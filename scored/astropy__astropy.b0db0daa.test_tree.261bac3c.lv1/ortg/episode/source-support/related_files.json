@@ -1,0 +1,137 @@
+{
+  "visible_tests_status": "read",
+  "visible_test_files": [
+    "astropy/utils/tests/test_xml.py",
+    "astropy/io/votable/tests/test_coosys.py",
+    "astropy/io/votable/tests/test_table.py",
+    "astropy/io/votable/tests/test_vo.py"
+  ],
+  "unknown_evidence": [
+    "No visible test directly calls VOTableFile.set_all_tables_format.",
+    "No visible test exercises an invalid astronomical year or the W07 verification-policy branches.",
+    "No visible test directly exercises check_string or W08, and the task's string-only wording differs from W08's existing 'str or bytes object' message.",
+    "The visible check_token test covers a normal token and a carriage return only; the remaining whitespace boundaries come from the public task contract rather than visible tests."
+  ],
+  "related_files": [
+    {
+      "path": "astropy/utils/xml/check.py",
+      "reason": "The public task explicitly requires the check_token interface at this source path.",
+      "visible_test_entries": [
+        "astropy/utils/tests/test_xml.py::test_check_token"
+      ],
+      "source_entry": "astropy.utils.xml.check.check_token"
+    },
+    {
+      "path": "astropy/utils/tests/test_xml.py",
+      "reason": "Visible public test directly calls check_token with accepted and rejected XML-token values.",
+      "visible_test_entries": [
+        "astropy/utils/tests/test_xml.py::test_check_token"
+      ],
+      "source_entry": "astropy.utils.xml.check.check_token"
+    },
+    {
+      "path": "astropy/io/votable/__init__.py",
+      "reason": "Visible tests acquire parse, from_table, and tree-facing public VOTable APIs from this package entry point.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_coosys.py::test_coosys",
+        "astropy/io/votable/tests/test_table.py::test_write_with_format"
+      ],
+      "source_entry": "astropy.io.votable public imports and configuration"
+    },
+    {
+      "path": "astropy/io/votable/tree.py",
+      "reason": "The public task explicitly locates VOTableFile.set_all_tables_format, _get_default_unit_format, check_astroyear, and check_string here; the same file contains their consumers and VOTable serialization path.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_coosys.py::test_coosys",
+        "astropy/io/votable/tests/test_coosys.py::test_coosys_roundtrip",
+        "astropy/io/votable/tests/test_table.py::test_write_with_format",
+        "astropy/io/votable/tests/test_vo.py::test_regression"
+      ],
+      "source_entry": "astropy.io.votable.tree.VOTableFile and module-level validation helpers"
+    },
+    {
+      "path": "astropy/io/votable/table.py",
+      "reason": "Visible parsing tests enter through parse, which builds the config carrying VOTable version and unit_format into tree.py validators and unit parsing.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_coosys.py::test_coosys",
+        "astropy/io/votable/tests/test_table.py::test_pass_kwargs_through_table_interface",
+        "astropy/io/votable/tests/test_vo.py::test_nonstandard_units"
+      ],
+      "source_entry": "astropy.io.votable.table.parse"
+    },
+    {
+      "path": "astropy/io/votable/util.py",
+      "reason": "VOTableFile derives version_1_1_or_later through version_1_5_or_later flags with util.version_compare, which the tasked default-unit and binary2 version behavior consumes.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_table.py::test_write_with_format",
+        "astropy/io/votable/tests/test_vo.py::test_nonstandard_units"
+      ],
+      "source_entry": "astropy.io.votable.util.version_compare"
+    },
+    {
+      "path": "astropy/io/votable/xmlutil.py",
+      "reason": "tree.py delegates VOTable XML-token attribute validation through this public utility, which adapts check_token to VOTable warning handling.",
+      "visible_test_entries": [
+        "astropy/utils/tests/test_xml.py::test_check_token"
+      ],
+      "source_entry": "astropy.io.votable.xmlutil.check_token"
+    },
+    {
+      "path": "astropy/io/votable/exceptions.py",
+      "reason": "The tasked astronomical-year and string validators are specified to report W07 and W08 according to VOTable verification policy, whose warning classes and dispatch helper live here.",
+      "visible_test_entries": [],
+      "source_entry": "astropy.io.votable.exceptions.W07, W08, and warn_or_raise"
+    },
+    {
+      "path": "astropy/io/votable/connect.py",
+      "reason": "Visible Table.write tests pass tabledata_format through this public VOTable writer into VOTableFile.to_xml, the consumer that applies the tasked all-table format setter.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_table.py::test_write_with_format"
+      ],
+      "source_entry": "astropy.io.votable.connect.write_table_votable"
+    },
+    {
+      "path": "astropy/io/votable/tests/test_coosys.py",
+      "reason": "Visible tests construct and round-trip CooSys astronomical epoch/equinox strings consumed by check_astroyear.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_coosys.py::test_coosys",
+        "astropy/io/votable/tests/test_coosys.py::test_coosys_roundtrip"
+      ],
+      "source_entry": "astropy.io.votable.tree.CooSys"
+    },
+    {
+      "path": "astropy/io/votable/tests/test_table.py",
+      "reason": "Visible test_write_with_format exercises the public Table.write tabledata_format path for binary and binary2 output.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_table.py::test_write_with_format"
+      ],
+      "source_entry": "astropy.io.votable.connect.write_table_votable to astropy.io.votable.tree.VOTableFile.to_xml"
+    },
+    {
+      "path": "astropy/io/votable/tests/test_vo.py",
+      "reason": "Visible regression coverage exercises VOTableFile table formats and direct XML serialization across tabledata, binary, and binary2 paths.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_vo.py::test_regression"
+      ],
+      "source_entry": "astropy.io.votable.tree.VOTableFile.to_xml and table format properties"
+    },
+    {
+      "path": "astropy/io/votable/tests/data/coosys.xml",
+      "reason": "Visible COOSYS tests parse this fixture, whose J- and B-prefixed astronomical years establish accepted public examples and round-trip values.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_coosys.py::test_coosys",
+        "astropy/io/votable/tests/test_coosys.py::test_coosys_roundtrip"
+      ],
+      "source_entry": "COOSYS equinox and epoch XML attributes parsed by astropy.io.votable.tree.CooSys"
+    },
+    {
+      "path": "astropy/io/votable/tests/data/nonstandard_units.xml",
+      "reason": "Visible unit-format tests parse this VOTable 1.1 fixture to distinguish default legacy-unit handling from an explicit generic override.",
+      "visible_test_entries": [
+        "astropy/io/votable/tests/test_table.py::test_pass_kwargs_through_table_interface",
+        "astropy/io/votable/tests/test_vo.py::test_nonstandard_units"
+      ],
+      "source_entry": "FIELD unit parsing through astropy.io.votable.tree._get_default_unit_format"
+    }
+  ]
+}

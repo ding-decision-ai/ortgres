@@ -1,0 +1,22 @@
+diff --git a/sphinx/ext/doctest.py b/sphinx/ext/doctest.py
+index 1133da0..3011b19 100644
+--- a/sphinx/ext/doctest.py
++++ b/sphinx/ext/doctest.py
+@@ -42,6 +42,11 @@
+ doctestopt_re = re.compile(r'[ \t]*#\s*doctest:.+$', re.MULTILINE)
+ 
+ 
++def is_allowed_version(spec: str, version: str) -> bool:
++    """Return whether *version* satisfies the PEP 440 *spec*."""
++    return SpecifierSet(spec).contains(Version(version))
++
++
+ 
+ 
+ 
+@@ -653,5 +658,3 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+     }
+ 
+ 
+-
+-

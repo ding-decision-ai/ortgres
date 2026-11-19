@@ -1,0 +1,87 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/uncertainty/tests/test_functions.py.
+
+Date: 2026-10-11T00:29:55
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+
+astropy/uncertainty/tests/test_functions.py .....FF.FF                   [100%]
+
+=================================== FAILURES ===================================
+_____________________ TestBroadcast.test_broadcast_arrays ______________________
+astropy/uncertainty/tests/test_functions.py:77: in test_broadcast_arrays
+    assert type(bdc) is type(self.c)
+E   AssertionError: assert <class 'astropy.uncertainty.core.NdarrayDistribution'> is <class 'numpy.ndarray'>
+E    +  where <class 'astropy.uncertainty.core.NdarrayDistribution'> = type(NdarrayDistribution([[[200., 200., 200., 200.],\n        [200., 200., 200., 200.],\n        [200., 200., 200., 200.]],\n\n       [[300., 300., 300., 300.],\n        [300., 300., 300., 300.],\n        [300., 300., 300., 300.]]]) with n_samples=4)
+E    +  and   <class 'numpy.ndarray'> = type(array([[200.],\n       [300.]]))
+E    +    where array([[200.],\n       [300.]]) = <astropy.uncertainty.tests.test_functions.TestBroadcast object at 0x7d183d8c1b90>.c
+_______________ TestBroadcast.test_broadcast_arrays_subok_false ________________
+astropy/uncertainty/tests/test_functions.py:88: in test_broadcast_arrays_subok_false
+    assert type(bdc) is np.ndarray
+E   AssertionError: assert <class 'astropy.uncertainty.core.NdarrayDistribution'> is <class 'numpy.ndarray'>
+E    +  where <class 'astropy.uncertainty.core.NdarrayDistribution'> = type(NdarrayDistribution([[[200., 200., 200., 200.],\n        [200., 200., 200., 200.],\n        [200., 200., 200., 200.]],\n\n       [[300., 300., 300., 300.],\n        [300., 300., 300., 300.],\n        [300., 300., 300., 300.]]]) with n_samples=4)
+E    +  and   <class 'numpy.ndarray'> = np.ndarray
+___________ TestQuantityDistributionBroadcast.test_broadcast_arrays ____________
+astropy/uncertainty/tests/test_functions.py:77: in test_broadcast_arrays
+    assert type(bdc) is type(self.c)
+E   AssertionError: assert <class 'astropy.units.quantity.QuantityDistribution'> is <class 'astropy.units.quantity.Quantity'>
+E    +  where <class 'astropy.units.quantity.QuantityDistribution'> = type(<QuantityDistribution [[[200., 200., 200., 200.],\n            [200., 200., 200., 200.],\n            [200., 200., 200.,...., 300., 300., 300.],\n            [300., 300., 300., 300.],\n            [300., 300., 300., 300.]]] Mm with n_samples=4>)
+E    +  and   <class 'astropy.units.quantity.Quantity'> = type(<Quantity [[200.],\n           [300.]] Mm>)
+E    +    where <Quantity [[200.],\n           [300.]] Mm> = <astropy.uncertainty.tests.test_functions.TestQuantityDistributionBroadcast object at 0x7d183d845590>.c
+_____ TestQuantityDistributionBroadcast.test_broadcast_arrays_subok_false ______
+astropy/uncertainty/tests/test_functions.py:88: in test_broadcast_arrays_subok_false
+    assert type(bdc) is np.ndarray
+E   AssertionError: assert <class 'astropy.uncertainty.core.NdarrayDistribution'> is <class 'numpy.ndarray'>
+E    +  where <class 'astropy.uncertainty.core.NdarrayDistribution'> = type(NdarrayDistribution([[[200., 200., 200., 200.],\n        [200., 200., 200., 200.],\n        [200., 200., 200., 200.]],\n\n       [[300., 300., 300., 300.],\n        [300., 300., 300., 300.],\n        [300., 300., 300., 300.]]]) with n_samples=4)
+E    +  and   <class 'numpy.ndarray'> = np.ndarray
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/uncertainty/tests/test_functions.py::TestConcatenation::test_concatenate
+PASSED astropy/uncertainty/tests/test_functions.py::TestConcatenation::test_concatenate_not_all_distribution
+PASSED astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionConcatenation::test_concatenate
+PASSED astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionConcatenation::test_concatenate_not_all_distribution
+PASSED astropy/uncertainty/tests/test_functions.py::TestBroadcast::test_broadcast_to
+PASSED astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionBroadcast::test_broadcast_to
+FAILED astropy/uncertainty/tests/test_functions.py::TestBroadcast::test_broadcast_arrays
+FAILED astropy/uncertainty/tests/test_functions.py::TestBroadcast::test_broadcast_arrays_subok_false
+FAILED astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionBroadcast::test_broadcast_arrays
+FAILED astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionBroadcast::test_broadcast_arrays_subok_false
+========================= 4 failed, 6 passed in 0.06s ==========================

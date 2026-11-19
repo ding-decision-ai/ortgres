@@ -1,0 +1,328 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/units/tests/test_quantity_erfa_ufuncs.py.
+
+Date: 2026-10-11T02:16:22
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 44 items
+
+astropy/units/tests/test_quantity_erfa_ufuncs.py ...FFFxF....FFF..FF.F.. [ 52%]
+....FFFF.FFFFFF......                                                    [100%]
+
+=================================== FAILURES ===================================
+____________________________ TestPVUfuncs.test_pv2p ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:59: in test_pv2p
+    p = erfa_ufunc.pv2p(self.pv)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:167: in helper_pv2p
+    check_structured_unit(unit1, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+____________________________ TestPVUfuncs.test_pv2s ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:67: in test_pv2s
+    theta, phi, r, td, pd, rd = erfa_ufunc.pv2s(self.pv)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:174: in helper_pv2s
+    check_structured_unit(unit_pv, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+__________________ TestPVUfuncs.test_pv2s_non_standard_units ___________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:83: in test_pv2s_non_standard_units
+    theta, phi, r, td, pd, rd = erfa_ufunc.pv2s(pv)
+                                ^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:174: in helper_pv2s
+    check_structured_unit(unit_pv, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+____________________________ TestPVUfuncs.test_s2pv ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:121: in test_s2pv
+    theta, phi, r, td, pd, rd = erfa_ufunc.pv2s(self.pv)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:174: in helper_pv2s
+    check_structured_unit(unit_pv, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+___________________________ TestPVUfuncs.test_pvdpv ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:202: in test_pvdpv
+    pvdpv = erfa_ufunc.pvdpv(self.pv, self.pv)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:194: in helper_pv_multiplication
+    check_structured_unit(unit1, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+___________________________ TestPVUfuncs.test_pvxpv ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:219: in test_pvxpv
+    pvxpv = erfa_ufunc.pvxpv(self.pv, self.pv)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:194: in helper_pv_multiplication
+    check_structured_unit(unit1, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+____________________________ TestPVUfuncs.test_pvm _____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:234: in test_pvm
+    pm, vm = erfa_ufunc.pvm(self.pv)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:204: in helper_pvm
+    check_structured_unit(unit1, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+____________________________ TestPVUfuncs.test_pvu _____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:253: in test_pvu
+    pvu = erfa_ufunc.pvu(86400 * u.s, self.pv)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:254: in helper_pvu
+    check_structured_unit(unit_pv, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+____________________________ TestPVUfuncs.test_pvup ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:259: in test_pvup
+    pvup = erfa_ufunc.pvup(86400 * u.s, self.pv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:259: in helper_pvup
+    check_structured_unit(unit_pv, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+___________________________ TestPVUfuncs.test_s2xpv ____________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:276: in test_s2xpv
+    s2xpv = erfa_ufunc.s2xpv(10.0, 1 * u.s, self.pv)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:264: in helper_s2xpv
+    check_structured_unit(unit_pv, "dt_pv")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+______________________ TestEraStructUfuncs.test_ldn_basic ______________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:354: in test_ldn_basic
+    sn = erfa_ufunc.ldn(self.ldbody, self.ob, self.sc)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:315: in helper_ldn
+    get_converter(unit_b, ldbody_unit()),
+                          ^^^^^^^^^^^
+E   NameError: name 'ldbody_unit' is not defined
+__________________ TestEraStructUfuncs.test_ldn_in_other_unit __________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:364: in test_ldn_in_other_unit
+    ldbody = self.ldbody.to("kg,rad,(m,m/s)")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:920: in to
+    value = self._to_value(unit, equivalencies)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:873: in _to_value
+    return self.unit.to(
+           ^^^^^^^^^^^^
+E   AttributeError: 'StructuredUnit' object has no attribute 'to'
+______________________ TestEraStructUfuncs.test_ldn_in_SI ______________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:376: in test_ldn_in_SI
+    sn = erfa_ufunc.ldn(self.ldbody.si, self.ob.si, self.sc)
+                        ^^^^^^^^^^^^^^
+astropy/units/quantity.py:1085: in __getattr__
+    raise AttributeError(
+E   AttributeError: 'Quantity' object has no 'si' member
+________________________ TestEraStructUfuncs.test_aper _________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:387: in test_aper
+    astrom2 = erfa_ufunc.aper(10 * u.deg, self.astrom)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:618: in __array_ufunc__
+    converters, unit = converters_and_unit(function, method, *inputs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/converters.py:177: in converters_and_unit
+    converters, result_unit = ufunc_helper(function, *units)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity_helper/erfa.py:322: in helper_aper
+    check_structured_unit(unit_astrom, "dt_eraASTROM")
+    ^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'check_structured_unit' is not defined
+_________________ TestEraStructUfuncs.test_atciq_in_other_unit _________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:405: in test_atciq_in_other_unit
+    astrom = self.astrom.to("s,km,1,km,1,1,1,deg,deg,deg,deg,1,1,1,deg,deg,deg")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:920: in to
+    value = self._to_value(unit, equivalencies)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:873: in _to_value
+    return self.unit.to(
+           ^^^^^^^^^^^^
+E   AttributeError: 'StructuredUnit' object has no attribute 'to'
+_______________________ TestEraStructUfuncs.test_atciqn ________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:426: in test_atciqn
+    self.astrom.si,
+    ^^^^^^^^^^^^^^
+astropy/units/quantity.py:1085: in __getattr__
+    raise AttributeError(
+E   AttributeError: 'Quantity' object has no 'si' member
+_______________________ TestEraStructUfuncs.test_atciqz ________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:433: in test_atciqz
+    ri, di = erfa_ufunc.atciqz(self.rc.to(u.deg), self.dc.to(u.deg), self.astrom.si)
+                                                                     ^^^^^^^^^^^^^^
+astropy/units/quantity.py:1085: in __getattr__
+    raise AttributeError(
+E   AttributeError: 'Quantity' object has no 'si' member
+________________________ TestEraStructUfuncs.test_aticq ________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:440: in test_aticq
+    rc, dc = erfa_ufunc.aticq(ri.to(u.deg), di.to(u.deg), self.astrom.si)
+                                                          ^^^^^^^^^^^^^^
+astropy/units/quantity.py:1085: in __getattr__
+    raise AttributeError(
+E   AttributeError: 'Quantity' object has no 'si' member
+_______________________ TestEraStructUfuncs.test_aticqn ________________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:448: in test_aticqn
+    ri.to(u.deg), di.to(u.deg), self.astrom.si, self.ldbody.si
+                                ^^^^^^^^^^^^^^
+astropy/units/quantity.py:1085: in __getattr__
+    raise AttributeError(
+E   AttributeError: 'Quantity' object has no 'si' member
+_____________________ TestEraStructUfuncs.test_atioq_atoiq _____________________
+astropy/units/tests/test_quantity_erfa_ufuncs.py:473: in test_atioq_atoiq
+    ri.to(u.deg), di.to(u.deg), astrom.si
+                                ^^^^^^^^^
+astropy/units/quantity.py:1085: in __getattr__
+    raise AttributeError(
+E   AttributeError: 'Quantity' object has no 'si' member
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_cpv
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_p2pv
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_p2pv_inplace
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_s2p_not_all_quantity
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvstar
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_starpv
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvtob
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvmpv
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvppv
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_sxpv
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_rxpv[r0]
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_rxpv[r1]
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_rxpv[r2]
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_trxpv[r0]
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_trxpv[r1]
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_trxpv[r2]
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_atciq_basic
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestAp::test_apco13
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestAp::test_apco13_no_time_units
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestAp::test_apio
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestGeodetic::test_unit_errors
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestGeodetic::test_gc2gde
+PASSED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestGeodetic::test_gd2gce
+XFAIL astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pv2s_non_standard_names_and_units - erfa ufuncs cannot take different names; it is not yet clear whether this is changeable; see https://github.com/liberfa/pyerfa/issues/77
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pv2p
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pv2s
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pv2s_non_standard_units
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_s2pv
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvdpv
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvxpv
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvm
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvu
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_pvup
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestPVUfuncs::test_s2xpv
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_ldn_basic
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_ldn_in_other_unit
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_ldn_in_SI
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_aper
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_atciq_in_other_unit
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_atciqn
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_atciqz
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_aticq
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_aticqn
+FAILED astropy/units/tests/test_quantity_erfa_ufuncs.py::TestEraStructUfuncs::test_atioq_atoiq
+=================== 20 failed, 23 passed, 1 xfailed in 0.75s ===================

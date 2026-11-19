@@ -1,0 +1,87 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: zarr-3.1.3, env-1.2.0, asyncio-1.3.0, hypothesis-6.147.0, xdist-3.8.0, mypy-plugins-3.2.0, cov-7.0.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 34 items
+
+xarray/tests/test_treenode.py ........F................FF.......         [100%]
+
+=================================== FAILURES ===================================
+____________________ TestFamilyTree.test_doppelganger_child ____________________
+/testbed/xarray/tests/test_treenode.py:106: in test_doppelganger_child
+    john.children = {"Kate": kate, "Evil_Kate": kate}
+    ^^^^^^^^^^^^^
+/testbed/xarray/core/treenode.py:454: in children
+    self._check_children(children)
+/testbed/xarray/core/treenode.py:120: in _check_children
+    raise InvalidTreeError(
+E   xarray.core.treenode.InvalidTreeError: the same node cannot be attached under multiple child names
+
+During handling of the above exception, another exception occurred:
+/testbed/xarray/tests/test_treenode.py:105: in test_doppelganger_child
+    with pytest.raises(InvalidTreeError, match="Cannot add same node"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Cannot add same node'
+E     Actual message: 'the same node cannot be attached under multiple child names'
+__________________________ TestAncestry.test_lineage ___________________________
+/testbed/xarray/tests/test_treenode.py:382: in test_lineage
+    with pytest.warns(DeprecationWarning):
+E   Failed: DID NOT WARN. No warnings of type (<class 'DeprecationWarning'>,) were emitted.
+E    Emitted warnings: [FutureWarning('The `lineage` property is deprecated; use `parents` instead.')].
+_________________________ TestAncestry.test_ancestors __________________________
+/testbed/xarray/tests/test_treenode.py:387: in test_ancestors
+    with pytest.warns(DeprecationWarning):
+E   Failed: DID NOT WARN. No warnings of type (<class 'DeprecationWarning'>,) were emitted.
+E    Emitted warnings: [ FutureWarning('The `ancestors` property is deprecated; use `parents` instead.')].
+=============================== warnings summary ===============================
+xarray/tests/test_treenode.py::TestAncestry::test_lineage
+  /testbed/xarray/tests/test_treenode.py:383: FutureWarning: The `lineage` property is deprecated; use `parents` instead.
+    assert [node.name for node in leaf_f.lineage] == expected
+
+xarray/tests/test_treenode.py::TestAncestry::test_ancestors
+  /testbed/xarray/tests/test_treenode.py:388: FutureWarning: The `ancestors` property is deprecated; use `parents` instead.
+    ancestors = leaf_f.ancestors
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_lonely
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_parenting
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_no_time_traveller_loops
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_parent_swap
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_forbid_setting_parent_directly
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_dont_modify_children_inplace
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_multi_child_family
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_disown_child
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_sibling_relationships
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_copy_subtree
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_parents
+PASSED xarray/tests/test_treenode.py::TestGetNodes::test_get_child
+PASSED xarray/tests/test_treenode.py::TestGetNodes::test_get_upwards
+PASSED xarray/tests/test_treenode.py::TestGetNodes::test_get_from_root
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_set_child_node
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_child_already_exists
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_set_grandchild
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_create_intermediate_child
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_overwrite_child
+PASSED xarray/tests/test_treenode.py::TestPruning::test_del_child
+PASSED xarray/tests/test_treenode.py::TestGroupSubtrees::test_one_tree
+PASSED xarray/tests/test_treenode.py::TestGroupSubtrees::test_different_order
+PASSED xarray/tests/test_treenode.py::TestGroupSubtrees::test_different_structure
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_parents
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_subtree
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_subtree_with_keys
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_descendants
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_leaves
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_levels
+PASSED xarray/tests/test_treenode.py::TestRenderTree::test_render_nodetree
+PASSED xarray/tests/test_treenode.py::test_nodepath
+FAILED xarray/tests/test_treenode.py::TestFamilyTree::test_doppelganger_child
+FAILED xarray/tests/test_treenode.py::TestAncestry::test_lineage - Failed: DI...
+FAILED xarray/tests/test_treenode.py::TestAncestry::test_ancestors - Failed: ...
+=================== 3 failed, 31 passed, 2 warnings in 0.80s ===================

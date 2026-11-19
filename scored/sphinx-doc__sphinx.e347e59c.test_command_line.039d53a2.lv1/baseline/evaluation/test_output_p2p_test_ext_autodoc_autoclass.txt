@@ -1,0 +1,307 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/15b114b, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-1
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 24 items
+
+tests/test_ext_autodoc/test_ext_autodoc_autoclass.py ................... [ 79%]
+.....                                                                    [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-autodoc
+# outdir: /tmp/pytest-of-root/pytest-1/ext-autodoc/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/15b114b[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_classes
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_instance_variable
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_inherited_instance_variable
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_uninitialized_attributes
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_undocumented_uninitialized_attributes
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_decorators
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_properties
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_slots_attribute
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_show_inheritance_for_subclass_of_generic_type
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_show_inheritance_for_decendants_of_generic_type
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autodoc_process_bases
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_doc_from_class
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_doc_from_init
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_doc_from_both
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_alias
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_alias_having_doccomment
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_alias_for_imported_object_having_doccomment
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_coroutine
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autodata_NewType_module_level
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autoattribute_NewType_class_level
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autodata_TypeVar_class_level
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autoattribute_TypeVar_module_level
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_inherited_instance_variable_with_annotations
+PASSED tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_no_inherited_instance_variable_with_annotations
+============================== 24 passed in 1.06s ==============================

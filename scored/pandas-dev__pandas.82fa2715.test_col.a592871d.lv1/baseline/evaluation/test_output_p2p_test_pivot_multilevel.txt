@@ -1,0 +1,37 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 12 items
+
+pandas/tests/reshape/test_pivot_multilevel.py ............
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_index[input_index0-lev3-values-expected_values0-expected_columns0-expected_index0]
+
+(29 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_index[input_index0-lev3-values-expected_values0-expected_columns0-expected_index0]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_index[input_index1-lev3-_NoDefault.no_default-expected_values1-expected_columns1-expected_index1]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_index[input_index2-lev3-values-expected_values2-expected_columns2-expected_index2]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_index[input_index3-lev3-_NoDefault.no_default-expected_values3-expected_columns3-expected_index3]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_columns[lev4-input_columns0-values-expected_values0-expected_columns0-expected_index0]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_columns[input_index1-input_columns1-values-expected_values1-expected_columns1-expected_index1]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_columns[input_index2-input_columns2-values-expected_values2-expected_columns2-expected_index2]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_list_like_columns[input_index3-input_columns3-values-expected_values3-expected_columns3-expected_index3]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_multiindexed_rows_and_cols
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_df_multiindex_index_none
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_table_multiindex_values_as_two_params[values-and-columns]
+PASSED pandas/tests/reshape/test_pivot_multilevel.py::test_pivot_table_multiindex_values_as_two_params[values-and-index]
+============================== 12 passed in 0.06s ==============================

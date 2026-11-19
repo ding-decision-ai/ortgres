@@ -1,0 +1,88 @@
+2026-10-10 22:16:13,801 - INFO - ============================================================
+2026-10-10 22:16:13,801 - INFO - Starting evaluation for instance: matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1
+2026-10-10 22:16:13,801 - INFO - Level: 1
+2026-10-10 22:16:13,801 - INFO - Attempt: 1
+2026-10-10 22:16:13,801 - INFO - ============================================================
+2026-10-10 22:16:13,808 - INFO - Docker runtime config: shm_size=4g, number_once=1, env_vars=[], env_exports=0 items
+2026-10-10 22:16:13,809 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_matplotlib-instance_1a84341f
+2026-10-10 22:16:13,812 - INFO - Image docker.io/libercoders/featurebench-specs_matplotlib-instance_1a84341f found locally
+2026-10-10 22:16:13,812 - INFO - Creating container: fb-eval-matplotlib__matplotlib-86a476d2-test_backend_registry-872ba384-lv1-attempt-1-20261010-221613-812789
+2026-10-10 22:16:13,813 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-10 22:16:13,814 - INFO - Using shared memory size: 4g
+2026-10-10 22:16:14,078 - INFO - Container fb-eval-matplotlib__matplotlib-86a476d2-test_backend_registry-872ba384-lv1-attempt-1-20261010-221613-812789 created successfully
+2026-10-10 22:16:14,078 - INFO - Starting Level 1 evaluation for matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1
+2026-10-10 22:16:14,078 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-10 22:16:16,721 - INFO - Restore project exit code: 0
+2026-10-10 22:16:16,721 - INFO - Output: 
+2026-10-10 22:16:16,721 - INFO - Step 2: Applying patch to mask files
+2026-10-10 22:16:16,727 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-10 22:16:17,061 - INFO - Mask patch apply exit code: 0
+2026-10-10 22:16:17,061 - INFO - Mask patch output: 
+2026-10-10 22:16:17,061 - INFO - Successfully applied mask patch
+2026-10-10 22:16:17,061 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-10 22:16:17,064 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-10 22:16:17,064 - INFO - Deleting F2P test file: /testbed/lib/matplotlib/tests/test_backend_registry.py
+2026-10-10 22:16:17,374 - INFO - Successfully deleted F2P test file: /testbed/lib/matplotlib/tests/test_backend_registry.py
+2026-10-10 22:16:17,374 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-10 22:16:17,374 - INFO - Step 4: Reinitializing git repository
+2026-10-10 22:16:21,467 - INFO - Step 5: Applying agent patch
+2026-10-10 22:16:21,477 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-10 22:16:21,754 - INFO - Patch apply exit code: 0
+2026-10-10 22:16:21,754 - INFO - Patch output: Checking patch lib/matplotlib/backends/registry.py...
+Checking patch lib/matplotlib/backends/registry.pyi...
+Checking patch ortg.tsv...
+Applied patch lib/matplotlib/backends/registry.py cleanly.
+Applied patch lib/matplotlib/backends/registry.pyi cleanly.
+Applied patch ortg.tsv cleanly.
+
+2026-10-10 22:16:21,754 - INFO - >>>>> Applied Patch
+2026-10-10 22:16:21,754 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-10 22:16:21,754 - INFO - F2P test path: /testbed/lib/matplotlib/tests/test_backend_registry.py
+2026-10-10 22:16:22,023 - INFO - Delete F2P file exit code: 0
+2026-10-10 22:16:22,023 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-10 22:16:22,299 - INFO - Reverse apply exit code: 0
+2026-10-10 22:16:22,299 - INFO - Reverse apply output: 
+2026-10-10 22:16:22,299 - INFO - Successfully restored F2P test file using test_patch
+2026-10-10 22:16:22,299 - INFO - Step 7: Running tests
+2026-10-10 22:16:22,299 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-10 22:16:22,299 - INFO - Test timeout: 600s
+2026-10-10 22:16:22,299 - INFO - Running F2P test: /testbed/lib/matplotlib/tests/test_backend_registry.py
+2026-10-10 22:16:48,462 - INFO - F2P test exit code: 0
+2026-10-10 22:16:48,462 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 31 items
+
+lib/matplotlib/tests/test_backend_registry.py ...................ss..... [ 83%]
+.....                                                                    [100%]
+
+===================
+2026-10-10 22:16:48,462 - INFO - Saved F2P test output to artifact://6b39b44821544fb0
+2026-10-10 22:16:48,462 - INFO - Running 5 P2P tests
+2026-10-10 22:16:48,463 - INFO - Running P2P test: /testbed/lib/mpl_toolkits/axisartist/tests/test_axislines.py
+2026-10-10 22:16:50,531 - INFO - P2P test /testbed/lib/mpl_toolkits/axisartist/tests/test_axislines.py exit code: 0
+2026-10-10 22:16:50,531 - INFO - Saved P2P test output to artifact://85e0858832c617c2
+2026-10-10 22:16:50,531 - INFO - Running P2P test: /testbed/lib/matplotlib/tests/test_backend_tools.py
+2026-10-10 22:16:51,828 - INFO - P2P test /testbed/lib/matplotlib/tests/test_backend_tools.py exit code: 0
+2026-10-10 22:16:51,829 - INFO - Saved P2P test output to artifact://b54b7e7ca398618d
+2026-10-10 22:16:51,829 - INFO - Running P2P test: /testbed/lib/matplotlib/tests/test_axis.py
+2026-10-10 22:16:53,487 - INFO - P2P test /testbed/lib/matplotlib/tests/test_axis.py exit code: 0
+2026-10-10 22:16:53,487 - INFO - Saved P2P test output to artifact://8db005ec85901629
+2026-10-10 22:16:53,487 - INFO - Running P2P test: /testbed/lib/matplotlib/tests/test_bezier.py
+2026-10-10 22:16:54,771 - INFO - P2P test /testbed/lib/matplotlib/tests/test_bezier.py exit code: 0
+2026-10-10 22:16:54,771 - INFO - Saved P2P test output to artifact://8c9cbc0fc76ad97f
+2026-10-10 22:16:54,771 - INFO - Running P2P test: /testbed/lib/matplotlib/tests/test_cm_stubs.py
+2026-10-10 22:16:56,123 - INFO - P2P test /testbed/lib/matplotlib/tests/test_cm_stubs.py exit code: 0
+2026-10-10 22:16:56,123 - INFO - Saved P2P test output to artifact://35bf7da82afd059b
+2026-10-10 22:16:56,132 - INFO - ============================================================
+2026-10-10 22:16:56,132 - INFO - Evaluation completed for matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1
+2026-10-10 22:16:56,132 - INFO - Resolved: True
+2026-10-10 22:16:56,132 - INFO - F2P Pass rate: 1.0
+2026-10-10 22:16:56,132 - INFO - ============================================================
+2026-10-10 22:16:56,132 - INFO - Stopping and removing container
+2026-10-10 22:17:06,634 - INFO - Container removed successfully

@@ -1,0 +1,36 @@
+{
+  "instance_id": "mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1",
+  "repo": "mlflow/mlflow",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 10,
+      "failure": 9,
+      "total": 19
+    },
+    "p2p": {
+      "success": 122,
+      "failure": 0,
+      "total": 122
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "42bf752d6a08b53322bc565ed6fe838b4b0ba7e908037c6551fd7389c81a297b"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 10,
+      "failure": 9,
+      "total": 19
+    },
+    "p2p": {
+      "success": 122,
+      "failure": 0,
+      "total": 122
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "39289287443e933c565f677937fc4e7eda29e96ea9e765be878710590fabd775"
+  },
+  "conditions": "conditions.json",
+  "costs": null
+}

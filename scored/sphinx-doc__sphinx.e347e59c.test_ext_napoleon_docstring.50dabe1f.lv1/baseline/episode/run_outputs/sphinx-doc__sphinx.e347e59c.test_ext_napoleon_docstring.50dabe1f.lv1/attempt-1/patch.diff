@@ -1,0 +1,349 @@
+diff --git a/sphinx/ext/intersphinx/__init__.py b/sphinx/ext/intersphinx/__init__.py
+index f7c65b9..b0cb349 100644
+--- a/sphinx/ext/intersphinx/__init__.py
++++ b/sphinx/ext/intersphinx/__init__.py
+@@ -40,7 +40,11 @@
+ 
+ import sphinx
+ from sphinx.ext.intersphinx._cli import inspect_main
+-from sphinx.ext.intersphinx._load import fetch_inventory, validate_intersphinx_mapping
++from sphinx.ext.intersphinx._load import (
++    fetch_inventory,
++    load_mappings,
++    validate_intersphinx_mapping,
++)
+ 
+ 
+ 
+diff --git a/sphinx/ext/intersphinx/_load.py b/sphinx/ext/intersphinx/_load.py
+index 076da60..e6d6d9d 100644
+--- a/sphinx/ext/intersphinx/_load.py
++++ b/sphinx/ext/intersphinx/_load.py
+@@ -135,76 +135,69 @@ def validate_intersphinx_mapping(app: Sphinx, config: Config) -> None:
+         raise ConfigError(msg % errors)
+ 
+ 
++def load_mappings(app: Sphinx) -> None:
++    """Load all configured intersphinx inventories into the environment."""
++    mapping: IntersphinxMapping = app.config.intersphinx_mapping
++    projects: list[_IntersphinxProject] = []
++
++    # The mapping has already been normalised by
++    # ``validate_intersphinx_mapping``.  Failure here therefore indicates an
++    # internal error (or a caller invoking this hook out of order), rather
++    # than a configuration form that this function should try to normalise.
++    for value in mapping.values():
++        try:
++            name, (target_uri, locations) = value
++            project = _IntersphinxProject(
++                name=name,
++                target_uri=target_uri,
++                locations=locations,
++            )
++        except (TypeError, ValueError) as exc:
++            msg = __(
++                'Invalid intersphinx_mapping entry after normalisation: %r'
++            )
++            raise ConfigError(msg % (value,)) from exc
++        projects.append(project)
++
++    inventories = InventoryAdapter(app.env)
++    cache = inventories.cache
++
++    # A cached inventory is useful only while its target URI is configured.
++    configured_uris = {project.target_uri for project in projects}
++    for uri in cache.keys() - configured_uris:
++        del cache[uri]
++
++    now = int(time.time())
++    config = _InvConfig.from_config(app.config)
++    cache_dir = app.doctreedir / '__intersphinx_cache__'
++
++    with concurrent.futures.ThreadPoolExecutor() as executor:
++        futures = [
++            executor.submit(
++                _fetch_inventory_group,
++                project=project,
++                cache=cache,
++                now=now,
++                config=config,
++                srcdir=app.srcdir,
++                cache_dir=cache_dir,
++            )
++            for project in projects
++        ]
++        updated = any(future.result() for future in futures)
+ 
++    # Keep the existing views when every fetch was satisfied by the cache.
++    if not updated:
++        return
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    inventories.named_inventory.clear()
++    inventories.main_inventory.clear()
++    for name, _expiry, inventory in sorted(
++        cache.values(), key=itemgetter(0, 1)
++    ):
++        inventories.named_inventory[name] = inventory
++        for object_type, objects in inventory.items():
++            inventories.main_inventory.setdefault(object_type, {}).update(objects)
+ 
+ 
+ @dataclasses.dataclass(frozen=True, kw_only=True, slots=True)
+@@ -215,15 +208,16 @@ class _InvConfig:
+     tls_cacerts: str | dict[str, str] | None
+     user_agent: str
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @classmethod
++    def from_config(cls, config: Config) -> _InvConfig:
++        """Create the immutable inventory-fetch configuration snapshot."""
++        return cls(
++            intersphinx_cache_limit=config.intersphinx_cache_limit,
++            intersphinx_timeout=config.intersphinx_timeout,
++            tls_verify=config.tls_verify,
++            tls_cacerts=config.tls_cacerts,
++            user_agent=config.user_agent or '',
++        )
+ 
+ 
+ def _fetch_inventory_group(
+@@ -468,4 +462,4 @@ def _strip_basic_auth(url: str) -> str:
+     # swap out 'user[:pass]@hostname' for 'hostname'
+     if '@' in frags[1]:
+         frags[1] = frags[1].split('@')[1]
+-    return urlunsplit(frags)
+\ No newline at end of file
++    return urlunsplit(frags)
+diff --git a/sphinx/ext/intersphinx/_shared.py b/sphinx/ext/intersphinx/_shared.py
+index 49d2e54..11829e2 100644
+--- a/sphinx/ext/intersphinx/_shared.py
++++ b/sphinx/ext/intersphinx/_shared.py
+@@ -114,3 +114,23 @@ def __delattr__(self, key: str) -> NoReturn:
+ class InventoryAdapter:
+     """Inventory adapter for environment"""
+ 
++    def __init__(self, env: BuildEnvironment) -> None:
++        self.env = env
++
++    @property
++    def cache(self) -> dict[InventoryURI, InventoryCacheEntry]:
++        if not hasattr(self.env, 'intersphinx_cache'):
++            self.env.intersphinx_cache = {}
++        return self.env.intersphinx_cache
++
++    @property
++    def main_inventory(self) -> Inventory:
++        if not hasattr(self.env, 'intersphinx_inventory'):
++            self.env.intersphinx_inventory = {}
++        return self.env.intersphinx_inventory
++
++    @property
++    def named_inventory(self) -> dict[InventoryName, Inventory]:
++        if not hasattr(self.env, 'intersphinx_named_inventory'):
++            self.env.intersphinx_named_inventory = {}
++        return self.env.intersphinx_named_inventory
+diff --git a/sphinx/ext/napoleon/docstring.py b/sphinx/ext/napoleon/docstring.py
+index efa1736..9f10ef1 100644
+--- a/sphinx/ext/napoleon/docstring.py
++++ b/sphinx/ext/napoleon/docstring.py
+@@ -152,63 +152,41 @@ def postprocess(item: str) -> list[str]:
+     return tokens
+ 
+ 
++def _token_type(token: str, debug_location: str | None = None) -> str:
++    """Classify one token from a Napoleon type specification."""
++    if token.isnumeric():
++        type_ = 'literal'
++    elif token in ('optional', 'default'):
++        type_ = 'control'
++    elif token.startswith('{'):
++        type_ = 'literal'
++        if not token.endswith('}'):
++            logger.warning(
++                __('invalid value set (missing closing brace): %s'),
++                token,
++                location=debug_location,
++            )
++    elif token[0:1] in {'"', "'"}:
++        type_ = 'literal'
++        if not token.endswith(token[0]):
++            logger.warning(
++                __('invalid string literal (missing closing quote): %s'),
++                token,
++                location=debug_location,
++            )
++    elif token[:1].isspace() or token[-1:].isspace():
++        type_ = 'delimiter'
++    elif _xref_regex.match(token):
++        type_ = 'reference'
++    else:
++        try:
++            complex(token)
++        except ValueError:
++            type_ = 'obj'
++        else:
++            type_ = 'literal'
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    return type_
+ 
+ 
+ def _convert_type_spec(
+@@ -409,16 +387,9 @@ def __init__(
+ 
+         self._parse()
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __str__(self) -> str:
++        """Return the already parsed docstring joined by newlines."""
++        return '\n'.join(self._parsed_lines)
+ 
+     def _get_location(self) -> str | None:
+         try:
+@@ -1428,4 +1399,4 @@ def translate(
+                 last_had_desc = False
+         lines += ['']
+ 
+-        return self._format_admonition('seealso', lines)
+\ No newline at end of file
++        return self._format_admonition('seealso', lines)

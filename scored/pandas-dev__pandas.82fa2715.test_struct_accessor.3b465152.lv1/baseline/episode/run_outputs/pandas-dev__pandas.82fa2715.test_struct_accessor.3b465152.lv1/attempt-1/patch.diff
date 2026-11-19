@@ -1,0 +1,186 @@
+diff --git a/pandas/core/arrays/arrow/accessors.py b/pandas/core/arrays/arrow/accessors.py
+index c6d8eac..2fc728b 100644
+--- a/pandas/core/arrays/arrow/accessors.py
++++ b/pandas/core/arrays/arrow/accessors.py
+@@ -41,19 +41,21 @@ class ArrowAccessor(metaclass=ABCMeta):
+     def _is_valid_pyarrow_dtype(self, pyarrow_dtype) -> bool:
+         pass
+ 
++    def _validate(self, data) -> None:
++        dtype = data.dtype
++        if not isinstance(dtype, ArrowDtype) or not self._is_valid_pyarrow_dtype(
++            dtype.pyarrow_dtype
++        ):
++            raise AttributeError(self._validation_msg.format(dtype=dtype))
+ 
++    @property
++    def _pa_array(self):
++        return self._data.array._pa_array
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def _pa_dtype(self):
++        dtype = cast(ArrowDtype, self._data.dtype)
++        return dtype.pyarrow_dtype
+ 
+ 
+ class ListAccessor(ArrowAccessor):
+@@ -256,30 +258,71 @@ class StructAccessor(ArrowAccessor):
+     def _is_valid_pyarrow_dtype(self, pyarrow_dtype) -> bool:
+         return pa.types.is_struct(pyarrow_dtype)
+ 
++    @property
++    def dtypes(self) -> Series:
++        """Return the dtype object of each child field of the struct."""
++        from pandas import Series
+ 
++        return Series(
++            [ArrowDtype(field.type) for field in self._pa_dtype],
++            index=[field.name for field in self._pa_dtype],
++            dtype=object,
++        )
+ 
++    def explode(self) -> DataFrame:
++        """Extract all child fields of a struct as a DataFrame."""
++        from pandas import DataFrame
+ 
++        result = DataFrame(
++            {index: self.field(index) for index in range(len(self._pa_dtype))},
++            index=self._data.index,
++        )
++        result.columns = [field.name for field in self._pa_dtype]
++        return result
++
++    def field(
++        self,
++        name_or_index: (
++            list[str]
++            | list[bytes]
++            | list[int]
++            | pc.Expression
++            | bytes
++            | str
++            | int
++        ),
++    ) -> Series:
++        """Extract a child field of a struct as a Series."""
++        from pandas import Series
+ 
++        if isinstance(name_or_index, pc.Expression):
++            result_name = str(name_or_index)
++            selection = name_or_index
++            selected = pc.struct_field(self._pa_array, selection)
++        else:
++            if is_list_like(name_or_index):
++                selection = list(name_or_index)
++            else:
++                selection = [name_or_index]
++
++            if not selection or not all(
++                isinstance(item, (str, bytes, int)) for item in selection
++            ):
++                raise ValueError(
++                    "name_or_index must be an int, str, bytes, "
++                    "pyarrow.compute.Expression, or a non-empty list of those"
++                )
++
++            selected = pc.struct_field(self._pa_array, selection)
++            current_type = self._pa_dtype
++            selected_field = current_type[selection[0]]
++            for item in selection[1:]:
++                selected_field = selected_field.type[item]
++            result_name = selected_field.name
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        return Series(
++            selected,
++            dtype=ArrowDtype(selected.type),
++            index=self._data.index,
++            name=result_name,
++        )
+diff --git a/pandas/core/arrays/arrow/array.py b/pandas/core/arrays/arrow/array.py
+index b74aa99..c3bc1f3 100644
+--- a/pandas/core/arrays/arrow/array.py
++++ b/pandas/core/arrays/arrow/array.py
+@@ -219,26 +219,23 @@ if TYPE_CHECKING:
+     from pandas.core.arrays.timedeltas import TimedeltaArray
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def to_pyarrow_type(
++    dtype: ArrowDtype | pa.DataType | Dtype | None,
++) -> pa.DataType | None:
++    """Convert a pandas or NumPy dtype to a PyArrow data type."""
++    if dtype is None:
++        return None
++    if isinstance(dtype, ArrowDtype):
++        return dtype.pyarrow_dtype
++    if isinstance(dtype, pa.DataType):
++        return dtype
++    if isinstance(dtype, DatetimeTZDtype):
++        return pa.timestamp(dtype.unit, dtype.tz)
++
++    try:
++        return pa.from_numpy_dtype(dtype)
++    except pa.ArrowNotImplementedError:
++        return None
+ 
+ 
+ class ArrowExtensionArray(
+@@ -3217,4 +3214,4 @@ def transpose_homogeneous_pyarrow(
+     indices = np.arange(nrows * ncols).reshape(ncols, nrows).T.reshape(-1)
+     arr = pa.chunked_array([chunk for arr in arrays for chunk in arr._pa_array.chunks])
+     arr = arr.take(indices)
+-    return [ArrowExtensionArray(arr.slice(i * ncols, ncols)) for i in range(nrows)]
+\ No newline at end of file
++    return [ArrowExtensionArray(arr.slice(i * ncols, ncols)) for i in range(nrows)]

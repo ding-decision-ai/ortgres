@@ -1,0 +1,134 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/coordinates/tests/test_iau_fullstack.py.
+
+Date: 2026-10-11T02:16:29
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 52 items
+
+astropy/coordinates/tests/test_iau_fullstack.py F....................... [ 46%]
+............................                                             [100%]
+
+=================================== FAILURES ===================================
+_ test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations0-fullstack_times0] _
+astropy/coordinates/tests/test_iau_fullstack.py:62: in test_iau_fullstack
+    aacoo = FULLSTACK_ICRS.transform_to(
+astropy/coordinates/baseframe.py:1487: in transform_to
+    return trans(self, new_frame)
+           ^^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/transformations/composite.py:113: in __call__
+    curr_coord = t(curr_coord, curr_toframe)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/transformations/function.py:174: in __call__
+    return supcall(fromcoord, toframe)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/builtin_frames/icrs_observed_transforms.py:35: in icrs_to_observed
+    astrom = erfa_astrom.get().apco(observed_frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/erfa_astrom.py:67: in apco
+    xp, yp = get_polar_motion(obstime)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/builtin_frames/utils.py:46: in get_polar_motion
+    xp, yp, status = iers_table.pm_xy(time, return_status=True)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/utils/iers/iers.py:409: in pm_xy
+    return self._interpolate(
+astropy/utils/iers/iers.py:441: in _interpolate
+    mjd, utc = self.mjd_utc(jd1, jd2)
+               ^^^^^^^^^^^^^^^^^^^^^^
+astropy/utils/iers/iers.py:310: in mjd_utc
+    mjd = np.floor(jd1 - MJD_ZERO + jd2)
+                   ^^^^^^^^^^^^^^
+E   TypeError: unsupported operand type(s) for -: 'Time' and 'float'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations0-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations1-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations1-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations2-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations2-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations3-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations3-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations4-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations4-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations0-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations0-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations1-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations1-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations2-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations2-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations3-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations3-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations4-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions1-min_alt1-tol1-fullstack_locations4-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations0-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations0-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations1-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations1-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations2-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations2-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations3-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations3-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations4-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions2-min_alt2-tol2-fullstack_locations4-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations0-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations0-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations1-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations1-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations2-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations2-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations3-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations3-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations4-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions3-min_alt3-tol3-fullstack_locations4-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations0-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations0-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations1-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations1-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations2-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations2-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations3-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations3-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations4-fullstack_times0]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions4-min_alt4-tol4-fullstack_locations4-fullstack_times1]
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_fiducial_roudtrip
+PASSED astropy/coordinates/tests/test_iau_fullstack.py::test_future_altaz
+FAILED astropy/coordinates/tests/test_iau_fullstack.py::test_iau_fullstack[fullstack_obsconditions0-min_alt0-tol0-fullstack_locations0-fullstack_times0]
+========================= 1 failed, 51 passed in 0.85s =========================

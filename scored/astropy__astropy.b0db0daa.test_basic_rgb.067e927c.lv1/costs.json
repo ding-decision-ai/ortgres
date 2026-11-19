@@ -1,0 +1,46 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "008",
+    "source_and_execution": {
+      "whole_full_eval_outer_seconds": 15.089077440000437,
+      "inner_eval_already_in_whole_outer_seconds": 14.65737136700045,
+      "charge_inner_and_outer_twice": false,
+      "prior005_controller_not_running_zero_grade_failure_outer_seconds": 0.3106319059997986,
+      "prior005_grade_or_model_calls": 0,
+      "fresh_evaluator_creation_seconds": 0.2342395010000473,
+      "current_phase_ledger": {
+        "bytes": 25403
+      },
+      "current_phase_charged_seconds": 87.80819371399048,
+      "current_phase_remaining_seconds": 1112.1918062860095,
+      "phase_and_all_history_actual_total_seconds": null,
+      "all_history_USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "existing_full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.2342395010000473,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 0.3106319059997986,
+          "inner_budget_already_charged": 0.0,
+          "inner_known_actual_already_charged": 0.0,
+          "additional_budget": 0.3106319059997986,
+          "additional_known_actual": 0.3106319059997986,
+          "models": 0
+        },
+        "2": {
+          "whole_seconds": 15.089077440000437,
+          "inner_budget_already_charged": 14.65737136700045,
+          "inner_known_actual_already_charged": 0.0,
+          "additional_budget": 0.43170607299998665,
+          "additional_known_actual": 15.089077440000437,
+          "models": 0
+        }
+      }
+    },
+    "accounting_rule": "unknown"
+  }
+}

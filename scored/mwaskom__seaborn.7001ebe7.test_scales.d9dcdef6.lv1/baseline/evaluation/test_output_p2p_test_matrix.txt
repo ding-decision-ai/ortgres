@@ -1,0 +1,109 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 93 items
+
+tests/test_matrix.py .......................................ssssssssssss [ 54%]
+sssssssssssssssssssssssssssssssssssssssss.                               [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_matrix.py::TestHeatmap::test_ndarray_input
+PASSED tests/test_matrix.py::TestHeatmap::test_array_like_input
+PASSED tests/test_matrix.py::TestHeatmap::test_df_input
+PASSED tests/test_matrix.py::TestHeatmap::test_df_multindex_input
+PASSED tests/test_matrix.py::TestHeatmap::test_mask_input[float]
+PASSED tests/test_matrix.py::TestHeatmap::test_mask_input[int64]
+PASSED tests/test_matrix.py::TestHeatmap::test_mask_input[object]
+PASSED tests/test_matrix.py::TestHeatmap::test_mask_limits
+PASSED tests/test_matrix.py::TestHeatmap::test_default_vlims
+PASSED tests/test_matrix.py::TestHeatmap::test_robust_vlims
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_sequential_vlims
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_diverging_vlims
+PASSED tests/test_matrix.py::TestHeatmap::test_array_with_nans
+PASSED tests/test_matrix.py::TestHeatmap::test_mask
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_cmap
+PASSED tests/test_matrix.py::TestHeatmap::test_centered_vlims
+PASSED tests/test_matrix.py::TestHeatmap::test_default_colors
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_vlim_colors
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_center_colors
+PASSED tests/test_matrix.py::TestHeatmap::test_cmap_with_properties
+PASSED tests/test_matrix.py::TestHeatmap::test_explicit_none_norm
+PASSED tests/test_matrix.py::TestHeatmap::test_ticklabels_off
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_ticklabels
+PASSED tests/test_matrix.py::TestHeatmap::test_custom_ticklabel_interval
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation_overwrite_kws
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation_with_mask
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation_mesh_colors
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation_other_data
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation_different_shapes
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_annotation_with_limited_ticklabels
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_cbar
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_axes
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_ticklabel_rotation
+PASSED tests/test_matrix.py::TestHeatmap::test_heatmap_inner_lines
+PASSED tests/test_matrix.py::TestHeatmap::test_square_aspect
+PASSED tests/test_matrix.py::TestHeatmap::test_mask_validation
+PASSED tests/test_matrix.py::TestHeatmap::test_missing_data_mask
+PASSED tests/test_matrix.py::TestHeatmap::test_cbar_ticks
+PASSED tests/test_matrix.py::test_required_scipy_errors
+SKIPPED [1] tests/test_matrix.py:526: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:542: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:558: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:577: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:594: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:607: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:615: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:634: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:645: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:659: fastcluster not installed
+SKIPPED [1] tests/test_matrix.py:670: fastcluster not installed
+SKIPPED [1] tests/test_matrix.py:682: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:695: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:712: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:780: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:787: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:791: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:798: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:810: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:822: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:842: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:856: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:869: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:878: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:889: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:898: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:909: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:916: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:925: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:936: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:944: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:950: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:956: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:969: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:985: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:995: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1015: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1038: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1061: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1076: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1105: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1122: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1146: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1160: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1179: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1195: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1211: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1230: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1243: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1305: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1320: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1333: Test requires scipy
+SKIPPED [1] tests/test_matrix.py:1343: Test requires scipy
+======================== 40 passed, 53 skipped in 1.58s ========================

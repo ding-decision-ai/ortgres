@@ -1,0 +1,275 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "ready": true,
+      "model_elapsed_seconds": 350.7528487449963,
+      "elapsed_seconds": 351.66513313400355,
+      "event_summary": {
+        "turn_usages": {
+          "0": {
+            "input_tokens": 4762300,
+            "cached_input_tokens": 4601856,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 14779,
+            "reasoning_output_tokens": 6871
+          },
+          "1": {
+            "input_tokens": 364803,
+            "cached_input_tokens": 306816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 2090,
+            "reasoning_output_tokens": 1160
+          }
+        },
+        "usage_total": {
+          "input_tokens": 5127103,
+          "cached_input_tokens": 4908672,
+          "output_tokens": 16869
+        }
+      },
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "source_episode_ledger": {
+        "0": {
+          "recorded_metadata": {
+            "ready": true,
+            "initialization_timeout_seconds": 3600,
+            "tsv_version": 2,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 24524534,
+                  "cached_input_tokens": 23259136,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 72293,
+                  "reasoning_output_tokens": 11145
+                }
+              },
+              "usage_complete": true,
+              "usage_total": {
+                "reasoning_output_tokens": 11145,
+                "input_tokens": 24524534,
+                "cached_input_tokens": 23259136,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 72293
+              }
+            },
+            "model_elapsed_seconds": 1896.974327272008,
+            "model_exit_code": 0,
+            "state_files_saved": {
+              "artifact_24e44c228e5184e3": true,
+              "artifact_2c1f8de3485efb44": false,
+              "artifact_4caf12de69a79acd": false
+            },
+            "elapsed_seconds": 1898.1638494439976,
+            "segment_limit": 4,
+            "segments": {
+              "0": {
+                "number": 1,
+                "metadata": {
+                  "ready": true,
+                  "initialization_timeout_seconds": 3599,
+                  "tsv_version": 2,
+                  "event_summary": {
+                    "completed": true,
+                    "turn_usages": {
+                      "0": {
+                        "input_tokens": 24524534,
+                        "cached_input_tokens": 23259136,
+                        "cache_write_input_tokens": 0,
+                        "output_tokens": 72293,
+                        "reasoning_output_tokens": 11145
+                      }
+                    },
+                    "usage_total": {
+                      "input_tokens": 24524534,
+                      "cached_input_tokens": 23259136,
+                      "output_tokens": 72293
+                    }
+                  },
+                  "model_elapsed_seconds": 1896.974327272008,
+                  "model_exit_code": 0,
+                  "state_files_saved": {
+                    "artifact_24e44c228e5184e3": true,
+                    "artifact_2c1f8de3485efb44": false,
+                    "artifact_4caf12de69a79acd": false
+                  },
+                  "elapsed_seconds": 1898.0257552479889
+                },
+                "continuation_allowed": false
+              }
+            }
+          },
+          "source_segments": 1,
+          "recorded_model_seconds": 1896.974327272008,
+          "recorded_elapsed_seconds": 1898.1638494439976,
+          "root_segment_same_event_counted_once": true,
+          "actual_cost_usd": null
+        },
+        "1": {
+          "source_segments": 2,
+          "recorded_model_seconds": 350.7528487449963,
+          "recorded_elapsed_seconds": 351.66513313400355,
+          "segments": {
+            "0": {
+              "number": 1,
+              "recorded_model_seconds": 295.0430732099994,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 4762300,
+                    "cached_input_tokens": 4601856,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 14779,
+                    "reasoning_output_tokens": 6871
+                  }
+                },
+                "last_source_note": "unknown"
+              },
+              "actual_cost_usd": null
+            },
+            "1": {
+              "number": 2,
+              "recorded_model_seconds": 55.70977553499688,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 364803,
+                    "cached_input_tokens": 306816,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 2090,
+                    "reasoning_output_tokens": 1160
+                  }
+                },
+                "last_source_note": "unknown"
+              },
+              "actual_cost_usd": null
+            }
+          },
+          "recorded_event_summary": {
+            "turn_usages": {
+              "0": {
+                "input_tokens": 4762300,
+                "cached_input_tokens": 4601856,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 14779,
+                "reasoning_output_tokens": 6871
+              },
+              "1": {
+                "input_tokens": 364803,
+                "cached_input_tokens": 306816,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 2090,
+                "reasoning_output_tokens": 1160
+              }
+            },
+            "usage_total": {
+              "input_tokens": 5127103,
+              "cached_input_tokens": 4908672,
+              "output_tokens": 16869
+            }
+          },
+          "actual_cost_usd": null
+        }
+      },
+      "source_event_sha256_unique_count": 3,
+      "source_event_sha256_unique_model_seconds": {
+        "430f707541fd931c726b285230d3fbdb66ca713a231e1ca878ed71f84915e6cd": 1896.974327272008,
+        "a41329147726a4010eb48f30ac88bdfb01e690cdee95119a0b671adac586625c": 295.0430732099994,
+        "c15a2fc7320e9c29865768485bdc490795a521eb7f4a65097971bf0b835aa49a": 55.70977553499688
+      },
+      "known_source_model_seconds_all_unique": 2247.7271760170042,
+      "source_usage_accounting_complete": true,
+      "related_file_count": 4,
+      "related_valid_outline_count": 4,
+      "original_cognitive_files": 326,
+      "genuine_rows_reused_before_new_source": 326,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true,
+      "historical_cost_preservation": {
+        "root_and_segment_charged_once": true,
+        "no_prior_failed_stage_pointer_recorded": true
+      },
+      "trusted_mode_repair_receipt": {
+        "original_receipt": {
+          "source_preflight_passed": true,
+          "pass": true,
+          "source_files_checked": 326,
+          "tracked_files_checked": 326,
+          "differences": {
+            "0": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "1": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "2": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "3": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "4": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            }
+          },
+          "after_source_body_and_modes_exact": true,
+          "scope_unchanged": true,
+          "tsv_unchanged": true,
+          "roles_content_unchanged": true,
+          "models_called": 0
+        }
+      },
+      "source_cost_usd": null,
+      "accounting_note": "unknown"
+    },
+    "formal": {
+      "infer_success": true,
+      "infer_exit_code": 0,
+      "grade_exit_code": 0,
+      "agent_exit_status": null,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_turn_completed_observed": true,
+      "formal_budget_time_exceeded": false,
+      "formal_model_calls": 1,
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "usage": {
+        "input_tokens": 9142791,
+        "cached_input_tokens": 8959744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 32661,
+        "reasoning_output_tokens": 11426
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 132,
+        "turn.started": 1,
+        "item.started": 56,
+        "turn.completed": 1
+      },
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null
+    },
+    "accounting_rule": "unknown"
+  }
+}

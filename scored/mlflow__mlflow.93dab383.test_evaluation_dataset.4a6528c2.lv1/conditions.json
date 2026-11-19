@@ -1,0 +1,16 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.31",
+  "initialization": {
+    "coverage": {}
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1"
+}

@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 29 items
+
+tests/_marks/test_line.py .............................                  [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_marks/test_line.py::TestPath::test_xy_data
+PASSED tests/_marks/test_line.py::TestPath::test_shared_colors_direct
+PASSED tests/_marks/test_line.py::TestPath::test_separate_colors_direct
+PASSED tests/_marks/test_line.py::TestPath::test_shared_colors_mapped
+PASSED tests/_marks/test_line.py::TestPath::test_separate_colors_mapped
+PASSED tests/_marks/test_line.py::TestPath::test_color_with_alpha
+PASSED tests/_marks/test_line.py::TestPath::test_color_and_alpha
+PASSED tests/_marks/test_line.py::TestPath::test_other_props_direct
+PASSED tests/_marks/test_line.py::TestPath::test_other_props_mapped
+PASSED tests/_marks/test_line.py::TestPath::test_capstyle
+PASSED tests/_marks/test_line.py::TestLine::test_xy_data
+PASSED tests/_marks/test_line.py::TestPaths::test_xy_data
+PASSED tests/_marks/test_line.py::TestPaths::test_set_properties
+PASSED tests/_marks/test_line.py::TestPaths::test_mapped_properties
+PASSED tests/_marks/test_line.py::TestPaths::test_color_with_alpha
+PASSED tests/_marks/test_line.py::TestPaths::test_color_and_alpha
+PASSED tests/_marks/test_line.py::TestPaths::test_capstyle
+PASSED tests/_marks/test_line.py::TestLines::test_xy_data
+PASSED tests/_marks/test_line.py::TestLines::test_single_orient_value
+PASSED tests/_marks/test_line.py::TestRange::test_xy_data
+PASSED tests/_marks/test_line.py::TestRange::test_auto_range
+PASSED tests/_marks/test_line.py::TestRange::test_mapped_color
+PASSED tests/_marks/test_line.py::TestRange::test_direct_properties
+PASSED tests/_marks/test_line.py::TestDash::test_xy_data
+PASSED tests/_marks/test_line.py::TestDash::test_xy_data_grouped
+PASSED tests/_marks/test_line.py::TestDash::test_set_properties
+PASSED tests/_marks/test_line.py::TestDash::test_mapped_properties
+PASSED tests/_marks/test_line.py::TestDash::test_width
+PASSED tests/_marks/test_line.py::TestDash::test_dodge
+============================== 29 passed in 1.04s ==============================

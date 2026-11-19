@@ -1,0 +1,290 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/votable/tests/test_vo.py.
+
+Date: 2026-10-11T01:21:37
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 184 items
+
+astropy/io/votable/tests/test_vo.py .................................... [ 19%]
+.........................F.............................F................ [ 58%]
+.................F...................................F.....F..Validation report for /testbed/astropy/io/votable/tests/data/empty_table.xml
+
+astropy.io.votable found no violations.
+
+xmllint passed
+..F....... [ 97%]
+....                                                                     [100%]
+
+=================================== FAILURES ===================================
+_____________________________ TestParse.test_repr ______________________________
+astropy/io/votable/tests/test_vo.py:699: in test_repr
+    assert (
+E   assert '<PARAM ID="w... value="[]"/>' == '<PARAM ID="a..."[0.0 0.0]"/>'
+E     
+E     - <PARAM ID="awesome" arraysize="*" datatype="float" name="INPUT" unit="deg" value="[0.0 0.0]"/>
+E     + <PARAM ID="wrong_arraysize" arraysize="0" datatype="float" name="wrong_arraysize" value="[]"/>
+________________________ TestThroughTableData.test_repr ________________________
+astropy/io/votable/tests/test_vo.py:699: in test_repr
+    assert (
+E   assert '<PARAM ID="w... value="[]"/>' == '<PARAM ID="a..."[0.0 0.0]"/>'
+E     
+E     - <PARAM ID="awesome" arraysize="*" datatype="float" name="INPUT" unit="deg" value="[0.0 0.0]"/>
+E     + <PARAM ID="wrong_arraysize" arraysize="0" datatype="float" name="wrong_arraysize" value="[]"/>
+_________________________ TestThroughBinary.test_repr __________________________
+astropy/io/votable/tests/test_vo.py:699: in test_repr
+    assert (
+E   assert '<PARAM ID="w... value="[]"/>' == '<PARAM ID="a..."[0.0 0.0]"/>'
+E     
+E     - <PARAM ID="awesome" arraysize="*" datatype="float" name="INPUT" unit="deg" value="[0.0 0.0]"/>
+E     + <PARAM ID="wrong_arraysize" arraysize="0" datatype="float" name="wrong_arraysize" value="[]"/>
+_________________________ TestThroughBinary2.test_repr _________________________
+astropy/io/votable/tests/test_vo.py:699: in test_repr
+    assert (
+E   assert '<PARAM ID="w... value="[]"/>' == '<PARAM ID="a..."[0.0 0.0]"/>'
+E     
+E     - <PARAM ID="awesome" arraysize="*" datatype="float" name="INPUT" unit="deg" value="[0.0 0.0]"/>
+E     + <PARAM ID="wrong_arraysize" arraysize="0" datatype="float" name="wrong_arraysize" value="[]"/>
+____________________________ test_too_many_columns _____________________________
+astropy/io/votable/tests/test_vo.py:896: in test_too_many_columns
+    parse(get_pkg_data_filename("data/too_many_columns.xml.gz"))
+astropy/io/votable/table.py:164: in parse
+    return tree.VOTableFile(config=config, pos=(1, 1)).parse(iterator, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4471: in parse
+    for start, tag, data, pos in iterator:
+E   ValueError: 1:0: not well-formed (invalid token)
+____________________________ test_gzip_filehandles _____________________________
+astropy/io/votable/tests/test_vo.py:1012: in test_gzip_filehandles
+    votable = parse(fd)
+              ^^^^^^^^^
+astropy/io/votable/table.py:164: in parse
+    return tree.VOTableFile(config=config, pos=(1, 1)).parse(iterator, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4471: in parse
+    for start, tag, data, pos in iterator:
+E   ValueError: 1:0: not well-formed (invalid token)
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/votable/tests/test_vo.py::test_parse_single_table
+PASSED astropy/io/votable/tests/test_vo.py::test_parse_single_table2
+PASSED astropy/io/votable/tests/test_vo.py::test_parse_single_table3
+PASSED astropy/io/votable/tests/test_vo.py::test_regression
+PASSED astropy/io/votable/tests/test_vo.py::test_regression_python_based_parser
+PASSED astropy/io/votable/tests/test_vo.py::test_regression_binary2
+PASSED astropy/io/votable/tests/test_vo.py::TestFixups::test_implicit_id
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_fieldref
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_paramref
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_iter_fields_and_params_on_a_group
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_iter_groups_on_a_group
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_iter_groups
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_ref_table
+PASSED astropy/io/votable/tests/test_vo.py::TestReferences::test_iter_coosys
+PASSED astropy/io/votable/tests/test_vo.py::test_select_missing_columns_error_message[basic]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_missing_columns_error_message[check-ordering]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_missing_columns_error_message[list-only-missing]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_index
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[first-col-ids]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[first-col-names]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[single-col-ids]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[single-col-names]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[two-cols-ids]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[two-cols-names]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[two-cols-ids-sameID]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[two-cols-names-sameID]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[two-cols-ids-order-mismatch]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_by_name_edge_cases[two-cols-names-order-mismatch]
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_fixed_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_fixed_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_unsignedByte
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_short
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_int
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_long
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_double
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_float
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_array
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bit
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bit_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bitarray
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bitarray_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bitvararray
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bitvararray2
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_floatComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_doubleComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_doubleComplexArray
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_boolean
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_boolean_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_boolean_array
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_boolean_array_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_nulls
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_nulls_array
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_double_array
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bit_array2
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_bit_array2_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_get_coosys_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_get_field_by_utype
+PASSED astropy/io/votable/tests/test_vo.py::TestParse::test_get_info_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_fixed_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_fixed_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_unsignedByte
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_short
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_int
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_long
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_double
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_float
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bit
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bitarray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bitvararray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bitvararray2
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_floatComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_doubleComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_doubleComplexArray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_boolean
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_boolean_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_boolean_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_boolean_array_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_nulls
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_nulls_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_double_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bit_array2
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_get_coosys_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_get_field_by_utype
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_get_info_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bit_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bitarray_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_bit_array2_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_schema
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_fixed_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_fixed_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_unsignedByte
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_short
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_int
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_long
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_double
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_float
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bit
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bitarray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bitvararray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bitvararray2
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_floatComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_doubleComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_doubleComplexArray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_boolean
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_boolean_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_boolean_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_boolean_array_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_nulls
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_nulls_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_double_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bit_array2
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_get_coosys_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_get_field_by_utype
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_get_info_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bit_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bitarray_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_bit_array2_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_null_integer_binary
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_fixed_string_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_fixed_unicode_test
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_unsignedByte
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_short
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_int
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_long
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_double
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_float
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bit
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bit_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bitarray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bitarray_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bitvararray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bitvararray2
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_floatComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_doubleComplex
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_doubleComplexArray
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_boolean
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_boolean_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_boolean_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_boolean_array_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_nulls
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_nulls_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_double_array
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bit_array2
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_bit_array2_mask
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_get_field_by_utype
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_get_info_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_get_coosys_by_id
+PASSED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_null_integer_binary2
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_binary[binary]
+PASSED astropy/io/votable/tests/test_vo.py::test_select_columns_binary[binary2]
+PASSED astropy/io/votable/tests/test_vo.py::test_open_files
+PASSED astropy/io/votable/tests/test_vo.py::test_build_from_scratch
+PASSED astropy/io/votable/tests/test_vo.py::test_validate
+PASSED astropy/io/votable/tests/test_vo.py::test_validate_xmllint_true
+PASSED astropy/io/votable/tests/test_vo.py::test_validate_path_object
+PASSED astropy/io/votable/tests/test_vo.py::test_from_scratch_example
+PASSED astropy/io/votable/tests/test_vo.py::test_fileobj
+PASSED astropy/io/votable/tests/test_vo.py::test_nonstandard_units
+PASSED astropy/io/votable/tests/test_vo.py::test_resource_structure
+PASSED astropy/io/votable/tests/test_vo.py::test_no_resource_check
+PASSED astropy/io/votable/tests/test_vo.py::test_instantiate_vowarning
+PASSED astropy/io/votable/tests/test_vo.py::test_custom_datatype
+PASSED astropy/io/votable/tests/test_vo.py::test_timesys
+PASSED astropy/io/votable/tests/test_vo.py::test_timesys_roundtrip
+PASSED astropy/io/votable/tests/test_vo.py::test_timesys_errors
+PASSED astropy/io/votable/tests/test_vo.py::test_get_infos_by_name
+FAILED astropy/io/votable/tests/test_vo.py::TestParse::test_repr - assert '<P...
+FAILED astropy/io/votable/tests/test_vo.py::TestThroughTableData::test_repr
+FAILED astropy/io/votable/tests/test_vo.py::TestThroughBinary::test_repr - as...
+FAILED astropy/io/votable/tests/test_vo.py::TestThroughBinary2::test_repr - a...
+FAILED astropy/io/votable/tests/test_vo.py::test_too_many_columns - ValueErro...
+FAILED astropy/io/votable/tests/test_vo.py::test_gzip_filehandles - ValueErro...
+======================== 6 failed, 178 passed in 0.74s =========================

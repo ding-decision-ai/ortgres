@@ -1,0 +1,101 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/table/tests/test_groups.py.
+
+Date: 2026-10-10T23:48:26
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 50 items
+
+astropy/table/tests/test_groups.py ..................................... [ 74%]
+.............                                                            [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/table/tests/test_groups.py::test_column_group_by[False]
+PASSED astropy/table/tests/test_groups.py::test_column_group_by[True]
+PASSED astropy/table/tests/test_groups.py::test_column_group_by_no_argsort
+PASSED astropy/table/tests/test_groups.py::test_table_group_by[False]
+PASSED astropy/table/tests/test_groups.py::test_table_group_by[True]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys[T1m0]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys[T1m1]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys[T1m2]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys[T1m3]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys_time
+PASSED astropy/table/tests/test_groups.py::test_groups_iterator[False]
+PASSED astropy/table/tests/test_groups.py::test_groups_iterator[True]
+PASSED astropy/table/tests/test_groups.py::test_grouped_copy[False]
+PASSED astropy/table/tests/test_groups.py::test_grouped_copy[True]
+PASSED astropy/table/tests/test_groups.py::test_grouped_slicing[False]
+PASSED astropy/table/tests/test_groups.py::test_grouped_slicing[True]
+PASSED astropy/table/tests/test_groups.py::test_group_column_from_table[False]
+PASSED astropy/table/tests/test_groups.py::test_group_column_from_table[True]
+PASSED astropy/table/tests/test_groups.py::test_table_groups_mask_index[False]
+PASSED astropy/table/tests/test_groups.py::test_table_groups_mask_index[True]
+PASSED astropy/table/tests/test_groups.py::test_table_groups_array_index[False]
+PASSED astropy/table/tests/test_groups.py::test_table_groups_array_index[True]
+PASSED astropy/table/tests/test_groups.py::test_table_groups_slicing[False]
+PASSED astropy/table/tests/test_groups.py::test_table_groups_slicing[True]
+PASSED astropy/table/tests/test_groups.py::test_grouped_item_access[False]
+PASSED astropy/table/tests/test_groups.py::test_grouped_item_access[True]
+PASSED astropy/table/tests/test_groups.py::test_mutable_operations[False]
+PASSED astropy/table/tests/test_groups.py::test_mutable_operations[True]
+PASSED astropy/table/tests/test_groups.py::test_group_by_masked[False]
+PASSED astropy/table/tests/test_groups.py::test_group_by_masked[True]
+PASSED astropy/table/tests/test_groups.py::test_group_by_errors[False]
+PASSED astropy/table/tests/test_groups.py::test_group_by_errors[True]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys_meta[False]
+PASSED astropy/table/tests/test_groups.py::test_groups_keys_meta[True]
+PASSED astropy/table/tests/test_groups.py::test_table_aggregate[False]
+PASSED astropy/table/tests/test_groups.py::test_table_aggregate[True]
+PASSED astropy/table/tests/test_groups.py::test_table_aggregate_reduceat[False]
+PASSED astropy/table/tests/test_groups.py::test_table_aggregate_reduceat[True]
+PASSED astropy/table/tests/test_groups.py::test_table_aggregate_reduceat_empty
+PASSED astropy/table/tests/test_groups.py::test_column_aggregate[False]
+PASSED astropy/table/tests/test_groups.py::test_column_aggregate[True]
+PASSED astropy/table/tests/test_groups.py::test_column_aggregate_f8
+PASSED astropy/table/tests/test_groups.py::test_table_filter
+PASSED astropy/table/tests/test_groups.py::test_column_filter
+PASSED astropy/table/tests/test_groups.py::test_group_mixins
+PASSED astropy/table/tests/test_groups.py::test_group_mixins_unsupported[col0]
+PASSED astropy/table/tests/test_groups.py::test_group_mixins_unsupported[col1]
+PASSED astropy/table/tests/test_groups.py::test_group_mixins_unsupported[col2]
+PASSED astropy/table/tests/test_groups.py::test_group_stable_sort[False]
+PASSED astropy/table/tests/test_groups.py::test_group_stable_sort[True]
+============================== 50 passed in 1.67s ==============================

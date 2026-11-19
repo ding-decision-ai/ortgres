@@ -1,0 +1,37 @@
+{
+  "ready": true,
+  "initialization_timeout_seconds": 3599,
+  "ortg_version": "0.5.31",
+  "tsv_version": 2,
+  "cbm": "off",
+  "repo": "/testbed",
+  "validator_sha256": "18ab66b8d690df9a9e45883e84dc057481d802d6f89bcb8970a93eab5063190e",
+  "prompt_sha256": "f98cd1ff180ab2dcbf8156d254a008d8056d4315eb1383554b02575506702f21",
+  "event_summary": {
+    "completed": true,
+    "last_event_type": "turn.completed",
+    "turn_usages": [
+      {
+        "input_tokens": 3255169,
+        "cached_input_tokens": 3120640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 32766,
+        "reasoning_output_tokens": 12562
+      }
+    ],
+    "usage_total": {
+      "input_tokens": 3255169,
+      "cached_input_tokens": 3120640,
+      "output_tokens": 32766
+    }
+  },
+  "model_elapsed_seconds": 545.1848884530045,
+  "scope_sha256": "224053fbfcc3e01f4371e28cad5162eecaa1abc53fdbe9eeec677b8f4fdfba30",
+  "model_exit_code": 0,
+  "state_files_saved": {
+    "/testbed/ortg.tsv": true,
+    "/testbed/overview.txt": false,
+    "/testbed/.ortg/config.json": false
+  },
+  "elapsed_seconds": 546.8263721589901
+}

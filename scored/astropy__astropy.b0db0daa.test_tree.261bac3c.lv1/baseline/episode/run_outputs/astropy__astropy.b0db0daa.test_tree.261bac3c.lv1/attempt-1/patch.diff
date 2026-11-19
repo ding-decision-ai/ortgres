@@ -1,0 +1,182 @@
+diff --git a/astropy/io/votable/exceptions.py b/astropy/io/votable/exceptions.py
+index cda29c9..f2af3c2 100644
+--- a/astropy/io/votable/exceptions.py
++++ b/astropy/io/votable/exceptions.py
+@@ -73,6 +73,38 @@ class Conf(_config.ConfigNamespace):
+ conf = Conf()
+ 
+ 
++def _format_message(message, warning_name, config=None, pos=None):
++    """Add source location and warning code information to a message."""
++    if config is None:
++        config = {}
++    if pos is None:
++        pos = ("?", "?")
++    filename = config.get("filename")
++    location = f"{pos[0]}:{pos[1]}"
++    if filename:
++        location = f"{filename}:{location}"
++    return f"{location}: {warning_name}: {message}"
++
++
++def _suppressed_warning(warning, config=None, stacklevel=1):
++    """Emit repeated warning classes only up to ``conf.max_warnings``."""
++    if config is None:
++        config = {}
++    counts = config.setdefault("_warning_counts", {})
++    warning_class = warning.__class__
++    count = counts.get(warning_class, 0)
++    counts[warning_class] = count + 1
++
++    if count >= conf.max_warnings:
++        return
++    if count == conf.max_warnings - 1:
++        warning.formatted_message += (
++            " (suppressing further warnings of this type...)"
++        )
++        warning.args = (warning.formatted_message,)
++    warn(warning, stacklevel=stacklevel + 1)
++
++
+ 
+ 
+ 
+@@ -1609,4 +1641,4 @@ if __doc__ is not None:
+     __doc__ = __doc__.format(**_build_doc_string())
+ 
+ __all__ += [x[0] for x in _get_warning_and_exception_classes("W")]
+-__all__ += [x[0] for x in _get_warning_and_exception_classes("E")]
+\ No newline at end of file
++__all__ += [x[0] for x in _get_warning_and_exception_classes("E")]
+diff --git a/astropy/io/votable/tree.py b/astropy/io/votable/tree.py
+index 87e4db2..8f9654d 100644
+--- a/astropy/io/votable/tree.py
++++ b/astropy/io/votable/tree.py
+@@ -294,6 +294,44 @@ def _attach_default_config(votable, config) -> dict:
+ # ATTRIBUTE CHECKERS
+ 
+ 
++_astroyear_re = re.compile(r"^[JB]?[0-9]+(?:[.][0-9]*)?$")
++
++
++def _get_default_unit_format(config):
++    """Return the unit syntax prescribed by the configured VOTable version."""
++    if "version_1_4_or_later" in config:
++        version_1_4_or_later = config["version_1_4_or_later"]
++    else:
++        version = config.get("version")
++        version_1_4_or_later = (
++            version is not None and util.version_compare(str(version), "1.4") >= 0
++        )
++    return "vounit" if version_1_4_or_later else "cds"
++
++
++def _get_unit_format(config):
++    """Return an explicit unit format, or the version-dependent default."""
++    return config.get("unit_format") or _get_default_unit_format(config)
++
++
++def check_astroyear(year, field, config=None, pos=None):
++    """Validate an astronomical year value from a VOTable attribute."""
++    if year is not None and (
++        not isinstance(year, str) or _astroyear_re.fullmatch(year) is None
++    ):
++        warn_or_raise(W07, W07, (field, year), config, pos)
++        return False
++    return True
++
++
++def check_string(string, attr_name, config=None, pos=None):
++    """Validate that a VOTable attribute is a string or bytes value."""
++    if string is not None and not isinstance(string, (str, bytes)):
++        warn_or_raise(W08, W08, (attr_name,), config, pos)
++        return False
++    return True
++
++
+ 
+ 
+ 
+@@ -4166,6 +4204,12 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+         self._groups = HomogeneousList(Group)
+ 
+ 
++    def set_all_tables_format(self, format):
++        """Set the output storage format for every table in this file."""
++        for table in self.iter_tables():
++            table.format = format
++
++
+ 
+ 
+ 
+@@ -4703,4 +4747,4 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+             votable.ID = table_id
+         resource.tables.append(votable)
+         votable_file.resources.append(resource)
+-        return votable_file
+\ No newline at end of file
++        return votable_file
+diff --git a/astropy/utils/xml/check.py b/astropy/utils/xml/check.py
+index 1f711a6..5c99019 100644
+--- a/astropy/utils/xml/check.py
++++ b/astropy/utils/xml/check.py
+@@ -8,6 +8,53 @@ import re
+ import urllib.parse
+ 
+ 
++_id_regex = re.compile(r"^[A-Za-z_][A-Za-z0-9._-]*$")
++_id_char_regex = re.compile(r"[^A-Za-z0-9._-]")
++
++
++def check_id(ID):
++    """Return whether *ID* has the lexical form of an XML ID."""
++    return isinstance(ID, str) and _id_regex.fullmatch(ID) is not None
++
++
++def fix_id(ID):
++    """Convert an arbitrary string to the lexical form of an XML ID."""
++    if not isinstance(ID, str):
++        ID = str(ID)
++    if not ID or ID[0] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_":
++        ID = "_" + ID
++    return _id_char_regex.sub("_", ID)
++
++
++def check_anyuri(uri):
++    """Return whether *uri* can be parsed as an XML ``anyURI`` value."""
++    try:
++        urllib.parse.urlparse(uri)
++    except (AttributeError, TypeError, ValueError):
++        return False
++    return True
++
++
++def check_token(token):
++    """
++    Returns `True` if *token* is a valid XML token, as defined by XML
++    Schema Part 2.
++
++    XML ``token`` values may be empty, but may not contain tabs or line
++    breaks, leading or trailing spaces, or consecutive spaces.
++    """
++    if not isinstance(token, str):
++        return False
++    return (
++        "\r" not in token
++        and "\n" not in token
++        and "\t" not in token
++        and not token.startswith(" ")
++        and not token.endswith(" ")
++        and "  " not in token
++    )
++
++
+ 
+ 
+ 
+@@ -61,4 +108,3 @@ def check_mime_content_type(content_type):
+         is not None
+     )
+ 
+-

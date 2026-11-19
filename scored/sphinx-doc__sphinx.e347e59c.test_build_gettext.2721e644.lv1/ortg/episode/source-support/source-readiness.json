@@ -1,0 +1,29 @@
+{
+  "source_identity_preserved": true,
+  "roles_preserved": true,
+  "coverage_scope": "task_and_visible_tests_related_files",
+  "original_cognitive_files": 2017,
+  "related_files": [
+    "sphinx/builders/gettext.py",
+    "sphinx/util/template.py",
+    "sphinx/jinja2glue.py",
+    "sphinx/util/osutil.py",
+    "sphinx/__init__.py",
+    "sphinx/templates/gettext/message.pot.jinja",
+    "tests/test_intl/test_intl.py",
+    "tests/test_util/test_util_template.py"
+  ],
+  "related_file_count": 8,
+  "related_valid_outline_count": 8,
+  "missing_paths": [],
+  "invalid_paths": [],
+  "subset_ready": true,
+  "coverage_complete": true,
+  "full_repository_ready": false,
+  "full_repository_completion_required": false,
+  "unselected_bare_rows": 2009,
+  "visible_tests_status": "read",
+  "selection_is_repair_allowlist": false,
+  "official_evaluation_scope_changed": false,
+  "semantic_fidelity": "Selected summaries require source-body/test reading; row syntax does not prove semantic quality."
+}

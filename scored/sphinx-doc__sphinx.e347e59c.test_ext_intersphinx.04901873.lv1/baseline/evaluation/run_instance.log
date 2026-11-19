@@ -1,0 +1,104 @@
+2026-10-12 04:04:50,087 - INFO - ============================================================
+2026-10-12 04:04:50,087 - INFO - Starting evaluation for instance: sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1
+2026-10-12 04:04:50,087 - INFO - Level: 1
+2026-10-12 04:04:50,087 - INFO - Attempt: 1
+2026-10-12 04:04:50,087 - INFO - ============================================================
+2026-10-12 04:04:50,094 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-12 04:04:50,094 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_sphinx-instance_6191afb1
+2026-10-12 04:04:50,096 - INFO - Image docker.io/libercoders/featurebench-specs_sphinx-instance_6191afb1 found locally
+2026-10-12 04:04:50,096 - INFO - Creating container: fb-eval-sphinx-doc__sphinx-e347e59c-test_ext_intersphinx-04901873-lv1-attempt-1-20261012-040450-096100
+2026-10-12 04:04:50,097 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-12 04:04:50,293 - INFO - Container fb-eval-sphinx-doc__sphinx-e347e59c-test_ext_intersphinx-04901873-lv1-attempt-1-20261012-040450-096100 created successfully
+2026-10-12 04:04:50,293 - INFO - Starting Level 1 evaluation for sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1
+2026-10-12 04:04:50,293 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-12 04:04:50,991 - INFO - Restore project exit code: 0
+2026-10-12 04:04:50,991 - INFO - Output: 
+2026-10-12 04:04:50,991 - INFO - Step 2: Applying patch to mask files
+2026-10-12 04:04:50,995 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-12 04:04:51,236 - INFO - Mask patch apply exit code: 0
+2026-10-12 04:04:51,236 - INFO - Mask patch output: /tmp/mask_patch.diff:138: new blank line at EOF.
++
+/tmp/mask_patch.diff:692: new blank line at EOF.
++
+/tmp/mask_patch.diff:1490: new blank line at EOF.
++
+/tmp/mask_patch.diff:1888: new blank line at EOF.
++
+warning: 4 lines add whitespace errors.
+
+2026-10-12 04:04:51,236 - INFO - Successfully applied mask patch
+2026-10-12 04:04:51,236 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-12 04:04:51,240 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-12 04:04:51,240 - INFO - Deleting F2P test file: /testbed/tests/test_ext_intersphinx/test_ext_intersphinx.py
+2026-10-12 04:04:51,476 - INFO - Successfully deleted F2P test file: /testbed/tests/test_ext_intersphinx/test_ext_intersphinx.py
+2026-10-12 04:04:51,476 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-12 04:04:51,476 - INFO - Step 4: Reinitializing git repository
+2026-10-12 04:04:53,677 - INFO - Step 5: Applying agent patch
+2026-10-12 04:04:53,681 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-12 04:04:53,917 - INFO - Patch apply exit code: 0
+2026-10-12 04:04:53,917 - INFO - Patch output: Checking patch sphinx/ext/intersphinx/__init__.py...
+Checking patch sphinx/ext/intersphinx/_cli.py...
+Checking patch sphinx/ext/intersphinx/_load.py...
+Checking patch sphinx/ext/intersphinx/_resolve.py...
+Checking patch sphinx/ext/intersphinx/_shared.py...
+Checking patch sphinx/util/inventory.py...
+Checking patch sphinx/util/requests.py...
+Applied patch sphinx/ext/intersphinx/__init__.py cleanly.
+Applied patch sphinx/ext/intersphinx/_cli.py cleanly.
+Applied patch sphinx/ext/intersphinx/_load.py cleanly.
+Applied patch sphinx/ext/intersphinx/_resolve.py cleanly.
+Applied patch sphinx/ext/intersphinx/_shared.py cleanly.
+Applied patch sphinx/util/inventory.py cleanly.
+Applied patch sphinx/util/requests.py cleanly.
+
+2026-10-12 04:04:53,917 - INFO - >>>>> Applied Patch
+2026-10-12 04:04:53,917 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-12 04:04:53,917 - INFO - F2P test path: /testbed/tests/test_ext_intersphinx/test_ext_intersphinx.py
+2026-10-12 04:04:54,174 - INFO - Delete F2P file exit code: 0
+2026-10-12 04:04:54,174 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-12 04:04:54,428 - INFO - Reverse apply exit code: 0
+2026-10-12 04:04:54,428 - INFO - Reverse apply output: 
+2026-10-12 04:04:54,428 - INFO - Successfully restored F2P test file using test_patch
+2026-10-12 04:04:54,428 - INFO - Step 7: Running tests
+2026-10-12 04:04:54,428 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-12 04:04:54,428 - INFO - Test timeout: 600s
+2026-10-12 04:04:54,428 - INFO - Running F2P test: /testbed/tests/test_ext_intersphinx/test_ext_intersphinx.py
+2026-10-12 04:04:56,189 - INFO - F2P test exit code: 1
+2026-10-12 04:04:56,189 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/1160ded, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 28 items
+
+tests/test_ext_intersphinx/test_ext_intersphinx.py FF.F.F
+2026-10-12 04:04:56,190 - INFO - Saved F2P test output to artifact://cefb11f9d9477b67
+2026-10-12 04:04:56,190 - INFO - Running 5 P2P tests
+2026-10-12 04:04:56,190 - INFO - Running P2P test: /testbed/tests/test_transforms/test_transforms_post_transforms.py
+2026-10-12 04:04:57,396 - INFO - P2P test /testbed/tests/test_transforms/test_transforms_post_transforms.py exit code: 0
+2026-10-12 04:04:57,396 - INFO - Saved P2P test output to artifact://7e5d47d6eae9c2e1
+2026-10-12 04:04:57,396 - INFO - Running P2P test: /testbed/tests/test_builders/test_build_html_download.py
+2026-10-12 04:04:58,897 - INFO - P2P test /testbed/tests/test_builders/test_build_html_download.py exit code: 0
+2026-10-12 04:04:58,897 - INFO - Saved P2P test output to artifact://60fae895f39b0da6
+2026-10-12 04:04:58,897 - INFO - Running P2P test: /testbed/tests/test_environment/test_environment_indexentries.py
+2026-10-12 04:04:59,792 - INFO - P2P test /testbed/tests/test_environment/test_environment_indexentries.py exit code: 0
+2026-10-12 04:04:59,792 - INFO - Saved P2P test output to artifact://42d744e6c5c48c5e
+2026-10-12 04:04:59,792 - INFO - Running P2P test: /testbed/tests/test_writers/test_writer_latex.py
+2026-10-12 04:05:00,410 - INFO - P2P test /testbed/tests/test_writers/test_writer_latex.py exit code: 0
+2026-10-12 04:05:00,410 - INFO - Saved P2P test output to artifact://790cde8dac6c94e8
+2026-10-12 04:05:00,410 - INFO - Running P2P test: /testbed/tests/test_markup/test_parser.py
+2026-10-12 04:05:01,190 - INFO - P2P test /testbed/tests/test_markup/test_parser.py exit code: 0
+2026-10-12 04:05:01,190 - INFO - Saved P2P test output to artifact://3e68cdc87938a762
+2026-10-12 04:05:01,192 - INFO - ============================================================
+2026-10-12 04:05:01,192 - INFO - Evaluation completed for sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1
+2026-10-12 04:05:01,192 - INFO - Resolved: False
+2026-10-12 04:05:01,192 - INFO - F2P Pass rate: 0.6429
+2026-10-12 04:05:01,192 - INFO - ============================================================
+2026-10-12 04:05:01,192 - INFO - Stopping and removing container
+2026-10-12 04:05:11,489 - INFO - Container removed successfully

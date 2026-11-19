@@ -1,0 +1,132 @@
+2026-10-14 12:41:00,167 - INFO - ============================================================
+2026-10-14 12:41:00,167 - INFO - Starting evaluation for instance: pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1
+2026-10-14 12:41:00,167 - INFO - Level: 1
+2026-10-14 12:41:00,167 - INFO - Attempt: 1
+2026-10-14 12:41:00,167 - INFO - ============================================================
+2026-10-14 12:41:00,179 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 12:41:00,179 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_pandas-instance_15f634a6
+2026-10-14 12:41:00,181 - INFO - Image docker.io/libercoders/featurebench-specs_pandas-instance_15f634a6 found locally
+2026-10-14 12:41:00,181 - INFO - Creating container: fb-eval-pandas-dev__pandas-82fa2715-test_http_headers-aafb551e-lv1-attempt-1-20261014-124100-181524
+2026-10-14 12:41:00,182 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 12:41:00,423 - INFO - Container fb-eval-pandas-dev__pandas-82fa2715-test_http_headers-aafb551e-lv1-attempt-1-20261014-124100-181524 created successfully
+2026-10-14 12:41:00,423 - INFO - Starting Level 1 evaluation for pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1
+2026-10-14 12:41:00,423 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 12:41:01,189 - INFO - Restore project exit code: 0
+2026-10-14 12:41:01,189 - INFO - Output: 
+2026-10-14 12:41:01,189 - INFO - Step 2: Applying patch to mask files
+2026-10-14 12:41:01,194 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 12:41:01,438 - INFO - Mask patch apply exit code: 0
+2026-10-14 12:41:01,438 - INFO - Mask patch output: /tmp/mask_patch.diff:2392: new blank line at EOF.
++
+/tmp/mask_patch.diff:2933: new blank line at EOF.
++
+/tmp/mask_patch.diff:5015: new blank line at EOF.
++
+warning: 3 lines add whitespace errors.
+
+2026-10-14 12:41:01,438 - INFO - Successfully applied mask patch
+2026-10-14 12:41:01,438 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 12:41:01,442 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 12:41:01,442 - INFO - Deleting F2P test file: /testbed/pandas/tests/io/test_http_headers.py
+2026-10-14 12:41:01,677 - INFO - Successfully deleted F2P test file: /testbed/pandas/tests/io/test_http_headers.py
+2026-10-14 12:41:01,677 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 12:41:01,677 - INFO - Step 4: Reinitializing git repository
+2026-10-14 12:41:04,169 - INFO - Step 5: Applying agent patch
+2026-10-14 12:41:04,176 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 12:41:04,427 - INFO - Patch apply exit code: 0
+2026-10-14 12:41:04,427 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch pandas/__init__.py...
+Checking patch pandas/_testing/contexts.py...
+Checking patch pandas/api/__init__.py...
+Checking patch pandas/core/frame.py...
+Checking patch pandas/core/generic.py...
+Checking patch pandas/core/indexes/api.py...
+Checking patch pandas/core/indexes/base.py...
+Checking patch pandas/io/api.py...
+Checking patch pandas/io/common.py...
+Checking patch pandas/io/excel/_base.py...
+Checking patch pandas/io/feather_format.py...
+Checking patch pandas/io/formats/csvs.py...
+Checking patch pandas/io/formats/format.py...
+Checking patch pandas/io/formats/html.py...
+Checking patch pandas/io/html.py...
+Checking patch pandas/io/json/__init__.py...
+Checking patch pandas/io/json/_json.py...
+Checking patch pandas/io/parquet.py...
+Checking patch pandas/io/parsers/readers.py...
+Checking patch pandas/io/pickle.py...
+Checking patch pandas/io/pytables.py...
+Checking patch pandas/io/sas/sasreader.py...
+Checking patch pandas/io/stata.py...
+Checking patch pandas/util/_validators.py...
+Applied patch ortg.tsv cleanly.
+Applied patch pandas/__init__.py cleanly.
+Applied patch pandas/_testing/contexts.py cleanly.
+Applied patch pandas/api/__init__.py cleanly.
+Applied patch pandas/core/frame.py cleanly.
+Applied patch pandas/core/generic.py cleanly.
+Applied patch pandas/core/indexes/api.py cleanly.
+Applied patch pandas/core/indexes/base.py cleanly.
+Applied patch pandas/io/api.py cleanly.
+Applied patch pandas/io/common.py cleanly.
+Applied patch pandas/io/excel/_base.py cleanly.
+Applied patch pandas/io/feather_format.py cleanly.
+Applied patch pandas/io/formats/csvs.py cleanly.
+Applied patch pandas/io/formats/format.py cleanly.
+Applied patch pandas/io/formats/html.py cleanly.
+Applied patch pandas/io/html.py cleanly.
+Applied patch pandas/io/json/__init__.py cleanly.
+Applied patch pandas/io/json/_json.py cleanly.
+Applied patch pandas/io/parquet.py cleanly.
+Applied patch pandas/io/parsers/readers.py cleanly.
+Applied patch pandas/io/pickle.py cleanly.
+Applied patch pandas/io/pytables.py cleanly.
+Applied patch pandas/io/sas/sasreader.py cleanly.
+Applied patch pandas/io/stata.py cleanly.
+Applied patch pandas/util/_validators.py cleanly.
+
+2026-10-14 12:41:04,427 - INFO - >>>>> Applied Patch
+2026-10-14 12:41:04,427 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 12:41:04,427 - INFO - F2P test path: /testbed/pandas/tests/io/test_http_headers.py
+2026-10-14 12:41:04,681 - INFO - Delete F2P file exit code: 0
+2026-10-14 12:41:04,681 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 12:41:04,916 - INFO - Reverse apply exit code: 0
+2026-10-14 12:41:04,916 - INFO - Reverse apply output: 
+2026-10-14 12:41:04,916 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 12:41:04,916 - INFO - Step 7: Running tests
+2026-10-14 12:41:04,916 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-14 12:41:04,916 - INFO - Test timeout: 600s
+2026-10-14 12:41:04,916 - INFO - Running F2P test: /testbed/pandas/tests/io/test_http_headers.py
+2026-10-14 12:42:01,350 - INFO - F2P test exit code: 0
+2026-10-14 12:42:01,350 - INFO - F2P output (truncated): /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /te
+2026-10-14 12:42:01,350 - INFO - Saved F2P test output to artifact://2eb90cda5431374a
+2026-10-14 12:42:01,350 - INFO - Running 5 P2P tests
+2026-10-14 12:42:01,350 - INFO - Running P2P test: /testbed/pandas/tests/frame/methods/test_reset_index.py
+2026-10-14 12:42:03,429 - INFO - P2P test /testbed/pandas/tests/frame/methods/test_reset_index.py exit code: 0
+2026-10-14 12:42:03,429 - INFO - Saved P2P test output to artifact://4595a593418cb981
+2026-10-14 12:42:03,429 - INFO - Running P2P test: /testbed/pandas/tests/io/formats/test_to_excel.py
+2026-10-14 12:42:05,564 - INFO - P2P test /testbed/pandas/tests/io/formats/test_to_excel.py exit code: 0
+2026-10-14 12:42:05,564 - INFO - Saved P2P test output to artifact://fa68081dc7cbdb66
+2026-10-14 12:42:05,564 - INFO - Running P2P test: /testbed/pandas/tests/arrays/floating/test_function.py
+2026-10-14 12:42:07,210 - INFO - P2P test /testbed/pandas/tests/arrays/floating/test_function.py exit code: 0
+2026-10-14 12:42:07,211 - INFO - Saved P2P test output to artifact://dc62430d68d3a5e7
+2026-10-14 12:42:07,211 - INFO - Running P2P test: /testbed/pandas/tests/indexing/multiindex/test_sorted.py
+2026-10-14 12:42:08,969 - INFO - P2P test /testbed/pandas/tests/indexing/multiindex/test_sorted.py exit code: 0
+2026-10-14 12:42:08,969 - INFO - Saved P2P test output to artifact://4e94695f1507de36
+2026-10-14 12:42:08,969 - INFO - Running P2P test: /testbed/pandas/tests/arrays/categorical/test_map.py
+2026-10-14 12:42:10,620 - INFO - P2P test /testbed/pandas/tests/arrays/categorical/test_map.py exit code: 0
+2026-10-14 12:42:10,620 - INFO - Saved P2P test output to artifact://ee4904267ae84ab6
+2026-10-14 12:42:10,626 - INFO - ============================================================
+2026-10-14 12:42:10,626 - INFO - Evaluation completed for pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1
+2026-10-14 12:42:10,626 - INFO - Resolved: True
+2026-10-14 12:42:10,626 - INFO - F2P Pass rate: 1.0
+2026-10-14 12:42:10,626 - INFO - ============================================================
+2026-10-14 12:42:10,626 - INFO - Stopping and removing container
+2026-10-14 12:42:21,045 - INFO - Container removed successfully

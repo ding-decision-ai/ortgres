@@ -1,0 +1,151 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 127 items
+
+pandas/tests/scalar/timedelta/test_arithmetic.py ...............................................................................................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_ten_seconds[ten_seconds0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_ten_seconds[ten_seconds1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_ten_seconds[ten_seconds2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_ten_seconds[ten_seconds3]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_ten_seconds[ten_seconds4]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_one_day_ten_seconds[one_day_ten_secs0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_one_day_ten_seconds[one_day_ten_secs1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_one_day_ten_seconds[one_day_ten_secs2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_one_day_ten_seconds[one_day_ten_secs3]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_one_day_ten_seconds[one_day_ten_secs4]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_datetimelike_scalar[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_datetimelike_scalar[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_timestamp_overflow
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_td[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_td[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_pytimedelta[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_pytimedelta[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_timedelta64[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_timedelta64[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_offset[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_offset[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_td
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_pytimedelta
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_timedelta64
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_nat
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_td64_nat
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_offset
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_numeric_raises
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_int_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_rsub_nat
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_rsub_offset
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_timedeltalike_object_dtype_array
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_sub_mixed_most_timedeltalike_object_dtype_array
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_rsub_mixed_most_timedeltalike_object_dtype_array
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_timedeltalike_object_dtype_array[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_timedeltalike_object_dtype_array[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_mixed_timedeltalike_object_dtype_array[add]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_mixed_timedeltalike_object_dtype_array[radd]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_td64_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_dt64_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaAdditionSubtraction::test_td_add_sub_ndarray_0d
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nat[mul-td_nat0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nat[mul-td_nat1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nat[mul-td_nat2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nat[rmul-td_nat0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nat[rmul-td_nat1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nat[rmul-td_nat2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nan[mul-nan0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nan[mul-nan1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nan[mul-nan2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nan[rmul-nan0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nan[rmul-nan1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_nan[rmul-nan2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_scalar[mul]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_scalar[rmul]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_numeric_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_numeric_ndarray_0d
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_mul_td64_ndarray_invalid
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_timedeltalike_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_td64_non_nano
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_numeric_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_nan[nan0]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_nan[nan1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_nan[nan2]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_td64_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_div_ndarray_0d
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rdiv_timedeltalike_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rdiv_na_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rdiv_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rdiv_ndarray_0d
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_timedeltalike_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_null_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_offsets
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_invalid_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_numeric_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_timedeltalike_array
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_floordiv_numeric_series
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_timedeltalike_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_null_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_offsets
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_invalid_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_numeric_scalar
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_timedeltalike_array
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_intarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_rfloordiv_numeric_series
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_mod_timedeltalike
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_mod_timedelta64_nat
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_mod_timedelta64
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_mod_offset
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_mod_numeric
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_mod_invalid
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_rmod_pytimedelta
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_rmod_timedelta64
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_rmod_invalid
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_divmod_numeric
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_divmod
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_divmod_offset
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_divmod_invalid
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_rdivmod_pytimedelta
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_rdivmod_offset
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_rdivmod_invalid
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr0-mul]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr0-rmul]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr0-truediv]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr0-rdiv]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr0-rsub]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr1-mul]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr1-rmul]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr1-truediv]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr1-rdiv]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaMultiplicationDivision::test_td_op_timedelta_timedeltalike_array[arr1-rsub]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_pytimedelta_bounds
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_pytimedelta_bounds2
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_tick[Hour]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_tick[Micro]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_tick[Milli]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_tick[Minute]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_tick[Nano]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_tick[Second]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_comparison_object_array
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_timedelta_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_td64_ndarray
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_custom_object
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_unknown_type[string]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::TestTimedeltaComparison::test_compare_unknown_type[1]
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::test_ops_notimplemented
+PASSED pandas/tests/scalar/timedelta/test_arithmetic.py::test_ops_error_str
+============================= 127 passed in 0.11s ==============================

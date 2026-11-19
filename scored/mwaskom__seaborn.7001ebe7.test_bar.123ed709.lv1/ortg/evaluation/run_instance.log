@@ -1,0 +1,90 @@
+2026-10-10 20:24:57,523 - INFO - ============================================================
+2026-10-10 20:24:57,523 - INFO - Starting evaluation for instance: mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1
+2026-10-10 20:24:57,523 - INFO - Level: 1
+2026-10-10 20:24:57,523 - INFO - Attempt: 1
+2026-10-10 20:24:57,523 - INFO - ============================================================
+2026-10-10 20:24:57,529 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-10 20:24:57,530 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb
+2026-10-10 20:24:57,531 - INFO - Image docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb found locally
+2026-10-10 20:24:57,531 - INFO - Creating container: fb-eval-mwaskom__seaborn-7001ebe7-test_bar-123ed709-lv1-attempt-1-20261010-202457-531785
+2026-10-10 20:24:57,532 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-10 20:24:57,799 - INFO - Container fb-eval-mwaskom__seaborn-7001ebe7-test_bar-123ed709-lv1-attempt-1-20261010-202457-531785 created successfully
+2026-10-10 20:24:57,799 - INFO - Starting Level 1 evaluation for mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1
+2026-10-10 20:24:57,799 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-10 20:24:58,221 - INFO - Restore project exit code: 0
+2026-10-10 20:24:58,222 - INFO - Output: 
+2026-10-10 20:24:58,222 - INFO - Step 2: Applying patch to mask files
+2026-10-10 20:24:58,225 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-10 20:24:58,493 - INFO - Mask patch apply exit code: 0
+2026-10-10 20:24:58,493 - INFO - Mask patch output: /tmp/mask_patch.diff:230: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+
+2026-10-10 20:24:58,493 - INFO - Successfully applied mask patch
+2026-10-10 20:24:58,493 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-10 20:24:58,496 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-10 20:24:58,496 - INFO - Deleting F2P test file: /testbed/tests/_marks/test_bar.py
+2026-10-10 20:24:58,749 - INFO - Successfully deleted F2P test file: /testbed/tests/_marks/test_bar.py
+2026-10-10 20:24:58,749 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-10 20:24:58,749 - INFO - Step 4: Reinitializing git repository
+2026-10-10 20:25:00,456 - INFO - Step 5: Applying agent patch
+2026-10-10 20:25:00,459 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-10 20:25:00,704 - INFO - Patch apply exit code: 0
+2026-10-10 20:25:00,704 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch seaborn/_core/scales.py...
+Checking patch seaborn/_marks/bar.py...
+Applied patch ortg.tsv cleanly.
+Applied patch seaborn/_core/scales.py cleanly.
+Applied patch seaborn/_marks/bar.py cleanly.
+
+2026-10-10 20:25:00,704 - INFO - >>>>> Applied Patch
+2026-10-10 20:25:00,704 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-10 20:25:00,704 - INFO - F2P test path: /testbed/tests/_marks/test_bar.py
+2026-10-10 20:25:00,953 - INFO - Delete F2P file exit code: 0
+2026-10-10 20:25:00,953 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-10 20:25:01,202 - INFO - Reverse apply exit code: 0
+2026-10-10 20:25:01,202 - INFO - Reverse apply output: 
+2026-10-10 20:25:01,202 - INFO - Successfully restored F2P test file using test_patch
+2026-10-10 20:25:01,202 - INFO - Step 7: Running tests
+2026-10-10 20:25:01,202 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-10 20:25:01,202 - INFO - Test timeout: 600s
+2026-10-10 20:25:01,202 - INFO - Running F2P test: /testbed/tests/_marks/test_bar.py
+2026-10-10 20:25:04,412 - INFO - F2P test exit code: 0
+2026-10-10 20:25:04,412 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 16 items
+
+tests/_marks/test_bar.py ................                                [100%]
+
+==================================== PASSES ====================================
+=====================
+2026-10-10 20:25:04,412 - INFO - Saved F2P test output to artifact://02c0f8d405025393
+2026-10-10 20:25:04,412 - INFO - Running 5 P2P tests
+2026-10-10 20:25:04,412 - INFO - Running P2P test: /testbed/tests/test_rcmod.py
+2026-10-10 20:25:05,500 - INFO - P2P test /testbed/tests/test_rcmod.py exit code: 0
+2026-10-10 20:25:05,500 - INFO - Saved P2P test output to artifact://071e10b17cb5d9a0
+2026-10-10 20:25:05,500 - INFO - Running P2P test: /testbed/tests/test_statistics.py
+2026-10-10 20:25:08,105 - INFO - P2P test /testbed/tests/test_statistics.py exit code: 0
+2026-10-10 20:25:08,105 - INFO - Saved P2P test output to artifact://34fce4ac435baefb
+2026-10-10 20:25:08,105 - INFO - Running P2P test: /testbed/tests/_stats/test_counting.py
+2026-10-10 20:25:09,297 - INFO - P2P test /testbed/tests/_stats/test_counting.py exit code: 0
+2026-10-10 20:25:09,298 - INFO - Saved P2P test output to artifact://d3396fa89e6224f1
+2026-10-10 20:25:09,298 - INFO - Running P2P test: /testbed/tests/_marks/test_line.py
+2026-10-10 20:25:11,220 - INFO - P2P test /testbed/tests/_marks/test_line.py exit code: 0
+2026-10-10 20:25:11,221 - INFO - Saved P2P test output to artifact://732414de94f59cbc
+2026-10-10 20:25:11,221 - INFO - Running P2P test: /testbed/tests/_marks/test_base.py
+2026-10-10 20:25:12,253 - INFO - P2P test /testbed/tests/_marks/test_base.py exit code: 0
+2026-10-10 20:25:12,253 - INFO - Saved P2P test output to artifact://ba5ea62f3807237f
+2026-10-10 20:25:12,255 - INFO - ============================================================
+2026-10-10 20:25:12,255 - INFO - Evaluation completed for mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1
+2026-10-10 20:25:12,255 - INFO - Resolved: True
+2026-10-10 20:25:12,255 - INFO - F2P Pass rate: 1.0
+2026-10-10 20:25:12,255 - INFO - ============================================================
+2026-10-10 20:25:12,255 - INFO - Stopping and removing container
+2026-10-10 20:25:22,551 - INFO - Container removed successfully

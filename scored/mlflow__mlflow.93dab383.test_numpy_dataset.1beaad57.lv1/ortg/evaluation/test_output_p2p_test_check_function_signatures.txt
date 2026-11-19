@@ -1,0 +1,91 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 18 items
+
+tests/dev/test_check_function_signatures.py::test_no_changes PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [  5%]
+tests/dev/test_check_function_signatures.py::test_positional_param_removed PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 11%]
+tests/dev/test_check_function_signatures.py::test_positional_param_renamed PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 16%]
+tests/dev/test_check_function_signatures.py::test_only_first_positional_rename_flagged PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 22%]
+tests/dev/test_check_function_signatures.py::test_optional_positional_became_required PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 27%]
+tests/dev/test_check_function_signatures.py::test_multiple_optional_became_required PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 33%]
+tests/dev/test_check_function_signatures.py::test_new_required_positional_param PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 38%]
+tests/dev/test_check_function_signatures.py::test_new_optional_positional_param_allowed PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 44%]
+tests/dev/test_check_function_signatures.py::test_keyword_only_param_removed PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 50%]
+tests/dev/test_check_function_signatures.py::test_multiple_keyword_only_removed PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 55%]
+tests/dev/test_check_function_signatures.py::test_optional_keyword_only_became_required PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 61%]
+tests/dev/test_check_function_signatures.py::test_new_required_keyword_only_param PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 66%]
+tests/dev/test_check_function_signatures.py::test_new_optional_keyword_only_allowed PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 72%]
+tests/dev/test_check_function_signatures.py::test_complex_mixed_violations PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 77%]
+tests/dev/test_check_function_signatures.py::test_parameter_error_has_location_info PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 83%]
+tests/dev/test_check_function_signatures.py::test_async_function_compatibility PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 88%]
+tests/dev/test_check_function_signatures.py::test_positional_only_compatibility PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 94%]
+tests/dev/test_check_function_signatures.py::test_rename_stops_further_positional_checks PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:50 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_no_changes
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_positional_param_removed
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_positional_param_renamed
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_only_first_positional_rename_flagged
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_optional_positional_became_required
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_multiple_optional_became_required
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_new_required_positional_param
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_new_optional_positional_param_allowed
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_keyword_only_param_removed
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_multiple_keyword_only_removed
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_optional_keyword_only_became_required
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_new_required_keyword_only_param
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_new_optional_keyword_only_allowed
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_complex_mixed_violations
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_parameter_error_has_location_info
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_async_function_compatibility
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_positional_only_compatibility
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/dev/test_check_function_signatures.py::test_rename_stops_further_positional_checks
+============================== 18 passed in 0.09s ==============================

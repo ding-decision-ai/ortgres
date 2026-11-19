@@ -1,0 +1,573 @@
+{
+  "cognitive": [
+    ".github/dependabot.yml",
+    ".github/workflows/codeql.yml",
+    ".github/workflows/docs.yml",
+    ".github/workflows/lint.yml",
+    ".github/workflows/test.yml",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yml",
+    "CHANGELOG.rst",
+    "CONTRIBUTING.rst",
+    "LICENSE",
+    "LICENSE.APACHE",
+    "LICENSE.BSD",
+    "README.rst",
+    "SECURITY.md",
+    "docs/Makefile",
+    "docs/changelog.rst",
+    "docs/conf.py",
+    "docs/development/getting-started.rst",
+    "docs/development/index.rst",
+    "docs/development/release-process.rst",
+    "docs/development/reviewing-patches.rst",
+    "docs/development/submitting-patches.rst",
+    "docs/index.rst",
+    "docs/licenses.rst",
+    "docs/markers.rst",
+    "docs/metadata.rst",
+    "docs/pylock.rst",
+    "docs/requirements.rst",
+    "docs/requirements.txt",
+    "docs/security.rst",
+    "docs/specifiers.rst",
+    "docs/tags.rst",
+    "docs/utils.rst",
+    "docs/version.rst",
+    "noxfile.py",
+    "pyproject.toml",
+    "src/packaging/__init__.py",
+    "src/packaging/_elffile.py",
+    "src/packaging/_manylinux.py",
+    "src/packaging/_musllinux.py",
+    "src/packaging/_parser.py",
+    "src/packaging/_structures.py",
+    "src/packaging/_tokenizer.py",
+    "src/packaging/licenses/__init__.py",
+    "src/packaging/licenses/_spdx.py",
+    "src/packaging/markers.py",
+    "src/packaging/metadata.py",
+    "src/packaging/py.typed",
+    "src/packaging/pylock.py",
+    "src/packaging/requirements.py",
+    "src/packaging/specifiers.py",
+    "src/packaging/tags.py",
+    "src/packaging/utils.py",
+    "src/packaging/version.py",
+    "tasks/__init__.py",
+    "tasks/check.py",
+    "tasks/licenses.py",
+    "tasks/paths.py",
+    "tasks/requirements.txt",
+    "tests/__init__.py",
+    "tests/hello-world.c",
+    "tests/manylinux/build.sh",
+    "tests/manylinux/hello-world-armv7l-armel",
+    "tests/manylinux/hello-world-armv7l-armhf",
+    "tests/manylinux/hello-world-invalid-class",
+    "tests/manylinux/hello-world-invalid-data",
+    "tests/manylinux/hello-world-invalid-magic",
+    "tests/manylinux/hello-world-s390x-s390x",
+    "tests/manylinux/hello-world-too-short",
+    "tests/manylinux/hello-world-x86_64-amd64",
+    "tests/manylinux/hello-world-x86_64-i386",
+    "tests/manylinux/hello-world-x86_64-x32",
+    "tests/metadata/everything.metadata",
+    "tests/musllinux/build.sh",
+    "tests/musllinux/glibc-x86_64",
+    "tests/musllinux/musl-aarch64",
+    "tests/musllinux/musl-i386",
+    "tests/musllinux/musl-x86_64",
+    "tests/pylock/pylock.spec-example.toml",
+    "tests/test_elffile.py",
+    "tests/test_licenses.py",
+    "tests/test_manylinux.py",
+    "tests/test_markers.py",
+    "tests/test_musllinux.py",
+    "tests/test_pylock.py",
+    "tests/test_requirements.py",
+    "tests/test_specifiers.py",
+    "tests/test_structures.py",
+    "tests/test_tags.py",
+    "tests/test_utils.py",
+    "tests/test_version.py"
+  ],
+  "roles": {
+    "ignore_dirs": [],
+    "ignore_files": [],
+    "keep_files": [],
+    "observe_dirs": [],
+    "observe_files": []
+  },
+  "counts": [
+    0,
+    0,
+    1,
+    0
+  ],
+  "tracked": [
+    ".github/dependabot.yml",
+    ".github/workflows/codeql.yml",
+    ".github/workflows/docs.yml",
+    ".github/workflows/lint.yml",
+    ".github/workflows/test.yml",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yml",
+    "CHANGELOG.rst",
+    "CONTRIBUTING.rst",
+    "LICENSE",
+    "LICENSE.APACHE",
+    "LICENSE.BSD",
+    "README.rst",
+    "SECURITY.md",
+    "docs/Makefile",
+    "docs/changelog.rst",
+    "docs/conf.py",
+    "docs/development/getting-started.rst",
+    "docs/development/index.rst",
+    "docs/development/release-process.rst",
+    "docs/development/reviewing-patches.rst",
+    "docs/development/submitting-patches.rst",
+    "docs/index.rst",
+    "docs/licenses.rst",
+    "docs/markers.rst",
+    "docs/metadata.rst",
+    "docs/pylock.rst",
+    "docs/requirements.rst",
+    "docs/requirements.txt",
+    "docs/security.rst",
+    "docs/specifiers.rst",
+    "docs/tags.rst",
+    "docs/utils.rst",
+    "docs/version.rst",
+    "noxfile.py",
+    "pyproject.toml",
+    "src/packaging/__init__.py",
+    "src/packaging/_elffile.py",
+    "src/packaging/_manylinux.py",
+    "src/packaging/_musllinux.py",
+    "src/packaging/_parser.py",
+    "src/packaging/_structures.py",
+    "src/packaging/_tokenizer.py",
+    "src/packaging/licenses/__init__.py",
+    "src/packaging/licenses/_spdx.py",
+    "src/packaging/markers.py",
+    "src/packaging/metadata.py",
+    "src/packaging/py.typed",
+    "src/packaging/pylock.py",
+    "src/packaging/requirements.py",
+    "src/packaging/specifiers.py",
+    "src/packaging/tags.py",
+    "src/packaging/utils.py",
+    "src/packaging/version.py",
+    "tasks/__init__.py",
+    "tasks/check.py",
+    "tasks/licenses.py",
+    "tasks/paths.py",
+    "tasks/requirements.txt",
+    "tests/__init__.py",
+    "tests/hello-world.c",
+    "tests/manylinux/build.sh",
+    "tests/manylinux/hello-world-armv7l-armel",
+    "tests/manylinux/hello-world-armv7l-armhf",
+    "tests/manylinux/hello-world-invalid-class",
+    "tests/manylinux/hello-world-invalid-data",
+    "tests/manylinux/hello-world-invalid-magic",
+    "tests/manylinux/hello-world-s390x-s390x",
+    "tests/manylinux/hello-world-too-short",
+    "tests/manylinux/hello-world-x86_64-amd64",
+    "tests/manylinux/hello-world-x86_64-i386",
+    "tests/manylinux/hello-world-x86_64-x32",
+    "tests/metadata/everything.metadata",
+    "tests/musllinux/build.sh",
+    "tests/musllinux/glibc-x86_64",
+    "tests/musllinux/musl-aarch64",
+    "tests/musllinux/musl-i386",
+    "tests/musllinux/musl-x86_64",
+    "tests/pylock/pylock.spec-example.toml",
+    "tests/test_elffile.py",
+    "tests/test_licenses.py",
+    "tests/test_manylinux.py",
+    "tests/test_markers.py",
+    "tests/test_musllinux.py",
+    "tests/test_pylock.py",
+    "tests/test_requirements.py",
+    "tests/test_specifiers.py",
+    "tests/test_structures.py",
+    "tests/test_tags.py",
+    "tests/test_utils.py",
+    "tests/test_version.py"
+  ],
+  "source": {
+    ".github/dependabot.yml": [
+      "bc0b0608a6c4d65ed3a51cfa3d680e5280a47cf9550c02d065c602e8f9678a09",
+      436
+    ],
+    ".github/workflows/codeql.yml": [
+      "113029b78348568f1f8b1021d91a5a5e852cbb4db50c8b5ee261897a2d0f8b83",
+      436
+    ],
+    ".github/workflows/docs.yml": [
+      "9d9cbf0683aa7fe78ab338c3ed22595ce545e0a4dae1466a50041f3989c89e7b",
+      436
+    ],
+    ".github/workflows/lint.yml": [
+      "f60d2b2051da9f01f6e421e9873c9ac17bcf82191b19e8abc8a9861c0fbeaaa5",
+      436
+    ],
+    ".github/workflows/test.yml": [
+      "74be9002e5929d492eb83d20ed6afee1c2dabf22b48b2e69eca2c5f3d6f53cb3",
+      436
+    ],
+    ".gitignore": [
+      "026f6aba7a057f58e6f70ee800b2d58416fbbc40984b45ce13cd23a8db6f450c",
+      436
+    ],
+    ".pre-commit-config.yaml": [
+      "74869e5527ce1cc02009ca80fa0a06a96e1210bc3d7fc9da050ae178fde33cd7",
+      436
+    ],
+    ".readthedocs.yml": [
+      "e333e00895848e0a49f12c16d8ca20df66d894041146df7d8fabdb123385e1db",
+      436
+    ],
+    "CHANGELOG.rst": [
+      "543a3d54b372c200209e9abeabb672ef108e114ea658d5e7ea374e67ca80543b",
+      420
+    ],
+    "CONTRIBUTING.rst": [
+      "ac3e94b9f72b3937c785378721425c79c353ef0b5b6ad916fe8a8f5b45484e1a",
+      420
+    ],
+    "LICENSE": [
+      "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+      420
+    ],
+    "LICENSE.APACHE": [
+      "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      420
+    ],
+    "LICENSE.BSD": [
+      "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5",
+      420
+    ],
+    "README.rst": [
+      "1111b670f3b989bbcb2098a00db13b27e5f69b5e52c7c66e4520ef2cdfa37733",
+      420
+    ],
+    "SECURITY.md": [
+      "60654ddbe8516c46522a951df800d64ffa5b2a0d6a443a094cb51ef76d44be13",
+      420
+    ],
+    "docs/Makefile": [
+      "fa00a62495826ebc2a20da0b06aeadf8ddc38014c91b1917cab0766fca7788c2",
+      420
+    ],
+    "docs/changelog.rst": [
+      "bd8b3e8b5551105b987eb3f26cc72889cf471457ed78d12d93870ab39e1ec311",
+      420
+    ],
+    "docs/conf.py": [
+      "1199fbf1f1391de1c5e7ba2e6dd013d6b4f5020288e627a0b44c1accade632b2",
+      420
+    ],
+    "docs/development/getting-started.rst": [
+      "68562735413e93fd17dc693ec774a5ef320be0d7394087b76353444d39aa6e36",
+      420
+    ],
+    "docs/development/index.rst": [
+      "30c40d5cc9bf6f9c4c91feb3134961d20dd35d2ede1b4aa3d19305930d28216b",
+      420
+    ],
+    "docs/development/release-process.rst": [
+      "3acee2dbd7170c6ec3be18d07f51346d7a95d68f6ddd2cc558bd9f5c6d123864",
+      420
+    ],
+    "docs/development/reviewing-patches.rst": [
+      "da62db0cae8605759c446843edd694b10a8dc9a5aaf5e70cf45e3f14c34e2d6f",
+      420
+    ],
+    "docs/development/submitting-patches.rst": [
+      "51caee4a9a93dd9c94df3f3077a3f018a4de25cb5ceebcc0174509cfbb83fdcb",
+      420
+    ],
+    "docs/index.rst": [
+      "ec0e2b67c04ded525e20c64448282fe728be2011e4f96f8eb45ae3acd267cd7f",
+      420
+    ],
+    "docs/licenses.rst": [
+      "efe1f34e7f19037ce654f9f8e76cc6f7149d6fadd0cc8ee87691c4122b83b94a",
+      420
+    ],
+    "docs/markers.rst": [
+      "734bec0f035ad714a4729b2923997f83320cd41b4ceeacebba425ec2a6864c7d",
+      420
+    ],
+    "docs/metadata.rst": [
+      "be55906ae6a090b7a390cd964a8b738fd2daf01a7f648aaf8023ab39bda32272",
+      420
+    ],
+    "docs/pylock.rst": [
+      "d694d33e0aab8f6119b1d26cd8e3b785f79dde382bf11a2181eb3003925b4455",
+      420
+    ],
+    "docs/requirements.rst": [
+      "7fd464e6a8df76da3a7e169564ec7d2c27acb91979bb8ce2bc538fe172d96104",
+      420
+    ],
+    "docs/requirements.txt": [
+      "ae5b04b6f106a5a99de9a33af38022f999cdd81c9228e7f7319de92e630d4d84",
+      420
+    ],
+    "docs/security.rst": [
+      "57c8b6c681751e740ada0a69c4c820c71ff0121cd69708ced9d4f8f42edc89ea",
+      420
+    ],
+    "docs/specifiers.rst": [
+      "b6f621d9bb96b44b27b3f1de185e0beb15cc8dd0c143fdb39c521f1cefada360",
+      420
+    ],
+    "docs/tags.rst": [
+      "fbd1aef815f8b6f5408510c10a24011baae70e6863b87386a18a4a41cdca5331",
+      420
+    ],
+    "docs/utils.rst": [
+      "5d59633293b8eac93b14662885eb409f46b4d5c0497fd48c4b61c730eba936cc",
+      420
+    ],
+    "docs/version.rst": [
+      "7b85b501973e91a6ff0b9c6f54360ebb07e376e6474c5e2d689359ce94cdc790",
+      420
+    ],
+    "noxfile.py": [
+      "eb94006b9094cbdce7667219d93f6268ce6d9377ea2aa4f656b9b5cb54119c39",
+      420
+    ],
+    "pyproject.toml": [
+      "0526b1980915f14ad5d0f7d73150b765324c971f928268120c5b4b9f0bee11ca",
+      420
+    ],
+    "src/packaging/__init__.py": [
+      "71f968cd2322f3f88dc2f4223733d2a47790bd918ed2222647b136011487e664",
+      420
+    ],
+    "src/packaging/_elffile.py": [
+      "fac2a4a6d62acd8c36fb1dd007225ae66078adf3d6bb5a719191d1c755801426",
+      420
+    ],
+    "src/packaging/_manylinux.py": [
+      "b4166b16e8d26f7fc61a36b3b11ec80510d543ecc4b09f5f14c9707b2f1c8a40",
+      420
+    ],
+    "src/packaging/_musllinux.py": [
+      "67ab308c7dcc03b5d2dea5e798c37b40f86a3f77e7a18234790d7c7bdf878001",
+      420
+    ],
+    "src/packaging/_parser.py": [
+      "3dd7a790cc536a6950d3d2674071255c9e2a5e7df6d6bd14107282346556971a",
+      438
+    ],
+    "src/packaging/_structures.py": [
+      "ab77953666d62461bf4b40e2b7f4b7028f2a42acffe4f6135c500a0597b9cabe",
+      420
+    ],
+    "src/packaging/_tokenizer.py": [
+      "f6fdd73358fe52d7c1c5972b96c96b8643a667b0412e43744a9f01b8a8b32b53",
+      420
+    ],
+    "src/packaging/licenses/__init__.py": [
+      "69e179a8e207ac51703bc3222602201870a06a7ea1ba088287691f5d55ada3ac",
+      420
+    ],
+    "src/packaging/licenses/_spdx.py": [
+      "a009b5ced3c5c25b2608a7bb94002cbff38839f4b57160eef5b34191ebbeda7b",
+      420
+    ],
+    "src/packaging/markers.py": [
+      "71e1bb3387a1df12e915d8a71968ce24c5ac209cbc549619cea66d15aafdb5b2",
+      420
+    ],
+    "src/packaging/metadata.py": [
+      "40019554a4ab12a3c68c29b3b33a86cee6991ba3df6803aad633c398aef7c761",
+      438
+    ],
+    "src/packaging/py.typed": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/packaging/pylock.py": [
+      "c3b92fc41e50abc187dfd9f0356e25c37537303cb6c2659fe750f3178b6bfccc",
+      420
+    ],
+    "src/packaging/requirements.py": [
+      "7f74f4ae6807192b87966c8cfe524f75c69e4053b641d7b0e23c5dacdcfd671c",
+      438
+    ],
+    "src/packaging/specifiers.py": [
+      "0be322bafa635d5a0b40bfd849d39bdb855a1e38bf2e3ae38b7687b603d66e56",
+      420
+    ],
+    "src/packaging/tags.py": [
+      "7172d5d69243dd4b4994383b5b3df3adf75085166aafc8ee99200a28001ddb11",
+      420
+    ],
+    "src/packaging/utils.py": [
+      "303b7e96a8dd702dbbb1e7f007f61b46e453d84cf8791893532b9864baa7e385",
+      420
+    ],
+    "src/packaging/version.py": [
+      "094f4d634d5cd7de6aa62689d4f6dc488981e538471e15c2ad2d9b1fd61d4dce",
+      420
+    ],
+    "tasks/__init__.py": [
+      "0056ad4ade924b9a503a59e9f7ad176420ad6ef4458a5cc6908ad08236f9dab6",
+      420
+    ],
+    "tasks/check.py": [
+      "28836860ec8e531b995d7279eaf0c0518a54c0c2a80acafff193173268536211",
+      420
+    ],
+    "tasks/licenses.py": [
+      "65b3e244ab46d175e066e3fa250466bb12bf4296097d12bdfb6625bc0dfb038e",
+      420
+    ],
+    "tasks/paths.py": [
+      "2048afe6c8505347d3d216a14cd713c7283593b92f9644895c056b83deb75e42",
+      420
+    ],
+    "tasks/requirements.txt": [
+      "62ebe3b944dee42b38eec94079ac1f4aeb494f3092e3660ea298e50f745699fa",
+      420
+    ],
+    "tests/__init__.py": [
+      "b3da0a090db2705757a0445d4b58a669fb9e4a406c2fd92f6f27e085a6ae67d6",
+      420
+    ],
+    "tests/hello-world.c": [
+      "d2f746f760c010b1225914636628b90e9150b066b6128e3c0845b48a98d61cc2",
+      420
+    ],
+    "tests/manylinux/build.sh": [
+      "f6930bfb34d37f7753987d55113cff4454f80cce7762911cfa3f420d6856ac0a",
+      493
+    ],
+    "tests/manylinux/hello-world-armv7l-armel": [
+      "d0946e4b30a9d67f5ee811dddf6227376b2e9e09ac1d7836c7fec9c4825fb7f3",
+      493
+    ],
+    "tests/manylinux/hello-world-armv7l-armhf": [
+      "67e5fd8dc9298c96b97aa42f68036f86e707077e4850c5112440fd79d890c560",
+      493
+    ],
+    "tests/manylinux/hello-world-invalid-class": [
+      "1ae2af7c78f88a20d4cd69e3d0daaa91444caa0dc9d18c6cc313931524f4b00c",
+      493
+    ],
+    "tests/manylinux/hello-world-invalid-data": [
+      "22e7fb680271534efb9f187ba7113e5f4ba93f4e9cda164891d88f1d958d02cf",
+      493
+    ],
+    "tests/manylinux/hello-world-invalid-magic": [
+      "7add6a4ffe6d82ee55c8fdbc76151298fa5750149f09d77862195507ecb66504",
+      493
+    ],
+    "tests/manylinux/hello-world-s390x-s390x": [
+      "9c62fa176e3ade50bedf2f57e96c16a9ad7c3b541530f33944158e6001894572",
+      420
+    ],
+    "tests/manylinux/hello-world-too-short": [
+      "57dca6651be6c3977755336a3533c633c22e4ff6bd99f21f313517e2e0433d68",
+      420
+    ],
+    "tests/manylinux/hello-world-x86_64-amd64": [
+      "bf76a3af4839959dce2f88862fafe0696cc05910d230afc2ea4845df8f8e1c21",
+      420
+    ],
+    "tests/manylinux/hello-world-x86_64-i386": [
+      "73d1f60fad7910e928e0185b8ff43eb795d81f33952a13a463e4ef407b5aad1d",
+      493
+    ],
+    "tests/manylinux/hello-world-x86_64-x32": [
+      "3e9bbb13d68a7ac99a71e019b6b5ebfc296704bc01cc07475e8b9f088ee813ba",
+      493
+    ],
+    "tests/metadata/everything.metadata": [
+      "8a004908a27f3dfa2c797f6929938cba3308a06482da0c1e3215d8a0857f535f",
+      420
+    ],
+    "tests/musllinux/build.sh": [
+      "88eae04b8c1d59330117030af4ab083c98532bcb6bfcc2fef6bd75b0536dda03",
+      420
+    ],
+    "tests/musllinux/glibc-x86_64": [
+      "af74c4504c0f8c13e14d45374991ea4065687d53991473f8e017ec46a17e8b70",
+      493
+    ],
+    "tests/musllinux/musl-aarch64": [
+      "296ef64fa17fe7a8ae48af17f45effd52e023653552435f9a6cc8159ad656e94",
+      493
+    ],
+    "tests/musllinux/musl-i386": [
+      "762f5b4b06a2539f3bdcb43c674e68bfe183c36a0453b6c1aefed7ac7e36f060",
+      493
+    ],
+    "tests/musllinux/musl-x86_64": [
+      "03c992f2c9a4aaaddb5aae577b6c69ab76975dd9ecda3f600492d8e9347ce5b3",
+      493
+    ],
+    "tests/pylock/pylock.spec-example.toml": [
+      "1dc2265541d9483561e599e0db7787162a64032465ab9c8d86da1344290694dc",
+      420
+    ],
+    "tests/test_elffile.py": [
+      "a3d8dc49f836916fc931a6d3006e04c413b42776f44ecdd7618d21aaf6f2cbae",
+      420
+    ],
+    "tests/test_licenses.py": [
+      "355702896a49f86d65c8de4222a55537da56460177f8ed0941694838b34ca33a",
+      420
+    ],
+    "tests/test_manylinux.py": [
+      "a5c6ce841c0cdebed0f3ba61be5b6348f1dc7bd1a5af52f458faf68f748ac9ce",
+      420
+    ],
+    "tests/test_markers.py": [
+      "76557eacb6d677128c5ad59e12a1ae5b1e1170f2591a5af811b9173ee78487aa",
+      420
+    ],
+    "tests/test_musllinux.py": [
+      "dbc68b2731326d0566211f8964feff0b31048b31defe3e4207dac2f7b4db5eec",
+      420
+    ],
+    "tests/test_pylock.py": [
+      "0b3a9e5f83f29a30323699e27044b84c8b80966e4694dcfb5683ad2c17c09d48",
+      420
+    ],
+    "tests/test_requirements.py": [
+      "b3969f12e20d2068797aefdebe9ee4cd862549272ae8e23045e3f12fafe8893e",
+      420
+    ],
+    "tests/test_specifiers.py": [
+      "4f8b08a9d7556c17ae5812d086cf74474bd210bc52ce769d627ed35de19405a4",
+      420
+    ],
+    "tests/test_structures.py": [
+      "12d1bbdf512b33e33d2e599e00e311e64f89371240643ada94c974a94f90e190",
+      420
+    ],
+    "tests/test_tags.py": [
+      "f3fca1828a34fa97a1eb59bfbfc780f8b9cafa176304f4a0ee1f7fcb11a29776",
+      420
+    ],
+    "tests/test_utils.py": [
+      "b88312727c72348acee5f99a4341c726e845b9d1a3c8eb50636f4b6196aef8d2",
+      420
+    ],
+    "tests/test_version.py": [
+      "c2058229b89b7a399dac26c99b19d673a6135d120ac73caa450e7a6d34bbf225",
+      420
+    ]
+  }
+}

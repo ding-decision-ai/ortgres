@@ -1,0 +1,1566 @@
+diff --git a/src/hatch/cli/application.py b/src/hatch/cli/application.py
+index 2856fe0..5edc32a 100644
+--- a/src/hatch/cli/application.py
++++ b/src/hatch/cli/application.py
+@@ -50,6 +50,50 @@ class Application(Terminal):
+     def prepare_environment(self, environment: EnvironmentInterface):
+         self.project.prepare_environment(environment)
+ 
++    def run_shell_commands(self, context: ExecutionContext) -> None:
++        first_error = 0
++        show_commands = not context.hide_commands and (self.verbose or len(context.shell_commands) > 1)
++
++        with context.env.command_context():
++            for index, raw_command in enumerate(context.shell_commands, 1):
++                command = raw_command
++                ignore_error = False
++                if command.startswith("- "):
++                    ignore_error = True
++                    command = command[2:]
++
++                if show_commands:
++                    prefix = f"{context.source} [{index}]" if len(context.shell_commands) > 1 else context.source
++                    # Display the original form so ignored commands remain
++                    # distinguishable in command traces.
++                    self.display_info(f"{prefix} | {raw_command}")
++
++                try:
++                    return_code = context.env.run_shell_command(command)
++                except OSError as e:
++                    self.abort(str(e))
++                    return
++                finally:
++                    sys.stdout.flush()
++                    sys.stderr.flush()
++
++                if not return_code:
++                    continue
++
++                if ignore_error:
++                    continue
++
++                if not first_error:
++                    first_error = return_code
++
++                if not context.force_continue:
++                    message = f"Command failed with exit code {return_code}" if context.show_code_on_error else ""
++                    self.abort(message, code=return_code)
++                    return
++
++        if first_error:
++            self.abort(code=first_error)
++
+ 
+ 
+ 
+@@ -175,6 +219,12 @@ class Application(Terminal):
+         with self.status(wait_message):
+             self.platform.check_command(pip_command)
+ 
++    def get_env_directory(self, environment_type: str) -> Path:
++        directory = self.config.dirs.env.get(environment_type)
++        if directory:
++            return Path(directory).expand()
++        return self.data_dir / "env" / environment_type
++
+ 
+ 
+ 
+@@ -205,4 +255,4 @@ class Application(Terminal):
+     def abort(self, text="", code=1, **kwargs):
+         if text:
+             self.display_error(text, **kwargs)
+-        self.__exit_func(code)
+\ No newline at end of file
++        self.__exit_func(code)
+diff --git a/src/hatch/cli/fmt/core.py b/src/hatch/cli/fmt/core.py
+index ce11d8d..aa5e911 100644
+--- a/src/hatch/cli/fmt/core.py
++++ b/src/hatch/cli/fmt/core.py
+@@ -9,6 +9,146 @@ if TYPE_CHECKING:
+ 
+ 
+ class StaticAnalysisEnvironment:
++    def __init__(self, env: EnvironmentInterface) -> None:
++        self.env = env
++        self.config_path = self._get_config_path()
++
++    def _get_config_path(self) -> str:
++        config_path = self.env.config.get("config-path", "")
++        if not isinstance(config_path, str):
++            message = f"Field `tool.hatch.envs.{self.env.name}.config-path` must be a string"
++            raise TypeError(message)
++        return config_path
++
++    def get_config(self, name: str) -> dict[str, Any]:
++        config = self.env.config.get(name, {})
++        if not isinstance(config, dict):
++            message = f"Field `tool.hatch.envs.{self.env.name}.{name}` must be a table"
++            raise TypeError(message)
++        return config
++
++    @cached_property
++    def project_root(self) -> Path:
++        from hatch.utils.fs import Path
++
++        return Path(self.env.root)
++
++    @cached_property
++    def internal_config_directory(self) -> Path:
++        app = getattr(self.env, "app", None)
++        data_directory = getattr(app, "data_dir", self.env.isolated_data_directory)
++        return data_directory / ".config" / "ruff" / self.project_root.id
++
++    @cached_property
++    def internal_config_file(self) -> Path:
++        return self.internal_config_directory / "ruff_defaults.toml"
++
++    @cached_property
++    def user_config_file(self) -> Path | None:
++        from hatch.utils.toml import load_toml_data
++
++        for file_name in (".ruff.toml", "ruff.toml"):
++            path = self.project_root / file_name
++            if path.is_file():
++                return path
++
++        pyproject_file = self.project_root / "pyproject.toml"
++        if pyproject_file.is_file():
++            try:
++                data = load_toml_data(pyproject_file.read_text(encoding="utf-8"))
++            except ValueError:
++                return None
++            if isinstance(data.get("tool", {}).get("ruff"), dict):
++                return pyproject_file
++        return None
++
++    @cached_property
++    def internal_user_config_file(self) -> Path | None:
++        if self.user_config_file is None:
++            return None
++        return self.internal_config_directory / self.user_config_file.name
++
++    @cached_property
++    def linter_preview(self) -> bool:
++        return self.get_config("lint").get("preview", False)
++
++    def get_default_args(self) -> list[str]:
++        if self.config_path:
++            return []
++        config_file = self.internal_user_config_file or self.internal_config_file
++        return ["--config", str(config_file)]
++
++    @staticmethod
++    def _format_array(values: list[str] | tuple[str, ...]) -> str:
++        entries = "".join(f'  "{value}",\n' for value in values)
++        return f"[\n{entries}]"
++
++    def _render_config(self, *, preview: bool) -> str:
++        from hatch.utils.metadata import normalize_project_name
++
++        enable_linter_preview = preview or self.linter_preview
++        rules = [*STABLE_RULES]
++        if enable_linter_preview:
++            rules.extend(PREVIEW_RULES)
++        rules.sort()
++
++        lines = [
++            "line-length = 120",
++            "",
++            "[format]",
++            "docstring-code-format = true",
++            "docstring-code-line-length = 80",
++        ]
++        if self.formatter_preview:
++            lines.append("preview = true")
++
++        lines.extend(["", "[lint]"])
++        if enable_linter_preview:
++            lines.append("preview = true")
++        lines.extend([f"select = {self._format_array(rules)}", "", "[lint.per-file-ignores]"])
++        for pattern, ignored_rules in PER_FILE_IGNORED_RULES.items():
++            lines.append(f'"{pattern}" = {self._format_array(ignored_rules)}')
++
++        package_name = normalize_project_name(self.env.metadata.name)
++        lines.extend(
++            [
++                "",
++                "[lint.flake8-tidy-imports]",
++                'ban-relative-imports = "all"',
++                "",
++                "[lint.isort]",
++                f'known-first-party = ["{package_name}"]',
++                "",
++                "[lint.flake8-pytest-style]",
++                "fixture-parentheses = false",
++                "mark-parentheses = false",
++                "",
++            ]
++        )
++        return "\n".join(lines)
++
++    def write_config_file(self, *, preview: bool) -> None:
++        generated_config = self._render_config(preview=preview)
++        if self.config_path:
++            config_file = self.project_root / self.config_path
++            config_file.ensure_parent_dir_exists()
++            config_file.write_atomic(generated_config, "w", encoding="utf-8")
++            return
++
++        self.internal_config_directory.ensure_dir_exists()
++        self.internal_config_file.write_atomic(generated_config, "w", encoding="utf-8")
++
++        if self.user_config_file is None or self.internal_user_config_file is None:
++            return
++
++        contents = self.user_config_file.read_text(encoding="utf-8")
++        extend = str(self.internal_config_file).replace("\\", "\\\\")
++        if self.user_config_file.name == "pyproject.toml":
++            marker = "[tool.ruff]"
++            contents = contents.replace(marker, f'{marker}\nextend = "{extend}"', 1)
++        else:
++            contents = f'extend = "{extend}"\n{contents}'
++        self.internal_user_config_file.write_atomic(contents, "w", encoding="utf-8")
+ 
+ 
+ 
+@@ -916,4 +1056,4 @@ PER_FILE_IGNORED_RULES: dict[str, list[str]] = {
+         "S",
+         "TID252",
+     ],
+-}
+\ No newline at end of file
++}
+diff --git a/src/hatch/env/collectors/default.py b/src/hatch/env/collectors/default.py
+index bbf7a4c..e9008db 100644
+--- a/src/hatch/env/collectors/default.py
++++ b/src/hatch/env/collectors/default.py
+@@ -6,4 +6,6 @@ from hatch.env.internal import get_internal_env_config
+ class DefaultEnvironmentCollector(EnvironmentCollectorInterface):
+     PLUGIN_NAME = "default"
+ 
++    def get_initial_config(self) -> dict[str, dict]:
++        return get_internal_env_config()
+ 
+diff --git a/src/hatch/env/collectors/plugin/hooks.py b/src/hatch/env/collectors/plugin/hooks.py
+index d9cb44c..4cbdb78 100644
+--- a/src/hatch/env/collectors/plugin/hooks.py
++++ b/src/hatch/env/collectors/plugin/hooks.py
+@@ -10,3 +10,7 @@ if TYPE_CHECKING:
+     from hatch.env.collectors.plugin.interface import EnvironmentCollectorInterface
+ 
+ 
++@hookimpl
++def hatch_register_environment_collector() -> list[type[EnvironmentCollectorInterface]]:
++    return [DefaultEnvironmentCollector, CustomEnvironmentCollector]
++
+diff --git a/src/hatch/env/collectors/plugin/interface.py b/src/hatch/env/collectors/plugin/interface.py
+index dfa56ed..ef74d45 100644
+--- a/src/hatch/env/collectors/plugin/interface.py
++++ b/src/hatch/env/collectors/plugin/interface.py
+@@ -55,6 +55,11 @@ class EnvironmentCollectorInterface:
+         """
+         return {}
+ 
++    def finalize_config(self, config: dict[str, dict]) -> None:  # noqa: ARG002, PLR6301
++        """Allow a collector to alter environment templates before expansion."""
++
++    def finalize_environments(self, config: dict[str, dict]) -> None:  # noqa: ARG002, PLR6301
++        """Allow a collector to alter fully expanded environments."""
+ 
+ 
+ 
+diff --git a/src/hatch/env/context.py b/src/hatch/env/context.py
+index 43901f7..6337ca7 100644
+--- a/src/hatch/env/context.py
++++ b/src/hatch/env/context.py
+@@ -11,36 +11,28 @@ class EnvironmentContextFormatterBase(ContextFormatter, ABC):
+ 
+ 
+ class EnvironmentContextFormatter(EnvironmentContextFormatterBase):
++    CONTEXT_NAME = "environment"
++
++    def __init__(self, environment):
++        self.environment = environment
++        self.args = ""
++
++    def get_formatters(self):
++        formatters = {
++            "env_name": self.__format_env_name,
++            "env_type": self.__format_env_type,
++            "matrix": self.__format_matrix,
++            "verbosity": self.__format_verbosity,
++            "args": self.__format_args,
++        }
++        formatters.update(self.formatters())
++        return formatters
+ 
++    def formatters(self):
++        return {}
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __format_args(self, value, data):  # noqa: ARG002
++        return self.args or data
+ 
+     def __format_env_name(self, value, data):  # noqa: ARG002
+         return self.environment.name
+@@ -81,4 +73,4 @@ class EnvironmentContextFormatter(EnvironmentContextFormatterBase):
+             message = f"Verbosity flag adjustment must be an integer: {adjustment}"
+             raise TypeError(message) from None
+ 
+-        return get_verbosity_flag(self.environment.verbosity, adjustment=adjustment)
+\ No newline at end of file
++        return get_verbosity_flag(self.environment.verbosity, adjustment=adjustment)
+diff --git a/src/hatch/env/internal/__init__.py b/src/hatch/env/internal/__init__.py
+index 342eda6..4a2cc59 100644
+--- a/src/hatch/env/internal/__init__.py
++++ b/src/hatch/env/internal/__init__.py
+@@ -2,6 +2,7 @@ from __future__ import annotations
+ 
+ from typing import Any
+ 
++from hatch.env.utils import ensure_valid_environment
+ 
+ 
+ 
+diff --git a/src/hatch/env/plugin/hooks.py b/src/hatch/env/plugin/hooks.py
+index cb873af..86072ce 100644
+--- a/src/hatch/env/plugin/hooks.py
++++ b/src/hatch/env/plugin/hooks.py
+@@ -3,3 +3,7 @@ from hatch.env.virtual import VirtualEnvironment
+ from hatchling.plugin import hookimpl
+ 
+ 
++@hookimpl
++def hatch_register_environment():
++    return [VirtualEnvironment, SystemEnvironment]
++
+diff --git a/src/hatch/env/plugin/interface.py b/src/hatch/env/plugin/interface.py
+index efea2b8..74058e2 100644
+--- a/src/hatch/env/plugin/interface.py
++++ b/src/hatch/env/plugin/interface.py
+@@ -86,6 +86,37 @@ class EnvironmentInterface(ABC):
+         """
+         return self.__app
+ 
++    def join_command_args(self, args: list[str]):
++        return self.__platform.join_command_args(args)
++
++    @property
++    def root(self):
++        return self.__root
++
++    @property
++    def metadata(self):
++        return self.__metadata
++
++    @property
++    def config(self):
++        return self.__config
++
++    @property
++    def data_directory(self):
++        return self.__data_directory
++
++    @property
++    def isolated_data_directory(self):
++        return self.__isolated_data_directory
++
++    @property
++    def platform(self):
++        return self.__platform
++
++    @property
++    def verbosity(self):
++        return self.__verbosity
++
+ 
+ 
+ 
+@@ -184,6 +215,56 @@ class EnvironmentInterface(ABC):
+ 
+         return system_python
+ 
++    @cached_property
++    def context(self):
++        return self.get_context()
++
++    def get_context(self):
++        from hatch.env.context import EnvironmentContextFormatter
++
++        return EnvironmentContextFormatter(self)
++
++    def apply_context(self):
++        return self.metadata.context.apply_context(self.context)
++
++    @cached_property
++    def env_vars(self) -> dict[str, str]:
++        config = self.config.get("env-vars", {})
++        if not isinstance(config, dict):
++            message = f"Field `tool.hatch.envs.{self.name}.env-vars` must be a mapping"
++            raise TypeError(message)
++        result = {AppEnvVars.ENV_ACTIVE: self.name}
++        with self.apply_context():
++            for variable, value in config.items():
++                if not isinstance(value, str):
++                    message = (
++                        f"Environment variable `{variable}` of field `tool.hatch.envs.{self.name}.env-vars` "
++                        "must be a string"
++                    )
++                    raise TypeError(message)
++                result[variable] = self.metadata.context.format(value)
++        return result
++
++    def _get_env_patterns(self, option: str) -> list[str]:
++        patterns = self.config.get(option, [])
++        if not isinstance(patterns, list):
++            message = f"Field `tool.hatch.envs.{self.name}.{option}` must be an array"
++            raise TypeError(message)
++        for i, pattern in enumerate(patterns, 1):
++            if not isinstance(pattern, str):
++                message = f"Pattern #{i} of field `tool.hatch.envs.{self.name}.{option}` must be a string"
++                raise TypeError(message)
++        return list(patterns)
++
++    @cached_property
++    def env_include(self) -> list[str]:
++        patterns = self._get_env_patterns("env-include")
++        return ["HATCH_BUILD_*", *patterns] if patterns else []
++
++    @cached_property
++    def env_exclude(self) -> list[str]:
++        return self._get_env_patterns("env-exclude")
++
+ 
+ 
+ 
+@@ -256,7 +337,7 @@ class EnvironmentInterface(ABC):
+         from hatch.dep.core import Dependency, InvalidDependencyError
+ 
+         dependencies_complex: list[Dependency] = []
+-        with self.apply_context():
++        with self.get_env_vars(), self.apply_context():
+             for option in ("dependencies", "extra-dependencies"):
+                 dependencies = self.config.get(option, [])
+                 if not isinstance(dependencies, list):
+@@ -438,6 +519,16 @@ class EnvironmentInterface(ABC):
+ 
+         return [platform.lower() for platform in platforms]
+ 
++    @cached_property
++    def skip_install(self) -> bool:
++        skip_install = self.config.get("skip-install")
++        if skip_install is None:
++            skip_install = not (self.root / "pyproject.toml").is_file()
++        if not isinstance(skip_install, bool):
++            message = f"Field `tool.hatch.envs.{self.name}.skip-install` must be a boolean"
++            raise TypeError(message)
++        return skip_install
++
+ 
+ 
+ 
+@@ -570,6 +661,61 @@ class EnvironmentInterface(ABC):
+ 
+         return description
+ 
++    @cached_property
++    def scripts(self) -> dict[str, list[str]]:
++        all_scripts = {}
++        for option in ("extra-scripts", "scripts"):
++            scripts = self.config.get(option, {})
++            if not isinstance(scripts, dict):
++                message = f"Field `tool.hatch.envs.{self.name}.{option}` must be a table"
++                raise TypeError(message)
++            normalized = {}
++            for script_name, commands in scripts.items():
++                if " " in script_name:
++                    message = (
++                        f"Script name `{script_name}` in field `tool.hatch.envs.{self.name}.{option}` "
++                        "must not contain spaces"
++                    )
++                    raise ValueError(message)
++                if isinstance(commands, str):
++                    commands = [commands]
++                elif not isinstance(commands, list):
++                    message = (
++                        f"Field `tool.hatch.envs.{self.name}.{option}.{script_name}` must be a string "
++                        "or an array of strings"
++                    )
++                    raise TypeError(message)
++                for i, command in enumerate(commands, 1):
++                    if not isinstance(command, str):
++                        message = (
++                            f"Command #{i} in field `tool.hatch.envs.{self.name}.{option}.{script_name}` "
++                            "must be a string"
++                        )
++                        raise TypeError(message)
++                normalized[script_name] = list(commands)
++            all_scripts.update(normalized)
++
++        seen = {}
++        try:
++            return {
++                name: expand_script_commands(self.name, name, commands, all_scripts, seen, [])
++                for name, commands in all_scripts.items()
++            }
++        except ValueError as e:
++            raise ValueError(str(e).replace("tool.hatch.scripts", f"tool.hatch.envs.{self.name}.scripts")) from None
++
++    def expand_command(self, command: str):
++        script_name, args, ignore_exit_code = parse_script_command(command)
++        commands = self.scripts.get(script_name, [command])
++        self.context.args = args
++        with self.apply_context():
++            for expanded in format_script_commands(commands=commands, args="", ignore_exit_code=ignore_exit_code):
++                yield self.metadata.context.format(expanded).rstrip()
++
++    def resolve_commands(self, commands: list[str]):
++        for command in commands:
++            yield from self.expand_command(command)
++
+ 
+ 
+ 
+@@ -851,6 +997,10 @@ class EnvironmentInterface(ABC):
+         with self.command_context():
+             self.platform.exit_with_command([path, *args])
+ 
++    def run_shell_command(self, command: str) -> int:
++        process = self.platform.run_command(command, shell=True)
++        return process.returncode
++
+ 
+ 
+ 
+@@ -875,6 +1025,14 @@ class EnvironmentInterface(ABC):
+         with self.get_env_vars():
+             yield
+ 
++    def get_env_vars(self):
++        return EnvVars(self.env_vars, include=self.env_include, exclude=self.env_exclude)
++
++    def get_env_var_option(self, option: str) -> str:
++        from hatch.env.utils import get_env_var
++
++        return os.environ.get(get_env_var(plugin_name=self.PLUGIN_NAME, option=option), "")
++
+ 
+ 
+ 
+@@ -1268,14 +1426,13 @@ class Workspace:
+ 
+ 
+ class WorkspaceMember:
++    def __init__(self, project: Project, *, features=()):
++        self.project = project
++        self.features = features
+ 
+-
+-
+-
+-
+-
+-
+-
++    @cached_property
++    def name(self) -> str:
++        return self.project.metadata.name
+ 
+     @cached_property
+     def has_static_dependencies(self) -> bool:
+@@ -1363,4 +1520,4 @@ def _recurse_members(root, matcher_index, matchers):
+     with os.scandir(root) as it:
+         for entry in it:
+             if entry.is_dir() and matcher(entry):
+-                yield from _recurse_members(entry.path, matcher_index + 1, matchers)
+\ No newline at end of file
++                yield from _recurse_members(entry.path, matcher_index + 1, matchers)
+diff --git a/src/hatch/env/utils.py b/src/hatch/env/utils.py
+index 1315201..217fe02 100644
+--- a/src/hatch/env/utils.py
++++ b/src/hatch/env/utils.py
+@@ -9,6 +9,14 @@ def get_env_var(*, plugin_name: str, option: str) -> str:
+     return f"{AppEnvVars.ENV_OPTION_PREFIX}{plugin_name}_{option.replace('-', '_')}".upper()
+ 
+ 
++def ensure_valid_environment(config: dict) -> None:
++    """Validate the minimal shape required for an ad-hoc environment."""
++    env_type = config.get("type", "virtual")
++    if not isinstance(env_type, str):
++        message = "Environment option `type` must be a string"
++        raise TypeError(message)
++
++
+ 
+ 
+ 
+@@ -63,4 +71,4 @@ def get_verbosity_flag(verbosity: int, *, adjustment=0) -> str:
+ def add_verbosity_flag(command: list[str], verbosity: int, *, adjustment=0):
+     flag = get_verbosity_flag(verbosity, adjustment=adjustment)
+     if flag:
+-        command.append(flag)
+\ No newline at end of file
++        command.append(flag)
+diff --git a/src/hatch/plugin/manager.py b/src/hatch/plugin/manager.py
+index 58c3120..56d2ac5 100644
+--- a/src/hatch/plugin/manager.py
++++ b/src/hatch/plugin/manager.py
+@@ -9,6 +9,16 @@ class PluginManager(_PluginManager):
+ 
+         self.manager.add_hookspecs(specs)
+ 
++    def hatch_register_environment(self):
++        from hatch.env.plugin import hooks
++
++        self.manager.register(hooks)
++
++    def hatch_register_environment_collector(self):
++        from hatch.env.collectors.plugin import hooks
++
++        self.manager.register(hooks)
++
+ 
+ 
+ 
+@@ -27,4 +37,4 @@ class PluginManager(_PluginManager):
+     def hatch_register_template(self):
+         from hatch.template.plugin import hooks
+ 
+-        self.manager.register(hooks)
+\ No newline at end of file
++        self.manager.register(hooks)
+diff --git a/src/hatch/project/config.py b/src/hatch/project/config.py
+index a4db520..32f12f5 100644
+--- a/src/hatch/project/config.py
++++ b/src/hatch/project/config.py
+@@ -16,6 +16,489 @@ if TYPE_CHECKING:
+     from hatch.dep.core import Dependency
+ 
+ 
++class ProjectConfig:
++    def __init__(self, root, config: dict[str, Any], plugin_manager=None) -> None:
++        self.root = root
++        self.config = config
++        self.plugin_manager = plugin_manager
++        self._env_option_types: dict[str, type] = {}
++        self._env_overrides_finalized = False
++        self._processed_env_data = None
++        self._override_environment = None
++
++    @cached_property
++    def build(self) -> BuildConfig:
++        config = self.config.get("build", {})
++        if not isinstance(config, dict):
++            message = "Field `tool.hatch.build` must be a table"
++            raise TypeError(message)
++        return BuildConfig(config)
++
++    @cached_property
++    def env(self) -> dict[str, Any]:
++        config = self.config.get("env", {})
++        if not isinstance(config, dict):
++            message = "Field `tool.hatch.env` must be a table"
++            raise TypeError(message)
++        return config
++
++    @cached_property
++    def env_requires_complex(self) -> list[Dependency]:
++        from hatch.dep.core import Dependency, InvalidDependencyError
++
++        requirements = self.env.get("requires", [])
++        if not isinstance(requirements, list):
++            message = "Field `tool.hatch.env.requires` must be an array"
++            raise TypeError(message)
++
++        result = []
++        for i, requirement in enumerate(requirements, 1):
++            if not isinstance(requirement, str):
++                message = f"Requirement #{i} in `tool.hatch.env.requires` must be a string"
++                raise TypeError(message)
++            try:
++                result.append(Dependency(requirement))
++            except InvalidDependencyError as e:
++                message = f"Requirement #{i} in `tool.hatch.env.requires` is invalid: {e}"
++                raise ValueError(message) from None
++        return result
++
++    @cached_property
++    def env_requires(self) -> list[str]:
++        return [str(requirement) for requirement in self.env_requires_complex]
++
++    @cached_property
++    def env_collectors(self) -> dict[str, dict[str, Any]]:
++        collectors = self.env.get("collectors", {})
++        if not isinstance(collectors, dict):
++            message = "Field `tool.hatch.env.collectors` must be a table"
++            raise TypeError(message)
++
++        result = {"default": {}}
++        for name, collector_config in collectors.items():
++            if not isinstance(collector_config, dict):
++                message = f"Field `tool.hatch.env.collectors.{name}` must be a table"
++                raise TypeError(message)
++            result[name] = collector_config
++        return result
++
++    def _get_collectors(self):
++        if self.plugin_manager is None:
++            from hatch.plugin.manager import PluginManager
++
++            self.plugin_manager = PluginManager()
++
++        collectors = []
++        for name, config in self.env_collectors.items():
++            collector_class = self.plugin_manager.environment_collector.get(name)
++            if collector_class is None:
++                message = f"Unknown environment collector: {name}"
++                raise ValueError(message)
++            collectors.append(collector_class(self.root, config))
++        return collectors
++
++    @staticmethod
++    def _merge_env_config(parent: dict[str, Any], child: dict[str, Any]) -> dict[str, Any]:
++        result = deepcopy(parent)
++        for key, value in child.items():
++            if key == "scripts" and isinstance(value, dict) and isinstance(result.get(key), dict):
++                result[key] = {**result[key], **deepcopy(value)}
++            else:
++                result[key] = deepcopy(value)
++        return result
++
++    def _validate_overrides(self, env_name: str, overrides: Any) -> dict[str, dict]:
++        if not isinstance(overrides, dict):
++            message = f"Field `tool.hatch.envs.{env_name}.overrides` must be a table"
++            raise TypeError(message)
++        for source, conditions in overrides.items():
++            if source not in {"platform", "env", "matrix", "name"}:
++                continue
++            if not isinstance(conditions, dict):
++                message = f"Field `tool.hatch.envs.{env_name}.overrides.{source}` must be a table"
++                raise TypeError(message)
++            for condition, options in conditions.items():
++                if not isinstance(options, dict):
++                    message = f"Field `tool.hatch.envs.{env_name}.overrides.{source}.{condition}` must be a table"
++                    raise TypeError(message)
++        return overrides
++
++    def _apply_env_overrides(
++        self,
++        template_name: str,
++        generated_name: str,
++        matrix_variables: dict[str, str],
++        overrides: dict[str, dict],
++        target: dict[str, Any],
++        *,
++        sources: set[str] | None = None,
++        reserved: bool = True,
++        plugins: bool = True,
++    ) -> None:
++        from hatch.utils.platform import get_platform_name
++
++        calls = []
++        platform_name = get_platform_name()
++        if platform_name in overrides.get("platform", {}):
++            calls.append(("platform", platform_name, platform_name, overrides["platform"][platform_name]))
++
++        environment = environ if self._override_environment is None else self._override_environment
++        for variable, options in overrides.get("env", {}).items():
++            if variable in environment:
++                calls.append(("env", variable, environment[variable], options))
++
++        for variable, value in matrix_variables.items():
++            if variable in overrides.get("matrix", {}):
++                calls.append(("matrix", variable, value, overrides["matrix"][variable]))
++
++        for pattern, options in overrides.get("name", {}).items():
++            if re.search(pattern, generated_name):
++                calls.append(("name", pattern, generated_name, options))
++
++        for source, condition, value, options in calls:
++            if sources is not None and source not in sources:
++                continue
++            if reserved:
++                apply_overrides(template_name, source, condition, value, options, target)
++            if plugins and self._env_overrides_finalized:
++                apply_overrides(
++                    generated_name,
++                    source,
++                    condition,
++                    value,
++                    options,
++                    target,
++                    self._env_option_types,
++                )
++
++    def _process_environments(self):
++        if self._processed_env_data is not None:
++            return self._processed_env_data
++        if self._override_environment is None:
++            self._override_environment = dict(environ)
++
++        configured_envs = self.config.get("envs", {})
++        if not isinstance(configured_envs, dict):
++            message = "Field `tool.hatch.envs` must be a table"
++            raise TypeError(message)
++        for env_name, env_config in configured_envs.items():
++            if not isinstance(env_config, dict):
++                message = f"Field `tool.hatch.envs.{env_name}` must be a table"
++                raise TypeError(message)
++            workspace = env_config.get("workspace", {})
++            if not isinstance(workspace, dict):
++                message = "Field workspace must be a table"
++                raise TypeError(message)
++            members = workspace.get("members", [])
++            if not isinstance(members, list):
++                message = "Field workspace.members must be an array"
++                raise TypeError(message)
++            for i, member in enumerate(members, 1):
++                if not isinstance(member, (str, dict)):
++                    message = f"Member #{i} must be a string or table"
++                    raise TypeError(message)
++                if isinstance(member, dict):
++                    if "path" not in member:
++                        message = f"Member #{i} must define a `path` key"
++                        raise TypeError(message)
++                    if not isinstance(member["path"], str):
++                        message = f"Member #{i} path must be a string"
++                        raise TypeError(message)
++
++        collectors = self._get_collectors()
++        raw_config: dict[str, dict[str, Any]] = {}
++        internal_names = set()
++        for collector in collectors:
++            initial = collector.get_initial_config()
++            for env_name, env_config in initial.items():
++                raw_config[env_name] = self._merge_env_config(raw_config.get(env_name, {}), env_config)
++                if collector.PLUGIN_NAME == "default":
++                    internal_names.add(env_name)
++
++        for env_name, env_config in configured_envs.items():
++            raw_config[env_name] = self._merge_env_config(raw_config.get(env_name, {}), env_config)
++
++        raw_config.setdefault("default", {})
++        for collector in collectors:
++            collector.finalize_config(raw_config)
++
++        resolved: dict[str, dict[str, Any]] = {}
++
++        def resolve(env_name: str, active: list[str]) -> dict[str, Any]:
++            if env_name in resolved:
++                return deepcopy(resolved[env_name])
++            if env_name in active:
++                chain = " -> ".join([*active, env_name])
++                message = f"Circular inheritance detected for field `tool.hatch.envs.*.template`: {chain}"
++                raise ValueError(message)
++            if env_name not in raw_config:
++                # The caller provides the field owner in this case.
++                raise KeyError(env_name)
++
++            own = deepcopy(raw_config[env_name])
++            detached = own.pop("detached", False)
++            explicit_template = own.pop("template", None)
++            own.pop("matrix", None)
++            own.pop("matrix-name-format", None)
++            own.pop("overrides", None)
++
++            if detached:
++                base = {}
++                own["skip-install"] = True
++            else:
++                template = explicit_template
++                if template is None and env_name != "default" and env_name not in internal_names:
++                    template = "default"
++                if template is None or template == env_name:
++                    base = {}
++                else:
++                    if template not in raw_config:
++                        message = (
++                            f"Field `tool.hatch.envs.{env_name}.template` refers to an unknown environment `{template}`"
++                        )
++                        raise ValueError(message)
++                    base = resolve(template, [*active, env_name])
++
++            final = self._merge_env_config(base, own)
++            final.setdefault("type", "virtual")
++            resolved[env_name] = final
++            return deepcopy(final)
++
++        for env_name in raw_config:
++            resolve(env_name, [])
++
++        envs: dict[str, dict[str, Any]] = {}
++        internal_envs: dict[str, dict[str, Any]] = {}
++        matrices: dict[str, dict[str, Any]] = {}
++        internal_matrices: dict[str, dict[str, Any]] = {}
++        matrix_variables: dict[str, dict[str, str]] = {}
++
++        for template_name, raw_env_config in raw_config.items():
++            final_base = resolved[template_name]
++            overrides = self._validate_overrides(template_name, raw_env_config.get("overrides", {}))
++            matrix_config = raw_env_config.get("matrix")
++            target_envs = internal_envs if template_name in internal_names else envs
++            target_matrices = internal_matrices if template_name in internal_names else matrices
++
++            name_format = raw_env_config.get("matrix-name-format", "{value}")
++            if not isinstance(name_format, str):
++                message = f"Field `tool.hatch.envs.{template_name}.matrix-name-format` must be a string"
++                raise TypeError(message)
++            if "{value}" not in name_format:
++                message = (
++                    f"Field `tool.hatch.envs.{template_name}.matrix-name-format` must contain at least "
++                    "the `{value}` placeholder"
++                )
++                raise ValueError(message)
++
++            if matrix_config is None:
++                final = deepcopy(final_base)
++                self._apply_env_overrides(template_name, template_name, {}, overrides, final)
++                target_envs[template_name] = final
++                continue
++
++            if not isinstance(matrix_config, list):
++                message = f"Field `tool.hatch.envs.{template_name}.matrix` must be an array"
++                raise TypeError(message)
++
++            common_config = deepcopy(final_base)
++            self._apply_env_overrides(
++                template_name,
++                template_name,
++                {},
++                overrides,
++                common_config,
++                sources={"platform", "env"},
++                plugins=False,
++            )
++            generated_variables: dict[str, dict[str, str]] = {}
++
++            for matrix_index, matrix in enumerate(matrix_config, 1):
++                if not isinstance(matrix, dict):
++                    message = f"Entry #{matrix_index} in field `tool.hatch.envs.{template_name}.matrix` must be a table"
++                    raise TypeError(message)
++                if not matrix:
++                    message = (
++                        f"Matrix #{matrix_index} in field `tool.hatch.envs.{template_name}.matrix` cannot be empty"
++                    )
++                    raise ValueError(message)
++                if "py" in matrix and "python" in matrix:
++                    message = (
++                        f"Matrix #{matrix_index} in field `tool.hatch.envs.{template_name}.matrix` cannot contain "
++                        "both `py` and `python` variables"
++                    )
++                    raise ValueError(message)
++
++                ordered_variables = []
++                python_key = "py" if "py" in matrix else "python" if "python" in matrix else None
++                if python_key:
++                    ordered_variables.append(python_key)
++                ordered_variables.extend(key for key in matrix if key != python_key)
++
++                values_to_expand = []
++                for variable_index, variable in enumerate(ordered_variables, 1):
++                    if not isinstance(variable, str) or not variable:
++                        message = (
++                            f"Variable #{variable_index} in matrix #{matrix_index} in field "
++                            f"`tool.hatch.envs.{template_name}.matrix` cannot be an empty string"
++                        )
++                        raise ValueError(message)
++                    values = matrix[variable]
++                    if not isinstance(values, list):
++                        message = (
++                            f"Variable `{variable}` in matrix #{matrix_index} in field "
++                            f"`tool.hatch.envs.{template_name}.matrix` must be an array"
++                        )
++                        raise TypeError(message)
++                    if not values:
++                        message = (
++                            f"Variable `{variable}` in matrix #{matrix_index} in field "
++                            f"`tool.hatch.envs.{template_name}.matrix` cannot be empty"
++                        )
++                        raise ValueError(message)
++                    seen_values = set()
++                    for value_index, value in enumerate(values, 1):
++                        if not isinstance(value, str):
++                            message = (
++                                f"Value #{value_index} of variable `{variable}` in matrix #{matrix_index} in field "
++                                f"`tool.hatch.envs.{template_name}.matrix` must be a string"
++                            )
++                            raise TypeError(message)
++                        if not value:
++                            message = (
++                                f"Value #{value_index} of variable `{variable}` in matrix #{matrix_index} in field "
++                                f"`tool.hatch.envs.{template_name}.matrix` cannot be an empty string"
++                            )
++                            raise ValueError(message)
++                        if value in seen_values:
++                            message = (
++                                f"Value #{value_index} of variable `{variable}` in matrix #{matrix_index} in field "
++                                f"`tool.hatch.envs.{template_name}.matrix` is a duplicate"
++                            )
++                            raise ValueError(message)
++                        seen_values.add(value)
++                    values_to_expand.append(values)
++
++                for result in product(*values_to_expand):
++                    raw_variables = dict(zip(ordered_variables, result, strict=False))
++                    parts = []
++                    for index, (variable, value) in enumerate(raw_variables.items()):
++                        if index == 0 and variable in {"py", "python"}:
++                            parts.append(value if value.startswith(("py", "python")) else f"py{value}")
++                        else:
++                            parts.append(name_format.format(variable=variable, value=value))
++                    suffix = "-".join(parts)
++                    generated_name = suffix if template_name == "default" else f"{template_name}.{suffix}"
++                    variables = {
++                        ("python" if variable == "py" else variable): value
++                        for variable, value in raw_variables.items()
++                    }
++                    final = deepcopy(common_config)
++                    if "python" in variables:
++                        final["python"] = variables["python"]
++                    self._apply_env_overrides(
++                        template_name,
++                        generated_name,
++                        variables,
++                        overrides,
++                        final,
++                        sources={"platform", "env"},
++                        reserved=False,
++                    )
++                    self._apply_env_overrides(
++                        template_name,
++                        generated_name,
++                        variables,
++                        overrides,
++                        final,
++                        sources={"matrix", "name"},
++                    )
++                    target_envs[generated_name] = final
++                    generated_variables[generated_name] = variables
++                    matrix_variables[generated_name] = variables
++
++            target_matrices[template_name] = {"config": common_config, "envs": generated_variables}
++
++        all_environments = {**envs, **internal_envs}
++        for collector in collectors:
++            collector.finalize_environments(all_environments)
++        for name, config in all_environments.items():
++            (internal_envs if name in internal_envs else envs)[name] = config
++
++        self._processed_env_data = envs, internal_envs, matrices, internal_matrices, matrix_variables
++        return self._processed_env_data
++
++    @property
++    def envs(self) -> dict[str, dict[str, Any]]:
++        return self._process_environments()[0]
++
++    @property
++    def internal_envs(self) -> dict[str, dict[str, Any]]:
++        return self._process_environments()[1]
++
++    @property
++    def matrices(self) -> dict[str, dict[str, Any]]:
++        return self._process_environments()[2]
++
++    @property
++    def internal_matrices(self) -> dict[str, dict[str, Any]]:
++        return self._process_environments()[3]
++
++    @property
++    def matrix_variables(self) -> dict[str, dict[str, str]]:
++        return self._process_environments()[4]
++
++    def finalize_env_overrides(self, option_types: dict[str, type]) -> None:
++        self._env_option_types = option_types
++        self._env_overrides_finalized = True
++        self._processed_env_data = None
++        from hatch.utils.structures import EnvVars
++
++        with EnvVars(self._override_environment):
++            self._process_environments()
++
++    @cached_property
++    def publish(self) -> dict[str, dict[str, Any]]:
++        config = self.config.get("publish", {})
++        if not isinstance(config, dict):
++            message = "Field `tool.hatch.publish` must be a table"
++            raise TypeError(message)
++        for publisher, publisher_config in config.items():
++            if not isinstance(publisher_config, dict):
++                message = f"Field `tool.hatch.publish.{publisher}` must be a table"
++                raise TypeError(message)
++        return config
++
++    @cached_property
++    def scripts(self) -> dict[str, list[str]]:
++        config = self.config.get("scripts", {})
++        if not isinstance(config, dict):
++            message = "Field `tool.hatch.scripts` must be a table"
++            raise TypeError(message)
++
++        normalized = {}
++        for script_name, commands in config.items():
++            if " " in script_name:
++                message = f"Script name `{script_name}` in field `tool.hatch.scripts` must not contain spaces"
++                raise ValueError(message)
++            if isinstance(commands, str):
++                commands = [commands]
++            elif not isinstance(commands, list):
++                message = f"Field `tool.hatch.scripts.{script_name}` must be a string or an array of strings"
++                raise TypeError(message)
++            for i, command in enumerate(commands, 1):
++                if not isinstance(command, str):
++                    message = f"Command #{i} in field `tool.hatch.scripts.{script_name}` must be a string"
++                    raise TypeError(message)
++            normalized[script_name] = list(commands)
++
++        seen = {}
++        return {
++            script_name: expand_script_commands(script_name, commands, normalized, seen, [])
++            for script_name, commands in normalized.items()
++        }
++
++
+ 
+ 
+ 
+@@ -519,7 +1002,7 @@ if TYPE_CHECKING:
+ class BuildConfig:
+     def __init__(self, config: dict[str, Any]) -> None:
+         self.__config = config
+-        self.__targets: dict[str, BuildTargetConfig] = config
++        self.__targets: dict[str, BuildTargetConfig] = {}
+ 
+     @cached_property
+     def directory(self) -> str:
+@@ -582,11 +1065,10 @@ class BuildConfig:
+ 
+ 
+ class BuildTargetConfig:
+-
+-
+-
+-
+-
++    def __init__(self, name: str, config: dict[str, Any], global_config: BuildConfig) -> None:
++        self.__name = name
++        self.__config = config
++        self.__global_config = global_config
+     @cached_property
+     def directory(self) -> str:
+         directory = self.__config.get("directory", self.__global_config.directory)
+@@ -730,4 +1212,4 @@ def env_var_enabled(env_var: str, *, default: bool = False) -> bool:
+     if env_var in environ:
+         return environ[env_var] in {"1", "true"}
+ 
+-    return default
+\ No newline at end of file
++    return default
+diff --git a/src/hatch/project/core.py b/src/hatch/project/core.py
+index 7445e45..ef328fa 100644
+--- a/src/hatch/project/core.py
++++ b/src/hatch/project/core.py
+@@ -43,6 +43,84 @@ class Project:
+         self._explicit_path: Path | None = None if locate else path
+         self.current_member_path: Path | None = None
+ 
++    @property
++    def app(self) -> Application:
++        if self.__app is None:
++            message = "Application has not been attached to the project"
++            raise RuntimeError(message)
++        return self.__app
++
++    @property
++    def config(self):
++        if self._config is None:
++            from hatch.project.config import ProjectConfig
++
++            hatch_config = self.metadata.config.get("tool", {}).get("hatch", {})
++            self._config = ProjectConfig(self.location, hatch_config, self.plugin_manager)
++        return self._config
++
++    def find_project_root(self) -> Path | None:
++        path = self._path.parent if self._path.is_file() else self._path
++        for directory in (path, *path.parents):
++            pyproject_file = directory / "pyproject.toml"
++            if pyproject_file.is_file():
++                self._project_file_path = pyproject_file
++                return directory
++            setup_file = directory / "setup.py"
++            if setup_file.is_file():
++                self._project_file_path = setup_file
++                return directory
++        return None
++
++    @property
++    def root(self) -> Path | None:
++        if not self._root_searched:
++            self._root = self.find_project_root()
++            self._root_searched = True
++        return self._root
++
++    @property
++    def location(self) -> Path:
++        return self._explicit_path or self.root or self._path
++
++    @property
++    def raw_config(self):
++        if self._raw_config is None:
++            project_file = self.root / "pyproject.toml" if self.root is not None else None
++            if project_file is not None and project_file.is_file():
++                from hatch.utils.toml import load_toml_data
++
++                self._raw_config = load_toml_data(project_file.read_text(encoding="utf-8"))
++                self._project_file_path = project_file
++            else:
++                self._raw_config = {}
++
++        self._raw_config.setdefault("project", {"name": self.location.name})
++        return self._raw_config
++
++    def save_config(self, config):
++        import tomlkit
++
++        project_file = self.location / "pyproject.toml"
++        with project_file.open("w", encoding="utf-8") as f:
++            f.write(tomlkit.dumps(config))
++
++    @property
++    def plugin_manager(self):
++        if self._plugin_manager is None:
++            from hatch.plugin.manager import PluginManager
++
++            self._plugin_manager = PluginManager()
++        return self._plugin_manager
++
++    @property
++    def metadata(self):
++        if self._metadata is None:
++            from hatchling.metadata.core import ProjectMetadata
++
++            self._metadata = ProjectMetadata(str(self.location), self.plugin_manager, self.raw_config)
++        return self._metadata
++
+ 
+ 
+ 
+@@ -79,6 +157,46 @@ class Project:
+     def set_app(self, app: Application) -> None:
+         self.__app = app
+ 
++    def get_environment(self, env_name: str | None = None) -> EnvironmentInterface:
++        from hatch.env.internal import is_isolated_environment
++
++        env_name = env_name or self.app.env
++        if env_name in self.config.internal_envs:
++            config = self.config.internal_envs[env_name]
++        elif env_name in self.config.envs:
++            config = self.config.envs[env_name]
++        else:
++            self.app.abort(f"Environment `{env_name}` is not defined")
++            raise AssertionError
++
++        environment_type = config.get("type", "virtual")
++        environment_class = self.plugin_manager.environment.get(environment_type)
++        if environment_class is None:
++            self.app.abort(f"Environment `{env_name}` has unknown type: {environment_type}")
++            raise AssertionError
++
++        self.config.finalize_env_overrides(environment_class.get_option_types())
++        config_source = self.config.internal_envs if env_name in self.config.internal_envs else self.config.envs
++        config = config_source[env_name]
++
++        isolated_data_directory = self.app.data_dir / "env" / environment_type
++        data_directory = self.app.get_env_directory(environment_type)
++        if self.location.is_file() or is_isolated_environment(env_name, config):
++            data_directory = isolated_data_directory
++
++        return environment_class(
++            self.location,
++            self.metadata,
++            env_name,
++            config,
++            self.config.matrix_variables.get(env_name, {}),
++            data_directory,
++            isolated_data_directory,
++            self.app.platform,
++            self.app.verbosity,
++            self.app,
++        )
++
+ 
+ 
+ 
+@@ -183,6 +301,41 @@ class Project:
+     # Ensure that this method is clearly written since it is
+     # used for documenting the life cycle of environments.
+ 
++    def prepare_environment(self, environment: EnvironmentInterface):
++        metadata = EnvironmentMetadata()
++        created = not environment.exists()
++        if created:
++            metadata.reset(environment)
++            with environment.app_status_creation():
++                environment.create()
++
++            if not environment.skip_install:
++                if environment.pre_install_commands:
++                    with environment.app_status_pre_installation():
++                        context = ExecutionContext(environment, shell_commands=environment.pre_install_commands)
++                        self.app.execute_context(context)
++                with environment.app_status_project_installation():
++                    if environment.dev_mode:
++                        environment.install_project_dev_mode()
++                    else:
++                        environment.install_project()
++                if environment.post_install_commands:
++                    with environment.app_status_post_installation():
++                        context = ExecutionContext(environment, shell_commands=environment.post_install_commands)
++                        self.app.execute_context(context)
++
++        dependency_hash = environment.dependency_hash()
++        if not created and metadata.dependency_hash(environment) == dependency_hash:
++            return
++
++        with environment.app_status_dependency_installation_check():
++            dependencies_in_sync = environment.dependencies_in_sync()
++        if not dependencies_in_sync:
++            with environment.app_status_dependency_synchronization():
++                environment.sync_dependencies()
++            dependency_hash = environment.dependency_hash()
++        metadata.update_dependency_hash(environment, dependency_hash)
++
+ 
+ 
+ 
+@@ -451,4 +604,4 @@ class Project:
+         version_config["path"] = f"{template_config['package_name']}/__init__.py"
+ 
+         with open(str(project_file_path), "w", encoding="utf-8") as f:
+-            f.write(tomlkit.dumps(raw_config))
+\ No newline at end of file
++            f.write(tomlkit.dumps(raw_config))
+diff --git a/src/hatch/project/env.py b/src/hatch/project/env.py
+index 3a1f713..c746553 100644
+--- a/src/hatch/project/env.py
++++ b/src/hatch/project/env.py
+@@ -376,12 +376,12 @@ TYPE_OVERRIDES = {
+ 
+ 
+ class EnvironmentMetadata:
++    @staticmethod
++    def _metadata_file(environment: EnvironmentInterface):
++        return environment.data_directory / ".metadata" / environment.name
+ 
+-
+-
+-
+-
+-
++    def dependency_hash(self, environment: EnvironmentInterface) -> str:
++        return self._read(environment).get("dependency_hash", "")
+ 
+     def update_dependency_hash(self, environment: EnvironmentInterface, dependency_hash: str) -> None:
+         metadata = self._read(environment)
+@@ -391,6 +391,17 @@ class EnvironmentMetadata:
+     def reset(self, environment: EnvironmentInterface) -> None:
+         self._metadata_file(environment).unlink(missing_ok=True)
+ 
++    def _read(self, environment: EnvironmentInterface) -> dict[str, Any]:
++        import json
++
++        metadata_file = self._metadata_file(environment)
++        if not metadata_file.is_file():
++            return {}
++        try:
++            return json.loads(metadata_file.read_text())
++        except (OSError, ValueError):
++            return {}
++
+ 
+ 
+ 
+@@ -409,4 +420,3 @@ class EnvironmentMetadata:
+ 
+ 
+ 
+-
+diff --git a/src/hatch/template/default.py b/src/hatch/template/default.py
+index 9140a5c..93665ad 100644
+--- a/src/hatch/template/default.py
++++ b/src/hatch/template/default.py
+@@ -7,13 +7,11 @@ from hatch.utils.network import download_file
+ class DefaultTemplate(TemplateInterface):
+     PLUGIN_NAME = "default"
+ 
+-
+-
+-
+-
+-
+-
+-
++    def __init__(self, *args, **kwargs):
++        super().__init__(*args, **kwargs)
++        self.plugin_config.setdefault("ci", False)
++        self.plugin_config.setdefault("src-layout", True)
++        self.plugin_config.setdefault("tests", True)
+     def initialize_config(self, config):
+         # Default values
+         config["readme_file_path"] = "README.md"
+@@ -126,4 +124,4 @@ def get_license_text(config, license_id, license_text, creation_time):
+         license_text = license_text.replace("<year>", f"{creation_time.year}-present", 1)
+         license_text = license_text.replace("<owner>", f"{config['name']} <{config['email']}>", 1)
+ 
+-    return f"{license_text.rstrip()}\n"
+\ No newline at end of file
++    return f"{license_text.rstrip()}\n"
+diff --git a/src/hatch/template/plugin/interface.py b/src/hatch/template/plugin/interface.py
+index a02cd2f..2816271 100644
+--- a/src/hatch/template/plugin/interface.py
++++ b/src/hatch/template/plugin/interface.py
+@@ -2,11 +2,10 @@ class TemplateInterface:
+     PLUGIN_NAME = ""
+     PRIORITY = 100
+ 
+-
+-
+-
+-
+-
++    def __init__(self, plugin_config, cache_dir, creation_time):
++        self.plugin_config = plugin_config
++        self.cache_dir = cache_dir
++        self.creation_time = creation_time
+     def initialize_config(self, config):
+         """
+         Allow modification of the configuration passed to every file for new projects
+@@ -18,4 +17,4 @@ class TemplateInterface:
+         return []
+ 
+     def finalize_files(self, config, files):
+-        """Allow modification of files for new projects before they are written to the file system."""
+\ No newline at end of file
++        """Allow modification of files for new projects before they are written to the file system."""
+diff --git a/src/hatch/utils/platform.py b/src/hatch/utils/platform.py
+index ec3734c..7020734 100644
+--- a/src/hatch/utils/platform.py
++++ b/src/hatch/utils/platform.py
+@@ -43,6 +43,27 @@ class Platform:
+ 
+         self.__modules = LazilyLoadedModules()
+ 
++    @property
++    def modules(self) -> LazilyLoadedModules:
++        return self.__modules
++
++    @property
++    def join_command_args(self) -> Callable[[list[str]], str]:
++        if self.__join_command_args is None:
++            if self.windows:
++                self.__join_command_args = self.modules.subprocess.list2cmdline
++            else:
++                self.__join_command_args = self.modules.shlex.join
++
++        return self.__join_command_args
++
++    def run_command(self, command: str | list[str], *, shell: bool = False, **kwargs: Any) -> CompletedProcess:
++        self.populate_default_popen_kwargs(kwargs, shell=shell)
++        if self.displaying_status:
++            return self._run_command_integrated(command, shell=shell, **kwargs)
++
++        return self.modules.subprocess.run(self.format_for_subprocess(command, shell=shell), shell=shell, **kwargs)
++
+ 
+ 
+ 
+@@ -145,6 +166,23 @@ class Platform:
+             **kwargs,
+         )
+ 
++    def format_for_subprocess(self, command: str | list[str], *, shell: bool = False) -> str | list[str]:
++        if isinstance(command, list) or shell or self.windows:
++            return command
++
++        return self.modules.shlex.split(command)
++
++    def populate_default_popen_kwargs(self, kwargs: dict[str, Any], *, shell: bool = False) -> None:
++        if not shell or "executable" in kwargs or not self.macos:
++            return
++
++        # SIP strips DYLD_* variables when invoking a system shell. Resolve a
++        # shell from PATH so those variables survive for child processes.
++        if any(name.startswith("DYLD_") for name in os.environ):
++            executable = self.modules.shutil.which("sh")
++            if executable:
++                kwargs["executable"] = executable
++
+ 
+ 
+ 
+@@ -196,6 +234,11 @@ class Platform:
+                 self.__default_shell = cast(str, os.environ.get("SHELL", "bash"))
+         return self.__default_shell
+ 
++    @property
++    def macos(self) -> bool:
++        """Indicates whether Hatch is running on macOS."""
++        return self.name == "macos"
++
+ 
+ 
+ 
+@@ -276,6 +319,15 @@ class Platform:
+ 
+         return self.__display_name
+ 
++    @property
++    def home(self) -> Path:
++        if self.__home is None:
++            from hatch.utils.fs import Path
++
++            self.__home = Path(os.path.expanduser("~"))
++
++        return self.__home
++
+ 
+ 
+ 
+@@ -290,4 +342,7 @@ class Platform:
+ 
+ 
+ class LazilyLoadedModules:
+-    pass
+\ No newline at end of file
++    def __getattr__(self, name: str) -> ModuleType:
++        module = import_module(name)
++        setattr(self, name, module)
++        return module

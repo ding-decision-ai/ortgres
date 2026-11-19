@@ -1,0 +1,160 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 130 items
+
+pandas/tests/frame/methods/test_reset_index.py ..................................................................................................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.02s call     pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index
+0.01s call     pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_multiindex_col
+0.01s call     pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_multiindex_columns
+0.01s call     pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_level[levels0]
+0.01s call     pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_level[levels1]
+0.01s call     pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_multiindex_nan
+
+(24 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_empty_rangeindex
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_set_reset
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_set_index_reset_index_dt64tz
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['UTC']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['US/Eastern']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['Asia/Tokyo']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['dateutil/US/Pacific']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['dateutil/Asia/Singapore']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['UTC+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz['UTC-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[tzutc()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[tzlocal()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[datetime.timezone.utc]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[datetime.timezone(datetime.timedelta(seconds=3600))]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[pytz.FixedOffset(300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[<UTC>0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[pytz.FixedOffset(-300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[<DstTzInfo 'US/Pacific' LMT-1 day, 16:07:00 STD>]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_tz[<UTC>1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_frame_reset_index_tzaware_index[US/Eastern]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_frame_reset_index_tzaware_index[dateutil/US/Eastern]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_intervals
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_name
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_level[levels0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_level[levels1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_level_missing[idx_lev0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_level_missing[idx_lev1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_right_dtype
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_multiindex_col
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_multiindex_nan
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[None]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[foo]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[2]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[3.0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[name4]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[name5]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_datetimeindex_cols[2012-12-31]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_range
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_multiindex_columns
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_duplicate_columns_allow[False-False]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_duplicate_columns_allow[False-True]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_duplicate_columns_allow[True-False]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_duplicate_columns_allow[True-True]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_duplicate_columns_default[False]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_duplicate_columns_default[True]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_allow_duplicates_check[bad value]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[None]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['UTC']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['US/Eastern']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['Asia/Tokyo']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['dateutil/US/Pacific']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['dateutil/Asia/Singapore']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['UTC+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime['UTC-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[tzutc()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[tzlocal()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[datetime.timezone.utc]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[datetime.timezone(datetime.timedelta(seconds=3600))]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[pytz.FixedOffset(300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[<UTC>0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[pytz.FixedOffset(-300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[<DstTzInfo 'US/Pacific' LMT-1 day, 16:07:00 STD>]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime[<UTC>1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[None]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['UTC']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['US/Eastern']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['Asia/Tokyo']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['dateutil/US/Pacific']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['dateutil/Asia/Singapore']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['UTC+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2['UTC-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[tzutc()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[tzlocal()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[datetime.timezone.utc]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[datetime.timezone(datetime.timedelta(seconds=3600))]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[pytz.FixedOffset(300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[<UTC>0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[pytz.FixedOffset(-300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[<DstTzInfo 'US/Pacific' LMT-1 day, 16:07:00 STD>]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime2[<UTC>1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[None]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['UTC']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['US/Eastern']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['Asia/Tokyo']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['dateutil/US/Pacific']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['dateutil/Asia/Singapore']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['UTC+01:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3['UTC-02:15']
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[tzutc()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[tzlocal()]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[datetime.timezone.utc]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[datetime.timezone(datetime.timedelta(seconds=3600))]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[pytz.FixedOffset(300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[<UTC>0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[pytz.FixedOffset(-300)]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[<DstTzInfo 'US/Pacific' LMT-1 day, 16:07:00 STD>]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_datetime3[<UTC>1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_period
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_delevel_infer_dtype
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_with_drop
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_nat_multiindex[ix_data0-exp_data0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_nat_multiindex[ix_data1-exp_data1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_reset_index_nat_multiindex[ix_data2-exp_data2]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_rest_index_multiindex_categorical_with_missing_values[codes0]
+PASSED pandas/tests/frame/methods/test_reset_index.py::TestResetIndex::test_rest_index_multiindex_categorical_with_missing_values[codes1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_dtypes_on_empty_frame_with_multiindex[array0-object]
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_dtypes_on_empty_frame_with_multiindex[array1-dtype1]
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_empty_frame_with_datetime64_multiindex
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_empty_frame_with_datetime64_multiindex_from_groupby
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_multiindex_nat
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_interval_columns_object_cast
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_rename
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_rename_multiindex
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_errorreset_index_rename
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_false_index_name
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_with_empty_frame[None]
+PASSED pandas/tests/frame/methods/test_reset_index.py::test_reset_index_with_empty_frame[columns1]
+============================= 130 passed in 0.35s ==============================

@@ -1,0 +1,235 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 193 items
+
+pandas/tests/io/formats/style/test_style.py .................................................................................................................................................................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.12s call     pandas/tests/io/formats/style/test_style.py::TestStyler::test_subset_for_boolean_cols[background_gradient]
+0.01s call     pandas/tests/io/formats/style/test_style.py::TestStyler::test_hide_columns_index_mult_levels
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[False-True-True]
+0.01s call     pandas/tests/io/formats/style/test_style.py::test_output_buffer[latex]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[True-False-False]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[True-True-False]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[False-True-False]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[False-False-False]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[True-True-True]
+0.01s call     pandas/tests/io/formats/style/test_style.py::test_copy[False-True-True]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[False-False-True]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_copy[True-False-True]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_export
+0.01s call     pandas/tests/io/formats/style/test_style.py::test_copy[True-True-True]
+0.01s setup    pandas/tests/io/formats/style/test_style.py::test_clear
+0.01s call     pandas/tests/io/formats/style/test_style.py::test_hiding_headers_over_columns_no_sparsify
+0.01s call     pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_7]
+0.01s call     pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_0]
+
+(12 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/io/formats/style/test_style.py::test_mi_styler_sparsify_columns[True-exp_cols0]
+PASSED pandas/tests/io/formats/style/test_style.py::test_mi_styler_sparsify_columns[False-exp_cols1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_mi_styler_sparsify_index[True-exp_rows0]
+PASSED pandas/tests/io/formats/style/test_style.py::test_mi_styler_sparsify_index[False-exp_rows1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_mi_styler_sparsify_options
+PASSED pandas/tests/io/formats/style/test_style.py::test_trimming_maximum[100-100-100-None-None-12-6]
+PASSED pandas/tests/io/formats/style/test_style.py::test_trimming_maximum[1000-3-750-None-None-250-3]
+PASSED pandas/tests/io/formats/style/test_style.py::test_trimming_maximum[4-1000-500-None-None-4-125]
+PASSED pandas/tests/io/formats/style/test_style.py::test_trimming_maximum[1000-3-750-10-None-10-3]
+PASSED pandas/tests/io/formats/style/test_style.py::test_trimming_maximum[4-1000-500-None-5-4-5]
+PASSED pandas/tests/io/formats/style/test_style.py::test_trimming_maximum[100-100-700-50-50-25-25]
+PASSED pandas/tests/io/formats/style/test_style.py::test_render_trimming_rows[styler.render.max_elements-6]
+PASSED pandas/tests/io/formats/style/test_style.py::test_render_trimming_rows[styler.render.max_rows-3]
+PASSED pandas/tests/io/formats/style/test_style.py::test_render_trimming_cols[styler.render.max_elements-6]
+PASSED pandas/tests/io/formats/style/test_style.py::test_render_trimming_cols[styler.render.max_columns-2]
+PASSED pandas/tests/io/formats/style/test_style.py::test_render_trimming_mi
+PASSED pandas/tests/io/formats/style/test_style.py::test_render_empty_mi
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[True-True-True]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[True-True-False]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[True-False-True]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[True-False-False]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[False-True-True]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[False-True-False]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[False-False-True]
+PASSED pandas/tests/io/formats/style/test_style.py::test_copy[False-False-False]
+PASSED pandas/tests/io/formats/style/test_style.py::test_inherited_copy[True]
+PASSED pandas/tests/io/formats/style/test_style.py::test_inherited_copy[False]
+PASSED pandas/tests/io/formats/style/test_style.py::test_clear
+PASSED pandas/tests/io/formats/style/test_style.py::test_export
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_raises
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_index_level[1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_index_level[one]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_index_level[level2]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_index_level[level3]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[True-1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[True-one]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[True-level2]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[True-level3]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[False-1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[False-one]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[False-level2]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hide_columns_level[False-level3]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header[index-map]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header[index-apply]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header[columns-map]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header[columns-apply]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header_mi[index-apply]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header_mi[index-map]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header_mi[columns-apply]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header_mi[columns-map]
+PASSED pandas/tests/io/formats/style/test_style.py::test_apply_map_header_raises
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_init_non_pandas
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_init_series
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_repr_html_ok
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_repr_html_mathjax
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_update_ctx
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_update_ctx_flatten_multi_and_trailing_semi
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_render
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_multiple_render
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_render_empty_dfs
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_render_double
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_set_properties
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_set_properties_subset
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_empty_index_name_doesnt_display
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_index_name
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_numeric_columns
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_axis
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_series_return[0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_series_return[1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_dataframe_return[False-False]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_dataframe_return[False-True]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_dataframe_return[True-False]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_dataframe_return[True-True]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[0-slice_0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[0-slice_1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[0-slice_2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[0-slice_3]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[0-slice_4]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[1-slice_0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[1-slice_1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[1-slice_2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[1-slice_3]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_subset[1-slice_4]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset[slice_0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset[slice_1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset[slice_2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset[slice_3]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset[slice_4]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_3]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_4]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_5]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_6]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex[slice_7]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_map_subset_multiindex_code
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_subset_for_boolean_cols[background_gradient]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_subset_for_boolean_cols[bar]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_subset_for_boolean_cols[text_gradient]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_empty
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_duplicate
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_init_with_na_rep
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_caption
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_unique_id
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_table_styles
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_table_styles_multiple
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_table_styles_dict_multiple_selectors
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_maybe_convert_css_to_tuples
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_maybe_convert_css_to_tuples_err
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_table_attributes
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_none
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_trim
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_export
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_bad_apply_shape
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_bad_return
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_bad_labels[index]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_apply_bad_labels[columns]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_get_level_lengths
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_get_level_lengths_un_sorted
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_mi_sparse_index_names
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_mi_sparse_column_names
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_hide_column_headers
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_hide_single_index
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_hide_multiindex
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_hide_columns_single_level
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_hide_columns_index_mult_levels
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_pipe
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_no_cell_ids
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_set_data_classes[classes0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_set_data_classes[classes1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_set_data_classes[classes2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_set_data_classes_reindex
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_chaining_table_styles
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_column_and_row_styling
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len[1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len[5]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len[32]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len[33]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len[100]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len_raises[-2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len_raises[bad]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_uuid_len_raises[None]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc3]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc4]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc5]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc7]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc8]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc9]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc10]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice[slc11]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_list_slice[list]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_list_slice[Series]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_list_slice[array]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_slice_on_multiindex
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_0]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_1]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_2]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_3]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_4]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_5]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_6]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_7]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_8]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_9]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_10]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_11]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_12]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_13]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_14]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_15]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_16]
+PASSED pandas/tests/io/formats/style/test_style.py::TestStyler::test_non_reducing_multi_slice_on_multiindex[slice_17]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hidden_index_names
+PASSED pandas/tests/io/formats/style/test_style.py::test_hidden_column_names
+PASSED pandas/tests/io/formats/style/test_style.py::test_caption_raises[1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_caption_raises[caption1]
+PASSED pandas/tests/io/formats/style/test_style.py::test_caption_raises[caption2]
+PASSED pandas/tests/io/formats/style/test_style.py::test_hiding_headers_over_index_no_sparsify
+PASSED pandas/tests/io/formats/style/test_style.py::test_hiding_headers_over_columns_no_sparsify
+PASSED pandas/tests/io/formats/style/test_style.py::test_get_level_lengths_mi_hidden
+PASSED pandas/tests/io/formats/style/test_style.py::test_row_trimming_hide_index
+PASSED pandas/tests/io/formats/style/test_style.py::test_row_trimming_hide_index_mi
+PASSED pandas/tests/io/formats/style/test_style.py::test_col_trimming_hide_columns
+PASSED pandas/tests/io/formats/style/test_style.py::test_no_empty_apply
+PASSED pandas/tests/io/formats/style/test_style.py::test_output_buffer[html]
+PASSED pandas/tests/io/formats/style/test_style.py::test_output_buffer[latex]
+PASSED pandas/tests/io/formats/style/test_style.py::test_output_buffer[string]
+============================= 193 passed in 0.86s ==============================

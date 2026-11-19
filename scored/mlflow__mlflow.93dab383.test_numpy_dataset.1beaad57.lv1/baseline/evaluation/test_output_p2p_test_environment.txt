@@ -1,0 +1,255 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 46 items / 1 deselected / 45 selected
+
+tests/utils/test_environment.py::test_mlflow_conda_env_returns_none_when_output_path_is_specified PASSED | MEM 21.5/46.9 GB | DISK 791.8/915.7 GB [  2%]
+tests/utils/test_environment.py::test_mlflow_conda_env_returns_expected_env_dict_when_output_path_is_not_specified PASSED | MEM 21.5/46.9 GB | DISK 791.8/915.7 GB [  4%]
+tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_but_pip_is_not_specified[conda_deps0] PASSED | MEM 21.5/46.9 GB | DISK 791.8/915.7 GB [  6%]
+tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_but_pip_is_not_specified[None] PASSED | MEM 21.4/46.9 GB | DISK 791.8/915.7 GB [  8%]
+tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_and_pip_is_specified[pip] PASSED | MEM 21.4/46.9 GB | DISK 791.8/915.7 GB [ 11%]
+tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_and_pip_is_specified[pip==20.0.02] PASSED | MEM 21.4/46.9 GB | DISK 791.8/915.7 GB [ 13%]
+tests/utils/test_environment.py::test_is_pip_deps PASSED | MEM 21.4/46.9 GB | DISK 791.8/915.7 GB [ 15%]
+tests/utils/test_environment.py::test_overwrite_pip_deps PASSED | MEM 21.4/46.9 GB | DISK 791.8/915.7 GB [ 17%]
+tests/utils/test_environment.py::test_parse_pip_requirements PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 20%]
+tests/utils/test_environment.py::test_parse_pip_requirements_with_relative_requirements_files PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 22%]
+tests/utils/test_environment.py::test_parse_pip_requirements_with_absolute_requirements_files PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 24%]
+tests/utils/test_environment.py::test_parse_pip_requirements_with_constraints_files PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 26%]
+tests/utils/test_environment.py::test_parse_pip_requirements_ignores_comments_and_blank_lines PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 28%]
+tests/utils/test_environment.py::test_parse_pip_requirements_removes_temporary_requirements_file PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 31%]
+tests/utils/test_environment.py::test_parse_pip_requirements_with_invalid_argument_types[0] PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 33%]
+tests/utils/test_environment.py::test_parse_pip_requirements_with_invalid_argument_types[True] PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 35%]
+tests/utils/test_environment.py::test_parse_pip_requirements_with_invalid_argument_types[invalid_argument2] PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 37%]
+tests/utils/test_environment.py::test_validate_env_arguments PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 40%]
+tests/utils/test_environment.py::test_is_mlflow_requirement PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 42%]
+tests/utils/test_environment.py::test_contains_mlflow_requirement PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 44%]
+tests/utils/test_environment.py::test_get_pip_requirement_specifier PASSED | MEM 21.3/46.9 GB | DISK 791.8/915.7 GB [ 46%]
+tests/utils/test_environment.py::test_process_pip_requirements PASSED | MEM 21.8/46.9 GB | DISK 791.8/915.7 GB [ 48%]
+tests/utils/test_environment.py::test_process_conda_env PASSED | MEM 21.8/46.9 GB | DISK 791.8/915.7 GB [ 51%]
+tests/utils/test_environment.py::test_infer_requirements_error_handling[True-fallbacks0-True] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 53%]
+tests/utils/test_environment.py::test_infer_requirements_error_handling[True-None-True] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 55%]
+tests/utils/test_environment.py::test_infer_requirements_error_handling[False-fallbacks2-False] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 57%]
+tests/utils/test_environment.py::test_infer_requirements_error_handling[False-None-True] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 60%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements0-expected0] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 62%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements1-expected1] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 64%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements2-expected2] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 66%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements3-expected3] PASSED | MEM 21.7/46.9 GB | DISK 791.8/915.7 GB [ 68%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements4-expected4] PASSED | MEM 21.4/46.9 GB | DISK 792.1/915.7 GB [ 71%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements5-expected5] PASSED | MEM 21.4/46.9 GB | DISK 792.1/915.7 GB [ 73%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements6-expected6] PASSED | MEM 20.8/46.9 GB | DISK 792.5/915.7 GB [ 75%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements7-expected7] PASSED | MEM 21.0/46.9 GB | DISK 792.0/915.7 GB [ 77%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements8-expected8] PASSED | MEM 21.0/46.9 GB | DISK 792.0/915.7 GB [ 80%]
+tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements9-expected9] PASSED | MEM 21.0/46.9 GB | DISK 792.0/915.7 GB [ 82%]
+tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements1] PASSED | MEM 21.3/46.9 GB | DISK 793.0/915.7 GB [ 84%]
+tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements2] PASSED | MEM 21.5/46.9 GB | DISK 794.6/915.7 GB [ 86%]
+tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements3] PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB [ 88%]
+tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements0-expected0] PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB [ 91%]
+tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements1-expected1] PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB [ 93%]
+tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements2-expected2] PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB [ 95%]
+tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements3-expected3] PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB [ 97%]
+tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements4-expected4] PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_process_pip_requirements _________________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - a (current: uninstalled, required: a)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - b (current: uninstalled, required: b)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - a (current: uninstalled, required: a)
+ - b (current: uninstalled, required: b)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - b (current: uninstalled, required: b)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - a (current: uninstalled, required: a[extras])
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - b (current: uninstalled, required: b[extra1,extra2])
+ - a (current: uninstalled, required: a[extras]==1.2.3)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+____________________________ test_process_conda_env ____________________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - a (current: uninstalled, required: a)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - a (current: uninstalled, required: a)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - a (current: uninstalled, required: a)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+2026/10/11 19:45:30 WARNING mlflow.utils.requirements_utils: Detected one or more mismatches between the model's dependencies and the current Python environment:
+ - mlflow-skinny (current: uninstalled, required: mlflow-skinny)
+ - a (current: uninstalled, required: a)
+ - b (current: uninstalled, required: b)
+To fix the mismatches, call `mlflow.pyfunc.get_model_dependencies(model_uri)` to fetch the model's environment and install dependencies using the resulting environment file.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:30 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:34 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:34 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:37 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:40 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:40 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:40 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:46:13 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:46:50 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:47:20 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:47:20 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:47:20 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:47:20 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:47:20 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:47:20 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+34.35s call     tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements2]
+30.29s call     tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements1]
+30.14s call     tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements3]
+3.51s call     tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements4-expected4]
+3.48s call     tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements6-expected6]
+3.03s call     tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements7-expected7]
+0.40s call     tests/utils/test_environment.py::test_process_pip_requirements
+0.01s call     tests/utils/test_environment.py::test_process_conda_env
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+
+========================= per-file durations (sorted) ==========================
+::group::per-file durations (sorted)
+
+| Rank | File                              | Duration | Tests | Min    | Max     | Avg    |
+| ---- | --------------------------------- | -------- | ----- | ------ | ------- | ------ |
+| 1    | `tests/utils/test_environment.py` | 105.29s  | 45    | 0.001s | 34.355s | 2.340s |
+
+::endgroup::
+
+=========================== short test summary info ============================
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_mlflow_conda_env_returns_none_when_output_path_is_specified
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_mlflow_conda_env_returns_expected_env_dict_when_output_path_is_not_specified
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_but_pip_is_not_specified[conda_deps0]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_but_pip_is_not_specified[None]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_and_pip_is_specified[pip]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_mlflow_conda_env_includes_pip_dependencies_and_pip_is_specified[pip==20.0.02]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_is_pip_deps
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_overwrite_pip_deps
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_with_relative_requirements_files
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_with_absolute_requirements_files
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_with_constraints_files
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_ignores_comments_and_blank_lines
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_removes_temporary_requirements_file
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_with_invalid_argument_types[0]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_with_invalid_argument_types[True]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_parse_pip_requirements_with_invalid_argument_types[invalid_argument2]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_validate_env_arguments
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_is_mlflow_requirement
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_contains_mlflow_requirement
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_get_pip_requirement_specifier
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_process_pip_requirements
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_process_conda_env
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_infer_requirements_error_handling[True-fallbacks0-True]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_infer_requirements_error_handling[True-None-True]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_infer_requirements_error_handling[False-fallbacks2-False]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_infer_requirements_error_handling[False-None-True]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements0-expected0]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements1-expected1]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements2-expected2]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements3-expected3]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements4-expected4]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements5-expected5]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements6-expected6]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements7-expected7]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements8-expected8]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_deduplicate_requirements_resolve_correctly[input_requirements9-expected9]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements1]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements2]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_invalid_requirements_raise[input_requirements3]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements0-expected0]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements1-expected1]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements2-expected2]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements3-expected3]
+PASSED | MEM 20.3/46.9 GB | DISK 794.5/915.7 GB tests/utils/test_environment.py::test_remove_incompatible_requirements[input_requirements4-expected4]
+================= 45 passed, 1 deselected in 105.34s (0:01:45) =================

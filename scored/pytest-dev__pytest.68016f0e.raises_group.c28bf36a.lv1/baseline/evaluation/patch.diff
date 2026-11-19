@@ -1,0 +1,292 @@
+diff --git a/src/_pytest/assertion/util.py b/src/_pytest/assertion/util.py
+index e1ec22a..04381e0 100644
+--- a/src/_pytest/assertion/util.py
++++ b/src/_pytest/assertion/util.py
+@@ -282,6 +282,82 @@ def _compare_eq_any(
+     return explanation
+ 
+ 
++def dummy_highlighter(source: str, lexer: Literal["diff", "python"] = "python") -> str:
++    """Return *source* unchanged.
++
++    Assertion helpers accept a highlighter so terminal output can be colored.  Some
++    callers (notably exception matching) need the same diff without terminal
++    formatting, and use this deliberately no-op implementation.
++    """
++    return source
++
++
++def _diff_text(
++    left: str,
++    right: str,
++    highlighter: _HighlightFunc,
++    verbose: int = 0,
++) -> list[str]:
++    """Return a line-oriented diff of two strings.
++
++    ``left`` is the obtained value and ``right`` the expected value, matching the
++    ordering used by the rest of the assertion explanation code.
++    """
++    from difflib import ndiff
++
++    explanation: list[str] = []
++    if left.isspace() and right.isspace():
++        explanation.append(
++            "Strings contain only whitespace, escaping them using repr()"
++        )
++        left = repr(left)
++        right = repr(right)
++
++    if verbose < 1:
++        common_prefix = 0
++        for left_char, right_char in zip(left, right):
++            if left_char != right_char:
++                break
++            common_prefix += 1
++        if common_prefix > 42:
++            common_prefix -= 10
++            explanation.append(
++                f"Skipping {common_prefix} identical leading characters in diff, "
++                "use -v to show"
++            )
++            left = left[common_prefix:]
++            right = right[common_prefix:]
++
++        # Only trim the suffix when both remaining strings have the same length.
++        # This prevents a suffix from being mistaken for corresponding text after
++        # an insertion or deletion.
++        if len(left) == len(right):
++            common_suffix = 0
++            for left_char, right_char in zip(reversed(left), reversed(right)):
++                if left_char != right_char:
++                    break
++                common_suffix += 1
++            if common_suffix > 42:
++                common_suffix -= 10
++                explanation.append(
++                    f"Skipping {common_suffix} identical trailing characters in diff, "
++                    "use -v to show"
++                )
++                left = left[:-common_suffix]
++                right = right[:-common_suffix]
++
++    keepends = True
++    diff = "\n".join(
++        line.rstrip("\n")
++        for line in ndiff(
++            right.splitlines(keepends),
++            left.splitlines(keepends),
++        )
++    )
++    explanation.extend(highlighter(diff, lexer="diff").splitlines())
++    return explanation
++
++
+ 
+ 
+ 
+@@ -612,4 +688,4 @@ def _notin_text(term: str, text: str, verbose: int = 0) -> list[str]:
+             newdiff.append("  " + line[2:])
+         else:
+             newdiff.append(line)
+-    return newdiff
+\ No newline at end of file
++    return newdiff
+diff --git a/src/_pytest/raises.py b/src/_pytest/raises.py
+index 34619cd..cc8d31e 100644
+--- a/src/_pytest/raises.py
++++ b/src/_pytest/raises.py
+@@ -369,6 +369,16 @@ def is_fully_escaped(s: str) -> bool:
+     )
+ 
+ 
++def unescape(s: str) -> str:
++    """Remove escapes from regex metacharacters and escaped whitespace.
++
++    This is intentionally narrower than decoding arbitrary backslash escapes: it
++    is used only after :func:`is_fully_escaped` has identified a regex suitable
++    for displaying as literal text.
++    """
++    return re.sub(r"\\([{}()+\-.*?^$\[\]\\\s])", r"\1", s)
++
++
+ 
+ 
+ 
+@@ -512,8 +522,10 @@ class AbstractRaises(ABC, Generic[BaseExcT_co]):
+         if isinstance(self.rawmatch, str):
+             # TODO: it instructs to use `-v` to print leading text, but that doesn't work
+             # I also don't know if this is the proper entry point, or tool to use at all
+-
+-
++            # Import lazily: assertion rewriting imports mark structures, which in
++            # turn imports this module.
++            from _pytest.assertion.util import _diff_text
++            from _pytest.assertion.util import dummy_highlighter
+ 
+             diff = _diff_text(self.rawmatch, stringified_exception, dummy_highlighter)
+             self._fail_reason = ("\n" if diff[0][0] == "-" else "") + "\n".join(diff)
+@@ -1226,6 +1238,26 @@ class RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):
+         return True
+ 
+ 
++    @staticmethod
++    def _repr_expected(
++        expected: type[BaseException] | AbstractRaises[BaseException],
++    ) -> str:
++        return expected.__name__ if isinstance(expected, type) else repr(expected)
++
++    @staticmethod
++    def _check_expected(
++        expected: type[BaseException] | AbstractRaises[BaseException],
++        exception: BaseException,
++    ) -> str | None:
++        """Return ``None`` if one expected item matches, else its reason."""
++        if isinstance(expected, type):
++            return _check_raw_type(expected, exception)
++        if expected.matches(exception):
++            return None
++        assert expected.fail_reason is not None
++        return expected.fail_reason
++
++
+ 
+ 
+ 
+@@ -1266,6 +1298,121 @@ class RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):
+     ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...
+ 
+ 
++    def _check_exceptions(
++        self,
++        _exception: BaseException,
++        actual_exceptions: Sequence[BaseException],
++    ) -> bool:
++        """Greedily pair expected and actual exceptions and explain failures."""
++        results = ResultHolder(self.expected_exceptions, actual_exceptions)
++        matched_actual: dict[int, int] = {}
++        unmatched_expected: list[int] = []
++
++        # Expected items are considered in declaration order and are paired with
++        # the first still-unpaired actual item which matches.  This ordering is a
++        # documented part of RaisesGroup's behaviour.
++        for expected_index, expected in enumerate(self.expected_exceptions):
++            for actual_index, actual in enumerate(actual_exceptions):
++                if actual_index in matched_actual:
++                    continue
++                result = self._check_expected(expected, actual)
++                results.set_result(expected_index, actual_index, result)
++                if result is None:
++                    matched_actual[actual_index] = expected_index
++                    break
++            else:
++                unmatched_expected.append(expected_index)
++
++        unmatched_actual = [
++            index
++            for index in range(len(actual_exceptions))
++            if index not in matched_actual
++        ]
++        if not unmatched_expected and not unmatched_actual:
++            return True
++
++        # A single failed pair already has the clearest possible explanation.
++        if (
++            len(self.expected_exceptions) == 1
++            and len(actual_exceptions) == 1
++            and unmatched_expected
++        ):
++            result = results.get_result(0, 0)
++            assert isinstance(result, str)
++            self._fail_reason = result
++            return False
++
++        # These two common cardinality mismatches don't need a full matrix.
++        if unmatched_expected and not unmatched_actual:
++            not_matched = ", ".join(
++                self._repr_expected(self.expected_exceptions[index])
++                for index in unmatched_expected
++            )
++            self._fail_reason = (
++                f"Too few exceptions raised, found no match for: [{not_matched}]"
++            )
++            return False
++        if unmatched_actual and not unmatched_expected:
++            noun = "exception" if len(matched_actual) == 1 else "exceptions"
++            unexpected = [actual_exceptions[index] for index in unmatched_actual]
++            self._fail_reason = (
++                f"{len(matched_actual)} matched {noun}. "
++                f"Unexpected exception(s): {unexpected!r}"
++            )
++            return False
++
++        # Complete the relevant cells lazily.  Besides making the diagnostics
++        # useful, caching avoids evaluating a check predicate twice for one pair.
++        for actual_index in unmatched_actual:
++            for expected_index in unmatched_expected:
++                if results.get_result(expected_index, actual_index) is NotChecked:
++                    results.set_result(
++                        expected_index,
++                        actual_index,
++                        self._check_expected(
++                            self.expected_exceptions[expected_index],
++                            actual_exceptions[actual_index],
++                        ),
++                    )
++
++        lines: list[str] = []
++        matched_count = len(matched_actual)
++        if matched_count:
++            noun = "exception" if matched_count == 1 else "exceptions"
++            lines.append(f"{matched_count} matched {noun}.")
++
++        for expected_index in unmatched_expected:
++            expected = self.expected_exceptions[expected_index]
++            lines.append(f"{self._repr_expected(expected)}:")
++
++            # First mention matching exceptions which the greedy pass already
++            # paired with an earlier expectation.  This makes ordering failures
++            # understandable instead of presenting them as a regex/type failure.
++            for actual_index, paired_expected_index in matched_actual.items():
++                result = results.get_result(expected_index, actual_index)
++                if result is NotChecked:
++                    result = self._check_expected(
++                        expected, actual_exceptions[actual_index]
++                    )
++                    results.set_result(expected_index, actual_index, result)
++                if result is None:
++                    paired_expected = self.expected_exceptions[paired_expected_index]
++                    lines.append(
++                        f"  It matches {actual_exceptions[actual_index]!r} "
++                        "which was paired with "
++                        f"{self._repr_expected(paired_expected)}"
++                    )
++
++            for actual_index in unmatched_actual:
++                result = results.get_result(expected_index, actual_index)
++                assert isinstance(result, str)
++                lines.append(f"  {actual_exceptions[actual_index]!r}:")
++                lines.extend(indent(result, "    ").splitlines())
++
++        self._fail_reason = "\n".join(lines)
++        return False
++
++
+ 
+ 
+ 
+@@ -1478,9 +1625,9 @@ class ResultHolder:
+             [NotChecked for _ in expected_exceptions] for _ in actual_exceptions
+         ]
+ 
++    def set_result(self, expected: int, actual: int, result: str | None) -> None:
++        assert self.results[actual][expected] is NotChecked
++        self.results[actual][expected] = result
+ 
+-
+-
+-
+-
+-
++    def get_result(self, expected: int, actual: int) -> str | type[NotChecked] | None:
++        return self.results[actual][expected]

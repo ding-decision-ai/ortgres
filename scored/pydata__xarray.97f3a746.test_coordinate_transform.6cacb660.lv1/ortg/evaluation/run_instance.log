@@ -1,0 +1,136 @@
+2026-10-13 12:57:11,383 - INFO - ============================================================
+2026-10-13 12:57:11,383 - INFO - Starting evaluation for instance: pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1
+2026-10-13 12:57:11,383 - INFO - Level: 1
+2026-10-13 12:57:11,383 - INFO - Attempt: 1
+2026-10-13 12:57:11,383 - INFO - ============================================================
+2026-10-13 12:57:11,391 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-13 12:57:11,391 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_xarray-instance_62de996a
+2026-10-13 12:57:11,394 - INFO - Image docker.io/libercoders/featurebench-specs_xarray-instance_62de996a found locally
+2026-10-13 12:57:11,394 - INFO - Creating container: fb-eval-pydata__xarray-97f3a746-test_coordinate_transform-6cacb660-lv1-attempt-1-20261013-125711-394867
+2026-10-13 12:57:11,396 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-13 12:57:11,997 - INFO - Container fb-eval-pydata__xarray-97f3a746-test_coordinate_transform-6cacb660-lv1-attempt-1-20261013-125711-394867 created successfully
+2026-10-13 12:57:11,997 - INFO - Starting Level 1 evaluation for pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1
+2026-10-13 12:57:11,997 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-13 12:57:12,607 - INFO - Restore project exit code: 0
+2026-10-13 12:57:12,607 - INFO - Output: 
+2026-10-13 12:57:12,607 - INFO - Step 2: Applying patch to mask files
+2026-10-13 12:57:12,613 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-13 12:57:12,978 - INFO - Mask patch apply exit code: 0
+2026-10-13 12:57:12,978 - INFO - Mask patch output: /tmp/mask_patch.diff:303: new blank line at EOF.
++
+/tmp/mask_patch.diff:1628: new blank line at EOF.
++
+/tmp/mask_patch.diff:3252: new blank line at EOF.
++
+warning: 3 lines add whitespace errors.
+
+2026-10-13 12:57:12,978 - INFO - Successfully applied mask patch
+2026-10-13 12:57:12,978 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-13 12:57:12,983 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-13 12:57:12,984 - INFO - Deleting F2P test file: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-13 12:57:13,306 - INFO - Successfully deleted F2P test file: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-13 12:57:13,306 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-13 12:57:13,306 - INFO - Step 4: Reinitializing git repository
+2026-10-13 12:57:15,932 - INFO - Step 5: Applying agent patch
+2026-10-13 12:57:15,942 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-13 12:57:16,418 - INFO - Patch apply exit code: 0
+2026-10-13 12:57:16,418 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Checking patch xarray/compat/array_api_compat.py...
+Checking patch xarray/computation/apply_ufunc.py...
+Checking patch xarray/core/common.py...
+Checking patch xarray/core/coordinate_transform.py...
+Checking patch xarray/core/coordinates.py...
+Checking patch xarray/core/dataarray.py...
+Checking patch xarray/core/dataset.py...
+Checking patch xarray/core/dataset_utils.py...
+Checking patch xarray/core/datatree.py...
+Checking patch xarray/core/dtypes.py...
+Checking patch xarray/core/duck_array_ops.py...
+Checking patch xarray/core/formatting.py...
+Checking patch xarray/core/formatting_html.py...
+Checking patch xarray/core/groupby.py...
+Checking patch xarray/core/indexes.py...
+Checking patch xarray/core/indexing.py...
+Checking patch xarray/core/nputils.py...
+Checking patch xarray/core/utils.py...
+Checking patch xarray/core/variable.py...
+Checking patch xarray/groupers.py...
+Checking patch xarray/namedarray/core.py...
+Checking patch xarray/namedarray/pycompat.py...
+Checking patch xarray/structure/concat.py...
+Checking patch xarray/structure/merge.py...
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+Applied patch xarray/compat/array_api_compat.py cleanly.
+Applied patch xarray/computation/apply_ufunc.py cleanly.
+Applied patch xarray/core/common.py cleanly.
+Applied patch xarray/core/coordinate_transform.py cleanly.
+Applied patch xarray/core/coordinates.py cleanly.
+Applied patch xarray/core/dataarray.py cleanly.
+Applied patch xarray/core/dataset.py cleanly.
+Applied patch xarray/core/dataset_utils.py cleanly.
+Applied patch xarray/core/datatree.py cleanly.
+Applied patch xarray/core/dtypes.py cleanly.
+Applied patch xarray/core/duck_array_ops.py cleanly.
+Applied patch xarray/core/formatting.py cleanly.
+Applied patch xarray/core/formatting_html.py cleanly.
+Applied patch xarray/core/groupby.py cleanly.
+Applied patch xarray/core/indexes.py cleanly.
+Applied patch xarray/core/indexing.py cleanly.
+Applied patch xarray/core/nputils.py cleanly.
+Applied patch xarray/core/utils.py cleanly.
+Applied patch xarray/core/variable.py cleanly.
+Applied patch xarray/groupers.py cleanly.
+Applied patch xarray/namedarray/core.py cleanly.
+Applied patch xarray/namedarray/pycompat.py cleanly.
+Applied patch xarray/structure/concat.py cleanly.
+Applied patch xarray/structure/merge.py cleanly.
+
+2026-10-13 12:57:16,418 - INFO - >>>>> Applied Patch
+2026-10-13 12:57:16,418 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-13 12:57:16,419 - INFO - F2P test path: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-13 12:57:16,918 - INFO - Delete F2P file exit code: 0
+2026-10-13 12:57:16,918 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-13 12:57:17,408 - INFO - Reverse apply exit code: 0
+2026-10-13 12:57:17,408 - INFO - Reverse apply output: 
+2026-10-13 12:57:17,408 - INFO - Successfully restored F2P test file using test_patch
+2026-10-13 12:57:17,408 - INFO - Step 7: Running tests
+2026-10-13 12:57:17,408 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-13 12:57:17,408 - INFO - Test timeout: 600s
+2026-10-13 12:57:17,408 - INFO - Running F2P test: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-13 12:57:28,096 - INFO - F2P test exit code: 1
+2026-10-13 12:57:28,096 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: zarr-3.1.3, env-1.2.0, asyncio-1.3.0, hypothesis-6.147.0, xdist-3.8.0, mypy-plugins-3.2.0, cov-7.0.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+col
+2026-10-13 12:57:28,096 - INFO - Saved F2P test output to artifact://78ae4e6117bcd9d4
+2026-10-13 12:57:28,097 - INFO - Running 5 P2P tests
+2026-10-13 12:57:28,097 - INFO - Running P2P test: /testbed/xarray/tests/test_treenode.py
+2026-10-13 12:57:33,536 - INFO - P2P test /testbed/xarray/tests/test_treenode.py exit code: 0
+2026-10-13 12:57:33,537 - INFO - Saved P2P test output to artifact://aa17ac6ce0efdd0c
+2026-10-13 12:57:33,537 - INFO - Running P2P test: /testbed/xarray/tests/test_backends_chunks.py
+2026-10-13 12:57:37,664 - INFO - P2P test /testbed/xarray/tests/test_backends_chunks.py exit code: 0
+2026-10-13 12:57:37,664 - INFO - Saved P2P test output to artifact://4b8dce3f4da28043
+2026-10-13 12:57:37,664 - INFO - Running P2P test: /testbed/xarray/tests/test_plugins.py
+2026-10-13 12:57:42,943 - INFO - P2P test /testbed/xarray/tests/test_plugins.py exit code: 0
+2026-10-13 12:57:42,943 - INFO - Saved P2P test output to artifact://fc16d843eaae3c9e
+2026-10-13 12:57:42,943 - INFO - Running P2P test: /testbed/xarray/tests/test_backends_locks.py
+2026-10-13 12:57:48,041 - INFO - P2P test /testbed/xarray/tests/test_backends_locks.py exit code: 0
+2026-10-13 12:57:48,041 - INFO - Saved P2P test output to artifact://af2f9caf6db1cc58
+2026-10-13 12:57:48,041 - INFO - Running P2P test: /testbed/xarray/tests/test_backends_lru_cache.py
+2026-10-13 12:57:53,037 - INFO - P2P test /testbed/xarray/tests/test_backends_lru_cache.py exit code: 0
+2026-10-13 12:57:53,037 - INFO - Saved P2P test output to artifact://14215d13dd3fc2db
+2026-10-13 12:57:53,042 - INFO - ============================================================
+2026-10-13 12:57:53,042 - INFO - Evaluation completed for pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1
+2026-10-13 12:57:53,042 - INFO - Resolved: False
+2026-10-13 12:57:53,042 - INFO - F2P Pass rate: 0.7857
+2026-10-13 12:57:53,042 - INFO - ============================================================
+2026-10-13 12:57:53,042 - INFO - Stopping and removing container
+2026-10-13 12:58:03,564 - INFO - Container removed successfully

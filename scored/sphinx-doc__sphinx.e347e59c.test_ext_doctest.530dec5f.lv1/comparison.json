@@ -1,0 +1,40 @@
+{
+  "instance_id": "sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1",
+  "repo": "sphinx-doc/sphinx",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 1,
+      "failure": 10,
+      "total": 11
+    },
+    "p2p": {
+      "success": 124,
+      "failure": 0,
+      "total": 124
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "481118e650505f3af18af62648fa1345180adc3dda722e74c6f0b4bf84a33857"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 1,
+      "failure": 10,
+      "total": 11
+    },
+    "p2p": {
+      "success": 124,
+      "failure": 0,
+      "total": 124
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "6949922e0d8e5970042f00271e7c97eff1fd1173645fcb77891b354fe86ae9aa"
+  },
+  "conditions": "conditions.json",
+  "costs": null,
+  "official_test_identity_sha256": {
+    "f2p": "ac94034635681058777aa1f12c13eb40e3fe2084196584f2a9694f471f3db66b",
+    "p2p": "b661f92b3270619ab469664fa280648e3db9abdd004a4739efec357657d0c920"
+  }
+}

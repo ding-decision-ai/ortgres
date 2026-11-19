@@ -1,0 +1,50 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: zarr-3.1.3, env-1.2.0, asyncio-1.3.0, hypothesis-6.147.0, xdist-3.8.0, mypy-plugins-3.2.0, cov-7.0.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 34 items
+
+xarray/tests/test_treenode.py ..................................         [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_lonely
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_parenting
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_no_time_traveller_loops
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_parent_swap
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_forbid_setting_parent_directly
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_dont_modify_children_inplace
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_multi_child_family
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_disown_child
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_doppelganger_child
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_sibling_relationships
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_copy_subtree
+PASSED xarray/tests/test_treenode.py::TestFamilyTree::test_parents
+PASSED xarray/tests/test_treenode.py::TestGetNodes::test_get_child
+PASSED xarray/tests/test_treenode.py::TestGetNodes::test_get_upwards
+PASSED xarray/tests/test_treenode.py::TestGetNodes::test_get_from_root
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_set_child_node
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_child_already_exists
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_set_grandchild
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_create_intermediate_child
+PASSED xarray/tests/test_treenode.py::TestSetNodes::test_overwrite_child
+PASSED xarray/tests/test_treenode.py::TestPruning::test_del_child
+PASSED xarray/tests/test_treenode.py::TestGroupSubtrees::test_one_tree
+PASSED xarray/tests/test_treenode.py::TestGroupSubtrees::test_different_order
+PASSED xarray/tests/test_treenode.py::TestGroupSubtrees::test_different_structure
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_parents
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_lineage
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_ancestors
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_subtree
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_subtree_with_keys
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_descendants
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_leaves
+PASSED xarray/tests/test_treenode.py::TestAncestry::test_levels
+PASSED xarray/tests/test_treenode.py::TestRenderTree::test_render_nodetree
+PASSED xarray/tests/test_treenode.py::test_nodepath
+============================== 34 passed in 0.20s ==============================

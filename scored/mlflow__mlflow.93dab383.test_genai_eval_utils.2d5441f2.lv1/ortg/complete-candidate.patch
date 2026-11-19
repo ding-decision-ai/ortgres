@@ -1,0 +1,117 @@
+diff --git a/mlflow/cli/genai_eval_utils.py b/mlflow/cli/genai_eval_utils.py
+index c835381..89fce14 100644
+--- a/mlflow/cli/genai_eval_utils.py
++++ b/mlflow/cli/genai_eval_utils.py
+@@ -99,6 +99,112 @@ def _format_assessment_cell(assessment: Assessment | None) -> Cell:
+     return Cell(value=display_value, assessment=assessment)
+ 
+ 
++def extract_assessments_from_results(
++    results_df: pd.DataFrame, evaluation_run_id: str
++) -> list[EvalResult]:
++    """Extract assessments produced by a specific evaluation run."""
++    output_data = []
++
++    for _, row in results_df.iterrows():
++        assessments = []
++        row_assessments = row.get("assessments", [])
++        if isinstance(row_assessments, float) and pd.isna(row_assessments):
++            row_assessments = []
++
++        for assessment_data in row_assessments:
++            metadata = assessment_data.get("metadata", {})
++            if metadata.get(AssessmentMetadataKey.SOURCE_RUN_ID) != evaluation_run_id:
++                continue
++
++            feedback = assessment_data.get("feedback")
++            result = feedback.get("value") if isinstance(feedback, dict) else None
++            error = assessment_data.get("error")
++            assessments.append(
++                Assessment(
++                    name=assessment_data.get("assessment_name"),
++                    result=result,
++                    rationale=assessment_data.get("rationale"),
++                    error=str(error) if error else None,
++                )
++            )
++
++        if not assessments:
++            assessments.append(
++                Assessment(name=NA_VALUE, error="No assessments found on trace")
++            )
++
++        trace_id = row.get("trace_id", "unknown")
++        if isinstance(trace_id, float) and pd.isna(trace_id):
++            trace_id = "unknown"
++
++        output_data.append(EvalResult(trace_id=trace_id, assessments=assessments))
++
++    return output_data
++
++
++def format_table_output(output_data: list[EvalResult]) -> TableOutput:
++    """Format evaluation results as trace rows and assessment columns."""
++    assessment_names = sorted(
++        {
++            assessment.name
++            for result in output_data
++            for assessment in result.assessments
++            if assessment.name not in (None, NA_VALUE)
++        }
++    )
++    headers = ["trace_id", *assessment_names]
++    rows = []
++
++    for result in output_data:
++        assessments_by_name = {
++            assessment.name: assessment for assessment in result.assessments
++        }
++        rows.append(
++            [Cell(value=result.trace_id)]
++            + [
++                _format_assessment_cell(assessments_by_name.get(name))
++                for name in assessment_names
++            ]
++        )
++
++    return TableOutput(headers=headers, rows=rows)
++
++
++def resolve_scorers(scorer_names: list[str], experiment_id: str) -> list[Scorer]:
++    """Resolve built-in scorer class/default names and registered scorer names."""
++    built_in_scorers = get_all_scorers()
++    scorers_by_name = {
++        name: scorer
++        for scorer in built_in_scorers
++        for name in (scorer.__class__.__name__, scorer.name)
++    }
++    available_built_ins = ", ".join(
++        sorted(
++            f"{scorer.__class__.__name__} ({scorer.name})"
++            for scorer in built_in_scorers
++        )
++    )
++
++    resolved_scorers = []
++    for scorer_name in scorer_names:
++        if scorer := scorers_by_name.get(scorer_name):
++            resolved_scorers.append(scorer)
++            continue
++
++        try:
++            resolved_scorers.append(
++                get_scorer(name=scorer_name, experiment_id=experiment_id)
++            )
++        except MlflowException as e:
++            raise click.UsageError(
++                f"Failed to resolve scorer '{scorer_name}': {e}. "
++                f"Available built-in scorers: {available_built_ins}"
++            ) from e
++
++    if not resolved_scorers:
++        raise click.UsageError("No valid scorers were specified")
++
++    return resolved_scorers
+ 
+ 
+ 

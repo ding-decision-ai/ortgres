@@ -1,0 +1,382 @@
+diff --git a/lib/matplotlib/backends/registry.py b/lib/matplotlib/backends/registry.py
+index 55e4d8f..161a4a9 100644
+--- a/lib/matplotlib/backends/registry.py
++++ b/lib/matplotlib/backends/registry.py
+@@ -110,94 +110,77 @@ class BackendRegistry:
+         # Clear all dynamically-added data, used for testing only.
+         self.__init__()
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def _ensure_entry_points_loaded(self):
++        """Load and register backend entry points, once."""
++        if not self._loaded_entry_points:
++            entries = self._read_entry_points()
++            self._validate_and_store_entry_points(entries)
++            self._loaded_entry_points = True
++
++    def _get_gui_framework_by_loading(self, backend):
++        """Load *backend* and return its GUI framework designation."""
++        module = self.load_backend_module(backend)
++        framework = module.FigureCanvas.required_interactive_framework
++        return framework or "headless"
++
++    def _read_entry_points(self):
++        """Return ``(name, module)`` pairs advertised as backend entry points."""
++        import importlib.metadata as im
++
++        return [(entry.name, entry.value)
++                for entry in im.entry_points(group="matplotlib.backend")]
++
++    def _validate_and_store_entry_points(self, entries):
++        """Validate and store entry points for later backend resolution."""
++        # Collapse only exact duplicates.  In particular, entries which differ
++        # merely in the case of their name are conflicting entries, rather than
++        # duplicates, because backend names are case-insensitive.
++        entries = list(dict.fromkeys(entries))
++        normalized = [(name.lower(), module) for name, module in entries]
++
++        for name, _ in normalized:
++            if name.startswith("module://"):
++                raise RuntimeError(
++                    f"Entry point name {name!r} cannot start with 'module://'")
++            if name in self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK:
++                raise RuntimeError(
++                    f"Entry point name {name!r} is a built-in backend")
++
++        names = [name for name, _ in normalized]
++        if len(names) != len(set(names)):
++            raise RuntimeError("Entry point backend name is duplicated")
++
++        # Do not partly update the registry if validation above fails.
++        for name, module in normalized:
++            self._name_to_module[name] = module
++            self._backend_to_gui_framework[name] = "unknown"
++
++    def backend_for_gui_framework(self, framework):
++        """Return the preferred built-in backend for *framework*, if any."""
++        return self._GUI_FRAMEWORK_TO_BACKEND.get(framework.lower())
++
++    def list_all(self):
++        """Return all built-in and dynamically registered backend names."""
++        self._ensure_entry_points_loaded()
++        return [*self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK,
++                *self._backend_to_gui_framework]
++
++    def list_builtin(self, filter_=None):
++        """Return built-in backend names, optionally filtered by interactivity."""
++        if filter_ is BackendFilter.INTERACTIVE:
++            return [backend for backend, framework in
++                    self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK.items()
++                    if framework != "headless"]
++        if filter_ is BackendFilter.NON_INTERACTIVE:
++            return [backend for backend, framework in
++                    self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK.items()
++                    if framework == "headless"]
++        return list(self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK)
++
++    def list_gui_frameworks(self):
++        """Return GUI framework names having a preferred built-in backend."""
++        return [framework for framework in self._GUI_FRAMEWORK_TO_BACKEND
++                if framework != "headless"]
+ 
+     def is_valid_backend(self, backend):
+         """
+@@ -247,57 +230,62 @@ class BackendRegistry:
+ 
+         return False
+ 
++    def resolve_backend(self, backend):
++        """Return the normalized backend name and its required GUI framework."""
++        if not isinstance(backend, str):
++            import matplotlib
+ 
++            backend = matplotlib.get_backend()
+ 
++        # Module names are case-sensitive, unlike ordinary backend names.
++        if not backend.startswith("module://"):
++            backend = backend.lower()
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        if backend in self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK:
++            framework = self._BUILTIN_BACKEND_TO_GUI_FRAMEWORK[backend]
++        else:
++            if backend.startswith("module://"):
++                # An explicit module specification is intrinsically a valid
++                # backend, but its GUI requirement is not known until import.
++                self._backend_to_gui_framework.setdefault(backend, "unknown")
++            elif backend not in self._backend_to_gui_framework:
++                # Do not inspect entry points for built-ins, explicit modules,
++                # or dynamic backends that are already known.
++                self._ensure_entry_points_loaded()
++
++            try:
++                framework = self._backend_to_gui_framework[backend]
++            except KeyError:
++                raise RuntimeError(
++                    f"{backend!r} is not a recognised backend name") from None
++
++            if framework == "unknown":
++                # Assign only after a successful import and inspection, so a
++                # transient import error can be retried on the next call.
++                framework = self._get_gui_framework_by_loading(backend)
++                self._backend_to_gui_framework[backend] = framework
++
++        return backend, (None if framework == "headless" else framework)
++
++    def resolve_gui_or_backend(self, gui_or_backend):
++        """Resolve a string interpreted first as a GUI loop, then a backend."""
++        # Deliberately use a string method before resolve_backend: unlike that
++        # method, None is not a request for the current backend here.
++        if gui_or_backend.startswith("module://"):
++            normalized = gui_or_backend
++        else:
++            normalized = gui_or_backend.lower()
++
++        backend = self.backend_for_gui_framework(normalized)
++        if backend is not None:
++            return backend, (None if normalized == "headless" else normalized)
++
++        try:
++            return self.resolve_backend(normalized)
++        except Exception:
++            raise RuntimeError(
++                f"{gui_or_backend!r} is not a recognised GUI loop or "
++                "backend name") from None
+ 
+     def load_backend_module(self, backend):
+         """
+@@ -317,98 +305,5 @@ class BackendRegistry:
+         return importlib.import_module(module_name)
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+ # Singleton
+-backend_registry = BackendRegistry()
+\ No newline at end of file
++backend_registry = BackendRegistry()

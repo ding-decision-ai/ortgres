@@ -1,0 +1,89 @@
+2026-10-10 20:35:39,589 - INFO - ============================================================
+2026-10-10 20:35:39,590 - INFO - Starting evaluation for instance: mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1
+2026-10-10 20:35:39,590 - INFO - Level: 1
+2026-10-10 20:35:39,590 - INFO - Attempt: 1
+2026-10-10 20:35:39,590 - INFO - ============================================================
+2026-10-10 20:35:39,600 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-10 20:35:39,601 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb
+2026-10-10 20:35:39,602 - INFO - Image docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb found locally
+2026-10-10 20:35:39,603 - INFO - Creating container: fb-eval-mwaskom__seaborn-7001ebe7-test_scales-d9dcdef6-lv1-attempt-1-20261010-203539-603086
+2026-10-10 20:35:39,604 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-10 20:35:40,030 - INFO - Container fb-eval-mwaskom__seaborn-7001ebe7-test_scales-d9dcdef6-lv1-attempt-1-20261010-203539-603086 created successfully
+2026-10-10 20:35:40,030 - INFO - Starting Level 1 evaluation for mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1
+2026-10-10 20:35:40,030 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-10 20:35:40,558 - INFO - Restore project exit code: 0
+2026-10-10 20:35:40,558 - INFO - Output: 
+2026-10-10 20:35:40,558 - INFO - Step 2: Applying patch to mask files
+2026-10-10 20:35:40,562 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-10 20:35:40,890 - INFO - Mask patch apply exit code: 0
+2026-10-10 20:35:40,890 - INFO - Mask patch output: 
+2026-10-10 20:35:40,890 - INFO - Successfully applied mask patch
+2026-10-10 20:35:40,891 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-10 20:35:40,896 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-10 20:35:40,897 - INFO - Deleting F2P test file: /testbed/tests/_core/test_scales.py
+2026-10-10 20:35:41,215 - INFO - Successfully deleted F2P test file: /testbed/tests/_core/test_scales.py
+2026-10-10 20:35:41,215 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-10 20:35:41,215 - INFO - Step 4: Reinitializing git repository
+2026-10-10 20:35:43,223 - INFO - Step 5: Applying agent patch
+2026-10-10 20:35:43,227 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-10 20:35:43,584 - INFO - Patch apply exit code: 0
+2026-10-10 20:35:43,584 - INFO - Patch output: Checking patch seaborn/_core/properties.py...
+Checking patch seaborn/_core/scales.py...
+Checking patch seaborn/external/husl.py...
+Checking patch seaborn/palettes.py...
+Applied patch seaborn/_core/properties.py cleanly.
+Applied patch seaborn/_core/scales.py cleanly.
+Applied patch seaborn/external/husl.py cleanly.
+Applied patch seaborn/palettes.py cleanly.
+
+2026-10-10 20:35:43,584 - INFO - >>>>> Applied Patch
+2026-10-10 20:35:43,584 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-10 20:35:43,584 - INFO - F2P test path: /testbed/tests/_core/test_scales.py
+2026-10-10 20:35:43,873 - INFO - Delete F2P file exit code: 0
+2026-10-10 20:35:43,873 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-10 20:35:44,213 - INFO - Reverse apply exit code: 0
+2026-10-10 20:35:44,213 - INFO - Reverse apply output: 
+2026-10-10 20:35:44,213 - INFO - Successfully restored F2P test file using test_patch
+2026-10-10 20:35:44,213 - INFO - Step 7: Running tests
+2026-10-10 20:35:44,213 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-10 20:35:44,213 - INFO - Test timeout: 600s
+2026-10-10 20:35:44,213 - INFO - Running F2P test: /testbed/tests/_core/test_scales.py
+2026-10-10 20:35:49,104 - INFO - F2P test exit code: 1
+2026-10-10 20:35:49,104 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 103 items
+
+tests/_core/test_scales.py FFFF......................F.................. [ 43%]
+..........x...............................FFFFFFFFFFFFFFFF               [100%]
+
+=====================
+2026-10-10 20:35:49,104 - INFO - Saved F2P test output to artifact://1e0916a48a683f2d
+2026-10-10 20:35:49,104 - INFO - Running 5 P2P tests
+2026-10-10 20:35:49,104 - INFO - Running P2P test: /testbed/tests/_core/test_rules.py
+2026-10-10 20:35:50,540 - INFO - P2P test /testbed/tests/_core/test_rules.py exit code: 0
+2026-10-10 20:35:50,540 - INFO - Saved P2P test output to artifact://70b5420f0ab0bf29
+2026-10-10 20:35:50,540 - INFO - Running P2P test: /testbed/tests/_stats/test_counting.py
+2026-10-10 20:35:52,307 - INFO - P2P test /testbed/tests/_stats/test_counting.py exit code: 0
+2026-10-10 20:35:52,308 - INFO - Saved P2P test output to artifact://8fdc8e4425f6183d
+2026-10-10 20:35:52,308 - INFO - Running P2P test: /testbed/tests/test_rcmod.py
+2026-10-10 20:35:53,790 - INFO - P2P test /testbed/tests/test_rcmod.py exit code: 0
+2026-10-10 20:35:53,790 - INFO - Saved P2P test output to artifact://9c11b7cfe73e0652
+2026-10-10 20:35:53,790 - INFO - Running P2P test: /testbed/tests/_stats/test_regression.py
+2026-10-10 20:35:55,360 - INFO - P2P test /testbed/tests/_stats/test_regression.py exit code: 0
+2026-10-10 20:35:55,360 - INFO - Saved P2P test output to artifact://051a195a540c4a0c
+2026-10-10 20:35:55,360 - INFO - Running P2P test: /testbed/tests/test_matrix.py
+2026-10-10 20:35:58,306 - INFO - P2P test /testbed/tests/test_matrix.py exit code: 0
+2026-10-10 20:35:58,306 - INFO - Saved P2P test output to artifact://27b178a1942cf4d3
+2026-10-10 20:35:58,309 - INFO - ============================================================
+2026-10-10 20:35:58,309 - INFO - Evaluation completed for mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1
+2026-10-10 20:35:58,309 - INFO - Resolved: False
+2026-10-10 20:35:58,309 - INFO - F2P Pass rate: 0.7961
+2026-10-10 20:35:58,309 - INFO - ============================================================
+2026-10-10 20:35:58,309 - INFO - Stopping and removing container
+2026-10-10 20:36:08,573 - INFO - Container removed successfully

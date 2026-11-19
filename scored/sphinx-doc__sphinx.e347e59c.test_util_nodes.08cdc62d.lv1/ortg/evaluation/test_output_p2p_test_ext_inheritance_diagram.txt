@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/9dad591, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-4
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 6 items
+
+tests/test_extensions/test_ext_inheritance_diagram.py sssss.             [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_extensions/test_ext_inheritance_diagram.py::test_import_classes
+SKIPPED [1] tests/test_extensions/test_ext_inheritance_diagram.py:24: graphviz "dot" is not available
+SKIPPED [1] tests/test_extensions/test_ext_inheritance_diagram.py:162: graphviz "dot" is not available
+SKIPPED [1] tests/test_extensions/test_ext_inheritance_diagram.py:212: graphviz "dot" is not available
+SKIPPED [1] tests/test_extensions/test_ext_inheritance_diagram.py:271: graphviz "dot" is not available
+SKIPPED [1] tests/test_extensions/test_ext_inheritance_diagram.py:286: graphviz "dot" is not available
+========================= 1 passed, 5 skipped in 0.41s =========================

@@ -1,0 +1,131 @@
+2026-10-12 04:05:18,670 - INFO - ============================================================
+2026-10-12 04:05:18,670 - INFO - Starting evaluation for instance: pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1
+2026-10-12 04:05:18,670 - INFO - Level: 1
+2026-10-12 04:05:18,670 - INFO - Attempt: 1
+2026-10-12 04:05:18,670 - INFO - ============================================================
+2026-10-12 04:05:18,677 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-12 04:05:18,677 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_hatch-instance_02086956
+2026-10-12 04:05:18,679 - INFO - Image docker.io/libercoders/featurebench-specs_hatch-instance_02086956 found locally
+2026-10-12 04:05:18,679 - INFO - Creating container: fb-eval-pypa__hatch-ff4b4040-test_fmt-782c88a8-lv1-attempt-1-20261012-040518-679239
+2026-10-12 04:05:18,680 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-12 04:05:18,875 - INFO - Container fb-eval-pypa__hatch-ff4b4040-test_fmt-782c88a8-lv1-attempt-1-20261012-040518-679239 created successfully
+2026-10-12 04:05:18,876 - INFO - Starting Level 1 evaluation for pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1
+2026-10-12 04:05:18,876 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-12 04:05:19,300 - INFO - Restore project exit code: 0
+2026-10-12 04:05:19,300 - INFO - Output: 
+2026-10-12 04:05:19,300 - INFO - Step 2: Applying patch to mask files
+2026-10-12 04:05:19,305 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-12 04:05:19,555 - INFO - Mask patch apply exit code: 0
+2026-10-12 04:05:19,555 - INFO - Mask patch output: /tmp/mask_patch.diff:442: new blank line at EOF.
++
+/tmp/mask_patch.diff:455: new blank line at EOF.
++
+/tmp/mask_patch.diff:479: new blank line at EOF.
++
+/tmp/mask_patch.diff:587: new blank line at EOF.
++
+/tmp/mask_patch.diff:2979: new blank line at EOF.
++
+warning: squelched 1 whitespace error
+warning: 6 lines add whitespace errors.
+
+2026-10-12 04:05:19,555 - INFO - Successfully applied mask patch
+2026-10-12 04:05:19,556 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-12 04:05:19,560 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-12 04:05:19,560 - INFO - Deleting F2P test file: /testbed/tests/cli/fmt/test_fmt.py
+2026-10-12 04:05:19,800 - INFO - Successfully deleted F2P test file: /testbed/tests/cli/fmt/test_fmt.py
+2026-10-12 04:05:19,800 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-12 04:05:19,800 - INFO - Step 4: Reinitializing git repository
+2026-10-12 04:05:21,601 - INFO - Step 5: Applying agent patch
+2026-10-12 04:05:21,605 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-12 04:05:21,861 - INFO - Patch apply exit code: 0
+2026-10-12 04:05:21,861 - INFO - Patch output: Checking patch src/hatch/cli/application.py...
+Checking patch src/hatch/cli/fmt/core.py...
+Checking patch src/hatch/env/collectors/default.py...
+Checking patch src/hatch/env/collectors/plugin/hooks.py...
+/tmp/agent_patch.diff:256: new blank line at EOF.
++
+Checking patch src/hatch/env/collectors/plugin/interface.py...
+Checking patch src/hatch/env/context.py...
+Checking patch src/hatch/env/internal/__init__.py...
+Checking patch src/hatch/env/plugin/hooks.py...
+/tmp/agent_patch.diff:364: new blank line at EOF.
++
+Checking patch src/hatch/env/plugin/interface.py...
+Checking patch src/hatch/env/utils.py...
+Checking patch src/hatch/plugin/manager.py...
+Checking patch src/hatch/project/config.py...
+Checking patch src/hatch/project/core.py...
+Checking patch src/hatch/project/env.py...
+Checking patch src/hatch/template/default.py...
+Checking patch src/hatch/template/plugin/interface.py...
+Checking patch src/hatch/utils/platform.py...
+Applied patch src/hatch/cli/application.py cleanly.
+Applied patch src/hatch/cli/fmt/core.py cleanly.
+Applied patch src/hatch/env/collectors/default.py cleanly.
+Applied patch src/hatch/env/collectors/plugin/hooks.py cleanly.
+Applied patch src/hatch/env/collectors/plugin/interface.py cleanly.
+Applied patch src/hatch/env/context.py cleanly.
+Applied patch src/hatch/env/internal/__init__.py cleanly.
+Applied patch src/hatch/env/plugin/hooks.py cleanly.
+Applied patch src/hatch/env/plugin/interface.py cleanly.
+Applied patch src/hatch/env/utils.py cleanly.
+Applied patch src/hatch/plugin/manager.py cleanly.
+Applied patch src/hatch/project/config.py cleanly.
+Applied patch src/hatch/project/core.py cleanly.
+Applied patch src/hatch/project/env.py cleanly.
+Applied patch src/hatch/template/default.py cleanly.
+Applied patch src/hatch/template/plugin/interface.py cleanly.
+Applied patch src/hatch/utils/platform.py cleanly.
+warning: 2 lines add whitespace errors.
+
+2026-10-12 04:05:21,861 - INFO - >>>>> Applied Patch
+2026-10-12 04:05:21,861 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-12 04:05:21,861 - INFO - F2P test path: /testbed/tests/cli/fmt/test_fmt.py
+2026-10-12 04:05:22,114 - INFO - Delete F2P file exit code: 0
+2026-10-12 04:05:22,114 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-12 04:05:22,362 - INFO - Reverse apply exit code: 0
+2026-10-12 04:05:22,362 - INFO - Reverse apply output: 
+2026-10-12 04:05:22,362 - INFO - Successfully restored F2P test file using test_patch
+2026-10-12 04:05:22,362 - INFO - Step 7: Running tests
+2026-10-12 04:05:22,362 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-12 04:05:22,362 - INFO - Test timeout: 600s
+2026-10-12 04:05:22,362 - INFO - Running F2P test: /testbed/tests/cli/fmt/test_fmt.py
+2026-10-12 04:05:23,719 - INFO - F2P test exit code: 1
+2026-10-12 04:05:23,720 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 19 items
+
+tests/cli/fmt/test_fmt.py FFFFFFF.F.FFFFFFFFF                            [100%]
+
+=================================== FAILURES ==============================
+2026-10-12 04:05:23,720 - INFO - Saved F2P test output to artifact://b51209592df1b06f
+2026-10-12 04:05:23,720 - INFO - Running 5 P2P tests
+2026-10-12 04:05:23,720 - INFO - Running P2P test: /testbed/tests/publish/plugin/test_interface.py
+2026-10-12 04:05:24,250 - INFO - P2P test /testbed/tests/publish/plugin/test_interface.py exit code: 0
+2026-10-12 04:05:24,250 - INFO - Saved P2P test output to artifact://9ee6bd40002863bc
+2026-10-12 04:05:24,250 - INFO - Running P2P test: /testbed/tests/cli/self/test_self.py
+2026-10-12 04:05:24,776 - INFO - P2P test /testbed/tests/cli/self/test_self.py exit code: 0
+2026-10-12 04:05:24,777 - INFO - Saved P2P test output to artifact://99f61efbfb945421
+2026-10-12 04:05:24,777 - INFO - Running P2P test: /testbed/tests/env/collectors/test_custom.py
+2026-10-12 04:05:25,329 - INFO - P2P test /testbed/tests/env/collectors/test_custom.py exit code: 0
+2026-10-12 04:05:25,329 - INFO - Saved P2P test output to artifact://0c253306d22666f0
+2026-10-12 04:05:25,329 - INFO - Running P2P test: /testbed/tests/cli/config/test_show.py
+2026-10-12 04:05:25,951 - INFO - P2P test /testbed/tests/cli/config/test_show.py exit code: 0
+2026-10-12 04:05:25,951 - INFO - Saved P2P test output to artifact://fd232e3256eff347
+2026-10-12 04:05:25,951 - INFO - Running P2P test: /testbed/tests/backend/metadata/test_spec.py
+2026-10-12 04:05:27,137 - INFO - P2P test /testbed/tests/backend/metadata/test_spec.py exit code: 0
+2026-10-12 04:05:27,137 - INFO - Saved P2P test output to artifact://5ae6d7b990f8964c
+2026-10-12 04:05:27,139 - INFO - ============================================================
+2026-10-12 04:05:27,139 - INFO - Evaluation completed for pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1
+2026-10-12 04:05:27,139 - INFO - Resolved: False
+2026-10-12 04:05:27,139 - INFO - F2P Pass rate: 0.1053
+2026-10-12 04:05:27,139 - INFO - ============================================================
+2026-10-12 04:05:27,139 - INFO - Stopping and removing container
+2026-10-12 04:05:37,390 - INFO - Container removed successfully

@@ -1,0 +1,226 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/51b26a5, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-1
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collected 4 items
+
+tests/test_extensions/test_ext_coverage.py ....                          [100%]
+
+==================================== PASSES ====================================
+__________________________________ test_build __________________________________
+----------------------------- Captured stdout call -----------------------------
++----------------+----------+--------------+
+| Module         | Coverage | Undocumented |
++================+==========+==============+
+| autodoc_target | 66.67%   | 3            |
++----------------+----------+--------------+
+| TOTAL          | 66.67%   | 3            |
++----------------+----------+--------------+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: coverage
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/coverage
+# status: 
+[01mRunning Sphinx v8.3.0+/51b26a5[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [coverage]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35motherext[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35msubdir/includes[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded, 19 warnings.[39;49;00m
+
+Testing of coverage in the sources finished, look at the results in ../tmp/pytest-of-root/pytest-1/root/_build/coverage/python.txt.
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91mWARNING: module mod could not be imported: No module named 'mod'[39;49;00m
+
+________________________ test_coverage_ignore_pyobjects ________________________
+----------------------------- Captured stdout call -----------------------------
++---------------------------+----------+--------------+
+| Module                    | Coverage | Undocumented |
++===========================+==========+==============+
+| grog                      | 100.00%  | 0            |
++---------------------------+----------+--------------+
+| grog.coverage_missing     | 100.00%  | 0            |
++---------------------------+----------+--------------+
+| grog.coverage_not_ignored | 0.00%    | 2            |
++---------------------------+----------+--------------+
+| TOTAL                     | 0.00%    | 2            |
++---------------------------+----------+--------------+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: coverage
+# srcdir: /tmp/pytest-of-root/pytest-1/ext-coverage
+# outdir: /tmp/pytest-of-root/pytest-1/ext-coverage/_build/coverage
+# status: 
+[01mRunning Sphinx v8.3.0+/51b26a5[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [coverage]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded, 1 warning.[39;49;00m
+
+Testing of coverage in the sources finished, look at the results in ../tmp/pytest-of-root/pytest-1/ext-coverage/_build/coverage/python.txt.
+
+# warning: 
+[91mWARNING: the following modules are specified in coverage_modules but were not documented: grog, grog.coverage_missing[39;49;00m
+
+___________________________ test_show_missing_items ____________________________
+----------------------------- Captured stdout call -----------------------------
++----------------+----------+--------------+
+| Module         | Coverage | Undocumented |
++================+==========+==============+
+| autodoc_target | 66.67%   | 3            |
++----------------+----------+--------------+
+| TOTAL          | 66.67%   | 3            |
++----------------+----------+--------------+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: coverage
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/coverage
+# status: 
+[01mRunning Sphinx v8.3.0+/51b26a5[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (2 options: 'coverage_show_missing_items', 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [coverage]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[91mundocumented  [39;49;00mpy  function  raises                        [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     AttCls                        [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     Base                          [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  method    Class.roger                   [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  method    Class.undocmeth               [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     CustomDataDescriptor          [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     CustomDataDescriptor2         [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     CustomDataDescriptorMeta      [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     Derived                       [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     DocstringSig                  [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     EnumCls                       [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mpy  class     StrRepr                       [91m - in module [39;49;00mautodoc_target
+[91mundocumented  [39;49;00mc   api       Py_SphinxTest [ function]     [91m - in file [39;49;00m/tmp/pytest-of-root/pytest-1/root/special/api.h
+[01mbuild succeeded, 1 warning.[39;49;00m
+
+Testing of coverage in the sources finished, look at the results in ../tmp/pytest-of-root/pytest-1/root/_build/coverage/python.txt.
+
+# warning: 
+[91mWARNING: module mod could not be imported: No module named 'mod'[39;49;00m
+
+________________________ test_show_missing_items_quiet _________________________
+----------------------------- Captured stdout call -----------------------------
++----------------+----------+--------------+
+| Module         | Coverage | Undocumented |
++================+==========+==============+
+| autodoc_target | 66.67%   | 3            |
++----------------+----------+--------------+
+| TOTAL          | 66.67%   | 3            |
++----------------+----------+--------------+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: coverage
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/coverage
+# status: 
+[01mRunning Sphinx v8.3.0+/51b26a5[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (2 options: 'coverage_show_missing_items', 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [coverage]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded, 14 warnings.[39;49;00m
+
+Testing of coverage in the sources finished, look at the results in ../tmp/pytest-of-root/pytest-1/root/_build/coverage/python.txt.
+
+# warning: 
+[91mWARNING: module mod could not be imported: No module named 'mod'[39;49;00m
+[91mWARNING: undocumented python function: autodoc_target :: raises[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: AttCls[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: Base[39;49;00m
+[91mWARNING: undocumented python method: autodoc_target :: Class :: roger[39;49;00m
+[91mWARNING: undocumented python method: autodoc_target :: Class :: undocmeth[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: CustomDataDescriptor[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: CustomDataDescriptor2[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: CustomDataDescriptorMeta[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: Derived[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: DocstringSig[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: EnumCls[39;49;00m
+[91mWARNING: undocumented python class: autodoc_target :: StrRepr[39;49;00m
+[91mWARNING: undocumented c api: Py_SphinxTest [function] in file /tmp/pytest-of-root/pytest-1/root/special/api.h[39;49;00m
+
+=========================== short test summary info ============================
+PASSED tests/test_extensions/test_ext_coverage.py::test_build
+PASSED tests/test_extensions/test_ext_coverage.py::test_coverage_ignore_pyobjects
+PASSED tests/test_extensions/test_ext_coverage.py::test_show_missing_items
+PASSED tests/test_extensions/test_ext_coverage.py::test_show_missing_items_quiet
+============================== 4 passed in 0.52s ===============================

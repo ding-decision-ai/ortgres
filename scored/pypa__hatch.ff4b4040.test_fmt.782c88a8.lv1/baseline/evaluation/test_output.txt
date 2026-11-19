@@ -1,0 +1,177 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 19 items
+
+tests/cli/fmt/test_fmt.py FFFFFFF.F.FFFFFFFFF                            [100%]
+
+=================================== FAILURES ===================================
+____________________________ TestDefaults.test_fix _____________________________
+/testbed/tests/cli/fmt/test_fmt.py:93: in test_fix
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...format-fix \n' == 'cmd [1] | ru...ject.toml .\n'
+E     
+E     - cmd [1] | ruff check --config /tmp/tmp5mc8i5xo/data/env/.internal/hatch-static-analysis/.config/xXDh-9Cz/pyproject.toml --fix .
+E     - cmd [2] | ruff format --config /tmp/tmp5mc8i5xo/data/env/.internal/hatch-static-analysis/.config/xXDh-9Cz/pyproject.toml .
+E     + cmd [1] | lint-fix 
+E     + cmd [2] | format-fix
+___________________________ TestDefaults.test_check ____________________________
+/testbed/tests/cli/fmt/test_fmt.py:141: in test_check
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...rmat-check \n' == 'cmd [1] | ru...ck --diff .\n'
+E     
+E     - cmd [1] | ruff check --config /tmp/tmpqp2n898i/data/env/.internal/hatch-static-analysis/.config/hPdEvG-V/pyproject.toml .
+E     - cmd [2] | ruff format --config /tmp/tmpqp2n898i/data/env/.internal/hatch-static-analysis/.config/hPdEvG-V/pyproject.toml --check --diff .
+E     + cmd [1] | lint-check 
+E     + cmd [2] | format-check
+______________________ TestDefaults.test_existing_config _______________________
+/testbed/tests/cli/fmt/test_fmt.py:195: in test_existing_config
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...rmat-check \n' == 'cmd [1] | ru...ck --diff .\n'
+E     
+E     - cmd [1] | ruff check --config /tmp/tmp8ke4j1zj/data/env/.internal/hatch-static-analysis/.config/211vHZeE/pyproject.toml .
+E     - cmd [2] | ruff format --config /tmp/tmp8ke4j1zj/data/env/.internal/hatch-static-analysis/.config/211vHZeE/pyproject.toml --check --diff .
+E     + cmd [1] | lint-check 
+E     + cmd [2] | format-check
+__________________________ TestPreview.test_fix_flag ___________________________
+/testbed/tests/cli/fmt/test_fmt.py:244: in test_fix_flag
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...format-fix \n' == 'cmd [1] | ru...--preview .\n'
+E     
+E     - cmd [1] | ruff check --config /tmp/tmpidlfi64p/data/env/.internal/hatch-static-analysis/.config/JrUzmxZZ/pyproject.toml --preview --fix .
+E     - cmd [2] | ruff format --config /tmp/tmpidlfi64p/data/env/.internal/hatch-static-analysis/.config/JrUzmxZZ/pyproject.toml --preview .
+E     + cmd [1] | lint-fix 
+E     + cmd [2] | format-fix
+_________________________ TestPreview.test_check_flag __________________________
+/testbed/tests/cli/fmt/test_fmt.py:292: in test_check_flag
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...rmat-check \n' == 'cmd [1] | ru...ck --diff .\n'
+E     
+E     - cmd [1] | ruff check --config /tmp/tmplqa873x6/data/env/.internal/hatch-static-analysis/.config/ljAKvjRt/pyproject.toml --preview .
+E     - cmd [2] | ruff format --config /tmp/tmplqa873x6/data/env/.internal/hatch-static-analysis/.config/ljAKvjRt/pyproject.toml --preview --check --diff .
+E     + cmd [1] | lint-check 
+E     + cmd [2] | format-check
+_______________________ TestComponents.test_only_linter ________________________
+/testbed/tests/cli/fmt/test_fmt.py:340: in test_only_linter
+    config_dir = next(root_data_path.iterdir())
+/opt/miniconda3/envs/testbed/lib/python3.10/pathlib.py:1017: in iterdir
+    for name in self._accessor.listdir(self):
+E   FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpwq55tes9/data/env/.internal/hatch-static-analysis/.config'
+______________________ TestComponents.test_only_formatter ______________________
+/testbed/tests/cli/fmt/test_fmt.py:383: in test_only_formatter
+    config_dir = next(root_data_path.iterdir())
+/opt/miniconda3/envs/testbed/lib/python3.10/pathlib.py:1017: in iterdir
+    for name in self._accessor.listdir(self):
+E   FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmplo8az1o_/data/env/.internal/hatch-static-analysis/.config'
+________________________ TestArguments.test_forwarding _________________________
+/testbed/tests/cli/fmt/test_fmt.py:456: in test_forwarding
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...x --foo bar\n' == 'cmd [1] | ru...l --foo bar\n'
+E     
+E     - cmd [1] | ruff check --config /tmp/tmp2k1j_i9b/data/env/.internal/hatch-static-analysis/.config/NuSVVT2e/pyproject.toml --fix --foo bar
+E     - cmd [2] | ruff format --config /tmp/tmp2k1j_i9b/data/env/.internal/hatch-static-analysis/.config/NuSVVT2e/pyproject.toml --foo bar
+E     + cmd [1] | lint-fix --foo bar
+E     + cmd [2] | format-fix --foo bar
+___________________________ TestConfigPath.test_sync ___________________________
+/testbed/tests/cli/fmt/test_fmt.py:535: in test_sync
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...format-fix \n' == 'cmd [1] | ru...ff format .\n'
+E     
+E     - cmd [1] | ruff check --fix .
+E     - cmd [2] | ruff format .
+E     + cmd [1] | lint-fix 
+E     + cmd [2] | format-fix
+_________________________ TestConfigPath.test_no_sync __________________________
+/testbed/tests/cli/fmt/test_fmt.py:579: in test_no_sync
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...format-fix \n' == 'cmd [1] | ru...ff format .\n'
+E     
+E     - cmd [1] | ruff check --fix .
+E     - cmd [2] | ruff format .
+E     + cmd [1] | lint-fix 
+E     + cmd [2] | format-fix
+____________________ TestConfigPath.test_sync_legacy_config ____________________
+/testbed/tests/cli/fmt/test_fmt.py:623: in test_sync_legacy_config
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'The `tool.ha...format-fix \n' == 'The `tool.ha...ff format .\n'
+E     
+E     Skipping 163 identical leading characters in diff, use -v to show
+E     - cmd [1] | ruff check --fix .
+E     - cmd [2] | ruff format .
+E     + cmd [1] | lint-fix 
+E     + cmd [2] | format-fix
+____________________ TestCustomScripts.test_only_linter_fix ____________________
+/testbed/tests/cli/fmt/test_fmt.py:689: in test_only_linter_fix
+    assert env_run.call_args_list == [
+E   AssertionError: assert [call('lint-f..., shell=True)] == [call('flake8 .', shell=True)]
+E     
+E     At index 0 diff: call('lint-fix ', shell=True) != call('flake8 .', shell=True)
+E     Use -v to get more diff
+___________________ TestCustomScripts.test_only_linter_check ___________________
+/testbed/tests/cli/fmt/test_fmt.py:739: in test_only_linter_check
+    assert env_run.call_args_list == [
+E   AssertionError: assert [call('lint-c..., shell=True)] == [call('flake8 .', shell=True)]
+E     
+E     At index 0 diff: call('lint-check ', shell=True) != call('flake8 .', shell=True)
+E     Use -v to get more diff
+__________________ TestCustomScripts.test_only_formatter_fix ___________________
+/testbed/tests/cli/fmt/test_fmt.py:784: in test_only_formatter_fix
+    assert result.output == helpers.dedent(
+E   AssertionError: assert '' == 'cmd [1] | is...] | black .\n'
+E     
+E     - cmd [1] | isort .
+E     - cmd [2] | black .
+_________________ TestCustomScripts.test_only_formatter_check __________________
+/testbed/tests/cli/fmt/test_fmt.py:840: in test_only_formatter_check
+    assert result.output == helpers.dedent(
+E   AssertionError: assert '' == 'cmd [1] | bl...ly --diff .\n'
+E     
+E     - cmd [1] | black --check --diff .
+E     - cmd [2] | isort --check-only --diff .
+__________________________ TestCustomScripts.test_fix __________________________
+/testbed/tests/cli/fmt/test_fmt.py:896: in test_fix
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...format-fix \n' == 'cmd [1] | fl...] | black .\n'
+E     
+E     + cmd [1] | lint-fix 
+E     + cmd [2] | format-fix 
+E     - cmd [1] | flake8 .
+E     - cmd [2] | isort .
+E     - cmd [3] | black .
+_________________________ TestCustomScripts.test_check _________________________
+/testbed/tests/cli/fmt/test_fmt.py:954: in test_check
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | li...rmat-check \n' == 'cmd [1] | fl...ly --diff .\n'
+E     
+E     + cmd [1] | lint-check 
+E     + cmd [2] | format-check 
+E     - cmd [1] | flake8 .
+E     - cmd [2] | black --check --diff .
+E     - cmd [3] | isort --check-only --diff .
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/cli/fmt/test_fmt.py::TestComponents::test_select_multiple
+PASSED tests/cli/fmt/test_fmt.py::TestConfigPath::test_sync_without_config
+FAILED tests/cli/fmt/test_fmt.py::TestDefaults::test_fix - AssertionError: as...
+FAILED tests/cli/fmt/test_fmt.py::TestDefaults::test_check - AssertionError: ...
+FAILED tests/cli/fmt/test_fmt.py::TestDefaults::test_existing_config - Assert...
+FAILED tests/cli/fmt/test_fmt.py::TestPreview::test_fix_flag - AssertionError...
+FAILED tests/cli/fmt/test_fmt.py::TestPreview::test_check_flag - AssertionErr...
+FAILED tests/cli/fmt/test_fmt.py::TestComponents::test_only_linter - FileNotF...
+FAILED tests/cli/fmt/test_fmt.py::TestComponents::test_only_formatter - FileN...
+FAILED tests/cli/fmt/test_fmt.py::TestArguments::test_forwarding - AssertionE...
+FAILED tests/cli/fmt/test_fmt.py::TestConfigPath::test_sync - AssertionError:...
+FAILED tests/cli/fmt/test_fmt.py::TestConfigPath::test_no_sync - AssertionErr...
+FAILED tests/cli/fmt/test_fmt.py::TestConfigPath::test_sync_legacy_config - A...
+FAILED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_linter_fix - A...
+FAILED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_linter_check
+FAILED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_formatter_fix
+FAILED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_formatter_check
+FAILED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_fix - AssertionErro...
+FAILED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_check - AssertionEr...
+========================= 17 failed, 2 passed in 0.73s =========================

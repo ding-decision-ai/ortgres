@@ -1,0 +1,184 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 61 items
+
+tests/test_regression.py FFFFF..FFF..FFF.ss....ss.........ssss....FF.... [ 77%]
+F...FF...s.F.F                                                           [100%]
+
+=================================== FAILURES ===================================
+____________ TestLinearPlotter.test_establish_variables_from_frame _____________
+tests/test_regression.py:41: in test_establish_variables_from_frame
+    pdt.assert_frame_equal(p.data, self.df)
+E   AttributeError: '_LinearPlotter' object has no attribute 'data'
+____________ TestLinearPlotter.test_establish_variables_from_series ____________
+tests/test_regression.py:49: in test_establish_variables_from_series
+    assert p.data is None
+E   AttributeError: '_LinearPlotter' object has no attribute 'data'
+____________ TestLinearPlotter.test_establish_variables_from_array _____________
+tests/test_regression.py:59: in test_establish_variables_from_array
+    assert p.data is None
+E   AttributeError: '_LinearPlotter' object has no attribute 'data'
+____________ TestLinearPlotter.test_establish_variables_from_lists _____________
+tests/test_regression.py:69: in test_establish_variables_from_lists
+    assert p.data is None
+E   AttributeError: '_LinearPlotter' object has no attribute 'data'
+_____________ TestLinearPlotter.test_establish_variables_from_mix ______________
+tests/test_regression.py:77: in test_establish_variables_from_mix
+    pdt.assert_frame_equal(p.data, self.df)
+E   AttributeError: '_LinearPlotter' object has no attribute 'data'
+_______________ TestRegressionPlotter.test_variables_from_frame ________________
+tests/test_regression.py:128: in test_variables_from_frame
+    pdt.assert_frame_equal(p.data, self.df)
+E   AttributeError: '_RegressionPlotter' object has no attribute 'data'
+_______________ TestRegressionPlotter.test_variables_from_series _______________
+tests/test_regression.py:137: in test_variables_from_series
+    assert p.data is None
+E   AttributeError: '_RegressionPlotter' object has no attribute 'data'
+________________ TestRegressionPlotter.test_variables_from_mix _________________
+tests/test_regression.py:145: in test_variables_from_mix
+    pdt.assert_frame_equal(p.data, self.df)
+E   AttributeError: '_RegressionPlotter' object has no attribute 'data'
+_________________ TestRegressionPlotter.test_singleton[x0-y0] __________________
+tests/test_regression.py:170: in test_singleton
+    assert not p.fit_reg
+E   assert not True
+E    +  where True = <seaborn.regression._RegressionPlotter object at 0x724da7d676a0>.fit_reg
+_________________ TestRegressionPlotter.test_singleton[x1-y1] __________________
+tests/test_regression.py:170: in test_singleton
+    assert not p.fit_reg
+E   assert not True
+E    +  where True = <seaborn.regression._RegressionPlotter object at 0x724da798dea0>.fit_reg
+_________________ TestRegressionPlotter.test_singleton[x2-y2] __________________
+tests/test_regression.py:170: in test_singleton
+    assert not p.fit_reg
+E   assert not True
+E    +  where True = <seaborn.regression._RegressionPlotter object at 0x724da7d662c0>.fit_reg
+______________ TestRegressionPlots.test_regplot_scatter_kws_alpha ______________
+tests/test_regression.py:509: in test_regplot_scatter_kws_alpha
+    assert ax.collections[0]._alpha is None
+E   assert 0.8 is None
+E    +  where 0.8 = <matplotlib.collections.PathCollection object at 0x724da7b80640>._alpha
+___________________ TestRegressionPlots.test_regplot_binned ____________________
+tests/test_regression.py:541: in test_regplot_binned
+    assert len(ax.lines) == 6
+E   AssertionError: assert 1 == 6
+E    +  where 1 = len(<Axes.ArtistList of 1 lines>)
+E    +    where <Axes.ArtistList of 1 lines> = <Axes: xlabel='x', ylabel='y'>.lines
+______________ TestRegressionPlots.test_lmplot_marker_linewidths _______________
+tests/test_regression.py:586: in test_lmplot_marker_linewidths
+    assert c[1].get_linewidths()[0] == mpl.rcParams["lines.linewidth"]
+E   assert np.float64(0.75) == 1.5
+_____________ TestRegressionPlots.test_lmplot_facet_truncate[True] _____________
+tests/test_regression.py:624: in test_lmplot_facet_truncate
+    assert ax.get_xlim() == tuple(xdata[[0, -1]])
+E   assert (np.float64(-...648521855995)) == (np.float64(-...789679505302))
+E     
+E     At index 0 diff: np.float64(-4.986552749556945) != np.float64(-2.7733831956514803)
+E     Use -v to get more diff
+____________ TestRegressionPlots.test_lmplot_facet_truncate[False] _____________
+tests/test_regression.py:624: in test_lmplot_facet_truncate
+    assert ax.get_xlim() == tuple(xdata[[0, -1]])
+E   assert (np.float64(-...430071693638)) == (np.float64(-...211011834817))
+E     
+E     At index 0 diff: np.float64(-3.321975177080323) != np.float64(-2.431756117221502)
+E     Use -v to get more diff
+____ TestRegressionPlots.test_residplot_statsmodels_missing_errors[lowess] _____
+tests/test_regression.py:673: in test_residplot_statsmodels_missing_errors
+    lm.residplot(long_df, x="x", y="y", **{option: True})
+seaborn/regression.py:1278: in residplot
+    plotter.plot(ax, scatter_kws, line_kws)
+seaborn/regression.py:629: in plot
+    self.lineplot(ax, line_kws)
+seaborn/regression.py:594: in lineplot
+    grid, yhat, err_bands = self.fit_regression(ax)
+seaborn/regression.py:554: in fit_regression
+    grid, yhat = self.fit_lowess()
+seaborn/regression.py:527: in fit_lowess
+    from statsmodels.nonparametric.smoothers_lowess import lowess
+E   ModuleNotFoundError: No module named 'statsmodels'
+____________________ TestRegressionPlots.test_regplot_xlim _____________________
+tests/test_regression.py:690: in test_regplot_xlim
+    assert np.array_equal(line1.get_xdata(), line2.get_xdata())
+E   assert False
+E    +  where False = <function array_equal at 0x724dd21a56b0>(array([-2.36330026, -2.29840994, -2.23351962, -2.16862929, -2.10373897,\n       -2.03884865, -1.97395833, -1.909068  , ...171913,  3.60660945,  3.67149977,  3.73639009,\n        3.80128042,  3.86617074,  3.93106106,  3.99595139,  4.06084171]), array([-2.68450736, -2.61312801, -2.54174865, -2.4703693 , -2.39898994,\n       -2.32761059, -2.25623123, -2.18485188, ...101397,  3.88239332,  3.95377268,  4.02515203,\n        4.09653139,  4.16791074,  4.2392901 ,  4.31066945,  4.38204881]))
+E    +    where <function array_equal at 0x724dd21a56b0> = np.array_equal
+E    +    and   array([-2.36330026, -2.29840994, -2.23351962, -2.16862929, -2.10373897,\n       -2.03884865, -1.97395833, -1.909068  , ...171913,  3.60660945,  3.67149977,  3.73639009,\n        3.80128042,  3.86617074,  3.93106106,  3.99595139,  4.06084171]) = get_xdata()
+E    +      where get_xdata = <matplotlib.lines.Line2D object at 0x724da78b4550>.get_xdata
+E    +    and   array([-2.68450736, -2.61312801, -2.54174865, -2.4703693 , -2.39898994,\n       -2.32761059, -2.25623123, -2.18485188, ...101397,  3.88239332,  3.95377268,  4.02515203,\n        4.09653139,  4.16791074,  4.2392901 ,  4.31066945,  4.38204881]) = get_xdata()
+E    +      where get_xdata = <matplotlib.lines.Line2D object at 0x724da78b73d0>.get_xdata
+=============================== warnings summary ===============================
+tests/test_regression.py::TestRegressionPlots::test_lmplot_marker_linewidths
+  /testbed/seaborn/regression.py:588: UserWarning: You passed a edgecolor/edgecolors ('w') for an unfilled marker ('+').  Matplotlib is ignoring the edgecolor in favor of the facecolor.  This behavior may change in the future.
+    scatter_artist = ax.scatter(x, y, **kws)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_regression.py::TestLinearPlotter::test_establish_variables_from_bad
+PASSED tests/test_regression.py::TestLinearPlotter::test_dropna
+PASSED tests/test_regression.py::TestRegressionPlotter::test_variables_must_be_1d
+PASSED tests/test_regression.py::TestRegressionPlotter::test_dropna
+PASSED tests/test_regression.py::TestRegressionPlotter::test_ci
+PASSED tests/test_regression.py::TestRegressionPlotter::test_statsmodels_missing_errors[logistic]
+PASSED tests/test_regression.py::TestRegressionPlotter::test_statsmodels_missing_errors[robust]
+PASSED tests/test_regression.py::TestRegressionPlotter::test_statsmodels_missing_errors[lowess]
+PASSED tests/test_regression.py::TestRegressionPlotter::test_regress_logx
+PASSED tests/test_regression.py::TestRegressionPlotter::test_regress_bootstrap_seed
+PASSED tests/test_regression.py::TestRegressionPlotter::test_numeric_bins
+PASSED tests/test_regression.py::TestRegressionPlotter::test_provided_bins
+PASSED tests/test_regression.py::TestRegressionPlotter::test_bin_results
+PASSED tests/test_regression.py::TestRegressionPlotter::test_scatter_data
+PASSED tests/test_regression.py::TestRegressionPlotter::test_estimate_data
+PASSED tests/test_regression.py::TestRegressionPlotter::test_estimate_cis
+PASSED tests/test_regression.py::TestRegressionPlotter::test_estimate_units
+PASSED tests/test_regression.py::TestRegressionPlotter::test_partial
+PASSED tests/test_regression.py::TestRegressionPlotter::test_regression_options
+PASSED tests/test_regression.py::TestRegressionPlotter::test_regression_limits
+PASSED tests/test_regression.py::TestRegressionPlots::test_regplot_basic
+PASSED tests/test_regression.py::TestRegressionPlots::test_regplot_selective
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_no_data
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_basic
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_hue
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_markers
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_facets
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_hue_col_nolegend
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_scatter_kws
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_sharey
+PASSED tests/test_regression.py::TestRegressionPlots::test_lmplot_facet_kws
+PASSED tests/test_regression.py::TestRegressionPlots::test_residplot
+PASSED tests/test_regression.py::TestRegressionPlots::test_residplot_statsmodels_missing_errors[robust]
+PASSED tests/test_regression.py::TestRegressionPlots::test_three_point_colors
+SKIPPED [1] tests/test_regression.py:186: no statsmodels
+SKIPPED [1] tests/test_regression.py:200: no statsmodels
+SKIPPED [1] tests/test_regression.py:234: no statsmodels
+SKIPPED [1] tests/test_regression.py:251: no statsmodels
+SKIPPED [1] tests/test_regression.py:392: no statsmodels
+SKIPPED [1] tests/test_regression.py:401: no statsmodels
+SKIPPED [1] tests/test_regression.py:412: no statsmodels
+SKIPPED [1] tests/test_regression.py:425: no statsmodels
+SKIPPED [1] tests/test_regression.py:660: no statsmodels
+FAILED tests/test_regression.py::TestLinearPlotter::test_establish_variables_from_frame
+FAILED tests/test_regression.py::TestLinearPlotter::test_establish_variables_from_series
+FAILED tests/test_regression.py::TestLinearPlotter::test_establish_variables_from_array
+FAILED tests/test_regression.py::TestLinearPlotter::test_establish_variables_from_lists
+FAILED tests/test_regression.py::TestLinearPlotter::test_establish_variables_from_mix
+FAILED tests/test_regression.py::TestRegressionPlotter::test_variables_from_frame
+FAILED tests/test_regression.py::TestRegressionPlotter::test_variables_from_series
+FAILED tests/test_regression.py::TestRegressionPlotter::test_variables_from_mix
+FAILED tests/test_regression.py::TestRegressionPlotter::test_singleton[x0-y0]
+FAILED tests/test_regression.py::TestRegressionPlotter::test_singleton[x1-y1]
+FAILED tests/test_regression.py::TestRegressionPlotter::test_singleton[x2-y2]
+FAILED tests/test_regression.py::TestRegressionPlots::test_regplot_scatter_kws_alpha
+FAILED tests/test_regression.py::TestRegressionPlots::test_regplot_binned - A...
+FAILED tests/test_regression.py::TestRegressionPlots::test_lmplot_marker_linewidths
+FAILED tests/test_regression.py::TestRegressionPlots::test_lmplot_facet_truncate[True]
+FAILED tests/test_regression.py::TestRegressionPlots::test_lmplot_facet_truncate[False]
+FAILED tests/test_regression.py::TestRegressionPlots::test_residplot_statsmodels_missing_errors[lowess]
+FAILED tests/test_regression.py::TestRegressionPlots::test_regplot_xlim - ass...
+============= 18 failed, 34 passed, 9 skipped, 1 warning in 6.61s ==============

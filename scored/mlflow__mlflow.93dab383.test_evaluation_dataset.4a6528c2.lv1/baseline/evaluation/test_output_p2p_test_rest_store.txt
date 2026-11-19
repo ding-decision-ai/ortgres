@@ -1,0 +1,268 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 58 items
+
+tests/store/model_registry/test_rest_store.py::test_create_registered_model PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [  1%]
+tests/store/model_registry/test_rest_store.py::test_update_registered_model_name PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [  3%]
+tests/store/model_registry/test_rest_store.py::test_update_registered_model_description PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [  5%]
+tests/store/model_registry/test_rest_store.py::test_delete_registered_model PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [  6%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [  8%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 10%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-None-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 12%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 13%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-400-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 15%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 17%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-None-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 18%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 20%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-400-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 22%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 24%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-None-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 25%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 27%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-400-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 29%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 31%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-None-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 32%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 34%]
+tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-400-model = 'yo'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 36%]
+tests/store/model_registry/test_rest_store.py::test_get_registered_model PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 37%]
+tests/store/model_registry/test_rest_store.py::test_get_latest_versions PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 39%]
+tests/store/model_registry/test_rest_store.py::test_get_latest_versions_with_stages PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 41%]
+tests/store/model_registry/test_rest_store.py::test_set_registered_model_tag PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 43%]
+tests/store/model_registry/test_rest_store.py::test_delete_registered_model_tag PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 44%]
+tests/store/model_registry/test_rest_store.py::test_create_model_version PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 46%]
+tests/store/model_registry/test_rest_store.py::test_transition_model_version_stage PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 48%]
+tests/store/model_registry/test_rest_store.py::test_update_model_version_description PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 50%]
+tests/store/model_registry/test_rest_store.py::test_delete_model_version PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 51%]
+tests/store/model_registry/test_rest_store.py::test_get_model_version_details PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 53%]
+tests/store/model_registry/test_rest_store.py::test_get_model_version_download_uri PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 55%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 56%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 58%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-None-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 60%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 62%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-400-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 63%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 65%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-None-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 67%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 68%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-400-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 70%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 72%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-None-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 74%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 75%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-400-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 77%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-None-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 79%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-None-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 81%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-400-None] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 82%]
+tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-400-name = 'model_12'] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 84%]
+tests/store/model_registry/test_rest_store.py::test_set_model_version_tag PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 86%]
+tests/store/model_registry/test_rest_store.py::test_delete_model_version_tag PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 87%]
+tests/store/model_registry/test_rest_store.py::test_set_registered_model_alias PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 89%]
+tests/store/model_registry/test_rest_store.py::test_delete_registered_model_alias PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 91%]
+tests/store/model_registry/test_rest_store.py::test_get_model_version_by_alias PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 93%]
+tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_pending PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 94%]
+tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_failed PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 96%]
+tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_show_correct_message_for_prompt[prompt] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [ 98%]
+tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_show_correct_message_for_prompt[model] PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:18 INFO mlflow.tracking.fluent: Active model is cleared
+__________________ test_await_model_version_creation_pending ___________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 03:02:18 INFO mlflow.store.model_registry.abstract_store: Waiting up to 0.5 seconds for model version to finish creation. Model name: Model 1, version 1
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:19 INFO mlflow.tracking.fluent: Active model is cleared
+___________________ test_await_model_version_creation_failed ___________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 03:02:19 INFO mlflow.store.model_registry.abstract_store: Waiting up to 0.5 seconds for model version to finish creation. Model name: Model 1, version 1
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:19 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:19 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:02:19 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+1.00s call     tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_pending
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+
+========================= per-file durations (sorted) ==========================
+::group::per-file durations (sorted)
+
+| Rank | File                                            | Duration | Tests | Min    | Max    | Avg    |
+| ---- | ----------------------------------------------- | -------- | ----- | ------ | ------ | ------ |
+| 1    | `tests/store/model_registry/test_rest_store.py` | 1.10s    | 58    | 0.001s | 1.002s | 0.019s |
+
+::endgroup::
+
+=========================== short test summary info ============================
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_create_registered_model
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_update_registered_model_name
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_update_registered_model_description
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_delete_registered_model
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-None-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-None-400-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-None-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[None-blah-400-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-None-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-None-400-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-None-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_registered_models_params[order_by1-blah-400-model = 'yo']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_get_registered_model
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_get_latest_versions
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_get_latest_versions_with_stages
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_set_registered_model_tag
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_delete_registered_model_tag
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_create_model_version
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_transition_model_version_stage
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_update_model_version_description
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_delete_model_version
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_get_model_version_details
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_get_model_version_download_uri
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-None-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-None-400-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-None-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[version DESC-blah-400-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-None-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-None-400-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-None-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-None-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-400-None]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_search_model_versions_params[creation_time DESC-blah-400-name = 'model_12']
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_set_model_version_tag
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_delete_model_version_tag
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_set_registered_model_alias
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_delete_registered_model_alias
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_get_model_version_by_alias
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_pending
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_failed
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_show_correct_message_for_prompt[prompt]
+PASSED | MEM 22.6/33.7 GB | DISK 797.5/915.7 GB tests/store/model_registry/test_rest_store.py::test_await_model_version_creation_show_correct_message_for_prompt[model]
+============================== 58 passed in 1.13s ==============================

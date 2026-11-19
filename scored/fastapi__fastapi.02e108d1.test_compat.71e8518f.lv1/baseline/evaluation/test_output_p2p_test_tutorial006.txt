@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, inline-snapshot-0.31.1, cov-7.0.0, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 15 items
+
+tests/test_tutorial/test_security/test_tutorial006.py ...............    [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic[tutorial006]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic[tutorial006_an]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic[tutorial006_an_py39]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_no_credentials[tutorial006]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_no_credentials[tutorial006_an]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_no_credentials[tutorial006_an_py39]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_invalid_credentials[tutorial006]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_invalid_credentials[tutorial006_an]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_invalid_credentials[tutorial006_an_py39]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_non_basic_credentials[tutorial006]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_non_basic_credentials[tutorial006_an]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_non_basic_credentials[tutorial006_an_py39]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_openapi_schema[tutorial006]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_openapi_schema[tutorial006_an]
+PASSED tests/test_tutorial/test_security/test_tutorial006.py::test_openapi_schema[tutorial006_an_py39]
+============================== 15 passed in 0.25s ==============================

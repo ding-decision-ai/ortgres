@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 29 items
+
+tests/_stats/test_counting.py .............................              [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_stats/test_counting.py::TestCount::test_single_grouper
+PASSED tests/_stats/test_counting.py::TestCount::test_multiple_groupers
+PASSED tests/_stats/test_counting.py::TestHist::test_string_bins
+PASSED tests/_stats/test_counting.py::TestHist::test_int_bins
+PASSED tests/_stats/test_counting.py::TestHist::test_array_bins
+PASSED tests/_stats/test_counting.py::TestHist::test_binwidth
+PASSED tests/_stats/test_counting.py::TestHist::test_binrange
+PASSED tests/_stats/test_counting.py::TestHist::test_discrete_bins
+PASSED tests/_stats/test_counting.py::TestHist::test_discrete_bins_from_nominal_scale
+PASSED tests/_stats/test_counting.py::TestHist::test_count_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_probability_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_proportion_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_percent_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_density_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_frequency_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_invalid_stat
+PASSED tests/_stats/test_counting.py::TestHist::test_cumulative_count
+PASSED tests/_stats/test_counting.py::TestHist::test_cumulative_proportion
+PASSED tests/_stats/test_counting.py::TestHist::test_cumulative_density
+PASSED tests/_stats/test_counting.py::TestHist::test_common_norm_default
+PASSED tests/_stats/test_counting.py::TestHist::test_common_norm_false
+PASSED tests/_stats/test_counting.py::TestHist::test_common_norm_subset
+PASSED tests/_stats/test_counting.py::TestHist::test_common_norm_warning
+PASSED tests/_stats/test_counting.py::TestHist::test_common_bins_default
+PASSED tests/_stats/test_counting.py::TestHist::test_common_bins_false
+PASSED tests/_stats/test_counting.py::TestHist::test_common_bins_subset
+PASSED tests/_stats/test_counting.py::TestHist::test_common_bins_warning
+PASSED tests/_stats/test_counting.py::TestHist::test_histogram_single
+PASSED tests/_stats/test_counting.py::TestHist::test_histogram_multiple
+============================== 29 passed in 0.42s ==============================

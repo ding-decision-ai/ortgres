@@ -1,0 +1,77 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 53 items
+
+pandas/tests/series/methods/test_equals.py .....................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/series/methods/test_equals.py::test_equals[arr0-idx0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals[arr1-idx1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals[arr2-idx2]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[1.1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[(1+1j)]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[True]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[abc]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[val5]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[val6]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[val7]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[val8]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_list_array[None]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_false_negative
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_matching_nas
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NoneType-NoneType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NoneType-float0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NoneType-NaTType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NoneType-float1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NoneType-NAType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NoneType-Decimal]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float0-NoneType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float0-float0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float0-NaTType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float0-float1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float0-NAType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float0-Decimal]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NaTType-NoneType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NaTType-float0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NaTType-NaTType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NaTType-float1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NaTType-NAType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NaTType-Decimal]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float1-NoneType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float1-float0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float1-NaTType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float1-float1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float1-NAType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[float1-Decimal]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NAType-NoneType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NAType-float0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NAType-NaTType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NAType-float1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NAType-NAType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[NAType-Decimal]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[Decimal-NoneType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[Decimal-float0]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[Decimal-NaTType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[Decimal-float1]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[Decimal-NAType]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_mismatched_nas[Decimal-Decimal]
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_none_vs_nan
+PASSED pandas/tests/series/methods/test_equals.py::test_equals_None_vs_float
+============================== 53 passed in 0.08s ==============================

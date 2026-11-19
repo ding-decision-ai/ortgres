@@ -1,0 +1,40 @@
+{
+  "instance_id": "fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1",
+  "repo": "fastapi/fastapi",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 6,
+      "failure": 4,
+      "total": 10
+    },
+    "p2p": {
+      "success": 48,
+      "failure": 0,
+      "total": 48
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "828d54cdf75fb740e0694f65ef335a4df46bfb0d57f3453573f0be902e1e68ed"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 6,
+      "failure": 4,
+      "total": 10
+    },
+    "p2p": {
+      "success": 48,
+      "failure": 0,
+      "total": 48
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "057eb7811f37792b44a193caa3b4763890498574970ca3a999167b4ab2f316ab"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "e1dd18c674e65aa763a9942e2a1ecd3c7c19e6dd7fa4980c70b250f93a3f9697",
+    "p2p": "5b7327bd6e0f8b9309a2c101eae5f0508325287f4091856027db014ec14b4c80"
+  }
+}

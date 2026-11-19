@@ -1,0 +1,16 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.3.35",
+  "initialization": {
+    "coverage": {}
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "web_enabled",
+    "configured_search": "enabled",
+    "actual_external_information_obtained": false,
+    "observed_activity": "no_external_calls_observed"
+  },
+  "run_conditions": "../../run-conditions.json#/cases/sphinx-doc__sphinx.e347e59c.test_build_html.d253ea54.lv1"
+}

@@ -1,0 +1,213 @@
+{
+  "visible_tests_status": "read",
+  "visible_test_files": [
+    "tests/metrics/genai/test_base.py",
+    "tests/metrics/genai/test_prompt_template.py",
+    "tests/metrics/genai/prompts/test_v1.py",
+    "tests/metrics/test_metric_base.py",
+    "tests/metrics/test_metric_definitions.py",
+    "tests/evaluate/test_default_evaluator.py"
+  ],
+  "unknown_evidence": [
+    "No visible test directly names _extract_score_and_justification or _format_args_string; their exact edge behavior is specified by the public task but remains unverified by visible tests.",
+    "No visible test directly asserts EvaluationMetric.__str__ or calls _generate_eval_metric_class by name; visible coverage reaches the generated callable through built-in metric factories.",
+    "The evaluator integration tests mock judge-model scoring, so live provider, endpoint, proxy, and header behavior is not visibly verified for these interfaces."
+  ],
+  "related_files": [
+    {
+      "path": "mlflow/metrics/genai/genai_metric.py",
+      "reason": "Primary task source for parsing, grading-context formatting, both GenAI metric factories, row-order scoring, and custom-metric persistence/reconstruction.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness",
+        "tests/evaluate/test_default_evaluator.py::test_target_prediction_col_mapping",
+        "tests/evaluate/test_default_evaluator.py::test_log_genai_custom_metrics_as_artifacts",
+        "tests/evaluate/test_default_evaluator.py::test_all_genai_custom_metrics_are_from_user_prompt"
+      ],
+      "source_entry": "mlflow.metrics.genai.make_genai_metric / mlflow.metrics.genai.genai_metric.make_genai_metric_from_prompt"
+    },
+    {
+      "path": "mlflow/metrics/genai/base.py",
+      "reason": "Primary task source for EvaluationExample formatting; examples are consumed by the GenAI prompt model and metric factory.",
+      "visible_test_entries": [
+        "tests/metrics/genai/test_base.py::test_evaluation_example_str",
+        "tests/metrics/genai/prompts/test_v1.py::test_evaluation_model_output"
+      ],
+      "source_entry": "mlflow.metrics.genai.EvaluationExample"
+    },
+    {
+      "path": "mlflow/metrics/genai/prompt_template.py",
+      "reason": "Primary task source for block-wise prompt formatting and partial filling; used by EvaluationExample and v1 evaluation prompts.",
+      "visible_test_entries": [
+        "tests/metrics/genai/test_prompt_template.py::test_prompt_template_flat_str_no_variables",
+        "tests/metrics/genai/test_prompt_template.py::test_prompt_template_arr_str_no_variables",
+        "tests/metrics/genai/test_prompt_template.py::test_prompt_template_partial_formatting",
+        "tests/metrics/genai/prompts/test_v1.py::test_evaluation_model_output"
+      ],
+      "source_entry": "mlflow.metrics.genai.prompt_template.PromptTemplate"
+    },
+    {
+      "path": "mlflow/metrics/genai/prompts/v1.py",
+      "reason": "Actual public dependency that constructs the versioned grading prompt consumed by make_genai_metric and formats EvaluationExample instances.",
+      "visible_test_entries": [
+        "tests/metrics/genai/prompts/test_v1.py::test_evaluation_model_output",
+        "tests/metrics/genai/prompts/test_v1.py::test_no_examples"
+      ],
+      "source_entry": "mlflow.metrics.genai.prompts.v1.EvaluationModel"
+    },
+    {
+      "path": "mlflow/metrics/genai/model_utils.py",
+      "reason": "Actual scoring dependency called by the generated GenAI eval function to resolve endpoint type and obtain raw judge output.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness"
+      ],
+      "source_entry": "mlflow.metrics.genai.model_utils.score_model_on_payload"
+    },
+    {
+      "path": "mlflow/metrics/genai/metric_definitions.py",
+      "reason": "Public predefined GenAI metric factories are consumers of make_genai_metric and are used by visible persistence tests.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_log_genai_custom_metrics_as_artifacts"
+      ],
+      "source_entry": "mlflow.metrics.genai.answer_similarity"
+    },
+    {
+      "path": "mlflow/metrics/genai/__init__.py",
+      "reason": "Public package acquisition point for EvaluationExample and both task metric factories; current source contains missing factory bindings.",
+      "visible_test_entries": [
+        "tests/metrics/genai/test_base.py::test_evaluation_example_str",
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness"
+      ],
+      "source_entry": "mlflow.metrics.genai"
+    },
+    {
+      "path": "mlflow/models/evaluation/base.py",
+      "reason": "Primary task source for EvaluationMetric string form and the dynamically generated callable metric class; also owns the public evaluation entry consuming metric objects.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_definitions.py::test_builtin_metric_call_signature",
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness"
+      ],
+      "source_entry": "mlflow.models.EvaluationMetric / mlflow.models.make_metric / mlflow.models.evaluate"
+    },
+    {
+      "path": "mlflow/models/evaluation/default_evaluator.py",
+      "reason": "Actual evaluation consumer that resolves EvaluationMetric eval_fn arguments, invokes MetricDefinition, and preserves per-row scores and justifications in evaluator results.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness",
+        "tests/evaluate/test_default_evaluator.py::test_target_prediction_col_mapping"
+      ],
+      "source_entry": "mlflow.models.evaluation.default_evaluator.DefaultEvaluator"
+    },
+    {
+      "path": "mlflow/models/evaluation/evaluators/default.py",
+      "reason": "Actual evaluator adapter that selects default metrics and logs/re-exposes serialized GenAI factory arguments as the custom-metrics artifact.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_log_genai_custom_metrics_as_artifacts",
+        "tests/evaluate/test_default_evaluator.py::test_all_genai_custom_metrics_are_from_user_prompt"
+      ],
+      "source_entry": "mlflow.models.evaluation.evaluators.default.DefaultEvaluator"
+    },
+    {
+      "path": "mlflow/models/evaluation/utils/metric.py",
+      "reason": "Shortest evaluation-pipeline consumer: converts EvaluationMetric to MetricDefinition, invokes eval_fn, and validates MetricValue output.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness"
+      ],
+      "source_entry": "mlflow.models.evaluation.utils.metric.MetricDefinition"
+    },
+    {
+      "path": "mlflow/models/evaluation/__init__.py",
+      "reason": "Public evaluation-package export point for make_metric and EvaluationMetric; current source advertises make_metric without binding it.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_definitions.py::test_builtin_metric_call_signature"
+      ],
+      "source_entry": "mlflow.models.evaluation.make_metric"
+    },
+    {
+      "path": "mlflow/models/__init__.py",
+      "reason": "Top-level models export point used by GenAI factories to acquire EvaluationMetric and by callers to acquire make_metric; current source advertises an unbound make_metric.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_definitions.py::test_builtin_metric_call_signature"
+      ],
+      "source_entry": "mlflow.models.make_metric"
+    },
+    {
+      "path": "mlflow/metrics/__init__.py",
+      "reason": "Public built-in metric construction path exercising generated callable signatures; current source calls and exports an unbound make_metric.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_definitions.py::test_builtin_metric_call_signature"
+      ],
+      "source_entry": "mlflow.metrics.ndcg_at_k / mlflow.metrics.make_metric"
+    },
+    {
+      "path": "mlflow/metrics/metric_definitions.py",
+      "reason": "Provides the eval_fn whose signature is transformed into the visible callable metric signature tested through ndcg_at_k.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_definitions.py::test_builtin_metric_call_signature"
+      ],
+      "source_entry": "mlflow.metrics.metric_definitions._ndcg_at_k_eval_fn"
+    },
+    {
+      "path": "mlflow/metrics/base.py",
+      "reason": "Defines MetricValue, the required output object returned by generated GenAI eval functions and validated by the evaluation pipeline.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_base.py::test_metric_value",
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness"
+      ],
+      "source_entry": "mlflow.metrics.MetricValue"
+    },
+    {
+      "path": "tests/metrics/genai/test_base.py",
+      "reason": "Visible direct contract for EvaluationExample string formatting with dictionary, string, and absent grading context.",
+      "visible_test_entries": [
+        "tests/metrics/genai/test_base.py::test_evaluation_example_str"
+      ],
+      "source_entry": "pytest tests/metrics/genai/test_base.py"
+    },
+    {
+      "path": "tests/metrics/genai/test_prompt_template.py",
+      "reason": "Visible direct contract for PromptTemplate formatting, None filtering, block omission, concatenation, and partial_fill.",
+      "visible_test_entries": [
+        "tests/metrics/genai/test_prompt_template.py::test_prompt_template_flat_str_no_variables",
+        "tests/metrics/genai/test_prompt_template.py::test_prompt_template_arr_str_no_variables",
+        "tests/metrics/genai/test_prompt_template.py::test_prompt_template_partial_formatting"
+      ],
+      "source_entry": "pytest tests/metrics/genai/test_prompt_template.py"
+    },
+    {
+      "path": "tests/metrics/genai/prompts/test_v1.py",
+      "reason": "Visible prompt-composition contract connecting PromptTemplate, EvaluationExample, and EvaluationModel defaults/examples.",
+      "visible_test_entries": [
+        "tests/metrics/genai/prompts/test_v1.py::test_evaluation_model_output",
+        "tests/metrics/genai/prompts/test_v1.py::test_no_examples"
+      ],
+      "source_entry": "pytest tests/metrics/genai/prompts/test_v1.py"
+    },
+    {
+      "path": "tests/metrics/test_metric_base.py",
+      "reason": "Visible output-object contract for per-row scores, justifications, and default aggregate results used by generated metrics.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_base.py::test_metric_value"
+      ],
+      "source_entry": "pytest tests/metrics/test_metric_base.py"
+    },
+    {
+      "path": "tests/metrics/test_metric_definitions.py",
+      "reason": "Visible consumer contract for keyword-only callable metric signatures produced through the built-in metric factory path.",
+      "visible_test_entries": [
+        "tests/metrics/test_metric_definitions.py::test_builtin_metric_call_signature"
+      ],
+      "source_entry": "pytest tests/metrics/test_metric_definitions.py"
+    },
+    {
+      "path": "tests/evaluate/test_default_evaluator.py",
+      "reason": "Visible end-to-end consumer coverage for GenAI factory construction, mocked scoring, column mapping, artifact persistence, and reconstruction.",
+      "visible_test_entries": [
+        "tests/evaluate/test_default_evaluator.py::test_evaluate_with_correctness",
+        "tests/evaluate/test_default_evaluator.py::test_target_prediction_col_mapping",
+        "tests/evaluate/test_default_evaluator.py::test_log_genai_custom_metrics_as_artifacts",
+        "tests/evaluate/test_default_evaluator.py::test_all_genai_custom_metrics_are_from_user_prompt"
+      ],
+      "source_entry": "pytest tests/evaluate/test_default_evaluator.py"
+    }
+  ]
+}

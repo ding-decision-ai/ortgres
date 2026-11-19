@@ -1,0 +1,67 @@
+{
+    "sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.3,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "tests/test_command_line.py::test_build_main_parse_arguments_pos_intermixed",
+                    "tests/test_command_line.py::test_build_main_parse_arguments_filenames_last",
+                    "tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last"
+                ],
+                "failure": [
+                    "tests/test_command_line.py::test_build_main_parse_arguments_pos_first",
+                    "tests/test_command_line.py::test_build_main_parse_arguments_pos_last",
+                    "tests/test_command_line.py::test_build_main_parse_arguments_pos_middle",
+                    "tests/test_command_line.py::test_make_mode_parse_arguments_pos_first",
+                    "tests/test_command_line.py::test_make_mode_parse_arguments_pos_last",
+                    "tests/test_command_line.py::test_make_mode_parse_arguments_pos_middle",
+                    "tests/test_command_line.py::test_make_mode_parse_arguments_pos_intermixed"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_classes",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_instance_variable",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_inherited_instance_variable",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_uninitialized_attributes",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_undocumented_uninitialized_attributes",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_decorators",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_properties",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_slots_attribute",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_show_inheritance_for_subclass_of_generic_type",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_show_inheritance_for_decendants_of_generic_type",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autodoc_process_bases",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_doc_from_class",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_doc_from_init",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_doc_from_both",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_alias",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_alias_having_doccomment",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_class_alias_for_imported_object_having_doccomment",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_coroutine",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autodata_NewType_module_level",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autoattribute_NewType_class_level",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autodata_TypeVar_class_level",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_autoattribute_TypeVar_module_level",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_inherited_instance_variable_with_annotations",
+                    "tests/test_ext_autodoc/test_ext_autodoc_autoclass.py::test_no_inherited_instance_variable_with_annotations",
+                    "tests/test_ext_autodoc/test_ext_autodoc_preserve_defaults.py::test_preserve_defaults",
+                    "tests/test_ext_autodoc/test_ext_autodoc_preserve_defaults.py::test_preserve_defaults_special_constructs",
+                    "tests/test_builders/test_build_html_copyright.py::test_html_multi_line_copyright",
+                    "tests/test_builders/test_build_html_copyright.py::test_html_multi_line_copyright_sde[1199145600]",
+                    "tests/test_builders/test_build_html_copyright.py::test_html_multi_line_copyright_sde[1199145599]",
+                    "tests/test_extensions/test_extension.py::test_needs_extensions",
+                    "tests/test_builders/test_build_changes.py::test_build",
+                    "tests/test_builders/test_build_changes.py::test_no_changes"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-13T20:17:57.527060"
+    }
+}

@@ -1,0 +1,620 @@
+diff --git a/astropy/cosmology/_src/core.py b/astropy/cosmology/_src/core.py
+index d1073dd..ca33aed 100644
+--- a/astropy/cosmology/_src/core.py
++++ b/astropy/cosmology/_src/core.py
+@@ -93,19 +93,15 @@ class _NameField:
+ 
+     default: str | None = None
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __get__(
++        self, cosmology: Union["Cosmology", None], cosmo_cls: type["Cosmology"] | None
++    ) -> str | None:
++        if cosmology is None:
++            return self.default
++        return cosmology.__dict__["name"]
++
++    def __set__(self, cosmology: "Cosmology", value: Any) -> None:
++        cosmology.__dict__["name"] = None if value is None else str(value)
+ @dataclass_decorator
+ class Cosmology(metaclass=ABCMeta):
+     """Base-class for all Cosmologies.
+@@ -399,39 +395,11 @@ class Cosmology(metaclass=ABCMeta):
+             np.all(getattr(self, k) == getattr(other, k)) for k in self._parameters_all
+         )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __eq__(self, other: Any, /) -> bool:
++        """Check equality of the class, name, and parameter values."""
++        if other.__class__ is not self.__class__:
++            return NotImplemented
++        return self.name == other.name and self.__equiv__(other)
+     # ---------------------------------------------------------------
+ 
+     def __str__(self) -> str:
+@@ -660,4 +628,4 @@ class FlatCosmologyMixin(metaclass=ABCMeta):
+             )
+             # flatness check
+             and other.is_flat
+-        )
+\ No newline at end of file
++        )
+diff --git a/astropy/cosmology/_src/default.py b/astropy/cosmology/_src/default.py
+index 6e8f400..02d9332 100644
+--- a/astropy/cosmology/_src/default.py
++++ b/astropy/cosmology/_src/default.py
+@@ -38,3 +38,27 @@ class default_cosmology(ScienceState):
+     _default_value: ClassVar[str] = "Planck18"
+     _value: ClassVar[str | Cosmology] = "Planck18"
+ 
++    @classmethod
++    def validate(cls, value: Cosmology | str | None) -> Cosmology | None:
++        """Validate and resolve a default cosmology specification."""
++        if value is None:
++            value = cls._default_value
++
++        if isinstance(value, str):
++            if value == "no_default":
++                return None
++
++            from astropy.cosmology import realizations
++
++            if value not in realizations.available:
++                raise ValueError(
++                    f"Unknown cosmology {value!r}. "
++                    f"Valid cosmologies are {realizations.available}."
++                )
++            return getattr(realizations, value)
++
++        if not isinstance(value, Cosmology):
++            raise TypeError(
++                "default_cosmology must be a string or Cosmology instance"
++            )
++        return value
+diff --git a/astropy/cosmology/_src/io/builtin/ecsv.py b/astropy/cosmology/_src/io/builtin/ecsv.py
+index 979985c..85379cd 100644
+--- a/astropy/cosmology/_src/io/builtin/ecsv.py
++++ b/astropy/cosmology/_src/io/builtin/ecsv.py
+@@ -159,11 +159,17 @@ Additional keyword arguments are passed to ``QTable.read`` and ``QTable.write``.
+     >>> temp_dir.cleanup()
+ """
+ 
++import csv
++import json
+ from collections.abc import Mapping
+ from typing import Any, TypeVar
+ 
++import numpy as np
++import yaml
++
+ import astropy.units as u
+ from astropy.table import QTable, Table
++from astropy.utils.data import get_readable_fileobj
+ 
+ # isort: split
+ import astropy.cosmology.units as cu
+@@ -172,11 +178,107 @@ from astropy.cosmology._src.io.connect import readwrite_registry
+ from astropy.cosmology._src.typing import _CosmoT
+ from astropy.io.typing import PathLike, ReadableFileLike, WriteableFileLike
+ 
+-from .table import from_table, to_table
++from .mapping import from_mapping
++from .table import to_table
+ 
+ _TableT = TypeVar("_TableT", bound=Table)
+ 
+ 
++def _read_ecsv_table(filename: PathLike | ReadableFileLike[Table]) -> QTable:
++    """Read the ECSV subset used to store cosmology realizations."""
++    with get_readable_fileobj(filename, encoding="utf-8") as fileobj:
++        text = fileobj.read()
++
++    header_lines = []
++    data_lines = []
++    for line in text.splitlines():
++        stripped = line.strip()
++        if not data_lines and stripped.startswith("#"):
++            content = stripped[1:]
++            header_lines.append(content[1:] if content.startswith(" ") else content)
++        elif stripped:
++            data_lines.append(line)
++
++    if not header_lines or not header_lines[0].startswith("%ECSV"):
++        raise ValueError("ECSV header line not found")
++    if not data_lines:
++        raise ValueError("ECSV table contains no column header")
++
++    class ECSVLoader(yaml.SafeLoader):
++        pass
++
++    def construct_unit(loader: ECSVLoader, node: yaml.MappingNode) -> u.UnitBase:
++        return u.Unit(loader.construct_mapping(node, deep=True)["unit"])
++
++    def construct_quantity(
++        loader: ECSVLoader, node: yaml.MappingNode
++    ) -> u.Quantity:
++        value = loader.construct_mapping(node, deep=True)
++        return u.Quantity(value["value"], value["unit"])
++
++    ECSVLoader.add_constructor("!astropy.units.Unit", construct_unit)
++    ECSVLoader.add_constructor("!astropy.units.Quantity", construct_quantity)
++    ECSVLoader.add_constructor(
++        "!astropy.table.SerializedColumn",
++        lambda loader, node: loader.construct_mapping(node, deep=True),
++    )
++    header = yaml.load("\n".join(header_lines[1:]), Loader=ECSVLoader)
++    descriptors = header["datatype"]
++    delimiter = header.get("delimiter", " ")
++    rows = list(
++        csv.reader(
++            data_lines,
++            delimiter=delimiter,
++            quotechar='"',
++            skipinitialspace=delimiter == " ",
++        )
++    )
++    names = rows.pop(0)
++    expected_names = [descriptor["name"] for descriptor in descriptors]
++    if names != expected_names:
++        raise ValueError(
++            f"ECSV data columns {names} do not match metadata {expected_names}"
++        )
++
++    columns: dict[str, Any] = {}
++    for index, descriptor in enumerate(descriptors):
++        dtype = descriptor["datatype"]
++        subtype = descriptor.get("subtype")
++        values = []
++        for row in rows:
++            if len(row) != len(names):
++                raise ValueError("ECSV row has an inconsistent number of columns")
++            value = row[index]
++            if dtype == "string":
++                if subtype:
++                    base_dtype = subtype.split("[", 1)[0]
++                    decoded = json.loads(value)
++                    value = (
++                        decoded
++                        if base_dtype == "json"
++                        else np.asarray(decoded, dtype=base_dtype)
++                    )
++            elif dtype == "bool":
++                if value not in ("True", "False", "1", "0"):
++                    raise ValueError(f"invalid boolean value {value!r}")
++                value = value in ("True", "1")
++            else:
++                value = np.asarray(value, dtype=dtype)[()]
++            values.append(value)
++
++        unit = descriptor.get("unit")
++        if unit is not None:
++            columns[descriptor["name"]] = u.Quantity(values, unit=u.Unit(unit))
++        elif subtype and subtype.split("[", 1)[0] != "json":
++            columns[descriptor["name"]] = np.asarray(values)
++        else:
++            columns[descriptor["name"]] = values
++
++    metadata = dict(header.get("meta", {}))
++    metadata.pop("__serialized_columns__", None)
++    return QTable(columns, meta=metadata)
++
++
+ def read_ecsv(
+     filename: PathLike | ReadableFileLike[Table],
+     index: int | str | None = None,
+@@ -343,12 +445,43 @@ def read_ecsv(
+     """
+     kwargs["format"] = "ascii.ecsv"
+     with u.add_enabled_units(cu):
+-        table = QTable.read(filename, **kwargs)
+-
+-    # build cosmology from table
+-    return from_table(
+-        table,
+-        index=index,
++        if set(kwargs) != {"format"}:
++            unexpected = set(kwargs) - {"format"}
++            raise TypeError(f"unsupported ECSV read options: {unexpected}")
++        table = _read_ecsv_table(filename)
++
++    # Select the row without constructing a ``Table.Row``.  This reader is
++    # also used to bootstrap the built-in realizations, so keeping the final
++    # conversion in terms of columns and mappings avoids making realization
++    # loading depend on the considerably larger Row implementation.
++    if isinstance(index, str):
++        name_column = "name"
++        if rename is not None:
++            name_column = next(
++                (source for source, target in rename.items() if target == "name"),
++                name_column,
++            )
++        matches = np.flatnonzero(np.asarray(table[name_column]) == index)
++        if len(matches) == 0:
++            raise KeyError(f"No matches found for key {index!r}")
++        if len(matches) > 1:
++            raise ValueError(f"more than one cosmology found for key {index!r}")
++        index = matches[0]
++
++    if index is None:
++        if len(table) != 1:
++            raise ValueError(
++                "need to select a specific row (e.g. index=1) when "
++                "constructing a Cosmology from a multi-row table."
++            )
++        index = 0
++
++    mapping = {name: table[name][index] for name in table.colnames}
++    meta = dict(table.meta)
++    mapping.setdefault("cosmology", meta.pop("cosmology", None))
++    mapping["meta"] = meta
++    return from_mapping(
++        mapping,
+         move_to_meta=move_to_meta,
+         cosmology=cosmology,
+         rename=rename,
+diff --git a/astropy/cosmology/_src/io/builtin/mapping.py b/astropy/cosmology/_src/io/builtin/mapping.py
+index f0de92b..fee43cd 100644
+--- a/astropy/cosmology/_src/io/builtin/mapping.py
++++ b/astropy/cosmology/_src/io/builtin/mapping.py
+@@ -140,31 +140,44 @@ from astropy.cosmology._src.typing import _CosmoT
+ _MapT = TypeVar("_MapT", bound=MutableMapping[str, Any])
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def _rename_map(mapping: _MapT, renames: Mapping[str, str]) -> _MapT:
++    """Rename mapping keys, rejecting ambiguous destination names."""
++    common = set(mapping).intersection(renames.values())
++    if common:
++        raise ValueError(
++            "'renames' values must be disjoint from 'map' keys, "
++            f"the common keys are: {common}"
++        )
++
++    for old, new in renames.items():
++        mapping[new] = mapping.pop(old)
++    return mapping
++
++
++def _get_cosmology_class(
++    cosmology: str | type[_CosmoT] | None, params: MutableMapping[str, Any]
++) -> type[_CosmoT]:
++    """Resolve and consume the cosmology class for a mapping conversion."""
++    if cosmology is None:
++        try:
++            cosmology = params.pop("cosmology")
++        except KeyError:
++            raise ValueError(
++                "the mapping must contain a 'cosmology' key or a cosmology "
++                "class must be supplied"
++            ) from None
++    else:
++        params.pop("cosmology", None)
++
++    if isinstance(cosmology, str):
++        try:
++            cosmology = _COSMOLOGY_CLASSES[cosmology]
++        except KeyError:
++            raise ValueError(f"unknown cosmology class {cosmology!r}") from None
++
++    if not isinstance(cosmology, type) or not issubclass(cosmology, Cosmology):
++        raise TypeError("cosmology must be a Cosmology subclass or its registered name")
++    return cosmology
+ 
+ def from_mapping(
+     mapping: Mapping[str, Any],
+@@ -429,4 +442,4 @@ def mapping_identify(
+ 
+ convert_registry.register_reader("mapping", Cosmology, from_mapping)
+ convert_registry.register_writer("mapping", Cosmology, to_mapping)
+-convert_registry.register_identifier("mapping", Cosmology, mapping_identify)
+\ No newline at end of file
++convert_registry.register_identifier("mapping", Cosmology, mapping_identify)
+diff --git a/astropy/cosmology/_src/parameter/core.py b/astropy/cosmology/_src/parameter/core.py
+index a59e758..707a0c9 100644
+--- a/astropy/cosmology/_src/parameter/core.py
++++ b/astropy/cosmology/_src/parameter/core.py
+@@ -165,44 +165,24 @@ class Parameter:
+     ) -> Any:
+         # Get from class
+         if cosmology is None:
+-            # If the Parameter is being set as part of a dataclass constructor, then we
+-            # raise an AttributeError if the default is MISSING. This is to prevent the
+-            # Parameter from being set as the default value of the dataclass field and
+-            # erroneously included in the class' __init__ signature.
+-            if self.default is MISSING and (
+-                not is_dataclass(cosmo_cls)
+-                or self.name not in cosmo_cls.__dataclass_fields__
+-            ):
+-                raise AttributeError
++            # During dataclass processing, descriptor access supplies the field's
++            # actual default.  Once the field has been installed on the dataclass,
++            # class access must return the Parameter descriptor itself.
++            dataclass_fields = cosmo_cls.__dict__.get("__dataclass_fields__", {})
++            if not is_dataclass(cosmo_cls) or self.name not in dataclass_fields:
++                if self.default is MISSING:
++                    raise AttributeError
++                return self.default
+             return self
+         # Get from instance
+         return cosmology.__dict__[self.name]
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __set__(
++        self, cosmology: "astropy.cosmology.Cosmology", value: Any
++    ) -> None:
++        if self.name in cosmology.__dict__:
++            raise AttributeError(f"cannot assign to field {self.name!r}")
++        cosmology.__dict__[self.name] = self.validate(cosmology, value)
+ 
+ 
+ 
+@@ -226,22 +206,11 @@ class Parameter:
+         """
+         return self.clone(fvalidate=fvalidate)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def validate(
++        self, cosmology: "astropy.cosmology.Cosmology", value: Any
++    ) -> Any:
++        """Validate and convert a value for a cosmology instance."""
++        return self.fvalidate(cosmology, self, value)
+ 
+     @staticmethod
+     def register_validator(key, fvalidate: FValidateCallable | None = None) -> Any:
+@@ -301,4 +270,4 @@ class Parameter:
+             # Only show fields that should be displayed and are not sentinel values
+             if f.repr and (f.name != "default" or self.default is not MISSING)
+         )
+-        return f"{self.__class__.__name__}({', '.join(fields_repr)})"
+\ No newline at end of file
++        return f"{self.__class__.__name__}({', '.join(fields_repr)})"
+diff --git a/astropy/cosmology/realizations.py b/astropy/cosmology/realizations.py
+index 442e9a9..801ff5c 100644
+--- a/astropy/cosmology/realizations.py
++++ b/astropy/cosmology/realizations.py
+@@ -43,3 +43,18 @@ available = (
+ )
+ 
+ 
++def __getattr__(name: str) -> Cosmology:
++    """Load and cache a built-in cosmology realization on first access."""
++    if name not in available:
++        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
++
++    cosmology = Cosmology.read(
++        _COSMOLOGY_DATA_DIR / f"{name}.ecsv", format="ascii.ecsv"
++    )
++    setattr(sys.modules[__name__], name, cosmology)
++    return cosmology
++
++
++def __dir__() -> list[str]:
++    """Directory, including lazily imported cosmology realizations."""
++    return __all__
+diff --git a/astropy/io/registry/core.py b/astropy/io/registry/core.py
+index c92fbd0..840063c 100644
+--- a/astropy/io/registry/core.py
++++ b/astropy/io/registry/core.py
+@@ -11,16 +11,11 @@ __all__ = ["UnifiedIORegistry", "UnifiedInputRegistry", "UnifiedOutputRegistry"]
+ PATH_TYPES = (str, os.PathLike)  # TODO! include bytes
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def _expand_user_in_args(args):
++    """Expand a leading user-relative path without changing other arguments."""
++    if args and isinstance(args[0], PATH_TYPES):
++        return (os.path.expanduser(args[0]),) + args[1:]
++    return args
+ # -----------------------------------------------------------------------------
+ 
+ 
+@@ -419,4 +414,4 @@ class UnifiedIORegistry(UnifiedInputRegistry, UnifiedOutputRegistry):
+         format_table : :class:`~astropy.table.Table`
+             Table of available I/O formats.
+         """
+-        return super().get_formats(data_class, readwrite)
+\ No newline at end of file
++        return super().get_formats(data_class, readwrite)
+diff --git a/astropy/io/registry/interface.py b/astropy/io/registry/interface.py
+index b78fac9..be57a5c 100644
+--- a/astropy/io/registry/interface.py
++++ b/astropy/io/registry/interface.py
+@@ -48,11 +48,10 @@ class UnifiedReadWrite:
+         self._cls = cls
+         self._method_name = method_name  # 'read' or 'write'
+ 
+-
+-
+-
+-
+-
++    @property
++    def registry(self):
++        """The registry used to dispatch this read or write operation."""
++        return self._registry
+     def help(self, format=None, out=None):
+         """Output help documentation for the specified unified I/O ``format``.
+ 
+@@ -152,4 +151,4 @@ class UnifiedReadWriteMethod(property):
+     # gh-11554).
+     # We override __get__ to pass both instance and class to UnifiedReadWrite.
+     def __get__(self, instance, owner_cls):
+-        return self.fget(instance, owner_cls)
+\ No newline at end of file
++        return self.fget(instance, owner_cls)
+diff --git a/astropy/units/core.py b/astropy/units/core.py
+index 06b7623..1f16198 100644
+--- a/astropy/units/core.py
++++ b/astropy/units/core.py
+@@ -368,14 +368,12 @@ class UnitBase:
+     def _hash(self) -> int:
+         return hash((self.scale, *[x.name for x in self.bases], *map(str, self.powers)))
+ 
+-
+-
+-
+-
+-
+-
+-
+-
++    def __getstate__(self) -> dict[str, object]:
++        """Return state suitable for pickling across Python processes."""
++        state = self.__dict__.copy()
++        state.pop("_hash", None)
++        state.pop("_physical_type_id", None)
++        return state
+     def __eq__(self, other):
+         if self is other:
+             return True
+@@ -1447,18 +1445,16 @@ class _UnitContext:
+     def __init__(self, init=[], equivalencies=[]):
+         _unit_registries.append(_UnitRegistry(init=init, equivalencies=equivalencies))
+ 
++    def __enter__(self) -> None:
++        pass
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __exit__(
++        self,
++        type: type[BaseException] | None,
++        value: BaseException | None,
++        tb: TracebackType | None,
++    ) -> None:
++        _unit_registries.pop()
+ _unit_registries: Final = [_UnitRegistry()]
+ 
+ 
+@@ -2753,4 +2749,4 @@ dimensionless_unscaled: Final[CompositeUnit] = CompositeUnit(
+     1, [], [], _error_check=False
+ )
+ # Abbreviation of the above, see #1980
+-one: Final[CompositeUnit] = dimensionless_unscaled
+\ No newline at end of file
++one: Final[CompositeUnit] = dimensionless_unscaled

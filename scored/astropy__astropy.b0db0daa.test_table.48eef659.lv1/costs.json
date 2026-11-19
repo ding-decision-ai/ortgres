@@ -1,0 +1,67 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "initialization_current_stage_04": {
+      "model_calls": 0,
+      "model_elapsed_seconds": 0,
+      "cache_restore_elapsed_seconds_recorded": 2.1207505529996524,
+      "row_count": 1944,
+      "scope_total": 1944,
+      "scope_identity_equal_across_donor_and_receiver": true,
+      "body_mode_cognitive_tracked_roles_all_equal": true,
+      "usd_cost": null
+    },
+    "initialization_historical_stage_03": {
+      "model_elapsed_seconds_recorded": 21781.80504981894,
+      "elapsed_seconds_recorded": 21818.016563510013,
+      "segments": 44,
+      "usage_total_recorded": {
+        "input_tokens": 281152892,
+        "cached_input_tokens": 268056064,
+        "output_tokens": 844755
+      },
+      "missing_usage_segments": {
+        "0": 17
+      },
+      "usage_complete": false,
+      "usd_cost": null,
+      "prior_stage_01_null": {
+        "ready": false,
+        "model_elapsed_seconds": 614.3297967830003,
+        "elapsed_seconds": 620.5698632390122,
+        "model_exit_code": 0,
+        "segment_limit": 4
+      }
+    },
+    "formal_stage_04": {
+      "infer_success": true,
+      "infer_error": null,
+      "agent_exit_status": null,
+      "normal_terminal_turn_observed": true,
+      "configured_formal_budget_seconds": 3600,
+      "formal_usage": {
+        "input_tokens": 41548821,
+        "cached_input_tokens": 39790208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 68298,
+        "reasoning_output_tokens": 18803
+      },
+      "formal_active_model_seconds": null,
+      "formal_usd_cost": null,
+      "marker_to_terminal_log_observation_span_seconds": 2968.3076837062836,
+      "observation_span_not_backend_active_seconds": true,
+      "grade_retry_models": 0
+    },
+    "historical_baseline": {
+      "reused_fixed": true,
+      "usd_cost": null
+    },
+    "technical_premodel_and_grade_retry": {
+      "formal_calls_before_technical_recovery": 0,
+      "source_models_during_new_cache_restore": 0,
+      "first_grading_infrastructure_null": true,
+      "grade_retry_model_calls": 0
+    },
+    "limits": "unknown"
+  }
+}

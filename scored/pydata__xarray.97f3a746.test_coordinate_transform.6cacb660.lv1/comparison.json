@@ -1,0 +1,40 @@
+{
+  "instance_id": "pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1",
+  "repo": "pydata/xarray",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 10,
+      "failure": 4,
+      "total": 14
+    },
+    "p2p": {
+      "success": 74,
+      "failure": 0,
+      "total": 74
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "6146f1804a0939ca22239d741817d22fa0c5374be4b6ef30917a2e8443bfeefc"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 11,
+      "failure": 3,
+      "total": 14
+    },
+    "p2p": {
+      "success": 74,
+      "failure": 0,
+      "total": 74
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "7bbf39e74880b8969754d71af4ee8197ed549998fb5da18ea8347c69c932e17e"
+  },
+  "conditions": "conditions.json",
+  "costs": null,
+  "official_test_identity_sha256": {
+    "f2p": "9c750bd5ebdd354ea824db4a02024336b006431b79091ab7391e1c4f943cd72f",
+    "p2p": "f13f09a7a182ff20ab0c700c5467defc6c9327faee0eb32ad1d07324a2a2d735"
+  }
+}

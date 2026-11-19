@@ -1,0 +1,524 @@
+diff --git a/mesonbuild/cargo/cfg.py b/mesonbuild/cargo/cfg.py
+index 2c4054e..ee4f9d9 100644
+--- a/mesonbuild/cargo/cfg.py
++++ b/mesonbuild/cargo/cfg.py
+@@ -55,41 +55,58 @@ def lexer(raw: str) -> _LEX_STREAM:
+     :param raw: The raw cfg() expression
+     :return: An iterable of tokens
+     """
+-    start: int = 0
+-    is_string: bool = False
+-    for i, s in enumerate(raw):
+-        if s.isspace() or s in {')', '(', ',', '=', '"'}:
+-            val = raw[start:i]
+-            start = i + 1
+-            if s == '"' and is_string:
+-                yield (TokenType.STRING, val)
+-                is_string = False
+-                continue
+-            elif val == 'any':
+-                yield (TokenType.ANY, None)
+-            elif val == 'all':
+-                yield (TokenType.ALL, None)
+-            elif val == 'not':
+-                yield (TokenType.NOT, None)
+-            elif val == 'cfg':
+-                yield (TokenType.CFG, None)
+-            elif val:
+-                yield (TokenType.IDENTIFIER, val)
+-
+-            if s == '(':
+-                yield (TokenType.LPAREN, None)
+-            elif s == ')':
+-                yield (TokenType.RPAREN, None)
+-            elif s == ',':
+-                yield (TokenType.COMMA, None)
+-            elif s == '=':
+-                yield (TokenType.EQUAL, None)
+-            elif s == '"':
+-                is_string = True
+-    val = raw[start:]
+-    if val:
+-        # This should always be an identifier
+-        yield (TokenType.IDENTIFIER, val)
++    punctuation = {
++        '(': TokenType.LPAREN,
++        ')': TokenType.RPAREN,
++        ',': TokenType.COMMA,
++        '=': TokenType.EQUAL,
++    }
++    keywords = {
++        'all': TokenType.ALL,
++        'any': TokenType.ANY,
++        'not': TokenType.NOT,
++        'cfg': TokenType.CFG,
++    }
++
++    i = 0
++    while i < len(raw):
++        char = raw[i]
++        if char.isspace():
++            i += 1
++            continue
++        if char in punctuation:
++            yield punctuation[char], None
++            i += 1
++            continue
++        if char == '"':
++            i += 1
++            value: T.List[str] = []
++            while i < len(raw) and raw[i] != '"':
++                if raw[i] == '\\' and i + 1 < len(raw):
++                    i += 1
++                    escapes = {'n': '\n', 'r': '\r', 't': '\t'}
++                    value.append(escapes.get(raw[i], raw[i]))
++                else:
++                    value.append(raw[i])
++                i += 1
++            if i == len(raw):
++                raise MesonBugException('Unterminated string in Cargo cfg expression')
++            yield TokenType.STRING, ''.join(value)
++            i += 1
++            continue
++
++        start = i
++        while (i < len(raw) and not raw[i].isspace()
++               and raw[i] not in {'(', ')', ',', '=', '"'}):
++            i += 1
++        value = raw[start:i]
++        token = keywords.get(value)
++        if token is not None:
++            yield token, None
++        elif value:
++            yield TokenType.IDENTIFIER, value
++        else:
++            raise MesonBugException(f'Unhandled character in Cargo cfg expression: {raw[i]!r}')
+ 
+ 
+ def lookahead(iter: T.Iterator[_T]) -> T.Iterator[T.Tuple[_T, T.Optional[_T]]]:
+@@ -186,6 +203,9 @@ def _parse(ast: _LEX_STREAM_AH) -> IR:
+         (token, value), n_stream = next(ast)
+         assert token is TokenType.LPAREN
+         if n_stream and n_stream[0] == TokenType.RPAREN:
++            # Consume the closing parenthesis. This matters when an empty
++            # all()/any() is nested in a larger expression.
++            next(ast)
+             return type_(args)
+         while True:
+             args.append(_parse(ast))
+@@ -206,14 +226,20 @@ def _parse(ast: _LEX_STREAM_AH) -> IR:
+         raise MesonBugException(f'Unhandled Cargo token:{token} {value}')
+ 
+ 
++def parse(ast: _LEX_STREAM) -> IR:
++    """Parse a stream of Cargo cfg lexer tokens into an IR tree."""
++    stream = lookahead(ast)
++    result = _parse(stream)
++    try:
++        token, _ = next(stream)
++    except StopIteration:
++        return result
++    raise MesonBugException(f'Unexpected trailing Cargo token: {token[0]} {token[1]}')
+ 
+ 
+-
+-
+-
+-
+-
+-
++def eval_cfg(raw: str, cfgs: T.Dict[str, str]) -> bool:
++    """Evaluate a Rust cfg expression against compiler configuration values."""
++    return _eval_cfg(parse(lexer(raw)), cfgs)
+ 
+ 
+ def _eval_cfg(ir: IR, cfgs: T.Dict[str, str]) -> bool:
+@@ -229,4 +255,3 @@ def _eval_cfg(ir: IR, cfgs: T.Dict[str, str]) -> bool:
+         return all(_eval_cfg(i, cfgs) for i in ir.args)
+     else:
+         raise MesonBugException(f'Unhandled Cargo cfg IR: {ir}')
+-
+diff --git a/mesonbuild/cargo/interpreter.py b/mesonbuild/cargo/interpreter.py
+index 5d5326e..1f488f6 100644
+--- a/mesonbuild/cargo/interpreter.py
++++ b/mesonbuild/cargo/interpreter.py
+@@ -19,8 +19,8 @@ import urllib.parse
+ import typing as T
+ 
+ from . import builder, version
+-
+-
++from .cfg import eval_cfg
++from .toml import load_toml
+ from .manifest import Manifest, CargoLock, CargoLockPackage, Workspace, fixup_meson_varname
+ from ..mesonlib import is_parent_path, MesonException, MachineChoice, version_compare
+ from .. import coredata, mlog
+@@ -37,8 +37,113 @@ if T.TYPE_CHECKING:
+     from typing_extensions import Literal
+ 
+ 
++def _dependency_name(package_name: str, api: str, suffix: str = '-rs') -> str:
++    """Return the dependency name exposed by a Cargo subproject."""
++    return f'{package_name}-{api}{suffix}'
++
++
++def _parse_git_url(url: str, branch: T.Optional[str] = None) -> T.Tuple[str, str, str]:
++    """Split a Cargo git URL into clone URL, revision, and wrap directory."""
++    if url.startswith('git+'):
++        url = url[4:]
++    parsed = urllib.parse.urlparse(url)
++    query = urllib.parse.parse_qs(parsed.query)
++
++    # Cargo.lock records the resolved commit in the fragment. Cargo.toml can
++    # instead select rev/tag/branch (with branch also represented by the
++    # Dependency.branch field).
++    selected_ref: T.Optional[str] = branch
++    if selected_ref is None:
++        for key in ('rev', 'tag', 'branch'):
++            values = query.get(key)
++            if values:
++                selected_ref = values[0]
++                break
++
++    revision = parsed.fragment
++    if not revision:
++        revision = selected_ref or 'HEAD'
++
++    clone_url = urllib.parse.urlunparse(parsed._replace(query='', fragment=''))
++    directory = pathlib.PurePosixPath(parsed.path.rstrip('/')).name
++    if directory.endswith('.git'):
++        directory = directory[:-4]
++    if not directory:
++        raise MesonException(f'Could not determine a project name from Cargo git URL {url!r}')
++    # Different branches of the same repository may occur in one lockfile.
++    # Keep their subproject names distinct, while matching the name derived
++    # from a Cargo.toml dependency's explicit branch.
++    if selected_ref is not None:
++        safe_ref = selected_ref.replace('/', '-')
++        directory = f'{directory}-{safe_ref}'
++    return clone_url, revision, directory
++
++
++def load_cargo_lock(filename: str, subproject_dir: str) -> T.Optional[CargoLock]:
++    """Load Cargo.lock and synthesize Meson wraps for its remote packages."""
++    if not os.path.exists(filename):
++        return None
+ 
+-
++    raw_lock = T.cast('raw.CargoLock', load_toml(filename))
++    lock = CargoLock.from_raw(raw_lock)
++
++    crates_io_sources = {
++        'registry+https://github.com/rust-lang/crates.io-index',
++        'sparse+https://index.crates.io/',
++    }
++    git_wraps: T.Dict[T.Tuple[str, str], PackageDefinition] = {}
++
++    for package in lock.package:
++        source = package.source
++        if source is None:
++            # Workspace/path packages are already present locally.
++            continue
++
++        if source in crates_io_sources:
++            checksum = package.checksum
++            if checksum is None:
++                checksum = lock.metadata.get(
++                    f'checksum {package.name} {package.version} ({source})')
++
++            # Meson's package cache convention uses a .tar.gz filename. The
++            # crates.io endpoint serves the same gzip-compressed tar archive.
++            archive = f'{package.name}-{package.version}.tar.gz'
++            values = {
++                'directory': f'{package.name}-{package.version}',
++                'source_url': (f'https://crates.io/api/v1/crates/{package.name}/'
++                               f'{package.version}/download'),
++                'source_filename': archive,
++                'method': 'cargo',
++            }
++            if checksum is not None:
++                values['source_hash'] = checksum
++            wrap = PackageDefinition(package.subproject, subproject_dir, 'file', values)
++            lock.wraps[package.subproject] = wrap
++            continue
++
++        if source.startswith('git+'):
++            git_url, revision, directory = _parse_git_url(source)
++            identity = (git_url, revision)
++            wrap = git_wraps.get(identity)
++            if wrap is None:
++                values = {
++                    'url': git_url,
++                    'revision': revision,
++                    'directory': directory,
++                    'method': 'cargo',
++                }
++                wrap = PackageDefinition(directory, subproject_dir, 'git', values)
++                git_wraps[identity] = wrap
++                lock.wraps[directory] = wrap
++            # A git repository can be a workspace containing several crates.
++            # Advertise all of their Cargo dependency names from the one wrap.
++            wrap.provided_deps[package.subproject.lower()] = None
++            continue
++
++        mlog.warning(f'Unsupported Cargo.lock source URL {source!r}; ignoring package '
++                     f'{package.name} {package.version}')
++
++    return lock
+ 
+ 
+ def _dependency_varname(dep: Dependency) -> str:
+@@ -440,7 +545,7 @@ class Interpreter:
+             self._load_workspace_member(ws, dep_member)
+             dep_pkg = self._require_workspace_member(ws, dep_member)
+         elif dep.git:
+-            _, _, directory = _parse_git_url(dep.git, dep.branch)
++            _, _, directory = _parse_git_url(dep.git, dep.branch or dep.rev)
+             dep_pkg = self._fetch_package_from_subproject(dep.package, directory)
+         else:
+             cargo_pkg = self._resolve_package(dep.package, dep.meson_version)
+@@ -789,5 +894,3 @@ class Interpreter:
+                 ],
+             ),
+         ]
+-
+-
+diff --git a/mesonbuild/cargo/manifest.py b/mesonbuild/cargo/manifest.py
+index 4c001b6..d87eead 100644
+--- a/mesonbuild/cargo/manifest.py
++++ b/mesonbuild/cargo/manifest.py
+@@ -260,10 +260,9 @@ class Dependency:
+     default_features: bool = True
+     features: T.List[str] = dataclasses.field(default_factory=list)
+ 
+-
+-
+-
+-
++    @lazy_property
++    def meson_version(self) -> T.List[str]:
++        return version.convert(self.version)
+     @lazy_property
+     def api(self) -> str:
+         # Extract wanted API version from version constraints.
+@@ -453,23 +452,23 @@ class Lint:
+         lints_final.sort(key=lambda x: x.priority)
+         return lints_final
+ 
++    def to_arguments(self, check_cfg: bool) -> T.List[str]:
++        flags = {
++            'deny': '-D',
++            'allow': '-A',
++            'warn': '-W',
++            'forbid': '-F',
++        }
++        try:
++            flag = flags[self.level]
++        except KeyError:
++            raise MesonException(f'Unknown Cargo lint level {self.level!r}')
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        arguments = [flag, self.name]
++        if check_cfg and self.check_cfg is not None:
++            for value in self.check_cfg:
++                arguments.extend(['--check-cfg', value])
++        return arguments
+ 
+ 
+ @dataclasses.dataclass
+@@ -504,9 +503,13 @@ class Manifest:
+     def __post_init__(self) -> None:
+         self.features.setdefault('default', [])
+ 
+-
+-
+-
++    @lazy_property
++    def system_dependencies(self) -> T.Dict[str, SystemDependency]:
++        raw_dependencies = self.package.metadata.get('system-deps', {})
++        if not isinstance(raw_dependencies, dict):
++            raise MesonException('package.metadata.system-deps must be a table')
++        return {name: SystemDependency.from_raw(name, value)
++                for name, value in raw_dependencies.items()}
+ 
+     @classmethod
+     def from_raw(cls, raw: raw.Manifest, path: str, workspace: T.Optional[Workspace] = None, member_path: str = '') -> Self:
+@@ -555,13 +558,12 @@ class Workspace:
+     # A workspace can also have a root package.
+     root_package: T.Optional[Manifest] = None
+ 
+-
+-
+-
+-
+-
+-
+-
++    @lazy_property
++    def inheritable(self) -> T.Dict[str, object]:
++        # Package and dependency tables are inherited field-by-field and are
++        # handled explicitly by their converters. Lints are inherited as one
++        # complete table.
++        return {'lints': self.lints}
+ 
+     @classmethod
+     def from_raw(cls, raw: raw.Manifest, path: str) -> Self:
+@@ -584,10 +586,9 @@ class CargoLockPackage:
+     checksum: T.Optional[str] = None
+     dependencies: T.List[str] = dataclasses.field(default_factory=list)
+ 
+-
+-
+-
+-
++    @lazy_property
++    def api(self) -> str:
++        return version.api(self.version)
+     @lazy_property
+     def subproject(self) -> str:
+         return f'{self.name}-{self.api}-rs'
+@@ -622,4 +623,4 @@ class CargoLock:
+     @classmethod
+     def from_raw(cls, raw: raw.CargoLock) -> Self:
+         return _raw_to_dataclass(raw, cls, 'Cargo.lock',
+-                                 package=ConvertValue(lambda x: [CargoLockPackage.from_raw(p) for p in x]))
+\ No newline at end of file
++                                 package=ConvertValue(lambda x: [CargoLockPackage.from_raw(p) for p in x]))
+diff --git a/mesonbuild/cargo/toml.py b/mesonbuild/cargo/toml.py
+index 353e293..10b8f0b 100644
+--- a/mesonbuild/cargo/toml.py
++++ b/mesonbuild/cargo/toml.py
+@@ -31,3 +31,27 @@ class TomlImplementationMissing(MesonException):
+     pass
+ 
+ 
++def load_toml(filename: str) -> T.Dict[str, object]:
++    """Load *filename* using the available TOML implementation."""
++    if tomllib is not None:
++        # tomllib (and tomli's compatible API) requires a binary file object so
++        # that it can apply TOML's mandated UTF-8 decoding itself.
++        with open(filename, 'rb') as f:
++            return T.cast('T.Dict[str, object]', tomllib.load(f))
++
++    if toml2json is None:
++        raise TomlImplementationMissing(
++            'No TOML parser is available. Use Python 3.11+, install tomli, or install toml2json.')
++
++    process, stdout, stderr = Popen_safe([toml2json, filename])
++    if process.returncode != 0:
++        detail = stderr.strip() or stdout.strip()
++        raise MesonException(f'Failed to parse TOML file {filename}: {detail}')
++    try:
++        parsed = json.loads(stdout)
++    except json.JSONDecodeError as e:
++        raise MesonException(f'Failed to decode toml2json output for {filename}: {e}') from e
++    if not isinstance(parsed, dict):
++        raise MesonException(f'TOML file {filename} did not contain a top-level table')
++    return T.cast('T.Dict[str, object]', parsed)
++
+diff --git a/mesonbuild/cargo/version.py b/mesonbuild/cargo/version.py
+index 1f8127b..c62b37d 100644
+--- a/mesonbuild/cargo/version.py
++++ b/mesonbuild/cargo/version.py
+@@ -7,3 +7,86 @@ from __future__ import annotations
+ import typing as T
+ 
+ 
++def api(version: str) -> str:
++    """Return the Cargo API compatibility component of *version*.
++
++    Cargo follows semver for releases starting at 1.0.  Before 1.0 the minor
++    component is the compatibility boundary (with all 0.0 releases sharing
++    the ``0`` API used by Meson's Cargo dependency naming convention).
++    """
++    components = version.split('.')
++    major = components[0]
++    if major != '0':
++        return major
++    if len(components) > 1 and components[1] != '0':
++        return f'0.{components[1]}'
++    return '0'
++
++
++def _release_components(requirement: str) -> T.List[int]:
++    """Get the numeric release components used to calculate an upper bound."""
++    # Pre-release/build information affects the lower bound, but never which
++    # release component Cargo increments for the compatibility upper bound.
++    release = requirement.split('+', 1)[0].split('-', 1)[0]
++    return [int(component) for component in release.split('.')]
++
++
++def _upper_bound(components: T.List[int], index: int) -> str:
++    upper = components[:index + 1]
++    upper[index] += 1
++    return '.'.join(str(component) for component in upper)
++
++
++def _range(lower: str, upper: str) -> T.List[str]:
++    return [f'>= {lower}', f'< {upper}']
++
++
++def convert(cargo_ver: str) -> T.List[str]:
++    """Convert Cargo version requirements to Meson version constraints.
++
++    Cargo's comparison requirements map directly to Meson's comparisons.
++    Tilde, wildcard, and caret requirements are expanded into an inclusive
++    lower bound and an exclusive upper bound.
++    """
++    result: T.List[str] = []
++    for raw_requirement in cargo_ver.split(','):
++        requirement = raw_requirement.strip()
++        if not requirement:
++            continue
++
++        # Comparison requirements do not imply an additional compatibility
++        # range. Meson accepts Cargo's comparison spelling directly; retain it
++        # after trimming whitespace around the comma-separated requirement.
++        if requirement.startswith(('>=', '<=', '>', '<', '=')):
++            result.append(requirement)
++            continue
++
++        if requirement.startswith('~'):
++            lower = requirement[1:].strip()
++            components = _release_components(lower)
++            # ~1 is <2, while ~1.2 and ~1.2.3 are both <1.3.
++            upper_index = 0 if len(components) == 1 else 1
++            result.extend(_range(lower, _upper_bound(components, upper_index)))
++            continue
++
++        wildcard_parts = requirement.split('.')
++        wildcard_at = next((i for i, p in enumerate(wildcard_parts)
++                            if p.lower() in {'*', 'x'}), None)
++        if wildcard_at is not None:
++            # A bare wildcard imposes no version constraint.
++            if wildcard_at == 0:
++                continue
++            prefix = wildcard_parts[:wildcard_at]
++            components = [int(component) for component in prefix]
++            lower = '.'.join(prefix)
++            result.extend(_range(lower, _upper_bound(components, len(components) - 1)))
++            continue
++
++        # A requirement without an operator is a caret requirement.
++        lower = requirement[1:].strip() if requirement.startswith('^') else requirement
++        components = _release_components(lower)
++        upper_index = next((i for i, component in enumerate(components) if component != 0),
++                           len(components) - 1)
++        result.extend(_range(lower, _upper_bound(components, upper_index)))
++
++    return result

@@ -1,0 +1,35 @@
+diff --git a/mlflow/entities/webhook.py b/mlflow/entities/webhook.py
+index 1d50930..dc2fe17 100644
+--- a/mlflow/entities/webhook.py
++++ b/mlflow/entities/webhook.py
+@@ -315,9 +315,23 @@ class Webhook:
+     def status(self) -> WebhookStatus:
+         return self._status
+ 
++    @property
++    def secret(self) -> str | None:
++        """
++        Get the secret value stored on this Webhook entity.
+ 
++        This property exposes the optional secret supplied when the entity was directly constructed.
+ 
++        Returns:
++            The value supplied when this entity object was constructed, or None.
+ 
++        Notes:
++            Webhook protocol/REST responses do not expose the secret. Entities reconstructed from
++            those responses therefore report None even when a secret was supplied in the create
++            request. Directly constructing ``Webhook(..., secret=...)`` retains and exposes that
++            value.
++        """
++        return self._secret
+ 
+     @property
+     def creation_timestamp(self) -> int:
+@@ -434,4 +448,4 @@ class WebhookTestResult:
+             f"response_body={self.response_body!r}, "
+             f"error_message={self.error_message!r}"
+             f")"
+-        )
+\ No newline at end of file
++        )

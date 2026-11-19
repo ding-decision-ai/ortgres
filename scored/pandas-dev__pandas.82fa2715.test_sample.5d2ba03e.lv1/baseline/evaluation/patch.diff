@@ -1,0 +1,241 @@
+diff --git a/pandas/core/common.py b/pandas/core/common.py
+index a1ec90c..7bdf1f8 100644
+--- a/pandas/core/common.py
++++ b/pandas/core/common.py
+@@ -428,6 +428,21 @@ def random_state(
+ ) -> np.random.RandomState: ...
+ 
+ 
++def random_state(state: RandomState | None = None) -> RandomState:
++    """Turn a supported seed into a NumPy random-state object."""
++    if is_integer(state) or isinstance(state, (np.ndarray, np.random.BitGenerator)):
++        return np.random.RandomState(state)
++    if isinstance(state, (np.random.RandomState, np.random.Generator)):
++        return state
++    if state is None:
++        return np.random
++
++    raise ValueError(
++        "random_state must be an integer, array-like, a BitGenerator, Generator, "
++        "a numpy RandomState, or None"
++    )
++
++
+ 
+ 
+ 
+@@ -651,4 +666,4 @@ def fill_missing_names(names: Sequence[Hashable | None]) -> list[Hashable]:
+     list
+         list of column names with the None values replaced.
+     """
+-    return [f"level_{i}" if name is None else name for i, name in enumerate(names)]
+\ No newline at end of file
++    return [f"level_{i}" if name is None else name for i, name in enumerate(names)]
+diff --git a/pandas/core/groupby/groupby.py b/pandas/core/groupby/groupby.py
+index 2bc54b9..28c6f7f 100644
+--- a/pandas/core/groupby/groupby.py
++++ b/pandas/core/groupby/groupby.py
+@@ -5427,6 +5427,95 @@ class GroupBy(BaseGroupBy[NDFrameT]):
+         shifted = fill_grp.shift(periods=periods, freq=freq)
+         return (filled / shifted) - 1
+ 
++    @final
++    def sample(
++        self,
++        n: int | None = None,
++        frac: float | None = None,
++        replace: bool = False,
++        weights: Sequence | Series | None = None,
++        random_state: RandomState | None = None,
++    ):
++        """
++        Return a random sample of items from each group.
++
++        Each group is sampled independently. The selected rows retain their
++        original index labels and are returned in group iteration order.
++
++        Parameters
++        ----------
++        n : int, optional
++            Number of items to return for each group. Cannot be used with
++            ``frac``. Defaults to one when ``frac`` is not specified.
++        frac : float, optional
++            Fraction of items to return from each group.
++        replace : bool, default False
++            Allow sampling of the same row more than once.
++        weights : sequence or Series, optional
++            Sampling weights. Series weights align to the selected object's
++            index; weights are normalized separately within each group.
++        random_state : int, ndarray, BitGenerator, RandomState, Generator, optional
++            Random state used across all groups.
++
++        Returns
++        -------
++        Series or DataFrame
++            Rows sampled from each group, with their original labels.
++        """
++        selected_obj = self._selected_obj
++        if selected_obj.empty:
++            return selected_obj
++
++        size = sample.process_sampling_size(n, frac, replace)
++        if weights is not None:
++            weights_arr = sample.preprocess_weights(selected_obj, weights, axis=0)
++        else:
++            weights_arr = None
++
++        random_state = com.random_state(random_state)
++
++        group_ids = self._grouper.ids
++        valid = group_ids >= 0
++        group_sizes = np.bincount(
++            group_ids[valid], minlength=self._grouper.ngroups
++        )
++        # Stable sorting keeps rows in their original order within each group.
++        # Group numbers correspond to result_index, i.e. group iteration order.
++        sorter = np.argsort(group_ids, kind="stable")
++        sorter = sorter[group_ids[sorter] >= 0]
++
++        sampled_indices: list[npt.NDArray[np.intp]] = []
++        start = 0
++        for group_size in group_sizes:
++            group_indices = sorter[start : start + group_size]
++            start += group_size
++
++            if size is None:
++                assert frac is not None
++                sample_size = round(frac * group_size)
++            else:
++                sample_size = size
++
++            if weights_arr is None:
++                group_weights = None
++            else:
++                group_weights = weights_arr[group_indices]
++
++            sampled = sample.sample(
++                group_size,
++                sample_size,
++                replace,
++                group_weights,
++                random_state,
++            )
++            sampled_indices.append(group_indices[sampled])
++
++        if sampled_indices:
++            sampled_indices_array = np.concatenate(sampled_indices)
++        else:
++            sampled_indices_array = np.array([], dtype=np.intp)
++        return selected_obj.take(sampled_indices_array, axis=0)
++
+     @final
+     @Substitution(name="groupby")
+     @Substitution(see_also=_common_see_also)
+@@ -5812,4 +5901,4 @@ def _insert_quantile_level(idx: Index, qs: npt.NDArray[np.float64]) -> MultiInde
+         codes = [np.repeat(idx_codes, nqs), np.tile(lev_codes, nidx)]
+         mi = MultiIndex(levels=levels, codes=codes, names=[idx.name, None])
+ 
+-    return mi
+\ No newline at end of file
++    return mi
+diff --git a/pandas/core/sample.py b/pandas/core/sample.py
+index 450439f..3416f21 100644
+--- a/pandas/core/sample.py
++++ b/pandas/core/sample.py
+@@ -21,3 +21,96 @@ if TYPE_CHECKING:
+     from pandas.core.generic import NDFrame
+ 
+ 
++def preprocess_weights(obj: NDFrame, weights, axis: AxisInt) -> np.ndarray:
++    """Validate and coerce weights for ``NDFrame.sample``."""
++    if isinstance(weights, str):
++        if not isinstance(obj, ABCDataFrame):
++            assert isinstance(obj, ABCSeries)
++            raise ValueError(
++                "Strings cannot be passed as weights when sampling from a Series."
++            )
++        if axis != 0:
++            raise ValueError(
++                "Strings can only be passed to weights when sampling from rows "
++                "on a DataFrame"
++            )
++
++        try:
++            weights = obj[weights]
++        except KeyError as err:
++            raise KeyError("String passed to weights not a valid column") from err
++
++    if isinstance(weights, ABCSeries):
++        weights = weights.reindex(obj.axes[axis])
++
++    weights = np.asarray(weights, dtype="float64")
++
++    if len(weights) != obj.shape[axis]:
++        raise ValueError("Weights and axis to be sampled must be of same length")
++    if lib.has_infs(weights):
++        raise ValueError("weight vector may not include `inf` values")
++    if (weights < 0).any():
++        raise ValueError("weight vector many not include negative values")
++
++    # Do not mutate caller-owned arrays or DataFrame columns when replacing NaNs.
++    weights = weights.copy()
++    weights[np.isnan(weights)] = 0
++    return weights
++
++
++def process_sampling_size(
++    n: int | None, frac: float | None, replace: bool
++) -> int | None:
++    """Process and validate the ``n`` and ``frac`` arguments to sample."""
++    if n is None and frac is None:
++        return 1
++    if n is not None and frac is not None:
++        raise ValueError("Please enter a value for `frac` OR `n`, not both")
++
++    if n is not None:
++        if n < 0:
++            raise ValueError(
++                "A negative number of rows requested. Please provide `n` >= 0"
++            )
++        if not lib.is_integer(n):
++            raise ValueError("Only integers accepted as `n` values")
++        return n
++
++    assert frac is not None
++    if frac > 1 and not replace:
++        raise ValueError(
++            "Replace has to be set to `True` when upsampling the population "
++            "`frac` > 1."
++        )
++    if frac < 0:
++        raise ValueError(
++            "A negative number of rows requested. Please provide `frac` >= 0"
++        )
++    return None
++
++
++def sample(
++    obj_len: int,
++    size: int,
++    replace: bool,
++    weights: np.ndarray | None,
++    random_state: np.random.RandomState | np.random.Generator,
++) -> np.ndarray:
++    """Randomly sample positional indices."""
++    if weights is not None:
++        weight_sum = weights.sum()
++        if weight_sum != 0:
++            weights = weights / weight_sum
++        else:
++            raise ValueError("Invalid weights: weights sum to zero")
++
++        if not replace and size * weights.max() > 1:
++            raise ValueError(
++                "Weighted sampling cannot be achieved with replace=False. Either "
++                "set replace=True or use smaller weights. See the docstring of "
++                "sample for details."
++            )
++
++    return random_state.choice(
++        obj_len, size=size, replace=replace, p=weights
++    ).astype(np.intp, copy=False)

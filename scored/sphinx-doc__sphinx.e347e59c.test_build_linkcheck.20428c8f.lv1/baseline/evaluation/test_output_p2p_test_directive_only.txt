@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/fb15428, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-1
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 1 item
+
+tests/test_directives/test_directive_only.py .                           [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-1/directive-only
+# outdir: /tmp/pytest-of-root/pytest-1/directive-only/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are specified
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00m1 source files given on command line
+[01mupdating environment: [39;49;00m[new config] 2 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 50%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35monly[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 50%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32monly[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-1/directive-only/_build/text.
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_directives/test_directive_only.py::test_sectioning
+============================== 1 passed in 0.20s ===============================

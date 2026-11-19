@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 6 items
+
+tests/_stats/test_order.py ......                                        [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_stats/test_order.py::TestPerc::test_int_k
+PASSED tests/_stats/test_order.py::TestPerc::test_list_k
+PASSED tests/_stats/test_order.py::TestPerc::test_orientation
+PASSED tests/_stats/test_order.py::TestPerc::test_method
+PASSED tests/_stats/test_order.py::TestPerc::test_grouped
+PASSED tests/_stats/test_order.py::TestPerc::test_with_na
+============================== 6 passed in 0.25s ===============================

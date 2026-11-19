@@ -1,0 +1,88 @@
+2026-10-10 17:47:24,417 - INFO - ============================================================
+2026-10-10 17:47:24,417 - INFO - Starting evaluation for instance: mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1
+2026-10-10 17:47:24,417 - INFO - Level: 1
+2026-10-10 17:47:24,417 - INFO - Attempt: 1
+2026-10-10 17:47:24,417 - INFO - ============================================================
+2026-10-10 17:47:24,422 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-10 17:47:24,422 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb
+2026-10-10 17:47:24,424 - INFO - Image docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb found locally
+2026-10-10 17:47:24,424 - INFO - Creating container: fb-eval-mwaskom__seaborn-7001ebe7-test_distributions-f700676d-lv1-attempt-1-20261010-174724-424047
+2026-10-10 17:47:24,424 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-10 17:47:24,776 - INFO - Container fb-eval-mwaskom__seaborn-7001ebe7-test_distributions-f700676d-lv1-attempt-1-20261010-174724-424047 created successfully
+2026-10-10 17:47:24,776 - INFO - Starting Level 1 evaluation for mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1
+2026-10-10 17:47:24,776 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-10 17:47:25,109 - INFO - Restore project exit code: 0
+2026-10-10 17:47:25,110 - INFO - Output: 
+2026-10-10 17:47:25,110 - INFO - Step 2: Applying patch to mask files
+2026-10-10 17:47:25,113 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-10 17:47:25,355 - INFO - Mask patch apply exit code: 0
+2026-10-10 17:47:25,355 - INFO - Mask patch output: 
+2026-10-10 17:47:25,355 - INFO - Successfully applied mask patch
+2026-10-10 17:47:25,355 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-10 17:47:25,358 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-10 17:47:25,358 - INFO - Deleting F2P test file: /testbed/tests/test_distributions.py
+2026-10-10 17:47:25,613 - INFO - Successfully deleted F2P test file: /testbed/tests/test_distributions.py
+2026-10-10 17:47:25,614 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-10 17:47:25,614 - INFO - Step 4: Reinitializing git repository
+2026-10-10 17:47:27,171 - INFO - Step 5: Applying agent patch
+2026-10-10 17:47:27,175 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-10 17:47:27,416 - INFO - Patch apply exit code: 0
+2026-10-10 17:47:27,416 - INFO - Patch output: Checking patch seaborn/_compat.py...
+Checking patch seaborn/axisgrid.py...
+Checking patch seaborn/palettes.py...
+Checking patch seaborn/utils.py...
+Applied patch seaborn/_compat.py cleanly.
+Applied patch seaborn/axisgrid.py cleanly.
+Applied patch seaborn/palettes.py cleanly.
+Applied patch seaborn/utils.py cleanly.
+
+2026-10-10 17:47:27,416 - INFO - >>>>> Applied Patch
+2026-10-10 17:47:27,416 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-10 17:47:27,416 - INFO - F2P test path: /testbed/tests/test_distributions.py
+2026-10-10 17:47:27,649 - INFO - Delete F2P file exit code: 0
+2026-10-10 17:47:27,649 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-10 17:47:27,882 - INFO - Reverse apply exit code: 0
+2026-10-10 17:47:27,882 - INFO - Reverse apply output: 
+2026-10-10 17:47:27,882 - INFO - Successfully restored F2P test file using test_patch
+2026-10-10 17:47:27,882 - INFO - Step 7: Running tests
+2026-10-10 17:47:27,882 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-10 17:47:27,882 - INFO - Test timeout: 600s
+2026-10-10 17:47:27,882 - INFO - Running F2P test: /testbed/tests/test_distributions.py
+2026-10-10 17:47:52,267 - INFO - F2P test exit code: 1
+2026-10-10 17:47:52,267 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 259 items
+
+tests/test_distributions.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 16%]
+FFFFFFFFFsFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 44%]
+FFFFFFFFFFFFFFFFFFFFFF
+2026-10-10 17:47:52,268 - INFO - Saved F2P test output to artifact://0531e265a33d9200
+2026-10-10 17:47:52,268 - INFO - Running 5 P2P tests
+2026-10-10 17:47:52,268 - INFO - Running P2P test: /testbed/tests/test_statistics.py
+2026-10-10 17:47:54,628 - INFO - P2P test /testbed/tests/test_statistics.py exit code: 0
+2026-10-10 17:47:54,629 - INFO - Saved P2P test output to artifact://656380be65745157
+2026-10-10 17:47:54,629 - INFO - Running P2P test: /testbed/tests/_core/test_moves.py
+2026-10-10 17:47:55,719 - INFO - P2P test /testbed/tests/_core/test_moves.py exit code: 0
+2026-10-10 17:47:55,719 - INFO - Saved P2P test output to artifact://23c79a69b473868d
+2026-10-10 17:47:55,719 - INFO - Running P2P test: /testbed/tests/_core/test_data.py
+2026-10-10 17:47:56,813 - INFO - P2P test /testbed/tests/_core/test_data.py exit code: 0
+2026-10-10 17:47:56,813 - INFO - Saved P2P test output to artifact://0c776a72ce7c2b40
+2026-10-10 17:47:56,813 - INFO - Running P2P test: /testbed/tests/_stats/test_aggregation.py
+2026-10-10 17:47:57,971 - INFO - P2P test /testbed/tests/_stats/test_aggregation.py exit code: 0
+2026-10-10 17:47:57,971 - INFO - Saved P2P test output to artifact://1406e095159b34de
+2026-10-10 17:47:57,971 - INFO - Running P2P test: /testbed/tests/test_algorithms.py
+2026-10-10 17:48:00,694 - INFO - P2P test /testbed/tests/test_algorithms.py exit code: 0
+2026-10-10 17:48:00,694 - INFO - Saved P2P test output to artifact://fa3b565db56f6941
+2026-10-10 17:48:00,697 - INFO - ============================================================
+2026-10-10 17:48:00,697 - INFO - Evaluation completed for mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1
+2026-10-10 17:48:00,697 - INFO - Resolved: False
+2026-10-10 17:48:00,697 - INFO - F2P Pass rate: 0.0039
+2026-10-10 17:48:00,697 - INFO - ============================================================
+2026-10-10 17:48:00,697 - INFO - Stopping and removing container
+2026-10-10 17:48:10,903 - INFO - Container removed successfully

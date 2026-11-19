@@ -1,0 +1,156 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/table/tests/test_pprint.py.
+
+Date: 2026-10-10T23:34:31
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 89 items
+
+astropy/table/tests/test_pprint.py ..................................... [ 41%]
+....................................................                     [100%]
+
+==================================== PASSES ====================================
+_________________ TestPprintColumn.test_pprint_scalar[1-exp0] __________________
+----------------------------- Captured stdout call -----------------------------
+None
+----
+   1
+______________ TestPprintColumn.test_pprint_scalar[scalar1-exp1] _______________
+----------------------------- Captured stdout call -----------------------------
+None
+----
+ 0.6
+__________________________________ test_align __________________________________
+----------------------------- Captured stdout call -----------------------------
+ a   b 
+--- ---
+ +1   b
+ +2   c
+=========================== short test summary info ============================
+PASSED astropy/table/tests/test_pprint.py::TestMultiD::test_multidim[False]
+PASSED astropy/table/tests/test_pprint.py::TestMultiD::test_multidim[True]
+PASSED astropy/table/tests/test_pprint.py::TestMultiD::test_fake_multidim[False]
+PASSED astropy/table/tests/test_pprint.py::TestMultiD::test_fake_multidim[True]
+PASSED astropy/table/tests/test_pprint.py::test_html_escaping
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_empty_table[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_empty_table[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format0[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format0[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format1[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format1[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format2[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format2[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format3[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format3[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format4[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_format4[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_noclip[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_noclip[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip1[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip1[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip2[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip2[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip3[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip3[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip4[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_clip4[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_pformat_all[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_pformat_all[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_pprint_all[False]
+PASSED astropy/table/tests/test_pprint.py::TestPprint::test_pprint_all[True]
+PASSED astropy/table/tests/test_pprint.py::TestPprintColumn::test_pprint_scalar[1-exp0]
+PASSED astropy/table/tests/test_pprint.py::TestPprintColumn::test_pprint_scalar[scalar1-exp1]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_with_threshold[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_with_threshold[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_callable[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_callable[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func_wrong_number_args[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func_wrong_number_args[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func_multiD[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func_multiD[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func_not_str[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_format_func_not_str[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_alignment[False]
+PASSED astropy/table/tests/test_pprint.py::TestFormat::test_column_alignment[True]
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format_with_threshold_masked_table
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format_func
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format_func_with_special_masked
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format_callable
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format_func_wrong_number_args
+PASSED astropy/table/tests/test_pprint.py::TestFormatWithMaskedElements::test_column_format_func_multiD
+PASSED astropy/table/tests/test_pprint.py::test_pprint_npfloat32
+PASSED astropy/table/tests/test_pprint.py::test_pprint_py3_bytes
+PASSED astropy/table/tests/test_pprint.py::test_pprint_structured
+PASSED astropy/table/tests/test_pprint.py::test_pprint_structured_with_format
+PASSED astropy/table/tests/test_pprint.py::test_pprint_nameless_col
+PASSED astropy/table/tests/test_pprint.py::test_html
+PASSED astropy/table/tests/test_pprint.py::test_align
+PASSED astropy/table/tests/test_pprint.py::test_auto_format_func
+PASSED astropy/table/tests/test_pprint.py::test_decode_replace
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_basic[pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_basic[pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_slice
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_copy
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_setting[z-pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_setting[z-pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_setting[value1-pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_setting[value1-pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_add_remove[z-pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_add_remove[z-pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_add_remove[value1-pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_add_remove[value1-pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_add_remove[value2-pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_add_remove[value2-pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_rename[pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_rename[pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_remove[pprint_exclude_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_remove[pprint_include_names]
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_serialization
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_output
+PASSED astropy/table/tests/test_pprint.py::TestColumnsShowHide::test_output_globs
+PASSED astropy/table/tests/test_pprint.py::test_embedded_newline_tab
+PASSED astropy/table/tests/test_pprint.py::test_multidims_with_zero_dim
+PASSED astropy/table/tests/test_pprint.py::test_zero_length_string
+============================== 89 passed in 0.33s ==============================

@@ -1,0 +1,116 @@
+2026-10-12 18:43:10,706 - INFO - ============================================================
+2026-10-12 18:43:10,706 - INFO - Starting evaluation for instance: pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1
+2026-10-12 18:43:10,706 - INFO - Level: 1
+2026-10-12 18:43:10,706 - INFO - Attempt: 1
+2026-10-12 18:43:10,706 - INFO - ============================================================
+2026-10-12 18:43:10,713 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-12 18:43:10,713 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_pandas-instance_15f634a6
+2026-10-12 18:43:10,715 - INFO - Image docker.io/libercoders/featurebench-specs_pandas-instance_15f634a6 found locally
+2026-10-12 18:43:10,715 - INFO - Creating container: fb-eval-pandas-dev__pandas-82fa2715-test_merge_antijoin-921feefe-lv1-attempt-1-20261012-184310-715415
+2026-10-12 18:43:10,716 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-12 18:43:10,929 - INFO - Container fb-eval-pandas-dev__pandas-82fa2715-test_merge_antijoin-921feefe-lv1-attempt-1-20261012-184310-715415 created successfully
+2026-10-12 18:43:10,929 - INFO - Starting Level 1 evaluation for pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1
+2026-10-12 18:43:10,929 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-12 18:43:11,690 - INFO - Restore project exit code: 0
+2026-10-12 18:43:11,690 - INFO - Output: 
+2026-10-12 18:43:11,690 - INFO - Step 2: Applying patch to mask files
+2026-10-12 18:43:11,696 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-12 18:43:11,977 - INFO - Mask patch apply exit code: 0
+2026-10-12 18:43:11,977 - INFO - Mask patch output: /tmp/mask_patch.diff:887: new blank line at EOF.
++
+/tmp/mask_patch.diff:7133: new blank line at EOF.
++
+warning: 2 lines add whitespace errors.
+
+2026-10-12 18:43:11,977 - INFO - Successfully applied mask patch
+2026-10-12 18:43:11,977 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-12 18:43:11,982 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-12 18:43:11,982 - INFO - Deleting F2P test file: /testbed/pandas/tests/reshape/merge/test_merge_antijoin.py
+2026-10-12 18:43:12,234 - INFO - Successfully deleted F2P test file: /testbed/pandas/tests/reshape/merge/test_merge_antijoin.py
+2026-10-12 18:43:12,234 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-12 18:43:12,234 - INFO - Step 4: Reinitializing git repository
+2026-10-12 18:43:14,783 - INFO - Step 5: Applying agent patch
+2026-10-12 18:43:14,787 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-12 18:43:15,035 - INFO - Patch apply exit code: 0
+2026-10-12 18:43:15,035 - INFO - Patch output: Checking patch pandas/__init__.py...
+Checking patch pandas/core/arrays/arrow/array.py...
+Checking patch pandas/core/arrays/base.py...
+Checking patch pandas/core/common.py...
+Checking patch pandas/core/dtypes/astype.py...
+Checking patch pandas/core/dtypes/cast.py...
+Checking patch pandas/core/dtypes/concat.py...
+Checking patch pandas/core/frame.py...
+Checking patch pandas/core/indexes/api.py...
+Checking patch pandas/core/indexes/base.py...
+Checking patch pandas/core/indexes/interval.py...
+Checking patch pandas/core/internals/__init__.py...
+Checking patch pandas/core/internals/blocks.py...
+Checking patch pandas/core/internals/concat.py...
+Checking patch pandas/core/internals/managers.py...
+Checking patch pandas/core/reshape/api.py...
+Checking patch pandas/core/reshape/concat.py...
+Checking patch pandas/core/reshape/merge.py...
+Applied patch pandas/__init__.py cleanly.
+Applied patch pandas/core/arrays/arrow/array.py cleanly.
+Applied patch pandas/core/arrays/base.py cleanly.
+Applied patch pandas/core/common.py cleanly.
+Applied patch pandas/core/dtypes/astype.py cleanly.
+Applied patch pandas/core/dtypes/cast.py cleanly.
+Applied patch pandas/core/dtypes/concat.py cleanly.
+Applied patch pandas/core/frame.py cleanly.
+Applied patch pandas/core/indexes/api.py cleanly.
+Applied patch pandas/core/indexes/base.py cleanly.
+Applied patch pandas/core/indexes/interval.py cleanly.
+Applied patch pandas/core/internals/__init__.py cleanly.
+Applied patch pandas/core/internals/blocks.py cleanly.
+Applied patch pandas/core/internals/concat.py cleanly.
+Applied patch pandas/core/internals/managers.py cleanly.
+Applied patch pandas/core/reshape/api.py cleanly.
+Applied patch pandas/core/reshape/concat.py cleanly.
+Applied patch pandas/core/reshape/merge.py cleanly.
+
+2026-10-12 18:43:15,035 - INFO - >>>>> Applied Patch
+2026-10-12 18:43:15,035 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-12 18:43:15,035 - INFO - F2P test path: /testbed/pandas/tests/reshape/merge/test_merge_antijoin.py
+2026-10-12 18:43:15,276 - INFO - Delete F2P file exit code: 0
+2026-10-12 18:43:15,276 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-12 18:43:15,554 - INFO - Reverse apply exit code: 0
+2026-10-12 18:43:15,554 - INFO - Reverse apply output: 
+2026-10-12 18:43:15,554 - INFO - Successfully restored F2P test file using test_patch
+2026-10-12 18:43:15,554 - INFO - Step 7: Running tests
+2026-10-12 18:43:15,555 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-12 18:43:15,555 - INFO - Test timeout: 600s
+2026-10-12 18:43:15,555 - INFO - Running F2P test: /testbed/pandas/tests/reshape/merge/test_merge_antijoin.py
+2026-10-12 18:44:04,573 - INFO - F2P test exit code: 1
+2026-10-12 18:44:04,573 - INFO - F2P output (truncated): /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /te
+2026-10-12 18:44:04,573 - INFO - Saved F2P test output to artifact://61c572720ba4b75c
+2026-10-12 18:44:04,574 - INFO - Running 5 P2P tests
+2026-10-12 18:44:04,574 - INFO - Running P2P test: /testbed/pandas/tests/series/methods/test_equals.py
+2026-10-12 18:44:06,442 - INFO - P2P test /testbed/pandas/tests/series/methods/test_equals.py exit code: 0
+2026-10-12 18:44:06,442 - INFO - Saved P2P test output to artifact://df80ccfb5f2e7a52
+2026-10-12 18:44:06,442 - INFO - Running P2P test: /testbed/pandas/tests/io/parser/dtypes/test_empty.py
+2026-10-12 18:44:09,314 - INFO - P2P test /testbed/pandas/tests/io/parser/dtypes/test_empty.py exit code: 0
+2026-10-12 18:44:09,314 - INFO - Saved P2P test output to artifact://6f38e813c0af7fc2
+2026-10-12 18:44:09,314 - INFO - Running P2P test: /testbed/pandas/tests/indexes/timedeltas/methods/test_factorize.py
+2026-10-12 18:44:11,226 - INFO - P2P test /testbed/pandas/tests/indexes/timedeltas/methods/test_factorize.py exit code: 0
+2026-10-12 18:44:11,227 - INFO - Saved P2P test output to artifact://6880ecec45265996
+2026-10-12 18:44:11,227 - INFO - Running P2P test: /testbed/pandas/tests/extension/test_extension.py
+2026-10-12 18:44:13,021 - INFO - P2P test /testbed/pandas/tests/extension/test_extension.py exit code: 0
+2026-10-12 18:44:13,021 - INFO - Saved P2P test output to artifact://883f598ef7de59c8
+2026-10-12 18:44:13,021 - INFO - Running P2P test: /testbed/pandas/tests/groupby/methods/test_nlargest_nsmallest.py
+2026-10-12 18:44:14,796 - INFO - P2P test /testbed/pandas/tests/groupby/methods/test_nlargest_nsmallest.py exit code: 0
+2026-10-12 18:44:14,796 - INFO - Saved P2P test output to artifact://56bacc1a8476bb64
+2026-10-12 18:44:14,799 - INFO - ============================================================
+2026-10-12 18:44:14,799 - INFO - Evaluation completed for pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1
+2026-10-12 18:44:14,799 - INFO - Resolved: False
+2026-10-12 18:44:14,799 - INFO - F2P Pass rate: 0.4
+2026-10-12 18:44:14,799 - INFO - ============================================================
+2026-10-12 18:44:14,799 - INFO - Stopping and removing container
+2026-10-12 18:44:25,176 - INFO - Container removed successfully

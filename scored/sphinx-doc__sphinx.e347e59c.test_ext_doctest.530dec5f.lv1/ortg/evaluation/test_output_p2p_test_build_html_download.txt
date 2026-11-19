@@ -1,0 +1,163 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/2420e63, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-1
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 2 items
+
+tests/test_builders/test_build_html_download.py ..                       [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/2420e63[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 15 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35motherext[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35msubdir/includes[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying downloadable files... [39;49;00m[ 33%] [33mimg.png[39;49;00m
+[01mcopying downloadable files... [39;49;00m[ 67%] [33msubdir/img.png[39;49;00m
+[01mcopying downloadable files... [39;49;00m[100%] [33mfile_with_special_#_chars.xyz[39;49;00m
+
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/root/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/root/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/root/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mautodoc[39;49;00m
+[01mwriting output... [39;49;00m[ 13%] [32mbom[39;49;00m
+[01mwriting output... [39;49;00m[ 20%] [32mextapi[39;49;00m
+[01mwriting output... [39;49;00m[ 27%] [32mextensions[39;49;00m
+[01mwriting output... [39;49;00m[ 33%] [32mfootnote[39;49;00m
+[01mwriting output... [39;49;00m[ 40%] [32mimages[39;49;00m
+[01mwriting output... [39;49;00m[ 47%] [32mincludes[39;49;00m
+[01mwriting output... [39;49;00m[ 53%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 60%] [32mlists[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mmarkup[39;49;00m
+[01mwriting output... [39;49;00m[ 73%] [32mmath[39;49;00m
+[01mwriting output... [39;49;00m[ 80%] [32mobjects[39;49;00m
+[01mwriting output... [39;49;00m[ 87%] [32motherext[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32msubdir/images[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32msubdir/includes[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex py-modindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mcopying images... [39;49;00m[ 17%] [33mimg.png[39;49;00m
+[01mcopying images... [39;49;00m[ 33%] [33msubdir/img.png[39;49;00m
+[01mcopying images... [39;49;00m[ 50%] [33msubdir/simg.png[39;49;00m
+[01mcopying images... [39;49;00m[ 67%] [33msvgimg.svg[39;49;00m
+[01mcopying images... [39;49;00m[ 83%] [33mimg.foo.png[39;49;00m
+[01mcopying images... [39;49;00m[100%] [33mrimg.png[39;49;00m
+
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded, 19 warnings.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-1/root/_build/html.
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m/tmp/pytest-of-root/pytest-1/root/objects.txt:161: WARNING: Unparseable C cross-reference: 'SphinxType *'
+Invalid C declaration: Expected end of definition. [error at 11]
+  SphinxType *
+  -----------^[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/roles-download
+# outdir: /tmp/pytest-of-root/pytest-1/roles-download/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/2420e63[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying downloadable files... [39;49;00m[ 50%] [33mdummy.dat[39;49;00m
+[01mcopying downloadable files... [39;49;00m[100%] [33manother/dummy.dat[39;49;00m
+
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/roles-download/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/roles-download/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/roles-download/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded, 1 warning.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-1/roles-download/_build/html.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-1/roles-download/index.rst:6: WARNING: download file not readable: /tmp/pytest-of-root/pytest-1/roles-download/not_found.dat [download.not_readable][39;49;00m
+
+=========================== short test summary info ============================
+PASSED tests/test_builders/test_build_html_download.py::test_html_download
+PASSED tests/test_builders/test_build_html_download.py::test_html_download_role
+============================== 2 passed in 0.99s ===============================

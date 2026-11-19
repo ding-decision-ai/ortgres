@@ -1,0 +1,294 @@
+diff --git a/seaborn/_statistics.py b/seaborn/_statistics.py
+index 3aeaf7f..a50cd84 100644
+--- a/seaborn/_statistics.py
++++ b/seaborn/_statistics.py
+@@ -87,69 +87,73 @@ class KDE:
+ 
+         self.support = None
+ 
++    def _define_support_grid(self, x, bw, cut, clip, gridsize):
++        """Create the regularly-spaced grid for one data dimension."""
++        clip_lo, clip_hi = clip
++        if clip_lo is None:
++            clip_lo = -np.inf
++        if clip_hi is None:
++            clip_hi = +np.inf
++
++        gridmin = max(np.min(x) - bw * cut, clip_lo)
++        gridmax = min(np.max(x) + bw * cut, clip_hi)
++        return np.linspace(gridmin, gridmax, gridsize)
++
++    def _define_support_univariate(self, x, weights):
++        """Create a support grid for a univariate KDE."""
++        kde = self._fit(x, weights)
++        bw = np.sqrt(kde.covariance.squeeze())
++        return self._define_support_grid(
++            x, bw, self.cut, self.clip, self.gridsize,
++        )
+ 
++    def _define_support_bivariate(self, x1, x2, weights):
++        """Create one support grid for each dimension of a bivariate KDE."""
++        clip = self.clip
++        if len(clip) == 2 and (clip[0] is None or isinstance(clip[0], Number)):
++            clip1 = clip2 = clip
++        else:
++            clip1, clip2 = clip
+ 
++        kde = self._fit([x1, x2], weights)
++        bw = np.sqrt(np.diag(kde.covariance).squeeze())
+ 
++        grid1 = self._define_support_grid(
++            x1, bw[0], self.cut, clip1, self.gridsize,
++        )
++        grid2 = self._define_support_grid(
++            x2, bw[1], self.cut, clip2, self.gridsize,
++        )
++        return grid1, grid2
+ 
++    def define_support(self, x1, x2=None, weights=None, cache=True):
++        """Create the evaluation grid for a given data set."""
++        if x2 is None:
++            support = self._define_support_univariate(x1, weights)
++        else:
++            support = self._define_support_bivariate(x1, x2, weights)
+ 
++        if cache:
++            self.support = support
+ 
++        return support
+ 
++    def _fit(self, fit_data, weights=None):
++        """Fit the scipy KDE while applying the bandwidth adjustment."""
++        fit_kws = {"bw_method": self.bw_method}
++        if weights is not None:
++            fit_kws["weights"] = weights
+ 
++        kde = gaussian_kde(fit_data, **fit_kws)
++        kde.set_bandwidth(kde.factor * self.bw_adjust)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        return kde
+ 
+     def _eval_univariate(self, x, weights=None):
+         """Fit and evaluate a univariate on univariate data."""
+         support = self.support
+         if support is None:
+-            support = self.define_support(x, cache=False)
++            support = self.define_support(x, weights=weights, cache=False)
+ 
+         kde = self._fit(x, weights)
+ 
+@@ -167,7 +171,7 @@ class KDE:
+         """Fit and evaluate a univariate on bivariate data."""
+         support = self.support
+         if support is None:
+-            support = self.define_support(x1, x2, cache=False)
++            support = self.define_support(x1, x2, weights, cache=False)
+ 
+         kde = self._fit([x1, x2], weights)
+ 
+@@ -252,92 +256,84 @@ class Histogram:
+ 
+         self.bin_kws = None
+ 
++    def _define_bin_edges(
++        self, x, weights, bins, binwidth, binrange, discrete,
++    ):
++        """Resolve bin specifications into an explicit array of edges."""
++        if binrange is None:
++            start, stop = np.min(x), np.max(x)
++        else:
++            start, stop = binrange
+ 
++        if discrete:
++            bin_edges = np.arange(start - .5, stop + 1.5)
++        else:
++            if binwidth is not None:
++                bins = int(round((stop - start) / binwidth))
++            bin_edges = np.histogram_bin_edges(
++                x, bins, binrange, weights,
++            )
+ 
++        return bin_edges
+ 
++    def define_bin_params(self, x1, x2=None, weights=None, cache=True):
++        """Given data, return numpy.histogram parameters to define bins."""
++        if x2 is None:
+ 
++            bin_edges = self._define_bin_edges(
++                x1,
++                weights,
++                self.bins,
++                self.binwidth,
++                self.binrange,
++                self.discrete,
++            )
+ 
++            if isinstance(self.bins, (str, Number)):
++                bin_kws = {
++                    "bins": len(bin_edges) - 1,
++                    "range": (bin_edges.min(), bin_edges.max()),
++                }
++            else:
++                bin_kws = {"bins": bin_edges}
+ 
++        else:
+ 
++            bin_edges = []
++            for i, x in enumerate([x1, x2]):
+ 
++                bins = self.bins
++                if not isinstance(bins, (str, Number)):
++                    bins = bins[i]
+ 
++                binwidth = self.binwidth
++                if binwidth is not None and not isinstance(binwidth, Number):
++                    binwidth = binwidth[i]
+ 
++                binrange = self.binrange
++                if binrange is not None and not isinstance(binrange[0], Number):
++                    binrange = binrange[i]
+ 
++                discrete = self.discrete
++                if not isinstance(discrete, (bool, np.bool_)):
++                    discrete = discrete[i]
+ 
++                bin_edges.append(self._define_bin_edges(
++                    x, weights, bins, binwidth, binrange, discrete,
++                ))
+ 
++            bin_kws = {"bins": tuple(bin_edges)}
+ 
++        if cache:
++            self.bin_kws = bin_kws
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        return bin_kws
+ 
+     def _eval_bivariate(self, x1, x2, weights):
+         """Inner function for histogram of two variables."""
+         bin_kws = self.bin_kws
+         if bin_kws is None:
+-            bin_kws = self.define_bin_params(x1, x2, cache=False)
++            bin_kws = self.define_bin_params(x1, x2, weights, cache=False)
+ 
+         density = self.stat == "density"
+ 
+@@ -695,4 +691,4 @@ def _validate_errorbar_arg(arg):
+     if level is not None and not isinstance(level, Number):
+         raise TypeError(usage)
+ 
+-    return method, level
+\ No newline at end of file
++    return method, level

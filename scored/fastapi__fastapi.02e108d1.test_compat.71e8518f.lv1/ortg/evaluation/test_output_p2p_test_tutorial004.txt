@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, inline-snapshot-0.31.1, cov-7.0.0, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 12 items
+
+tests/test_tutorial/test_response_model/test_tutorial004.py ............ [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004-/items/foo-data0]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004-/items/bar-data1]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004-/items/baz-data2]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py39-/items/foo-data0]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py39-/items/bar-data1]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py39-/items/baz-data2]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py310-/items/foo-data0]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py310-/items/bar-data1]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py310-/items/baz-data2]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_openapi_schema[tutorial004]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_openapi_schema[tutorial004_py39]
+PASSED tests/test_tutorial/test_response_model/test_tutorial004.py::test_openapi_schema[tutorial004_py310]
+============================== 12 passed in 0.24s ==============================

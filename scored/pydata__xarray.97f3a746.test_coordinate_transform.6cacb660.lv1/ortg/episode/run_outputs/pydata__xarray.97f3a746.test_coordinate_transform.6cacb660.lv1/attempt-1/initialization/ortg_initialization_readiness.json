@@ -1,0 +1,18 @@
+{
+  "source_identity_preserved": true,
+  "roles_preserved": true,
+  "total_cognitive_files": 428,
+  "native_outline_rows": 428,
+  "missing_count": 0,
+  "missing_paths": [],
+  "malformed_paths": [],
+  "native_status_bad_states": {},
+  "coverage_complete": true,
+  "native_status_counts": [
+    428,
+    0,
+    2,
+    0
+  ],
+  "semantic_fidelity": "Row/native completeness is checked; semantic fidelity relies on current-source model maintenance, not row count."
+}

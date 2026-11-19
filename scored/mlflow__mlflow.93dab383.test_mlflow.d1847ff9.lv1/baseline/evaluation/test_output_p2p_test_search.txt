@@ -1,0 +1,111 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 23 items
+
+tests/tracing/utils/test_search.py::test_field_parser[span.inputs-expected0] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [  4%]
+tests/tracing/utils/test_search.py::test_field_parser[span.outputs-expected1] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [  8%]
+tests/tracing/utils/test_search.py::test_field_parser[`span`.inputs-expected2] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 13%]
+tests/tracing/utils/test_search.py::test_field_parser[`span`.outputs-expected3] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 17%]
+tests/tracing/utils/test_search.py::test_field_parser[span.inputs.field-expected4] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 21%]
+tests/tracing/utils/test_search.py::test_field_parser[`span`.inputs.field-expected5] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 26%]
+tests/tracing/utils/test_search.py::test_field_parser[span.inputs.`field`-expected6] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 30%]
+tests/tracing/utils/test_search.py::test_field_parser[`span`.inputs.`field`-expected7] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 34%]
+tests/tracing/utils/test_search.py::test_field_parser[`span.name`.inputs.field-expected8] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 39%]
+tests/tracing/utils/test_search.py::test_field_parser[`span.inputs.name`.inputs.field-expected9] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 43%]
+tests/tracing/utils/test_search.py::test_field_parser[`span.outputs.name`.outputs.field-expected10] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 47%]
+tests/tracing/utils/test_search.py::test_field_parser[span.inputs.`field.name`-expected11] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 52%]
+tests/tracing/utils/test_search.py::test_field_parser[span.inputs.`field.inputs.name`-expected12] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 56%]
+tests/tracing/utils/test_search.py::test_field_parser[span.outputs.`field.outputs.name`-expected13] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 60%]
+tests/tracing/utils/test_search.py::test_field_parser[`span.name`.inputs.`field.name`-expected14] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 65%]
+tests/tracing/utils/test_search.py::test_field_parser[`span.inputs.name`.inputs.`field.inputs.name`-expected15] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 69%]
+tests/tracing/utils/test_search.py::test_field_parser[`span.outputs.name`.outputs.`field.outputs.name`-expected16] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 73%]
+tests/tracing/utils/test_search.py::test_field_parser_invalid_value[`span.inputs.field-Expected closing backtick] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 78%]
+tests/tracing/utils/test_search.py::test_field_parser_invalid_value[`span`a.inputs.field-Expected dot after span name] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 82%]
+tests/tracing/utils/test_search.py::test_field_parser_invalid_value[span.foo.field-Invalid field type] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 86%]
+tests/tracing/utils/test_search.py::test_field_parser_invalid_value[span.inputs.`field-Expected closing backtick] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 91%]
+tests/tracing/utils/test_search.py::test_field_parser_invalid_value[span.inputs.`field`name-Unexpected characters after closing backtick] PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [ 95%]
+tests/tracing/utils/test_search.py::test_parse_fields PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:45:24 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.inputs-expected0]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.outputs-expected1]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span`.inputs-expected2]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span`.outputs-expected3]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.inputs.field-expected4]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span`.inputs.field-expected5]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.inputs.`field`-expected6]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span`.inputs.`field`-expected7]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span.name`.inputs.field-expected8]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span.inputs.name`.inputs.field-expected9]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span.outputs.name`.outputs.field-expected10]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.inputs.`field.name`-expected11]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.inputs.`field.inputs.name`-expected12]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[span.outputs.`field.outputs.name`-expected13]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span.name`.inputs.`field.name`-expected14]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span.inputs.name`.inputs.`field.inputs.name`-expected15]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser[`span.outputs.name`.outputs.`field.outputs.name`-expected16]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser_invalid_value[`span.inputs.field-Expected closing backtick]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser_invalid_value[`span`a.inputs.field-Expected dot after span name]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser_invalid_value[span.foo.field-Invalid field type]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser_invalid_value[span.inputs.`field-Expected closing backtick]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_field_parser_invalid_value[span.inputs.`field`name-Unexpected characters after closing backtick]
+PASSED | MEM 16.3/46.9 GB | DISK 834.8/915.7 GB tests/tracing/utils/test_search.py::test_parse_fields
+============================== 23 passed in 0.05s ==============================

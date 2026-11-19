@@ -1,0 +1,445 @@
+diff --git a/astropy/cosmology/__init__.py b/astropy/cosmology/__init__.py
+index 13c1c03..6f9df74 100644
+--- a/astropy/cosmology/__init__.py
++++ b/astropy/cosmology/__init__.py
+@@ -23,7 +23,7 @@ from ._src.flrw import (
+     wCDM,
+     wpwaCDM,
+ )
+-from ._src.funcs import z_at_value
++from ._src.funcs import cosmology_equal, z_at_value
+ from ._src.parameter import Parameter
+ from .realizations import available, default_cosmology
+ 
+diff --git a/astropy/cosmology/_src/core.py b/astropy/cosmology/_src/core.py
+index bbfd919..b08168b 100644
+--- a/astropy/cosmology/_src/core.py
++++ b/astropy/cosmology/_src/core.py
+@@ -95,16 +95,16 @@ class _NameField:
+ 
+     def __get__(
+         self, instance: Union["Cosmology", None], owner: type["Cosmology"] | None
+-    ) -> str:
++    ) -> str | None:
+         # Called from the class. `dataclass` uses this to create ``__init__``.
+         if instance is None:
+             return self.default
+         # Called from the instance
+         return instance._name
+ 
+-
+-
+-
++    def __set__(self, instance: "Cosmology", value: Any) -> None:
++        """Store names as strings while retaining ``None`` as the sentinel."""
++        object.__setattr__(instance, "_name", None if value is None else str(value))
+ 
+ @dataclass_decorator
+ class Cosmology(metaclass=ABCMeta):
+@@ -291,6 +291,25 @@ class Cosmology(metaclass=ABCMeta):
+     # ---------------------------------------------------------------
+     # comparison methods
+ 
++    def __eq__(self, other: Any, /) -> bool:
++        """Check strict equality of two cosmologies.
++
++        Equality includes the concrete class, name, parameter names, and all
++        parameter values.  Metadata is deliberately excluded because it is
++        mutable and does not define the cosmological model.
++        """
++        if other.__class__ is not self.__class__:
++            return False
++
++        return (
++            self.name == other.name
++            and self._parameters_all == other._parameters_all
++            and all(
++                np.all(getattr(self, key) == getattr(other, key))
++                for key in self._parameters_all
++            )
++        )
++
+     def is_equivalent(
+         self, other: Any, /, *, format: bool | None | str = False
+     ) -> bool:
+@@ -360,7 +379,9 @@ class Cosmology(metaclass=ABCMeta):
+             >>> Planck18.is_equivalent(tbl, format="yaml")
+             True
+         """
+-
++        # Import lazily to avoid the comparison module's import of Cosmology
++        # creating a cycle while this module is initialized.
++        from astropy.cosmology._src.funcs.comparison import cosmology_equal
+ 
+         try:
+             return cosmology_equal(
+@@ -660,4 +681,4 @@ class FlatCosmologyMixin(metaclass=ABCMeta):
+             )
+             # flatness check
+             and other.is_flat
+-        )
+\ No newline at end of file
++        )
+diff --git a/astropy/cosmology/_src/funcs/__init__.py b/astropy/cosmology/_src/funcs/__init__.py
+index 74d4fe7..eaa4e74 100644
+--- a/astropy/cosmology/_src/funcs/__init__.py
++++ b/astropy/cosmology/_src/funcs/__init__.py
+@@ -4,4 +4,5 @@
+ __all__ = ["cosmology_equal", "z_at_value"]
+ 
+ 
++from .comparison import cosmology_equal
+ from .optimize import z_at_value
+diff --git a/astropy/cosmology/_src/funcs/comparison.py b/astropy/cosmology/_src/funcs/comparison.py
+index 96ced68..db9fd85 100644
+--- a/astropy/cosmology/_src/funcs/comparison.py
++++ b/astropy/cosmology/_src/funcs/comparison.py
+@@ -110,6 +110,51 @@ def _parse_format(cosmo: Any, format: _FormatType, /) -> Cosmology:
+     return out
+ 
+ 
++def _parse_formats(*cosmos: object, format: _FormatsType) -> ndarray:
++    """Parse each cosmology-like argument with its corresponding format hint.
++
++    A scalar format is repeated for every positional argument.  A non-scalar
++    format must broadcast to exactly that argument axis; it never contributes
++    dimensions to any vectorized cosmology argument.
++    """
++    nargs = len(cosmos)
++    formats = np.broadcast_to(np.asarray(format, dtype=object), (nargs,))
++    if not nargs:
++        return np.empty(0, dtype=object)
++
++    # Determine the element-wise shape solely from the cosmology arguments.
++    # Table and Row deliberately masquerade as scalars here: NumPy otherwise
++    # expands their rows or columns while constructing an object array.
++    wrapped = [
++        _CosmologyWrapper(cosmo)
++        if isinstance(cosmo, _CANT_BROADCAST)
++        else cosmo
++        for cosmo in cosmos
++    ]
++    arrays = [np.asarray(cosmo, dtype=object) for cosmo in wrapped]
++    broadcast = np.broadcast_arrays(*arrays)
++    cosmology_array = np.stack(broadcast)
++
++    # Each hint belongs to one positional argument.  Add singleton element
++    # axes only after the cosmology shape has been fixed, then broadcast over
++    # those axes.
++    element_ndim = cosmology_array.ndim - 1
++    formats = formats.reshape((nargs,) + (1,) * element_ndim)
++    formats = np.broadcast_to(formats, cosmology_array.shape)
++    return _parse_format(cosmology_array, formats)
++
++
++def _is_equivalent_scalar(cosmo1: Cosmology, cosmo2: Cosmology, /) -> bool:
++    """Apply the asymmetric ``__equiv__`` protocol in both directions."""
++    equivalent = cosmo1.__equiv__(cosmo2)
++    if equivalent is NotImplemented:
++        equivalent = cosmo2.__equiv__(cosmo1)
++    return False if equivalent is NotImplemented else bool(equivalent)
++
++
++_is_equivalent = np.frompyfunc(_is_equivalent_scalar, 2, 1)
++
++
+ 
+ 
+ 
+@@ -202,9 +247,30 @@ def _comparison_decorator(pyfunc: Callable[..., Any]) -> Callable[..., Any]:
+ # COMPARISON FUNCTIONS
+ 
+ 
++@_comparison_decorator
++def _cosmology_not_equal(
++    cosmo1: Any, cosmo2: Any, /, *, allow_equivalent: bool = False
++) -> bool:
++    """Return the element-wise logical negation of cosmology equality."""
++    if not allow_equivalent:
++        return cosmo1 != cosmo2
++
++    result = np.asarray(
++        np.logical_not(_is_equivalent(cosmo1, cosmo2)), dtype=bool
++    )
++    return bool(result) if result.ndim == 0 else result
+ 
+ 
++@_comparison_decorator
++def cosmology_equal(
++    cosmo1: Any, cosmo2: Any, /, *, allow_equivalent: bool = False
++) -> bool:
++    """Return an element-wise equality check on cosmology-like objects."""
++    if not allow_equivalent:
++        return cosmo1 == cosmo2
+ 
++    result = np.asarray(_is_equivalent(cosmo1, cosmo2), dtype=bool)
++    return bool(result) if result.ndim == 0 else result
+ 
+ 
+ 
+diff --git a/astropy/cosmology/_src/io/builtin/model.py b/astropy/cosmology/_src/io/builtin/model.py
+index ca63151..9c1637e 100644
+--- a/astropy/cosmology/_src/io/builtin/model.py
++++ b/astropy/cosmology/_src/io/builtin/model.py
+@@ -92,6 +92,16 @@ class _CosmologyModel(FittableModel, Generic[_CosmoT]):
+         """Signature of |Cosmology| class."""
+         return inspect.signature(cls._cosmology_class)
+ 
++    @property
++    def cosmology(self) -> _CosmoT:
++        """Cosmology represented by the model's current parameter values."""
++        kwargs = {}
++        for name in self.param_names:
++            parameter = getattr(self, name)
++            kwargs[name] = (
++                parameter.value if not parameter.unit else parameter.quantity
++            )
++        return self._cosmology_class(**kwargs, name=self.name)
+ 
+ 
+ 
+@@ -296,4 +306,4 @@ def model_identify(
+ 
+ convert_registry.register_reader("astropy.model", Cosmology, from_model)
+ convert_registry.register_writer("astropy.model", Cosmology, to_model)
+-convert_registry.register_identifier("astropy.model", Cosmology, model_identify)
+\ No newline at end of file
++convert_registry.register_identifier("astropy.model", Cosmology, model_identify)
+diff --git a/astropy/cosmology/_src/io/builtin/table.py b/astropy/cosmology/_src/io/builtin/table.py
+index bc25e81..a3c2799 100644
+--- a/astropy/cosmology/_src/io/builtin/table.py
++++ b/astropy/cosmology/_src/io/builtin/table.py
+@@ -167,6 +167,18 @@ from .row import from_row
+ _TableT = TypeVar("_TableT", bound=Table)
+ 
+ 
++def convert_parameter_to_column(parameter, value, meta=None) -> Column:
++    """Convert one cosmology parameter value to a one-row table column."""
++    data = np.asanyarray(value.value if hasattr(value, "unit") else value)[None]
++    return Column(
++        data,
++        name=parameter.name,
++        unit=parameter.unit,
++        description=parameter.__doc__,
++        meta=meta or {},
++    )
++
++
+ def from_table(
+     table: Table,
+     index: int | str | None = None,
+diff --git a/astropy/cosmology/_src/parameter/core.py b/astropy/cosmology/_src/parameter/core.py
+index a59e758..6ffd200 100644
+--- a/astropy/cosmology/_src/parameter/core.py
++++ b/astropy/cosmology/_src/parameter/core.py
+@@ -178,6 +178,15 @@ class Parameter:
+         # Get from instance
+         return cosmology.__dict__[self.name]
+ 
++    def __set__(self, cosmology: "astropy.cosmology.Cosmology", value: Any) -> None:
++        """Validate and store a parameter during cosmology initialization."""
++        # Dataclasses obtain descriptor defaults through ``__get__(None, cls)``;
++        # for Parameters that value is the descriptor itself.  Substitute the
++        # actual declared default before validation.
++        if value is self:
++            value = self.default
++        cosmology.__dict__[self.name] = self.validate(cosmology, value)
++
+ 
+ 
+ 
+@@ -210,6 +219,12 @@ class Parameter:
+     # -------------------------------------------
+     # validate value
+ 
++    def validate(
++        self, cosmology: "astropy.cosmology.Cosmology", value: Any
++    ) -> Any:
++        """Validate and convert a value with this parameter's validator."""
++        return self.fvalidate(cosmology, self, value)
++
+     def validator(self, fvalidate: FValidateCallable) -> "Parameter":
+         """Make new Parameter with custom ``fvalidate``.
+ 
+@@ -301,4 +316,4 @@ class Parameter:
+             # Only show fields that should be displayed and are not sentinel values
+             if f.repr and (f.name != "default" or self.default is not MISSING)
+         )
+-        return f"{self.__class__.__name__}({', '.join(fields_repr)})"
+\ No newline at end of file
++        return f"{self.__class__.__name__}({', '.join(fields_repr)})"
+diff --git a/astropy/modeling/parameters.py b/astropy/modeling/parameters.py
+index 87da115..8266b9c 100644
+--- a/astropy/modeling/parameters.py
++++ b/astropy/modeling/parameters.py
+@@ -326,6 +326,10 @@ class Parameter:
+ 
+         return f"{self.__class__.__name__}({args})"
+ 
++    @property
++    def name(self):
++        """Parameter name."""
++        return self._name
+ 
+ 
+ 
+@@ -787,4 +791,4 @@ def _wrap_ufunc(ufunc):
+ 
+         return ufunc(value)
+ 
+-    return _wrapper
+\ No newline at end of file
++    return _wrapper
+diff --git a/astropy/table/index.py b/astropy/table/index.py
+index b62cf19..399f26e 100644
+--- a/astropy/table/index.py
++++ b/astropy/table/index.py
+@@ -351,6 +351,13 @@ class Index:
+         """
+         return len(self.columns[0])
+ 
++    @property
++    def table_cls(self):
++        """Table class used internally to hold sorted index keys."""
++        # Local import avoids the table/index import cycle.
++        from .table import Table
++
++        return Table
+ 
+ 
+ 
+@@ -846,6 +853,13 @@ class SlicedIndex:
+         index = Index(new_cols, engine=self.data.__class__)
+         return self.__class__(index, slice(0, 0, None), original=True)
+ 
++    @property
++    def columns(self):
++        return self.index.columns
++
++    @property
++    def id(self):
++        return tuple(column.info.name for column in self.columns)
+ 
+ 
+ 
+@@ -1302,4 +1316,4 @@ class TableILoc(TableLoc):
+         if len(table_slice) == 0:  # no matches found
+             raise IndexError(f"Invalid index for iloc: {item}")
+ 
+-        return table_slice
+\ No newline at end of file
++        return table_slice
+diff --git a/astropy/table/row.py b/astropy/table/row.py
+index d8b28fe..712b7e9 100644
+--- a/astropy/table/row.py
++++ b/astropy/table/row.py
+@@ -146,6 +146,13 @@ class Row:
+     def values(self):
+         return self.__iter__()
+ 
++    @property
++    def index(self):
++        return self._index
++
++    @property
++    def table(self):
++        return self._table
+ 
+ 
+ 
+@@ -223,4 +230,4 @@ class Row:
+         return str(self).encode("utf-8")
+ 
+ 
+-collections.abc.Sequence.register(Row)
+\ No newline at end of file
++collections.abc.Sequence.register(Row)
+diff --git a/astropy/table/sorted_array.py b/astropy/table/sorted_array.py
+index 872655c..2fbd050 100644
+--- a/astropy/table/sorted_array.py
++++ b/astropy/table/sorted_array.py
+@@ -48,6 +48,16 @@ class SortedArray:
+         Defaults to False.
+     """
+ 
++    def __init__(self, data: "Table", row_index: "Column", unique: bool = False):
++        self.data = data
++        self.row_index = row_index
++        self.unique = unique
++        self.num_cols = len(data.columns) if hasattr(data, "columns") else 0
++
++        if unique and len(row_index) > 1 and self.num_cols:
++            keys = zip(*(column.tolist() for column in self.cols))
++            if len(set(keys)) != len(row_index):
++                raise ValueError("Cannot create a unique index with duplicate values")
+ 
+ 
+ 
+@@ -326,4 +336,4 @@ class SortedArray:
+     def __repr__(self):
+         t = self.data.copy()
+         t["rows"] = self.row_index
+-        return f"<{self.__class__.__name__} length={len(t)}>\n{t}"
+\ No newline at end of file
++        return f"<{self.__class__.__name__} length={len(t)}>\n{t}"
+diff --git a/astropy/table/table.py b/astropy/table/table.py
+index 2b3c86e..9ce5a28 100644
+--- a/astropy/table/table.py
++++ b/astropy/table/table.py
+@@ -1076,6 +1076,25 @@ class Table:
+         """
+         return TableILoc(self)
+ 
++    def add_index(self, colnames, engine=None, unique=False):
++        """Add an index on one or more table columns."""
++        if isinstance(colnames, str):
++            colnames = (colnames,)
++        columns = [self.columns[name] for name in colnames]
++        for column in columns:
++            if column.ndim != 1:
++                raise ValueError(
++                    f"Multi-dimensional column {column.info.name!r} cannot be used "
++                    "as an index."
++                )
++
++        index = SlicedIndex(
++            Index(columns, engine=engine, unique=unique), slice(None), original=True
++        )
++        for column in columns:
++            column.info.indices.append(index)
++        if self.primary_key is None:
++            self.primary_key = tuple(column.info.name for column in columns)
+ 
+ 
+ 
+@@ -4424,4 +4443,4 @@ class QTable(Table):
+ 
+         return super()._convert_data_to_col(
+             data, copy=copy, default_name=default_name, dtype=dtype, name=name
+-        )
+\ No newline at end of file
++        )
+diff --git a/astropy/utils/data_info.py b/astropy/utils/data_info.py
+index 785d878..5a88f39 100644
+--- a/astropy/utils/data_info.py
++++ b/astropy/utils/data_info.py
+@@ -381,6 +381,12 @@ that temporary object is now lost.  Instead force a permanent reference (e.g.
+     def __setstate__(self, state):
+         self._attrs = state
+ 
++    def _represent_as_dict(self, attrs=None):
++        """Represent the parent object's construction attributes as a mapping."""
++        if attrs is None:
++            attrs = self._represent_as_dict_attrs
++        parent = self._parent
++        return {attr: getattr(parent, attr) for attr in attrs}
+ 
+ 
+ 
+@@ -804,4 +810,4 @@ class MixinInfo(BaseColumnInfo):
+ class ParentDtypeInfo(MixinInfo):
+     """Mixin that gets info.dtype from parent."""
+ 
+-    attrs_from_parent = {"dtype"}  # dtype and unit taken from parent
+\ No newline at end of file
++    attrs_from_parent = {"dtype"}  # dtype and unit taken from parent

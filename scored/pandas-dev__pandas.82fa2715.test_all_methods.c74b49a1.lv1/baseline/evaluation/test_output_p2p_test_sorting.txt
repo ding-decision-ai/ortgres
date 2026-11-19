@@ -1,0 +1,106 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 57 items
+
+pandas/tests/test_sorting.py .........................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+2.10s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[right]
+1.94s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[inner]
+1.91s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[left]
+1.89s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[outer]
+1.13s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_check_sum_col
+0.96s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_sort_false_order
+0.19s setup    pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_check_sum_col
+0.17s call     pandas/tests/test_sorting.py::TestSorting::test_int64_overflow_groupby_large_df_shuffled[mean]
+0.14s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[right-True]
+0.14s call     pandas/tests/test_sorting.py::TestSorting::test_int64_overflow_groupby_large_df_shuffled[median]
+0.14s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[inner-False]
+0.14s setup    pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[right]
+0.14s setup    pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[inner]
+0.13s setup    pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_sort_false_order
+0.13s setup    pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[left]
+0.12s setup    pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[outer]
+0.11s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[right-False]
+0.11s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[inner-True]
+0.11s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[outer-True]
+0.10s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[left-False]
+0.10s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[outer-False]
+0.10s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[left-True]
+0.07s call     pandas/tests/test_sorting.py::TestSorting::test_int64_overflow
+0.03s call     pandas/tests/test_sorting.py::TestSorting::test_int64_overflow_groupby_large_range
+0.01s call     pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_outer_merge
+
+(5 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/test_sorting.py::TestSorting::test_int64_overflow
+PASSED pandas/tests/test_sorting.py::TestSorting::test_int64_overflow_groupby_large_range
+PASSED pandas/tests/test_sorting.py::TestSorting::test_int64_overflow_groupby_large_df_shuffled[mean]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_int64_overflow_groupby_large_df_shuffled[median]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_lexsort_indexer[True-last-exp0]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_lexsort_indexer[True-first-exp1]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_lexsort_indexer[False-last-exp2]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_lexsort_indexer[False-first-exp3]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_nargsort[True-last-exp0]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_nargsort[True-first-exp1]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_nargsort[False-last-exp2]
+PASSED pandas/tests/test_sorting.py::TestSorting::test_nargsort[False-first-exp3]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_outer_merge
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_check_sum_col
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[inner]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[outer]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[left]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_how_merge[right]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_sort_false_order
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[inner-True]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[inner-False]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[outer-True]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[outer-False]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[left-True]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[left-False]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[right-True]
+PASSED pandas/tests/test_sorting.py::TestMerge::test_int64_overflow_one_to_many_none_match[right-False]
+PASSED pandas/tests/test_sorting.py::test_decons[codes_list0-shape0]
+PASSED pandas/tests/test_sorting.py::test_decons[codes_list1-shape1]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_basic_sort[arg0-exp0]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_basic_sort[arg1-exp1]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_basic_sort[arg2-exp2]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes[codes0-exp_codes0-True]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes[codes0-exp_codes0-False]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes[codes1-exp_codes1-True]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes[codes1-exp_codes1-False]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes_out_of_bound
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes_empty_array_out_of_bound[codes0]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes_empty_array_out_of_bound[codes1]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_codes_empty_array_out_of_bound[codes2]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_mixed_integer
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_mixed_integer_with_codes
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_unsortable
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_exceptions[1-None-TypeError-Only np.ndarray, ExtensionArray, and Index]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_exceptions[arg1-1-TypeError-Only list-like objects or None]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_exceptions[arg2-codes2-ValueError-values should be unique]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_extension_array[arg0-exp0]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_extension_array[arg1-exp1]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_extension_array_codes[True]
+PASSED pandas/tests/test_sorting.py::TestSafeSort::test_extension_array_codes[False]
+PASSED pandas/tests/test_sorting.py::test_mixed_str_null[NoneType]
+PASSED pandas/tests/test_sorting.py::test_mixed_str_null[float0]
+PASSED pandas/tests/test_sorting.py::test_mixed_str_null[NaTType]
+PASSED pandas/tests/test_sorting.py::test_mixed_str_null[float1]
+PASSED pandas/tests/test_sorting.py::test_mixed_str_null[NAType]
+PASSED pandas/tests/test_sorting.py::test_mixed_str_null[Decimal]
+PASSED pandas/tests/test_sorting.py::test_safe_sort_multiindex
+============================= 57 passed in 12.18s ==============================

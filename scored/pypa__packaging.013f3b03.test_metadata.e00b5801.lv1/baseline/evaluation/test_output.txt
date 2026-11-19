@@ -1,0 +1,616 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 294 items
+
+tests/test_metadata.py ................................................. [ 16%]
+............F.F.FF.FF........F............F............................. [ 41%]
+...............................FFF...................................... [ 65%]
+........................................................................ [ 90%]
+...........FFFFFFF.........F.                                            [100%]
+
+=================================== FAILURES ===================================
+_________________ TestRawMetadata.test_keywords[A -expected1] __________________
+tests/test_metadata.py:80: in test_keywords
+    assert raw["keywords"] == expected
+E   AssertionError: assert ['A '] == ['A']
+E     
+E     At index 0 diff: 'A ' != 'A'
+E     Use -v to get more diff
+        expected   = ['A']
+        given      = 'A '
+        header     = 'Keywords: A '
+        raw        = {'keywords': ['A ']}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3726ae1a0>
+        unparsed   = {}
+________________ TestRawMetadata.test_keywords[A, B-expected3] _________________
+tests/test_metadata.py:80: in test_keywords
+    assert raw["keywords"] == expected
+E   AssertionError: assert ['A', ' B'] == ['A', 'B']
+E     
+E     At index 1 diff: ' B' != 'B'
+E     Use -v to get more diff
+        expected   = ['A', 'B']
+        given      = 'A, B'
+        header     = 'Keywords: A, B'
+        raw        = {'keywords': ['A', ' B']}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3729de9b0>
+        unparsed   = {}
+________________ TestRawMetadata.test_keywords[ A, B-expected5] ________________
+tests/test_metadata.py:80: in test_keywords
+    assert raw["keywords"] == expected
+E   AssertionError: assert ['A', ' B'] == ['A', 'B']
+E     
+E     At index 1 diff: ' B' != 'B'
+E     Use -v to get more diff
+        expected   = ['A', 'B']
+        given      = ' A, B'
+        header     = 'Keywords:  A, B'
+        raw        = {'keywords': ['A', ' B']}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3729de440>
+        unparsed   = {}
+________________ TestRawMetadata.test_keywords[A,B -expected6] _________________
+tests/test_metadata.py:80: in test_keywords
+    assert raw["keywords"] == expected
+E   AssertionError: assert ['A', 'B '] == ['A', 'B']
+E     
+E     At index 1 diff: 'B ' != 'B'
+E     Use -v to get more diff
+        expected   = ['A', 'B']
+        given      = 'A,B '
+        header     = 'Keywords: A,B '
+        raw        = {'keywords': ['A', 'B ']}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3729deda0>
+        unparsed   = {}
+____________ TestRawMetadata.test_project_urls_parsing[-expected0] _____________
+tests/test_metadata.py:97: in test_project_urls_parsing
+    assert not unparsed
+E   AssertionError: assert not {'project-url': ['']}
+        expected   = {'': ''}
+        given      = ''
+        header     = 'project-url: '
+        raw        = {}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3726aef80>
+        unparsed   = {'project-url': ['']}
+____________ TestRawMetadata.test_project_urls_parsing[A-expected1] ____________
+tests/test_metadata.py:97: in test_project_urls_parsing
+    assert not unparsed
+E   AssertionError: assert not {'project-url': ['A']}
+        expected   = {'A': ''}
+        given      = 'A'
+        header     = 'project-url: A'
+        raw        = {}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3729df1f0>
+        unparsed   = {'project-url': ['A']}
+_____________________ TestRawMetadata.test_header_mojibake _____________________
+tests/test_metadata.py:139: in test_header_mojibake
+    assert unparsed[header_name] == [value]
+E   AssertionError: assert ['�msterdam'] == ['Àmsterdam']
+E     
+E     At index 0 diff: '�msterdam' != 'Àmsterdam'
+E     Use -v to get more diff
+        header_bytes = b'value: \xc0msterdam'
+        header_name = 'value'
+        raw        = {}
+        self       = <tests.test_metadata.TestRawMetadata object at 0x75b3729dd7b0>
+        unparsed   = {'value': ['�msterdam']}
+        value      = 'Àmsterdam'
+________________ TestMetadata.test_from_email_empty_import_name ________________
+tests/test_metadata.py:302: in test_from_email_empty_import_name
+    assert meta.import_names == []
+        meta       = <packaging.metadata.Metadata object at 0x75b372bc6a70>
+        self       = <tests.test_metadata.TestMetadata object at 0x75b3729dfe20>
+src/packaging/metadata.py:715: in __get__
+    processed = processor(value) if processor is not None else value
+        _owner     = <class 'packaging.metadata.Metadata'>
+        instance   = <packaging.metadata.Metadata object at 0x75b372bc6a70>
+        metadata_version = '2.5'
+        processor  = <bound method _Validator._process_import_names of <packaging.metadata._Validator object at 0x75b3728c9120>>
+        self       = <packaging.metadata._Validator object at 0x75b3728c9120>
+        value      = ['']
+src/packaging/metadata.py:1064: in _process_import_names
+    raise self._invalid_metadata(
+E   packaging.metadata.InvalidMetadata: '' is invalid for import-name; '' is not a valid identifier
+        identifier = ''
+        import_name = ''
+        name       = ''
+        private    = ''
+        self       = <packaging.metadata._Validator object at 0x75b3728c9120>
+        semicolon  = ''
+        value      = ['']
+_ TestMetadata.test_invalid_description_content_type[text/plain; charset=utf-8] _
+tests/test_metadata.py:522: in test_invalid_description_content_type
+    with pytest.raises(metadata.InvalidMetadata):
+E   Failed: DID NOT RAISE <class 'packaging.metadata.InvalidMetadata'>
+        content_type = 'text/plain; charset=utf-8'
+        meta       = <packaging.metadata.Metadata object at 0x75b37269a830>
+        self       = <tests.test_metadata.TestMetadata object at 0x75b372bcf820>
+_ TestMetadata.test_invalid_description_content_type[text/markdown; variant=gfm] _
+tests/test_metadata.py:522: in test_invalid_description_content_type
+    with pytest.raises(metadata.InvalidMetadata):
+E   Failed: DID NOT RAISE <class 'packaging.metadata.InvalidMetadata'>
+        content_type = 'text/markdown; variant=gfm'
+        meta       = <packaging.metadata.Metadata object at 0x75b373274160>
+        self       = <tests.test_metadata.TestMetadata object at 0x75b372bcc7f0>
+_ TestMetadata.test_invalid_description_content_type[text/markdown; variant=commonmark] _
+tests/test_metadata.py:522: in test_invalid_description_content_type
+    with pytest.raises(metadata.InvalidMetadata):
+E   Failed: DID NOT RAISE <class 'packaging.metadata.InvalidMetadata'>
+        content_type = 'text/markdown; variant=commonmark'
+        meta       = <packaging.metadata.Metadata object at 0x75b372bc4d90>
+        self       = <tests.test_metadata.TestMetadata object at 0x75b372bcc490>
+___________________ TestMetadataWriting.test_write_metadata ____________________
+tests/test_metadata.py:830: in test_write_metadata
+    assert (
+E   AssertionError: assert 'Metadata-Ver... 2023.0.0\n\n' == 'metadata-ver... 2023.0.0\n\n'
+E     
+E     - metadata-version: 2.5
+E     ? ^        ^
+E     + Metadata-Version: 2.5
+E     ? ^        ^
+E     - name: packaging
+E     ? ^...
+E     
+E     ...Full output truncated (7 lines hidden), use '-vv' to show
+        meta       = <packaging.metadata.Metadata object at 0x75b372bcafb0>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c03b50>
+        written    = 'Metadata-Version: 2.5\nName: packaging\nVersion: 2023.0.0\n\n'
+___________ TestMetadataWriting.test_write_metadata_with_description ___________
+tests/test_metadata.py:845: in test_write_metadata_with_description
+    assert (
+E   AssertionError: assert 'Version: 1.2...llo\n\nWorld👋' == 'metadata-ver...llo\n\nWorld👋'
+E     
+E     - metadata-version: 2.3
+E     - name: Hello
+E     - version: 1.2.3
+E     ? ^
+E     + Version: 1.2.3
+E     ? ^...
+E     
+E     ...Full output truncated (6 lines hidden), use '-vv' to show
+        meta       = <packaging.metadata.Metadata object at 0x75b372ba5b10>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c03190>
+        written    = 'Version: 1.2.3\nName: Hello\nMetadata-Version: 2.3\n\nHello\n\nWorld👋'
+__________________ TestMetadataWriting.test_multiline_license __________________
+tests/test_metadata.py:865: in test_multiline_license
+    written = meta.as_rfc822().as_string()
+        meta       = <packaging.metadata.Metadata object at 0x75b37327b4c0>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c037f0>
+/opt/miniconda3/envs/testbed/lib/python3.10/email/message.py:968: in as_string
+    return super().as_string(unixfrom, maxheaderlen, policy)
+        __class__  = <class 'email.message.MIMEPart'>
+        maxheaderlen = 0
+        policy     = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b373279990>)
+        self       = <packaging.metadata.RFC822Message object at 0x75b373278370>
+        unixfrom   = False
+/opt/miniconda3/envs/testbed/lib/python3.10/email/message.py:158: in as_string
+    g.flatten(self, unixfrom=unixfrom)
+        Generator  = <class 'email.generator.Generator'>
+        fp         = <_io.StringIO object at 0x75b37281fe20>
+        g          = <email.generator.Generator object at 0x75b373279e40>
+        maxheaderlen = 0
+        policy     = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b373279990>)
+        self       = <packaging.metadata.RFC822Message object at 0x75b373278370>
+        unixfrom   = False
+/opt/miniconda3/envs/testbed/lib/python3.10/email/generator.py:118: in flatten
+    self._write(msg)
+        linesep    = None
+        msg        = <packaging.metadata.RFC822Message object at 0x75b373278370>
+        old_gen_policy = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b373279990>)
+        old_msg_policy = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b373279990>)
+        policy     = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b373279990>, max_line_length=0)
+        self       = <email.generator.Generator object at 0x75b373279e40>
+        unixfrom   = False
+/opt/miniconda3/envs/testbed/lib/python3.10/email/generator.py:201: in _write
+    self._write_headers(msg)
+        meth       = None
+        msg        = <packaging.metadata.RFC822Message object at 0x75b373278370>
+        munge_cte  = None
+        oldfp      = <_io.StringIO object at 0x75b37281fe20>
+        self       = <email.generator.Generator object at 0x75b373279e40>
+        sfp        = <_io.StringIO object at 0x75b37281ea70>
+/opt/miniconda3/envs/testbed/lib/python3.10/email/generator.py:235: in _write_headers
+    raise HeaderWriteError(
+E   email.errors.HeaderWriteError: folded header contains newline: 'License: Hello\nWorld🐍\n'
+        folded     = 'License: Hello\nWorld🐍\n'
+        h          = 'License'
+        linesep    = '\n'
+        msg        = <packaging.metadata.RFC822Message object at 0x75b373278370>
+        self       = <email.generator.Generator object at 0x75b373279e40>
+        v          = 'Hello\nWorld🐍'
+________________________ TestMetadataWriting.test_large ________________________
+tests/test_metadata.py:918: in test_large
+    assert core_metadata.items() == [
+E   AssertionError: assert [('Author', '...esting'), ...] == [('metadata-v...esting'), ...]
+E     
+E     At index 0 diff: ('Author', 'Example!') != ('metadata-version', '2.1')
+E     Use -v to get more diff
+        core_metadata = <packaging.metadata.RFC822Message object at 0x75b3725e94b0>
+        meta       = <packaging.metadata.Metadata object at 0x75b3725ea1d0>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c030d0>
+___________________ TestMetadataWriting.test_modern_license ____________________
+tests/test_metadata.py:967: in test_modern_license
+    assert core_metadata.items() == [
+E   AssertionError: assert [('Metadata-V...', 'LICENSE')] == [('metadata-v...', 'LICENSE')]
+E     
+E     At index 0 diff: ('Metadata-Version', '2.4') != ('metadata-version', '2.4')
+E     Use -v to get more diff
+        core_metadata = <packaging.metadata.RFC822Message object at 0x75b37327bc10>
+        meta       = <packaging.metadata.Metadata object at 0x75b37327b040>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b37331e140>
+____________________ TestMetadataWriting.test__import_names ____________________
+tests/test_metadata.py:990: in test__import_names
+    assert core_metadata.items() == [
+E   AssertionError: assert [('Metadata-V...ce', 'three')] == [('metadata-v...ce', 'three')]
+E     
+E     At index 0 diff: ('Metadata-Version', '2.5') != ('metadata-version', '2.5')
+E     Use -v to get more diff
+        core_metadata = <packaging.metadata.RFC822Message object at 0x75b372c12ad0>
+        meta       = <packaging.metadata.Metadata object at 0x75b372c12f80>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c032e0>
+_________________ TestMetadataWriting.test_empty_import_names __________________
+tests/test_metadata.py:1012: in test_empty_import_names
+    assert core_metadata.items() == [
+E   AssertionError: assert [('Metadata-V...rt-Name', '')] == [('metadata-v...rt-name', '')]
+E     
+E     At index 0 diff: ('Metadata-Version', '2.5') != ('metadata-version', '2.5')
+E     Use -v to get more diff
+        core_metadata = <packaging.metadata.RFC822Message object at 0x75b37327a050>
+        meta       = <packaging.metadata.Metadata object at 0x75b373279720>
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c03760>
+_________________ TestMetadataWriting.test_headers[multiline] __________________
+tests/test_metadata.py:1134: in test_headers
+    assert str(message) == data
+        data       = 'ItemA: ValueA\nItemB: ValueB1\n       ValueB2\n       ValueB3\nItemC: ValueC\n\n'
+        items      = [('ItemA', 'ValueA'), ('ItemB', 'ValueB1\nValueB2\nValueB3'), ('ItemC', 'ValueC')]
+        message    = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+        name       = 'ItemC'
+        self       = <tests.test_metadata.TestMetadataWriting object at 0x75b372c00fd0>
+        value      = 'ValueC'
+/opt/miniconda3/envs/testbed/lib/python3.10/email/message.py:971: in __str__
+    return self.as_string(policy=self.policy.clone(utf8=True))
+        self       = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+/opt/miniconda3/envs/testbed/lib/python3.10/email/message.py:968: in as_string
+    return super().as_string(unixfrom, maxheaderlen, policy)
+        __class__  = <class 'email.message.MIMEPart'>
+        maxheaderlen = 0
+        policy     = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b3729e1f90>, utf8=True)
+        self       = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+        unixfrom   = False
+/opt/miniconda3/envs/testbed/lib/python3.10/email/message.py:158: in as_string
+    g.flatten(self, unixfrom=unixfrom)
+        Generator  = <class 'email.generator.Generator'>
+        fp         = <_io.StringIO object at 0x75b37281f880>
+        g          = <email.generator.Generator object at 0x75b3729e17b0>
+        maxheaderlen = 0
+        policy     = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b3729e1f90>, utf8=True)
+        self       = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+        unixfrom   = False
+/opt/miniconda3/envs/testbed/lib/python3.10/email/generator.py:118: in flatten
+    self._write(msg)
+        linesep    = None
+        msg        = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+        old_gen_policy = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b3729e1f90>, utf8=True)
+        old_msg_policy = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b3729e1f90>)
+        policy     = RFC822Policy(header_factory=<email.headerregistry.HeaderRegistry object at 0x75b3729e1f90>, utf8=True, max_line_length=0)
+        self       = <email.generator.Generator object at 0x75b3729e17b0>
+        unixfrom   = False
+/opt/miniconda3/envs/testbed/lib/python3.10/email/generator.py:201: in _write
+    self._write_headers(msg)
+        meth       = None
+        msg        = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+        munge_cte  = None
+        oldfp      = <_io.StringIO object at 0x75b37281f880>
+        self       = <email.generator.Generator object at 0x75b3729e17b0>
+        sfp        = <_io.StringIO object at 0x75b37281d630>
+/opt/miniconda3/envs/testbed/lib/python3.10/email/generator.py:235: in _write_headers
+    raise HeaderWriteError(
+E   email.errors.HeaderWriteError: folded header contains newline: 'ItemB: ValueB1\nValueB2\nValueB3\n'
+        folded     = 'ItemB: ValueB1\nValueB2\nValueB3\n'
+        h          = 'ItemB'
+        linesep    = '\n'
+        msg        = <packaging.metadata.RFC822Message object at 0x75b3729e1990>
+        self       = <email.generator.Generator object at 0x75b3729e17b0>
+        v          = 'ValueB1\nValueB2\nValueB3'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[author]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[author_email]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[description]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[description_content_type]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[download_url]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[home_page]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[license]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[license_expression]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[maintainer]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[maintainer_email]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[metadata_version]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[name]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[requires_python]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[summary]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_only_once[version]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[author]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[author_email]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[description]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[description_content_type]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[download_url]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[home_page]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[license]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[license_expression]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[maintainer]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[maintainer_email]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[metadata_version]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[name]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[requires_python]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[summary]
+PASSED tests/test_metadata.py::TestRawMetadata::test_non_repeating_fields_repeated[version]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[classifiers]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[dynamic]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[import_names]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[import_namespaces]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[license_files]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[obsoletes]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[obsoletes_dist]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[platforms]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[provides]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[provides_dist]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[provides_extra]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[requires]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[requires_dist]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[requires_external]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_only_once[supported_platforms]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[classifiers]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[dynamic]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[import_names]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[import_namespaces]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[license_files]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[obsoletes]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[obsoletes_dist]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[platforms]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[provides]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[provides_dist]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[provides_extra]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[requires]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[requires_dist]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[requires_external]
+PASSED tests/test_metadata.py::TestRawMetadata::test_repeating_fields_repeated[supported_platforms]
+PASSED tests/test_metadata.py::TestRawMetadata::test_keywords[A-expected0]
+PASSED tests/test_metadata.py::TestRawMetadata::test_keywords[ A-expected2]
+PASSED tests/test_metadata.py::TestRawMetadata::test_keywords[A,B-expected4]
+PASSED tests/test_metadata.py::TestRawMetadata::test_keywords[A B-expected7]
+PASSED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[A,B-expected2]
+PASSED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[A, B-expected3]
+PASSED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[ A,B-expected4]
+PASSED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[A,B -expected5]
+PASSED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[A,B,C-expected6]
+PASSED tests/test_metadata.py::TestRawMetadata::test_duplicate_project_urls
+PASSED tests/test_metadata.py::TestRawMetadata::test_str_input
+PASSED tests/test_metadata.py::TestRawMetadata::test_bytes_input
+PASSED tests/test_metadata.py::TestRawMetadata::test_description[hello0]
+PASSED tests/test_metadata.py::TestRawMetadata::test_description[description: hello]
+PASSED tests/test_metadata.py::TestRawMetadata::test_description[hello1]
+PASSED tests/test_metadata.py::TestRawMetadata::test_description_non_utf8
+PASSED tests/test_metadata.py::TestRawMetadata::test_description_multiple[description: 1\ndescription: 2-expected0]
+PASSED tests/test_metadata.py::TestRawMetadata::test_description_multiple[description: 1\n\n2-expected1]
+PASSED tests/test_metadata.py::TestRawMetadata::test_description_multiple[description: 1\ndescription: 2\n\n3-expected2]
+PASSED tests/test_metadata.py::TestRawMetadata::test_lowercase_keys
+PASSED tests/test_metadata.py::TestRawMetadata::test_complete
+PASSED tests/test_metadata.py::TestExceptionGroup::test_attributes
+PASSED tests/test_metadata.py::TestExceptionGroup::test_repr
+PASSED tests/test_metadata.py::TestMetadata::test_from_email
+PASSED tests/test_metadata.py::TestMetadata::test_from_email_unparsed
+PASSED tests/test_metadata.py::TestMetadata::test_from_email_validate
+PASSED tests/test_metadata.py::TestMetadata::test_from_email_unparsed_valid_field_name
+PASSED tests/test_metadata.py::TestMetadata::test_required_fields
+PASSED tests/test_metadata.py::TestMetadata::test_required_fields_missing[metadata_version]
+PASSED tests/test_metadata.py::TestMetadata::test_required_fields_missing[name]
+PASSED tests/test_metadata.py::TestMetadata::test_required_fields_missing[version]
+PASSED tests/test_metadata.py::TestMetadata::test_raw_validate_unrecognized_field
+PASSED tests/test_metadata.py::TestMetadata::test_raw_data_not_mutated
+PASSED tests/test_metadata.py::TestMetadata::test_caching
+PASSED tests/test_metadata.py::TestMetadata::test_from_raw_validate
+PASSED tests/test_metadata.py::TestMetadata::test_metadata_version_field_introduction[2.2]
+PASSED tests/test_metadata.py::TestMetadata::test_metadata_version_field_introduction[2.3]
+PASSED tests/test_metadata.py::TestMetadata::test_metadata_version_field_introduction_mismatch[1.0]
+PASSED tests/test_metadata.py::TestMetadata::test_metadata_version_field_introduction_mismatch[1.1]
+PASSED tests/test_metadata.py::TestMetadata::test_metadata_version_field_introduction_mismatch[1.2]
+PASSED tests/test_metadata.py::TestMetadata::test_metadata_version_field_introduction_mismatch[2.1]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[description]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[home_page]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[download_url]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[author]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[author_email]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[maintainer]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[maintainer_email]
+PASSED tests/test_metadata.py::TestMetadata::test_single_value_unvalidated_attribute[license]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[supported_platforms]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[platforms]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[classifiers]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[provides_dist]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[obsoletes_dist]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[requires]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[provides]
+PASSED tests/test_metadata.py::TestMetadata::test_multi_value_unvalidated_attribute[obsoletes]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_metadata_version[1.0]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_metadata_version[1.1]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_metadata_version[1.2]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_metadata_version[2.1]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_metadata_version[2.2]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_metadata_version[2.3]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_metadata_version[1.3]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_metadata_version[2.0]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_version
+PASSED tests/test_metadata.py::TestMetadata::test_missing_version
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_version
+PASSED tests/test_metadata.py::TestMetadata::test_valid_summary
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_summary
+PASSED tests/test_metadata.py::TestMetadata::test_valid_name
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_name
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[TEXT/PLAIN]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/x-rst]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/markdown]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=UTF-8]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/x-rst; charset=UTF-8]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/markdown; charset=UTF-8; variant=GFM]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/markdown; charset=UTF-8; variant=CommonMark]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/markdown; variant=GFM]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/markdown; variant=CommonMark]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_description_content_type[application/json]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_description_content_type[text/plain; charset=ascii]
+PASSED tests/test_metadata.py::TestMetadata::test_keywords
+PASSED tests/test_metadata.py::TestMetadata::test_valid_project_urls
+PASSED tests/test_metadata.py::TestMetadata::test_valid_requires_python[>=3]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_requires_python[>2.6,!=3.0.*,!=3.1.*]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_requires_python[~=2.6]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_requires_python
+PASSED tests/test_metadata.py::TestMetadata::test_requires_external
+PASSED tests/test_metadata.py::TestMetadata::test_valid_provides_extra
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_provides_extra
+PASSED tests/test_metadata.py::TestMetadata::test_valid_requires_dist
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_requires_dist
+PASSED tests/test_metadata.py::TestMetadata::test_valid_dynamic
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_dynamic_value
+PASSED tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]
+PASSED tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]
+PASSED tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author_email]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[classifiers]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[description]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[description_content_type]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[download_url]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[dynamic]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[home_page]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[import_names]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[keywords]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[license]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[license_expression]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[license_files]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[maintainer]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[maintainer_email]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[obsoletes]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[obsoletes_dist]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[platforms]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[project_urls]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[provides]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[provides_dist]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[provides_extra]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[requires]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[requires_dist]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[requires_external]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[requires_python]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[summary]
+PASSED tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[supported_platforms]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[MIT-MIT]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit-MIT]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[BSD-3-Clause-BSD-3-Clause]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[Bsd-3-clause-BSD-3-Clause]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[MIT AND (Apache-2.0 OR BSD-2-Clause)-MIT AND (Apache-2.0 OR BSD-2-Clause)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit and (apache-2.0 or bsd-2-clause)-MIT AND (Apache-2.0 OR BSD-2-Clause)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[MIT OR GPL-2.0-or-later OR (FSFUL AND BSD-2-Clause)-MIT OR GPL-2.0-or-later OR (FSFUL AND BSD-2-Clause)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[GPL-3.0-only WITH Classpath-exception-2.0 OR BSD-3-Clause-GPL-3.0-only WITH Classpath-exception-2.0 OR BSD-3-Clause]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[LicenseRef-Special-License OR CC0-1.0 OR Unlicense-LicenseRef-Special-License OR CC0-1.0 OR Unlicense]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mIt-MIT]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[ mIt -MIT]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit or apache-2.0-MIT OR Apache-2.0]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit and apache-2.0-MIT AND Apache-2.0]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[gpl-2.0-or-later with bison-exception-2.2-GPL-2.0-or-later WITH Bison-exception-2.2]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit or apache-2.0 and (bsd-3-clause or mpl-2.0)-MIT OR Apache-2.0 AND (BSD-3-Clause OR MPL-2.0)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit and (apache-2.0+ or mpl-2.0+)-MIT AND (Apache-2.0+ OR MPL-2.0+)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[mit  and  ( apache-2.0+  or  mpl-2.0+ )-MIT AND (Apache-2.0+ OR MPL-2.0+)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[LicenseRef-Public-Domain-LicenseRef-Public-Domain]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[licenseref-public-domain-LicenseRef-public-domain]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[licenseref-proprietary-LicenseRef-proprietary]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[LicenseRef-Proprietary-LicenseRef-Proprietary]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[LicenseRef-Beerware-4.2-LicenseRef-Beerware-4.2]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[licenseref-beerware-4.2-LicenseRef-beerware-4.2]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[(LicenseRef-Special-License OR LicenseRef-OtherLicense) OR Unlicense-(LicenseRef-Special-License OR LicenseRef-OtherLicense) OR Unlicense]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[(LicenseRef-Special-License OR licenseref-OtherLicense) OR unlicense-(LicenseRef-Special-License OR LicenseRef-OtherLicense) OR Unlicense]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[(MIT)-(MIT)]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT))-((MIT))]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[(( MIT ))-((MIT))]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT AND (MIT)))-((MIT AND (MIT)))]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[Use-it-after-midnight]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[LicenseRef-License with spaces]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[LicenseRef-License_with_underscores]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[or]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[and]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[with]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit or]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit and]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit with]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[or mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[and mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[with mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[(mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit)]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[) mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit (]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit or or apache-2.0]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit or apache-2.0 (bsd-3-clause and MPL-2.0)]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[Apache-2.0 OR 2-BSD-Clause]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[()]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[( ) or mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit and ( )]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[( ) or mit and ( )]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[( ) with ( ) or mit]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit with ( ) with ( ) or mit]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_files[license_files0]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_files[license_files1]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_license_files[license_files2]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files0]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files1]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files2]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files3]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files4]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files5]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_import_names[import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_valid_import_names[import_names]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[not-valid-import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[not-valid-import_names]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[still.not-valid-import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[still.not-valid-import_names]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[stuff;-import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[stuff;-import_names]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[stuff; extra-import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_identifier[stuff; extra-import_names]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_keyword[import_namespaces]
+PASSED tests/test_metadata.py::TestMetadata::test_invalid_import_names_keyword[import_names]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[empty]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[simple]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[multiple]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[unicode]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[emoji]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[none]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[order 1]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[order 2]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_headers[multiple keys]
+PASSED tests/test_metadata.py::TestMetadataWriting::test_body
+FAILED tests/test_metadata.py::TestRawMetadata::test_keywords[A -expected1]
+FAILED tests/test_metadata.py::TestRawMetadata::test_keywords[A, B-expected3]
+FAILED tests/test_metadata.py::TestRawMetadata::test_keywords[ A, B-expected5]
+FAILED tests/test_metadata.py::TestRawMetadata::test_keywords[A,B -expected6]
+FAILED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[-expected0]
+FAILED tests/test_metadata.py::TestRawMetadata::test_project_urls_parsing[A-expected1]
+FAILED tests/test_metadata.py::TestRawMetadata::test_header_mojibake - Assert...
+FAILED tests/test_metadata.py::TestMetadata::test_from_email_empty_import_name
+FAILED tests/test_metadata.py::TestMetadata::test_invalid_description_content_type[text/plain; charset=utf-8]
+FAILED tests/test_metadata.py::TestMetadata::test_invalid_description_content_type[text/markdown; variant=gfm]
+FAILED tests/test_metadata.py::TestMetadata::test_invalid_description_content_type[text/markdown; variant=commonmark]
+FAILED tests/test_metadata.py::TestMetadataWriting::test_write_metadata - Ass...
+FAILED tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_description
+FAILED tests/test_metadata.py::TestMetadataWriting::test_multiline_license - ...
+FAILED tests/test_metadata.py::TestMetadataWriting::test_large - AssertionErr...
+FAILED tests/test_metadata.py::TestMetadataWriting::test_modern_license - Ass...
+FAILED tests/test_metadata.py::TestMetadataWriting::test__import_names - Asse...
+FAILED tests/test_metadata.py::TestMetadataWriting::test_empty_import_names
+FAILED tests/test_metadata.py::TestMetadataWriting::test_headers[multiline]
+======================== 19 failed, 275 passed in 0.58s ========================

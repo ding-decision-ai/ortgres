@@ -1,0 +1,3 @@
+{"stage":"docs_complete","core_files":["src/packaging/__init__.py","src/packaging/version.py","src/packaging/specifiers.py","src/packaging/markers.py","src/packaging/requirements.py","src/packaging/_tokenizer.py","src/packaging/_parser.py","src/packaging/_structures.py","src/packaging/utils.py","src/packaging/tags.py","src/packaging/_elffile.py","src/packaging/_manylinux.py","src/packaging/_musllinux.py","src/packaging/licenses/__init__.py","src/packaging/licenses/_spdx.py","src/packaging/metadata.py","src/packaging/pylock.py"]}
+{"stage":"core_complete"}
+{"stage":"all_complete"}

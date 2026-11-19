@@ -1,0 +1,1117 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/9acda7d, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 13 items
+
+tests/test_builders/test_build_gettext.py .FFFFFFFFFFFF                  [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_build_gettext ______________________________
+tests/test_builders/test_build_gettext.py:57: in test_build_gettext
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:69: in run
+    content = self.find_pending_xref_condition(node, ('resolved', '*'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/transforms/post_transforms/__init__.py:306: in find_pending_xref_condition
+    matched = find_pending_xref_condition(node, condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'find_pending_xref_condition' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/root-gettext
+# outdir: /tmp/pytest-of-root/pytest-0/root-gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35motherext[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35msubdir/includes[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mautodoc[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+
+_________________________________ test_msgfmt __________________________________
+tests/test_builders/test_build_gettext.py:76: in test_msgfmt
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:69: in run
+    content = self.find_pending_xref_condition(node, ('resolved', '*'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/transforms/post_transforms/__init__.py:306: in find_pending_xref_condition
+    matched = find_pending_xref_condition(node, condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'find_pending_xref_condition' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/root-gettext
+# outdir: /tmp/pytest-of-root/pytest-0/root-gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35motherext[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35msubdir/includes[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mautodoc[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+
+__________________________ test_gettext_index_entries __________________________
+tests/test_builders/test_build_gettext.py:130: in test_gettext_index_entries
+    app.build(filenames=[app.srcdir / 'index_entries.txt'])
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:434: in build
+    self.builder.build_specific(filenames)
+sphinx/builders/__init__.py:365: in build_specific
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:692: in get_and_resolve_doctree
+    result = toctree_adapters._resolve_toctree(
+sphinx/environment/adapters/toctree.py:218: in _resolve_toctree
+    rel_uri = builder.get_relative_uri(docname, refnode['refuri'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:195: in get_relative_uri
+    self.get_target_uri(from_),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:187: in get_target_uri
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are specified
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00m1 source files given on command line
+[01mupdating environment: [39;49;00m[new config] 32 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  3%] [35madmonitions[39;49;00m
+[01mreading sources... [39;49;00m[  6%] [35mbackslashes[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mdefinition_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mdocfields[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mexternal_links[39;49;00m
+[01mreading sources... [39;49;00m[ 22%] [35mfigure[39;49;00m
+[01mreading sources... [39;49;00m[ 25%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mglossary_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 31%] [35mglossary_terms_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 34%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 38%] [35mindex_entries[39;49;00m
+[01mreading sources... [39;49;00m[ 41%] [35mlabel_target[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mliteralblock[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mnoqa[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35monly[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mraw[39;49;00m
+[01mreading sources... [39;49;00m[ 59%] [35mrefs[39;49;00m
+[01mreading sources... [39;49;00m[ 62%] [35mrefs_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 66%] [35mrefs_python_domain[39;49;00m
+[01mreading sources... [39;49;00m[ 69%] [35mrole_xref[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mrubric[39;49;00m
+[01mreading sources... [39;49;00m[ 75%] [35msection[39;49;00m
+[01mreading sources... [39;49;00m[ 78%] [35mseealso[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35msubdir/index[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35mtable[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtoctree[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtopic[39;49;00m
+[01mreading sources... [39;49;00m[ 94%] [35mtranslation_progress[39;49;00m
+[01mreading sources... [39;49;00m[ 97%] [35mversionchange[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mwarnings[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00m/tmp/pytest-of-root/pytest-0/gettext/figure.txt: document is referenced in multiple toctrees: ['index', 'toctree'], selecting: toctree <- figure
+done
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 50%] [32mindex[39;49;00m
+
+# warning: 
+[31m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt:41: ERROR: Duplicate target name, cannot be used as a unique reference: "duplicated sub section". [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/literalblock.txt:13: WARNING: Literal block expected; none found. [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/admonitions.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/noqa.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs_python_domain.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/rubric.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/toctree.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+______________________ test_gettext_disable_index_entries ______________________
+tests/test_builders/test_build_gettext.py:161: in test_gettext_disable_index_entries
+    app.build(filenames=[app.srcdir / 'index_entries.txt'])
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:434: in build
+    self.builder.build_specific(filenames)
+sphinx/builders/__init__.py:365: in build_specific
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:692: in get_and_resolve_doctree
+    result = toctree_adapters._resolve_toctree(
+sphinx/environment/adapters/toctree.py:218: in _resolve_toctree
+    rel_uri = builder.get_relative_uri(docname, refnode['refuri'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:195: in get_relative_uri
+    self.get_target_uri(from_),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:187: in get_target_uri
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are specified
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00m1 source files given on command line
+[01mupdating environment: [39;49;00m[new config] 32 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  3%] [35madmonitions[39;49;00m
+[01mreading sources... [39;49;00m[  6%] [35mbackslashes[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mdefinition_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mdocfields[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mexternal_links[39;49;00m
+[01mreading sources... [39;49;00m[ 22%] [35mfigure[39;49;00m
+[01mreading sources... [39;49;00m[ 25%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mglossary_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 31%] [35mglossary_terms_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 34%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 38%] [35mindex_entries[39;49;00m
+[01mreading sources... [39;49;00m[ 41%] [35mlabel_target[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mliteralblock[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mnoqa[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35monly[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mraw[39;49;00m
+[01mreading sources... [39;49;00m[ 59%] [35mrefs[39;49;00m
+[01mreading sources... [39;49;00m[ 62%] [35mrefs_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 66%] [35mrefs_python_domain[39;49;00m
+[01mreading sources... [39;49;00m[ 69%] [35mrole_xref[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mrubric[39;49;00m
+[01mreading sources... [39;49;00m[ 75%] [35msection[39;49;00m
+[01mreading sources... [39;49;00m[ 78%] [35mseealso[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35msubdir/index[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35mtable[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtoctree[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtopic[39;49;00m
+[01mreading sources... [39;49;00m[ 94%] [35mtranslation_progress[39;49;00m
+[01mreading sources... [39;49;00m[ 97%] [35mversionchange[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mwarnings[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00m/tmp/pytest-of-root/pytest-0/gettext/figure.txt: document is referenced in multiple toctrees: ['index', 'toctree'], selecting: toctree <- figure
+done
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 50%] [32mindex[39;49;00m
+
+# warning: 
+[31m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt:41: ERROR: Duplicate target name, cannot be used as a unique reference: "duplicated sub section". [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/literalblock.txt:13: WARNING: Literal block expected; none found. [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/admonitions.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/noqa.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs_python_domain.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/rubric.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/toctree.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+____________________________ test_gettext_template _____________________________
+tests/test_builders/test_build_gettext.py:181: in test_gettext_template
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:897: in _write_docname
+    builder.write_doc(docname, doctree)
+sphinx/builders/__init__.py:845: in write_doc
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 32 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  3%] [35madmonitions[39;49;00m
+[01mreading sources... [39;49;00m[  6%] [35mbackslashes[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mdefinition_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mdocfields[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mexternal_links[39;49;00m
+[01mreading sources... [39;49;00m[ 22%] [35mfigure[39;49;00m
+[01mreading sources... [39;49;00m[ 25%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mglossary_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 31%] [35mglossary_terms_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 34%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 38%] [35mindex_entries[39;49;00m
+[01mreading sources... [39;49;00m[ 41%] [35mlabel_target[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mliteralblock[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mnoqa[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35monly[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mraw[39;49;00m
+[01mreading sources... [39;49;00m[ 59%] [35mrefs[39;49;00m
+[01mreading sources... [39;49;00m[ 62%] [35mrefs_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 66%] [35mrefs_python_domain[39;49;00m
+[01mreading sources... [39;49;00m[ 69%] [35mrole_xref[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mrubric[39;49;00m
+[01mreading sources... [39;49;00m[ 75%] [35msection[39;49;00m
+[01mreading sources... [39;49;00m[ 78%] [35mseealso[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35msubdir/index[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35mtable[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtoctree[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtopic[39;49;00m
+[01mreading sources... [39;49;00m[ 94%] [35mtranslation_progress[39;49;00m
+[01mreading sources... [39;49;00m[ 97%] [35mversionchange[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mwarnings[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00m/tmp/pytest-of-root/pytest-0/gettext/figure.txt: document is referenced in multiple toctrees: ['index', 'toctree'], selecting: toctree <- figure
+done
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  3%] [32madmonitions[39;49;00m
+
+# warning: 
+[31m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt:41: ERROR: Duplicate target name, cannot be used as a unique reference: "duplicated sub section". [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/literalblock.txt:13: WARNING: Literal block expected; none found. [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/admonitions.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/noqa.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs_python_domain.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/rubric.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/toctree.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+________________ test_gettext_template_msgid_order_in_sphinxpot ________________
+tests/test_builders/test_build_gettext.py:192: in test_gettext_template_msgid_order_in_sphinxpot
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:897: in _write_docname
+    builder.write_doc(docname, doctree)
+sphinx/builders/__init__.py:845: in write_doc
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-template
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-template/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_____________________ test_gettext_custom_output_template ______________________
+tests/test_builders/test_build_gettext.py:210: in test_gettext_custom_output_template
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:897: in _write_docname
+    builder.write_doc(docname, doctree)
+sphinx/builders/__init__.py:845: in write_doc
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-custom-output-template
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-custom-output-template/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+____________________________ test_build_single_pot _____________________________
+tests/test_builders/test_build_gettext.py:224: in test_build_single_pot
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:69: in run
+    content = self.find_pending_xref_condition(node, ('resolved', '*'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/transforms/post_transforms/__init__.py:306: in find_pending_xref_condition
+    matched = find_pending_xref_condition(node, condition)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'find_pending_xref_condition' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/root-gettext
+# outdir: /tmp/pytest-of-root/pytest-0/root-gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[ 13%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 20%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 27%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 73%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 80%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 87%] [35motherext[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35msubdir/includes[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mautodoc[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+
+___________________ test_gettext_prolog_epilog_substitution ____________________
+tests/test_builders/test_build_gettext.py:248: in test_gettext_prolog_epilog_substitution
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:692: in get_and_resolve_doctree
+    result = toctree_adapters._resolve_toctree(
+sphinx/environment/adapters/toctree.py:218: in _resolve_toctree
+    rel_uri = builder.get_relative_uri(docname, refnode['refuri'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:195: in get_relative_uri
+    self.get_target_uri(from_),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:187: in get_target_uri
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-subst
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-subst/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mprolog_epilog_substitution[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mprolog_epilog_substitution_excluded[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________ test_gettext_prolog_epilog_substitution_excluded _______________
+tests/test_builders/test_build_gettext.py:275: in test_gettext_prolog_epilog_substitution_excluded
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:692: in get_and_resolve_doctree
+    result = toctree_adapters._resolve_toctree(
+sphinx/environment/adapters/toctree.py:218: in _resolve_toctree
+    rel_uri = builder.get_relative_uri(docname, refnode['refuri'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:195: in get_relative_uri
+    self.get_target_uri(from_),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/__init__.py:187: in get_target_uri
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-subst
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-subst/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mprolog_epilog_substitution[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mprolog_epilog_substitution_excluded[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mindex[39;49;00m
+
+# warning: 
+
+_____________________ test_gettext_literalblock_additional _____________________
+tests/test_builders/test_build_gettext.py:299: in test_gettext_literalblock_additional
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:59: in run
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 43 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  2%] [35madmonitions[39;49;00m
+[01mreading sources... [39;49;00m[  5%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[  7%] [35mbackslashes[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mdefinition_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 14%] [35mdocfields[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 21%] [35mexternal_links[39;49;00m
+[01mreading sources... [39;49;00m[ 23%] [35mfigure[39;49;00m
+[01mreading sources... [39;49;00m[ 26%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mglossary_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 30%] [35mglossary_terms_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 35%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 37%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mindex_entries[39;49;00m
+[01mreading sources... [39;49;00m[ 42%] [35mlabel_target[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mliteralblock[39;49;00m
+[01mreading sources... [39;49;00m[ 49%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 51%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mnoqa[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 58%] [35monly[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35motherext[39;49;00m
+[01mreading sources... [39;49;00m[ 63%] [35mraw[39;49;00m
+[01mreading sources... [39;49;00m[ 65%] [35mrefs[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mrefs_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 70%] [35mrefs_python_domain[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mrole_xref[39;49;00m
+[01mreading sources... [39;49;00m[ 74%] [35mrubric[39;49;00m
+[01mreading sources... [39;49;00m[ 77%] [35msection[39;49;00m
+[01mreading sources... [39;49;00m[ 79%] [35mseealso[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35msubdir/includes[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35msubdir/index[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtable[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtoctree[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35mtopic[39;49;00m
+[01mreading sources... [39;49;00m[ 95%] [35mtranslation_progress[39;49;00m
+[01mreading sources... [39;49;00m[ 98%] [35mversionchange[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mwarnings[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  2%] [32madmonitions[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt:41: ERROR: Duplicate target name, cannot be used as a unique reference: "duplicated sub section". [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/literalblock.txt:13: WARNING: Literal block expected; none found. [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/admonitions.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/backslashes.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/definition_terms.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/docfields.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/external_links.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/glossary_terms.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/glossary_terms_inconsistency.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/index_entries.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/literalblock.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/noqa.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/only.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/raw.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs_inconsistency.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs_python_domain.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/role_xref.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/rubric.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/section.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/seealso.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/subdir/index.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/toctree.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/topic.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/translation_progress.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/versionchange.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/warnings.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+______________________ test_gettext_trailing_backslashes _______________________
+tests/test_builders/test_build_gettext.py:330: in test_gettext_trailing_backslashes
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:897: in _write_docname
+    builder.write_doc(docname, doctree)
+sphinx/builders/__init__.py:845: in write_doc
+    raise NotImplementedError
+E   NotImplementedError
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/9acda7d[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 43 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  2%] [35madmonitions[39;49;00m
+[01mreading sources... [39;49;00m[  5%] [35mautodoc[39;49;00m
+[01mreading sources... [39;49;00m[  7%] [35mbackslashes[39;49;00m
+[01mreading sources... [39;49;00m[  9%] [35mbom[39;49;00m
+[01mreading sources... [39;49;00m[ 12%] [35mdefinition_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 14%] [35mdocfields[39;49;00m
+[01mreading sources... [39;49;00m[ 16%] [35mextapi[39;49;00m
+[01mreading sources... [39;49;00m[ 19%] [35mextensions[39;49;00m
+[01mreading sources... [39;49;00m[ 21%] [35mexternal_links[39;49;00m
+[01mreading sources... [39;49;00m[ 23%] [35mfigure[39;49;00m
+[01mreading sources... [39;49;00m[ 26%] [35mfootnote[39;49;00m
+[01mreading sources... [39;49;00m[ 28%] [35mglossary_terms[39;49;00m
+[01mreading sources... [39;49;00m[ 30%] [35mglossary_terms_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mimages[39;49;00m
+[01mreading sources... [39;49;00m[ 35%] [35mincludes[39;49;00m
+[01mreading sources... [39;49;00m[ 37%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 40%] [35mindex_entries[39;49;00m
+[01mreading sources... [39;49;00m[ 42%] [35mlabel_target[39;49;00m
+[01mreading sources... [39;49;00m[ 44%] [35mlists[39;49;00m
+[01mreading sources... [39;49;00m[ 47%] [35mliteralblock[39;49;00m
+[01mreading sources... [39;49;00m[ 49%] [35mmarkup[39;49;00m
+[01mreading sources... [39;49;00m[ 51%] [35mmath[39;49;00m
+[01mreading sources... [39;49;00m[ 53%] [35mnoqa[39;49;00m
+[01mreading sources... [39;49;00m[ 56%] [35mobjects[39;49;00m
+[01mreading sources... [39;49;00m[ 58%] [35monly[39;49;00m
+[01mreading sources... [39;49;00m[ 60%] [35mraw[39;49;00m
+[01mreading sources... [39;49;00m[ 63%] [35mrefs[39;49;00m
+[01mreading sources... [39;49;00m[ 65%] [35mrefs_inconsistency[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mrefs_python_domain[39;49;00m
+[01mreading sources... [39;49;00m[ 70%] [35mrole_xref[39;49;00m
+[01mreading sources... [39;49;00m[ 72%] [35mrubric[39;49;00m
+[01mreading sources... [39;49;00m[ 74%] [35msection[39;49;00m
+[01mreading sources... [39;49;00m[ 77%] [35mseealso[39;49;00m
+[01mreading sources... [39;49;00m[ 79%] [35msubdir/excluded[39;49;00m
+[01mreading sources... [39;49;00m[ 81%] [35msubdir/images[39;49;00m
+[01mreading sources... [39;49;00m[ 84%] [35msubdir/includes[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35msubdir/index[39;49;00m
+[01mreading sources... [39;49;00m[ 88%] [35mtable[39;49;00m
+[01mreading sources... [39;49;00m[ 91%] [35mtoctree[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35mtopic[39;49;00m
+[01mreading sources... [39;49;00m[ 95%] [35mtranslation_progress[39;49;00m
+[01mreading sources... [39;49;00m[ 98%] [35mversionchange[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mwarnings[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00m/tmp/pytest-of-root/pytest-0/gettext/figure.txt: document is referenced in multiple toctrees: ['index', 'toctree'], selecting: toctree <- figure
+done
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  2%] [32madmonitions[39;49;00m
+
+# warning: 
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:6: ERROR: Unknown directive type "automodule".
+
+.. automodule:: autodoc_target
+   :members: [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:9: ERROR: Unknown directive type "autofunction".
+
+.. autofunction:: function [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:11: ERROR: Unknown directive type "autoclass".
+
+.. autoclass:: Class
+   :inherited-members:
+
+   Additional content. [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:16: ERROR: Unknown directive type "autoclass".
+
+.. autoclass:: Outer
+   :members: Inner [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:19: ERROR: Unknown directive type "autoattribute".
+
+.. autoattribute:: Class.docattr [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:21: ERROR: Unknown directive type "autoexception".
+
+.. autoexception:: CustomEx
+   :members: f [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:24: ERROR: Unknown directive type "autoclass".
+
+.. autoclass:: CustomDict
+   :show-inheritance:
+   :members: [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:31: ERROR: Unknown directive type "autoclass".
+
+.. autoclass:: InstAttCls
+   :members:
+
+   All members (5 total) [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt:36: ERROR: Unknown directive type "autoclass".
+
+.. autoclass:: InstAttCls
+   :members: ca1, ia1
+
+   Specific members (2 total) [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extapi.txt:6: ERROR: Unknown directive type "clsdir".
+
+.. clsdir::
+   :opt: Bar [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt:7: ERROR: Unknown interpreted text role "issue". [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt:7: ERROR: Unknown interpreted text role "pyurl". [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt:7: ERROR: Unknown interpreted text role "issue". [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt:14: ERROR: Unknown directive type "todo".
+
+.. todo::
+
+   Test the todo extension. [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt:18: ERROR: Unknown directive type "todo".
+
+.. todo::
+
+   Test with |sub| (see https://github.com/sphinx-doc/sphinx/issues/286). [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt:28: ERROR: Unknown directive type "todolist".
+
+.. todolist:: [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt:41: ERROR: Duplicate target name, cannot be used as a unique reference: "duplicated sub section". [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/literalblock.txt:13: WARNING: Literal block expected; none found. [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/objects.txt:242: ERROR: Unknown directive type "userdesc".
+
+.. userdesc:: myobj:parameter
+
+   Description of userdesc. [docutils][39;49;00m
+[31m/tmp/pytest-of-root/pytest-0/gettext/objects.txt:247: ERROR: Unknown interpreted text role "userdescrole". [docutils][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/admonitions.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/autodoc.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/extapi.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/extensions.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/images.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/includes.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/label_target.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/lists.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/math.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/noqa.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/objects.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/refs_python_domain.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/rubric.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/subdir/excluded.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/subdir/images.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/subdir/includes.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/gettext/toctree.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_builders/test_build_gettext.py::test_Catalog_duplicated_message
+FAILED tests/test_builders/test_build_gettext.py::test_build_gettext - NameEr...
+FAILED tests/test_builders/test_build_gettext.py::test_msgfmt - NameError: na...
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_index_entries
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_disable_index_entries
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_template - Not...
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_template_msgid_order_in_sphinxpot
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_custom_output_template
+FAILED tests/test_builders/test_build_gettext.py::test_build_single_pot - Nam...
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_prolog_epilog_substitution
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_prolog_epilog_substitution_excluded
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_literalblock_additional
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_trailing_backslashes
+========================= 12 failed, 1 passed in 3.44s =========================

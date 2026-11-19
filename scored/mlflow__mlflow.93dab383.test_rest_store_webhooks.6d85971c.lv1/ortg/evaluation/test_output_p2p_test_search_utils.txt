@@ -1,0 +1,627 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 152 items
+
+tests/utils/test_search_utils.py::test_filter[metric.acc >= 0.94-parsed_filter0] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  0%]
+tests/utils/test_search_utils.py::test_filter[metric.acc>=100-parsed_filter1] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  1%]
+tests/utils/test_search_utils.py::test_filter[params.m!='tf'-parsed_filter2] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  1%]
+tests/utils/test_search_utils.py::test_filter[params."m"!="tf"-parsed_filter3] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  2%]
+tests/utils/test_search_utils.py::test_filter[metric."legit name" >= 0.243-parsed_filter4] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  3%]
+tests/utils/test_search_utils.py::test_filter[metrics.XYZ = 3-parsed_filter5] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  3%]
+tests/utils/test_search_utils.py::test_filter[params."cat dog" = "pets"-parsed_filter6] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  4%]
+tests/utils/test_search_utils.py::test_filter[metrics."X-Y-Z" = 3-parsed_filter7] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  5%]
+tests/utils/test_search_utils.py::test_filter[metrics."X//Y#$$@&Z" = 3-parsed_filter8] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  5%]
+tests/utils/test_search_utils.py::test_filter[params.model = 'LinearRegression'-parsed_filter9] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  6%]
+tests/utils/test_search_utils.py::test_filter[metrics.rmse < 1 and params.model_class = 'LR'-parsed_filter10] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  7%]
+tests/utils/test_search_utils.py::test_filter[-parsed_filter11] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  7%]
+tests/utils/test_search_utils.py::test_filter[`metric`.a >= 0.1-parsed_filter12] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  8%]
+tests/utils/test_search_utils.py::test_filter[`params`.model >= 'LR'-parsed_filter13] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  9%]
+tests/utils/test_search_utils.py::test_filter[tags.version = 'commit-hash'-parsed_filter14] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [  9%]
+tests/utils/test_search_utils.py::test_filter[`tags`.source_name = 'a notebook'-parsed_filter15] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 10%]
+tests/utils/test_search_utils.py::test_filter[metrics."accuracy.2.0" > 5-parsed_filter16] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 11%]
+tests/utils/test_search_utils.py::test_filter[metrics.`spacey name` > 5-parsed_filter17] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 11%]
+tests/utils/test_search_utils.py::test_filter[params."p.a.r.a.m" != "a"-parsed_filter18] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 12%]
+tests/utils/test_search_utils.py::test_filter[tags."t.a.g" = "a"-parsed_filter19] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 13%]
+tests/utils/test_search_utils.py::test_filter[attribute.artifact_uri = '1/23/4'-parsed_filter20] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 13%]
+tests/utils/test_search_utils.py::test_filter[attribute.start_time >= 1234-parsed_filter21] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 14%]
+tests/utils/test_search_utils.py::test_filter[run.status = 'RUNNING'-parsed_filter22] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 15%]
+tests/utils/test_search_utils.py::test_filter[dataset.name = 'my_dataset'-parsed_filter23] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 15%]
+tests/utils/test_search_utils.py::test_correct_quote_trimming[params.m = 'LR'-parsed_filter0] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 16%]
+tests/utils/test_search_utils.py::test_correct_quote_trimming[params.m = "LR"-parsed_filter1] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 17%]
+tests/utils/test_search_utils.py::test_correct_quote_trimming[params.m = "L'Hosp"-parsed_filter2] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 17%]
+tests/utils/test_search_utils.py::test_error_filter[metric.acc >= 0.94; metrics.rmse < 1-Search filter contained multiple expression] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 18%]
+tests/utils/test_search_utils.py::test_error_filter[m.acc >= 0.94-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 19%]
+tests/utils/test_search_utils.py::test_error_filter[acc >= 0.94-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 19%]
+tests/utils/test_search_utils.py::test_error_filter[p.model >= 'LR'-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 20%]
+tests/utils/test_search_utils.py::test_error_filter[attri.x != 1-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 21%]
+tests/utils/test_search_utils.py::test_error_filter[a.x != 1-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 21%]
+tests/utils/test_search_utils.py::test_error_filter[model >= 'LR'-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 22%]
+tests/utils/test_search_utils.py::test_error_filter[metrics.A > 0.1 OR params.B = 'LR'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 23%]
+tests/utils/test_search_utils.py::test_error_filter[metrics.A > 0.1 NAND params.B = 'LR'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 23%]
+tests/utils/test_search_utils.py::test_error_filter[metrics.A > 0.1 AND (params.B = 'LR')-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 24%]
+tests/utils/test_search_utils.py::test_error_filter[`metrics.A > 0.1-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 25%]
+tests/utils/test_search_utils.py::test_error_filter[param`.A > 0.1-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 25%]
+tests/utils/test_search_utils.py::test_error_filter[`dummy.A > 0.1-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 26%]
+tests/utils/test_search_utils.py::test_error_filter[dummy`.A > 0.1-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 26%]
+tests/utils/test_search_utils.py::test_error_filter[attribute.start != 1-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 27%]
+tests/utils/test_search_utils.py::test_error_filter[attribute.experiment_id != 1-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 28%]
+tests/utils/test_search_utils.py::test_error_filter[attribute.lifecycle_stage = 'ACTIVE'-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 28%]
+tests/utils/test_search_utils.py::test_error_filter[attribute.name != 1-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 29%]
+tests/utils/test_search_utils.py::test_error_filter[attribute.time != 1-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 30%]
+tests/utils/test_search_utils.py::test_error_filter[attribute._status != 'RUNNING'-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 30%]
+tests/utils/test_search_utils.py::test_error_filter[attribute.status = true-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 31%]
+tests/utils/test_search_utils.py::test_error_filter[dataset.status = 'true'-Invalid dataset key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 32%]
+tests/utils/test_search_utils.py::test_error_filter[dataset.profile = 'num_rows: 10'-Invalid dataset key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 32%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[metric.model = 'LR'-Expected numeric value type for metric] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 33%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[metric.model = '5'-Expected numeric value type for metric] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 34%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[params.acc = 5-Expected a quoted string value for param] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 34%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[tags.acc = 5-Expected a quoted string value for tag] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 35%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[metrics.acc != metrics.acc-Expected numeric value type for metric] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 36%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[1.0 > metrics.acc-Expected 'Identifier' found] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 36%]
+tests/utils/test_search_utils.py::test_error_comparison_clauses[attribute.status = 1-Expected a quoted string value for attributes] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 37%]
+tests/utils/test_search_utils.py::test_bad_quotes[params.acc = LR-value is either not quoted or unidentified quote types] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 38%]
+tests/utils/test_search_utils.py::test_bad_quotes[tags.acc = LR-value is either not quoted or unidentified quote types] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 38%]
+tests/utils/test_search_utils.py::test_bad_quotes[params.acc = `LR`-value is either not quoted or unidentified quote types] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 39%]
+tests/utils/test_search_utils.py::test_bad_quotes[params.'acc = LR-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 40%]
+tests/utils/test_search_utils.py::test_bad_quotes[params.acc = 'LR-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 40%]
+tests/utils/test_search_utils.py::test_bad_quotes[params.acc = LR'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 41%]
+tests/utils/test_search_utils.py::test_bad_quotes[params.acc = "LR'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 42%]
+tests/utils/test_search_utils.py::test_bad_quotes[tags.acc = "LR'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 42%]
+tests/utils/test_search_utils.py::test_bad_quotes[tags.acc = = 'LR'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 43%]
+tests/utils/test_search_utils.py::test_bad_quotes[attribute.status IS 'RUNNING'-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 44%]
+tests/utils/test_search_utils.py::test_invalid_clauses[params.acc LR !=-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 44%]
+tests/utils/test_search_utils.py::test_invalid_clauses[params.acc LR-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 45%]
+tests/utils/test_search_utils.py::test_invalid_clauses[metric.acc !=-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 46%]
+tests/utils/test_search_utils.py::test_invalid_clauses[acc != 1.0-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 46%]
+tests/utils/test_search_utils.py::test_invalid_clauses[foo is null-Invalid clause(s) in filter string] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 47%]
+tests/utils/test_search_utils.py::test_invalid_clauses[1=1-Expected 'Identifier' found] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 48%]
+tests/utils/test_search_utils.py::test_invalid_clauses[1==2-Expected 'Identifier' found] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 48%]
+tests/utils/test_search_utils.py::test_bad_comparators[metrics-bad_comparators0-abc-1.0] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 49%]
+tests/utils/test_search_utils.py::test_bad_comparators[params-bad_comparators1-abc-'my-param-value'] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 50%]
+tests/utils/test_search_utils.py::test_bad_comparators[tags-bad_comparators2-abc-'my-tag-value'] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 50%]
+tests/utils/test_search_utils.py::test_bad_comparators[attributes-bad_comparators3-status-'my-tag-value'] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 51%]
+tests/utils/test_search_utils.py::test_bad_comparators[attributes-bad_comparators4-start_time-1234] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 51%]
+tests/utils/test_search_utils.py::test_bad_comparators[datasets-bad_comparators5-name-'my-dataset-name'] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 52%]
+tests/utils/test_search_utils.py::test_correct_filtering[None-matching_runs0] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 53%]
+tests/utils/test_search_utils.py::test_correct_filtering[-matching_runs1] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 53%]
+tests/utils/test_search_utils.py::test_correct_filtering[attributes.status = 'FAILED'-matching_runs2] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 54%]
+tests/utils/test_search_utils.py::test_correct_filtering[metrics.key1 = 123-matching_runs3] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 55%]
+tests/utils/test_search_utils.py::test_correct_filtering[metrics.key1 != 123-matching_runs4] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 55%]
+tests/utils/test_search_utils.py::test_correct_filtering[metrics.key1 >= 123-matching_runs5] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 56%]
+tests/utils/test_search_utils.py::test_correct_filtering[params.my_param = 'A'-matching_runs6] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 57%]
+tests/utils/test_search_utils.py::test_correct_filtering[tags.tag1 = 'D'-matching_runs7] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 57%]
+tests/utils/test_search_utils.py::test_correct_filtering[tags.tag1 != 'D'-matching_runs8] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 58%]
+tests/utils/test_search_utils.py::test_correct_filtering[params.my_param = 'A' AND attributes.status = 'FAILED'-matching_runs9] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 59%]
+tests/utils/test_search_utils.py::test_correct_filtering[datasets.name = 'name1'-matching_runs10] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 59%]
+tests/utils/test_search_utils.py::test_correct_filtering[datasets.name IN ('name1', 'name2')-matching_runs11] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 60%]
+tests/utils/test_search_utils.py::test_correct_filtering[datasets.digest IN ('digest1', 'digest2')-matching_runs12] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 61%]
+tests/utils/test_search_utils.py::test_correct_filtering[datasets.name = 'name1' AND datasets.digest = 'digest2'-matching_runs13] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 61%]
+tests/utils/test_search_utils.py::test_correct_filtering[datasets.context = 'train'-matching_runs14] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 62%]
+tests/utils/test_search_utils.py::test_correct_filtering[datasets.name = 'name1' AND datasets.context = 'train'-matching_runs15] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 63%]
+tests/utils/test_search_utils.py::test_filter_runs_by_start_time PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 63%]
+tests/utils/test_search_utils.py::test_filter_runs_by_user_id PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 64%]
+tests/utils/test_search_utils.py::test_filter_runs_by_end_time PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 65%]
+tests/utils/test_search_utils.py::test_correct_sorting[None-matching_runs0] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 65%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys1-matching_runs1] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 66%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys2-matching_runs2] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 67%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys3-matching_runs3] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 67%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys4-matching_runs4] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 68%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys5-matching_runs5] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 69%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys6-matching_runs6] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 69%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys7-matching_runs7] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 70%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys8-matching_runs8] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 71%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys9-matching_runs9] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 71%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys10-matching_runs10] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 72%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys11-matching_runs11] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 73%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys12-matching_runs12] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 73%]
+tests/utils/test_search_utils.py::test_correct_sorting[order_bys13-matching_runs13] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 74%]
+tests/utils/test_search_utils.py::test_order_by_metric_with_nans_infs_nones PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 75%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[m.acc-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 75%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[acc-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 76%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attri.x-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 76%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[`metrics.A-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 77%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[`metrics.A`-Invalid entity type] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 78%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.start-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 78%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.experiment_id-Invalid attribute key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 79%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[metrics.A != 1-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 80%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[params.my_param -Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 80%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.run_id ACS-Invalid ordering key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 81%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.run_id decs-Invalid ordering key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 82%]
+tests/utils/test_search_utils.py::test_space_order_by_search_runs[metrics.`Mean Square Error`-True] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 82%]
+tests/utils/test_search_utils.py::test_space_order_by_search_runs[metrics.`Mean Square Error` ASC-True] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 83%]
+tests/utils/test_search_utils.py::test_space_order_by_search_runs[metrics.`Mean Square Error` DESC-False] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 84%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[creation_timestamp DESC-Invalid order by key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 84%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[last_updated_timestamp DESC blah-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 85%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 86%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp somerandomstuff ASC-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 86%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp somerandomstuff-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 87%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp decs-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 88%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp ACS-Invalid order_by clause] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 88%]
+tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[name aCs-Invalid ordering key] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 89%]
+tests/utils/test_search_utils.py::test_pagination[None-1-matching_runs0-expected_next_page_token0] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 90%]
+tests/utils/test_search_utils.py::test_pagination[None-2-matching_runs1-expected_next_page_token1] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 90%]
+tests/utils/test_search_utils.py::test_pagination[None-3-matching_runs2-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 91%]
+tests/utils/test_search_utils.py::test_pagination[None-5-matching_runs3-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 92%]
+tests/utils/test_search_utils.py::test_pagination[page_token4-1-matching_runs4-expected_next_page_token4] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 92%]
+tests/utils/test_search_utils.py::test_pagination[page_token5-2-matching_runs5-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 93%]
+tests/utils/test_search_utils.py::test_pagination[page_token6-3-matching_runs6-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 94%]
+tests/utils/test_search_utils.py::test_pagination[page_token7-1-matching_runs7-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 94%]
+tests/utils/test_search_utils.py::test_pagination[page_token8-2-matching_runs8-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 95%]
+tests/utils/test_search_utils.py::test_pagination[page_token9-0-matching_runs9-expected_next_page_token9] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 96%]
+tests/utils/test_search_utils.py::test_pagination[page_token10-1-matching_runs10-None] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 96%]
+tests/utils/test_search_utils.py::test_invalid_page_tokens[e30=-Invalid page token] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 97%]
+tests/utils/test_search_utils.py::test_invalid_page_tokens[eyJvZmZzZXQiOiAiYSJ9-Invalid page token] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 98%]
+tests/utils/test_search_utils.py::test_invalid_page_tokens[eyJvZmZzb290IjogN30=-Invalid page token] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 98%]
+tests/utils/test_search_utils.py::test_invalid_page_tokens[bm90IGpzb24=-Invalid page token] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [ 99%]
+tests/utils/test_search_utils.py::test_invalid_page_tokens[not base64-Invalid page token] PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:31:02 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metric.acc >= 0.94-parsed_filter0]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metric.acc>=100-parsed_filter1]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[params.m!='tf'-parsed_filter2]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[params."m"!="tf"-parsed_filter3]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metric."legit name" >= 0.243-parsed_filter4]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metrics.XYZ = 3-parsed_filter5]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[params."cat dog" = "pets"-parsed_filter6]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metrics."X-Y-Z" = 3-parsed_filter7]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metrics."X//Y#$$@&Z" = 3-parsed_filter8]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[params.model = 'LinearRegression'-parsed_filter9]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metrics.rmse < 1 and params.model_class = 'LR'-parsed_filter10]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[-parsed_filter11]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[`metric`.a >= 0.1-parsed_filter12]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[`params`.model >= 'LR'-parsed_filter13]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[tags.version = 'commit-hash'-parsed_filter14]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[`tags`.source_name = 'a notebook'-parsed_filter15]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metrics."accuracy.2.0" > 5-parsed_filter16]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[metrics.`spacey name` > 5-parsed_filter17]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[params."p.a.r.a.m" != "a"-parsed_filter18]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[tags."t.a.g" = "a"-parsed_filter19]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[attribute.artifact_uri = '1/23/4'-parsed_filter20]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[attribute.start_time >= 1234-parsed_filter21]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[run.status = 'RUNNING'-parsed_filter22]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter[dataset.name = 'my_dataset'-parsed_filter23]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_quote_trimming[params.m = 'LR'-parsed_filter0]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_quote_trimming[params.m = "LR"-parsed_filter1]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_quote_trimming[params.m = "L'Hosp"-parsed_filter2]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[metric.acc >= 0.94; metrics.rmse < 1-Search filter contained multiple expression]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[m.acc >= 0.94-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[acc >= 0.94-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[p.model >= 'LR'-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attri.x != 1-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[a.x != 1-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[model >= 'LR'-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[metrics.A > 0.1 OR params.B = 'LR'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[metrics.A > 0.1 NAND params.B = 'LR'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[metrics.A > 0.1 AND (params.B = 'LR')-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[`metrics.A > 0.1-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[param`.A > 0.1-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[`dummy.A > 0.1-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[dummy`.A > 0.1-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute.start != 1-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute.experiment_id != 1-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute.lifecycle_stage = 'ACTIVE'-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute.name != 1-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute.time != 1-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute._status != 'RUNNING'-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[attribute.status = true-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[dataset.status = 'true'-Invalid dataset key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_filter[dataset.profile = 'num_rows: 10'-Invalid dataset key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[metric.model = 'LR'-Expected numeric value type for metric]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[metric.model = '5'-Expected numeric value type for metric]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[params.acc = 5-Expected a quoted string value for param]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[tags.acc = 5-Expected a quoted string value for tag]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[metrics.acc != metrics.acc-Expected numeric value type for metric]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[1.0 > metrics.acc-Expected 'Identifier' found]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_error_comparison_clauses[attribute.status = 1-Expected a quoted string value for attributes]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[params.acc = LR-value is either not quoted or unidentified quote types]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[tags.acc = LR-value is either not quoted or unidentified quote types]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[params.acc = `LR`-value is either not quoted or unidentified quote types]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[params.'acc = LR-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[params.acc = 'LR-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[params.acc = LR'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[params.acc = "LR'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[tags.acc = "LR'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[tags.acc = = 'LR'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_quotes[attribute.status IS 'RUNNING'-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[params.acc LR !=-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[params.acc LR-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[metric.acc !=-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[acc != 1.0-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[foo is null-Invalid clause(s) in filter string]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[1=1-Expected 'Identifier' found]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_clauses[1==2-Expected 'Identifier' found]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_comparators[metrics-bad_comparators0-abc-1.0]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_comparators[params-bad_comparators1-abc-'my-param-value']
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_comparators[tags-bad_comparators2-abc-'my-tag-value']
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_comparators[attributes-bad_comparators3-status-'my-tag-value']
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_comparators[attributes-bad_comparators4-start_time-1234]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_bad_comparators[datasets-bad_comparators5-name-'my-dataset-name']
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[None-matching_runs0]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[-matching_runs1]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[attributes.status = 'FAILED'-matching_runs2]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[metrics.key1 = 123-matching_runs3]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[metrics.key1 != 123-matching_runs4]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[metrics.key1 >= 123-matching_runs5]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[params.my_param = 'A'-matching_runs6]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[tags.tag1 = 'D'-matching_runs7]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[tags.tag1 != 'D'-matching_runs8]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[params.my_param = 'A' AND attributes.status = 'FAILED'-matching_runs9]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[datasets.name = 'name1'-matching_runs10]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[datasets.name IN ('name1', 'name2')-matching_runs11]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[datasets.digest IN ('digest1', 'digest2')-matching_runs12]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[datasets.name = 'name1' AND datasets.digest = 'digest2'-matching_runs13]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[datasets.context = 'train'-matching_runs14]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_filtering[datasets.name = 'name1' AND datasets.context = 'train'-matching_runs15]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter_runs_by_start_time
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter_runs_by_user_id
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_filter_runs_by_end_time
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[None-matching_runs0]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys1-matching_runs1]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys2-matching_runs2]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys3-matching_runs3]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys4-matching_runs4]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys5-matching_runs5]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys6-matching_runs6]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys7-matching_runs7]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys8-matching_runs8]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys9-matching_runs9]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys10-matching_runs10]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys11-matching_runs11]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys12-matching_runs12]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_correct_sorting[order_bys13-matching_runs13]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_order_by_metric_with_nans_infs_nones
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[m.acc-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[acc-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attri.x-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[`metrics.A-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[`metrics.A`-Invalid entity type]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.start-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.experiment_id-Invalid attribute key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[metrics.A != 1-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[params.my_param -Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.run_id ACS-Invalid ordering key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_runs[attribute.run_id decs-Invalid ordering key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_space_order_by_search_runs[metrics.`Mean Square Error`-True]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_space_order_by_search_runs[metrics.`Mean Square Error` ASC-True]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_space_order_by_search_runs[metrics.`Mean Square Error` DESC-False]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[creation_timestamp DESC-Invalid order by key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[last_updated_timestamp DESC blah-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp somerandomstuff ASC-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp somerandomstuff-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp decs-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[timestamp ACS-Invalid order_by clause]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_order_by_search_registered_models[name aCs-Invalid ordering key]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[None-1-matching_runs0-expected_next_page_token0]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[None-2-matching_runs1-expected_next_page_token1]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[None-3-matching_runs2-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[None-5-matching_runs3-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token4-1-matching_runs4-expected_next_page_token4]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token5-2-matching_runs5-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token6-3-matching_runs6-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token7-1-matching_runs7-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token8-2-matching_runs8-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token9-0-matching_runs9-expected_next_page_token9]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_pagination[page_token10-1-matching_runs10-None]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_page_tokens[e30=-Invalid page token]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_page_tokens[eyJvZmZzZXQiOiAiYSJ9-Invalid page token]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_page_tokens[eyJvZmZzb290IjogN30=-Invalid page token]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_page_tokens[bm90IGpzb24=-Invalid page token]
+PASSED | MEM 22.2/46.9 GB | DISK 827.4/915.7 GB tests/utils/test_search_utils.py::test_invalid_page_tokens[not base64-Invalid page token]
+============================= 152 passed in 0.42s ==============================

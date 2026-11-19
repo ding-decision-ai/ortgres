@@ -1,0 +1,95 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "042",
+    "source_and_execution": {
+      "canonical_phase_ledger": {
+        "bytes": 85911
+      },
+      "coordinator_phase_cap_seconds": 1200,
+      "evaluation_reserve_seconds": 300,
+      "budget_consumed_seconds": 780.2550578830333,
+      "known_measured_actual_seconds": 768.0027437620292,
+      "remaining_budget_seconds": 419.74494211696674,
+      "budget_is_not_measured_elapsed": true,
+      "whole_model_outer_seconds": 701.4021859119966,
+      "inner_model_seconds_included": 700.7751777779995,
+      "whole_full_outer_seconds": 13.526363226000285,
+      "inner_full_seconds_included": 13.049986914999863,
+      "inner_outer_not_double_charged": true,
+      "full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.19140877700010606,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 13.526363226000285,
+          "inner_budget_already_charged": 13.049986914999863,
+          "inner_known_actual_already_charged": 13.049986914999863,
+          "additional_budget": 0.476376311000422,
+          "additional_known_actual": 0.476376311000422,
+          "models": 0
+        }
+      },
+      "historical_ledger_references": {
+        "previous_method_spent_seconds_known": 804.9967174960184,
+        "previous_lost_outer_wrapper_elapsed_seconds": null,
+        "previous_strict_remaining_seconds": 395.0032825039816,
+        "cumulative_actual_all_history_seconds": null,
+        "historical_costs_preserved_by_reference": {
+          "previous_method_spent_seconds": 809.0997871369752,
+          "original_known_prefix_seconds": null,
+          "known_case_spent_before_new_method_seconds": null,
+          "counter_scopes": {
+            "prior_model_dispatch_attempts": 1,
+            "prior_stage_06_model_dispatch_attempts": 0,
+            "prior_stage_07_model_dispatch_attempts": 1,
+            "new_method_initial_model_dispatch_attempts": 1,
+            "planned_next_model_dispatch_number": 2
+          }
+        },
+        "prior_case_cumulative_base": {
+          "previous_method_spent_seconds": 809.0997871369752,
+          "model_dispatch_attempts": 1,
+          "prior_case_cumulative_base": null
+        }
+      },
+      "new_original_budget_reset": false,
+      "case_cumulative_actual_seconds": null,
+      "exact_actual_current_segment_total_seconds": null,
+      "USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "unknown_or_unmeasured_costs_not_rewritten_to_zero": true,
+      "current_phase_ledger": {
+        "bytes": 85911
+      },
+      "current_phase_charged_seconds": 780.2550578830333,
+      "current_phase_remaining_seconds": 419.74494211696674
+    },
+    "historical_source_and_method_reference": {
+      "previous_method_spent_seconds_known": 804.9967174960184,
+      "previous_lost_outer_wrapper_elapsed_seconds": null,
+      "previous_strict_remaining_seconds": 395.0032825039816,
+      "cumulative_actual_all_history_seconds": null,
+      "historical_costs_preserved_by_reference": {
+        "previous_method_spent_seconds": 809.0997871369752,
+        "original_known_prefix_seconds": null,
+        "known_case_spent_before_new_method_seconds": null,
+        "counter_scopes": {
+          "prior_model_dispatch_attempts": 1,
+          "prior_stage_06_model_dispatch_attempts": 0,
+          "prior_stage_07_model_dispatch_attempts": 1,
+          "new_method_initial_model_dispatch_attempts": 1,
+          "planned_next_model_dispatch_number": 2
+        }
+      },
+      "prior_case_cumulative_base": {
+        "previous_method_spent_seconds": 809.0997871369752,
+        "model_dispatch_attempts": 1,
+        "prior_case_cumulative_base": null
+      }
+    },
+    "accounting_rule": "unknown"
+  }
+}

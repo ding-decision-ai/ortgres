@@ -1,0 +1,577 @@
+diff --git a/astropy/io/fits/column.py b/astropy/io/fits/column.py
+index 3712f52..24d0833 100644
+--- a/astropy/io/fits/column.py
++++ b/astropy/io/fits/column.py
+@@ -2303,6 +2303,42 @@ def _parse_tformat(tform):
+ 
+     return (repeat, format.upper(), option)
+ 
++def _parse_ascii_tformat(tform, strict=False):
++    """Parse an ASCII-table ``TFORMn`` value."""
++    try:
++        match = TFORMAT_ASCII_RE.fullmatch(tform.strip().upper())
++    except (AttributeError, TypeError):
++        match = None
++
++    if match is None:
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    groups = match.groupdict()
++    format_ = (groups["format"] or groups["formatf"]).upper()
++    width_text = groups["width"] or groups["widthf"]
++    precision_text = groups["precision"]
++
++    if width_text is None:
++        if strict:
++            raise VerifyError(f"Format {tform!r} is not recognized.")
++        width, precision = ASCII_DEFAULT_WIDTHS[format_]
++    else:
++        width = int(width_text)
++        if format_ in "EFD":
++            if precision_text is None:
++                if strict:
++                    raise VerifyError(f"Format {tform!r} is not recognized.")
++                precision = 1
++            else:
++                precision = int(precision_text)
++        else:
++            precision = 0
++
++    if width <= 0 or precision >= width:
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    return format_, width, precision
++
+ 
+ 
+ 
+@@ -2768,4 +2804,4 @@ def python_to_tdisp(format_string, logical_dtype=False):
+     if logical_dtype:
+         ftype = "L"
+ 
+-    return ftype + width + sep + precision
+\ No newline at end of file
++    return ftype + width + sep + precision
+diff --git a/astropy/io/fits/file.py b/astropy/io/fits/file.py
+index 42f3051..641b83a 100644
+--- a/astropy/io/fits/file.py
++++ b/astropy/io/fits/file.py
+@@ -128,6 +128,19 @@ def _is_lzwfile(fileobj):
+     else:
+         return False
+ 
++def _normalize_fits_mode(mode):
++    """Normalize a Python binary-file mode to an internal FITS mode."""
++    if mode is None or mode in IO_FITS_MODES:
++        return mode
++    if mode in FILE_MODES:
++        return FILE_MODES[mode]
++    if isinstance(mode, str) and TEXT_RE.fullmatch(mode):
++        raise ValueError(
++            f"File mode {mode!r} is not supported for FITS files; "
++            "use a binary mode instead"
++        )
++    raise ValueError(f"Mode {mode!r} not recognized")
++
+ 
+ 
+ 
+@@ -241,6 +254,9 @@ class _File:
+         else:
+             self._open_filelike(fileobj, mode, overwrite)
+ 
++        # A non-seekable file-like object is normalized to an output stream by
++        # _open_filelike; use that effective mode for the remaining setup.
++        mode = self.mode
+         self.fileobj_mode = fileobj_mode(self._file)
+ 
+         if isinstance(fileobj, gzip.GzipFile):
+@@ -566,7 +582,7 @@ class _File:
+             self.compression = "gzip"
+         elif (is_ostream and ext == ".zip") or magic.startswith(PKZIP_MAGIC):
+             # Handle zip files
+-            self._open_zipfile(self.name, mode)
++            self._open_zipfile(obj_or_name, mode)
+             self.compression = "zip"
+         elif (is_ostream and ext == ".bz2") or magic.startswith(BZIP2_MAGIC):
+             # Handle bzip2 files
+@@ -608,6 +624,116 @@ class _File:
+             self.compression = "lzw"
+         return self.compression is not None
+ 
++    def _open_fileobj(self, fileobj, mode, overwrite):
++        """Open an OS-backed file object and detect transparent compression."""
++        closed = fileobj_closed(fileobj)
++
++        if mode == "ostream":
++            self._overwrite_existing(overwrite, fileobj, closed)
++
++        # A closed handle can be reopened from its filename.  Overwriting an
++        # open file closes and removes it, so that case also needs reopening.
++        if closed or fileobj_closed(fileobj):
++            fileobj = open(self.name, IO_FITS_MODES[mode])
++            self.close_on_error = True
++
++        self._file = fileobj
++        magic = b""
++        if mode != "ostream":
++            self._file.seek(0)
++            magic = self._file.read(6)
++            self._file.seek(0)
++
++        if not self._try_read_compressed(self._file, magic, mode):
++            self._file = fileobj
++
++        if hasattr(self._file, "seek"):
++            self._file.seek(0)
++
++    def _open_filelike(self, fileobj, mode, overwrite):
++        """Open and validate a general file-like object."""
++        self.file_like = True
++
++        if isinstance(fileobj, zipfile.ZipFile):
++            self._open_zipfile(fileobj, mode)
++            return
++
++        if fileobj_closed(fileobj):
++            raise OSError("I/O operation on closed file")
++
++        seekable = hasattr(fileobj, "seek") and hasattr(fileobj, "tell")
++        if not seekable:
++            mode = self.mode = "ostream"
++
++        readable = callable(getattr(fileobj, "read", None))
++        writable = callable(getattr(fileobj, "write", None))
++        if mode == "ostream":
++            if not writable:
++                raise OSError("File-like object does not have a 'write' method")
++        else:
++            if not readable:
++                raise OSError("File-like object does not have a 'read' method")
++            if mode in ("update", "append") and not writable:
++                raise OSError(
++                    f"File-like object must have a 'write' method for mode {mode!r}"
++                )
++
++        self._file = fileobj
++
++        # Explicit compression wrappers expose decompressed bytes and should
++        # be retained as-is.  In output mode their seek methods commonly do
++        # not support seeking from the end, and the wrapper's own open mode
++        # has already established whether it truncates or appends.
++        if isinstance(fileobj, gzip.GzipFile):
++            if mode == "append":
++                raise OSError(
++                    "'append' mode is not supported with gzip files."
++                    "Use 'update' mode instead"
++                )
++            if mode != "ostream":
++                fileobj.seek(0)
++            return
++        if _is_bz2file(fileobj) or _is_lzmafile(fileobj):
++            if mode in ("update", "append"):
++                kind = "bzip2" if _is_bz2file(fileobj) else "lzma"
++                raise OSError(
++                    f"update and append modes are not supported with {kind} files"
++                )
++            if mode != "ostream":
++                fileobj.seek(0)
++            return
++        if _is_lzwfile(fileobj):
++            if mode in ("update", "append", "ostream"):
++                raise OSError(f"{mode} mode not supported with LZW files")
++            fileobj.seek(0)
++            return
++
++        if mode == "ostream":
++            if seekable:
++                original = fileobj.tell()
++                fileobj.seek(0, os.SEEK_END)
++                length = fileobj.tell()
++                fileobj.seek(original)
++                if length:
++                    if not overwrite:
++                        raise OSError(NOT_OVERWRITING_MSG.format(self.name))
++                    if not hasattr(fileobj, "truncate"):
++                        raise OSError("File-like object cannot be truncated")
++                    fileobj.seek(0)
++                    fileobj.truncate(0)
++                else:
++                    fileobj.seek(0)
++            return
++
++        # Raw streams are sniffed by magic bytes.
++        fileobj.seek(0)
++        magic = fileobj.read(6)
++        fileobj.seek(0)
++        if not self._try_read_compressed(fileobj, magic, mode):
++            self._file = fileobj
++        if hasattr(self._file, "seek"):
++            self._file.seek(0)
++
+ 
+ 
+ 
+@@ -775,4 +901,4 @@ class _File:
+         # We just wrote the contents of the first file in the archive to a new
+         # temp file, which now serves as our underlying file object. So it's
+         # necessary to reset the position back to the beginning
+-        self._file.seek(0)
+\ No newline at end of file
++        self._file.seek(0)
+diff --git a/astropy/io/fits/hdu/compressed/_tiled_compression.py b/astropy/io/fits/hdu/compressed/_tiled_compression.py
+index a10cf4f..299c3be 100644
+--- a/astropy/io/fits/hdu/compressed/_tiled_compression.py
++++ b/astropy/io/fits/hdu/compressed/_tiled_compression.py
+@@ -27,6 +27,26 @@ ALGORITHMS = {
+ 
+ DEFAULT_ZBLANK = -2147483648
+ 
++def _tile_shape(header):
++    """Return the compression tile shape in NumPy axis order."""
++    ndim = header.get("ZNAXIS", 0)
++    fits_shape = []
++    for axis in range(1, ndim + 1):
++        default = header.get("ZNAXIS1", 0) if axis == 1 else 1
++        fits_shape.append(header.get(f"ZTILE{axis}", default))
++    return np.asarray(fits_shape[::-1], dtype=int)
++
++
++def _get_compression_setting(header, name, default):
++    """Read a named ``ZNAMEi``/``ZVALi`` compression setting."""
++    wanted = name.strip().lower()
++    index = 1
++    while f"ZNAME{index}" in header:
++        if str(header[f"ZNAME{index}"]).strip().lower() == wanted:
++            return header.get(f"ZVAL{index}", default)
++        index += 1
++    return default
++
+ 
+ __all__ = [
+     "compress_image_data",
+@@ -645,4 +665,4 @@ def compress_image_data(
+ 
+     table_bytes = table.tobytes()
+ 
+-    return table.tobytes() + compressed_bytes
+\ No newline at end of file
++    return table.tobytes() + compressed_bytes
+diff --git a/astropy/io/fits/hdu/compressed/compressed.py b/astropy/io/fits/hdu/compressed/compressed.py
+index 86424c7..02386ab 100644
+--- a/astropy/io/fits/hdu/compressed/compressed.py
++++ b/astropy/io/fits/hdu/compressed/compressed.py
+@@ -10,7 +10,11 @@ import numpy as np
+ from astropy.io.fits.fitsrec import FITS_rec
+ from astropy.io.fits.hdu.base import BITPIX2DTYPE, DELAYED
+ from astropy.io.fits.hdu.compressed._quantization import DITHER_METHODS
+-from astropy.io.fits.hdu.compressed._tiled_compression import compress_image_data
++from astropy.io.fits.hdu.compressed._tiled_compression import (
++    _get_compression_setting,
++    _tile_shape,
++    compress_image_data,
++)
+ 
+ 
+ 
+diff --git a/astropy/io/fits/hdu/compressed/header.py b/astropy/io/fits/hdu/compressed/header.py
+index 6275863..d27643e 100644
+--- a/astropy/io/fits/hdu/compressed/header.py
++++ b/astropy/io/fits/hdu/compressed/header.py
+@@ -72,6 +72,14 @@ class CompImageHeader(Header):
+         )
+         super().__init__(*args, **kwargs)
+ 
++def _is_reserved_keyword(keyword):
++    """Return whether *keyword* is reserved by tiled-image compression."""
++    keyword = keyword.upper()
++    if keyword in COMPRESSION_KEYWORDS:
++        return True
++    match = ZDEF_RE.fullmatch(keyword)
++    return bool(match and match.group("label").upper() in INDEXED_COMPRESSION_KEYWORDS)
++
+ 
+ 
+ 
+@@ -701,4 +709,4 @@ def _image_header_to_empty_bintable(
+ 
+     # TODO: avoid writing the same comment multiple times
+ 
+-    return bintable
+\ No newline at end of file
++    return bintable
+diff --git a/astropy/io/fits/hdu/compressed/section.py b/astropy/io/fits/hdu/compressed/section.py
+index 099b64f..da75d93 100644
+--- a/astropy/io/fits/hdu/compressed/section.py
++++ b/astropy/io/fits/hdu/compressed/section.py
+@@ -26,6 +26,29 @@ class CompImageSection:
+     for more details.
+     """
+ 
++    def __init__(self, hdu):
++        self.hdu = hdu
++        self._data_shape = tuple(hdu._data_shape)
++        self._tile_shape = tuple(hdu.tile_shape)
++        self._n_dim = len(self._data_shape)
++        self._n_tiles = np.array(
++            [
++                (length + tile_length - 1) // tile_length
++                for length, tile_length in zip(self._data_shape, self._tile_shape)
++            ],
++            dtype=int,
++        )
++
++    @property
++    def dtype(self):
++        """NumPy dtype represented by the compressed image's BITPIX."""
++        return np.dtype(BITPIX2DTYPE[self.hdu._bitpix])
++
++    @property
++    def ndim(self):
++        """Number of dimensions in the compressed image."""
++        return len(self.hdu.shape)
++
+ 
+ 
+ 
+@@ -128,4 +151,4 @@ class CompImageSection:
+         if self.hdu._do_not_scale_image_data:
+             return data
+         else:
+-            return self.hdu._scale_data(data)
+\ No newline at end of file
++            return self.hdu._scale_data(data)
+diff --git a/astropy/io/fits/hdu/image.py b/astropy/io/fits/hdu/image.py
+index bc0f2d2..7a6af97 100644
+--- a/astropy/io/fits/hdu/image.py
++++ b/astropy/io/fits/hdu/image.py
+@@ -966,6 +966,11 @@ class Section:
+     def __init__(self, hdu):
+         self.hdu = hdu
+ 
++    @property
++    def shape(self):
++        """Shape of the image without loading its data."""
++        return self.hdu.shape
++
+ 
+ 
+ 
+@@ -1293,4 +1298,4 @@ class _IndexInfo:
+             self.offset = 0
+             self.contiguous = False
+         else:
+-            raise IndexError(f"Illegal index {index}")
+\ No newline at end of file
++            raise IndexError(f"Illegal index {index}")
+diff --git a/astropy/io/fits/header.py b/astropy/io/fits/header.py
+index 9d09564..027defe 100644
+--- a/astropy/io/fits/header.py
++++ b/astropy/io/fits/header.py
+@@ -282,8 +282,9 @@ class Header:
+     def __repr__(self):
+         return self.tostring(sep="\n", endcard=False, padding=False)
+ 
+-
+-
++    def __str__(self):
++        """Return the header formatted as it would appear in a FITS file."""
++        return self.tostring()
+ 
+     def __eq__(self, other):
+         """
+@@ -978,6 +979,16 @@ class Header:
+         for card in self._cards:
+             yield None if card.value == UNDEFINED else card.value
+ 
++    def count(self, keyword):
++        """Return the number of occurrences of *keyword* in the header."""
++        keyword = Card.normalize_keyword(keyword)
++        indices = self._keyword_indices.get(keyword)
++        if indices is None and keyword:
++            indices = self._rvkc_indices.get(keyword)
++        if not indices:
++            raise KeyError(f"Keyword {keyword!r} not found.")
++        return len(indices)
++
+ 
+ 
+ 
+@@ -1177,6 +1188,73 @@ class Header:
+ 
+         self._modified = True
+ 
++    def add_blank(self, value="", before=None, after=None):
++        """Add a blank commentary card."""
++        self.set("", value, before=before, after=after)
++
++    def add_comment(self, value, before=None, after=None):
++        """Add a ``COMMENT`` card."""
++        self.set("COMMENT", value, before=before, after=after)
++
++    def add_history(self, value, before=None, after=None):
++        """Add a ``HISTORY`` card."""
++        self.set("HISTORY", value, before=before, after=after)
++
++    def extend(
++        self,
++        cards,
++        strip=True,
++        unique=False,
++        update=False,
++        update_first=False,
++        useblanks=True,
++        bottom=False,
++        end=False,
++    ):
++        """Append multiple cards, optionally filtering or updating duplicates."""
++        if isinstance(cards, Header):
++            source = cards
++        else:
++            source = Header(cards)
++
++        first_card = copy.copy(source.cards[0]) if len(source) else None
++        incoming = source.copy(strip=strip)
++
++        incoming_cards = [copy.copy(card) for card in incoming.cards]
++        commentary_values = {
++            keyword: set(self[keyword])
++            for keyword in _commentary_keywords
++            if keyword and keyword in self
++        }
++
++        if update and update_first and self._cards and first_card is not None:
++            old_first = self._cards[0].keyword
++            new_first = first_card.keyword
++            if {old_first, new_first} == {"SIMPLE", "XTENSION"}:
++                del self[0]
++                self.insert(0, first_card, useblanks=False)
++                if incoming_cards and incoming_cards[0].keyword == new_first:
++                    incoming_cards.pop(0)
++
++        for card in incoming_cards:
++            keyword = Card.normalize_keyword(card.keyword)
++            if (unique or update) and keyword in self:
++                if keyword in _commentary_keywords:
++                    # Blank cards are useful formatting even when their values
++                    # match; other commentary duplicates are value-sensitive.
++                    # Compare against the header as it stood before extending,
++                    # so duplicate commentary in the input is preserved.
++                    if card.value in commentary_values.get(keyword, ()):
++                        continue
++                else:
++                    if update:
++                        self[keyword] = (card.value, card.comment)
++                    continue
++
++            self.append(
++                card, useblanks=useblanks, bottom=bottom, end=end
++            )
++
+ 
+ 
+ 
+@@ -1513,6 +1591,20 @@ class Header:
+         del self[idx]
+         self.insert(idx, (new, card.value, card.comment))
+ 
++    @staticmethod
++    def _splitcommentary(keyword, value):
++        """Split a long commentary value into physical-card-sized values."""
++        if not isinstance(value, str):
++            return [Card(keyword, value)]
++
++        width = Card.length - KEYWORD_LENGTH
++        if not value:
++            return [Card(keyword, value)]
++        return [
++            Card(keyword, value[idx : idx + width])
++            for idx in range(0, len(value), width)
++        ]
++
+ 
+ 
+ 
+@@ -1839,6 +1931,30 @@ class Header:
+             keyword.endswith("...") or "*" in keyword or "?" in keyword
+         )
+ 
++    def _wildcardmatch(self, pattern):
++        """Return indices whose complete keywords match a wildcard pattern."""
++        pattern = pattern.strip()
++        parts = []
++        idx = 0
++        while idx < len(pattern):
++            if pattern.startswith("...", idx):
++                parts.append(r"\S*")
++                idx += 3
++            elif pattern[idx] == "*":
++                parts.append(".*")
++                idx += 1
++            elif pattern[idx] == "?":
++                parts.append(".")
++                idx += 1
++            else:
++                parts.append(re.escape(pattern[idx]))
++                idx += 1
++
++        matcher = re.compile("".join(parts) + r"\Z", re.IGNORECASE)
++        return [
++            idx for idx, card in enumerate(self._cards) if matcher.match(card.keyword)
++        ]
++
+ 
+ 
+ 
+@@ -2274,4 +2390,4 @@ def _hdr_data_size(header):
+         gcount = header.get("GCOUNT", 1)
+         pcount = header.get("PCOUNT", 0)
+         size = abs(bitpix) * gcount * (pcount + size) // 8
+-    return size
+\ No newline at end of file
++    return size
+diff --git a/astropy/io/fits/util.py b/astropy/io/fits/util.py
+index 84349e4..1ffc4c8 100644
+--- a/astropy/io/fits/util.py
++++ b/astropy/io/fits/util.py
+@@ -88,6 +88,16 @@ class NotifierMixin:
+ 
+         self._listeners[id(listener)] = listener
+ 
++    def _remove_listener(self, listener):
++        """Remove a registered listener by identity."""
++        if self._listeners is None:
++            return
++
++        key = id(listener)
++        registered = self._listeners.get(key)
++        if registered is listener:
++            del self._listeners[key]
++
+ 
+ 
+ 
+@@ -216,6 +226,17 @@ def ignore_sigint(func):
+ 
+ 
+ 
++        class SigintHandler:
++            def __init__(self):
++                self.sigint_received = False
++
++            def __call__(self, signum, frame):
++                self.sigint_received = True
++                warnings.warn(
++                    "KeyboardInterrupt ignored until test is complete!",
++                    AstropyUserWarning,
++                )
++
+         sigint_handler = SigintHandler()
+ 
+         # Define new signal interput handler
+@@ -890,5 +911,3 @@ def _rstrip_inplace(array):
+     return array
+ 
+ 
+-
+-

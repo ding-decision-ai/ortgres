@@ -1,0 +1,29 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.61",
+  "initialization": {
+    "coverage": {
+      "ready": true,
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "related_file_count": 14,
+      "related_valid_outline_count": 14,
+      "original_cognitive_files": 1944,
+      "genuine_rows_reused_before_new_source": 0,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true,
+      "active_genuine_rows_before_new_source": 0
+    }
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1"
+}

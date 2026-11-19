@@ -1,0 +1,355 @@
+diff --git a/mlflow/entities/assessment_source.py b/mlflow/entities/assessment_source.py
+index 940882f..b2ade7a 100644
+--- a/mlflow/entities/assessment_source.py
++++ b/mlflow/entities/assessment_source.py
+@@ -157,38 +157,33 @@ class AssessmentSourceType:
+     CODE = "CODE"
+     _SOURCE_TYPES = [SOURCE_TYPE_UNSPECIFIED, LLM_JUDGE, HUMAN, CODE]
+ 
++    @staticmethod
++    def _standardize(source_type: str) -> str:
++        """Standardize and validate an assessment source type."""
++        if isinstance(source_type, str):
++            standardized_source_type = source_type.upper()
++        else:
++            standardized_source_type = source_type
++
++        if standardized_source_type == AssessmentSourceType.AI_JUDGE:
++            warnings.warn(
++                "AI_JUDGE is deprecated. Use LLM_JUDGE instead.",
++                FutureWarning,
++                stacklevel=2,
++            )
++            standardized_source_type = AssessmentSourceType.LLM_JUDGE
++
++        if standardized_source_type not in AssessmentSourceType._SOURCE_TYPES:
++            raise MlflowException(
++                message=(
++                    f"Invalid assessment source type: {source_type}. "
++                    f"Valid source types: {AssessmentSourceType._SOURCE_TYPES}"
++                ),
++                error_code=INVALID_PARAMETER_VALUE,
++            )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        return standardized_source_type
+ 
+     @classmethod
+     def from_proto(cls, proto_source_type) -> str:
+-        return ProtoAssessmentSource.SourceType.Name(proto_source_type)
+\ No newline at end of file
++        return ProtoAssessmentSource.SourceType.Name(proto_source_type)
+diff --git a/mlflow/entities/trace_data.py b/mlflow/entities/trace_data.py
+index 19d57d2..61b1933 100644
+--- a/mlflow/entities/trace_data.py
++++ b/mlflow/entities/trace_data.py
+@@ -64,10 +64,27 @@ class TraceData:
+                     result[span_name] = span.outputs
+             return result
+ 
++    def _get_root_span(self) -> Span | None:
++        """Return the first span without a parent, if one exists."""
++        return next((span for span in self.spans if span.parent_id is None), None)
+ 
++    # `request` and `response` are preserved for backward compatibility with v2
++    @property
++    def request(self) -> str | None:
++        root_span = self._get_root_span()
++        if root_span is None or root_span.inputs is None:
++            return None
+ 
++        from mlflow.tracing.utils import dump_span_attribute_value
+ 
++        return dump_span_attribute_value(root_span.inputs)
+ 
++    @property
++    def response(self) -> str | None:
++        root_span = self._get_root_span()
++        if root_span is None or root_span.outputs is None:
++            return None
+ 
+-    # `request` and `response` are preserved for backward compatibility with v2
++        from mlflow.tracing.utils import dump_span_attribute_value
+ 
++        return dump_span_attribute_value(root_span.outputs)
+diff --git a/mlflow/genai/judges/tools/search_traces.py b/mlflow/genai/judges/tools/search_traces.py
+index ca187bd..bc33470 100644
+--- a/mlflow/genai/judges/tools/search_traces.py
++++ b/mlflow/genai/judges/tools/search_traces.py
+@@ -31,80 +31,6 @@ from mlflow.utils.annotations import experimental
+ _logger = logging.getLogger(__name__)
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+ @experimental(version="3.5.0")
+ class SearchTracesTool(JudgeTool):
+     """
+@@ -116,3 +42,166 @@ class SearchTracesTool(JudgeTool):
+     data, execution metrics, and assessments for analysis.
+     """
+ 
++    def get_definition(self) -> ToolDefinition:
++        return ToolDefinition(
++            function=FunctionToolDefinition(
++                name=ToolNames._SEARCH_TRACES,
++                description=(
++                    "Search for traces in the same MLflow experiment as the trace currently "
++                    "being evaluated. Supports SQL-like filtering over trace attributes, tags, "
++                    "and metadata, as well as ordering and result limits. Returns trace timing, "
++                    "state, request, response, execution duration, and assessments."
++                ),
++                parameters=ToolParamsSchema(
++                    type="object",
++                    properties={
++                        "filter_string": {
++                            "type": "string",
++                            "description": (
++                                "Optional SQL-like trace filter. Supported attributes include "
++                                "request_id, timestamp_ms, execution_time_ms, status, name, and "
++                                "run_id. Use tags.<key> or tag.<key> for tags and metadata.<key> "
++                                "for trace metadata; enclose keys containing special characters "
++                                "in backticks. String values must be quoted, while numeric values "
++                                "must be unquoted. Comparators include =, !=, >, >=, <, <=, LIKE, "
++                                "ILIKE, IN, and NOT IN, and expressions can be joined with AND. "
++                                "Examples: 'status = \"OK\"', 'execution_time_ms > 1000', and "
++                                '\'tags.model_name = "gpt-4" AND status = "OK"\'.'
++                            ),
++                        },
++                        "order_by": {
++                            "type": "array",
++                            "items": {"type": "string"},
++                            "description": (
++                                "Ordering expressions such as 'timestamp DESC'. Defaults to "
++                                "['timestamp ASC'] for chronological order."
++                            ),
++                            "default": ["timestamp ASC"],
++                        },
++                        "max_results": {
++                            "type": "integer",
++                            "description": "Maximum number of traces to return (default: 20).",
++                            "default": 20,
++                        },
++                    },
++                    required=[],
++                ),
++            ),
++            type="function",
++        )
++
++    def invoke(
++        self,
++        trace: Trace,
++        filter_string: str | None = None,
++        order_by: list[str] | None = None,
++        max_results: int = 20,
++    ) -> list[JudgeToolTraceInfo]:
++        if isinstance(max_results, bool) or not isinstance(max_results, int) or max_results <= 0:
++            raise MlflowException(
++                "max_results must be a positive integer.",
++                error_code=INVALID_PARAMETER_VALUE,
++            )
++
++        experiment_id = _get_experiment_id(trace)
++        if order_by is None:
++            order_by = ["timestamp ASC"]
++
++        traces = mlflow.search_traces(
++            locations=[experiment_id],
++            filter_string=filter_string,
++            order_by=order_by,
++            max_results=max_results,
++            return_type="list",
++        )
++
++        results = []
++        for searched_trace in traces:
++            try:
++                results.append(
++                    JudgeToolTraceInfo(
++                        trace_id=searched_trace.info.trace_id,
++                        request_time=searched_trace.info.request_time,
++                        state=searched_trace.info.state,
++                        request=searched_trace.data.request,
++                        response=searched_trace.data.response,
++                        execution_duration=searched_trace.info.execution_duration,
++                        assessments=_convert_assessments_to_tool_types(
++                            searched_trace.info.assessments
++                        ),
++                    )
++                )
++            except Exception as e:
++                try:
++                    trace_id = searched_trace.info.trace_id
++                except Exception:
++                    trace_id = "unknown"
++                _logger.warning("Failed to process trace %s: %s", trace_id, e)
++
++        return results
++
++    @property
++    def name(self) -> str:
++        return ToolNames._SEARCH_TRACES
++
++
++def _convert_assessments_to_tool_types(
++    assessments: list[Assessment],
++) -> list[JudgeToolExpectation | JudgeToolFeedback]:
++    converted_assessments = []
++    for assessment in assessments:
++        if isinstance(assessment, Expectation):
++            converted_assessments.append(
++                JudgeToolExpectation(
++                    name=assessment.name,
++                    source=assessment.source.source_id,
++                    rationale=assessment.rationale,
++                    span_id=assessment.span_id,
++                    assessment_id=assessment.assessment_id,
++                    value=assessment.value,
++                )
++            )
++        elif isinstance(assessment, Feedback):
++            error = assessment.error
++            converted_assessments.append(
++                JudgeToolFeedback(
++                    name=assessment.name,
++                    source=assessment.source.source_id,
++                    rationale=assessment.rationale,
++                    span_id=assessment.span_id,
++                    assessment_id=assessment.assessment_id,
++                    value=assessment.value,
++                    error_code=error.error_code if error else None,
++                    error_message=error.error_message if error else None,
++                    stack_trace=error.stack_trace if error else None,
++                    overrides=assessment.overrides,
++                    valid=assessment.valid,
++                )
++            )
++
++    return converted_assessments
++
++
++def _get_experiment_id(trace: Trace) -> str:
++    trace_location = getattr(getattr(trace, "info", None), "trace_location", None)
++    if trace_location is None:
++        raise MlflowException(
++            "The trace has no trace location information.",
++            error_code=INVALID_PARAMETER_VALUE,
++        )
++
++    if trace_location.type != TraceLocationType.MLFLOW_EXPERIMENT:
++        raise MlflowException(
++            "The trace is not from an MLflow experiment context.",
++            error_code=INVALID_PARAMETER_VALUE,
++        )
++
++    experiment_location = trace_location.mlflow_experiment
++    experiment_id = experiment_location.experiment_id if experiment_location else None
++    if not experiment_id:
++        raise MlflowException(
++            "The trace has no associated experiment_id.",
++            error_code=INVALID_PARAMETER_VALUE,
++        )
++
++    return experiment_id

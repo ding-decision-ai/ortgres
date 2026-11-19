@@ -1,0 +1,28 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 13 items
+
+tests/test_algorithms.py .............                                   [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_algorithms.py::test_bootstrap
+PASSED tests/test_algorithms.py::test_bootstrap_length
+PASSED tests/test_algorithms.py::test_bootstrap_range
+PASSED tests/test_algorithms.py::test_bootstrap_multiarg
+PASSED tests/test_algorithms.py::test_bootstrap_axis
+PASSED tests/test_algorithms.py::test_bootstrap_seed
+PASSED tests/test_algorithms.py::test_bootstrap_ols
+PASSED tests/test_algorithms.py::test_bootstrap_units
+PASSED tests/test_algorithms.py::test_bootstrap_arglength
+PASSED tests/test_algorithms.py::test_bootstrap_string_func
+PASSED tests/test_algorithms.py::test_bootstrap_reproducibility
+PASSED tests/test_algorithms.py::test_nanaware_func_auto
+PASSED tests/test_algorithms.py::test_nanaware_func_warning
+============================== 13 passed in 2.11s ==============================

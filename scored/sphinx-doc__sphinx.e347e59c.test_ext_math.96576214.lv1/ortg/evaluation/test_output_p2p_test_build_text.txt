@@ -1,0 +1,485 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/941ccf0, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-4
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 15 items
+
+tests/test_builders/test_build_text.py ...............                   [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 14 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 14 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mdoc1[39;49;00m
+[01mreading sources... [39;49;00m[ 14%] [35mdoc2[39;49;00m
+[01mreading sources... [39;49;00m[ 21%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mlineblock[39;49;00m
+[01mreading sources... [39;49;00m[ 36%] [35mlistitems[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mmaxwidth[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mnonascii_maxwidth[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mnonascii_table[39;49;00m
+[01mreading sources... [39;49;00m[ 64%] [35mnonascii_title[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mtable[39;49;00m
+[01mreading sources... [39;49;00m[ 79%] [35mtable_colspan[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mtable_colspan_and_rowspan[39;49;00m
+[01mreading sources... [39;49;00m[ 93%] [35mtable_colspan_left[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtable_rowspan[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mdoc1[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mdoc2[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mlineblock[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mlistitems[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mmaxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mnonascii_maxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mnonascii_table[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mnonascii_title[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mtable[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32mtable_colspan[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtable_colspan_and_rowspan[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtable_colspan_left[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtable_rowspan[39;49;00m
+
+[01mbuild succeeded, 10 warnings.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-4/build-text/listitems.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/table_colspan.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/table_colspan_and_rowspan.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/table_colspan_left.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/table_rowspan.txt: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'lineblock' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mdoc1[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mdoc2[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mlineblock[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mlistitems[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mmaxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mnonascii_maxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mnonascii_table[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mnonascii_title[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mtable[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32mtable_colspan[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtable_colspan_and_rowspan[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtable_colspan_left[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtable_rowspan[39;49;00m
+
+[01mbuild succeeded, 5 warnings.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'lineblock' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mno targets are out of date.[39;49;00m
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-4/build-text
+# outdir: /tmp/pytest-of-root/pytest-4/build-text/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mdoc1[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mdoc2[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mlineblock[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mlistitems[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mmaxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mnonascii_maxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mnonascii_table[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mnonascii_title[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mtable[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32mtable_colspan[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtable_colspan_and_rowspan[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtable_colspan_left[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtable_rowspan[39;49;00m
+
+[01mbuild succeeded, 5 warnings.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mdoc1[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mdoc2[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mlineblock[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mlistitems[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mmaxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mnonascii_maxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mnonascii_table[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mnonascii_title[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mtable[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32mtable_colspan[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtable_colspan_and_rowspan[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtable_colspan_left[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtable_rowspan[39;49;00m
+
+[01mbuild succeeded, 10 warnings.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  7%] [32mdoc1[39;49;00m
+[01mwriting output... [39;49;00m[ 14%] [32mdoc2[39;49;00m
+[01mwriting output... [39;49;00m[ 21%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mlineblock[39;49;00m
+[01mwriting output... [39;49;00m[ 36%] [32mlistitems[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mmaxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mnonascii_maxwidth[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mnonascii_table[39;49;00m
+[01mwriting output... [39;49;00m[ 64%] [32mnonascii_title[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mtable[39;49;00m
+[01mwriting output... [39;49;00m[ 79%] [32mtable_colspan[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mtable_colspan_and_rowspan[39;49;00m
+[01mwriting output... [39;49;00m[ 93%] [32mtable_colspan_left[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtable_rowspan[39;49;00m
+
+[01mbuild succeeded, 15 warnings.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-4/build-text/_build/text.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'lineblock' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'lineblock' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'lineblock' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'nonascii_maxwidth' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+[91m/tmp/pytest-of-root/pytest-4/build-text/index.txt:1: WARNING: toctree contains reference to document 'table' that doesn't have a title: no link will be generated [toc.no_title][39;49;00m
+
+=========================== short test summary info ============================
+PASSED tests/test_builders/test_build_text.py::test_maxwitdh_with_prefix
+PASSED tests/test_builders/test_build_text.py::test_lineblock
+PASSED tests/test_builders/test_build_text.py::test_nonascii_title_line
+PASSED tests/test_builders/test_build_text.py::test_nonascii_table
+PASSED tests/test_builders/test_build_text.py::test_nonascii_maxwidth
+PASSED tests/test_builders/test_build_text.py::test_table_builder
+PASSED tests/test_builders/test_build_text.py::test_table_separator
+PASSED tests/test_builders/test_build_text.py::test_table_cell
+PASSED tests/test_builders/test_build_text.py::test_table_with_empty_cell
+PASSED tests/test_builders/test_build_text.py::test_table_with_rowspan
+PASSED tests/test_builders/test_build_text.py::test_table_with_colspan
+PASSED tests/test_builders/test_build_text.py::test_table_with_colspan_left
+PASSED tests/test_builders/test_build_text.py::test_table_with_colspan_and_rowspan
+PASSED tests/test_builders/test_build_text.py::test_list_items_in_admonition
+PASSED tests/test_builders/test_build_text.py::test_secnums
+============================== 15 passed in 0.38s ==============================

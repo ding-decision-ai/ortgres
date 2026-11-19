@@ -1,0 +1,3685 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "ready": true,
+      "model_elapsed_seconds": 353.9802030229994,
+      "elapsed_seconds": 355.425079136,
+      "event_summary": {
+        "turn_usages": {
+          "0": {
+            "input_tokens": 4975494,
+            "cached_input_tokens": 4411008,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 15172,
+            "reasoning_output_tokens": 6741
+          }
+        },
+        "usage_total": {
+          "input_tokens": 4975494,
+          "cached_input_tokens": 4411008,
+          "output_tokens": 15172
+        }
+      },
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "subset_ready": true,
+      "subset_coverage_complete": true,
+      "full_repository_ready": false,
+      "full_repository_completion_required": false,
+      "original_cognitive_files": 2504,
+      "related_file_count": 16,
+      "related_valid_outline_count": 16,
+      "prior_source_initialization_cost": {
+        "ready": false,
+        "source_only": true,
+        "segments": {
+          "0": {
+            "number": 1,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 270.18883541800005,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3227950,
+                  "cached_input_tokens": 3069056,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 13178,
+                  "reasoning_output_tokens": 3424
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3227950,
+                "cached_input_tokens": 3069056,
+                "output_tokens": 13178
+              }
+            }
+          },
+          "1": {
+            "number": 2,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 268.0755261989998,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4085113,
+                  "cached_input_tokens": 3892608,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 12035,
+                  "reasoning_output_tokens": 2500
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4085113,
+                "cached_input_tokens": 3892608,
+                "output_tokens": 12035
+              }
+            }
+          },
+          "2": {
+            "number": 3,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 235.85979540799963,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4226257,
+                  "cached_input_tokens": 4062464,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 12677,
+                  "reasoning_output_tokens": 2265
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4226257,
+                "cached_input_tokens": 4062464,
+                "output_tokens": 12677
+              }
+            }
+          },
+          "3": {
+            "number": 4,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 120.91345165100029,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2668894,
+                  "cached_input_tokens": 2491776,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 6046,
+                  "reasoning_output_tokens": 1074
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2668894,
+                "cached_input_tokens": 2491776,
+                "output_tokens": 6046
+              }
+            }
+          },
+          "4": {
+            "number": 5,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 145.40997573000004,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2079643,
+                  "cached_input_tokens": 1975680,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 7167,
+                  "reasoning_output_tokens": 1575
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2079643,
+                "cached_input_tokens": 1975680,
+                "output_tokens": 7167
+              }
+            }
+          },
+          "5": {
+            "number": 6,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 194.6623050219996,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2425103,
+                  "cached_input_tokens": 2259328,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 11115,
+                  "reasoning_output_tokens": 3559
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2425103,
+                "cached_input_tokens": 2259328,
+                "output_tokens": 11115
+              }
+            }
+          },
+          "6": {
+            "number": 7,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 244.34361544700005,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 5667404,
+                  "cached_input_tokens": 5412096,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 9845,
+                  "reasoning_output_tokens": 1556
+                }
+              },
+              "usage_total": {
+                "input_tokens": 5667404,
+                "cached_input_tokens": 5412096,
+                "output_tokens": 9845
+              }
+            }
+          },
+          "7": {
+            "number": 8,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 87.13263305599958,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2038282,
+                  "cached_input_tokens": 1865984,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 4585,
+                  "reasoning_output_tokens": 1048
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2038282,
+                "cached_input_tokens": 1865984,
+                "output_tokens": 4585
+              }
+            }
+          },
+          "8": {
+            "number": 9,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 1417.8980126690003,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 11548313,
+                  "cached_input_tokens": 10908800,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 45566,
+                  "reasoning_output_tokens": 10568
+                }
+              },
+              "usage_total": {
+                "input_tokens": 11548313,
+                "cached_input_tokens": 10908800,
+                "output_tokens": 45566
+              }
+            }
+          },
+          "9": {
+            "number": 10,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 266.83335388399973,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4446840,
+                  "cached_input_tokens": 4249216,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 13531,
+                  "reasoning_output_tokens": 4625
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4446840,
+                "cached_input_tokens": 4249216,
+                "output_tokens": 13531
+              }
+            }
+          },
+          "10": {
+            "number": 11,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 266.7865491550001,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3431574,
+                  "cached_input_tokens": 3277312,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 14773,
+                  "reasoning_output_tokens": 3367
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3431574,
+                "cached_input_tokens": 3277312,
+                "output_tokens": 14773
+              }
+            }
+          },
+          "11": {
+            "number": 12,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 944.9407523780001,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 15087636,
+                  "cached_input_tokens": 14035072,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 43079,
+                  "reasoning_output_tokens": 10779
+                }
+              },
+              "usage_total": {
+                "input_tokens": 15087636,
+                "cached_input_tokens": 14035072,
+                "output_tokens": 43079
+              }
+            }
+          },
+          "12": {
+            "number": 13,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 167.4719741129993,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1813430,
+                  "cached_input_tokens": 1688576,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 8554,
+                  "reasoning_output_tokens": 2472
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1813430,
+                "cached_input_tokens": 1688576,
+                "output_tokens": 8554
+              }
+            }
+          },
+          "13": {
+            "number": 14,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 327.01796869700047,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4676674,
+                  "cached_input_tokens": 4332416,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 16319,
+                  "reasoning_output_tokens": 3578
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4676674,
+                "cached_input_tokens": 4332416,
+                "output_tokens": 16319
+              }
+            }
+          },
+          "14": {
+            "number": 15,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 199.4414081620016,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3097816,
+                  "cached_input_tokens": 2914688,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 7068,
+                  "reasoning_output_tokens": 2325
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3097816,
+                "cached_input_tokens": 2914688,
+                "output_tokens": 7068
+              }
+            }
+          },
+          "15": {
+            "number": 16,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 458.38654118500017,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 7386872,
+                  "cached_input_tokens": 7220736,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 23872,
+                  "reasoning_output_tokens": 3924
+                }
+              },
+              "usage_total": {
+                "input_tokens": 7386872,
+                "cached_input_tokens": 7220736,
+                "output_tokens": 23872
+              }
+            }
+          },
+          "16": {
+            "number": 17,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 1138.827294965,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 15796901,
+                  "cached_input_tokens": 15313024,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 56600,
+                  "reasoning_output_tokens": 10379
+                }
+              },
+              "usage_total": {
+                "input_tokens": 15796901,
+                "cached_input_tokens": 15313024,
+                "output_tokens": 56600
+              }
+            }
+          },
+          "17": {
+            "number": 18,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 903.7469928070004,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 11980202,
+                  "cached_input_tokens": 11547136,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 49436,
+                  "reasoning_output_tokens": 9455
+                }
+              },
+              "usage_total": {
+                "input_tokens": 11980202,
+                "cached_input_tokens": 11547136,
+                "output_tokens": 49436
+              }
+            }
+          },
+          "18": {
+            "number": 19,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 320.4796268959999,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4015453,
+                  "cached_input_tokens": 3816832,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 12015,
+                  "reasoning_output_tokens": 4012
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4015453,
+                "cached_input_tokens": 3816832,
+                "output_tokens": 12015
+              }
+            }
+          },
+          "19": {
+            "number": 20,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 451.25100878099875,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 5180165,
+                  "cached_input_tokens": 5010176,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 21207,
+                  "reasoning_output_tokens": 4038
+                }
+              },
+              "usage_total": {
+                "input_tokens": 5180165,
+                "cached_input_tokens": 5010176,
+                "output_tokens": 21207
+              }
+            }
+          },
+          "20": {
+            "number": 21,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 203.11690403899956,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2979272,
+                  "cached_input_tokens": 2791040,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 10379,
+                  "reasoning_output_tokens": 2109
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2979272,
+                "cached_input_tokens": 2791040,
+                "output_tokens": 10379
+              }
+            }
+          },
+          "21": {
+            "number": 22,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 324.5729399019983,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 6344808,
+                  "cached_input_tokens": 6162304,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 15443,
+                  "reasoning_output_tokens": 2223
+                }
+              },
+              "usage_total": {
+                "input_tokens": 6344808,
+                "cached_input_tokens": 6162304,
+                "output_tokens": 15443
+              }
+            }
+          },
+          "22": {
+            "number": 23,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 246.25702477999948,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2255359,
+                  "cached_input_tokens": 2142976,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 14323,
+                  "reasoning_output_tokens": 1558
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2255359,
+                "cached_input_tokens": 2142976,
+                "output_tokens": 14323
+              }
+            }
+          },
+          "23": {
+            "number": 24,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 324.87855537500036,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3234552,
+                  "cached_input_tokens": 3075712,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 14309,
+                  "reasoning_output_tokens": 2219
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3234552,
+                "cached_input_tokens": 3075712,
+                "output_tokens": 14309
+              }
+            }
+          },
+          "24": {
+            "number": 25,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 456.0993354990005,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4816437,
+                  "cached_input_tokens": 4670464,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 17693,
+                  "reasoning_output_tokens": 3152
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4816437,
+                "cached_input_tokens": 4670464,
+                "output_tokens": 17693
+              }
+            }
+          },
+          "25": {
+            "number": 26,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 263.1228847750008,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2729918,
+                  "cached_input_tokens": 2597248,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 13189,
+                  "reasoning_output_tokens": 1884
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2729918,
+                "cached_input_tokens": 2597248,
+                "output_tokens": 13189
+              }
+            }
+          },
+          "26": {
+            "number": 27,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 182.66761654699985,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1815985,
+                  "cached_input_tokens": 1713792,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 8215,
+                  "reasoning_output_tokens": 1280
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1815985,
+                "cached_input_tokens": 1713792,
+                "output_tokens": 8215
+              }
+            }
+          },
+          "27": {
+            "number": 28,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 238.96824456800096,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1470305,
+                  "cached_input_tokens": 1388288,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 10717,
+                  "reasoning_output_tokens": 2843
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1470305,
+                "cached_input_tokens": 1388288,
+                "output_tokens": 10717
+              }
+            }
+          },
+          "28": {
+            "number": 29,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 338.86601821099975,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 7063727,
+                  "cached_input_tokens": 6857856,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 16005,
+                  "reasoning_output_tokens": 3938
+                }
+              },
+              "usage_total": {
+                "input_tokens": 7063727,
+                "cached_input_tokens": 6857856,
+                "output_tokens": 16005
+              }
+            }
+          },
+          "29": {
+            "number": 30,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 221.6744752630002,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2254916,
+                  "cached_input_tokens": 2129280,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 11774,
+                  "reasoning_output_tokens": 4060
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2254916,
+                "cached_input_tokens": 2129280,
+                "output_tokens": 11774
+              }
+            }
+          },
+          "30": {
+            "number": 31,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 198.41948269400018,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2127928,
+                  "cached_input_tokens": 2009472,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 10035,
+                  "reasoning_output_tokens": 2996
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2127928,
+                "cached_input_tokens": 2009472,
+                "output_tokens": 10035
+              }
+            }
+          },
+          "31": {
+            "number": 32,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 654.809858493998,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 8144851,
+                  "cached_input_tokens": 7751552,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 31550,
+                  "reasoning_output_tokens": 7570
+                }
+              },
+              "usage_total": {
+                "input_tokens": 8144851,
+                "cached_input_tokens": 7751552,
+                "output_tokens": 31550
+              }
+            }
+          },
+          "32": {
+            "number": 33,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 284.6386004550004,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4326858,
+                  "cached_input_tokens": 4175744,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 13147,
+                  "reasoning_output_tokens": 3051
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4326858,
+                "cached_input_tokens": 4175744,
+                "output_tokens": 13147
+              }
+            }
+          },
+          "33": {
+            "number": 34,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 280.1041384279997,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2389897,
+                  "cached_input_tokens": 2247936,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 13960,
+                  "reasoning_output_tokens": 3371
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2389897,
+                "cached_input_tokens": 2247936,
+                "output_tokens": 13960
+              }
+            }
+          },
+          "34": {
+            "number": 35,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 121.64812236800208,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1763679,
+                  "cached_input_tokens": 1633280,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 4943,
+                  "reasoning_output_tokens": 1583
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1763679,
+                "cached_input_tokens": 1633280,
+                "output_tokens": 4943
+              }
+            }
+          },
+          "35": {
+            "number": 36,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 156.09655527699942,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2512327,
+                  "cached_input_tokens": 2338432,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 6409,
+                  "reasoning_output_tokens": 3282
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2512327,
+                "cached_input_tokens": 2338432,
+                "output_tokens": 6409
+              }
+            }
+          },
+          "36": {
+            "number": 37,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 315.8050697110011,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3667325,
+                  "cached_input_tokens": 3504640,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 13451,
+                  "reasoning_output_tokens": 3473
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3667325,
+                "cached_input_tokens": 3504640,
+                "output_tokens": 13451
+              }
+            }
+          },
+          "37": {
+            "number": 38,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 462.36312898300093,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 4052613,
+                  "cached_input_tokens": 3867776,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 15167,
+                  "reasoning_output_tokens": 5237
+                }
+              },
+              "usage_total": {
+                "input_tokens": 4052613,
+                "cached_input_tokens": 3867776,
+                "output_tokens": 15167
+              }
+            }
+          },
+          "38": {
+            "number": 39,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 282.4456285990018,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2804395,
+                  "cached_input_tokens": 2662016,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 10471,
+                  "reasoning_output_tokens": 3140
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2804395,
+                "cached_input_tokens": 2662016,
+                "output_tokens": 10471
+              }
+            }
+          },
+          "39": {
+            "number": 40,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 304.4753537430006,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3820658,
+                  "cached_input_tokens": 3638016,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 11388,
+                  "reasoning_output_tokens": 2825
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3820658,
+                "cached_input_tokens": 3638016,
+                "output_tokens": 11388
+              }
+            }
+          },
+          "40": {
+            "number": 41,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 276.46873657799733,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 2409467,
+                  "cached_input_tokens": 2281088,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 11226,
+                  "reasoning_output_tokens": 3041
+                }
+              },
+              "usage_total": {
+                "input_tokens": 2409467,
+                "cached_input_tokens": 2281088,
+                "output_tokens": 11226
+              }
+            }
+          },
+          "41": {
+            "number": 42,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 182.58155102000092,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1448557,
+                  "cached_input_tokens": 1358208,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 7168,
+                  "reasoning_output_tokens": 2282
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1448557,
+                "cached_input_tokens": 1358208,
+                "output_tokens": 7168
+              }
+            }
+          },
+          "42": {
+            "number": 43,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 200.0945894869983,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1268594,
+                  "cached_input_tokens": 1178368,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 9341,
+                  "reasoning_output_tokens": 2332
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1268594,
+                "cached_input_tokens": 1178368,
+                "output_tokens": 9341
+              }
+            }
+          },
+          "43": {
+            "number": 44,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 232.50690383500114,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 1768111,
+                  "cached_input_tokens": 1635328,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 11778,
+                  "reasoning_output_tokens": 3634
+                }
+              },
+              "usage_total": {
+                "input_tokens": 1768111,
+                "cached_input_tokens": 1635328,
+                "output_tokens": 11778
+              }
+            }
+          },
+          "44": {
+            "number": 45,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 301.4695376910022,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 3454427,
+                  "cached_input_tokens": 3302528,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 12703,
+                  "reasoning_output_tokens": 3592
+                }
+              },
+              "usage_total": {
+                "input_tokens": 3454427,
+                "cached_input_tokens": 3302528,
+                "output_tokens": 12703
+              }
+            }
+          },
+          "45": {
+            "number": 46,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 1311.5328231460007,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 18615698,
+                  "cached_input_tokens": 17948032,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 62958,
+                  "reasoning_output_tokens": 14303
+                }
+              },
+              "usage_total": {
+                "input_tokens": 18615698,
+                "cached_input_tokens": 17948032,
+                "output_tokens": 62958
+              }
+            }
+          },
+          "46": {
+            "number": 47,
+            "model_exit_code": 0,
+            "model_elapsed_seconds": 628.2606361790022,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 7929063,
+                  "cached_input_tokens": 7513344,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 23712,
+                  "reasoning_output_tokens": 7368
+                }
+              },
+              "usage_total": {
+                "input_tokens": 7929063,
+                "cached_input_tokens": 7513344,
+                "output_tokens": 23712
+              }
+            }
+          }
+        },
+        "model_elapsed_seconds": 17423.612337270006,
+        "elapsed_seconds": 17459.335110954,
+        "segment_timeout_seconds": 1800,
+        "formal_solver_budget_separate_seconds": 3600,
+        "prior_source_initialization_cost": {
+          "ready": false,
+          "model_elapsed_seconds": 1730.0018443089975,
+          "elapsed_seconds": 1739.4778738479981,
+          "model_exit_code": 0,
+          "stage_evidence_status": {
+            "valid": true,
+            "api_abnormal": false
+          },
+          "segment_limit": 4
+        },
+        "current_readiness": {
+          "source_identity_preserved": true,
+          "roles_preserved": true,
+          "total_cognitive_files": 2504,
+          "outline_rows": 1602,
+          "missing_count": 902,
+          "missing_paths": {
+            "359": "unknown"
+          },
+          "recorded_status_bad_states": {
+            "无纲要": 902
+          },
+          "coverage_complete": false,
+          "recorded_status_counts": {
+            "0": 1602,
+            "1": 0,
+            "2": 1,
+            "3": 0
+          }
+        },
+        "event_summary": {
+          "turn_usages": {
+            "0": {
+              "input_tokens": 3227950,
+              "cached_input_tokens": 3069056,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 13178,
+              "reasoning_output_tokens": 3424
+            },
+            "1": {
+              "input_tokens": 4085113,
+              "cached_input_tokens": 3892608,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 12035,
+              "reasoning_output_tokens": 2500
+            },
+            "2": {
+              "input_tokens": 4226257,
+              "cached_input_tokens": 4062464,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 12677,
+              "reasoning_output_tokens": 2265
+            },
+            "3": {
+              "input_tokens": 2668894,
+              "cached_input_tokens": 2491776,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 6046,
+              "reasoning_output_tokens": 1074
+            },
+            "4": {
+              "input_tokens": 2079643,
+              "cached_input_tokens": 1975680,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7167,
+              "reasoning_output_tokens": 1575
+            },
+            "5": {
+              "input_tokens": 2425103,
+              "cached_input_tokens": 2259328,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 11115,
+              "reasoning_output_tokens": 3559
+            },
+            "6": {
+              "input_tokens": 5667404,
+              "cached_input_tokens": 5412096,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 9845,
+              "reasoning_output_tokens": 1556
+            },
+            "7": {
+              "input_tokens": 2038282,
+              "cached_input_tokens": 1865984,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 4585,
+              "reasoning_output_tokens": 1048
+            },
+            "8": {
+              "input_tokens": 11548313,
+              "cached_input_tokens": 10908800,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 45566,
+              "reasoning_output_tokens": 10568
+            },
+            "9": {
+              "input_tokens": 4446840,
+              "cached_input_tokens": 4249216,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 13531,
+              "reasoning_output_tokens": 4625
+            },
+            "10": {
+              "input_tokens": 3431574,
+              "cached_input_tokens": 3277312,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 14773,
+              "reasoning_output_tokens": 3367
+            },
+            "11": {
+              "input_tokens": 15087636,
+              "cached_input_tokens": 14035072,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 43079,
+              "reasoning_output_tokens": 10779
+            },
+            "12": {
+              "input_tokens": 1813430,
+              "cached_input_tokens": 1688576,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 8554,
+              "reasoning_output_tokens": 2472
+            },
+            "13": {
+              "input_tokens": 4676674,
+              "cached_input_tokens": 4332416,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 16319,
+              "reasoning_output_tokens": 3578
+            },
+            "14": {
+              "input_tokens": 3097816,
+              "cached_input_tokens": 2914688,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7068,
+              "reasoning_output_tokens": 2325
+            },
+            "15": {
+              "input_tokens": 7386872,
+              "cached_input_tokens": 7220736,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 23872,
+              "reasoning_output_tokens": 3924
+            },
+            "16": {
+              "input_tokens": 15796901,
+              "cached_input_tokens": 15313024,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 56600,
+              "reasoning_output_tokens": 10379
+            },
+            "17": {
+              "input_tokens": 11980202,
+              "cached_input_tokens": 11547136,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 49436,
+              "reasoning_output_tokens": 9455
+            },
+            "18": {
+              "input_tokens": 4015453,
+              "cached_input_tokens": 3816832,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 12015,
+              "reasoning_output_tokens": 4012
+            },
+            "19": {
+              "input_tokens": 5180165,
+              "cached_input_tokens": 5010176,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 21207,
+              "reasoning_output_tokens": 4038
+            },
+            "20": {
+              "input_tokens": 2979272,
+              "cached_input_tokens": 2791040,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 10379,
+              "reasoning_output_tokens": 2109
+            },
+            "21": {
+              "input_tokens": 6344808,
+              "cached_input_tokens": 6162304,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 15443,
+              "reasoning_output_tokens": 2223
+            },
+            "22": {
+              "input_tokens": 2255359,
+              "cached_input_tokens": 2142976,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 14323,
+              "reasoning_output_tokens": 1558
+            },
+            "23": {
+              "input_tokens": 3234552,
+              "cached_input_tokens": 3075712,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 14309,
+              "reasoning_output_tokens": 2219
+            },
+            "24": {
+              "input_tokens": 4816437,
+              "cached_input_tokens": 4670464,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 17693,
+              "reasoning_output_tokens": 3152
+            },
+            "25": {
+              "input_tokens": 2729918,
+              "cached_input_tokens": 2597248,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 13189,
+              "reasoning_output_tokens": 1884
+            },
+            "26": {
+              "input_tokens": 1815985,
+              "cached_input_tokens": 1713792,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 8215,
+              "reasoning_output_tokens": 1280
+            },
+            "27": {
+              "input_tokens": 1470305,
+              "cached_input_tokens": 1388288,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 10717,
+              "reasoning_output_tokens": 2843
+            },
+            "28": {
+              "input_tokens": 7063727,
+              "cached_input_tokens": 6857856,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 16005,
+              "reasoning_output_tokens": 3938
+            },
+            "29": {
+              "input_tokens": 2254916,
+              "cached_input_tokens": 2129280,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 11774,
+              "reasoning_output_tokens": 4060
+            },
+            "30": {
+              "input_tokens": 2127928,
+              "cached_input_tokens": 2009472,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 10035,
+              "reasoning_output_tokens": 2996
+            },
+            "31": {
+              "input_tokens": 8144851,
+              "cached_input_tokens": 7751552,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 31550,
+              "reasoning_output_tokens": 7570
+            },
+            "32": {
+              "input_tokens": 4326858,
+              "cached_input_tokens": 4175744,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 13147,
+              "reasoning_output_tokens": 3051
+            },
+            "33": {
+              "input_tokens": 2389897,
+              "cached_input_tokens": 2247936,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 13960,
+              "reasoning_output_tokens": 3371
+            },
+            "34": {
+              "input_tokens": 1763679,
+              "cached_input_tokens": 1633280,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 4943,
+              "reasoning_output_tokens": 1583
+            },
+            "35": {
+              "input_tokens": 2512327,
+              "cached_input_tokens": 2338432,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 6409,
+              "reasoning_output_tokens": 3282
+            },
+            "36": {
+              "input_tokens": 3667325,
+              "cached_input_tokens": 3504640,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 13451,
+              "reasoning_output_tokens": 3473
+            },
+            "37": {
+              "input_tokens": 4052613,
+              "cached_input_tokens": 3867776,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 15167,
+              "reasoning_output_tokens": 5237
+            },
+            "38": {
+              "input_tokens": 2804395,
+              "cached_input_tokens": 2662016,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 10471,
+              "reasoning_output_tokens": 3140
+            },
+            "39": {
+              "input_tokens": 3820658,
+              "cached_input_tokens": 3638016,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 11388,
+              "reasoning_output_tokens": 2825
+            },
+            "40": {
+              "input_tokens": 2409467,
+              "cached_input_tokens": 2281088,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 11226,
+              "reasoning_output_tokens": 3041
+            },
+            "41": {
+              "input_tokens": 1448557,
+              "cached_input_tokens": 1358208,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 7168,
+              "reasoning_output_tokens": 2282
+            },
+            "42": {
+              "input_tokens": 1268594,
+              "cached_input_tokens": 1178368,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 9341,
+              "reasoning_output_tokens": 2332
+            },
+            "43": {
+              "input_tokens": 1768111,
+              "cached_input_tokens": 1635328,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 11778,
+              "reasoning_output_tokens": 3634
+            },
+            "44": {
+              "input_tokens": 3454427,
+              "cached_input_tokens": 3302528,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 12703,
+              "reasoning_output_tokens": 3592
+            },
+            "45": {
+              "input_tokens": 18615698,
+              "cached_input_tokens": 17948032,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 62958,
+              "reasoning_output_tokens": 14303
+            },
+            "46": {
+              "input_tokens": 7929063,
+              "cached_input_tokens": 7513344,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 23712,
+              "reasoning_output_tokens": 7368
+            }
+          },
+          "usage_total": {
+            "input_tokens": 222350249,
+            "cached_input_tokens": 211917696,
+            "output_tokens": 790122
+          }
+        }
+      },
+      "source_episode_ledger": {
+        "0": {
+          "recorded_model_seconds": 17423.612337270006,
+          "recorded_usage_total": {
+            "input_tokens": 222350249,
+            "cached_input_tokens": 211917696,
+            "output_tokens": 790122
+          },
+          "segments": {
+            "0": {
+              "number": 1,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 270.18883541800005
+            },
+            "1": {
+              "number": 2,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 268.0755261989998
+            },
+            "2": {
+              "number": 3,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 235.85979540799963
+            },
+            "3": {
+              "number": 4,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 120.91345165100029
+            },
+            "4": {
+              "number": 5,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 145.40997573000004
+            },
+            "5": {
+              "number": 6,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 194.6623050219996
+            },
+            "6": {
+              "number": 7,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 244.34361544700005
+            },
+            "7": {
+              "number": 8,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 87.13263305599958
+            },
+            "8": {
+              "number": 9,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1417.8980126690003
+            },
+            "9": {
+              "number": 10,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 266.83335388399973
+            },
+            "10": {
+              "number": 11,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 266.7865491550001
+            },
+            "11": {
+              "number": 12,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 944.9407523780001
+            },
+            "12": {
+              "number": 13,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 167.4719741129993
+            },
+            "13": {
+              "number": 14,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 327.01796869700047
+            },
+            "14": {
+              "number": 15,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 199.4414081620016
+            },
+            "15": {
+              "number": 16,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 458.38654118500017
+            },
+            "16": {
+              "number": 17,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1138.827294965
+            },
+            "17": {
+              "number": 18,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 903.7469928070004
+            },
+            "18": {
+              "number": 19,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 320.4796268959999
+            },
+            "19": {
+              "number": 20,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 451.25100878099875
+            },
+            "20": {
+              "number": 21,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 203.11690403899956
+            },
+            "21": {
+              "number": 22,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 324.5729399019983
+            },
+            "22": {
+              "number": 23,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 246.25702477999948
+            },
+            "23": {
+              "number": 24,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 324.87855537500036
+            },
+            "24": {
+              "number": 25,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 456.0993354990005
+            },
+            "25": {
+              "number": 26,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 263.1228847750008
+            },
+            "26": {
+              "number": 27,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 182.66761654699985
+            },
+            "27": {
+              "number": 28,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 238.96824456800096
+            },
+            "28": {
+              "number": 29,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 338.86601821099975
+            },
+            "29": {
+              "number": 30,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 221.6744752630002
+            },
+            "30": {
+              "number": 31,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 198.41948269400018
+            },
+            "31": {
+              "number": 32,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 654.809858493998
+            },
+            "32": {
+              "number": 33,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 284.6386004550004
+            },
+            "33": {
+              "number": 34,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 280.1041384279997
+            },
+            "34": {
+              "number": 35,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 121.64812236800208
+            },
+            "35": {
+              "number": 36,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 156.09655527699942
+            },
+            "36": {
+              "number": 37,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 315.8050697110011
+            },
+            "37": {
+              "number": 38,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 462.36312898300093
+            },
+            "38": {
+              "number": 39,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 282.4456285990018
+            },
+            "39": {
+              "number": 40,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 304.4753537430006
+            },
+            "40": {
+              "number": 41,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 276.46873657799733
+            },
+            "41": {
+              "number": 42,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 182.58155102000092
+            },
+            "42": {
+              "number": 43,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 200.0945894869983
+            },
+            "43": {
+              "number": 44,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 232.50690383500114
+            },
+            "44": {
+              "number": 45,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 301.4695376910022
+            },
+            "45": {
+              "number": 46,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1311.5328231460007
+            },
+            "46": {
+              "number": 47,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 628.2606361790022
+            }
+          }
+        },
+        "1": {
+          "recorded_model_seconds": 7640.092534370004,
+          "recorded_usage_total": {
+            "input_tokens": 85869270,
+            "cached_input_tokens": 82264576,
+            "output_tokens": 277715
+          },
+          "segments": {
+            "0": {
+              "number": 1,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 387.9967838490011
+            },
+            "1": {
+              "number": 2,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 357.77408851899963
+            },
+            "2": {
+              "number": 3,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 643.0706049260007
+            },
+            "3": {
+              "number": 4,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 238.94925647499986
+            },
+            "4": {
+              "number": 5,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 344.6596486810013
+            },
+            "5": {
+              "number": 6,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 239.28051936299744
+            },
+            "6": {
+              "number": 7,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 428.79609537500073
+            },
+            "7": {
+              "number": 8,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 219.80896453400055
+            },
+            "8": {
+              "number": 9,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1030.1712173800006
+            },
+            "9": {
+              "number": 10,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 276.65486992500155
+            },
+            "10": {
+              "number": 11,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1750.4972876579995
+            },
+            "11": {
+              "number": 12,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1482.722314685001
+            },
+            "12": {
+              "number": 13,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 239.71088299999974
+            }
+          }
+        },
+        "2": {
+          "recorded_model_seconds": 2100.823753613,
+          "recorded_usage_total": {
+            "input_tokens": 34698721,
+            "cached_input_tokens": 33227648,
+            "output_tokens": 88720
+          },
+          "segments": {
+            "0": {
+              "number": 1001,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 600.0957205610001
+            },
+            "1": {
+              "number": 1002,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1022.9304724559997
+            },
+            "2": {
+              "number": 1003,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 294.123320401
+            },
+            "3": {
+              "number": 1004,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 183.67424019500004
+            }
+          }
+        },
+        "3": {
+          "recorded_model_seconds": 353.9802030229994,
+          "recorded_usage_total": {
+            "input_tokens": 4975494,
+            "cached_input_tokens": 4411008,
+            "output_tokens": 15172
+          },
+          "segments": {
+            "0": {
+              "number": 1,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 353.9802030229994
+            }
+          }
+        }
+      },
+      "legacy_stage_02_failed_source": {
+        "recorded_metadata": {
+          "ready": false,
+          "initialization_timeout_seconds": 3600,
+          "tsv_version": 2,
+          "scope_binding": {
+            "original_masked_scope_reference": null,
+            "provenance": {
+              "order": 61
+            }
+          },
+          "original_masked_scope_reference": null,
+          "protocol_records": {
+            "ready": false,
+            "api_abnormal": false,
+            "scope_drift": false,
+            "generated_outline_commands": 0,
+            "known_template_updates": 0,
+            "product_refusals": 39,
+            "updated_files": 284,
+            "submitted_files": 284,
+            "body_read_files": 122,
+            "documentation_files": 380,
+            "header_saves": 1,
+            "state": {
+              "offset": 1234,
+              "accepted": {
+                "README.md": 38,
+                "doc/source/index.rst.template": 44,
+                "doc/source/development/internals.rst": 46,
+                "doc/cheatsheet/README.md": 63,
+                "doc/sphinxext/README.rst": 65,
+                "web/README.md": 67,
+                "web/interactive_terminal/README.md": 69,
+                ".github/PULL_REQUEST_TEMPLATE.md": 71,
+                "AUTHORS.md": 73,
+                "doc/.gitignore": 97,
+                "doc/_templates/api_redirect.html": 99,
+                "doc/_templates/autosummary/accessor.rst": 101,
+                "doc/_templates/autosummary/accessor_attribute.rst": 103,
+                "doc/_templates/autosummary/accessor_callable.rst": 105,
+                "doc/_templates/autosummary/accessor_method.rst": 107,
+                "doc/_templates/autosummary/class.rst": 109,
+                "doc/_templates/autosummary/class_without_autosummary.rst": 111,
+                "doc/_templates/pandas_footer.html": 113,
+                "doc/_templates/sidebar-nav-bs.html": 115,
+                "doc/source/development/index.rst": 148,
+                "doc/source/development/copy_on_write.rst": 150,
+                "doc/source/development/debugging_extensions.rst": 152,
+                "doc/source/development/policies.rst": 154,
+                "doc/source/reference/index.rst": 156,
+                "doc/source/reference/missing_value.rst": 158,
+                "doc/source/reference/options.rst": 160,
+                "doc/source/reference/plotting.rst": 162,
+                "doc/source/reference/resampling.rst": 164,
+                "doc/source/reference/extensions.rst": 166,
+                "web/pandas/contribute.md": 190,
+                "web/pandas/getting_started.md": 192,
+                "web/pandas/try.md": 194,
+                "web/pandas/about/index.md": 196,
+                "web/pandas/about/roadmap.md": 198,
+                "web/pandas/about/sponsors.md": 200,
+                "web/pandas/about/team.md": 202,
+                "web/pandas/community/benchmarks.md": 204,
+                "web/pandas/community/coc.md": 206,
+                "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 208,
+                "web/pandas/robots.txt": 234,
+                "web/pandas/about/citing.md": 240,
+                "web/pandas/community/blog/pandas-1.0.md": 244,
+                "doc/source/user_guide/templates/myhtml.tpl": 306,
+                "doc/source/getting_started/comparison/includes/sorting.rst": 308,
+                "doc/source/getting_started/comparison/includes/extract_substring.rst": 310,
+                "doc/source/getting_started/comparison/includes/merge_setup.rst": 312,
+                "doc/source/getting_started/comparison/includes/if_then.rst": 314,
+                "doc/source/getting_started/comparison/includes/introduction.rst": 316,
+                "doc/source/getting_started/comparison/includes/limit.rst": 318,
+                "doc/source/getting_started/comparison/includes/groupby.rst": 320,
+                "doc/source/getting_started/comparison/includes/transform.rst": 322,
+                "doc/source/getting_started/comparison/includes/length.rst": 324,
+                "doc/source/getting_started/comparison/index.rst": 326,
+                "doc/source/getting_started/comparison/includes/construct_dataframe.rst": 328,
+                "doc/source/whatsnew/v0.23.3.rst": 330,
+                "doc/source/getting_started/comparison/includes/column_record.rst": 332,
+                "doc/source/getting_started/comparison/includes/missing_intro.rst": 334,
+                "doc/source/getting_started/intro_tutorials/index.rst": 336,
+                "doc/source/getting_started/comparison/includes/find_substring.rst": 338,
+                "doc/source/getting_started/comparison/includes/column_operations.rst": 340,
+                "doc/source/getting_started/comparison/includes/case.rst": 342,
+                "doc/source/getting_started/comparison/includes/nth_word.rst": 344,
+                "doc/source/getting_started/comparison/includes/filtering.rst": 346,
+                "doc/source/getting_started/comparison/includes/merge.rst": 348,
+                "doc/source/whatsnew/v0.25.3.rst": 350,
+                "doc/source/getting_started/comparison/includes/time_date.rst": 352,
+                "doc/source/whatsnew/v1.0.3.rst": 354,
+                "doc/source/getting_started/comparison/includes/missing.rst": 361,
+                "doc/source/getting_started/comparison/includes/copies.rst": 363,
+                "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 365,
+                "doc/source/user_guide/templates/html_style_structure.html": 367,
+                "doc/source/_static/css/pandas.css": 369,
+                "doc/source/_static/logo_stata.svg": 371,
+                "doc/source/whatsnew/v2.1.3.rst": 373,
+                "doc/source/whatsnew/v1.0.5.rst": 375,
+                "doc/source/whatsnew/v0.7.2.rst": 377,
+                "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 379,
+                "doc/source/whatsnew/v0.7.1.rst": 381,
+                "doc/source/whatsnew/v0.23.4.rst": 383,
+                "doc/source/whatsnew/v1.2.5.rst": 385,
+                "doc/source/user_guide/templates/html_table_structure.html": 387,
+                "doc/source/reference/general_functions.rst": 389,
+                "doc/source/whatsnew/v2.2.3.rst": 391,
+                "doc/source/reference/style.rst": 393,
+                "doc/source/whatsnew/v2.3.2.rst": 395,
+                "doc/source/whatsnew/v1.2.4.rst": 397,
+                "doc/source/user_guide/index.rst": 399,
+                "doc/source/whatsnew/v1.2.3.rst": 405,
+                "doc/source/whatsnew/v0.25.2.rst": 407,
+                "doc/source/whatsnew/v0.8.1.rst": 409,
+                "doc/sphinxext/contributors.py": 411,
+                "doc/source/whatsnew/v1.3.5.rst": 413,
+                "doc/source/reference/testing.rst": 415,
+                "doc/source/_static/logo_r.svg": 417,
+                "doc/source/whatsnew/v1.5.2.rst": 419,
+                "doc/source/whatsnew/v0.6.1.rst": 421,
+                "doc/source/whatsnew/v2.0.3.rst": 423,
+                "doc/source/reference/window.rst": 425,
+                "doc/source/_static/question_mark_noback.svg": 427,
+                "doc/source/_static/index_contribute.svg": 429,
+                "doc/source/whatsnew/v2.2.2.rst": 431,
+                "doc/source/whatsnew/v1.4.2.rst": 433,
+                "doc/source/whatsnew/v2.1.4.rst": 438,
+                "doc/source/reference/io.rst": 440,
+                "doc/scripts/eval_performance.py": 442,
+                "doc/source/whatsnew/v1.1.5.rst": 444,
+                "doc/source/whatsnew/v1.3.1.rst": 446,
+                "doc/source/_static/spreadsheets/logo_excel.svg": 448,
+                "doc/source/whatsnew/v0.20.3.rst": 450,
+                "doc/source/whatsnew/v1.2.2.rst": 452,
+                "doc/source/whatsnew/v1.4.1.rst": 454,
+                "doc/source/whatsnew/v1.3.2.rst": 456,
+                "doc/source/whatsnew/index.rst": 461,
+                "doc/source/whatsnew/v2.1.1.rst": 463,
+                "doc/source/user_guide/boolean.rst": 465,
+                "doc/source/whatsnew/v0.4.x.rst": 467,
+                "doc/source/whatsnew/v1.5.3.rst": 469,
+                "requirements-dev.txt": 536,
+                "doc/source/_static/ci.png": 555,
+                "doc/source/_static/df_repr_truncated.png": 557,
+                "doc/source/_static/eval-perf.png": 559,
+                "doc/source/_static/index_api.svg": 561,
+                "doc/source/_static/index_getting_started.svg": 563,
+                "doc/source/_static/index_user_guide.svg": 565,
+                "doc/source/_static/logo_sas.svg": 567,
+                "doc/source/_static/logo_sas_white.svg": 569,
+                "doc/source/_static/logo_sql.svg": 571,
+                "doc/source/_static/new-excel-index.png": 573,
+                "doc/source/_static/old-excel-index.png": 575,
+                "doc/source/_static/print_df_new.png": 577,
+                "doc/source/_static/print_df_old.png": 579,
+                "doc/source/_static/query-perf.png": 581,
+                "doc/source/_static/reshaping_melt.png": 583,
+                "doc/source/_static/reshaping_pivot.png": 585,
+                "doc/source/_static/reshaping_stack.png": 587,
+                "doc/source/_static/reshaping_unstack.png": 589,
+                "doc/source/_static/reshaping_unstack_0.png": 591,
+                "doc/source/_static/reshaping_unstack_1.png": 593,
+                "doc/source/_static/style-excel.png": 595,
+                "doc/source/_static/whatsnew_assign.png": 597,
+                "doc/source/_static/whatsnew_plot_submethods.png": 599,
+                "doc/source/_static/schemas/01_table_dataframe.svg": 605,
+                "doc/source/_static/schemas/01_table_series.svg": 607,
+                "doc/source/_static/schemas/01_table_spreadsheet.png": 609,
+                "doc/source/_static/schemas/02_io_readwrite.svg": 611,
+                "doc/source/_static/schemas/03_subset_columns.svg": 613,
+                "doc/source/_static/schemas/03_subset_columns_rows.svg": 615,
+                "doc/source/_static/schemas/03_subset_rows.svg": 617,
+                "doc/source/_static/schemas/04_plot_overview.svg": 619,
+                "doc/source/_static/schemas/05_newcolumn_1.svg": 621,
+                "doc/source/_static/schemas/05_newcolumn_2.svg": 623,
+                "doc/source/_static/schemas/05_newcolumn_3.svg": 625,
+                "doc/source/_static/schemas/06_aggregate.svg": 627,
+                "doc/source/_static/schemas/06_groupby.svg": 629,
+                "doc/source/_static/schemas/06_groupby_agg_detail.svg": 631,
+                "doc/source/_static/schemas/06_groupby_select_detail.svg": 633,
+                "doc/source/_static/schemas/06_reduction.svg": 635,
+                "doc/source/_static/schemas/06_valuecounts.svg": 637,
+                "doc/source/_static/schemas/07_melt.svg": 639,
+                "doc/source/_static/schemas/07_pivot.svg": 641,
+                "doc/source/_static/schemas/07_pivot_table.svg": 643,
+                "doc/source/_static/schemas/08_concat_column.svg": 645,
+                "doc/source/_static/schemas/08_concat_row.svg": 647,
+                "doc/source/_static/schemas/08_merge_left.svg": 649,
+                "doc/source/_static/spreadsheets/conditional.png": 655,
+                "doc/source/_static/spreadsheets/filter.png": 657,
+                "doc/source/_static/spreadsheets/find.png": 659,
+                "doc/source/_static/spreadsheets/pivot.png": 661,
+                "doc/source/_static/spreadsheets/sort.png": 663,
+                "doc/source/_static/spreadsheets/vlookup.png": 665,
+                "doc/source/_static/style/appmaphead1.png": 679,
+                "doc/source/_static/style/appmaphead2.png": 681,
+                "doc/source/_static/style/bg_ax0.png": 683,
+                "doc/source/_static/style/bg_axNone.png": 685,
+                "doc/source/_static/style/bg_axNone_gmap.png": 687,
+                "doc/source/_static/style/bg_axNone_lowhigh.png": 689,
+                "doc/source/_static/style/bg_axNone_vminvmax.png": 691,
+                "doc/source/_static/style/bg_gmap.png": 693,
+                "doc/source/_static/style/df_pipe.png": 695,
+                "doc/source/_static/style/df_pipe_applydata.png": 697,
+                "doc/source/_static/style/df_pipe_applymap.png": 699,
+                "doc/source/_static/style/df_pipe_hl.png": 701,
+                "doc/source/_static/style/df_pipe_hl2.png": 703,
+                "doc/source/_static/style/footer_extended.png": 705,
+                "doc/source/_static/style/footer_simple.png": 707,
+                "doc/source/_static/style/format_excel_css.png": 709,
+                "doc/source/_static/style/hbetw_axNone.png": 711,
+                "doc/source/_static/style/hbetw_basic.png": 713,
+                "doc/source/_static/style/hbetw_props.png": 715,
+                "doc/source/_static/style/hbetw_seq.png": 717,
+                "doc/source/_static/style/hq_ax1.png": 719,
+                "doc/source/_static/style/hq_axNone.png": 721,
+                "doc/source/_static/style/hq_props.png": 723,
+                "doc/source/_static/style/latex_1.png": 725,
+                "doc/source/_static/style/latex_2.png": 727,
+                "doc/source/_static/style/latex_stocks.png": 729,
+                "doc/source/_static/style/latex_stocks_html.png": 731,
+                "doc/source/_static/style/tg_ax0.png": 733,
+                "doc/source/_static/style/tg_axNone.png": 735,
+                "doc/source/_static/style/tg_axNone_gmap.png": 737,
+                "doc/source/_static/style/tg_axNone_lowhigh.png": 739,
+                "doc/source/_static/style/tg_axNone_vminvmax.png": 741,
+                "doc/source/_static/style/tg_gmap.png": 743,
+                "doc/source/development/gitpod-imgs/gitpod-dashboard-stop.png": 747,
+                "doc/source/development/gitpod-imgs/gitpod-edit-permissions-gh.png": 749,
+                "doc/source/development/gitpod-imgs/gitpod-edit-permissions-repo.png": 751,
+                "doc/source/development/gitpod-imgs/gitpod-workspace.png": 753,
+                "doc/source/development/gitpod-imgs/pandas-github.png": 755,
+                "doc/source/development/gitpod-imgs/pandas-gitpod-branches.png": 757,
+                "doc/source/development/gitpod-imgs/rst-rendering.png": 759,
+                "doc/source/development/gitpod-imgs/vscode-rst.png": 761,
+                "doc/source/development/gitpod-imgs/vscode-statusbar.png": 763,
+                "doc/cheatsheet/Pandas_Cheat_Sheet.pdf": 788,
+                "doc/cheatsheet/Pandas_Cheat_Sheet.pptx": 790,
+                "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf": 792,
+                "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx": 794,
+                "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf": 796,
+                "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx": 798,
+                "doc/make.py": 851,
+                "doc/redirects.csv": 853,
+                "doc/source/_static/css/getting_started.css": 855,
+                "doc/source/conf.py": 857,
+                "doc/sphinxext/announce.py": 859,
+                "doc/source/whatsnew/whatsnew_0171_html_table.html": 861,
+                "doc/source/_static/trunc_before.png": 869,
+                "doc/source/_static/trunc_after.png": 871,
+                "doc/source/whatsnew/v1.3.4.rst": 884,
+                "doc/source/whatsnew/v0.5.0.rst": 886,
+                "doc/source/whatsnew/v2.0.2.rst": 888,
+                "doc/source/whatsnew/v1.0.4.rst": 890,
+                "doc/source/whatsnew/v2.3.3.rst": 892,
+                "doc/source/whatsnew/v0.9.0.rst": 894,
+                "doc/source/whatsnew/v1.3.3.rst": 915,
+                "doc/source/whatsnew/v1.1.4.rst": 917,
+                "doc/source/whatsnew/v2.3.1.rst": 919,
+                "doc/source/user_guide/integer_na.rst": 921,
+                "doc/source/whatsnew/v1.1.1.rst": 923,
+                "doc/source/whatsnew/v0.24.1.rst": 925,
+                "doc/source/whatsnew/v1.1.2.rst": 942,
+                "doc/source/reference/groupby.rst": 944,
+                "doc/source/whatsnew/v1.0.1.rst": 946,
+                "doc/source/whatsnew/v0.19.1.rst": 948,
+                "doc/source/whatsnew/v0.7.3.rst": 950,
+                "doc/source/whatsnew/v1.4.4.rst": 952,
+                "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 967,
+                "doc/source/whatsnew/v1.4.3.rst": 969,
+                "doc/source/whatsnew/v1.1.3.rst": 971,
+                "doc/source/whatsnew/v2.1.2.rst": 973,
+                "doc/source/whatsnew/v0.6.0.rst": 975,
+                "doc/source/whatsnew/v0.9.1.rst": 977,
+                "doc/source/whatsnew/v2.0.1.rst": 992,
+                "doc/source/whatsnew/v0.23.2.rst": 994,
+                "doc/source/whatsnew/v0.24.2.rst": 996,
+                "doc/source/development/community.rst": 998,
+                "doc/source/whatsnew/v0.19.2.rst": 1000,
+                "doc/source/getting_started/comparison/comparison_with_spss.rst": 1002,
+                "doc/source/getting_started/index.rst": 1036,
+                "doc/source/getting_started/tutorials.rst": 1038,
+                "doc/source/reference/aliases.rst": 1040,
+                "doc/source/reference/arrays.rst": 1042,
+                "doc/source/reference/frame.rst": 1044,
+                "doc/source/reference/indexing.rst": 1046,
+                "doc/source/whatsnew/v0.20.2.rst": 1066,
+                "doc/source/getting_started/intro_tutorials/02_read_write.rst": 1068,
+                "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 1070,
+                "doc/source/development/developer.rst": 1072,
+                "doc/source/whatsnew/v0.25.1.rst": 1074,
+                "doc/source/whatsnew/v1.0.2.rst": 1076,
+                "doc/source/whatsnew/v1.5.1.rst": 1089,
+                "doc/source/user_guide/duplicates.rst": 1091,
+                "doc/source/user_guide/pyarrow.rst": 1093,
+                "doc/source/getting_started/intro_tutorials/04_plotting.rst": 1095,
+                "doc/source/whatsnew/v2.2.1.rst": 1179,
+                "web/pandas/community/blog/asv-pandas-grant.md": 1183,
+                "doc/source/whatsnew/v0.23.1.rst": 1185,
+                "doc/source/whatsnew/v1.2.1.rst": 1187,
+                "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 1191,
+                "web/pandas/community/blog/2019-user-survey.md": 1203,
+                "doc/source/getting_started/overview.rst": 1205,
+                "doc/source/whatsnew/v2.3.0.rst": 1207,
+                "doc/source/whatsnew/v0.21.1.rst": 1209,
+                "doc/source/whatsnew/v0.17.1.rst": 1220,
+                "doc/source/whatsnew/v0.16.2.rst": 1222,
+                "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 1224
+              },
+              "body_reads": {
+                "pandas/core/api.py": 27,
+                "pandas/__init__.py": 25,
+                "pyproject.toml": 506,
+                "doc/source/development/internals.rst": 31,
+                "README.md": 16,
+                "meson.build": 23,
+                "doc/source/index.rst.template": 29,
+                "doc/cheatsheet/README.md": 51,
+                "doc/sphinxext/README.rst": 53,
+                "web/README.md": 55,
+                "web/interactive_terminal/README.md": 57,
+                ".github/PULL_REQUEST_TEMPLATE.md": 59,
+                "AUTHORS.md": 61,
+                "doc/.gitignore": 76,
+                "doc/_templates/api_redirect.html": 78,
+                "doc/_templates/autosummary/accessor.rst": 80,
+                "doc/_templates/autosummary/accessor_attribute.rst": 82,
+                "doc/_templates/autosummary/accessor_callable.rst": 84,
+                "doc/_templates/autosummary/accessor_method.rst": 86,
+                "doc/_templates/autosummary/class.rst": 88,
+                "doc/_templates/autosummary/class_without_autosummary.rst": 90,
+                "doc/_templates/pandas_footer.html": 92,
+                "doc/_templates/sidebar-nav-bs.html": 94,
+                "doc/source/development/index.rst": 127,
+                "doc/source/development/copy_on_write.rst": 129,
+                "doc/source/development/debugging_extensions.rst": 131,
+                "doc/source/development/policies.rst": 133,
+                "doc/source/reference/index.rst": 135,
+                "doc/source/reference/missing_value.rst": 137,
+                "doc/source/reference/options.rst": 139,
+                "doc/source/reference/plotting.rst": 141,
+                "doc/source/reference/resampling.rst": 143,
+                "doc/source/reference/extensions.rst": 145,
+                "web/pandas/contribute.md": 169,
+                "web/pandas/getting_started.md": 171,
+                "web/pandas/try.md": 173,
+                "web/pandas/about/index.md": 175,
+                "web/pandas/about/roadmap.md": 177,
+                "web/pandas/about/sponsors.md": 179,
+                "web/pandas/about/team.md": 181,
+                "web/pandas/community/benchmarks.md": 183,
+                "web/pandas/community/coc.md": 185,
+                "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 187,
+                "web/pandas/config.yml": 214,
+                "web/pandas/index.html": 216,
+                "web/pandas/robots.txt": 218,
+                "web/pandas/versions.json": 220,
+                "web/pandas/_templates/layout.html": 222,
+                "web/pandas/about/citing.md": 224,
+                "web/pandas/community/blog/index.html": 226,
+                "web/pandas/community/blog/pandas-1.0.md": 228,
+                "Dockerfile": 1125,
+                ".gitignore": 1121,
+                ".gitattributes": 1121,
+                "LICENSE": 1125,
+                "MANIFEST.in": 1125,
+                ".pre-commit-config.yaml": 1121,
+                "doc/make.py": 804,
+                "doc/source/conf.py": 806,
+                "doc/sphinxext/announce.py": 808,
+                "doc/redirects.csv": 811,
+                "doc/source/_static/css/getting_started.css": 835,
+                "doc/source/whatsnew/whatsnew_0171_html_table.html": 838,
+                "doc/source/whatsnew/v1.3.3.rst": 902,
+                "doc/source/whatsnew/v1.1.4.rst": 904,
+                "doc/source/whatsnew/v2.3.1.rst": 906,
+                "doc/source/user_guide/integer_na.rst": 908,
+                "doc/source/whatsnew/v1.1.1.rst": 910,
+                "doc/source/whatsnew/v0.24.1.rst": 912,
+                "doc/source/whatsnew/v1.1.2.rst": 929,
+                "doc/source/reference/groupby.rst": 931,
+                "doc/source/whatsnew/v1.0.1.rst": 933,
+                "doc/source/whatsnew/v0.19.1.rst": 935,
+                "doc/source/whatsnew/v0.7.3.rst": 937,
+                "doc/source/whatsnew/v1.4.4.rst": 939,
+                "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 954,
+                "doc/source/whatsnew/v1.4.3.rst": 956,
+                "doc/source/whatsnew/v1.1.3.rst": 958,
+                "doc/source/whatsnew/v2.1.2.rst": 960,
+                "doc/source/whatsnew/v0.6.0.rst": 962,
+                "doc/source/whatsnew/v0.9.1.rst": 964,
+                "doc/source/whatsnew/v2.0.1.rst": 979,
+                "doc/source/whatsnew/v0.23.2.rst": 981,
+                "doc/source/whatsnew/v0.24.2.rst": 983,
+                "doc/source/development/community.rst": 985,
+                "doc/source/whatsnew/v0.19.2.rst": 987,
+                "doc/source/getting_started/comparison/comparison_with_spss.rst": 989,
+                "doc/source/getting_started/index.rst": 1023,
+                "doc/source/getting_started/tutorials.rst": 1025,
+                "doc/source/reference/aliases.rst": 1027,
+                "doc/source/reference/arrays.rst": 1029,
+                "doc/source/reference/frame.rst": 1031,
+                "doc/source/reference/indexing.rst": 1033,
+                "doc/source/whatsnew/v0.20.2.rst": 1053,
+                "doc/source/getting_started/intro_tutorials/02_read_write.rst": 1055,
+                "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 1057,
+                "doc/source/development/developer.rst": 1059,
+                "doc/source/whatsnew/v0.25.1.rst": 1061,
+                "doc/source/whatsnew/v1.0.2.rst": 1063,
+                "doc/source/whatsnew/v1.5.1.rst": 1080,
+                "doc/source/user_guide/duplicates.rst": 1082,
+                "doc/source/user_guide/pyarrow.rst": 1084,
+                "doc/source/getting_started/intro_tutorials/04_plotting.rst": 1086,
+                ".devcontainer.json": 1121,
+                ".gitpod.yml": 1121,
+                "environment.yml": 1124,
+                "generate_version.py": 1124,
+                "generate_pxi.py": 1124,
+                "codecov.yml": 1125,
+                "CITATION.cff": 1125,
+                "doc/source/whatsnew/v2.2.1.rst": 1171,
+                "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 1172,
+                "web/pandas/community/blog/asv-pandas-grant.md": 1173,
+                "doc/source/whatsnew/v0.23.1.rst": 1174,
+                "doc/source/whatsnew/v1.2.1.rst": 1176,
+                "web/pandas/community/blog/2019-user-survey.md": 1195,
+                "doc/source/whatsnew/v2.3.0.rst": 1197,
+                "doc/source/whatsnew/v0.21.1.rst": 1199,
+                "doc/source/getting_started/overview.rst": 1201,
+                "doc/source/whatsnew/v0.17.1.rst": 1213,
+                "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 1215,
+                "doc/source/whatsnew/v0.16.2.rst": 1217
+              },
+              "core_files": null,
+              "header_saves": 1,
+              "generated_outline_commands": 0,
+              "known_template_updates": 0,
+              "product_refusals": 39,
+              "api_abnormal": false,
+              "scope_drift": false
+            }
+          },
+          "event_summary": {
+            "completed": true,
+            "turn_usages": {
+              "0": {
+                "input_tokens": 2555312,
+                "cached_input_tokens": 2384896,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 12855,
+                "reasoning_output_tokens": 3112
+              },
+              "1": {
+                "input_tokens": 1755104,
+                "cached_input_tokens": 1632256,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 15653,
+                "reasoning_output_tokens": 2917
+              },
+              "2": {
+                "input_tokens": 11780840,
+                "cached_input_tokens": 11161344,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 39325,
+                "reasoning_output_tokens": 7875
+              },
+              "3": {
+                "input_tokens": 1729776,
+                "cached_input_tokens": 1581312,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 11357,
+                "reasoning_output_tokens": 4441
+              }
+            },
+            "usage_complete": true,
+            "usage_total": {
+              "cache_write_input_tokens": 0,
+              "output_tokens": 79190,
+              "cached_input_tokens": 16759808,
+              "input_tokens": 17821032,
+              "reasoning_output_tokens": 18345
+            }
+          },
+          "model_elapsed_seconds": 1730.0018443089975,
+          "model_exit_code": 0,
+          "stage_evidence_status": {
+            "valid": true,
+            "api_abnormal": false
+          },
+          "state_files_saved": {
+            "artifact_24e44c228e5184e3": true,
+            "artifact_2c1f8de3485efb44": false,
+            "artifact_4caf12de69a79acd": false
+          },
+          "elapsed_seconds": 1739.4778738479981,
+          "segment_limit": 4,
+          "segments": {
+            "0": {
+              "number": 1,
+              "metadata": {
+                "ready": false,
+                "initialization_timeout_seconds": 3599,
+                "tsv_version": 2,
+                "scope_binding": {
+                  "original_masked_scope_reference": null,
+                  "provenance": {
+                    "order": 61
+                  }
+                },
+                "original_masked_scope_reference": null,
+                "protocol_records": {
+                  "ready": false,
+                  "api_abnormal": false,
+                  "scope_drift": false,
+                  "generated_outline_commands": 0,
+                  "known_template_updates": 0,
+                  "product_refusals": 7,
+                  "updated_files": 42,
+                  "submitted_files": 42,
+                  "body_read_files": 51,
+                  "documentation_files": 380,
+                  "header_saves": 1,
+                  "state": {
+                    "offset": 253,
+                    "accepted": {
+                      "README.md": 38,
+                      "doc/source/index.rst.template": 44,
+                      "doc/source/development/internals.rst": 46,
+                      "doc/cheatsheet/README.md": 63,
+                      "doc/sphinxext/README.rst": 65,
+                      "web/README.md": 67,
+                      "web/interactive_terminal/README.md": 69,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 71,
+                      "AUTHORS.md": 73,
+                      "doc/.gitignore": 97,
+                      "doc/_templates/api_redirect.html": 99,
+                      "doc/_templates/autosummary/accessor.rst": 101,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 103,
+                      "doc/_templates/autosummary/accessor_callable.rst": 105,
+                      "doc/_templates/autosummary/accessor_method.rst": 107,
+                      "doc/_templates/autosummary/class.rst": 109,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 111,
+                      "doc/_templates/pandas_footer.html": 113,
+                      "doc/_templates/sidebar-nav-bs.html": 115,
+                      "doc/source/development/index.rst": 148,
+                      "doc/source/development/copy_on_write.rst": 150,
+                      "doc/source/development/debugging_extensions.rst": 152,
+                      "doc/source/development/policies.rst": 154,
+                      "doc/source/reference/index.rst": 156,
+                      "doc/source/reference/missing_value.rst": 158,
+                      "doc/source/reference/options.rst": 160,
+                      "doc/source/reference/plotting.rst": 162,
+                      "doc/source/reference/resampling.rst": 164,
+                      "doc/source/reference/extensions.rst": 166,
+                      "web/pandas/contribute.md": 190,
+                      "web/pandas/getting_started.md": 192,
+                      "web/pandas/try.md": 194,
+                      "web/pandas/about/index.md": 196,
+                      "web/pandas/about/roadmap.md": 198,
+                      "web/pandas/about/sponsors.md": 200,
+                      "web/pandas/about/team.md": 202,
+                      "web/pandas/community/benchmarks.md": 204,
+                      "web/pandas/community/coc.md": 206,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 208,
+                      "web/pandas/robots.txt": 234,
+                      "web/pandas/about/citing.md": 240,
+                      "web/pandas/community/blog/pandas-1.0.md": 244
+                    },
+                    "body_reads": {
+                      "pandas/core/api.py": 27,
+                      "pandas/__init__.py": 25,
+                      "pyproject.toml": 16,
+                      "doc/source/development/internals.rst": 31,
+                      "README.md": 16,
+                      "meson.build": 23,
+                      "doc/source/index.rst.template": 29,
+                      "doc/cheatsheet/README.md": 51,
+                      "doc/sphinxext/README.rst": 53,
+                      "web/README.md": 55,
+                      "web/interactive_terminal/README.md": 57,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 59,
+                      "AUTHORS.md": 61,
+                      "doc/.gitignore": 76,
+                      "doc/_templates/api_redirect.html": 78,
+                      "doc/_templates/autosummary/accessor.rst": 80,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 82,
+                      "doc/_templates/autosummary/accessor_callable.rst": 84,
+                      "doc/_templates/autosummary/accessor_method.rst": 86,
+                      "doc/_templates/autosummary/class.rst": 88,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 90,
+                      "doc/_templates/pandas_footer.html": 92,
+                      "doc/_templates/sidebar-nav-bs.html": 94,
+                      "doc/source/development/index.rst": 127,
+                      "doc/source/development/copy_on_write.rst": 129,
+                      "doc/source/development/debugging_extensions.rst": 131,
+                      "doc/source/development/policies.rst": 133,
+                      "doc/source/reference/index.rst": 135,
+                      "doc/source/reference/missing_value.rst": 137,
+                      "doc/source/reference/options.rst": 139,
+                      "doc/source/reference/plotting.rst": 141,
+                      "doc/source/reference/resampling.rst": 143,
+                      "doc/source/reference/extensions.rst": 145,
+                      "web/pandas/contribute.md": 169,
+                      "web/pandas/getting_started.md": 171,
+                      "web/pandas/try.md": 173,
+                      "web/pandas/about/index.md": 175,
+                      "web/pandas/about/roadmap.md": 177,
+                      "web/pandas/about/sponsors.md": 179,
+                      "web/pandas/about/team.md": 181,
+                      "web/pandas/community/benchmarks.md": 183,
+                      "web/pandas/community/coc.md": 185,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 187,
+                      "web/pandas/config.yml": 214,
+                      "web/pandas/index.html": 216,
+                      "web/pandas/robots.txt": 218,
+                      "web/pandas/versions.json": 220,
+                      "web/pandas/_templates/layout.html": 222,
+                      "web/pandas/about/citing.md": 224,
+                      "web/pandas/community/blog/index.html": 226,
+                      "web/pandas/community/blog/pandas-1.0.md": 228
+                    },
+                    "core_files": null,
+                    "header_saves": 1,
+                    "generated_outline_commands": 0,
+                    "known_template_updates": 0,
+                    "product_refusals": 7,
+                    "api_abnormal": false,
+                    "scope_drift": false
+                  }
+                },
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 2555312,
+                      "cached_input_tokens": 2384896,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 12855,
+                      "reasoning_output_tokens": 3112
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 2555312,
+                    "cached_input_tokens": 2384896,
+                    "output_tokens": 12855
+                  }
+                },
+                "model_elapsed_seconds": 241.19373226899916,
+                "model_exit_code": 0,
+                "stage_evidence_status": {
+                  "valid": true,
+                  "api_abnormal": false
+                },
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 243.22641154699886
+              },
+              "continuation_allowed": true
+            },
+            "1": {
+              "number": 2,
+              "metadata": {
+                "ready": false,
+                "initialization_timeout_seconds": 3356,
+                "tsv_version": 2,
+                "scope_binding": {
+                  "original_masked_scope_reference": null,
+                  "provenance": {
+                    "order": 61
+                  }
+                },
+                "original_masked_scope_reference": null,
+                "protocol_records": {
+                  "ready": false,
+                  "api_abnormal": false,
+                  "scope_drift": false,
+                  "generated_outline_commands": 0,
+                  "known_template_updates": 0,
+                  "product_refusals": 12,
+                  "updated_files": 117,
+                  "submitted_files": 117,
+                  "body_read_files": 56,
+                  "documentation_files": 380,
+                  "header_saves": 1,
+                  "state": {
+                    "offset": 478,
+                    "accepted": {
+                      "README.md": 38,
+                      "doc/source/index.rst.template": 44,
+                      "doc/source/development/internals.rst": 46,
+                      "doc/cheatsheet/README.md": 63,
+                      "doc/sphinxext/README.rst": 65,
+                      "web/README.md": 67,
+                      "web/interactive_terminal/README.md": 69,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 71,
+                      "AUTHORS.md": 73,
+                      "doc/.gitignore": 97,
+                      "doc/_templates/api_redirect.html": 99,
+                      "doc/_templates/autosummary/accessor.rst": 101,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 103,
+                      "doc/_templates/autosummary/accessor_callable.rst": 105,
+                      "doc/_templates/autosummary/accessor_method.rst": 107,
+                      "doc/_templates/autosummary/class.rst": 109,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 111,
+                      "doc/_templates/pandas_footer.html": 113,
+                      "doc/_templates/sidebar-nav-bs.html": 115,
+                      "doc/source/development/index.rst": 148,
+                      "doc/source/development/copy_on_write.rst": 150,
+                      "doc/source/development/debugging_extensions.rst": 152,
+                      "doc/source/development/policies.rst": 154,
+                      "doc/source/reference/index.rst": 156,
+                      "doc/source/reference/missing_value.rst": 158,
+                      "doc/source/reference/options.rst": 160,
+                      "doc/source/reference/plotting.rst": 162,
+                      "doc/source/reference/resampling.rst": 164,
+                      "doc/source/reference/extensions.rst": 166,
+                      "web/pandas/contribute.md": 190,
+                      "web/pandas/getting_started.md": 192,
+                      "web/pandas/try.md": 194,
+                      "web/pandas/about/index.md": 196,
+                      "web/pandas/about/roadmap.md": 198,
+                      "web/pandas/about/sponsors.md": 200,
+                      "web/pandas/about/team.md": 202,
+                      "web/pandas/community/benchmarks.md": 204,
+                      "web/pandas/community/coc.md": 206,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 208,
+                      "web/pandas/robots.txt": 234,
+                      "web/pandas/about/citing.md": 240,
+                      "web/pandas/community/blog/pandas-1.0.md": 244,
+                      "doc/source/user_guide/templates/myhtml.tpl": 306,
+                      "doc/source/getting_started/comparison/includes/sorting.rst": 308,
+                      "doc/source/getting_started/comparison/includes/extract_substring.rst": 310,
+                      "doc/source/getting_started/comparison/includes/merge_setup.rst": 312,
+                      "doc/source/getting_started/comparison/includes/if_then.rst": 314,
+                      "doc/source/getting_started/comparison/includes/introduction.rst": 316,
+                      "doc/source/getting_started/comparison/includes/limit.rst": 318,
+                      "doc/source/getting_started/comparison/includes/groupby.rst": 320,
+                      "doc/source/getting_started/comparison/includes/transform.rst": 322,
+                      "doc/source/getting_started/comparison/includes/length.rst": 324,
+                      "doc/source/getting_started/comparison/index.rst": 326,
+                      "doc/source/getting_started/comparison/includes/construct_dataframe.rst": 328,
+                      "doc/source/whatsnew/v0.23.3.rst": 330,
+                      "doc/source/getting_started/comparison/includes/column_record.rst": 332,
+                      "doc/source/getting_started/comparison/includes/missing_intro.rst": 334,
+                      "doc/source/getting_started/intro_tutorials/index.rst": 336,
+                      "doc/source/getting_started/comparison/includes/find_substring.rst": 338,
+                      "doc/source/getting_started/comparison/includes/column_operations.rst": 340,
+                      "doc/source/getting_started/comparison/includes/case.rst": 342,
+                      "doc/source/getting_started/comparison/includes/nth_word.rst": 344,
+                      "doc/source/getting_started/comparison/includes/filtering.rst": 346,
+                      "doc/source/getting_started/comparison/includes/merge.rst": 348,
+                      "doc/source/whatsnew/v0.25.3.rst": 350,
+                      "doc/source/getting_started/comparison/includes/time_date.rst": 352,
+                      "doc/source/whatsnew/v1.0.3.rst": 354,
+                      "doc/source/getting_started/comparison/includes/missing.rst": 361,
+                      "doc/source/getting_started/comparison/includes/copies.rst": 363,
+                      "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 365,
+                      "doc/source/user_guide/templates/html_style_structure.html": 367,
+                      "doc/source/_static/css/pandas.css": 369,
+                      "doc/source/_static/logo_stata.svg": 371,
+                      "doc/source/whatsnew/v2.1.3.rst": 373,
+                      "doc/source/whatsnew/v1.0.5.rst": 375,
+                      "doc/source/whatsnew/v0.7.2.rst": 377,
+                      "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 379,
+                      "doc/source/whatsnew/v0.7.1.rst": 381,
+                      "doc/source/whatsnew/v0.23.4.rst": 383,
+                      "doc/source/whatsnew/v1.2.5.rst": 385,
+                      "doc/source/user_guide/templates/html_table_structure.html": 387,
+                      "doc/source/reference/general_functions.rst": 389,
+                      "doc/source/whatsnew/v2.2.3.rst": 391,
+                      "doc/source/reference/style.rst": 393,
+                      "doc/source/whatsnew/v2.3.2.rst": 395,
+                      "doc/source/whatsnew/v1.2.4.rst": 397,
+                      "doc/source/user_guide/index.rst": 399,
+                      "doc/source/whatsnew/v1.2.3.rst": 405,
+                      "doc/source/whatsnew/v0.25.2.rst": 407,
+                      "doc/source/whatsnew/v0.8.1.rst": 409,
+                      "doc/sphinxext/contributors.py": 411,
+                      "doc/source/whatsnew/v1.3.5.rst": 413,
+                      "doc/source/reference/testing.rst": 415,
+                      "doc/source/_static/logo_r.svg": 417,
+                      "doc/source/whatsnew/v1.5.2.rst": 419,
+                      "doc/source/whatsnew/v0.6.1.rst": 421,
+                      "doc/source/whatsnew/v2.0.3.rst": 423,
+                      "doc/source/reference/window.rst": 425,
+                      "doc/source/_static/question_mark_noback.svg": 427,
+                      "doc/source/_static/index_contribute.svg": 429,
+                      "doc/source/whatsnew/v2.2.2.rst": 431,
+                      "doc/source/whatsnew/v1.4.2.rst": 433,
+                      "doc/source/whatsnew/v2.1.4.rst": 438,
+                      "doc/source/reference/io.rst": 440,
+                      "doc/scripts/eval_performance.py": 442,
+                      "doc/source/whatsnew/v1.1.5.rst": 444,
+                      "doc/source/whatsnew/v1.3.1.rst": 446,
+                      "doc/source/_static/spreadsheets/logo_excel.svg": 448,
+                      "doc/source/whatsnew/v0.20.3.rst": 450,
+                      "doc/source/whatsnew/v1.2.2.rst": 452,
+                      "doc/source/whatsnew/v1.4.1.rst": 454,
+                      "doc/source/whatsnew/v1.3.2.rst": 456,
+                      "doc/source/whatsnew/index.rst": 461,
+                      "doc/source/whatsnew/v2.1.1.rst": 463,
+                      "doc/source/user_guide/boolean.rst": 465,
+                      "doc/source/whatsnew/v0.4.x.rst": 467,
+                      "doc/source/whatsnew/v1.5.3.rst": 469
+                    },
+                    "body_reads": {
+                      "pandas/core/api.py": 27,
+                      "pandas/__init__.py": 25,
+                      "pyproject.toml": 16,
+                      "doc/source/development/internals.rst": 31,
+                      "README.md": 16,
+                      "meson.build": 23,
+                      "doc/source/index.rst.template": 29,
+                      "doc/cheatsheet/README.md": 51,
+                      "doc/sphinxext/README.rst": 53,
+                      "web/README.md": 55,
+                      "web/interactive_terminal/README.md": 57,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 59,
+                      "AUTHORS.md": 61,
+                      "doc/.gitignore": 76,
+                      "doc/_templates/api_redirect.html": 78,
+                      "doc/_templates/autosummary/accessor.rst": 80,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 82,
+                      "doc/_templates/autosummary/accessor_callable.rst": 84,
+                      "doc/_templates/autosummary/accessor_method.rst": 86,
+                      "doc/_templates/autosummary/class.rst": 88,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 90,
+                      "doc/_templates/pandas_footer.html": 92,
+                      "doc/_templates/sidebar-nav-bs.html": 94,
+                      "doc/source/development/index.rst": 127,
+                      "doc/source/development/copy_on_write.rst": 129,
+                      "doc/source/development/debugging_extensions.rst": 131,
+                      "doc/source/development/policies.rst": 133,
+                      "doc/source/reference/index.rst": 135,
+                      "doc/source/reference/missing_value.rst": 137,
+                      "doc/source/reference/options.rst": 139,
+                      "doc/source/reference/plotting.rst": 141,
+                      "doc/source/reference/resampling.rst": 143,
+                      "doc/source/reference/extensions.rst": 145,
+                      "web/pandas/contribute.md": 169,
+                      "web/pandas/getting_started.md": 171,
+                      "web/pandas/try.md": 173,
+                      "web/pandas/about/index.md": 175,
+                      "web/pandas/about/roadmap.md": 177,
+                      "web/pandas/about/sponsors.md": 179,
+                      "web/pandas/about/team.md": 181,
+                      "web/pandas/community/benchmarks.md": 183,
+                      "web/pandas/community/coc.md": 185,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 187,
+                      "web/pandas/config.yml": 214,
+                      "web/pandas/index.html": 216,
+                      "web/pandas/robots.txt": 218,
+                      "web/pandas/versions.json": 220,
+                      "web/pandas/_templates/layout.html": 222,
+                      "web/pandas/about/citing.md": 224,
+                      "web/pandas/community/blog/index.html": 226,
+                      "web/pandas/community/blog/pandas-1.0.md": 228,
+                      "Dockerfile": 275,
+                      ".gitignore": 276,
+                      ".gitattributes": 278,
+                      "LICENSE": 280,
+                      "MANIFEST.in": 282
+                    },
+                    "core_files": null,
+                    "header_saves": 1,
+                    "generated_outline_commands": 0,
+                    "known_template_updates": 0,
+                    "product_refusals": 12,
+                    "api_abnormal": false,
+                    "scope_drift": false
+                  }
+                },
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 1755104,
+                      "cached_input_tokens": 1632256,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 15653,
+                      "reasoning_output_tokens": 2917
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 1755104,
+                    "cached_input_tokens": 1632256,
+                    "output_tokens": 15653
+                  }
+                },
+                "model_elapsed_seconds": 250.53345797200018,
+                "model_exit_code": 0,
+                "stage_evidence_status": {
+                  "valid": true,
+                  "api_abnormal": false
+                },
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 252.91967769099938
+              },
+              "continuation_allowed": true
+            },
+            "2": {
+              "number": 3,
+              "metadata": {
+                "ready": false,
+                "initialization_timeout_seconds": 3103,
+                "tsv_version": 2,
+                "scope_binding": {
+                  "original_masked_scope_reference": null,
+                  "provenance": {
+                    "order": 61
+                  }
+                },
+                "original_masked_scope_reference": null,
+                "protocol_records": {
+                  "ready": false,
+                  "api_abnormal": false,
+                  "scope_drift": false,
+                  "generated_outline_commands": 0,
+                  "known_template_updates": 0,
+                  "product_refusals": 25,
+                  "updated_files": 272,
+                  "submitted_files": 272,
+                  "body_read_files": 103,
+                  "documentation_files": 380,
+                  "header_saves": 1,
+                  "state": {
+                    "offset": 1104,
+                    "accepted": {
+                      "README.md": 38,
+                      "doc/source/index.rst.template": 44,
+                      "doc/source/development/internals.rst": 46,
+                      "doc/cheatsheet/README.md": 63,
+                      "doc/sphinxext/README.rst": 65,
+                      "web/README.md": 67,
+                      "web/interactive_terminal/README.md": 69,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 71,
+                      "AUTHORS.md": 73,
+                      "doc/.gitignore": 97,
+                      "doc/_templates/api_redirect.html": 99,
+                      "doc/_templates/autosummary/accessor.rst": 101,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 103,
+                      "doc/_templates/autosummary/accessor_callable.rst": 105,
+                      "doc/_templates/autosummary/accessor_method.rst": 107,
+                      "doc/_templates/autosummary/class.rst": 109,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 111,
+                      "doc/_templates/pandas_footer.html": 113,
+                      "doc/_templates/sidebar-nav-bs.html": 115,
+                      "doc/source/development/index.rst": 148,
+                      "doc/source/development/copy_on_write.rst": 150,
+                      "doc/source/development/debugging_extensions.rst": 152,
+                      "doc/source/development/policies.rst": 154,
+                      "doc/source/reference/index.rst": 156,
+                      "doc/source/reference/missing_value.rst": 158,
+                      "doc/source/reference/options.rst": 160,
+                      "doc/source/reference/plotting.rst": 162,
+                      "doc/source/reference/resampling.rst": 164,
+                      "doc/source/reference/extensions.rst": 166,
+                      "web/pandas/contribute.md": 190,
+                      "web/pandas/getting_started.md": 192,
+                      "web/pandas/try.md": 194,
+                      "web/pandas/about/index.md": 196,
+                      "web/pandas/about/roadmap.md": 198,
+                      "web/pandas/about/sponsors.md": 200,
+                      "web/pandas/about/team.md": 202,
+                      "web/pandas/community/benchmarks.md": 204,
+                      "web/pandas/community/coc.md": 206,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 208,
+                      "web/pandas/robots.txt": 234,
+                      "web/pandas/about/citing.md": 240,
+                      "web/pandas/community/blog/pandas-1.0.md": 244,
+                      "doc/source/user_guide/templates/myhtml.tpl": 306,
+                      "doc/source/getting_started/comparison/includes/sorting.rst": 308,
+                      "doc/source/getting_started/comparison/includes/extract_substring.rst": 310,
+                      "doc/source/getting_started/comparison/includes/merge_setup.rst": 312,
+                      "doc/source/getting_started/comparison/includes/if_then.rst": 314,
+                      "doc/source/getting_started/comparison/includes/introduction.rst": 316,
+                      "doc/source/getting_started/comparison/includes/limit.rst": 318,
+                      "doc/source/getting_started/comparison/includes/groupby.rst": 320,
+                      "doc/source/getting_started/comparison/includes/transform.rst": 322,
+                      "doc/source/getting_started/comparison/includes/length.rst": 324,
+                      "doc/source/getting_started/comparison/index.rst": 326,
+                      "doc/source/getting_started/comparison/includes/construct_dataframe.rst": 328,
+                      "doc/source/whatsnew/v0.23.3.rst": 330,
+                      "doc/source/getting_started/comparison/includes/column_record.rst": 332,
+                      "doc/source/getting_started/comparison/includes/missing_intro.rst": 334,
+                      "doc/source/getting_started/intro_tutorials/index.rst": 336,
+                      "doc/source/getting_started/comparison/includes/find_substring.rst": 338,
+                      "doc/source/getting_started/comparison/includes/column_operations.rst": 340,
+                      "doc/source/getting_started/comparison/includes/case.rst": 342,
+                      "doc/source/getting_started/comparison/includes/nth_word.rst": 344,
+                      "doc/source/getting_started/comparison/includes/filtering.rst": 346,
+                      "doc/source/getting_started/comparison/includes/merge.rst": 348,
+                      "doc/source/whatsnew/v0.25.3.rst": 350,
+                      "doc/source/getting_started/comparison/includes/time_date.rst": 352,
+                      "doc/source/whatsnew/v1.0.3.rst": 354,
+                      "doc/source/getting_started/comparison/includes/missing.rst": 361,
+                      "doc/source/getting_started/comparison/includes/copies.rst": 363,
+                      "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 365,
+                      "doc/source/user_guide/templates/html_style_structure.html": 367,
+                      "doc/source/_static/css/pandas.css": 369,
+                      "doc/source/_static/logo_stata.svg": 371,
+                      "doc/source/whatsnew/v2.1.3.rst": 373,
+                      "doc/source/whatsnew/v1.0.5.rst": 375,
+                      "doc/source/whatsnew/v0.7.2.rst": 377,
+                      "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 379,
+                      "doc/source/whatsnew/v0.7.1.rst": 381,
+                      "doc/source/whatsnew/v0.23.4.rst": 383,
+                      "doc/source/whatsnew/v1.2.5.rst": 385,
+                      "doc/source/user_guide/templates/html_table_structure.html": 387,
+                      "doc/source/reference/general_functions.rst": 389,
+                      "doc/source/whatsnew/v2.2.3.rst": 391,
+                      "doc/source/reference/style.rst": 393,
+                      "doc/source/whatsnew/v2.3.2.rst": 395,
+                      "doc/source/whatsnew/v1.2.4.rst": 397,
+                      "doc/source/user_guide/index.rst": 399,
+                      "doc/source/whatsnew/v1.2.3.rst": 405,
+                      "doc/source/whatsnew/v0.25.2.rst": 407,
+                      "doc/source/whatsnew/v0.8.1.rst": 409,
+                      "doc/sphinxext/contributors.py": 411,
+                      "doc/source/whatsnew/v1.3.5.rst": 413,
+                      "doc/source/reference/testing.rst": 415,
+                      "doc/source/_static/logo_r.svg": 417,
+                      "doc/source/whatsnew/v1.5.2.rst": 419,
+                      "doc/source/whatsnew/v0.6.1.rst": 421,
+                      "doc/source/whatsnew/v2.0.3.rst": 423,
+                      "doc/source/reference/window.rst": 425,
+                      "doc/source/_static/question_mark_noback.svg": 427,
+                      "doc/source/_static/index_contribute.svg": 429,
+                      "doc/source/whatsnew/v2.2.2.rst": 431,
+                      "doc/source/whatsnew/v1.4.2.rst": 433,
+                      "doc/source/whatsnew/v2.1.4.rst": 438,
+                      "doc/source/reference/io.rst": 440,
+                      "doc/scripts/eval_performance.py": 442,
+                      "doc/source/whatsnew/v1.1.5.rst": 444,
+                      "doc/source/whatsnew/v1.3.1.rst": 446,
+                      "doc/source/_static/spreadsheets/logo_excel.svg": 448,
+                      "doc/source/whatsnew/v0.20.3.rst": 450,
+                      "doc/source/whatsnew/v1.2.2.rst": 452,
+                      "doc/source/whatsnew/v1.4.1.rst": 454,
+                      "doc/source/whatsnew/v1.3.2.rst": 456,
+                      "doc/source/whatsnew/index.rst": 461,
+                      "doc/source/whatsnew/v2.1.1.rst": 463,
+                      "doc/source/user_guide/boolean.rst": 465,
+                      "doc/source/whatsnew/v0.4.x.rst": 467,
+                      "doc/source/whatsnew/v1.5.3.rst": 469,
+                      "requirements-dev.txt": 536,
+                      "doc/source/_static/ci.png": 555,
+                      "doc/source/_static/df_repr_truncated.png": 557,
+                      "doc/source/_static/eval-perf.png": 559,
+                      "doc/source/_static/index_api.svg": 561,
+                      "doc/source/_static/index_getting_started.svg": 563,
+                      "doc/source/_static/index_user_guide.svg": 565,
+                      "doc/source/_static/logo_sas.svg": 567,
+                      "doc/source/_static/logo_sas_white.svg": 569,
+                      "doc/source/_static/logo_sql.svg": 571,
+                      "doc/source/_static/new-excel-index.png": 573,
+                      "doc/source/_static/old-excel-index.png": 575,
+                      "doc/source/_static/print_df_new.png": 577,
+                      "doc/source/_static/print_df_old.png": 579,
+                      "doc/source/_static/query-perf.png": 581,
+                      "doc/source/_static/reshaping_melt.png": 583,
+                      "doc/source/_static/reshaping_pivot.png": 585,
+                      "doc/source/_static/reshaping_stack.png": 587,
+                      "doc/source/_static/reshaping_unstack.png": 589,
+                      "doc/source/_static/reshaping_unstack_0.png": 591,
+                      "doc/source/_static/reshaping_unstack_1.png": 593,
+                      "doc/source/_static/style-excel.png": 595,
+                      "doc/source/_static/whatsnew_assign.png": 597,
+                      "doc/source/_static/whatsnew_plot_submethods.png": 599,
+                      "doc/source/_static/schemas/01_table_dataframe.svg": 605,
+                      "doc/source/_static/schemas/01_table_series.svg": 607,
+                      "doc/source/_static/schemas/01_table_spreadsheet.png": 609,
+                      "doc/source/_static/schemas/02_io_readwrite.svg": 611,
+                      "doc/source/_static/schemas/03_subset_columns.svg": 613,
+                      "doc/source/_static/schemas/03_subset_columns_rows.svg": 615,
+                      "doc/source/_static/schemas/03_subset_rows.svg": 617,
+                      "doc/source/_static/schemas/04_plot_overview.svg": 619,
+                      "doc/source/_static/schemas/05_newcolumn_1.svg": 621,
+                      "doc/source/_static/schemas/05_newcolumn_2.svg": 623,
+                      "doc/source/_static/schemas/05_newcolumn_3.svg": 625,
+                      "doc/source/_static/schemas/06_aggregate.svg": 627,
+                      "doc/source/_static/schemas/06_groupby.svg": 629,
+                      "doc/source/_static/schemas/06_groupby_agg_detail.svg": 631,
+                      "doc/source/_static/schemas/06_groupby_select_detail.svg": 633,
+                      "doc/source/_static/schemas/06_reduction.svg": 635,
+                      "doc/source/_static/schemas/06_valuecounts.svg": 637,
+                      "doc/source/_static/schemas/07_melt.svg": 639,
+                      "doc/source/_static/schemas/07_pivot.svg": 641,
+                      "doc/source/_static/schemas/07_pivot_table.svg": 643,
+                      "doc/source/_static/schemas/08_concat_column.svg": 645,
+                      "doc/source/_static/schemas/08_concat_row.svg": 647,
+                      "doc/source/_static/schemas/08_merge_left.svg": 649,
+                      "doc/source/_static/spreadsheets/conditional.png": 655,
+                      "doc/source/_static/spreadsheets/filter.png": 657,
+                      "doc/source/_static/spreadsheets/find.png": 659,
+                      "doc/source/_static/spreadsheets/pivot.png": 661,
+                      "doc/source/_static/spreadsheets/sort.png": 663,
+                      "doc/source/_static/spreadsheets/vlookup.png": 665,
+                      "doc/source/_static/style/appmaphead1.png": 679,
+                      "doc/source/_static/style/appmaphead2.png": 681,
+                      "doc/source/_static/style/bg_ax0.png": 683,
+                      "doc/source/_static/style/bg_axNone.png": 685,
+                      "doc/source/_static/style/bg_axNone_gmap.png": 687,
+                      "doc/source/_static/style/bg_axNone_lowhigh.png": 689,
+                      "doc/source/_static/style/bg_axNone_vminvmax.png": 691,
+                      "doc/source/_static/style/bg_gmap.png": 693,
+                      "doc/source/_static/style/df_pipe.png": 695,
+                      "doc/source/_static/style/df_pipe_applydata.png": 697,
+                      "doc/source/_static/style/df_pipe_applymap.png": 699,
+                      "doc/source/_static/style/df_pipe_hl.png": 701,
+                      "doc/source/_static/style/df_pipe_hl2.png": 703,
+                      "doc/source/_static/style/footer_extended.png": 705,
+                      "doc/source/_static/style/footer_simple.png": 707,
+                      "doc/source/_static/style/format_excel_css.png": 709,
+                      "doc/source/_static/style/hbetw_axNone.png": 711,
+                      "doc/source/_static/style/hbetw_basic.png": 713,
+                      "doc/source/_static/style/hbetw_props.png": 715,
+                      "doc/source/_static/style/hbetw_seq.png": 717,
+                      "doc/source/_static/style/hq_ax1.png": 719,
+                      "doc/source/_static/style/hq_axNone.png": 721,
+                      "doc/source/_static/style/hq_props.png": 723,
+                      "doc/source/_static/style/latex_1.png": 725,
+                      "doc/source/_static/style/latex_2.png": 727,
+                      "doc/source/_static/style/latex_stocks.png": 729,
+                      "doc/source/_static/style/latex_stocks_html.png": 731,
+                      "doc/source/_static/style/tg_ax0.png": 733,
+                      "doc/source/_static/style/tg_axNone.png": 735,
+                      "doc/source/_static/style/tg_axNone_gmap.png": 737,
+                      "doc/source/_static/style/tg_axNone_lowhigh.png": 739,
+                      "doc/source/_static/style/tg_axNone_vminvmax.png": 741,
+                      "doc/source/_static/style/tg_gmap.png": 743,
+                      "doc/source/development/gitpod-imgs/gitpod-dashboard-stop.png": 747,
+                      "doc/source/development/gitpod-imgs/gitpod-edit-permissions-gh.png": 749,
+                      "doc/source/development/gitpod-imgs/gitpod-edit-permissions-repo.png": 751,
+                      "doc/source/development/gitpod-imgs/gitpod-workspace.png": 753,
+                      "doc/source/development/gitpod-imgs/pandas-github.png": 755,
+                      "doc/source/development/gitpod-imgs/pandas-gitpod-branches.png": 757,
+                      "doc/source/development/gitpod-imgs/rst-rendering.png": 759,
+                      "doc/source/development/gitpod-imgs/vscode-rst.png": 761,
+                      "doc/source/development/gitpod-imgs/vscode-statusbar.png": 763,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet.pdf": 788,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet.pptx": 790,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf": 792,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx": 794,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf": 796,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx": 798,
+                      "doc/make.py": 851,
+                      "doc/redirects.csv": 853,
+                      "doc/source/_static/css/getting_started.css": 855,
+                      "doc/source/conf.py": 857,
+                      "doc/sphinxext/announce.py": 859,
+                      "doc/source/whatsnew/whatsnew_0171_html_table.html": 861,
+                      "doc/source/_static/trunc_before.png": 869,
+                      "doc/source/_static/trunc_after.png": 871,
+                      "doc/source/whatsnew/v1.3.4.rst": 884,
+                      "doc/source/whatsnew/v0.5.0.rst": 886,
+                      "doc/source/whatsnew/v2.0.2.rst": 888,
+                      "doc/source/whatsnew/v1.0.4.rst": 890,
+                      "doc/source/whatsnew/v2.3.3.rst": 892,
+                      "doc/source/whatsnew/v0.9.0.rst": 894,
+                      "doc/source/whatsnew/v1.3.3.rst": 915,
+                      "doc/source/whatsnew/v1.1.4.rst": 917,
+                      "doc/source/whatsnew/v2.3.1.rst": 919,
+                      "doc/source/user_guide/integer_na.rst": 921,
+                      "doc/source/whatsnew/v1.1.1.rst": 923,
+                      "doc/source/whatsnew/v0.24.1.rst": 925,
+                      "doc/source/whatsnew/v1.1.2.rst": 942,
+                      "doc/source/reference/groupby.rst": 944,
+                      "doc/source/whatsnew/v1.0.1.rst": 946,
+                      "doc/source/whatsnew/v0.19.1.rst": 948,
+                      "doc/source/whatsnew/v0.7.3.rst": 950,
+                      "doc/source/whatsnew/v1.4.4.rst": 952,
+                      "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 967,
+                      "doc/source/whatsnew/v1.4.3.rst": 969,
+                      "doc/source/whatsnew/v1.1.3.rst": 971,
+                      "doc/source/whatsnew/v2.1.2.rst": 973,
+                      "doc/source/whatsnew/v0.6.0.rst": 975,
+                      "doc/source/whatsnew/v0.9.1.rst": 977,
+                      "doc/source/whatsnew/v2.0.1.rst": 992,
+                      "doc/source/whatsnew/v0.23.2.rst": 994,
+                      "doc/source/whatsnew/v0.24.2.rst": 996,
+                      "doc/source/development/community.rst": 998,
+                      "doc/source/whatsnew/v0.19.2.rst": 1000,
+                      "doc/source/getting_started/comparison/comparison_with_spss.rst": 1002,
+                      "doc/source/getting_started/index.rst": 1036,
+                      "doc/source/getting_started/tutorials.rst": 1038,
+                      "doc/source/reference/aliases.rst": 1040,
+                      "doc/source/reference/arrays.rst": 1042,
+                      "doc/source/reference/frame.rst": 1044,
+                      "doc/source/reference/indexing.rst": 1046,
+                      "doc/source/whatsnew/v0.20.2.rst": 1066,
+                      "doc/source/getting_started/intro_tutorials/02_read_write.rst": 1068,
+                      "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 1070,
+                      "doc/source/development/developer.rst": 1072,
+                      "doc/source/whatsnew/v0.25.1.rst": 1074,
+                      "doc/source/whatsnew/v1.0.2.rst": 1076,
+                      "doc/source/whatsnew/v1.5.1.rst": 1089,
+                      "doc/source/user_guide/duplicates.rst": 1091,
+                      "doc/source/user_guide/pyarrow.rst": 1093,
+                      "doc/source/getting_started/intro_tutorials/04_plotting.rst": 1095
+                    },
+                    "body_reads": {
+                      "pandas/core/api.py": 27,
+                      "pandas/__init__.py": 25,
+                      "pyproject.toml": 506,
+                      "doc/source/development/internals.rst": 31,
+                      "README.md": 16,
+                      "meson.build": 23,
+                      "doc/source/index.rst.template": 29,
+                      "doc/cheatsheet/README.md": 51,
+                      "doc/sphinxext/README.rst": 53,
+                      "web/README.md": 55,
+                      "web/interactive_terminal/README.md": 57,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 59,
+                      "AUTHORS.md": 61,
+                      "doc/.gitignore": 76,
+                      "doc/_templates/api_redirect.html": 78,
+                      "doc/_templates/autosummary/accessor.rst": 80,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 82,
+                      "doc/_templates/autosummary/accessor_callable.rst": 84,
+                      "doc/_templates/autosummary/accessor_method.rst": 86,
+                      "doc/_templates/autosummary/class.rst": 88,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 90,
+                      "doc/_templates/pandas_footer.html": 92,
+                      "doc/_templates/sidebar-nav-bs.html": 94,
+                      "doc/source/development/index.rst": 127,
+                      "doc/source/development/copy_on_write.rst": 129,
+                      "doc/source/development/debugging_extensions.rst": 131,
+                      "doc/source/development/policies.rst": 133,
+                      "doc/source/reference/index.rst": 135,
+                      "doc/source/reference/missing_value.rst": 137,
+                      "doc/source/reference/options.rst": 139,
+                      "doc/source/reference/plotting.rst": 141,
+                      "doc/source/reference/resampling.rst": 143,
+                      "doc/source/reference/extensions.rst": 145,
+                      "web/pandas/contribute.md": 169,
+                      "web/pandas/getting_started.md": 171,
+                      "web/pandas/try.md": 173,
+                      "web/pandas/about/index.md": 175,
+                      "web/pandas/about/roadmap.md": 177,
+                      "web/pandas/about/sponsors.md": 179,
+                      "web/pandas/about/team.md": 181,
+                      "web/pandas/community/benchmarks.md": 183,
+                      "web/pandas/community/coc.md": 185,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 187,
+                      "web/pandas/config.yml": 214,
+                      "web/pandas/index.html": 216,
+                      "web/pandas/robots.txt": 218,
+                      "web/pandas/versions.json": 220,
+                      "web/pandas/_templates/layout.html": 222,
+                      "web/pandas/about/citing.md": 224,
+                      "web/pandas/community/blog/index.html": 226,
+                      "web/pandas/community/blog/pandas-1.0.md": 228,
+                      "Dockerfile": 275,
+                      ".gitignore": 276,
+                      ".gitattributes": 278,
+                      "LICENSE": 280,
+                      "MANIFEST.in": 282,
+                      ".pre-commit-config.yaml": 504,
+                      "doc/make.py": 804,
+                      "doc/source/conf.py": 806,
+                      "doc/sphinxext/announce.py": 808,
+                      "doc/redirects.csv": 811,
+                      "doc/source/_static/css/getting_started.css": 835,
+                      "doc/source/whatsnew/whatsnew_0171_html_table.html": 838,
+                      "doc/source/whatsnew/v1.3.3.rst": 902,
+                      "doc/source/whatsnew/v1.1.4.rst": 904,
+                      "doc/source/whatsnew/v2.3.1.rst": 906,
+                      "doc/source/user_guide/integer_na.rst": 908,
+                      "doc/source/whatsnew/v1.1.1.rst": 910,
+                      "doc/source/whatsnew/v0.24.1.rst": 912,
+                      "doc/source/whatsnew/v1.1.2.rst": 929,
+                      "doc/source/reference/groupby.rst": 931,
+                      "doc/source/whatsnew/v1.0.1.rst": 933,
+                      "doc/source/whatsnew/v0.19.1.rst": 935,
+                      "doc/source/whatsnew/v0.7.3.rst": 937,
+                      "doc/source/whatsnew/v1.4.4.rst": 939,
+                      "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 954,
+                      "doc/source/whatsnew/v1.4.3.rst": 956,
+                      "doc/source/whatsnew/v1.1.3.rst": 958,
+                      "doc/source/whatsnew/v2.1.2.rst": 960,
+                      "doc/source/whatsnew/v0.6.0.rst": 962,
+                      "doc/source/whatsnew/v0.9.1.rst": 964,
+                      "doc/source/whatsnew/v2.0.1.rst": 979,
+                      "doc/source/whatsnew/v0.23.2.rst": 981,
+                      "doc/source/whatsnew/v0.24.2.rst": 983,
+                      "doc/source/development/community.rst": 985,
+                      "doc/source/whatsnew/v0.19.2.rst": 987,
+                      "doc/source/getting_started/comparison/comparison_with_spss.rst": 989,
+                      "doc/source/getting_started/index.rst": 1023,
+                      "doc/source/getting_started/tutorials.rst": 1025,
+                      "doc/source/reference/aliases.rst": 1027,
+                      "doc/source/reference/arrays.rst": 1029,
+                      "doc/source/reference/frame.rst": 1031,
+                      "doc/source/reference/indexing.rst": 1033,
+                      "doc/source/whatsnew/v0.20.2.rst": 1053,
+                      "doc/source/getting_started/intro_tutorials/02_read_write.rst": 1055,
+                      "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 1057,
+                      "doc/source/development/developer.rst": 1059,
+                      "doc/source/whatsnew/v0.25.1.rst": 1061,
+                      "doc/source/whatsnew/v1.0.2.rst": 1063,
+                      "doc/source/whatsnew/v1.5.1.rst": 1080,
+                      "doc/source/user_guide/duplicates.rst": 1082,
+                      "doc/source/user_guide/pyarrow.rst": 1084,
+                      "doc/source/getting_started/intro_tutorials/04_plotting.rst": 1086
+                    },
+                    "core_files": null,
+                    "header_saves": 1,
+                    "generated_outline_commands": 0,
+                    "known_template_updates": 0,
+                    "product_refusals": 25,
+                    "api_abnormal": false,
+                    "scope_drift": false
+                  }
+                },
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 11780840,
+                      "cached_input_tokens": 11161344,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 39325,
+                      "reasoning_output_tokens": 7875
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 11780840,
+                    "cached_input_tokens": 11161344,
+                    "output_tokens": 39325
+                  }
+                },
+                "model_elapsed_seconds": 1040.497468497997,
+                "model_exit_code": 0,
+                "stage_evidence_status": {
+                  "valid": true,
+                  "api_abnormal": false
+                },
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 1043.0203699799968
+              },
+              "continuation_allowed": true
+            },
+            "3": {
+              "number": 4,
+              "metadata": {
+                "ready": false,
+                "initialization_timeout_seconds": 2060,
+                "tsv_version": 2,
+                "scope_binding": {
+                  "original_masked_scope_reference": null,
+                  "provenance": {
+                    "order": 61
+                  }
+                },
+                "original_masked_scope_reference": null,
+                "protocol_records": {
+                  "ready": false,
+                  "api_abnormal": false,
+                  "scope_drift": false,
+                  "generated_outline_commands": 0,
+                  "known_template_updates": 0,
+                  "product_refusals": 39,
+                  "updated_files": 284,
+                  "submitted_files": 284,
+                  "body_read_files": 122,
+                  "documentation_files": 380,
+                  "header_saves": 1,
+                  "state": {
+                    "offset": 1234,
+                    "accepted": {
+                      "README.md": 38,
+                      "doc/source/index.rst.template": 44,
+                      "doc/source/development/internals.rst": 46,
+                      "doc/cheatsheet/README.md": 63,
+                      "doc/sphinxext/README.rst": 65,
+                      "web/README.md": 67,
+                      "web/interactive_terminal/README.md": 69,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 71,
+                      "AUTHORS.md": 73,
+                      "doc/.gitignore": 97,
+                      "doc/_templates/api_redirect.html": 99,
+                      "doc/_templates/autosummary/accessor.rst": 101,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 103,
+                      "doc/_templates/autosummary/accessor_callable.rst": 105,
+                      "doc/_templates/autosummary/accessor_method.rst": 107,
+                      "doc/_templates/autosummary/class.rst": 109,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 111,
+                      "doc/_templates/pandas_footer.html": 113,
+                      "doc/_templates/sidebar-nav-bs.html": 115,
+                      "doc/source/development/index.rst": 148,
+                      "doc/source/development/copy_on_write.rst": 150,
+                      "doc/source/development/debugging_extensions.rst": 152,
+                      "doc/source/development/policies.rst": 154,
+                      "doc/source/reference/index.rst": 156,
+                      "doc/source/reference/missing_value.rst": 158,
+                      "doc/source/reference/options.rst": 160,
+                      "doc/source/reference/plotting.rst": 162,
+                      "doc/source/reference/resampling.rst": 164,
+                      "doc/source/reference/extensions.rst": 166,
+                      "web/pandas/contribute.md": 190,
+                      "web/pandas/getting_started.md": 192,
+                      "web/pandas/try.md": 194,
+                      "web/pandas/about/index.md": 196,
+                      "web/pandas/about/roadmap.md": 198,
+                      "web/pandas/about/sponsors.md": 200,
+                      "web/pandas/about/team.md": 202,
+                      "web/pandas/community/benchmarks.md": 204,
+                      "web/pandas/community/coc.md": 206,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 208,
+                      "web/pandas/robots.txt": 234,
+                      "web/pandas/about/citing.md": 240,
+                      "web/pandas/community/blog/pandas-1.0.md": 244,
+                      "doc/source/user_guide/templates/myhtml.tpl": 306,
+                      "doc/source/getting_started/comparison/includes/sorting.rst": 308,
+                      "doc/source/getting_started/comparison/includes/extract_substring.rst": 310,
+                      "doc/source/getting_started/comparison/includes/merge_setup.rst": 312,
+                      "doc/source/getting_started/comparison/includes/if_then.rst": 314,
+                      "doc/source/getting_started/comparison/includes/introduction.rst": 316,
+                      "doc/source/getting_started/comparison/includes/limit.rst": 318,
+                      "doc/source/getting_started/comparison/includes/groupby.rst": 320,
+                      "doc/source/getting_started/comparison/includes/transform.rst": 322,
+                      "doc/source/getting_started/comparison/includes/length.rst": 324,
+                      "doc/source/getting_started/comparison/index.rst": 326,
+                      "doc/source/getting_started/comparison/includes/construct_dataframe.rst": 328,
+                      "doc/source/whatsnew/v0.23.3.rst": 330,
+                      "doc/source/getting_started/comparison/includes/column_record.rst": 332,
+                      "doc/source/getting_started/comparison/includes/missing_intro.rst": 334,
+                      "doc/source/getting_started/intro_tutorials/index.rst": 336,
+                      "doc/source/getting_started/comparison/includes/find_substring.rst": 338,
+                      "doc/source/getting_started/comparison/includes/column_operations.rst": 340,
+                      "doc/source/getting_started/comparison/includes/case.rst": 342,
+                      "doc/source/getting_started/comparison/includes/nth_word.rst": 344,
+                      "doc/source/getting_started/comparison/includes/filtering.rst": 346,
+                      "doc/source/getting_started/comparison/includes/merge.rst": 348,
+                      "doc/source/whatsnew/v0.25.3.rst": 350,
+                      "doc/source/getting_started/comparison/includes/time_date.rst": 352,
+                      "doc/source/whatsnew/v1.0.3.rst": 354,
+                      "doc/source/getting_started/comparison/includes/missing.rst": 361,
+                      "doc/source/getting_started/comparison/includes/copies.rst": 363,
+                      "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 365,
+                      "doc/source/user_guide/templates/html_style_structure.html": 367,
+                      "doc/source/_static/css/pandas.css": 369,
+                      "doc/source/_static/logo_stata.svg": 371,
+                      "doc/source/whatsnew/v2.1.3.rst": 373,
+                      "doc/source/whatsnew/v1.0.5.rst": 375,
+                      "doc/source/whatsnew/v0.7.2.rst": 377,
+                      "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 379,
+                      "doc/source/whatsnew/v0.7.1.rst": 381,
+                      "doc/source/whatsnew/v0.23.4.rst": 383,
+                      "doc/source/whatsnew/v1.2.5.rst": 385,
+                      "doc/source/user_guide/templates/html_table_structure.html": 387,
+                      "doc/source/reference/general_functions.rst": 389,
+                      "doc/source/whatsnew/v2.2.3.rst": 391,
+                      "doc/source/reference/style.rst": 393,
+                      "doc/source/whatsnew/v2.3.2.rst": 395,
+                      "doc/source/whatsnew/v1.2.4.rst": 397,
+                      "doc/source/user_guide/index.rst": 399,
+                      "doc/source/whatsnew/v1.2.3.rst": 405,
+                      "doc/source/whatsnew/v0.25.2.rst": 407,
+                      "doc/source/whatsnew/v0.8.1.rst": 409,
+                      "doc/sphinxext/contributors.py": 411,
+                      "doc/source/whatsnew/v1.3.5.rst": 413,
+                      "doc/source/reference/testing.rst": 415,
+                      "doc/source/_static/logo_r.svg": 417,
+                      "doc/source/whatsnew/v1.5.2.rst": 419,
+                      "doc/source/whatsnew/v0.6.1.rst": 421,
+                      "doc/source/whatsnew/v2.0.3.rst": 423,
+                      "doc/source/reference/window.rst": 425,
+                      "doc/source/_static/question_mark_noback.svg": 427,
+                      "doc/source/_static/index_contribute.svg": 429,
+                      "doc/source/whatsnew/v2.2.2.rst": 431,
+                      "doc/source/whatsnew/v1.4.2.rst": 433,
+                      "doc/source/whatsnew/v2.1.4.rst": 438,
+                      "doc/source/reference/io.rst": 440,
+                      "doc/scripts/eval_performance.py": 442,
+                      "doc/source/whatsnew/v1.1.5.rst": 444,
+                      "doc/source/whatsnew/v1.3.1.rst": 446,
+                      "doc/source/_static/spreadsheets/logo_excel.svg": 448,
+                      "doc/source/whatsnew/v0.20.3.rst": 450,
+                      "doc/source/whatsnew/v1.2.2.rst": 452,
+                      "doc/source/whatsnew/v1.4.1.rst": 454,
+                      "doc/source/whatsnew/v1.3.2.rst": 456,
+                      "doc/source/whatsnew/index.rst": 461,
+                      "doc/source/whatsnew/v2.1.1.rst": 463,
+                      "doc/source/user_guide/boolean.rst": 465,
+                      "doc/source/whatsnew/v0.4.x.rst": 467,
+                      "doc/source/whatsnew/v1.5.3.rst": 469,
+                      "requirements-dev.txt": 536,
+                      "doc/source/_static/ci.png": 555,
+                      "doc/source/_static/df_repr_truncated.png": 557,
+                      "doc/source/_static/eval-perf.png": 559,
+                      "doc/source/_static/index_api.svg": 561,
+                      "doc/source/_static/index_getting_started.svg": 563,
+                      "doc/source/_static/index_user_guide.svg": 565,
+                      "doc/source/_static/logo_sas.svg": 567,
+                      "doc/source/_static/logo_sas_white.svg": 569,
+                      "doc/source/_static/logo_sql.svg": 571,
+                      "doc/source/_static/new-excel-index.png": 573,
+                      "doc/source/_static/old-excel-index.png": 575,
+                      "doc/source/_static/print_df_new.png": 577,
+                      "doc/source/_static/print_df_old.png": 579,
+                      "doc/source/_static/query-perf.png": 581,
+                      "doc/source/_static/reshaping_melt.png": 583,
+                      "doc/source/_static/reshaping_pivot.png": 585,
+                      "doc/source/_static/reshaping_stack.png": 587,
+                      "doc/source/_static/reshaping_unstack.png": 589,
+                      "doc/source/_static/reshaping_unstack_0.png": 591,
+                      "doc/source/_static/reshaping_unstack_1.png": 593,
+                      "doc/source/_static/style-excel.png": 595,
+                      "doc/source/_static/whatsnew_assign.png": 597,
+                      "doc/source/_static/whatsnew_plot_submethods.png": 599,
+                      "doc/source/_static/schemas/01_table_dataframe.svg": 605,
+                      "doc/source/_static/schemas/01_table_series.svg": 607,
+                      "doc/source/_static/schemas/01_table_spreadsheet.png": 609,
+                      "doc/source/_static/schemas/02_io_readwrite.svg": 611,
+                      "doc/source/_static/schemas/03_subset_columns.svg": 613,
+                      "doc/source/_static/schemas/03_subset_columns_rows.svg": 615,
+                      "doc/source/_static/schemas/03_subset_rows.svg": 617,
+                      "doc/source/_static/schemas/04_plot_overview.svg": 619,
+                      "doc/source/_static/schemas/05_newcolumn_1.svg": 621,
+                      "doc/source/_static/schemas/05_newcolumn_2.svg": 623,
+                      "doc/source/_static/schemas/05_newcolumn_3.svg": 625,
+                      "doc/source/_static/schemas/06_aggregate.svg": 627,
+                      "doc/source/_static/schemas/06_groupby.svg": 629,
+                      "doc/source/_static/schemas/06_groupby_agg_detail.svg": 631,
+                      "doc/source/_static/schemas/06_groupby_select_detail.svg": 633,
+                      "doc/source/_static/schemas/06_reduction.svg": 635,
+                      "doc/source/_static/schemas/06_valuecounts.svg": 637,
+                      "doc/source/_static/schemas/07_melt.svg": 639,
+                      "doc/source/_static/schemas/07_pivot.svg": 641,
+                      "doc/source/_static/schemas/07_pivot_table.svg": 643,
+                      "doc/source/_static/schemas/08_concat_column.svg": 645,
+                      "doc/source/_static/schemas/08_concat_row.svg": 647,
+                      "doc/source/_static/schemas/08_merge_left.svg": 649,
+                      "doc/source/_static/spreadsheets/conditional.png": 655,
+                      "doc/source/_static/spreadsheets/filter.png": 657,
+                      "doc/source/_static/spreadsheets/find.png": 659,
+                      "doc/source/_static/spreadsheets/pivot.png": 661,
+                      "doc/source/_static/spreadsheets/sort.png": 663,
+                      "doc/source/_static/spreadsheets/vlookup.png": 665,
+                      "doc/source/_static/style/appmaphead1.png": 679,
+                      "doc/source/_static/style/appmaphead2.png": 681,
+                      "doc/source/_static/style/bg_ax0.png": 683,
+                      "doc/source/_static/style/bg_axNone.png": 685,
+                      "doc/source/_static/style/bg_axNone_gmap.png": 687,
+                      "doc/source/_static/style/bg_axNone_lowhigh.png": 689,
+                      "doc/source/_static/style/bg_axNone_vminvmax.png": 691,
+                      "doc/source/_static/style/bg_gmap.png": 693,
+                      "doc/source/_static/style/df_pipe.png": 695,
+                      "doc/source/_static/style/df_pipe_applydata.png": 697,
+                      "doc/source/_static/style/df_pipe_applymap.png": 699,
+                      "doc/source/_static/style/df_pipe_hl.png": 701,
+                      "doc/source/_static/style/df_pipe_hl2.png": 703,
+                      "doc/source/_static/style/footer_extended.png": 705,
+                      "doc/source/_static/style/footer_simple.png": 707,
+                      "doc/source/_static/style/format_excel_css.png": 709,
+                      "doc/source/_static/style/hbetw_axNone.png": 711,
+                      "doc/source/_static/style/hbetw_basic.png": 713,
+                      "doc/source/_static/style/hbetw_props.png": 715,
+                      "doc/source/_static/style/hbetw_seq.png": 717,
+                      "doc/source/_static/style/hq_ax1.png": 719,
+                      "doc/source/_static/style/hq_axNone.png": 721,
+                      "doc/source/_static/style/hq_props.png": 723,
+                      "doc/source/_static/style/latex_1.png": 725,
+                      "doc/source/_static/style/latex_2.png": 727,
+                      "doc/source/_static/style/latex_stocks.png": 729,
+                      "doc/source/_static/style/latex_stocks_html.png": 731,
+                      "doc/source/_static/style/tg_ax0.png": 733,
+                      "doc/source/_static/style/tg_axNone.png": 735,
+                      "doc/source/_static/style/tg_axNone_gmap.png": 737,
+                      "doc/source/_static/style/tg_axNone_lowhigh.png": 739,
+                      "doc/source/_static/style/tg_axNone_vminvmax.png": 741,
+                      "doc/source/_static/style/tg_gmap.png": 743,
+                      "doc/source/development/gitpod-imgs/gitpod-dashboard-stop.png": 747,
+                      "doc/source/development/gitpod-imgs/gitpod-edit-permissions-gh.png": 749,
+                      "doc/source/development/gitpod-imgs/gitpod-edit-permissions-repo.png": 751,
+                      "doc/source/development/gitpod-imgs/gitpod-workspace.png": 753,
+                      "doc/source/development/gitpod-imgs/pandas-github.png": 755,
+                      "doc/source/development/gitpod-imgs/pandas-gitpod-branches.png": 757,
+                      "doc/source/development/gitpod-imgs/rst-rendering.png": 759,
+                      "doc/source/development/gitpod-imgs/vscode-rst.png": 761,
+                      "doc/source/development/gitpod-imgs/vscode-statusbar.png": 763,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet.pdf": 788,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet.pptx": 790,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf": 792,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx": 794,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf": 796,
+                      "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx": 798,
+                      "doc/make.py": 851,
+                      "doc/redirects.csv": 853,
+                      "doc/source/_static/css/getting_started.css": 855,
+                      "doc/source/conf.py": 857,
+                      "doc/sphinxext/announce.py": 859,
+                      "doc/source/whatsnew/whatsnew_0171_html_table.html": 861,
+                      "doc/source/_static/trunc_before.png": 869,
+                      "doc/source/_static/trunc_after.png": 871,
+                      "doc/source/whatsnew/v1.3.4.rst": 884,
+                      "doc/source/whatsnew/v0.5.0.rst": 886,
+                      "doc/source/whatsnew/v2.0.2.rst": 888,
+                      "doc/source/whatsnew/v1.0.4.rst": 890,
+                      "doc/source/whatsnew/v2.3.3.rst": 892,
+                      "doc/source/whatsnew/v0.9.0.rst": 894,
+                      "doc/source/whatsnew/v1.3.3.rst": 915,
+                      "doc/source/whatsnew/v1.1.4.rst": 917,
+                      "doc/source/whatsnew/v2.3.1.rst": 919,
+                      "doc/source/user_guide/integer_na.rst": 921,
+                      "doc/source/whatsnew/v1.1.1.rst": 923,
+                      "doc/source/whatsnew/v0.24.1.rst": 925,
+                      "doc/source/whatsnew/v1.1.2.rst": 942,
+                      "doc/source/reference/groupby.rst": 944,
+                      "doc/source/whatsnew/v1.0.1.rst": 946,
+                      "doc/source/whatsnew/v0.19.1.rst": 948,
+                      "doc/source/whatsnew/v0.7.3.rst": 950,
+                      "doc/source/whatsnew/v1.4.4.rst": 952,
+                      "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 967,
+                      "doc/source/whatsnew/v1.4.3.rst": 969,
+                      "doc/source/whatsnew/v1.1.3.rst": 971,
+                      "doc/source/whatsnew/v2.1.2.rst": 973,
+                      "doc/source/whatsnew/v0.6.0.rst": 975,
+                      "doc/source/whatsnew/v0.9.1.rst": 977,
+                      "doc/source/whatsnew/v2.0.1.rst": 992,
+                      "doc/source/whatsnew/v0.23.2.rst": 994,
+                      "doc/source/whatsnew/v0.24.2.rst": 996,
+                      "doc/source/development/community.rst": 998,
+                      "doc/source/whatsnew/v0.19.2.rst": 1000,
+                      "doc/source/getting_started/comparison/comparison_with_spss.rst": 1002,
+                      "doc/source/getting_started/index.rst": 1036,
+                      "doc/source/getting_started/tutorials.rst": 1038,
+                      "doc/source/reference/aliases.rst": 1040,
+                      "doc/source/reference/arrays.rst": 1042,
+                      "doc/source/reference/frame.rst": 1044,
+                      "doc/source/reference/indexing.rst": 1046,
+                      "doc/source/whatsnew/v0.20.2.rst": 1066,
+                      "doc/source/getting_started/intro_tutorials/02_read_write.rst": 1068,
+                      "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 1070,
+                      "doc/source/development/developer.rst": 1072,
+                      "doc/source/whatsnew/v0.25.1.rst": 1074,
+                      "doc/source/whatsnew/v1.0.2.rst": 1076,
+                      "doc/source/whatsnew/v1.5.1.rst": 1089,
+                      "doc/source/user_guide/duplicates.rst": 1091,
+                      "doc/source/user_guide/pyarrow.rst": 1093,
+                      "doc/source/getting_started/intro_tutorials/04_plotting.rst": 1095,
+                      "doc/source/whatsnew/v2.2.1.rst": 1179,
+                      "web/pandas/community/blog/asv-pandas-grant.md": 1183,
+                      "doc/source/whatsnew/v0.23.1.rst": 1185,
+                      "doc/source/whatsnew/v1.2.1.rst": 1187,
+                      "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 1191,
+                      "web/pandas/community/blog/2019-user-survey.md": 1203,
+                      "doc/source/getting_started/overview.rst": 1205,
+                      "doc/source/whatsnew/v2.3.0.rst": 1207,
+                      "doc/source/whatsnew/v0.21.1.rst": 1209,
+                      "doc/source/whatsnew/v0.17.1.rst": 1220,
+                      "doc/source/whatsnew/v0.16.2.rst": 1222,
+                      "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 1224
+                    },
+                    "body_reads": {
+                      "pandas/core/api.py": 27,
+                      "pandas/__init__.py": 25,
+                      "pyproject.toml": 506,
+                      "doc/source/development/internals.rst": 31,
+                      "README.md": 16,
+                      "meson.build": 23,
+                      "doc/source/index.rst.template": 29,
+                      "doc/cheatsheet/README.md": 51,
+                      "doc/sphinxext/README.rst": 53,
+                      "web/README.md": 55,
+                      "web/interactive_terminal/README.md": 57,
+                      ".github/PULL_REQUEST_TEMPLATE.md": 59,
+                      "AUTHORS.md": 61,
+                      "doc/.gitignore": 76,
+                      "doc/_templates/api_redirect.html": 78,
+                      "doc/_templates/autosummary/accessor.rst": 80,
+                      "doc/_templates/autosummary/accessor_attribute.rst": 82,
+                      "doc/_templates/autosummary/accessor_callable.rst": 84,
+                      "doc/_templates/autosummary/accessor_method.rst": 86,
+                      "doc/_templates/autosummary/class.rst": 88,
+                      "doc/_templates/autosummary/class_without_autosummary.rst": 90,
+                      "doc/_templates/pandas_footer.html": 92,
+                      "doc/_templates/sidebar-nav-bs.html": 94,
+                      "doc/source/development/index.rst": 127,
+                      "doc/source/development/copy_on_write.rst": 129,
+                      "doc/source/development/debugging_extensions.rst": 131,
+                      "doc/source/development/policies.rst": 133,
+                      "doc/source/reference/index.rst": 135,
+                      "doc/source/reference/missing_value.rst": 137,
+                      "doc/source/reference/options.rst": 139,
+                      "doc/source/reference/plotting.rst": 141,
+                      "doc/source/reference/resampling.rst": 143,
+                      "doc/source/reference/extensions.rst": 145,
+                      "web/pandas/contribute.md": 169,
+                      "web/pandas/getting_started.md": 171,
+                      "web/pandas/try.md": 173,
+                      "web/pandas/about/index.md": 175,
+                      "web/pandas/about/roadmap.md": 177,
+                      "web/pandas/about/sponsors.md": 179,
+                      "web/pandas/about/team.md": 181,
+                      "web/pandas/community/benchmarks.md": 183,
+                      "web/pandas/community/coc.md": 185,
+                      "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 187,
+                      "web/pandas/config.yml": 214,
+                      "web/pandas/index.html": 216,
+                      "web/pandas/robots.txt": 218,
+                      "web/pandas/versions.json": 220,
+                      "web/pandas/_templates/layout.html": 222,
+                      "web/pandas/about/citing.md": 224,
+                      "web/pandas/community/blog/index.html": 226,
+                      "web/pandas/community/blog/pandas-1.0.md": 228,
+                      "Dockerfile": 1125,
+                      ".gitignore": 1121,
+                      ".gitattributes": 1121,
+                      "LICENSE": 1125,
+                      "MANIFEST.in": 1125,
+                      ".pre-commit-config.yaml": 1121,
+                      "doc/make.py": 804,
+                      "doc/source/conf.py": 806,
+                      "doc/sphinxext/announce.py": 808,
+                      "doc/redirects.csv": 811,
+                      "doc/source/_static/css/getting_started.css": 835,
+                      "doc/source/whatsnew/whatsnew_0171_html_table.html": 838,
+                      "doc/source/whatsnew/v1.3.3.rst": 902,
+                      "doc/source/whatsnew/v1.1.4.rst": 904,
+                      "doc/source/whatsnew/v2.3.1.rst": 906,
+                      "doc/source/user_guide/integer_na.rst": 908,
+                      "doc/source/whatsnew/v1.1.1.rst": 910,
+                      "doc/source/whatsnew/v0.24.1.rst": 912,
+                      "doc/source/whatsnew/v1.1.2.rst": 929,
+                      "doc/source/reference/groupby.rst": 931,
+                      "doc/source/whatsnew/v1.0.1.rst": 933,
+                      "doc/source/whatsnew/v0.19.1.rst": 935,
+                      "doc/source/whatsnew/v0.7.3.rst": 937,
+                      "doc/source/whatsnew/v1.4.4.rst": 939,
+                      "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 954,
+                      "doc/source/whatsnew/v1.4.3.rst": 956,
+                      "doc/source/whatsnew/v1.1.3.rst": 958,
+                      "doc/source/whatsnew/v2.1.2.rst": 960,
+                      "doc/source/whatsnew/v0.6.0.rst": 962,
+                      "doc/source/whatsnew/v0.9.1.rst": 964,
+                      "doc/source/whatsnew/v2.0.1.rst": 979,
+                      "doc/source/whatsnew/v0.23.2.rst": 981,
+                      "doc/source/whatsnew/v0.24.2.rst": 983,
+                      "doc/source/development/community.rst": 985,
+                      "doc/source/whatsnew/v0.19.2.rst": 987,
+                      "doc/source/getting_started/comparison/comparison_with_spss.rst": 989,
+                      "doc/source/getting_started/index.rst": 1023,
+                      "doc/source/getting_started/tutorials.rst": 1025,
+                      "doc/source/reference/aliases.rst": 1027,
+                      "doc/source/reference/arrays.rst": 1029,
+                      "doc/source/reference/frame.rst": 1031,
+                      "doc/source/reference/indexing.rst": 1033,
+                      "doc/source/whatsnew/v0.20.2.rst": 1053,
+                      "doc/source/getting_started/intro_tutorials/02_read_write.rst": 1055,
+                      "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 1057,
+                      "doc/source/development/developer.rst": 1059,
+                      "doc/source/whatsnew/v0.25.1.rst": 1061,
+                      "doc/source/whatsnew/v1.0.2.rst": 1063,
+                      "doc/source/whatsnew/v1.5.1.rst": 1080,
+                      "doc/source/user_guide/duplicates.rst": 1082,
+                      "doc/source/user_guide/pyarrow.rst": 1084,
+                      "doc/source/getting_started/intro_tutorials/04_plotting.rst": 1086,
+                      ".devcontainer.json": 1121,
+                      ".gitpod.yml": 1121,
+                      "environment.yml": 1124,
+                      "generate_version.py": 1124,
+                      "generate_pxi.py": 1124,
+                      "codecov.yml": 1125,
+                      "CITATION.cff": 1125,
+                      "doc/source/whatsnew/v2.2.1.rst": 1171,
+                      "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 1172,
+                      "web/pandas/community/blog/asv-pandas-grant.md": 1173,
+                      "doc/source/whatsnew/v0.23.1.rst": 1174,
+                      "doc/source/whatsnew/v1.2.1.rst": 1176,
+                      "web/pandas/community/blog/2019-user-survey.md": 1195,
+                      "doc/source/whatsnew/v2.3.0.rst": 1197,
+                      "doc/source/whatsnew/v0.21.1.rst": 1199,
+                      "doc/source/getting_started/overview.rst": 1201,
+                      "doc/source/whatsnew/v0.17.1.rst": 1213,
+                      "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 1215,
+                      "doc/source/whatsnew/v0.16.2.rst": 1217
+                    },
+                    "core_files": null,
+                    "header_saves": 1,
+                    "generated_outline_commands": 0,
+                    "known_template_updates": 0,
+                    "product_refusals": 39,
+                    "api_abnormal": false,
+                    "scope_drift": false
+                  }
+                },
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 1729776,
+                      "cached_input_tokens": 1581312,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 11357,
+                      "reasoning_output_tokens": 4441
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 1729776,
+                    "cached_input_tokens": 1581312,
+                    "output_tokens": 11357
+                  }
+                },
+                "model_elapsed_seconds": 197.77718557000117,
+                "model_exit_code": 0,
+                "stage_evidence_status": {
+                  "valid": true,
+                  "api_abnormal": false
+                },
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 199.90170013500028
+              },
+              "continuation_allowed": true
+            }
+          }
+        }
+      },
+      "cached_initialization_receipt": {},
+      "source_cost_usd": null,
+      "accounting_note": "unknown"
+    },
+    "formal": {
+      "infer_success": true,
+      "infer_exit_code": 0,
+      "grade_exit_code": 0,
+      "agent_exit_status": null,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_model_calls": 1,
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "usage": {
+        "input_tokens": 74312480,
+        "cached_input_tokens": 72620800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 126330,
+        "reasoning_output_tokens": 33485
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 804,
+        "turn.started": 1,
+        "item.started": 456,
+        "turn.completed": 1
+      },
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null
+    },
+    "accounting_rule": "unknown"
+  }
+}

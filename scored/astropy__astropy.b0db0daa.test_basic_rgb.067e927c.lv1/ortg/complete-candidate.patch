@@ -1,0 +1,370 @@
+diff --git a/astropy/visualization/basic_rgb.py b/astropy/visualization/basic_rgb.py
+index cd8257e..1a4114f 100644
+--- a/astropy/visualization/basic_rgb.py
++++ b/astropy/visualization/basic_rgb.py
+@@ -33,124 +33,51 @@ class RGBImageMapping:
+ 
+     """
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(
++        self,
++        interval=ManualInterval(vmin=0, vmax=None),
++        stretch=LinearStretch(),
++    ):
++        try:
++            n_intervals = len(interval)
++        except TypeError:
++            self.intervals = [interval] * 3
++        else:
++            if n_intervals != 3:
++                raise ValueError("please provide 1 or 3 values for interval.")
++            self.intervals = list(interval)
++
++        self.stretch = stretch
++
++    def apply_mappings(self, image_r, image_g, image_b):
++        """Apply the configured interval and stretch to each channel."""
++        image_rgb = [image_r, image_g, image_b]
++        for index, image in enumerate(image_rgb):
++            normalized = self.intervals[index](image, clip=True)
++            image_rgb[index] = self.stretch(normalized, clip=True)
++
++        return np.asarray(image_rgb)
++
++    def make_rgb_image(self, image_r, image_g, image_b, output_dtype=np.uint8):
++        """Convert three same-shaped arrays into an RGB image."""
++        if output_dtype not in _OUTPUT_IMAGE_FORMATS:
++            raise ValueError(
++                "output_dtype must be one of float, numpy.float64, or numpy.uint8"
++            )
++
++        image_r = np.asarray(image_r)
++        image_g = np.asarray(image_g)
++        image_b = np.asarray(image_b)
++
++        if image_r.shape != image_g.shape or image_g.shape != image_b.shape:
++            msg = "The image shapes must match. r: {}, g: {} b: {}"
++            raise ValueError(msg.format(image_r.shape, image_g.shape, image_b.shape))
++
++        image_rgb = self.apply_mappings(image_r, image_g, image_b)
++        if output_dtype == np.uint8:
++            image_rgb = image_rgb * np.iinfo(np.uint8).max
++
++        return np.dstack(image_rgb).astype(output_dtype)
+ 
+ 
+ def make_rgb(
+@@ -214,4 +141,4 @@ def make_rgb(
+ 
+         matplotlib.image.imsave(filename, rgb, origin="lower")
+ 
+-    return rgb
+\ No newline at end of file
++    return rgb
+diff --git a/astropy/visualization/interval.py b/astropy/visualization/interval.py
+index 6689b2a..a11020f 100644
+--- a/astropy/visualization/interval.py
++++ b/astropy/visualization/interval.py
+@@ -49,30 +49,17 @@ class BaseInterval(BaseTransform):
+         """
+         raise NotImplementedError("Needs to be implemented in a subclass.")
+ 
++    @staticmethod
++    def _process_values(values):
++        """Return finite, unmasked values as a one-dimensional array."""
++        data, mask = get_data_and_mask(values)
++        data = np.asarray(data)
+ 
++        if mask is not None:
++            data = data[~np.asarray(mask, dtype=bool)]
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        data = data.ravel()
++        return data[np.isfinite(data)]
+ 
+     def __call__(self, values, clip=True, out=None):
+         """
+@@ -318,18 +305,60 @@ class ZScaleInterval(BaseInterval):
+         self.krej = krej
+         self.max_iterations = max_iterations
+ 
++    def get_limits(self, values):
++        values = self._process_values(values)
+ 
++        # Sample at a regular stride so that the full flattened image is
++        # represented while limiting the cost of sorting and fitting.
++        stride = max(1.0, values.size / self.n_samples)
++        samples = values[:: int(stride)][: self.n_samples]
++        samples.sort()
++
++        npix = len(samples)
++        vmin = samples[0]
++        vmax = samples[-1]
++
++        if npix <= self.min_npixels:
++            return vmin, vmax
++
++        x = np.arange(npix)
++        ngoodpix = npix
++        minpix = max(self.min_npixels, int(npix * self.max_reject))
++        last_ngoodpix = npix + 1
++        badpix = np.zeros(npix, dtype=bool)
++        ngrow = max(1, int(npix * 0.01))
++        kernel = np.ones(ngrow, dtype=bool)
++        fit = None
++
++        for _ in range(self.max_iterations):
++            if ngoodpix >= last_ngoodpix or ngoodpix < minpix:
++                break
++
++            try:
++                fit = np.polyfit(x, samples, deg=1, w=(~badpix).astype(int))
++            except (ValueError, np.linalg.LinAlgError):
++                fit = None
++                break
++
++            fitted = np.poly1d(fit)(x)
++            flat = samples - fitted
++            threshold = self.krej * flat[~badpix].std()
++            badpix[(flat < -threshold) | (flat > threshold)] = True
++            badpix = np.convolve(badpix, kernel, mode="same").astype(bool)
++
++            last_ngoodpix = ngoodpix
++            ngoodpix = np.count_nonzero(~badpix)
++
++        if fit is None or ngoodpix < minpix or not np.all(np.isfinite(fit)):
++            return vmin, vmax
++
++        slope = fit[0]
++        if self.contrast > 0:
++            slope /= self.contrast
++
++        center_pixel = (npix - 1) // 2
++        median = np.median(samples)
++        vmin = max(vmin, median - (center_pixel - 1) * slope)
++        vmax = min(vmax, median + (npix - center_pixel) * slope)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        return vmin, vmax
+diff --git a/astropy/visualization/lupton_rgb.py b/astropy/visualization/lupton_rgb.py
+index a8ecc2d..d9aa1b3 100644
+--- a/astropy/visualization/lupton_rgb.py
++++ b/astropy/visualization/lupton_rgb.py
+@@ -11,7 +11,7 @@ For details, see : https://ui.adsabs.harvard.edu/abs/2004PASP..116..133L
+ import numpy as np
+ 
+ from astropy.visualization.interval import ManualInterval, ZScaleInterval
+-from astropy.visualization.stretch import BaseStretch
++from astropy.visualization.stretch import BaseStretch, _prepare as _stretch_prepare
+ 
+ 
+ from .basic_rgb import RGBImageMapping
+diff --git a/astropy/visualization/stretch.py b/astropy/visualization/stretch.py
+index 502dfb8..6a34892 100644
+--- a/astropy/visualization/stretch.py
++++ b/astropy/visualization/stretch.py
+@@ -37,19 +37,22 @@ def _logn(n, x, out=None):
+         return out
+ 
+ 
++def _prepare(values, clip=True, out=None):
++    """Prepare an array for in-place stretching operations."""
++    if out is None:
++        values = np.array(values, dtype=float, copy=True)
++    else:
++        if out.dtype.kind != "f":
++            raise TypeError(
++                "Can only do in-place scaling for floating-point arrays"
++            )
++        np.copyto(out, values, casting="unsafe")
++        values = out
+ 
++    if clip:
++        np.clip(values, 0.0, 1.0, out=values)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    return values
+ 
+ 
+ class BaseStretch(BaseTransform):
+@@ -87,10 +90,12 @@ class BaseStretch(BaseTransform):
+         result : ndarray
+             The transformed values.
+         """
++        raise NotImplementedError("Needs to be implemented in a subclass.")
+ 
+     @property
+     def inverse(self):
+         """A stretch object that performs the inverse operation."""
++        raise NotImplementedError("Needs to be implemented in a subclass.")
+ 
+ 
+ class LinearStretch(BaseStretch):
+@@ -985,3 +990,6 @@ class CompositeStretch(CompositeTransform, BaseStretch):
+         The second stretch to apply.
+     """
+ 
++    def __call__(self, values, clip=True, out=None):
++        values = self.transform_1(values, clip=clip, out=out)
++        return self.transform_2(values, clip=clip, out=out)

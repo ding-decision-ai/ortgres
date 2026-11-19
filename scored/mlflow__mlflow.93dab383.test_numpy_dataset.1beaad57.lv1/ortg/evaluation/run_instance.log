@@ -1,0 +1,116 @@
+2026-10-14 14:41:15,208 - INFO - ============================================================
+2026-10-14 14:41:15,208 - INFO - Starting evaluation for instance: mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1
+2026-10-14 14:41:15,208 - INFO - Level: 1
+2026-10-14 14:41:15,208 - INFO - Attempt: 1
+2026-10-14 14:41:15,208 - INFO - ============================================================
+2026-10-14 14:41:15,219 - INFO - Docker runtime config: shm_size=4g, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 14:41:15,219 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e
+2026-10-14 14:41:15,221 - INFO - Image docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e found locally
+2026-10-14 14:41:15,221 - INFO - Creating container: fb-eval-mlflow__mlflow-93dab383-test_numpy_dataset-1beaad57-lv1-attempt-1-20261014-144115-221482
+2026-10-14 14:41:15,222 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 14:41:15,222 - INFO - Using shared memory size: 4g
+2026-10-14 14:41:16,330 - INFO - Container fb-eval-mlflow__mlflow-93dab383-test_numpy_dataset-1beaad57-lv1-attempt-1-20261014-144115-221482 created successfully
+2026-10-14 14:41:16,330 - INFO - Starting Level 1 evaluation for mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1
+2026-10-14 14:41:16,330 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 14:41:19,283 - INFO - Restore project exit code: 0
+2026-10-14 14:41:19,284 - INFO - Output: 
+2026-10-14 14:41:19,284 - INFO - Step 2: Applying patch to mask files
+2026-10-14 14:41:19,289 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 14:41:19,628 - INFO - Mask patch apply exit code: 0
+2026-10-14 14:41:19,628 - INFO - Mask patch output: /tmp/mask_patch.diff:420: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+
+2026-10-14 14:41:19,628 - INFO - Successfully applied mask patch
+2026-10-14 14:41:19,629 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 14:41:19,634 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 14:41:19,634 - INFO - Deleting F2P test file: /testbed/tests/data/test_numpy_dataset.py
+2026-10-14 14:41:19,962 - INFO - Successfully deleted F2P test file: /testbed/tests/data/test_numpy_dataset.py
+2026-10-14 14:41:19,962 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 14:41:19,962 - INFO - Applying environment fix mlflow_parallel_sources for mlflow/mlflow
+2026-10-14 14:41:20,410 - INFO - Environment fix mlflow_parallel_sources completed for mlflow/mlflow
+2026-10-14 14:41:20,410 - INFO - Step 4: Reinitializing git repository
+2026-10-14 14:41:44,953 - INFO - Step 5: Applying agent patch
+2026-10-14 14:41:44,966 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 14:41:45,288 - INFO - Patch apply exit code: 0
+2026-10-14 14:41:45,288 - INFO - Patch output: Checking patch mlflow/data/dataset.py...
+Checking patch mlflow/data/dataset_source.py...
+Checking patch mlflow/data/dataset_source_registry.py...
+Checking patch mlflow/data/digest_utils.py...
+Checking patch mlflow/data/evaluation_dataset.py...
+Checking patch mlflow/data/huggingface_dataset.py...
+Checking patch mlflow/data/numpy_dataset.py...
+Checking patch mlflow/data/pandas_dataset.py...
+Checking patch mlflow/data/schema.py...
+Checking patch mlflow/data/spark_dataset.py...
+Checking patch mlflow/data/tensorflow_dataset.py...
+Checking patch mlflow/models/signature.py...
+Checking patch mlflow/models/utils.py...
+Checking patch mlflow/types/schema.py...
+Checking patch mlflow/types/utils.py...
+Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Applied patch mlflow/data/dataset.py cleanly.
+Applied patch mlflow/data/dataset_source.py cleanly.
+Applied patch mlflow/data/dataset_source_registry.py cleanly.
+Applied patch mlflow/data/digest_utils.py cleanly.
+Applied patch mlflow/data/evaluation_dataset.py cleanly.
+Applied patch mlflow/data/huggingface_dataset.py cleanly.
+Applied patch mlflow/data/numpy_dataset.py cleanly.
+Applied patch mlflow/data/pandas_dataset.py cleanly.
+Applied patch mlflow/data/schema.py cleanly.
+Applied patch mlflow/data/spark_dataset.py cleanly.
+Applied patch mlflow/data/tensorflow_dataset.py cleanly.
+Applied patch mlflow/models/signature.py cleanly.
+Applied patch mlflow/models/utils.py cleanly.
+Applied patch mlflow/types/schema.py cleanly.
+Applied patch mlflow/types/utils.py cleanly.
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+
+2026-10-14 14:41:45,288 - INFO - >>>>> Applied Patch
+2026-10-14 14:41:45,288 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 14:41:45,288 - INFO - F2P test path: /testbed/tests/data/test_numpy_dataset.py
+2026-10-14 14:41:45,602 - INFO - Delete F2P file exit code: 0
+2026-10-14 14:41:45,602 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 14:41:45,919 - INFO - Reverse apply exit code: 0
+2026-10-14 14:41:45,919 - INFO - Reverse apply output: 
+2026-10-14 14:41:45,919 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 14:41:45,919 - INFO - Step 7: Running tests
+2026-10-14 14:41:45,920 - INFO - Test command: pytest -rA --tb=short --color=no -k 'not test_invalid_requirements_raise[input_requirements0]' --timeout=120
+2026-10-14 14:41:45,920 - INFO - Test timeout: 1200s
+2026-10-14 14:41:45,920 - INFO - Running F2P test: /testbed/tests/data/test_numpy_dataset.py
+2026-10-14 14:41:48,885 - INFO - F2P test exit code: 1
+2026-10-14 14:41:48,885 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 120.0s
+timeout method:
+2026-10-14 14:41:48,886 - INFO - Saved F2P test output to artifact://28a9b34be105e736
+2026-10-14 14:41:48,886 - INFO - Running 5 P2P tests
+2026-10-14 14:41:48,886 - INFO - Running P2P test: /testbed/tests/dev/test_check_function_signatures.py
+2026-10-14 14:41:51,130 - INFO - P2P test /testbed/tests/dev/test_check_function_signatures.py exit code: 0
+2026-10-14 14:41:51,130 - INFO - Saved P2P test output to artifact://82c8598239d2a34e
+2026-10-14 14:41:51,130 - INFO - Running P2P test: /testbed/tests/genai/optimize/test_util.py
+2026-10-14 14:41:54,370 - INFO - P2P test /testbed/tests/genai/optimize/test_util.py exit code: 0
+2026-10-14 14:41:54,371 - INFO - Saved P2P test output to artifact://daddd170c92c0b67
+2026-10-14 14:41:54,371 - INFO - Running P2P test: /testbed/tests/utils/test_promptlab_utils.py
+2026-10-14 14:41:59,799 - INFO - P2P test /testbed/tests/utils/test_promptlab_utils.py exit code: 0
+2026-10-14 14:41:59,799 - INFO - Saved P2P test output to artifact://a7d59845f2065b59
+2026-10-14 14:41:59,799 - INFO - Running P2P test: /testbed/tests/store/tracking/test_sqlalchemy_store_schema.py
+2026-10-14 14:42:14,600 - INFO - P2P test /testbed/tests/store/tracking/test_sqlalchemy_store_schema.py exit code: 0
+2026-10-14 14:42:14,600 - INFO - Saved P2P test output to artifact://aead9a0a88bcef04
+2026-10-14 14:42:14,600 - INFO - Running P2P test: /testbed/tests/utils/test_environment.py
+2026-10-14 14:42:20,668 - INFO - P2P test /testbed/tests/utils/test_environment.py exit code: 0
+2026-10-14 14:42:20,669 - INFO - Saved P2P test output to artifact://b9291b9d5a1061a5
+2026-10-14 14:42:20,677 - INFO - ============================================================
+2026-10-14 14:42:20,677 - INFO - Evaluation completed for mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1
+2026-10-14 14:42:20,677 - INFO - Resolved: False
+2026-10-14 14:42:20,677 - INFO - F2P Pass rate: 0.6667
+2026-10-14 14:42:20,677 - INFO - ============================================================
+2026-10-14 14:42:20,677 - INFO - Stopping and removing container
+2026-10-14 14:42:31,806 - INFO - Container removed successfully

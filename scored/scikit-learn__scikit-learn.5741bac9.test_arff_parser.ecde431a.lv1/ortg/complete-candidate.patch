@@ -1,0 +1,554 @@
+diff --git a/sklearn/datasets/_arff_parser.py b/sklearn/datasets/_arff_parser.py
+index 4166faa..3e86adf 100644
+--- a/sklearn/datasets/_arff_parser.py
++++ b/sklearn/datasets/_arff_parser.py
+@@ -14,6 +14,9 @@ import scipy as sp
+ 
+ from sklearn.externals import _arff
+ from sklearn.externals._arff import ArffSparseDataType
++from sklearn.utils._chunking import chunk_generator, get_chunk_n_rows
++from sklearn.utils._optional_dependencies import check_pandas_support
++from sklearn.utils.fixes import pd_fillna
+ 
+ 
+ 
+@@ -72,6 +75,24 @@ def _sparse_data_to_array(
+     return y
+ 
+ 
++def _post_process_frame(frame, feature_names, target_names):
++    """Select feature and target columns from a parsed pandas DataFrame.
++
++    A single target is returned as a Series, multiple targets as a DataFrame,
++    and an empty target selection as ``None``.
++    """
++    X = frame[feature_names]
++
++    if not target_names:
++        y = None
++    elif len(target_names) == 1:
++        y = frame[target_names[0]]
++    else:
++        y = frame[target_names]
++
++    return X, y
++
++
+ 
+ 
+ 
+@@ -450,7 +471,9 @@ def _pandas_arff_parser(
+     if output_arrays_type == "pandas":
+         return X, y, frame, None
+     else:
+-        X, y = X.to_numpy(), y.to_numpy()
++        X = X.to_numpy()
++        if y is not None:
++            y = y.to_numpy()
+ 
+     categories = {
+         name: dtype.categories.tolist()
+@@ -460,8 +483,38 @@ def _pandas_arff_parser(
+     return X, y, None, categories
+ 
+ 
++def load_arff_from_gzip_file(
++    gzip_file,
++    parser,
++    output_type,
++    openml_columns_info,
++    feature_names_to_select,
++    target_names_to_select,
++    shape=None,
++    read_csv_kwargs=None,
++):
++    """Load a compressed ARFF stream with the requested existing parser."""
++    if parser == "liac-arff":
++        return _liac_arff_parser(
++            gzip_file,
++            output_type,
++            openml_columns_info,
++            feature_names_to_select,
++            target_names_to_select,
++            shape=shape,
++        )
+ 
++    if parser == "pandas":
++        return _pandas_arff_parser(
++            gzip_file,
++            output_type,
++            openml_columns_info,
++            feature_names_to_select,
++            target_names_to_select,
++            read_csv_kwargs=read_csv_kwargs,
++        )
+ 
++    raise ValueError(f"Unknown parser: {parser}")
+ 
+ 
+ 
+diff --git a/sklearn/datasets/_base.py b/sklearn/datasets/_base.py
+index e26c60e..68a68f8 100644
+--- a/sklearn/datasets/_base.py
++++ b/sklearn/datasets/_base.py
+@@ -30,6 +30,7 @@ import numpy as np
+ from sklearn.preprocessing import scale
+ from sklearn.utils import Bunch, check_random_state
+ 
++from sklearn.utils._optional_dependencies import check_pandas_support
+ from sklearn.utils._param_validation import Interval, StrOptions, validate_params
+ 
+ DATA_MODULE = "sklearn.datasets.data"
+diff --git a/sklearn/datasets/_openml.py b/sklearn/datasets/_openml.py
+index 86a5b3d..9447a02 100644
+--- a/sklearn/datasets/_openml.py
++++ b/sklearn/datasets/_openml.py
+@@ -20,9 +20,11 @@ from warnings import warn
+ import numpy as np
+ 
+ from sklearn.datasets import get_data_home
++from sklearn.datasets._arff_parser import load_arff_from_gzip_file
+ 
+ from sklearn.utils import Bunch
+ 
++from sklearn.utils._optional_dependencies import check_pandas_support
+ from sklearn.utils._param_validation import (
+     Integral,
+     Interval,
+@@ -994,6 +996,11 @@ def fetch_openml(
+     dtypes: category(9), int64(6)
+     memory usage: 2.7 MB
+     """
++    if name is None and data_id is None:
++        raise ValueError(
++            "Neither name nor data_id are provided. Please provide name or data_id."
++        )
++
+     if cache is False:
+         # no caching will be applied
+         data_home = None
+diff --git a/sklearn/externals/_arff.py b/sklearn/externals/_arff.py
+index 076d592..6b6bbf1 100644
+--- a/sklearn/externals/_arff.py
++++ b/sklearn/externals/_arff.py
+@@ -280,6 +280,43 @@ def _unquote(v):
+         return v
+ 
+ 
++def _parse_values(s):
++    """Parse a dense or sparse ARFF data row into Python values."""
++    if _RE_SPARSE_LINE.match(s):
++        if s.strip() == "{}":
++            return {}
++        values = {}
++        position = 0
++        for match in _RE_SPARSE_KEY_VALUES.finditer(s):
++            if match.start() != position:
++                raise BadDataFormat(s)
++            key, value = match.group(1, 2)
++            if key is None:
++                raise BadDataFormat(s)
++            key = int(key)
++            if key in values:
++                raise BadDataFormat(s)
++            values[key] = _unquote(value)
++            position = match.end()
++
++        if s[position:].strip() != "}":
++            raise BadDataFormat(s)
++        return values
++
++    source = "," + s
++    values = []
++    position = 0
++    for match in _RE_DENSE_VALUES.finditer(source):
++        if source[position : match.start()].strip() or match.group(2) is not None:
++            raise BadDataFormat(s)
++        values.append(_unquote(match.group(1)))
++        position = match.end()
++
++    if source[position:].strip():
++        raise BadDataFormat(s)
++    return values
++
++
+ 
+ 
+ 
+@@ -473,16 +510,19 @@ class DenseGeneratorData:
+ 
+             yield self._decode_values(values, conversors)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def _decode_values(self, values, conversors):
++        decoded = []
++        for value, conversor in zip(values, conversors):
++            if value is None:
++                decoded.append(None)
++                continue
++            try:
++                decoded.append(conversor(value))
++            except ArffException:
++                raise
++            except (TypeError, ValueError):
++                raise BadNumericalValue()
++        return decoded
+ 
+     def encode_data(self, data, attributes):
+         '''(INTERNAL) Encodes a line of data.
+@@ -589,23 +629,26 @@ class COOData:
+         yield " ".join(["{", ','.join(new_data), "}"])
+ 
+ class LODGeneratorData:
++    def decode_rows(self, stream, conversors):
++        for row in stream:
++            values = _parse_values(row)
++            if not isinstance(values, dict):
++                raise BadLayout()
++            if values and max(values) >= len(conversors):
++                raise BadDataFormat(row)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++            decoded = {}
++            for key, value in values.items():
++                if value is None:
++                    decoded[key] = None
++                    continue
++                try:
++                    decoded[key] = conversors[key](value)
++                except ArffException:
++                    raise
++                except (TypeError, ValueError):
++                    raise BadNumericalValue()
++            yield decoded
+     def encode_data(self, data, attributes):
+         current_row = 0
+ 
+@@ -634,18 +677,18 @@ class LODData(_DataListMixin, LODGeneratorData):
+     pass
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def _get_data_object_for_decoding(return_type):
++    data_types = {
++        DENSE: Data,
++        COO: COOData,
++        LOD: LODData,
++        DENSE_GEN: DenseGeneratorData,
++        LOD_GEN: LODGeneratorData,
++    }
++    try:
++        return data_types[return_type]()
++    except KeyError:
++        raise ValueError("Unsupported return type: %r" % return_type)
+ 
+ 
+ def _get_data_object_for_encoding(matrix):
+@@ -687,6 +730,151 @@ class ArffDecoder:
+         res = re.sub(r'^\%( )?', '', s)
+         return res
+ 
++    def _decode_relation(self, s):
++        value = s.strip()
++        if not value or not _RE_RELATION.match(value):
++            raise BadRelationFormat()
++        return _unquote(value)
++
++    def _decode_attribute(self, s):
++        match = _RE_ATTRIBUTE.match(s.strip())
++        if match is None:
++            raise BadAttributeFormat()
++
++        name, type_ = match.groups()
++        name = _unquote(name)
++        type_ = type_.strip()
++        simple_type = type_.upper()
++        if simple_type in _SIMPLE_TYPES:
++            return name, simple_type
++
++        if type_.startswith("{") and type_.endswith("}"):
++            values = _parse_values(type_[1:-1])
++            if isinstance(values, dict):
++                raise BadAttributeType()
++            values = [value for value in values if value is not None]
++            if not values:
++                raise BadAttributeType()
++            return name, values
++
++        raise BadAttributeType()
++
++    def _build_conversors(self, attributes, encode_nominal):
++        conversors = []
++        for _, type_ in attributes:
++            if isinstance(type_, list):
++                conversor = (
++                    EncodedNominalConversor(type_)
++                    if encode_nominal
++                    else NominalConversor(type_)
++                )
++            elif type_ == "INTEGER":
++                conversor = int
++            elif type_ in ("NUMERIC", "REAL"):
++                conversor = float
++            else:
++                conversor = str
++            conversors.append(conversor)
++        return conversors
++
++    def decode(self, stream, encode_nominal=False, return_type=DENSE):
++        """Decode an ARFF string or iterable of lines into a dictionary."""
++        if return_type not in _SUPPORTED_DATA_STRUCTURES:
++            raise ValueError("Unsupported return type: %r" % return_type)
++
++        if isinstance(stream, str):
++            stream = stream.splitlines()
++        iterator = iter(stream)
++        self._current_line = 0
++
++        description = []
++        relation = None
++        attributes = []
++        attribute_lines = {}
++        found_data = False
++
++        try:
++            for raw_line in iterator:
++                self._current_line += 1
++                if isinstance(raw_line, bytes):
++                    raw_line = raw_line.decode("utf-8")
++                line = raw_line.strip()
++                if not line:
++                    continue
++                if line.startswith(_TK_COMMENT):
++                    if relation is None:
++                        description.append(self._decode_comment(line))
++                    continue
++
++                parts = line.split(None, 1)
++                token = parts[0].upper()
++                payload = parts[1].strip() if len(parts) == 2 else ""
++                if token == _TK_RELATION:
++                    if relation is not None or attributes:
++                        raise BadLayout()
++                    relation = self._decode_relation(payload)
++                elif token == _TK_ATTRIBUTE:
++                    if relation is None:
++                        raise BadLayout()
++                    attribute = self._decode_attribute(payload)
++                    name = attribute[0]
++                    if name in attribute_lines:
++                        raise BadAttributeName(name, attribute_lines[name])
++                    attribute_lines[name] = self._current_line
++                    attributes.append(attribute)
++                elif token == _TK_DATA:
++                    if payload or relation is None or not attributes:
++                        raise BadLayout()
++                    found_data = True
++                    break
++                else:
++                    raise BadLayout()
++        except ArffException as exc:
++            exc.line = self._current_line
++            raise
++
++        if relation is None or not attributes or not found_data:
++            exc = BadLayout()
++            exc.line = self._current_line
++            raise exc
++
++        conversors = self._build_conversors(attributes, encode_nominal)
++
++        def data_lines():
++            for raw_line in iterator:
++                self._current_line += 1
++                if isinstance(raw_line, bytes):
++                    raw_line = raw_line.decode("utf-8")
++                line = raw_line.strip()
++                if line and not line.startswith(_TK_COMMENT):
++                    yield line
++
++        data_object = _get_data_object_for_decoding(return_type)
++        try:
++            data = data_object.decode_rows(data_lines(), conversors)
++        except ArffException as exc:
++            exc.line = self._current_line
++            raise
++
++        if return_type in (DENSE_GEN, LOD_GEN):
++            decoded_rows = data
++
++            def checked_rows():
++                try:
++                    yield from decoded_rows
++                except ArffException as exc:
++                    exc.line = self._current_line
++                    raise
++
++            data = checked_rows()
++
++        return {
++            "description": "\n".join(description),
++            "relation": relation,
++            "attributes": attributes,
++            "data": data,
++        }
++
+ 
+ 
+ 
+@@ -1044,6 +1232,14 @@ class ArffEncoder:
+ # BASIC INTERFACE =============================================================
+ 
+ 
++def load(fp, encode_nominal=False, return_type=DENSE):
++    """Read an ARFF document from a file-like object or line iterable."""
++    decoder = ArffDecoder()
++    return decoder.decode(
++        fp, encode_nominal=encode_nominal, return_type=return_type
++    )
++
++
+ 
+ 
+ 
+@@ -1104,4 +1300,4 @@ def dumps(obj):
+     '''
+     encoder = ArffEncoder()
+     return encoder.encode(obj)
+-# =============================================================================
+\ No newline at end of file
++# =============================================================================
+diff --git a/sklearn/utils/_chunking.py b/sklearn/utils/_chunking.py
+index 39e9293..9549c47 100644
+--- a/sklearn/utils/_chunking.py
++++ b/sklearn/utils/_chunking.py
+@@ -11,6 +11,36 @@ from sklearn._config import get_config
+ from sklearn.utils._param_validation import Interval, validate_params
+ 
+ 
++def chunk_generator(gen, chunksize):
++    """Yield successive lists of at most ``chunksize`` items from ``gen``."""
++    while True:
++        chunk = list(islice(gen, chunksize))
++        if not chunk:
++            return
++        yield chunk
++
++
++def get_chunk_n_rows(row_bytes, *, max_n_rows=None, working_memory=None):
++    """Calculate how many rows fit within the configured working memory."""
++    if working_memory is None:
++        working_memory = get_config()["working_memory"]
++
++    chunk_n_rows = int(working_memory * (2**20) // row_bytes)
++    if max_n_rows is not None:
++        chunk_n_rows = min(chunk_n_rows, max_n_rows)
++
++    if chunk_n_rows < 1:
++        warnings.warn(
++            "Could not adhere to working_memory config. "
++            f"Currently {working_memory:.0f}MiB, "
++            f"{np.ceil(row_bytes / 2**20):.0f}MiB required.",
++            UserWarning,
++        )
++        return 1
++
++    return chunk_n_rows
++
++
+ 
+ 
+ 
+@@ -138,4 +168,3 @@ def gen_even_slices(n, n_packs, *, n_samples=None):
+ 
+ 
+ 
+-
+diff --git a/sklearn/utils/_optional_dependencies.py b/sklearn/utils/_optional_dependencies.py
+index 1135a98..60f7313 100644
+--- a/sklearn/utils/_optional_dependencies.py
++++ b/sklearn/utils/_optional_dependencies.py
+@@ -2,6 +2,18 @@
+ # SPDX-License-Identifier: BSD-3-Clause
+ 
+ 
++def check_pandas_support(caller_name):
++    """Return pandas or raise an informative error when it is unavailable."""
++    try:
++        import pandas
++    except ImportError as exc:
++        raise ImportError(
++            f"{caller_name} requires pandas. You can install pandas with "
++            "`pip install pandas`"
++        ) from exc
++    return pandas
++
++
+ def check_matplotlib_support(caller_name):
+     """Raise ImportError with detailed error message if mpl is not installed.
+ 
+@@ -25,4 +37,3 @@ def check_matplotlib_support(caller_name):
+ 
+ 
+ 
+-
+diff --git a/sklearn/utils/fixes.py b/sklearn/utils/fixes.py
+index 362714e..446cfb3 100644
+--- a/sklearn/utils/fixes.py
++++ b/sklearn/utils/fixes.py
+@@ -222,6 +222,13 @@ else:
+ 
+ 
+ # TODO: Adapt when Pandas > 2.2 is the minimum supported version
++def pd_fillna(pd, frame):
++    """Fill missing values while preserving pandas' legacy dtype inference."""
++    if parse_version(pd.__version__) < parse_version("2.2"):
++        return frame.fillna(value=np.nan)
++
++    with pd.option_context("future.no_silent_downcasting", True):
++        return frame.fillna(value=np.nan).infer_objects(copy=False)
+ 
+ 
+ 
+@@ -427,4 +434,4 @@ try:
+     if pyarrow_version < parse_version("17.0.0"):
+         PYARROW_VERSION_BELOW_17 = True
+ except ModuleNotFoundError:  # pragma: no cover
+-    pass
+\ No newline at end of file
++    pass

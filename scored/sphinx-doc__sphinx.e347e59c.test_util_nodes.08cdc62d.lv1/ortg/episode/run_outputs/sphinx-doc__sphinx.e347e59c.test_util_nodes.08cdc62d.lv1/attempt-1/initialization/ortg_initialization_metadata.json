@@ -1,0 +1,17 @@
+{
+  "ready_for_task_solving": true,
+  "native_outline_rows": 667,
+  "total_cognitive_files": 1914,
+  "observed_files": 103,
+  "coverage_complete": false,
+  "source_identity_preserved": true,
+  "new_initialization_model_calls": 0,
+  "ready": true,
+  "condition": "available_source_only_outline_v1",
+  "error": null,
+  "model_elapsed_seconds": 0,
+  "snapshot_sha256": "9d0012b2628e2ff14608396d5a9a699e651ffb9ba936f4ed07890bdde0ee6b16",
+  "scope_sha256": "3ac992afe22a2ef295683be0722f320ac719d309f15ee18c6b6302bd149dbc80",
+  "source_run": "artifact://3a535ba13abc7fe7",
+  "prior_source_initialization_cost": "Retained separately in original source-only run"
+}

@@ -1,0 +1,102 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "models_called": 1,
+      "model_elapsed_seconds": 404.37302984500275,
+      "model_exit_code": 0,
+      "turn_usages": {
+        "0": {
+          "input_tokens": 8146331,
+          "cached_input_tokens": 7892736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23967,
+          "reasoning_output_tokens": 5683
+        }
+      },
+      "cost_usd": null,
+      "prior_history_preserved": true,
+      "source_budget_separate_from_future_formal_seconds": 3600
+    },
+    "source_event_reference": {
+      "bytes": 4029973,
+      "actual_overview_outputs": {
+        "0": {
+          "call_line": 21,
+          "output_line": 24,
+          "output_chars": 162212,
+          "contains_task_dependency_closure": true,
+          "contains_public_wrapper_rules": true,
+          "contains_outline_truncation_marker": false
+        },
+        "1": {
+          "call_line": 367,
+          "output_line": 370,
+          "output_chars": 3236,
+          "contains_task_dependency_closure": false,
+          "contains_public_wrapper_rules": false,
+          "contains_outline_truncation_marker": false
+        },
+        "2": {
+          "call_line": 409,
+          "output_line": 414,
+          "output_chars": 31967,
+          "contains_task_dependency_closure": false,
+          "contains_public_wrapper_rules": false,
+          "contains_outline_truncation_marker": false
+        }
+      },
+      "actual_tool_output_truncation_lines": {
+        "0": 17,
+        "1": 175,
+        "2": 324,
+        "3": 405
+      }
+    },
+    "source_event_count_once_across_reuses": true,
+    "formal": {
+      "elapsed_seconds": 1389.4835186800046,
+      "raw_completed_turn_usages": {
+        "0": {
+          "input_tokens": 19004163,
+          "cached_input_tokens": 18612608,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 61829,
+          "reasoning_output_tokens": 29368
+        }
+      },
+      "usd": null,
+      "exact_inference_api_active_seconds": null
+    },
+    "earlier_history_costs_not_erased_or_summed_when_unknown": true,
+    "source_cost_is_same_handoff_event_as_technical_attempt_not_a_new_initialization": true,
+    "prior_invalid_formal_attempt_reference": {
+      "case_order": 49,
+      "invalid_condition": true,
+      "not_added_to_this_fresh_formal_elapsed": true,
+      "raw_case_cost_fields": {
+        "raw_formal_elapsed_seconds": 214.72542196599534,
+        "formal_usage": null,
+        "source_cost_separate": {
+          "models_called": 1,
+          "model_elapsed_seconds": 404.37302984500275,
+          "model_exit_code": 0,
+          "turn_usages": {
+            "0": {
+              "input_tokens": 8146331,
+              "cached_input_tokens": 7892736,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 23967,
+              "reasoning_output_tokens": 5683
+            }
+          },
+          "cost_usd": null,
+          "prior_history_preserved": true,
+          "source_budget_separate_from_future_formal_seconds": 3600
+        }
+      }
+    },
+    "incremental_token_usage": null,
+    "USD": null
+  }
+}

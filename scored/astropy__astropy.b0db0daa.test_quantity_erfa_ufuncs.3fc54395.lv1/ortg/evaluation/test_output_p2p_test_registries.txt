@@ -1,0 +1,280 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/registry/tests/test_registries.py.
+
+Date: 2026-10-15T02:52:41
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 240 items
+
+astropy/io/registry/tests/test_registries.py ....s...........sss........ [ 11%]
+...ss.s...........................s...........ss..s..................... [ 41%]
+.s...........ss...................................................s.s... [ 71%]
+........ss...................................................s.......    [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/registry/tests/test_registries.py::test_fmcls1_fmtcls2
+PASSED astropy/io/registry/tests/test_registries.py::test_IORegistryError
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_get_formats
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_delay_doc_updates
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_register_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_register_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_register_identifier_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_unregister_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_unregister_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_compat_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_compat_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistryBase::test_compat_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_identifier_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_unregister_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_unregister_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_inherited_read_registration
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_delay_doc_updates
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_identify_read_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_reader_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_reader_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_register_readers_with_same_name_on_different_classes
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_unregister_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_unregister_reader_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_get_reader[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_get_reader[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_get_reader_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_get_reader_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_noformat
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_noformat_arbitrary
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_noformat_arbitrary_file
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_toomanyformats
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_uses_priority
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_format_noreader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_valid_return[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_valid_return[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_non_existing_unknown_ext
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_read_directory
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_register_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_unregister_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_get_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedInputRegistry::test_compat_read
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_identifier_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_unregister_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_unregister_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_inherited_write_registration
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_delay_doc_updates
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_identify_write_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_writer_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_writer_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_register_writer_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_unregister_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_unregister_writer_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_unregister_writer_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_get_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_get_writer_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_noformat
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_noformat_arbitrary
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_noformat_arbitrary_file
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_toomanyformats
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_uses_priority
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_format_nowriter
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_write_return
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_register_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_unregister_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_get_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedOutputRegistry::test_compat_write
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_identifier_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_inherited_write_registration
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_identify_write_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_writer_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_writer_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_writer_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_writer_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_writer_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_get_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_get_writer_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_noformat
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_noformat_arbitrary
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_noformat_arbitrary_file
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_toomanyformats
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_uses_priority
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_format_nowriter
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_write_return
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_register_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_unregister_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_get_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_write
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_inherited_read_registration
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_delay_doc_updates
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_identify_read_format
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_reader_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_reader_force
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_register_readers_with_same_name_on_different_classes
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_unregister_reader_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_get_reader[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_get_reader[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_get_reader_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_get_reader_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_noformat
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_noformat_arbitrary
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_noformat_arbitrary_file
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_toomanyformats
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_uses_priority
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_format_noreader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_valid_return[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_valid_return[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_non_existing_unknown_ext
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_read_directory
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_register_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_unregister_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_get_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_compat_read
+PASSED astropy/io/registry/tests/test_registries.py::TestUnifiedIORegistry::test_identifier_origin
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_identifier_force
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_identifier_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_identifier_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_register_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_unregister_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_identify_format
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_inherited_write_registration
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_identify_write_format
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_writer_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_writer_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_writer_force
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_writer_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_writer_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_get_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_get_writer_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_noformat
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_noformat_arbitrary
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_noformat_arbitrary_file
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_toomanyformats
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_uses_priority
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_format_nowriter
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_write_return
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_register_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_unregister_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_get_writer
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_write
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_inherited_read_registration
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_delay_doc_updates
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_identify_read_format
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_reader_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_reader_force
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_register_readers_with_same_name_on_different_classes
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_unregister_reader_invalid
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_get_reader[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_get_reader[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_get_reader_invalid[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_get_reader_invalid[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_noformat
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_noformat_arbitrary
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_noformat_arbitrary_file
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_toomanyformats
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_uses_priority
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_format_noreader
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_identifier
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_valid_return[test1]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_valid_return[test2]
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_non_existing_unknown_ext
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_read_directory
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_register_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_unregister_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_get_reader
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_compat_read
+PASSED astropy/io/registry/tests/test_registries.py::TestDefaultRegistry::test_identifier_origin
+PASSED astropy/io/registry/tests/test_registries.py::test_dir
+PASSED astropy/io/registry/tests/test_registries.py::test_getattr
+PASSED astropy/io/registry/tests/test_registries.py::test_read_basic_table
+PASSED astropy/io/registry/tests/test_registries.py::TestSubclass::test_read_table_subclass
+PASSED astropy/io/registry/tests/test_registries.py::TestSubclass::test_write_table_subclass
+PASSED astropy/io/registry/tests/test_registries.py::TestSubclass::test_read_table_subclass_with_columns_attributes
+SKIPPED [5] astropy/io/registry/tests/test_registries.py:175: checking behavior specifically if docstrings are not present
+SKIPPED [5] astropy/io/registry/tests/test_registries.py:301: TODO!
+SKIPPED [5] astropy/io/registry/tests/test_registries.py:305: TODO!
+SKIPPED [1] astropy/io/registry/tests/test_registries.py:348: TODO!
+SKIPPED [1] astropy/io/registry/tests/test_registries.py:752: TODO!
+SKIPPED [2] astropy/io/registry/tests/test_registries.py:1025: TODO!
+======================= 221 passed, 19 skipped in 0.73s ========================

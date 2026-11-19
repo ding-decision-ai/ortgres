@@ -1,0 +1,395 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/1160ded, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 28 items
+
+tests/test_ext_intersphinx/test_ext_intersphinx.py FF.F.FFFF..F......F.. [ 75%]
+......F                                                                  [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_fetch_inventory_redirection _______________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:91: in test_fetch_inventory_redirection
+    raw_data, target_uri = _fetch_inventory_data(
+sphinx/ext/intersphinx/_load.py:235: in _fetch_inventory_data
+    return raw_data, _strip_basic_auth(target_uri)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/ext/intersphinx/_load.py:173: in _strip_basic_auth
+    parts = urlsplit(url)
+            ^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/urllib/parse.py:504: in urlsplit
+    if i > 0 and url[0].isascii() and url[0].isalpha():
+       ^^^^^
+E   TypeError: '>' not supported between instances of 'MagicMock' and 'int'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+____________________________ test_missing_reference ____________________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:204: in test_missing_reference
+    assert rn[0].astext() == 'module2'
+           ^^^^^
+E   TypeError: 'NoneType' object is not subscriptable
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_______________________ test_missing_reference_stddomain _______________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:313: in test_missing_reference_stddomain
+    assert rn.astext() == 'ls -l'
+           ^^^^^^^^^
+E   AttributeError: 'NoneType' object has no attribute 'astext'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+________________ test_ambiguous_reference_handling[B TERM-True] ________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:369: in test_ambiguous_reference_handling
+    assert ambiguity is expected_ambiguity
+E   assert False is True
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+inventory contains multiple definitions for std:term:b term
+
+# warning: 
+
+_______________________ test_missing_reference_cppdomain _______________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:389: in test_missing_reference_cppdomain
+    assert (
+E   assert '<a class="reference external" href="https://docs.python.org/index.html#cpp_foo_bar" title="(in foo v2.0)"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Bar</span></code></a>' in '<!DOCTYPE html>\n\n<html lang="en" data-content_root="./">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="v...\n      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.3.0+/1160ded.\n    </div>\n  </body>\n</html>'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-intersphinx-cppdomain
+# outdir: /tmp/pytest-of-root/pytest-0/ext-intersphinx-cppdomain/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-intersphinx-cppdomain/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-intersphinx-cppdomain/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-intersphinx-cppdomain/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-0/ext-intersphinx-cppdomain/_build/html.
+
+# warning: 
+
+_______________________ test_missing_reference_jsdomain ________________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:433: in test_missing_reference_jsdomain
+    assert rn.astext() == 'baz()'
+           ^^^^^^^^^
+E   AttributeError: 'NoneType' object has no attribute 'astext'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+____________________ test_missing_reference_disabled_domain ____________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:487: in test_missing_reference_disabled_domain
+    case(term=True, doc=True, py=True)
+tests/test_ext_intersphinx/test_ext_intersphinx.py:466: in case
+    assert_(rn, 'a term')
+tests/test_ext_intersphinx/test_ext_intersphinx.py:456: in assert_
+    assert rn.astext() == expected
+           ^^^^^^^^^
+E   AttributeError: 'NoneType' object has no attribute 'astext'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_________________________ test_load_mappings_fallback __________________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:608: in test_load_mappings_fallback
+    assert (
+E   AssertionError: assert 'encountered some issues with some of the inventories' in '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\...\x00\x00\x00\x00\x00\x00\x00\x00\x00encountered some issues with intersphinx inventory, but had working alternatives\n'
+E    +  where '\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\...\x00\x00\x00\x00\x00\x00\x00\x00\x00encountered some issues with intersphinx inventory, but had working alternatives\n' = <built-in method getvalue of _io.StringIO object at 0x78518ffd5090>()
+E    +    where <built-in method getvalue of _io.StringIO object at 0x78518ffd5090> = <_io.StringIO object at 0x78518ffd5090>.getvalue
+E    +      where <_io.StringIO object at 0x78518ffd5090> = <SphinxTestApp buildername='html'>.status
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+                                                                                                 encountered some issues with intersphinx inventory, but had working alternatives
+
+# warning: 
+
+___________________________ test_inspect_main_noargs ___________________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:678: in test_inspect_main_noargs
+    assert stderr == expected + '\n'
+E   AssertionError: assert 'Usage: pytho...<inventory>\n' == 'Print out an...ntory file.\n'
+E     
+E     + Usage: python -m sphinx.ext.intersphinx <inventory>
+E     - Print out an inventory file.
+E     - Error: must specify local path or URL to an inventory file.
+_________________________ test_inventory_text_version __________________________
+tests/test_ext_intersphinx/test_ext_intersphinx.py:924: in test_inventory_text_version
+    assert rn['reftitle'] == '(in foo stable)'
+E   AssertionError: assert '(in foo vstable)' == '(in foo stable)'
+E     
+E     - (in foo stable)
+E     + (in foo vstable)
+E     ?         +
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+inventory contains multiple definitions for std:term:b term
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[31mERROR: Invalid intersphinx project identifier `''` in intersphinx_mapping. Project identifiers must be non-empty strings.[39;49;00m
+[31mERROR: Invalid intersphinx project identifier `12345` in intersphinx_mapping. Project identifiers must be non-empty strings.[39;49;00m
+[31mERROR: Invalid intersphinx project identifier `None` in intersphinx_mapping. Project identifiers must be non-empty strings.[39;49;00m
+[31mERROR: Invalid value `None` in intersphinx_mapping['https://example/']. Expected a two-element tuple or list.[39;49;00m
+[31mERROR: Invalid value `'inventory'` in intersphinx_mapping['https://server/']. Expected a two-element tuple or list.[39;49;00m
+[31mERROR: Invalid value `0` in intersphinx_mapping['bad-dict-item']. Expected a two-element tuple or list.[39;49;00m
+[31mERROR: Invalid value `[0]` in intersphinx_mapping['unpack-except-1']. Values must be a (target URI, inventory locations) pair.[39;49;00m
+[31mERROR: Invalid value `[]` in intersphinx_mapping['unpack-except-2']. Values must be a (target URI, inventory locations) pair.[39;49;00m
+[31mERROR: Invalid target URI value `123456789` in intersphinx_mapping['bad-uri-type-1'][0]. Target URIs must be unique non-empty strings.[39;49;00m
+[31mERROR: Invalid target URI value `None` in intersphinx_mapping['bad-uri-type-2'][0]. Target URIs must be unique non-empty strings.[39;49;00m
+[31mERROR: Invalid target URI value `''` in intersphinx_mapping['bad-uri-value'][0]. Target URIs must be unique non-empty strings.[39;49;00m
+[31mERROR: Invalid target URI value `'example.org'` in intersphinx_mapping['dedup-good'][0]. Target URIs must be unique (other instance in intersphinx_mapping['good']).[39;49;00m
+[31mERROR: Invalid inventory location value `1` in intersphinx_mapping['bad-location-1'][1]. Inventory locations must be non-empty strings or None.[39;49;00m
+[31mERROR: Invalid inventory location value `''` in intersphinx_mapping['bad-location-2'][1]. Inventory locations must be non-empty strings or None.[39;49;00m
+[31mERROR: Invalid inventory location value `2` in intersphinx_mapping['bad-location-3'][1]. Inventory locations must be non-empty strings or None.[39;49;00m
+[31mERROR: Invalid inventory location value `''` in intersphinx_mapping['bad-location-4'][1]. Inventory locations must be non-empty strings or None.[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-intersphinx-role
+# outdir: /tmp/pytest-of-root/pytest-0/ext-intersphinx-role/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-intersphinx-role/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-intersphinx-role/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-intersphinx-role/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex py-modindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded, 8 warnings.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-0/ext-intersphinx-role/_build/html.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:21: WARNING: role for external cross-reference not found in domain 'py': 'nope' [intersphinx.external][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:28: WARNING: role for external cross-reference not found in domains 'cpp', 'std': 'nope' [intersphinx.external][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:39: WARNING: inventory for external cross-reference not found: 'invNope' [intersphinx.external][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:44: WARNING: role for external cross-reference not found in domain 'c': 'function' (perhaps you meant one of: 'func', 'identifier', 'type') [intersphinx.external][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:45: WARNING: role for external cross-reference not found in domains 'cpp', 'std': 'function' (perhaps you meant one of: 'cpp:func', 'cpp:identifier', 'cpp:type') [intersphinx.external][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:9: WARNING: external py:mod reference target not found: module3 [ref.mod][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:14: WARNING: external py:mod reference target not found: module10 [ref.mod][39;49;00m
+[91m/tmp/pytest-of-root/pytest-0/ext-intersphinx-role/index.rst:19: WARNING: external py:meth reference target not found: inv:Foo.bar [ref.meth][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_pydomain
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_ambiguous_reference_handling[A TERM-False]
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inventory_not_having_version
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_validate_intersphinx_mapping_warnings
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::TestStripBasicAuth::test_auth_stripped
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::TestStripBasicAuth::test_no_auth
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::TestStripBasicAuth::test_having_port
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_getsafeurl_authed
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_getsafeurl_authed_having_port
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_getsafeurl_unauthed
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inspect_main_file
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inspect_main_url
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_role
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[5-False]
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[1-True]
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[0-True]
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[-1-False]
+PASSED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_fetch_inventory_group_url
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_fetch_inventory_redirection
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_stddomain
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_ambiguous_reference_handling[B TERM-True]
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_cppdomain
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_jsdomain
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_disabled_domain
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_load_mappings_fallback
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inspect_main_noargs
+FAILED tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inventory_text_version
+======================== 10 failed, 18 passed in 0.93s =========================

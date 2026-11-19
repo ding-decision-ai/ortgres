@@ -1,0 +1,190 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/cosmology/_src/tests/funcs/test_comparison.py.
+
+Date: 2026-10-10T22:50:08
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 60 items
+
+astropy/cosmology/_src/tests/funcs/test_comparison.py .................F [ 30%]
+x..Fx...x...x...x.....Fx..Fx...x...x...x..                               [100%]
+
+=================================== FAILURES ===================================
+____ Test_cosmology_equal.test_cosmology_equal_format_error[astropy.model] _____
+astropy/cosmology/_src/tests/funcs/test_comparison.py:211: in test_cosmology_equal_format_error
+    cosmology_equal(cosmo, converted)
+astropy/cosmology/_src/funcs/comparison.py:238: in wrapper
+    cosmos = _parse_formats(*cosmos, format=format)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:144: in _parse_formats
+    return _parse_format(cosmology_array, formats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:104: in _parse_format
+    f"if 'format' is False, arguments must be a Cosmology, not {cosmo}"
+astropy/modeling/core.py:878: in __str__
+    return self._format_str()
+           ^^^^^^^^^^^^^^^^
+E   AttributeError: 'FlatLambdaCDMCosmologyComovingDistanceModel' object has no attribute '_format_str'
+_____ Test_cosmology_equal.test_cosmology_equal_format_error[astropy.row] ______
+astropy/cosmology/_src/tests/funcs/test_comparison.py:211: in test_cosmology_equal_format_error
+    cosmology_equal(cosmo, converted)
+astropy/cosmology/_src/funcs/comparison.py:238: in wrapper
+    cosmos = _parse_formats(*cosmos, format=format)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:144: in _parse_formats
+    return _parse_format(cosmology_array, formats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:104: in _parse_format
+    f"if 'format' is False, arguments must be a Cosmology, not {cosmo}"
+astropy/table/row.py:223: in __repr__
+    return self._base_repr_(html=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/table/row.py:210: in _base_repr_
+    table = self._table[index : index + 1]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/table/table.py:2151: in __getitem__
+    return self._new_from_slice(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/table/table.py:1564: in _new_from_slice
+    newcol = col.info.slice_indices(newcol, slice_, len(col))
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ColumnInfo' object has no attribute 'slice_indices'
+_ Test_cosmology_not_equal.test_cosmology_not_equal_format_error[astropy.model] _
+astropy/cosmology/_src/tests/funcs/test_comparison.py:290: in test_cosmology_not_equal_format_error
+    _cosmology_not_equal(cosmo, converted)
+astropy/cosmology/_src/funcs/comparison.py:238: in wrapper
+    cosmos = _parse_formats(*cosmos, format=format)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:144: in _parse_formats
+    return _parse_format(cosmology_array, formats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:104: in _parse_format
+    f"if 'format' is False, arguments must be a Cosmology, not {cosmo}"
+astropy/modeling/core.py:878: in __str__
+    return self._format_str()
+           ^^^^^^^^^^^^^^^^
+E   AttributeError: 'FlatLambdaCDMCosmologyComovingDistanceModel' object has no attribute '_format_str'
+_ Test_cosmology_not_equal.test_cosmology_not_equal_format_error[astropy.row] __
+astropy/cosmology/_src/tests/funcs/test_comparison.py:290: in test_cosmology_not_equal_format_error
+    _cosmology_not_equal(cosmo, converted)
+astropy/cosmology/_src/funcs/comparison.py:238: in wrapper
+    cosmos = _parse_formats(*cosmos, format=format)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:144: in _parse_formats
+    return _parse_format(cosmology_array, formats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/cosmology/_src/funcs/comparison.py:104: in _parse_format
+    f"if 'format' is False, arguments must be a Cosmology, not {cosmo}"
+astropy/table/row.py:223: in __repr__
+    return self._base_repr_(html=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/table/row.py:210: in _base_repr_
+    table = self._table[index : index + 1]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/table/table.py:2151: in __getitem__
+    return self._new_from_slice(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/table/table.py:1564: in _new_from_slice
+    newcol = col.info.slice_indices(newcol, slice_, len(col))
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ColumnInfo' object has no attribute 'slice_indices'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_shortcut
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_convert[astropy.model]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_vectorized[astropy.model]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_convert[astropy.row]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_vectorized[astropy.row]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_convert[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_vectorized[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_convert[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_vectorized[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_convert[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_vectorized[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_error_wrong_format
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_format_error_noncosmology_cant_convert
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_parse_format::test_parse_formats_vectorized
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_simple
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_equivalent
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_too_many_cosmo
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_specify[astropy.model]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_equivalent_format_specify[astropy.model]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_specify[astropy.row]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_equivalent_format_specify[astropy.row]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_error[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_specify[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_equivalent_format_specify[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_error[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_specify[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_equivalent_format_specify[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_error[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_specify[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_equivalent_format_specify[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_simple
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_too_many_cosmo
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_equivalent
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_specify[astropy.model]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_equivalent_format_specify[astropy.model]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_specify[astropy.row]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_equivalent_format_specify[astropy.row]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_error[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_specify[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_equivalent_format_specify[astropy.table]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_error[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_specify[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_equivalent_format_specify[mapping]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_error[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_specify[yaml]
+PASSED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_equivalent_format_specify[yaml]
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_auto[astropy.model] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_auto[astropy.row] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_auto[astropy.table] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_auto[mapping] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_auto[yaml] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_auto[astropy.model] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_auto[astropy.row] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_auto[astropy.table] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_auto[mapping] - cannot autoidentify
+XFAIL astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_auto[yaml] - cannot autoidentify
+FAILED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_error[astropy.model]
+FAILED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_equal::test_cosmology_equal_format_error[astropy.row]
+FAILED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_error[astropy.model]
+FAILED astropy/cosmology/_src/tests/funcs/test_comparison.py::Test_cosmology_not_equal::test_cosmology_not_equal_format_error[astropy.row]
+=================== 4 failed, 46 passed, 10 xfailed in 1.19s ===================

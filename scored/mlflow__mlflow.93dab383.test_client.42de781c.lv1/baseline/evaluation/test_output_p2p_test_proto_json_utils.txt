@@ -1,0 +1,137 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 29 items
+
+tests/utils/test_proto_json_utils.py::test_message_to_json PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [  3%]
+tests/utils/test_proto_json_utils.py::test_parse_dict PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [  6%]
+tests/utils/test_proto_json_utils.py::test_parse_dict_int_as_string_backcompat PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 10%]
+tests/utils/test_proto_json_utils.py::test_parse_legacy_experiment PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 13%]
+tests/utils/test_proto_json_utils.py::test_back_compat PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 17%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_dictionary PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 20%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_arbitrary_input_dictionary PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 24%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_single_array PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 27%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_raises_expected_errors PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 31%]
+tests/utils/test_proto_json_utils.py::test_dataframe_from_json PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 34%]
+tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt0-"2022-01-01T00:00:00"] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 37%]
+tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt1-"2022-01-02T03:04:05"] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 41%]
+tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt2-"2022-01-01"] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 44%]
+tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt3-"00:00:00"] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 48%]
+tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt4-"2022-01-01T00:00:00"] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 51%]
+tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe0-schema0-expected0] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 55%]
+tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe1-schema1-expected1] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 58%]
+tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe2-schema2-expected2] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 62%]
+tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe3-schema3-expected3] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 65%]
+tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_error_message[dataframe0-schema0-TypeError\\('encoding without a string argument'\\)] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 68%]
+tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_error_message[dataframe1-schema1-ValueError\\("could not convert string to float: \\'a\\'"\\)] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 72%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data0-schema0-None] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 75%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data1-schema1-None] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 79%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data2-schema2-None] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 82%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data3-schema3-None] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 86%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data4-schema4-instances_data4] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 89%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data5-schema5-instances_data5] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 93%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data6-schema6-instances_data6] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 96%]
+tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data7-schema7-None] PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:53 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+0.01s call     tests/utils/test_proto_json_utils.py::test_parse_tf_serving_dictionary
+0.01s call     tests/utils/test_proto_json_utils.py::test_dataframe_from_json
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_message_to_json
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_dict
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_dict_int_as_string_backcompat
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_legacy_experiment
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_back_compat
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_dictionary
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_arbitrary_input_dictionary
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_single_array
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_raises_expected_errors
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_dataframe_from_json
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt0-"2022-01-01T00:00:00"]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt1-"2022-01-02T03:04:05"]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt2-"2022-01-01"]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt3-"00:00:00"]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_datetime_encoder[dt4-"2022-01-01T00:00:00"]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe0-schema0-expected0]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe1-schema1-expected1]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe2-schema2-expected2]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_success[dataframe3-schema3-expected3]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_error_message[dataframe0-schema0-TypeError\\('encoding without a string argument'\\)]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_cast_df_types_according_to_schema_error_message[dataframe1-schema1-ValueError\\("could not convert string to float: \\'a\\'"\\)]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data0-schema0-None]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data1-schema1-None]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data2-schema2-None]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data3-schema3-None]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data4-schema4-instances_data4]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data5-schema5-instances_data5]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data6-schema6-instances_data6]
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_proto_json_utils.py::test_parse_tf_serving_input_for_dictionaries_and_lists_and_maps[data7-schema7-None]
+============================== 29 passed in 0.11s ==============================

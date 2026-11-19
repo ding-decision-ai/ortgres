@@ -1,0 +1,105 @@
+2026-10-10 22:49:08,040 - INFO - ============================================================
+2026-10-10 22:49:08,040 - INFO - Starting evaluation for instance: astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1
+2026-10-10 22:49:08,040 - INFO - Level: 1
+2026-10-10 22:49:08,040 - INFO - Attempt: 1
+2026-10-10 22:49:08,040 - INFO - ============================================================
+2026-10-10 22:49:08,047 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-10 22:49:08,047 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_astropy-instance_493bb78b
+2026-10-10 22:49:08,053 - INFO - Image docker.io/libercoders/featurebench-specs_astropy-instance_493bb78b found locally
+2026-10-10 22:49:08,053 - INFO - Creating container: fb-eval-astropy__astropy-b0db0daa-test_compression_failures-48dc420b-lv1-attempt-1-20261010-224908-053698
+2026-10-10 22:49:08,054 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-10 22:49:08,331 - INFO - Container fb-eval-astropy__astropy-b0db0daa-test_compression_failures-48dc420b-lv1-attempt-1-20261010-224908-053698 created successfully
+2026-10-10 22:49:08,331 - INFO - Starting Level 1 evaluation for astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1
+2026-10-10 22:49:08,331 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-10 22:49:09,225 - INFO - Restore project exit code: 0
+2026-10-10 22:49:09,225 - INFO - Output: 
+2026-10-10 22:49:09,225 - INFO - Step 2: Applying patch to mask files
+2026-10-10 22:49:09,230 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-10 22:49:09,511 - INFO - Mask patch apply exit code: 0
+2026-10-10 22:49:09,511 - INFO - Mask patch output: 
+2026-10-10 22:49:09,511 - INFO - Successfully applied mask patch
+2026-10-10 22:49:09,511 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-10 22:49:09,516 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-10 22:49:09,516 - INFO - Deleting F2P test file: /testbed/astropy/io/fits/hdu/compressed/tests/test_compression_failures.py
+2026-10-10 22:49:09,787 - INFO - Successfully deleted F2P test file: /testbed/astropy/io/fits/hdu/compressed/tests/test_compression_failures.py
+2026-10-10 22:49:09,787 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-10 22:49:09,787 - INFO - Step 4: Reinitializing git repository
+2026-10-10 22:49:12,106 - INFO - Step 5: Applying agent patch
+2026-10-10 22:49:12,110 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-10 22:49:12,368 - INFO - Patch apply exit code: 0
+2026-10-10 22:49:12,368 - INFO - Patch output: Checking patch astropy/io/fits/card.py...
+Checking patch astropy/io/fits/column.py...
+Checking patch astropy/io/fits/convenience.py...
+Checking patch astropy/io/fits/hdu/base.py...
+Checking patch astropy/io/fits/hdu/compressed/_tiled_compression.py...
+Checking patch astropy/io/fits/hdu/compressed/compressed.py...
+Checking patch astropy/io/fits/hdu/groups.py...
+Checking patch astropy/io/fits/hdu/hdulist.py...
+Checking patch astropy/io/fits/hdu/image.py...
+Checking patch astropy/io/fits/hdu/table.py...
+Checking patch astropy/io/fits/header.py...
+Checking patch astropy/io/fits/util.py...
+Applied patch astropy/io/fits/card.py cleanly.
+Applied patch astropy/io/fits/column.py cleanly.
+Applied patch astropy/io/fits/convenience.py cleanly.
+Applied patch astropy/io/fits/hdu/base.py cleanly.
+Applied patch astropy/io/fits/hdu/compressed/_tiled_compression.py cleanly.
+Applied patch astropy/io/fits/hdu/compressed/compressed.py cleanly.
+Applied patch astropy/io/fits/hdu/groups.py cleanly.
+Applied patch astropy/io/fits/hdu/hdulist.py cleanly.
+Applied patch astropy/io/fits/hdu/image.py cleanly.
+Applied patch astropy/io/fits/hdu/table.py cleanly.
+Applied patch astropy/io/fits/header.py cleanly.
+Applied patch astropy/io/fits/util.py cleanly.
+
+2026-10-10 22:49:12,368 - INFO - >>>>> Applied Patch
+2026-10-10 22:49:12,368 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-10 22:49:12,368 - INFO - F2P test path: /testbed/astropy/io/fits/hdu/compressed/tests/test_compression_failures.py
+2026-10-10 22:49:12,624 - INFO - Delete F2P file exit code: 0
+2026-10-10 22:49:12,624 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-10 22:49:12,888 - INFO - Reverse apply exit code: 0
+2026-10-10 22:49:12,888 - INFO - Reverse apply output: 
+2026-10-10 22:49:12,888 - INFO - Successfully restored F2P test file using test_patch
+2026-10-10 22:49:12,888 - INFO - Step 7: Running tests
+2026-10-10 22:49:12,888 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-10 22:49:12,888 - INFO - Test timeout: 600s
+2026-10-10 22:49:12,888 - INFO - Running F2P test: /testbed/astropy/io/fits/hdu/compressed/tests/test_compression_failures.py
+2026-10-10 22:49:14,737 - INFO - F2P test exit code: 1
+2026-10-10 22:49:14,737 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/fits/hdu/compressed/tests/test_compression_failures.py.
+
+Date: 2026-10-10T22:49:14
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main,
+2026-10-10 22:49:14,737 - INFO - Saved F2P test output to artifact://574c672f6da337d2
+2026-10-10 22:49:14,738 - INFO - Running 5 P2P tests
+2026-10-10 22:49:14,738 - INFO - Running P2P test: /testbed/astropy/nddata/tests/test_covariance.py
+2026-10-10 22:49:15,792 - INFO - P2P test /testbed/astropy/nddata/tests/test_covariance.py exit code: 0
+2026-10-10 22:49:15,793 - INFO - Saved P2P test output to artifact://d2d78a953901d564
+2026-10-10 22:49:15,793 - INFO - Running P2P test: /testbed/astropy/io/votable/tests/test_dataorigin.py
+2026-10-10 22:49:16,794 - INFO - P2P test /testbed/astropy/io/votable/tests/test_dataorigin.py exit code: 0
+2026-10-10 22:49:16,794 - INFO - Saved P2P test output to artifact://7804df71b0c7dad1
+2026-10-10 22:49:16,794 - INFO - Running P2P test: /testbed/astropy/convolution/tests/test_convolve_kernels.py
+2026-10-10 22:49:18,139 - INFO - P2P test /testbed/astropy/convolution/tests/test_convolve_kernels.py exit code: 0
+2026-10-10 22:49:18,139 - INFO - Saved P2P test output to artifact://70b850574a1c4a19
+2026-10-10 22:49:18,139 - INFO - Running P2P test: /testbed/astropy/modeling/tests/test_rotations.py
+2026-10-10 22:49:19,286 - INFO - P2P test /testbed/astropy/modeling/tests/test_rotations.py exit code: 0
+2026-10-10 22:49:19,286 - INFO - Saved P2P test output to artifact://2812391deeec9864
+2026-10-10 22:49:19,286 - INFO - Running P2P test: /testbed/astropy/units/tests/test_quantity_non_ufuncs.py
+2026-10-10 22:49:20,994 - INFO - P2P test /testbed/astropy/units/tests/test_quantity_non_ufuncs.py exit code: 0
+2026-10-10 22:49:20,994 - INFO - Saved P2P test output to artifact://7667829890312641
+2026-10-10 22:49:21,000 - INFO - ============================================================
+2026-10-10 22:49:21,000 - INFO - Evaluation completed for astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1
+2026-10-10 22:49:21,000 - INFO - Resolved: False
+2026-10-10 22:49:21,000 - INFO - F2P Pass rate: 0.1667
+2026-10-10 22:49:21,000 - INFO - ============================================================
+2026-10-10 22:49:21,000 - INFO - Stopping and removing container
+2026-10-10 22:49:31,358 - INFO - Container removed successfully

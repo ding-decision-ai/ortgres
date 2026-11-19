@@ -1,0 +1,83 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/885ccff, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+
+tests/test_command_line.py FFFx.FFFxF                                    [100%]
+
+=================================== FAILURES ===================================
+__________________ test_build_main_parse_arguments_pos_first ___________________
+tests/test_command_line.py:104: in test_build_main_parse_arguments_pos_first
+    assert parse_arguments(args) == EXPECTED_BUILD_MAIN
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...g': True, ...}
+E     
+E     Omitting 7 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'confdir': '', 'doctreedir': ''}
+E     Use -v to get more diff
+___________________ test_build_main_parse_arguments_pos_last ___________________
+tests/test_command_line.py:113: in test_build_main_parse_arguments_pos_last
+    assert parse_arguments(args) == EXPECTED_BUILD_MAIN
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...g': True, ...}
+E     
+E     Omitting 7 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'confdir': '', 'doctreedir': ''}
+E     Use -v to get more diff
+__________________ test_build_main_parse_arguments_pos_middle __________________
+tests/test_command_line.py:124: in test_build_main_parse_arguments_pos_middle
+    assert parse_arguments(args) == EXPECTED_BUILD_MAIN
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...g': True, ...}
+E     
+E     Omitting 7 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'confdir': '', 'doctreedir': ''}
+E     Use -v to get more diff
+___________________ test_make_mode_parse_arguments_pos_first ___________________
+tests/test_command_line.py:166: in test_make_mode_parse_arguments_pos_first
+    assert run_make_mode(args) == EXPECTED_MAKE_MODE
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...v': True, ...}
+E     
+E     Omitting 8 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'confdir': ''}
+E     Use -v to get more diff
+___________________ test_make_mode_parse_arguments_pos_last ____________________
+tests/test_command_line.py:182: in test_make_mode_parse_arguments_pos_last
+    assert stderr[-1].endswith('error: argument --builder/-b: expected one argument')
+E   AssertionError: assert False
+E    +  where False = <built-in method endswith of str object at 0x7f8662ee8fb0>('error: argument --builder/-b: expected one argument')
+E    +    where <built-in method endswith of str object at 0x7f8662ee8fb0> = 'sphinx-build: error: argument -b/--builder: expected one argument'.endswith
+__________________ test_make_mode_parse_arguments_pos_middle ___________________
+tests/test_command_line.py:199: in test_make_mode_parse_arguments_pos_middle
+    assert stderr[-1].endswith('error: argument --builder/-b: expected one argument')
+E   AssertionError: assert False
+E    +  where False = <built-in method endswith of str object at 0x7f8662cdc1b0>('error: argument --builder/-b: expected one argument')
+E    +    where <built-in method endswith of str object at 0x7f8662cdc1b0> = 'sphinx-build: error: argument -b/--builder: expected one argument'.endswith
+________________ test_make_mode_parse_arguments_pos_intermixed _________________
+tests/test_command_line.py:236: in test_make_mode_parse_arguments_pos_intermixed
+    assert stderr[-1].endswith('error: argument --builder/-b: expected one argument')
+E   AssertionError: assert False
+E    +  where False = <built-in method endswith of str object at 0x7f8662d387b0>('error: argument --builder/-b: expected one argument')
+E    +    where <built-in method endswith of str object at 0x7f8662d387b0> = 'sphinx-build: error: argument -b/--builder: expected one argument'.endswith
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_command_line.py::test_build_main_parse_arguments_pos_intermixed
+XFAIL tests/test_command_line.py::test_build_main_parse_arguments_filenames_last - sphinx-build does not yet support filenames after options
+XFAIL tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last - sphinx-build does not yet support filenames after options
+FAILED tests/test_command_line.py::test_build_main_parse_arguments_pos_first
+FAILED tests/test_command_line.py::test_build_main_parse_arguments_pos_last
+FAILED tests/test_command_line.py::test_build_main_parse_arguments_pos_middle
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_first
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_last - ...
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_middle
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_intermixed
+==================== 7 failed, 1 passed, 2 xfailed in 0.12s ====================

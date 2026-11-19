@@ -1,0 +1,115 @@
+2026-10-15 07:33:45,903 - INFO - ============================================================
+2026-10-15 07:33:45,903 - INFO - Starting evaluation for instance: sympy__sympy.c1097516.test_smtlib.69d52b90.lv1
+2026-10-15 07:33:45,903 - INFO - Level: 1
+2026-10-15 07:33:45,903 - INFO - Attempt: 1
+2026-10-15 07:33:45,903 - INFO - ============================================================
+2026-10-15 07:33:45,915 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-15 07:33:45,915 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_sympy-instance_3d889fef
+2026-10-15 07:33:45,917 - INFO - Image docker.io/libercoders/featurebench-specs_sympy-instance_3d889fef found locally
+2026-10-15 07:33:45,918 - INFO - Creating container: fb-eval-sympy__sympy-c1097516-test_smtlib-69d52b90-lv1-attempt-1-20261015-073345-918013
+2026-10-15 07:33:45,919 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-15 07:33:46,219 - INFO - Container fb-eval-sympy__sympy-c1097516-test_smtlib-69d52b90-lv1-attempt-1-20261015-073345-918013 created successfully
+2026-10-15 07:33:46,219 - INFO - Starting Level 1 evaluation for sympy__sympy.c1097516.test_smtlib.69d52b90.lv1
+2026-10-15 07:33:46,219 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-15 07:33:47,614 - INFO - Restore project exit code: 0
+2026-10-15 07:33:47,614 - INFO - Output: 
+2026-10-15 07:33:47,614 - INFO - Step 2: Applying patch to mask files
+2026-10-15 07:33:47,619 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-15 07:33:48,077 - INFO - Mask patch apply exit code: 0
+2026-10-15 07:33:48,078 - INFO - Mask patch output: /tmp/mask_patch.diff:567: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+
+2026-10-15 07:33:48,078 - INFO - Successfully applied mask patch
+2026-10-15 07:33:48,078 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-15 07:33:48,094 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-15 07:33:48,094 - INFO - Deleting F2P test file: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-15 07:33:48,469 - INFO - Successfully deleted F2P test file: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-15 07:33:48,469 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-15 07:33:48,469 - INFO - Step 4: Reinitializing git repository
+2026-10-15 07:33:50,168 - INFO - Step 5: Applying agent patch
+2026-10-15 07:33:50,175 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-15 07:33:50,530 - INFO - Patch apply exit code: 0
+2026-10-15 07:33:50,530 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Checking patch sympy/assumptions/handlers/ntheory.py...
+Checking patch sympy/combinatorics/permutations.py...
+Checking patch sympy/core/expr.py...
+Checking patch sympy/core/numbers.py...
+Checking patch sympy/core/relational.py...
+Checking patch sympy/functions/elementary/integers.py...
+Checking patch sympy/physics/quantum/spin.py...
+Checking patch sympy/plotting/intervalmath/interval_arithmetic.py...
+Checking patch sympy/polys/domains/finitefield.py...
+Checking patch sympy/polys/domains/gmpyintegerring.py...
+Checking patch sympy/polys/domains/integerring.py...
+Checking patch sympy/polys/domains/pythonintegerring.py...
+Checking patch sympy/solvers/diophantine/diophantine.py...
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+Applied patch sympy/assumptions/handlers/ntheory.py cleanly.
+Applied patch sympy/combinatorics/permutations.py cleanly.
+Applied patch sympy/core/expr.py cleanly.
+Applied patch sympy/core/numbers.py cleanly.
+Applied patch sympy/core/relational.py cleanly.
+Applied patch sympy/functions/elementary/integers.py cleanly.
+Applied patch sympy/physics/quantum/spin.py cleanly.
+Applied patch sympy/plotting/intervalmath/interval_arithmetic.py cleanly.
+Applied patch sympy/polys/domains/finitefield.py cleanly.
+Applied patch sympy/polys/domains/gmpyintegerring.py cleanly.
+Applied patch sympy/polys/domains/integerring.py cleanly.
+Applied patch sympy/polys/domains/pythonintegerring.py cleanly.
+Applied patch sympy/solvers/diophantine/diophantine.py cleanly.
+
+2026-10-15 07:33:50,530 - INFO - >>>>> Applied Patch
+2026-10-15 07:33:50,530 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-15 07:33:50,530 - INFO - F2P test path: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-15 07:33:50,829 - INFO - Delete F2P file exit code: 0
+2026-10-15 07:33:50,829 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-15 07:33:51,135 - INFO - Reverse apply exit code: 0
+2026-10-15 07:33:51,136 - INFO - Reverse apply output: 
+2026-10-15 07:33:51,136 - INFO - Successfully restored F2P test file using test_patch
+2026-10-15 07:33:51,136 - INFO - Step 7: Running tests
+2026-10-15 07:33:51,136 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-15 07:33:51,136 - INFO - Test timeout: 600s
+2026-10-15 07:33:51,136 - INFO - Running F2P test: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-15 07:33:55,567 - INFO - F2P test exit code: 1
+2026-10-15 07:33:55,567 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: split-0.10.0, hypothesis-6.147.0, xdist-3.8.0, doctestplus-1.5.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 16 items
+
+sympy/printing/tests/test_smtlib.py FFFFFFFFFFFFFFFF                     [100%]
+2026-10-15 07:33:55,567 - INFO - Saved F2P test output to artifact://559687e3df52a9cc
+2026-10-15 07:33:55,567 - INFO - Running 5 P2P tests
+2026-10-15 07:33:55,567 - INFO - Running P2P test: /testbed/sympy/combinatorics/tests/test_partitions.py
+2026-10-15 07:33:57,399 - INFO - P2P test /testbed/sympy/combinatorics/tests/test_partitions.py exit code: 0
+2026-10-15 07:33:57,399 - INFO - Saved P2P test output to artifact://878b4b3718b3f6fd
+2026-10-15 07:33:57,399 - INFO - Running P2P test: /testbed/sympy/ntheory/tests/test_digits.py
+2026-10-15 07:33:58,904 - INFO - P2P test /testbed/sympy/ntheory/tests/test_digits.py exit code: 0
+2026-10-15 07:33:58,905 - INFO - Saved P2P test output to artifact://89b29b2142c1598d
+2026-10-15 07:33:58,905 - INFO - Running P2P test: /testbed/sympy/matrices/expressions/tests/test_matmul.py
+2026-10-15 07:34:00,627 - INFO - P2P test /testbed/sympy/matrices/expressions/tests/test_matmul.py exit code: 0
+2026-10-15 07:34:00,628 - INFO - Saved P2P test output to artifact://b479ff6acf0b24b1
+2026-10-15 07:34:00,628 - INFO - Running P2P test: /testbed/sympy/physics/quantum/tests/test_operator.py
+2026-10-15 07:34:02,809 - INFO - P2P test /testbed/sympy/physics/quantum/tests/test_operator.py exit code: 0
+2026-10-15 07:34:02,809 - INFO - Saved P2P test output to artifact://02bb178e24bda0d9
+2026-10-15 07:34:02,809 - INFO - Running P2P test: /testbed/sympy/core/tests/test_traversal.py
+2026-10-15 07:34:04,449 - INFO - P2P test /testbed/sympy/core/tests/test_traversal.py exit code: 0
+2026-10-15 07:34:04,449 - INFO - Saved P2P test output to artifact://48a5e09a2f7de679
+2026-10-15 07:34:04,451 - INFO - ============================================================
+2026-10-15 07:34:04,451 - INFO - Evaluation completed for sympy__sympy.c1097516.test_smtlib.69d52b90.lv1
+2026-10-15 07:34:04,451 - INFO - Resolved: False
+2026-10-15 07:34:04,451 - INFO - F2P Pass rate: 0.0
+2026-10-15 07:34:04,451 - INFO - ============================================================
+2026-10-15 07:34:04,451 - INFO - Stopping and removing container
+2026-10-15 07:34:14,872 - INFO - Container removed successfully

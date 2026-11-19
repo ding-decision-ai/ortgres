@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: split-0.10.0, hypothesis-6.147.0, xdist-3.8.0, doctestplus-1.5.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 4 items
+
+sympy/ntheory/tests/test_digits.py ....                                  [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED sympy/ntheory/tests/test_digits.py::test_num_digits
+PASSED sympy/ntheory/tests/test_digits.py::test_digits
+PASSED sympy/ntheory/tests/test_digits.py::test_count_digits
+PASSED sympy/ntheory/tests/test_digits.py::test_is_palindromic
+============================== 4 passed in 0.06s ===============================

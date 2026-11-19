@@ -1,0 +1,1243 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/fits/hdu/compressed/tests/test_compressed.py.
+
+Date: 2026-10-10T23:24:20
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 92 items
+
+astropy/io/fits/hdu/compressed/tests/test_compressed.py FFFFFFFFFFFs.FF. [ 17%]
+.sFFFFFFFF.FFFFFFFF..FFFFFFFFFFFFFFFFFFFFFFFF..F..F..EEEEEEFFFFF..FF.F.. [ 92%]
+FFFFFFF                                                                  [100%]
+
+==================================== ERRORS ====================================
+__________ ERROR at setup of TestCompHDUSections.test_section_slicing __________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1022: in setup_method
+    hdulist.writeto(tmp_path / "sections.fits")
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ ERROR at teardown of TestCompHDUSections.test_section_slicing _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1028: in teardown_method
+    self.hdul.close()
+    ^^^^^^^^^
+E   AttributeError: 'TestCompHDUSections' object has no attribute 'hdul'
+______ ERROR at setup of TestCompHDUSections.test_section_slicing_scaling ______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1022: in setup_method
+    hdulist.writeto(tmp_path / "sections.fits")
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____ ERROR at teardown of TestCompHDUSections.test_section_slicing_scaling _____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1028: in teardown_method
+    self.hdul.close()
+    ^^^^^^^^^
+E   AttributeError: 'TestCompHDUSections' object has no attribute 'hdul'
+________ ERROR at setup of TestCompHDUSections.test_section_properties _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1022: in setup_method
+    hdulist.writeto(tmp_path / "sections.fits")
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_______ ERROR at teardown of TestCompHDUSections.test_section_properties _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1028: in teardown_method
+    self.hdul.close()
+    ^^^^^^^^^
+E   AttributeError: 'TestCompHDUSections' object has no attribute 'hdul'
+=================================== FAILURES ===================================
+________________________ TestCompressedImage.test_empty ________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:38: in test_empty
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/compressed/compressed.py:620: in _writeto
+    return self._tmp_bintable._writeto(fileobj, inplace=inplace, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: '_CompBinTableHDU' object has no attribute '_writedata_direct_copy'
+____________ TestCompressedImage.test_comp_image[<-data0-RICE_1-16] ____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_comp_image[<-data1-GZIP_1--0.01] ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_comp_image[<-data2-GZIP_2--0.01] ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_comp_image[<-data3-HCOMPRESS_1-16] __________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____________ TestCompressedImage.test_comp_image[<-data4-PLIO_1-16] ____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____________ TestCompressedImage.test_comp_image[>-data0-RICE_1-16] ____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_comp_image[>-data1-GZIP_1--0.01] ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_comp_image[>-data2-GZIP_2--0.01] ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_comp_image[>-data3-HCOMPRESS_1-16] __________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____________ TestCompressedImage.test_comp_image[>-data4-PLIO_1-16] ____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:76: in test_comp_image
+    ofd.writeto(self.temp("test_new.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_comp_image_hcompress_image_stack ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:164: in test_comp_image_hcompress_image_stack
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_______________ TestCompressedImage.test_subtractive_dither_seed _______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:188: in test_subtractive_dither_seed
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_write_comp_hdu_direct_from_existing _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:292: in test_write_comp_hdu_direct_from_existing
+    hdul[1].writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/compressed/compressed.py:620: in _writeto
+    return self._tmp_bintable._writeto(fileobj, inplace=inplace, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'BinTableHDU' object has no attribute '_writedata_direct_copy'
+_______ TestCompressedImage.test_rewriting_large_scaled_image_compressed _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:313: in test_rewriting_large_scaled_image_compressed
+    chdu.writeto(self.temp("fixed-1890-z.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________________ TestCompressedImage.test_scale_back_compressed ________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:360: in test_scale_back_compressed
+    chdu.writeto(self.temp("scale.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______________ TestCompressedImage.test_lossless_gzip_compression ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:397: in test_lossless_gzip_compression
+    chdu1.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______________ TestCompressedImage.test_compression_column_tforms ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:424: in test_compression_column_tforms
+    chdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______________ TestCompressedImage.test_compression_update_header ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:436: in test_compression_update_header
+    with fits.open(testfile, mode="update") as hdul:
+astropy/io/fits/hdu/hdulist.py:463: in __exit__
+    self.close(output_verify=output_verify)
+astropy/io/fits/hdu/hdulist.py:1090: in close
+    self.flush(output_verify=output_verify, verbose=verbose)
+astropy/io/fits/util.py:228: in wrapped
+    func(*args, **kwargs)
+astropy/io/fits/hdu/hdulist.py:957: in flush
+    self._flush_update()
+astropy/io/fits/hdu/hdulist.py:1443: in _flush_update
+    hdu._prewriteto(inplace=True)
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:555: in _add_data_to_bintable
+    if self.data is None:
+       ^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:515: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:84: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:314: in decompress_image_data_section
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_______ TestCompressedImage.test_compression_update_header_with_reserved _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:506: in test_compression_update_header_with_reserved
+    hdul.writeto(tmp_path / "test.fits")
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'PrimaryHDU' object has no attribute '_writedata_direct_copy'
+
+During handling of the above exception, another exception occurred:
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:505: in test_compression_update_header_with_reserved
+    with pytest.warns() as record:
+E   Failed: DID NOT WARN. No warnings of type (<class 'Warning'>,) were emitted.
+E    Emitted warnings: [].
+______________ TestCompressedImage.test_compression_header_append ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:530: in test_compression_header_append
+    hdul.writeto(tmp_path / "updated.fits")
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'PrimaryHDU' object has no attribute '_writedata_direct_copy'
+
+During handling of the above exception, another exception occurred:
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:527: in test_compression_header_append
+    with pytest.warns(
+E   Failed: DID NOT WARN. No warnings of type (<class 'astropy.io.fits.verify.VerifyWarning'>,) were emitted.
+E    Emitted warnings: [].
+______________ TestCompressedImage.test_compression_header_insert ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:580: in test_compression_header_insert
+    hdul.writeto(tmp_path / "updated.fits")
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'PrimaryHDU' object has no attribute '_writedata_direct_copy'
+
+During handling of the above exception, another exception occurred:
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:577: in test_compression_header_insert
+    with pytest.warns(
+E   Failed: DID NOT WARN. No warnings of type (<class 'astropy.io.fits.verify.VerifyWarning'>,) were emitted.
+E    Emitted warnings: [].
+_________ TestCompressedImage.test_compression_header_set_before_after _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:602: in test_compression_header_set_before_after
+    hdul.writeto(tmp_path / "updated1.fits")
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'PrimaryHDU' object has no attribute '_writedata_direct_copy'
+
+During handling of the above exception, another exception occurred:
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:601: in test_compression_header_set_before_after
+    with pytest.warns(UserWarning, match="Keyword 'ZBITPIX' is reserved"):
+E   Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted.
+E    Emitted warnings: [].
+________ TestCompressedImage.test_compression_header_append_commentary _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:642: in test_compression_header_append_commentary
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____________ TestCompressedImage.test_compression_with_gzip_column _____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:661: in test_compression_with_gzip_column
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ TestCompressedImage.test_duplicate_compression_header_keywords ________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:683: in test_duplicate_compression_header_keywords
+    hdu.writeto(self.temp("test1.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ TestCompressedImage.test_scale_bzero_with_compressed_int_data _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:714: in test_scale_bzero_with_compressed_int_data
+    hdu1.scale("int16", bzero=99.0)
+astropy/io/fits/hdu/image.py:478: in scale
+    self._scale_internal(
+astropy/io/fits/hdu/image.py:548: in _scale_internal
+    if _is_dask_array(self.data):
+       ^^^^^^^^^^^^^^
+E   NameError: name '_is_dask_array' is not defined
+________ TestCompressedImage.test_scale_back_compressed_uint_assignment ________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:730: in test_scale_back_compressed_uint_assignment
+    fits.CompImageHDU(a).writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_compressed_header_double_extname ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:760: in test_compressed_header_double_extname
+    hdul.writeto(self.temp("tmp.fits"), overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'PrimaryHDU' object has no attribute '_writedata_direct_copy'
+____ TestCompressedImage.test_compressed_scaled_float[BSCALE-uint8-float32] ____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:835: in test_compressed_scaled_float
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____ TestCompressedImage.test_compressed_scaled_float[BSCALE-int16-float32] ____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:835: in test_compressed_scaled_float
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____ TestCompressedImage.test_compressed_scaled_float[BSCALE-int32-float64] ____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:835: in test_compressed_scaled_float
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____ TestCompressedImage.test_compressed_scaled_float[BZERO-uint8-float32] _____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:835: in test_compressed_scaled_float
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____ TestCompressedImage.test_compressed_scaled_float[BZERO-int16-float32] _____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:835: in test_compressed_scaled_float
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____ TestCompressedImage.test_compressed_scaled_float[BZERO-int32-float64] _____
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:835: in test_compressed_scaled_float
+    hdu.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________ TestCompressedImage.test_compressed_integers[uint8] ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:854: in test_compressed_integers
+    hdu.writeto(testfile, overwrite=True)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________ TestCompressedImage.test_compressed_integers[int16] ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:854: in test_compressed_integers
+    hdu.writeto(testfile, overwrite=True)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________ TestCompressedImage.test_compressed_integers[uint16] _____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:854: in test_compressed_integers
+    hdu.writeto(testfile, overwrite=True)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________ TestCompressedImage.test_compressed_integers[int32] ______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:854: in test_compressed_integers
+    hdu.writeto(testfile, overwrite=True)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________ TestCompressedImage.test_compressed_integers[uint32] _____________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:854: in test_compressed_integers
+    hdu.writeto(testfile, overwrite=True)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_______ TestCompressedImage.test_write_non_contiguous_data[NOCOMPRESS-f] _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______ TestCompressedImage.test_write_non_contiguous_data[NOCOMPRESS-i4] _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_write_non_contiguous_data[RICE_1-f] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ TestCompressedImage.test_write_non_contiguous_data[RICE_1-i4] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_write_non_contiguous_data[GZIP_1-f] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ TestCompressedImage.test_write_non_contiguous_data[GZIP_1-i4] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_write_non_contiguous_data[GZIP_2-f] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ TestCompressedImage.test_write_non_contiguous_data[GZIP_2-i4] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________ TestCompressedImage.test_write_non_contiguous_data[PLIO_1-f] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+________ TestCompressedImage.test_write_non_contiguous_data[PLIO_1-i4] _________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______ TestCompressedImage.test_write_non_contiguous_data[HCOMPRESS_1-f] _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______ TestCompressedImage.test_write_non_contiguous_data[HCOMPRESS_1-i4] ______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:875: in test_write_non_contiguous_data
+    hdulist.writeto(self.temp("test.fits"))
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______________ TestCompressedImage.test_slice_and_write_comp_hdu _______________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:885: in test_slice_and_write_comp_hdu
+    hdul[1].data = hdul[1].data[:200, :100]
+                   ^^^^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:515: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:84: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:314: in decompress_image_data_section
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+__________ TestCompressedImage.test_compressed_optional_prefix_tform ___________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:912: in test_compressed_optional_prefix_tform
+    hdu1.writeto(tmp_path / "compressed.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________________ TestCompressedImage.test_inplace_data_modify _________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:966: in test_inplace_data_modify
+    data = hdul[1].data
+           ^^^^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:515: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:84: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:314: in decompress_image_data_section
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________________________ test_comphdu_fileobj _____________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1059: in test_comphdu_fileobj
+    hdu.writeto(byte_buffer)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________________________ test_comphdu_bscale ______________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1084: in test_comphdu_bscale
+    hdus.writeto(filename1)
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:583: in _writedata
+    size += self._writedata_internal(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/image.py:651: in _writedata_internal
+    elif _is_dask_array(self.data):
+         ^^^^^^^^^^^^^^
+E   NameError: name '_is_dask_array' is not defined
+__________________________ test_image_write_readonly ___________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1110: in test_image_write_readonly
+    ghdu.writeto(filename)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_______________________________ test_uint_option _______________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1126: in test_uint_option
+    hdu.writeto(filename)
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_____________________________ test_incorrect_bzero _____________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1158: in test_incorrect_bzero
+    hdulist.writeto(tmp_path / "test_bzero.fits")
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:583: in _writedata
+    size += self._writedata_internal(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/image.py:651: in _writedata_internal
+    elif _is_dask_array(self.data):
+         ^^^^^^^^^^^^^^
+E   NameError: name '_is_dask_array' is not defined
+____________________ test_compression_settings_delayed_data ____________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1209: in test_compression_settings_delayed_data
+    hdu1.writeto(tmp_path / "data1.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_________________________ test_header_assignment_issue _________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1232: in test_header_assignment_issue
+    ch.writeto(tmp_path / "test_header.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1060: in writeto
+    hdu._writeto(hdulist._file)
+astropy/io/fits/hdu/compressed/compressed.py:620: in _writeto
+    return self._tmp_bintable._writeto(fileobj, inplace=inplace, copy=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:646: in _writeto
+    self._writeto_internal(fileobj, inplace, copy)
+astropy/io/fits/hdu/base.py:652: in _writeto_internal
+    data_offset, data_size = self._writedata(fileobj)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/base.py:599: in _writedata
+    size += self._writedata_direct_copy(fileobj)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: '_CompBinTableHDU' object has no attribute '_writedata_direct_copy'
+_____________________________ test_section_scaling _____________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1254: in test_section_scaling
+    chdu._scale_internal(bzero=1.234, bscale=0.0002, blank=32767)
+astropy/io/fits/hdu/image.py:548: in _scale_internal
+    if _is_dask_array(self.data):
+       ^^^^^^^^^^^^^^
+E   NameError: name '_is_dask_array' is not defined
+______________________________ test_header_order _______________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1341: in test_header_order
+    hdulist.writeto(tmp_path / "test.fits", overwrite=True)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+____________________________ test_hdu_lazy_loading _____________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1357: in test_hdu_lazy_loading
+    hdulist.writeto(tmp_path / "multi_hdu.fits")
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______ test_compression_options_with_mutated_data[quantize_level_w_data] _______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1440: in test_compression_options_with_mutated_data
+    hdu.writeto(tmp_path / "t.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+______ test_compression_options_with_mutated_data[quantize_level_wo_data] ______
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1440: in test_compression_options_with_mutated_data
+    hdu.writeto(tmp_path / "t.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_ test_compression_options_with_mutated_data[quantize_level_dither_seed_w_data] _
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1440: in test_compression_options_with_mutated_data
+    hdu.writeto(tmp_path / "t.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_ test_compression_options_with_mutated_data[quantize_level_dither_seed_wo_data] _
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1440: in test_compression_options_with_mutated_data
+    hdu.writeto(tmp_path / "t.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+_______________________ test_reserved_keywords_stripped ________________________
+astropy/io/fits/hdu/compressed/tests/test_compressed.py:1457: in test_reserved_keywords_stripped
+    hdu.writeto(tmp_path / "compressed.fits")
+astropy/io/fits/hdu/base.py:1541: in writeto
+    hdulist.writeto(name, output_verify, overwrite=overwrite, checksum=checksum)
+astropy/io/fits/hdu/hdulist.py:1059: in writeto
+    hdu._prewriteto()
+astropy/io/fits/hdu/compressed/compressed.py:593: in _prewriteto
+    self._add_data_to_bintable(self._tmp_bintable)
+astropy/io/fits/hdu/compressed/compressed.py:558: in _add_data_to_bintable
+    heap = compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:507: in compress_image_data
+    _check_compressed_header(compressed_header)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_check_compressed_header' is not defined
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_hcompression_1_invalid_data
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_disable_image_compression
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_open_comp_image_in_update_mode
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_append2
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_header_extname
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_header_minimal
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_properties_default
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_properties_set
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_info
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_shape
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_summary_noload
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_fileinfo
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_custom_extname
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_pickle
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_section_unwritten
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_header
+PASSED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_rice_one_alias
+SKIPPED [1] ../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_remotedata/plugin.py:81: need --remote-data option to run
+SKIPPED [1] astropy/io/fits/hdu/compressed/tests/test_compressed.py:228: need --run-slow option to run
+ERROR astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_slicing
+ERROR astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_slicing
+ERROR astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_slicing_scaling
+ERROR astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_slicing_scaling
+ERROR astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_properties
+ERROR astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_properties
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_empty
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data0-RICE_1-16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data1-GZIP_1--0.01]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data2-GZIP_2--0.01]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data3-HCOMPRESS_1-16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data4-PLIO_1-16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data0-RICE_1-16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data1-GZIP_1--0.01]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data2-GZIP_2--0.01]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data3-HCOMPRESS_1-16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data4-PLIO_1-16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_hcompress_image_stack
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_subtractive_dither_seed
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_comp_hdu_direct_from_existing
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_rewriting_large_scaled_image_compressed
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_scale_back_compressed
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_lossless_gzip_compression
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_column_tforms
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_update_header
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_update_header_with_reserved
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_append
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_insert
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_set_before_after
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_append_commentary
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_with_gzip_column
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_duplicate_compression_header_keywords
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_scale_bzero_with_compressed_int_data
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_scale_back_compressed_uint_assignment
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_header_double_extname
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BSCALE-uint8-float32]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BSCALE-int16-float32]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BSCALE-int32-float64]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BZERO-uint8-float32]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BZERO-int16-float32]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BZERO-int32-float64]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[uint8]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[int16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[uint16]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[int32]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[uint32]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[NOCOMPRESS-f]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[NOCOMPRESS-i4]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[RICE_1-f]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[RICE_1-i4]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_1-f]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_1-i4]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_2-f]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_2-i4]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[PLIO_1-f]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[PLIO_1-i4]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[HCOMPRESS_1-f]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[HCOMPRESS_1-i4]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_slice_and_write_comp_hdu
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_optional_prefix_tform
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_inplace_data_modify
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_comphdu_fileobj
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_comphdu_bscale
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_image_write_readonly
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_uint_option
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_incorrect_bzero
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_settings_delayed_data
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_header_assignment_issue
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_section_scaling
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_header_order
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_hdu_lazy_loading
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_w_data]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_wo_data]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_dither_seed_w_data]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_dither_seed_wo_data]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_reserved_keywords_stripped
+============== 70 failed, 17 passed, 2 skipped, 6 errors in 5.68s ==============

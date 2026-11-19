@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 36 items
+
+tests/_core/test_subplots.py ....................................        [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_core/test_subplots.py::TestSpecificationChecks::test_both_facets_and_wrap
+PASSED tests/_core/test_subplots.py::TestSpecificationChecks::test_cross_xy_pairing_and_wrap
+PASSED tests/_core/test_subplots.py::TestSpecificationChecks::test_col_facets_and_x_pairing
+PASSED tests/_core/test_subplots.py::TestSpecificationChecks::test_wrapped_columns_and_y_pairing
+PASSED tests/_core/test_subplots.py::TestSpecificationChecks::test_wrapped_x_pairing_and_facetd_rows
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_single_subplot
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_single_facet
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_two_facets
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_col_facet_wrapped
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_row_facet_wrapped
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_col_facet_wrapped_single_row
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_x_and_y_paired
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_x_paired
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_y_paired
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_x_paired_and_wrapped
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_y_paired_and_wrapped
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_y_paired_and_wrapped_single_row
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_col_faceted_y_paired
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_row_faceted_x_paired
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_x_any_y_paired_non_cross
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_x_any_y_paired_non_cross_wrapped
+PASSED tests/_core/test_subplots.py::TestSubplotSpec::test_forced_unshared_facets
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_subplot
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_facet_dim[col]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_facet_dim[row]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_facet_dim_wrapped[col]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_facet_dim_wrapped[row]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_both_facet_dims
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_paired_var[x]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_paired_var[y]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_paired_var_wrapped[x]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_single_paired_var_wrapped[y]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_both_paired_variables
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_both_paired_non_cross
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_one_facet_one_paired[col-y]
+PASSED tests/_core/test_subplots.py::TestSubplotElements::test_one_facet_one_paired[row-x]
+============================== 36 passed in 0.60s ==============================

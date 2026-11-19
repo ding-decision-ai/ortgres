@@ -1,0 +1,216 @@
+diff --git a/sphinx/builders/gettext.py b/sphinx/builders/gettext.py
+index 7951692..fc659d7 100644
+--- a/sphinx/builders/gettext.py
++++ b/sphinx/builders/gettext.py
+@@ -23,7 +23,7 @@
+ from sphinx.util.display import status_iterator
+ from sphinx.util.i18n import docname_to_domain
+ from sphinx.util.index_entries import split_index_msg
+-from sphinx.util.nodes import traverse_translatable_index
++from sphinx.util.nodes import extract_messages, traverse_translatable_index
+ from sphinx.util.osutil import canon_path, ensuredir, relpath
+ from sphinx.util.tags import Tags
+ from sphinx.util.template import SphinxRenderer
+diff --git a/sphinx/domains/javascript.py b/sphinx/domains/javascript.py
+index 4019e07..6ebd1de 100644
+--- a/sphinx/domains/javascript.py
++++ b/sphinx/domains/javascript.py
+@@ -18,7 +18,7 @@
+ from sphinx.util import logging
+ from sphinx.util.docfields import Field, GroupedField, TypedField
+ from sphinx.util.docutils import SphinxDirective
+-from sphinx.util.nodes import make_refnode
++from sphinx.util.nodes import make_id, make_refnode
+ 
+ if TYPE_CHECKING:
+     from collections.abc import Iterator, Set
+diff --git a/sphinx/domains/python/__init__.py b/sphinx/domains/python/__init__.py
+index 4bfe991..afd17f9 100644
+--- a/sphinx/domains/python/__init__.py
++++ b/sphinx/domains/python/__init__.py
+@@ -19,7 +19,7 @@
+ from sphinx.roles import XRefRole
+ from sphinx.util import logging
+ from sphinx.util.docutils import SphinxDirective
+-from sphinx.util.nodes import find_pending_xref_condition, make_refnode
++from sphinx.util.nodes import find_pending_xref_condition, make_id, make_refnode
+ 
+ 
+ 
+diff --git a/sphinx/domains/python/_object.py b/sphinx/domains/python/_object.py
+index e2bc528..68d655f 100644
+--- a/sphinx/domains/python/_object.py
++++ b/sphinx/domains/python/_object.py
+@@ -20,6 +20,7 @@
+ from sphinx.locale import _
+ from sphinx.util import logging
+ from sphinx.util.docfields import Field, GroupedField, TypedField
++from sphinx.util.nodes import make_id
+ 
+ 
+ 
+diff --git a/sphinx/domains/rst.py b/sphinx/domains/rst.py
+index 5becf67..64aff25 100644
+--- a/sphinx/domains/rst.py
++++ b/sphinx/domains/rst.py
+@@ -13,7 +13,7 @@
+ from sphinx.locale import _, __
+ from sphinx.roles import XRefRole
+ from sphinx.util import logging
+-from sphinx.util.nodes import make_refnode
++from sphinx.util.nodes import make_id, make_refnode
+ 
+ if TYPE_CHECKING:
+     from collections.abc import Iterator, Set
+diff --git a/sphinx/domains/std/__init__.py b/sphinx/domains/std/__init__.py
+index 5e28f29..52ccef6 100644
+--- a/sphinx/domains/std/__init__.py
++++ b/sphinx/domains/std/__init__.py
+@@ -19,7 +19,7 @@
+ from sphinx.roles import EmphasizedLiteral, XRefRole
+ from sphinx.util import docname_join, logging, ws_re
+ from sphinx.util.docutils import SphinxDirective
+-from sphinx.util.nodes import clean_astext, make_refnode
++from sphinx.util.nodes import clean_astext, make_id, make_refnode
+ from sphinx.util.parsing import nested_parse_to_nodes
+ 
+ if TYPE_CHECKING:
+diff --git a/sphinx/ext/extlinks.py b/sphinx/ext/extlinks.py
+index 16339f6..fc8b35f 100644
+--- a/sphinx/ext/extlinks.py
++++ b/sphinx/ext/extlinks.py
+@@ -28,6 +28,7 @@
+ from sphinx.locale import __
+ from sphinx.transforms.post_transforms import SphinxPostTransform
+ from sphinx.util import logging, rst
++from sphinx.util.nodes import split_explicit_title
+ 
+ 
+ if TYPE_CHECKING:
+diff --git a/sphinx/transforms/i18n.py b/sphinx/transforms/i18n.py
+index 8cd6e3c..1fa289e 100644
+--- a/sphinx/transforms/i18n.py
++++ b/sphinx/transforms/i18n.py
+@@ -19,7 +19,13 @@
+ from sphinx.util.docutils import LoggingReporter
+ from sphinx.util.i18n import docname_to_domain
+ from sphinx.util.index_entries import split_index_msg
+-from sphinx.util.nodes import IMAGE_TYPE_NODES, LITERAL_TYPE_NODES, NodeMatcher, traverse_translatable_index
++from sphinx.util.nodes import (
++    IMAGE_TYPE_NODES,
++    LITERAL_TYPE_NODES,
++    NodeMatcher,
++    extract_messages,
++    traverse_translatable_index,
++)
+ 
+ 
+ 
+diff --git a/sphinx/util/nodes.py b/sphinx/util/nodes.py
+index 71e0fd8..de8b97f 100644
+--- a/sphinx/util/nodes.py
++++ b/sphinx/util/nodes.py
+@@ -290,6 +290,44 @@ def is_translatable(node: Node) -> bool:
+ )  # fmt: skip
+ 
+ 
++def extract_messages(doctree: Element) -> Iterable[tuple[Element, str]]:
++    """Extract translatable messages from a document tree."""
++
++    def clean_message(rawsource: str) -> str:
++        # A backslash at the end of an reStructuredText source line is a line
++        # continuation marker.  Work one line at a time here: besides making
++        # the intended treatment of newlines explicit, this avoids the severe
++        # backtracking that a multiline ``\s*...`` expression can exhibit on
++        # a long line.
++        lines = rawsource.replace('\r\n', '\n').replace('\r', '\n').split('\n')
++        for index, line in enumerate(lines):
++            without_trailing_space = line.rstrip(' \t')
++            if without_trailing_space.endswith('\\'):
++                lines[index] = without_trailing_space[:-1].rstrip(' \t')
++        return ' '.join(lines).strip()
++
++    for node in doctree.findall(is_translatable):
++        if isinstance(node, addnodes.translatable):
++            messages = node.extract_original_messages()
++        elif isinstance(node, LITERAL_TYPE_NODES):
++            messages = (node.rawsource or node.astext(),)
++        elif isinstance(node, IMAGE_TYPE_NODES):
++            image_messages = []
++            if node.get('alt'):
++                image_messages.append(node['alt'])
++            if node.get('translatable'):
++                image_messages.append(f'.. image:: {node["uri"]}')
++            messages = image_messages
++        elif isinstance(node, nodes.meta):
++            messages = (node.get('content', ''),)
++        else:
++            messages = (clean_message(node.rawsource),)
++
++        for message in messages:
++            if message:
++                yield node, message
++
++
+ 
+ 
+ 
+@@ -535,6 +573,14 @@ def inline_all_toctrees(
+     return tree
+ 
+ 
++def split_explicit_title(text: str) -> tuple[bool, str, str]:
++    """Split role content into title and target, if given."""
++    match = explicit_title_re.match(text)
++    if match:
++        return True, match.group(1), match.group(2)
++    return False, text, text
++
++
+ 
+ 
+ 
+@@ -608,6 +654,36 @@ def inline_all_toctrees(
+ }
+ 
+ 
++def make_id(
++    env: BuildEnvironment,
++    document: nodes.document,
++    prefix: str = '',
++    term: str | None = None,
++) -> str:
++    """Generate an appropriate node ID for *prefix* and *term*."""
++    if term is not None:
++        node_id = f'{prefix}-{term}' if prefix else term
++        node_id = node_id.lower()
++        node_id = node_id.translate(_non_id_translate_digraphs)
++        node_id = node_id.translate(_non_id_translate)
++        node_id = unicodedata.normalize('NFKD', node_id)
++        node_id = node_id.encode('ascii', 'ignore').decode('ascii')
++        node_id = _non_id_chars.sub('-', ' '.join(node_id.split()))
++        node_id = _non_id_at_ends.sub('', node_id)
++        if node_id and node_id not in document.ids:
++            return node_id
++
++    if prefix:
++        id_format = f'{prefix}-%s'
++    else:
++        id_format = f'{document.settings.id_prefix or "id"}%s'
++
++    while True:
++        node_id = id_format % env.new_serialno('index')
++        if node_id not in document.ids:
++            return node_id
++
++
+ 
+ 
+ 
+@@ -780,4 +856,4 @@ def _deepcopy(el: Element) -> Element:
+     return newnode
+ 
+ 
+-nodes.Element.deepcopy = _deepcopy  # type: ignore[assignment]
+\ No newline at end of file
++nodes.Element.deepcopy = _deepcopy  # type: ignore[assignment]

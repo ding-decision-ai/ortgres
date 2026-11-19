@@ -1,0 +1,84 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/modeling/tests/test_rotations.py.
+
+Date: 2026-10-10T23:36:16
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 33 items
+
+astropy/modeling/tests/test_rotations.py ............................... [ 93%]
+..                                                                       [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp0]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp1]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp2]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp3]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp4]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp5]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp6]
+PASSED astropy/modeling/tests/test_rotations.py::test_against_wcslib[inp7]
+PASSED astropy/modeling/tests/test_rotations.py::test_roundtrip_sky_rotation[inp0]
+PASSED astropy/modeling/tests/test_rotations.py::test_roundtrip_sky_rotation[inp1]
+PASSED astropy/modeling/tests/test_rotations.py::test_roundtrip_sky_rotation[inp2]
+PASSED astropy/modeling/tests/test_rotations.py::test_roundtrip_sky_rotation[inp3]
+PASSED astropy/modeling/tests/test_rotations.py::test_roundtrip_sky_rotation[inp4]
+PASSED astropy/modeling/tests/test_rotations.py::test_native_celestial_lat90
+PASSED astropy/modeling/tests/test_rotations.py::test_Rotation2D
+PASSED astropy/modeling/tests/test_rotations.py::test_Rotation2D_quantity
+PASSED astropy/modeling/tests/test_rotations.py::test_Rotation2D_inverse
+PASSED astropy/modeling/tests/test_rotations.py::test_Rotation2D_errors
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angle_rotations
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angles[zxz]
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angles[zyz]
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angles[yzy]
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angles[yxy]
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angles[xyx]
+PASSED astropy/modeling/tests/test_rotations.py::test_euler_angles[xzx]
+PASSED astropy/modeling/tests/test_rotations.py::test_rotation_3d
+PASSED astropy/modeling/tests/test_rotations.py::test_spherical_rotation
+PASSED astropy/modeling/tests/test_rotations.py::test_RotationSequence3D_errors
+PASSED astropy/modeling/tests/test_rotations.py::test_RotationSequence3D_inverse
+PASSED astropy/modeling/tests/test_rotations.py::test_EulerAngleRotation_errors
+PASSED astropy/modeling/tests/test_rotations.py::test_EulerAngleRotation_inverse
+PASSED astropy/modeling/tests/test_rotations.py::test__SkyRotation_errors
+PASSED astropy/modeling/tests/test_rotations.py::test__SkyRotation__evaluate
+============================== 33 passed in 0.18s ==============================

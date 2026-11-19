@@ -1,0 +1,36 @@
+{
+  "instance_id": "pypa__packaging.013f3b03.test_metadata.e00b5801.lv1",
+  "repo": "pypa/packaging",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 275,
+      "failure": 19,
+      "total": 294
+    },
+    "p2p": {
+      "success": 3508,
+      "failure": 0,
+      "total": 3508
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "9330764a2a1b97d8f6d7c8f965656e05325d3c3276da9a142c24542323c7f566"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 280,
+      "failure": 14,
+      "total": 294
+    },
+    "p2p": {
+      "success": 3508,
+      "failure": 0,
+      "total": 3508
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "eec8d40528ec38b8edd215d0978e647e2e082fb0638ac53d70092727f94658e7"
+  },
+  "conditions": "conditions.json",
+  "costs": null
+}

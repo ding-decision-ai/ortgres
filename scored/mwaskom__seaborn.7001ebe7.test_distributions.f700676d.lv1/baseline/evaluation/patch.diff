@@ -1,0 +1,161 @@
+diff --git a/seaborn/_compat.py b/seaborn/_compat.py
+index 3c2803a..a3fa36b 100644
+--- a/seaborn/_compat.py
++++ b/seaborn/_compat.py
+@@ -64,6 +64,14 @@ def norm_from_scale(scale, norm):
+ 
+ 
+ 
++def get_colormap(name):
++    """Retrieve a matplotlib colormap by name across registry APIs."""
++    try:
++        return mpl.colormaps[name]
++    except AttributeError:
++        return mpl.cm.get_cmap(name)
++
++
+ def register_colormap(name, cmap):
+     """Handle changes to matplotlib colormap interface in 3.6."""
+     try:
+@@ -126,4 +134,4 @@ def groupby_apply_include_groups(val):
+ def get_converter(axis):
+     if _version_predates(mpl, "3.10.0"):
+         return axis.converter
+-    return axis.get_converter()
+\ No newline at end of file
++    return axis.get_converter()
+diff --git a/seaborn/axisgrid.py b/seaborn/axisgrid.py
+index 0872f3a..ba657e0 100644
+--- a/seaborn/axisgrid.py
++++ b/seaborn/axisgrid.py
+@@ -1073,6 +1073,20 @@ class FacetGrid(Grid):
+         """An array of the :class:`matplotlib.axes.Axes` objects in the grid."""
+         return self._axes
+ 
++    @property
++    def ax(self):
++        """The :class:`matplotlib.axes.Axes` when the grid has shape (1, 1)."""
++        if self.axes.shape == (1, 1):
++            return self.axes[0, 0]
++        raise AttributeError(
++            "Use the `.axes` attribute when facet variables are assigned."
++        )
++
++    @property
++    def axes_dict(self):
++        """A mapping of facet names to the corresponding Axes objects."""
++        return self._axes_dict
++
+ 
+ 
+ 
+@@ -2398,4 +2412,4 @@ Examples
+     params=_param_docs,
+     returns=_core_docs["returns"],
+     seealso=_core_docs["seealso"],
+-)
+\ No newline at end of file
++)
+diff --git a/seaborn/palettes.py b/seaborn/palettes.py
+index e24df41..0f47514 100644
+--- a/seaborn/palettes.py
++++ b/seaborn/palettes.py
+@@ -6,7 +6,8 @@ import matplotlib as mpl
+ 
+ from .external import husl
+ 
+-from .utils import desaturate
++from ._compat import get_colormap
++from .utils import desaturate, get_color_cycle
+ from .colors import xkcd_rgb, crayons
+ 
+ 
+@@ -58,6 +59,42 @@ QUAL_PALETTE_SIZES.update({k: len(v) for k, v in SEABORN_PALETTES.items()})
+ QUAL_PALETTES = list(QUAL_PALETTE_SIZES.keys())
+ 
+ 
++def _parse_cubehelix_args(argstr):
++    """Parse a cubehelix palette specification string."""
++    if argstr.startswith("ch:"):
++        argstr = argstr[3:]
++
++    reverse = argstr.endswith("_r")
++    if reverse:
++        argstr = argstr[:-2]
++
++    if not argstr.strip(" "):
++        return [], {"reverse": reverse}
++
++    aliases = {
++        "s": "start",
++        "r": "rot",
++        "g": "gamma",
++        "h": "hue",
++        "l": "light",
++        "d": "dark",
++    }
++    args = []
++    kwargs = {}
++    for item in argstr.split(","):
++        if "=" in item:
++            key, value = item.split("=", 1)
++            key = key.strip(" ")
++            kwargs[aliases.get(key, key)] = float(value.strip(" "))
++        else:
++            args.append(float(item.strip(" ")))
++
++    if reverse:
++        kwargs["reverse"] = True
++
++    return args, kwargs
++
++
+ class _ColorPalette(list):
+     """Set the color palette in a with statement, otherwise be a list."""
+     def __enter__(self):
+@@ -737,6 +774,14 @@ def cubehelix_palette(n_colors=6, start=0, rot=.4, gamma=1.0, hue=0.8,
+ 
+ 
+ 
++    def get_color_function(p0, p1):
++        def color(x):
++            xg = x ** gamma
++            a = hue * xg * (1 - xg) / 2
++            phi = 2 * np.pi * (start / 3 + rot * x)
++            return xg + a * (p0 * np.cos(phi) + p1 * np.sin(phi))
++        return color
++
+     cdict = {
+         "red": get_color_function(-0.14861, 1.78277),
+         "green": get_color_function(-0.29227, -0.90649),
+@@ -838,4 +883,4 @@ def set_color_codes(palette="deep"):
+ 
+     for code, color in zip("bgrmyck", colors):
+         rgb = mpl.colors.colorConverter.to_rgb(color)
+-        mpl.colors.colorConverter.colors[code] = rgb
+\ No newline at end of file
++        mpl.colors.colorConverter.colors[code] = rgb
+diff --git a/seaborn/utils.py b/seaborn/utils.py
+index 5c118ed..64aafbb 100644
+--- a/seaborn/utils.py
++++ b/seaborn/utils.py
+@@ -55,6 +55,12 @@ def ci_to_errsize(cis, heights):
+     return errsize
+ 
+ 
++def get_color_cycle():
++    """Return the list of colors in the current matplotlib color cycle."""
++    cycler = mpl.rcParams["axes.prop_cycle"]
++    return cycler.by_key().get("color", [".15"])
++
++
+ 
+ 
+ 
+@@ -894,4 +900,4 @@ def _get_patch_legend_artist(fill):
+ 
+         return mpl.patches.Rectangle((0, 0), 0, 0, **kws)
+ 
+-    return legend_artist
+\ No newline at end of file
++    return legend_artist

@@ -1,0 +1,254 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/f339159, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 27 items
+
+tests/test_util/test_util_nodes.py ..........FFF.F..F...F....F           [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_make_id[term--term-0] __________________________
+tests/test_util/test_util_nodes.py:224: in test_make_id
+    assert make_id(app.env, document, prefix, term) == expected
+E   AssertionError: assert 'term' == 'term-0'
+E     
+E     - term-0
+E     ?     --
+E     + term
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+____________________ test_make_id[term-Sphinx-term-Sphinx] _____________________
+tests/test_util/test_util_nodes.py:224: in test_make_id
+    assert make_id(app.env, document, prefix, term) == expected
+E   AssertionError: assert 'term-sphinx' == 'term-Sphinx'
+E     
+E     - term-Sphinx
+E     ?      ^
+E     + term-sphinx
+E     ?      ^
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+____________________ test_make_id[-io.StringIO-io.StringIO] ____________________
+tests/test_util/test_util_nodes.py:224: in test_make_id
+    assert make_id(app.env, document, prefix, term) == expected
+E   AssertionError: assert 'io.stringio' == 'io.StringIO'
+E     
+E     - io.StringIO
+E     + io.stringio
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+___________________ test_make_id[-_io.StringIO-io.StringIO] ____________________
+tests/test_util/test_util_nodes.py:224: in test_make_id
+    assert make_id(app.env, document, prefix, term) == expected
+E   AssertionError: assert 'io.stringio' == 'io.StringIO'
+E     
+E     - io.StringIO
+E     + io.stringio
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+____ test_make_id[-Hello=\u60a0\u597d=\u3053\u3093\u306b\u3061\u306f-Hello] ____
+tests/test_util/test_util_nodes.py:224: in test_make_id
+    assert make_id(app.env, document, prefix, term) == expected
+E   AssertionError: assert 'hello' == 'Hello'
+E     
+E     - Hello
+E     ? ^
+E     + hello
+E     ? ^
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_______________________ test_make_id_already_registered ________________________
+tests/test_util/test_util_nodes.py:231: in test_make_id_already_registered
+    assert make_id(app.env, document, 'term', 'Sphinx') == 'term-0'
+E   AssertionError: assert 'term-sphinx' == 'term-0'
+E     
+E     - term-0
+E     + term-sphinx
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_____________ test_apply_source_workaround_literal_block_no_source _____________
+tests/test_util/test_util_nodes.py:269: in test_apply_source_workaround_literal_block_no_source
+    apply_source_workaround(literal_block)
+sphinx/util/nodes.py:187: in apply_source_workaround
+    node.source = get_node_source(node)
+                  ^^^^^^^^^^^^^^^
+E   NameError: name 'get_node_source' is not defined
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/f339159[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_util/test_util_nodes.py::test_NodeMatcher
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages[\n           .. admonition:: admonition title\n\n              admonition body\n           -title-1]
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages[\n           .. figure:: foo.jpg\n\n              this is title\n           -caption-1]
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages[\n           .. rubric:: spam\n           -rubric-1]
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages[\n           | spam\n           | egg\n           -line-2]
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages[\n           section\n           =======\n\n           +----------------+\n           | | **Title 1**  |\n           | | Message 1    |\n           +----------------+\n           -line-2]
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages[\n           * | **Title 1**\n             | Message 1\n           -line-2]
+PASSED tests/test_util/test_util_nodes.py::test_extract_messages_without_rawsource
+PASSED tests/test_util/test_util_nodes.py::test_clean_astext
+PASSED tests/test_util/test_util_nodes.py::test_make_id[--id0]
+PASSED tests/test_util/test_util_nodes.py::test_make_id[-sphinx.setup_command-sphinx.setup_command]
+PASSED tests/test_util/test_util_nodes.py::test_make_id[-\uff53\uff50\uff48\uff49\uff4e\uff58-sphinx]
+PASSED tests/test_util/test_util_nodes.py::test_make_id[-\u60a0\u597d-id0]
+PASSED tests/test_util/test_util_nodes.py::test_make_id[-f\xfcnf-funf]
+PASSED tests/test_util/test_util_nodes.py::test_make_id[-0sphinx-sphinx]
+PASSED tests/test_util/test_util_nodes.py::test_make_id[-sphinx--sphinx]
+PASSED tests/test_util/test_util_nodes.py::test_make_id_sequential
+PASSED tests/test_util/test_util_nodes.py::test_split_explicit_target[hello-expected0]
+PASSED tests/test_util/test_util_nodes.py::test_split_explicit_target[hello <world>-expected1]
+PASSED tests/test_util/test_util_nodes.py::test_split_explicit_target[hello <world> <sphinx>-expected2]
+FAILED tests/test_util/test_util_nodes.py::test_make_id[term--term-0] - Asser...
+FAILED tests/test_util/test_util_nodes.py::test_make_id[term-Sphinx-term-Sphinx]
+FAILED tests/test_util/test_util_nodes.py::test_make_id[-io.StringIO-io.StringIO]
+FAILED tests/test_util/test_util_nodes.py::test_make_id[-_io.StringIO-io.StringIO]
+FAILED tests/test_util/test_util_nodes.py::test_make_id[-Hello=\u60a0\u597d=\u3053\u3093\u306b\u3061\u306f-Hello]
+FAILED tests/test_util/test_util_nodes.py::test_make_id_already_registered - ...
+FAILED tests/test_util/test_util_nodes.py::test_apply_source_workaround_literal_block_no_source
+========================= 7 failed, 20 passed in 0.64s =========================

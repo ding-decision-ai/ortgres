@@ -1,0 +1,134 @@
+diff --git a/mlflow/data/dataset.py b/mlflow/data/dataset.py
+index a69ce04..f1f2f35 100644
+--- a/mlflow/data/dataset.py
++++ b/mlflow/data/dataset.py
+@@ -14,15 +14,18 @@ class Dataset:
+     and targets for training and evaluation as well.
+     """
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(
++        self, source: DatasetSource, name: str | None = None, digest: str | None = None
++    ):
++        """Initialize a dataset with its source and optional identity metadata.
++
++        If ``digest`` is falsy (including None or an empty string), compute it with the subclass's
++        ``_compute_digest()``. Subclasses should call this constructor only after initializing the
++        state needed for that computation. If ``name`` is None, ``name`` falls back to ``"dataset"``.
++        """
++        self._source = source
++        self._name = name if name is not None else "dataset"
++        self._digest = digest or self._compute_digest()
+ 
+     @abstractmethod
+     def _compute_digest(self) -> str:
+@@ -35,21 +38,18 @@ class Dataset:
+ 
+         """
+ 
++    def to_dict(self) -> dict[str, str]:
++        """Return the base dataset configuration.
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        The source is serialized as JSON so that the mapping can be passed directly to MLflow's
++        tracking entities.
++        """
++        return {
++            "name": self.name,
++            "digest": self.digest,
++            "source": self.source.to_json(),
++            "source_type": self._get_source_type(),
++        }
+ 
+     def to_json(self) -> str:
+         """
+@@ -67,22 +67,15 @@ class Dataset:
+ 
+         return self.source._get_source_type()
+ 
++    @property
++    def digest(self) -> str:
++        """The compact fingerprint stored when the dataset was initialized."""
++        return self._digest
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def name(self) -> str:
++        """The dataset name, or ``"dataset"`` when no name was provided."""
++        return self._name
+ 
+     @property
+     def source(self) -> DatasetSource:
+@@ -123,4 +116,4 @@ class Dataset:
+             source=dataset_dict["source"],
+             schema=dataset_dict.get("schema"),
+             profile=dataset_dict.get("profile"),
+-        )
+\ No newline at end of file
++        )
+diff --git a/mlflow/data/dataset_source.py b/mlflow/data/dataset_source.py
+index 04224ba..9cd4f5a 100644
+--- a/mlflow/data/dataset_source.py
++++ b/mlflow/data/dataset_source.py
+@@ -72,16 +72,9 @@ class DatasetSource:
+ 
+         """
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def to_json(self) -> str:
++        """Serialize this source's ``to_dict()`` representation as a JSON string."""
++        return json.dumps(self.to_dict())
+ 
+     @classmethod
+     @abstractmethod
+@@ -107,4 +100,4 @@ class DatasetSource:
+             A DatasetSource instance.
+ 
+         """
+-        return cls.from_dict(json.loads(source_json))
+\ No newline at end of file
++        return cls.from_dict(json.loads(source_json))

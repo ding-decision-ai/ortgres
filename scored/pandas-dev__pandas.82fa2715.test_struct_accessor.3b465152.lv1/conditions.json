@@ -1,0 +1,25 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.54",
+  "initialization": {
+    "coverage": {
+      "ready": true,
+      "outline_rows": 2504,
+      "total_cognitive_files": 2504,
+      "coverage_complete": true,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "preformal_full_source_coverage": 2504,
+      "cache_saved_before_formal": true
+    }
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1"
+}

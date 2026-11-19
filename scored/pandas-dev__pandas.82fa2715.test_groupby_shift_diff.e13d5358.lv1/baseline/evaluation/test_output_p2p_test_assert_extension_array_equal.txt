@@ -1,0 +1,60 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 36 items
+
+pandas/tests/util/test_assert_extension_array_equal.py ....................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_not_exact[kwargs0]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_not_exact[kwargs1]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_not_exact[kwargs2]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[0]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[1]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[2]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[3]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[4]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[5]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[6]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[7]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[8]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_less_precise[9]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_dtype_mismatch[True]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_dtype_mismatch[False]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_missing_values
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_non_extension_array[left]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_non_extension_array[right]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[uint8]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[uint16]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[uint32]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[uint64]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[int]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[int8]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[int16]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[int32]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[int64]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[UInt8]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[UInt16]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[UInt32]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[UInt64]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[Int8]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[Int16]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[Int32]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_ignore_dtype_mismatch[Int64]
+PASSED pandas/tests/util/test_assert_extension_array_equal.py::test_assert_extension_array_equal_time_units
+============================== 36 passed in 0.04s ==============================

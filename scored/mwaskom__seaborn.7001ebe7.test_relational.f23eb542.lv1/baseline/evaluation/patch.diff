@@ -1,0 +1,164 @@
+diff --git a/seaborn/_base.py b/seaborn/_base.py
+index 31981f2..82a5e87 100644
+--- a/seaborn/_base.py
++++ b/seaborn/_base.py
+@@ -49,6 +49,29 @@ class SemanticMapping:
+         # Fully achieving that is going to take some thinking.
+         self.plotter = plotter
+ 
++    def _check_list_length(self, levels, values, variable):
++        """Check a list of mapping values and adapt it to the levels."""
++        message = ""
++        if len(levels) > len(values):
++            message = " ".join([
++                f"\nThe {variable} list has fewer values ({len(values)})",
++                f"than needed ({len(levels)}) and will cycle, which may",
++                "produce an uninterpretable plot.",
++            ])
++            values = [x for _, x in zip(levels, itertools.cycle(values))]
++
++        elif len(values) > len(levels):
++            message = " ".join([
++                f"The {variable} list has more values ({len(values)})",
++                f"than needed ({len(levels)}), which may not be intended.",
++            ])
++            values = values[:len(levels)]
++
++        if message:
++            warnings.warn(message, UserWarning)
++
++        return values
++
+ 
+ 
+ 
+@@ -580,6 +603,31 @@ class StyleMapping(SemanticMapping):
+             self.levels = levels
+             self.lookup_table = lookup_table
+ 
++    def _map_attributes(self, arg, levels, defaults, attr):
++        """Handle the specification for a given style attribute."""
++        if isinstance(arg, dict):
++            missing = set(levels) - set(arg)
++            if missing:
++                err = f"These `style` levels are missing from `{attr}`: {missing}"
++                raise ValueError(err)
++            lookup_table = arg
++
++        elif isinstance(arg, Sequence):
++            values = self._check_list_length(levels, arg, attr)
++            lookup_table = dict(zip(levels, values))
++
++        elif arg is True:
++            lookup_table = dict(zip(levels, defaults))
++
++        elif arg:
++            err = f"This `{attr}` argument has an unrecognized value: {arg}"
++            raise ValueError(err)
++
++        else:
++            lookup_table = {}
++
++        return lookup_table
++
+     def _lookup_single(self, key, attr=None):
+         """Get attribute(s) for a given data point."""
+         if attr is None:
+@@ -589,6 +637,75 @@ class StyleMapping(SemanticMapping):
+         return value
+ 
+ 
++def unique_dashes(n):
++    """Build an arbitrarily long list of unique dash styles for lines."""
++    # Start with dash specs that are particularly easy to distinguish.
++    dashes = [
++        "",
++        (4, 1.5),
++        (1, 1),
++        (3, 1.25, 1.5, 1.25),
++        (5, 1, 1, 1),
++    ]
++
++    # Extend the list deterministically with increasingly complex patterns.
++    p = 3
++    while len(dashes) < n:
++        a = itertools.product([3, 1.25], repeat=p)
++        b = itertools.product([5, 1], repeat=p)
++        for segments in itertools.chain(a, b):
++            gap = min(segments)
++            spec = tuple(itertools.chain.from_iterable(
++                (segment, gap) for segment in segments
++            ))
++            dashes.append(spec)
++        p += 1
++
++    return dashes[:n]
++
++
++def unique_markers(n):
++    """Build an arbitrarily long list of unique marker styles for points."""
++    # Start with filled markers that are particularly easy to distinguish.
++    markers = [
++        "o",
++        "X",
++        (4, 0, 45),
++        "P",
++        (4, 0, 0),
++        (4, 1, 0),
++        "^",
++        (4, 1, 180),
++        "v",
++        (4, 1, 225),
++        (4, 1, 45),
++        "s",
++        (8, 1, 0),
++        (8, 1, 22.5),
++        (8, 1, 45),
++        (8, 1, 67.5),
++    ]
++
++    # Generate increasingly fine-grained regular polygons as needed.
++    seen = set(markers)
++    p = 5
++    while len(markers) < n:
++        angle = 360 / p
++        candidates = [
++            (p, 1, angle / 2),
++            (p, 0, angle / 2),
++            (p, 1, 0),
++            (p, 0, 0),
++        ]
++        for marker in candidates:
++            if marker not in seen:
++                markers.append(marker)
++                seen.add(marker)
++        p += 1
++
++    return markers[:n]
++
++
+ 
+ 
+ 
+@@ -838,6 +955,14 @@ class VectorPlotter:
+         mapping = HueMapping(self, palette, order, norm, saturation)
+         self._hue_map = mapping
+ 
++    def map_size(self, sizes=None, order=None, norm=None):
++        mapping = SizeMapping(self, sizes, order, norm)
++        self._size_map = mapping
++
++    def map_style(self, markers=None, dashes=None, order=None):
++        mapping = StyleMapping(self, markers, dashes, order)
++        self._style_map = mapping
++
+ 
+ 
+ 
+@@ -1774,4 +1899,4 @@ def categorical_order(vector, order=None):
+                     order = np.sort(order)
+ 
+         order = filter(pd.notnull, order)
+-    return list(order)
+\ No newline at end of file
++    return list(order)

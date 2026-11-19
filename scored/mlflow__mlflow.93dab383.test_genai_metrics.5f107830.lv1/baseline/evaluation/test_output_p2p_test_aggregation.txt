@@ -1,0 +1,76 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 14 items
+
+tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [  7%]
+tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics_custom_function PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 14%]
+tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics_empty PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 21%]
+tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics_with_namespace PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 28%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[5-5.0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 35%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[3.14-3.14] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 42%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[True-1.0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 50%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[False-0.0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 57%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[yes-1.0_0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 64%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[no-0.0_0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 71%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[yes-1.0_1] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 78%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[no-0.0_1] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 85%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[Yes-1.0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [ 92%]
+tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[No-0.0] PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:32:01 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+0.46s setup    tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics_custom_function
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics_empty
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_compute_aggregated_metrics_with_namespace
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[5-5.0]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[3.14-3.14]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[True-1.0]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[False-0.0]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[yes-1.0_0]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[no-0.0_0]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[yes-1.0_1]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[no-0.0_1]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[Yes-1.0]
+PASSED | MEM 23.7/33.7 GB | DISK 794.2/915.7 GB tests/genai/scorers/test_aggregation.py::test_cast_numeric_values[No-0.0]
+============================== 14 passed in 0.51s ==============================

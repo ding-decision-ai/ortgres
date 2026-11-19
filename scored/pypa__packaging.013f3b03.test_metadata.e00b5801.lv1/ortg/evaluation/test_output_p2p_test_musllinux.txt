@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+
+tests/test_musllinux.py ..........                                       [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_musllinux.py::test_parse_musl_version[amd64-1.2.2]
+PASSED tests/test_musllinux.py::test_parse_musl_version[i386-1.2.1]
+PASSED tests/test_musllinux.py::test_parse_musl_version[aarch64-1.1.24]
+PASSED tests/test_musllinux.py::test_parse_musl_version[invalid]
+PASSED tests/test_musllinux.py::test_parse_musl_version[unknown]
+PASSED tests/test_musllinux.py::test_get_musl_version[does-not-exist]
+PASSED tests/test_musllinux.py::test_get_musl_version[glibc]
+PASSED tests/test_musllinux.py::test_get_musl_version[x86_64]
+PASSED tests/test_musllinux.py::test_get_musl_version[i386]
+PASSED tests/test_musllinux.py::test_get_musl_version[aarch64]
+============================== 10 passed in 0.02s ==============================

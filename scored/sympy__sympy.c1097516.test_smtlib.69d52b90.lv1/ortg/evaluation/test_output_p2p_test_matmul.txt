@@ -1,0 +1,47 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: split-0.10.0, hypothesis-6.147.0, xdist-3.8.0, doctestplus-1.5.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 27 items
+
+sympy/matrices/expressions/tests/test_matmul.py ...................x.... [ 88%]
+...                                                                      [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_evaluate
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_adjoint
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_transpose
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_factor_in_front
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_remove_ids
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_combine_powers
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_any_zeros
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_unpack
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_only_squares
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_determinant
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_doit
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_doit_drills_down
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_doit_deep_false_still_canonical
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_matmul_scalar_Matrix_doit
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_matmul_sympify
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_collapse_MatrixBase
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_refine
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_matmul_no_matrices
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_matmul_args_cnc
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_issue_12950
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_construction_with_Mul
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_construction_with_mul
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_generic_identity
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_issue_23519
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_shape_error
+PASSED sympy/matrices/expressions/tests/test_matmul.py::test_matmul_transpose
+XFAIL sympy/matrices/expressions/tests/test_matmul.py::test_matmul_args_cnc_symbols
+======================== 26 passed, 1 xfailed in 0.23s =========================

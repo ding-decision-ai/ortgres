@@ -1,0 +1,235 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 209 items
+
+pandas/tests/series/methods/test_interpolate.py x................................................................................................................................................................................................x.x.............
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.34s call     pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_cubicspline
+0.04s call     pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_direction
+
+(28 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_time_raises_for_non_timeseries
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_cubicspline
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_pchip
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_akima
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_piecewise_polynomial
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_from_derivatives
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_corners[kwargs0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_corners[kwargs1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_index_values
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_non_ts
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_nan_interpolate[kwargs0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_nan_interpolate[kwargs1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_nan_irregular_index
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_nan_str_index
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_quad
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_scipy_basic
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[linear--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[linear-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[index--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[index-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[values--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[values-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[nearest--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[nearest-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[slinear--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[slinear-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[zero--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[zero-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[quadratic--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[quadratic-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[cubic--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[cubic-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[barycentric--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[barycentric-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[krogh--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[krogh-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[polynomial--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[polynomial-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[spline--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[spline-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[piecewise_polynomial--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[piecewise_polynomial-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[from_derivatives--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[from_derivatives-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[pchip--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[pchip-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[akima--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[akima-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[cubicspline--1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_nonpositive_limit[cubicspline-0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[linear]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[index]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[values]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[slinear]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[zero]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[quadratic]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[cubic]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[barycentric]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[krogh]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[polynomial]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[spline]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[piecewise_polynomial]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[from_derivatives]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[pchip]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[akima]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_invalid_float_limit[cubicspline]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_invalid_method[None]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_invalid_method[nonexistent_method]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_forward
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_unlimited
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_bad_direction
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_pad[data0-kwargs0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_pad[data1-kwargs1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_pad[data2-kwargs2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_pad[data3-kwargs3]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_pad[data4-kwargs4]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_pad[data5-kwargs5]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_backfill[data0-kwargs0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_backfill[data1-kwargs1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_backfill[data2-kwargs2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_area_with_backfill[data3-kwargs3]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_direction
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_to_ends
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_before_ends
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_all_good
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_multiIndex[False]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_multiIndex[True]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_nonmono_raise
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[None-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[None-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['UTC'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['UTC'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['US/Eastern'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['US/Eastern'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['Asia/Tokyo'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['Asia/Tokyo'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['dateutil/US/Pacific'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['dateutil/US/Pacific'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['dateutil/Asia/Singapore'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['dateutil/Asia/Singapore'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['+01:15'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['+01:15'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['-02:15'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['-02:15'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['UTC+01:15'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['UTC+01:15'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['UTC-02:15'-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64['UTC-02:15'-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[tzutc()-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[tzutc()-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[tzlocal()-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[tzlocal()-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[datetime.timezone.utc-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[datetime.timezone.utc-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[datetime.timezone(datetime.timedelta(seconds=3600))-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[datetime.timezone(datetime.timedelta(seconds=3600))-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[datetime.timezone(datetime.timedelta(days=-1, seconds=82800), 'foo')-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[pytz.FixedOffset(300)-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[pytz.FixedOffset(300)-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[<UTC>0-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[<UTC>0-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[pytz.FixedOffset(-300)-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[pytz.FixedOffset(-300)-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[<DstTzInfo 'US/Pacific' LMT-1 day, 16:07:00 STD>-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[<DstTzInfo 'US/Pacific' LMT-1 day, 16:07:00 STD>-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[<UTC>1-nearest]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_datetime64[<UTC>1-pad]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_pad_datetime64tz_values
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_limit_no_nans
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_no_order[polynomial]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_no_order[spline]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_spline_invalid_order[-1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_spline_invalid_order[-1.0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_spline_invalid_order[0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_spline_invalid_order[0.0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_spline_invalid_order[nan]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_spline
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_spline_extrapolate
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_spline_smooth
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_spline_interpolation
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_timedelta64
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_series_interpolate_method_values
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_series_interpolate_intraday
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[linear-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[linear-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[linear-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[slinear-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[slinear-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[slinear-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[zero-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[zero-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[zero-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[quadratic-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[quadratic-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[quadratic-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[cubic-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[cubic-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[cubic-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[barycentric-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[barycentric-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[barycentric-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[krogh-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[krogh-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[krogh-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[polynomial-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[polynomial-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[polynomial-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[spline-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[spline-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[spline-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[piecewise_polynomial-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[piecewise_polynomial-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[piecewise_polynomial-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[from_derivatives-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[from_derivatives-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[from_derivatives-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[pchip-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[pchip-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[pchip-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[akima-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[akima-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[akima-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[cubicspline-ind0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[cubicspline-ind1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interp_non_timedelta_index[cubicspline-ind2]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[linear]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[slinear]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[quadratic]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[barycentric]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[krogh]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[polynomial]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[spline]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[piecewise_polynomial]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[from_derivatives]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[pchip]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[akima]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[cubicspline]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_unsorted_index[True-expected_values0]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_unsorted_index[False-expected_values1]
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_asfreq_raises
+PASSED pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_fill_value
+XFAIL pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_period_values - EA.fillna does not handle 'linear' method
+XFAIL pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[zero] - zero interpolation is not supported for TimedeltaIndex
+XFAIL pandas/tests/series/methods/test_interpolate.py::TestSeriesInterpolateData::test_interpolate_timedelta_index[cubic] - cubic interpolation is not supported for TimedeltaIndex
+======================== 206 passed, 3 xfailed in 0.98s ========================

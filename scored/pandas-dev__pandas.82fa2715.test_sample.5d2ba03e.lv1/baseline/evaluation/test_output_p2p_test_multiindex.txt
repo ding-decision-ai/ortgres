@@ -1,0 +1,50 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 23 items
+
+pandas/tests/indexing/multiindex/test_multiindex.py .......................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_groupyby_rename_categories_operation_with_multiindex[add]
+0.01s call     pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_groupyby_rename_categories_operation_with_multiindex[mul]
+0.01s call     pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_assign_aligns_as_implicit_tuple
+
+(27 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_perf_warn[True]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_perf_warn[False]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_indexing_over_hashtable_size_cutoff[-5]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_indexing_over_hashtable_size_cutoff[5]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multi_nan_indexing
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_exclusive_nat_column_indexing
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_nested_tuples_duplicates
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_with_datatime_level_preserves_freq
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_complex
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_rename_multiindex_with_duplicates
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_series_align_multiindex_with_nan_overlap_only
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_series_align_multiindex_with_nan
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_nunique_smoke
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_repeated_keys
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_with_na_missing_key
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_dtype_preservation
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_from_tuples_with_nan
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_groupyby_rename_categories_operation_with_multiindex[div]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_groupyby_rename_categories_operation_with_multiindex[mul]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_groupyby_rename_categories_operation_with_multiindex[add]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_groupyby_rename_categories_operation_with_multiindex[sub]
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_assign_aligns_as_implicit_tuple
+PASSED pandas/tests/indexing/multiindex/test_multiindex.py::TestMultiIndexBasic::test_multiindex_assign_alignment_with_non_string_dtype
+============================== 23 passed in 0.10s ==============================

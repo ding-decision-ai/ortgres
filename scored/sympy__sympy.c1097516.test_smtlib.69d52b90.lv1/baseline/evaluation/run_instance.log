@@ -1,0 +1,87 @@
+2026-10-12 21:53:09,727 - INFO - ============================================================
+2026-10-12 21:53:09,727 - INFO - Starting evaluation for instance: sympy__sympy.c1097516.test_smtlib.69d52b90.lv1
+2026-10-12 21:53:09,727 - INFO - Level: 1
+2026-10-12 21:53:09,727 - INFO - Attempt: 1
+2026-10-12 21:53:09,727 - INFO - ============================================================
+2026-10-12 21:53:09,733 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-12 21:53:09,733 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_sympy-instance_3d889fef
+2026-10-12 21:53:09,735 - INFO - Image docker.io/libercoders/featurebench-specs_sympy-instance_3d889fef found locally
+2026-10-12 21:53:09,735 - INFO - Creating container: fb-eval-sympy__sympy-c1097516-test_smtlib-69d52b90-lv1-attempt-1-20261012-215309-735487
+2026-10-12 21:53:09,736 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-12 21:53:09,923 - INFO - Container fb-eval-sympy__sympy-c1097516-test_smtlib-69d52b90-lv1-attempt-1-20261012-215309-735487 created successfully
+2026-10-12 21:53:09,923 - INFO - Starting Level 1 evaluation for sympy__sympy.c1097516.test_smtlib.69d52b90.lv1
+2026-10-12 21:53:09,923 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-12 21:53:10,376 - INFO - Restore project exit code: 0
+2026-10-12 21:53:10,376 - INFO - Output: 
+2026-10-12 21:53:10,376 - INFO - Step 2: Applying patch to mask files
+2026-10-12 21:53:10,380 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-12 21:53:10,592 - INFO - Mask patch apply exit code: 0
+2026-10-12 21:53:10,592 - INFO - Mask patch output: /tmp/mask_patch.diff:567: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+
+2026-10-12 21:53:10,592 - INFO - Successfully applied mask patch
+2026-10-12 21:53:10,592 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-12 21:53:10,595 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-12 21:53:10,596 - INFO - Deleting F2P test file: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-12 21:53:10,806 - INFO - Successfully deleted F2P test file: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-12 21:53:10,807 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-12 21:53:10,807 - INFO - Step 4: Reinitializing git repository
+2026-10-12 21:53:12,633 - INFO - Step 5: Applying agent patch
+2026-10-12 21:53:12,636 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-12 21:53:12,847 - INFO - Patch apply exit code: 0
+2026-10-12 21:53:12,847 - INFO - Patch output: Checking patch sympy/core/numbers.py...
+Applied patch sympy/core/numbers.py cleanly.
+
+2026-10-12 21:53:12,847 - INFO - >>>>> Applied Patch
+2026-10-12 21:53:12,847 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-12 21:53:12,847 - INFO - F2P test path: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-12 21:53:13,056 - INFO - Delete F2P file exit code: 0
+2026-10-12 21:53:13,056 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-12 21:53:13,266 - INFO - Reverse apply exit code: 0
+2026-10-12 21:53:13,266 - INFO - Reverse apply output: 
+2026-10-12 21:53:13,266 - INFO - Successfully restored F2P test file using test_patch
+2026-10-12 21:53:13,266 - INFO - Step 7: Running tests
+2026-10-12 21:53:13,266 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-12 21:53:13,266 - INFO - Test timeout: 600s
+2026-10-12 21:53:13,266 - INFO - Running F2P test: /testbed/sympy/printing/tests/test_smtlib.py
+2026-10-12 21:53:15,333 - INFO - F2P test exit code: 1
+2026-10-12 21:53:15,333 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: split-0.10.0, hypothesis-6.147.0, xdist-3.8.0, doctestplus-1.5.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 16 items
+
+sympy/printing/tests/test_smtlib.py FFFFFFFFFFFFFFFF                     [100%]
+2026-10-12 21:53:15,333 - INFO - Saved F2P test output to artifact://66e521da42500a74
+2026-10-12 21:53:15,333 - INFO - Running 5 P2P tests
+2026-10-12 21:53:15,333 - INFO - Running P2P test: /testbed/sympy/combinatorics/tests/test_partitions.py
+2026-10-12 21:53:16,428 - INFO - P2P test /testbed/sympy/combinatorics/tests/test_partitions.py exit code: 0
+2026-10-12 21:53:16,429 - INFO - Saved P2P test output to artifact://8f3198e27fe44ac3
+2026-10-12 21:53:16,429 - INFO - Running P2P test: /testbed/sympy/ntheory/tests/test_digits.py
+2026-10-12 21:53:17,314 - INFO - P2P test /testbed/sympy/ntheory/tests/test_digits.py exit code: 0
+2026-10-12 21:53:17,314 - INFO - Saved P2P test output to artifact://6ee89bf20a0c1d34
+2026-10-12 21:53:17,314 - INFO - Running P2P test: /testbed/sympy/matrices/expressions/tests/test_matmul.py
+2026-10-12 21:53:18,355 - INFO - P2P test /testbed/sympy/matrices/expressions/tests/test_matmul.py exit code: 0
+2026-10-12 21:53:18,356 - INFO - Saved P2P test output to artifact://341941e0f1bbd4c6
+2026-10-12 21:53:18,356 - INFO - Running P2P test: /testbed/sympy/physics/quantum/tests/test_operator.py
+2026-10-12 21:53:19,512 - INFO - P2P test /testbed/sympy/physics/quantum/tests/test_operator.py exit code: 0
+2026-10-12 21:53:19,512 - INFO - Saved P2P test output to artifact://442e3d721e723043
+2026-10-12 21:53:19,512 - INFO - Running P2P test: /testbed/sympy/core/tests/test_traversal.py
+2026-10-12 21:53:20,472 - INFO - P2P test /testbed/sympy/core/tests/test_traversal.py exit code: 0
+2026-10-12 21:53:20,473 - INFO - Saved P2P test output to artifact://68634f8260dbb913
+2026-10-12 21:53:20,474 - INFO - ============================================================
+2026-10-12 21:53:20,474 - INFO - Evaluation completed for sympy__sympy.c1097516.test_smtlib.69d52b90.lv1
+2026-10-12 21:53:20,474 - INFO - Resolved: False
+2026-10-12 21:53:20,474 - INFO - F2P Pass rate: 0.0
+2026-10-12 21:53:20,474 - INFO - ============================================================
+2026-10-12 21:53:20,474 - INFO - Stopping and removing container
+2026-10-12 21:53:30,796 - INFO - Container removed successfully

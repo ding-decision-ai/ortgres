@@ -1,0 +1,96 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/coordinates/tests/test_masked.py.
+
+Date: 2026-10-16T06:29:58
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 45 items
+
+astropy/coordinates/tests/test_masked.py ............................... [ 68%]
+..............                                                           [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_initialization
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_convert_to_cartesian
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_convert_to_unit_spherical
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_convert_to_radial
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_convert_to_physics_spherical
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_set_mask
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_setitem
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_set_masked_item_on_unmasked_instance
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_set_np_ma_masked_on_unmasked_instance
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_set_np_ma_nomasked_on_unmasked_instance
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_filled
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_filled_with_masked_value
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_transform_keeps_distance_angular_masks
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_unmasked_representation_masked_differential
+PASSED astropy/coordinates/tests/test_masked.py::TestSphericalRepresentationSeparateMasks::test_masked_representation_unmasked_differential
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_initialization_directly
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_class_initialization
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_cache_clearing
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_cartesian
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_unit_spherical
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_physics_spherical
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_get_mask
+PASSED astropy/coordinates/tests/test_masked.py::TestFrame::test_unmasked_frame
+PASSED astropy/coordinates/tests/test_masked.py::test_frame_without_data
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_initialization_directly
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_class_initialization
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_cache_clearing
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_cartesian
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_unit_spherical
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_physics_spherical
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_get_mask
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_unmasked_frame
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoord::test_non_frame_attribute
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithDifferentials::test_setup
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithDifferentials::test_get_mask
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithDifferentials::test_filled
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithDifferentials::test_filled_with_masked_value
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithDifferentials::test_apply_space_motion[dt0]
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithDifferentials::test_apply_space_motion[dt1]
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithOnlyDifferentialsMasked::test_setup
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithOnlyDifferentialsMasked::test_get_mask
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithOnlyDifferentialsMasked::test_filled
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithOnlyDifferentialsMasked::test_filled_with_masked_value
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithOnlyDifferentialsMasked::test_apply_space_motion[dt0]
+PASSED astropy/coordinates/tests/test_masked.py::TestSkyCoordWithOnlyDifferentialsMasked::test_apply_space_motion[dt1]
+============================== 45 passed in 0.38s ==============================

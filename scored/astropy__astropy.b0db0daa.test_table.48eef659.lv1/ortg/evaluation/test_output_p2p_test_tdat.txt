@@ -1,0 +1,79 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/ascii/tests/test_tdat.py.
+
+Date: 2026-10-14T02:59:24
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 29 items
+
+astropy/io/ascii/tests/test_tdat.py .............................        [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/ascii/tests/test_tdat.py::astropy.io.ascii.tests.test_tdat.test_round_trip_masked_table_default
+PASSED astropy/io/ascii/tests/test_tdat.py::test_write_simple
+PASSED astropy/io/ascii/tests/test_tdat.py::test_catch_format
+PASSED astropy/io/ascii/tests/test_tdat.py::test_read_tdat
+PASSED astropy/io/ascii/tests/test_tdat.py::test_full_table_content
+PASSED astropy/io/ascii/tests/test_tdat.py::test_write_full
+PASSED astropy/io/ascii/tests/test_tdat.py::test_write_read_roundtrip
+PASSED astropy/io/ascii/tests/test_tdat.py::test_write_read_roundtrip_empty_table
+PASSED astropy/io/ascii/tests/test_tdat.py::test_keyword_quotes
+PASSED astropy/io/ascii/tests/test_tdat.py::test_tablenames
+PASSED astropy/io/ascii/tests/test_tdat.py::test_bad_delimiter
+PASSED astropy/io/ascii/tests/test_tdat.py::test_bad_header_start
+PASSED astropy/io/ascii/tests/test_tdat.py::test_missing_data_heading
+PASSED astropy/io/ascii/tests/test_tdat.py::test_bad_end_heading
+PASSED astropy/io/ascii/tests/test_tdat.py::test_unrecognized_dtype
+PASSED astropy/io/ascii/tests/test_tdat.py::test_supported_dtypes
+PASSED astropy/io/ascii/tests/test_tdat.py::test_mismatch_line_field
+PASSED astropy/io/ascii/tests/test_tdat.py::test_fieldname_too_long
+PASSED astropy/io/ascii/tests/test_tdat.py::test_fmt_type_too_long
+PASSED astropy/io/ascii/tests/test_tdat.py::test_units
+PASSED astropy/io/ascii/tests/test_tdat.py::test_round_trip_masked_table_default
+PASSED astropy/io/ascii/tests/test_tdat.py::test_deprecated_keyword
+PASSED astropy/io/ascii/tests/test_tdat.py::test_tdat_format_error
+PASSED astropy/io/ascii/tests/test_tdat.py::test_delimiter_in_data
+PASSED astropy/io/ascii/tests/test_tdat.py::test_unsupported_delimiter
+PASSED astropy/io/ascii/tests/test_tdat.py::test_write_qtable
+PASSED astropy/io/ascii/tests/test_tdat.py::test_multiline_data
+PASSED astropy/io/ascii/tests/test_tdat.py::test_comment_too_long
+PASSED astropy/io/ascii/tests/test_tdat.py::test_int_too_large
+============================== 29 passed in 0.20s ==============================

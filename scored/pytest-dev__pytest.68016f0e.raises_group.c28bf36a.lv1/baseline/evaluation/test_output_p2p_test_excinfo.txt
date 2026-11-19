@@ -1,0 +1,2237 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: mock-3.15.1, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 187 items
+
+testing/code/test_excinfo.py .................s......................... [ 22%]
+..................s..................................................... [ 61%]
+...............................................sssssssss................ [100%]
+
+==================================== PASSES ====================================
+______ TestTraceback_f_g_h.test_traceback_filter_selective[<lambda>-True] ______
+----------------------------- Captured stdout call -----------------------------
+old: [<TracebackEntry /testbed/src/_pytest/raises.py:296>, <TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:217>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+new: [<TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+_____ TestTraceback_f_g_h.test_traceback_filter_selective[<lambda>-False] ______
+----------------------------- Captured stdout call -----------------------------
+old: [<TracebackEntry /testbed/src/_pytest/raises.py:296>, <TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:217>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+new: [<TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:217>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+___ TestTraceback_f_g_h.test_traceback_filter_selective[tracebackhide2-True] ___
+----------------------------- Captured stdout call -----------------------------
+old: [<TracebackEntry /testbed/src/_pytest/raises.py:296>, <TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:217>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+new: [<TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+__ TestTraceback_f_g_h.test_traceback_filter_selective[tracebackhide3-False] ___
+----------------------------- Captured stdout call -----------------------------
+old: [<TracebackEntry /testbed/src/_pytest/raises.py:296>, <TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:217>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+new: [<TracebackEntry /testbed/testing/code/test_excinfo.py:222>, <TracebackEntry /testbed/testing/code/test_excinfo.py:217>, <TracebackEntry /testbed/testing/code/test_excinfo.py:211>]
+______________________ test_excinfo_no_python_sourcecode _______________________
+----------------------------- Captured stdout call -----------------------------
+  File '/testbed/src/_pytest/raises.py':296 in raises
+  func(*args[1:], **kwargs)
+
+  File '/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/jinja2/environment.py':1295 in render
+  self.environment.handle_exception()
+
+  File '/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/jinja2/environment.py':942 in handle_exception
+  raise rewrite_traceback_stack(source=source)
+
+  File '/tmp/pytest-of-root/pytest-2/test_excinfo_no_python_sourcec0/test.txt':1 in top-level template code
+  ???
+
+  File '/testbed/testing/code/test_excinfo.py':119 in h
+  g()
+
+  File '/testbed/testing/code/test_excinfo.py':113 in g
+  f()
+
+  File '/testbed/testing/code/test_excinfo.py':106 in f
+  raise ValueError
+
+________________ TestFormattedExcinfo.test_repr_source_excinfo _________________
+----------------------------- Captured stdout call -----------------------------
+    def f():
+>       _ = 1 / 0
+E       ZeroDivisionError: division by zero
+________________ TestFormattedExcinfo.test_traceback_repr_style ________________
+----------------------------- Captured stdout call -----------------------------
+
+    def f():
+>       g()
+
+(<object object at 0x788257734fa0>, '/tmp/pytest-of-root/pytest-2/test_traceback_repr_style0/mod.py')
+:3: 
+('_ ', None)
+(<object object at 0x788257734fa0>, '/tmp/pytest-of-root/pytest-2/test_traceback_repr_style0/mod.py')
+:5: in g
+    h()
+(<object object at 0x788257734fa0>, '/tmp/pytest-of-root/pytest-2/test_traceback_repr_style0/mod.py')
+:7: in h
+    i()
+('_ ', None)
+
+    def i():
+>       raise ValueError()
+E       ValueError
+
+(<object object at 0x788257734fa0>, '/tmp/pytest-of-root/pytest-2/test_traceback_repr_style0/mod.py')
+:9: ValueError
+___________________ TestFormattedExcinfo.test_exc_chain_repr ___________________
+----------------------------- Captured stdout call -----------------------------
+
+    def f():
+        try:
+>           g()
+
+(<object object at 0x788257734e30>, '/tmp/pytest-of-root/pytest-2/test_exc_chain_repr0/mod.py')
+:6: 
+('_ ', None)
+
+    def g():
+>       raise ValueError()
+E       ValueError
+
+(<object object at 0x788257734e30>, '/tmp/pytest-of-root/pytest-2/test_exc_chain_repr0/mod.py')
+:12: ValueError
+
+The above exception was the direct cause of the following exception:
+
+    def f():
+        try:
+            g()
+        except Exception as e:
+>           raise Err() from e
+E           test_exc_chain_repr0.mod.Err
+
+(<object object at 0x788257734e30>, '/tmp/pytest-of-root/pytest-2/test_exc_chain_repr0/mod.py')
+:8: Err
+
+During handling of the above exception, another exception occurred:
+
+    def f():
+        try:
+            g()
+        except Exception as e:
+            raise Err() from e
+        finally:
+>           h()
+
+(<object object at 0x788257734e30>, '/tmp/pytest-of-root/pytest-2/test_exc_chain_repr0/mod.py')
+:10: 
+('_ ', None)
+
+    def h():
+>       if True: raise AttributeError()
+E       AttributeError
+
+(<object object at 0x788257734e30>, '/tmp/pytest-of-root/pytest-2/test_exc_chain_repr0/mod.py')
+:15: AttributeError
+_______ TestFormattedExcinfo.test_exc_repr_chain_suppression[from_none] ________
+----------------------------- Captured stdout call -----------------------------
+
+    def f():
+        try:
+            g()
+        except Exception:
+>           raise AttributeError() from None
+E           AttributeError
+
+(<object object at 0x788257735170>, '/tmp/pytest-of-root/pytest-2/test_exc_repr_chain_suppressio0/mod.py')
+:6: AttributeError
+___ TestFormattedExcinfo.test_exc_repr_chain_suppression[explicit_suppress] ____
+----------------------------- Captured stdout call -----------------------------
+
+    def f():
+        try:
+            g()
+        except Exception:
+>           raise AttributeError()
+E           AttributeError
+
+(<object object at 0x7882577351a0>, '/tmp/pytest-of-root/pytest-2/test_exc_repr_chain_suppressio1/mod.py')
+:6: AttributeError
+___________________________ test_match_raises_error ____________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_match_raises_error0
+collected 1 item
+
+test_match_raises_error.py F                                             [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_division_zero ______________________________
+test_match_raises_error.py:5: in test_division_zero
+    excinfo.match(r'[123]+')
+E   AssertionError: Regex pattern did not match.
+E    Regex: '[123]+'
+E    Input: 'division by zero'
+=========================== short test summary info ============================
+FAILED test_match_raises_error.py::test_division_zero - AssertionError: Regex...
+============================== 1 failed in 0.00s ===============================
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_match_raises_error0
+collected 1 item
+
+test_match_raises_error.py F                                             [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_division_zero ______________________________
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_and_report.<locals>.<lambda> at 0x78825752f250>
+when = 'call'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -> CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        instant = timing.Instant()
+        try:
+>           result: TResult | None = func()
+
+/testbed/src/_pytest/runner.py:344: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>       lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+    )
+
+/testbed/src/_pytest/runner.py:246: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <HookCaller 'pytest_runtest_call'>
+kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def __call__(self, **kwargs: object) -> Any:
+        """Call the hook.
+    
+        Only accepts keyword arguments, which should match the hook
+        specification.
+    
+        Returns the result(s) of calling all registered plugins, see
+        :ref:`calling`.
+        """
+        assert not self.is_historic(), (
+            "Cannot directly call a historic hook - use call_historic instead."
+        )
+        self._verify_all_args_are_provided(kwargs)
+        firstresult = self.spec.opts.get("firstresult", False) if self.spec else False
+        # Copy because plugins may register other plugins during iteration (#438).
+>       return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_hooks.py:512: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.config.PytestPluginManager object at 0x788257dca6e0>
+hook_name = 'pytest_runtest_call'
+methods = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def _hookexec(
+        self,
+        hook_name: str,
+        methods: Sequence[HookImpl],
+        kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+caller_kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def traced_hookexec(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        before(hook_name, hook_impls, caller_kwargs)
+        outcome = Result.from_call(
+            lambda: oldcall(hook_name, hook_impls, caller_kwargs, firstresult)
+        )
+        after(outcome, hook_name, hook_impls, caller_kwargs)
+>       return outcome.get_result()
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:475: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pluggy._result.Result object at 0x788259617e40>
+
+    def get_result(self) -> ResultType:
+        """Get the result(s) for this hook call.
+    
+        If the hook was marked as a ``firstresult`` only a single value
+        will be returned, otherwise a list of results.
+        """
+        __tracebackhide__ = True
+        exc = self._exception
+        tb = self._traceback
+        if exc is None:
+            return cast(ResultType, self._result)
+        else:
+>           raise exc.with_traceback(tb)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'pluggy._result.Result'>
+func = <function PluginManager.add_hookcall_monitoring.<locals>.traced_hookexec.<locals>.<lambda> at 0x788257294820>
+
+    @classmethod
+    def from_call(cls, func: Callable[[], ResultType]) -> Result[ResultType]:
+        """:meta private:"""
+        __tracebackhide__ = True
+        result = exception = None
+        try:
+>           result = func()
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>       lambda: oldcall(hook_name, hook_impls, caller_kwargs, firstresult)
+    )
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:472: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+caller_kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+                            teardown.throw(exception)
+                        except RuntimeError as re:
+                            # StopIteration from generator causes RuntimeError
+                            # even for coroutine usage - see #544
+                            if (
+                                isinstance(exception, StopIteration)
+                                and re.__cause__ is exception
+                            ):
+                                teardown.close()
+                                continue
+                            else:
+                                raise
+                    else:
+                        teardown.send(result)
+                    # Following is unreachable for a well behaved hook wrapper.
+                    # Try to force finalizers otherwise postponed till GC action.
+                    # Note: close() may raise if generator handles GeneratorExit.
+                    teardown.close()
+                except StopIteration as si:
+                    result = si.value
+                    exception = None
+                    continue
+                except BaseException as e:
+                    exception = e
+                    continue
+                _raise_wrapfail(teardown, "has second yield")
+    
+        if exception is not None:
+>           raise exception
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+caller_kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.logging.LoggingPlugin object at 0x7882582d4c70>
+item = <Function test_division_zero>
+
+    @hookimpl(wrapper=True)
+    def pytest_runtest_call(self, item: nodes.Item) -> Generator[None]:
+        self.log_cli_handler.set_when("call")
+    
+        with self._runtest_for(item, "call"):
+>           yield
+
+/testbed/src/_pytest/logging.py:850: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+caller_kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <CaptureManager _method='fd' _global_capturing=<MultiCapture out=<FDCapture 1 oldfd=13 _state='suspended' tmpfile=<_io...xtIOWrapper name='/dev/null' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>
+item = <Function test_division_zero>
+
+    @hookimpl(wrapper=True)
+    def pytest_runtest_call(self, item: Item) -> Generator[None]:
+        with self.item_capture("call", item):
+>           return (yield)
+
+/testbed/src/_pytest/capture.py:900: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+caller_kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_division_zero>
+
+    @hookimpl(wrapper=True)
+    def pytest_runtest_call(item: Item) -> Generator[None]:
+        xfailed = item.stash.get(xfailed_key, None)
+        if xfailed is None:
+            item.stash[xfailed_key] = xfailed = evaluate_xfail_marks(item)
+    
+        if xfailed and not item.config.option.runxfail and not xfailed.run:
+            xfail("[NOTRUN] " + xfailed.reason)
+    
+        try:
+>           return (yield)
+
+/testbed/src/_pytest/skipping.py:262: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from '/testbed/src/_pytest/threadex...xture=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7882582d4c70>>]
+caller_kwargs = {'item': <Function test_division_zero>}, firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+>                       res = hook_impl.function(*args)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_division_zero>
+
+    def pytest_runtest_call(item: Item) -> None:
+        _update_current_test_var(item, "call")
+        try:
+            del sys.last_type
+            del sys.last_value
+            del sys.last_traceback
+            if sys.version_info >= (3, 12, 0):
+                del sys.last_exc  # type:ignore[attr-defined]
+        except AttributeError:
+            pass
+        try:
+>           item.runtest()
+
+/testbed/src/_pytest/runner.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Function test_division_zero>
+
+    def runtest(self) -> None:
+        """Execute the underlying test function."""
+>       self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+
+/testbed/src/_pytest/python.py:1715: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <HookCaller 'pytest_pyfunc_call'>
+kwargs = {'pyfuncitem': <Function test_division_zero>}, firstresult = True
+
+    def __call__(self, **kwargs: object) -> Any:
+        """Call the hook.
+    
+        Only accepts keyword arguments, which should match the hook
+        specification.
+    
+        Returns the result(s) of calling all registered plugins, see
+        :ref:`calling`.
+        """
+        assert not self.is_historic(), (
+            "Cannot directly call a historic hook - use call_historic instead."
+        )
+        self._verify_all_args_are_provided(kwargs)
+        firstresult = self.spec.opts.get("firstresult", False) if self.spec else False
+        # Copy because plugins may register other plugins during iteration (#438).
+>       return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_hooks.py:512: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.config.PytestPluginManager object at 0x788257dca6e0>
+hook_name = 'pytest_pyfunc_call'
+methods = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from '/testbed/src/_pytest/python.py'>>]
+kwargs = {'pyfuncitem': <Function test_division_zero>}, firstresult = True
+
+    def _hookexec(
+        self,
+        hook_name: str,
+        methods: Sequence[HookImpl],
+        kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_pyfunc_call'
+hook_impls = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from '/testbed/src/_pytest/python.py'>>]
+caller_kwargs = {'pyfuncitem': <Function test_division_zero>}
+firstresult = True
+
+    def traced_hookexec(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        before(hook_name, hook_impls, caller_kwargs)
+        outcome = Result.from_call(
+            lambda: oldcall(hook_name, hook_impls, caller_kwargs, firstresult)
+        )
+        after(outcome, hook_name, hook_impls, caller_kwargs)
+>       return outcome.get_result()
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:475: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pluggy._result.Result object at 0x788259616d80>
+
+    def get_result(self) -> ResultType:
+        """Get the result(s) for this hook call.
+    
+        If the hook was marked as a ``firstresult`` only a single value
+        will be returned, otherwise a list of results.
+        """
+        __tracebackhide__ = True
+        exc = self._exception
+        tb = self._traceback
+        if exc is None:
+            return cast(ResultType, self._result)
+        else:
+>           raise exc.with_traceback(tb)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class 'pluggy._result.Result'>
+func = <function PluginManager.add_hookcall_monitoring.<locals>.traced_hookexec.<locals>.<lambda> at 0x78825752e8c0>
+
+    @classmethod
+    def from_call(cls, func: Callable[[], ResultType]) -> Result[ResultType]:
+        """:meta private:"""
+        __tracebackhide__ = True
+        result = exception = None
+        try:
+>           result = func()
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>       lambda: oldcall(hook_name, hook_impls, caller_kwargs, firstresult)
+    )
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:472: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_pyfunc_call'
+hook_impls = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from '/testbed/src/_pytest/python.py'>>]
+caller_kwargs = {'pyfuncitem': <Function test_division_zero>}
+firstresult = True
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+                            teardown.throw(exception)
+                        except RuntimeError as re:
+                            # StopIteration from generator causes RuntimeError
+                            # even for coroutine usage - see #544
+                            if (
+                                isinstance(exception, StopIteration)
+                                and re.__cause__ is exception
+                            ):
+                                teardown.close()
+                                continue
+                            else:
+                                raise
+                    else:
+                        teardown.send(result)
+                    # Following is unreachable for a well behaved hook wrapper.
+                    # Try to force finalizers otherwise postponed till GC action.
+                    # Note: close() may raise if generator handles GeneratorExit.
+                    teardown.close()
+                except StopIteration as si:
+                    result = si.value
+                    exception = None
+                    continue
+                except BaseException as e:
+                    exception = e
+                    continue
+                _raise_wrapfail(teardown, "has second yield")
+    
+        if exception is not None:
+>           raise exception
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook_name = 'pytest_pyfunc_call'
+hook_impls = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from '/testbed/src/_pytest/python.py'>>]
+caller_kwargs = {'pyfuncitem': <Function test_division_zero>}
+firstresult = True
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+>                       res = hook_impl.function(*args)
+
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pyfuncitem = <Function test_division_zero>
+
+    @hookimpl(trylast=True)
+    def pytest_pyfunc_call(pyfuncitem: Function) -> object | None:
+        testfunction = pyfuncitem.obj
+        if is_async_function(testfunction):
+            async_fail(pyfuncitem.nodeid)
+        funcargs = pyfuncitem.funcargs
+        testargs = {arg: funcargs[arg] for arg in pyfuncitem._fixtureinfo.argnames}
+>       result = testfunction(**testargs)
+
+/testbed/src/_pytest/python.py:164: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def test_division_zero():
+        with pytest.raises(ZeroDivisionError) as excinfo:
+            0 / 0
+>       excinfo.match(r'[123]+')
+
+test_match_raises_error.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <ExceptionInfo ZeroDivisionError('division by zero') tblen=1>
+regexp = '[123]+'
+
+    def match(self, regexp: str | re.Pattern[str]) -> Literal[True]:
+        """Check whether the regular expression `regexp` matches the string
+        representation of the exception using :func:`python:re.search`.
+    
+        If it matches `True` is returned, otherwise an `AssertionError` is raised.
+        """
+        __tracebackhide__ = True
+        value = stringify_exception(self.value)
+        msg = f"Regex pattern did not match.\n Regex: {regexp!r}\n Input: {value!r}"
+        if regexp == value:
+            msg += "\n Did you mean to `re.escape()` the regex?"
+>       assert re.search(regexp, value), msg
+E       AssertionError: Regex pattern did not match.
+E        Regex: '[123]+'
+E        Input: 'division by zero'
+
+/testbed/src/_pytest/_code/code.py:778: AssertionError
+=========================== short test summary info ============================
+FAILED test_match_raises_error.py::test_division_zero - AssertionError: Regex...
+============================== 1 failed in 0.08s ===============================
+_______________________________ test_cwd_deleted _______________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_cwd_deleted0
+collected 1 item
+
+test_cwd_deleted.py F                                                    [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-2/basetemp/test0')
+
+    def test(tmp_path):
+        os.chdir(tmp_path)
+>       tmp_path.unlink()
+
+/tmp/pytest-of-root/pytest-2/test_cwd_deleted0/test_cwd_deleted.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-2/basetemp/test0')
+missing_ok = False
+
+    def unlink(self, missing_ok=False):
+        """
+        Remove this file or link.
+        If the path is a directory, use rmdir() instead.
+        """
+        try:
+>           self._accessor.unlink(self)
+E           IsADirectoryError: [Errno 21] Is a directory: '/tmp/pytest-of-root/pytest-2/basetemp/test0'
+
+/opt/miniconda3/envs/testbed/lib/python3.10/pathlib.py:1206: IsADirectoryError
+=========================== short test summary info ============================
+FAILED test_cwd_deleted.py::test - IsADirectoryError: [Errno 21] Is a directo...
+============================== 1 failed in 0.01s ===============================
+_____________________ test_regression_negative_line_index ______________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_regression_negative_line_index0
+collected 1 item
+
+test_regression_negative_line_index.py F                                 [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_literal_eval _______________________________
+
+    def test_literal_eval():
+        with pytest.raises(ValueError, match="^$"):
+>           ast.literal_eval("pytest")
+
+test_regression_negative_line_index.py:7: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/miniconda3/envs/testbed/lib/python3.10/ast.py:110: in literal_eval
+    return _convert(node_or_string)
+/opt/miniconda3/envs/testbed/lib/python3.10/ast.py:109: in _convert
+    return _convert_signed_num(node)
+/opt/miniconda3/envs/testbed/lib/python3.10/ast.py:83: in _convert_signed_num
+    return _convert_num(node)
+/opt/miniconda3/envs/testbed/lib/python3.10/ast.py:74: in _convert_num
+    _raise_malformed_node(node)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+node = <ast.Name object at 0x788257ca4f70>
+
+    def _raise_malformed_node(node):
+        msg = "malformed node or string"
+        if lno := getattr(node, 'lineno', None):
+            msg += f' on line {lno}'
+>       raise ValueError(msg + f': {node!r}')
+E       ValueError: malformed node or string on line 1: <ast.Name object at 0x788257ca4f70>
+
+/opt/miniconda3/envs/testbed/lib/python3.10/ast.py:71: ValueError
+
+During handling of the above exception, another exception occurred:
+
+    def test_literal_eval():
+>       with pytest.raises(ValueError, match="^$"):
+E       AssertionError: 
+E       - malformed node or string on line 1: <ast.Name object at 0x788257ca4f70>
+
+test_regression_negative_line_index.py:6: AssertionError
+=========================== short test summary info ============================
+FAILED test_regression_negative_line_index.py::test_literal_eval - AssertionE...
+============================== 1 failed in 0.04s ===============================
+________________________ test_exceptiongroup[none-none] ________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup0
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 38, in test
+  |     outer("none", "none")
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 16, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup0/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - exceptiongroup.BaseExceptionGroup: Oops (2 su...
+============================== 1 failed in 0.00s ===============================
+________________________ test_exceptiongroup[none-from] ________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup1
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 16, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 38, in test
+    outer("from", "none")
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup1/test_excgroup.py", line 32, in outer
+    raise IndexError() from e
+IndexError
+
+The above exception was the direct cause of the following exception:
+
+    def test():
+>       outer("from", "none")
+
+test_excgroup.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+outer_chain = 'from', inner_chain = 'none'
+
+    def outer(outer_chain, inner_chain):
+        try:
+            inner(inner_chain)
+        except exceptiongroup.BaseExceptionGroup as e:
+            if outer_chain == "none":
+                raise
+            if outer_chain == "from":
+>               raise IndexError() from e
+E               IndexError
+
+test_excgroup.py:32: IndexError
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - IndexError
+============================== 1 failed in 0.00s ===============================
+______________________ test_exceptiongroup[none-another] _______________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup2
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 16, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 38, in test
+    outer("another", "none")
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup2/test_excgroup.py", line 34, in outer
+    raise IndexError()
+IndexError
+
+During handling of the above exception, another exception occurred:
+
+    def test():
+>       outer("another", "none")
+
+test_excgroup.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+outer_chain = 'another', inner_chain = 'none'
+
+    def outer(outer_chain, inner_chain):
+        try:
+            inner(inner_chain)
+        except exceptiongroup.BaseExceptionGroup as e:
+            if outer_chain == "none":
+                raise
+            if outer_chain == "from":
+                raise IndexError() from e
+            else:
+>               raise IndexError()
+E               IndexError
+
+test_excgroup.py:34: IndexError
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - IndexError
+============================== 1 failed in 0.00s ===============================
+________________________ test_exceptiongroup[from-none] ________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup3
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+inner_chain = 'from'
+
+    def inner(inner_chain):
+        excs = []
+        for callback in [f, g]:
+            try:
+                callback()
+            except BaseException as err:
+                excs.append(err)
+        if excs:
+            if inner_chain == "none":
+                raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+            try:
+>               raise SyntaxError()
+E               SyntaxError: <no detail available>
+
+test_excgroup.py:18: SyntaxError
+
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 18, in inner
+    raise SyntaxError()
+SyntaxError: <no detail available>
+
+The above exception was the direct cause of the following exception:
+
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 38, in test
+  |     outer("none", "from")
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 21, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs) from e
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup3/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - exceptiongroup.BaseExceptionGroup: Oops (2 su...
+============================== 1 failed in 0.00s ===============================
+________________________ test_exceptiongroup[from-from] ________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup4
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+inner_chain = 'from'
+
+    def inner(inner_chain):
+        excs = []
+        for callback in [f, g]:
+            try:
+                callback()
+            except BaseException as err:
+                excs.append(err)
+        if excs:
+            if inner_chain == "none":
+                raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+            try:
+>               raise SyntaxError()
+E               SyntaxError: <no detail available>
+
+test_excgroup.py:18: SyntaxError
+
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 18, in inner
+    raise SyntaxError()
+SyntaxError: <no detail available>
+
+The above exception was the direct cause of the following exception:
+
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 21, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs) from e
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 38, in test
+    outer("from", "from")
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup4/test_excgroup.py", line 32, in outer
+    raise IndexError() from e
+IndexError
+
+The above exception was the direct cause of the following exception:
+
+    def test():
+>       outer("from", "from")
+
+test_excgroup.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+outer_chain = 'from', inner_chain = 'from'
+
+    def outer(outer_chain, inner_chain):
+        try:
+            inner(inner_chain)
+        except exceptiongroup.BaseExceptionGroup as e:
+            if outer_chain == "none":
+                raise
+            if outer_chain == "from":
+>               raise IndexError() from e
+E               IndexError
+
+test_excgroup.py:32: IndexError
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - IndexError
+============================== 1 failed in 0.00s ===============================
+______________________ test_exceptiongroup[from-another] _______________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup5
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+inner_chain = 'from'
+
+    def inner(inner_chain):
+        excs = []
+        for callback in [f, g]:
+            try:
+                callback()
+            except BaseException as err:
+                excs.append(err)
+        if excs:
+            if inner_chain == "none":
+                raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+            try:
+>               raise SyntaxError()
+E               SyntaxError: <no detail available>
+
+test_excgroup.py:18: SyntaxError
+
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 18, in inner
+    raise SyntaxError()
+SyntaxError: <no detail available>
+
+The above exception was the direct cause of the following exception:
+
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 21, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs) from e
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 38, in test
+    outer("another", "from")
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup5/test_excgroup.py", line 34, in outer
+    raise IndexError()
+IndexError
+
+During handling of the above exception, another exception occurred:
+
+    def test():
+>       outer("another", "from")
+
+test_excgroup.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+outer_chain = 'another', inner_chain = 'from'
+
+    def outer(outer_chain, inner_chain):
+        try:
+            inner(inner_chain)
+        except exceptiongroup.BaseExceptionGroup as e:
+            if outer_chain == "none":
+                raise
+            if outer_chain == "from":
+                raise IndexError() from e
+            else:
+>               raise IndexError()
+E               IndexError
+
+test_excgroup.py:34: IndexError
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - IndexError
+============================== 1 failed in 0.00s ===============================
+______________________ test_exceptiongroup[another-none] _______________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup6
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+inner_chain = 'another'
+
+    def inner(inner_chain):
+        excs = []
+        for callback in [f, g]:
+            try:
+                callback()
+            except BaseException as err:
+                excs.append(err)
+        if excs:
+            if inner_chain == "none":
+                raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+            try:
+>               raise SyntaxError()
+E               SyntaxError: <no detail available>
+
+test_excgroup.py:18: SyntaxError
+
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 18, in inner
+    raise SyntaxError()
+SyntaxError: <no detail available>
+
+During handling of the above exception, another exception occurred:
+
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 38, in test
+  |     outer("none", "another")
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 23, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup6/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - exceptiongroup.BaseExceptionGroup: Oops (2 su...
+============================== 1 failed in 0.00s ===============================
+______________________ test_exceptiongroup[another-from] _______________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup7
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+inner_chain = 'another'
+
+    def inner(inner_chain):
+        excs = []
+        for callback in [f, g]:
+            try:
+                callback()
+            except BaseException as err:
+                excs.append(err)
+        if excs:
+            if inner_chain == "none":
+                raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+            try:
+>               raise SyntaxError()
+E               SyntaxError: <no detail available>
+
+test_excgroup.py:18: SyntaxError
+
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 18, in inner
+    raise SyntaxError()
+SyntaxError: <no detail available>
+
+During handling of the above exception, another exception occurred:
+
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 23, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 38, in test
+    outer("from", "another")
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup7/test_excgroup.py", line 32, in outer
+    raise IndexError() from e
+IndexError
+
+The above exception was the direct cause of the following exception:
+
+    def test():
+>       outer("from", "another")
+
+test_excgroup.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+outer_chain = 'from', inner_chain = 'another'
+
+    def outer(outer_chain, inner_chain):
+        try:
+            inner(inner_chain)
+        except exceptiongroup.BaseExceptionGroup as e:
+            if outer_chain == "none":
+                raise
+            if outer_chain == "from":
+>               raise IndexError() from e
+E               IndexError
+
+test_excgroup.py:32: IndexError
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - IndexError
+============================== 1 failed in 0.00s ===============================
+_____________________ test_exceptiongroup[another-another] _____________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup8
+collected 1 item
+
+test_excgroup.py F                                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+inner_chain = 'another'
+
+    def inner(inner_chain):
+        excs = []
+        for callback in [f, g]:
+            try:
+                callback()
+            except BaseException as err:
+                excs.append(err)
+        if excs:
+            if inner_chain == "none":
+                raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+            try:
+>               raise SyntaxError()
+E               SyntaxError: <no detail available>
+
+test_excgroup.py:18: SyntaxError
+
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 18, in inner
+    raise SyntaxError()
+SyntaxError: <no detail available>
+
+During handling of the above exception, another exception occurred:
+
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 27, in outer
+  |     inner(inner_chain)
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 23, in inner
+  |     raise exceptiongroup.BaseExceptionGroup("Oops", excs)
+  | exceptiongroup.BaseExceptionGroup: Oops (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 4, in f
+    |     def f(): raise ValueError("From f()")
+    | ValueError: From f()
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 11, in inner
+    |     callback()
+    |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 5, in g
+    |     def g(): raise BaseException("From g()")
+    | BaseException: From g()
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 38, in test
+    outer("another", "another")
+  File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup8/test_excgroup.py", line 34, in outer
+    raise IndexError()
+IndexError
+
+During handling of the above exception, another exception occurred:
+
+    def test():
+>       outer("another", "another")
+
+test_excgroup.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+outer_chain = 'another', inner_chain = 'another'
+
+    def outer(outer_chain, inner_chain):
+        try:
+            inner(inner_chain)
+        except exceptiongroup.BaseExceptionGroup as e:
+            if outer_chain == "none":
+                raise
+            if outer_chain == "from":
+                raise IndexError() from e
+            else:
+>               raise IndexError()
+E               IndexError
+
+test_excgroup.py:34: IndexError
+=========================== short test summary info ============================
+FAILED test_excgroup.py::test - IndexError
+============================== 1 failed in 0.02s ===============================
+____________________ test_exceptiongroup_short_summary_info ____________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.10
+cachedir: .pytest_cache
+rootdir: /tmp/pytest-of-root/pytest-2/test_exceptiongroup_short_summary_info0
+collecting ... collected 5 items
+
+test_exceptiongroup_short_summary_info.py::test_base FAILED              [ 20%]
+test_exceptiongroup_short_summary_info.py::test_nonbase FAILED           [ 40%]
+test_exceptiongroup_short_summary_info.py::test_nested FAILED            [ 60%]
+test_exceptiongroup_short_summary_info.py::test_multiple FAILED          [ 80%]
+test_exceptiongroup_short_summary_info.py::test_nested_multiple FAILED   [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_base ___________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup_short_summary_info0/test_exceptiongroup_short_summary_info.py", line 7, in test_base
+  |     raise BaseExceptionGroup("NOT IN SUMMARY", [SystemExit("a" * 10)])
+  | exceptiongroup.BaseExceptionGroup: NOT IN SUMMARY (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | SystemExit: aaaaaaaaaa
+    +------------------------------------
+_________________________________ test_nonbase _________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup_short_summary_info0/test_exceptiongroup_short_summary_info.py", line 10, in test_nonbase
+  |     raise ExceptionGroup("NOT IN SUMMARY", [ValueError("a" * 10)])
+  | exceptiongroup.ExceptionGroup: NOT IN SUMMARY (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | ValueError: aaaaaaaaaa
+    +------------------------------------
+_________________________________ test_nested __________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup_short_summary_info0/test_exceptiongroup_short_summary_info.py", line 13, in test_nested
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup: NOT DISPLAYED (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | exceptiongroup.ExceptionGroup: NOT IN SUMMARY (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | ValueError: aaaaaaaaaa
+      +------------------------------------
+________________________________ test_multiple _________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup_short_summary_info0/test_exceptiongroup_short_summary_info.py", line 20, in test_multiple
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup: bbbbbbbbbb (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | ValueError: NOT IN SUMMARY
+    +---------------- 2 ----------------
+    | TypeError: NOT IN SUMMARY
+    +------------------------------------
+_____________________________ test_nested_multiple _____________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/tmp/pytest-of-root/pytest-2/test_exceptiongroup_short_summary_info0/test_exceptiongroup_short_summary_info.py", line 29, in test_nested_multiple
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup: bbbbbbbbbb (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | exceptiongroup.ExceptionGroup: cccccccccc (2 sub-exceptions)
+    +-+---------------- 1 ----------------
+      | ValueError: NOT IN SUMMARY
+      +---------------- 2 ----------------
+      | TypeError: NOT IN SUMMARY
+      +------------------------------------
+=========================== short test summary info ============================
+FAILED test_exceptiongroup_short_summary_info.py::test_base - SystemExit('aaaaaaaaaa') [single exception in BaseExceptionGroup]
+FAILED test_exceptiongroup_short_summary_info.py::test_nonbase - ValueError('aaaaaaaaaa') [single exception in ExceptionGroup]
+FAILED test_exceptiongroup_short_summary_info.py::test_nested - ValueError('aaaaaaaaaa') [single exception in ExceptionGroup]
+FAILED test_exceptiongroup_short_summary_info.py::test_multiple - exceptiongroup.ExceptionGroup: bbbbbbbbbb (2 sub-exceptions)
+FAILED test_exceptiongroup_short_summary_info.py::test_nested_multiple - exceptiongroup.ExceptionGroup: bbbbbbbbbb (1 sub-exception)
+============================== 5 failed in 0.01s ===============================
+________________________ test_all_entries_hidden[long] _________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_all_entries_hidden0
+collected 1 item
+
+test_all_entries_hidden.py F                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+E   ZeroDivisionError: division by zero
+All traceback entries are hidden. Pass `--full-trace` to see hidden and internal frames.
+=========================== short test summary info ============================
+FAILED test_all_entries_hidden.py::test - ZeroDivisionError: division by zero
+============================== 1 failed in 0.00s ===============================
+________________________ test_all_entries_hidden[short] ________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_all_entries_hidden1
+collected 1 item
+
+test_all_entries_hidden.py F                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+E   ZeroDivisionError: division by zero
+All traceback entries are hidden. Pass `--full-trace` to see hidden and internal frames.
+=========================== short test summary info ============================
+FAILED test_all_entries_hidden.py::test - ZeroDivisionError: division by zero
+============================== 1 failed in 0.00s ===============================
+________________________ test_all_entries_hidden[auto] _________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_all_entries_hidden2
+collected 1 item
+
+test_all_entries_hidden.py F                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+
+E   ZeroDivisionError: division by zero
+All traceback entries are hidden. Pass `--full-trace` to see hidden and internal frames.
+=========================== short test summary info ============================
+FAILED test_all_entries_hidden.py::test - ZeroDivisionError: division by zero
+============================== 1 failed in 0.00s ===============================
+________________________ test_all_entries_hidden[line] _________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_all_entries_hidden3
+collected 1 item
+
+test_all_entries_hidden.py F                                             [100%]
+
+=================================== FAILURES ===================================
+/testbed/src/_pytest/python.py:164: ZeroDivisionError: division by zero
+=========================== short test summary info ============================
+FAILED test_all_entries_hidden.py::test - ZeroDivisionError: division by zero
+============================== 1 failed in 0.00s ===============================
+_______________________ test_all_entries_hidden[native] ________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_all_entries_hidden4
+collected 1 item
+
+test_all_entries_hidden.py F                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+Traceback (most recent call last):
+  File "/testbed/src/_pytest/runner.py", line 344, in from_call
+    result: TResult | None = func()
+  File "/testbed/src/_pytest/runner.py", line 246, in <lambda>
+    lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py", line 475, in traced_hookexec
+    return outcome.get_result()
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py", line 103, in get_result
+    raise exc.with_traceback(tb)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py", line 62, in from_call
+    result = func()
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py", line 472, in <lambda>
+    lambda: oldcall(hook_name, hook_impls, caller_kwargs, firstresult)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 167, in _multicall
+    raise exception
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "/testbed/src/_pytest/logging.py", line 850, in pytest_runtest_call
+    yield
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "/testbed/src/_pytest/capture.py", line 900, in pytest_runtest_call
+    return (yield)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "/testbed/src/_pytest/skipping.py", line 262, in pytest_runtest_call
+    return (yield)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "/testbed/src/_pytest/runner.py", line 178, in pytest_runtest_call
+    item.runtest()
+  File "/testbed/src/_pytest/python.py", line 1715, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py", line 475, in traced_hookexec
+    return outcome.get_result()
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py", line 103, in get_result
+    raise exc.with_traceback(tb)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_result.py", line 62, in from_call
+    result = func()
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py", line 472, in <lambda>
+    lambda: oldcall(hook_name, hook_impls, caller_kwargs, firstresult)
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 167, in _multicall
+    raise exception
+  File "/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "/testbed/src/_pytest/python.py", line 164, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "/tmp/pytest-of-root/pytest-2/test_all_entries_hidden4/test_all_entries_hidden.py", line 3, in test
+    1 / 0
+ZeroDivisionError: division by zero
+=========================== short test summary info ============================
+FAILED test_all_entries_hidden.py::test - ZeroDivisionError: division by zero
+============================== 1 failed in 0.00s ===============================
+___________ test_hidden_entries_of_chained_exceptions_are_not_shown ____________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-2/test_hidden_entries_of_chained_exceptions_are_not_shown0
+collected 1 item
+
+test_hidden_entries_of_chained_exceptions_are_not_shown.py F             [100%]
+
+=================================== FAILURES ===================================
+_____________________________________ test _____________________________________
+test_hidden_entries_of_chained_exceptions_are_not_shown.py:11: in f2
+    f3()
+E   ZeroDivisionError: division by zero
+
+During handling of the above exception, another exception occurred:
+test_hidden_entries_of_chained_exceptions_are_not_shown.py:20: in test
+    f1()
+test_hidden_entries_of_chained_exceptions_are_not_shown.py:13: in f2
+    g1()
+E   AttributeError: type object 'str' has no attribute 'does_not_exist'
+=========================== short test summary info ============================
+FAILED test_hidden_entries_of_chained_exceptions_are_not_shown.py::test - Att...
+============================== 1 failed in 0.00s ===============================
+=========================== short test summary info ============================
+PASSED testing/code/test_excinfo.py::test_excinfo_simple
+PASSED testing/code/test_excinfo.py::test_excinfo_from_exc_info_simple
+PASSED testing/code/test_excinfo.py::test_excinfo_from_exception_simple
+PASSED testing/code/test_excinfo.py::test_excinfo_from_exception_missing_traceback_assertion
+PASSED testing/code/test_excinfo.py::test_excinfo_getstatement
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_entries
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_entry_getsource
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_entry_getsource_in_construct
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_cut
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_filter
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_filter_selective[<lambda>-True]
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_filter_selective[<lambda>-False]
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_filter_selective[tracebackhide2-True]
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_filter_selective[tracebackhide3-False]
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_recursion_index
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_only_specific_recursion_errors
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_no_recursion_index
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_getreprcrash
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_getreprcrash_empty
+PASSED testing/code/test_excinfo.py::test_excinfo_exconly
+PASSED testing/code/test_excinfo.py::test_excinfo_repr_str
+PASSED testing/code/test_excinfo.py::test_excinfo_for_later
+PASSED testing/code/test_excinfo.py::test_excinfo_errisinstance
+PASSED testing/code/test_excinfo.py::test_excinfo_no_sourcecode
+PASSED testing/code/test_excinfo.py::test_excinfo_no_python_sourcecode
+PASSED testing/code/test_excinfo.py::test_entrysource_Queue_example
+PASSED testing/code/test_excinfo.py::test_codepath_Queue_example
+PASSED testing/code/test_excinfo.py::test_match_succeeds
+PASSED testing/code/test_excinfo.py::test_raises_accepts_generic_group
+PASSED testing/code/test_excinfo.py::test_raises_accepts_generic_base_group
+PASSED testing/code/test_excinfo.py::test_raises_rejects_specific_generic_group
+PASSED testing/code/test_excinfo.py::test_raises_accepts_generic_group_in_tuple
+PASSED testing/code/test_excinfo.py::test_raises_exception_escapes_generic_group
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_type
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_doesnt_contain_exception_type
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_match
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_doesnt_contain_exception_match
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_type_unlimited_depth
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_type_at_depth_1
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_doesnt_contain_exception_type_past_depth
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_type_specific_depth
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_match_unlimited_depth
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_match_at_depth_1
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_doesnt_contain_exception_match_past_depth
+PASSED testing/code/test_excinfo.py::TestGroupContains::test_contains_exception_match_specific_depth
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_source
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_source_out_of_bounds
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_source_excinfo
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_source_not_existing
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_many_line_source_not_existing
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_source_failing_fullsource
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_local
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_local_with_error
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_local_with_exception_in_class_property
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_local_truncated
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_args_not_truncated
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_tracebackentry_lines
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_tracebackentry_lines2
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_tracebackentry_lines_var_kw_args
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_tracebackentry_short
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_tracebackentry_no
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_traceback_tbfilter
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_traceback_short_no_source
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_traceback_and_excinfo
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_traceback_with_invalid_cwd
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_excinfo_addouterr
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_excinfo_reprcrash
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_repr_traceback_recursion
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_reprexcinfo_getrepr
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_reprexcinfo_unicode
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_toterminal_long
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_toterminal_long_missing_source
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_toterminal_long_incomplete_source
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_toterminal_long_filenames
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_toterminal_value
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=long,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=short,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=line,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=no,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=native,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=value,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=True,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=True,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=True,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=True,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=False,funcargs=True,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=False,funcargs=False,tbfilter=True]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=False,funcargs=True,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_format_excinfo[style=auto,showlocals=False,funcargs=False,tbfilter=False]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_traceback_repr_style
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exc_chain_repr
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exc_repr_chain_suppression[from_none]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exc_repr_chain_suppression[explicit_suppress]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exc_chain_repr_without_traceback[cause]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exc_chain_repr_without_traceback[context]
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exc_chain_repr_cycle
+PASSED testing/code/test_excinfo.py::TestFormattedExcinfo::test_exec_type_error_filter
+PASSED testing/code/test_excinfo.py::test_repr_traceback_with_unicode[None-short]
+PASSED testing/code/test_excinfo.py::test_repr_traceback_with_unicode[None-long]
+PASSED testing/code/test_excinfo.py::test_repr_traceback_with_unicode[utf8-short]
+PASSED testing/code/test_excinfo.py::test_repr_traceback_with_unicode[utf8-long]
+PASSED testing/code/test_excinfo.py::test_repr_traceback_with_unicode[utf16-short]
+PASSED testing/code/test_excinfo.py::test_repr_traceback_with_unicode[utf16-long]
+PASSED testing/code/test_excinfo.py::test_exception_repr_extraction_error_on_recursion
+PASSED testing/code/test_excinfo.py::test_no_recursion_index_on_recursion_error
+PASSED testing/code/test_excinfo.py::test_check_error_notes_success[error0-notes0-test]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_success[error1-notes1-bar]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_success[error2-notes2-bar]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_success[error3-notes3-baz]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_success[error4-notes4-bar\\nbaz]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_success[error5-notes5-BAZ]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_failure[error0-notes0-foo]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_failure[error1-notes1-baz]
+PASSED testing/code/test_excinfo.py::test_check_error_notes_failure[error2-notes2-foo\nbaz]
+PASSED testing/code/test_excinfo.py::TestTraceback_f_g_h::test_traceback_cut_excludepath
+PASSED testing/code/test_excinfo.py::test_match_raises_error
+PASSED testing/code/test_excinfo.py::test_cwd_deleted
+PASSED testing/code/test_excinfo.py::test_regression_negative_line_index
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[none-none]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[none-from]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[none-another]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[from-none]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[from-from]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[from-another]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[another-none]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[another-from]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup[another-another]
+PASSED testing/code/test_excinfo.py::test_exceptiongroup_short_summary_info
+PASSED testing/code/test_excinfo.py::test_all_entries_hidden[long]
+PASSED testing/code/test_excinfo.py::test_all_entries_hidden[short]
+PASSED testing/code/test_excinfo.py::test_all_entries_hidden[auto]
+PASSED testing/code/test_excinfo.py::test_all_entries_hidden[line]
+PASSED testing/code/test_excinfo.py::test_all_entries_hidden[native]
+PASSED testing/code/test_excinfo.py::test_hidden_entries_of_chained_exceptions_are_not_shown
+SKIPPED [1] testing/code/test_excinfo.py:284: could not import 'decorator': No module named 'decorator'
+SKIPPED [1] testing/code/test_excinfo.py:886: Column level traceback info added in python 3.11
+SKIPPED [9] testing/code/test_excinfo.py:1805: Native ExceptionGroup not implemented
+======================= 176 passed, 11 skipped in 2.15s ========================

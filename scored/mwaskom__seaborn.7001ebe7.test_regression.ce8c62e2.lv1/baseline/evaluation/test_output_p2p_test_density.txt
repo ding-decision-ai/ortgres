@@ -1,0 +1,39 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 25 items
+
+tests/_stats/test_density.py ................ss.......                   [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_stats/test_density.py::TestKDE::test_columns[x]
+PASSED tests/_stats/test_density.py::TestKDE::test_columns[y]
+PASSED tests/_stats/test_density.py::TestKDE::test_gridsize[20]
+PASSED tests/_stats/test_density.py::TestKDE::test_gridsize[30]
+PASSED tests/_stats/test_density.py::TestKDE::test_gridsize[None]
+PASSED tests/_stats/test_density.py::TestKDE::test_cut[1]
+PASSED tests/_stats/test_density.py::TestKDE::test_cut[2]
+PASSED tests/_stats/test_density.py::TestKDE::test_common_grid[True]
+PASSED tests/_stats/test_density.py::TestKDE::test_common_grid[False]
+PASSED tests/_stats/test_density.py::TestKDE::test_common_norm[True]
+PASSED tests/_stats/test_density.py::TestKDE::test_common_norm[False]
+PASSED tests/_stats/test_density.py::TestKDE::test_common_norm_variables
+PASSED tests/_stats/test_density.py::TestKDE::test_common_input_checks[norm]
+PASSED tests/_stats/test_density.py::TestKDE::test_common_input_checks[grid]
+PASSED tests/_stats/test_density.py::TestKDE::test_bw_adjust
+PASSED tests/_stats/test_density.py::TestKDE::test_bw_method_scalar
+PASSED tests/_stats/test_density.py::TestKDE::test_cumulative_requires_scipy
+PASSED tests/_stats/test_density.py::TestKDE::test_singular[vals0]
+PASSED tests/_stats/test_density.py::TestKDE::test_singular[vals1]
+PASSED tests/_stats/test_density.py::TestKDE::test_singular[vals2]
+PASSED tests/_stats/test_density.py::TestKDE::test_singular[vals3]
+PASSED tests/_stats/test_density.py::TestKDE::test_missing[y]
+PASSED tests/_stats/test_density.py::TestKDE::test_missing[weight]
+SKIPPED [2] tests/_stats/test_density.py:170: KDE.cumulative requires scipy
+======================== 23 passed, 2 skipped in 0.42s =========================

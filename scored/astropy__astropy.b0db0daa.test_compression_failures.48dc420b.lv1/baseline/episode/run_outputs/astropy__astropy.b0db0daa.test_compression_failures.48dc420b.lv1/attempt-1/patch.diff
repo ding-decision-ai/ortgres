@@ -1,0 +1,824 @@
+diff --git a/astropy/io/fits/card.py b/astropy/io/fits/card.py
+index 6d62e97..739bd5c 100644
+--- a/astropy/io/fits/card.py
++++ b/astropy/io/fits/card.py
+@@ -8,7 +8,7 @@ import numpy as np
+ from astropy.utils.exceptions import AstropyUserWarning
+ 
+ from . import conf
+-from .util import _str_to_num, _words_group, translate
++from .util import _is_int, _str_to_num, _words_group, translate
+ from .verify import VerifyError, VerifyWarning, _ErrList, _Verify
+ 
+ __all__ = ["Card", "Undefined"]
+@@ -1297,6 +1297,20 @@ def _format_value(value):
+         return ""
+ 
+ 
++def _format_float(value):
++    """Format a floating-point value for a FITS card value field."""
++    value_str = str(value).upper()
++
++    if "E" in value_str:
++        if len(value_str) > 20:
++            exponent = value_str[value_str.index("E") :]
++            value_str = value_str[: 20 - len(exponent)] + exponent
++    elif "." not in value_str:
++        value_str += ".0"
++
++    return value_str
++
++
+ 
+ 
+ 
+@@ -1329,4 +1343,4 @@ def _pad(input):
+     # minimum length is 80
+     else:
+         strlen = _len % Card.length
+-        return input + " " * (Card.length - strlen)
+\ No newline at end of file
++        return input + " " * (Card.length - strlen)
+diff --git a/astropy/io/fits/column.py b/astropy/io/fits/column.py
+index 4f6ddfa..056f441 100644
+--- a/astropy/io/fits/column.py
++++ b/astropy/io/fits/column.py
+@@ -20,7 +20,7 @@ from astropy.utils import lazyproperty
+ from astropy.utils.exceptions import AstropyUserWarning
+ 
+ from .card import CARD_LENGTH, Card
+-from .util import NotifierMixin, _convert_array, cmp, encode_ascii
++from .util import NotifierMixin, _convert_array, _is_int, cmp, encode_ascii
+ from .verify import VerifyError, VerifyWarning
+ 
+ __all__ = ["ColDefs", "Column", "Delayed"]
+@@ -262,7 +262,7 @@ class _BaseColumnFormat(str):
+             if not isinstance(other, self.__class__):
+                 try:
+                     other = self.__class__(other)
+-                except ValueError:
++                except (ValueError, VerifyError):
+                     return False
+         else:
+             return False
+@@ -1322,6 +1322,11 @@ class Column(NotifierMixin):
+ 
+     @classmethod
+     def _guess_format(cls, format, start, dim):
++        if not start and not dim and format in NUMPY2FITS:
++            # Lower-case NumPy record formats are unambiguous and take
++            # precedence over their superficially similar ASCII TFORM values.
++            return cls._convert_format(format, _ColumnFormat)
++
+         if start and dim:
+             # This is impossible; this can't be a valid FITS column
+             raise ValueError(
+@@ -2284,6 +2289,71 @@ def _makep(array, descr_output, format, nrows=None):
+     return data_output
+ 
+ 
++def _parse_tformat(tform):
++    """Parse a binary-table ``TFORMn`` value."""
++    if not isinstance(tform, str):
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    match = TFORMAT_RE.match(tform)
++    if match is None or match.end() != len(tform):
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    repeat = match.group("repeat")
++    return (
++        int(repeat) if repeat else 1,
++        match.group("format").upper(),
++        match.group("option"),
++    )
++
++
++def _parse_ascii_tformat(tform, strict=False):
++    """Parse an ASCII-table ``TFORMn`` value."""
++    if not isinstance(tform, str):
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    value = tform.upper()
++    match = TFORMAT_ASCII_RE.match(value)
++    if match is None or match.end() != len(value):
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    format_code = (match.group("format") or match.group("formatf")).upper()
++    width_text = match.group("width") or match.group("widthf")
++    precision_text = match.group("precision")
++
++    if strict and (
++        width_text is None
++        or (format_code in ("E", "F", "D") and precision_text is None)
++    ):
++        raise VerifyError(f"Format {tform!r} is not recognized.")
++
++    default_width, default_precision = ASCII_DEFAULT_WIDTHS[format_code]
++    if width_text is None:
++        width = default_width
++        precision = default_precision
++    else:
++        width = int(width_text)
++        precision = (
++            int(precision_text)
++            if precision_text is not None
++            else default_precision
++        )
++
++    if width <= 0:
++        raise VerifyError(
++            f"Column width must be a positive integer (got {width!r})."
++        )
++    if (
++        format_code in ("E", "F", "D")
++        and precision_text is not None
++        and precision >= width
++    ):
++        raise VerifyError(
++            f"Decimal precision ({precision}) must be less than the column width ({width})."
++        )
++
++    return format_code, width, precision
++
++
+ 
+ 
+ 
+@@ -2427,6 +2497,39 @@ def _cmp_recformats(f1, f2):
+         return cmp(FORMATORDER.index(f1), FORMATORDER.index(f2))
+ 
+ 
++def _convert_fits2record(format):
++    """Convert a binary-table FITS format to a NumPy record format."""
++    if isinstance(format, str):
++        legacy = re.fullmatch(r"(?P<repeat>[0-9]*)F", format, re.IGNORECASE)
++    else:
++        legacy = None
++    if legacy is not None:
++        repeat = int(legacy.group("repeat") or 1)
++        return "f8" if repeat == 1 else f"{repeat}f8"
++
++    try:
++        repeat, format_code, option = _parse_tformat(format)
++        normalized = format.upper()
++
++        if format_code == "X":
++            return _FormatX(repeat)
++        if format_code == "P":
++            return _FormatP.from_tform(normalized)
++        if format_code == "Q":
++            return _FormatQ.from_tform(normalized)
++
++        recformat = FITS2NUMPY[format_code]
++    except (KeyError, VerifyError):
++        raise ValueError(f"Illegal format `{format}`.") from None
++
++    if format_code == "A":
++        width = int(option) if option.isdigit() else repeat
++        return f"S{width}"
++    if repeat != 1:
++        return f"{repeat}{recformat}"
++    return recformat
++
++
+ 
+ 
+ 
+@@ -2768,4 +2871,4 @@ def python_to_tdisp(format_string, logical_dtype=False):
+     if logical_dtype:
+         ftype = "L"
+ 
+-    return ftype + width + sep + precision
+\ No newline at end of file
++    return ftype + width + sep + precision
+diff --git a/astropy/io/fits/convenience.py b/astropy/io/fits/convenience.py
+index b489258..eeeb13e 100644
+--- a/astropy/io/fits/convenience.py
++++ b/astropy/io/fits/convenience.py
+@@ -70,7 +70,14 @@ from .hdu.hdulist import HDUList, fitsopen
+ from .hdu.image import ImageHDU, PrimaryHDU
+ from .hdu.table import BinTableHDU
+ from .header import Header
+-from .util import _is_dask_array, fileobj_closed, fileobj_mode, fileobj_name, path_like
++from .util import (
++    _is_dask_array,
++    _is_int,
++    fileobj_closed,
++    fileobj_mode,
++    fileobj_name,
++    path_like,
++)
+ 
+ 
+ 
+diff --git a/astropy/io/fits/hdu/base.py b/astropy/io/fits/hdu/base.py
+index a5171da..ce8684f 100644
+--- a/astropy/io/fits/hdu/base.py
++++ b/astropy/io/fits/hdu/base.py
+@@ -14,7 +14,15 @@ import numpy as np
+ from astropy.io.fits import conf
+ from astropy.io.fits.file import _File
+ from astropy.io.fits.header import Header, _BasicHeader, _DelayedHeader, _pad_length
+-from astropy.io.fits.util import _extract_number, _free_space_check, _get_array_mmap, decode_ascii, first, itersubclasses
++from astropy.io.fits.util import (
++    _extract_number,
++    _free_space_check,
++    _get_array_mmap,
++    _is_int,
++    decode_ascii,
++    first,
++    itersubclasses,
++)
+ 
+ 
+ 
+@@ -274,6 +282,10 @@ class _BaseHDU:
+     def _data_loaded(self):
+         return "data" in self.__dict__ and self.data is not DELAYED
+ 
++    @property
++    def _has_data(self):
++        return self._data_loaded and self.data is not None
++
+ 
+ 
+ 
+@@ -1596,4 +1608,4 @@ class NonstandardExtHDU(ExtensionHDU):
+         """
+         Return the file data.
+         """
+-        return self._get_raw_data(self.size, "ubyte", self._data_offset)
+\ No newline at end of file
++        return self._get_raw_data(self.size, "ubyte", self._data_offset)
+diff --git a/astropy/io/fits/hdu/compressed/_tiled_compression.py b/astropy/io/fits/hdu/compressed/_tiled_compression.py
+index e159d14..e352ff0 100644
+--- a/astropy/io/fits/hdu/compressed/_tiled_compression.py
++++ b/astropy/io/fits/hdu/compressed/_tiled_compression.py
+@@ -153,6 +153,36 @@ def _finalize_array(tile_buffer, *, bitpix, tile_shape, algorithm, lossless):
+     return tile_data
+ 
+ 
++def _check_compressed_header(header):
++    """Validate header values needed by the tiled-compression machinery."""
++    required = ("ZBITPIX", "ZNAXIS", "ZCMPTYPE")
++    missing = [keyword for keyword in required if keyword not in header]
++    if missing:
++        raise ValueError(
++            "Compressed image header is missing required keyword(s): "
++            + ", ".join(missing)
++        )
++
++    if header["ZBITPIX"] not in BITPIX2DTYPE:
++        raise ValueError(f"Invalid value for ZBITPIX: {header['ZBITPIX']!r}")
++
++    znaxis = header["ZNAXIS"]
++    if not isinstance(znaxis, (int, np.integer)) or znaxis < 0:
++        raise ValueError(f"Invalid value for ZNAXIS: {znaxis!r}")
++
++    compression_type = header["ZCMPTYPE"]
++    if compression_type not in ALGORITHMS:
++        raise ValueError(f"Unsupported compression algorithm: {compression_type!r}")
++
++    for axis in range(1, znaxis + 1):
++        dimension = header.get(f"ZNAXIS{axis}")
++        tile = header.get(f"ZTILE{axis}", dimension)
++        if not isinstance(dimension, (int, np.integer)) or dimension < 0:
++            raise ValueError(f"Invalid value for ZNAXIS{axis}: {dimension!r}")
++        if not isinstance(tile, (int, np.integer)) or tile <= 0:
++            raise ValueError(f"Invalid value for ZTILE{axis}: {tile!r}")
++
++
+ 
+ 
+ 
+@@ -645,4 +675,4 @@ def compress_image_data(
+ 
+     table_bytes = table.tobytes()
+ 
+-    return table.tobytes() + compressed_bytes
+\ No newline at end of file
++    return table.tobytes() + compressed_bytes
+diff --git a/astropy/io/fits/hdu/compressed/compressed.py b/astropy/io/fits/hdu/compressed/compressed.py
+index a034280..cac1019 100644
+--- a/astropy/io/fits/hdu/compressed/compressed.py
++++ b/astropy/io/fits/hdu/compressed/compressed.py
+@@ -17,6 +17,7 @@ from astropy.io.fits.hdu.compressed._tiled_compression import (
+ from astropy.io.fits.hdu.compressed.utils import _tile_shape, _validate_tile_shape
+ from astropy.io.fits.hdu.image import ImageHDU
+ from astropy.io.fits.header import Header
++from astropy.io.fits.util import _is_int
+ 
+ from astropy.io.fits.verify import _ErrList
+ from astropy.utils.decorators import lazyproperty
+diff --git a/astropy/io/fits/hdu/groups.py b/astropy/io/fits/hdu/groups.py
+index a22cfae..f88d0ba 100644
+--- a/astropy/io/fits/hdu/groups.py
++++ b/astropy/io/fits/hdu/groups.py
+@@ -6,7 +6,7 @@ import numpy as np
+ 
+ from astropy.io.fits.column import FITS2NUMPY, ColDefs, Column
+ from astropy.io.fits.fitsrec import FITS_rec, FITS_record
+-from astropy.io.fits.util import _pseudo_zero
++from astropy.io.fits.util import _is_int, _is_pseudo_integer, _pseudo_zero
+ from astropy.utils import lazyproperty
+ 
+ from .base import DELAYED, DTYPE2BITPIX
+diff --git a/astropy/io/fits/hdu/hdulist.py b/astropy/io/fits/hdu/hdulist.py
+index aac82e7..1851c13 100644
+--- a/astropy/io/fits/hdu/hdulist.py
++++ b/astropy/io/fits/hdu/hdulist.py
+@@ -13,7 +13,16 @@ import numpy as np
+ 
+ from astropy.io.fits.file import FILE_MODES, _File
+ from astropy.io.fits.header import _pad_length
+-from astropy.io.fits.util import _free_space_check, _get_array_mmap, _tmp_name, fileobj_closed, fileobj_mode, ignore_sigint, isfile
++from astropy.io.fits.util import (
++    _free_space_check,
++    _get_array_mmap,
++    _is_int,
++    _tmp_name,
++    fileobj_closed,
++    fileobj_mode,
++    ignore_sigint,
++    isfile,
++)
+ 
+ 
+ 
+diff --git a/astropy/io/fits/hdu/image.py b/astropy/io/fits/hdu/image.py
+index 8b94421..3cab927 100644
+--- a/astropy/io/fits/hdu/image.py
++++ b/astropy/io/fits/hdu/image.py
+@@ -7,7 +7,12 @@ import warnings
+ import numpy as np
+ 
+ from astropy.io.fits.header import Header
+-from astropy.io.fits.util import _is_dask_array, _pseudo_zero
++from astropy.io.fits.util import (
++    _is_dask_array,
++    _is_int,
++    _is_pseudo_integer,
++    _pseudo_zero,
++)
+ 
+ 
+ 
+@@ -966,6 +971,12 @@ class Section:
+     def __init__(self, hdu):
+         self.hdu = hdu
+ 
++    @property
++    def shape(self):
++        # Implementing ``shape`` allows array-like consumers to determine the
++        # section bounds without forcing the HDU's data to be loaded.
++        return self.hdu.shape
++
+ 
+ 
+ 
+@@ -1293,4 +1304,4 @@ class _IndexInfo:
+             self.offset = 0
+             self.contiguous = False
+         else:
+-            raise IndexError(f"Illegal index {index}")
+\ No newline at end of file
++            raise IndexError(f"Illegal index {index}")
+diff --git a/astropy/io/fits/hdu/table.py b/astropy/io/fits/hdu/table.py
+index f536141..de012da 100644
+--- a/astropy/io/fits/hdu/table.py
++++ b/astropy/io/fits/hdu/table.py
+@@ -16,7 +16,23 @@ from numpy import char as chararray
+ # This module may have many dependencies on astropy.io.fits.column, but
+ # astropy.io.fits.column has fewer dependencies overall, so it's easier to
+ # keep table/column-related utilities in astropy.io.fits.column
+-from astropy.io.fits.column import ATTRIBUTE_TO_KEYWORD, FITS2NUMPY, KEYWORD_NAMES, KEYWORD_TO_ATTRIBUTE, TDEF_RE, ColDefs, Column, _AsciiColDefs, _cmp_recformats, _convert_format, _FormatP, _FormatQ, _makep, _scalar_to_format
++from astropy.io.fits.column import (
++    ATTRIBUTE_TO_KEYWORD,
++    FITS2NUMPY,
++    KEYWORD_NAMES,
++    KEYWORD_TO_ATTRIBUTE,
++    TDEF_RE,
++    ColDefs,
++    Column,
++    _AsciiColDefs,
++    _cmp_recformats,
++    _convert_format,
++    _FormatP,
++    _FormatQ,
++    _makep,
++    _parse_tformat,
++    _scalar_to_format,
++)
+ 
+ 
+ 
+@@ -35,7 +51,7 @@ from astropy.io.fits.column import ATTRIBUTE_TO_KEYWORD, FITS2NUMPY, KEYWORD_NAM
+ 
+ from astropy.io.fits.fitsrec import FITS_rec, _get_recarray_field, _has_unicode_fields
+ from astropy.io.fits.header import Header, _pad_length
+-from astropy.io.fits.util import _str_to_num, path_like
++from astropy.io.fits.util import _is_int, _str_to_num, path_like
+ from astropy.utils import lazyproperty
+ 
+ from .base import DELAYED, ExtensionHDU, _ValidHDU
+diff --git a/astropy/io/fits/header.py b/astropy/io/fits/header.py
+index 8ac5953..1183035 100644
+--- a/astropy/io/fits/header.py
++++ b/astropy/io/fits/header.py
+@@ -135,18 +135,13 @@ class Header:
+         for card in self._cards:
+             yield card.keyword
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __contains__(self, keyword):
++        """Return whether *keyword* identifies a card in this header."""
++        try:
++            self._cardindex(keyword)
++        except (KeyError, IndexError, TypeError, ValueError):
++            return False
++        return True
+ 
+     def __getitem__(self, key):
+         if isinstance(key, slice):
+@@ -312,22 +307,10 @@ class Header:
+         """
+         return _CardAccessor(self)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def comments(self):
++        """A mapping-like view of the comments on this header's cards."""
++        return _HeaderComments(self)
+ 
+     @property
+     def _modified(self):
+@@ -864,30 +847,12 @@ class Header:
+             d.append((key,) + value)
+         return d
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def get(self, key, default=None):
++        """Return the value for *key*, or *default* if it is absent."""
++        try:
++            return self[key]
++        except (KeyError, IndexError):
++            return default
+ 
+     def set(self, keyword, value=None, comment=None, before=None, after=None):
+         """
+@@ -1342,6 +1307,73 @@ class Header:
+                 return idx
+         raise ValueError(f"The keyword {keyword!r} is not in the  header.")
+ 
++    def insert(self, key, card, useblanks=True, after=False):
++        """Insert a card before (or, with ``after=True``, after) *key*."""
++        if isinstance(card, str):
++            card = Card(card)
++        elif isinstance(card, tuple):
++            card = Card(*card)
++        elif not isinstance(card, Card):
++            raise ValueError(
++                "The value inserted into a Header must be either a keyword or "
++                f"(keyword, value, [comment]) tuple; got: {card!r}"
++            )
++
++        if isinstance(key, numbers.Integral):
++            idx = int(key)
++            if idx < 0:
++                idx = max(0, len(self._cards) + idx)
++            else:
++                idx = min(idx, len(self._cards))
++        else:
++            idx = self._cardindex(key)
++
++        if after:
++            idx = min(idx + 1, len(self._cards))
++
++        if card.keyword in _commentary_keywords:
++            cards = self._splitcommentary(card.keyword, card.value)
++        else:
++            cards = [card]
++            if card.keyword in self:
++                warnings.warn(
++                    f"A {card.keyword!r} keyword already exists in this header.  "
++                    "Inserting duplicate keyword.",
++                    AstropyUserWarning,
++                )
++
++        for offset, new_card in enumerate(cards):
++            insert_at = idx + offset
++            self._updateindices(insert_at)
++            self._cards.insert(insert_at, new_card)
++
++            keyword = Card.normalize_keyword(new_card.keyword)
++            self._keyword_indices[keyword].append(insert_at)
++            self._keyword_indices[keyword].sort()
++            if new_card.field_specifier is not None:
++                self._rvkc_indices[new_card.rawkeyword].append(insert_at)
++                self._rvkc_indices[new_card.rawkeyword].sort()
++
++        if useblanks:
++            nblocks = sum(len(str(new_card)) // Card.length for new_card in cards)
++            self._useblanks(nblocks)
++        self._modified = True
++
++    def remove(self, keyword, ignore_missing=False, remove_all=False):
++        """Remove the first, or all, occurrences of *keyword*."""
++        removed = False
++        while True:
++            try:
++                idx = self._cardindex(keyword)
++            except (KeyError, IndexError):
++                if ignore_missing or (remove_all and removed):
++                    return
++                raise
++            del self[idx]
++            removed = True
++            if not remove_all:
++                return
++
+ 
+ 
+ 
+@@ -1631,6 +1663,81 @@ class Header:
+         size = self.data_size
+         return size + _pad_length(size)
+ 
++    def _relativeinsert(self, card, before=None, after=None, replace=False):
++        """Insert *card* relative to another card, optionally moving it."""
++        reference = before if before is not None else after
++        if isinstance(reference, numbers.Integral):
++            idx = int(reference)
++            if idx < 0:
++                idx = max(0, len(self._cards) + idx)
++            else:
++                idx = min(idx, len(self._cards))
++        else:
++            idx = self._cardindex(reference)
++        if before is None:
++            idx = min(idx + 1, len(self._cards))
++
++        if replace:
++            try:
++                old_idx = next(
++                    i for i, old_card in enumerate(self._cards) if old_card is card
++                )
++            except StopIteration:
++                old_idx = self._cardindex(card.keyword)
++
++            if old_idx < idx:
++                idx -= 1
++            if old_idx == idx:
++                return
++            del self[old_idx]
++
++        self.insert(idx, card)
++
++    def _cardindex(self, key):
++        """Return the physical card index represented by *key*."""
++        if isinstance(key, slice):
++            return key
++
++        if isinstance(key, numbers.Integral):
++            idx = int(key)
++            if idx < 0:
++                idx += len(self._cards)
++            if idx < 0 or idx >= len(self._cards):
++                raise IndexError("Header index out of range.")
++            return idx
++
++        repeat = 0
++        if isinstance(key, tuple):
++            if (
++                len(key) != 2
++                or not isinstance(key[0], str)
++                or not isinstance(key[1], numbers.Integral)
++            ):
++                raise ValueError(
++                    "Header indices must be either a string, a 2-tuple of "
++                    "(keyword, index), or an integer."
++                )
++            key, repeat = key[0], int(key[1])
++        elif not isinstance(key, str):
++            raise ValueError(
++                "Header indices must be either a string, a 2-tuple of "
++                "(keyword, index), or an integer."
++            )
++
++        keyword = Card.normalize_keyword(key)
++        indices = self._keyword_indices
++        if keyword not in indices:
++            indices = self._rvkc_indices
++        if keyword not in indices:
++            raise KeyError(f"Keyword {keyword!r} not found.")
++
++        try:
++            return indices[keyword][repeat]
++        except IndexError:
++            raise IndexError(
++                f"There are only {len(indices[keyword])} '{keyword}' cards in the header."
++            ) from None
++
+ 
+ 
+ 
+@@ -1743,6 +1850,55 @@ class Header:
+         repeat = self._keyword_indices[keyword].index(idx)
+         return keyword, repeat
+ 
++    def _set_slice(self, key, value, target):
++        """Implement assignment through slices and wildcard selections."""
++        if isinstance(key, slice):
++            indices = range(*key.indices(len(target)))
++        elif self._haswildcard(key):
++            indices = self._wildcardmatch(key)
++        else:
++            return False
++
++        if isinstance(value, str) or not np.iterable(value):
++            value = itertools.repeat(value, len(indices))
++        for idx, val in zip(indices, value):
++            target[idx] = val
++        return True
++
++    def _update(self, card):
++        """Update the first matching card, or append a new card."""
++        comment_supplied = True
++        if isinstance(card, tuple):
++            if len(card) != 3:
++                raise ValueError("Header._update expects a Card or a 3-tuple.")
++            keyword, value, comment = card
++            comment_supplied = comment is not None
++            card = Card(keyword, value, comment)
++        elif not isinstance(card, Card):
++            raise ValueError("Header._update expects a Card or a 3-tuple.")
++
++        keyword = card.keyword
++        if keyword in _commentary_keywords:
++            for commentary_card in self._splitcommentary(keyword, card.value):
++                if keyword == "":
++                    self.append(commentary_card, end=True)
++                else:
++                    self.append(commentary_card)
++            return
++
++        try:
++            idx = self._cardindex(keyword)
++        except KeyError:
++            self.append(card)
++            return
++
++        old_card = self._cards[idx]
++        old_card.value = card.value
++        if comment_supplied:
++            old_card.comment = card.comment
++        if old_card._modified:
++            self._modified = True
++
+ 
+ 
+ 
+@@ -1826,6 +1982,12 @@ class Header:
+                 return idx - 1
+         return 0
+ 
++    def _haswildcard(self, keyword):
++        """Return whether a string contains a supported wildcard."""
++        return isinstance(keyword, str) and (
++            "*" in keyword or "?" in keyword or keyword.endswith("...")
++        )
++
+ 
+ 
+ 
+@@ -1852,6 +2014,11 @@ class Header:
+         pattern = pattern.replace("...", r"\S*") + "$"
+         match_pattern = re.compile(pattern, re.IGNORECASE).match
+         return [i for i, card in enumerate(self._cards) if match_pattern(card.keyword)]
++
++    def _useblanks(self, blank_count):
++        """Consume up to *blank_count* blank cards from the header tail."""
++        for _ in range(min(blank_count, self._countblanks())):
++            del self[-1]
+ 
+ 
+ 
+@@ -1923,6 +2090,21 @@ class _DelayedHeader:
+     was stored in HDU._header_str when parsing the file.
+     """
+ 
++    def __get__(self, obj, owner=None):
++        try:
++            return obj.__dict__["_header"]
++        except KeyError:
++            pass
++
++        header_str = obj._header_str
++        if header_str is None:
++            raise AttributeError("Header has not been initialized.")
++
++        header = Header.fromstring(header_str)
++        obj.__dict__["_header"] = header
++        obj._header_str = None
++        return header
++
+ 
+ 
+ 
+@@ -2274,4 +2456,4 @@ def _hdr_data_size(header):
+         gcount = header.get("GCOUNT", 1)
+         pcount = header.get("PCOUNT", 0)
+         size = abs(bitpix) * gcount * (pcount + size) // 8
+-    return size
+\ No newline at end of file
++    return size
+diff --git a/astropy/io/fits/util.py b/astropy/io/fits/util.py
+index 75515f4..6b3445b 100644
+--- a/astropy/io/fits/util.py
++++ b/astropy/io/fits/util.py
+@@ -30,6 +30,13 @@ cmp = lambda a, b: (a > b) - (a < b)
+ all_integer_types = (int, np.integer)
+ 
+ 
++def _is_int(value):
++    """Return True for Python and NumPy integer scalars, excluding booleans."""
++    return isinstance(value, all_integer_types) and not isinstance(
++        value, (bool, np.bool_)
++    )
++
++
+ class NotifierMixin:
+     """
+     Mixin class that provides services by which objects can register
+@@ -690,6 +697,14 @@ def _pseudo_zero(dtype):
+     return 1 << (dtype.itemsize * 8 - 1)
+ 
+ 
++def _is_pseudo_integer(dtype):
++    """Whether *dtype* uses FITS' pseudo-unsigned integer convention."""
++    dtype = np.dtype(dtype)
++    return (dtype.kind == "i" and dtype.itemsize == 1) or (
++        dtype.kind == "u" and dtype.itemsize in (2, 4, 8)
++    )
++
++
+ 
+ 
+ 
+@@ -897,4 +912,4 @@ def _is_dask_array(data):
+ 
+     from dask.array import Array
+ 
+-    return isinstance(data, Array)
+\ No newline at end of file
++    return isinstance(data, Array)

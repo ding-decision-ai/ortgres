@@ -1,0 +1,40 @@
+{
+  "instance_id": "sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1",
+  "repo": "sphinx-doc/sphinx",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 3,
+      "failure": 7,
+      "total": 10
+    },
+    "p2p": {
+      "success": 32,
+      "failure": 0,
+      "total": 32
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "caf7098ce0cf064172364c5095f49842958864425abda5832a1430efc64d0ce3"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 3,
+      "failure": 7,
+      "total": 10
+    },
+    "p2p": {
+      "success": 32,
+      "failure": 0,
+      "total": 32
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "29bea63e03e7ff88121d43f125ca976d27c73840463511dfacde21f78e94d876"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "36d58f12cef3b5b46838829323bfcef08fe4961e35c4224000cba41584ad7d5d",
+    "p2p": "757b942a3d19c26ec32381e4bda8e6431e35a8c862d853c46f5cf3ae6caa6216"
+  }
+}

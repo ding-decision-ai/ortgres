@@ -1,0 +1,685 @@
+diff --git a/pandas/core/array_algos/take.py b/pandas/core/array_algos/take.py
+index eded875..cf1a2e2 100644
+--- a/pandas/core/array_algos/take.py
++++ b/pandas/core/array_algos/take.py
+@@ -289,6 +289,41 @@ def _get_take_nd_function(
+     return func
+ 
+ 
++def _take_nd_object(
++    arr: np.ndarray,
++    indexer: np.ndarray,
++    out: np.ndarray,
++    *,
++    axis: AxisInt,
++    fill_value,
++    mask_info=None,
++) -> None:
++    """NumPy fallback for dtype combinations without a specialized taker."""
++    if mask_info is not None and mask_info[0] is None and not mask_info[1]:
++        mask = np.zeros(len(indexer), dtype=bool)
++    elif mask_info is not None and mask_info[0] is not None:
++        mask = mask_info[0]
++    else:
++        mask = indexer == -1
++    safe_indexer = np.where(mask, 0, indexer)
++    taken = np.take(arr, safe_indexer, axis=axis)
++    out[...] = taken
++    if mask.any():
++        if out.ndim == 1:
++            out[mask] = fill_value
++        elif axis == 0:
++            out[mask, :] = fill_value
++        else:
++            out[:, mask] = fill_value
++
++
++def _convert_wrapper(f, dtype):
++    def wrapper(arr, indexer, out, fill_value=np.nan) -> None:
++        f(arr.astype(dtype), indexer, out, fill_value=fill_value)
++
++    return wrapper
++
++
+ def _view_wrapper(f, arr_dtype=None, out_dtype=None, fill_wrap=None):
+     def wrapper(
+         arr: np.ndarray, indexer: np.ndarray, out: np.ndarray, fill_value=np.nan
+@@ -543,4 +578,4 @@ def _take_preprocess_indexer_and_fill_value(
+                 # to crash when trying to cast it to dtype)
+                 dtype, fill_value = arr.dtype, arr.dtype.type()
+ 
+-    return dtype, fill_value, mask_info
+\ No newline at end of file
++    return dtype, fill_value, mask_info
+diff --git a/pandas/core/groupby/groupby.py b/pandas/core/groupby/groupby.py
+index 56fca7e..98d1ced 100644
+--- a/pandas/core/groupby/groupby.py
++++ b/pandas/core/groupby/groupby.py
+@@ -18,6 +18,7 @@ from collections.abc import (
+     Sequence,
+ )
+ import datetime
++import operator
+ from functools import (
+     partial,
+     wraps,
+@@ -972,6 +973,27 @@ class BaseGroupBy(PandasObject, SelectionMixin[NDFrameT], GroupByIndexingMixin):
+ OutputFrameOrSeries = TypeVar("OutputFrameOrSeries", bound=NDFrame)
+ 
+ 
++class _TransformGrouper:
++    """Small grouper protocol used by transform-only GroupBy operations."""
++
++    def __init__(self, ids: np.ndarray, result_index: Index) -> None:
++        self.ids = np.asarray(ids, dtype=np.intp)
++        self.result_index = result_index
++        self.ngroups = len(result_index)
++
++    @property
++    def has_dropped_na(self) -> bool:
++        return bool((self.ids < 0).any())
++
++    @property
++    def is_monotonic(self) -> bool:
++        return Index(self.ids).is_monotonic_increasing
++
++    def get_iterator(self, data: NDFrameT):
++        for code, key in enumerate(self.result_index):
++            yield key, data.iloc[np.flatnonzero(self.ids == code)]
++
++
+ class GroupBy(BaseGroupBy[NDFrameT]):
+     """
+     Class for grouping and aggregating relational data.
+@@ -1042,6 +1064,161 @@ class GroupBy(BaseGroupBy[NDFrameT]):
+     _grouper: ops.BaseGrouper
+     as_index: bool
+ 
++    def __init__(
++        self,
++        obj: NDFrameT,
++        keys=None,
++        level=None,
++        grouper: ops.BaseGrouper | None = None,
++        exclusions=None,
++        selection=None,
++        as_index: bool = True,
++        sort: bool = True,
++        group_keys: bool = True,
++        observed: bool = True,
++        dropna: bool = True,
++    ) -> None:
++        self._selection = selection
++        self.level = level
++        self.as_index = as_index
++        self.keys = keys
++        self.sort = sort
++        self.group_keys = group_keys
++        self.observed = observed
++        self.dropna = dropna
++        self.obj = obj
++
++        if grouper is not None:
++            self._grouper = grouper
++            self.exclusions = frozenset(exclusions or ())
++            return
++
++        grouping_values: list = []
++        inferred_exclusions: set = set(exclusions or ())
++
++        if level is not None:
++            levels = (
++                list(level)
++                if is_list_like(level) and not isinstance(level, tuple)
++                else [level]
++            )
++            for lev in levels:
++                grouping_values.append(obj.index.get_level_values(lev))
++        else:
++            key_list: list
++            if isinstance(obj, DataFrame) and is_hashable(keys) and keys in obj.columns:
++                key_list = [keys]
++            elif (
++                isinstance(obj, DataFrame)
++                and isinstance(keys, list)
++                and keys
++                and all(
++                    is_hashable(key)
++                    and (key in obj.columns or key in obj.index.names)
++                    for key in keys
++                )
++            ):
++                key_list = keys
++            else:
++                key_list = [keys]
++
++            for key in key_list:
++                if (
++                    isinstance(obj, DataFrame)
++                    and is_hashable(key)
++                    and key in obj.columns
++                ):
++                    grouping_values.append(obj[key]._values)
++                    inferred_exclusions.add(key)
++                elif is_hashable(key) and key in obj.index.names:
++                    grouping_values.append(obj.index.get_level_values(key))
++                elif isinstance(key, Series):
++                    grouping_values.append(key.reindex(obj.index)._values)
++                elif isinstance(key, Mapping):
++                    grouping_values.append(obj.index.map(key))
++                elif callable(key):
++                    grouping_values.append(obj.index.map(key))
++                elif is_list_like(key):
++                    if len(key) != len(obj):
++                        raise ValueError("Grouper and axis must be same length")
++                    grouping_values.append(key)
++                else:
++                    raise KeyError(key)
++
++        if not grouping_values:
++            raise ValueError("No group keys passed!")
++
++        if len(grouping_values) == 1:
++            values = grouping_values[0]
++            if not isinstance(values, (Series, Index, ExtensionArray, np.ndarray)):
++                values = np.asarray(values, dtype=object)
++            ids, uniques = algorithms.factorize(
++                values, sort=sort, use_na_sentinel=dropna
++            )
++            result_index = Index(uniques)
++        else:
++            arrays = [np.asarray(values) for values in grouping_values]
++            missing = np.logical_or.reduce([isna(values) for values in arrays])
++            tuples = list(zip(*arrays, strict=True))
++            tuple_values = np.empty(len(tuples), dtype=object)
++            tuple_values[:] = tuples
++            ids, uniques = algorithms.factorize(
++                tuple_values, sort=sort, use_na_sentinel=False
++            )
++            if dropna and missing.any():
++                ids = ids.astype(np.intp, copy=True)
++                ids[missing] = -1
++                present = np.unique(ids[ids >= 0])
++                recoder = np.full(len(uniques), -1, dtype=np.intp)
++                recoder[present] = np.arange(len(present), dtype=np.intp)
++                ids = np.where(ids >= 0, recoder[ids], -1)
++                uniques = uniques.take(present)
++            result_index = Index(uniques)
++
++        self._grouper = cast(ops.BaseGrouper, _TransformGrouper(ids, result_index))
++        self.exclusions = frozenset(inferred_exclusions)
++
++    @cache_readonly
++    def _obj_with_exclusions(self):
++        if isinstance(self.obj, Series):
++            return self.obj
++        if self._selection is not None:
++            return self.obj[self._selection]
++        if self.exclusions:
++            positions = [
++                i
++                for i, column in enumerate(self.obj.columns)
++                if column not in self.exclusions
++            ]
++            return self.obj.iloc[:, positions]
++        return self.obj
++
++    def _gotitem(self, key, ndim: int, subset=None):
++        if subset is None:
++            subset = self.obj[key]
++        if ndim == 1:
++            from pandas.core.groupby.generic import SeriesGroupBy
++
++            return SeriesGroupBy(
++                subset,
++                grouper=self._grouper,
++                selection=key,
++                group_keys=self.group_keys,
++                observed=self.observed,
++                dropna=self.dropna,
++            )
++
++        from pandas.core.groupby.generic import DataFrameGroupBy
++
++        return DataFrameGroupBy(
++            subset,
++            grouper=self._grouper,
++            selection=key,
++            group_keys=self.group_keys,
++            observed=self.observed,
++            dropna=self.dropna,
++        )
++
+ 
+ 
+ 
+@@ -5096,6 +5273,128 @@ class GroupBy(BaseGroupBy[NDFrameT]):
+         )
+ 
+ 
++    @final
++    @Substitution(name="groupby")
++    @Substitution(see_also=_common_see_also)
++    def diff(self, periods: int = 1) -> NDFrameT:
++        """Calculate discrete differences within each group."""
++        obj = self._obj_with_exclusions
++        shifted = self.shift(periods=periods)
++
++        # Match Series.diff's historical low-precision integer result dtype.
++        dtypes_to_f32 = (np.dtype("int8"), np.dtype("int16"))
++        if obj.ndim == 1:
++            if obj.dtype in dtypes_to_f32:
++                shifted = shifted.astype("float32")
++        else:
++            to_coerce = {
++                column: "float32"
++                for column, dtype in obj.dtypes.items()
++                if dtype in dtypes_to_f32
++            }
++            if to_coerce:
++                shifted = shifted.astype(to_coerce)
++
++        def subtract(left: Series, right: Series) -> Series:
++            left_values = left._values
++            right_values = right._values
++            if isinstance(left_values, BaseMaskedArray) and isinstance(
++                right_values, BaseMaskedArray
++            ):
++                mask = left_values._mask | right_values._mask
++                values = left_values._data - right_values._data
++                array = left_values._maybe_mask_result(values, mask)
++                return left._constructor(array, index=left.index, name=left.name)
++            return left._arith_method(right, operator.sub)
++
++        if isinstance(obj, Series):
++            return subtract(obj, shifted)
++
++        columns = {
++            i: subtract(obj.iloc[:, i], shifted.iloc[:, i])
++            for i in range(len(obj.columns))
++        }
++        result = obj._constructor(columns, index=obj.index)
++        result.columns = obj.columns
++        return result
++
++    @final
++    @Substitution(name="groupby")
++    def shift(
++        self,
++        periods: int | Sequence[int] = 1,
++        freq=None,
++        fill_value=lib.no_default,
++        suffix: str | None = None,
++    ):
++        """Shift values by observations within each group."""
++        if is_list_like(periods):
++            periods = cast(Sequence[int], periods)
++            if len(periods) == 0:
++                raise ValueError("If `periods` is an iterable, it cannot be empty.")
++
++            from pandas.core.reshape.concat import concat
++
++            shifted_frames = []
++            for period in periods:
++                if not is_integer(period):
++                    raise TypeError(
++                        f"Periods must be integer, but {period} is {type(period)}."
++                    )
++                shifted = self.shift(
++                    periods=cast(int, period),
++                    freq=freq,
++                    fill_value=fill_value,
++                )
++                if isinstance(shifted, Series):
++                    shifted = shifted.to_frame()
++                suffix_text = f"{suffix}_{period}" if suffix else f"_{period}"
++                shifted.columns = Index(
++                    [f"{column}{suffix_text}" for column in shifted.columns]
++                )
++                shifted_frames.append(shifted)
++
++            return concat(shifted_frames, axis=1)
++
++        if not is_integer(periods):
++            raise TypeError(
++                f"Periods must be integer, but {periods} is {type(periods)}."
++            )
++        periods = cast(int, periods)
++
++        if suffix:
++            raise ValueError("Cannot specify `suffix` if `periods` is an int.")
++
++        if freq is not None and fill_value is not lib.no_default:
++            raise ValueError(
++                "Passing a 'freq' together with a 'fill_value' is not allowed."
++            )
++
++        if freq is not None:
++            # A frequency shift changes index labels, not the order of values;
++            # applying it to each group is therefore equivalent to applying it
++            # once to the selected, non-grouping data.
++            return self._obj_with_exclusions.shift(
++                periods=periods, freq=freq, axis=0
++            )
++
++        if fill_value is lib.no_default:
++            fill_value = None
++
++        ids = self._grouper.ids
++        ngroups = self._grouper.ngroups
++        res_indexer = np.zeros(len(ids), dtype=np.int64)
++        libgroupby.group_shift_indexer(res_indexer, ids, ngroups, periods)
++
++        obj = self._obj_with_exclusions
++        shifted = obj._reindex_with_indexers(
++            {0: (obj.index, res_indexer)},
++            fill_value=fill_value,
++            allow_dups=True,
++        )
++        return shifted
++
++
+ 
+ 
+ 
+@@ -5812,4 +6111,4 @@ def _insert_quantile_level(idx: Index, qs: npt.NDArray[np.float64]) -> MultiInde
+         codes = [np.repeat(idx_codes, nqs), np.tile(lev_codes, nidx)]
+         mi = MultiIndex(levels=levels, codes=codes, names=[idx.name, None])
+ 
+-    return mi
+\ No newline at end of file
++    return mi
+diff --git a/pandas/core/groupby/ops.py b/pandas/core/groupby/ops.py
+index a27f5df..fa70698 100644
+--- a/pandas/core/groupby/ops.py
++++ b/pandas/core/groupby/ops.py
+@@ -1208,6 +1208,23 @@ class BinGrouper(BaseGrouper):
+ 
+ class DataSplitter(Generic[NDFrameT]):
+ 
++    def __init__(
++        self,
++        data: NDFrameT,
++        ngroups: int,
++        *,
++        sort_idx: npt.NDArray[np.intp],
++        sorted_ids: npt.NDArray[np.intp],
++    ) -> None:
++        self.data = data
++        self.ngroups = ngroups
++        self._slabels = sorted_ids
++        self._sort_idx = sort_idx
++
++    @cache_readonly
++    def _sorted_data(self) -> NDFrameT:
++        return self.data.take(self._sort_idx, axis=0)
++
+ 
+ 
+ 
+@@ -1250,4 +1267,9 @@ class SeriesSplitter(DataSplitter):
+ 
+ 
+ class FrameSplitter(DataSplitter):
+-    pass
+\ No newline at end of file
++    def _chop(self, sdata: DataFrame, slice_obj: slice) -> DataFrame:
++        # Fastpath equivalent to ``sdata.iloc[slice_obj]``.  BlockManager's
++        # axis 1 is the DataFrame row axis.
++        mgr = sdata._mgr.get_slice(slice_obj, axis=1)
++        df = sdata._constructor_from_mgr(mgr, axes=mgr.axes)
++        return df.__finalize__(sdata, method="groupby")
+diff --git a/pandas/core/indexes/base.py b/pandas/core/indexes/base.py
+index 00b54bc..4001b63 100644
+--- a/pandas/core/indexes/base.py
++++ b/pandas/core/indexes/base.py
+@@ -190,7 +190,12 @@ from pandas.core.sorting import ensure_key_mapped, nargsort
+ 
+ from pandas.core.strings.accessor import StringMethods
+ 
+-from pandas.io.formats.printing import PrettyDict, default_pprint, pprint_thing
++from pandas.io.formats.printing import (
++    PrettyDict,
++    default_pprint,
++    format_object_summary,
++    pprint_thing,
++)
+ 
+ 
+ 
+diff --git a/pandas/core/indexes/datetimes.py b/pandas/core/indexes/datetimes.py
+index 5928648..6451e55 100644
+--- a/pandas/core/indexes/datetimes.py
++++ b/pandas/core/indexes/datetimes.py
+@@ -413,7 +413,7 @@ class DatetimeIndex(DatetimeTimedeltaMixin):
+     def _formatter_func(self):
+         # Note this is equivalent to the DatetimeIndexOpsMixin method but
+         #  uses the maybe-cached self._is_dates_only instead of re-computing it.
+-
++        from pandas.io.formats.format import get_format_datetime64
+ 
+         formatter = get_format_datetime64(is_dates_only=self._is_dates_only)
+         return lambda x: f"'{formatter(x)}'"
+diff --git a/pandas/core/internals/managers.py b/pandas/core/internals/managers.py
+index 1fbd39d..6e001de 100644
+--- a/pandas/core/internals/managers.py
++++ b/pandas/core/internals/managers.py
+@@ -2407,6 +2407,21 @@ def _form_blocks(arrays: list[ArrayLike], consolidate: bool, refs: list) -> list
+     return nbs
+ 
+ 
++def _tuples_to_blocks_no_consolidate(tuples, refs) -> list[Block]:
++    """Create one two-dimensional block for each ``(placement, array)``."""
++    blocks: list[Block] = []
++    for (placement, array), ref in zip(tuples, refs, strict=True):
++        values = ensure_block_shape(array, 2)
++        blocks.append(
++            new_block_2d(
++                values,
++                placement=BlockPlacement(placement),
++                refs=ref,
++            )
++        )
++    return blocks
++
++
+ 
+ 
+ 
+@@ -2537,4 +2552,4 @@ def make_na_array(dtype: DtypeObj, shape: Shape, fill_value) -> ArrayLike:
+ 
+         if dtype.kind in "mM":
+             missing_arr_np = ensure_wrapped_if_datetimelike(missing_arr_np)
+-        return missing_arr_np
+\ No newline at end of file
++        return missing_arr_np
+diff --git a/pandas/io/formats/format.py b/pandas/io/formats/format.py
+index dc5a4a7..5cf35fb 100644
+--- a/pandas/io/formats/format.py
++++ b/pandas/io/formats/format.py
+@@ -1655,6 +1655,16 @@ def _format_datetime64_dateonly(
+         return x._date_repr
+ 
+ 
++def get_format_datetime64(
++    is_dates_only: bool,
++    nat_rep: str = "NaT",
++    date_format: str | None = None,
++) -> Callable:
++    if is_dates_only:
++        return lambda x: _format_datetime64_dateonly(x, nat_rep, date_format)
++    return lambda x: _format_datetime64(x, nat_rep)
++
++
+ 
+ 
+ 
+@@ -2081,4 +2091,4 @@ def buffer_put_lines(buf: WriteBuffer[str], lines: list[str]) -> None:
+     """
+     if any(isinstance(x, str) for x in lines):
+         lines = [str(x) for x in lines]
+-    buf.write("\n".join(lines))
+\ No newline at end of file
++    buf.write("\n".join(lines))
+diff --git a/pandas/io/formats/printing.py b/pandas/io/formats/printing.py
+index fe1f675..fd8b1da 100644
+--- a/pandas/io/formats/printing.py
++++ b/pandas/io/formats/printing.py
+@@ -288,6 +288,125 @@ def enable_data_resource_formatter(enable: bool) -> None:
+         formatters[mimetype].enabled = False
+ 
+ 
++def format_object_summary(
++    obj: ListLike,
++    formatter: Callable,
++    is_justify: bool = True,
++    name: str | None = None,
++    indent_for_name: bool = True,
++    line_break_each_value: bool = False,
++) -> str:
++    """Return the compact, possibly truncated, body used in object reprs."""
++    if name is None:
++        name = type(obj).__name__
++
++    display_width = get_option("display.width") or 80
++    max_seq_items = get_option("display.max_seq_items")
++    if not max_seq_items:
++        max_seq_items = len(obj)
++
++    if indent_for_name:
++        space1 = "\n" + " " * (len(name) + 1)
++        space2 = "\n" + " " * (len(name) + 2)
++        first_prefix_width = len(name) + 1
++    else:
++        space1 = "\n"
++        space2 = "\n "
++        first_prefix_width = 0
++
++    is_truncated = len(obj) > max_seq_items
++    if is_truncated:
++        n = min(max_seq_items // 2, 10)
++        head = [formatter(x) for x in obj[:n]]
++        # In particular, max_seq_items == 1 displays the final value.
++        tail_n = n if n else 1
++        tail = [formatter(x) for x in obj[-tail_n:]]
++    else:
++        head = [formatter(x) for x in obj]
++        tail = []
++
++    adjustment = get_adjustment()
++
++    if is_justify and head + tail:
++        if line_break_each_value:
++            head, tail = _justify(head, tail)
++        else:
++            one_line = ", ".join(head + tail)
++            should_wrap = (
++                first_prefix_width + 2 + adjustment.len(one_line) > display_width
++            )
++            if is_truncated or should_wrap:
++                max_length = max(adjustment.len(x) for x in head + tail)
++                head = adjustment.justify(head, max_length)
++                tail = adjustment.justify(tail, max_length)
++
++    def format_tuple(values: Sequence[str]) -> str:
++        values = list(values)
++        if not values:
++            return "()"
++
++        singleton = "," if len(values) == 1 else ""
++        result = f"({', '.join(values)}{singleton})"
++        # A MultiIndex tuple is kept to one physical line.  If necessary,
++        # discard complete trailing fields and use an ellipsis.
++        available = max(display_width - first_prefix_width - 2, 1)
++        while len(values) > 1 and adjustment.len(result) > available:
++            values.pop()
++            result = f"({', '.join(values)}, ...)"
++        return result
++
++    if line_break_each_value:
++        head = [format_tuple(x) for x in head]
++        tail = [format_tuple(x) for x in tail]
++
++    values: list[str | None] = list(head)
++    if is_truncated:
++        values.append(None)
++        values.extend(tail)
++
++    if not values:
++        return "[], "
++
++    # MultiIndex values deliberately occupy one line each.  Truncation's
++    # ellipsis is likewise put on a line of its own.
++    force_lines = line_break_each_value
++    lines: list[str] = []
++    line = "["
++    for i, value in enumerate(values):
++        if value is None:
++            if line == "[":
++                lines.append("[...")
++            else:
++                lines.append(line.rstrip())
++                lines.append("...")
++            line = ""
++            continue
++
++        is_last = i == len(values) - 1
++        token = value + ("" if is_last else ",")
++        separator = "" if line in ("", "[") else " "
++        candidate = line + separator + token
++        prefix_width = first_prefix_width if not lines else len(space2) - 1
++        too_wide = adjustment.len(candidate) + prefix_width > display_width
++
++        if line not in ("", "[") and (too_wide or force_lines):
++            lines.append(line.rstrip())
++            line = token
++        else:
++            line = candidate
++
++    if line:
++        lines.append(line.rstrip())
++
++    if len(lines) == 1 and not line_break_each_value and not is_truncated:
++        return lines[0] + "], "
++
++    result = lines[0]
++    for line in lines[1:]:
++        result += space2 + line
++    return result + "]," + space1
++
++
+ def default_pprint(thing: Any, max_seq_items: int | None = None) -> str:
+     return pprint_thing(
+         thing,
+@@ -542,6 +661,23 @@ class _TextAdjustment:
+ 
+ class _EastAsianTextAdjustment(_TextAdjustment):
+ 
++    def __init__(self) -> None:
++        super().__init__()
++        self.ambiguous_width = (
++            2 if get_option("display.unicode.ambiguous_as_wide") else 1
++        )
++        self._EAW_MAP = {
++            "W": 2,
++            "F": 2,
++            "H": 1,
++            "Na": 1,
++            "N": 1,
++            "A": self.ambiguous_width,
++        }
++
++    def len(self, text: str) -> int:
++        return sum(self._EAW_MAP[east_asian_width(char)] for char in text)
++
+ 
+ 
+ 
+@@ -579,3 +715,7 @@ class _EastAsianTextAdjustment(_TextAdjustment):
+             return [x.rjust(_get_pad(x)) for x in texts]
+ 
+ 
++def get_adjustment() -> _TextAdjustment:
++    if get_option("display.unicode.east_asian_width"):
++        return _EastAsianTextAdjustment()
++    return _TextAdjustment()

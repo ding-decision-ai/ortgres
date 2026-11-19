@@ -1,0 +1,72 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 47 items
+
+pandas/tests/arrays/categorical/test_dtypes.py ...............................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.02s call     pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_codes_dtypes
+
+(29 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_categories_match_up_to_permutation
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_same
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_new_categories
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values0-categories0-new_categories0-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values1-categories1-new_categories1-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values2-categories2-new_categories2-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values3-categories3-new_categories3-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values4-categories4-new_categories4-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values5-categories5-new_categories5-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values6-categories6-new_categories6-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values7-categories7-new_categories7-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values8-categories8-new_categories8-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values9-categories9-new_categories9-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values10-categories10-new_categories10-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values11-categories11-new_categories11-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[True-values12-categories12-new_categories12-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values0-categories0-new_categories0-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values1-categories1-new_categories1-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values2-categories2-new_categories2-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values3-categories3-new_categories3-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values4-categories4-new_categories4-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values5-categories5-new_categories5-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values6-categories6-new_categories6-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values7-categories7-new_categories7-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values8-categories8-new_categories8-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values9-categories9-new_categories9-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values10-categories10-new_categories10-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values11-categories11-new_categories11-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[False-values12-categories12-new_categories12-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values0-categories0-new_categories0-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values1-categories1-new_categories1-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values2-categories2-new_categories2-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values3-categories3-new_categories3-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values4-categories4-new_categories4-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values5-categories5-new_categories5-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values6-categories6-new_categories6-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values7-categories7-new_categories7-None]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values8-categories8-new_categories8-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values9-categories9-new_categories9-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values10-categories10-new_categories10-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values11-categories11-new_categories11-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_many[None-values12-categories12-new_categories12-Pandas4Warning]
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_set_dtype_no_overlap
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_codes_dtypes
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_iter_python_types
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_iter_python_types_datetime
+PASSED pandas/tests/arrays/categorical/test_dtypes.py::TestCategoricalDtypes::test_interval_index_category
+============================== 47 passed in 0.09s ==============================

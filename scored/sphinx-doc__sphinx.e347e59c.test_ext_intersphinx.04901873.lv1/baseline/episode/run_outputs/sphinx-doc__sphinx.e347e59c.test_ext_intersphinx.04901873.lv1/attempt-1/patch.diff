@@ -1,0 +1,1239 @@
+diff --git a/sphinx/ext/intersphinx/__init__.py b/sphinx/ext/intersphinx/__init__.py
+index 0c87fe6..0579461 100644
+--- a/sphinx/ext/intersphinx/__init__.py
++++ b/sphinx/ext/intersphinx/__init__.py
+@@ -40,21 +40,23 @@
+ 
+ import sphinx
+ 
+-from sphinx.ext.intersphinx._load import fetch_inventory, validate_intersphinx_mapping
+-
+-
+-
+-
+-from sphinx.ext.intersphinx._resolve import IntersphinxDispatcher, IntersphinxRole, IntersphinxRoleResolver
+-
+-
+-
+-
+-
+-
+-
+-
+-
++from sphinx.ext.intersphinx._cli import inspect_main
++from sphinx.ext.intersphinx._load import (
++    fetch_inventory,
++    load_mappings,
++    validate_intersphinx_mapping,
++)
++from sphinx.ext.intersphinx._resolve import (
++    IntersphinxDispatcher,
++    IntersphinxRole,
++    IntersphinxRoleResolver,
++    install_dispatcher,
++    inventory_exists,
++    missing_reference,
++    resolve_reference_any_inventory,
++    resolve_reference_detect_inventory,
++    resolve_reference_in_inventory,
++)
+ 
+ from sphinx.ext.intersphinx._shared import InventoryAdapter
+ 
+diff --git a/sphinx/ext/intersphinx/_cli.py b/sphinx/ext/intersphinx/_cli.py
+index af970cc..c2fcb83 100644
+--- a/sphinx/ext/intersphinx/_cli.py
++++ b/sphinx/ext/intersphinx/_cli.py
+@@ -2,7 +2,57 @@
+ 
+ from __future__ import annotations
+ 
++import posixpath
+ import sys
+ from pathlib import Path
++from urllib.parse import urlsplit
+ 
+-from sphinx.ext.intersphinx._load import _InvConfig
++from sphinx.ext.intersphinx._load import (
++    _InvConfig,
++    _fetch_inventory_data,
++    _load_inventory,
++)
++
++
++def inspect_main(argv: list[str], /) -> int:
++    """Print the contents of an intersphinx inventory."""
++    if not argv:
++        print('Usage: python -m sphinx.ext.intersphinx <inventory>', file=sys.stderr)
++        return 1
++
++    location = argv[0]
++    parsed = urlsplit(location)
++    target_uri = (
++        posixpath.dirname(location) if parsed.scheme in {'http', 'https'} else ''
++    )
++    config = _InvConfig(
++        intersphinx_cache_limit=0,
++        intersphinx_timeout=None,
++        tls_verify=True,
++        tls_cacerts=None,
++        user_agent='',
++    )
++    try:
++        raw_data, target_uri = _fetch_inventory_data(
++            target_uri=target_uri,
++            inv_location=location,
++            config=config,
++            srcdir=Path.cwd(),
++            cache_path=None,
++        )
++        inventory = _load_inventory(raw_data, target_uri=target_uri).data
++    except ValueError as exc:
++        print(f'Inventory error: {exc}', file=sys.stderr)
++        return 1
++    except Exception as exc:
++        print(f'Unable to load inventory {location!r}: {exc}', file=sys.stderr)
++        return 1
++
++    for objtype in sorted(inventory):
++        print(objtype)
++        for name, item in sorted(inventory[objtype].items()):
++            if item.display_name == '-':
++                print(f'    {name:<40} {item.uri}')
++            else:
++                print(f'    {name:<40} {item.display_name:<40} {item.uri}')
++    return 0
+diff --git a/sphinx/ext/intersphinx/_load.py b/sphinx/ext/intersphinx/_load.py
+index 02e7a69..604caf3 100644
+--- a/sphinx/ext/intersphinx/_load.py
++++ b/sphinx/ext/intersphinx/_load.py
+@@ -112,18 +112,29 @@ def validate_intersphinx_mapping(app: Sphinx, config: Config) -> None:
+ 
+         # ensure inventory locations are None or non-empty
+         targets: list[InventoryLocation] = []
++        invalid_targets = False
+         for target in inv:
+             if target is None or target and isinstance(target, str):
+                 targets.append(target)
+             else:
+                 errors += 1
++                invalid_targets = True
+                 msg = __(
+                     'Invalid inventory location value `%r` in intersphinx_mapping[%r][1]. '
+                     'Inventory locations must be non-empty strings or None.'
+                 )
+                 LOGGER.error(msg, target, name)
+-                del config.intersphinx_mapping[name]
+-                continue
++        if not targets and not invalid_targets:
++            errors += 1
++            invalid_targets = True
++            msg = __(
++                'Invalid inventory locations in intersphinx_mapping[%r][1]. '
++                'At least one inventory location is required.'
++            )
++            LOGGER.error(msg, name)
++        if invalid_targets:
++            del config.intersphinx_mapping[name]
++            continue
+ 
+         config.intersphinx_mapping[name] = (name, (uri, tuple(targets)))
+ 
+@@ -135,78 +146,6 @@ def validate_intersphinx_mapping(app: Sphinx, config: Config) -> None:
+         raise ConfigError(msg % errors)
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+ @dataclasses.dataclass(frozen=True, kw_only=True, slots=True)
+ class _InvConfig:
+     intersphinx_cache_limit: int
+@@ -215,112 +154,171 @@ class _InvConfig:
+     tls_cacerts: str | dict[str, str] | None
+     user_agent: str
+ 
++    @classmethod
++    def from_config(cls, config: Config) -> _InvConfig:
++        return cls(
++            intersphinx_cache_limit=config.intersphinx_cache_limit,
++            intersphinx_timeout=config.intersphinx_timeout,
++            tls_verify=config.tls_verify,
++            tls_cacerts=config.tls_cacerts,
++            user_agent=config.user_agent,
++        )
++
++
++def _is_url(location: str) -> bool:
++    return urlsplit(location).scheme in {'http', 'https'}
++
++
++def _strip_basic_auth(url: str) -> str:
++    parts = urlsplit(url)
++    if '@' not in parts.netloc:
++        return url
++    _credentials, _separator, host = parts.netloc.rpartition('@')
++    return urlunsplit((parts.scheme, host, parts.path, parts.query, parts.fragment))
++
++
++def _get_safe_url(url: str) -> str:
++    parts = urlsplit(url)
++    if '@' not in parts.netloc:
++        return url
++    credentials, _separator, host = parts.netloc.rpartition('@')
++    username = credentials.partition(':')[0]
++    netloc = f'{username}@{host}' if username else host
++    return urlunsplit((parts.scheme, netloc, parts.path, parts.query, parts.fragment))
++
++
++def _fetch_inventory_data(
++    *,
++    target_uri: InventoryURI,
++    inv_location: str,
++    config: _InvConfig,
++    srcdir: Path,
++    cache_path: Path | None,
++) -> tuple[bytes, str]:
++    """Read an inventory and return its raw data and link base URI."""
++    if _is_url(inv_location):
++        try:
++            response = requests.get(
++                inv_location,
++                timeout=config.intersphinx_timeout,
++                _user_agent=config.user_agent,
++                _tls_info=(config.tls_verify, config.tls_cacerts),
++            )
++            response.raise_for_status()
++            raw_data = response.content
++
++            # A redirect of the conventional ``objects.inv`` location means
++            # links should follow the redirected documentation root as well.
++            final_location = response.url
++            default_location = posixpath.join(target_uri, INVENTORY_FILENAME)
++            if final_location != inv_location:
++                if target_uri == inv_location:
++                    target_uri = final_location
++                elif inv_location == default_location:
++                    target_uri = final_location.rsplit('/', 1)[0]
++        except Exception as exc:
++            if cache_path is not None and cache_path.is_file():
++                LOGGER.info(
++                    __('using cached intersphinx inventory from %s'),
++                    cache_path,
++                )
++                return cache_path.read_bytes(), _strip_basic_auth(target_uri)
++            safe_location = _get_safe_url(inv_location)
++            exc.args = (
++                f'Inventory fetch failed for {safe_location}: {exc}',
++                *exc.args[1:],
++            )
++            raise
++        if cache_path is not None:
++            cache_path.parent.mkdir(parents=True, exist_ok=True)
++            cache_path.write_bytes(raw_data)
++        return raw_data, _strip_basic_auth(target_uri)
++
++    path = srcdir / os.path.expanduser(inv_location)
++    try:
++        safe_target_uri = (
++            _strip_basic_auth(target_uri) if _is_url(target_uri) else target_uri
++        )
++        return path.read_bytes(), safe_target_uri
++    except OSError as exc:
++        exc.args = (f'Inventory file not found: {path}', *exc.args[1:])
++        raise
++
++
++def _load_inventory(raw_data: bytes, /, *, target_uri: InventoryURI) -> _Inventory:
++    try:
++        return InventoryFile.loads(raw_data, uri=target_uri)
++    except Exception as exc:
++        if isinstance(exc, ValueError):
++            raise ValueError(f'Invalid inventory file: {exc}') from exc
++        raise ValueError('Invalid inventory file') from exc
++
++
++def _fetch_inventory_group(
++    *,
++    project: _IntersphinxProject,
++    cache: dict[InventoryURI, InventoryCacheEntry],
++    now: int,
++    config: _InvConfig,
++    srcdir: Path,
++    cache_dir: Path | None,
++) -> bool:
++    """Fetch the first usable inventory configured for *project*."""
++    old_entry = cache.get(project.target_uri)
++    locations = tuple(
++        posixpath.join(project.target_uri, INVENTORY_FILENAME)
++        if location is None
++        else location
++        for location in project.locations
++    )
++    has_local_location = any(not _is_url(location) for location in locations)
++    cache_valid = (
++        old_entry is not None
++        and not has_local_location
++        and (
++            config.intersphinx_cache_limit < 0
++            or now - old_entry[1] < config.intersphinx_cache_limit * 86400
++        )
++    )
++    if cache_valid:
++        return False
++
++    failures: list[tuple[str, Exception]] = []
++    for index, inv_location in enumerate(locations):
++        cache_path = None
++        if cache_dir is not None and _is_url(inv_location):
++            suffix = '' if index == 0 else f'-{index}'
++            cache_path = cache_dir / f'{project.name}{suffix}.inv'
++        try:
++            raw_data, target_uri = _fetch_inventory_data(
++                target_uri=project.target_uri,
++                inv_location=inv_location,
++                config=config,
++                srcdir=srcdir,
++                cache_path=cache_path,
++            )
++            inventory = _load_inventory(raw_data, target_uri=target_uri)
++        except Exception as exc:
++            failures.append((inv_location, exc))
++            continue
+ 
++        cache[project.target_uri] = (project.name, now, inventory.data)
++        if failures:
++            LOGGER.info(
++                __(
++                    'encountered some issues with intersphinx inventory, '
++                    'but had working alternatives'
++                )
++            )
++        return True
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    for location, exc in failures:
++        LOGGER.warning(
++            __('failed to reach any of the inventories with the following issues:\n%s'),
++            f'{_get_safe_url(location)}: {exc}',
++            type='intersphinx',
++        )
++    return False
+ 
+ 
+ 
+@@ -336,10 +334,68 @@ def fetch_inventory(app: Sphinx, uri: InventoryURI, inv: str) -> Inventory:
+     return _load_inventory(raw_data, target_uri=uri).data
+ 
+ 
++def load_mappings(app: Sphinx) -> None:
++    """Load all configured intersphinx inventories into the environment."""
++    inventories = InventoryAdapter(app.env)
++    mapping: IntersphinxMapping = app.config.intersphinx_mapping
+ 
+-
+-
+-
++    projects: list[_IntersphinxProject] = []
++    for name, value in mapping.items():
++        try:
++            normalised_name, (target_uri, locations) = value
++            project = _IntersphinxProject(
++                name=normalised_name,
++                target_uri=target_uri,
++                locations=locations,
++            )
++        except (TypeError, ValueError) as exc:
++            msg = (
++                'intersphinx_mapping was not normalised before load_mappings: '
++                f'{name!r}: {value!r}'
++            )
++            raise ConfigError(msg) from exc
++        projects.append(project)
++
++    active_uris = {project.target_uri for project in projects}
++    for target_uri in tuple(inventories.cache):
++        if target_uri not in active_uris:
++            del inventories.cache[target_uri]
++
++    now = int(time.time())
++    config = _InvConfig.from_config(app.config)
++    cache_dir = app.doctreedir / '__intersphinx_cache__'
++
++    updated = False
++    if projects:
++        with concurrent.futures.ThreadPoolExecutor() as executor:
++            futures = [
++                executor.submit(
++                    _fetch_inventory_group,
++                    project=project,
++                    cache=inventories.cache,
++                    now=now,
++                    config=config,
++                    srcdir=app.srcdir,
++                    cache_dir=cache_dir,
++                )
++                for project in projects
++            ]
++            updated = any([future.result() for future in futures])
++
++    if not updated:
++        return
++
++    main_inventory: Inventory = {}
++    named_inventory: dict[InventoryName, Inventory] = {}
++    for name, _timestamp, inventory in sorted(
++        inventories.cache.values(), key=itemgetter(0, 1)
++    ):
++        named_inventory[name] = inventory
++        for objtype, objects in inventory.items():
++            main_inventory.setdefault(objtype, {}).update(objects)
++
++    inventories.main_inventory = main_inventory
++    inventories.named_inventory = named_inventory
+ 
+ 
+ 
+diff --git a/sphinx/ext/intersphinx/_resolve.py b/sphinx/ext/intersphinx/_resolve.py
+index bcc7476..1be66ec 100644
+--- a/sphinx/ext/intersphinx/_resolve.py
++++ b/sphinx/ext/intersphinx/_resolve.py
+@@ -2,6 +2,7 @@
+ 
+ from __future__ import annotations
+ 
++import posixpath
+ import re
+ from pathlib import Path
+ from typing import TYPE_CHECKING, cast
+@@ -10,7 +11,6 @@
+ 
+ from sphinx.addnodes import pending_xref
+ from sphinx.deprecation import _deprecation_warning
+-from sphinx.errors import ExtensionError
+ from sphinx.ext.intersphinx._shared import LOGGER, InventoryAdapter
+ from sphinx.locale import _, __
+ from sphinx.transforms.post_transforms import ReferencesResolver
+@@ -18,7 +18,7 @@
+ from sphinx.util.osutil import _relative_path
+ 
+ if TYPE_CHECKING:
+-    from collections.abc import Iterable, Sequence, Set
++    from collections.abc import Iterable, Sequence
+     from types import ModuleType
+     from typing import Any
+ 
+@@ -27,7 +27,6 @@
+ 
+     from sphinx.application import Sphinx
+     from sphinx.domains import Domain
+-    from sphinx.domains._domains_container import _DomainsContainer
+     from sphinx.environment import BuildEnvironment
+     from sphinx.ext.intersphinx._shared import InventoryName
+     from sphinx.util.inventory import _InventoryItem
+@@ -346,6 +345,225 @@
+ 
+ 
+ 
++
++
++def install_dispatcher(app: Sphinx, docname: str, source: list[str]) -> None:
++    """Install the dispatcher which recognises ``external`` roles."""
++    IntersphinxDispatcher().enable()
++
++
++def inventory_exists(env: BuildEnvironment, inventory_name: str) -> bool:
++    return inventory_name in InventoryAdapter(env).named_inventory
++
++
++def _object_types_for_reference(
++    env: BuildEnvironment, node: pending_xref, inventory: Inventory
++) -> list[str]:
++    domain_name = node.get('refdomain')
++    role_name = node.get('reftype')
++    if role_name == 'any':
++        return sorted(inventory)
++    if not domain_name or domain_name not in env.domains:
++        return []
++    domain = env.domains[domain_name]
++    objtypes = list(domain.objtypes_for_role(role_name) or ())
++    if domain_name == 'py':
++        if role_name == 'class':
++            objtypes.extend(('data', 'attribute'))
++        elif role_name == 'attr':
++            objtypes.extend(('method', 'property'))
++        elif role_name == 'meth':
++            objtypes.extend(('property', 'attribute'))
++    return list(dict.fromkeys(f'{domain_name}:{objtype}' for objtype in objtypes))
++
++
++def _target_candidates(node: pending_xref, objtype: str) -> list[str]:
++    target = node['reftarget']
++    candidates = [target]
++    if objtype in {'std:label', 'std:term'}:
++        candidates.append(target.lower())
++    elif objtype == 'std:doc':
++        if target.startswith('/'):
++            candidates.append(target.lstrip('/'))
++        elif refdoc := node.get('refdoc'):
++            candidates.append(
++                posixpath.normpath(posixpath.join(posixpath.dirname(refdoc), target))
++            )
++    elif objtype == 'std:cmdoption':
++        candidates.extend((target.replace(' ', '.'), target.replace(' ', '-')))
++
++    if objtype.startswith('py:'):
++        module_name = node.get('py:module')
++        class_name = node.get('py:class')
++        if class_name:
++            if module_name and not class_name.startswith(f'{module_name}.'):
++                candidates.append(f'{module_name}.{class_name}.{target}')
++            candidates.append(f'{class_name}.{target}')
++        if module_name:
++            candidates.append(f'{module_name}.{target}')
++    elif objtype.startswith('js:'):
++        module_name = node.get('js:module')
++        class_name = node.get('js:class')
++        if class_name:
++            candidates.append(f'{class_name}.{target}')
++        if module_name:
++            candidates.append(f'{module_name}.{target}')
++    return list(dict.fromkeys(candidate for candidate in candidates if candidate))
++
++
++def _find_inventory_item(
++    objects: dict[str, _InventoryItem],
++    candidates: Sequence[str],
++    *,
++    refspecific: bool,
++) -> tuple[str, _InventoryItem] | None:
++    for candidate in candidates:
++        if candidate in objects:
++            return candidate, objects[candidate]
++
++    folded_candidates = {candidate.casefold() for candidate in candidates}
++    folded_matches = [
++        (name, item)
++        for name, item in objects.items()
++        if name.casefold() in folded_candidates
++    ]
++    if len(folded_matches) == 1:
++        return folded_matches[0]
++
++    if refspecific:
++        suffixes = tuple(f'.{candidate}' for candidate in candidates)
++        matches = [
++            (name, item) for name, item in objects.items() if name.endswith(suffixes)
++        ]
++        if len(matches) == 1:
++            return matches[0]
++    return None
++
++
++def _make_reference(
++    node: pending_xref,
++    contnode: TextElement,
++    item: _InventoryItem,
++) -> nodes.reference:
++    uri = item.uri
++    if '://' not in uri and not uri.startswith(('/', '#')):
++        path, marker, fragment = uri.partition('#')
++        if refdoc := node.get('refdoc'):
++            path = _relative_path(Path(path), Path(refdoc).parent).as_posix()
++        uri = path + (f'#{fragment}' if marker else '')
++
++    if item.project_version:
++        title = _('(in %s v%s)') % (item.project_name, item.project_version)
++    else:
++        title = _('(in %s)') % item.project_name
++    reference = nodes.reference('', '', internal=False, refuri=uri, reftitle=title)
++    if (
++        node.get('refexplicit')
++        or item.display_name == '-'
++        or (node.get('refdomain') == 'std' and node.get('reftype') == 'keyword')
++    ):
++        reference += contnode
++    else:
++        reference += contnode.__class__(item.display_name, item.display_name)
++    return reference
++
++
++def _resolve_reference(
++    env: BuildEnvironment,
++    inventory: Inventory,
++    node: pending_xref,
++    contnode: TextElement,
++) -> nodes.reference | None:
++    matches: list[tuple[str, str, _InventoryItem]] = []
++    for objtype in _object_types_for_reference(env, node, inventory):
++        objects = inventory.get(objtype)
++        if not objects:
++            continue
++        found = _find_inventory_item(
++            objects,
++            _target_candidates(node, objtype),
++            refspecific='refspecific' in node,
++        )
++        if found is not None:
++            name, item = found
++            matches.append((objtype, name, item))
++            if node.get('reftype') != 'any':
++                break
++
++    if not matches:
++        return None
++    if len(matches) > 1:
++        LOGGER.warning(
++            __('more than one target found for cross-reference %r: %s'),
++            node.get('reftarget', ''),
++            ', '.join(f'{objtype}:{name}' for objtype, name, _item in matches),
++            type='ref',
++            subtype='any',
++            location=node,
++        )
++    return _make_reference(node, contnode, matches[0][2])
++
++
++def resolve_reference_in_inventory(
++    env: BuildEnvironment,
++    inventory_name: InventoryName,
++    node: pending_xref,
++    contnode: TextElement,
++) -> nodes.reference | None:
++    inventory = InventoryAdapter(env).named_inventory.get(inventory_name)
++    if inventory is None:
++        return None
++    return _resolve_reference(env, inventory, node, contnode)
++
++
++def resolve_reference_any_inventory(
++    env: BuildEnvironment,
++    honor_disabled_refs: bool,
++    node: pending_xref,
++    contnode: TextElement,
++) -> nodes.reference | None:
++    if honor_disabled_refs:
++        disabled = env.config.intersphinx_disabled_reftypes
++        domain = node.get('refdomain', '')
++        reftype = node.get('reftype', '')
++        if (
++            '*' in disabled
++            or f'{domain}:*' in disabled
++            or f'{domain}:{reftype}' in disabled
++        ):
++            return None
++    return _resolve_reference(env, InventoryAdapter(env).main_inventory, node, contnode)
++
++
++def resolve_reference_detect_inventory(
++    env: BuildEnvironment,
++    node: pending_xref,
++    contnode: TextElement,
++) -> nodes.reference | None:
++    """Resolve the legacy ``inventory:target`` target spelling."""
++    target = node.get('reftarget', '')
++    inventory_name, separator, new_target = target.partition(':')
++    if not separator or not inventory_exists(env, inventory_name):
++        return None
++    copied_node = cast('pending_xref', node.deepcopy())
++    copied_node['reftarget'] = new_target
++    return resolve_reference_in_inventory(env, inventory_name, copied_node, contnode)
++
++
++def missing_reference(
++    app: Sphinx,
++    env: BuildEnvironment,
++    node: pending_xref,
++    contnode: TextElement,
++) -> nodes.reference | None:
++    """Try to resolve a missing cross-reference using intersphinx."""
++    if env.config.intersphinx_resolve_self:
++        node['intersphinx_self_referential'] = True
++        return None
++    inventory_name = node.get('inventory')
++    if inventory_name:
++        return resolve_reference_in_inventory(env, inventory_name, node, contnode)
++    return resolve_reference_any_inventory(env, True, node, contnode)
+ 
+ 
+ class IntersphinxDispatcher(CustomReSTDispatcher):
+@@ -630,5 +848,3 @@ def run(self, **kwargs: Any) -> None:
+                 node.replace_self(contnode)
+             else:
+                 node.replace_self(newnode)
+-
+-
+diff --git a/sphinx/ext/intersphinx/_shared.py b/sphinx/ext/intersphinx/_shared.py
+index 49d2e54..385e428 100644
+--- a/sphinx/ext/intersphinx/_shared.py
++++ b/sphinx/ext/intersphinx/_shared.py
+@@ -114,3 +114,29 @@ def __delattr__(self, key: str) -> NoReturn:
+ class InventoryAdapter:
+     """Inventory adapter for environment"""
+ 
++    def __init__(self, env: BuildEnvironment) -> None:
++        self.env = env
++        if not hasattr(env, 'intersphinx_cache'):
++            env.intersphinx_cache = {}
++            env.intersphinx_inventory = {}
++            env.intersphinx_named_inventory = {}
++
++    @property
++    def cache(self) -> dict[InventoryURI, InventoryCacheEntry]:
++        return self.env.intersphinx_cache
++
++    @property
++    def main_inventory(self) -> Inventory:
++        return self.env.intersphinx_inventory
++
++    @main_inventory.setter
++    def main_inventory(self, inventory: Inventory) -> None:
++        self.env.intersphinx_inventory = inventory
++
++    @property
++    def named_inventory(self) -> dict[InventoryName, Inventory]:
++        return self.env.intersphinx_named_inventory
++
++    @named_inventory.setter
++    def named_inventory(self, inventory: dict[InventoryName, Inventory]) -> None:
++        self.env.intersphinx_named_inventory = inventory
+diff --git a/sphinx/util/inventory.py b/sphinx/util/inventory.py
+index eabbfc3..ae6082f 100644
+--- a/sphinx/util/inventory.py
++++ b/sphinx/util/inventory.py
+@@ -42,26 +42,36 @@ def __getattr__(name: str) -> object:
+ 
+ class InventoryFile:
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @classmethod
++    def loads(cls, content: bytes, *, uri: str) -> _Inventory:
++        """Load an inventory from a byte string.
++
++        Inventory version 1 is a plain-text format.  Version 2 has four
++        uncompressed header lines followed by a zlib-compressed body.
++        """
++        if not isinstance(content, bytes):
++            raise TypeError('inventory content must be bytes')
++
++        first_line, separator, remainder = content.partition(b'\n')
++        if not separator:
++            raise ValueError('invalid inventory header')
++
++        try:
++            header = first_line.decode('utf-8').rstrip('\r')
++        except UnicodeDecodeError as exc:
++            raise ValueError('invalid inventory header') from exc
++
++        if header == '# Sphinx inventory version 1':
++            try:
++                lines = remainder.decode('utf-8').splitlines()
++            except UnicodeDecodeError as exc:
++                raise ValueError('invalid inventory encoding') from exc
++            return cls._loads_v1(lines, uri=uri)
++        if header == '# Sphinx inventory version 2':
++            return cls._loads_v2(remainder, uri=uri)
++
++        msg = f'unknown or unsupported inventory version: {header!r}'
++        raise ValueError(msg)
+     @classmethod
+     def load(cls, stream: _SupportsRead, uri: str, joinfunc: _JoinFunc) -> Inventory:
+         return cls.loads(stream.read(), uri=uri).data
+@@ -71,6 +81,10 @@ def _loads_v1(cls, lines: Sequence[str], *, uri: str) -> _Inventory:
+         if len(lines) < 2:
+             msg = 'invalid inventory header: missing project name or version'
+             raise ValueError(msg)
++        if not lines[0].startswith('# Project:'):
++            raise ValueError('invalid inventory header: missing project name')
++        if not lines[1].startswith('# Version:'):
++            raise ValueError('invalid inventory header: missing project version')
+         inv = _Inventory({})
+         projname = lines[0].rstrip()[11:]  # Project name
+         version = lines[1].rstrip()[11:]  # Project version
+@@ -92,82 +106,70 @@ def _loads_v1(cls, lines: Sequence[str], *, uri: str) -> _Inventory:
+             )
+         return inv
+ 
++    @classmethod
++    def _loads_v2(cls, content: bytes, *, uri: str) -> _Inventory:
++        project_line, separator, content = content.partition(b'\n')
++        version_line, separator2, content = content.partition(b'\n')
++        compression_line, separator3, compressed = content.partition(b'\n')
++        if not (separator and separator2 and separator3):
++            raise ValueError('invalid inventory header: missing header fields')
++
++        try:
++            project_header = project_line.decode('utf-8').rstrip('\r')
++            version_header = version_line.decode('utf-8').rstrip('\r')
++            compression_header = compression_line.decode('utf-8').rstrip('\r')
++        except UnicodeDecodeError as exc:
++            raise ValueError('invalid inventory header encoding') from exc
++
++        if not project_header.startswith('# Project:'):
++            raise ValueError('invalid inventory header: missing project name')
++        if not version_header.startswith('# Version:'):
++            raise ValueError('invalid inventory header: missing project version')
++        if 'zlib' not in compression_header.lower():
++            raise ValueError('invalid inventory header: unsupported compression')
++
++        project_name = project_header[10:].strip()
++        project_version = version_header[10:].strip()
++        try:
++            body = zlib.decompress(compressed).decode('utf-8')
++        except (zlib.error, UnicodeDecodeError) as exc:
++            raise ValueError('invalid inventory: zlib decompression failed') from exc
+ 
++        inv = _Inventory({})
++        # The name and display name may contain whitespace.  The three middle
++        # fields may not, which makes this expression unambiguous.
++        entry_re = re.compile(r'(.+?)\s+(\S+:\S+)\s+(-?\d+)\s+(\S*)\s+(.*)')
++        for line in body.splitlines():
++            match = entry_re.fullmatch(line.rstrip())
++            if match is None:
++                continue
++            name, item_type, _priority, location, display_name = match.groups()
++            if location.endswith('$'):
++                location = location[:-1] + name
++            location = posixpath.join(uri, location)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++            # Terms are referenced case-insensitively by the standard domain.
++            # Report only genuinely ambiguous duplicate definitions.
++            key_name = name.lower() if item_type == 'std:term' else name
++            old_item = inv.data.get(item_type, {}).get(key_name)
++            if (
++                item_type == 'std:term'
++                and old_item is not None
++                and old_item.uri != location
++            ):
++                logger.info(
++                    __('inventory contains multiple definitions for %s:%s'),
++                    item_type,
++                    key_name,
++                )
++
++            inv[item_type, key_name] = _InventoryItem(
++                project_name=project_name,
++                project_version=project_version,
++                uri=location,
++                display_name=display_name,
++            )
++        return inv
+ 
+ 
+ 
+@@ -250,18 +252,18 @@ class _InventoryItem:
+     uri: str
+     display_name: str
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(
++        self,
++        *,
++        project_name: str,
++        project_version: str,
++        uri: str,
++        display_name: str,
++    ) -> None:
++        object.__setattr__(self, 'project_name', project_name)
++        object.__setattr__(self, 'project_version', project_version)
++        object.__setattr__(self, 'uri', uri)
++        object.__setattr__(self, 'display_name', display_name)
+ 
+     def __repr__(self) -> str:
+         return (
+@@ -273,16 +275,15 @@ def __repr__(self) -> str:
+             ')'
+         )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __eq__(self, other: object) -> bool:
++        if not isinstance(other, _InventoryItem):
++            return NotImplemented
++        return (
++            self.project_name == other.project_name
++            and self.project_version == other.project_version
++            and self.uri == other.uri
++            and self.display_name == other.display_name
++        )
+     def __hash__(self) -> int:
+         return hash((
+             self.project_name,
+@@ -299,9 +300,13 @@ def __delattr__(self, key: str) -> NoReturn:
+         msg = '_InventoryItem is immutable'
+         raise AttributeError(msg)
+ 
+-
+-
+-
++    def __getstate__(self) -> tuple[str, str, str, str]:
++        return (
++            self.project_name,
++            self.project_version,
++            self.uri,
++            self.display_name,
++        )
+     def __setstate__(self, state: tuple[str, str, str, str]) -> None:
+         project_name, project_version, uri, display_name = state
+         object.__setattr__(self, 'project_name', project_name)
+@@ -325,4 +330,4 @@ def __iter__(self) -> Iterator[str]:
+             stacklevel=2,
+         )
+         tpl = self.project_name, self.project_version, self.uri, self.display_name
+-        return iter(tpl)
+\ No newline at end of file
++        return iter(tpl)
+diff --git a/sphinx/util/requests.py b/sphinx/util/requests.py
+index 8e70583..fff2daa 100644
+--- a/sphinx/util/requests.py
++++ b/sphinx/util/requests.py
+@@ -45,14 +45,10 @@ def _get_tls_cacert(url: str, certs: str | dict[str, str] | None) -> str | bool:
+         return certs.get(hostname, True)
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
++def get(url: str, **kwargs: Any) -> requests.Response:
++    """Send a GET request with Sphinx's TLS and user-agent defaults."""
++    with _Session() as session:
++        return session.get(url, **kwargs)
+ 
+ def head(url: str, **kwargs: Any) -> requests.Response:
+     """Sends a HEAD request like ``requests.head()``.
+@@ -66,3 +62,45 @@ def head(url: str, **kwargs: Any) -> requests.Response:
+ class _Session(requests.Session):
+     _ignored_redirects: Sequence[re.Pattern[str]]
+ 
++    def __init__(self, *, _ignored_redirects: Sequence[re.Pattern[str]] = ()) -> None:
++        super().__init__()
++        self._ignored_redirects = _ignored_redirects
++
++    def resolve_redirects(
++        self,
++        response: requests.Response,
++        request: requests.PreparedRequest,
++        **kwargs: Any,
++    ) -> Any:
++        if location := response.headers.get('location'):
++            destination = urljoin(response.url, location)
++            if any(pattern.match(destination) for pattern in self._ignored_redirects):
++                raise _IgnoredRedirection(destination, response.status_code)
++        return super().resolve_redirects(response, request, **kwargs)
++
++    def request(
++        self,
++        method: str,
++        url: str,
++        *args: Any,
++        _user_agent: str | None = None,
++        _tls_info: tuple[bool, str | dict[str, str] | None] | None = None,
++        **kwargs: Any,
++    ) -> requests.Response:
++        headers = kwargs.setdefault('headers', {})
++        if _user_agent:
++            headers.setdefault('User-Agent', _user_agent)
++        else:
++            headers.setdefault('User-Agent', _USER_AGENT)
++
++        if _tls_info is not None and 'verify' not in kwargs:
++            tls_verify, tls_cacerts = _tls_info
++            kwargs['verify'] = (
++                _get_tls_cacert(url, tls_cacerts) if tls_verify else False
++            )
++
++        if kwargs.get('verify') is False:
++            with warnings.catch_warnings():
++                warnings.simplefilter('ignore', InsecureRequestWarning)
++                return super().request(method, url, *args, **kwargs)
++        return super().request(method, url, *args, **kwargs)

@@ -1,0 +1,36 @@
+{
+  "instance_id": "astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1",
+  "repo": "astropy/astropy",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 6,
+      "failure": 30,
+      "total": 36
+    },
+    "p2p": {
+      "success": 711,
+      "failure": 0,
+      "total": 711
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "a3fb80a533aa009cb8ba3b1d2fe9f0d0bb1dd1f0078f4aa9e245366d1bbb0614"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 7,
+      "failure": 29,
+      "total": 36
+    },
+    "p2p": {
+      "success": 711,
+      "failure": 0,
+      "total": 711
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "6867a3c2bd6ea9249f3a3f9c8741c6e4f062a827bd03778573ba67f0f30b5205"
+  },
+  "conditions": "conditions.json",
+  "costs": null
+}

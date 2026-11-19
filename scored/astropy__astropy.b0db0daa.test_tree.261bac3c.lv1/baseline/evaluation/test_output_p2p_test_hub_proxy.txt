@@ -1,0 +1,108 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/samp/tests/test_hub_proxy.py.
+
+Date: 2026-10-11T00:59:12
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 5 items
+
+astropy/samp/tests/test_hub_proxy.py .....                               [100%]
+
+==================================== PASSES ====================================
+________________________ TestHubProxy.test_is_connected ________________________
+---------------------------- Captured stdout setup -----------------------------
+INFO: Hub started [astropy.samp.hub]
+------------------------------ Captured log setup ------------------------------
+INFO     astropy:hub.py:434 Hub started
+--------------------------- Captured stdout teardown ---------------------------
+INFO: Hub is stopping... [astropy.samp.hub]
+INFO: Hub stopped. [astropy.samp.hub]
+---------------------------- Captured log teardown -----------------------------
+INFO     astropy:hub.py:501 Hub is stopping...
+INFO     astropy:hub.py:527 Hub stopped.
+_________________________ TestHubProxy.test_disconnect _________________________
+---------------------------- Captured stdout setup -----------------------------
+INFO: Hub started [astropy.samp.hub]
+------------------------------ Captured log setup ------------------------------
+INFO     astropy:hub.py:434 Hub started
+--------------------------- Captured stdout teardown ---------------------------
+INFO: Hub is stopping... [astropy.samp.hub]
+INFO: Hub stopped. [astropy.samp.hub]
+---------------------------- Captured log teardown -----------------------------
+INFO     astropy:hub.py:501 Hub is stopping...
+INFO     astropy:hub.py:527 Hub stopped.
+____________________________ TestHubProxy.test_ping ____________________________
+---------------------------- Captured stdout setup -----------------------------
+INFO: Hub started [astropy.samp.hub]
+------------------------------ Captured log setup ------------------------------
+INFO     astropy:hub.py:434 Hub started
+--------------------------- Captured stdout teardown ---------------------------
+INFO: Hub is stopping... [astropy.samp.hub]
+INFO: Hub stopped. [astropy.samp.hub]
+---------------------------- Captured log teardown -----------------------------
+INFO     astropy:hub.py:501 Hub is stopping...
+INFO     astropy:hub.py:527 Hub stopped.
+________________________ TestHubProxy.test_registration ________________________
+---------------------------- Captured stdout setup -----------------------------
+INFO: Hub started [astropy.samp.hub]
+------------------------------ Captured log setup ------------------------------
+INFO     astropy:hub.py:434 Hub started
+--------------------------- Captured stdout teardown ---------------------------
+INFO: Hub is stopping... [astropy.samp.hub]
+INFO: Hub stopped. [astropy.samp.hub]
+---------------------------- Captured log teardown -----------------------------
+INFO     astropy:hub.py:501 Hub is stopping...
+INFO     astropy:hub.py:527 Hub stopped.
+_____________________________ test_custom_lockfile _____________________________
+----------------------------- Captured stdout call -----------------------------
+INFO: Hub started [astropy.samp.hub]
+INFO: Hub is stopping... [astropy.samp.hub]
+INFO: Hub stopped. [astropy.samp.hub]
+------------------------------ Captured log call -------------------------------
+INFO     astropy:hub.py:434 Hub started
+INFO     astropy:hub.py:501 Hub is stopping...
+INFO     astropy:hub.py:527 Hub stopped.
+=========================== short test summary info ============================
+PASSED astropy/samp/tests/test_hub_proxy.py::TestHubProxy::test_is_connected
+PASSED astropy/samp/tests/test_hub_proxy.py::TestHubProxy::test_disconnect
+PASSED astropy/samp/tests/test_hub_proxy.py::TestHubProxy::test_ping
+PASSED astropy/samp/tests/test_hub_proxy.py::TestHubProxy::test_registration
+PASSED astropy/samp/tests/test_hub_proxy.py::test_custom_lockfile
+============================== 5 passed in 0.12s ===============================

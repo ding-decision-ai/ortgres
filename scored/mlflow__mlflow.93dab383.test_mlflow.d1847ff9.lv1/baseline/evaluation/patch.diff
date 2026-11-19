@@ -1,0 +1,567 @@
+diff --git a/mlflow/deployments/__init__.py b/mlflow/deployments/__init__.py
+index 33d590f..9d35458 100644
+--- a/mlflow/deployments/__init__.py
++++ b/mlflow/deployments/__init__.py
+@@ -19,7 +19,7 @@ import json
+ 
+ from mlflow.deployments.base import BaseDeploymentClient
+ from mlflow.deployments.databricks import DatabricksDeploymentClient, DatabricksEndpoint
+-from mlflow.deployments.interface import run_local
++from mlflow.deployments.interface import get_deploy_client, run_local
+ from mlflow.deployments.openai import OpenAIDeploymentClient
+ from mlflow.deployments.utils import get_deployments_target, set_deployments_target
+ from mlflow.exceptions import MlflowException
+diff --git a/mlflow/deployments/base.py b/mlflow/deployments/base.py
+index c78d4bb..c42daa2 100644
+--- a/mlflow/deployments/base.py
++++ b/mlflow/deployments/base.py
+@@ -85,8 +85,8 @@ class BaseDeploymentClient(abc.ABC):
+         Subclasses should raise :py:class:`mlflow.exceptions.MlflowException` in error cases (e.g.
+         on failure to deploy a model).
+     """
+-
+-
++    def __init__(self, target_uri):
++        self.target_uri = target_uri
+ 
+ 
+     @abc.abstractmethod
+@@ -355,4 +355,4 @@ class BaseDeploymentClient(abc.ABC):
+         raise MlflowException(
+             "Method is unimplemented in base client. Implementation should be "
+             "provided by specific target plugins."
+-        )
+\ No newline at end of file
++        )
+diff --git a/mlflow/deployments/databricks/__init__.py b/mlflow/deployments/databricks/__init__.py
+index 2e2cc04..ef787eb 100644
+--- a/mlflow/deployments/databricks/__init__.py
++++ b/mlflow/deployments/databricks/__init__.py
+@@ -16,7 +16,11 @@ from mlflow.exceptions import MlflowException
+ from mlflow.utils import AttrDict
+ from mlflow.utils.annotations import deprecated
+ from mlflow.utils.databricks_utils import get_databricks_host_creds
+-from mlflow.utils.rest_utils import augmented_raise_for_status, validate_deployment_timeout_config
++from mlflow.utils.rest_utils import (
++    augmented_raise_for_status,
++    http_request,
++    validate_deployment_timeout_config,
++)
+ 
+ 
+ 
+diff --git a/mlflow/deployments/interface.py b/mlflow/deployments/interface.py
+index b7242ca..5f8abb1 100644
+--- a/mlflow/deployments/interface.py
++++ b/mlflow/deployments/interface.py
+@@ -12,6 +12,32 @@ plugin_store.register("sagemaker", "mlflow.sagemaker")
+ _logger = Logger(__name__)
+ 
+ 
++def get_deploy_client(target_uri=None):
++    """Return the deployment client registered for ``target_uri``.
++
++    When no URI is supplied, the configured deployments target is used.  For
++    backwards compatibility, an absent configured target produces ``None``.
++    """
++    if target_uri is None:
++        try:
++            target_uri = get_deployments_target()
++        except MlflowException:
++            _logger.info(
++                "No deployments target has been set. Set one with "
++                "mlflow.deployments.set_deployments_target() or the "
++                "MLFLOW_DEPLOYMENTS_TARGET environment variable."
++            )
++            return None
++
++    plugin = plugin_store[target_uri]
++    for _, candidate in inspect.getmembers(plugin, inspect.isclass):
++        if candidate is not BaseDeploymentClient and issubclass(candidate, BaseDeploymentClient):
++            return candidate(target_uri)
++
++    # DeploymentPlugins validates this invariant, so this is defensive only.
++    raise MlflowException(f"No deployment client implementation found for target {target_uri!r}")
++
++
+ 
+ 
+ 
+@@ -99,4 +125,4 @@ def _target_help(target):
+     Args:
+         target: Which target to use. This information is used to call the appropriate plugin.
+     """
+-    return plugin_store[target].target_help()
+\ No newline at end of file
++    return plugin_store[target].target_help()
+diff --git a/mlflow/deployments/mlflow/__init__.py b/mlflow/deployments/mlflow/__init__.py
+index d40fb7b..e7a4a77 100644
+--- a/mlflow/deployments/mlflow/__init__.py
++++ b/mlflow/deployments/mlflow/__init__.py
+@@ -20,7 +20,7 @@ from mlflow.environment_variables import (
+ from mlflow.protos.databricks_pb2 import BAD_REQUEST
+ from mlflow.store.entities.paged_list import PagedList
+ from mlflow.utils.credentials import get_default_host_creds
+-from mlflow.utils.rest_utils import augmented_raise_for_status
++from mlflow.utils.rest_utils import augmented_raise_for_status, http_request
+ from mlflow.utils.uri import join_paths
+ 
+ if TYPE_CHECKING:
+diff --git a/mlflow/deployments/plugin_manager.py b/mlflow/deployments/plugin_manager.py
+index 2e94f93..d90fc33 100644
+--- a/mlflow/deployments/plugin_manager.py
++++ b/mlflow/deployments/plugin_manager.py
+@@ -17,6 +17,11 @@ from mlflow.utils.plugins import get_entry_points
+ #   mlflow/store/artifact/artifact_repository_registry.py
+ 
+ 
++def parse_target_uri(target_uri):
++    """Return the deployment plugin name encoded by a target URI."""
++    return target_uri.split(":", 1)[0]
++
++
+ @developer_stable
+ class PluginManager(abc.ABC):
+     """
+diff --git a/mlflow/deployments/server/config.py b/mlflow/deployments/server/config.py
+index 79995f0..0d07191 100644
+--- a/mlflow/deployments/server/config.py
++++ b/mlflow/deployments/server/config.py
+@@ -1,4 +1,24 @@
+ from pydantic import ConfigDict
+ 
+ from mlflow.gateway.base_models import ResponseModel
+-from mlflow.gateway.config import EndpointModelInfo
++from mlflow.gateway.config import EndpointModelInfo, Limit
++
++
++class Endpoint(ResponseModel):
++    name: str
++    endpoint_type: str
++    model: EndpointModelInfo
++    endpoint_url: str
++    limit: Limit | None
++
++    model_config = ConfigDict(
++        json_schema_extra={
++            "example": {
++                "name": "openai-completions",
++                "endpoint_type": "llm/v1/completions",
++                "model": {"name": "gpt-4o-mini", "provider": "openai"},
++                "endpoint_url": "/endpoints/completions/invocations",
++                "limit": {"calls": 1, "key": None, "renewal_period": "minute"},
++            }
++        }
++    )
+diff --git a/mlflow/gateway/config.py b/mlflow/gateway/config.py
+index 2069851..f1a98b0 100644
+--- a/mlflow/gateway/config.py
++++ b/mlflow/gateway/config.py
+@@ -320,6 +320,18 @@ class AliasedConfigModel(ConfigModel):
+     model_config = ConfigDict(populate_by_name=True)
+ 
+ 
++class EndpointType(str, Enum):
++    LLM_V1_COMPLETIONS = "llm/v1/completions"
++    LLM_V1_CHAT = "llm/v1/chat"
++    LLM_V1_EMBEDDINGS = "llm/v1/embeddings"
++
++
++class Limit(LimitModel):
++    calls: int
++    key: str | None = None
++    renewal_period: str
++
++
+ 
+ 
+ 
+@@ -389,9 +401,9 @@ class EndpointConfig(AliasedConfigModel):
+ 
+     @field_validator("limit", mode="before")
+     def validate_limit(cls, value):
+-        from limits import parse
+-
+         if value:
++            from limits import parse
++
+             limit = Limit(**value)
+             try:
+                 parse(f"{limit.calls}/{limit.renewal_period}")
+@@ -527,4 +539,4 @@ def _validate_config(config_path: str) -> GatewayConfig:
+     try:
+         return _load_gateway_config(config_path)
+     except Exception as e:
+-        raise MlflowException.invalid_parameter_value(f"Invalid gateway configuration: {e}") from e
+\ No newline at end of file
++        raise MlflowException.invalid_parameter_value(f"Invalid gateway configuration: {e}") from e
+diff --git a/mlflow/tracking/request_header/databricks_request_header_provider.py b/mlflow/tracking/request_header/databricks_request_header_provider.py
+index c51ecd4..a6e2c1d 100644
+--- a/mlflow/tracking/request_header/databricks_request_header_provider.py
++++ b/mlflow/tracking/request_header/databricks_request_header_provider.py
+@@ -7,7 +7,12 @@ class DatabricksRequestHeaderProvider(RequestHeaderProvider):
+     Provides request headers indicating the type of Databricks environment from which a request
+     was made.
+     """
+-
++    def in_context(self):
++        return (
++            databricks_utils.is_in_databricks_notebook()
++            or databricks_utils.is_in_databricks_job()
++            or databricks_utils.is_in_cluster()
++        )
+ 
+ 
+ 
+@@ -35,4 +40,4 @@ class DatabricksRequestHeaderProvider(RequestHeaderProvider):
+         if workload_class is not None:
+             request_headers["workload_class"] = workload_class
+ 
+-        return request_headers
+\ No newline at end of file
++        return request_headers
+diff --git a/mlflow/tracking/request_header/default_request_header_provider.py b/mlflow/tracking/request_header/default_request_header_provider.py
+index 8b125ce..e854e7a 100644
+--- a/mlflow/tracking/request_header/default_request_header_provider.py
++++ b/mlflow/tracking/request_header/default_request_header_provider.py
+@@ -14,5 +14,8 @@ class DefaultRequestHeaderProvider(RequestHeaderProvider):
+     """
+     Provides default request headers for outgoing request.
+     """
++    def in_context(self):
++        return True
+ 
+-
++    def request_headers(self):
++        return _DEFAULT_HEADERS.copy()
+diff --git a/mlflow/tracking/request_header/registry.py b/mlflow/tracking/request_header/registry.py
+index 6c51778..8bd8e47 100644
+--- a/mlflow/tracking/request_header/registry.py
++++ b/mlflow/tracking/request_header/registry.py
+@@ -43,3 +43,21 @@ _request_header_provider_registry.register(DefaultRequestHeaderProvider)
+ _request_header_provider_registry.register_entrypoints()
+ 
+ 
++def resolve_request_headers(request_headers=None):
++    """Resolve and merge headers from all providers active in this context."""
++    headers = {}
++    for provider in _request_header_provider_registry:
++        try:
++            if not provider.in_context():
++                continue
++            provider_headers = provider.request_headers()
++        except Exception as e:
++            _logger.warning(
++                "Encountered an unexpected error while resolving request headers: %s", e
++            )
++            continue
++        for name, value in provider_headers.items():
++            headers[name] = f"{headers[name]} {value}" if name in headers else value
++    if request_headers:
++        headers.update(request_headers)
++    return headers
+diff --git a/mlflow/utils/request_utils.py b/mlflow/utils/request_utils.py
+index eaf4e57..b5f1cdc 100644
+--- a/mlflow/utils/request_utils.py
++++ b/mlflow/utils/request_utils.py
+@@ -98,6 +98,63 @@ def download_chunk(*, range_start, range_end, headers, download_path, http_uri):
+             f.write(response.content)
+ 
+ 
++@lru_cache(maxsize=8)
++def _cached_get_request_session(
++    max_retries,
++    backoff_factor,
++    backoff_jitter,
++    retry_codes,
++    raise_on_status,
++    respect_retry_after_header,
++):
++    retry = JitteredRetry(
++        total=max_retries,
++        connect=max_retries,
++        read=max_retries,
++        redirect=max_retries,
++        status=max_retries,
++        allowed_methods=None,
++        status_forcelist=retry_codes,
++        backoff_factor=backoff_factor,
++        backoff_jitter=backoff_jitter,
++        raise_on_status=raise_on_status,
++        respect_retry_after_header=respect_retry_after_header,
++    )
++    adapter = HTTPAdapter(max_retries=retry)
++    session = requests.Session()
++    session.mount("http://", adapter)
++    session.mount("https://", adapter)
++    return session
++
++
++def _get_http_response_with_retries(
++    method,
++    url,
++    max_retries,
++    backoff_factor,
++    backoff_jitter,
++    retry_codes,
++    raise_on_status=True,
++    timeout=None,
++    respect_retry_after_header=True,
++    **kwargs,
++):
++    """Issue a request using a cached session configured with urllib3 retries."""
++    retry_codes = tuple(sorted(retry_codes))
++    session = _cached_get_request_session(
++        max_retries,
++        backoff_factor,
++        backoff_jitter,
++        retry_codes,
++        raise_on_status,
++        respect_retry_after_header,
++    )
++    if "allow_redirects" not in kwargs:
++        allow_redirects = os.getenv("MLFLOW_ALLOW_HTTP_REDIRECTS", "true").lower()
++        kwargs["allow_redirects"] = allow_redirects in {"1", "true"}
++    return session.request(method, url, timeout=timeout, **kwargs)
++
++
+ 
+ 
+ 
+@@ -276,4 +333,4 @@ def cloud_storage_http_request(
+         retry_codes,
+         timeout=timeout,
+         **kwargs,
+-    )
+\ No newline at end of file
++    )
+diff --git a/mlflow/utils/rest_utils.py b/mlflow/utils/rest_utils.py
+index 063b65f..60f64b3 100644
+--- a/mlflow/utils/rest_utils.py
++++ b/mlflow/utils/rest_utils.py
+@@ -33,7 +33,12 @@ from mlflow.exceptions import (
+ from mlflow.protos import databricks_pb2
+ from mlflow.protos.databricks_pb2 import ENDPOINT_NOT_FOUND, ErrorCode
+ from mlflow.utils.proto_json_utils import parse_dict
+-from mlflow.utils.request_utils import _TRANSIENT_FAILURE_RESPONSE_CODES, augmented_raise_for_status, cloud_storage_http_request
++from mlflow.utils.request_utils import (
++    _TRANSIENT_FAILURE_RESPONSE_CODES,
++    _get_http_response_with_retries,
++    augmented_raise_for_status,
++    cloud_storage_http_request,
++)
+ 
+ 
+ 
+@@ -57,6 +62,196 @@ _DATABRICKS_SDK_RETRY_AFTER_SECS_DEPRECATION_WARNING = (
+ )
+ 
+ 
++def _resolve_request_headers(extra_headers=None):
++    from mlflow.tracking.request_header.registry import resolve_request_headers
++
++    headers = resolve_request_headers(extra_headers)
++    traffic_id = _MLFLOW_DATABRICKS_TRAFFIC_ID.get()
++    if traffic_id:
++        headers["x-databricks-traffic-id"] = traffic_id
++    return headers
++
++
++def _databricks_error_to_response(error, url):
++    from databricks.sdk.errors import STATUS_CODE_MAPPING
++
++    status_code = next(
++        (code for code, error_type in STATUS_CODE_MAPPING.items() if isinstance(error, error_type)),
++        ERROR_CODE_TO_HTTP_STATUS.get(getattr(error, "error_code", None), 500),
++    )
++    response = requests.Response()
++    response.status_code = status_code
++    response.url = url
++    response._content = json.dumps(
++        {
++            "error_code": getattr(error, "error_code", None) or "INTERNAL_ERROR",
++            "message": str(error),
++        }
++    ).encode("utf-8")
++    response.headers["Content-Type"] = "application/json"
++    return response
++
++
++def http_request(
++    host_creds,
++    endpoint,
++    method,
++    max_retries=None,
++    backoff_factor=None,
++    backoff_jitter=None,
++    extra_headers=None,
++    retry_codes=_TRANSIENT_FAILURE_RESPONSE_CODES,
++    timeout=None,
++    raise_on_status=True,
++    respect_retry_after_header=None,
++    retry_timeout_seconds=None,
++    **kwargs,
++):
++    """Make an authenticated HTTP request to an MLflow service endpoint."""
++    max_retries = MLFLOW_HTTP_REQUEST_MAX_RETRIES.get() if max_retries is None else max_retries
++    backoff_factor = (
++        MLFLOW_HTTP_REQUEST_BACKOFF_FACTOR.get() if backoff_factor is None else backoff_factor
++    )
++    backoff_jitter = (
++        MLFLOW_HTTP_REQUEST_BACKOFF_JITTER.get() if backoff_jitter is None else backoff_jitter
++    )
++    timeout = MLFLOW_HTTP_REQUEST_TIMEOUT.get() if timeout is None else timeout
++    respect_retry_after_header = (
++        MLFLOW_HTTP_RESPECT_RETRY_AFTER_HEADER.get()
++        if respect_retry_after_header is None
++        else respect_retry_after_header
++    )
++
++    if max_retries < 0:
++        raise MlflowException.invalid_parameter_value(
++            "The max_retries value must be either zero or a positive integer."
++        )
++    if max_retries > _MLFLOW_HTTP_REQUEST_MAX_RETRIES_LIMIT.get():
++        raise MlflowException.invalid_parameter_value(
++            "The configured max_retries exceeds the allowed maximum of "
++            f"{_MLFLOW_HTTP_REQUEST_MAX_RETRIES_LIMIT.get()}."
++        )
++    if backoff_factor < 0:
++        raise MlflowException.invalid_parameter_value(
++            "The backoff_factor value must be zero or a positive number."
++        )
++    if backoff_factor > _MLFLOW_HTTP_REQUEST_MAX_BACKOFF_FACTOR_LIMIT.get():
++        raise MlflowException.invalid_parameter_value(
++            "The configured backoff_factor exceeds the allowed maximum of "
++            f"{_MLFLOW_HTTP_REQUEST_MAX_BACKOFF_FACTOR_LIMIT.get()}."
++        )
++    if host_creds.client_secret and not MLFLOW_ENABLE_DB_SDK.get():
++        raise MlflowException(
++            "OAuth authentication requires the Databricks SDK. Set MLFLOW_ENABLE_DB_SDK=true.",
++            error_code=CUSTOMER_UNAUTHORIZED,
++        )
++
++    url = f"{host_creds.host.rstrip('/')}/{endpoint.lstrip('/')}"
++    headers = _resolve_request_headers(extra_headers)
++
++    if host_creds.use_databricks_sdk:
++        from databricks.sdk.errors import DatabricksError
++
++        retry_timeout = (
++            MLFLOW_DATABRICKS_ENDPOINT_HTTP_RETRY_TIMEOUT.get()
++            if retry_timeout_seconds is None
++            else retry_timeout_seconds
++        )
++        workspace_client = get_workspace_client(
++            host_creds.use_secret_scope_token,
++            host_creds.host,
++            host_creds.token,
++            host_creds.databricks_auth_profile,
++            retry_timeout_seconds=retry_timeout_seconds,
++            timeout=timeout,
++        )
++        sdk_kwargs = {
++            "method": method,
++            "path": endpoint,
++            "headers": headers,
++            "raw": True,
++        }
++        if "params" in kwargs:
++            sdk_kwargs["query"] = kwargs["params"]
++        if "json" in kwargs:
++            sdk_kwargs["body"] = kwargs["json"]
++        if "files" in kwargs:
++            sdk_kwargs["files"] = kwargs["files"]
++        if "data" in kwargs:
++            sdk_kwargs["data"] = kwargs["data"]
++
++        def call_sdk():
++            return workspace_client.api_client.do(**sdk_kwargs)
++
++        try:
++            with warnings.catch_warnings():
++                warnings.filterwarnings(
++                    "ignore",
++                    message=f".*{_DATABRICKS_SDK_RETRY_AFTER_SECS_DEPRECATION_WARNING}.*",
++                )
++                result = _retry_databricks_sdk_call_with_exponential_backoff(
++                    call_func=call_sdk,
++                    retry_codes=retry_codes,
++                    retry_timeout_seconds=retry_timeout,
++                    backoff_factor=backoff_factor,
++                    backoff_jitter=backoff_jitter,
++                    max_retries=max_retries,
++                )
++            contents = result.get("contents", result) if isinstance(result, dict) else result
++            return getattr(contents, "_response", contents)
++        except DatabricksError as e:
++            return _databricks_error_to_response(e, url)
++
++    if host_creds.token:
++        headers["Authorization"] = f"Bearer {host_creds.token}"
++    elif host_creds.username is not None and host_creds.password is not None:
++        credentials = f"{host_creds.username}:{host_creds.password}".encode("utf-8")
++        headers["Authorization"] = "Basic " + base64.b64encode(credentials).decode("ascii")
++
++    request_kwargs = {
++        "headers": headers,
++        "verify": (
++            host_creds.server_cert_path
++            if host_creds.server_cert_path is not None
++            else not host_creds.ignore_tls_verification
++        ),
++        "timeout": timeout,
++        **kwargs,
++    }
++    if host_creds.client_cert_path is not None:
++        request_kwargs["cert"] = host_creds.client_cert_path
++    if host_creds.aws_sigv4:
++        from requests_auth_aws_sigv4 import AWSSigV4
++
++        request_kwargs["auth"] = AWSSigV4("execute-api")
++    elif host_creds.auth:
++        from mlflow.tracking.request_auth.registry import fetch_auth
++
++        request_kwargs["auth"] = fetch_auth(host_creds.auth)
++
++    try:
++        return _get_http_response_with_retries(
++            method,
++            url,
++            max_retries,
++            backoff_factor,
++            backoff_jitter,
++            retry_codes,
++            raise_on_status,
++            respect_retry_after_header=respect_retry_after_header,
++            **request_kwargs,
++        )
++    except requests.exceptions.InvalidURL as e:
++        raise InvalidUrlException(f"Invalid url: {url}") from e
++    except requests.exceptions.Timeout as e:
++        raise MlflowException(
++            f"API request to {url} timed out. To increase the timeout, set the environment "
++            f"variable {str(MLFLOW_HTTP_REQUEST_TIMEOUT)}."
++        ) from e
++    except requests.exceptions.RequestException as e:
++        raise MlflowException(f"API request to {url} failed with exception {e}") from e
++
++
+ 
+ 
+ 
+@@ -451,7 +646,8 @@ def _retry_databricks_sdk_call_with_exponential_backoff(
+         except DatabricksError as e:
+             # Get HTTP status code from the error
+             status_code = next(
+-                (code for code, cls in STATUS_CODE_MAPPING.items() if isinstance(e, cls)), 500
++                (code for code, cls in STATUS_CODE_MAPPING.items() if isinstance(e, cls)),
++                ERROR_CODE_TO_HTTP_STATUS.get(getattr(e, "error_code", None), 500),
+             )
+             # Check if this is a retryable error
+             if status_code not in retry_codes:
+@@ -711,4 +907,3 @@ class MlflowHostCreds:
+ 
+     def __hash__(self):
+         return hash(frozenset(self.__dict__.items()))
+-

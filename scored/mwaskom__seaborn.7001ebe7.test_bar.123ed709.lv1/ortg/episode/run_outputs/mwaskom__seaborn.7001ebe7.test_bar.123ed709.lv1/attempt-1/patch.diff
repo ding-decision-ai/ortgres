@@ -1,0 +1,588 @@
+diff --git a/ortg.tsv b/ortg.tsv
+new file mode 100644
+index 0000000..20cd62e
+--- /dev/null
++++ b/ortg.tsv
+@@ -0,0 +1,356 @@
++#ORTG-TSV: 2
++#====项目纲要====
++#【部署】seaborn 是 Python 3.8+ 库，以 pyproject.toml/flit 构建发布；运行依赖 numpy、pandas、matplotlib，scipy 与 statsmodels 等为可选统计依赖；源码环境可用 pip install -e .，质量入口为 make test、make lint、make typecheck，文档从 doc 目录执行 make notebooks html 并由 Sphinx/nbconvert 生成站点
++#【系统】面向表格数据、构建在 matplotlib 之上的统计可视化库 | 经典函数式 API 与实验性 objects 声明式 API 并存：公开入口连接数据解释和语义映射层、统计变换层、Mark/绘制层及 figure/axes 网格布局，底层依赖 numpy/pandas/matplotlib 并按功能选用 scipy/statsmodels | 不可破坏 figure-level 拥有新 Figure 而 axes-level 可定向既有 Axes、长表/宽表摄取语义、跨分面映射一致性、统计与尺度空间顺序以及公开 API 的关键字调用约定
++#【整体规范】以当前可见源码和测试为事实来源；数据先标准化为变量映射与索引对齐的表，再按语义分组、统计变换、尺度映射和 Mark/artist 渲染；objects 规范方法返回派生规范而不原位修改，经典 figure-level 函数返回网格对象、axes-level 函数返回 Axes；可选依赖缺失只影响对应高级能力；文档生成脚本会写派生文件，库运行不得依赖网络
++#纲要格式：文件名[标签]: Role:职责 | Uses:依赖 | API:对外契约 | Constraints:约束 ；文件名不带路径；四字段必填,无内容写-
++#骨架规则：只有裸文件名没有纲要的行是尚未建立认知的文件,读取时顺便生成纲要并调用 ortg_update 提交
++#目标规则：条目下一行 #目标: 是目标纲要(改完后应有的纲要,不写待核查事项)；#目标:删除 计划删除；#计划新建 文件尚不存在
++#测试契约规则：被测试锁定的对外行为写成"必须保持 X(测试名)"并写清期望结果；只涉及一个文件的写进它的 Constraints,跨模块的登记进【契约】
++#契约规则：跨模块、不靠调用关系的约定在纲要头登记一行 #【契约】键：正文；参与文件行末以 Keys 声明，未由源码和测试确认的契约不得登记
++#===代码纲要规范===
++#【标签】[C A B D… E] 重要度数字在前,其后层级、模块、特征(0到多个)、规模,空格分隔,每个是一个大写字母,模块可一个或两个字母
++#A层级: E入口 C核心 S服务 D数据 I集成 U工具 T测试 B构建 X配置 O文档
++#B模块: G通用基础 D数据语义 O对象接口 M图形标记 S统计变换 A网格布局 R关系图 F分布图 C分类图 Q回归图 H矩阵图 P颜色主题 V外部兼容 W文档画廊
++#C重要度: 9核心 8高频 7业务 5常规 3辅助 1边缘
++#D特征: N数值统计 V可视化 M语义映射 L布局 C兼容性 B自助抽样
++#E规模: L大>400 M中200-400 S小100-200 T微<100
++#Constraints配额: C9≤2000字 C8≤1200字 C7-4≤500字 C3-1≤100字
++#===代码纲要规范完毕===
++
++{
++  "dirs": {},
++  "ignore_dirs": [],
++  "ignore_files": [],
++  "keep_files": [],
++  "observe_dirs": [],
++  "observe_files": []
++}
++
++path	crc32	ignored	deleted	mtime	module	outline	outline_time	target_outline	target_time	target_delete
++.github/CONTRIBUTING.md	9573c766	0	0	2025-11-03T14:43:22Z	G	CONTRIBUTING.md[3 O G S]: Role:规定 seaborn 的支持求助、缺陷报告与新功能讨论准则 | Uses:- | API:- | Constraints:缺陷报告必须含可复现代码、实际输出、错误解释以及 seaborn/matplotlib 版本；优先用内置示例数据或合成数据，不接受 pickle 形式的数据共享	2026-10-10T19:39:37Z			0
++.github/dependabot.yml	5933b60e	0	0	2025-11-03T14:43:22Z	G	dependabot.yml[1 X G T]: Role:配置 GitHub Actions 依赖的每周自动更新检查 | Uses:.github/workflows/ci.yaml | API:- | Constraints:仅监控仓库根目录的 github-actions 生态	2026-10-10T19:47:10Z			0
++.github/workflows/ci.yaml	b82a85eb	0	0	2025-11-03T14:43:22Z	G	ci.yaml[7 B G S]: Role:在 GitHub Actions 构建文档并跨 Python/依赖组合运行测试、lint 与类型检查 | Uses:Makefile,pyproject.toml,ci/deps_pinned.txt,doc/Makefile | API:push、pull_request、定时与手动 CI 工作流 | Constraints:测试矩阵覆盖 Python 3.8–3.12、3.8 固定依赖和 3.11 轻量无 stats 安装；统一 Agg 后端与本地 SEABORN_DATA；文档先缓存数据再并行生成 notebooks/html	2026-10-10T19:47:10Z			0
++.gitignore	093cedd3	0	0	2025-11-03T14:43:22Z	G	.gitignore[3 X G T]: Role:排除 Python 构建、覆盖率、编辑器、测试缓存与本地笔记等非源码产物 | Uses:- | API:- | Constraints:notebooks/ 整目录属于本地工作产物而不入库	2026-10-10T19:47:10Z			0
++.pre-commit-config.yaml	2b642526	0	0	2025-11-03T14:43:22Z	G	.pre-commit-config.yaml[3 X G T]: Role:配置 YAML/尾行/空白检查、flake8 与 objects 子包 mypy 预提交钩子 | Uses:setup.cfg | API:pre-commit 钩子集合 | Constraints:SVG 不做尾随空白修复；flake8 排除 cm.py 与 external；mypy 仅覆盖 seaborn/_core、_marks、_stats	2026-10-10T19:47:10Z			0
++CITATION.cff	2cfa503a	0	0	2026-10-10T19:38:39Z	G	CITATION.cff[3 O G T]: Role:提供 seaborn 科学出版引用的机器可读 CFF 元数据 | Uses:doc/citing.rst | API:CFF 1.2.0 preferred-citation | Constraints:首选引用为 Waskom 2021 JOSS 论文，DOI 10.21105/joss.03021	2026-10-10T19:47:10Z			0
++LICENSE.md	bfa08f6c	0	0	2026-10-10T19:38:39Z	G	LICENSE.md[5 O G S]: Role:声明 seaborn 源码与二进制再分发适用的三条款 BSD 许可证 | Uses:- | API:- | Constraints:再分发须保留版权、条件与免责声明；未经许可不得以项目或贡献者名义背书；软件按现状提供且不承担损害责任	2026-10-10T19:39:37Z			0
++Makefile	2cf75302	0	0	2026-10-10T19:38:39Z	G	Makefile[5 B G T]: Role:提供测试、flake8 与 mypy 的统一开发命令入口 | Uses:setup.cfg,tests/ | API:make test；make lint；make typecheck | Constraints:test 使用 pytest-xdist 自动并行并同时统计 seaborn 与 tests 覆盖率；typecheck 只检查 _core、_marks、_stats	2026-10-10T19:47:10Z			0
++README.md	e72014a7	0	0	2026-10-10T19:38:39Z	G	README.md[5 O G S]: Role:介绍 seaborn 的定位、安装依赖、文档入口、引用方式与开发测试流程 | Uses:doc/README.md,Makefile,setup.cfg | API:- | Constraints:项目支持 Python 3.8+；必需依赖为 numpy、pandas、matplotlib，scipy 与 statsmodels 属可选统计依赖；源码测试入口为 make test，风格检查入口为 make lint	2026-10-10T19:39:37Z			0
++SECURITY.md	a56d6aa8	0	0	2026-10-10T19:38:39Z	G	SECURITY.md[3 O G T]: Role:说明 seaborn 安全漏洞的私下报告渠道与披露政策 | Uses:- | API:- | Constraints:漏洞不得先作为公开 issue 披露；报告需说明影响与复现方法，并给予单一维护者 90 天修复窗口	2026-10-10T19:39:37Z			0
++ci/cache_datasets.py	a6a754e3	0	0	2026-10-10T19:38:39Z	G	cache_datasets.py[3 B G T]: Role:扫描仓库 Python 与 notebook 中的静态 load_dataset 调用并预缓存唯一数据集 | Uses:seaborn/utils.py | API:python ci/cache_datasets.py | Constraints:只识别字面量单词型数据集名；排序去重后逐项调用公开加载器以避免并行下载竞争	2026-10-10T19:47:10Z			0
++ci/check_gallery.py	3447e8f0	0	0	2026-10-10T19:38:39Z	W	check_gallery.py[3 B W T]: Role:顺序执行全部示例画廊脚本并关闭每个脚本产生的 Figure | Uses:examples/ | API:python ci/check_gallery.py | Constraints:示例按文件名排序且在同一进程全局命名空间执行，每项后必须关闭全部 Figure	2026-10-10T19:47:10Z			0
++ci/deps_pinned.txt	89707e13	0	0	2026-10-10T19:38:39Z	G	deps_pinned.txt[3 X G T]: Role:固定 CI 兼容性作业所用科学计算与图像依赖的近似版本系列 | Uses:- | API:- | Constraints:numpy、pandas、matplotlib、scipy、statsmodels 使用 ~= 约束，Pillow 固定在 ~=10.3.0	2026-10-10T19:39:37Z			0
++ci/getmsfonts.sh	7807f252	0	0	2026-10-10T19:38:39Z	G	getmsfonts.sh[1 B G T]: Role:在 Debian CI 环境预接受 EULA 并静默安装微软核心字体 | Uses:- | API:sh ci/getmsfonts.sh | Constraints:需要 debconf 与 apt-get 权限	2026-10-10T19:47:10Z			0
++doc/.gitignore	113709ec	0	0	2026-10-10T19:38:39Z	G	.gitignore[1 X G T]: Role:排除文档构建产物、生成页面、缩略图与 notebook 中间目录 | Uses:- | API:- | Constraints:忽略 _build、generated、examples、docstrings、tutorial 及其图像等派生内容	2026-10-10T19:39:37Z			0
++doc/Makefile	06909909	0	0	2026-10-10T19:38:39Z	G	Makefile[5 B G S]: Role:编排 Sphinx 各格式构建、notebook 文档生成与派生产物清理 | Uses:doc/_docstrings/Makefile,doc/_tutorial/Makefile,doc/conf.py | API:make notebooks、make html 及各 Sphinx builder 目标 | Constraints:notebooks 必须先生成 tutorial 与 docstrings；clean 会移除构建目录、生成页面、缩略图与 notebook 转换产物	2026-10-10T19:45:45Z			0
++doc/README.md	8376a701	0	0	2026-10-10T19:38:39Z	G	README.md[5 O G T]: Role:说明 seaborn 文档环境、notebook 转换与 Sphinx 本地构建清理流程 | Uses:doc/Makefile,doc/_docstrings/,doc/_tutorial/ | API:- | Constraints:文档依赖通过 stats,docs extras 安装；内核可由 NB_KERNEL 指定；完整构建从 doc 目录运行 make notebooks html，输出位于 _build/html	2026-10-10T19:39:37Z			0
++doc/_docstrings/FacetGrid.ipynb	6791467e	0	0	2026-10-10T19:38:39Z	G	FacetGrid.ipynb[5 O G S]: Role:以完整示例说明 FacetGrid 的分面构造、映射、色调同步、布局、注释与底层 axes 定制 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/relational.py | API:- | Constraints:map 使用位置变量，map_dataframe 适配接受 data 和命名变量的函数；各分面独立推导统计参数，需显式同步或优先使用 figure-level 函数；自定义映射函数须在当前 axes 绘图并接收额外关键字	2026-10-10T19:40:02Z			0
++doc/_docstrings/JointGrid.ipynb	401c67b1	0	0	2026-10-10T19:38:39Z	G	JointGrid.ipynb[5 O G S]: Role:示例讲解 JointGrid 联合图与边际图的构造、绘制、坐标轴访问及布局控制 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/relational.py | API:- | Constraints:plot 的附加参数同时传给联合与边际函数，需分别配置时使用 plot_joint 与 plot_marginals；图形默认保持方形，数据轴在联合和边际图之间共享	2026-10-10T19:40:02Z			0
++doc/_docstrings/Makefile	7cedf509	0	0	2026-10-10T19:38:39Z	G	Makefile[3 B G T]: Role:将每个 API 示例 notebook 转换为 docstrings RST 并复制生成资源 | Uses:doc/tools/nb_to_doc.py,doc/_docstrings/ | API:make docstrings；make clean | Constraints:使用 matplotlib inline backend；每个 ipynb 映射到 ../docstrings 同名 rst，并把资源复制到 ../generated；若自动摘要页已存在则 touch 触发刷新	2026-10-10T19:42:08Z			0
++doc/_docstrings/PairGrid.ipynb	c10d6a3a	0	0	2026-10-10T19:38:39Z	G	PairGrid.ipynb[5 O G S]: Role:示例讲解 PairGrid 的矩阵映射、对角线与上下三角分工、hue、变量选择及非方形布局 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/relational.py | API:- | Constraints:seaborn 函数可直接接收 hue，matplotlib 函数由 PairGrid 内部分组；数值 hue 映射时应在对角轴禁用 hue，hue 变量默认不作为矩阵坐标变量	2026-10-10T19:40:02Z			0
++doc/_docstrings/axes_style.ipynb	9d9c155d	0	0	2026-10-10T19:38:39Z	G	axes_style.ipynb[3 O G T]: Role:示例说明查询预定义 axes 风格及用上下文管理器临时应用风格 | Uses:seaborn/rcmod.py | API:- | Constraints:无参数返回当前样式字典；上下文管理器的样式修改仅在作用域内生效	2026-10-10T19:40:02Z			0
++doc/_docstrings/barplot.ipynb	7d606e43	0	0	2026-10-10T19:38:39Z	G	barplot.ipynb[5 O G S]: Role:以长表、宽表和向量示例说明 barplot 的聚合、分组、误差条、原生尺度与外观定制 | Uses:seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:0.13 起默认不再给每组不同颜色，复现旧视觉需将分组变量同时赋给 hue 并关闭图例；figure-level 分面条形图推荐使用 catplot	2026-10-10T19:40:02Z			0
++doc/_docstrings/blend_palette.ipynb	2a879f87	0	0	2026-10-10T19:38:39Z	G	blend_palette.ipynb[3 O G T]: Role:示例说明从任意颜色序列插值生成离散调色板或连续 colormap | Uses:seaborn/palettes.py | API:- | Constraints:输入可含任意数量及任意 matplotlib 颜色格式；as_cmap=True 返回连续色图	2026-10-10T19:40:02Z			0
++doc/_docstrings/boxenplot.ipynb	9252b0e3	0	0	2026-10-10T19:38:39Z	G	boxenplot.ipynb[5 O G S]: Role:示例说明 boxenplot 的分组、嵌套色调、箱体深度与宽度规则、异常值和线条样式 | Uses:seaborn/categorical.py | API:- | Constraints:width_method 控制逐层箱宽规则而 width 控制最大箱宽；fill=False 时所有元素均以线稿绘制并跟随 hue	2026-10-10T19:40:02Z			0
++doc/_docstrings/boxplot.ipynb	010b3aa6	0	0	2026-10-10T19:38:39Z	G	boxplot.ipynb[5 O G S]: Role:示例说明 boxplot 的方向、分类与嵌套分组、须线范围、原生尺度及 matplotlib artist 定制 | Uses:seaborn/categorical.py | API:- | Constraints:whis=(0,100) 可令须覆盖完整数据范围；native_scale=True 保留数值分组坐标；底层箱体、异常值和中位数样式通过对应 props 字典传递	2026-10-10T19:40:02Z			0
++doc/_docstrings/catplot.ipynb	cc89f4ca	0	0	2026-10-10T19:38:39Z	G	catplot.ipynb[5 O G S]: Role:示例说明 figure-level catplot 的图形类型切换、图例、分面、尺寸与 FacetGrid 后处理 | Uses:seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:kind 选择底层分类图函数且额外关键字透传；row/col 自动建立分面，尺寸由 height 与 aspect 控制；单子图可叠加 axes-level 图层	2026-10-10T19:40:21Z			0
++doc/_docstrings/clustermap.ipynb	8b0e574f	0	0	2026-10-10T19:38:39Z	G	clustermap.ipynb[5 O G T]: Role:示例说明 clustermap 的层次聚类热图、布局、行颜色、尺度标准化与聚类参数 | Uses:seaborn/matrix.py | API:- | Constraints:standard_scale 按指定轴缩放至范围，z_score 按指定轴标准化；row_cluster 可关闭行聚类，行注释颜色需与观测索引映射	2026-10-10T19:40:21Z			0
++doc/_docstrings/color_palette.ipynb	7f6ec211	0	0	2026-10-10T19:38:39Z	G	color_palette.ipynb[5 O G S]: Role:示例说明 color_palette 的命名调色板语法、离散与连续返回、上下文使用及十六进制导出 | Uses:seaborn/palettes.py | API:- | Constraints:无参数返回当前颜色循环；支持 seaborn、Color Brewer、cubehelix、light/dark/blend 字符串协议；作为上下文管理器仅临时更改默认定性调色板	2026-10-10T19:40:21Z			0
++doc/_docstrings/countplot.ipynb	4fe2f5a5	0	0	2026-10-10T19:38:39Z	G	countplot.ipynb[3 O G T]: Role:示例说明 countplot 对分类变量计数、按 hue 分组及百分比归一化 | Uses:seaborn/categorical.py | API:- | Constraints:stat=percent 将计数归一化为百分比	2026-10-10T19:40:21Z			0
++doc/_docstrings/cubehelix_palette.ipynb	5325ae1d	0	0	2026-10-10T19:38:39Z	G	cubehelix_palette.ipynb[3 O G T]: Role:示例说明 cubehelix 调色板的颜色数、起点、旋转、亮度、饱和度、方向与连续色图参数 | Uses:seaborn/palettes.py | API:- | Constraints:reverse 反转亮度坡度；gamma 对亮度坡度施加非线性；as_cmap 在连续色图与离散颜色列表间切换	2026-10-10T19:40:21Z			0
++doc/_docstrings/dark_palette.ipynb	c79ccccc	0	0	2026-10-10T19:38:39Z	G	dark_palette.ipynb[3 O G T]: Role:示例说明从暗灰到指定颜色生成顺序调色板及连续色图 | Uses:seaborn/palettes.py | API:- | Constraints:终点颜色可用名称、十六进制或指定颜色空间的元组表达	2026-10-10T19:40:21Z			0
++doc/_docstrings/displot.ipynb	8a53ff35	0	0	2026-10-10T19:38:39Z	G	displot.ipynb[5 O G S]: Role:示例说明 figure-level displot 的直方图、KDE、ECDF、rug、hue 与分面能力 | Uses:seaborn/distributions.py,seaborn/axisgrid.py | API:- | Constraints:默认 kind 为 hist；双变量仅支持 hist 与 kde；底层绘图关键字会透传，返回 FacetGrid 且尺寸由 height/aspect 控制	2026-10-10T19:40:21Z			0
++doc/_docstrings/diverging_palette.ipynb	0b1493cf	0	0	2026-10-10T19:38:39Z	G	diverging_palette.ipynb[3 O G T]: Role:示例说明按两个 hue 端点生成明心或暗心的发散调色板 | Uses:seaborn/palettes.py | API:- | Constraints:center 选择明或暗中心，sep 控制中心间隔，s 与 l 控制端点饱和度及亮度，as_cmap 返回连续色图	2026-10-10T19:40:21Z			0
++doc/_docstrings/ecdfplot.ipynb	9da87ed3	0	0	2026-10-10T19:38:39Z	G	ecdfplot.ipynb[5 O G T]: Role:示例说明 ecdfplot 的坐标方向、宽表与长表 hue、统计单位及互补分布 | Uses:seaborn/distributions.py | API:- | Constraints:无 x/y 时把宽表数值列分别绘制；stat 可选择 proportion、count 或 percent；complementary=True 绘制 1-CDF	2026-10-10T19:40:21Z			0
++doc/_docstrings/heatmap.ipynb	c8343e71	0	0	2026-10-10T19:38:39Z	G	heatmap.ipynb[5 O G T]: Role:示例说明 heatmap 的索引标签、单元格注释、网格线、色图与数值范围 | Uses:seaborn/matrix.py,seaborn/palettes.py | API:- | Constraints:DataFrame 索引与列成为轴标签；annot 可为布尔值或独立同形数据，fmt 控制文字格式；返回 axes 可继续用 matplotlib 调整	2026-10-10T19:40:21Z			0
++doc/_docstrings/histplot.ipynb	c26cb3bc	0	0	2026-10-10T19:38:39Z	G	histplot.ipynb[7 O G M]: Role:系统示例 histplot 的单变量与双变量分箱、统计归一化、hue 组合、累积、对数尺度和色图阈值 | Uses:seaborn/distributions.py | API:- | Constraints:宽表在未指定 x/y 时逐数值列绘制；多分布默认 layer，可选 stack/dodge；偏态数据建议对数分箱；双变量参数可用元组分别配置两轴，空单元默认透明，pthresh/pmax 按累计占比控制显示与饱和	2026-10-10T19:40:21Z			0
++doc/_docstrings/hls_palette.ipynb	5c4cd061	0	0	2026-10-10T19:38:39Z	G	hls_palette.ipynb[3 O G T]: Role:示例说明 HLS 等距 hue 调色板的数量、亮度、饱和度、起点与连续色图 | Uses:seaborn/palettes.py | API:- | Constraints:默认六色且亮度饱和度相同；连续 HLS 色图在黄、青、品红附近存在感知不连续	2026-10-10T19:40:21Z			0
++doc/_docstrings/husl_palette.ipynb	e306ece5	0	0	2026-10-10T19:38:39Z	G	husl_palette.ipynb[3 O G T]: Role:示例说明 HUSL 等感知亮度 hue 调色板的数量、亮度、饱和度、起点与连续色图 | Uses:seaborn/palettes.py | API:- | Constraints:默认返回六个等亮度、等饱和度且 hue 等距的颜色；as_cmap=True 返回连续色图	2026-10-10T19:40:43Z			0
++doc/_docstrings/jointplot.ipynb	657ec689	0	0	2026-10-10T19:38:39Z	G	jointplot.ipynb[5 O G S]: Role:示例说明 jointplot 的散点、KDE、回归、矩形及六边形分箱模式与边际图定制 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/regression.py | API:- | Constraints:默认联合散点加边际直方图；kind 决定联合与边际底层表示；返回 JointGrid，可继续叠加联合和边际图层	2026-10-10T19:40:43Z			0
++doc/_docstrings/kdeplot.ipynb	c64f50c6	0	0	2026-10-10T19:38:39Z	G	kdeplot.ipynb[7 O G S]: Role:系统示例 kdeplot 的单/双变量密度、平滑、截断、权重、hue 组合、累计与等高线 | Uses:seaborn/distributions.py | API:- | Constraints:bw_adjust 控制平滑且 cut=0 限制估计范围；multiple 支持 stack/fill，累计子集比较可配 common_norm=False 与 common_grid=True；双变量 levels 与 thresh 控制覆盖密度	2026-10-10T19:40:43Z			0
++doc/_docstrings/light_palette.ipynb	e50fe012	0	0	2026-10-10T19:38:39Z	G	light_palette.ipynb[3 O G T]: Role:示例说明从浅灰到指定颜色生成顺序调色板及连续色图 | Uses:seaborn/palettes.py | API:- | Constraints:终点颜色可用名称、十六进制或指定颜色空间元组表达	2026-10-10T19:40:43Z			0
++doc/_docstrings/lineplot.ipynb	c54bb441	0	0	2026-10-10T19:38:39Z	G	lineplot.ipynb[7 O G M]: Role:系统示例 lineplot 的长宽数据、重复观测聚合、语义映射、误差表示、单位线与排序 | Uses:seaborn/relational.py,seaborn/axisgrid.py,seaborn/palettes.py | API:- | Constraints:长表重复 x 默认聚合均值与 95% 置信区间；units 配 estimator=None 绘制个体线；数值 hue 使用连续映射；默认按 x 排序，sort=False 保留观测顺序；跨分面建议 relplot 以同步语义映射	2026-10-10T19:40:43Z			0
++doc/_docstrings/lmplot.ipynb	82de9ddf	0	0	2026-10-10T19:38:39Z	G	lmplot.ipynb[5 O G T]: Role:示例说明 lmplot 的回归拟合、hue 条件化、行列分面与独立坐标范围 | Uses:seaborn/regression.py,seaborn/axisgrid.py | API:- | Constraints:回归模型选项与 regplot 共用；facet_kws 中 sharex/sharey 控制分面是否共享坐标范围	2026-10-10T19:40:43Z			0
++doc/_docstrings/move_legend.ipynb	c167b7f3	0	0	2026-10-10T19:38:39Z	G	move_legend.ipynb[3 O G T]: Role:示例说明为 axes-level 与 figure-level 图重建并移动图例 | Uses:seaborn/utils.py,seaborn/axisgrid.py | API:- | Constraints:bbox_to_anchor 精调位置且额外关键字传给 matplotlib legend；figure-level 图默认会为外置图例预留右侧空间，可用 legend_out=False 避免	2026-10-10T19:40:43Z			0
++doc/_docstrings/mpl_palette.ipynb	382fc70a	0	0	2026-10-10T19:38:39Z	G	mpl_palette.ipynb[3 O G T]: Role:示例说明从 matplotlib 色图提取离散颜色或返回连续色图 | Uses:seaborn/palettes.py | API:- | Constraints:连续色图离散采样避开更强烈的极值；定性色图只返回独特颜色，结果可能少于请求数量	2026-10-10T19:40:43Z			0
++doc/_docstrings/objects.Agg.ipynb	8555d8d9	0	0	2026-10-10T19:38:39Z	G	objects.Agg.ipynb[5 O G T]: Role:示例说明 objects.Agg 的默认均值、命名或自定义聚合、分组与方向推断 | Uses:seaborn/_stats/aggregation.py,seaborn/_core/plot.py | API:- | Constraints:默认按组取均值；可接受 pandas 方法名或可调用对象；聚合变量随图层方向决定，方向通常由坐标变量类型推断也可在 Plot.add 指定	2026-10-10T19:40:43Z			0
++doc/_docstrings/objects.Area.ipynb	9901266a	0	0	2026-10-10T19:38:39Z	G	objects.Area.ipynb[5 O G T]: Role:示例说明 objects.Area 面积标记的颜色映射、边线、方向、折线叠加与堆叠 | Uses:seaborn/_marks/area.py,seaborn/_core/plot.py,seaborn/_stats/order.py | API:- | Constraints:color 同时设置边与填充，edgecolor 可单独映射；图层方向决定从哪一坐标轴基线填充；Stack 可表达部分整体关系	2026-10-10T19:40:43Z			0
++doc/_docstrings/objects.Band.ipynb	12180fb7	0	0	2026-10-10T19:38:39Z	G	objects.Band.ipynb[5 O G T]: Role:示例说明 objects.Band 区间带的上下界、边线、估计误差带与全数据范围用法 | Uses:seaborn/_marks/area.py,seaborn/_stats/aggregation.py,seaborn/_core/plot.py | API:- | Constraints:显式 ymin/ymax 或变换产生上下界；未提供边界时覆盖数据完整范围；默认样式针对与 Line 组合显示误差区间	2026-10-10T19:40:43Z			0
++doc/_docstrings/objects.Bar.ipynb	6b672ab2	0	0	2026-10-10T19:38:39Z	G	objects.Bar.ipynb[5 O G T]: Role:示例说明 objects.Bar 的基线条形、方向、直方图组合、重叠消解、属性映射与误差条 | Uses:seaborn/_marks/bar.py,seaborn/_stats/counting.py,seaborn/_core/moves.py | API:- | Constraints:方向由 x/y 类型及 orient 决定；额外映射默认使条形重叠，需 Dodge 或 Stack 消解；可与 Range 及 Est 组合显示估计误差	2026-10-10T19:40:43Z			0
++doc/_docstrings/objects.Bars.ipynb	64047e79	0	0	2026-10-10T19:38:39Z	G	objects.Bars.ipynb[5 O G T]: Role:示例说明 objects.Bars 连续直方条的默认几何、重叠消解、属性与空心样式 | Uses:seaborn/_marks/bar.py,seaborn/_stats/counting.py,seaborn/_core/moves.py | API:- | Constraints:相较 Bar 默认全宽细边，适合连续直方图；分组属性会导致重叠，通常需 Stack/Dodge 或分面；空心条必须覆盖默认边色	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Count.ipynb	2a8cab5c	0	0	2026-10-10T19:38:39Z	G	objects.Count.ipynb[3 O G T]: Role:示例说明 objects.Count 按方向变量取不同观测计数并生成另一轴变量 | Uses:seaborn/_stats/counting.py | API:- | Constraints:额外映射变量参与分组；与 Hist 不同，数值数据不先分箱；定义 y 时计数写入 x	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Dash.ipynb	d773edbd	0	0	2026-10-10T19:38:39Z	G	objects.Dash.ipynb[3 O G T]: Role:示例说明 objects.Dash 点中心短线标记的宽度、方向、聚合与抖动组合 | Uses:seaborn/_marks/dot.py,seaborn/_stats/aggregation.py,seaborn/_core/moves.py | API:- | Constraints:width 相对方向轴相邻值间距，Dodge 时自动适配；双数值坐标可显式指定方向	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Dodge.ipynb	4026df5b	0	0	2026-10-10T19:38:39Z	G	objects.Dodge.ipynb[5 O G T]: Role:示例说明 objects.Dodge 对重叠标记的位置和宽度调整、空组合策略、间距与分组选择 | Uses:seaborn/_core/moves.py | API:- | Constraints:empty=fill 补满缺失组合空间，empty=drop 居中现有标记并保持宽度；by 限定参与错开的语义变量；与 Jitter/Stack 组合时变换顺序有语义	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Dot.ipynb	389ad90d	0	0	2026-10-10T19:38:39Z	G	objects.Dot.ipynb[5 O G T]: Role:示例说明 objects.Dot 大号点标记的边缘、抖动错开、属性映射和误差范围组合 | Uses:seaborn/_marks/dot.py,seaborn/_core/moves.py,seaborn/_stats/aggregation.py | API:- | Constraints:适合名义尺度而密集散点优先 Dots；空心 marker 使用 stroke/color 而非 edgewidth/edgecolor 参数化边缘	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Dots.ipynb	c7ca4454	0	0	2026-10-10T19:38:39Z	G	objects.Dots.ipynb[3 O G T]: Role:示例说明 objects.Dots 密集散点的透明度、颜色、填充边缘分离、marker 与 jitter | Uses:seaborn/_marks/dot.py,seaborn/_core/moves.py | API:- | Constraints:color 同时改变描边和填充，fillcolor 可独立映射；填充与空心 marker 可混用，默认局部透明有助于显示密度	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Est.ipynb	0e70ce08	0	0	2026-10-10T19:38:39Z	G	objects.Est.ipynb[5 O G T]: Role:示例说明 objects.Est 的估计量、bootstrap 置信区间、标准误/差、随机种子与权重 | Uses:seaborn/_stats/aggregation.py | API:- | Constraints:默认均值和 bootstrap 95% 置信区间；误差条可为 se/sd；bootstrap 有随机性，可增加迭代或设 seed；加权估计需在使用 stat 的图层映射 weight	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Hist.ipynb	156c5eb9	0	0	2026-10-10T19:38:39Z	G	objects.Hist.ipynb[5 O G S]: Role:示例说明 objects.Hist 的分箱粒度、统计量、跨组归一化及 Bar/Bars/Area/Stack 组合 | Uses:seaborn/_stats/counting.py,seaborn/_marks/bar.py,seaborn/_marks/area.py,seaborn/_core/moves.py | API:- | Constraints:离散分类变量常配 Bar，连续单变量优先 Bars；默认输出每箱计数且跨所有组归一，common_norm=False 按分布独立归一，也可用变量列表限定归一组	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Jitter.ipynb	2d386d29	0	0	2026-10-10T19:38:39Z	G	objects.Jitter.ipynb[3 O G T]: Role:示例说明 objects.Jitter 的方向相对抖动与按数据单位指定的轴向抖动 | Uses:seaborn/_core/moves.py | API:- | Constraints:width 始终作用于方向轴并相对标记间距；x/y 始终对应固定坐标轴且使用数据单位，可同时指定	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.KDE.ipynb	c576b77d	0	0	2026-10-10T19:38:39Z	G	objects.KDE.ipynb[5 O G S]: Role:示例说明 objects.KDE 的平滑、估计范围、采样网格、分组归一、堆叠和累计密度 | Uses:seaborn/_stats/density.py,seaborn/_marks/area.py | API:- | Constraints:cut 控制曲线超出观测范围的程度；gridsize=None 在原始点求值；默认跨组联合归一，common_norm=False 为条件密度；Stack 组合要求 common_grid=True	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Line.ipynb	6a66ae12	0	0	2026-10-10T19:38:39Z	G	objects.Line.ipynb[5 O G T]: Role:示例说明 objects.Line 排序连接、方向、分组复制、统计聚合、误差带与采样 marker | Uses:seaborn/_marks/line.py,seaborn/_stats/aggregation.py,seaborn/_core/plot.py | API:- | Constraints:绘制前按方向轴排序；大批重复线优先 Lines；映射 color/linestyle 会定义统计变换分组	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Lines.ipynb	a5f720d9	0	0	2026-10-10T19:38:39Z	G	objects.Lines.ipynb[3 O G T]: Role:示例说明 objects.Lines 面向大量排序连线的高性能绘制与分面映射 | Uses:seaborn/_marks/line.py,seaborn/_core/plot.py | API:- | Constraints:与 Line 一样连接排序观测，但可设置属性更少且大量线时性能更好	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Norm.ipynb	9f6a2fac	0	0	2026-10-10T19:38:39Z	G	objects.Norm.ipynb[3 O G T]: Role:示例说明 objects.Norm 按组最大值或条件基线缩放并可输出百分比变化 | Uses:seaborn/_stats/order.py | API:- | Constraints:默认每组相对最大值缩放；where 限定定义基线的观测，percent=True 将结果转为百分比	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Path.ipynb	b3fe8cda	0	0	2026-10-10T19:38:39Z	G	objects.Path.ipynb[3 O G T]: Role:示例说明 objects.Path 按输入顺序连接观测以绘制变量空间轨迹 | Uses:seaborn/_marks/line.py | API:- | Constraints:不同于 Line，不在绘图前排序；其余可设置或映射的线与 marker 属性相同	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Paths.ipynb	39f05b18	0	0	2026-10-10T19:38:39Z	G	objects.Paths.ipynb[3 O G T]: Role:示例说明 objects.Paths 在配对网格中高效绘制保持输入顺序的多条轨迹 | Uses:seaborn/_marks/line.py,seaborn/_core/plot.py | API:- | Constraints:不同于 Lines，不排序观测；属性集合与 Lines 相同	2026-10-10T19:41:05Z			0
++doc/_docstrings/objects.Perc.ipynb	6aec075a	0	0	2026-10-10T19:38:39Z	G	objects.Perc.ipynb[3 O G T]: Role:示例说明 objects.Perc 的默认分位数、等距百分位、显式百分位及区间标记组合 | Uses:seaborn/_stats/order.py | API:- | Constraints:默认计算四分位数及最小最大值；整数生成等距百分位，列表精确指定百分位	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.add.ipynb	c55dba6b	0	0	2026-10-10T19:38:39Z	G	objects.Plot.add.ipynb[7 O G S]: Role:系统说明 Plot.add 的图层 Mark、Stat/Move 管线、方向、局部映射、数据源与图例标签 | Uses:seaborn/_core/plot.py,seaborn/_marks/,seaborn/_stats/,seaborn/_core/moves.py | API:- | Constraints:每层必须含 Mark；传给 add 的属性参与尺度映射，传给 Mark 构造器的属性直接设值；全局变量可在层中以 None 排除；仅变换使用的变量必须在层级映射；层数据按索引与构造器数据连接	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.config.ipynb	7901d7b6	0	0	2026-10-10T19:38:39Z	G	objects.Plot.config.ipynb[5 O G S]: Role:说明 Plot.config 的全局主题与 notebook 显示格式、HiDPI 和缩放配置 | Uses:seaborn/_core/plot.py,seaborn/rcmod.py | API:- | Constraints:config.theme 更改影响后续所有 Plot，单图修改用 Plot.theme；默认 notebook 输出为 HiDPI PNG，也可用 SVG；SVG 大小随元素复杂度增长，PNG 大小随图尺寸增长	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.facet.ipynb	fd3ce6aa	0	0	2026-10-10T19:38:39Z	G	objects.Plot.facet.ipynb[5 O G T]: Role:示例说明 Plot.facet 的行列变量、顺序筛选、向量输入、单变量换行、共享尺度与标题 | Uses:seaborn/_core/plot.py | API:- | Constraints:wrap 仅在单个分面变量时有效且可按行或列换行；多个变量的 order 用 col/row 字典；尺度共享和标题分别由 share/label 后续控制	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.label.ipynb	203476d4	0	0	2026-10-10T19:38:39Z	G	objects.Plot.label.ipynb[5 O G T]: Role:示例说明 Plot.label 对轴、语义、单图及分面标题和图层图例标题的定制 | Uses:seaborn/_core/plot.py | API:- | Constraints:字符串覆盖默认标签，可调用对象修改默认标签；分面 title 修改默认标题，row/col 添加分面变量前缀；legend 设置图层标签组成图例的标题	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.layout.ipynb	140a5a04	0	0	2026-10-10T19:38:39Z	G	objects.Plot.layout.ipynb[3 O G T]: Role:示例说明 Plot.layout 的图形尺寸、布局引擎与绘图区 extent | Uses:seaborn/_core/plot.py | API:- | Constraints:分面或配对子图缩放以适应整体 size；extent 控制绘图区在底层 figure 中的相对范围，保存或 GUI 显示时区别明显	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.limit.ipynb	f0668887	0	0	2026-10-10T19:38:39Z	G	objects.Plot.limit.ipynb[3 O G T]: Role:示例说明 Plot.limit 的固定、单侧默认及反向坐标范围 | Uses:seaborn/_core/plot.py | API:- | Constraints:默认范围受 axes.xmargin/ymargin 主题参数影响；逆序最小最大值会反转轴；任一端为 None 保留自动值	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.on.ipynb	38c3031e	0	0	2026-10-10T19:38:39Z	G	objects.Plot.on.ipynb[5 O G S]: Role:示例说明 Plot.on 嵌入 matplotlib Axes、Figure、SubFigure 及编译后底层定制流程 | Uses:seaborn/_core/plot.py | API:- | Constraints:传现有 Axes 时采用其创建时全局 rcParams，传 Figure 时由 Plot 创建 axes 并应用 Plot 主题；深度定制需按指定、plot 编译、修改 artist、显示的顺序进行	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.pair.ipynb	b3b55c4d	0	0	2026-10-10T19:38:39Z	G	objects.Plot.pair.ipynb[5 O G S]: Role:示例说明 Plot.pair 的多坐标交叉或按位配对、换行、分面组合、向量输入与逐坐标定制 | Uses:seaborn/_core/plot.py | API:- | Constraints:默认 x/y 列表做笛卡尔配对，cross=False 按位置配对；仅允许 pairing-y 配 facet-col 或 pairing-x 配 facet-row；定制时用 x0、x1 等引用独立坐标	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.scale.ipynb	629cf6b3	0	0	2026-10-10T19:38:39Z	G	objects.Plot.scale.ipynb[7 O G S]: Role:系统说明 Plot.scale 的坐标变换、调色板与输出范围、尺度对象、刻度标签和名义类型控制 | Uses:seaborn/_core/scales.py,seaborn/_core/plot.py,seaborn/palettes.py | API:- | Constraints:非线性尺度变换先于统计变换；字符串可指定变换或调色板，元组可指定数值/颜色范围；定性调色板、列表或字典隐含 Nominal，显式 Nominal 可控制类别顺序	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.share.ipynb	b2a829dc	0	0	2026-10-10T19:38:39Z	G	objects.Plot.share.ipynb[3 O G T]: Role:示例说明 Plot.share 对分面及配对图坐标尺度的全部、独立、按行或按列共享 | Uses:seaborn/_core/plot.py | API:- | Constraints:分面默认所有轴共享；配对图默认不同，需显式选择全共享且并非所有数据语义都适合共享	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Plot.theme.ipynb	19ee2ac6	0	0	2026-10-10T19:38:39Z	G	objects.Plot.theme.ipynb[5 O G T]: Role:示例说明 Plot.theme 的单图 rc 参数、seaborn/matplotlib 样式合并及全局默认配置 | Uses:seaborn/_core/plot.py,seaborn/rcmod.py | API:- | Constraints:默认主题等同无参数 set_theme；多个参数字典应先合并并在一次 theme 调用中传入；全局 Plot 默认通过 Plot.config.theme 修改	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Range.ipynb	416db0a3	0	0	2026-10-10T19:38:39Z	G	objects.Range.ipynb[5 O G T]: Role:示例说明 objects.Range 的估计误差区间、显式上下界及按方向值完整范围 | Uses:seaborn/_marks/line.py,seaborn/_stats/aggregation.py | API:- | Constraints:会继承 linewidth/linestyle 等映射，不需要时须在本层排除；无变换生成或显式 min/max 时覆盖每个方向值的数据完整范围	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Shift.ipynb	149becb1	0	0	2026-10-10T19:38:39Z	G	objects.Shift.ipynb[3 O G T]: Role:示例说明 objects.Shift 将重叠图层按固定数据单位平移 | Uses:seaborn/_core/moves.py | API:- | Constraints:名义 y 轴反向，因此正 y 偏移在视觉上向下移动	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Stack.ipynb	5961ee5b	0	0	2026-10-10T19:38:39Z	G	objects.Stack.ipynb[3 O G T]: Role:示例说明 objects.Stack 对有基线标记作垂直累计以表达部分整体关系 | Uses:seaborn/_core/moves.py | API:- | Constraints:堆叠消除 Bar/Area 等重叠但使被平移组之间的数值比较更困难，适合部分整体表达	2026-10-10T19:41:30Z			0
++doc/_docstrings/objects.Text.ipynb	3daad636	0	0	2026-10-10T19:38:39Z	G	objects.Text.ipynb[5 O G T]: Role:示例说明 objects.Text 的坐标文字、条形注释、对齐偏移、语义映射与字体属性 | Uses:seaborn/_marks/text.py,seaborn/_core/plot.py | API:- | Constraints:halign/valign 可固定或映射，offset 微调相对位置；额外 matplotlib 文本参数以字典传给 Text	2026-10-10T19:41:30Z			0
++doc/_docstrings/pairplot.ipynb	44df5f28	0	0	2026-10-10T19:38:39Z	G	pairplot.ipynb[5 O G S]: Role:示例说明 pairplot 的对角与非对角图形类型、hue、变量子集、下三角和 PairGrid 后处理 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/relational.py | API:- | Constraints:默认非对角 scatter、对角 hist；启用 hue 时默认对角改为分层 KDE；plot_kws 与 diag_kws 分别定制非对角和对角图，返回 PairGrid	2026-10-10T19:41:49Z			0
++doc/_docstrings/plotting_context.ipynb	38e11dfc	0	0	2026-10-10T19:38:39Z	G	plotting_context.ipynb[3 O G T]: Role:示例说明查询预定义绘图上下文及用上下文管理器临时改变缩放参数 | Uses:seaborn/rcmod.py | API:- | Constraints:无参数返回当前可缩放 rc 参数；上下文管理器修改仅在作用域内生效	2026-10-10T19:41:49Z			0
++doc/_docstrings/pointplot.ipynb	66b2a33a	0	0	2026-10-10T19:38:39Z	G	pointplot.ipynb[5 O G S]: Role:示例说明 pointplot 的分类聚合、误差条、hue 可访问性编码、错开、宽表和原生尺度 | Uses:seaborn/categorical.py | API:- | Constraints:宽表按列聚合，一维数据按键或索引定位；dodge 可为布尔或相对分类宽度的数值；formatter 控制分类标签，native_scale 保留分组变量原尺度	2026-10-10T19:41:49Z			0
++doc/_docstrings/regplot.ipynb	770326e1	0	0	2026-10-10T19:38:39Z	G	regplot.ipynb[5 O G S]: Role:示例说明 regplot 的线性、多项式、对数、LOWESS、逻辑与稳健回归及离散 x 处理 | Uses:seaborn/regression.py | API:- | Constraints:ci=None 可跳过 bootstrap 置信区间；离散 x 可 jitter、按唯一值聚合或连续变量分箱聚合；各模型选项改变拟合语义	2026-10-10T19:41:49Z			0
++doc/_docstrings/relplot.ipynb	e648ccf0	0	0	2026-10-10T19:38:39Z	G	relplot.ipynb[7 O G S]: Role:示例说明 figure-level relplot 的散点/折线类型、多语义映射、行列分面、尺寸与 FacetGrid 后处理 | Uses:seaborn/relational.py,seaborn/axisgrid.py | API:- | Constraints:默认 kind=scatter，kind=line 会按 x 排序并聚合重复观测为均值和 95% CI；宽表不支持分面；始终返回 FacetGrid 并跨分面同步语义映射	2026-10-10T19:41:49Z			0
++doc/_docstrings/residplot.ipynb	38b157b1	0	0	2026-10-10T19:38:39Z	G	residplot.ipynb[3 O G T]: Role:示例说明 residplot 用回归残差诊断线性假设、高阶趋势及 LOWESS 结构 | Uses:seaborn/regression.py | API:- | Constraints:order 可先移除高阶趋势，lowess 仅用于在残差散点上强调剩余结构	2026-10-10T19:41:49Z			0
++doc/_docstrings/rugplot.ipynb	f3e6c339	0	0	2026-10-10T19:38:39Z	G	rugplot.ipynb[3 O G T]: Role:示例说明 rugplot 在单轴或双轴标记观测、hue、外置刻线及大数据透明度 | Uses:seaborn/distributions.py | API:- | Constraints:负 height 配 clip_on=False 可将刻线放到 axes 外；密集数据需细线和低 alpha 表达局部密度	2026-10-10T19:41:49Z			0
++doc/_docstrings/scatterplot.ipynb	1cd2a299	0	0	2026-10-10T19:38:39Z	G	scatterplot.ipynb[7 O G S]: Role:系统示例 scatterplot 的 hue/style/size 语义、定量归一化、marker、宽表与分面建议 | Uses:seaborn/relational.py,seaborn/palettes.py,seaborn/axisgrid.py | API:- | Constraints:数值 hue 默认定量映射且大量唯一值图例抽样；size 映射点面积；宽表每列按索引绘制并同时映射 hue/style；跨分面使用 relplot 保持语义同步	2026-10-10T19:41:49Z			0
++doc/_docstrings/set_context.ipynb	fe2bff8c	0	0	2026-10-10T19:38:39Z	G	set_context.ipynb[3 O G T]: Role:示例说明设置全局绘图上下文、独立字体缩放及 rc 参数覆盖 | Uses:seaborn/rcmod.py | API:- | Constraints:调用会改变后续所有绘图的全局上下文参数，font_scale 相对当前上下文缩放字体	2026-10-10T19:41:49Z			0
++doc/_docstrings/set_style.ipynb	465690e3	0	0	2026-10-10T19:38:39Z	G	set_style.ipynb[3 O G T]: Role:示例说明设置全局 seaborn 样式并选择性覆盖样式 rc 参数 | Uses:seaborn/rcmod.py | API:- | Constraints:调用会改变后续所有绘图的默认样式	2026-10-10T19:41:49Z			0
++doc/_docstrings/set_theme.ipynb	7ad48cb0	0	0	2026-10-10T19:38:39Z	G	set_theme.ipynb[5 O G T]: Role:示例说明激活和组合 seaborn 全局主题的样式、调色板及 rc 参数 | Uses:seaborn/rcmod.py,seaborn/palettes.py | API:- | Constraints:主题影响所有 matplotlib 图而不只 seaborn；各参数组传 None 可保留当前值；rc 可覆盖主题之外的 matplotlib 参数	2026-10-10T19:41:49Z			0
++doc/_docstrings/stripplot.ipynb	74774102	0	0	2026-10-10T19:38:39Z	G	stripplot.ipynb[5 O G S]: Role:示例说明 stripplot 的随机抖动、方向、hue 与 dodge、宽表、原生尺度及样式 | Uses:seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:0.12 起分类层级不默认异色且数值 hue 默认定量；宽表数值列同时映射 x 与 hue；分类坐标默认离散索引，native_scale 保留原尺度；分面优先 catplot 同步语义	2026-10-10T19:41:49Z			0
++doc/_docstrings/swarmplot.ipynb	d67f551e	0	0	2026-10-10T19:38:39Z	G	swarmplot.ipynb[5 O G S]: Role:示例说明 swarmplot 的无重叠点布局、方向、hue 与 dodge、密度边界、原生尺度及分面 | Uses:seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:高局部密度会迫使点在 gutter 重叠并发警告，可减小点；分类坐标默认离散索引，native_scale 保留原尺度；分面使用 catplot(kind=swarm) 同步变量映射	2026-10-10T19:41:49Z			0
++doc/_docstrings/violinplot.ipynb	54bc884e	0	0	2026-10-10T19:38:39Z	G	violinplot.ipynb[5 O G S]: Role:示例说明 violinplot 的 KDE 与内层摘要、分组分裂、宽度归一、平滑、原生尺度和样式 | Uses:seaborn/categorical.py | API:- | Constraints:默认 KDE 会超出观测极值，cut=0 截断；density_norm=count 令宽度反映样本数；split 可拆单个或 hue 小提琴；分类轴默认固定位置，native_scale 保留原坐标	2026-10-10T19:41:49Z			0
++doc/_static/copybutton.js	e6032560	0	0	2026-10-10T19:38:39Z	G	copybutton.js[3 O G T]: Role:为含交互提示符的文档代码块添加隐藏提示与输出的复制按钮 | Uses:- | API:- | Constraints:仅对含 .gp 的 Python/pycon 高亮块添加按钮；切换时同步隐藏或恢复 .go、.gp、.gt 及 traceback 后续文本	2026-10-10T19:45:45Z			0
++doc/_static/css/custom.css	00500638	0	0	2026-10-10T19:38:39Z	G	custom.css[3 O G S]: Role:定制文档浅色主题、语法高亮、内容宽度、函数签名与发布说明徽章外观 | Uses:- | API:- | Constraints:内容区占满可用宽度；发布徽章按 api、defaults、docs、feature、enhancement、fix、build 类别映射固定颜色	2026-10-10T19:45:45Z			0
++doc/_static/favicon.ico	2e4e0916	0	0	2026-10-10T19:38:39Z	G	favicon.ico[1 O G T]: Role:提供文档站点当前多分辨率圆形 seaborn 标志浏览器图标 | Uses:doc/_static/logo-mark-lightbg.png | API:- | Constraints:包含 16、32、48 像素三档 ICO 图像	2026-10-10T19:46:21Z			0
++doc/_static/favicon_old.ico	168e07c5	0	0	2026-10-10T19:38:39Z	G	favicon_old.ico[1 O G T]: Role:保留文档站点旧版密度曲线与直方图组合浏览器图标 | Uses:- | API:- | Constraints:单幅 256×256 ICO，属于历史视觉资产	2026-10-10T19:46:21Z			0
++doc/_static/logo-mark-darkbg.png	ee52f7b1	0	0	2026-10-10T19:38:39Z	G	logo-mark-darkbg.png[1 O G T]: Role:提供适合深色背景的圆形 seaborn 图形标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:660×629 光栅图，背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-mark-darkbg.svg	b8c10533	0	0	2026-10-10T19:38:39Z	G	logo-mark-darkbg.svg[1 O G L]: Role:提供适合深色背景的圆形 seaborn 图形标志 SVG | Uses:doc/tools/generate_logos.py | API:- | Constraints:158×151 矢量画布，背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-mark-lightbg.png	ded7ae91	0	0	2026-10-10T19:38:39Z	G	logo-mark-lightbg.png[1 O G T]: Role:提供适合浅色背景的圆形 seaborn 图形标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:660×629 光栅图，背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-mark-lightbg.svg	c8216552	0	0	2026-10-10T19:38:39Z	G	logo-mark-lightbg.svg[1 O G L]: Role:提供适合浅色背景的圆形 seaborn 图形标志 SVG | Uses:doc/tools/generate_logos.py | API:- | Constraints:158×151 矢量画布，背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-mark-whitebg.png	7b3e3992	0	0	2026-10-10T19:38:39Z	G	logo-mark-whitebg.png[1 O G T]: Role:提供带白色不透明背景的圆形 seaborn 图形标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:660×629 光栅图，保留白底	2026-10-10T19:46:21Z			0
++doc/_static/logo-tall-darkbg.png	ea08e48e	0	0	2026-10-10T19:38:39Z	G	logo-tall-darkbg.png[1 O G T]: Role:提供适合深色背景的纵向 seaborn 图文标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:660×794 光栅图，图形位于文字上方且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-tall-darkbg.svg	43306b98	0	0	2026-10-10T19:38:39Z	G	logo-tall-darkbg.svg[1 O G L]: Role:提供适合深色背景的纵向 seaborn 图文标志 SVG | Uses:doc/tools/generate_logos.py | API:- | Constraints:158×191 矢量画布，图形位于文字上方且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-tall-lightbg.png	45828b33	0	0	2026-10-10T19:38:39Z	G	logo-tall-lightbg.png[1 O G T]: Role:提供适合浅色背景的纵向 seaborn 图文标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:660×794 光栅图，图形位于文字上方且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-tall-lightbg.svg	b372c900	0	0	2026-10-10T19:38:39Z	G	logo-tall-lightbg.svg[1 O G L]: Role:提供适合浅色背景的纵向 seaborn 图文标志 SVG | Uses:doc/tools/generate_logos.py | API:- | Constraints:158×191 矢量画布，图形位于文字上方且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-tall-whitebg.png	9e34a6ce	0	0	2026-10-10T19:38:39Z	G	logo-tall-whitebg.png[1 O G T]: Role:提供带白色不透明背景的纵向 seaborn 图文标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:660×794 光栅图，图形位于文字上方并保留白底	2026-10-10T19:46:21Z			0
++doc/_static/logo-wide-darkbg.png	76646d16	0	0	2026-10-10T19:38:39Z	G	logo-wide-darkbg.png[1 O G S]: Role:提供适合深色背景的横向 seaborn 图文标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:2483×711 光栅图，图形位于文字左侧且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-wide-darkbg.svg	67482bc1	0	0	2026-10-10T19:38:39Z	G	logo-wide-darkbg.svg[1 O G L]: Role:提供适合深色背景的横向 seaborn 图文标志 SVG | Uses:doc/tools/generate_logos.py | API:- | Constraints:596×171 矢量画布，图形位于文字左侧且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-wide-lightbg.png	0bd94f07	0	0	2026-10-10T19:38:39Z	G	logo-wide-lightbg.png[1 O G S]: Role:提供适合浅色背景的横向 seaborn 图文标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:2483×711 光栅图，图形位于文字左侧且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-wide-lightbg.svg	ff4e8b42	0	0	2026-10-10T19:38:39Z	G	logo-wide-lightbg.svg[1 O G L]: Role:提供适合浅色背景的横向 seaborn 图文标志 SVG | Uses:doc/tools/generate_logos.py | API:- | Constraints:596×171 矢量画布，图形位于文字左侧且背景透明	2026-10-10T19:46:21Z			0
++doc/_static/logo-wide-whitebg.png	aa754d2b	0	0	2026-10-10T19:38:39Z	G	logo-wide-whitebg.png[1 O G S]: Role:提供带白色不透明背景的横向 seaborn 图文标志 PNG | Uses:doc/tools/generate_logos.py | API:- | Constraints:2483×711 光栅图，图形位于文字左侧并保留白底	2026-10-10T19:46:21Z			0
++doc/_templates/autosummary/base.rst	d49f621b	0	0	2026-10-10T19:38:39Z	G	base.rst[3 O G T]: Role:为普通 autosummary 对象生成标题、模块上下文与对应 autodoc 指令 | Uses:doc/conf.py | API:- | Constraints:指令类型由 objtype 模板变量决定	2026-10-10T19:45:45Z			0
++doc/_templates/autosummary/class.rst	8121ed7e	0	0	2026-10-10T19:38:39Z	G	class.rst[3 O G T]: Role:为类参考页生成构造器、方法和属性摘要 | Uses:doc/conf.py | API:- | Constraints:方法单独生成页面，属性只列摘要；始终显式记录 __init__	2026-10-10T19:45:45Z			0
++doc/_templates/autosummary/object.rst	b58d292e	0	0	2026-10-10T19:38:39Z	G	object.rst[3 O G T]: Role:为对象类参考页生成简洁 autoclass 页面 | Uses:doc/conf.py | API:- | Constraints:仅渲染类本身，不自动展开成员	2026-10-10T19:45:45Z			0
++doc/_templates/autosummary/plot.rst	1c22be19	0	0	2026-10-10T19:38:39Z	G	plot.rst[5 O G T]: Role:为 objects.Plot 生成按规范、子图、定制、集成与输出分类的专用 API 页面 | Uses:seaborn/objects.py,doc/_docstrings/objects.Plot.config.ipynb | API:- | Constraints:Plot.config 是类属性而非实例方法；配置正文由转换后的 objects.Plot.config 文档片段包含	2026-10-10T19:45:48Z			0
++doc/_templates/autosummary/scale.rst	73ace273	0	0	2026-10-10T19:38:39Z	G	scale.rst[3 O G T]: Role:为 objects Scale 类生成包含 tick 与 label 方法的参考页 | Uses:seaborn/_core/scales.py | API:- | Constraints:只额外展开 tick 和 label 两个公共方法	2026-10-10T19:45:46Z			0
++doc/_templates/layout.html	48ecc038	0	0	2026-10-10T19:38:39Z	G	layout.html[3 O G T]: Role:覆盖主题页脚以展示版权、构建工具、历史版本归档与当前版本 | Uses:doc/conf.py | API:- | Constraints:继承主题原始 layout；归档链接固定覆盖 0.9 至 0.12 系列	2026-10-10T19:45:45Z			0
++doc/_templates/version.html	1e76291a	0	0	2026-10-10T19:38:39Z	G	version.html[1 O G T]: Role:在导航栏渲染当前文档版本号 | Uses:doc/conf.py | API:- | Constraints:版本值由 Sphinx 上下文提供	2026-10-10T19:45:45Z			0
++doc/_tutorial/Makefile	6253a059	0	0	2026-10-10T19:38:39Z	G	Makefile[3 B G T]: Role:将教程 notebook 批量转换为 tutorial RST 并提供清理入口 | Uses:doc/tools/nb_to_doc.py,doc/_tutorial/ | API:make tutorial；make clean | Constraints:使用 matplotlib inline backend；每个 ipynb 映射到 ../tutorial 同名 rst	2026-10-10T19:42:08Z			0
++doc/_tutorial/aesthetics.ipynb	ce09e81f	0	0	2026-10-10T19:38:39Z	G	aesthetics.ipynb[5 O G M]: Role:教程讲解 seaborn 主题的样式与上下文两组 rc 参数、预设、despine、临时作用域和自定义 | Uses:seaborn/rcmod.py,seaborn/utils.py | API:- | Constraints:0.8 后导入不自动启用主题；样式由 axes_style/set_style 控制，元素尺度由 plotting_context/set_context 控制；axes_style 的 rc 只能覆盖样式集合参数，set_theme 可覆盖任意 matplotlib rc	2026-10-10T19:42:35Z			0
++doc/_tutorial/axis_grids.ipynb	ab73e72d	0	0	2026-10-10T19:38:39Z	G	axis_grids.ipynb[7 O G L]: Role:教程讲解 FacetGrid 条件分面、自定义映射函数及 PairGrid 成对关系矩阵的高级用法 | Uses:seaborn/axisgrid.py,seaborn/relational.py,seaborn/distributions.py,seaborn/categorical.py,seaborn/regression.py | API:- | Constraints:figure-level 函数通常优先因其同步网格语义；FacetGrid 自定义函数须在当前 axes 绘图、接收位置数据及 color/label 关键字；col_wrap 不能同时使用 row；FacetGrid 展示同一关系的条件子集，PairGrid 各格展示不同变量关系	2026-10-10T19:42:35Z			0
++doc/_tutorial/categorical.ipynb	0c28ec55	0	0	2026-10-10T19:38:39Z	G	categorical.ipynb[7 O G L]: Role:教程按散点、分布摘要与中心估计三族讲解分类数据图及 catplot 统一分面接口 | Uses:seaborn/categorical.py,seaborn/axisgrid.py,seaborn/distributions.py | API:- | Constraints:分类轴默认将级别置于 0 起序数位置，即使输入为数值；native_scale=True 保留数值或日期性质；swarm 适合较小数据；boxen 适合较大数据；bar 默认均值与 bootstrap 95% CI，point 用连线突出 hue 趋势	2026-10-10T19:42:35Z			0
++doc/_tutorial/color_palettes.ipynb	b2c422e2	0	0	2026-10-10T19:38:39Z	G	color_palettes.ipynb[7 O G L]: Role:教程从感知原则到定性、顺序和发散三类详解调色板选择与 seaborn 生成接口 | Uses:seaborn/palettes.py,seaborn/cm.py,seaborn/colors/ | API:- | Constraints:类别应主要用 hue 区分并兼顾色觉障碍，数值应主要用亮度顺序，带有意义中点的数值用发散色图；离散顺序色板避开连续色图极值；rocket/mako 适合填充，flare/crest 更适合线点；避免红绿发散组合	2026-10-10T19:42:35Z			0
++doc/_tutorial/data_structure.ipynb	24418215	0	0	2026-10-10T19:38:39Z	G	data_structure.ipynb[7 O G L]: Role:教程定义 seaborn 接受的长表、宽表与混乱数据结构及 pandas、numpy、字典和序列输入方式 | Uses:seaborn/_core/data.py,seaborn/relational.py,seaborn/categorical.py | API:- | Constraints:长表每变量一列每观测一行且支持显式多语义映射；未指定 x/y 时 data 按宽表解释，索引映射 x、值映射 y、列映射分组但变量名信息可能丢失；宽表不使用 MultiIndex 且最多表达少量变量，混乱数据应先重塑	2026-10-10T19:42:51Z			0
++doc/_tutorial/distributions.ipynb	d936a5b2	0	0	2026-10-10T19:38:39Z	G	distributions.ipynb[7 O G L]: Role:教程比较直方图、KDE、ECDF、双变量分布及 joint/pair 网格的选择、参数与陷阱 | Uses:seaborn/distributions.py,seaborn/axisgrid.py,seaborn/matrix.py | API:- | Constraints:直方图结论应跨分箱尺度核验；density 按面积归一而 probability 按高度和归一；KDE 假定平滑无界，不适合离散或边界数据且 cut 只截显示不修正边界偏差；ECDF 无分箱/平滑参数但形状较不直观；双变量 KDE contours 表示等密度累计比例	2026-10-10T19:42:51Z			0
++doc/_tutorial/error_bars.ipynb	6a23aabd	0	0	2026-10-10T19:38:39Z	G	error_bars.ipynb[7 O G M]: Role:教程区分数据离散与估计不确定性，并解释 sd、pi、se、ci 四类误差条及自定义区间 | Uses:seaborn/_statistics.py,seaborn/categorical.py,seaborn/regression.py | API:- | Constraints:参数法 sd/se 的 size 是倍数，非参数 pi/ci 的 size 是百分位宽度；默认 pi/ci 为 95%，sd/se 为一倍；bootstrap ci 有随机性和计算成本，可用 n_boot/seed 控制；自定义函数接收向量并返回上下界；摘要误差条不应替代查看原始分布	2026-10-10T19:42:51Z			0
++doc/_tutorial/function_overview.ipynb	bf6e644a	0	0	2026-10-10T19:38:39Z	G	function_overview.ipynb[7 O G L]: Role:教程概览关系、分布、分类模块及 axes-level、figure-level、JointGrid/PairGrid 两类绘图架构 | Uses:seaborn/relational.py,seaborn/distributions.py,seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:axes-level 面向单 axes、接受 ax 并返回 axes，可组合复杂 matplotlib 图；figure-level 拥有并新建 figure、返回 FacetGrid、可分面且外置图例但不能绘入既有 axes；figure-level 的 height/aspect 定义每个子图大小而非整体尺寸	2026-10-10T19:42:51Z			0
++doc/_tutorial/introduction.ipynb	92b29ebe	0	0	2026-10-10T19:38:39Z	G	introduction.ipynb[7 O G L]: Role:介绍 seaborn 基于 matplotlib/pandas 的声明式统计可视化定位、主要图形族、语义映射、估计与定制层次 | Uses:seaborn/relational.py,seaborn/distributions.py,seaborn/categorical.py,seaborn/regression.py,seaborn/axisgrid.py | API:- | Constraints:交互环境外通常需 pyplot.show；set_theme 通过 rcParams 影响全部 matplotlib 图；函数按数据变量语义自动映射视觉属性并可执行统计聚合；完整精细定制仍可下沉 matplotlib	2026-10-10T19:43:02Z			0
++doc/_tutorial/objects_interface.ipynb	b083f1cf	0	0	2026-10-10T19:38:39Z	G	objects_interface.ipynb[7 O G L]: Role:系统教程讲解实验性 seaborn.objects 的 Plot、Mark、Stat、Move、图层、分面配对、尺度、主题与渲染 | Uses:seaborn/_core/plot.py,seaborn/_marks/,seaborn/_stats/,seaborn/_core/moves.py,seaborn/_core/scales.py | API:- | Constraints:objects 接口为实验性且功能不完整；Mark 构造参数直接设属性，Plot/add 参数映射数据；Move 仅调整坐标且按顺序应用；Plot 方法克隆并返回新规范、不原地修改也不立即绘图；notebook 展示触发渲染，其他环境用 show，保存用 save	2026-10-10T19:43:02Z			0
++doc/_tutorial/properties.ipynb	cdfa021a	0	0	2026-10-10T19:38:39Z	G	properties.ipynb[7 O G L]: Role:逐类说明 objects Mark 的坐标、颜色透明度、填充、marker/线型、尺寸和文本属性及尺度语义 | Uses:seaborn/_core/properties.py,seaborn/_core/scales.py,seaborn/_marks/ | API:- | Constraints:名义坐标转整数索引、时间坐标转 epoch 日数且连续尺度可非线性变换；名义颜色默认离散 hue、连续/时间颜色默认顺序梯度；marker 始终使用名义尺度；pointsize 参数是直径但尺度用平方根使数据与面积线性；text 始终按字面值而 group 仅定义变换分组	2026-10-10T19:43:16Z			0
++doc/_tutorial/regression.ipynb	1bcb2431	0	0	2026-10-10T19:38:39Z	G	regression.ipynb[7 O G L]: Role:教程讲解 regplot/lmplot 的线性与多项式、稳健、逻辑、LOWESS 回归、残差诊断及分组分面 | Uses:seaborn/regression.py,seaborn/axisgrid.py,seaborn/algorithms.py | API:- | Constraints:回归图用于探索视觉引导而非提供统计推断结果；regplot 为 axes-level 且数据形式灵活，lmplot 要求 DataFrame 和字符串变量并支持 hue/分面；jitter 只改散点不改拟合；robust/logistic 与 bootstrap CI 成本高，LOWESS 不计算 CI；残差有结构表示简单线性模型不合适	2026-10-10T19:43:16Z			0
++doc/_tutorial/relational.ipynb	49823379	0	0	2026-10-10T19:38:39Z	G	relational.ipynb[7 O G L]: Role:教程讲解 scatterplot/lineplot 与 relplot 的 hue、size、style 语义、重复观测聚合、排序方向和分面 | Uses:seaborn/relational.py,seaborn/axisgrid.py,seaborn/palettes.py,seaborn/_statistics.py | API:- | Constraints:数值 hue 默认顺序色板，点 size 将数据范围归一到面积范围；lineplot 默认按 x 排序并聚合重复 x 为均值及 bootstrap 95% CI，可用 estimator=None 关闭；units 绘制重复测量个体而不污染图例；多语义过于复杂时优先分面为多个简单图	2026-10-10T19:43:16Z			0
++doc/api.rst	fde4d3b6	0	0	2026-10-10T19:38:39Z	G	api.rst[7 O G S]: Role:组织 objects 接口、函数式绘图、网格、主题、调色板与工具函数的公开 API 参考索引 | Uses:seaborn/objects.py,seaborn/axisgrid.py,seaborn/categorical.py,seaborn/distributions.py,seaborn/relational.py | API:- | Constraints:objects API 按 Plot、Mark、Stat、Move、Scale 与基类分组；函数式 API 以 seaborn 为 currentmodule 并通过 autosummary 生成页面	2026-10-10T19:39:37Z			0
++doc/citing.rst	03186a15	0	0	2026-10-10T19:38:39Z	G	citing.rst[3 O G T]: Role:说明 seaborn 与 matplotlib 的学术引用格式并展示可用 logo 资源 | Uses:doc/_static/ | API:- | Constraints:推荐引用 Waskom 2021 JOSS 论文 DOI 10.21105/joss.03021；使用 seaborn 的场景通常也应引用 matplotlib	2026-10-10T19:42:07Z			0
++doc/conf.py	8e20a66d	0	0	2026-10-10T19:38:39Z	G	conf.py[5 B G S]: Role:配置 Sphinx 扩展、项目版本、API 自动摘要、发布徽章、主题、静态资源、侧栏与 intersphinx | Uses:seaborn/__init__.py,seaborn/_core/properties.py,doc/sphinxext/,doc/_templates/,doc/_static/ | API:- | Constraints:文档版本取 seaborn.__version__；动态为 PROPERTIES 生成交叉引用替换；构建时确保静态与缩略图目录存在；根文档为 index，生成 API autosummary 且不展开类成员	2026-10-10T19:42:07Z			0
++doc/example_thumbs/.gitkeep	00000000	0	0	2026-10-10T19:38:39Z	G	.gitkeep[1 O G T]: Role:保留示例缩略图输出目录的空目录占位文件 | Uses:- | API:- | Constraints:文件内容为空	2026-10-10T19:46:21Z			0
++doc/faq.rst	132f83b5	0	0	2026-10-10T19:38:39Z	G	faq.rst[7 O G L]: Role:集中解释 seaborn 的安装显示、figure/axes 层级、分类坐标、数据形态、布局定制、matplotlib 集成与统计常见问题 | Uses:doc/installing.rst,doc/api.rst,doc/_tutorial/function_overview.ipynb,doc/_tutorial/data_structure.ipynb,doc/_tutorial/error_bars.ipynb | API:- | Constraints:figure-level 函数总是新建 figure 且不能定向现有 axes，axes-level 函数可接收并返回 axes；分类函数默认把分组值映射到整数位置，native_scale=True 才保留原尺度；长表最灵活，宽表能力受限；artist 类型与存储顺序不属稳定 API；seaborn 不提供统计模型结果查询 API；KDE 曲线积分为 1 而密度值可超过 1	2026-10-10T19:42:14Z			0
++doc/index.rst	a0158cce	0	0	2026-10-10T19:38:39Z	G	index.rst[5 O G S]: Role:构成 seaborn 文档首页，导览安装、画廊、教程、API、发布说明、引用与主要功能域 | Uses:doc/api.rst,doc/installing.rst,doc/tutorial.yaml,doc/whatsnew/index.rst,doc/citing.rst | API:- | Constraints:首页明确 seaborn 是基于 matplotlib 的 Python 统计可视化高级接口，并将 objects 接口、关系/分布/分类/回归图、网格、主题和调色板作为功能入口	2026-10-10T19:42:07Z			0
++doc/installing.rst	5522b2c3	0	0	2026-10-10T19:38:39Z	G	installing.rst[5 O G S]: Role:说明 seaborn 的 pip/conda 安装、依赖、快速入门、安装排错与求助渠道 | Uses:pyproject.toml,.github/CONTRIBUTING.md | API:- | Constraints:支持 Python 3.8+；numpy、pandas、matplotlib 必需，statsmodels/scipy/fastcluster 为特定高级功能可选；非交互环境需显式 pyplot.show；缺陷报告须可复现并含输出、原因和版本	2026-10-10T19:42:07Z			0
++doc/make.bat	fd2f318a	0	0	2026-10-10T19:38:39Z	G	make.bat[3 B G T]: Role:为 Windows 环境包装 Sphinx make-mode 文档构建 | Uses:doc/conf.py | API:make.bat <Sphinx目标> | Constraints:可由 SPHINXBUILD 覆盖命令；找不到 Sphinx 时退出码为 1	2026-10-10T19:45:45Z			0
++doc/matplotlibrc	cbab6525	0	0	2026-10-10T19:38:39Z	G	matplotlibrc[1 X G T]: Role:为文档绘图统一启用紧凑保存边界 | Uses:- | API:- | Constraints:所有文档图像默认使用 savefig.bbox=tight	2026-10-10T19:45:45Z			0
++doc/sphinxext/gallery_generator.py	b0c82c32	0	0	2026-10-10T19:38:39Z	G	gallery_generator.py[5 B G M]: Role:作为 Sphinx 扩展执行示例脚本并生成画廊页面、图片、缩略图和索引 | Uses:examples/,doc/example_thumbs/ | API:setup(app)；builder-inited 扩展钩子 | Constraints:强制 Agg 后端；仅当目标 RST 不存在或早于示例源码时重跑脚本；示例首个模块文档字符串决定页面说明并支持 _thumb 裁剪坐标；缩略图不足十项时循环补足 banner 数据	2026-10-10T19:45:46Z			0
++doc/sphinxext/tutorial_builder.py	8f884b4e	0	0	2026-10-10T19:38:39Z	G	tutorial_builder.py[5 B G M]: Role:作为 Sphinx 扩展按教程清单生成用户指南索引与各主题 SVG 缩略图 | Uses:doc/tutorial.yaml,seaborn/objects.py,seaborn/axisgrid.py,seaborn/relational.py,seaborn/distributions.py | API:setup(app)；builder-inited 扩展钩子 | Constraints:仅在缩略图缺失或早于构建器源码时重绘；页面名必须映射到同名缩略图函数；缩略图清除轴标签刻度和标题后以 SVG 保存	2026-10-10T19:45:46Z			0
++doc/tools/extract_examples.py	6297374c	0	0	2026-10-10T19:38:39Z	G	extract_examples.py[3 B G T]: Role:把公开函数文档的 Examples 段解析成 Markdown 与代码单元组成的 notebook | Uses:seaborn/external/docscrape.py,seaborn/__init__.py | API:python doc/tools/extract_examples.py <公开对象名> | Constraints:跳过 plot 指令与空行，移除交互提示符及常用 ax/g 赋值前缀，输出到 docstrings/<name>.ipynb	2026-10-10T19:45:46Z			0
++doc/tools/generate_logos.py	05253dfc	0	0	2026-10-10T19:38:39Z	G	generate_logos.py[3 B G M]: Role:以确定性密度曲线、直方图和散点图形生成 seaborn 标志的 mark、wide、tall 及背景变体 | Uses:seaborn/palettes.py | API:python doc/tools/generate_logos.py | Constraints:散点布局用固定 seed 且泊松圆盘结果缓存；每种形态同时写 PNG 与 SVG，白底不透明而 light/dark 透明	2026-10-10T19:45:46Z			0
++doc/tools/nb_to_doc.py	ec7bddde	0	0	2026-10-10T19:38:39Z	G	nb_to_doc.py[5 B G S]: Role:执行 notebook、按标签过滤内容、导出 RST 与图像并清理源 notebook 输出和执行元数据 | Uses:- | API:python doc/tools/nb_to_doc.py <notebook> <输出目录>；pop_recursive；strip_output | Constraints:执行超时 600 秒；NB_KERNEL 覆盖元数据内核；hide、hide-input、hide-output 标签分别移除单元、输入或输出；show-output 保留纯文本结果；运行会回写清理后的源 notebook	2026-10-10T19:45:46Z			0
++doc/tools/set_nb_kernels.py	bda1a003	0	0	2026-10-10T19:38:39Z	G	set_nb_kernels.py[3 B G T]: Role:递归统一仓库内 notebook 的 kernelspec 名称与显示名 | Uses:- | API:python doc/tools/set_nb_kernels.py <kernel_name> | Constraints:从当前目录递归匹配全部 ipynb 并原位回写	2026-10-10T19:45:46Z			0
++doc/tutorial.yaml	cdfc8f59	0	0	2026-10-10T19:38:39Z	G	tutorial.yaml[3 X G T]: Role:定义用户指南章节、页面顺序与教程导航分组 | Uses:doc/_tutorial/ | API:- | Constraints:页面键必须对应可生成的同名教程 notebook 与缩略图函数	2026-10-10T19:45:45Z			0
++doc/whatsnew/index.rst	6f33c466	0	0	2026-10-10T19:38:39Z	G	index.rst[3 O G T]: Role:按版本系列组织 seaborn 0.2 至 0.13 的发布说明目录 | Uses:doc/whatsnew/ | API:- | Constraints:每个系列通过 toctree 收录对应补丁版本，最大目录深度为 2	2026-10-10T19:42:08Z			0
++doc/whatsnew/v0.10.0.rst	6611939f	0	0	2026-10-10T19:38:39Z	G	v0.10.0.rst[3 O G T]: Role:记录 0.10.0 提升最低依赖、仅支持 Python 3.6+ 并删除旧入口与时间序列模块 | Uses:- | API:- | Constraints:历史兼容信息：删除 tsplot/seaborn.timeseries、seaborn.apionly 与旧 seaborn.linearmodels 模块	2026-10-10T19:44:05Z			0
++doc/whatsnew/v0.10.1.rst	3008b270	0	0	2026-10-10T19:38:39Z	G	v0.10.1.rst[1 O G S]: Role:记录 0.10.1 对 bootstrap、单例回归、heatmap 掩码色图、despine 和 boxenplot 的修复 | Uses:seaborn/algorithms.py,seaborn/regression.py,seaborn/matrix.py | API:- | Constraints:regplot 单例输入跳过拟合而非崩溃；heatmap 计算默认色界时忽略 masked 单元且重心时保留 under/over/bad 色	2026-10-10T19:44:05Z			0
++doc/whatsnew/v0.11.0.rst	6e5b1db3	0	0	2026-10-10T19:38:39Z	G	v0.11.0.rst[3 O G L]: Role:记录 0.11.0 分布模块重写、数据摄取标准化、主题/图例/网格和调色板更新 | Uses:seaborn/distributions.py,seaborn/_core/data.py,seaborn/axisgrid.py,seaborn/relational.py,seaborn/palettes.py | API:- | Constraints:历史兼容信息：绘图参数转向仅关键字；新增 displot/histplot/ecdfplot，kdeplot/rugplot 改 x/y API 并去除 statsmodels/非高斯 kernel，distplot 弃用；对象 dtype 仅内容本身为数值才按数值；网格 dropna 默认 False；set 改名 set_theme 并保留别名	2026-10-10T19:44:05Z			0
++doc/whatsnew/v0.11.1.rst	15e9f329	0	0	2026-10-10T19:38:39Z	G	v0.11.1.rst[1 O G S]: Role:记录 0.11.1 对数据键、缺失置信区间、非方 PairGrid、分类 dtype 与矩阵标注的修复 | Uses:seaborn/_core/data.py,seaborn/axisgrid.py,seaborn/distributions.py,seaborn/matrix.py | API:- | Constraints:长表字段可由元组或数值键引用；布尔或类布尔数据保留 categorical dtype；PairGrid 无可用变量时给出明确错误	2026-10-10T19:44:05Z			0
++doc/whatsnew/v0.11.2.rst	d8a3d8a1	0	0	2026-10-10T19:38:39Z	G	v0.11.2.rst[3 O G S]: Role:记录 0.11.2 的 move_legend、网格 refline/figure、hist 百分比统计与缺失/尺度修复 | Uses:seaborn/utils.py,seaborn/axisgrid.py,seaborn/distributions.py,seaborn/regression.py | API:- | Constraints:lmplot 分面参数迁至 facet_kws；网格底层 figure 推荐 .figure 而 .fig 保留兼容；hist stat=percent 总和为 100 且 proportion 为 probability 别名；移动已有图例应使用 move_legend 而非无数据调用 ax.legend	2026-10-10T19:44:05Z			0
++doc/whatsnew/v0.12.0.rst	0baa008b	0	0	2026-10-10T19:38:39Z	G	v0.12.0.rst[3 O G L]: Role:记录 0.12.0 引入 objects 接口、强制关键字参数、现代化分类散点与 errorbar API | Uses:seaborn/objects.py,seaborn/categorical.py,seaborn/relational.py,seaborn/axisgrid.py,seaborn/_statistics.py | API:- | Constraints:objects 接口标为实验性；data 成为大多绘图函数唯一位置参数；strip/swarm 新增 native_scale 且默认不再按分类级别自动多色、数值 hue 连续映射；errorbar 取代 ci 并支持 ci/pi/sd/se 或自定义函数；scipy 变为可选 stats extra	2026-10-10T19:44:17Z			0
++doc/whatsnew/v0.12.1.rst	f76ce1b1	0	0	2026-10-10T19:38:39Z	G	v0.12.1.rst[1 O G S]: Role:记录 0.12.1 新增 objects Text/Dash/Perc/Count 并修复图层、缺失值与性能问题 | Uses:seaborn/_marks/,seaborn/_stats/,seaborn/_core/moves.py | API:- | Constraints:Band/Range 未提供边界时覆盖完整数据范围；Jitter 默认施加小幅抖动；Nominal 轴采用固定边距、无网格及反转 y 的分类外观；Line 等方向排序使用稳定算法	2026-10-10T19:44:17Z			0
++doc/whatsnew/v0.12.2.rst	51455261	0	0	2026-10-10T19:38:39Z	G	v0.12.2.rst[1 O G S]: Role:记录 0.12.2 新增 objects.KDE/Boolean、PlotSpecError 上下文和 objects 稳健性修复 | Uses:seaborn/_stats/density.py,seaborn/_core/scales.py,seaborn/_core/exceptions.py | API:- | Constraints:最后支持 Python 3.7；Plot 编译失败包装为带上下文的 PlotSpecError	2026-10-10T19:44:17Z			0
++doc/whatsnew/v0.13.0.rst	23f0d446	0	0	2026-10-10T19:38:39Z	G	v0.13.0.rst[3 O G L]: Role:记录 0.13.0 分类图全面重写、替代 dataframe 协议、objects 配置及跨尺度统计更新 | Uses:seaborn/categorical.py,seaborn/_core/data.py,seaborn/_core/plot.py,seaborn/_statistics.py,seaborn/_core/scales.py | API:- | Constraints:分类图 native_scale 默认 False 且色彩默认单色，palette 需显式 hue；dodge 默认 auto，非线性尺度上的统计在尺度空间执行；pointplot 改用单一 Line2D；violin bw 改 bw_method/bw_adjust、scale 改 density_norm；boxen scale 改 width_method；外部 dataframe 通过交换协议转 pandas	2026-10-10T19:44:17Z			0
++doc/whatsnew/v0.13.1.rst	f5bbae3d	0	0	2026-10-10T19:38:39Z	G	v0.13.1.rst[1 O G T]: Role:记录 0.13.1 新增加权均值/置信区间与 Plot.layout extent 并修复分类和空数据问题 | Uses:seaborn/_statistics.py,seaborn/_core/plot.py,seaborn/categorical.py | API:- | Constraints:加权估计适用于 lineplot、barplot、pointplot 与 objects.Est，并支持 bootstrap 置信区间	2026-10-10T19:44:17Z			0
++doc/whatsnew/v0.13.2.rst	35b524d9	0	0	2026-10-10T19:38:39Z	G	v0.13.2.rst[1 O G T]: Role:记录 0.13.2 为适配 pandas 即将弃用项所做的内部兼容更新 | Uses:- | API:- | Constraints:-	2026-10-10T19:44:17Z			0
++doc/whatsnew/v0.2.0.rst	9b9380b1	0	0	2026-10-10T19:38:39Z	G	v0.2.0.rst[3 O G M]: Role:记录 0.2.0 的时间序列、交互/双变量 KDE、调色板、Python 3 与 API 变更 | Uses:seaborn/distributions.py,seaborn/regression.py,seaborn/palettes.py | API:- | Constraints:历史兼容信息：tsplot 改为数据首参且重命名观测误差样式，violin 更名 violinplot，KDE 改用 statsmodels 参数体系	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.2.1.rst	7e257698	0	0	2026-10-10T19:38:39Z	G	v0.2.1.rst[1 O G T]: Role:记录 0.2.1 对分类 groupby、KDE 类型/范围与直方分箱取整的修复 | Uses:- | API:- | Constraints:-	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.3.0.rst	575a7663	0	0	2026-10-10T19:38:39Z	G	v0.3.0.rst[3 O G M]: Role:记录 0.3.0 引入 FacetGrid、factorplot、JointGrid/jointplot、residplot 与主题 API 重构 | Uses:seaborn/axisgrid.py,seaborn/regression.py,seaborn/rcmod.py | API:- | Constraints:历史兼容信息：regplot 改为 axes-level，旧边际行为迁至 jointplot(kind=reg)；lmplot 改用 hue 并返回 FacetGrid；样式、上下文、调色板统一成查询/设置函数对	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.3.1.rst	ad5b74b8	0	0	2026-10-10T19:38:39Z	G	v0.3.1.rst[1 O G T]: Role:记录 0.3.1 对 point/factor 外观、FacetGrid 包列、KDE 支持域和图例的修复 | Uses:- | API:- | Constraints:-	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.4.0.rst	4eac46b7	0	0	2026-10-10T19:38:39Z	G	v0.4.0.rst[3 O G M]: Role:记录 0.4.0 引入 PairGrid/pairplot、cubehelix/XKCD 调色板及多项默认规则调整 | Uses:seaborn/axisgrid.py,seaborn/palettes.py,seaborn/rcmod.py | API:- | Constraints:历史兼容信息：FacetGrid.map 不再自动画图例，需 add_legend；默认 hue 颜色先用全局调色板，颜色不足时用 husl；删除旧 set_color_palette/palette_context 与 nogrid	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.5.0.rst	6a3bae13	0	0	2026-10-10T19:38:39Z	G	v0.5.0.rst[3 O G S]: Role:记录 0.5.0 引入 heatmap/clustermap、顺序/发散调色板和交互选色工具及相关修复 | Uses:seaborn/matrix.py,seaborn/palettes.py,seaborn/widgets.py | API:- | Constraints:历史契约：FacetGrid/PairGrid 的 hue_kws 长度须匹配 hue 级别；subplot_kws 支持自定义投影；light/diverging_palette 支持颜色空间输入；PairGrid 修复非默认索引和日期列	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.5.1.rst	a46315f6	0	0	2026-10-10T19:38:39Z	G	v0.5.1.rst[1 O G T]: Role:记录 0.5.1 对 matplotlib 1.4.2 marker、heatmap mask 方向和 clustermap 侧色的修复 | Uses:- | API:- | Constraints:-	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.6.0.rst	704f3ae6	0	0	2026-10-10T19:38:39Z	G	v0.6.0.rst[3 O G L]: Role:记录 0.6.0 统一分类图 API、引入 stripplot/countplot 并扩展网格、矩阵与数据缓存 | Uses:seaborn/categorical.py,seaborn/axisgrid.py,seaborn/matrix.py,seaborn/utils.py | API:- | Constraints:历史兼容信息：分类函数统一长/宽表、双方向和 hue；box/violin 改用 x/y/data 且分类顺序按出现次序或 categorical dtype；heatmap/clustermap 默认无线宽并自动 mask 缺失值；distplot 自动分箱上限 50 但显式 bins 不受限	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.7.0.rst	2e3fe8bf	0	0	2026-10-10T19:38:39Z	G	v0.7.0.rst[3 O G S]: Role:记录 0.7.0 引入 swarmplot、分类排序与 strip 默认调整及矩阵兼容修复 | Uses:seaborn/categorical.py,seaborn/matrix.py | API:- | Constraints:历史兼容信息：数值分类变量默认按数值排序，categorical dtype 仍服从类别顺序；strip hue 默认不分开且点更小无边	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.7.1.rst	1f3d46ab	0	0	2026-10-10T19:38:39Z	G	v0.7.1.rst[1 O G S]: Role:记录 0.7.1 的误差条帽、clustermap 索引对齐颜色、heatmap 注释数据与网格修复 | Uses:seaborn/categorical.py,seaborn/matrix.py,seaborn/axisgrid.py | API:- | Constraints:历史兼容信息：clustermap 的 pandas 行列颜色按索引而非位置匹配；heatmap annot 可接收矩形数据	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.8.0.rst	b6c95346	0	0	2026-10-10T19:38:39Z	G	v0.8.0.rst[3 O G S]: Role:记录 0.8.0 停止导入时自动设主题、引入感知均匀色图并重定义 heatmap 中心及分类 dodge | Uses:seaborn/rcmod.py,seaborn/matrix.py,seaborn/cm.py,seaborn/categorical.py | API:- | Constraints:历史兼容信息：导入不再应用默认样式；heatmap 仅显式 center 时按发散数据处理，中心通过改色图而非对称扩范围；heatmap 通过反转 y 轴而非数据行实现上至下显示	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.8.1.rst	36ce9829	0	0	2026-10-10T19:38:39Z	G	v0.8.1.rst[1 O G S]: Role:记录 0.8.1 对分类网格顺序警告、交互图例、稀疏 KDE 与矩阵标签注释的修复 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/matrix.py | API:- | Constraints:FacetGrid 映射分类函数未指定 order/hue_order 时会警告，以避免分面类别映射不一致	2026-10-10T19:43:44Z			0
++doc/whatsnew/v0.9.0.rst	252a727b	0	0	2026-10-10T19:38:39Z	G	v0.9.0.rst[3 O G L]: Role:记录 0.9.0 引入关系图 API、主题调色板更新及 catplot/boxenplot 与网格参数改名 | Uses:seaborn/relational.py,seaborn/categorical.py,seaborn/axisgrid.py,seaborn/rcmod.py,seaborn/palettes.py | API:- | Constraints:历史兼容信息：relplot 包装 scatterplot/lineplot；factorplot 改名 catplot 且默认 kind 从 point 改 strip；lvplot 改名 boxenplot；网格 size 参数改为 height；tsplot 被 lineplot 替代	2026-10-10T19:44:04Z			0
++doc/whatsnew/v0.9.1.rst	6a053548	0	0	2026-10-10T19:38:39Z	G	v0.9.1.rst[3 O G S]: Role:记录 0.9.1 的网格布局、bootstrap seed、关系语义分类与依赖兼容修复 | Uses:seaborn/axisgrid.py,seaborn/relational.py,seaborn/matrix.py | API:- | Constraints:最后支持 Python 2.7/3.5；PairGrid 默认变量排除 hue；关系图可用定性 palette 强制分类 hue；bootstrap seed 接受整数或 numpy Generator/RandomState	2026-10-10T19:44:04Z			0
++examples/.gitignore	fc59862f	0	0	2026-10-10T19:38:39Z	W	.gitignore[1 X W T]: Role:排除示例脚本生成的 HTML 页面与资源目录 | Uses:doc/sphinxext/gallery_generator.py | API:- | Constraints:仅忽略 *.html 与 *_files/ 派生产物	2026-10-10T19:47:53Z			0
++examples/anscombes_quartet.py	3402bbf5	0	0	2026-10-10T19:38:39Z	W	anscombes_quartet.py[1 O W V T]: Role:以分面线性回归展示 Anscombe 四组数据具有相同摘要但不同结构 | Uses:seaborn/regression.py,seaborn/axisgrid.py | API:- | Constraints:每个 dataset 独立分面且关闭置信区间	2026-10-10T19:47:53Z			0
++examples/different_scatter_variables.py	ca9b0050	0	0	2026-10-10T19:38:39Z	W	different_scatter_variables.py[1 O W V T]: Role:展示散点图同时映射清晰度颜色与深度尺寸 | Uses:seaborn/relational.py,seaborn/palettes.py | API:- | Constraints:清晰度使用显式等级顺序，点大小限制为 1–8 且无描边	2026-10-10T19:47:53Z			0
++examples/errorband_lineplots.py	35573dd3	0	0	2026-10-10T19:38:39Z	W	errorband_lineplots.py[1 O W V T]: Role:展示 FMRI 时间序列按脑区颜色、事件线型并带默认误差带 | Uses:seaborn/relational.py | API:- | Constraints:长表重复观测由 lineplot 默认聚合并显示误差带	2026-10-10T19:47:53Z			0
++examples/faceted_histogram.py	9c72712c	0	0	2026-10-10T19:38:39Z	W	faceted_histogram.py[1 O W V T]: Role:按企鹅物种列与性别行分面绘制定宽直方图 | Uses:seaborn/distributions.py,seaborn/axisgrid.py | API:- | Constraints:binwidth 固定为 3，分面边缘显示标题	2026-10-10T19:47:53Z			0
++examples/faceted_lineplot.py	2a4722ed	0	0	2026-10-10T19:38:39Z	W	faceted_lineplot.py[1 O W V T]: Role:展示点数据按对齐条件分面并以 coherence 颜色、choice 尺寸编码折线 | Uses:seaborn/relational.py,seaborn/axisgrid.py,seaborn/palettes.py | API:- | Constraints:各列不共享 x 轴，choice 顺序显式固定	2026-10-10T19:47:53Z			0
++examples/grouped_barplot.py	1d30beea	0	0	2026-10-10T19:38:39Z	W	grouped_barplot.py[1 O W V T]: Role:展示企鹅体重按物种和性别嵌套的均值条形与标准差 | Uses:seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:误差条使用 sd，图例标题和 x 轴标题清空	2026-10-10T19:47:53Z			0
++examples/grouped_boxplot.py	1bfdf4d1	0	0	2026-10-10T19:38:39Z	W	grouped_boxplot.py[1 O W V T]: Role:展示小费按日期和吸烟状态嵌套的箱线图 | Uses:seaborn/categorical.py | API:- | Constraints:hue 使用显式两色并对坐标脊线偏移裁剪	2026-10-10T19:47:53Z			0
++examples/grouped_violinplots.py	f3ba3759	0	0	2026-10-10T19:38:39Z	W	grouped_violinplots.py[1 O W V T]: Role:展示按日期和吸烟状态拆分的空心小提琴分布 | Uses:seaborn/categorical.py | API:- | Constraints:split=True 比较两个 hue 水平，inner 显示四分位且 fill=False	2026-10-10T19:47:53Z			0
++examples/heat_scatter.py	56321a24	0	0	2026-10-10T19:38:39Z	W	heat_scatter.py[1 O W V T]: Role:把脑网络相关矩阵转成长表并以点颜色和面积绘制热散图 | Uses:seaborn/relational.py | API:- | Constraints:颜色按 -1..1 归一、尺寸按 -.2...8 归一，坐标保持等比例	2026-10-10T19:47:53Z			0
++examples/hexbin_marginals.py	097ea856	0	0	2026-10-10T19:38:39Z	W	hexbin_marginals.py[1 O W V T]: Role:展示伽马与线性噪声模拟数据的六边形联合图及边际分布 | Uses:seaborn/axisgrid.py | API:- | Constraints:随机数使用固定 RandomState(11)	2026-10-10T19:47:53Z			0
++examples/histogram_stacked.py	1e1f69a3	0	0	2026-10-10T19:38:39Z	W	histogram_stacked.py[1 O W V T]: Role:展示钻石价格按切工堆叠的对数尺度直方图 | Uses:seaborn/distributions.py,seaborn/palettes.py | API:- | Constraints:x 轴对数但刻度以普通数值格式显示，分布以 stack 组合	2026-10-10T19:47:53Z			0
++examples/horizontal_boxplot.py	c327a58f	0	0	2026-10-10T19:38:39Z	W	horizontal_boxplot.py[1 O W V T]: Role:在对数距离轴上叠加行星探测方法的水平全范围箱线与观测点 | Uses:seaborn/categorical.py | API:- | Constraints:箱须覆盖 0–100 百分位；strip 点不按 hue 分色	2026-10-10T19:47:53Z			0
++examples/jitter_stripplot.py	d5ef0db6	0	0	2026-10-10T19:38:39Z	W	jitter_stripplot.py[1 O W V T]: Role:叠加鸢尾花分组观测条带和对齐条件均值点 | Uses:seaborn/categorical.py,seaborn/utils.py | API:- | Constraints:两层 hue dodge 宽度需匹配，strip 图例关闭后重建点图图例	2026-10-10T19:47:53Z			0
++examples/joint_histogram.py	887bb6a0	0	0	2026-10-10T19:38:39Z	W	joint_histogram.py[1 O W V T]: Role:用 JointGrid 组合年份/距离二维直方、边际阶梯直方与内嵌色条 | Uses:seaborn/axisgrid.py,seaborn/distributions.py | API:- | Constraints:联合 y 轴为对数，年份轴按离散分箱	2026-10-10T19:47:53Z			0
++examples/joint_kde.py	178510a0	0	0	2026-10-10T19:38:39Z	W	joint_kde.py[1 O W V T]: Role:展示企鹅喙长深度按物种分色的联合与边际 KDE | Uses:seaborn/axisgrid.py,seaborn/distributions.py | API:- | Constraints:jointplot kind=kde 同时处理 hue	2026-10-10T19:47:53Z			0
++examples/kde_ridgeplot.py	510d6467	0	0	2026-10-10T19:38:39Z	W	kde_ridgeplot.py[1 O W V T]: Role:构造重叠 FacetGrid 密度山脊图并在每行标注组名 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/palettes.py | API:- | Constraints:分面垂直负间距实现重叠；密度关闭裁剪且基线颜色继承 hue	2026-10-10T19:47:53Z			0
++examples/large_distributions.py	26a7b6bc	0	0	2026-10-10T19:38:39Z	W	large_distributions.py[1 O W V T]: Role:用 letter-value boxenplot 展示大样本钻石克拉数的清晰度分布 | Uses:seaborn/categorical.py | API:- | Constraints:分类顺序显式固定，箱宽规则为 linear	2026-10-10T19:47:53Z			0
++examples/layered_bivariate_plot.py	be081c9a	0	0	2026-10-10T19:38:39Z	W	layered_bivariate_plot.py[1 O W V T]: Role:叠加二元散点、二维直方与白色 KDE 等高线 | Uses:seaborn/relational.py,seaborn/distributions.py | API:- | Constraints:三层共享同一 Axes，直方低密度阈值为 .1	2026-10-10T19:47:54Z			0
++examples/logistic_regression.py	121bc267	0	0	2026-10-10T19:38:39Z	W	logistic_regression.py[1 O W V T]: Role:按性别分面拟合年龄与生存概率的逻辑回归 | Uses:seaborn/regression.py,seaborn/axisgrid.py | API:- | Constraints:启用 logistic 且不截断拟合，y 观测仅为显示加抖动	2026-10-10T19:47:54Z			0
++examples/many_facets.py	07776ed7	0	0	2026-10-10T19:38:39Z	W	many_facets.py[1 O W V T]: Role:为二十条随机游走建立换行分面并统一参考线和坐标范围 | Uses:seaborn/axisgrid.py | API:- | Constraints:随机生成固定种子；每四列换行且每分面对应一个 walk	2026-10-10T19:47:54Z			0
++examples/many_pairwise_correlations.py	18e11ecd	0	0	2026-10-10T19:38:39Z	W	many_pairwise_correlations.py[1 O W V T]: Role:绘制遮罩上三角的大型发散相关热图 | Uses:seaborn/matrix.py,seaborn/palettes.py | API:- | Constraints:只显示下三角，色阶以 0 为中心且单元格正方形	2026-10-10T19:47:54Z			0
++examples/marginal_ticks.py	2009d03e	0	0	2026-10-10T19:38:39Z	W	marginal_ticks.py[1 O W V T]: Role:用 JointGrid 绘制散点联合图与 rug 边际刻度 | Uses:seaborn/axisgrid.py,seaborn/relational.py,seaborn/distributions.py | API:- | Constraints:边际比例 17 且无间隔，散点尺寸直接取 horsepower 序列	2026-10-10T19:47:54Z			0
++examples/multiple_bivariate_kde.py	1b240521	0	0	2026-10-10T19:38:39Z	W	multiple_bivariate_kde.py[1 O W V T]: Role:比较两种鸢尾花物种的双变量 KDE 等高线 | Uses:seaborn/distributions.py | API:- | Constraints:排除 versicolor，坐标轴保持等比例且阈值 .1	2026-10-10T19:47:54Z			0
++examples/multiple_conditional_kde.py	af2d7533	0	0	2026-10-10T19:38:39Z	W	multiple_conditional_kde.py[1 O W V T]: Role:以填充归一的条件 KDE 展示钻石克拉数随切工的组成 | Uses:seaborn/distributions.py,seaborn/palettes.py | API:- | Constraints:multiple=fill 使每个 x 位置组份和为一，估计下界裁剪为 0	2026-10-10T19:47:54Z			0
++examples/multiple_ecdf.py	a8e33579	0	0	2026-10-10T19:38:39Z	W	multiple_ecdf.py[1 O W V T]: Role:按产地分面并以车型年份连续着色绘制排量 ECDF | Uses:seaborn/distributions.py,seaborn/palettes.py | API:- | Constraints:HUSL 两端混合成连续色图，分面 aspect=.75	2026-10-10T19:47:54Z			0
++examples/multiple_regression.py	f7c37e92	0	0	2026-10-10T19:38:39Z	W	multiple_regression.py[1 O W V T]: Role:按企鹅物种分色拟合喙长与喙深的多组线性回归 | Uses:seaborn/regression.py,seaborn/axisgrid.py | API:- | Constraints:返回网格后覆盖默认轴标签	2026-10-10T19:47:54Z			0
++examples/pair_grid_with_kde.py	867dd35d	0	0	2026-10-10T19:38:39Z	W	pair_grid_with_kde.py[1 O W V T]: Role:在 PairGrid 上三角画散点、下三角和对角画 KDE | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/relational.py | API:- | Constraints:对角轴不共享 y 尺度	2026-10-10T19:47:54Z			0
++examples/paired_pointplots.py	47af542b	0	0	2026-10-10T19:38:39Z	W	paired_pointplots.py[1 O W V T]: Role:用非方 PairGrid 横向比较多个分类因素的生存概率点图 | Uses:seaborn/axisgrid.py,seaborn/categorical.py | API:- | Constraints:单一 y 变量配四个 x 变量，所有 axes 的 y 范围固定 0–1	2026-10-10T19:47:54Z			0
++examples/pairgrid_dotplot.py	a2d6d0a2	0	0	2026-10-10T19:38:39Z	W	pairgrid_dotplot.py[1 O W V T]: Role:用非方 PairGrid 和水平 stripplot 比较各州多项车祸指标 | Uses:seaborn/axisgrid.py,seaborn/categorical.py | API:- | Constraints:关闭 jitter 并统一 x 范围，每列使用独立语义标题	2026-10-10T19:47:54Z			0
++examples/palette_choices.py	ee247038	0	0	2026-10-10T19:38:39Z	W	palette_choices.py[1 O W V T]: Role:并列演示顺序、发散和定性调色板与相应数据结构的匹配 | Uses:seaborn/categorical.py,seaborn/palettes.py | API:- | Constraints:三行共享 x，定性数据使用固定随机置换	2026-10-10T19:47:54Z			0
++examples/palette_generation.py	23dbeffa	0	0	2026-10-10T19:38:39Z	W	palette_generation.py[1 O W V T]: Role:用九组起始 hue 不同的 cubehelix 色图填充双变量 KDE | Uses:seaborn/palettes.py,seaborn/distributions.py | API:- | Constraints:随机数据固定种子，所有子图共享范围且隐藏坐标	2026-10-10T19:47:54Z			0
++examples/part_whole_bars.py	216b07ed	0	0	2026-10-10T19:38:39Z	W	part_whole_bars.py[1 O W V T]: Role:以重叠水平条形展示车祸总量与酒精相关子集的部分整体关系 | Uses:seaborn/categorical.py,seaborn/palettes.py | API:- | Constraints:先画总量再画子集，两个蓝色来自 pastel 与 muted color-code 上下文	2026-10-10T19:47:54Z			0
++examples/pointplot_anova.py	1d72cfcc	0	0	2026-10-10T19:38:39Z	W	pointplot_anova.py[1 O W V T]: Role:以时间、运动类型和饮食三因素点图展示脉搏均值与标准误 | Uses:seaborn/categorical.py,seaborn/axisgrid.py | API:- | Constraints:误差条使用 se，饮食按列分面	2026-10-10T19:47:54Z			0
++examples/radial_facets.py	b773d028	0	0	2026-10-10T19:38:39Z	W	radial_facets.py[1 O W V T]: Role:在 FacetGrid 自定义极坐标投影中展示三种速度的径向散点 | Uses:seaborn/axisgrid.py,seaborn/relational.py | API:- | Constraints:各分面不共享 x/y 且禁止 despine	2026-10-10T19:47:54Z			0
++examples/regression_marginals.py	70d3225b	0	0	2026-10-10T19:38:39Z	W	regression_marginals.py[1 O W V T]: Role:以 jointplot 组合小费线性回归与边际分布 | Uses:seaborn/axisgrid.py,seaborn/regression.py | API:- | Constraints:回归线不截断，联合轴范围显式固定	2026-10-10T19:47:54Z			0
++examples/residplot.py	8ba73974	0	0	2026-10-10T19:38:39Z	W	residplot.py[1 O W V T]: Role:展示模拟线性关系经 LOWESS 处理的回归残差图 | Uses:seaborn/regression.py | API:- | Constraints:随机数据固定种子并启用 lowess	2026-10-10T19:47:54Z			0
++examples/scatter_bubbles.py	f76e2be2	0	0	2026-10-10T19:38:39Z	W	scatter_bubbles.py[1 O W V T]: Role:以气泡图同时编码汽车产地颜色和重量尺寸 | Uses:seaborn/relational.py,seaborn/axisgrid.py | API:- | Constraints:点面积范围 40–400 且半透明	2026-10-10T19:47:54Z			0
++examples/scatterplot_categorical.py	993f4ffd	0	0	2026-10-10T19:38:39Z	W	scatterplot_categorical.py[1 O W V T]: Role:以 swarmplot 展示企鹅体重按性别和物种的分类散点 | Uses:seaborn/categorical.py | API:- | Constraints:体重在横轴、性别在纵轴并移除 y 标签	2026-10-10T19:47:54Z			0
++examples/scatterplot_matrix.py	f99f0daa	0	0	2026-10-10T19:38:39Z	W	scatterplot_matrix.py[1 O W V T]: Role:以物种着色生成企鹅数据的散点图矩阵 | Uses:seaborn/axisgrid.py | API:- | Constraints:pairplot 自动选择数值变量并用 species 作为 hue	2026-10-10T19:47:54Z			0
++examples/scatterplot_sizes.py	ac188c46	0	0	2026-10-10T19:38:39Z	W	scatterplot_sizes.py[1 O W V T]: Role:在双对数坐标上以年份连续色和质量尺寸展示行星数据 | Uses:seaborn/relational.py,seaborn/palettes.py | API:- | Constraints:x/y 均为 log scale，并显示次网格	2026-10-10T19:47:54Z			0
++examples/simple_violinplots.py	a36931f9	0	0	2026-10-10T19:38:39Z	W	simple_violinplots.py[1 O W V T]: Role:以年代为原生纵坐标绘制海冰范围的水平空心小提琴 | Uses:seaborn/categorical.py | API:- | Constraints:orient='y' 明确方向且 fill=False	2026-10-10T19:47:54Z			0
++examples/smooth_bivariate_kde.py	3862549b	0	0	2026-10-10T19:38:39Z	W	smooth_bivariate_kde.py[1 O W V T]: Role:用 JointGrid 组合平滑填充双变量 KDE 与边际直方图 | Uses:seaborn/axisgrid.py,seaborn/distributions.py | API:- | Constraints:联合密度裁剪到给定二维范围并用 100 个 level	2026-10-10T19:47:54Z			0
++examples/spreadsheet_heatmap.py	503f4c41	0	0	2026-10-10T19:38:39Z	W	spreadsheet_heatmap.py[1 O W V T]: Role:把航班长表透视成月×年矩阵并绘制数值注释热图 | Uses:seaborn/matrix.py | API:- | Constraints:注释按整数格式，单元格边界线宽 .5	2026-10-10T19:47:54Z			0
++examples/strip_regplot.py	40a8352d	0	0	2026-10-10T19:38:39Z	W	strip_regplot.py[1 O W V T]: Role:在原生圆柱数值尺度的分类散点上叠加二次回归曲线 | Uses:seaborn/categorical.py,seaborn/regression.py | API:- | Constraints:catplot 保留 native_scale，回归层不画散点且不截断	2026-10-10T19:47:54Z			0
++examples/structured_heatmap.py	28ddba06	0	0	2026-10-10T19:38:39Z	W	structured_heatmap.py[1 O W V T]: Role:按脑网络侧色注释聚类相关热图并移除行树状图 | Uses:seaborn/matrix.py,seaborn/palettes.py | API:- | Constraints:网络颜色通过列 MultiIndex 对齐，相关色阶以 0 为中心	2026-10-10T19:47:54Z			0
++examples/three_variable_histogram.py	5169ecdc	0	0	2026-10-10T19:38:39Z	W	three_variable_histogram.py[1 O W V T]: Role:按钻石清晰度分面绘制价格与颜色等级的二维直方图 | Uses:seaborn/distributions.py,seaborn/axisgrid.py | API:- | Constraints:价格轴对数、分类轴线性，每四列换行	2026-10-10T19:47:54Z			0
++examples/timeseries_facets.py	8945c83e	0	0	2026-10-10T19:38:39Z	W	timeseries_facets.py[1 O W V T]: Role:按年份分面突出单年航班客流并叠加全部年份背景线 | Uses:seaborn/relational.py,seaborn/axisgrid.py | API:- | Constraints:背景线以 units=year 且 estimator=None 保留个体轨迹，突出层无图例	2026-10-10T19:47:54Z			0
++examples/wide_data_lineplot.py	9a3d3aae	0	0	2026-10-10T19:38:39Z	W	wide_data_lineplot.py[1 O W V T]: Role:直接从宽表绘制四列随机游走的七日滚动均值折线 | Uses:seaborn/relational.py | API:- | Constraints:随机数固定种子，DataFrame 日期索引映射 x、列名映射分组	2026-10-10T19:47:54Z			0
++examples/wide_form_violinplot.py	09fbea6b	0	0	2026-10-10T19:38:39Z	W	wide_form_violinplot.py[1 O W V T]: Role:从脑网络宽表相关矩阵生成按网络分组的小提琴图 | Uses:seaborn/categorical.py | API:- | Constraints:相关矩阵先按 network 层聚合并排序，KDE 带宽缩放 .5	2026-10-10T19:47:54Z			0
++licences/APPDIRS_LICENSE	4acd3ce9	0	0	2026-10-10T19:38:39Z	V	APPDIRS_LICENSE[3 O V T]: Role:记录内置 appdirs 代码的来源与 MIT 许可 | Uses:seaborn/external/appdirs.py | API:- | Constraints:复制或再分发须保留版权与许可声明；软件按现状提供且不承担责任	2026-10-10T19:46:45Z			0
++licences/HUSL_LICENSE	c13257d9	0	0	2026-10-10T19:38:39Z	V	HUSL_LICENSE[3 O V T]: Role:记录内置 HUSL 实现的 MIT 许可 | Uses:seaborn/external/husl.py | API:- | Constraints:复制或再分发须保留版权与许可声明；软件按现状提供且不承担责任	2026-10-10T19:46:45Z			0
++licences/NUMPYDOC_LICENSE	450263d4	0	0	2026-10-10T19:38:39Z	V	NUMPYDOC_LICENSE[3 O V T]: Role:记录内置 numpydoc 文档解析代码的 BSD 两条款许可 | Uses:seaborn/external/docscrape.py | API:- | Constraints:源码与二进制再分发均须保留版权、条件和免责声明；软件按现状提供且不承担责任	2026-10-10T19:46:45Z			0
++licences/PACKAGING_LICENSE	470b508f	0	0	2026-10-10T19:38:39Z	V	PACKAGING_LICENSE[3 O V T]: Role:记录内置 packaging 版本处理代码的 BSD 两条款许可 | Uses:seaborn/external/version.py | API:- | Constraints:源码与二进制再分发均须保留版权、条件和免责声明；软件按现状提供且不承担责任	2026-10-10T19:46:45Z			0
++licences/SCIPY_LICENSE	4ccba559	0	0	2026-10-10T19:38:39Z	V	SCIPY_LICENSE[3 O V T]: Role:记录内置 SciPy KDE 衍生代码的 BSD 三条款许可 | Uses:seaborn/external/kde.py | API:- | Constraints:再分发须保留版权、条件与免责声明，且未经许可不得以版权方或贡献者名义背书；软件按现状提供且不承担责任	2026-10-10T19:46:45Z			0
++pyproject.toml	0338f806	0	0	2026-10-10T19:38:39Z	G	pyproject.toml[8 X G S]: Role:定义 flit 构建、包元数据、运行与可选依赖、源码分发及 pytest 配置 | Uses:seaborn/__init__.py,README.md,LICENSE.md | API:Python 包 seaborn；extras stats/dev/docs | Constraints:要求 Python>=3.8；必需 numpy>=1.20 且排除 1.24.0、pandas>=1.2、matplotlib>=3.4 且排除 3.6.1；版本动态取包；sdist 排除文档 SVG	2026-10-10T19:47:10Z			0
++seaborn/__init__.py	83b53798	0	0	2026-10-10T19:38:39Z	G	__init__.py[9 E G T]: Role:汇总并重导出经典 seaborn 公共 API、颜色资源与版本，并保存导入时 matplotlib rcParams 快照 | Uses:seaborn/rcmod.py,seaborn/relational.py,seaborn/categorical.py,seaborn/distributions.py,seaborn/axisgrid.py | API:经典 seaborn 顶层函数与类；xkcd_rgb；crayons；cm；__version__ | Constraints:__version__ 为 0.14.0.dev0；导入仅捕获 _orig_rc_params，不自动应用主题	2026-10-10T19:51:23Z			0
++seaborn/_base.py	0e2ba61a	0	0	2026-10-10T19:38:39Z	D	_base.py[9 C D M L]: Role:为经典绘图器提供长宽表数据摄取、变量类型与方向推断、hue/size/style 语义映射、分组迭代、坐标单位/尺度接线和图例数据生成的共享核心 | Uses:seaborn/_core/data.py,seaborn/palettes.py,seaborn/utils.py,seaborn/axisgrid.py | API:SemanticMapping；HueMapping；SizeMapping；StyleMapping；VectorPlotter；variable_type；infer_orient；unique_dashes；unique_markers；categorical_order（绘图模块和测试也调用） | Constraints:宽表禁止同时指定语义变量，只保留数值列并融成长表，平向量映射索引和值；长表通过 PlotData 对齐变量。hue 数值默认连续 cubehelix，宽表和显式列表/字典/定性色板强制分类，缺失映射透明；列表长度不符循环或截断并警告，字典必须覆盖级别。size 数值映射复制并强制 norm.clip，分类默认按级别反向线性取尺寸；style 始终分类且禁止混用实心与线稿 marker。iter_data 默认并入分面变量、按声明级别笛卡尔迭代并可选择空组；comp_data 按每行所属 matplotlib converter 做单位转换后进入轴变换空间、无穷转缺失并缓存。分面坐标转换器须遵循 sharex/sharey 范围，混合轴尺度不能取得统一变换；分类 y 轴反转。scale_categorical 原地把数据和级别转字符串、数值先稳定排序，显式 order 或 categorical dtype 标记有序。变量类型把全缺失和默认布尔判数值、显式 categorical 优先、timedelta 判分类；方向的 x/y 表示分类/自变量轴而 v/h 表示数值因变量方向。必须保持长宽数据解释、语义映射、分组副本、共享/非共享分面转换器、log 变换、分类顺序、图例和错误边界（TestHueMapping、TestSizeMapping、TestStyleMapping、TestVectorPlotter、TestCoreFunc）	2026-10-10T19:55:43Z			0
++seaborn/_compat.py	d7076c67	0	0	2026-10-10T19:38:39Z	G	_compat.py[5 U G C S]: Role:封装 matplotlib 与 pandas 跨版本差异，统一尺度归一化、色图注册、布局引擎、坐标轴共享、图例句柄、分组应用与单位转换操作 | Uses:- | API:norm_from_scale；register_colormap；get_colormap；get_layout_engine；set_layout_engine；share_axis；get_legend_handles；groupby_apply_include_groups；get_converter | Constraints:归一化会把尺度变换产生的非有限值遮蔽；布局与 groupby 分支按依赖版本能力动态选择	2026-10-10T19:51:23Z			0
++seaborn/_core/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	D	__init__.py[1 D D T]: Role:标记 objects 核心实现子包命名空间 | Uses:- | API:- | Constraints:文件为空	2026-10-10T19:49:10Z			0
++seaborn/_core/data.py	3d4b7949	0	0	2026-10-10T19:38:39Z	D	data.py[9 C D M M]: Role:把 DataFrame/Mapping/交换协议数据与变量规格解析为对齐的内部长表及来源元数据 | Uses:seaborn/_core/typing.py,seaborn/utils.py | API:PlotData；handle_data_source；convert_dataframe_to_pandas（objects 管线与测试也调用） | Constraints:字符串规格必须解析为列或字符串索引级；pandas 向量按索引对齐，非 Series 外部向量与 DataFrame 同用时长度必须相等；None 变量表示移除；join 始终保留最初 source_data/source_vars；外部 dataframe 转换失败包装 RuntimeError，pandas<2.0.2 发兼容警告；必须保持整数/元组键可引用列且裸标量整数作为常量（TestPlotData）	2026-10-10T19:49:10Z			0
++seaborn/_core/exceptions.py	ac784eeb	0	0	2026-10-10T19:38:39Z	O	exceptions.py[5 C O T]: Role:定义 objects Plot 延迟编译失败的上下文异常 | Uses:- | API:PlotSpecError | Constraints:_during 生成步骤/变量上下文并要求从原异常链抛出，消息提示查看上游 traceback	2026-10-10T19:49:10Z			0
++seaborn/_core/groupby.py	0ce8fcd7	0	0	2026-10-10T19:38:39Z	D	groupby.py[8 C D M S]: Role:提供可显式控制级别顺序与笛卡尔结果顺序的内部 split-apply-combine | Uses:seaborn/_core/rules.py | API:GroupBy（Stat/Move 实现与测试也调用） | Constraints:构造至少声明一个潜在分组变量；agg 必须有实际分组列并补齐未观测组合为 NaN；apply 无实际分组时直接调用函数，有分组时只保留观测组但按声明级别顺序拼接；结果先保留原列顺序再追加新列；必须保持多分组笛卡尔顺序（test_agg_two_groupers_ordered）	2026-10-10T19:49:10Z			0
++seaborn/_core/moves.py	2e6dd06c	0	0	2026-10-10T19:38:39Z	O	moves.py[8 C O M M]: Role:实现 objects 图层的抖动、错开、堆叠、平移与组内归一位置变换 | Uses:seaborn/_core/groupby.py,seaborn/_core/scales.py,seaborn/_core/typing.py | API:Move、Jitter、Dodge、Stack、Shift、Norm（经 seaborn.objects 公开） | Constraints:Jitter 默认仅沿方向轴按标记宽度20%抖动，显式 x/y 时默认方向抖动关闭且 seed 可复现；Dodge 按方向/分面组合分配中心和宽度，empty=keep/drop/fill 对缺组空间语义不同；Stack 要求组内 baseline 单一并保留缺失传播；Norm 在值轴按组除以查询子集聚合量；必须保持 Dodge 不等宽比例和分面隔离（TestDodge）	2026-10-10T19:49:26Z			0
++seaborn/_core/plot.py	83637dea	0	0	2026-10-10T19:38:39Z	O	plot.py[9 E O M L]: Role:定义声明式 Plot 规格、不可变式链式 API 与将数据/分面/统计/尺度/移动/Mark 编译为 matplotlib Figure 的 Plotter 引擎 | Uses:seaborn/_core/data.py,seaborn/_core/scales.py,seaborn/_core/subplots.py,seaborn/_marks/base.py,seaborn/_stats/base.py | API:Plot、Plot.config、Plot.add/pair/facet/scale/share/limit/label/layout/theme/on/plot/show/save；Plotter | Constraints:除 show 外规格方法克隆返回新 Plot；位置参数至多 data,x,y 且不得与命名参数重复；add 首个变换至多一个 Stat、其后只能 Move；统计在坐标尺度变换空间执行、绘制前反变换；分面/配对按共享策略分别建坐标尺度，语义尺度全局共享；数据行按 Mark 分组属性及 col/row/group 拆分，非 Path 默认丢弃任一语义缺失/无穷行；identity scale 不生成图例，同源多语义合并图例；on(Axes) 不重建 Figure 且禁止多子图；默认非 pyplot Figure、save 默认96dpi，富显示支持 PNG/SVG scaling/hidpi；必须保持原输入数据不被 stat/move 修改及限制只影响视域不裁统计数据（test_stat、Plot.limit 文档）	2026-10-10T19:50:30Z			0
++seaborn/_core/properties.py	ab6aab07	0	0	2026-10-10T19:38:39Z	O	properties.py[9 C O M L]: Role:定义 objects 可视属性注册表以及坐标、区间、对象、颜色、填充属性的尺度推断和标准化映射 | Uses:seaborn/_core/scales.py,seaborn/_core/rules.py,seaborn/palettes.py,seaborn/utils.py | API:PROPERTIES 与 Property/Coordinate/Color/Fill/Marker/LineStyle/PointSize 等属性类（核心管线、Mark 和测试也调用） | Constraints:字典映射必须覆盖全部级别，列表过短循环/过长截断并警告；PointSize 在面积空间线性映射再开方；名义对象缺失映射为不可见哨兵；Color 保留显式 RGBA 而连续映射剥离 alpha 交由 alpha 属性；多于两级 Fill 交替真/假并警告；线型短写标准化为 offset/dash 且 offset 对周期取模；必须保持默认色板在级别超出 color cycle 时切换 husl（TestColor.test_nominal_default_palette_large）	2026-10-10T19:49:54Z			0
++seaborn/_core/rules.py	11a2e856	0	0	2026-10-10T19:38:39Z	D	rules.py[8 C D M S]: Role:统一变量类型判定与分类级别排序规则 | Uses:- | API:VarType、variable_type、categorical_order（绘图管线与测试也调用） | Constraints:显式 categorical dtype 永远分类，全缺失永远数值；布尔/0-1 类型由 boolean_type 和 strict_boolean 控制；object 内容全数字/日期仍识别对应类型，否则分类；分类顺序优先显式 order，其次 categorical categories，再按出现顺序且数值级别排序，始终去除缺失；必须保持 timedelta 当前判为 categorical（test_variable_type）	2026-10-10T19:49:10Z			0
++seaborn/_core/scales.py	5645ec17	0	0	2026-10-10T20:17:49Z	O	scales.py[9 C O M L]: Role:实现布尔、名义、连续与时间尺度的转换管线、刻度标签、图例元数据和坐标轴收尾 | Uses:seaborn/_core/rules.py,seaborn/_core/typing.py,seaborn/_core/properties.py | API:Scale、Boolean、Nominal、Continuous、Temporal（经 seaborn.objects 公开）；PseudoAxis；_make_log_transforms（测试也调用） | Constraints:尺度配置方法复制返回新对象；Nominal 按级别转整数、未知级别为 NaN、坐标 y 轴反转并禁网格；Boolean 保持 True/False 图例顺序但坐标为1/0并按轴反转；Continuous 在变换空间归一并支持 log/symlog/logit/pow/sqrt 与刻度/格式器组合，log 下 count 要求 between 且不支持 every；Temporal 使用 matplotlib 日期单位；对数工厂按 None/2/10/其他基数选择正逆函数并在两方向抑制 invalid/divide 警告，不另行验证基数或定义域	2026-10-10T20:18:07Z			0
++seaborn/_core/subplots.py	16029774	0	0	2026-10-10T19:38:39Z	O	subplots.py[8 C O L M]: Role:把 objects 的 facet/pair/wrap/share 规格编译为 matplotlib Figure/Axes 网格与逐轴元数据 | Uses:seaborn/_core/plot.py | API:Subplots（Plot 编译器与测试也调用） | Constraints:禁止同一维度的 facet/pair/wrap 冲突及双轴交叉配对后 wrap；配对轴默认只沿对应维共享，wrap 后不共享配对轴；非 cross 配对按 x/y 成对而非笛卡尔；Plot.on(Axes) 只能生成单轴，Figure/SubFigure 可容纳网格；多余 wrapped Axes 必须删除并正确标记四边；必须保持边界元数据与轴键对应（TestSubplotElements）	2026-10-10T19:49:26Z			0
++seaborn/_core/typing.py	030d02b5	0	0	2026-10-10T19:38:39Z	D	typing.py[3 D D T]: Role:集中定义数据源、变量、顺序、归一化与调色板类型别名和默认/弃用哨兵 | Uses:- | API:供 seaborn 内部及公开签名使用的类型别名、default、deprecated | Constraints:DataSource 接受 dataframe 协议对象、Mapping 或 None；哨兵 repr 固定为 <default>/<deprecated>	2026-10-10T19:49:10Z			0
++seaborn/_docstrings.py	c2f298df	0	0	2026-10-10T19:38:39Z	G	_docstrings.py[3 U G T]: Role:提供可递归嵌套和格式化的文档字符串组件，并集中维护经典绘图 API 的共享参数、返回值与参见说明文本 | Uses:- | API:DocstringComponents；_core_docs | Constraints:from_nested_components 递归把嵌套字典转为组件；缺失格式键仍按 str.format 语义报错	2026-10-10T19:51:23Z			0
++seaborn/_marks/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	M	__init__.py[1 D M T]: Role:标记 objects 图形标记子包命名空间 | Uses:- | API:- | Constraints:文件为空，不在此重导出 Mark	2026-10-10T19:48:47Z			0
++seaborn/_marks/area.py	5ecaaa15	0	0	2026-10-10T19:38:39Z	M	area.py[7 C M V S]: Role:实现从基线到数值的 Area 与上下界区间 Band 多边形标记 | Uses:seaborn/_marks/base.py | API:Area、Band（经 seaborn.objects 公开） | Constraints:顶点按方向轴稳定排序并沿下界正向、上界反向闭合；Band 缺少显式 min/max 时按方向位置聚合完整范围；fill=False 仅将面透明；边线因裁剪补偿加倍；必须保持 Area 默认基线0及 Band 自动范围（TestArea、TestBand）	2026-10-10T19:48:47Z			0
++seaborn/_marks/bar.py	386fac24	0	0	2026-10-10T20:18:52Z	M	bar.py[8 C M V S]: Role:实现单条 Bar 与按轴汇集的高性能 Bars，包括共享矩形构造、样式解析、图例 artist、数据范围与容器处理 | Uses:seaborn/_marks/base.py,seaborn/_core/scales.py | API:Bar、Bars（经 seaborn.objects 公开）；BarBase._legend_artist（测试也调用） | Constraints:Bar 默认宽 .8，Bars 默认宽1且边宽自动；矩形端点按位置尺度的变换空间宽度换算以支持非线性轴；零值或非有限值高度条跳过；填充、边色透明度、线型和显式边宽须保持；Bars 按 Axes 合并 PatchCollection、手工更新 datalim 并设置值轴 sticky edges；自动边宽依条形显示宽度计算并不超过 patch.linewidth	2026-10-10T20:18:59Z			0
++seaborn/_marks/base.py	ca05340e	0	0	2026-10-10T19:38:39Z	M	base.py[9 C M M M]: Role:定义 Mark/Mappable 基础协议以及属性、颜色、方向和文档解析机制 | Uses:seaborn/_core/properties.py,seaborn/_core/scales.py,seaborn/_core/exceptions.py | API:Mark、Mappable、resolve_properties、resolve_color、document_properties（供 objects 标记实现） | Constraints:直接值优先于映射，映射值经 Scale 转换且错误包装为 PlotSpecError；依赖属性递归取默认，rc 默认实时读取；颜色自身 alpha 与独立 alpha 合成并对不可见值设 NaN；必须保持 DataFrame 输入返回等长数组而标量字典返回单值（TestMappable）	2026-10-10T19:48:47Z			0
++seaborn/_marks/dot.py	0b1da8bd	0	0	2026-10-10T19:38:39Z	M	dot.py[8 C M V S]: Role:实现适合点图的 Dot 与适合密集散点的 Dots PathCollection 标记 | Uses:seaborn/_marks/base.py | API:Dot、Dots（经 seaborn.objects 公开） | Constraints:pointsize 平方后传给 matplotlib 面积；marker 路径按样式缓存；空心 marker 强制无填充，Dot 用 stroke 描主线而 Dots 分离填色/描边透明度；坐标或参与语义缺失的行由绘图管线剔除；必须保持混合实心/空心的颜色与线宽规则（TestDot、TestDots）	2026-10-10T19:48:47Z			0
++seaborn/_marks/line.py	21d26bb0	0	0	2026-10-10T19:38:39Z	M	line.py[8 C M V M]: Role:实现按输入或方向排序的单路径/批量线、范围线与逐点短划标记 | Uses:seaborn/_marks/base.py | API:Path、Line、Paths、Lines、Range、Dash（经 seaborn.objects 公开） | Constraints:Path/Paths 保留输入顺序和组内 NaN，Line/Lines 按方向轴稳定排序并去除缺失坐标；Range 无 min/max 时按方向位置取范围；Dash 宽度沿方向轴居中；LineCollection 手工更新 datalim；必须保持实线 dash cap 跟随 solid cap 的兼容规则（TestPath.test_capstyle、TestPaths.test_capstyle）	2026-10-10T19:48:47Z			0
++seaborn/_marks/text.py	2cba90ec	0	0	2026-10-10T19:38:39Z	M	text.py[5 C M V T]: Role:把文本、颜色、字号、对齐与偏移映射为逐行 matplotlib Text artist | Uses:seaborn/_marks/base.py | API:Text（经 seaborn.objects 公开） | Constraints:行内 text 数据优先于 Mark 默认；偏移以 point 转换为 DPI 缩放且只沿对齐方向施加；添加后更新 axes 数据范围；必须保持居中时无变换偏移及 right/top/bottom 的符号方向（TestText）	2026-10-10T19:48:47Z			0
++seaborn/_statistics.py	64570a78	0	0	2026-10-10T19:38:39Z	S	_statistics.py[9 S S N L]: Role:为经典绘图管线提供 KDE、直方图、ECDF、点估计误差区间、加权聚合与 letter-value 分位统计变换 | Uses:seaborn/algorithms.py,seaborn/utils.py,seaborn/external/kde.py | API:KDE；Histogram；ECDF；EstimateAggregator；WeightedAggregator；LetterValues；_validate_errorbar_arg（绘图实现与测试也调用） | Constraints:scipy 缺失时 KDE 回退内置 gaussian_kde，但累计 KDE 构造即报错；缓存 support/bin_kws 后子集求值复用全局网格；Histogram 的 density 面积、probability/proportion 总和及 percent 总和分别归一为1、1、100，累计 density/frequency 先乘箱宽/面积；ECDF 在 -inf 前置零点且双变量未实现；EstimateAggregator 的 ci/pi/se/sd 默认级别分别95/95/1/1，单观测区间为 NaN；WeightedAggregator 只允许 mean 与 bootstrap ci；本地验证盲区：累计 KDE 在无 scipy 时跳过、与 statsmodels 的 ECDF 对照在依赖缺失时跳过	2026-10-10T19:53:13Z			0
++seaborn/_stats/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	S	__init__.py[1 D S T]: Role:标记 objects 统计变换子包命名空间 | Uses:- | API:- | Constraints:文件为空，不在此重导出变换类	2026-10-10T19:48:21Z			0
++seaborn/_stats/aggregation.py	0fc9892b	0	0	2026-10-10T19:38:39Z	S	aggregation.py[8 C S N S]: Role:实现按方向轴分组的通用聚合、点估计与误差区间变换 | Uses:seaborn/_stats/base.py,seaborn/_statistics.py,seaborn/_core/groupby.py | API:Agg、Est（经 seaborn.objects 公开） | Constraints:Agg/Est 聚合方向轴的另一变量并丢弃空估计；存在 weight 时 Est 走 WeightedAggregator；单观测无区间时上下界回填点估计；必须保持相同 seed 的 bootstrap 结果一致且加权均值使用权重（test_seed、test_weighted_mean）	2026-10-10T19:48:21Z			0
++seaborn/_stats/base.py	beb28b04	0	0	2026-10-10T19:38:39Z	S	base.py[8 C S T]: Role:定义无状态可调用统计变换基类及参数、分组变量校验助手 | Uses:seaborn/_core/groupby.py,seaborn/_core/scales.py | API:Stat（由 seaborn.objects 间接公开） | Constraints:Stat 子类只由初始化参数持有状态；未知选项抛 ValueError，分组参数引用缺失变量时发 UserWarning	2026-10-10T19:48:21Z			0
++seaborn/_stats/counting.py	b1a86312	0	0	2026-10-10T19:38:39Z	S	counting.py[8 C S N M]: Role:实现分组计数与可分箱、归一化、累积的直方图统计变换 | Uses:seaborn/_stats/base.py,seaborn/_core/groupby.py,seaborn/_core/scales.py | API:Count、Hist（经 seaborn.objects 公开） | Constraints:名义/离散数据以整数为中心建单位宽箱；probability/proportion 总和为1、percent 为100、density 面积为1、frequency 面积为观测数；common_bins/common_norm 可为布尔或分组变量列表，缺失变量发警告；必须保持累计 density/proportion 终值为1（TestHist）	2026-10-10T19:48:21Z			0
++seaborn/_stats/density.py	f2441096	0	0	2026-10-10T19:38:39Z	S	density.py[8 C S N M]: Role:实现单变量分组 KDE 的带宽、支持网格、权重、共享归一与累计估计 | Uses:seaborn/_stats/base.py,seaborn/_core/groupby.py,seaborn/external/kde.py | API:KDE（经 seaborn.objects 公开） | Constraints:优先 scipy KDE，缺失时回退内置实现但累计模式要求 scipy；少于两点或奇异协方差返回空结果；common_grid/common_norm 仅接受 bool 或字符串列表；默认跨组面积和为1，独立归一时每组面积为1；必须保持 gridsize=None 使用原始点且缺失值/权重被丢弃（TestKDE）	2026-10-10T19:48:21Z			0
++seaborn/_stats/order.py	48ba3387	0	0	2026-10-10T19:38:39Z	S	order.py[5 C S N T]: Role:按组将观测替换为指定百分位值并保留百分位标签 | Uses:seaborn/_stats/base.py,seaborn/_core/groupby.py,seaborn/utils.py | API:Perc（经 seaborn.objects 公开） | Constraints:k 为整数时含 0 与100生成等距百分位，为列表时原样使用；忽略缺失值；兼容 numpy<1.22 的 interpolation 参数；必须保持方向轴决定被聚合的另一坐标（TestPerc.test_orientation）	2026-10-10T19:48:21Z			0
++seaborn/_stats/regression.py	f1276928	0	0	2026-10-10T19:38:39Z	S	regression.py[5 C S N T]: Role:实现按组多项式拟合并在均匀网格上输出预测曲线 | Uses:seaborn/_stats/base.py,seaborn/_core/groupby.py | API:PolyFit（经 seaborn.objects 公开）；OLSFit 占位 | Constraints:先丢弃任一坐标缺失的行；唯一 x 数不超过阶数时输出空组；每组独立生成 gridsize 点；OLSFit 尚无实现	2026-10-10T19:48:21Z			0
++seaborn/_testing.py	1fec902c	0	0	2026-10-10T19:38:39Z	G	_testing.py[3 U G T]: Role:提供 seaborn 测试套件复用的 matplotlib artist、图例、绘图集合与颜色断言辅助函数 | Uses:- | API:assert_array_equal；assert_array_almost_equal；assert_equal；assert_plots_equal；assert_colors_equal；assert_legend_contents；assert_artists_equal | Constraints:绘图比较按 artist 类型分别核对数据、样式和变换；颜色比较统一转为 RGB(A) 数组	2026-10-10T19:51:23Z			0
++seaborn/algorithms.py	60866e15	0	0	2026-10-10T19:38:39Z	S	algorithms.py[8 S S N B S]: Role:对一组等长数组执行普通或按抽样单元分层的有放回 bootstrap，并支持向量化函数或逐次调用统计量 | Uses:- | API:bootstrap(*args, **kwargs) | Constraints:所有输入必须同长度且至少一个；默认 n_boot=10000、axis=0、seed=None；func 为字符串时调用对应 numpy 统计量，func 可调用时逐次计算；random_seed 已弃用	2026-10-10T19:51:23Z			0
++seaborn/axisgrid.py	a3dd1c6c	0	0	2026-10-10T19:38:39Z	A	axisgrid.py[9 E A V L L]: Role:实现分面、成对变量和联合/边际子图网格，以及 pairplot、jointplot 两个经典 figure-level 快捷接口和通用图例布局 | Uses:seaborn/_base.py,seaborn/_core/data.py,seaborn/utils.py,seaborn/palettes.py,seaborn/distributions.py | API:FacetGrid；PairGrid；JointGrid；pairplot；jointplot；Grid（测试和其他绘图模块也调用） | Constraints:所有网格自行创建 Figure，figure-level jointplot 忽略 ax 并警告；Grid/各映射与设置方法除 pipe 外返回 self，savefig 默认 tight bbox，外置图例扩宽 Figure 并收紧布局矩形。FacetGrid 的 row/col/hue 级别按 categorical_order 固定，col_wrap 与 row 不兼容且忽略 gridspec_kws；map 向普通函数传位置向量并切换当前轴，map_dataframe 传列名和 data，向 seaborn 函数则改为语义关键字和 ax；空分面不绘制，dropna 控制分面与绘图缺失过滤，直接调用 axes-level 语义函数时须由调用者同步跨分面映射。共享轴只在外缘显示标签，ax 属性仅单分面可用，margin_titles 把行标题放最右侧。PairGrid 默认只选数值列并排除 hue，显式 vars 可包含 hue，空行/列变量报错；corner 移除上三角轴，diag 使用独立 twinx 并可共享 y；含 hue 参数的函数一次接收完整 hue，否则网格逐级调用且保留空级，图例由各轴汇总。JointGrid 始终方形并让边际轴共享数据轴，hue 仅能交给支持 hue 的绘图函数；非 seaborn 边际函数按 orientation/vertical 签名定向。pairplot 仅接受 pandas DataFrame，diag auto 随 kind/hue 选择，reg marker 数须与 hue 级别一致；jointplot 仅支持 scatter/hist/hex/kde/reg/resid，hex/reg/resid 禁 hue，hex 强制去缺失，成对 bins 参数拆给两边际轴且不得修改输入 kw 字典。必须保持 FacetGrid/PairGrid/JointGrid 的轴形状、映射数据、标签/标题、图例、颜色、共享策略、refline 和快捷函数与对应 axes-level 图形一致（TestFacetGrid、TestPairGrid、TestJointGrid、TestJointPlot）；本地验证盲区：dataframe interchange 用例在 pandas 无 interchange 时跳过，pairplot marker 图例在 matplotlib<3.7 因上游缺陷跳过	2026-10-10T19:56:14Z			0
++seaborn/categorical.py	166cb370	0	0	2026-10-10T19:38:39Z	C	categorical.py[9 E C N V M L]: Role:实现经典分类散点、分布、估计和计数图，统一分类/原生坐标、hue 分组、统计误差、artist 容器及 FacetGrid figure-level 调度 | Uses:seaborn/_base.py,seaborn/_statistics.py,seaborn/_stats/density.py,seaborn/axisgrid.py,seaborn/utils.py | API:stripplot；swarmplot；boxplot；violinplot；boxenplot；pointplot；barplot；countplot；catplot；Beeswarm、BoxPlotContainer、_CategoricalPlotter（测试也调用） | Constraints:所有 axes-level 接口定向并返回 Axes，空输入不添 artist；默认把分组轴转成字符串固定在0..n-1，native_scale=True 才保留数值/日期单位，元素宽度取原生最小间距，统计和 dodge/宽度先在轴变换空间计算再反变换，因此 log 轴保持等变换宽度；分类 y 轴倒置并关闭分组轴网格，多次调用须扩展已有分类范围。宽表以列为类别/hue，显式 color 合并为单色；palette 无 hue、color 生成渐变、gray 自动边色及旧 scale/bw/join/err 参数保留兼容警告。dodge='auto' 仅在 orient×hue 会重叠时启用，gap 按比例缩宽；冗余 hue 和宽表默认不显示图例，legend=True 可强制，数值 hue auto 简略。strip 仅沿分组轴均匀 jitter，swarm 在显示坐标按 marker 半径避免重叠、限制于0.8原生宽并在越界比例超阈值时警告。box 的四分位/须/异常值来自 matplotlib 且 BoxPlotContainer 暴露成组 artist；violin 用 KDE，density_norm 仅 area/count/width，common_norm 控制跨 violin 标准化，split 可对任意 hue 级交替半边，零方差退化成线，inner 仅 box/quart/stick/point/None；boxen 的 k_depth 与 width_method 由 LetterValues 约束。bar/point 在变换空间按分类和 hue 聚合并绘误差，weights 时使用 WeightedAggregator，point 的 marker/linestyle 可逐 hue；capsize 相对原生间距且 dodge bar 分摊；countplot 只能给 x/y 之一，stat 仅 count/percent/probability/proportion且后3种对全图归一。catplot 总是新建并返回 FacetGrid、忽略 ax 并警告，kind 仅 strip/swarm/box/violin/boxen/point/bar/count，保持输入 data 供后续 map，非 bar/point 的 weights 仅警告无效。必须保持各 axes-level 图与同 kind catplot 单分面几何/颜色/图例一致，分类顺序、空组合 artist、原生日期/log 尺度、fill/linecolor、统计误差与 artist kwargs 透传一致（TestStripPlot、TestSwarmPlot、TestBoxPlot、TestBoxenPlot、TestViolinPlot、TestBarPlot、TestPointPlot、TestCountPlot、TestCatPlot、TestBeeswarm、TestBoxPlotContainer）；本地验证盲区：pointplot 图例 marker/linestyle 属性测试在 matplotlib<3.6 跳过	2026-10-10T19:57:29Z			0
++seaborn/cm.py	44d24702	0	0	2026-10-10T19:38:39Z	P	cm.py[5 D P V L]: Role:保存 rocket、mako、icefire、vlag、flare、crest 六组连续色图采样，并构造和注册各自正反向 matplotlib 色图 | Uses:seaborn/_compat.py | API:rocket、mako、icefire、vlag、flare、crest 及对应 _r ListedColormap | Constraints:导入模块即向 matplotlib 注册十二个名称；反向色图必须严格反转原采样表	2026-10-10T19:52:21Z			0
++seaborn/colors/__init__.py	f3420d14	0	0	2026-10-10T19:38:39Z	P	__init__.py[3 E P T]: Role:从颜色数据子包重导出 XKCD 与 Crayola 命名颜色字典 | Uses:seaborn/colors/xkcd_rgb.py,seaborn/colors/crayons.py | API:xkcd_rgb；crayons | Constraints:-	2026-10-10T19:52:21Z			0
++seaborn/colors/crayons.py	5c281c8a	0	0	2026-10-10T19:38:39Z	P	crayons.py[3 D P S]: Role:提供 Crayola 标准颜色名称到十六进制 RGB 值的静态映射 | Uses:- | API:crayons（经 seaborn.colors 与顶层包公开） | Constraints:键保留官方大小写和标点形式	2026-10-10T19:52:21Z			0
++seaborn/colors/xkcd_rgb.py	287f0acc	0	0	2026-10-10T19:38:39Z	P	xkcd_rgb.py[3 D P L]: Role:提供 XKCD 颜色调查名称到十六进制 RGB 值的静态映射 | Uses:- | API:xkcd_rgb（经 seaborn.colors 与顶层包公开） | Constraints:键使用调查原始的小写名称及拼写变体	2026-10-10T19:52:21Z			0
++seaborn/distributions.py	44d65348	0	0	2026-10-10T19:38:39Z	F	distributions.py[9 E F N V L]: Role:实现直方图、核密度、经验分布和 rug 的 axes-level 绘制、FacetGrid figure-level 分面接口及兼容性 distplot | Uses:seaborn/_base.py,seaborn/_statistics.py,seaborn/_stats/counting.py,seaborn/axisgrid.py,seaborn/utils.py | API:histplot；kdeplot；ecdfplot；rugplot；displot；distplot；_DistributionPlotter、_freedman_diaconis_bins（网格与测试也调用） | Constraints:axes-level 函数接受/返回目标 Axes，空数据仍返回 Axes；displot 总是创建并返回 FacetGrid、忽略 ax 并警告，kind 仅 hist/kde/ecdf，且保留原 data 列与匿名向量分面列。所有统计先在坐标变换空间计算再反变换支持/箱边，log 尺度下宽度和网格因此为乘法间隔。宽表以列作 hue。hist 的 layer/dodge/stack/fill 必须共享相应箱边并正确归一；count 禁 common_norm，normalized stat 的 common_norm 按观测数或权重缩放；加权 auto bins 回退10并警告；categorical 默认离散单位箱；KDE 叠加曲线面积缩放至直方图面积。双变量 hist 用 pcolormesh，thresh/pthresh 屏蔽低格，pmax 定饱和，common_norm 同时控制跨组颜色范围，阈值存在时清空 sticky edges并恢复网格状态。KDE 只接受数值/日期，奇异子集警告或静默跳过；stack/fill 强制 common_grid，common_norm 令所有子集总面积为1，独立时每组为1；双变量 levels 是[0,1]概率质量等高比例，hue 时忽略 cmap/colors并警告，累计 KDE 需要 scipy。ECDF 仅单变量，x 为 steps-post、y 为 steps-pre，proportion 边界0/1、count 边界0/n，双变量抛 NotImplementedError；log 下首支持点处理为负无穷。rug 用混合数据/轴坐标的单个 LineCollection并可扩边距。distplot 已弃用且每次警告，仍组合 hist/KDE/rug/拟合并返回 Axes。必须保持宽长输入等价、颜色循环、hue 逆序 artist、统计归一、权重、日期/log 轴、图例、matplotlib kwargs 透传及 displot 与对应 axes-level 单图一致（TestRugPlot、TestKDEPlotUnivariate、TestKDEPlotBivariate、TestHistPlotUnivariate、TestHistPlotBivariate、TestECDFPlotUnivariate、TestDisPlot、TestDistPlot）；本地验证盲区：累计 KDE 的有/无 scipy 分支按依赖条件互斥跳过	2026-10-10T19:56:47Z			0
++seaborn/external/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	V	__init__.py[1 D V T]: Role:标记 seaborn 内置第三方兼容实现的子包命名空间 | Uses:- | API:- | Constraints:文件为空，不在此重导出 vendored 接口	2026-10-10T19:52:46Z			0
++seaborn/external/appdirs.py	2e02b5fc	0	0	2026-10-10T19:38:39Z	V	appdirs.py[3 U V C M]: Role:按 Windows、macOS 与 XDG 约定计算应用的用户缓存目录，并提供多种 Windows shell 文件夹查询回退 | Uses:- | API:user_cache_dir；__version__ | Constraints:vendored appdirs 1.4.4 的精简实现；Windows opinion=True 会附加 Cache，version 仅在有 appname 时附加	2026-10-10T19:52:46Z			0
++seaborn/external/docscrape.py	a5960bcf	0	0	2026-10-10T19:38:39Z	V	docscrape.py[5 U V C L]: Role:解析 NumPy 风格文档字符串为结构化节区，并为函数与类重新渲染签名、参数、参见、索引和成员文档 | Uses:- | API:Reader；ParseError；Parameter；NumpyDocString；FunctionDoc；ClassDoc；strip_blank_lines；indent；dedent_lines；header | Constraints:Returns 与 Yields 不得并存，Receives 必须伴随 Yields；重复非空节区报错；FunctionDoc 无显式签名时从 inspect 推导；ClassDoc 可按配置包含、排除或隐藏继承成员	2026-10-10T19:52:46Z			0
++seaborn/external/husl.py	63a2cf52	0	0	2026-10-10T19:38:39Z	V	husl.py[5 U V N M]: Role:在 RGB、HEX、XYZ、LUV、LCH 与 HUSL/HUSLp 色彩空间间转换并计算给定亮度和色相的最大色度 | Uses:- | API:husl_to_rgb；husl_to_hex；rgb_to_husl；hex_to_husl；huslp_to_rgb；huslp_to_hex；rgb_to_huslp；hex_to_huslp；lch_to_rgb；rgb_to_lch；max_chroma；max_chroma_pastel | Constraints:采用硬编码 D65 白点和 sRGB 传递函数；极黑/极白亮度强制零色度；rgb_prepare 对超出容差的通道报错并把微小越界钳制到 0–1	2026-10-10T19:52:46Z			0
++seaborn/external/kde.py	c820a980	0	0	2026-10-10T19:38:39Z	V	kde.py[7 S V N M]: Role:提供无需 scipy 编译组件的加权单变量或多变量高斯核密度估计、带宽选择与密度求值 | Uses:- | API:gaussian_kde | Constraints:dataset 形状为维度×观测且至少两个元素；权重必须一维、与观测数一致并归一；带宽只接受 None、scott、silverman、标量或可调用对象；这是 scipy gaussian_kde 的纯 Python 子集，不含积分、重采样与 logpdf	2026-10-10T19:52:46Z			0
++seaborn/external/version.py	3e0cdfed	0	0	2026-10-10T19:38:39Z	V	version.py[5 U V C L]: Role:按 PEP 440 解析、规范化、比较和展示版本字符串 | Uses:- | API:Version；InvalidVersion；VERSION_PATTERN | Constraints:VERSION_PATTERN 为可复用而故意不锚定，Version 自身用首尾锚定正则；比较忽略 release 尾随零并遵循 pre/post/dev/local 排序；无效输入抛 InvalidVersion；vendored packaging 实现不支持 LegacyVersion	2026-10-10T19:52:46Z			0
++seaborn/matrix.py	1e905eda	0	0	2026-10-10T19:38:39Z	H	matrix.py[8 E H N V L]: Role:实现带注释和遮罩的矩阵热图、层次聚类树及带行列颜色轨道的聚类热图布局 | Uses:seaborn/cm.py,seaborn/axisgrid.py,seaborn/_compat.py,seaborn/utils.py | API:heatmap；clustermap；ClusterGrid、dendrogram（测试和高级组合也调用） | Constraints:遮罩必须与数据同形并并入缺失值，robust 色限取2/98百分位，中心化色图保留 bad/under/over；heatmap 为 axes-level 并返回 Axes、反转 y 轴；clustermap 需要 scipy、返回新 ClusterGrid，并以同一聚类次序重排数据、遮罩、注释、标签和颜色轨道，z_score 与 standard_scale 互斥；带索引的行列颜色须按数据标签对齐，缺失颜色填白，混合索引类型报错；fastcluster 可选且回退 scipy，大矩阵回退会警告；square 在 clustermap 中警告并忽略；必须保持无 scipy 时 clustermap、ClusterGrid、dendrogram 抛 RuntimeError，关闭聚类时保留原数据顺序且隐藏树轴刻度，cbar_pos=None 不创建色条轴（TestHeatmap、TestDendrogram、TestClustermap）；本地验证盲区：scipy 缺失分支与 fastcluster 专用路径按依赖条件跳过	2026-10-10T19:55:15Z			0
++seaborn/miscplot.py	5368d9e8	0	0	2026-10-10T19:38:39Z	P	miscplot.py[3 E P V T]: Role:实现调色板色块预览与下载随机狗图像的便捷绘图函数 | Uses:- | API:palplot(pal, size=1)；dogplot(grown_up=False) | Constraints:palplot 创建新 Figure 且按颜色数设宽度；dogplot 依赖网络下载外部图像	2026-10-10T19:51:23Z			0
++seaborn/objects.py	2b062599	0	0	2026-10-10T19:38:39Z	O	objects.py[9 E O T]: Role:作为声明式接口门面统一重导出 Plot、Mark、Stat、Move、Scale 及全部具体组合类 | Uses:seaborn/_core/plot.py,seaborn/_marks/,seaborn/_stats/,seaborn/_core/moves.py,seaborn/_core/scales.py | API:Plot；Mark、Area、Band、Bar、Bars、Dot、Dots、Dash、Line、Lines、Path、Paths、Range、Text；Stat、Agg、Est、Count、Hist、KDE、Perc、PolyFit；Move、Dodge、Jitter、Norm、Shift、Stack；Scale、Boolean、Continuous、Nominal、Temporal | Constraints:命名空间除双下划线名外只暴露 Plot/Mark/Stat/Move/Scale 子类；接口为实验性组合 API	2026-10-10T19:50:30Z			0
++seaborn/palettes.py	77504427	0	0	2026-10-10T19:38:39Z	P	palettes.py[8 E P V L]: Role:解析 seaborn 调色板协议并生成、转换、临时应用或注册离散颜色序列和连续色图 | Uses:seaborn/external/husl.py,seaborn/utils.py,seaborn/colors/,seaborn/_compat.py,seaborn/rcmod.py | API:color_palette；hls_palette；husl_palette；mpl_palette；dark_palette；light_palette；diverging_palette；blend_palette；xkcd_palette；crayon_palette；cubehelix_palette；set_color_codes | Constraints:color_palette(None) 读取当前循环，非 cmap 结果始终为指定长度的 RGB 元组列表且短色板循环；定性色图最多返回其固有颜色数；字符串支持 ch:/light:/dark:/blend: 与 _r；jet 明确拒绝；_ColorPalette 上下文退出须恢复原循环；set_color_codes 修改 matplotlib 全局单字母色码	2026-10-10T19:52:21Z			0
++seaborn/rcmod.py	db95d750	0	0	2026-10-10T19:38:39Z	P	rcmod.py[8 E P V M]: Role:通过 matplotlib rcParams 组合、查询、全局应用或临时应用 seaborn 的样式、缩放上下文和颜色循环 | Uses:seaborn/palettes.py,seaborn/__init__.py | API:set_theme；set；reset_defaults；reset_orig；axes_style；set_style；plotting_context；set_context；set_palette | Constraints:style 与 context 只接受各自白名单 rc 键且互不重叠；axes_style/plotting_context 返回的字典同时可作上下文管理器或装饰器并在退出后恢复原值；reset_orig 恢复包导入时快照；set_theme 最后的 rc 可覆盖组合结果；本地验证盲区：Verdana 字体相关行为在未安装该字体时跳过	2026-10-10T19:52:56Z			0
++seaborn/regression.py	21be2d82	0	0	2026-10-10T19:38:39Z	Q	regression.py[8 E Q N V L]: Role:拟合并绘制线性、多项式、对数、逻辑、稳健或 LOWESS 模型及残差，并提供分面回归图 | Uses:seaborn/algorithms.py,seaborn/utils.py,seaborn/axisgrid.py | API:regplot；residplot；lmplot | Constraints:regplot/residplot 为 axes-level 返回 Axes，lmplot 要求 data 并返回新 FacetGrid；order>1、logistic、robust、lowess、logx 互斥，后三类依赖 statsmodels且 lowess 无置信带；普通线性/多项式/对数模型的 CI 由可按 units 分层的 bootstrap 计算，固定 seed 可复现；x_bins 只改变散点估计而回归仍用原数据；jitter 只影响显示不影响拟合；truncate 决定回归网格限于数据还是轴范围；单观测自动禁用拟合；statsmodels 完全分离产生全 NaN 预测；lmplot 的 markers 数必须为1或等于 hue 层级数，hue 与分面变量相同时不重复图例；本地验证盲区：statsmodels 缺失时模型对照、逻辑/稳健/LOWESS 与 LOWESS 残差测试跳过	2026-10-10T19:54:20Z			0
++seaborn/relational.py	f9e6f8ef	0	0	2026-10-10T19:38:39Z	R	relational.py[9 E R V L]: Role:实现经典散点图、折线统计图及其基于 FacetGrid 的 figure-level 关系图接口，统一 hue/size/style 语义与图例 | Uses:seaborn/_base.py,seaborn/_statistics.py,seaborn/axisgrid.py,seaborn/utils.py,seaborn/_compat.py | API:scatterplot；lineplot；relplot | Constraints:axes-level 接口返回并可定向 Axes，relplot 总是新建并返回 FacetGrid且传 ax 只警告并忽略；宽表仅使用数值列并以列映射 hue/style；lineplot 默认按方向轴聚合均值和95% bootstrap CI，units 要求 estimator=None，weights 只支持加权 mean/ci；统计在轴变换空间聚合后反变换绘制；err_style 仅 band/bars，orient 仅 x/y；scatter 丢弃坐标或语义缺失行，显式颜色数组与 matplotlib 短参数必须透传；figure-level 先用全数据冻结语义映射以保证跨分面一致，并恢复 g.data 的原变量列；必须保持 axes/figure-level 结果几何与语义一致、数值简略图例不使用 offset、未填充 marker 不触发边色警告（TestLinePlotter、TestScatterPlotter、TestRelationalPlotter）	2026-10-10T19:54:05Z			0
++seaborn/utils.py	4c8e60bc	0	0	2026-10-10T19:38:39Z	G	utils.py[8 U G V L]: Role:集中提供颜色处理、坐标轴外观、图例重建、示例数据下载缓存、文本/版本兼容与经典绘图辅助函数 | Uses:seaborn/_core/typing.py,seaborn/external/version.py,seaborn/external/appdirs.py,seaborn/axisgrid.py,seaborn/_compat.py | API:desaturate；saturate；set_hls_values；move_legend；despine；get_dataset_names；get_data_home；load_dataset；ci_to_errsize、remove_na、get_color_cycle、axis_ticklabels_overlap、axes_ticklabels_overlap、locator_to_legend_entries、relative_luminance、to_utf8、_check_argument、_assign_default_kwargs、_draw_figure、_deprecate_ci、_version_predates（绘图实现与测试也调用） | Constraints:desaturate 比例必须在0–1；move_legend 通过复制句柄/标签重建图例并保持 Grid 对新图例的引用，替换 labels 必须等长；get_data_home 优先显式参数、SEABORN_DATA、平台缓存目录并创建目录；load_dataset 只接受示例名，缓存缺失时先在线校验名称，并对特定数据集设置分类顺序或日期类型；_disable_autolayout 必须 finally 恢复全局 rc；本地验证盲区：数据集名称、全部远程数据和缓存下载测试在网络不可达时跳过	2026-10-10T19:53:31Z			0
++seaborn/widgets.py	14ceff13	0	0	2026-10-10T19:38:39Z	P	widgets.py[3 E P V L]: Role:用 ipywidgets 交互控件预览并返回 ColorBrewer、深浅、发散与 cubehelix 调色板或可原位更新的连续色图 | Uses:seaborn/palettes.py,seaborn/miscplot.py,seaborn/rcmod.py | API:choose_colorbrewer_palette；choose_cubehelix_palette；choose_dark_palette；choose_light_palette；choose_diverging_palette | Constraints:缺少 ipywidgets 时调用交互入口抛 ImportError；定性色板不得请求 cmap；as_cmap 返回同一可变色图并由回调原位更新 256 项 LUT，离散模式返回由回调原位填充的列表	2026-10-10T19:53:41Z			0
++setup.cfg	173be8ff	0	0	2026-10-10T19:38:39Z	G	setup.cfg[5 X G T]: Role:集中配置 flake8、mypy 与 coverage 的检查边界 | Uses:seaborn/_core/,seaborn/_marks/,seaborn/_stats/ | API:- | Constraints:flake8 行宽 88 并排除 cm.py/external；mypy 忽略缺失第三方类型；coverage 排除 widgets、external、colors、cm 等实现	2026-10-10T19:47:10Z			0
++tests/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	G	__init__.py[1 T G T]: Role:标记 tests 为 Python 测试包 | Uses:- | API:- | Constraints:文件为空，无运行逻辑	2026-10-10T19:51:23Z			0
++tests/_core/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	D	__init__.py[1 T D T]: Role:标记 objects 核心测试包 | Uses:- | API:- | Constraints:文件为空	2026-10-10T19:49:10Z			0
++tests/_core/test_data.py	f2b19740	0	0	2026-10-10T19:38:39Z	D	test_data.py[7 T D M]: Role:验证 PlotData 的列/索引/向量解析、索引对齐、join 继承、异常和 dataframe 交换协议 | Uses:seaborn/_core/data.py | API:- | Constraints:交换协议成功/失败分支按 pandas 能力条件互斥跳过	2026-10-10T19:49:10Z			0
++tests/_core/test_groupby.py	a1196be1	0	0	2026-10-10T19:38:39Z	D	test_groupby.py[5 T D S]: Role:验证 GroupBy 的声明顺序、笛卡尔聚合、无分组与分组 apply 及列顺序 | Uses:seaborn/_core/groupby.py | API:- | Constraints:-	2026-10-10T19:49:10Z			0
++tests/_core/test_moves.py	0f0ee087	0	0	2026-10-10T19:38:39Z	O	test_moves.py[7 T O M]: Role:验证 Jitter、Dodge、Stack、Shift、Norm 的位置、宽度、分面、缺失值和随机性契约 | Uses:seaborn/_core/moves.py,seaborn/_core/groupby.py,seaborn/_core/rules.py | API:- | Constraints:-	2026-10-10T19:49:26Z			0
++tests/_core/test_plot.py	602957e1	0	0	2026-10-10T19:38:39Z	O	test_plot.py[9 T O L]: Role:端到端验证 objects Plot 的构造、图层、尺度、编译、分面配对、布局、标签图例、异常和富显示契约 | Uses:seaborn/_core/plot.py,seaborn/_core/scales.py,seaborn/_core/moves.py,seaborn/_marks/base.py,seaborn/_stats/base.py | API:- | Constraints:部分尚未定案行为标记 xfail；dataframe 交换、matplotlib 布局/标签细节按依赖版本条件跳过或分支	2026-10-10T19:50:30Z			0
++tests/_core/test_properties.py	243d7f1b	0	0	2026-10-10T19:38:39Z	O	test_properties.py[7 T O L]: Role:验证可视属性的尺度推断、色板、对象/区间映射、标准化、警告与错误边界 | Uses:seaborn/_core/properties.py,seaborn/_core/scales.py,seaborn/palettes.py,seaborn/_compat.py | API:- | Constraints:-	2026-10-10T19:49:54Z			0
++tests/_core/test_rules.py	ba8649ac	0	0	2026-10-10T19:38:39Z	D	test_rules.py[5 T D S]: Role:验证变量类型判定、布尔策略与分类级别顺序 | Uses:seaborn/_core/rules.py | API:- | Constraints:-	2026-10-10T19:49:10Z			0
++tests/_core/test_scales.py	d265b6b1	0	0	2026-10-10T19:38:39Z	O	test_scales.py[8 T O L]: Role:验证连续、名义、时间与布尔尺度的转换、归一、调色、刻度标签、缺失与收尾行为 | Uses:seaborn/_core/scales.py,seaborn/_core/properties.py,seaborn/_core/plot.py,seaborn/palettes.py,seaborn/utils.py | API:- | Constraints:数值名义顺序中 int/float 混合用例标记为 xfail；minor tick 期望按 matplotlib 3.8 前后版本分支	2026-10-10T19:49:54Z			0
++tests/_core/test_subplots.py	26651bd7	0	0	2026-10-10T19:38:39Z	O	test_subplots.py[7 T O L]: Role:验证 subplot facet/pair/wrap 冲突、网格维度、共享轴、边界与轴变量元数据 | Uses:seaborn/_core/subplots.py | API:- | Constraints:-	2026-10-10T19:49:26Z			0
++tests/_marks/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	M	__init__.py[1 T M T]: Role:标记图形标记测试包 | Uses:- | API:- | Constraints:文件为空	2026-10-10T19:48:47Z			0
++tests/_marks/test_area.py	4d651116	0	0	2026-10-10T19:38:39Z	M	test_area.py[5 T M S]: Role:验证 Area/Band 顶点、默认与映射样式、空心及自动范围 | Uses:seaborn/_marks/area.py,seaborn/_core/plot.py | API:- | Constraints:-	2026-10-10T19:48:47Z			0
++tests/_marks/test_base.py	4f9f6988	0	0	2026-10-10T19:38:39Z	M	test_base.py[5 T M S]: Role:验证 Mappable 默认、rc/依赖/尺度解析及颜色与 alpha 合成 | Uses:seaborn/_marks/base.py | API:- | Constraints:-	2026-10-10T19:48:47Z			0
++tests/_marks/test_dot.py	6217c142	0	0	2026-10-10T19:38:39Z	M	test_dot.py[5 T M S]: Role:验证 Dot/Dots 的坐标、颜色、实心空心、尺寸、描边与缺失语义 | Uses:seaborn/_marks/dot.py,seaborn/_core/plot.py,seaborn/palettes.py | API:- | Constraints:-	2026-10-10T19:48:47Z			0
++tests/_marks/test_line.py	e86ae908	0	0	2026-10-10T19:38:39Z	M	test_line.py[5 T M L]: Role:验证 Path/Line/Paths/Lines/Range/Dash 的排序、分组、样式、范围与 dodge 几何 | Uses:seaborn/_marks/line.py,seaborn/_core/plot.py,seaborn/_core/moves.py | API:- | Constraints:-	2026-10-10T19:48:47Z			0
++tests/_marks/test_text.py	f0113ea0	0	0	2026-10-10T19:38:39Z	M	test_text.py[3 T M S]: Role:验证 Text 的内容、样式映射、对齐、身份字号与 DPI 偏移 | Uses:seaborn/_marks/text.py,seaborn/_core/plot.py | API:- | Constraints:-	2026-10-10T19:48:47Z			0
++tests/_stats/__init__.py	00000000	0	0	2026-10-10T19:38:39Z	S	__init__.py[1 T S T]: Role:标记统计变换测试包 | Uses:- | API:- | Constraints:文件为空	2026-10-10T19:48:21Z			0
++tests/_stats/test_aggregation.py	7e112f9d	0	0	2026-10-10T19:38:39Z	S	test_aggregation.py[5 T S S]: Role:验证 Agg 与 Est 的分组聚合、误差区间、权重和随机种子契约 | Uses:seaborn/_stats/aggregation.py,seaborn/_core/groupby.py | API:- | Constraints:-	2026-10-10T19:48:21Z			0
++tests/_stats/test_counting.py	191d1455	0	0	2026-10-10T19:38:39Z	S	test_counting.py[5 T S M]: Role:验证 Count/Hist 的分箱参数、统计归一、累计及共享分组规则 | Uses:seaborn/_stats/counting.py,seaborn/_core/groupby.py | API:- | Constraints:-	2026-10-10T19:48:21Z			0
++tests/_stats/test_density.py	c764b5ce	0	0	2026-10-10T19:38:39Z	S	test_density.py[5 T S M]: Role:验证 objects KDE 的网格、带宽、归一、累计、奇异与缺失数据行为 | Uses:seaborn/_stats/density.py,seaborn/_core/groupby.py,seaborn/_compat.py | API:- | Constraints:累计测试在缺少 scipy 时跳过	2026-10-10T19:48:21Z			0
++tests/_stats/test_order.py	c0d3cda9	0	0	2026-10-10T19:38:39Z	S	test_order.py[3 T S T]: Role:验证 Perc 的整数/列表百分位、方向、插值方法、分组和缺失值处理 | Uses:seaborn/_stats/order.py,seaborn/utils.py | API:- | Constraints:-	2026-10-10T19:48:21Z			0
++tests/_stats/test_regression.py	f5ebc6cc	0	0	2026-10-10T19:38:39Z	S	test_regression.py[3 T S T]: Role:验证 PolyFit 的无分组/分组预测网格、多项式形状与缺失值等价性 | Uses:seaborn/_stats/regression.py,seaborn/_core/groupby.py | API:- | Constraints:-	2026-10-10T19:48:21Z			0
++tests/conftest.py	ad1c213d	0	0	2026-10-10T19:38:39Z	G	conftest.py[7 T G M]: Role:为全测试套件提供确定性随机源、自动关闭 Figure 以及长表、宽表、空值、对象类型和 dataframe 交换协议数据夹具 | Uses:- | API:pytest 夹具 close_figs、random_seed、rng、wide_df、wide_array、flat_series、flat_array、flat_list、flat_data、wide_list_of_series、wide_list_of_arrays、wide_list_of_lists、wide_dict_of_series、wide_dict_of_arrays、wide_dict_of_lists、long_df、long_dict、repeated_df、null_df、object_df、null_series、mock_long_df | Constraints:每项测试后关闭全部 Figure；全局 numpy 随机种子和 rng 夹具使用不同固定种子；long_df 同时含数值、分类、日期、时间与显式重排 categorical 列	2026-10-10T19:53:41Z			0
++tests/test_algorithms.py	04c06462	0	0	2026-10-10T19:38:39Z	S	test_algorithms.py[5 T S N B S]: Role:验证 bootstrap 的默认形状、可复现随机性、字符串与可调用统计量、多数组、分层单元抽样、弃用参数和错误输入契约 | Uses:seaborn/algorithms.py | API:- | Constraints:统计性质断言使用固定种子和有限容差；覆盖 nan-aware 自动选择与 random_seed 弃用警告	2026-10-10T19:51:23Z			0
++tests/test_axisgrid.py	c039cf3c	0	0	2026-10-10T19:38:39Z	A	test_axisgrid.py[8 T A V L L]: Role:端到端验证 FacetGrid、PairGrid、JointGrid、pairplot 与 jointplot 的数据分组、轴布局、映射、图例、标签、快捷类型和错误契约 | Uses:seaborn/axisgrid.py,seaborn/distributions.py,seaborn/relational.py,seaborn/categorical.py,seaborn/_testing.py | API:- | Constraints:dataframe interchange 测试按 pandas 能力跳过；pairplot marker 图例测试因 matplotlib<3.7 缺陷条件跳过	2026-10-10T19:56:15Z			0
++tests/test_base.py	7dfc656b	0	0	2026-10-10T19:38:39Z	D	test_base.py[8 T D M L]: Role:验证经典绘图共享核心的数据摄取、语义映射、分组、坐标转换、尺度接线、变量类型、方向与分类顺序契约 | Uses:seaborn/_base.py,seaborn/axisgrid.py,seaborn/_compat.py,seaborn/palettes.py,seaborn/utils.py | API:- | Constraints:覆盖 matplotlib 单轴及 FacetGrid 共享策略下的转换器分配，并锁定缺失、重复索引、nullable dtype、日期和对数变换行为	2026-10-10T19:55:43Z			0
++tests/test_categorical.py	0ab8dfd1	0	0	2026-10-10T19:38:39Z	C	test_categorical.py[8 T C N V M L]: Role:端到端验证全部分类 axes/figure-level 接口的输入解释、方向、分组几何、统计、原生与对数尺度、颜色图例、兼容警告和辅助 artist 契约 | Uses:seaborn/categorical.py,seaborn/_base.py,seaborn/_compat.py,seaborn/palettes.py,seaborn/_testing.py | API:- | Constraints:pointplot 图例 handle 的 marker/linestyle 属性用例在 matplotlib<3.6 跳过；多处按 matplotlib 版本适配 box artist、图例句柄和延迟文字生成差异	2026-10-10T19:57:29Z			0
++tests/test_distributions.py	31c29c7b	0	0	2026-10-10T19:38:39Z	F	test_distributions.py[8 T F N V L]: Role:端到端验证直方图、KDE、ECDF、rug、displot 与弃用 distplot 的数据解释、统计归一、几何、颜色、尺度、分面和兼容契约 | Uses:seaborn/distributions.py,seaborn/_statistics.py,seaborn/axisgrid.py,seaborn/palettes.py,seaborn/_testing.py | API:- | Constraints:累计 KDE 分别按 scipy 存在与缺失条件互斥验证；等高线 artist 类型和坐标提取按 matplotlib 版本分支断言	2026-10-10T19:56:47Z			0
++tests/test_docstrings.py	9cae6045	0	0	2026-10-10T19:38:39Z	G	test_docstrings.py[3 T G T]: Role:验证文档字符串组件的属性/键访问、字符串表示、格式化、字典构造及多层递归嵌套行为 | Uses:seaborn/_docstrings.py | API:- | Constraints:未注册键的属性访问必须抛 AttributeError，格式化缺键必须抛 KeyError	2026-10-10T19:51:23Z			0
++tests/test_matrix.py	53756270	0	0	2026-10-10T19:38:39Z	H	test_matrix.py[7 T H N V L]: Role:验证热图、树状聚类和 ClusterGrid 的数据转换、色图、遮罩、标签、注释、颜色轨道、重排与布局契约 | Uses:seaborn/matrix.py,seaborn/palettes.py,seaborn/_compat.py,seaborn/_testing.py | API:- | Constraints:scipy 存在时跳过缺失依赖错误分支，fastcluster 对照与特定 linkage 测试按该可选依赖存在性跳过	2026-10-10T19:55:15Z			0
++tests/test_miscplot.py	3d217fd2	0	0	2026-10-10T19:38:39Z	P	test_miscplot.py[3 T P V T]: Role:验证 palplot 的图像形状和像素颜色，并对 dogplot 的默认与成年图像尺寸作网络集成检查 | Uses:seaborn/miscplot.py | API:- | Constraints:dogplot 用例带网络标记且需要外部图像服务，属于离线验证盲区	2026-10-10T19:51:23Z			0
++tests/test_objects.py	4c1fffb6	0	0	2026-10-10T19:38:39Z	O	test_objects.py[3 T O T]: Role:验证 seaborn.objects 的所有公开名称均属于声明式五类对象层次 | Uses:seaborn/objects.py,seaborn/_core/plot.py | API:- | Constraints:-	2026-10-10T19:50:30Z			0
++tests/test_palettes.py	1d4ba600	0	0	2026-10-10T19:38:39Z	P	test_palettes.py[5 T P V L]: Role:验证调色板解析、长度循环、颜色空间转换、顺序/发散/cubehelix 生成、上下文恢复、色码与富显示契约 | Uses:seaborn/palettes.py,seaborn/rcmod.py,seaborn/utils.py,seaborn/external/husl.py,seaborn/colors/ | API:- | Constraints:必须保持命名色板默认长度、反向结果与正向严格对应、上下文退出恢复原循环、XKCD/Crayola 名称解析为登记色值（TestColorPalettes）	2026-10-10T19:52:21Z			0
++tests/test_rcmod.py	8028e6b3	0	0	2026-10-10T19:38:39Z	P	test_rcmod.py[5 T P V M]: Role:验证主题样式、尺度上下文、调色板、重置和字体设置对 matplotlib rcParams 的全局及临时影响 | Uses:seaborn/rcmod.py,seaborn/palettes.py,seaborn/utils.py | API:- | Constraints:必须保持上下文管理器和装饰器退出后恢复原参数、未知 rc 键被过滤、font_scale 只独立缩放字体项（TestAxesStyle、TestPlottingContext）；Verdana 用例按字体可用性跳过	2026-10-10T19:52:56Z			0
++tests/test_regression.py	dc8d1efc	0	0	2026-10-10T19:38:39Z	Q	test_regression.py[7 T Q N L]: Role:验证回归变量摄取、模型拟合与 bootstrap、分箱偏回归、绘图组件、分面布局、残差和可选 statsmodels 路径 | Uses:seaborn/regression.py,seaborn/palettes.py | API:- | Constraints:必须保持输入一维、回归选项互斥、单点禁用拟合、相同 seed 的 bootstrap 相同、truncate 网格边界、lmplot 强制 data 与 marker 数契约、残差等于观测减拟合值（TestRegressionPlotter、TestRegressionPlots）；statsmodels 相关验证按依赖存在性互斥跳过	2026-10-10T19:54:20Z			0
++tests/test_relational.py	f8eee6e2	0	0	2026-10-10T19:38:39Z	R	test_relational.py[7 T R V L]: Role:端到端验证关系图的宽长数据解释、语义映射、聚合误差、权重单位、分面、图例和 matplotlib 属性透传 | Uses:seaborn/relational.py,seaborn/_base.py,seaborn/palettes.py,seaborn/utils.py,seaborn/_compat.py | API:- | Constraints:必须保持 relplot 与对应 axes-level 几何/颜色/尺寸/样式一致，跨分面语义映射固定，lineplot 在 log 轴变换空间聚合且反变换误差界，units 与 estimator 冲突报错，空数据仍返回 Axes（TestRelationalPlotter、TestLinePlotter、TestScatterPlotter）；部分 marker 图例属性按 matplotlib 3.7 分支断言	2026-10-10T19:54:05Z			0
++tests/test_statistics.py	0bf1c845	0	0	2026-10-10T19:38:39Z	S	test_statistics.py[7 T S N L]: Role:验证经典统计变换的网格与分箱、归一化累计、经验分布、误差区间、加权聚合和 letter-value 结果 | Uses:seaborn/_statistics.py | API:- | Constraints:必须保持单/双变量 KDE 与直方图积分归一、离散箱以整数为中心、ECDF 前置(-inf,0)、单观测误差界为 NaN、加权接口仅接受 mean/ci（TestKDE、TestHistogram、TestECDF、TestEstimateAggregator、TestWeightedAggregator）；scipy 与 statsmodels 对照按可选依赖跳过	2026-10-10T19:53:13Z			0
++tests/test_utils.py	14f43e32	0	0	2026-10-10T19:38:39Z	G	test_utils.py[5 T G V L]: Role:验证颜色、spine/tick、图例迁移、示例数据、亮度、字符串和内部参数兼容辅助函数 | Uses:seaborn/utils.py,seaborn/rcmod.py,seaborn/relational.py,seaborn/axisgrid.py,seaborn/_compat.py | API:- | Constraints:必须保持 despine 对指定轴/边/偏移/倒置轴裁剪正确，move_legend 保留句柄颜色和标题并校验新标签长度，颜色循环无 color 键时回退 .15（TestSpineUtils、test_move_legend_*、test_get_color_cycle）；远程数据测试在网络不可达时跳过	2026-10-10T19:53:31Z			0
+diff --git a/seaborn/_core/scales.py b/seaborn/_core/scales.py
+index 0c6f8ac..1e7bef8 100644
+--- a/seaborn/_core/scales.py
++++ b/seaborn/_core/scales.py
+@@ -1033,9 +1033,9 @@ def _make_log_transforms(base: float | None = None) -> TransFuncs:
+             return np.log(x) / np.log(base)
+         fs = forward, partial(np.power, base)
+ 
+-
+-
+-
++    def log(x: ArrayLike) -> ArrayLike:
++        with np.errstate(invalid="ignore", divide="ignore"):
++            return fs[0](x)
+ 
+     def exp(x: ArrayLike) -> ArrayLike:
+         with np.errstate(invalid="ignore", divide="ignore"):
+@@ -1087,4 +1087,4 @@ def _make_power_transforms(exp: float) -> TransFuncs:
+ 
+ 
+ def _default_spacer(x: Series) -> float:
+-    return 1
+\ No newline at end of file
++    return 1
+diff --git a/seaborn/_marks/bar.py b/seaborn/_marks/bar.py
+index bc3dd3e..53c049c 100644
+--- a/seaborn/_marks/bar.py
++++ b/seaborn/_marks/bar.py
+@@ -25,87 +25,69 @@ if TYPE_CHECKING:
+ 
+ 
+ class BarBase(Mark):
+-    pass
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+ 
++    def _make_patches(self, data, scales, orient):
++
++        other = {"x": "y", "y": "x"}[orient]
++        transform = scales[orient]._matplotlib_scale.get_transform()
++        forward = transform.transform
++        inverse = transform.inverted().transform
++
++        center = np.asarray(data[orient], float)
++        half_width = np.asarray(data["width"], float) / 2
++        start = inverse(forward(center) - half_width)
++        width = inverse(forward(center) + half_width) - start
++        baseline = np.asarray(data["baseline"], float)
++        value = np.asarray(data[other], float) - baseline
++
++        resolved = resolve_properties(self, data, scales)
++        facecolor = np.array(resolve_color(self, data, scales=scales), copy=True)
++        edgecolor = resolve_color(self, data, prefix="edge", scales=scales)
++        facecolor[~np.asarray(resolved["fill"], bool), 3] = 0
++
++        patches = []
++        values = []
++        for i, val in enumerate(value):
++            if not np.isfinite(val) or val == 0:
++                continue
++
++            if orient == "x":
++                xy = start[i], baseline[i]
++                w, h = width[i], val
++            else:
++                xy = baseline[i], start[i]
++                w, h = val, width[i]
++
++            patch = mpl.patches.Rectangle(
++                xy, w, h,
++                facecolor=facecolor[i],
++                edgecolor=edgecolor[i],
++                linewidth=resolved["edgewidth"][i],
++                linestyle=resolved["edgestyle"][i],
++                **self.artist_kws,
++            )
++            patches.append(patch)
++            values.append(val)
++
++        return patches, np.asarray(values)
++
++    def _legend_artist(
++        self, variables: list[str], value: Any, scales: dict[str, Scale],
++    ) -> Artist:
++
++        key = {v: value for v in variables}
++        resolved = resolve_properties(self, key, scales)
++        facecolor = resolve_color(self, key, scales=scales)
++        if not resolved["fill"]:
++            facecolor = mpl.colors.to_rgba(facecolor, 0)
++
++        return mpl.patches.Patch(
++            facecolor=facecolor,
++            edgecolor=resolve_color(self, key, prefix="edge", scales=scales),
++            linewidth=resolved["edgewidth"],
++            linestyle=resolved["edgestyle"],
++            **self.artist_kws,
++        )
+ 
+ 
+ @document_properties
+@@ -202,5 +184,47 @@ class Bars(BarBase):
+     width: MappableFloat = Mappable(1, grouping=False)
+     baseline: MappableFloat = Mappable(0, grouping=False)  # TODO *is* this mappable?
+ 
++    def _plot(self, split_gen, scales, orient):
++
++        patches = defaultdict(list)
++        auto_width = defaultdict(lambda: True)
+ 
++        for _, data, ax in split_gen():
++            bars, _ = self._make_patches(data, scales, orient)
++            patches[ax].extend(bars)
++            auto_width[ax] &= (
++                isinstance(self.edgewidth, Mappable)
++                and self.edgewidth._auto
++                and "edgewidth" not in data
++            )
++
++        orient_idx = ["x", "y"].index(orient)
++        val_idx = ["y", "x"].index(orient)
+ 
++        for ax, ax_patches in patches.items():
++
++            if ax_patches:
++                vertices = np.concatenate([
++                    patch.get_path().transformed(patch.get_transform()).vertices
++                    for patch in ax_patches
++                ])
++                ax.update_datalim(vertices)
++
++            collection = mpl.collections.PatchCollection(
++                ax_patches, match_original=True, **self.artist_kws,
++            )
++
++            if auto_width[ax] and ax_patches:
++                ax.autoscale_view()
++                points_per_pixel = 72 / ax.figure.dpi
++                widths = [
++                    abs(np.diff(ax.transData.transform(patch.get_bbox()), axis=0))[
++                        0, orient_idx
++                    ] * points_per_pixel
++                    for patch in ax_patches
++                ]
++                linewidth = min(.1 * min(widths), mpl.rcParams["patch.linewidth"])
++                collection.set_linewidth(linewidth)
++
++            collection.sticky_edges[val_idx][:] = (0, np.inf)
++            ax.add_collection(collection, autolim=False)

@@ -1,0 +1,551 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /testbed/build/cp311
+Build type: native build
+Project name: pandas
+Project version: 0+untagged.1.g87115e4.dirty
+C compiler for the host machine: cc (gcc 11.4.0 "cc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C linker for the host machine: cc ld.bfd 2.38
+C++ compiler for the host machine: c++ (gcc 11.4.0 "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C++ linker for the host machine: c++ ld.bfd 2.38
+Cython compiler for the host machine: cython (cython 3.2.1)
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python found: YES (/opt/miniconda3/envs/testbed/bin/python)
+Program cython found: YES (/opt/miniconda3/envs/testbed/bin/cython)
+Configuring free_threading_config.pxi using configuration
+Build targets in project: 56
+
+pandas 0+untagged.1.g87115e4.dirty
+
+  User defined options
+    Native files: /testbed/build/cp311/meson-python-native-file.ini
+    buildtype   : release
+    vsenv       : True
+    b_ndebug    : if-release
+    b_vscrt     : md
+
+Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at /opt/miniconda3/envs/testbed/bin/ninja
+
+Visual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:
+/opt/miniconda3/envs/testbed/bin/meson compile -C .
+[1/155] Generating pandas/_libs/algos_take_helper_pxi with a custom command
+[2/155] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command
+[3/155] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command
+[4/155] Generating pandas/_libs/intervaltree_helper_pxi with a custom command
+[5/155] Generating pandas/_libs/sparse_op_helper_pxi with a custom command
+[6/155] Generating pandas/_libs/algos_common_helper_pxi with a custom command
+[7/155] Generating pandas/_libs/index_class_helper_pxi with a custom command
+[8/155] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command
+[9/155] Compiling Cython source /testbed/pandas/_libs/ops_dispatch.pyx
+[10/155] Compiling Cython source /testbed/pandas/_libs/indexing.pyx
+[11/155] Compiling Cython source /testbed/pandas/_libs/properties.pyx
+[12/155] Compiling Cython source /testbed/pandas/_libs/tslibs/base.pyx
+[13/155] Compiling Cython source /testbed/pandas/_libs/sas.pyx
+[14/155] Compiling Cython source /testbed/pandas/_libs/ops.pyx
+[15/155] Compiling Cython source /testbed/pandas/_libs/tslibs/nattype.pyx
+[16/155] Compiling Cython source /testbed/pandas/_libs/tslibs/dtypes.pyx
+[17/155] Compiling Cython source /testbed/pandas/_libs/reshape.pyx
+[18/155] Compiling Cython source /testbed/pandas/_libs/tslibs/vectorized.pyx
+[19/155] Compiling Cython source /testbed/pandas/_libs/missing.pyx
+[20/155] Compiling Cython source /testbed/pandas/_libs/tslibs/fields.pyx
+[21/155] Compiling Cython source /testbed/pandas/_libs/tslibs/ccalendar.pyx
+[22/155] Compiling Cython source /testbed/pandas/_libs/tslibs/conversion.pyx
+[23/155] Compiling Cython source /testbed/pandas/_libs/tslibs/strptime.pyx
+[24/155] Compiling Cython source /testbed/pandas/_libs/arrays.pyx
+[25/155] Compiling Cython source /testbed/pandas/_libs/byteswap.pyx
+[26/155] Compiling Cython source /testbed/pandas/_libs/hashing.pyx
+[27/155] Compiling Cython source /testbed/pandas/_libs/tslibs/tzconversion.pyx
+[28/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timezones.pyx
+[29/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timedeltas.pyx
+[30/155] Compiling Cython source /testbed/pandas/_libs/tslibs/period.pyx
+[31/155] Compiling Cython source /testbed/pandas/_libs/internals.pyx
+warning: /testbed/pandas/_libs/internals.pyx:31:0: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:916:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:921:12: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:955:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:973:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:994:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+[32/155] Compiling Cython source /testbed/pandas/_libs/testing.pyx
+[33/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/.._src_parser_tokenizer.c.o
+[34/155] Compiling Cython source /testbed/pandas/_libs/tslibs/parsing.pyx
+[35/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timestamps.pyx
+[36/155] Compiling Cython source /testbed/pandas/_libs/tslibs/np_datetime.pyx
+[37/155] Compiling C object pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_base.pyx.c.o
+[38/155] Compiling Cython source /testbed/pandas/_libs/tslib.pyx
+[39/155] Compiling Cython source /testbed/pandas/_libs/writers.pyx
+[40/155] Compiling Cython source /testbed/pandas/_libs/window/indexers.pyx
+[41/155] Compiling C object pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_indexing.pyx.c.o
+[42/155] Compiling C object pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_ccalendar.pyx.c.o
+[43/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime.c.o
+[44/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime_strings.c.o
+[45/155] Compiling Cython source /testbed/pandas/_libs/parsers.pyx
+[46/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_pd_datetime.c.o
+[47/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_date_conversions.c.o
+[48/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[49/155] Compiling Cython source /testbed/pandas/_libs/lib.pyx
+[50/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_pd_parser.c.o
+[51/155] Compiling C object pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashing.pyx.c.o
+[52/155] Compiling C object pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_vectorized.pyx.c.o
+[53/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[54/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[55/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_ujson.c.o
+[56/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_JSONtoObj.c.o
+[57/155] Compiling Cython source /testbed/pandas/_libs/index.pyx
+[58/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsonenc.c.o
+[59/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsondec.c.o
+[60/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[61/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_objToJSON.c.o
+[62/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[63/155] Compiling Cython source /testbed/pandas/_libs/join.pyx
+[64/155] Compiling C object pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops_dispatch.pyx.c.o
+[65/155] Compiling Cython source /testbed/pandas/_libs/interval.pyx
+[66/155] Compiling Cython source /testbed/pandas/_libs/tslibs/offsets.pyx
+[67/155] Compiling Cython source /testbed/pandas/_libs/window/aggregations.pyx
+[68/155] Compiling Cython source /testbed/pandas/_libs/sparse.pyx
+[69/155] Compiling C object pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_byteswap.pyx.c.o
+[70/155] Compiling C object _cyutility.cpython-311-x86_64-linux-gnu.so.p/meson-generated_..__cyutility.c.o
+[71/155] Compiling C object pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_arrays.pyx.c.o
+[72/155] Compiling C object pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_properties.pyx.c.o
+[73/155] Linking target _cyutility.cpython-311-x86_64-linux-gnu.so
+[74/155] Compiling C object pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_dtypes.pyx.c.o
+[75/155] Linking target pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so
+[76/155] Generating write_version_file with a custom command
+[77/155] Generating pandas/__init__.py with a custom command
+[78/155] Linking target pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so
+[79/155] Linking target pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so
+[80/155] Linking target pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so
+[81/155] Linking target pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so
+[82/155] Linking target pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so
+[83/155] Linking target pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so
+[84/155] Compiling C object pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_np_datetime.pyx.c.o
+[85/155] Linking target pandas/_libs/json.cpython-311-x86_64-linux-gnu.so
+[86/155] Linking target pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so
+[87/155] Linking target pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so
+[88/155] Linking target pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so
+[89/155] Linking target pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so
+[90/155] Linking target pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so
+[91/155] Linking target pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so
+[92/155] Compiling C object pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_fields.pyx.c.o
+[93/155] Linking target pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so
+[94/155] Compiling C object pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_nattype.pyx.c.o
+[95/155] Linking target pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so
+[96/155] Compiling C object pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timezones.pyx.c.o
+[97/155] Compiling C object pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_conversion.pyx.c.o
+[98/155] Linking target pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so
+[99/155] Linking target pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so
+[100/155] Compiling C object pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_writers.pyx.c.o
+[101/155] Linking target pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so
+[102/155] Compiling C object pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_reshape.pyx.c.o
+[103/155] Linking target pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so
+[104/155] Compiling C object pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sas.pyx.c.o
+[105/155] Linking target pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so
+[106/155] Compiling C object pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_testing.pyx.c.o
+[107/155] Linking target pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so
+[108/155] Compiling C object pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops.pyx.c.o
+[109/155] Linking target pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so
+[110/155] Compiling C object pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_tzconversion.pyx.c.o
+[111/155] Linking target pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so
+[112/155] Compiling C object pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_missing.pyx.c.o
+[113/155] Linking target pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so
+[114/155] Compiling Cython source /testbed/pandas/_libs/hashtable.pyx
+[115/155] Compiling Cython source /testbed/pandas/_libs/groupby.pyx
+[116/155] Compiling C object pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_internals.pyx.c.o
+[117/155] Linking target pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so
+[118/155] Compiling C object pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslib.pyx.c.o
+[119/155] Linking target pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so
+[120/155] Compiling Cython source /testbed/pandas/_libs/algos.pyx
+[121/155] Compiling C object pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_strptime.pyx.c.o
+[122/155] Linking target pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so
+[123/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_parsing.pyx.c.o
+[124/155] Linking target pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so
+[125/155] Compiling C object pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_indexers.pyx.c.o
+[126/155] Linking target pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so
+[127/155] Compiling C object pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_period.pyx.c.o
+[128/155] Linking target pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so
+[129/155] Compiling C object pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timestamps.pyx.c.o
+[130/155] Linking target pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so
+[131/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_parsers.pyx.c.o
+[132/155] Linking target pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so
+[133/155] Compiling C object pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timedeltas.pyx.c.o
+[134/155] Linking target pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so
+[135/155] Compiling C++ object pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_aggregations.pyx.cpp.o
+[136/155] Linking target pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so
+[137/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o
+[138/155] Linking target pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so
+[139/155] Compiling C object pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o
+[140/155] Linking target pandas/_libs/index.cpython-311-x86_64-linux-gnu.so
+[141/155] Compiling C object pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o
+[142/155] Linking target pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so
+[143/155] Compiling C object pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o
+[144/155] Linking target pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so
+[145/155] Compiling C object pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o
+[146/155] Linking target pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so
+[147/155] Compiling C object pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o
+[148/155] Linking target pandas/_libs/join.cpython-311-x86_64-linux-gnu.so
+[149/155] Compiling C object pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o
+[150/155] Linking target pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so
+[151/155] Compiling C object pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o
+[152/155] Linking target pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so
+[153/155] Compiling C object pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o
+[154/155] Linking target pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 47 items
+
+pandas/tests/groupby/methods/test_groupby_shift_diff.py .......................FF..FFFFFFFF.FF.........
+
+=================================== FAILURES ===================================
+_______________________ test_group_diff_real_frame[int8] _______________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:95: in test_group_diff_real_frame
+    result = df.groupby("a").diff()
+             ^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/groupby/groupby.py:5296: in diff
+    shifted = shifted.astype(to_coerce)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6528: in astype
+    result = concat(results, axis=1)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/reshape/concat.py:441: in concat
+    return _get_result(
+pandas/core/reshape/concat.py:570: in _get_result
+    columns = _get_concat_axis_series(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_get_concat_axis_series' is not defined
+______________________ test_group_diff_real_frame[int16] _______________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:95: in test_group_diff_real_frame
+    result = df.groupby("a").diff()
+             ^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/groupby/groupby.py:5296: in diff
+    shifted = shifted.astype(to_coerce)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6528: in astype
+    result = concat(results, axis=1)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/reshape/concat.py:441: in concat
+    return _get_result(
+pandas/core/reshape/concat.py:570: in _get_result
+    columns = _get_concat_axis_series(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_get_concat_axis_series' is not defined
+____________________ test_group_diff_datetimelike[s-data0] _____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:124: in test_group_diff_datetimelike
+    expected = Series([NaT, NaT, Timedelta("1 days")], name="b").dt.as_unit(unit)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:506: in __init__
+    data = SingleBlockManager.from_array(data, index, refs=refs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2023: in from_array
+    array = maybe_coerce_values(array)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/blocks.py:2205: in maybe_coerce_values
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[s-data1] _____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:121: in test_group_diff_datetimelike
+    df = DataFrame({"a": [1, 2, 2], "b": data})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:775: in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:447: in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, consolidate=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:149: in arrays_to_mgr
+    return create_block_manager_from_column_arrays(
+pandas/core/internals/managers.py:2313: in create_block_manager_from_column_arrays
+    blocks = _form_blocks(arrays, consolidate, refs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2388: in _form_blocks
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[ms-data0] ____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:124: in test_group_diff_datetimelike
+    expected = Series([NaT, NaT, Timedelta("1 days")], name="b").dt.as_unit(unit)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:506: in __init__
+    data = SingleBlockManager.from_array(data, index, refs=refs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2023: in from_array
+    array = maybe_coerce_values(array)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/blocks.py:2205: in maybe_coerce_values
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[ms-data1] ____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:121: in test_group_diff_datetimelike
+    df = DataFrame({"a": [1, 2, 2], "b": data})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:775: in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:447: in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, consolidate=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:149: in arrays_to_mgr
+    return create_block_manager_from_column_arrays(
+pandas/core/internals/managers.py:2313: in create_block_manager_from_column_arrays
+    blocks = _form_blocks(arrays, consolidate, refs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2388: in _form_blocks
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[us-data0] ____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:124: in test_group_diff_datetimelike
+    expected = Series([NaT, NaT, Timedelta("1 days")], name="b").dt.as_unit(unit)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:506: in __init__
+    data = SingleBlockManager.from_array(data, index, refs=refs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2023: in from_array
+    array = maybe_coerce_values(array)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/blocks.py:2205: in maybe_coerce_values
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[us-data1] ____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:121: in test_group_diff_datetimelike
+    df = DataFrame({"a": [1, 2, 2], "b": data})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:775: in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:447: in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, consolidate=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:149: in arrays_to_mgr
+    return create_block_manager_from_column_arrays(
+pandas/core/internals/managers.py:2313: in create_block_manager_from_column_arrays
+    blocks = _form_blocks(arrays, consolidate, refs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2388: in _form_blocks
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[ns-data0] ____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:124: in test_group_diff_datetimelike
+    expected = Series([NaT, NaT, Timedelta("1 days")], name="b").dt.as_unit(unit)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:506: in __init__
+    data = SingleBlockManager.from_array(data, index, refs=refs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2023: in from_array
+    array = maybe_coerce_values(array)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/blocks.py:2205: in maybe_coerce_values
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_datetimelike[ns-data1] ____________________
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:121: in test_group_diff_datetimelike
+    df = DataFrame({"a": [1, 2, 2], "b": data})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:775: in __init__
+    mgr = dict_to_mgr(data, index, columns, dtype=dtype, copy=copy)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:447: in dict_to_mgr
+    return arrays_to_mgr(arrays, columns, index, dtype=dtype, consolidate=copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/construction.py:149: in arrays_to_mgr
+    return create_block_manager_from_column_arrays(
+pandas/core/internals/managers.py:2313: in create_block_manager_from_column_arrays
+    blocks = _form_blocks(arrays, consolidate, refs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:2388: in _form_blocks
+    values = ensure_wrapped_if_datetimelike(values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:510: in ensure_wrapped_if_datetimelike
+    return TimedeltaArray._from_sequence(arr, dtype=dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:241: in _from_sequence
+    dtype = _validate_td64_dtype(dtype)
+            ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_validate_td64_dtype' is not defined
+____________________ test_group_diff_object_raises[object0] ____________________
+pandas/core/ops/array_ops.py:217: in _na_arithmetic_op
+    result = func(left, right)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/computation/expressions.py:243: in evaluate
+    return _evaluate(op, op_str, left_op, right_op)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/computation/expressions.py:132: in _evaluate_numexpr
+    result = _evaluate_standard(op, op_str, left_op, right_op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/computation/expressions.py:74: in _evaluate_standard
+    return op(left_op, right_op)
+           ^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: unsupported operand type(s) for -: 'str' and 'float'
+
+During handling of the above exception, another exception occurred:
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:140: in test_group_diff_object_raises
+    df.groupby("a")["b"].diff()
+pandas/core/groupby/groupby.py:5311: in diff
+    return subtract(obj, shifted)
+           ^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/groupby/groupby.py:5308: in subtract
+    return left._arith_method(right, operator.sub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:6634: in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/base.py:1485: in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/ops/array_ops.py:282: in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/ops/array_ops.py:226: in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+             ^^^^^^^^^^^^^^^^
+E   NameError: name '_masked_arith_op' is not defined
+____________________ test_group_diff_object_raises[object1] ____________________
+pandas/core/ops/array_ops.py:217: in _na_arithmetic_op
+    result = func(left, right)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/computation/expressions.py:243: in evaluate
+    return _evaluate(op, op_str, left_op, right_op)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/computation/expressions.py:132: in _evaluate_numexpr
+    result = _evaluate_standard(op, op_str, left_op, right_op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/computation/expressions.py:74: in _evaluate_standard
+    return op(left_op, right_op)
+           ^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: unsupported operand type(s) for -: 'str' and 'float'
+
+During handling of the above exception, another exception occurred:
+pandas/tests/groupby/methods/test_groupby_shift_diff.py:140: in test_group_diff_object_raises
+    df.groupby("a")["b"].diff()
+pandas/core/groupby/groupby.py:5311: in diff
+    return subtract(obj, shifted)
+           ^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/groupby/groupby.py:5308: in subtract
+    return left._arith_method(right, operator.sub)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:6634: in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/base.py:1485: in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/ops/array_ops.py:282: in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/ops/array_ops.py:226: in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+             ^^^^^^^^^^^^^^^^
+E   NameError: name '_masked_arith_op' is not defined
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_with_null_key
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_with_fill_value
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_lose_timezone
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[float]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[float32]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[float64]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[uint8]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[uint16]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[uint32]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[uint64]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[int]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[int8]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[int16]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[int32]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_series[int64]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[float]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[float32]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[float64]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[uint8]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[uint16]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[uint32]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[uint64]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[int]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[int32]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[int64]
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_bool
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_empty_shift_with_fill
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_multindex_empty_shift_with_fill
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_shift_periods_freq
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_shift_disallow_freq_and_fill_value
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_shift_disallow_suffix_if_periods_is_int
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_with_multiple_periods
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_with_multiple_periods_and_freq
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_with_multiple_periods_and_fill_value
+PASSED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_shift_with_multiple_periods_and_both_fill_and_freq_deprecated
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[int8]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_real_frame[int16]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[s-data0]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[s-data1]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[ms-data0]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[ms-data1]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[us-data0]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[us-data1]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[ns-data0]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_datetimelike[ns-data1]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_object_raises[object0]
+FAILED pandas/tests/groupby/methods/test_groupby_shift_diff.py::test_group_diff_object_raises[object1]
+======================== 12 failed, 35 passed in 1.24s =========================

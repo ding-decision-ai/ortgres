@@ -1,0 +1,2690 @@
+# 069 · ORTG · task-run
+
+pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1
+
+输入留存情况：事件未记录初始user；本episode内未发现独立正式输入文件
+
+以下保留已记录的模型消息与工具活动；未完成记录不补写最终回复。
+
+# Public model conversation
+
+Private reasoning is omitted; credential-bearing content is redacted.
+
+## 1. tool / event
+
+```
+{
+  "name": "thread.started",
+  "output": {
+    "type": "thread.started",
+    "session_ref": "ref-004889"
+  }
+}
+```
+
+## 2. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "id": "item_0",
+    "type": "error",
+    "message": "`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."
+  },
+  "message_ref": "item_0"
+}
+```
+
+## 3. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "id": "item_1",
+    "type": "error",
+    "message": "`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."
+  },
+  "message_ref": "item_1"
+}
+```
+
+## 4. tool / event
+
+```
+{
+  "name": "turn.started",
+  "output": {
+    "type": "turn.started"
+  }
+}
+```
+
+## 5. assistant / message
+
+```
+当前对账：630 个文件已对齐、0 个过期、0 个缺少纲要（另有 9 个观察目录、2 个忽略项）。我先读取仓库纲要定位异常匹配模块，再核查可见测试和缺失实现。
+```
+
+## 6. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_3",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_overview",
+    "arguments": {},
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 7. assistant / tool_call
+
+```
+{
+  "name": "ortg_overview",
+  "server": "ortg",
+  "arguments": {},
+  "call_ref": "item_3"
+}
+```
+
+## 8. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "#【部署】Python 3.10+ 可安装包，setuptools.build_meta 与 setuptools-scm 构建；控制台命令 pytest、py.test 均调用 pytest:console_main，python -m pytest 调用同一入口；开发环境可用 pip install -e \".[dev]\"，仓库测试与质量任务由 tox、pytest 及 pyproject.toml 配置。\n#【系统】pytest 是面向 Python 应用与库的测试框架 | pytest 公共包稳定重导出 _pytest 能力；Config/PytestPluginManager 解析启动输入并建立路径敏感钩子环境，Session/Node 递归收集，Python 收集器生成参数化 Function，FixtureManager 解析可见依赖与作用域缓存，runner 按 setup/call/teardown 产出报告；断言导入钩子在测试模块加载前改写 AST | 所有阶段均通过 pluggy hookspec 允许插件与 conftest 在其可见范围扩展，清理和终结必须在失败、中断与参数切换路径成对执行。\n#【整体规范】源码以 Python 3.10 为最低版本并采用 src 布局；公共导出集中于 src/pytest/__init__.py，内部实现位于 src/_pytest/；测试默认位于 testing/，示例脚本目录默认不递归收集；用户可通过插件、conftest.py、命令行及配置文件扩展或配置行为；节点必须经 from_parent 构造，文件系统接口以 pathlib 为现行形式并保留明确弃用的 py.path 兼容面。\n#【资源目录】doc/en/_static：保存 Sphinx 文档的自定义样式资源，由 doc/en/conf.py 注册并影响生成站点的品牌与布局。\n#【资源目录】doc/en/img：保存 pytest 品牌标志及文档引用的图示资源，由 doc/en/conf.py 和各主题文档消费；仅据可见引用描述用途，不推测未检查图像内容。\n#纲要格式：文件名[标签]: Role:职责 | Uses:依赖 | API:对外契约 | Constraints:约束 ；文件名不带路径；四字段必填,无内容写-\n#骨架规则：只有裸文件名没有纲要的行是尚未建立认知的文件,读取时顺便生成纲要并调用 ortg_update 提交\n#目标规则：条目下一行 #目标: 是目标纲要(改完后应有的纲要,不写待核查事项)；#目标:删除 计划删除；#计划新建 文件尚不存在\n#测试契约规则：被测试锁定的对外行为写成\"必须保持 X(测试名)\"并写清期望结果；只涉及一个文件的写进它的 Constraints,跨模块的登记进【契约】；需求与守护测试冲突时按证据裁决:需求点名该测试或说旧行为错→改测试,需求说测试权威/行为不变/只是迁移→保持,有命令与期望输出的验收例→按实跑结果,都没有→先求两全,不能两全按需求实现,并把选择与理由记进纲要\n#契约规则：跨模块、不靠调用关系的约定(同一概念由多层共同实现、协议与消息格式、单位、兼容性、HTTP/WebSocket 路由与消息类型、配置键)在纲要头登记一行 #【契约】键：正文(正文写约定与守护测试,只写这一处)；每个参与文件在纲要行末尾加 | Keys:键(角色),… 声明它；路由、消息、事件、配置、环境变量类的键写成 route:/ws:/msg:/event:/topic:/cfg:/env: 加字面值\n#===代码纲要规范===\n#【标签】[C A B D… E] 重要度数字在前,其后层级、模块、特征(0到多个),规模,空格分隔,每个是大写字母(模块可两个)\n#A层级: E-入口 C-核心 S-服务 D-数据 I-集成 U-工具 T-测试 B-构建 X-配置 O-文档\n#B模块: R-运行与配置 C-收集与执行 F-夹具与Python对象 A-断言与异常 O-报告与输出 P-插件与钩子 I-兼容与集成 Q-质量构建发布 D-文档与示例 AA-测试基础设施 AB-构建发布与仓库自动化\n#C重要度: 9核心 8高频 7业务 5常规 3辅助 1边缘\n#D特征: H钩子 X跨平台 Y异步 V版本兼容\n#E规模: L-大>400 M-中200-400 S-小100-200 T-微<100\n#Constraints配额: C9≤2000字 C8≤1200字 C7-4≤500字 C3-1≤100字\n#===代码纲要规范完毕===\n\n#代码纲要\n\n===/testbed/===\n.coveragerc[5 X Q S]: Role:配置 coverage.py 对源码与测试的分支覆盖采集、跨环境路径归并和报告排除规则 | Uses:src/_pytest/（被测源码）, testing/（测试源码） | API:- | Constraints:并行覆盖数据须可合并；报告跳过已全覆盖文件并显示缺失行，TYPE_CHECKING、overload、抽象占位和预期失败等列明模式不计覆盖。\n.git-blame-ignore-revs[1 X AB T]: Role:列出仅含格式化、目录迁移和机械重写的修订供 git blame 忽略 | Uses:- | API:git blame --ignore-revs-file .git-blame-ignore-revs | Constraints:每行有效项必须是完整提交哈希，启用后用于把机械变更前移到有语义的作者修订。\n.gitattributes[1 X AB T]: Role:固定 Windows 批处理文件的文本属性与 CRLF 行尾 | Uses:- | API:- | Constraints:所有 *.bat 必须检出为 CRLF。\n.gitignore[3 X AB S]: Role:排除本地环境、构建产物、缓存、覆盖率结果、编辑器状态和自动生成版本文件 | Uses:- | API:- | Constraints:不得提交自动生成版本模块、构建发布产物、虚拟环境、测试与类型检查缓存或调试日志。\n.pre-commit-config.yaml[7 X Q L]: Role:编排提交前及手工运行的格式化、静态检查、文档校验和新闻片段规范钩子 | Uses:pyproject.toml（工具配置）, changelog/（新闻片段）, src/_pytest/deprecated.py（弃用检查豁免）, src/_pytest/legacypath.py（旧路径检查豁免） | API:pre-commit 钩子集合 | Constraints:自动阶段运行 Ruff、空白/YAML、zizmor、文档代码格式、拼写、类型注解与 mypy；Pyright、pyupgrade、pylint 为 manual；Python 升级目标为 3.10+；changelog 文件名只接受规定类别和议题编号形式。\n.readthedocs.yaml[5 X D S]: Role:配置 Read the Docs 在 Ubuntu 上安装项目与文档依赖并以严格警告模式构建多种格式 | Uses:doc/en/requirements.txt, doc/en/conf.py, pyproject.toml | API:- | Constraints:必须先安装项目再安装文档依赖以尊重后者版本钉住；使用 Python 3.12 和 Inkscape，Sphinx 警告令构建失败，并生成 epub、pdf、htmlzip。\nAUTHORS[3 O Q L]: Role:记录 pytest 原始作者、机构联系信息及按名排序的贡献者名录 | Uses:- | API:- | Constraints:贡献者列表按名字母序维护。\nCHANGELOG.rst[5 O D T]: Role:将仓库根变更日志入口指向在线 changelog 及其仓库源码文档 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nCITATION[3 O Q S]: Role:提供引用 pytest 的纯文本、BibLaTeX 与 BibTeX 模板 | Uses:- | API:- | Constraints:引用者须把 x.y 替换为所用 pytest 主次版本且不得包含补丁号。\nCODE_OF_CONDUCT.md[7 O Q S]: Role:规定 pytest 社区的包容性行为标准、维护者责任、适用范围和举报执行机制 | Uses:- | API:- | Constraints:适用于项目空间及代表项目的公共场合；违规报告至 coc@pytest.org，处理团队须保密举报人并采取适当公平措施。\nCONTRIBUTING.rst[7 O Q L]: Role:规定 pytest 的问题反馈、开发环境、代码与文档贡献、插件移交、评审合并、回移和陈旧事项处理流程 | Uses:pyproject.toml（开发与测试配置）, tox.ini（任务入口）, changelog/README.rst（新闻片段规则） | API:- | Constraints:常规代码变更应运行 tox 测试与检查并添加匹配类型的 changelog 片段，非微小或纯文档改动应按字母序更新 AUTHORS；测试通常用 pytester 做黑盒验证；所有贡献者都走 PR 与评审流程，已批准前不得自行合并；回移 PR 应压缩合并以保留原作者。\nLICENSE[8 O Q S]: Role:声明 pytest 软件及文档采用 MIT 许可证的授权、保留声明和免责声明 | Uses:- | API:- | Constraints:复制或实质部分必须保留版权和许可声明；软件按现状提供且作者不承担担保或损害责任。\nOPENCOLLECTIVE.rst[5 O Q S]: Role:说明 pytest OpenCollective 平台、资金用途、维护工时申报原则与面板管理职责 | Uses:- | API:- | Constraints:资金用于维护、冲刺、周边和开发者聚会；持续贡献者可依常识与信任申报维护工时，疑问先沟通；管理员由专门团队承担。\nREADME.rst[8 O D S]: Role:介绍 pytest 的定位、基本运行示例、主要能力、文档与支持渠道及许可证 | Uses:- | API:- | Constraints:声明 pytest 支持 Python 3.10+ 或 PyPy3，采用 MIT 许可证；安全问题通过 Tidelift 安全渠道协调披露。\nRELEASING.rst[8 O Q M]: Role:规定 pytest 自动与手工准备版本、部署、合并、回拣、开发版本标记和发布公告的完整流程 | Uses:.github/workflows/prepare-release-pr.yml, .github/workflows/deploy.yml, changelog/, tox.ini | API:- | Constraints:手工发布必须在 Linux 准备；修订与次版本从维护分支发布，重大版本也先建维护分支；部署从 release 分支触发并经核心团队批准，发布 PR 不得 squash；发布后把 changelog/announce 回拣 main，重大或次版本为下一特性版本打 dev 标签。\nTIDELIFT.rst[5 O Q S]: Role:说明 pytest 参与 Tidelift 的资助分配、领取人加入退出流程与平台管理职责 | Uses:- | API:- | Constraints:资金在愿意领取的贡献者团队成员间均分；名单增删通过 PR 并通知管理员团队，合并后领取者须在平台登记并签署协议。\ncodecov.yml[3 X Q T]: Role:配置 Codecov 仅检查补丁覆盖率并关闭项目总覆盖状态与评论 | Uses:.coveragerc | API:- | Constraints:每个补丁要求 100% 覆盖率；不生成项目状态检查或拉取请求评论。\npyproject.toml[9 B Q L]: Role:定义 pytest 构建元数据、依赖与命令入口，并集中配置格式化、静态分析、仓库自测和 towncrier 发布聚合 | Uses:README.rst, LICENSE, AUTHORS, src/pytest/__init__.py, changelog/_template.rst | API:pytest 与 py.test 控制台脚本；pytest Python 3.10+ 分发包及 dev extra | Constraints:构建使用 setuptools.build_meta 与 setuptools-scm 并生成版本模块；运行依赖固定 pluggy<2、iniconfig>=1.0.1、packaging>=22 等兼容边界；源码和两包均发布 py.typed；格式与类型检查以 Python 3.10 为最低语义；仓库自测默认加载 pytester、严格标记与严格参数 ID，警告默认升级为错误且只列明豁免；testing/example_scripts 不递归收集，doc 由独立 doctesting 任务验证；towncrier 只接受声明的十类新闻片段并写入文档 changelog。\ntox.ini[8 X Q X L]: Role:编排 pytest 跨 Python/平台依赖矩阵、自测覆盖率、文档、插件兼容、冻结打包、质量检查与发布辅助环境 | Uses:pyproject.toml, .coveragerc, doc/en/requirements.txt, testing/plugins_integration/requirements.txt, scripts/release.py | API:tox 环境 linting、py310-py314/pypy3、doctesting、plugins、freeze、docs、release 与发布辅助任务 | Constraints:要求 tox>=4 并复用单一 wheel；常规环境启用 dev extra，覆盖率子进程数据归并到仓库配置；doctesting 显式覆盖 doc/en；unittest 扩展环境只跑 testing/test_unittest.py；xdist 以可编辑当前项目运行；文档环境使用 Python 3.12、警告即错误；插件环境安装最新含预发布依赖并逐项冒烟；发布环境允许完整环境变量且版本号必须由位置参数提供。\n\n===/testbed/.github/===\nFUNDING.yml[1 X AB T]: Role:配置仓库赞助按钮指向 GitHub Sponsors、Tidelift、OpenCollective 与 thanks.dev | Uses:- | API:- | Constraints:-\nPULL_REQUEST_TEMPLATE.md[5 O Q S]: Role:为拉取请求提供文档、测试、维护者合并权限、议题关联、新闻片段与作者名录检查项 | Uses:changelog/README.rst, AUTHORS | API:GitHub pull-request template | Constraints:非微小或非小型文档变更应新增 <ISSUE>.<TYPE>.rst 新闻片段，句子用过去时或现在时并以句点结束；作者名录按字母序维护。\nchronographer.yml[3 X AB S]: Role:配置 Chronographer 对拉取请求新闻片段的命名、豁免标签和提示文案检查 | Uses:changelog/README.rst | API:Changelog entry 状态检查 | Constraints:新闻片段后缀为 .rst；skip news 标签和 pyup-bot 可豁免。\nconfig.yml[1 X AB T]: Role:把 GitHub 自动化关联到 pytest 的 Read the Docs 项目 | Uses:- | API:- | Constraints:-\ndependabot.yml[3 X AB T]: Role:安排插件集成依赖与 GitHub Actions 的每周 Dependabot 更新 | Uses:testing/plugins_integration/requirements.txt, .github/workflows/ | API:- | Constraints:每类最多同时开放 10 个拉取请求，插件集成目录同时更新直接和间接依赖。\nlabels.toml[3 X AB M]: Role:声明仓库平台、插件、状态和主题议题标签的名称、颜色与说明 | Uses:- | API:- | Constraints:标签名称与自动化和维护流程中的字面引用保持一致。\npatchback.yml[1 X AB T]: Role:配置 Patchback 回移分支和标签前缀 | Uses:- | API:- | Constraints:回移标签以含尾随空格的 backport 前缀识别，生成分支置于 patchback/backports/。\n\n===/testbed/.github/ISSUE_TEMPLATE/===\n1_bug_report.md[3 O Q T]: Role:为缺陷报告提示提交者提供问题说明、环境包清单、pytest 与操作系统版本及最小复现 | Uses:- | API:GitHub issue template | Constraints:-\n2_feature_request.md[3 O Q T]: Role:为功能建议引导填写待解决问题、期望方案、现实用例、替代办法与补充背景 | Uses:- | API:GitHub issue template | Constraints:-\nconfig.yml[1 X AB T]: Role:禁用空白议题并把支持问题引导到 GitHub Discussions | Uses:- | API:- | Constraints:用户不得创建无模板议题。\n\n===/testbed/.github/workflows/===\ndeploy.yml[8 B AB M]: Role:手工构建并签名发布包、发布 PyPI、创建版本标签与 GitHub Release | Uses:pyproject.toml, tox.ini, scripts/generate-gh-release-notes.py | API:GitHub Actions deploy 工作流 | Constraints:仅 pytest-dev/pytest 仓库执行部署；包构建启用 provenance attestations，PyPI 使用 OIDC；发布后以输入版本创建注解标签，GitHub Release 使用同一构建产物。\ndoc-check-links.yml[3 B AB T]: Role:每周或手工通过 tox 运行 Sphinx 链接检查 | Uses:tox.ini, doc/en/ | API:GitHub Actions Doc Check Links 工作流 | Constraints:仅 pytest-dev 所有者仓库执行。\nprepare-release-pr.yml[7 B AB S]: Role:手工调用 tox 发布准备任务并按输入创建普通或主版本发布拉取请求 | Uses:tox.ini, scripts/prepare-release-pr.py, scripts/release.py | API:GitHub Actions prepare release pr 工作流 | Constraints:输入分支必填；major=yes 走主版本路径，prerelease 原样传入；检出凭据须保留以推送发布分支。\nstale.yml[3 B AB T]: Role:定时把长期缺少补充信息的议题标记 stale 并关闭 | Uses:.github/labels.toml | API:GitHub Actions close needs-information issues 工作流 | Constraints:仅处理 status: needs information 议题，14 天后标记、再过 7 天关闭，不处理拉取请求。\ntest.yml[8 B Q X L]: Role:构建发行包并在 Windows、Linux、macOS、多 Python、插件与 doctest 矩阵中运行 tox 和覆盖率检查 | Uses:tox.ini, pyproject.toml, .coveragerc, codecov.yml, testing/plugins_integration/ | API:GitHub Actions test 工作流及分支保护 check 作业 | Constraints:矩阵不快速失败，同分支旧运行取消；测试安装刚构建的 sdist 而非工作树；部分实验矩阵允许失败但最终 check 汇总所有必需作业；带覆盖率环境生成 XML 并上传且 Codecov 故障不令 CI 失败。\nupdate-plugin-list.yml[5 B AB S]: Role:每周或手工生成插件目录并创建草稿更新拉取请求 | Uses:scripts/update-plugin-list.py, doc/en/reference/plugin_list.rst | API:GitHub Actions Update Plugin List 工作流 | Constraints:仅 pytest-dev 所有者仓库执行；HTTP 缓存跨运行恢复；自动 PR 保持草稿，维护者转为 ready 才触发 CI。\n\n===/testbed/bench/===\nbench.py[1 U Q T]: Role:以 cProfile 运行指定 pytest 脚本并打印累计耗时最高的调用统计 | Uses:src/pytest/__init__.py, bench/empty.py | API:python bench/bench.py [pytest参数] | Constraints:默认以 empty.py 为输入并写入 prof 文件。\nbench_argcomplete.py[1 U Q T]: Role:对比通用 argcomplete FilesCompleter 与 pytest 快速文件补全器的相对性能 | Uses:src/_pytest/_argcomplete.py | API:python bench/bench_argcomplete.py | Constraints:固定各执行 1000 次 /d 前缀补全。\nempty.py[1 T Q T]: Role:动态生成一千个空测试函数作为基础收集与运行性能负载 | Uses:- | API:- | Constraints:恰生成 test_func_0 至 test_func_999。\nmanyparam.py[1 T F T]: Role:以模块级 966 参数夹具和两个测试形成大参数化负载 | Uses:src/_pytest/fixtures.py | API:- | Constraints:总计生成 1932 个测试调用。\nskip.py[1 T C T]: Role:生成五千个在调用期统一跳过的参数化测试以测量跳过开销 | Uses:src/_pytest/outcomes.py, src/_pytest/python.py | API:- | Constraints:SKIP 为真时每个实例以原因 heh 跳过。\nunit_test.py[1 T I T]: Role:动态生成一万五千个含类级 setup 和三个方法的 unittest.TestCase 类作为兼容收集负载 | Uses:src/_pytest/unittest.py | API:- | Constraints:共生成四万五千个测试方法。\nxunit.py[1 T I T]: Role:动态生成五千个含 setup_class 和三个方法的 pytest 风格类作为 xunit 收集负载 | Uses:src/_pytest/python.py | API:- | Constraints:共生成一万五千个测试方法。\n\n===/testbed/changelog/===\n.gitignore[3 X D S]: Role:默认忽略 changelog 目录内容但白名单保留模板、说明和所有合法类别的新闻片段命名变体 | Uses:changelog/README.rst, changelog/_template.rst | API:- | Constraints:仅 breaking、deprecation、feature、improvement、bugfix、vendor、doc、packaging、contrib、misc 类别及允许的 .rst/附加编号形式进入版本控制。\n12083.breaking.rst[5 O D S]: Role:记录重叠路径参数与重复文件参数收集去重行为的破坏性修正及兼容开关 | Uses:src/_pytest/main.py | API:- | Constraints:重叠参数仅保留公共前缀，重复文件默认只运行一次；依赖旧行为时须显式使用 --keep-duplicates。\n12244.contrib.rst[1 O D T]: Role:记录 TERM=dumb 环境下自测试失败的修正 | Uses:- | API:- | Constraints:-\n12474.contrib.rst[1 O D T]: Role:记录新增定时 GitHub Actions Sphinx 文档链接检查 | Uses:.github/workflows/doc-check-links.yml | API:- | Constraints:-\n13072.feature.rst[5 O D S]: Role:说明通过 OSC 9;4 在受支持终端标签页显示测试会话进度的新功能及禁用办法 | Uses:src/_pytest/terminal.py | API:- | Constraints:TTY 中自动启用 terminalprogress 内部插件；可用 -p no:terminalprogress 或 PYTEST_ADDOPTS/addopts 禁用。\n13330.improvement.rst[3 O D T]: Role:记录同时存在多个 pytest 配置文件时提示仅使用其中一个的改进 | Uses:src/_pytest/config/findpaths.py | API:- | Constraints:-\n13445.bugfix.rst[1 O D T]: Role:记录 pytest.skip 等控制函数类型注解跨类型检查器兼容性的修正 | Uses:src/_pytest/outcomes.py | API:- | Constraints:-\n13522.bugfix.rst[3 O D S]: Role:记录 pytester 子进程模式传递全部插件列表并拒绝非字符串插件项的修正 | Uses:src/_pytest/pytester.py | API:- | Constraints:子进程模式须传递全部插件名，非字符串插件项报错；对象插件应改用名称或 runpytest_inprocess。\n13574.improvement.rst[5 O D S]: Role:说明单次 --version 快速路径与双次 --version 插件信息模式的启动优化 | Uses:src/_pytest/config/__init__.py, src/_pytest/helpconfig.py | API:- | Constraints:单次 --version 不加载完整插件基础设施且仅直接命令行传入时生效；双次保持显示版本、位置和插件信息。\n13598.bugfix.rst[1 O D T]: Role:记录 Windows 短路径与符号链接组合造成收集混淆的修正 | Uses:src/_pytest/main.py | API:- | Constraints:-\n13621.contrib.rst[3 O D T]: Role:记录自测试对 lsof 挂起设置十秒超时并跳过受影响用例 | Uses:testing/conftest.py | API:- | Constraints:-\n13625.doc.rst[1 O D T]: Role:记录 cacheprovider 的 pytest_addoption、pytest_configure 与 cacheshow 补充文档字符串 | Uses:src/_pytest/cacheprovider.py | API:- | Constraints:-\n13638.contrib.rst[3 O D T]: Role:记录发布准备脚本改用 GitHub CLI v2 支持的 gh pr create | Uses:scripts/prepare-release-pr.py | API:- | Constraints:-\n13678.feature.rst[5 O D S]: Role:说明控制 faulthandler 超时后是否中断 pytest 进程的新配置项 | Uses:src/_pytest/faulthandler.py | API:- | Constraints:faulthandler_exit_on_timeout 默认 false，仅输出所有线程回溯；启用后超时中断进程。\n13695.contrib.rst[1 O D T]: Role:记录 Pytester.run 刷新标准输出和错误以避免 CI 超时测试输出截断 | Uses:src/_pytest/pytester.py | API:- | Constraints:-\n13700.improvement.rst[3 O D T]: Role:记录安静模式下不再打印 JUnit XML 生成摘要 | Uses:src/_pytest/junitxml.py | API:- | Constraints:-\n13716.bugfix.rst[3 O D T]: Role:记录把文件节点后附参数选择器视为用法错误的收集修正 | Uses:src/_pytest/main.py | API:- | Constraints:形如 pytest x.py[a] 的文件参数化选择必须报用法错误，不得退化为 x.py。\n13719.breaking.rst[5 O D T]: Role:宣布因生命周期结束而停止支持 Python 3.9 | Uses:pyproject.toml | API:- | Constraints:最低受支持 CPython 为 3.10。\n13722.bugfix.rst[3 O D T]: Role:记录 pytest.approx 比较不同长度映射时误导性失败信息的修正 | Uses:src/_pytest/python_api.py | API:- | Constraints:-\n13732.improvement.rst[3 O D T]: Role:记录警告过滤器引用不可导入类时改为输出提示而非令 pytest 失败 | Uses:src/_pytest/config/__init__.py | API:- | Constraints:-\n13737.feature.rst[5 O D T]: Role:说明 strict_parametrization_ids 配置使重复参数集 ID 直接报错的新功能 | Uses:src/_pytest/python.py | API:- | Constraints:启用时非唯一参数 ID 必须报错，不再自动追加数字消歧。\n13766.breaking.rst[5 O D T]: Role:记录 CI 环境识别仅接受非空 CI 或 BUILD_NUMBER 环境变量的破坏性变更 | Uses:src/_pytest/compat.py | API:- | Constraints:仅定义为空字符串不得启用 CI 模式。\n13771.contrib.rst[1 O D T]: Role:记录无符号链接支持的 Windows 环境跳过相应用例以避免误报 | Uses:testing/test_collection.py | API:- | Constraints:-\n13773.bugfix.rst[3 O D T]: Role:记录静态夹具闭包计算纳入被覆盖夹具传递依赖的修正 | Uses:src/_pytest/fixtures.py | API:- | Constraints:-\n13779.breaking.rst[5 O D S]: Role:宣布 PytestRemovedIn9Warning 默认升级为错误并给出 pytest 9.0 临时过滤办法 | Uses:src/_pytest/warnings.py, src/_pytest/warning_types.py, doc/en/deprecations.rst | API:- | Constraints:pytest 9.0.x 可用 filterwarnings 临时忽略恢复警告；pytest 9.1 移除相关功能后该办法失效。\n13791.packaging.rst[3 O D T]: Role:记录 iniconfig 与 packaging 最低依赖版本提升 | Uses:pyproject.toml | API:- | Constraints:iniconfig 最低 1.0.1，packaging 最低 22.0.0。\n13807.deprecation.rst[3 O D T]: Role:记录 MonkeyPatch.syspath_prepend 遇到 pkg_resources 旧式命名空间包时的弃用警告 | Uses:src/_pytest/monkeypatch.py | API:- | Constraints:用户应迁移到 PEP 420 原生命名空间包。\n13829.feature.rst[5 O D S]: Role:说明 Parser.addini 通过 aliases 注册 ini 选项别名的功能与优先级 | Uses:src/_pytest/config/argparsing.py, src/_pytest/config/__init__.py | API:- | Constraints:配置同时提供规范名和别名时以规范名为准。\n13830.misc.rst[3 O D T]: Role:记录 -o/--override-ini 覆盖项改在启动期而非 Config.getini 调用时处理 | Uses:src/_pytest/config/__init__.py | API:- | Constraints:-\n13841.contrib.rst[1 O D T]: Role:记录 pytest 贡献环境要求 tox 4 或更高版本 | Uses:tox.ini | API:- | Constraints:-\n478.feature.rst[3 O D T]: Role:说明 consider_namespace_packages 启用时 --pyargs 可定位 PEP 420 隐式命名空间包 | Uses:src/_pytest/main.py | API:- | Constraints:该配置同时影响包名解析与测试发现。\nREADME.rst[7 O Q S]: Role:规定 towncrier 新闻片段的文件命名、受众、十种类别、文风与本地预览方式 | Uses:pyproject.toml, changelog/_template.rst, tox.ini | API:- | Constraints:文件名须为 <ISSUE>.<TYPE>.rst 且类型来自列出的十类；内容面向 pytest 用户，使用完整的过去时或现在时句子并有标点；除 feature 外通常保持单段。\n_template.rst[5 O Q S]: Role:定义 towncrier 按章节和类别汇总新闻片段、议题链接及空章节提示的 Jinja 模板 | Uses:pyproject.toml | API:- | Constraints:按定义顺序输出类别并按议题值排序；showcontent 类别展开文本与议题链接，其他类别只列议题；无内容章节或类别显示 No significant changes。\n\n===/testbed/doc/en/===\nMakefile[5 B D S]: Role:提供 Sphinx 文档构建代理目标及 regendoc 示例输出再生与稳定化规则 | Uses:doc/en/conf.py, doc/en/ | API:make help；make regen；任意 Sphinx -M 目标 | Constraints:默认目标为 help；regen 固定列宽、禁用字节码并归一化临时路径、耗时和依赖版本，且把缓存目录恢复为非 tox 默认值。\nadopt.rst[1 O D S]: Role:记录 2015 年由志愿导师帮助开源项目逐步采用 pytest 的活动目标、参与条件与成功标准 | Uses:- | API:- | Constraints:这是 orphan 历史活动页；采用可从兼容运行既有 unittest 渐进到 CI、原生断言、夹具与标记。\nbackwards-compatibility.rst[8 O I M]: Role:说明 pytest 公共 API、弃用流程和兼容性承诺，界定插件与用户可依赖的接口 | Uses:doc/en/deprecations.rst,doc/en/how-to/writing_plugins.rst,doc/en/reference/reference.rst | API:公共 API 变更通常先弃用并跨版本迁移，私有名称与实验性 API 不承诺兼容 | Constraints:弃用通常至少经历两个次要版本并先产生可升级为错误的警告，移除原则上发生在主要版本\nbroken-dep-constraints.txt[3 X Q T]: Role:为 Read the Docs 构建固定已知不兼容的文档依赖上限 | Uses:doc/en/requirements.txt | API:- | Constraints:仅补充主文档依赖清单中因上游破坏性版本而需要的约束\nbuiltin.rst[5 O F L]: Role:汇总 pytest 内置夹具的自动生成参考页入口 | Uses:src/_pytest/fixtures.py,src/_pytest/tmpdir.py,src/_pytest/capture.py,src/_pytest/monkeypatch.py,src/_pytest/logging.py | API:向文档读者列出可直接请求的内置 fixture 及其签名和说明 | Constraints:内容由文档生成配置从公开 fixture 文档抽取\nchangelog.rst[8 O D L]: Role:汇总 pytest 0.9.1 至 8.4.2 各版本的破坏性变更、弃用、功能、修复、文档与内部演进历史 | Uses:changelog/（towncrier 新闻片段来源）, changelog/_template.rst（聚合模板） | API:- | Constraints:版本遵循语义化版本；破坏性变更只在重大版本并须提前于弃用章节告知；本文件由 towncrier 管理，不应直接新增条目，仅可修正既有记录。\nconf.py[7 B D M]: Role:配置 pytest Sphinx 文档构建、版本信息、扩展、主题、链接与自定义对象处理 | Uses:doc/en/requirements.txt,src/pytest/__init__.py,doc/en/img/pytest_logo_curves.svg | API:Sphinx 构建配置及 setup(app) 扩展注册入口 | Constraints:文档版本取 pytest 发布元数据；nitpicky 引用检查配合显式忽略清单\nconftest.py[1 X D T]: Role:声明文档目录的 pytest 收集边界，避免把示例源码作为仓库测试递归执行 | Uses:- | API:collect_ignore_glob 忽略全部示例脚本测试文件 | Constraints:仅影响在 doc/en 下运行 pytest 时的收集\ncontact.rst[3 O Q S]: Role:列出 pytest 用户支持、讨论、缺陷报告与安全问题的联系渠道 | Uses:doc/en/contributing.rst | API:为不同沟通目的指向对应社区渠道 | Constraints:安全漏洞要求私下报告而非公开 issue\ncontents.rst[7 O D S]: Role:定义 pytest 文档全集的顶层目录树和隐藏导航结构 | Uses:doc/en/getting-started.rst,doc/en/how-to/index.rst,doc/en/reference/index.rst,doc/en/explanation/index.rst,doc/en/contributing.rst | API:作为 Sphinx 全文目录入口 | Constraints:toctree 顺序决定生成文档的主导航组织\ncontributing.rst[3 O D T]: Role:汇总参与 pytest 项目的贡献指南、开发流程与行为规范入口 | Uses:doc/en/development_guide.rst,doc/en/contact.rst | API:面向贡献者给出问题报告、代码贡献和社区参与路径 | Constraints:贡献行为受项目行为准则约束\ndeprecations.rst[8 O I L]: Role:集中记录 pytest 当前弃用、重大版本移除与插件迁移方案，涵盖路径、节点、钩子、夹具、标记、警告、收集和报告接口 | Uses:src/_pytest/deprecated.py, src/_pytest/warning_types.py, src/_pytest/nodes.py, src/_pytest/hookspec.py, src/_pytest/fixtures.py | API:pytest.importorskip(exc_type)；Node.from_parent；pytest.hookimpl；pytest.hookspec；pytest.mark.parametrize；pytest.fixture；pytest_warning_recorded；pytest_load_initial_conftests；record_property | Constraints:Node 构造器旧 fspath 是 py.path 而新 path 是 pathlib，路径钩子恰相反为旧 path、新 collection_path/file_path/module_path/start_path；自定义 Node 构造器须接收关键字 **kwargs 并用 from_parent；收集节点不得同时继承 Item 与 Collector；夹具函数上的标记无效；yield tests 已成为收集错误，nose 支持已移除；pytest 8 目录树以 Directory/Dir/Package 镜像文件系统并联合字母序收集；旧参数化、直接调用夹具、字符串 pytest.main 及非顶层 conftest 的 pytest_plugins 均须按文档替代。\ndevelopment_guide.rst[3 O Q L]: Role:说明 pytest 本地开发环境、测试、文档、发布与维护工作流 | Uses:pyproject.toml,tox.ini,doc/en/contributing.rst,doc/en/backwards-compatibility.rst | API:贡献者开发与发布操作指南 | Constraints:变更须匹配项目测试、代码风格、changelog 与兼容性流程\nfuncarg_compare.rst[3 O F M]: Role:记录 pytest 2.3 从旧 funcarg 工厂演进到可声明作用域、参数化和 autouse 的夹具机制的设计理由 | Uses:src/_pytest/fixtures.py,doc/en/how-to/fixtures.rst | API:- | Constraints:旧 pytest_funcarg__、request.cached_setup 和 getfuncargvalue 仅作历史兼容说明；推荐 pytest.fixture 直接声明 scope/params 并用 addfinalizer 或 yield 管理清理，夹具发现发生在收集期\nfuncargs.rst[3 O D T]: Role:说明 pytest 2.3 对 funcarg/夹具资源注入和参数化文档的重构并指向现行章节 | Uses:doc/en/how-to/fixtures.rst,doc/en/how-to/parametrize.rst,doc/en/funcarg_compare.rst | API:- | Constraints:-\ngetting-started.rst[8 O D L]: Role:以安装、首个失败测试、异常断言、测试类、近似比较和临时目录示例引导新用户使用 pytest | Uses:doc/en/how-to/usage.rst,doc/en/how-to/fixtures.rst,doc/en/how-to/mark.rst,doc/en/explanation/goodpractices.rst | API:pytest 命令；pytest.raises；pytest.approx；tmp_path；pytest --fixtures | Constraints:默认递归发现 test_*.py 与 *_test.py；测试类须以 Test 开头且每个测试方法获得独立实例，类属性仍共享；--fixtures 默认隐藏下划线开头夹具，-v 才显示\nhistorical-notes.rst[5 O I L]: Role:记录标记、缓存、旧式夹具、参数化、配置段、字符串条件、调试和节点兼容属性的历史 API 迁移 | Uses:src/_pytest/mark/,src/_pytest/nodes.py,src/_pytest/fixtures.py,src/_pytest/cacheprovider.py,src/_pytest/skipping.py | API:Node.iter_markers；Node.get_closest_marker；pytest_funcarg__NAME；pytest.yield_fixture；pytest.mark.skipif；pytest.mark.xfail | Constraints:覆盖语义标记用 get_closest_marker，累加语义用 iter_markers；核心 cache 仅持久化 JSON 可序列化值；setup.cfg 使用 [tool:pytest] 而 pytest.ini/tox.ini 使用 [pytest]；字符串 skipif/xfail 条件仍支持并在 sys、os、config 与测试模块全局命名空间求值，但布尔条件更利于跨模块复用且必须给 reason\nhistory.rst[3 O D L]: Role:叙述 pytest 从 PyPy 测试支持、std/py.test、py 库到独立 pytest 包与现代命令的演化 | Uses:doc/en/changelog.rst | API:- | Constraints:项目起点可按 PyPy 早期测试工作或 2004 年 EuroPython 的 std.utest/py.test 形成来理解，仓库首提交并非完整历史起点\nindex.rst[8 O D M]: Role:作为 pytest 文档首页介绍定位、断言示例、核心能力、文档入口、支持资助、企业服务和安全联系 | Uses:doc/en/getting-started.rst,doc/en/how-to/,doc/en/reference/,doc/en/explanation/,doc/en/example/ | API:- | Constraints:声明支持 Python 3.10+ 或 PyPy3；安全漏洞经 Tidelift 安全联系人协调修复与披露\nlicense.rst[5 O Q S]: Role:刊载 pytest 所采用 MIT 许可证的完整授权、版权声明与免责条款 | Uses:LICENSE | API:- | Constraints:软件可自由使用、复制、修改、合并、发布、分发、再许可和销售，但所有副本或实质部分必须保留版权及许可声明，并按现状提供且无任何担保\nnaming20.rst[3 O D T]: Role:说明 pytest 2.0 将旧 py.test 嵌套命名空间扁平迁移为 pytest 公共命名空间 | Uses:src/pytest/__init__.py | API:- | Constraints:py.test.XYZ 与 py.test.collect.XYZ 映射到 pytest.XYZ，py.test.cmdline.main 映射 pytest.main；旧访问方式仍兼容但不推荐\npytest.ini[1 X D T]: Role:隔离文档目录内 pytest 调用，防止继承仓库根 tox.ini 配置 | Uses:- | API:- | Constraints:[pytest] 节即使为空也用于截断上层配置发现\nrecwarn.rst[1 O D T]: Role:把旧 recwarn 文档入口重定向到警告断言章节 | Uses:doc/en/how-to/capture-warnings.rst | API:- | Constraints:保留 orphan 页面与 assertwarnings 交叉引用\nrequirements.txt[5 X Q T]: Role:声明 Sphinx 文档构建、主题、扩展及 pytest 文档渲染依赖 | Uses:doc/en/broken-dep-constraints.txt | API:- | Constraints:pluggy 至少 1.5，Sphinx 至少 7；首行应用集中约束文件\nsponsor.rst[3 O Q S]: Role:说明 pytest 志愿维护资金用途并引导通过 OpenCollective 透明捐助 | Uses:OPENCOLLECTIVE.rst | API:- | Constraints:资金用于补偿维护时间、本地及大型冲刺和周边\ntalks.rst[1 O D M]: Role:汇编 pytest 书籍、培训、演讲、博客以及参数化、断言、分布式测试与插件专题资料 | Uses:- | API:- | Constraints:-\ntidelift.rst[3 O Q S]: Role:介绍 pytest 的 Tidelift 企业订阅、商业支持、安全、许可证、维护和路线图服务 | Uses:TIDELIFT.rst | API:- | Constraints:-\nyieldfixture.rst[3 O D T]: Role:说明 yield_fixture 已弃用以及普通 fixture 装饰器使用 yield 提供值和清理的迁移方式 | Uses:doc/en/how-to/fixtures.rst | API:- | Constraints:新代码不得使用 yield_fixture；普通 fixture 自 pytest 3.0 起支持 yield\n\n===/testbed/doc/en/_static/===\npytest-custom.css[1 O D T]: Role:定制文档侧栏品牌标志尺寸、间距及首页特性列表布局 | Uses:doc/en/conf.py | API:- | Constraints:侧栏标志宽度为 70%，品牌容器无内边距；46em 以上 features 区域宽度为 50%。\n\n===/testbed/doc/en/_templates/===\nlinks.html[1 O D T]: Role:渲染文档侧栏指向 PyPI、GitHub、议题跟踪器和最新版 PDF 的快捷链接 | Uses:- | API:- | Constraints:-\n\n===/testbed/doc/en/announce/===\nindex.rst[3 O D S]: Role:按版本倒序组织 pytest 2.0 至 8.4 的发布公告与 2016 冲刺记录 | Uses:doc/en/announce/ | API:- | Constraints:-\nrelease-2.0.0.rst[5 O D L]: Role:宣布 pytest 2.0 从 py 分发拆分并介绍断言、配置、unittest、安静输出和完整收集模型 | Uses:doc/en/changelog.rst | API:- | Constraints:完整测试套件先收集后执行；目录收集器不再能由本目录 conftest 替换，旧收集 API、conftest 选项与 disabled 类属性已移除。\nrelease-2.0.1.rst[3 O D M]: Role:说明 pytest 2.0.1 对早期捕获、插件版本、断言、doctest、xfail 与结果日志的兼容性修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.0.2.rst[3 O D M]: Role:说明 pytest 2.0.2 对速度、skip/xfail 表达式、collect-only、参数化与 Python 3 的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:字符串 skipif/xfail 条件可访问模块全局并保留可报告条件；--collectonly -q 输出可复用测试 ID。\nrelease-2.0.3.rst[3 O D S]: Role:说明 pytest 2.0.3 对钩子回溯、JUnit XML、收集与跳过性能的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.1.0.rst[5 O D M]: Role:宣布 pytest 2.1 以导入钩子重写测试断言并修正 doctest、JUnit XML 与收集行为 | Uses:doc/en/changelog.rst | API:- | Constraints:Python 2.6+ 测试模块的 assert 在导入前经 AST 重写并缓存 pyc，避免优化模式关闭断言。\nrelease-2.1.1.rst[3 O D S]: Role:说明 pytest 2.1.1 的断言重写修复、JUnit system-out/err 输出与手册页构建 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.1.2.rst[3 O D S]: Role:说明 pytest 2.1.2 在 Windows 换行、包重写、优化缓存与 Jython 回退方面的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:Jython 不执行断言重写而使用重新解释路径。\nrelease-2.1.3.rst[3 O D S]: Role:说明 pytest 2.1.3 的布尔断言、空参数、JUnit 时长与目录级比较报告定制修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.2.0.rst[5 O D L]: Role:宣布 pytest 2.2 的参数化、标记选择注册、慢阶段报告及更早夹具清理机制 | Uses:doc/en/changelog.rst | API:- | Constraints:pytest_runtest_logreport 对 setup/call/teardown 阶段无条件调用，插件须按 rep.when 自行筛选；参数化 API 当时仍为实验性。\nrelease-2.2.1.rst[3 O D S]: Role:说明 pytest 2.2.1 对内部错误输出、回溯与末项即时清理的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:pytest_runtest_protocol 与 pytest_runtest_teardown 的 nextitem 为 None 表示运行结束。\nrelease-2.2.2.rst[3 O D S]: Role:说明 pytest 2.2.2 的 unittest 参数、分层参数化、会话清理、collect-only 输出和分布式报告属性修正 | Uses:doc/en/changelog.rst | API:- | Constraints:正文注明 2.2.2 因打包问题更新为 2.2.3；-q collect-only 显示测试 ID，-qq 只显示文件与数量。\nrelease-2.2.4.rst[3 O D S]: Role:说明 pytest 2.2.4 对断言百分号、JUnit XML、unittest 预期失败、Python 3 与会话收尾的兼容修正 | Uses:doc/en/changelog.rst | API:- | Constraints:configure/sessionstart 已调用时必须始终对应调用 unconfigure/sessionfinish。\nrelease-2.3.0.rst[5 O D L]: Role:宣布 pytest 2.3 的作用域与参数化夹具、夹具依赖、资源排序及 unittest 集成，并详列收集报告兼容修正 | Uses:doc/en/changelog.rst, doc/en/funcarg_compare.rst | API:- | Constraints:跳过优先于 xfail；插件管理器重复注册名称须报 ValueError；JUnit 相对路径基于初始工作目录；-vv 展开完整断言比较。\nrelease-2.3.1.rst[3 O D S]: Role:说明 pytest 2.3.1 修复方法夹具 self 实例、FreeBSD pexpect 挂起与 markers 帮助链接 | Uses:doc/en/changelog.rst | API:- | Constraints:方法夹具看到的 self 与请求它的测试方法实例相同。\nrelease-2.3.2.rst[3 O D M]: Role:说明 pytest 2.3.2 修复 conftest 定制、参数化清理、unittest 与 trial runTest、回溯性能和打包 | Uses:doc/en/changelog.rst | API:- | Constraints:只有 TestCase 定义测试方法时才调用 runtest，trial 空 runTest 不收集。\nrelease-2.3.3.rst[3 O D M]: Role:说明 pytest 2.3.3 对 Flask、NumPy、nose、unittest、mock、Python 2.4 与回溯参数显示的集成修正 | Uses:doc/en/changelog.rst | API:- | Constraints:unittest 类级 skip 不调用 setUpClass/tearDownClass；mock.patch 需 mock 1.0.1 或 Python 3.3 unittest.mock。\nrelease-2.3.4.rst[5 O D M]: Role:宣布 pytest 2.3.4 的布尔 -k 选择、动态标记、autouse 发现、长参数与 LIFO 夹具清理修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-k 改用类似 -m 的表达式，旧 TestClass.test_method 须改为 TestClass and test_method；yield 测试不能接收夹具参数。\nrelease-2.3.5.rst[3 O D L]: Role:说明 pytest 2.3.5 对夹具重跑、JUnit 输出、断言重写、doctest、捕获、nose 和插件交互的大批修正 | Uses:doc/en/changelog.rst | API:- | Constraints:worker 不写 JUnit XML；CPython 2.6.0 禁用断言重写；普通 unittest 不使用 nose 特殊 setup。\nrelease-2.4.0.rst[5 O D L]: Role:宣布 pytest 2.4 的 yield 夹具、原生 PDB 捕获、早期配置钩子、参数集标记、argcomplete 与 argparse 迁移 | Uses:doc/en/changelog.rst | API:- | Constraints:对应 setup 失败时不调用 teardown；pytest.fixture 装饰的生成器不作 yield 夹具，须用 pytest.yield_fixture；帮助显示连字符长选项但保留旧拼写。\nrelease-2.4.1.rst[3 O D S]: Role:说明 pytest 2.4.1 修复 addoption Unicode 类型转换、argcomplete 点文件名和单元组参数化回归 | Uses:doc/en/changelog.rst | API:- | Constraints:单参数名元组不得使每个参数值额外嵌套一层。\nrelease-2.4.2.rst[3 O D M]: Role:说明 pytest 2.4.2 的 Windows 颜色、-k 匹配、tmpdir 长度、插件节点标记与捕获兼容修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-k 不得因内部 repr、attr 等名称产生误匹配。\nrelease-2.5.0.rst[5 O D L]: Role:宣布 pytest 2.5 对夹具终结、参数 ID、选择表达式、命名空间包、断言重写、JUnit 与插件加载的大批修正 | Uses:doc/en/changelog.rst | API:- | Constraints:所有终结器均运行并重新抛出首个失败；--runxfail 使命令式 pytest.xfail 成为空操作；Python 2.5 不在自动发布验证范围；高作用域参数重排不得递归溢出。\nrelease-2.5.1.rst[3 O D S]: Role:说明 pytest 2.5.1 的文档首页样式、同名参数化函数、夹具参数 ID、JUnit 转义与 addoption 文档修正 | Uses:doc/en/changelog.rst | API:- | Constraints:参数化 fixture 与 yield_fixture 可通过 ids 指定参数 ID。\nrelease-2.5.2.rst[3 O D M]: Role:说明 pytest 2.5.2 对冻结、Unicode 异常、conftest 加载、字节断言和捕获实现的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:capsys/capfd 的 capture 属性转为私有，不应对外使用。\nrelease-2.6.0.rst[5 O D L]: Role:宣布 pytest 2.6 的默认短回溯、新警告系统、稳健捕获及 nose/mock/unittest 集成改进 | Uses:doc/en/changelog.rst | API:- | Constraints:默认 --tb=auto 仅首尾条目完整，--tb=long 恢复全长；类有 __init__ 或疑似测试的非函数可调用对象产生收集警告；__test__=False 阻止收集。\nrelease-2.6.1.rst[3 O D M]: Role:说明 pytest 2.6.1 的纯 nodeid 详细输出、捕获、xfail 期望异常与 unittest.mock 集成修正 | Uses:doc/en/changelog.rst | API:- | Constraints:pytest.mark.xfail 的 raises 接受单个异常类或异常类元组。\nrelease-2.6.2.rst[3 O D S]: Role:说明 pytest 2.6.2 新增 freeze_includes 并修正断言缓存、源码显示与冻结打包 | Uses:doc/en/changelog.rst | API:- | Constraints:Python 2.6 构建因额外 argparse 依赖不标记为通用 wheel。\nrelease-2.6.3.rst[3 O D S]: Role:说明 pytest 2.6.3 对 JUnit 收集错误、捕获序列化、异常递归判断、conftest 夹具可见性及 PDB 钩子的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:pytest_enter_pdb 供插件在进入交互调试时执行准备工作。\nrelease-2.7.0.rst[5 O D L]: Role:宣布 pytest 2.7 的 rootdir、PYTEST_ADDOPTS、钩子包装器、doctest 选项、参数 ID 生成与收集性能能力 | Uses:doc/en/changelog.rst | API:- | Constraints:旧 __multicall__ 协议计划由 hookwrapper 取代；python_classes 与 python_functions 接受 glob；失败后设置 sys.last_value/type/traceback。\nrelease-2.7.1.rst[3 O D M]: Role:说明 pytest 2.7.1 的断言解释、夹具查找、scope mismatch、捕获清理、构建与发布流程修正 | Uses:doc/en/changelog.rst | API:- | Constraints:yield fixture 已不再视为实验性；SystemExit 不得丢失已捕获输出。\nrelease-2.7.2.rst[3 O D S]: Role:说明 pytest 2.7.2 对 raises、JUnit 路径与 doctest、跳过报告、不可排序集合和回溯生成的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:JUnit 与结果日志的父目录自动创建。\nrelease-2.8.2.rst[3 O D S]: Role:说明 pytest 2.8.2 对参数化字节编码、空字节串和 exec 生成回溯过滤的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.8.3.rst[3 O D S]: Role:说明 pytest 2.8.3 对 unittest 跳过、动态属性收集、失效源码回溯和失败高亮的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:无法正确报告失败的可调用实例不得作为测试收集。\nrelease-2.8.4.rst[3 O D S]: Role:说明 pytest 2.8.4 对 deprecated_call、pastebin Unicode、恶意 __getattr__ 和空运行摘要的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.8.5.rst[3 O D T]: Role:说明 pytest 2.8.5 对收集期注入类属性、JUnit 内存和 deprecated_call 多参数回归的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-2.8.6.rst[3 O D M]: Role:说明 pytest 2.8.6 对重复 nodeid、PDB 捕获、monkeypatch 性能、doctest Unicode、警告与 JUnit 输出的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:monkeypatch 的 setattr、setenv 等操作改为常数时间。\nrelease-2.8.7.rst[3 O D T]: Role:宣布 pytest 2.8.7 热修复 2.8.6 引入的 monkeypatch 对象解析回归 | Uses:doc/en/changelog.rst | API:- | Constraints:声明与 2.8.5 直接兼容。\nrelease-2.9.0.rst[5 O D L]: Role:宣布 pytest 2.9 的 skip 标记、重复 doctest glob、通过报告、严格 xfail、布尔 ini 与内部代码迁移 | Uses:doc/en/changelog.rst | API:- | Constraints:_pytest._code 为私有实验实现，不应显式导入；CI 或 BUILD_NUMBER 环境使比较完整显示；xfail strict 使 XPASS 失败。\nrelease-2.9.1.rst[3 O D S]: Role:说明 pytest 2.9.1 对插件加载、非 ASCII 失败、JUnit nodeid、SyntaxError、参数 ID 与命令行参数节点选择的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:含 :: 的参数 ID 必须在 JUnit 与命令行选择中正确处理。\nrelease-2.9.2.rst[3 O D S]: Role:说明 pytest 2.9.2 对空参数维度、xfail 条件、Windows 配置路径、严格 skip 与 fixtures 列举的修正 | Uses:doc/en/changelog.rst | API:- | Constraints:--fixtures 显示同名夹具的全部定义。\nrelease-3.0.0.rst[5 O D L]: Role:宣布 pytest 3.0.0、2016 冲刺背景、主要改进、升级与贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:重大版本使用者应查阅完整变更日志和 3.0 新功能说明。\nrelease-3.0.1.rst[3 O D T]: Role:宣布 pytest 3.0.1 修复 3.0.0 回归并提供升级、变更日志与贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为 3.0.0 的可直接替换版本。\nrelease-3.0.2.rst[3 O D T]: Role:宣布 pytest 3.0.2 修复 3.0.1 的回归与缺陷并列出升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.0.3.rst[3 O D T]: Role:宣布 pytest 3.0.3 修复上一版本回归与缺陷并链接变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.0.4.rst[3 O D T]: Role:宣布 pytest 3.0.4 缺陷修订版并提供 PyPI 升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.0.5.rst[3 O D T]: Role:宣布 pytest 3.0.5 缺陷修订版并链接完整变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.0.6.rst[3 O D T]: Role:宣布 pytest 3.0.6 缺陷修订版并提供升级、变更日志与致谢 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.0.7.rst[3 O D T]: Role:宣布 pytest 3.0.7 缺陷修订版并提供升级和贡献者名单 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.1.0.rst[3 O D T]: Role:宣布 pytest 3.1.0 的缺陷修正与改进并指向完整变更日志和文档 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.1.1.rst[3 O D T]: Role:宣布 pytest 3.1.1 缺陷修订版及升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.1.2.rst[3 O D T]: Role:宣布 pytest 3.1.2 缺陷修订版及升级和变更日志入口 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.1.3.rst[3 O D T]: Role:宣布 pytest 3.1.3 缺陷修订版及升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.10.0.rst[3 O D T]: Role:宣布 pytest 3.10.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.10.1.rst[3 O D T]: Role:宣布 pytest 3.10.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.2.0.rst[3 O D T]: Role:宣布 pytest 3.2.0 的缺陷修正与改进并提供文档和升级入口 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.2.1.rst[3 O D T]: Role:宣布 pytest 3.2.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.2.2.rst[3 O D T]: Role:宣布 pytest 3.2.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.2.3.rst[3 O D T]: Role:宣布 pytest 3.2.3 缺陷修订版及升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.2.4.rst[3 O D T]: Role:宣布 pytest 3.2.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.2.5.rst[3 O D T]: Role:宣布 pytest 3.2.5 缺陷修订版及升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.3.0.rst[3 O D T]: Role:宣布 pytest 3.3.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.3.1.rst[3 O D T]: Role:宣布 pytest 3.3.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.3.2.rst[3 O D T]: Role:宣布 pytest 3.3.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.4.0.rst[3 O D T]: Role:宣布 pytest 3.4.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.4.1.rst[3 O D T]: Role:宣布 pytest 3.4.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.4.2.rst[3 O D T]: Role:宣布 pytest 3.4.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.5.0.rst[3 O D T]: Role:宣布 pytest 3.5.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.5.1.rst[3 O D T]: Role:宣布 pytest 3.5.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.6.0.rst[3 O D T]: Role:宣布 pytest 3.6.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.6.1.rst[3 O D T]: Role:宣布 pytest 3.6.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.6.2.rst[3 O D T]: Role:宣布 pytest 3.6.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.6.3.rst[3 O D T]: Role:宣布 pytest 3.6.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.6.4.rst[3 O D T]: Role:宣布 pytest 3.6.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.7.0.rst[3 O D T]: Role:宣布 pytest 3.7.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.7.1.rst[3 O D T]: Role:宣布 pytest 3.7.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.7.2.rst[3 O D T]: Role:宣布 pytest 3.7.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.7.3.rst[3 O D T]: Role:宣布 pytest 3.7.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.7.4.rst[3 O D T]: Role:宣布 pytest 3.7.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.8.0.rst[3 O D T]: Role:宣布 pytest 3.8.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.8.1.rst[3 O D T]: Role:宣布 pytest 3.8.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.8.2.rst[3 O D T]: Role:宣布 pytest 3.8.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.9.0.rst[3 O D T]: Role:宣布 pytest 3.9.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-3.9.1.rst[3 O D T]: Role:宣布 pytest 3.9.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.9.2.rst[3 O D T]: Role:宣布 pytest 3.9.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-3.9.3.rst[3 O D T]: Role:宣布 pytest 3.9.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.0.0.rst[3 O D T]: Role:宣布 pytest 4.0.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:重大版本使用者应查阅完整变更日志。\nrelease-4.0.1.rst[3 O D T]: Role:宣布 pytest 4.0.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.0.2.rst[3 O D T]: Role:宣布 pytest 4.0.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.1.0.rst[3 O D T]: Role:宣布 pytest 4.1.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-4.1.1.rst[3 O D T]: Role:宣布 pytest 4.1.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.2.0.rst[3 O D T]: Role:宣布 pytest 4.2.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-4.2.1.rst[3 O D T]: Role:宣布 pytest 4.2.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.3.0.rst[3 O D T]: Role:宣布 pytest 4.3.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-4.3.1.rst[3 O D T]: Role:宣布 pytest 4.3.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.4.0.rst[3 O D T]: Role:宣布 pytest 4.4.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-4.4.1.rst[3 O D T]: Role:宣布 pytest 4.4.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.4.2.rst[3 O D T]: Role:宣布 pytest 4.4.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.5.0.rst[3 O D T]: Role:宣布 pytest 4.5.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-4.6.0.rst[3 O D T]: Role:宣布 pytest 4.6.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-4.6.1.rst[3 O D T]: Role:宣布 pytest 4.6.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.2.rst[3 O D T]: Role:宣布 pytest 4.6.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.3.rst[3 O D T]: Role:宣布 pytest 4.6.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.4.rst[3 O D T]: Role:宣布 pytest 4.6.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.5.rst[3 O D T]: Role:宣布 pytest 4.6.5 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.6.rst[3 O D T]: Role:宣布 pytest 4.6.6 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.7.rst[3 O D T]: Role:宣布 pytest 4.6.7 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.8.rst[3 O D T]: Role:宣布 pytest 4.6.8 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-4.6.9.rst[3 O D T]: Role:宣布 pytest 4.6.9 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.0.0.rst[3 O D T]: Role:宣布 pytest 5.0.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:重大版本使用者应查阅完整变更日志。\nrelease-5.0.1.rst[3 O D T]: Role:宣布 pytest 5.0.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.1.0.rst[3 O D T]: Role:宣布 pytest 5.1.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-5.1.1.rst[3 O D T]: Role:宣布 pytest 5.1.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.1.2.rst[3 O D T]: Role:宣布 pytest 5.1.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.1.3.rst[3 O D T]: Role:宣布 pytest 5.1.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.2.0.rst[3 O D T]: Role:宣布 pytest 5.2.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-5.2.1.rst[3 O D T]: Role:宣布 pytest 5.2.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.2.2.rst[3 O D T]: Role:宣布 pytest 5.2.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.2.3.rst[3 O D T]: Role:宣布 pytest 5.2.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.2.4.rst[3 O D T]: Role:宣布 pytest 5.2.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.3.0.rst[3 O D T]: Role:宣布 pytest 5.3.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-5.3.1.rst[3 O D T]: Role:宣布 pytest 5.3.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.3.2.rst[3 O D T]: Role:宣布 pytest 5.3.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.3.3.rst[3 O D T]: Role:宣布 pytest 5.3.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.3.4.rst[3 O D T]: Role:宣布 pytest 5.3.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.3.5.rst[3 O D T]: Role:宣布 pytest 5.3.5 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.4.0.rst[3 O D T]: Role:宣布 pytest 5.4.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-5.4.1.rst[3 O D T]: Role:宣布 pytest 5.4.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.4.2.rst[3 O D T]: Role:宣布 pytest 5.4.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-5.4.3.rst[3 O D T]: Role:宣布 pytest 5.4.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.0.0.rst[3 O D T]: Role:宣布 pytest 6.0.0 的缺陷修正与改进并提供文档、升级和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:重大版本使用者应查阅完整变更日志。\nrelease-6.0.0rc1.rst[3 O D S]: Role:宣布 pytest 6.0.0rc1 候选版本及升级、变更日志和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:正文将其称为可直接替换的缺陷版，未附预发布专用安装警告。\nrelease-6.0.1.rst[3 O D T]: Role:宣布 pytest 6.0.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.0.2.rst[3 O D T]: Role:宣布 pytest 6.0.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.1.0.rst[3 O D T]: Role:宣布 pytest 6.1.0 的新功能、改进、缺陷修正与破坏性变化并引导查阅日志 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-6.1.1.rst[3 O D T]: Role:宣布 pytest 6.1.1 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.1.2.rst[3 O D T]: Role:宣布 pytest 6.1.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.2.0.rst[3 O D T]: Role:宣布 pytest 6.2.0 的新功能、改进、缺陷修正与破坏性变化并列出贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-6.2.1.rst[3 O D T]: Role:宣布 pytest 6.2.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.2.2.rst[3 O D T]: Role:宣布 pytest 6.2.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.2.3.rst[3 O D T]: Role:宣布 pytest 6.2.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.2.4.rst[3 O D T]: Role:宣布 pytest 6.2.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-6.2.5.rst[3 O D T]: Role:宣布 pytest 6.2.5 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.0.0.rst[3 O D T]: Role:宣布 pytest 7.0.0 的新功能、改进、缺陷修正与破坏性变化并列出贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:重大版本使用者应仔细查阅完整变更日志。\nrelease-7.0.0rc1.rst[3 O D S]: Role:征集对 pytest 7.0.0rc1 候选版的测试反馈并提供精确安装、日志和贡献者信息 | Uses:doc/en/changelog.rst | API:- | Constraints:不用于生产；回归报告标题应含 [prerelease]，安装应固定 pytest==7.0.0rc1。\nrelease-7.0.1.rst[3 O D T]: Role:宣布 pytest 7.0.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.1.0.rst[3 O D T]: Role:宣布 pytest 7.1.0 的新功能、改进和缺陷修正并提供文档与升级入口 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-7.1.1.rst[3 O D T]: Role:宣布 pytest 7.1.1 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.1.2.rst[3 O D T]: Role:宣布 pytest 7.1.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.1.3.rst[3 O D T]: Role:宣布 pytest 7.1.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.2.0.rst[3 O D T]: Role:宣布 pytest 7.2.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-7.2.1.rst[3 O D T]: Role:宣布 pytest 7.2.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.2.2.rst[3 O D T]: Role:宣布 pytest 7.2.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.3.0.rst[3 O D T]: Role:宣布 pytest 7.3.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-7.3.1.rst[3 O D T]: Role:宣布 pytest 7.3.1 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.3.2.rst[3 O D T]: Role:宣布 pytest 7.3.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.4.0.rst[3 O D T]: Role:宣布 pytest 7.4.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-7.4.1.rst[3 O D T]: Role:宣布 pytest 7.4.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.4.2.rst[3 O D T]: Role:宣布 pytest 7.4.2 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.4.3.rst[3 O D T]: Role:宣布 pytest 7.4.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-7.4.4.rst[3 O D T]: Role:宣布 pytest 7.4.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.0.0.rst[3 O D T]: Role:宣布 pytest 8.0.0 的新功能、改进、缺陷修正与破坏性变化并提供升级入口 | Uses:doc/en/changelog.rst | API:- | Constraints:重大版本使用者应仔细查阅完整变更日志。\nrelease-8.0.0rc1.rst[3 O D S]: Role:宣布 pytest 8.0.0rc1 候选版本及其功能、破坏性变化、文档和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:正文使用普通升级命令而未声明生产限制，使用者仍应依据候选版本标识审慎评估。\nrelease-8.0.0rc2.rst[3 O D S]: Role:征集对 pytest 8.0.0rc2 候选版的测试反馈并提供精确安装与日志入口 | Uses:doc/en/changelog.rst | API:- | Constraints:不用于生产；回归报告标题应含 [prerelease]，安装应固定 pytest==8.0.0rc2。\nrelease-8.0.1.rst[3 O D T]: Role:宣布 pytest 8.0.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.0.2.rst[3 O D T]: Role:宣布 pytest 8.0.2 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.1.0.rst[3 O D T]: Role:宣布 pytest 8.1.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-8.1.1.rst[3 O D T]: Role:宣布 pytest 8.1.1 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.1.2.rst[3 O D T]: Role:宣布 pytest 8.1.2 缺陷修订版及升级和变更日志 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.2.0.rst[3 O D T]: Role:宣布 pytest 8.2.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-8.2.1.rst[3 O D T]: Role:宣布 pytest 8.2.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.2.2.rst[3 O D T]: Role:宣布 pytest 8.2.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.3.0.rst[3 O D T]: Role:宣布 pytest 8.3.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-8.3.1.rst[3 O D T]: Role:宣布 pytest 8.3.1 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.3.2.rst[3 O D T]: Role:宣布 pytest 8.3.2 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.3.3.rst[3 O D T]: Role:宣布 pytest 8.3.3 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.3.4.rst[3 O D T]: Role:宣布 pytest 8.3.4 缺陷修订版及升级、变更日志和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本。\nrelease-8.3.5.rst[3 O D T]: Role:宣布 pytest 8.3.5 缺陷修订版并链接变更日志与贡献者名单 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本但不再展示升级命令。\nrelease-8.4.0.rst[3 O D T]: Role:宣布 pytest 8.4.0 的新功能、改进和缺陷修正并提供文档、升级和贡献者 | Uses:doc/en/changelog.rst | API:- | Constraints:-\nrelease-8.4.1.rst[3 O D T]: Role:宣布 pytest 8.4.1 缺陷修订版并链接变更日志与贡献者名单 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本但不再展示升级命令。\nrelease-8.4.2.rst[3 O D T]: Role:宣布 pytest 8.4.2 缺陷修订版并链接变更日志与贡献者名单 | Uses:doc/en/changelog.rst | API:- | Constraints:声明为可直接替换版本但不再展示升级命令。\nsprint2016.rst[3 O D S]: Role:记录 2016 年 Freiburg pytest 冲刺的议题、参与、组织方式和众筹资金用途 | Uses:doc/en/img/freiburg2.jpg | API:- | Constraints:众筹结余保留用于后续 pytest/tox 贡献者冲刺和差旅。\n\n===/testbed/doc/en/example/===\n.ruff.toml[1 X D T]: Role:为文档示例代码覆盖仓库 Ruff 检查设置 | Uses:pyproject.toml | API:- | Constraints:允许教学示例使用刻意简化或触发错误的写法\nattic.rst[1 O D S]: Role:保存旧式 funcarg 接受测试选择和逐模块装饰夹具结果的历史示例 | Uses:- | API:- | Constraints:示例使用已过时 pytest_option、pytest_funcarg__、getfuncargvalue 和 py.path 接口，仅作历史材料\nconftest.py[1 X D T]: Role:防止文档示例总目录直接递归收集需要专用运行方式的非 Python 与自定义目录样例 | Uses:doc/en/example/nonpython/,doc/en/example/customdirectory/ | API:- | Constraints:collect_ignore 同时排除 nonpython 和 customdirectory\ncustomdirectory.rst[5 O C S]: Role:讲解通过 pytest_collect_directory 和 manifest 驱动的 Directory 子类定制目录收集 | Uses:doc/en/example/customdirectory/conftest.py,doc/en/example/customdirectory/tests/manifest.json,doc/en/example/customdirectory/tests/test_first.py,doc/en/example/customdirectory/tests/test_second.py,doc/en/example/customdirectory/tests/test_third.py | API:- | Constraints:默认有 __init__.py 的目录用 Package，其他目录用 Dir；示例仅收集 manifest 列出的两个文件，第三个文件必须不执行\nindex.rst[5 O D S]: Role:索引报告、参数化、标记、特殊技巧、Python/非 Python 收集与自定义目录等 pytest 示例 | Uses:doc/en/example/reportingdemo.rst,doc/en/example/simple.rst,doc/en/example/parametrize.rst,doc/en/example/markers.rst,doc/en/example/nonpython.rst | API:- | Constraints:-\nmarkers.rst[7 O P L]: Role:以选择表达式、节点 ID、作用域继承、参数实例、插件注册和动态添加展示自定义标记的完整用法 | Uses:src/_pytest/mark/, src/_pytest/nodes.py, src/_pytest/config/__init__.py, src/_pytest/hookspec.py | API:pytest.mark；-m；-k；nodeid；pytest --markers；--strict-markers；pytestmark；pytest.param；MarkDecorator.with_args；Node.iter_markers；Node.add_marker | Constraints:-m 精确解析标记名及仅支持 int、未转义 str、bool、None 的关键字值，不支持位置参数匹配；-k 不区分大小写并匹配名称、父节点、属性、标记及 extra keywords；参数实例 nodeid 含 [param]；标记应注册以便严格模式捕获拼写错误；单一可调用位置参数用普通装饰调用会装饰该函数，须用 with_args 才把 callable 存为参数；iter_markers 从函数向类、模块返回。\nmultipython.py[5 O I X S]: Role:以双重 Python 版本夹具参数化验证 pickle 协议 2 对基本对象的跨解释器序列化兼容性 | Uses:- | API:- | Constraints:覆盖 Python 3.11、3.12、3.13 的所有写读组合，缺失解释器时跳过；子进程失败必须传播\nnonpython.rst[5 O C S]: Role:通过 YAML 收集插件示例讲解非 Python 测试文件的收集、执行、失败表示与位置报告 | Uses:doc/en/example/nonpython/conftest.py,doc/en/example/nonpython/test_simple.yaml | API:- | Constraints:示例需要 PyYAML 或兼容解析器，收集两个用例并预期一个失败一个通过；自定义节点用 repr_failure 控制失败文本、reportinfo 控制位置\nparametrize.rst[7 O F L]: Role:以命令行驱动、测试 ID、场景移植、间接资源、类配置、多夹具和可选实现展示高级参数化模式 | Uses:src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/mark/structures.py, doc/en/example/multipython.py | API:pytest_addoption；pytest_generate_tests；Metafunc.parametrize；pytest.mark.parametrize；pytest.param；request.param；pytest.importorskip | Constraints:参数化发生在收集期，昂贵资源应通过 indirect 让夹具在 setup 时构造；indirect=True 应用于全部参数，也可传名称列表仅间接特定参数；生成或显式 ID 会进入 nodeid、失败报告及 -k 选择；pytest.param 可为单一参数集绑定 ID 与多个标记；缺少可选实现应按参数实例跳过而非令整套失败。\npythoncollection.py[1 O D T]: Role:提供 collect-only 输出示例所需的一个函数测试和含两个方法的测试类 | Uses:- | API:- | Constraints:示例注释假定按 test_collectonly.py 文件名运行\npythoncollection.rst[7 O C L]: Role:说明通过命令行、配置和 conftest 控制 Python 测试路径忽略、去重、递归、命名、包解析和收集可见性 | Uses:src/_pytest/main.py,src/_pytest/python.py,src/_pytest/config/__init__.py,src/_pytest/pathlib.py | API:--ignore；--ignore-glob；--deselect；--keep-duplicates；norecursedirs；python_files；python_classes；python_functions；--pyargs；--collect-only；collect_ignore；collect_ignore_glob；__test__ | Constraints:重复命令行路径默认只收集一次，--keep-duplicates 才保留；python_files/classes/functions 可含多个 glob，但 classes/functions 不影响 unittest.TestCase 的 unittest 委托发现；--pyargs 优先把名称解析为可导入包或模块，失败才按文件系统路径；__test__=False 阻止类收集\nreportingdemo.rst[7 O A L]: Role:展示 pytest 对 44 种参数、表达式、文本、序列、映射、集合、数据类、属性、异常和自定义消息失败的详细报告 | Uses:doc/en/example/assertion/failure_demo.py, src/_pytest/assertion/rewrite.py, src/_pytest/assertion/util.py, src/_pytest/terminal.py | API:-v；-vv | Constraints:这是固定演示输出而非应通过的示例；默认会省略长文本共同首尾、长容器相同项和超长差异，-v 或 -vv 逐级展开；报告须保留表达式中间值、捕获输出、源码位置、专用比较说明和 44 failed 汇总。\nsimple.rst[7 O P L]: Role:汇集命令行默认值、自定义选项、动态参数、跳过控制、报告钩子、增量测试、目录夹具、运行状态和冻结打包等插件模式 | Uses:src/_pytest/config/__init__.py, src/_pytest/hookspec.py, src/_pytest/reports.py, src/_pytest/stash.py, src/_pytest/freeze_support.py | API:addopts；PYTEST_ADDOPTS；pytest_addoption；pytest_load_initial_conftests；pytest_collection_modifyitems；__tracebackhide__；PYTEST_VERSION；pytest_report_header；--durations；pytest_runtest_makereport；PYTEST_CURRENT_TEST；pytest.freeze_includes；pytest.main | Constraints:命令行组合顺序为 ini addopts、PYTEST_ADDOPTS、显式参数且冲突时后者胜；__tracebackhide__ 可为布尔或按 ExceptionInfo 判断的 callable，--full-trace 仍显示；增量状态须按类与参数索引隔离；报告包装器必须 yield 获取最终 report 并按 when 区分阶段；PYTEST_CURRENT_TEST 仅供人读且格式可在修订版变化，不得作为自动化协议；冻结程序无法靠 entry point 自动发现第三方插件，须显式导入并传给 pytest.main。\nspecial.rst[3 O F T]: Role:演示会话级 autouse 夹具遍历全部收集项并在各测试类运行前调用一次 callme | Uses:- | API:- | Constraints:通过 seen 集合确保每个类只调用一次，且同时适用于 pytest 类与 unittest.TestCase\nxfail_demo.py[3 O D S]: Role:演示 xfail 标记的无条件、禁跑、字符串条件、原因、预期异常及命令式用法 | Uses:- | API:- | Constraints:示例包含故意失败、跳过执行和命令式中止的测试，不作为仓库常规测试直接收集\n\n===/testbed/doc/en/example/assertion/===\nfailure_demo.py[5 O A M]: Role:汇集 44 个故意失败案例以展示断言重写对比较、容器、属性、异常、动态代码和自定义消息的报告 | Uses:src/_pytest/assertion/rewrite.py,src/_pytest/assertion/util.py | API:- | Constraints:该文件为文档演示输入而非应通过的测试；testing wrapper 锁定其总计 44 个失败\ntest_failures.py[5 T D T]: Role:运行完整断言失败演示脚本并验证其产生 44 个失败及非零退出码 | Uses:doc/en/example/assertion/failure_demo.py | API:- | Constraints:通过 pytester 复制并以内嵌测试会话运行演示，输出必须匹配 44 failed\ntest_setup_flow_example.py[3 O I S]: Role:通过模块、类和方法级 xunit setup/teardown 展示测试执行控制流与状态生命周期 | Uses:- | API:- | Constraints:setup_class 以类参数调用而无需显式 classmethod；每个方法从名称取得 id，模块收尾时 classcount 必须归零\n\n===/testbed/doc/en/example/assertion/global_testmodule_config/===\nconftest.py[5 O P H T]: Role:演示 pytest_runtest_setup 钩子按测试模块的 hello 全局变量输出模块级配置 | Uses:doc/en/example/assertion/global_testmodule_config/test_hello_world.py | API:pytest_runtest_setup | Constraints:仅处理当前示例目录内的 pytest.Function；模块有 hello 属性时才打印其 repr\ntest_hello_world.py[3 T D T]: Role:提供带 hello 模块全局量的测试模块以演示钩子读取测试模块配置 | Uses:doc/en/example/assertion/global_testmodule_config/conftest.py | API:- | Constraints:-\n\n===/testbed/doc/en/example/customdirectory/===\nconftest.py[7 O C H S]: Role:实现读取 manifest.json 并仅收集其列出文件的自定义目录收集器示例 | Uses:doc/en/example/customdirectory/tests/manifest.json | API:pytest_collect_directory；ManifestDirectory | Constraints:只有含 manifest.json 的目录使用 ManifestDirectory，其他目录返回 None 交给标准收集；文件按清单逐项转交 pytest_collect_file\npytest.ini[1 X D T]: Role:为自定义目录收集示例提供空的局部 pytest 配置文件 | Uses:- | API:- | Constraints:文件刻意为空，由示例的 conftest 收集器决定行为\n\n===/testbed/doc/en/example/customdirectory/tests/===\nmanifest.json[3 D D T]: Role:声明自定义目录收集示例应产生测试项的两个 Python 文件 | Uses:doc/en/example/customdirectory/tests/test_first.py,doc/en/example/customdirectory/tests/test_second.py | API:- | Constraints:test_third.py 未列入清单，示范按 manifest 而非文件名发现\ntest_first.py[1 T D T]: Role:提供自定义目录 manifest 中首个可收集通过测试 | Uses:doc/en/example/customdirectory/tests/manifest.json | API:- | Constraints:-\ntest_second.py[1 T D T]: Role:提供自定义目录 manifest 中第二个可收集通过测试 | Uses:doc/en/example/customdirectory/tests/manifest.json | API:- | Constraints:-\ntest_third.py[1 T D T]: Role:提供存在于目录但未列入 manifest 的通过测试以证明不会被自定义收集器选中 | Uses:doc/en/example/customdirectory/tests/manifest.json | API:- | Constraints:必须不在 manifest 的 files 数组中\n\n===/testbed/doc/en/example/fixtures/===\nfixture_availability.svg[1 O D S]: Role:以 tests、subpackage 和模块嵌套图展示夹具从测试向外逐层查找的可见范围与顺序 | Uses:doc/en/how-to/fixtures.rst | API:- | Constraints:查找从最内层模块依次向子包和外层测试包扩展，不向内或跨兄弟范围查找\nfixture_availability_plugins.svg[1 O D S]: Role:以嵌套范围和外部插件图展示夹具查找最终扩展到已注册插件的顺序 | Uses:doc/en/how-to/fixtures.rst | API:- | Constraints:从测试模块、子包、测试包向外查找后才在插件中解析，插件夹具不受目录圈层限制\ntest_fixtures_order_autouse.py[3 T F T]: Role:验证 autouse 夹具 c 及依赖关系共同决定完整夹具执行顺序 | Uses:- | API:- | Constraints:最终顺序必须为 a、b、c、d、e、f、g\ntest_fixtures_order_autouse.svg[1 O D T]: Role:绘制含 autouse 夹具 c 的依赖图及其对整体夹具链的提升效果 | Uses:doc/en/example/fixtures/test_fixtures_order_autouse.py | API:- | Constraints:橙色横带表示 autouse 使 c 及其依赖对该作用域自动生效\ntest_fixtures_order_autouse_flat.svg[1 O D T]: Role:以线性图展示 autouse 介入后 order、a 至 g 和测试的实际执行顺序 | Uses:doc/en/example/fixtures/test_fixtures_order_autouse.py | API:- | Constraints:图中以橙色横带标识 autouse 生效位置\ntest_fixtures_order_autouse_multiple_scopes.py[3 T F T]: Role:验证类作用域 autouse 夹具使其依赖链在各测试类中先于显式请求夹具执行 | Uses:- | API:- | Constraints:两个测试类均先执行 c1；随后分别为 c3 或 c2\ntest_fixtures_order_autouse_multiple_scopes.svg[1 O D S]: Role:对照两个测试类展示类作用域 autouse c1 分别与 c3、c2 的执行关系 | Uses:doc/en/example/fixtures/test_fixtures_order_autouse_multiple_scopes.py | API:- | Constraints:两个类均位于同一 autouse 带内但保有独立类作用域实例\ntest_fixtures_order_autouse_temp_effects.py[3 T F T]: Role:验证类内 autouse 夹具只影响所在类并临时提升其依赖的执行优先级 | Uses:- | API:- | Constraints:含 autouse 的类先 c2/c3，另一类不执行它们\ntest_fixtures_order_autouse_temp_effects.svg[1 O D S]: Role:对照含与不含类级 autouse 的测试类，绘制 c2/c3 依赖只在 autouse 所在类内临时提升并影响夹具执行链的范围 | Uses:doc/en/example/fixtures/test_fixtures_order_autouse_temp_effects.py | API:- | Constraints:含 autouse 的 TestWithAutouse 在两个测试中自动执行 c2、c3，仅显式请求时再执行 c1；TestWithoutAutouse 不继承该效果。\ntest_fixtures_order_dependencies.py[3 T F T]: Role:验证复杂夹具依赖图按依赖拓扑从 a 到 g 建立确定执行顺序 | Uses:- | API:- | Constraints:最终顺序必须为 a、b、c、d、e、f、g\ntest_fixtures_order_dependencies.svg[1 O D T]: Role:绘制 a 至 g 夹具依赖有向图及其通向 test_order 的关系 | Uses:doc/en/example/fixtures/test_fixtures_order_dependencies.py | API:- | Constraints:-\ntest_fixtures_order_dependencies_flat.svg[1 O D T]: Role:以线性图展示依赖示例最终解析出的 order、a 至 g 和 test_order 执行序列 | Uses:doc/en/example/fixtures/test_fixtures_order_dependencies.py | API:- | Constraints:-\ntest_fixtures_order_dependencies_unclear.svg[1 O D T]: Role:绘制缺少足够依赖约束时存在歧义的夹具顺序图 | Uses:doc/en/example/fixtures/test_fixtures_order_dependencies.py | API:- | Constraints:用于对比说明仅凭定义或请求次序不能保证无依赖节点的顺序\ntest_fixtures_order_scope.py[3 T F T]: Role:验证跨 session、package、module、class、function 作用域的夹具按由宽到窄顺序实例化 | Uses:- | API:- | Constraints:顺序必须为 session、package、module、class、function\ntest_fixtures_order_scope.svg[1 O D T]: Role:以作用域嵌套图展示 session 到 function 夹具及测试的由宽到窄顺序 | Uses:doc/en/example/fixtures/test_fixtures_order_scope.py | API:- | Constraints:-\ntest_fixtures_request_different_scope.py[3 T F T]: Role:证明同名 inner 类夹具按请求测试类解析并在 outer 前执行 | Uses:- | API:- | Constraints:两个类的顺序分别必须为 one/outer 与 two/outer\ntest_fixtures_request_different_scope.svg[1 O D S]: Role:以两个类作用域圈层展示同名 inner 夹具按请求测试所属类解析后再执行共享 outer 的顺序 | Uses:doc/en/example/fixtures/test_fixtures_request_different_scope.py | API:- | Constraints:TestOne 与 TestTwo 各自选取本类 inner，类圈层顺序标为 1，外层模块作用域与共享 outer 顺序标为 2。\n\n===/testbed/doc/en/example/nonpython/===\n__init__.py[1 O D T]: Role:将非 Python YAML 收集示例目录标识为可导入包 | Uses:- | API:- | Constraints:文件刻意为空\nconftest.py[7 O C H S]: Role:实现把 test*.yaml 文件、顶层用例与键值断言收集为 pytest File/Item 的非 Python 测试示例 | Uses:doc/en/example/nonpython/test_simple.yaml | API:pytest_collect_file；YamlFile；YamlItem | Constraints:YAML 用 safe_load 且用例和字段排序；字段名和值不等时抛 YamlException，并输出三行定制失败信息；报告位置为文件第 0 行\ntest_simple.yaml[3 D D T]: Role:提供自定义 YAML 收集器解析并转成测试项的嵌套键值样例 | Uses:doc/en/example/nonpython/conftest.py | API:- | Constraints:ok.sub1 值相等而 hello.some 值不等，用于同时示范通过与失败\n\n===/testbed/doc/en/explanation/===\nanatomy.rst[5 O D T]: Role:用 Arrange、Act、Assert、Cleanup 四阶段解释行为测试的结构和关注点 | Uses:- | API:- | Constraints:测试核心判断的是 Act 后可观察状态，Arrange 提供上下文，Cleanup 防止测试间状态污染\nci.rst[5 O O T]: Role:解释 pytest 如何识别 CI 环境以及对短测试摘要显示的影响 | Uses:src/_pytest/terminal.py | API:- | Constraints:仅 CI 或 BUILD_NUMBER 为非空时识别为 CI；CI 下短摘要失败消息不按终端宽度截断\nfixtures.rst[7 O F M]: Role:解释夹具作为显式模块化测试上下文的设计、依赖注入、错误传播、数据共享和清理边界 | Uses:src/_pytest/fixtures.py,doc/en/explanation/anatomy.rst,doc/en/how-to/fixtures.rst,doc/en/reference/fixtures.rst | API:- | Constraints:前置夹具异常会停止该测试后续夹具及测试体并记为 error 而非 test failure；pytest 不为 SIGTERM/SIGQUIT 安排夹具清理，以免全局信号处理干扰被测代码\nflaky.rst[5 O Q L]: Role:解释不稳定测试的状态隔离、过严断言、并行和线程根因及诊断、重跑、隔离和重写策略 | Uses:src/_pytest/runner.py,src/_pytest/python_api.py | API:pytest.approx；pytest.mark.xfail；PYTEST_CURRENT_TEST | Constraints:pytest 自身在同一线程串行执行且不主动创建线程，xdist 通常使用多进程；测试或夹具创建的线程须最终等待结束，pytest.warns、pytest.raises 等原语不得跨线程并发使用；strict=False 的 xfail 隔离和自动重跑只能缓解影响，不应替代根因修复\ngoodpractices.rst[8 O I L]: Role:规定隔离安装、Python 测试发现、src 与内联测试布局、导入模式和 tox 验证的项目集成实践 | Uses:src/_pytest/main.py,src/_pytest/python.py,src/_pytest/pathlib.py,doc/en/explanation/pythonpath.rst | API:testpaths；norecursedirs；python_files；python_classes；python_functions；--import-mode；pythonpath；--pyargs | Constraints:新项目推荐 venv、pip 可编辑安装、src 布局和 importlib 导入模式；默认发现 test_*.py/*_test.py、test* 函数及无 __init__ 的 Test* 类；prepend/append 下无包测试模块名必须唯一且可能把仓库根加入 sys.path 从而误测源码，importlib 不修改 sys.path；不推荐 python setup.py test 或 pytest-runner\nindex.rst[3 O D T]: Role:组织 pytest 工作原理、夹具设计、实践、导入路径、类型、CI 与不稳定测试解释文档 | Uses:doc/en/explanation/anatomy.rst,doc/en/explanation/fixtures.rst,doc/en/explanation/goodpractices.rst,doc/en/explanation/pythonpath.rst,doc/en/explanation/flaky.rst | API:- | Constraints:-\npythonpath.rst[8 O I L]: Role:解释 pytest 的 prepend、append、importlib 三种测试导入机制及其对 sys.path、模块命名和测试布局的影响 | Uses:src/_pytest/pathlib.py,src/_pytest/config/__init__.py | API:--import-mode；pythonpath；consider_namespace_packages | Constraints:prepend 为默认且在 sys.path 前插目录，append 后插；非包测试在两者下文件名须全局唯一；importlib 不改 sys.path 并按 rootdir 生成唯一模块名，但测试模块间和测试目录工具模块不能直接互导；python -m pytest 会把当前目录加入 sys.path\ntypes.rst[5 O D S]: Role:解释为测试、夹具和参数化添加常规 Python 类型注解的价值与方法 | Uses:src/pytest/__init__.py | API:- | Constraints:夹具返回值和测试参数用普通类型表达，类型检查器无需理解 pytest 注入机制\n\n===/testbed/doc/en/how-to/===\nassert.rst[8 O A L]: Role:说明普通 assert 重写报告、近似与异常组断言、上下文比较、自定义解释及重写缓存和禁用方式 | Uses:src/_pytest/assertion/rewrite.py,src/_pytest/assertion/util.py,src/_pytest/python_api.py,src/_pytest/raises.py,src/_pytest/hookspec.py | API:pytest.approx；pytest.raises；pytest.RaisesGroup；pytest.RaisesExc；pytest.ExceptionInfo；pytest.warns；pytest_assertrepr_compare；pytest.register_assert_rewrite；--assert=plain；PYTEST_DONT_REWRITE | Constraints:raises 接受异常子类，精确类型须另查 excinfo.type；match 用 re.search 且同时匹配 PEP 678 notes；RaisesGroup 默认严格匹配层级和包装，flatten_subgroups/allow_unwrapped 才放宽，group_contains 不能证明没有额外异常；测试函数返回非 None 被忽略并发警告；仅发现的测试模块自动重写，辅助模块须导入前注册；只读或 zip 环境缓存失败时仍执行重写\nbash-completion.rst[3 O D T]: Role:说明安装并以全局、永久用户级或单次方式启用 pytest 的 bash argcomplete 补全 | Uses:src/_pytest/_argcomplete.py | API:- | Constraints:依赖 argcomplete>=0.5.7 且需先启用 shell 集成\ncache.rst[8 O R L]: Role:说明跨会话缓存、仅重跑失败、失败优先、新测试优先、缓存检查清理和 stepwise 恢复执行 | Uses:src/_pytest/cacheprovider.py,src/_pytest/stepwise.py | API:--lf/--last-failed；--ff/--failed-first；--nf/--new-first；--lfnf/--last-failed-no-failures；--cache-show；--cache-clear；config.cache；pytestconfig；--sw/--stepwise；--stepwise-skip | Constraints:config.cache 仅保存 JSON 可编码值且键应以插件或应用名为首段并用 / 分隔；无已知失败时 --lfnf 默认 all 跑全套，none 则成功退出且不跑；--cache-clear 在运行前清空全部跨会话状态；--stepwise-skip 隐含启用 stepwise 并跳过一个当前失败点\ncapture-stdout-stderr.rst[7 O O M]: Role:说明 fd、sys、tee-sys 捕获模式、禁用方式及 capsys/capfd 文本与二进制夹具接口 | Uses:src/_pytest/capture.py | API:--capture；-s；--show-capture；capsys；capteesys；capsysbinary；capfd；capfdbinary | Constraints:默认 fd 捕获覆盖子进程并把 stdin 替为拒绝读取对象；readouterr 返回 out/err 快照后继续捕获，测试结束恢复原流；disabled 上下文仅临时直通\ncapture-warnings.rst[8 O I L]: Role:说明 pytest 会话警告捕获、过滤优先级、弃用显示、警告断言与记录以及资源警告溯源 | Uses:src/_pytest/warnings.py,src/_pytest/recwarn.py,src/_pytest/warning_types.py | API:-W；filterwarnings；pytest.mark.filterwarnings；pytestmark；--disable-warnings；-p no:warnings；pytest.deprecated_call；pytest.warns；recwarn；PYTHONTRACEMALLOC | Constraints:同一过滤列表最后匹配规则生效，但装饰器反向求值使靠前 filterwarnings 标记优先；标记过滤高于命令行和 ini；-W 的消息是去空白字面前缀而 ini 是不区分大小写正则前缀；解释器已配置警告时 pytest 不加默认过滤；warns/recwarn 捕获时相应警告不另入会话摘要，recwarn 测试结束恢复过滤器\ndoctest.rst[8 O C L]: Role:说明 pytest 收集文本与模块 doctest、配置匹配与编码、比较选项、失败格式以及夹具和跳过集成的方法 | Uses:src/_pytest/doctest.py,src/_pytest/python_api.py,src/_pytest/fixtures.py | API:--doctest-glob；--doctest-modules；doctest_encoding；doctest_optionflags；--doctest-continue-on-failure；--doctest-report；getfixture；doctest_namespace | Constraints:默认收集 test*.txt 且 UTF-8 解码；NUMBER 按期望文本小数精度用 pytest.approx 相对容差比较并会匹配输出任意位置数字，不宜无条件全局启用；文本 doctest 中 pytest.skip/xfail 影响文件余下检查，模块 docstring 中只影响当前 docstring；pytest 特有 getfixture 等会失去标准 doctest 兼容性\nexistingtestsuite.rst[3 O I T]: Role:说明以可编辑安装方式让 pytest 可靠运行现有项目测试套件 | Uses:- | API:- | Constraints:建议在项目根执行 pip install -e .，避免直接篡改 sys.path，并可结合 tox\nfailures.rst[7 O O S]: Role:说明失败停止阈值、PDB/断点调试、faulthandler 超时以及不可抛出与线程异常警告 | Uses:src/_pytest/debugging.py,src/_pytest/faulthandler.py,src/_pytest/threadexception.py,src/_pytest/unraisableexception.py | API:-x；--maxfail；--pdb；--trace；--pdbcls；faulthandler_timeout | Constraints:PDB 暂停当前测试捕获并在继续后恢复；faulthandler 默认启用可用 -p no:faulthandler 禁用；不可抛出和线程异常插件默认启用并可分别禁用或过滤其警告\nfixtures.rst[9 O F L]: Role:全面讲解夹具请求、复用缓存、autouse、作用域、动态作用域、清理安全、上下文、工厂、参数化、分组、usefixtures 与覆盖 | Uses:src/_pytest/fixtures.py, src/_pytest/scope.py, src/_pytest/mark/structures.py, doc/en/reference/fixtures.rst | API:pytest.fixture；FixtureRequest；request.addfinalizer；request.param；pytest.param；pytest.mark.usefixtures；pytestmark；usefixtures；pytest_plugins | Constraints:同一测试内同一夹具结果和副作用只缓存一次，但参数化夹具在同一作用域可有多个实例且任一时刻只缓存一个；作用域依次 function/class/module/package/session，窄作用域可依赖宽作用域而反向无意义；动态 scope callable 仅定义期调用一次且只收 fixture_name/config 关键字；yield 清理按建立逆序，yield 前异常不运行自身后半但已成功夹具仍清理；addfinalizer 注册后即使随后 setup 失败也会执行且后注册先执行；安全设计每个夹具只做一个状态变更并紧邻清理；usefixtures 标记对夹具函数本身无效；局部同名夹具可请求外层原夹具，直接测试参数还可覆盖间接依赖夹具值。\nindex.rst[5 O D T]: Role:按核心功能、结果输出、插件、其他测试体系和开发环境组织全部操作指南 | Uses:doc/en/how-to/usage.rst,doc/en/how-to/fixtures.rst,doc/en/how-to/output.rst,doc/en/how-to/writing_plugins.rst,doc/en/how-to/unittest.rst | API:- | Constraints:-\nlogging.rst[8 O O L]: Role:说明 pytest 的失败日志捕获、caplog 断言、实时与文件日志、格式级别和颜色定制 | Uses:src/_pytest/logging.py,src/_pytest/capture.py | API:caplog；--log-level；--log-format；--log-date-format；--log-disable；log_cli；--log-file；LogCaptureFixture；set_log_path；add_color_level | Constraints:默认捕获 WARNING 以上并在失败报告独立显示；caplog 的 records 只含当前阶段，跨阶段须 get_records，测试结束恢复临时日志级别；重配 root logger 时必须保留捕获 handler；日志文件默认每次覆盖且相对路径按当前工作目录解析；set_log_path 和颜色 API 为实验性且可无弃用变更\nmark.rst[7 O P S]: Role:说明内建与自定义标记的应用、注册、选择和未知标记严格校验 | Uses:src/_pytest/mark/,src/_pytest/config/__init__.py | API:pytest.mark；pytest --markers；-m；--strict-markers | Constraints:标记只对测试生效，对 fixture 无效；未注册装饰器标记会警告，--strict-markers 将其升级为错误；第三方插件应注册其标记\nmonkeypatch.rst[8 O I L]: Role:说明用 monkeypatch 夹具安全替换属性、映射、环境、路径和工作目录并构造隔离测试替身 | Uses:src/_pytest/monkeypatch.py,src/_pytest/fixtures.py | API:monkeypatch；pytest.MonkeyPatch；setattr；delattr；setitem；delitem；setenv；delenv；syspath_prepend；chdir；context | Constraints:夹具所做修改在请求测试或夹具结束后自动撤销，raising 控制目标缺失时是否抛 KeyError/AttributeError；syspath_prepend 还修复旧式命名空间包并使导入缓存失效；补丁必须在被测调用前应用；修改 open、compile 等内建或 pytest 所用标准库可能破坏框架，应以 context 限定范围，调试时可尝试原生回溯、plain 断言和关闭捕获但不保证安全\noutput.rst[8 O O L]: Role:说明回溯、捕获、详细度、短摘要、断言截断、JUnit XML 属性及 pastebin 输出的控制方式 | Uses:src/_pytest/terminal.py, src/_pytest/assertion/truncate.py, src/_pytest/junitxml.py, src/_pytest/pastebin.py, src/_pytest/capture.py | API:--showlocals；--capture；--tb；--full-trace；-q；-v；verbosity_assertions；verbosity_test_cases；-r；--no-fold-skipped；truncation_limit_lines；truncation_limit_chars；--junit-xml；record_property；record_xml_attribute；record_testsuite_property；--pastebin | Constraints:--full-trace 比 long 更完整且 KeyboardInterrupt 也打印栈；默认 -r 为 fE，a 表示除通过外全部，A 含全部，N 清空；默认断言截断为 8 行或 640 字符先到者，两个限制都设 0 才完全禁用；JUnit time 默认含 setup/call/teardown，call 配置仅报调用；record_property 与 record_xml_attribute 可破坏最新 XSD，后者为实验性，suite property 与 xunit2 兼容；paste 失败只警告不令测试失败。\nparametrize.rst[8 O F L]: Role:说明通过夹具参数、parametrize 标记和 pytest_generate_tests 钩子生成测试参数集 | Uses:src/_pytest/python.py,src/_pytest/mark/structures.py,src/_pytest/fixtures.py,src/_pytest/hookspec.py | API:pytest.fixture；pytest.mark.parametrize；pytest.param；pytest_generate_tests；Metafunc.parametrize；empty_parameter_set_mark | Constraints:参数值原样传递不复制，前次用例变更可影响后续；叠加 parametrize 形成笛卡尔积并按装饰器次序展开；多次 Metafunc.parametrize 的参数名不得重复；空参数集按 empty_parameter_set_mark 处理；pytest_generate_tests 特例可在测试模块或类内发现\nplugins.rst[7 O P S]: Role:说明第三方 pytest 插件的安装、自动发现、显式加载、诊断、禁用与关闭自动加载 | Uses:src/_pytest/config/__init__.py,doc/en/reference/plugin_list.rst,doc/en/how-to/writing_plugins.rst | API:pytest_plugins；pytest --trace-config；-p；--disable-plugin-autoload；PYTEST_DISABLE_PLUGIN_AUTOLOAD；PYTEST_PLUGINS | Constraints:非根 conftest.py 中声明 pytest_plugins 已弃用；pytest_plugins 名称保留；-p no:NAME 阻止后续加载；关闭自动加载后需显式列出所需插件\nskipping.rst[8 O C L]: Role:说明按条件、平台、依赖和预期失败状态跳过或 xfail 测试及其报告和参数化组合 | Uses:src/_pytest/skipping.py,src/_pytest/outcomes.py,src/_pytest/mark/structures.py | API:pytest.mark.skip；pytest.mark.skipif；pytest.skip；pytest.importorskip；pytest.mark.xfail；pytest.xfail；pytestmark；-r；--runxfail；xfail_strict | Constraints:多个 skipif 任一为真即跳过；模块导入期 pytest.skip 必须 allow_module_level=True；命令式 xfail 抛内部异常并停止后续代码，标记式仍运行；xfail 的 raises 不匹配则按普通失败，run=False 不执行测试，strict=True 使 XPASS 失败；--runxfail 忽略标记且使 pytest.xfail 无效\ntmp_path.rst[7 O I M]: Role:说明 pathlib 临时目录夹具、会话工厂、旧 py.path 兼容接口及基目录保留策略 | Uses:src/_pytest/tmpdir.py,src/_pytest/legacypath.py | API:tmp_path；tmp_path_factory；tmpdir；tmpdir_factory；--basetemp；PYTEST_DEBUG_TEMPROOT；tmp_path_retention_count；tmp_path_retention_policy | Constraints:tmp_path 每测试唯一，默认保留最近三次运行；显式 --basetemp 会在每次运行前盲目清空且不保留历史，必须只指向专用目录；新代码优先 pathlib 接口\nunittest.rst[8 O I L]: Role:说明 pytest 收集并运行 unittest.TestCase 套件、可用能力边界及以标记和 autouse 夹具渐进混用 pytest 的方式 | Uses:src/_pytest/unittest.py,src/_pytest/fixtures.py,src/_pytest/mark/ | API:pytest 命令；pytest.mark.usefixtures；pytest.fixture(autouse=True) | Constraints:支持 unittest 跳过与 setUp/tearDown 系列但不支持 load_tests；TestCase 方法不能直接接收普通夹具参数或参数化，也不能定义自定义钩子，仅可用 autouse/usefixtures 间接接入；unittest 的 setup/teardown 在 pytest call 阶段执行，相关错误也报告在 call\nusage.rst[8 O R M]: Role:说明 pytest 的发现与选择语法、参数文件、帮助和耗时选项、插件装载及命令行与 Python 调用入口 | Uses:src/_pytest/config/__init__.py,src/_pytest/main.py,src/pytest/__main__.py | API:pytest 命令；python -m pytest；pytest.main；-k；-m；--pyargs；@参数文件；-p | Constraints:节点 ID 用 :: 分段、参数 ID 用方括号；python -m pytest 会额外把当前目录加入 sys.path；pytest.main 返回退出码不抛 SystemExit，多次同进程调用受导入缓存影响而不推荐\nwriting_hook_functions.rst[8 O P L]: Role:规定 pytest/pluggy 钩子实现的签名校验、结果汇聚、包装与排序、自定义声明、可选插件和跨钩子状态存储 | Uses:src/_pytest/hookspec.py,src/_pytest/config/__init__.py,src/_pytest/stash.py,src/_pytest/nodes.py | API:pytest.hookimpl；pytest_addhooks；PluginManager.add_hookspecs；Config.hook；pytestconfig；pytest.StashKey；Node.stash；Config.stash | Constraints:实现签名只可取规范已有参数且按名称动态裁剪，调用钩子只传关键字；除 pytest_runtest_* 外钩子不应抛异常；firstresult 在首个非 None 结果停止，普通钩子汇集全部非 None；wrapper 必须恰好 yield 一次且包围普通实现，排序为 wrapper 外层、tryfirst、trylast；仅 pytest_generate_tests 可在测试模块或类发现，其他钩子须在 conftest 或插件\nwriting_plugins.rst[8 O P L]: Role:说明 pytest 插件类型、启动发现顺序、本地 conftest 作用域、pytest11 打包、断言重写、插件依赖与 pytester 测试 | Uses:src/_pytest/config/__init__.py,src/_pytest/hookspec.py,src/_pytest/assertion/rewrite.py,src/_pytest/pytester.py,src/_pytest/fixtures.py | API:pytest11 entry point；-p；PYTEST_DISABLE_PLUGIN_AUTOLOAD；PYTEST_PLUGINS；pytest_plugins；pytest.register_assert_rewrite；PluginManager.get_plugin；Config.addinivalue_line；pytester；Pytester | Constraints:-p no:name 在常规解析前阻止包括内建插件，之后按内建、-p name、entry point、环境变量、初始 conftest 顺序加载；非包 conftest 不应被直接导入；非根 conftest 声明 pytest_plugins 已弃用；断言重写仅自动覆盖测试模块、conftest 和已注册插件，帮助模块须在导入前显式注册；pytester 默认禁用须显式加载\nxunit_setup.rst[7 O I S]: Role:说明模块、类、方法和函数级 xunit 风格 setup/teardown 的定义、调用与夹具作用域交互 | Uses:src/_pytest/python.py | API:setup_module/teardown_module；setup_class/teardown_class；setup_method/teardown_method；setup_function/teardown_function | Constraints:各可选对象参数自 pytest 3.0 可省略；对应 setup 失败或跳过时不调用 teardown；调用对可在进程内多次执行，并服从 autouse 等夹具作用域规则\n\n===/testbed/doc/en/img/===\npytest_logo_curves.svg[3 D D S]: Role:提供由彩色竖条、灰色横杆与 pytest 字标组成的文档品牌矢量标志 | Uses:doc/en/conf.py（文档品牌引用） | API:- | Constraints:作为可缩放品牌资源保留完整图形与透明背景。\n\n===/testbed/doc/en/proposals/===\nparametrize_with_fixtures.rst[3 O F S]: Role:提出让参数化测试或夹具引用并展开其他夹具参数集的组合机制 | Uses:src/_pytest/fixtures.py,src/_pytest/python.py | API:- | Constraints:这是未实现提案；动态 getfuncargvalue 无法为当前测试补出参数化夹具，候选方案为 define_combined_fixture 或 fixture_request\n\n===/testbed/doc/en/reference/===\ncustomize.rst[8 O R L]: Role:规定 pytest 配置文件格式、优先级、rootdir/configfile 发现算法及终端高亮主题设置 | Uses:src/_pytest/config/findpaths.py,src/_pytest/config/__init__.py | API:pytest.ini；.pytest.ini；pyproject.toml [tool.pytest.ini_options]；tox.ini [pytest]；setup.cfg [tool:pytest]；--rootdir；PYTEST_THEME；PYTEST_THEME_MODE | Constraints:pytest.ini 即使为空也优先；候选配置绝不合并，首个匹配胜出；无其他匹配时无 pytest 表的 pyproject.toml 也可定 rootdir；rootdir 用于 nodeid 与项目状态而不修改 sys.path，且 --rootdir 不能放进 addopts；setup.cfg 解析差异使其仅适合简单配置\nexit-codes.rst[7 O R T]: Role:定义 pytest 六种进程退出状态及对应 pytest.ExitCode 公共枚举 | Uses:src/_pytest/config/__init__.py | API:pytest.ExitCode | Constraints:0 全部通过、1 测试失败、2 用户中断、3 内部错误、4 命令行用法错误、5 未收集测试\nfixtures.rst[8 O F L]: Role:参考内建夹具、按测试视角解析的可见范围以及由作用域、依赖和 autouse 决定的实例化顺序 | Uses:src/_pytest/fixtures.py,doc/en/example/fixtures/,src/_pytest/config/__init__.py | API:pytest.fixture；capfd；capfdbinary；caplog；capsys；capteesys；capsysbinary；cache；doctest_namespace；monkeypatch；pytestconfig；record_property；record_testsuite_property；recwarn；request；testdir；tmp_path；tmp_path_factory；tmpdir；tmpdir_factory；--fixtures；--setup-plan | Constraints:夹具从请求测试所在范围向外查找，不能向内或跨兄弟范围，第三方插件最后查找；夹具可请求任意定义位置的依赖，只要请求测试能看见全部参与者；顺序只由较宽作用域优先、依赖先行和同范围 autouse 优先决定，不得依赖名称、定义位置、定义或请求次序；autouse 的依赖仅在该 autouse 可达上下文中临时等效 autouse\nindex.rst[3 O D T]: Role:组织 pytest API、夹具、配置、退出码和插件清单等参考指南目录 | Uses:doc/en/reference/reference.rst,doc/en/reference/fixtures.rst,doc/en/reference/customize.rst,doc/en/reference/exit-codes.rst,doc/en/reference/plugin_list.rst | API:- | Constraints:-\nplugin_list.rst[7 O D L]: Role:作为自动生成的 pytest 插件发现目录，列出活跃 PyPI 插件的名称、摘要、最近发行日期、开发状态与 pytest 依赖要求 | Uses:scripts/update-plugin-list.py | API:pytest 插件清单参考页 | Constraints:文件由 scripts/update-plugin-list.py 自动生成并通常由每周自动化更新，不应手工编辑；候选项目未经策展或系统审查且不代表 pytest 项目背书，使用者须自行评估质量；非 LaTeX 输出宽表格，LaTeX 输出纵向条目以适应页面宽度\nreference.rst[9 O R L]: Role:汇总 pytest 公共常量、函数、标记、夹具、钩子、节点对象、全局量、环境变量、异常警告、配置项和命令行参数的权威参考 | Uses:src/pytest/__init__.py, src/_pytest/hookspec.py, src/_pytest/config/__init__.py, src/_pytest/fixtures.py, src/_pytest/main.py | API:pytest 公共命名空间；全部 pytest_* 钩子；内建夹具；collect_ignore/collect_ignore_glob/pytest_plugins/pytestmark；pytest --help | Constraints:HIDDEN_PARAM 每次参数化至多使用一次以保持 nodeid 唯一；标记只适用于测试而非夹具且 usefixtures 必须在 setup 前应用；pytester 需显式加载，新代码优先 pytester/pathlib 而非 testdir/py.path；collection_modifyitems 即使位于局部 conftest 也接收全部收集项；PY_COLORS 优先于 NO_COLOR，后者优先 FORCE_COLOR；setup.cfg 仅宜简单配置；相对 cache_dir/pythonpath 基于 rootdir，而 log_file 基于当前工作目录；CI/BUILD_NUMBER 非空时禁断言截断；norecursedirs 会替换默认值并优先于 collect-in-virtualenv；strict_parametrization_ids 启用时重复 ID 直接报错。\n\n===/testbed/extra/===\nget_issues.py[1 U AB S]: Role:分页获取或读取缓存的 pytest GitHub 议题并打印按编号排序的开放议题简报 | Uses:- | API:python extra/get_issues.py [--refresh] [--cache FILE] | Constraints:403 API 限额错误打印消息并退出 1；默认复用 issues.json，--refresh 才重新请求；类型只识别 bug、enhancement、proposal 标签。\n\n===/testbed/scripts/===\n.gitignore[1 X AB T]: Role:忽略发布流程生成的临时 GitHub Release Markdown 文件 | Uses:scripts/generate-gh-release-notes.py | API:- | Constraints:latest-release-notes.md 不进入版本控制。\ngenerate-gh-release-notes.py[5 U AB S]: Role:抽取指定 pytest 版本的 RST changelog 段落并经 Pandoc 转成 GitHub Release Markdown | Uses:doc/en/changelog.rst | API:python scripts/generate-gh-release-notes.py VERSION FILE；extract_changelog_entries_for；convert_rst_to_md | Constraints:命令必须恰有版本和输出文件两个参数，否则打印用法并返回 2；版本标题只匹配带日期的 pytest x.y.z/后缀格式，转换保留原换行。\nprepare-release-pr.py[7 U AB S]: Role:从指定维护分支推导下一版本、调用 tox 发布准备、强推 release 分支并创建草稿 PR | Uses:scripts/release.py, changelog/, .github/workflows/deploy.yml | API:python scripts/prepare-release-pr.py BASE_BRANCH [--major] [--prerelease]；find_next_version | Constraints:主版本递增 major 并清零，其次含 feature/breaking 片段递增 minor，否则递增 patch；发布模板按 major、prerelease、feature、patch 优先选择；切分支后必须通过 tox release 安装该分支依赖；PR 始终为 draft 并要求 GH_TOKEN。\nrelease.major.rst[5 O AB T]: Role:提供包含破坏性变化提醒、文档与变更日志入口、升级命令及贡献者名单的 pytest 主版本发布公告模板 | Uses:scripts/release.py, doc/en/changelog.rst | API:- | Constraints:{version} 与 {contributors} 由发布工具替换；主版本公告必须提醒用户审阅破坏性变化\nrelease.minor.rst[5 O AB T]: Role:提供概述新功能、改进和缺陷修复并链接文档与变更日志的 pytest 次版本发布公告模板 | Uses:scripts/release.py, doc/en/changelog.rst | API:- | Constraints:{version} 与 {contributors} 由发布工具替换\nrelease.patch.rst[5 O AB T]: Role:提供声明可直接替换、链接完整变更日志并致谢贡献者的 pytest 补丁版本发布公告模板 | Uses:scripts/release.py, doc/en/changelog.rst | API:- | Constraints:补丁版必须表述为仅修复缺陷且可直接替换；{version} 与 {contributors} 由发布工具替换\nrelease.pre.rst[5 O AB T]: Role:提供强调非生产用途、征集回归反馈并给出精确安装命令的 pytest 预发布公告模板 | Uses:scripts/release.py, doc/en/changelog.rst | API:- | Constraints:回归议题标题必须包含 [prerelease]；{version}、{doc_version} 与 {contributors} 由发布工具替换\nrelease.py[7 U AB S]: Role:生成发布公告、再生文档与 changelog、格式化和链接检查并提交发布准备修订 | Uses:scripts/release.major.rst, scripts/release.minor.rst, scripts/release.patch.rst, scripts/release.pre.rst, doc/en/announce/index.rst | API:python scripts/release.py VERSION TEMPLATE DOC_VERSION [--skip-check-links] | Constraints:贡献者从最近标签至 HEAD 的作者和 Co-authored-by 去重并排除机器人；公告插入 announce 索引首个 release 项前；regendoc 以伪装版本运行；除显式跳过外链接检查必须通过，最后创建 Prepare release version 提交。\nupdate-plugin-list.py[5 U D L]: Role:从 PyPI 枚举活跃 pytest 插件、缓存元数据并生成适合 HTML 与 LaTeX 的插件参考页 | Uses:doc/en/reference/plugin_list.rst | API:python scripts/update-plugin-list.py；iter_plugins；plugin_definitions | Constraints:只选 pytest-/pytest_ 前缀及显式附加项目，跳过 JSON 404 与 Inactive；缓存序列不一致时强制刷新；最近发布按可解析版本倒序且无效版本落到预发布基线；RST 摘要转义特殊字符，非 LaTeX 输出表格而 LaTeX 输出纵向定义。\n\n===/testbed/src/===\npy.py[7 E I T]: Role:在外部 py 包缺失时注册 pytest 内置 py.error 与 py.path 兼容模块 | Uses:src/_pytest/_py/error.py, src/_pytest/_py/path.py | API:py.error；py.path | Constraints:外部 py 包优先级更高时本垫片不生效；必须同步写入 sys.modules 子模块键以支持旧式导入。\n\n===/testbed/src/_pytest/===\n__init__.py[7 E R T]: Role:暴露 pytest 内核版本信息并在生成版本模块缺失的破损安装中提供保底值 | Uses:- | API:__version__；version_tuple | Constraints:版本模块不可导入时返回 unknown 与 (0, 0, unknown)，不得阻断包导入。\n_argcomplete.py[5 U R S]: Role:提供按需启用的 Bash argcomplete 集成和低开销文件路径补全 | Uses:- | API:FastFilesCompleter；try_argcomplete；filescompleter | Constraints:仅存在 _ARGCOMPLETE 环境变量时导入 argcomplete，缺依赖立即以 -1 退出；目录候选以 / 结尾并相对当前补全目录去前缀，点文件仅在无 glob 的空/目录前缀下补入。\ncacheprovider.py[9 S R H L]: Role:实现跨会话 JSON/目录缓存及 last-failed、failed-first、new-first 收集排序与缓存展示 | Uses:src/_pytest/pathlib.py, src/_pytest/reports.py, src/_pytest/main.py, src/_pytest/nodes.py, src/_pytest/fixtures.py | API:cache fixture；pytest.Cache；--lf/--last-failed；--ff/--failed-first；--nf/--new-first；--lfnf；--cache-show；--cache-clear；cache_dir | Constraints:值缓存仅 JSON 可编码且读取损坏返回默认；mkdir 名称不得含路径分隔，值键以 / 分层；首次建缓存目录时原子安装 README/.gitignore/CACHEDIR.TAG，并容忍并发创建竞争，写入/建目录失败只发 PytestCacheWarning；--lf 只在发现至少一个已知失败项后启用按文件提前过滤，显式初始文件仍保留，被筛项必须报告 deselected；无历史失败时 lfnf=none 清空项目否则全跑；通过调用或跳过移除 lastfailed，任一阶段失败记录；worker、cache-show 不写回，--nf collect-only 不写 nodeid；新项和旧项各按文件 mtime 降序。\ncapture.py[9 S O H L]: Role:实现 fd/sys/tee 全局与逐夹具 stdout/stderr 捕获、阶段报告接线和跨平台流恢复 | Uses:src/_pytest/config/__init__.py, src/_pytest/fixtures.py, src/_pytest/nodes.py, src/_pytest/reports.py | API:--capture={fd,sys,no,tee-sys}；-s；capsys；capteesys；capsysbinary；capfd；capfdbinary；CaptureFixture.readouterr/disabled | Constraints:初始 conftest 加载期间即捕获，异常时先回放再传播，最终始终暂停并在配置清理停止；fd 捕获必须处理原目标 fd 无效及 fd 复用，保存/恢复底层 fd 与 sys 流，文本 UTF-8 errors=replace；捕获时 stdin 所有读取给指向 -s 的 OSError且无 fileno；start/suspend/resume/done 状态转换严格，done 幂等而 MultiCapture 二次 stop 报错；每次 snap/readouterr 消耗并清空缓冲；fixture 捕获优先于全局，同一测试不得同时请求多个 capture fixture，阶段结束关闭夹具后读取全局并附 Captured stdout/stderr；disabled 仅恢复进入前处于活动的层；tee-sys 同时记录并写原流但不捕获子进程；Windows fd 模式重开 ConsoleIO，colorama/readline 必须在重定向前导入。\ncompat.py[8 U I V M]: Role:集中提供 Python 版本、包装函数、签名/夹具参数、异步识别、旧 py.path 和安全对象访问兼容工具 | Uses:src/py.py, src/_pytest/outcomes.py | API:- | Constraints:签名检查不得求值注解；getfuncargnames 只返回无默认值的位置或关键字参数，扣除绑定方法首参、partial/mock 注入参数且无法检查时以无回溯失败；safe_getattr 同时吞普通异常与 pytest outcome，恶意对象不得破坏收集；ascii_escaped 必须稳定转义非打印 ASCII、字节与 Unicode；Windows/Emscripten 用户 ID 返回 None；CallableBool 仅维持 isatty 属性/方法双形态兼容；仅非空 CI 或 BUILD_NUMBER 启用 CI 模式。\ndebugging.py[8 S O H L]: Role:接线 --pdb/--trace、自定义 PDB 类、捕获暂停恢复、异常后调试和 pytest.set_trace | Uses:src/_pytest/capture.py, src/_pytest/_code/code.py, src/_pytest/config/__init__.py, src/_pytest/reports.py, src/_pytest/runner.py | API:--pdb；--pdbcls=module:class；--trace；pytest.set_trace | Constraints:配置须栈式替换并清理恢复全局 pdb.set_trace，以支持嵌套会话；进入调试前暂停含 stdin 的捕获并触发 pytest_enter_pdb，continue 恢复原捕获并触发 leave 钩子，递归 debug 不重复外层处理；PDB quit 转 pytest.exit；自定义类导入或属性解析失败转含字面值 UsageError；异常交互先按 showcapture 回放所选 stdout/stderr/log 和回溯，unittest.SkipTest 不进入；doctest UnexpectedException 与 ConftestImportFailure 用底层异常/回溯；Python 3.13+ post_mortem 传异常对象，旧版传 traceback；--trace 包装函数须保留元数据且避免与名为 func 的测试参数冲突。\ndeprecated.py[7 D I T]: Role:集中定义弃用/移除警告、已并入核心的外部插件名单和私有 API 使用检查 | Uses:src/_pytest/warning_types.py | API:DEPRECATED_EXTERNAL_PLUGINS；弃用警告常量；check_ispytest | Constraints:常量必须是 PytestWarning 实例或可格式化警告；旧路径钩子/节点构造计划 pytest 9 移除，legacy namespace 修复计划 pytest 10 移除；未显式 _ispytest=True 的内部构造发私有 API 警告。\ndoctest.py[8 S C V L]: Role:收集并运行文本文件与 Python 模块 docstring doctest，接入夹具、pytest 控制结果和扩展输出比较 | Uses:src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/python_api.py, src/_pytest/nodes.py, src/_pytest/_code/code.py | API:--doctest-modules；--doctest-glob；--doctest-report；--doctest-ignore-import-errors；--doctest-continue-on-failure；doctest_optionflags/encoding；doctest_namespace/getfixture | Constraints:默认 glob test*.txt，显式初始 .txt/.rst 总可收集；模块模式排除 setup.py 与 __main__.py，导入错误仅显式开关时跳过；每个 Item 注入 getfixture、doctest_namespace 和 autouse 夹具，全例均 +SKIP 时整项跳过；pytest outcome 原样传播，BdbQuit 转 pytest.exit；continue-on-failure 与 PDB 不兼容，PDB 时首败停止；Darwin 运行前暂停全局捕获并回放已有输出；ALLOW_UNICODE/BYTES 忽略字面前缀，NUMBER 按期望数字小数精度用绝对 approx 对齐且数字数量必须相同；mock-aware unwrap 必须在上下文结束恢复 inspect.unwrap；doctest 模块惰性导入并在 unconfigure 清 runner 类。\nfaulthandler.py[7 S I H S]: Role:在会话中安全接管 faulthandler 输出并为单项测试安排可选超时回溯或进程退出 | Uses:src/_pytest/config/__init__.py, src/_pytest/stash.py, src/_pytest/nodes.py | API:faulthandler_timeout；faulthandler_exit_on_timeout | Constraints:配置时复制有效 stderr fd，卸载时关闭副本并恢复原先启用状态；sys.stderr 无真实 fd 时回退 sys.__stderr__；每个测试结束、进入 PDB 或交互异常时必须取消延迟转储；超时退出默认 false。\nfixtures.py[9 C F H L]: Role:实现夹具声明、发现与可见性、依赖闭包、作用域检查、参数化缓存、执行终结和夹具列表输出 | Uses:src/_pytest/nodes.py, src/_pytest/scope.py, src/_pytest/config/__init__.py, src/_pytest/outcomes.py, src/_pytest/python.py | API:fixture；yield_fixture；FixtureRequest；FixtureDef；FixtureLookupError；pytestconfig；request.getfixturevalue/addfinalizer/applymarker；--fixtures；--fixtures-per-test | Constraints:夹具可见性由定义位置 nodeid 前缀和请求节点祖先决定，插件夹具全局可见而 conftest 仅向子树可见；静态闭包包括参数、usefixtures、autouse 及传递依赖，覆盖夹具请求同名时逐层取得外层定义，直接参数化可裁剪闭包；作用域为 function<class<module<package<session，宽作用域请求不得依赖窄作用域；同一缓存键复用值或原异常，键变化先完整终结旧实例，比较失败时退回身份比较；依赖夹具失效必须先终结依赖它的夹具；终结器后注册先执行，全部尝试后聚合异常且始终清空缓存；yield 夹具必须恰好产出一次，直接调用 fixture 包装对象报错；动态 scope callable 只接受 fixture_name/config 关键字并返回合法字符串；request 名称保留。\nfreeze_support.py[5 U I T]: Role:递归枚举 pytest 内部所有模块名供 cx_Freeze 等冻结工具显式包含 | Uses:src/_pytest/ | API:freeze_includes | Constraints:包目录递归展开而只返回叶子模块名，不把包自身列入结果。\nhelpconfig.py[7 S R H M]: Role:注册版本、帮助、插件预载与调试跟踪选项，并渲染配置、环境变量和插件诊断信息 | Uses:src/_pytest/config/__init__.py, src/_pytest/config/argparsing.py, src/_pytest/terminal.py | API:--version/-V；-h/--help；-p；--disable-plugin-autoload；--trace-config；--debug；-o/--override-ini | Constraints:HelpAction 仅在预解析完成后以 PrintHelp 中止余下解析，确保插件必填参数不妨碍帮助；单次 --version 由 Config 快速路径处理，双次才在完整启动后列插件；--debug 以写入模式截断目标文件且清理时必须关闭并撤销跟踪；帮助中的 ini 项按已注册顺序和终端宽度折行。\nhookspec.py[9 C P H L]: Role:声明插件可实现的 pytest 启动、收集、Python 对象、运行、夹具、会话、断言、报告、警告与调试钩子协议 | Uses:src/_pytest/config/__init__.py, src/_pytest/nodes.py, src/_pytest/reports.py, src/_pytest/runner.py, src/_pytest/python.py | API:全部 pytest_* hookspec，供插件与 conftest 实现 | Constraints:historic 钩子在后注册插件上重放且不能使用 wrapper；firstresult 钩子在首个非 None 结果停止；收集修改实现移除项目时必须显式调用 pytest_deselected；路径相关钩子保留弃用的 py.path 参数并以 pathlib 参数为现行接口；局部 conftest 钩子仅作用于其目录子树，启动和命令行动作钩子仅初始 conftest 可参与；runtest 协议固定为 logstart、setup/call/teardown 各自 makereport/logreport/可交互异常、logfinish；pytest_fixture_setup 返回 None 会继续寻找下一实现。\njunitxml.py[8 S O H L]: Role:把收集与三阶段测试报告聚合成 JUnit xUnit1/xUnit2 XML，并提供用例和套件属性夹具 | Uses:src/_pytest/reports.py, src/_pytest/_code/code.py, src/_pytest/timing.py, src/_pytest/stash.py, src/_pytest/terminal.py | API:--junitxml/--junit-xml；--junit-prefix；junit_suite_name/logging/log_passing_tests/duration_report/family；record_property；record_xml_attribute；record_testsuite_property | Constraints:非法 XML 控制字符转可见 #xNN 文本；xunit2 testcase 只保留 classname/name，xunit1 另允 file/line/url，自定义 testcase 属性在 xunit2 被滤除并警告；同一测试 call 失败且 teardown 错误须拆为两个 testcase 但 tests 计数去重；xdist 以 nodeid+worker 及 item_index 配对交错报告，worker 不写文件；duration=total 累加三阶段，call 仅调用期；捕获输出按 logging 模式分别写 system-out/err，可排除通过项；套件属性名称必须字符串且不支持 xdist；会话结束创建父目录并覆写 UTF-8 XML，安静模式不打印生成摘要。\nlegacypath.py[8 S I H L]: Role:在 pathlib 现行接口之上安装 py.path 兼容属性、tmpdir/testdir 夹具和包装类 | Uses:src/_pytest/pytester.py, src/_pytest/tmpdir.py, src/_pytest/cacheprovider.py, src/_pytest/monkeypatch.py, src/_pytest/compat.py | API:testdir；tmpdir；tmpdir_factory；Testdir；TempdirFactory；Cache.makedir；Config.rootdir/inifile/invocation_dir；Node.fspath；FixtureRequest.fspath；pathlist ini 类型 | Constraints:所有旧路径返回 LEGACY_PATH，新接口仍以 pathlib 为权威；Testdir 只转发 Pytester 并转换路径结果，makefile 兼容无点扩展名；Node.fspath setter 同步回 path；pathlist 相对 inipath 父目录解析并要求存在配置文件；初始 conftest 阶段用 MonkeyPatch 安装所有兼容属性并在清理恢复；仅 tmpdir 插件存在时注册旧临时夹具，仅 pytester 动态注册后再注册 testdir 且不得重复；tmp_path_factory 被阻止时不伪造 handler。\nlogging.py[9 S O H L]: Role:实现逐阶段日志捕获、caplog 控制、实时终端与文件日志及格式/颜色/多行缩进配置 | Uses:src/_pytest/capture.py, src/_pytest/config/__init__.py, src/_pytest/fixtures.py, src/_pytest/stash.py, src/_pytest/terminal.py | API:caplog；LogCaptureFixture；--log-level/format/date-format；log_cli 与 --log-cli-*；--log-file-*；--log-auto-indent；--log-disable；LoggingPlugin.set_log_path；ColoredLevelFormatter.add_color_level | Constraints:捕获 handler 在 logging.raiseExceptions 时格式错误直接令测试失败；setup/call/teardown 各自重置记录并保存到 stash，报告捕获文本独立，teardown 无论异常都删 stash；caplog.set_level/at_level 必须同时调整 logger、handler 与全局 disable 门槛并精确恢复，text 去 ANSI 而 messages 不含格式装饰；根 logger handler 仅在上下文内安装且原级别恢复；实时日志临时禁用捕获，每阶段首条先换行并输出一次标题，启用时最低详细度提升到 1；文件父目录自动创建，默认 w 且 UTF-8，相对 set_log_path 基于 rootpath；多行 auto-indent 接受布尔或整数，非法值静默关闭；%f 时间使用含时区 datetime 且微秒截断避免溢出；卸载显式关闭文件 handler。\nmain.py[9 C C H L]: Role:实现会话生命周期、文件系统目录收集、选择参数解析、去重规范化、递归生成测试项目及主运行循环 | Uses:src/_pytest/config/__init__.py, src/_pytest/nodes.py, src/_pytest/runner.py, src/_pytest/pathlib.py, src/_pytest/reports.py | API:Session；Dir；pytest_cmdline_main；pytest_collection；pytest_runtestloop；resolve_collection_argument；validate_basetemp | Constraints:会话无论成功、中断或内部错误都恢复启动目录、配对 sessionfinish/unconfigure 并映射稳定退出码；--basetemp 拒绝空值、当前目录及其任何词法或解析后祖先；收集参数中的目录不得带 :: 选择，文件后的裸 [参数] 也作为用法错误；默认移除重复或前缀重叠参数且保留最早顺序，--keep-duplicates 才保留，但直接重复文件为兼容仍允许重复收集；节点选择对参数化后缀精确匹配，无后缀时匹配全部参数实例；路径钩子按 conftest 可见范围代理，收集结束钩子即使出错也调用；shouldstop/shouldfail 一旦设置不可清回 False。\nmonkeypatch.py[8 S I V L]: Role:提供夹具和独立上下文以临时修改属性、映射、环境、导入路径及工作目录并可靠撤销 | Uses:src/_pytest/fixtures.py, src/_pytest/deprecated.py, src/_pytest/warning_types.py | API:monkeypatch fixture；pytest.MonkeyPatch；setattr/delattr/setitem/delitem/setenv/delenv/syspath_prepend/chdir/context/undo | Constraints:raising=True 时缺失目标分别抛 AttributeError/KeyError，字符串属性目标必须是含点绝对导入路径；类属性保存 __dict__ 原值以绕过描述符；所有修改按各自逆序撤销，首次 sys.path/cwd 保存完整原态，undo 消耗栈且可重复安全调用；context 无论异常都撤销；setenv 非字符串警告后转换，prepend 置于原值之前；syspath_prepend 使导入缓存失效，并仅在旧 pkg_resources 命名空间确受影响时发弃用警告与修复。\nnodes.py[9 C C M]: Role:定义收集树的 Node、Collector、文件系统 Collector、Directory、File 与可执行 Item 基类及标记、位置、失败表示和终结器行为 | Uses:src/_pytest/config/__init__.py, src/_pytest/mark/structures.py, src/_pytest/_code/code.py, src/_pytest/stash.py, src/_pytest/pathlib.py | API:Node.from_parent；Node.iter_parents/listchain/add_marker/iter_markers/get_closest_marker/addfinalizer；Collector；File；Directory；Item；Item.add_report_section/reportinfo/location | Constraints:Node 禁止直接构造而必须用 from_parent，子类构造器应接受合作式关键字参数；节点须由 parent 或显式 config/session 建立，nodeid 在父链内唯一且路径分隔统一为 /；标记从当前节点向祖先按近到远迭代；文件系统节点优先以 rootpath 相对路径生成 nodeid，根外显式初始路径仍须稳定表示；Item 不应同时继承 Collector，兼容菱形继承只警告一次；失败路径在工作目录变化时使用绝对路径避免误导。\noutcomes.py[9 D C V M]: Role:定义 pytest 的跳过、失败、预期失败和立即退出控制异常及按可导入版本跳过的辅助函数 | Uses:src/_pytest/warning_types.py | API:pytest.skip；pytest.fail；pytest.xfail；pytest.exit；pytest.importorskip；OutcomeException/Skipped/Failed/Exit/XFailed | Constraints:OutcomeException 继承 BaseException 以免被常规 Exception 捕获，消息非字符串立即 TypeError；模块级 skip 仅在 allow_module_level=True 时合法；fail(pytrace=False) 把消息视为完整失败信息；exit 的 returncode=None 等价成功退出；importorskip 先校验模块名表达式，默认捕获 ImportError 但对非 ModuleNotFoundError 发弃用警告，显式 exc_type 可限定且须为 ImportError 子类；缺模块或版本不足以允许模块级的 Skipped 终止，版本按 packaging.Version 比较。\npastebin.py[5 S O H S]: Role:实现把完整会话输出或失败报告提交到 bpa.st 的终端插件 | Uses:src/_pytest/config/__init__.py, src/_pytest/terminal.py, src/_pytest/stash.py | API:--pastebin={failed,all}；create_new_paste | Constraints:all 模式仅有 terminalreporter 时 tee UTF-8 输出并在卸载恢复写方法、关闭临时文件；failed 模式逐失败提交；服务使用一周 expiry，HTTP/网络/响应格式错误返回 bad response 文本而不令测试失败。\npathlib.py[9 U I V L]: Role:集中实现稳健路径遍历/删除/编号目录、glob 匹配及三种测试模块导入模式与包名解析 | Uses:src/_pytest/compat.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py | API:ImportMode；import_path；ImportPathMismatchError；resolve_pkg_root_and_module_name；fnmatch_ex；rm_rf；make_numbered_dir_with_cleanup | Constraints:rm_rf 对只读文件逐层加用户读写权限重试、并发已删除静默，未知错误发 PytestWarning，Windows 使用扩展长度路径；编号目录最多竞争重试 10 次，以独占 .lock 防清理，锁超 3 天才视死锁，fork 子进程不得删除父进程锁，keep=0 不建锁；prepend/append 永久修改 sys.path，导入后模块 __file__ 必须与请求路径相同，除 PY_IGNORE_IMPORTMISMATCH=1；importlib 模式不得改 sys.path，优先规范包名与 meta_path 规格，失败按 root 生成唯一点名并补中间模块，保持父模块子属性且不能漏断言重写钩子；命名空间包仅配置启用时向上验证可正常导入；fnmatch_ex 保留整路径 ** 旧语义并适配 Windows 分隔符；scandir 只忽略明确的缺失/坏链/不可用驱动错误，其余传播。\npy.typed[3 D I T]: Role:声明 _pytest 内部包随发行物提供内联类型信息 | Uses:- | API:PEP 561 py.typed 标记 | Constraints:文件保持为空且随包分发。\npytester.py[9 S AA H X L]: Role:提供隔离创建测试项目、进程内或子进程运行 pytest、记录钩子、解析结果和匹配文本输出的插件测试基础设施 | Uses:src/_pytest/config/__init__.py, src/_pytest/main.py, src/_pytest/capture.py, src/_pytest/tmpdir.py, src/_pytest/pytester_assertions.py | API:pytester fixture；Pytester；RunResult；HookRecorder；LineMatcher；LineComp；--runpytest；--lsof | Constraints:插件默认禁用，使用者须显式加载 pytester；实例化后切换到独立临时目录并清除外层 PYTEST_ADDOPTS、隔离 HOME/USERPROFILE、关闭颜色及固定内层临时根，结束时恢复 sys.path、sys.meta_path 与模块快照但保留 zope/readline；进程内运行必须恢复内层全局导入状态和钩子监控，默认把真实 KeyboardInterrupt 重新抛给外层，捕获输出回放到外层后再构造 RunResult；子进程运行只接受字符串插件名并将每项转成 -p 参数，插件对象明确报错，自动使用独立 basetemp；run 默认关闭子进程 stdin，bytes 会写入管道，超时杀进程并抛 Pytester.TimeoutExpired，stdout/stderr 以 UTF-8 文件完整捕获并回显；所有启动方式确保当前目录加入 PYTHONPATH，runpytest 按 --runpytest 精确选择 inprocess/subprocess；文件生成会去共同缩进、去首尾空白且扩展名必须为空或以点开头；复制示例受 pytester_example_dir 与 pytester_example_path 标记约束，无 __init__.py 的目录内容合并进测试根；HookRecorder 必须停止监控并对同名多报告消除 setup/teardown 通过项歧义；RunResult 只从含秒数的最终摘要反向解析，warning/error 单数统一复数；LineMatcher 顺序匹配默认允许间隔，consecutive 模式在首次命中后不允许间隔，失败须包含逐行匹配日志；lsof 检查只在工具可用时启用并按新增 fd 报 PytestFDWarning。\npytester_assertions.py[5 S AA T]: Role:为 pytester 提供置于可断言重写模块中的运行结果计数断言 | Uses:src/_pytest/reports.py, src/_pytest/assertion/rewrite.py | API:assertoutcome；assert_outcomes | Constraints:模块不得独立加载；warnings 与 deselected 仅在期望值非 None 时参与严格字典比较。\npython.py[9 C F H L]: Role:实现 Python 测试模块、包、类和函数发现执行、xunit 适配、参数化展开、测试 ID 生成及 Function 项目建模 | Uses:src/_pytest/fixtures.py, src/_pytest/nodes.py, src/_pytest/mark/structures.py, src/_pytest/pathlib.py, src/_pytest/config/__init__.py | API:Module；Package；Class；Function；Metafunc.parametrize；pytest_pycollect_makemodule；pytest_pycollect_makeitem；pytest_pyfunc_call | Constraints:默认文件匹配 test_*.py/*_test.py，类和函数匹配 Test/test 前缀或配置 glob，__test__=False 与抽象类不收集；原生运行不支持 async 函数或返回 awaitable，需插件处理，普通测试返回非 None 仅警告；每个测试方法创建独立类实例；xunit setup/teardown 通过隐式 autouse 夹具接入且已标成 fixture 的同名函数不得重复调用；多次 parametrize 形成笛卡尔积且参数名不得重复，request 为保留名；参数 ID 必须唯一，默认重复 ID 加数字消歧，strict_parametrization_ids 时直接收集错误，HIDDEN_PARAM 每次 parametrize 至多一次；直接参数化会遮蔽同名夹具并重算静态夹具闭包。\npython_api.py[9 S F V L]: Role:实现 pytest.approx 对标量、Decimal、映射、序列及已加载 NumPy 数组的近似相等和失败差异 | Uses:- | API:pytest.approx；ApproxBase/ApproxScalar/ApproxDecimal | Constraints:比较相对期望值非对称，默认 rel=1e-6、abs=1e-12，显式仅 abs 时禁用默认 rel，同时给定取两容差较大者；负或 NaN 容差报 ValueError；布尔与 0/1 不近似相等，非数值退回严格相等，无穷只等自身，NaN 仅 nan_ok 时互等；禁止布尔上下文且对象不可哈希；只支持有序序列，长度与映射键必须完全相同，嵌套同类映射/序列拒绝；NumPy 仅在已导入时识别，数组形状须一致但标量可广播；Decimal 使用 Decimal 默认容差；失败说明列出不匹配数、最大绝对/相对差和逐索引值，不同大小先明确拒绝。\nraises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。\nrecwarn.py[8 S I V M]: Role:实现警告记录夹具以及 warns/deprecated_call 上下文和函数调用断言 | Uses:src/_pytest/fixtures.py, src/_pytest/outcomes.py, src/_pytest/deprecated.py | API:recwarn；pytest.warns；pytest.deprecated_call；WarningsRecorder；WarningsChecker | Constraints:warns 的期望类型必须为 Warning 子类，函数式第二参数必须可调用且 match 只供上下文形式；上下文至少捕获一个期望类别，给定 match 时须由 re.search 命中消息，否则 pytest.fail；所有未匹配警告无论断言成功与否均按原位置重发；skip/fail/xfail、KeyboardInterrupt 等控制流及 pytest.exit 必须传播且不得被 DID NOT WARN 覆盖；Recorder 禁止重复进入或未进入退出，但退出后可复用；pop 优先精确类别，否则选最接近子类；非法非字符串 UserWarning 消息给清晰 TypeError。\nreports.py[9 D O V L]: Role:定义测试与收集报告模型、捕获内容访问、终端渲染及跨进程内建类型序列化协议 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/terminalwriter.py, src/_pytest/nodes.py, src/_pytest/outcomes.py, src/_pytest/runner.py | API:BaseReport；TestReport；CollectReport；pytest_report_to_serializable/from_serializable；longreprtext/caplog/capstdout/capstderr | Constraints:outcome 仅 passed/failed/skipped，TestReport.when 仅 setup/call/teardown 且位置行号为 0 基；跳过报告默认取抛出位置，_use_item_location 时用 item 位置并转 1 基 longrepr 元组；call 失败走 item.repr_failure，setup/teardown 走配置回溯样式；捕获区段须保留阶段和类型标题；序列化为内建值并标 $report_type，收集 result 暂不传输，异常链、回溯条目、崩溃位置和附加区段须可往返；未知条目类型应抛含报告数据与 issue 地址的内部错误。\nrunner.py[9 C C H L]: Role:实现单项测试的 setup/call/teardown 协议、调用计时与异常捕获、收集报告和共享 setup 栈的精确终结 | Uses:src/_pytest/nodes.py, src/_pytest/reports.py, src/_pytest/timing.py, src/_pytest/outcomes.py, src/_pytest/main.py | API:CallInfo；runtestprotocol；call_and_report；SetupState | Constraints:setup 通过后才运行 call，但 teardown 始终执行；会话即将停止时 nextitem 强制为 None 以完整终结并报告 teardown 错误；每阶段依次 makereport、logreport，并仅对非 skip/BdbQuit/xfail 异常触发交互钩子；PYTEST_CURRENT_TEST 在三阶段更新并把空字节替换为 (null)，teardown 后删除；setup 失败在共享祖先子树复用同一异常而不重复 setup；终结器按 LIFO 全部运行，多异常按节点及全局层次组成 BaseExceptionGroup；CallInfo.result 在捕获异常时必须拒绝访问。\nscope.py[8 D F T]: Role:定义夹具五级作用域的规范名称、全序关系和相邻范围转换 | Uses:src/_pytest/outcomes.py | API:Scope；HIGH_SCOPES | Constraints:严格顺序为 function<class<module<package<session；最低/最高再向外转换抛 ValueError；用户输入非法作用域通过 pytest.fail 给出上下文。\nsetuponly.py[5 S F H T]: Role:实现仅建立夹具和显示夹具 setup/teardown 动作的命令模式 | Uses:src/_pytest/fixtures.py, src/_pytest/scope.py, src/_pytest/_io/saferepr.py, src/_pytest/capture.py | API:--setup-only/--setuponly；--setup-show/--setupshow | Constraints:setup-only 隐含 setup-show；显示期间暂停全局捕获后必须恢复；缩进随作用域由 session 到 function 增大，参数 repr 限 42 字符且 teardown 后清除临时缓存。\nsetupplan.py[5 S F H T]: Role:实现 --setup-plan 模式，以虚拟缓存夹具展示计划而不执行测试或夹具 | Uses:src/_pytest/fixtures.py, src/_pytest/config/__init__.py, src/_pytest/setuponly.py | API:--setup-plan/--setupplan | Constraints:启动时同时启用 setuponly 与 setupshow；夹具 setup 写入与当前参数键匹配的 None 缓存并阻止真实工厂执行。\nskipping.py[9 S C H M]: Role:注册并执行 skip/skipif/xfail 语义，把条件、运行控制和异常期望映射为测试报告状态 | Uses:src/_pytest/mark/structures.py, src/_pytest/outcomes.py, src/_pytest/raises.py, src/_pytest/reports.py, src/_pytest/runner.py | API:--runxfail；xfail_strict；pytest.mark.skip/skipif/xfail | Constraints:多个 skipif/xfail 条件任一为真即生效；字符串条件在 os/sys/platform/config、钩子命名空间与测试函数全局中求值，语法或运行异常转无回溯失败；布尔条件为真必须提供 reason，字符串条件可自动用表达式作原因；skip 优先于 xfail；run=False 在 setup/call 前以 [NOTRUN] 中止；raises 仅在异常匹配时记 XFAIL，否则真失败；XPASS 在 strict 时失败，否则通过并带 wasxfail；--runxfail 忽略标记并临时把命令式 xfail 变为空操作，卸载恢复。\nstash.py[7 D P S]: Role:提供以身份唯一泛型键实现的类型安全异构插件状态映射 | Uses:- | API:StashKey；Stash | Constraints:键按对象身份唯一而不按值相等；缺键的索引和删除抛 KeyError，get/setdefault 保留泛型返回类型；公共集合由 __all__ 固定。\nstepwise.py[7 S R H M]: Role:持久化最近失败节点并在后续 stepwise 会话中跳过此前通过项目、失败即停或跳过一次失败 | Uses:src/_pytest/cacheprovider.py, src/_pytest/main.py, src/_pytest/reports.py, src/_pytest/nodes.py | API:--stepwise/--sw；--stepwise-skip/--sw-skip；--stepwise-reset/--sw-reset | Constraints:skip/reset 隐含启用 stepwise；缓存损坏、测试数量变化或节点消失时不跳过并清状态；跳过项目必须调用 pytest_deselected；stepwise-skip 只忽略首个失败；xdist worker 不写缓存以避免竞争。\nterminal.py[9 S O H L]: Role:实现 pytest 全会话终端报告器，呈现收集、逐项进度、失败详情、警告、短摘要、最终统计及终端标签进度 | Uses:src/_pytest/reports.py, src/_pytest/_code/code.py, src/_pytest/_io/terminalwriter.py, src/_pytest/config/__init__.py, src/_pytest/nodes.py | API:TerminalReporter；TestShortLogReport；pytest_report_teststatus；-v/--verbose；-q/--quiet；--verbosity；-r；--tb；--showlocals；--show-capture；--color；--no-header；--no-summary；--no-fold-skipped；--force-short-summary；format_session_duration；format_node_duration | Constraints:setup/teardown/collect 失败归 error/E，普通通过、失败、跳过默认分别显示 ./F/s，插件可经 pytest_report_teststatus 覆盖；-r 按给定顺序去重，a 展开除 passed 外状态、A 含全部、N 清空，警告默认自动加入但 --disable-warnings 移除；进度在无捕获或 setup-show 时默认关闭，console_output_style 可选百分比、计数或耗时，最终 100% 必须等运行循环及 teardown 完成；xdist 交错报告不得按 logfinish 推断边界；会话头按详细度、--no-header 和插件反向钩子顺序输出，配置头必须显示 rootdir、所用 configfile 及同目录被忽略配置警告；终端摘要在常规退出状态且未 --no-summary 时运行，内部错误不走普通摘要，KeyboardInterrupt 非 fulltrace 只显崩溃位置和提示；捕获区段按 show-capture 精确筛选，xfail 默认不显回溯而 --xfail-tb 启用；警告按完整消息分组，位置少于十项逐条列出，否则按文件计数，teardown 新警告以 final 摘要补报；短摘要在 CI、详细度至少 2 或未强制短摘要时保留完整崩溃消息，否则按 Unicode 显示宽度裁剪；跳过折叠按相对路径、行号和原因聚合，函数级 skip 可忽略行号而全局 pytestmark 不可；最终颜色优先失败/错误红色，其次警告、XPASS 或未知状态黄色，通过绿色；会话时长小于一分钟只显示秒，节点耗时按微秒/毫秒/秒/分/小时紧凑分档；OSC 9;4 进度插件只在 TTY 注册，收集期 indeterminate、失败后 error、会话结束必须 remove。\nthreadexception.py[7 S I H S]: Role:暂时接管 threading.excepthook，把后台线程未处理异常转为 pytest 警告或阶段错误 | Uses:src/_pytest/config/__init__.py, src/_pytest/stash.py, src/_pytest/tracemalloc.py, src/_pytest/warning_types.py | API:- | Constraints:异常发生时立即冻结线程名、回溯与分配信息；setup/call/teardown 末检查队列，-Werror 时以原异常作 cause；多项组成 ExceptionGroup；卸载必须恢复原 hook 并清理 stash，但进程退出期仍存活线程的异常可能在恢复后发生。\ntiming.py[5 U I T]: Role:隔离 pytest 时间函数并提供可精确计时的 Instant/Duration 与确定性测试时钟 | Uses:src/_pytest/monkeypatch.py | API:Instant；Duration；MockTiming；time；perf_counter；sleep | Constraints:墙钟用于时间戳、性能计数器用于持续秒数；pytest 内部应从本模块取时间以免外部 mock 污染；MockTiming 只在 sleep 时推进。\ntmpdir.py[8 S I H M]: Role:创建安全的会话临时根与逐测试 pathlib 目录，并按测试结果和保留策略清理 | Uses:src/_pytest/pathlib.py, src/_pytest/fixtures.py, src/_pytest/monkeypatch.py, src/_pytest/reports.py, src/_pytest/stash.py | API:tmp_path；tmp_path_factory；pytest.TempPathFactory；--basetemp；PYTEST_DEBUG_TEMPROOT；tmp_path_retention_count/policy | Constraints:显式 basetemp 每次先递归清空后以 0700 重建；自动根必须归当前用户所有并移除组/其他权限，按用户名失败则回退 unknown；mktemp basename 必须规范化且只能是 basetemp 的直接相对子名；保留数不得为负，策略仅 all/failed/none；逐测试名清洗并截至 30 字符再编号；failed 策略删除通过测试目录，整场成功且非显式根时删除基目录，清理均尽力而为并清除死链接。\ntracemalloc.py[3 U I T]: Role:为资源类警告附加对象分配回溯或启用 tracemalloc 的指导信息 | Uses:- | API:tracemalloc_message | Constraints:source 为 None、模块不可用或无跟踪对象时不得失败；有回溯时以前导换行分隔。\nunittest.py[8 S I H L]: Role:收集并运行 unittest.TestCase，桥接 unittest 结果、生命周期、pytest 报告/PDB 与 Twisted Trial 异常 | Uses:src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/runner.py, src/_pytest/debugging.py, src/_pytest/monkeypatch.py | API:unittest.TestCase 收集兼容 | Constraints:仅具体 TestCase 子类且 __test__ 非 False 收集，方法名由 unittest.TestLoader 决定；TestCase 子项 nofuncargs，不支持普通夹具参数但仍解析类实例工厂与 autouse；setUpClass/tearDownClass/cleanup 通过类级 autouse 接入，setup 失败也执行 cleanup，多 cleanup 错误聚合 ExceptionGroup；类/方法 unittest skip 不运行对应 setup；unittest 的 error/failure/skip/expectedFailure 映射到首个 pytest excinfo，unexpected success 始终普通失败而非 XPASS；异步方法交给 unittest；--pdb 时延后非跳过测试 tearDown 以保留调试状态；过滤 __unittest 内部帧但不可过滤为空；Trial 仅其 unittest 模块已加载时集成，24 及更早临时保存原始 exc_info 并避免泄漏，25+从 Failure 提取值和回溯。\nunraisableexception.py[7 S I H S]: Role:暂时接管 sys.unraisablehook，把析构等不可抛出异常转为 pytest 警告或阶段错误 | Uses:src/_pytest/config/__init__.py, src/_pytest/stash.py, src/_pytest/tracemalloc.py, src/_pytest/warning_types.py | API:- | Constraints:钩子调用时冻结对象表示、回溯和分配信息；每阶段排空队列，-Werror 时保留原异常 cause，多项组成 ExceptionGroup；卸载前默认执行五轮 GC 再收集并恢复原 hook，轮数可由 stash 覆盖。\nwarning_types.py[8 D I S]: Role:定义 pytest 公共警告类别、版本移除类别、运行时格式化警告容器和精确源码位置发警告工具 | Uses:- | API:PytestWarning 及所有 Pytest*Warning；UnformattedWarning | Constraints:公共警告类的 __module__ 固定为 pytest；RemovedIn9/10 同时属于 PytestDeprecationWarning；warn_explicit_for 在警告升级为错误时把定义文件和行号补入新异常消息。\nwarnings.py[8 S I H S]: Role:在配置、收集和测试阶段捕获警告、应用分层过滤器并经历史钩子记录 | Uses:src/_pytest/config/__init__.py, src/_pytest/hookspec.py, src/_pytest/tracemalloc.py, src/_pytest/nodes.py | API:catch_warnings_for_item；warning_record_to_str；filterwarnings 标记 | Constraints:解释器未显式配置时默认总显示 DeprecationWarning/PendingDeprecationWarning；PytestRemovedIn9Warning 默认为错误；ini 与命令行过滤后再应用节点 filterwarnings 标记；每条捕获警告调用 pytest_warning_recorded，配置清理阶段只维持过滤不记录。\n\n===/testbed/src/_pytest/_code/===\n__init__.py[7 E A T]: Role:集中重导出源码、帧、代码、回溯与异常信息检查 API | Uses:src/_pytest/_code/code.py, src/_pytest/_code/source.py | API:Code；ExceptionInfo；Frame；Source；Traceback；TracebackEntry；filter_traceback；getfslineno；getrawcode | Constraints:公共集合由 __all__ 显式固定。\ncode.py[9 C A V L]: Role:封装 Python 代码对象、帧、回溯和异常信息，并生成可过滤、可序列化呈现的终端失败表示 | Uses:src/_pytest/_code/source.py, src/_pytest/_io/terminalwriter.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/pathlib.py | API:Code；Frame；TracebackEntry；Traceback；ExceptionInfo；FormattedExcinfo；TerminalRepr；getfslineno；filter_traceback | Constraints:ExceptionInfo 未填充时 type/value/tb 不可访问且 for_later 只能填充一次；from_exception 要求异常自带 traceback，match 用 re.search 匹配异常文本与 notes，group_contains 只证明存在匹配项且 depth 必须至少 1；回溯过滤须同时尊重 __tracebackhide__ callable/布尔值并隐藏 pytest、pluggy 和动态代码帧，全部隐藏时给出 --full-trace 提示；源码位置行号内部为 0 基而终端位置转 1 基，Python 3.11 列范围按 UTF-8 字节偏移换算字符并仅高亮单行局部表达式；long/short/line/no/native/value 样式、绝对路径、局部量与参数截断均由格式器选项控制，用户 repr 异常不得破坏报告但 KeyboardInterrupt 必须传播；递归回溯优先按相同位置与 locals 定位，比较 locals 失败时保留首尾各十帧并解释降级；异常 cause/context 链防循环并按 Python 抑制规则展示，异常组暂以原生格式保留子异常；终端表示的字符串形式必须由同一 toterminal 路径生成，文件位置消息只取首行。\nsource.py[7 D A M]: Role:表示不可变源码片段并从对象、AST 与 token 边界定位最小 Python 语句范围 | Uses:- | API:Source；findsource；getrawcode；getstatementrange_ast | Constraints:Source 构造默认去缩进并另存原始行，切片不允许非 1 step；越界行抛 IndexError；语句范围包含装饰器并把 else/finally 视为独立区域，排除尾部注释和空行；无法找源码返回 (None,-1)，无法取 code object 抛 TypeError。\n\n===/testbed/src/_pytest/_io/===\n__init__.py[5 E O T]: Role:重导出终端写入器和终端宽度查询接口 | Uses:src/_pytest/_io/terminalwriter.py | API:TerminalWriter；get_terminal_width | Constraints:公共集合由 __all__ 显式固定。\npprint.py[7 U O V L]: Role:提供从 CPython 适配的确定性递归安全漂亮打印器，供断言差异展开复杂容器和数据类 | Uses:- | API:PrettyPrinter.pformat | Constraints:indent 非负、depth 正数且 width 非零；仅对使用内建 repr 的支持类型分派，定制 repr 保持用户结果；字典和集合对不可比较对象以类型名与对象身份安全排序，Counter 保持 most_common 顺序；递归输出明确占位，深度上限输出省略结构；仅使用生成 repr 且 repr=True 的 dataclass 展开 repr 字段；字符串与字节按宽度切块并保持合法相邻字面量语义；单元素元组保留尾逗号，各多行容器项目保留尾逗号。\nsaferepr.py[7 U O S]: Role:安全生成用户对象的受限或不限长 repr，并在 repr 自身异常时返回诊断占位文本 | Uses:- | API:SafeRepr；safeformat；saferepr；saferepr_unlimited；DEFAULT_REPR_MAX_SIZE | Constraints:KeyboardInterrupt/SystemExit 必须传播，其他 repr 异常不得逃逸；限长文本从中部省略且总长不超 maxsize；默认整体上限 240；不限长版本默认使用 ascii。\nterminalwriter.py[8 U O V M]: Role:提供跨平台终端宽度、颜色判定、标记写入、分隔线和源码语法高亮 | Uses:src/_pytest/_io/wcwidth.py, src/_pytest/compat.py, src/_pytest/config/exceptions.py | API:TerminalWriter；get_terminal_width | Constraints:颜色优先级为 PY_COLORS 显式值、NO_COLOR、FORCE_COLOR、TTY 且 TERM 非 dumb；Windows 可用 colorama 转换并为末列预留一格；宽度小于 40 回退 80；未知 markup 抛 ValueError，Unicode 编码失败退回转义 ASCII；当前行宽按 Unicode 显示列计算；PYTEST_THEME/MODE 无效转 UsageError；Pygments 高亮不得凭空增加尾换行并在开头重置颜色。\nwcwidth.py[5 U O T]: Role:按 Unicode 类别计算终端字符及 NFC 字符串的显示列宽 | Uses:- | API:wcwidth；wcswidth | Constraints:ASCII 可打印字符宽 1，控制字符 -1，组合与列明格式字符宽 0，东亚全宽/宽字符宽 2；字符串含不可打印字符即返回 -1。\n\n===/testbed/src/_pytest/_py/===\n__init__.py[1 E I T]: Role:标识 pytest 内置 py 兼容实现包 | Uses:- | API:- | Constraints:文件刻意为空。\nerror.py[5 S I S]: Role:为 py.error 兼容层按 errno 延迟生成异常类并把 OSError 转为对应类型 | Uses:src/py.py | API:Error；checked_call；动态 ENOENT/EACCES 等 errno 类 | Constraints:生成类的模块名固定为 py.error 并按 errno 缓存；Windows 原生错误号先映射，未知映射保留原 OSError；errno=None 生成 UnknownErrnoNone。\npath.py[8 S I X V L]: Role:实现 pytest 内置 py.path.local 兼容对象及传统文件系统、导入、遍历、执行和编号临时目录操作 | Uses:src/_pytest/_py/error.py, src/_pytest/_code/source.py, src/py.py | API:py.path.local；LocalPath；Stat | Constraints:LocalPath 始终保存绝对路径并实现 os.PathLike，Windows 比较与哈希不区分大小写且 join 接受 POSIX 分隔符；check 支持属性反转并把缺失、非目录和忙设备按存在性条件折叠，visit 默认深度优先且可切换广度优先、过滤和层内排序；ensure 的目录创建容忍并发 EEXIST 但最终目标必须确为目录，move 跨设备时复制后删除且禁止移入自身子树；读写、复制、删除、chmod、链接和 stat 的系统错误统一转为 py.error 兼容异常，递归删除在 Windows 先放宽权限；pyimport 默认按 __init__.py 包链推导模块名并修改 sys.path，导入文件必须与请求路径相同，只有 PY_IGNORE_IMPORTMISMATCH=1 才忽略；importlib 模式不改 sys.path但只保证独立 .py 文件，显式 modname 的伪导入失败时必须从 sys.modules 回滚；sysexec 不经 shell，非零退出抛出含返回码、stdout 与 stderr 的 RuntimeError；编号目录创建与清理用独占锁处理多进程竞争，fork 子进程不得移除父进程锁，旧目录先改名为 garbage 再尽力删除；POSIX 独有所有权和链接能力在 Windows 不提供。\n\n===/testbed/src/_pytest/assertion/===\n__init__.py[9 S A H M]: Role:接线断言模式、导入重写钩子、自定义比较/通过钩子和解释截断配置 | Uses:src/_pytest/assertion/rewrite.py, src/_pytest/assertion/truncate.py, src/_pytest/assertion/util.py, src/_pytest/config/__init__.py, src/_pytest/nodes.py | API:register_assert_rewrite；--assert={rewrite,plain}；enable_assertion_pass_hook；truncation_limit_lines/chars | Constraints:插件须在目标模块导入前注册重写且名称必须全为字符串；无活动重写器时注册为空操作；安装钩子插入 sys.meta_path 首位并注册清理；每项运行期间临时设置比较与 assertion_pass 回调，结束必须恢复全局状态；自定义解释先截断、转义内嵌换行，rewrite 模式再转义百分号。\nrewrite.py[9 C A V L]: Role:以导入钩子把 assert AST 改写为含中间值解释、可选通过钩子和安全表示的代码并管理专用 pyc 缓存 | Uses:src/_pytest/assertion/util.py, src/_pytest/config/__init__.py, src/_pytest/main.py, src/_pytest/pathlib.py, src/_pytest/fixtures.py | API:AssertionRewritingHook；rewrite_asserts | Constraints:自动改写 conftest、显式初始测试路径、python_files 匹配模块及 register_assert_rewrite 标记的包与子模块；模块已导入且未由本钩子改写时标记重写须警告，文档字符串含 PYTEST_DONT_REWRITE 时禁用；缓存 pyc 以 Python magic、零 flags、32 位 mtime/size 校验，并先写进程临时文件再原子替换，目录只读或缓存损坏时仍从源码重写执行；生成临时变量使用非法 Python 标识符避免冲突并在断言后清空；布尔短路、链式比较、调用、属性、海象表达式和自定义比较解释须保持原求值语义；verbosity_assertions 控制安全 repr 截断，级别 2 以上不限长。\ntruncate.py[7 S A S]: Role:按断言详细度、CI 环境和配置行/字符阈值截断失败解释并附恢复提示 | Uses:src/_pytest/compat.py, src/_pytest/config/__init__.py, src/_pytest/nodes.py | API:truncate_if_required；truncation_limit_lines；truncation_limit_chars | Constraints:详细度至少 2、CI 环境或两个阈值都显式为 0 时不截断；默认 8 行/640 字符，先触及者生效；输出末尾必须报告隐藏行数并提示 -vv。\nutil.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。\n\n===/testbed/src/_pytest/config/===\n__init__.py[9 C R H L]: Role:实现 pytest 进程内与控制台启动、插件管理、conftest 作用域加载、命令行/ini 配置解析、配置生命周期和警告过滤 | Uses:src/_pytest/config/argparsing.py, src/_pytest/config/findpaths.py, src/_pytest/hookspec.py, src/_pytest/assertion/rewrite.py, src/_pytest/pathlib.py | API:main；console_main；cmdline.main；ExitCode；Config；PytestPluginManager；UsageError；hookimpl；hookspec；get_config；get_plugin_manager；create_terminal_writer | Constraints:仅参数序列恰含一次 --version 时走不加载完整插件的快速路径；main 在所有路径恢复 PYTEST_VERSION 并确保 unconfigure，console_main 遇 BrokenPipeError 以 1 返回且抑制退出期二次错误；essential_plugins 不可禁用，插件按内建、显式 -p、pytest11、PYTEST_PLUGINS 与 conftest 的启动阶段加载；conftest 只向所在目录及子树生效，confcutdir 表示不向其祖先继续查找而非限制到单一树；配置参数顺序为 ini addopts、PYTEST_ADDOPTS、显式参数，后者覆盖前者；ini 候选先按命令行 override、再按规范名优于别名选择并按注册类型转换；Config 只允许 parse 一次，配置清理回调即使钩子失败也执行。\nargparsing.py[8 S R V L]: Role:封装 argparse 为插件可扩展的命令行选项组与 ini 选项注册、解析、补全和帮助格式层 | Uses:src/_pytest/_argcomplete.py, src/_pytest/_io/terminalwriter.py, src/_pytest/config/exceptions.py, src/_pytest/deprecated.py | API:Parser；OptionGroup；Argument；Parser.addoption/getgroup/addini；config.option；config.getini；@参数文件 | Constraints:公开 addoption 保留小写短选项给核心，内部 _addoption 才可注册；不允许长选项缩写，未知短横线参数转 UsageError，而未知非选项继续作为 file_or_dir；ini 类型仅限 string/paths/pathlist/args/linelist/bool/int/float，未给默认值按类型产生空值；aliases 不得与规范项或既有别名冲突；同组重复选项名拒绝；帮助折叠仅多余连字符不同的长选项并保留较长拼写，宽度取真实终端；解析前启用按需 argcomplete。\ncompat.py[7 S I H T]: Role:在 pathlib 与弃用 py.path 钩子参数之间双向补全并校验一致性 | Uses:src/_pytest/compat.py, src/_pytest/deprecated.py, src/_pytest/hookspec.py | API:PathAwareHookProxy | Constraints:同时传 path/fspath 时必须表示同一路径，否则 ValueError；只传旧参数会发弃用警告并转 pathlib，只传新参数会生成 legacy_path；代理结果缓存以避免重复包装。\nexceptions.py[5 D R T]: Role:定义命令用法错误和请求提前打印帮助的配置控制异常 | Uses:- | API:UsageError | Constraints:UsageError 的 __module__ 固定为 pytest 以呈现公共类型名；PrintHelp 仅作解析内部控制流。\nfindpaths.py[8 S R V M]: Role:解析 pytest 支持的配置文件与命令行 ini 覆盖，并据输入路径确定 rootdir、配置文件和被忽略的同目录配置 | Uses:src/_pytest/config/exceptions.py, src/_pytest/outcomes.py, src/_pytest/pathlib.py | API:pytest.ini/.pytest.ini；pyproject.toml [tool.pytest.ini_options]；tox.ini [pytest]；setup.cfg [tool:pytest]；--rootdir；-o/--override-ini | Constraints:候选优先级固定为 pytest.ini、.pytest.ini、pyproject.toml、tox.ini、setup.cfg，首个有效配置胜出且不合并；pytest.ini 即使为空也有效，无专用表的首个 pyproject.toml 仅在无其他配置时确定根；setup.cfg 的 [pytest] 必须失败并提示改用 [tool:pytest]；TOML 标量转字符串而列表保留字符串列表；同名 -o 以最后值为准且覆盖文件来源；显式 --rootdir 必须是现存目录，环境变量会展开。\n\n===/testbed/src/_pytest/mark/===\n__init__.py[8 S P H M]: Role:接线标记公共对象、参数集构造、标记注册展示以及 -k/-m 表达式收集后筛选 | Uses:src/_pytest/mark/expression.py, src/_pytest/mark/structures.py, src/_pytest/config/__init__.py, src/_pytest/nodes.py, src/_pytest/stash.py | API:pytest.param；pytest.mark 相关重导出；-k；-m；--markers；markers；empty_parameter_set_mark | Constraints:-k 对节点与父名称、extra keywords、函数属性和标记名做不区分大小写的子串匹配且不接受调用参数；-m 精确匹配标记名并只按给定关键字值筛选；被筛除项必须统一调用 pytest_deselected；表达式语法错误转 UsageError 并含列位置；HIDDEN_PARAM 在同次参数化至多一次；配置期间 MARK_GEN 绑定当前 Config，卸载恢复此前值以支持嵌套会话；空参数集策略仅接受 skip、xfail、fail_at_collect 或空值。\nexpression.py[8 S P M]: Role:扫描、解析并安全编译 -k/-m 布尔匹配表达式，再通过调用方 matcher 求值 | Uses:- | API:Expression；ExpressionMatcher | Constraints:语法只支持 and/or/not、括号、标识符及纯关键字调用；关键字值限未转义字符串、整数、布尔或 None，字符串反斜线转义明确拒绝；空表达式为 False；错误必须携带单行列位置；True/False/None 可作匹配标识符同时可作值；求值移除 builtins，标识符经不可由语法输入的前缀映射到 matcher，保持布尔短路。\nstructures.py[9 D P V L]: Role:实现标记、标记装饰器与生成器、参数集规范化、空参数集策略及节点继承关键字映射 | Uses:src/_pytest/_code/code.py, src/_pytest/config/__init__.py, src/_pytest/fixtures.py, src/_pytest/outcomes.py, src/_pytest/raises.py | API:pytest.mark；pytest.param/ParameterSet；Mark；MarkDecorator；MarkGenerator；HIDDEN_PARAM | Constraints:单参数名字符串强制把每个值视为整体，参数集数量与名称数不符无回溯失败；空集生成 NOTSET 参数并按 skip/xfail(run=False)/fail_at_collect 策略处理；pytest.param 禁止 usefixtures 标记且 id 仅接受字符串、None 或 HIDDEN_PARAM；同名 Mark 合并追加位置参数、后者关键字覆盖前者并保留最近显式参数 ID 来源；单一函数/类位置参数会直接装饰，若要把 callable 存为标记参数必须 with_args；类标记按反向 MRO 汇集；标记夹具发弃用警告；未知标记警告，严格模式失败，常见 parametrize 拼写错误给专门错误；NodeKeywords 继承父链且禁止删除。\n\n===/testbed/src/pytest/===\n__init__.py[9 E R M]: Role:定义 pytest 公共命名空间并从内部模块集中重导出稳定的配置、节点、夹具、标记、断言、报告、测试辅助及警告 API | Uses:src/_pytest/config/__init__.py, src/_pytest/fixtures.py, src/_pytest/nodes.py, src/_pytest/python.py, src/_pytest/assertion/__init__.py | API:pytest.__version__/version_tuple；main/console_main/ExitCode/Config/PytestPluginManager；fixture/FixtureRequest/FixtureDef；mark/param/HIDDEN_PARAM；raises/RaisesExc/RaisesGroup/approx/warns；Collector/Item/File/Directory/Session/Module/Class/Function；hookimpl/hookspec/register_assert_rewrite；Pytester 及 __all__ 所列公共对象 | Constraints:公共可见性由显式 __all__ 固定；set_trace 委托 pytestPDB.set_trace；内部实现可迁移但重导出名称、模块归属与既有兼容别名不得无弃用删除。\n__main__.py[8 E R T]: Role:实现 python -m pytest 入口并把控制台返回值交给 SystemExit | Uses:src/pytest/__init__.py | API:python -m pytest | Constraints:所有行为委托 pytest.console_main。\npy.typed[7 D R T]: Role:声明 pytest 公共包随发行物提供内联类型信息 | Uses:src/pytest/__init__.py | API:PEP 561 py.typed 标记 | Constraints:文件保持为空且随包分发。\n\n===/testbed/testing/===\nacceptance_test.py[5 T AA H L]: Role:以端到端会话验证 pytest 启动、插件、收集、调用入口、导入模式、报告与生命周期集成 | Uses:src/_pytest/config/__init__.py, src/_pytest/main.py, src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/pytester.py | API:- | Constraints:配置、收集或钩子早期失败须返回对应稳定退出码并仍成对执行 unconfigure/sessionfinish；文件、模块、包、节点 ID、@参数文件及 --pyargs 的选择与错误诊断必须明确，重复参数 ID仍可逐项直接寻址；pytest.main 支持字符串插件名和对象插件但参数本身必须为字符串列表，python -m pytest 与控制台语义一致；原生 async 测试或返回 awaitable 必须失败，无插件处理的 async fixture 对同步测试发 RemovedIn9 警告；耗时报告按阶段排序并服从数量、最小值和详细度；fixture/失败帧生命周期结束后不得泄漏引用；tee-sys 同时实时输出并写入 JUnit；StopIteration 在收集期中断、在运行阶段按失败或错误阶段报告。本地验证盲区：旧 setuptools 命名空间、符号链接、BrokenPipe 平台差异及隔离安装复现按依赖或平台跳过。\nconftest.py[8 T AA H M]: Role:建立 pytest 自测的稳定环境、执行顺序、终端替身、样例收集器、颜色和确定性计时公共夹具 | Uses:src/_pytest/pytester.py, src/_pytest/monkeypatch.py, src/_pytest/timing.py, src/_pytest/nodes.py | API:tw_mock；dummy_yaml_custom_test；pytester；color_mapping；mock_timing | Constraints:所有测试固定 COLUMNS=80、清除颜色环境且默认移除 CI，keep_ci_var 标记可保留；pytester 自动关闭第三方插件加载；收集顺序为快速、无 fixture 信息、中等 pytester、子进程/pexpect 或显式 slow 最慢，并为 pexpect 用例加 uses_pexpect；覆盖率跟踪存在时测试后恢复原 trace；颜色映射适配 Pygments 2.19 空白高亮并分别支持字面、fnmatch、正则与去色；MockTiming 只有 sleep 推进时间。\ndeprecated_test.py[5 T I M]: Role:验证外部插件整合、旧 hook 标记、路径参数、节点构造和夹具标记的弃用诊断 | Uses:src/_pytest/deprecated.py, src/_pytest/config/__init__.py, src/_pytest/config/compat.py, src/_pytest/fixtures.py, src/_pytest/nodes.py | API:- | Constraints:弃用警告指向用户定义行；旧 path 参数发警告并与新 pathlib 参数一致，不一致直接 ValueError；旧路径 hook 实现注册产生五条 RemovedIn9 警告；标记与 fixture 任意装饰顺序均警告且标记数量决定警告数；_ispytest=True 抑制私有 API 警告。\ntest_argcomplete.py[5 T R X T]: Role:对照 Bash compgen 验证快速文件补全器的文件、目录和前缀处理 | Uses:src/_pytest/_argcomplete.py, src/_pytest/monkeypatch.py | API:- | Constraints:普通前缀候选集合与 compgen 相同且目录带 /；/usr/ 前缀刻意去掉目录前缀而不同于 compgen；Windows 与 Darwin 跳过。\ntest_assertion.py[5 T A L]: Role:验证断言插件的重写接线、自定义比较解释、专用对象差异、解释格式化与截断输出 | Uses:src/_pytest/assertion/__init__.py, src/_pytest/assertion/rewrite.py, src/_pytest/assertion/util.py, src/_pytest/assertion/truncate.py, src/_pytest/pytester.py | API:- | Constraints:pytest_assertrepr_compare 按 conftest 目录作用域生效且异常表示失败不得遮蔽原断言，pytest.exit 必须传播；字符串、字节、序列、映射、集合及默认 dataclass/attrs/namedtuple 的差异方向以右侧期望值为基线，坏 repr、Unicode 规范等价和多行内容不得破坏报告；普通详细度省略共同项和完整 iterable diff，-v/-vv 分级展开，CI 仅非空变量禁用省略；断言解释按结构标记缩进并转义普通换行；默认截断受 8 行/640 字符先到者控制，阈值 0 与 -vv/CI 的放宽语义须保持；--assert=plain 不显示重写中间值，优化模式必须警告断言不会执行。本地验证盲区：PyPy 跳过优化模式警告用例。\ntest_assertrewrite.py[5 T A V L]: Role:验证断言 AST 重写的求值保真、失败解释、导入钩子、缓存字节码与通过钩子行为 | Uses:src/_pytest/assertion/rewrite.py, src/_pytest/assertion/util.py, src/_pytest/assertion/__init__.py, src/_pytest/config/__init__.py, src/_pytest/pytester.py | API:- | Constraints:重写须把辅助导入置于文档字符串和 future import 后并保留源码位置、短路、链式比较、调用展开、属性及海象表达式的原求值次数与副作用；PYTEST_DONT_REWRITE 禁用改写，conftest、插件、显式初始文件及 python_files 匹配模块自动改写，已导入后注册须警告但已由同一钩子改写不得误报；断言消息、百分号、非 ASCII、坏 repr 和自定义比较均不得破坏原失败，详细度控制安全 repr 长度；专用 pyc 以 pytest 版本、magic、flags、mtime 和大小校验，损坏、只读、禁写、zip 或缓存目录异常时须回退源码执行，写入采用可失败而不中断的路径；导入中写 pyc 不得递归重写；enable_assertion_pass_hook 仅同时启用配置且存在实现时生成并调用通过解释；资源读取、reload 与 loader get_data/files 语义保持。 本地验证盲区：pkg_resources 缺失、32 位时间戳、PyPy 优化缓存及 Windows/Solaris 删除 cwd 条件会跳过对应覆盖。\ntest_cacheprovider.py[5 T R H L]: Role:验证 JSON/目录缓存、last-failed/failed-first/new-first 选择排序及缓存元数据创建 | Uses:src/_pytest/cacheprovider.py, src/_pytest/main.py, src/_pytest/reports.py, src/_pytest/pytester.py | API:- | Constraints:缓存值须 JSON 可编码，损坏读取回默认，键以 / 分层而 mkdir 名称不得含分隔符；首次真正写入专用缓存目录才创建 README/.gitignore/CACHEDIR.TAG且不覆盖现存文件或污染配置为已有普通目录，权限遵循普通 mkdir；写入/权限失败只发定位到 cacheprovider 的警告；lastfailed 记录收集文件或项目失败，通过、skip、普通 xfail 清除，严格 XPASS 保留，并在部分运行中累积未选失败；--lf 只有命中失败才过滤，显式路径仍可收集，lfnf=none 无历史时全部 deselect，--ff 仅前移；文件级跳过不得误删包或非 Python 收集器；--nf 先新 nodeid 再旧项，各组按文件 mtime 新到旧且部分运行不忘旧项；cache-show 只读并支持 glob。\ntest_capture.py[5 T O X L]: Role:验证 sys/fd/tee 全局与夹具捕获的状态机、报告分段、二进制流、恢复和跨平台边界 | Uses:src/_pytest/capture.py, src/_pytest/reports.py, src/_pytest/fixtures.py, src/_pytest/logging.py, src/_pytest/pytester.py | API:- | Constraints:捕获 start/suspend/resume/done 转换严格，readouterr 消耗当前缓冲并继续捕获，停止或读取失败仍须恢复原流；fd 模式同时捕获 os.write 与 sys 流，处理原 fd 无效、复用及测试关闭 stdout 后的下一项；sys 模式不捕获子进程，tee-sys 同时记录和写原流；同一测试不得同时使用多个 capture fixture，disabled 嵌套只恢复进入前活动层；文本以 UTF-8 errors=replace，二进制夹具保留原字节和换行；stdin 捕获拒绝读写与 fileno；setup/call/teardown 输出分段且不串项，失败、中断、早期 conftest 和日志交互后均不泄漏关闭流；Windows ConsoleIO 与 libedit 输入按平台处理。本地验证盲区：lsof、pexpect/readline、Windows 控制台及平台 fd 行为按工具或平台跳过。\ntest_collect_imported_tests.py[5 T C T]: Role:验证 collect_imported_tests 配置控制测试模块中导入对象是否参与收集 | Uses:src/_pytest/python.py, src/_pytest/main.py, src/_pytest/pytester.py | API:- | Constraints:默认或 true 收集导入的 Test 类和 test 函数共三项；false 只收集定义于本模块的 TestDomain.test，并且 collectreport、itemcollected 与 modifyitems 钩子均只反映该项。\ntest_collection.py[5 T C X L]: Role:验证文件系统与 Python 收集树、节点选择、忽略规则、导入模式、重复参数和收集错误控制 | Uses:src/_pytest/main.py, src/_pytest/python.py, src/_pytest/nodes.py, src/_pytest/pathlib.py, src/_pytest/pytester.py | API:- | Constraints:默认忽略版本控制、构建、隐藏目录和虚拟环境，norecursedirs 优先但显式路径可强制收集；testpaths 仅无显式路径时回退并建立初始 conftest 范围；ignore 钩子不屏蔽显式参数，兄弟 conftest 严格隔离；节点 ID 可选择类、方法和全部参数实例；重叠参数默认合并为最早覆盖范围并保持顺序，--keep-duplicates 才重复，包夹具不得重复建立；收集错误默认阻止执行，continue 开关允许执行且 maxfail 合计错误与失败；importlib 不改 sys.path且允许同名测试，prepend/append 保留路径副作用；直接 __init__.py 可收集，目录方式仍匹配 python_files；strict_parametrization_ids 对重复可见 ID 收集报错；yield 测试函数禁止。本地验证盲区：符号链接、Windows 短路径、权限及 Python 3.14 注解用例按平台跳过。\ntest_compat.py[5 T I S]: Role:验证包装函数解包、安全属性/类检测、cached_property 与穷尽性断言兼容工具 | Uses:src/_pytest/compat.py, src/_pytest/outcomes.py, src/_pytest/fixtures.py | API:- | Constraints:get_real_func 解 wraps/partial 但停在 pytest fixture 包装边界，包装循环在有限步后 ValueError；safe_getattr 吞普通 Exception 与 pytest outcome 但传播其他 BaseException；safe_isclass 不触发恶意 __class__；assert_never 在不可达分支抛 AssertionError。\ntest_config.py[5 T R H L]: Role:验证配置文件发现、命令行与 ini 解析、插件加载、Config API、rootdir 和启动诊断语义 | Uses:src/_pytest/config/__init__.py, src/_pytest/config/argparsing.py, src/_pytest/config/findpaths.py, src/_pytest/assertion/rewrite.py, src/_pytest/pytester.py | API:- | Constraints:配置候选按规定优先级取单个文件不合并，pytest.ini 即使为空也胜出，空 pyproject 仅作最终回退；参数组合顺序为 ini addopts、PYTEST_ADDOPTS、显式参数，-o 必须 option=value、最后一次胜出且须在插件/路径处理前生效；ini 类型转换与默认值固定，paths 相对配置目录，规范名优先别名而 override 可用任一名称，别名冲突拒绝；未知配置默认警告、strict-config 为用法错误，required_plugins 校验已装分发版本；Config 仅解析一次，cleanup 逆序全部执行并传播最后层失败；插件自动加载可由环境或开关禁用但显式 PYTEST_PLUGINS/-p 仍加载，-p no:name 在预解析阻止；非顶层 conftest 声明 pytest_plugins 通常报错，--pyargs 包场景除外；帮助/版本在参数错误时仍给可用输出，debug 日志每次截断；rootdir 考虑全部路径参数而不修改 sys.path。\ntest_conftest.py[5 T R H L]: Role:验证 conftest 的路径发现、作用域覆盖、导入模式、confcutdir 与符号链接可见性 | Uses:src/_pytest/config/__init__.py, src/_pytest/main.py, src/_pytest/fixtures.py, src/_pytest/pathlib.py, src/_pytest/pytester.py | API:- | Constraints:conftest 从目标目录向祖先按外到内加载，最近定义覆盖且只向子树生效；初始多个路径各加载其链，重复路径不重复插件；confcutdir 只停止向祖先搜索，边界目录自身仍考虑，显式直接导入可越过并更新子路径映射；--noconftest 完全禁用；--pyargs 安装包内 conftest 可发现；目录符号链接按用户路径结构搜索而文件符号链接可加载，大小写和非包同名模块须避免错误复用；局部覆盖夹具应裁剪被遮蔽定义的依赖；帮助模式不因插件必填项失败。本地验证盲区：符号链接和大小写不敏感文件系统用例按平台能力运行。\ntest_debugging.py[5 T O H L]: Role:验证 --pdb/--trace、pytest.set_trace/breakpoint、自定义调试器与捕获暂停恢复的交互生命周期 | Uses:src/_pytest/debugging.py, src/_pytest/capture.py, src/_pytest/reports.py, src/_pytest/doctest.py, src/_pytest/pytester.py | API:- | Constraints:普通失败和 KeyboardInterrupt 可进 post-mortem，skip/xfail/BdbQuit/unittest SkipTest 不进入；进入前按 show-capture 回放非空 stdout/stderr/log，暂停捕获，continue 后恢复且 enter/leave hooks 成对；quit 转 pytest.exit，递归 debug 不触发外层 continue 处理；pdb.set_trace、breakpoint 与 pytest.set_trace 统一拦截，配置/卸载栈式恢复以支持嵌套会话；--pdbcls 必须 mod:class，可延迟导入本地模块并支持嵌套属性，失败给清晰错误；--trace 每个参数实例 runcall 且不破坏共享 fixtureinfo；doctest 与 unittest 保留调试上下文。本地验证盲区：多个捕获交互用例 xfail，异常链导航仅 Python 3.13+，EOF/BdbQuit 在 Python 3.14+ 行为变更。\ntest_doctest.py[5 T C L]: Role:验证文本与模块 doctest 的收集执行、夹具接入、输出比较选项和失败报告 | Uses:src/_pytest/doctest.py, src/_pytest/fixtures.py, src/_pytest/python_api.py, src/_pytest/reports.py, src/_pytest/pytester.py | API:- | Constraints:默认匹配 test*.txt，多次 --doctest-glob 叠加；--doctest-modules 跳过真正的 setup.py 与 __main__.py，导入错误仅显式 ignore 时跳过；doctest 可用 getfixture、autouse/usefixtures 与 doctest_namespace，不适用的 request 属性为 None；全部示例带 SKIP 时整项 skipped，部分跳过仍运行其余示例，continue-on-failure 汇总多处失败；ALLOW_UNICODE/ALLOW_BYTES 忽略字面前缀，NUMBER 按期望小数精度比较且数字数量一致；报告保留正确行号和最多十行前文，位置未知时明确提示；报告格式选项及非法值诊断稳定；mock-aware unwrap 上下文结束必须恢复。本地验证盲区：外部 mock 缺失时跳过，UnexpectedException 回溯按 Python 版本分支。\ntest_entry_points.py[5 T R T]: Role:验证 pytest 与 py.test 两个分发控制台入口完全指向同一值 | Uses:pyproject.toml | API:- | Constraints:安装元数据中两个 entry point 的 value 必须相等。\ntest_error_diffs.py[5 T A M]: Role:验证断言差异中加减号始终以期望值为基线覆盖容器、字符串和对象字段 | Uses:src/_pytest/assertion/util.py, src/_pytest/_io/pprint.py, src/_pytest/pytester.py | API:- | Constraints:-vv 输出完整 diff；减号表示仅期望存在或期望旧值，加号表示实际额外项或实际值；列表/元组/集合/字典、包含关系、dataclass 与 attrs 的专用说明和字段钻取须保持固定方向。\ntest_faulthandler.py[5 T I X M]: Role:验证 faulthandler 启用恢复、崩溃输出、超时转储/退出、交互取消和 stderr fd 回退 | Uses:src/_pytest/faulthandler.py, src/_pytest/pytester.py | API:- | Constraints:pytest 配置时原已启用则卸载后恢复，否则保持禁用；禁用插件不转储；timeout 启用时输出线程栈，exit_on_timeout=true 在断言前中断而 false 继续失败；进入 PDB 或交互异常取消计划转储；无效 sys.stderr fd 回退真实 fd 2；本地验证盲区：Linux CI 且 Python 3.14+ 跳过部分超时崩溃用例。\ntest_findpaths.py[5 T R S]: Role:验证各配置格式解析、TOML 值归一、公共祖先、参数目录提取和文件系统根判断 | Uses:src/_pytest/config/findpaths.py | API:- | Constraints:pytest.ini 即使为空也有效，任意 ini 需 [pytest]，cfg 需 [tool:pytest] 且旧 [pytest] 失败，TOML 需 tool.pytest.ini_options 且语法错误转 UsageError；TOML 标量转字符串而列表保留；路径参数忽略不存在项和选项样式值；Windows 驱动根仅在 Windows 判根。\ntest_helpconfig.py[5 T R S]: Role:验证版本、帮助、钩子校验、跟踪和调试配置入口的输出与启动快慢路径 | Uses:src/_pytest/helpconfig.py, src/_pytest/config/__init__.py, src/_pytest/pytester.py | API:- | Constraints:单次 --version 只输出版本且不加载 conftest，双次还列来源和插件；addini help=None 报 TypeError、空字符串仍渲染；未知钩子失败而 optionalhook 允许；--debug 写 pytestdebug.log，PYTEST_DEBUG 向 stderr 跟踪。\ntest_junitxml.py[5 T O L]: Role:验证 JUnit xUnit1/xUnit2 XML 的计数、报告映射、捕获输出、属性夹具、转义与并发配对 | Uses:src/_pytest/junitxml.py, src/_pytest/reports.py, src/_pytest/runner.py, src/_pytest/logging.py, src/_pytest/pytester.py | API:- | Constraints:testsuite 的 tests 对同一项去重，call 失败与 teardown 错误拆成两个 testcase 并分别计 failure/error；skip/xfail 写 skipped，严格 XPASS 写 failure，收集与内部错误写 error；xunit2 testcase 只保留规范属性并通过 XSD，自定义 XML 属性及 record_property 警告不兼容；junit_logging 精确控制 log/stdout/stderr 合并位置且每类只写一次，禁用 passing output 仍保留失败项输出；非法 XML 字符转 #xNN/#xNNNN，节点 ID 中 :: 参数不误拆；duration=total 累加三阶段而 call 只取调用；文件路径在启动 cwd 解析、自动建父目录且目录目标报错；xdist/重复节点按 worker 与 item index 配对，worker 不独立配置写入；安静模式不显示生成摘要。本地验证盲区：xdist 未安装时交错报告用例跳过。\ntest_legacypath.py[5 T I S]: Role:验证 py.path 兼容属性、旧 testdir/tmpdir API、pathlist ini 和生命周期可用性 | Uses:src/_pytest/legacypath.py, src/_pytest/pytester.py, src/_pytest/fixtures.py, src/_pytest/cacheprovider.py | API:- | Constraints:Node/Request 的 fspath 与 pathlib path 指同一位置且 session request 无路径属性；testdir.makefile 自动补点、None 报 TypeError、空扩展名可用；tmpdir 与 tmp_path 相同且解析真实路径；pathlist 相对配置文件目录，override 逐项转换；Config.inifile 在 cmdline_main 已可用。\ntest_link_resolve.py[5 T C X T]: Role:验证经符号链接或 Windows subst 路径运行测试时失败位置保留用户输入路径而非解析后路径 | Uses:src/_pytest/main.py, src/_pytest/terminal.py, src/_pytest/pytester.py | API:- | Constraints:Linux 输出包含 sub2/test_foo.py 而不含真实 sub1 路径；Windows 输出包含 subst 驱动路径。\ntest_main.py[5 T C M]: Role:验证会话异常退出、basetemp 安全校验及文件/包收集参数解析 | Uses:src/_pytest/main.py, src/_pytest/config/__init__.py, src/_pytest/pytester.py | API:- | Constraints:启动内部异常输出 INTERNALERROR 并由 hook/pytest.exit 返回码裁决，sessionfinish exit 无显式码保留原 NO_TESTS；basetemp 拒绝空、cwd 及其祖先；目录或包不允许 :: 选择，文件可分段并把最后 [param] 独立，路径本身含 [] 拒绝且参数 ID 内 :: 保留；--pyargs 支持显式命名空间开关；不存在目标给区分路径/模块的 UsageError；无驱动绝对路径与超长参数均可运行。\ntest_mark.py[5 T P H L]: Role:验证标记声明、继承合并、-m/-k 选择、参数集标记与空参数策略 | Uses:src/_pytest/mark/__init__.py, src/_pytest/mark/structures.py, src/_pytest/mark/expression.py, src/_pytest/nodes.py, src/_pytest/python.py | API:- | Constraints:单一 callable/类位置参数直接装饰，with_args 才存为参数；未知标记默认警告而 strict 失败，下划线名称拒绝；-m 精确匹配标记及支持类型受限关键字，-k 不区分大小写匹配节点/父链/属性/标记/extra keywords并排除套件外目录与魔术属性；筛除统一报告 deselected；类标记按反向 MRO 合并且不污染兄弟或基类，最近函数标记由 get_closest_marker 返回；parametrize 值数须匹配名称，生成器可用，命令行裸函数选择全部参数实例；空集按 skip/xfail(run=False)/fail_at_collect，不能调用 idfunc；pytest.param id 仅字符串、None 或 HIDDEN_PARAM；classmethod/staticmethod 两种装饰顺序均参数化。\ntest_mark_expression.py[5 T P M]: Role:验证 -k/-m 表达式词法、布尔优先级、错误位置和标记关键字值匹配 | Uses:src/_pytest/mark/expression.py, src/_pytest/mark/__init__.py | API:- | Constraints:空表达式恒 False，and 高于 or 且 not/括号正常短路；标识符允许节点常见标点、Unicode、数字和 Python 保留字字面，但拒绝运算符类字符；反斜线在裸标识符中无转义语义；调用仅接受合法非保留关键字和 int/str/bool/None 字面，字符串转义拒绝；SyntaxError 必须有精确列和消息；标记参数需同名同值全部匹配。\ntest_meta.py[5 T AA X T]: Role:验证所有 _pytest 内部包与模块可在独立进程中无警告导入 | Uses:src/_pytest/ | API:- | Constraints:每个模块以 -W error 单独导入，不能依赖预先设置 pytest 公共命名空间。\ntest_monkeypatch.py[5 T I L]: Role:验证 MonkeyPatch 对属性、映射、环境、导入路径和工作目录的修改、解析与撤销契约 | Uses:src/_pytest/monkeypatch.py, src/_pytest/pytester.py, src/_pytest/deprecated.py | API:- | Constraints:raising 控制缺失键/属性异常，字符串目标须解析绝对导入路径并给清晰导入错误；连续改动按原始状态恢复，撤销幂等且不得覆盖撤销后用户的新改动；类描述符和继承静态方法须原样恢复；非字符串环境值警告后转换，prepend 拼接旧值；syspath_prepend 逆序插入、撤销完整恢复并失效导入缓存，只有已注册旧命名空间受影响时发 RemovedIn10 警告；context 异常安全清理。本地验证盲区：requests、pkg_resources 或旧 mock 依赖缺失时相应用例跳过。\ntest_nodes.py[5 T C S]: Role:验证 Node 构造、菱形继承警告、warning 校验、初始路径相对化和变更 cwd 后失败位置 | Uses:src/_pytest/nodes.py, src/_pytest/compat.py, src/_pytest/pytester.py | API:- | Constraints:from_parent 禁止 session/config 参数且直接构造失败；Item+Collector 与非合作构造分别警告；Node.warn 只接收 Warning 实例；根初始路径相对结果为空、子路径相对、根外为 None；cwd 改变时失败位置必须用正确绝对路径。\ntest_parseopt.py[5 T R M]: Role:验证插件参数解析器的选项注册、分组、未知参数、参数文件、帮助格式和 argcomplete 集成 | Uses:src/_pytest/config/argparsing.py, src/_pytest/_argcomplete.py, src/_pytest/pytester.py | API:- | Constraints:公开组不允许小写短选项且重复选项冲突，长选项不缩写；PathLike 位置项转字符串，@文件逐行展开；known/unknown API 分离未知选项与值；后注册 parse_setoption 恢复默认；帮助折叠仅连字符变体并正确渲染多 metavar；argcomplete 只在真实 GNU Bash 与依赖可用时验证选项和文件/目录候选。\ntest_pastebin.py[5 T O S]: Role:验证失败或完整会话粘贴捕获、Unicode 内容和 bpa.st 请求响应错误语义 | Uses:src/_pytest/pastebin.py, src/_pytest/terminal.py, src/_pytest/pytester.py | API:- | Constraints:failed 只提交失败报告一次，all 提交含通过/失败/跳过及汇总的 UTF-8 全输出；成功请求发往 https://bpa.st，lexer=text、expiry=1week 并把 /raw/id 转 /show/id；HTTP、URL 或格式错误返回 bad response 文本而不抛出。\ntest_pathlib.py[5 T I X L]: Role:验证 pathlib 工具的路径匹配、稳健清理、模块导入模式和命名空间包解析 | Uses:src/_pytest/pathlib.py, src/_pytest/tmpdir.py, src/_pytest/monkeypatch.py, src/_pytest/assertion/rewrite.py, src/_pytest/pytester.py | API:- | Constraints:fnmatch_ex 保留整路径与 ** 语义并适配绝对路径和平台分隔符；清理编号目录面对锁删除、权限和 Windows 长路径失败时尽力而为；prepend/append 修改 sys.path 并校验已导入模块路径，只有 PY_IGNORE_IMPORTMISMATCH=1 豁免；importlib 模式不改 sys.path，优先复用指向同一路径的现有模块，否则按 root 生成唯一名称并递归建立父模块及子属性，不能重复执行包初始化或遗漏断言重写；同名标准库、相同文件名不同目录、点开头目录和包根 __init__ 均须隔离；命名空间解析仅 consider_namespace_packages 启用时考虑 sys.path/meta_path 可导入性。本地验证盲区：Windows UNC/长路径及符号链接行为按平台跳过。\ntest_pluginmanager.py[5 T P H L]: Role:验证插件管理器的注册、导入、环境与命令行发现、动态 hookspec 及路径敏感钩子代理行为 | Uses:src/_pytest/config/__init__.py, src/_pytest/hookspec.py, src/_pytest/main.py, src/_pytest/pathlib.py, src/_pytest/pytester.py | API:- | Constraints:重复注册或缺失 hookspec 明确失败，已配置后注册插件立即收到 configure 而 unconfigure 后不再收到；插件导入错误保留原 traceback 与插件名，重复导入幂等；PYTEST_PLUGINS 及 pytest_plugins 可递归加载且不重复；-p no:name 阻止或注销插件，cacheprovider 被禁用时同步移除 stepwise，essential main 不可禁用，后续 -p name 可解除阻止；局部 conftest 加载变化须使 hook proxy 失效重建；跟踪异常后缩进恢复。本地验证盲区：Windows 大小写路径行为仅在 Windows 运行。\ntest_pytester.py[5 T AA H L]: Role:验证 Pytester 的隔离项目构造、内外进程运行、状态快照、结果解析与行匹配工具 | Uses:src/_pytest/pytester.py, src/_pytest/pytester_assertions.py, src/_pytest/config/__init__.py, src/_pytest/runner.py | API:- | Constraints:inline_run 每次重新导入改写测试并恢复 sys.modules、sys.path 与 meta_path，保留外部预载模块及 zope 系列；子进程模式按 --runpytest 选择、超时杀进程并抛 TimeoutExpired，stdin 默认关闭、bytes 完整传入；字符串插件转 -p，插件对象明确拒绝；makefile 扩展名必须为空或点开头，绝对键仍限制在测试根；RunResult 只从含耗时最终摘要反向解析并统一单复数，未产生摘要时 assert_outcomes 失败；LineMatcher 顺序匹配允许间隔而 consecutive 不允许，失败日志须记录已尝试行，负匹配不受先前游标影响；HOME 与环境修改传递给子进程。\ntest_python_path.py[5 T R S]: Role:验证 pythonpath 配置在导入测试与早期插件加载前生效并在卸载后清理 | Uses:src/_pytest/config/__init__.py, src/_pytest/pytester.py | API:- | Constraints:一个或多个相对目录使对应模块可导入，且 -p 本地插件能执行初始和卸载钩子；无配置或空配置导入失败并产生收集错误；添加路径在 pytest_unconfigure 期间尚可见而运行结束从 sys.path 移除。\ntest_recwarn.py[5 T I V L]: Role:验证 recwarn、pytest.warns 与 deprecated_call 的记录、匹配、重发和控制流语义 | Uses:src/_pytest/recwarn.py, src/_pytest/warnings.py, src/_pytest/outcomes.py, src/_pytest/pytester.py | API:- | Constraints:Recorder 可退出后复用但禁止重复进入或未进入退出，pop 优先精确类别再选最近子类；warns 类型须为 Warning 子类，函数式参数须 callable，match 用正则且失败报告列出已发警告；未匹配警告按原位置重发，匹配的多条不重发；deprecated_call 仅接受弃用/Future 类并保持全局 filters、onceregistry 和 warn 函数；skip/fail/exit/KeyboardInterrupt 原样传播且不得被 DID NOT WARN 覆盖；非法非字符串/非 Warning 消息明确 TypeError。本地验证盲区：标准库非法警告消息对照在 PyPy 跳过。\ntest_reports.py[5 T O V L]: Role:验证测试与收集报告的 JSON 往返、异常表示保真、时间字段及序列化钩子协议 | Uses:src/_pytest/reports.py, src/_pytest/_code/code.py, src/_pytest/runner.py, src/_pytest/hookspec.py, src/_pytest/pytester.py | API:- | Constraints:TestReport/CollectReport 往返须保留结果、阶段、关键字、附加属性、捕获区段、回溯条目、局部量、异常链及 reprcrash 缺失情形，path-like 扩展值转字符串；通过报告 longrepr 为 None，收集失败可降为字符串；未知条目或报告类型必须明确拒绝；钩子序列化携带 $report_type；start/stop 差等于 duration；ConftestImportFailure 不得遮蔽底层导入异常。\ntest_runner.py[5 T C H L]: Role:验证单项 setup/call/teardown 协议、SetupState 终结、报告内容及 outcome/importorskip 控制流 | Uses:src/_pytest/runner.py, src/_pytest/reports.py, src/_pytest/outcomes.py, src/_pytest/_code/code.py, src/_pytest/pytester.py | API:- | Constraints:setup 成功才进入 call，teardown 始终报告；共享 setup 失败缓存到同子树且回溯不得随复用增长；终结器按 LIFO 全部尝试，多失败按作用域聚合 ExceptionGroup并以用户建立顺序展示；SystemExit 记失败，KeyboardInterrupt 与 pytest.exit 传播，fail(pytrace=False) 只显示消息；CallInfo 有异常时禁止 result；PYTEST_CURRENT_TEST 精确标 setup/call/teardown 后删除，测试异常写 sys.last_* 而下次成功清除；阶段报告捕获输出累积到当前阶段，高作用域 teardown 在 maxfail/stepwise 提前停止后仍执行；importorskip 校验模块表达式与版本，缺模块跳过，模块内部 ImportError 默认警告而显式 exc_type=ImportError 抑制警告。\ntest_runner_xunit.py[5 T C M]: Role:验证模块、函数、类和方法级 xunit setup/teardown 生命周期及失败传播 | Uses:src/_pytest/python.py, src/_pytest/runner.py, src/_pytest/pytester.py | API:- | Constraints:对应 setup 成功才调用 teardown，setup 失败或跳过影响同作用域全部项目且不执行内层 fixture/setup；继承类 setup 独立生效，每个测试方法使用新实例；xunit 函数对象参数可省略；正常顺序固定模块 setup、每项函数/方法 setup-teardown、模块 teardown。\ntest_scope.py[5 T F T]: Role:验证夹具作用域全序、相邻转换和非法用户输入诊断 | Uses:src/_pytest/scope.py | API:- | Constraints:顺序固定 function<class<module<package<session；两端越界抛 ValueError；未知作用域经 pytest.fail 且消息包含描述、节点 ID 和字面值。\ntest_session.py[5 T C H L]: Role:验证 Session 收集与执行事件、停止阈值、路径筛选和会话状态生命周期 | Uses:src/_pytest/main.py, src/_pytest/runner.py, src/_pytest/terminal.py, src/_pytest/pytester.py | API:- | Constraints:收集导入/语法错误生成 collectreport 而不冒充测试失败，collect-only 成对触发 start/report 且不运行项目；-x 与 --maxfail 按最终阈值停止收集或执行，显式 maxfail 可覆盖 -x；ignore、ignore-glob 与 deselect 精确排除并报告 deselected；同模块多个选择器共享单一 Module，而 --keep-duplicates 的目录参数重复项目；sessionstart 改 cwd 后 sessionfinish 前恢复；shouldfail/shouldstop 一旦为真不得清回 False，只警告并保留。\ntest_setuponly.py[5 T F M]: Role:验证 --setup-only/--setup-plan/--setup-show 的夹具动作显示、作用域、参数和捕获行为 | Uses:src/_pytest/setuponly.py, src/_pytest/setupplan.py, src/_pytest/fixtures.py, src/_pytest/pytester.py | API:- | Constraints:三模式只显示实际使用及 autouse 夹具并按 S/C/M/F 缩进、嵌套同名依赖和逆序 teardown；参数显示 repr 或自定义 ID且 bytes 在 -bb 无警告；动态请求夹具也显示；setup-only 不执行测试但真实 setup 失败输出捕获，setup-show 执行测试；KeyboardInterrupt 后仍 teardown 并返回 INTERRUPTED。\ntest_setupplan.py[5 T F S]: Role:验证 --setup-plan 只展示夹具生命周期而不执行测试或夹具并与 --setup-show 顺序一致 | Uses:src/_pytest/setupplan.py, src/_pytest/setuponly.py, src/_pytest/fixtures.py | API:- | Constraints:含失败断言的夹具和测试在 plan 模式仍以退出码 0 结束；类夹具跨两项只各显示一次 SETUP/TEARDOWN；各作用域显示行与真实 --setup-show 完全相同。\ntest_skipping.py[5 T C L]: Role:验证 skip、skipif、xfail 与命令式 outcome 在条件求值、运行阶段和终端报告中的完整语义 | Uses:src/_pytest/skipping.py, src/_pytest/outcomes.py, src/_pytest/reports.py, src/_pytest/terminal.py, src/_pytest/pytester.py | API:- | Constraints:多个条件任一为真即生效，布尔真条件必须给 reason，字符串条件可访问内建命名空间、测试全局及钩子扩展且求值错误须清晰报告；skip 优先于 xfail，setup 中命令式 skip 覆盖 xfail；xfail 的 raises 仅匹配指定异常，run=False 不运行并标 NOTRUN，strict XPASS 失败而普通 XPASS 通过，--runxfail 忽略标记并使 pytest.xfail 成为空操作；跳过原因的位置、折叠、-r 状态字符及错误后摘要顺序必须稳定；模块级 pytest.skip 仅 allow_module_level=True 合法，非 Python Item 也支持命令式和标记式 xfail。\ntest_stash.py[5 T P T]: Role:验证身份键异构 Stash 的映射、默认值、类型隔离和不可扩展属性行为 | Uses:src/_pytest/stash.py | API:- | Constraints:缺键索引/删除抛 KeyError，setdefault 不覆盖既有值；相同键可跨 stash 使用但存储互相隔离，Stash 实例不能随意新增属性。\ntest_stepwise.py[5 T R H L]: Role:验证 stepwise 跨会话失败点缓存、跳过恢复、重置及分布式 worker 写入边界 | Uses:src/_pytest/stepwise.py, src/_pytest/cacheprovider.py, src/_pytest/main.py, src/_pytest/pytester.py | API:- | Constraints:--stepwise 在首个失败或 setup error 停止并下次从该项续跑，之前项目报告 deselected；--stepwise-skip 隐含启用并仅忽略一个失败，随后失败仍停止；普通 xfail 不停止而严格 XPASS 停止；收集错误直接停止；缓存损坏、测试数量变化或节点缺失须丢弃跳过状态并给原因，--sw-reset 显式重置；未启用时不得清缓存，xdist worker 不写失败点；资源警告过滤仅为测试稳定性不改变插件输出。\ntest_terminal.py[5 T O H L]: Role:验证终端报告器的会话头、收集与执行进度、失败详情、短摘要、颜色和终端进度协议 | Uses:src/_pytest/terminal.py, src/_pytest/reports.py, src/_pytest/_io/terminalwriter.py, src/_pytest/config/__init__.py, src/_pytest/pytester.py | API:- | Constraints:详细度决定逐项词语、文件字符或极简输出，collect-only 在 -q/-qq 退化为 nodeid/文件计数；三阶段失败、捕获区段和进度须分别呈现，100% 等 teardown 完成；-r 去重并按顺序选择，N 清空，警告默认加入，skip 可折叠或逐项展开；短摘要按 Unicode 显示宽度裁剪，CI/-vv 保留完整，force-short 可覆盖；最终颜色优先错误红、警告或未知黄、纯通过绿；classic/progress/count/times、无捕获及 xdist 交错保持边界；头部显示 rootdir、配置文件及忽略配置警告，no-header/no-summary 精确抑制；xfail 默认无回溯，开关可启用；show-capture 精确筛 stdout/stderr/log；TTY 才注册 OSC 9;4，收集期 indeterminate、失败后 error、结束 remove。本地验证盲区：xdist、pexpect、fd dup 与真实 TTY 按依赖或平台跳过。\ntest_threadexception.py[5 T I H M]: Role:验证后台线程未处理异常在各测试阶段转为警告或错误并保留诊断 | Uses:src/_pytest/threadexception.py, src/_pytest/warnings.py, src/_pytest/pytester.py | API:- | Constraints:setup/call/teardown 中单个线程异常默认不改变两个通过项而产生一条含线程名和 traceback 的警告；-Werror 使关联测试失败，多个异常聚合为含两子异常的 ExceptionGroup；读取线程名失败转明确 RuntimeError；配置清理后发生的异常当前为 INTERNAL_ERROR；exc_value/thread 均 None 时仍输出 <unknown> 和 NoneType: None。\ntest_tmpdir.py[5 T I X L]: Role:验证 pathlib 临时目录工厂、保留策略、编号目录锁和稳健递归删除 | Uses:src/_pytest/tmpdir.py, src/_pytest/pathlib.py, src/_pytest/pytester.py, testing/example_scripts/tmpdir/tmp_path_fixture.py | API:- | Constraints:显式 basetemp 每次清空且相对路径解析为绝对；mktemp 只接受基目录直属规范相对子名并编号去冲突；tmp_path 为真实路径且长参数 ID 被截短；failed 策略只保留失败项并删除全通过基目录，all 保留跳过项；用户名缺失或非法回退 unknown，自动根及父目录移除组/其他权限；编号锁仅同进程清理，keep=0 全清且 current 链接不作目录；rm_rf 能放宽只读文件/目录权限，未知错误警告而缺失项忽略。本地验证盲区：符号链接、Unix 权限/UID 与 Windows 用户分支按平台条件跳过。\ntest_unittest.py[5 T I L]: Role:验证 unittest.TestCase 与 pytest 收集、夹具、跳过、调试、清理及 Trial/异步兼容的桥接语义 | Uses:src/_pytest/unittest.py, src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/debugging.py, src/_pytest/pytester.py | API:- | Constraints:仅具体 TestCase 收集，runTest 只在无其他测试方法时收集，每项创建新实例且 item.obj 为绑定方法；unittest setUp/tearDown 在 call 阶段，类级生命周期通过夹具接入，setup 失败不跑对应 teardown 但 cleanup 始终运行，多个类 cleanup 失败聚合；类或方法 skip 阻止 setup，expectedFailure 的失败映射 XFAIL而 unexpected success 必须失败；TestCase 不支持普通参数化夹具并给明确诊断，但 autouse/usefixtures 可用；--pdb 延迟后仍须调用 tearDown，装饰器跳过则不调用；pytest.exit 传播并停止后项；Trial 的 skip/todo/Deferred 结果映射稳定。本地验证盲区：Twisted、asynctest 及交互 PDB 用例按依赖、Python 版本或 pexpect 能力跳过；普通 unittest async 方法维持 unittest 自身警告语义。\ntest_unraisableexception.py[5 T I V M]: Role:验证析构与协程等不可抛出异常在各阶段捕获、聚合、警告升级和卸载 GC 行为 | Uses:src/_pytest/unraisableexception.py, src/_pytest/tracemalloc.py, src/_pytest/warnings.py, src/_pytest/pytester.py | API:- | Constraints:setup/call/teardown 单异常默认不改通过结果并输出对象、回溯及可用时的 tracemalloc 提示；-Werror 使关联测试失败，多项聚合 ExceptionGroup；格式化失败转明确 RuntimeError；即使 GC 已禁用，卸载也收集引用环异常；卸载后触发的默认警告只到 stderr 且不计摘要；None excinfo 仍报告对象 None 和 NoneType；本地验证盲区：PyPy 因 GC 差异跳过部分即时析构用例。\ntest_warning_types.py[5 T I T]: Role:验证 pytest 警告类公共模块归属、错误呈现和精确源位置注解 | Uses:src/_pytest/warning_types.py, src/_pytest/pytester.py | API:- | Constraints:所有公开警告类 __module__ 为 pytest；升级为错误时显示 pytest.PytestWarning；warn_explicit_for 消息附被标注对象的定义文件和行号。\ntest_warnings.py[5 T I H L]: Role:验证会话各阶段警告捕获、过滤优先级、分组摘要、记录钩子与源位置 | Uses:src/_pytest/warnings.py, src/_pytest/terminal.py, src/_pytest/config/__init__.py, src/_pytest/assertion/rewrite.py, src/_pytest/tracemalloc.py | API:- | Constraints:配置、收集、setup/call/teardown 警告均捕获并以 when/nodeid/location 调用历史钩子；优先级为标记高于命令行高于 ini，标记正则不转义，未知警告类别导入失败仅发 ConfigWarning；未由解释器过滤时默认显示 Deprecation/PendingDeprecation，RemovedIn9 默认为错误但用户过滤可覆盖；同消息警告合并，位置少时逐 nodeid、位置多时按文件计数，Unicode 与非字符串参数安全；无效过滤正则为 UsageError；堆栈级须指向用户调用位置；资源警告有 tracemalloc 时附分配位置，否则给启用提示。本地验证盲区：预安装 warnings.filter 行为用例被显式 skip。\ntyping_checks.py[3 T Q T]: Role:以仅静态检查代码验证标记、夹具 ID、MonkeyPatch、raises 和 TestReport 公共类型签名 | Uses:src/pytest/__init__.py | API:- | Constraints:文件不执行，只供 mypy；raises 条件上下文推导 ExceptionInfo[RuntimeError]|None，TestReport.when 和 location 保持精确字面类型。\ntyping_raises_group.py[5 T Q V M]: Role:以静态断言验证 RaisesExc/RaisesGroup 构造重载、协变、嵌套异常组和 matches 类型收窄 | Uses:src/_pytest/raises.py, src/pytest/__init__.py | API:- | Constraints:文件主要供类型检查；RaisesExc 至少提供类型/match/check 之一，异常类型为位置参数而 match/check 仅关键字；check 参数随期望异常精确收窄；RaisesGroup.matches 区分 ExceptionGroup 与 BaseExceptionGroup；嵌套组保留嵌套泛型，混合期望协变到共同 Exception；allow_unwrapped 禁止多期望、嵌套组、match/check，flatten_subgroups 禁止嵌套组。\n\n===/testbed/testing/_py/===\ntest_local.py[5 T I X L]: Role:验证内置 py.path.local 兼容层的路径运算、文件系统操作、导入执行、临时编号目录及平台差异 | Uses:src/_pytest/_py/path.py, src/_pytest/_py/error.py, src/py.py, src/_pytest/legacypath.py, src/_pytest/monkeypatch.py | API:- | Constraints:LocalPath 必须保持绝对路径、os.PathLike 协议、字符串互操作与 Windows 不区分大小写的相等哈希；join 接受 POSIX 分隔符并规范化，visit 支持深度/广度、过滤、递归控制与排序；文件操作的系统错误映射为 py.error，递归删除处理只读项，copy 可选保留 mode/stat；pyimport 按包链推导名称并校验模块文件，PY_IGNORE_IMPORTMISMATCH 仅值 1 豁免，importlib 模式不改 sys.path 且相对导入受限；编号目录须在保留数、大小写与多进程竞争下安全；POSIX 链接/所有权和 Windows 执行搜索各按平台验证。本地验证盲区：符号链接权限、所有权、文件系统大小写、Windows 专属接口及多进程竞态按平台能力跳过或 xfail。\n\n===/testbed/testing/code/===\ntest_code.py[5 T A S]: Role:验证 Code、Frame、TracebackEntry 与异常链表示的源码、参数、编码和身份语义 | Uses:src/_pytest/_code/code.py, src/_pytest/_code/source.py | API:- | Constraints:不存在文件的 Code 保留 filename 且 fullsource=None，from_function 拒绝类；源码与语句定位精确，缺源码 statement 为空；参数按普通、*args、**kwargs 顺序返回；无当前异常时 from_current 断言失败；回溯字符串含文件、行、函数和源码；ExceptionChainRepr 实例按身份不等且可哈希。\ntest_excinfo.py[5 T A V L]: Role:验证 ExceptionInfo、Traceback 与异常终端表示对源码、过滤、递归、异常链和异常组的建模与渲染 | Uses:src/_pytest/_code/code.py, src/_pytest/_code/source.py, src/_pytest/_io/terminalwriter.py, src/_pytest/pathlib.py, src/_pytest/pytester.py | API:- | Constraints:ExceptionInfo 构造须有真实 traceback，for_later 未填充状态不可访问；match 对异常文本及 notes 做正则搜索，group_contains 可按类型、消息和深度查找但只证明存在；__tracebackhide__ 支持布尔和 callable，全部隐藏时除 line/native 外给提示；long/short/line/no/native/value/auto 样式、相对或绝对路径、局部量和参数截断均须安全处理缺失源码、已删除 cwd 及损坏 repr；递归定位以位置和 locals 判定，locals 比较异常时降级但不得内部错误；cause/context 链遵守显式抑制并防循环，异常组保留层级且单异常摘要展开叶异常；Python 3.11+ 短回溯按 UTF-8 列位显示插入符。本地验证盲区：Jinja、decorator 与 exceptiongroup 回移依赖缺失时相应用例跳过，原生异常组和列级信息按 Python 版本运行。\ntest_source.py[5 T A V L]: Role:验证 Source、Code、Frame 的源码提取、去缩进、切片和 AST 语句边界定位 | Uses:src/_pytest/_code/source.py, src/_pytest/_code/code.py, src/_pytest/pathlib.py | API:- | Constraints:Source 从字符串、行、函数、方法和类保留正确行内容并默认去公共缩进，切片只允许 step=1；语句范围覆盖多行表达式与装饰器，else/finally/except 分支按当前位置给最小语句并排除尾注释空行，语法错误传播；findsource 支持 linecache 动态代码与无尾换行文件，失败返回 None/-1；getfslineno 为 0 基并解包包装对象，不可检查对象返回空/-1；可调用实例仅 Code.from_function 支持时遵守函数代码契约。\n\n===/testbed/testing/example_scripts/===\nREADME.rst[5 O AA T]: Role:说明 example_scripts 目录保存可直接运行的行为复现测试套件，以替代难调试的动态嵌套 pytest 脚本 | Uses:testing/example_scripts/ | API:- | Constraints:目录内容本身不是主测试收集项，而是供其他测试以嵌套会话或子进程运行的样例\n__init__.py[1 D AA T]: Role:将可执行测试样例目录标识为 Python 包 | Uses:- | API:- | Constraints:文件刻意为空。\nissue_519.py[5 T F H S]: Role:验证模块级与函数级动态参数化夹具按资源作用域重排并以确定顺序建立 | Uses:src/_pytest/fixtures.py, src/_pytest/python.py | API:pytest_generate_tests | Constraints:arg1 两值为 module scope、arg2 两值为 function scope，8 个测试实例须按每个 arg1 下 arg2 分组执行；checked_order 收尾精确断言两次 fix1 和八次 fix2 的节点及值顺序。\njunit-10.xsd[5 D O S]: Role:定义用于验证 pytest JUnit XML 输出的 Maven Surefire 兼容 XSD | Uses:src/_pytest/junitxml.py | API:testsuites/testsuite/testcase JUnit XML schema | Constraints:testsuite 必须含 name/tests/failures/errors，testcase 必须含 name；时间接受分组千位与最多三位小数；失败、错误、跳过可含文本及 type/message；testcase 可重复包含 rerun/flaky 失败错误和 system-out/err，testsuite 可嵌套套件、属性、用例与输出；rerunType 的 type 必填而 stackTrace 和输出可选；许可证声明须随副本保留。\npytest.ini[1 X AA T]: Role:为直接运行 example_scripts 提供局部 pytest 配置边界 | Uses:- | API:- | Constraints:配置节刻意无选项。\n\n===/testbed/testing/example_scripts/acceptance/===\nfixture_mock_integration.py[3 T AA T]: Role:验证 mock.patch.dict 装饰的函数作用域夹具在 pytest 注入时返回补丁值 | Uses:src/_pytest/fixtures.py | API:- | Constraints:夹具执行期间 config['mykey'] 必须为 MOCKED。\n\n===/testbed/testing/example_scripts/collect/collect_init_tests/===\npytest.ini[3 X AA T]: Role:配置收集样例把所有 Python 文件名都视为测试模块候选 | Uses:src/_pytest/python.py | API:- | Constraints:python_files 固定为 *.py，因此包 __init__.py 也应参与收集。\n\n===/testbed/testing/example_scripts/collect/collect_init_tests/tests/===\n__init__.py[3 T AA T]: Role:提供验证包初始化模块可按 python_files 配置收集的通过测试 | Uses:testing/example_scripts/collect/collect_init_tests/pytest.ini | API:- | Constraints:test_init 必须被收集并通过。\ntest_foo.py[1 T AA T]: Role:提供 collect_init_tests 样例中的普通通过测试作为收集对照 | Uses:testing/example_scripts/collect/collect_init_tests/pytest.ini | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/collect/package_infinite_recursion/===\n__init__.pyi[1 D AA T]: Role:作为无限递归收集复现包的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T AA H T]: Role:让所有候选路径都不被忽略以复现并守护包收集不发生无限递归 | Uses:src/_pytest/main.py | API:pytest_ignore_collect | Constraints:钩子对任何 collection_path 固定返回 False。\n\n===/testbed/testing/example_scripts/collect/package_infinite_recursion/tests/===\n__init__.py[1 D AA T]: Role:将无限递归收集复现的 tests 目录标识为包 | Uses:- | API:- | Constraints:文件刻意为空。\ntest_basic.py[1 T AA T]: Role:提供包收集无限递归复现中的单个通过测试 | Uses:testing/example_scripts/collect/package_infinite_recursion/conftest.py | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/collect/package_init_given_as_arg/pkg/===\n__init__.py[3 T AA T]: Role:提供验证直接传入包初始化文件时可收集的测试函数 | Uses:src/_pytest/main.py, src/_pytest/python.py | API:- | Constraints:test_init 应作为包初始化模块内测试收集。\ntest_foo.py[1 T AA T]: Role:提供直接传入包初始化文件收集样例中的普通模块对照测试 | Uses:src/_pytest/python.py | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/config/collect_pytest_prefix/===\n__init__.pyi[1 D AA T]: Role:作为 pytest 前缀类收集复现目录的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T AA T]: Role:定义 pytest_ 前缀普通类以验证配置插件发现不会误收集或实例化该类 | Uses:src/_pytest/config/__init__.py | API:- | Constraints:pytest_something 只是普通类而非插件钩子。\ntest_foo.py[1 T AA T]: Role:提供 pytest 前缀类配置复现中的单个通过测试 | Uses:testing/example_scripts/config/collect_pytest_prefix/conftest.py | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/conftest_usageerror/===\n__init__.pyi[1 D AA T]: Role:作为 conftest UsageError 生命周期复现目录的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[5 T AA H T]: Role:复现配置钩子抛 UsageError 时仍执行卸载钩子的生命周期行为 | Uses:src/_pytest/config/__init__.py | API:pytest_configure；pytest_unconfigure | Constraints:pytest_configure 固定抛消息 hello 的 UsageError，pytest_unconfigure 必须输出 pytest_unconfigure_called。\n\n===/testbed/testing/example_scripts/customdirectory/===\nconftest.py[5 T AA H T]: Role:实现测试样例中的 manifest 驱动自定义目录收集器 | Uses:src/_pytest/nodes.py, testing/example_scripts/customdirectory/tests/manifest.json | API:pytest_collect_directory；ManifestDirectory | Constraints:仅含 manifest.json 的目录替换为 ManifestDirectory，并只按清单顺序转交列出的文件给 pytest_collect_file。\npytest.ini[1 X AA T]: Role:为自定义目录收集样例提供空的局部 pytest 配置边界 | Uses:- | API:- | Constraints:文件刻意为空。\n\n===/testbed/testing/example_scripts/customdirectory/tests/===\nmanifest.json[3 D AA T]: Role:声明自定义目录收集样例仅收集前两个测试文件 | Uses:testing/example_scripts/customdirectory/tests/test_first.py, testing/example_scripts/customdirectory/tests/test_second.py | API:- | Constraints:test_third.py 必须保持未列入 files。\ntest_first.py[1 T AA T]: Role:提供 manifest 自定义目录收集样例的首个通过测试 | Uses:testing/example_scripts/customdirectory/tests/manifest.json | API:- | Constraints:-\ntest_second.py[1 T AA T]: Role:提供 manifest 自定义目录收集样例的第二个通过测试 | Uses:testing/example_scripts/customdirectory/tests/manifest.json | API:- | Constraints:-\ntest_third.py[3 T AA T]: Role:提供存在但未列入 manifest 的测试以验证自定义收集排除行为 | Uses:testing/example_scripts/customdirectory/tests/manifest.json | API:- | Constraints:该测试必须不被 ManifestDirectory 收集。\n\n===/testbed/testing/example_scripts/dataclasses/===\ntest_compare_dataclasses.py[3 T A T]: Role:提供默认 dataclass 字段不等的失败断言以验证字段差异报告 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:仅 field_b 从 b 变 c，报告应能定位比较字段。\ntest_compare_dataclasses_field_comparison_off.py[3 T A T]: Role:验证 dataclass compare=False 字段不参与 pytest 结构化断言差异 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:对象虽 field_b 不同仍相等，断言必须通过。\ntest_compare_dataclasses_verbose.py[3 T A T]: Role:提供详细模式下 dataclass 字段差异报告的失败样例 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:仅 field_b 从 b 变 c，用于详细输出展示。\ntest_compare_dataclasses_with_custom_eq.py[3 T A T]: Role:验证自定义 __eq__ 的 dataclass 不被当作默认生成比较做字段钻取 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:显式 __eq__ 调用 object 相等语义，失败报告不得套用默认 dataclass 字段比较。\ntest_compare_initvar.py[3 T A T]: Role:验证 dataclass InitVar 不作为实例字段参与断言差异展开 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:两个 Foo 的 real_attr 不同而 init_only 仅初始化传入。\ntest_compare_recursive_dataclasses.py[3 T A T]: Role:提供多层嵌套 dataclass 不等断言以验证递归字段差异输出 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:报告须沿嵌套 dataclass 展开多个不等字段而不递归失控。\ntest_compare_two_different_dataclasses.py[3 T A T]: Role:验证字段形状相同但类型不同的 dataclass 按不等处理 | Uses:src/_pytest/assertion/util.py | API:- | Constraints:SimpleDataObjectOne 与 SimpleDataObjectTwo 必须不等且断言通过。\n\n===/testbed/testing/example_scripts/doctest/main_py/===\n__main__.py[3 T C T]: Role:提供 doctest 模块模式下应被忽略的 __main__.py 测试函数 | Uses:src/_pytest/doctest.py | API:- | Constraints:test_this_is_ignored 必须不被 doctest 模块收集。\ntest_normal_module.py[3 T C T]: Role:验证 doctest 模块模式收集普通模块文档字符串同时保留普通失败测试 | Uses:src/_pytest/doctest.py, src/_pytest/python.py | API:- | Constraints:文档示例 10>5 通过，而 test_doc 函数体固定失败。\n\n===/testbed/testing/example_scripts/fixtures/===\ntest_fixture_named_request.py[3 T F T]: Role:验证 request 保留夹具名不能被用户夹具定义覆盖 | Uses:src/_pytest/fixtures.py | API:- | Constraints:名为 request 的 fixture 声明必须被识别为非法保留名。\ntest_getfixturevalue_dynamic.py[3 T F T]: Role:验证动态 getfixturevalue 依赖会追加到请求夹具名称序列 | Uses:src/_pytest/fixtures.py | API:- | Constraints:最终 fixturenames 顺序必须为 b、request、a、dynamic。\n\n===/testbed/testing/example_scripts/fixtures/custom_item/===\n__init__.pyi[1 D AA T]: Role:作为自定义 Item 收集复现目录的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[5 T AA H T]: Role:实现把任意文件映射为单个 CustomItem 的自定义收集样例 | Uses:src/_pytest/nodes.py | API:pytest_collect_file；CustomFile；CustomItem | Constraints:CustomFile.collect 恰产出名为 foo 的一个 Item，所有节点必须经 from_parent 构造。\n\n===/testbed/testing/example_scripts/fixtures/custom_item/foo/===\n__init__.py[1 D AA T]: Role:将自定义 Item 样例的 foo 目录标识为包 | Uses:- | API:- | Constraints:文件刻意为空。\ntest_foo.py[1 T AA T]: Role:提供由自定义文件收集器包装的输入文件 | Uses:testing/example_scripts/fixtures/custom_item/conftest.py | API:- | Constraints:文件内容不决定最终 CustomItem 名称。\n\n===/testbed/testing/example_scripts/fixtures/fill_fixtures/===\ntest_detect_recursive_dependency_error.py[3 T F T]: Role:验证 fix1 与 fix2 的循环夹具依赖被检测为查找错误 | Uses:src/_pytest/fixtures.py | API:- | Constraints:循环依赖不得递归执行或静默解析。\ntest_extend_fixture_module_class.py[3 T F T]: Role:验证类级同名夹具可请求并扩展模块级定义 | Uses:src/_pytest/fixtures.py | API:- | Constraints:TestSpam.spam 的同名参数解析模块夹具且最终值为 spamspam。\ntest_funcarg_basic.py[3 T F T]: Role:验证 request.function 和普通夹具共同注入基础函数测试 | Uses:src/_pytest/fixtures.py | API:- | Constraints:some 返回当前测试函数名，other 返回 42。\ntest_funcarg_lookup_classlevel.py[3 T F T]: Role:验证类内方法夹具的 request.instance 与测试方法 self 相同 | Uses:src/_pytest/fixtures.py | API:- | Constraints:something 必须返回当前 TestClass 实例。\ntest_funcarg_lookup_modulelevel.py[3 T F T]: Role:验证模块夹具按请求节点提供当前函数名给函数与方法测试 | Uses:src/_pytest/fixtures.py | API:- | Constraints:request.function.__name__ 分别为 test_method 与 test_func。\ntest_funcarg_lookupfails.py[3 T F T]: Role:提供未知 some 夹具请求以验证查找失败诊断不会误用近似名称 | Uses:src/_pytest/fixtures.py | API:- | Constraints:仅定义 xyzsomething，test_func 请求 some 必须失败。\n\n===/testbed/testing/example_scripts/fixtures/fill_fixtures/test_conftest_funcargs_only_available_in_subdir/sub1/===\n__init__.py[1 D AA T]: Role:将局部夹具可见性样例的 sub1 目录标识为包 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T F T]: Role:定义 sub1 局部 arg1 夹具并验证无法动态取得兄弟目录 arg2 | Uses:src/_pytest/fixtures.py | API:- | Constraints:request.getfixturevalue('arg2') 必须抛 FixtureLookupError。\ntest_in_sub1.py[1 T F T]: Role:请求 sub1 局部 arg1 夹具以触发兄弟隔离断言 | Uses:testing/example_scripts/fixtures/fill_fixtures/test_conftest_funcargs_only_available_in_subdir/sub1/conftest.py | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/fixtures/fill_fixtures/test_conftest_funcargs_only_available_in_subdir/sub2/===\n__init__.py[1 D AA T]: Role:将局部夹具可见性样例的 sub2 目录标识为包 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T F T]: Role:定义 sub2 局部 arg2 夹具并验证无法动态取得兄弟目录 arg1 | Uses:src/_pytest/fixtures.py | API:- | Constraints:request.getfixturevalue('arg1') 必须抛 FixtureLookupError。\ntest_in_sub2.py[1 T F T]: Role:请求 sub2 局部 arg2 夹具以触发兄弟隔离断言 | Uses:testing/example_scripts/fixtures/fill_fixtures/test_conftest_funcargs_only_available_in_subdir/sub2/conftest.py | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/fixtures/fill_fixtures/test_extend_fixture_conftest_conftest/===\n__init__.pyi[1 D AA T]: Role:作为跨 conftest 同名夹具扩展样例的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T F T]: Role:定义外层 spam 夹具供子包同名夹具扩展 | Uses:src/_pytest/fixtures.py | API:- | Constraints:外层值固定为 spam。\n\n===/testbed/testing/example_scripts/fixtures/fill_fixtures/test_extend_fixture_conftest_conftest/pkg/===\n__init__.py[1 D AA T]: Role:将跨 conftest 同名夹具扩展的 pkg 目录标识为包 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T F T]: Role:定义请求外层同名 spam 并倍增其值的子包夹具 | Uses:testing/example_scripts/fixtures/fill_fixtures/test_extend_fixture_conftest_conftest/conftest.py, src/_pytest/fixtures.py | API:- | Constraints:同名参数必须解析到外层夹具而非形成自循环。\ntest_spam.py[3 T F T]: Role:验证子包同名夹具扩展得到 spamspam | Uses:testing/example_scripts/fixtures/fill_fixtures/test_extend_fixture_conftest_conftest/pkg/conftest.py | API:- | Constraints:spam 最终值必须为 spamspam。\n\n===/testbed/testing/example_scripts/fixtures/fill_fixtures/test_extend_fixture_conftest_module/===\n__init__.pyi[1 D AA T]: Role:作为模块扩展 conftest 夹具样例的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T F T]: Role:定义供测试模块同名夹具扩展的外层 spam 夹具 | Uses:src/_pytest/fixtures.py | API:- | Constraints:外层值固定为 spam。\ntest_extend_fixture_conftest_module.py[3 T F T]: Role:验证模块级同名夹具可请求并扩展 conftest 外层定义 | Uses:testing/example_scripts/fixtures/fill_fixtures/test_extend_fixture_conftest_module/conftest.py, src/_pytest/fixtures.py | API:- | Constraints:同名参数解析外层夹具且最终值为 spamspam。\n\n===/testbed/testing/example_scripts/issue88_initial_file_multinodes/===\n__init__.pyi[1 D AA T]: Role:作为自定义多节点初始文件收集复现目录的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[3 T AA H T]: Role:把每个文件收集为一个固定失败的自定义 Item 以复现初始文件多节点行为 | Uses:src/_pytest/nodes.py | API:pytest_collect_file；MyFile；MyItem | Constraints:每个 MyFile 恰生成名为 hello 的 MyItem，运行时固定抛 NotImplementedError。\ntest_hello.py[1 T AA T]: Role:提供自定义多节点初始文件收集器的输入模块 | Uses:testing/example_scripts/issue88_initial_file_multinodes/conftest.py | API:- | Constraints:实际执行由自定义 MyItem 接管。\n\n===/testbed/testing/example_scripts/marks/marks_considered_keywords/===\n__init__.pyi[1 D AA T]: Role:作为标记参与关键字选择复现目录的空类型包标记 | Uses:- | API:- | Constraints:文件刻意为空。\nconftest.py[1 X AA T]: Role:为标记关键字选择样例提供空 conftest 边界 | Uses:- | API:- | Constraints:文件刻意为空。\ntest_marks_as_keywords.py[3 T P T]: Role:验证自定义 foo 标记也作为 -k 关键字匹配来源 | Uses:src/_pytest/mark/__init__.py | API:- | Constraints:test_mark 带 foo 标记且应可用关键字表达式选择。\n\n===/testbed/testing/example_scripts/perf_examples/collect_stats/===\n.gitignore[1 X AA T]: Role:忽略收集性能样例生成的 foo_ 前缀目录 | Uses:testing/example_scripts/perf_examples/collect_stats/generate_folders.py | API:- | Constraints:仅匹配 foo_*。\ngenerate_folders.py[3 U AA T]: Role:按给定各层数量递归生成收集性能测试目录树与模板测试文件 | Uses:testing/example_scripts/perf_examples/collect_stats/template_test.py | API:python generate_folders.py [numbers...]；generate_folders | Constraints:中间层目录名按元素位数零填充并写模板 __init__.py，末层生成 test_*.py；无参数默认 10×100。\ntemplate_test.py[1 T AA T]: Role:提供收集性能目录生成器复制的单个通过测试模板 | Uses:- | API:- | Constraints:-\n\n===/testbed/testing/example_scripts/tmpdir/===\ntmp_path_fixture.py[3 T I T]: Role:验证含混合分隔符参数 ID 的测试仍获得存在且为空的 tmp_path | Uses:src/_pytest/tmpdir.py | API:- | Constraints:tmp_path 必须为目录且初始无内容。\n\n===/testbed/testing/example_scripts/unittest/===\ntest_parametrized_fixture_error_message.py[3 T I T]: Role:验证 unittest.TestCase 使用参数化 usefixtures 时产生明确的不支持诊断 | Uses:src/_pytest/unittest.py, src/_pytest/fixtures.py | API:- | Constraints:参数化夹具 two 有两个值，TestCase 不能被普通 fixture 参数化。\ntest_setup_skip.py[3 T I T]: Role:验证类级 unittest.skip 阻止调用继承的实例 setUp | Uses:src/_pytest/unittest.py | API:- | Constraints:若 Base.setUp 被调用会失败，因此整个 Test 必须在 setup 前跳过。\ntest_setup_skip_class.py[3 T I T]: Role:验证类级 unittest.skip 阻止调用继承的 setUpClass | Uses:src/_pytest/unittest.py | API:- | Constraints:若 Base.setUpClass 被调用会失败，因此整个 Test 必须在类 setup 前跳过。\ntest_setup_skip_module.py[3 T I T]: Role:验证即使模块内 TestCase 全部跳过仍会执行 setUpModule | Uses:src/_pytest/unittest.py | API:- | Constraints:setUpModule 固定失败且必须先于类级跳过生效。\ntest_unittest_asyncio.py[3 T I Y T]: Role:验证 IsolatedAsyncioTestCase 的异步成功、失败和 asyncTearDown 生命周期桥接 | Uses:src/_pytest/unittest.py | API:- | Constraints:两个异步测试无论成功失败都执行 asyncTearDown，随后计数必须为 2。\ntest_unittest_asynctest.py[3 T I Y T]: Role:验证 asynctest.TestCase 异步测试失败与 tearDown 生命周期集成 | Uses:src/_pytest/unittest.py | API:- | Constraints:一个异步测试故意失败、一个通过，两者均须执行异步 tearDown 后计数为 2。\ntest_unittest_plain_async.py[3 T I Y T]: Role:验证普通 unittest.TestCase 的 async 测试方法按 unittest 自身语义处理 | Uses:src/_pytest/unittest.py | API:- | Constraints:pytest 不得把该方法按原生 pytest async 函数路径处理。\n\n===/testbed/testing/example_scripts/warnings/===\ntest_group_warnings_by_message.py[3 T O T]: Role:提供重复 foo 与 bar 警告以验证终端按消息分组 | Uses:src/_pytest/terminal.py, src/_pytest/warnings.py | API:- | Constraints:共发出 6 条 foo 和 5 条 bar UserWarning。\n\n===/testbed/testing/example_scripts/warnings/test_group_warnings_by_message_summary/===\ntest_1.py[3 T O T]: Role:提供超过位置折叠阈值的重复警告以验证摘要按文件计数 | Uses:src/_pytest/terminal.py, src/_pytest/warnings.py | API:- | Constraints:本文件发出 21 条 foo 与 20 条 bar UserWarning。\ntest_2.py[3 T O T]: Role:从另一模块再发一条 foo 警告以验证跨文件消息分组 | Uses:testing/example_scripts/warnings/test_group_warnings_by_message_summary/test_1.py, src/_pytest/terminal.py | API:- | Constraints:调用共享 func 恰发一条 foo UserWarning。\n\n===/testbed/testing/examples/===\ntest_issue519.py[5 T AA T]: Role:以 pytester 黑盒验证 issue_519 参数化夹具顺序样例产生八个通过项 | Uses:testing/example_scripts/issue_519.py, src/_pytest/pytester.py | API:- | Constraints:复制样例后独立运行，结果必须恰为 passed=8。\n\n===/testbed/testing/freeze/===\n.gitignore[1 X AA T]: Role:忽略冻结测试生成的 PyInstaller 构建目录、发行目录和 spec 文件 | Uses:testing/freeze/create_executable.py | API:- | Constraints:-\ncreate_executable.py[5 U I T]: Role:用 pytest.freeze_includes 组装 PyInstaller 隐藏导入并生成嵌入 pytest 的可执行程序 | Uses:src/_pytest/freeze_support.py, testing/freeze/runtests_script.py | API:python create_executable.py | Constraints:每个 pytest 内部叶模块均作为 --hidden-import，另显式包含 distutils，并以 --noconfirm 构建。\nruntests_script.py[3 E I T]: Role:作为冻结可执行程序入口调用 pytest.main 并传播退出码 | Uses:src/pytest/__init__.py | API:冻结后的 runtests_script 可执行程序 | Constraints:仅直接执行时启动 pytest。\ntox_run.py[3 U I T]: Role:定位冻结产物并用其运行 freeze/tests 套件 | Uses:testing/freeze/create_executable.py, testing/freeze/runtests_script.py | API:python tox_run.py | Constraints:Windows 产物路径追加 .exe，子命令退出状态经 os.system 传播。\n\n===/testbed/testing/freeze/tests/===\ntest_doctest.txt[1 T I T]: Role:验证冻结可执行程序中的文本 doctest 收集与算术期望输出 | Uses:testing/freeze/create_executable.py | API:- | Constraints:doctest 表达式 1 + 1 必须得到 2。\ntest_trivial.py[1 T I T]: Role:提供冻结 pytest 可执行程序运行的两个基础字符串测试 | Uses:testing/freeze/runtests_script.py | API:- | Constraints:两个测试都必须通过。\n\n===/testbed/testing/io/===\ntest_pprint.py[5 T O L]: Role:验证漂亮打印器对数据类、映射、序列、集合及嵌套组合生成一致的多行表示 | Uses:src/_pytest/_io/pprint.py | API:- | Constraints:空容器保持紧凑表示，非空结构逐项缩进并保留尾逗号；OrderedDict、defaultdict、Counter、ChainMap、deque、mappingproxy、SimpleNamespace 与 dataclass 须保留各自类型化外形，深层混合结构递归格式稳定。\ntest_saferepr.py[5 T O S]: Role:验证安全 repr 的长度限制、异常降级、Unicode、不可用对象和不限长模式 | Uses:src/_pytest/_io/saferepr.py | API:- | Constraints:有限 maxsize 精确截成指定长度并中部省略，None 不截断；repr/异常自身损坏时产生含类型和对象地址的占位诊断；KeyboardInterrupt/SystemExit 始终传播；unlimited 不含省略号或换行。\ntest_terminalwriter.py[5 T O M]: Role:验证终端写入器宽度、颜色优先级、Unicode 降级、分隔线、显示列和源码高亮 | Uses:src/_pytest/_io/terminalwriter.py, src/_pytest/_io/wcwidth.py | API:- | Constraints:COLUMNS 覆盖宽度而过窄回退 80，Windows 分隔线少一列；不支持 Unicode 的流用反斜线转义；PY_COLORS 优先于 NO_COLOR/FORCE_COLOR，NO_COLOR 高于 FORCE_COLOR且空值忽略，TERM=dumb 禁色；未知 markup 报 ValueError；当前行宽按宽字符与组合字符列宽；源码高亮仅在 markup 与 code_highlight 同启，indents 数量必须匹配且空源码安全。\ntest_wcwidth.py[5 T O T]: Role:验证单字符与字符串终端显示列宽覆盖控制、组合、普通和宽字符 | Uses:src/_pytest/_io/wcwidth.py | API:- | Constraints:控制换行使整串宽度为 -1，组合/零宽字符为 0，东亚宽字符为 2。\n\n===/testbed/testing/logging/===\ntest_fixture.py[5 T O L]: Role:验证 caplog 夹具的级别控制、记录访问、阶段隔离、过滤及生命周期恢复 | Uses:src/_pytest/logging.py, src/_pytest/fixtures.py, src/_pytest/stash.py, src/_pytest/pytester.py | API:- | Constraints:set_level/at_level 须同时调整 logger、handler 与全局 disable 门槛并在嵌套、异常和测试结束后精确恢复；records/text/messages/record_tuples 各保留其规定的原始或格式化语义，clear 只清当前阶段；setup/call/teardown 记录分仓，records 仅当前阶段而 get_records 可跨阶段；caplog 的更低临时级别不得改变失败报告按全局 log_level 筛选的内容；filtering 只在上下文内生效。\ntest_formatter.py[5 T O S]: Role:验证日志级别着色、字段宽度与多行自动缩进格式 | Uses:src/_pytest/logging.py, src/_pytest/_io/terminalwriter.py | API:- | Constraints:有 markup 时只给 levelname 实际格式宽度着色，无 markup 保持对齐；auto_indent 可由格式器或 record 覆盖，True 对齐消息起点、整数用固定空格、False/非法值不缩进。\ntest_reporting.py[5 T O L]: Role:验证捕获日志、实时终端日志和文件日志在配置、阶段、格式及禁用策略下的报告行为 | Uses:src/_pytest/logging.py, src/_pytest/capture.py, src/_pytest/terminal.py, src/_pytest/config/__init__.py, src/_pytest/pytester.py | API:- | Constraints:setup/call/teardown 捕获日志分区并与 stdout/stderr 独立显示，无日志不得出现空区段；log_cli 只由显式启用或命令行 --log-cli-level 自动启用，每阶段首条日志前只输出一次标题并暂停捕获后恢复；捕获、实时和文件 handler 的级别可独立配置，默认不得改变 root logger 级别；文件模式仅 w/a 合法，UTF-8 写入并自动建父目录，set_log_path 服从同一模式；格式化错误仅 logging.raiseExceptions 为真时传播为测试失败；--log-disable 精确禁用目标 logger 且阻断其子 logger 记录传播；caplog.text 去除 ANSI，捕获级别名可着色；%f 与时区组合保持六位微秒，文件格式未专设时回退普通日志格式。\n\n===/testbed/testing/plugins_integration/===\n.gitignore[1 X AA T]: Role:忽略插件集成测试生成的 HTML 与 assets 输出 | Uses:- | API:- | Constraints:-\nREADME.rst[7 O AA S]: Role:规定流行第三方插件兼容性冒烟测试的纳入标准与最小用例要求 | Uses:testing/plugins_integration/requirements.txt, testing/plugins_integration/ | API:- | Constraints:只纳入影响面大且没有笨重外部服务依赖的插件；每个依赖应配最小功能冒烟用例，并优先复用现有测试\nbdd_wallet.feature[3 D I T]: Role:声明 pytest-bdd 钱包购买水果的 Given/When/Then 场景 | Uses:testing/plugins_integration/bdd_wallet.py | API:Buy fruits 场景 | Constraints:从 50 依次减 1 和 2 后余额必须为 47。\nbdd_wallet.py[3 T I H T]: Role:实现 pytest-bdd 钱包场景步骤并验证 fixture 注入与场景执行 | Uses:testing/plugins_integration/bdd_wallet.feature, src/_pytest/fixtures.py | API:- | Constraints:场景步骤文字须与 feature 完全匹配，最终 wallet.amount 为 47。\ndjango_settings.py[1 X I T]: Role:为 pytest-django 集成冒烟提供最小 Django SECRET_KEY 配置 | Uses:- | API:SECRET_KEY | Constraints:固定为 mysecret。\npytest.ini[5 X I T]: Role:配置第三方插件集成套件的严格标记、严格 asyncio 和警告策略 | Uses:testing/plugins_integration/ | API:- | Constraints:未知标记报错、asyncio_mode=strict、PytestWarning 默认升级为错误，仅豁免列出的 usefixtures 与 fspath 弃用消息。\npytest_anyio_integration.py[3 T I Y T]: Role:冒烟验证 anyio 标记可运行异步测试 | Uses:- | API:- | Constraints:anyio.sleep(0) 必须完成。\npytest_asyncio_integration.py[3 T I Y T]: Role:冒烟验证 pytest-asyncio 标记可运行 asyncio 测试 | Uses:- | API:- | Constraints:asyncio.sleep(0) 必须完成。\npytest_mock_integration.py[3 T I T]: Role:冒烟验证 pytest-mock 提供 mocker 夹具及 MagicMock | Uses:src/_pytest/fixtures.py | API:- | Constraints:mocker.MagicMock 构造不得失败。\npytest_rerunfailures_integration.py[3 T I T]: Role:验证 pytest-rerunfailures 可重跑首次失败的 unittest.TestCase | Uses:src/_pytest/unittest.py | API:- | Constraints:类状态使第一次调用失败并在重跑时通过。\npytest_trio_integration.py[3 T I Y T]: Role:冒烟验证 pytest-trio 标记可运行 Trio 异步测试 | Uses:- | API:- | Constraints:trio.sleep(0) 必须完成。\npytest_twisted_integration.py[3 T I Y T]: Role:冒烟验证 pytest-twisted 同时支持 inlineCallbacks 与 ensureDeferred 异步测试 | Uses:- | API:- | Constraints:两种适配入口都必须等待零延迟 Deferred 完成。\nrequirements.txt[5 X I T]: Role:固定流行 pytest 插件兼容性烟雾测试所需的插件、框架及异步运行时版本 | Uses:testing/plugins_integration/ | API:- | Constraints:依赖采用精确版本锁定，覆盖 anyio/trio、Django、异步与 BDD、覆盖率、报告、mock、重跑、Twisted 和 Xvfb 集成。\nsimple_integration.py[3 T I T]: Role:为覆盖率等通用插件提供普通与参数化 pytest 冒烟测试 | Uses:src/_pytest/python.py | API:- | Constraints:应收集一个普通项和三个参数项且全部通过。\n\n===/testbed/testing/python/===\napprox.py[5 T F V L]: Role:验证 pytest.approx 对标量、复数、Decimal/Fraction、映射、序列及 NumPy 协议对象的比较与差异输出 | Uses:src/_pytest/python_api.py, src/_pytest/assertion/util.py, src/_pytest/pytester.py | API:- | Constraints:默认 rel=1e-6、abs=1e-12，显式仅 abs 禁默认 rel且两者取较大容差；负值或 NaN 容差报 ValueError，inf/NaN、零与 bool 遵守专门语义，布尔上下文及顺序比较报 TypeError；映射键、序列长度和数组形状必须一致，集合及嵌套同类容器拒绝，非数值仅严格相等；NumPy 标量广播而数组形状匹配，未导入时不得强依赖；失败报告列不匹配数、最大绝对/相对差与索引明细，-vv 展开完整，尺寸不符给专用信息；repr 保留容差、复数角度与容器结构。本地验证盲区：NumPy 相关覆盖在依赖缺失时跳过。\ncollect.py[5 T C L]: Role:验证 Python 模块、类和函数收集、参数化展开、自定义钩子及收集树报告 | Uses:src/_pytest/python.py, src/_pytest/main.py, src/_pytest/nodes.py, src/_pytest/fixtures.py, src/_pytest/pytester.py | API:- | Constraints:导入失败、语法错误和同名模块路径冲突须给可定位诊断，详细度 2 才显示内部回溯；含 __init__/__new__ 的测试类警告并不收集，抽象类、property、实例描述符和非函数 callable 不得执行或误收集；静态方法可收集，每个方法用新实例且定义顺序稳定；直接参数化覆盖同名夹具并裁剪被遮蔽依赖，多层 parametrize 形成确定笛卡尔积，空集跳过，参数标记只作用对应实例；自定义 module/item 钩子保持局部 conftest 可见性；默认去重目录，--keep-duplicates 保持请求顺序及重叠树语义；直接指定包 __init__.py 只收集该模块。本地验证盲区：自定义扩展导入与部分路径行为使用子进程或依赖平台导入器。\nfixtures.py[5 T F H L]: Role:验证夹具声明发现、可见性与覆盖、依赖闭包、作用域缓存、参数化重排及终结生命周期 | Uses:src/_pytest/fixtures.py, src/_pytest/python.py, src/_pytest/scope.py, src/_pytest/nodes.py, src/_pytest/pytester.py | API:- | Constraints:静态闭包须包含覆盖链的传递依赖并裁剪被直接参数遮蔽的分支，循环与菱形依赖应终止且去重；同名夹具逐层解析外层定义，conftest、模块、类和插件可见性不得串域；作用域按宽到窄建立并按资源参数分组，宽作用域不得请求窄作用域，动态 scope 与无参数动态请求须给精确诊断；相同缓存键复用值或异常，参数切换先终结旧实例，依赖终结保持逆建立顺序；终结器后进先出且全部尝试，setup 失败后已注册终结器仍执行，yield 须恰产出一次；request 的可访问属性受作用域限制，request 名称保留，直接调用或重复装饰 fixture 必须报错；--fixtures 展示全部可见定义、来源和文档且隐藏私有项。 本地验证盲区：NumPy、PyPy 垃圾回收及部分平台能力缺失时跳过对应覆盖。\nintegration.py[5 T I L]: Role:验证 Python 收集、夹具参数解析与 unittest.mock/第三方 mock 装饰器协同工作的集成语义 | Uses:src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/compat.py, src/_pytest/runner.py, src/_pytest/pytester.py | API:- | Constraints:包装函数须正确解包并扣除 mock 注入参数而不误判 NumPy 式不可比较对象；重跑同一项应获得新 request 和夹具实例；__test__=False 在模块、函数、类及 TestCase 上阻止收集且恶意 __getattr__ 不得伪造真值；参数 ID 回调逐值生成并拒绝 pytest.param 上 usefixtures；每个实例、类方法和静态方法项目均有彼此独立的类实例。本地验证盲区：依赖外部 mock 包的用例在依赖缺失时跳过。\nmetafunc.py[5 T F L]: Role:验证 Metafunc 参数化展开、作用域推导、参数 ID、间接夹具与参数集标记语义 | Uses:src/_pytest/python.py, src/_pytest/fixtures.py, src/_pytest/mark/structures.py, src/_pytest/scope.py, src/_pytest/pytester.py | API:- | Constraints:同一参数名不得重复参数化，request 为保留名，参数名缺失、已有默认值、indirect 类型或名称错误须在收集期给区分 argument/fixture 的诊断；多次参数化生成确定笛卡尔积，纯间接参数按参与夹具的最窄作用域推导而混合直接参数回退 function，高作用域实例按资源分组且缺少对应节点不得崩溃；ID 来源优先参数集显式 id，再 ids/idfn/钩子/值，非 ASCII 按配置转义，重复 ID 数字消歧，HIDDEN_PARAM 每次调用至多一次并省略该维；空参数集生成跳过项，参数集标记仅作用对应实例；直接参数生成伪夹具，间接参数通过 request.param，类与局部 conftest 的 pytest_generate_tests 只作用其可见测试；参数化项仍保持每次独立类实例。\nraises.py[5 T A L]: Role:验证 pytest.raises 的函数式与上下文式异常捕获、类型校验、正则匹配、诊断及引用清理语义 | Uses:src/_pytest/raises.py, src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/pytester.py | API:- | Constraints:无匹配条件、空异常元组、非异常类型、非 callable 或未知关键字须给明确错误；错误异常类型原样传播，未抛异常报告 DID NOT RAISE，match 用正则搜索并对非法/空/疑似未转义模式给专用诊断；函数式与上下文式不得留下 sys.exc_info 或对象引用环。\nshow_fixtures_per_test.py[5 T F M]: Role:验证 --fixtures-per-test 按测试展示实际夹具闭包、来源和文档字符串 | Uses:src/_pytest/fixtures.py, src/_pytest/pytester.py, src/_pytest/doctest.py | API:- | Constraints:无项目不输出夹具标题；默认隐藏未使用和下划线私有夹具，-v 包含实际依赖到的私有夹具；模块定义覆盖 conftest 同名夹具；普通模式只显示多行 docstring 首段，-v 保留全部段落与空行；doctest 项也能在此模式收集而不出错。\n\n## 对账报告\n- 对齐 630, 观察 9, 忽略 2, 已清除 0\n\n纲要与代码已对齐。\n\n以上是整份的纲要。能据此回答的问题直接回答，不重复读源码；具体事实没写或出现冲突时读对应文件核实；别的模块的问题再按模块取。纲要与需求、源码、测试或实际运行结果冲突时，读取对应源码与测试核实，并修正不准确的纲要；状态对齐不证明代码正确或语义完整。"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_3"
+}
+```
+
+## 9. assistant / message
+
+```
+纲要显示改动应集中在 `src/_pytest/raises.py`：这里同时承载 `unescape`、成员配对及失败诊断。接下来我会完整阅读该文件，并查找仓库内针对这些私有辅助逻辑的调用与测试断言。
+```
+
+## 10. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_6",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'git status --short && rg -n \"unescape|RaisesGroup|TODO|NotImplemented|pass$\" src/_pytest/raises.py testing | head -n 300 && sed -n '\"'1,260p' src/_pytest/raises.py && sed -n '261,520p' src/_pytest/raises.py && sed -n '521,780p' src/_pytest/raises.py && sed -n '781,1100p' src/_pytest/raises.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 11. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'git status --short && rg -n \"unescape|RaisesGroup|TODO|NotImplemented|pass$\" src/_pytest/raises.py testing | head -n 300 && sed -n '\"'1,260p' src/_pytest/raises.py && sed -n '261,520p' src/_pytest/raises.py && sed -n '521,780p' src/_pytest/raises.py && sed -n '781,1100p' src/_pytest/raises.py\""
+  },
+  "call_ref": "item_6"
+}
+```
+
+## 12. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "?? ortg.tsv\n/bin/bash: line 1: rg: command not found\nfrom __future__ import annotations\n\nfrom abc import ABC\nfrom abc import abstractmethod\nimport re\nfrom re import Pattern\nimport sys\nfrom textwrap import indent\nfrom typing import Any\nfrom typing import cast\nfrom typing import final\nfrom typing import Generic\nfrom typing import get_args\nfrom typing import get_origin\nfrom typing import Literal\nfrom typing import overload\nfrom typing import TYPE_CHECKING\nimport warnings\n\nfrom _pytest._code import ExceptionInfo\nfrom _pytest._code.code import stringify_exception\nfrom _pytest.outcomes import fail\nfrom _pytest.warning_types import PytestWarning\n\n\nif TYPE_CHECKING:\n    from collections.abc import Callable\n    from collections.abc import Sequence\n\n    # for some reason Sphinx does not play well with 'from types import TracebackType'\n    import types\n    from typing import TypeGuard\n\n    from typing_extensions import ParamSpec\n    from typing_extensions import TypeVar\n\n    P = ParamSpec(\"P\")\n\n    # this conditional definition is because we want to allow a TypeVar default\n    BaseExcT_co_default = TypeVar(\n        \"BaseExcT_co_default\",\n        bound=BaseException,\n        default=BaseException,\n        covariant=True,\n    )\n\n    # Use short name because it shows up in docs.\n    E = TypeVar(\"E\", bound=BaseException, default=BaseException)\nelse:\n    from typing import TypeVar\n\n    BaseExcT_co_default = TypeVar(\n        \"BaseExcT_co_default\", bound=BaseException, covariant=True\n    )\n\n# RaisesGroup doesn't work with a default.\nBaseExcT_co = TypeVar(\"BaseExcT_co\", bound=BaseException, covariant=True)\nBaseExcT_1 = TypeVar(\"BaseExcT_1\", bound=BaseException)\nBaseExcT_2 = TypeVar(\"BaseExcT_2\", bound=BaseException)\nExcT_1 = TypeVar(\"ExcT_1\", bound=Exception)\nExcT_2 = TypeVar(\"ExcT_2\", bound=Exception)\n\nif sys.version_info < (3, 11):\n    from exceptiongroup import BaseExceptionGroup\n    from exceptiongroup import ExceptionGroup\n\n\n# String patterns default to including the unicode flag.\n_REGEX_NO_FLAGS = re.compile(r\"\").flags\n\n\n# pytest.raises helper\n@overload\ndef raises(\n    expected_exception: type[E] | tuple[type[E], ...],\n    *,\n    match: str | re.Pattern[str] | None = ...,\n    check: Callable[[E], bool] = ...,\n) -> RaisesExc[E]: ...\n\n\n@overload\ndef raises(\n    *,\n    match: str | re.Pattern[str],\n    # If exception_type is not provided, check() must do any typechecks itself.\n    check: Callable[[BaseException], bool] = ...,\n) -> RaisesExc[BaseException]: ...\n\n\n@overload\ndef raises(*, check: Callable[[BaseException], bool]) -> RaisesExc[BaseException]: ...\n\n\n@overload\ndef raises(\n    expected_exception: type[E] | tuple[type[E], ...],\n    func: Callable[..., Any],\n    *args: Any,\n    **kwargs: Any,\n) -> ExceptionInfo[E]: ...\n\n\ndef raises(\n    expected_exception: type[E] | tuple[type[E], ...] | None = None,\n    *args: Any,\n    **kwargs: Any,\n) -> RaisesExc[BaseException] | ExceptionInfo[E]:\n    r\"\"\"Assert that a code block/function call raises an exception type, or one of its subclasses.\n\n    :param expected_exception:\n        The expected exception type, or a tuple if one of multiple possible\n        exception types are expected. Note that subclasses of the passed exceptions\n        will also match.\n\n        This is not a required parameter, you may opt to only use ``match`` and/or\n        ``check`` for verifying the raised exception.\n\n    :kwparam str | re.Pattern[str] | None match:\n        If specified, a string containing a regular expression,\n        or a regular expression object, that is tested against the string\n        representation of the exception and its :pep:`678` `__notes__`\n        using :func:`re.search`.\n\n        To match a literal string that may contain :ref:`special characters\n        <re-syntax>`, the pattern can first be escaped with :func:`re.escape`.\n\n        (This is only used when ``pytest.raises`` is used as a context manager,\n        and passed through to the function otherwise.\n        When using ``pytest.raises`` as a function, you can use:\n        ``pytest.raises(Exc, func, match=\"passed on\").match(\"my pattern\")``.)\n\n    :kwparam Callable[[BaseException], bool] check:\n\n        .. versionadded:: 8.4\n\n        If specified, a callable that will be called with the exception as a parameter\n        after checking the type and the match regex if specified.\n        If it returns ``True`` it will be considered a match, if not it will\n        be considered a failed match.\n\n\n    Use ``pytest.raises`` as a context manager, which will capture the exception of the given\n    type, or any of its subclasses::\n\n        >>> import pytest\n        >>> with pytest.raises(ZeroDivisionError):\n        ...    1/0\n\n    If the code block does not raise the expected exception (:class:`ZeroDivisionError` in the example\n    above), or no exception at all, the check will fail instead.\n\n    You can also use the keyword argument ``match`` to assert that the\n    exception matches a text or regex::\n\n        >>> with pytest.raises(ValueError, match='must be 0 or None'):\n        ...     raise ValueError(\"value must be 0 or None\")\n\n        >>> with pytest.raises(ValueError, match=r'must be \\d+$'):\n        ...     raise ValueError(\"value must be 42\")\n\n    The ``match`` argument searches the formatted exception string, which includes any\n    `PEP-678 <https://peps.python.org/pep-0678/>`__ ``__notes__``:\n\n        >>> with pytest.raises(ValueError, match=r\"had a note added\"):  # doctest: +SKIP\n        ...     e = ValueError(\"value must be 42\")\n        ...     e.add_note(\"had a note added\")\n        ...     raise e\n\n    The ``check`` argument, if provided, must return True when passed the raised exception\n    for the match to be successful, otherwise an :exc:`AssertionError` is raised.\n\n        >>> import errno\n        >>> with pytest.raises(OSError, check=lambda e: e.errno == errno.EACCES):\n        ...     raise OSError(errno.EACCES, \"no permission to view\")\n\n    The context manager produces an :class:`ExceptionInfo` object which can be used to inspect the\n    details of the captured exception::\n\n        >>> with pytest.raises(ValueError) as exc_info:\n        ...     raise ValueError(\"value must be 42\")\n        >>> assert exc_info.type is ValueError\n        >>> assert exc_info.value.args[0] == \"value must be 42\"\n\n    .. warning::\n\n       Given that ``pytest.raises`` matches subclasses, be wary of using it to match :class:`Exception` like this::\n\n           # Careful, this will catch ANY exception raised.\n           with pytest.raises(Exception):\n               some_function()\n\n       Because :class:`Exception` is the base class of almost all exceptions, it is easy for this to hide\n       real bugs, where the user wrote this expecting a specific exception, but some other exception is being\n       raised due to a bug introduced during a refactoring.\n\n       Avoid using ``pytest.raises`` to catch :class:`Exception` unless certain that you really want to catch\n       **any** exception raised.\n\n    .. note::\n\n       When using ``pytest.raises`` as a context manager, it's worthwhile to\n       note that normal context manager rules apply and that the exception\n       raised *must* be the final line in the scope of the context manager.\n       Lines of code after that, within the scope of the context manager will\n       not be executed. For example::\n\n           >>> value = 15\n           >>> with pytest.raises(ValueError) as exc_info:\n           ...     if value > 10:\n           ...         raise ValueError(\"value must be <= 10\")\n           ...     assert exc_info.type is ValueError  # This will not execute.\n\n       Instead, the following approach must be taken (note the difference in\n       scope)::\n\n           >>> with pytest.raises(ValueError) as exc_info:\n           ...     if value > 10:\n           ...         raise ValueError(\"value must be <= 10\")\n           ...\n           >>> assert exc_info.type is ValueError\n\n    **Expecting exception groups**\n\n    When expecting exceptions wrapped in :exc:`BaseExceptionGroup` or\n    :exc:`ExceptionGroup`, you should instead use :class:`pytest.RaisesGroup`.\n\n    **Using with** ``pytest.mark.parametrize``\n\n    When using :ref:`pytest.mark.parametrize ref`\n    it is possible to parametrize tests such that\n    some runs raise an exception and others do not.\n\n    See :ref:`parametrizing_conditional_raising` for an example.\n\n    .. seealso::\n\n        :ref:`assertraises` for more examples and detailed discussion.\n\n    **Legacy form**\n\n    It is possible to specify a callable by passing a to-be-called lambda::\n\n        >>> raises(ZeroDivisionError, lambda: 1/0)\n        <ExceptionInfo ...>\n\n    or you can specify an arbitrary callable with arguments::\n\n        >>> def f(x): return 1/x\n        ...\n        >>> raises(ZeroDivisionError, f, 0)\n        <ExceptionInfo ...>\n        >>> raises(ZeroDivisionError, f, x=0)\n        <ExceptionInfo ...>\n\n    The form above is fully supported but discouraged for new code because the\n    context manager form is regarded as more readable and less error-prone.\n\n    .. note::\n        Similar to caught exception objects in Python, explicitly clearing\n        local references to returned ``ExceptionInfo`` objects can\n        help the Python interpreter speed up its garbage collection.\n\n        Clearing those references breaks a reference cycle\n        (``ExceptionInfo`` --> caught exception --> frame stack raising\n        the exception --> current frame stack --> local variables -->\n        ``ExceptionInfo``) which makes Python keep all objects referenced\n        from that cycle (including all local variables in the current\n        frame) alive until the next cyclic garbage collection run.\n        More detailed information can be found in the official Python\n        documentation for :ref:`the try statement <python:try>`.\n    \"\"\"\n    __tracebackhide__ = True\n\n    if not args:\n        if set(kwargs) - {\"match\", \"check\", \"expected_exception\"}:\n            msg = \"Unexpected keyword arguments passed to pytest.raises: \"\n            msg += \", \".join(sorted(kwargs))\n            msg += \"\\nUse context-manager form instead?\"\n            raise TypeError(msg)\n\n        if expected_exception is None:\n            return RaisesExc(**kwargs)\n        return RaisesExc(expected_exception, **kwargs)\n\n    if not expected_exception:\n        raise ValueError(\n            f\"Expected an exception type or a tuple of exception types, but got `{expected_exception!r}`. \"\n            f\"Raising exceptions is already understood as failing the test, so you don't need \"\n            f\"any special code to say 'this should never raise an exception'.\"\n        )\n    func = args[0]\n    if not callable(func):\n        raise TypeError(f\"{func!r} object (type: {type(func)}) must be callable\")\n    with RaisesExc(expected_exception) as excinfo:\n        func(*args[1:], **kwargs)\n    try:\n        return excinfo\n    finally:\n        del excinfo\n\n\n# note: RaisesExc/RaisesGroup uses fail() internally, so this alias\n#  indicates (to [internal] plugins?) that `pytest.raises` will\n#  raise `_pytest.outcomes.Failed`, where\n#  `outcomes.Failed is outcomes.fail.Exception is raises.Exception`\n# note: this is *not* the same as `_pytest.main.Failed`\n# note: mypy does not recognize this attribute, and it's not possible\n#  to use a protocol/decorator like the others in outcomes due to\n#  https://github.com/python/mypy/issues/18715\nraises.Exception = fail.Exception  # type: ignore[attr-defined]\n\n\ndef _match_pattern(match: Pattern[str]) -> str | Pattern[str]:\n    \"\"\"Helper function to remove redundant `re.compile` calls when printing regex\"\"\"\n    return match.pattern if match.flags == _REGEX_NO_FLAGS else match\n\n\ndef repr_callable(fun: Callable[[BaseExcT_1], bool]) -> str:\n    \"\"\"Get the repr of a ``check`` parameter.\n\n    Split out so it can be monkeypatched (e.g. by hypothesis)\n    \"\"\"\n    return repr(fun)\n\n\ndef backquote(s: str) -> str:\n    return \"`\" + s + \"`\"\n\n\ndef _exception_type_name(\n    e: type[BaseException] | tuple[type[BaseException], ...],\n) -> str:\n    if isinstance(e, type):\n        return e.__name__\n    if len(e) == 1:\n        return e[0].__name__\n    return \"(\" + \", \".join(ee.__name__ for ee in e) + \")\"\n\n\ndef _check_raw_type(\n    expected_type: type[BaseException] | tuple[type[BaseException], ...] | None,\n    exception: BaseException,\n) -> str | None:\n    if expected_type is None or expected_type == ():\n        return None\n\n    if not isinstance(\n        exception,\n        expected_type,\n    ):\n        actual_type_str = backquote(_exception_type_name(type(exception)) + \"()\")\n        expected_type_str = backquote(_exception_type_name(expected_type))\n        if (\n            isinstance(exception, BaseExceptionGroup)\n            and isinstance(expected_type, type)\n            and not issubclass(expected_type, BaseExceptionGroup)\n        ):\n            return f\"Unexpected nested {actual_type_str}, expected {expected_type_str}\"\n        return f\"{actual_type_str} is not an instance of {expected_type_str}\"\n    return None\n\n\ndef is_fully_escaped(s: str) -> bool:\n    # we know we won't compile with re.VERBOSE, so whitespace doesn't need to be escaped\n    metacharacters = \"{}()+.*?^$[]\"\n    return not any(\n        c in metacharacters and (i == 0 or s[i - 1] != \"\\\\\") for (i, c) in enumerate(s)\n    )\n\n\n\n\n\n\n# These classes conceptually differ from ExceptionInfo in that ExceptionInfo is tied, and\n# constructed from, a particular exception - whereas these are constructed with expected\n# exceptions, and later allow matching towards particular exceptions.\n# But there's overlap in `ExceptionInfo.match` and `AbstractRaises._check_match`, as with\n# `AbstractRaises.matches` and `ExceptionInfo.errisinstance`+`ExceptionInfo.group_contains`.\n# The interaction between these classes should perhaps be improved.\nclass AbstractRaises(ABC, Generic[BaseExcT_co]):\n    \"\"\"ABC with common functionality shared between RaisesExc and RaisesGroup\"\"\"\n\n    def __init__(\n        self,\n        *,\n        match: str | Pattern[str] | None,\n        check: Callable[[BaseExcT_co], bool] | None,\n    ) -> None:\n        if isinstance(match, str):\n            # juggle error in order to avoid context to fail (necessary?)\n            re_error = None\n            try:\n                self.match: Pattern[str] | None = re.compile(match)\n            except re.error as e:\n                re_error = e\n            if re_error is not None:\n                fail(f\"Invalid regex pattern provided to 'match': {re_error}\")\n            if match == \"\":\n                warnings.warn(\n                    PytestWarning(\n                        \"matching against an empty string will *always* pass. If you want \"\n                        \"to check for an empty message you need to pass '^$'. If you don't \"\n                        \"want to match you should pass `None` or leave out the parameter.\"\n                    ),\n                    stacklevel=2,\n                )\n        else:\n            self.match = match\n\n        # check if this is a fully escaped regex and has ^$ to match fully\n        # in which case we can do a proper diff on error\n        self.rawmatch: str | None = None\n        if isinstance(match, str) or (\n            isinstance(match, Pattern) and match.flags == _REGEX_NO_FLAGS\n        ):\n            if isinstance(match, Pattern):\n                match = match.pattern\n            if (\n                match\n                and match[0] == \"^\"\n                and match[-1] == \"$\"\n                and is_fully_escaped(match[1:-1])\n            ):\n                self.rawmatch = unescape(match[1:-1])\n\n        self.check = check\n        self._fail_reason: str | None = None\n\n        # used to suppress repeated printing of `repr(self.check)`\n        self._nested: bool = False\n\n        # set in self._parse_exc\n        self.is_baseexception = False\n\n    def _parse_exc(\n        self, exc: type[BaseExcT_1] | types.GenericAlias, expected: str\n    ) -> type[BaseExcT_1]:\n        if isinstance(exc, type) and issubclass(exc, BaseException):\n            if not issubclass(exc, Exception):\n                self.is_baseexception = True\n            return exc\n        # because RaisesGroup does not support variable number of exceptions there's\n        # still a use for RaisesExc(ExceptionGroup[Exception]).\n        origin_exc: type[BaseException] | None = get_origin(exc)\n        if origin_exc and issubclass(origin_exc, BaseExceptionGroup):\n            exc_type = get_args(exc)[0]\n            if (\n                issubclass(origin_exc, ExceptionGroup) and exc_type in (Exception, Any)\n            ) or (\n                issubclass(origin_exc, BaseExceptionGroup)\n                and exc_type in (BaseException, Any)\n            ):\n                if not issubclass(origin_exc, ExceptionGroup):\n                    self.is_baseexception = True\n                return cast(type[BaseExcT_1], origin_exc)\n            else:\n                raise ValueError(\n                    f\"Only `ExceptionGroup[Exception]` or `BaseExceptionGroup[BaseException]` \"\n                    f\"are accepted as generic types but got `{exc}`. \"\n                    f\"As `raises` will catch all instances of the specified group regardless of the \"\n                    f\"generic argument specific nested exceptions has to be checked \"\n                    f\"with `RaisesGroup`.\"\n                )\n        # unclear if the Type/ValueError distinction is even helpful here\n        msg = f\"expected exception must be {expected}, not \"\n        if isinstance(exc, type):  # type: ignore[unreachable]\n            raise ValueError(msg + f\"{exc.__name__!r}\")\n        if isinstance(exc, BaseException):  # type: ignore[unreachable]\n            raise TypeError(msg + f\"an exception instance ({type(exc).__name__})\")\n        raise TypeError(msg + repr(type(exc).__name__))\n\n    @property\n    def fail_reason(self) -> str | None:\n        \"\"\"Set after a call to :meth:`matches` to give a human-readable reason for why the match failed.\n        When used as a context manager the string will be printed as the reason for the\n        test failing.\"\"\"\n        return self._fail_reason\n\n    def _check_check(\n        self: AbstractRaises[BaseExcT_1],\n        exception: BaseExcT_1,\n    ) -> bool:\n        if self.check is None:\n            return True\n\n        if self.check(exception):\n            return True\n\n        check_repr = \"\" if self._nested else \" \" + repr_callable(self.check)\n        self._fail_reason = f\"check{check_repr} did not return True\"\n        return False\n\n    # TODO: harmonize with ExceptionInfo.match\n    def _check_match(self, e: BaseException) -> bool:\n        if self.match is None or re.search(\n            self.match,\n            stringified_exception := stringify_exception(\n                e, include_subexception_msg=False\n            ),\n        ):\n            return True\n\n        # if we're matching a group, make sure we're explicit to reduce confusion\n        # if they're trying to match an exception contained within the group\n        maybe_specify_type = (\n            f\" the `{_exception_type_name(type(e))}()`\"\n            if isinstance(e, BaseExceptionGroup)\n            else \"\"\n        )\n        if isinstance(self.rawmatch, str):\n            # TODO: it instructs to use `-v` to print leading text, but that doesn't work\n            # I also don't know if this is the proper entry point, or tool to use at all\n\n\n\n            diff = _diff_text(self.rawmatch, stringified_exception, dummy_highlighter)\n            self._fail_reason = (\"\\n\" if diff[0][0] == \"-\" else \"\") + \"\\n\".join(diff)\n            return False\n\n        # I don't love \"Regex\"+\"Input\" vs something like \"expected regex\"+\"exception message\"\n        # when they're similar it's not always obvious which is which\n        self._fail_reason = (\n            f\"Regex pattern did not match{maybe_specify_type}.\\n\"\n            f\" Regex: {_match_pattern(self.match)!r}\\n\"\n            f\" Input: {stringified_exception!r}\"\n        )\n        if _match_pattern(self.match) == stringified_exception:\n            self._fail_reason += \"\\n Did you mean to `re.escape()` the regex?\"\n        return False\n\n    @abstractmethod\n    def matches(\n        self: AbstractRaises[BaseExcT_1], exception: BaseException\n    ) -> TypeGuard[BaseExcT_1]:\n        \"\"\"Check if an exception matches the requirements of this AbstractRaises.\n        If it fails, :meth:`AbstractRaises.fail_reason` should be set.\n        \"\"\"\n\n\n@final\nclass RaisesExc(AbstractRaises[BaseExcT_co_default]):\n    \"\"\"\n    .. versionadded:: 8.4\n\n\n    This is the class constructed when calling :func:`pytest.raises`, but may be used\n    directly as a helper class with :class:`RaisesGroup` when you want to specify\n    requirements on sub-exceptions.\n\n    You don't need this if you only want to specify the type, since :class:`RaisesGroup`\n    accepts ``type[BaseException]``.\n\n    :param type[BaseException] | tuple[type[BaseException]] | None expected_exception:\n        The expected type, or one of several possible types.\n        May be ``None`` in order to only make use of ``match`` and/or ``check``\n\n        The type is checked with :func:`isinstance`, and does not need to be an exact match.\n        If that is wanted you can use the ``check`` parameter.\n\n    :kwparam str | Pattern[str] match:\n        A regex to match.\n\n    :kwparam Callable[[BaseException], bool] check:\n        If specified, a callable that will be called with the exception as a parameter\n        after checking the type and the match regex if specified.\n        If it returns ``True`` it will be considered a match, if not it will\n        be considered a failed match.\n\n    :meth:`RaisesExc.matches` can also be used standalone to check individual exceptions.\n\n    Examples::\n\n        with RaisesGroup(RaisesExc(ValueError, match=\"string\"))\n            ...\n        with RaisesGroup(RaisesExc(check=lambda x: x.args == (3, \"hello\"))):\n            ...\n        with RaisesGroup(RaisesExc(check=lambda x: type(x) is ValueError)):\n            ...\n    \"\"\"\n\n    # Trio bundled hypothesis monkeypatching, we will probably instead assume that\n    # hypothesis will handle that in their pytest plugin by the time this is released.\n    # Alternatively we could add a version of get_pretty_function_description ourselves\n    # https://github.com/HypothesisWorks/hypothesis/blob/8ced2f59f5c7bea3344e35d2d53e1f8f8eb9fcd8/hypothesis-python/src/hypothesis/internal/reflection.py#L439\n\n    # At least one of the three parameters must be passed.\n    @overload\n    def __init__(\n        self,\n        expected_exception: (\n            type[BaseExcT_co_default] | tuple[type[BaseExcT_co_default], ...]\n        ),\n        /,\n        *,\n        match: str | Pattern[str] | None = ...,\n        check: Callable[[BaseExcT_co_default], bool] | None = ...,\n    ) -> None: ...\n\n    @overload\n    def __init__(\n        self: RaisesExc[BaseException],  # Give E a value.\n        /,\n        *,\n        match: str | Pattern[str] | None,\n        # If exception_type is not provided, check() must do any typechecks itself.\n        check: Callable[[BaseException], bool] | None = ...,\n    ) -> None: ...\n\n    @overload\n    def __init__(self, /, *, check: Callable[[BaseException], bool]) -> None: ...\n\n    def __init__(\n        self,\n        expected_exception: (\n            type[BaseExcT_co_default] | tuple[type[BaseExcT_co_default], ...] | None\n        ) = None,\n        /,\n        *,\n        match: str | Pattern[str] | None = None,\n        check: Callable[[BaseExcT_co_default], bool] | None = None,\n    ):\n        super().__init__(match=match, check=check)\n        if isinstance(expected_exception, tuple):\n            expected_exceptions = expected_exception\n        elif expected_exception is None:\n            expected_exceptions = ()\n        else:\n            expected_exceptions = (expected_exception,)\n\n        if (expected_exceptions == ()) and match is None and check is None:\n            raise ValueError(\"You must specify at least one parameter to match on.\")\n\n        self.expected_exceptions = tuple(\n            self._parse_exc(e, expected=\"a BaseException type\")\n            for e in expected_exceptions\n        )\n\n        self._just_propagate = False\n\n    def matches(\n        self,\n        exception: BaseException | None,\n    ) -> TypeGuard[BaseExcT_co_default]:\n        \"\"\"Check if an exception matches the requirements of this :class:`RaisesExc`.\n        If it fails, :attr:`RaisesExc.fail_reason` will be set.\n\n        Examples::\n\n            assert RaisesExc(ValueError).matches(my_exception):\n            # is equivalent to\n            assert isinstance(my_exception, ValueError)\n\n            # this can be useful when checking e.g. the ``__cause__`` of an exception.\n            with pytest.raises(ValueError) as excinfo:\n                ...\n            assert RaisesExc(SyntaxError, match=\"foo\").matches(excinfo.value.__cause__)\n            # above line is equivalent to\n            assert isinstance(excinfo.value.__cause__, SyntaxError)\n            assert re.search(\"foo\", str(excinfo.value.__cause__)\n\n        \"\"\"\n        self._just_propagate = False\n        if exception is None:\n            self._fail_reason = \"exception is None\"\n            return False\n        if not self._check_type(exception):\n            self._just_propagate = True\n            return False\n\n        if not self._check_match(exception):\n            return False\n\n        return self._check_check(exception)\n\n    def __repr__(self) -> str:\n        parameters = []\n        if self.expected_exceptions:\n            parameters.append(_exception_type_name(self.expected_exceptions))\n        if self.match is not None:\n            # If no flags were specified, discard the redundant re.compile() here.\n            parameters.append(\n                f\"match={_match_pattern(self.match)!r}\",\n            )\n        if self.check is not None:\n            parameters.append(f\"check={repr_callable(self.check)}\")\n        return f\"RaisesExc({', '.join(parameters)})\"\n\n    def _check_type(self, exception: BaseException) -> TypeGuard[BaseExcT_co_default]:\n        self._fail_reason = _check_raw_type(self.expected_exceptions, exception)\n        return self._fail_reason is None\n\n    def __enter__(self) -> ExceptionInfo[BaseExcT_co_default]:\n        self.excinfo: ExceptionInfo[BaseExcT_co_default] = ExceptionInfo.for_later()\n        return self.excinfo\n\n    # TODO: move common code into superclass\n    def __exit__(\n        self,\n        exc_type: type[BaseException] | None,\n        exc_val: BaseException | None,\n        exc_tb: types.TracebackType | None,\n    ) -> bool:\n        __tracebackhide__ = True\n        if exc_type is None:\n            if not self.expected_exceptions:\n                fail(\"DID NOT RAISE any exception\")\n            if len(self.expected_exceptions) > 1:\n                fail(f\"DID NOT RAISE any of {self.expected_exceptions!r}\")\n\n            fail(f\"DID NOT RAISE {self.expected_exceptions[0]!r}\")\n\n        assert self.excinfo is not None, (\n            \"Internal error - should have been constructed in __enter__\"\n        )\n\n        if not self.matches(exc_val):\n            if self._just_propagate:\n                return False\n            raise AssertionError(self._fail_reason)\n\n        # Cast to narrow the exception type now that it's verified....\n        # even though the TypeGuard in self.matches should be narrowing\n        exc_info = cast(\n            \"tuple[type[BaseExcT_co_default], BaseExcT_co_default, types.TracebackType]\",\n            (exc_type, exc_val, exc_tb),\n        )\n        self.excinfo.fill_unfilled(exc_info)\n        return True\n\n\n@final\nclass RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):\n    \"\"\"\n    .. versionadded:: 8.4\n\n    Contextmanager for checking for an expected :exc:`ExceptionGroup`.\n    This works similar to :func:`pytest.raises`, but allows for specifying the structure of an :exc:`ExceptionGroup`.\n    :meth:`ExceptionInfo.group_contains` also tries to handle exception groups,\n    but it is very bad at checking that you *didn't* get unexpected exceptions.\n\n    The catching behaviour differs from :ref:`except* <except_star>`, being much\n    stricter about the structure by default.\n    By using ``allow_unwrapped=True`` and ``flatten_subgroups=True`` you can match\n    :ref:`except* <except_star>` fully when expecting a single exception.\n\n    :param args:\n        Any number of exception types, :class:`RaisesGroup` or :class:`RaisesExc`\n        to specify the exceptions contained in this exception.\n        All specified exceptions must be present in the raised group, *and no others*.\n\n        If you expect a variable number of exceptions you need to use\n        :func:`pytest.raises(ExceptionGroup) <pytest.raises>` and manually check\n        the contained exceptions. Consider making use of :meth:`RaisesExc.matches`.\n\n        It does not care about the order of the exceptions, so\n        ``RaisesGroup(ValueError, TypeError)``\n        is equivalent to\n        ``RaisesGroup(TypeError, ValueError)``.\n    :kwparam str | re.Pattern[str] | None match:\n        If specified, a string containing a regular expression,\n        or a regular expression object, that is tested against the string\n        representation of the exception group and its :pep:`678` `__notes__`\n        using :func:`re.search`.\n\n        To match a literal string that may contain :ref:`special characters\n        <re-syntax>`, the pattern can first be escaped with :func:`re.escape`.\n\n        Note that \" (5 subgroups)\" will be stripped from the ``repr`` before matching.\n    :kwparam Callable[[E], bool] check:\n        If specified, a callable that will be called with the group as a parameter\n        after successfully matching the expected exceptions. If it returns ``True``\n        it will be considered a match, if not it will be considered a failed match.\n    :kwparam bool allow_unwrapped:\n        If expecting a single exception or :class:`RaisesExc` it will match even\n        if the exception is not inside an exceptiongroup.\n\n        Using this together with ``match``, ``check`` or expecting multiple exceptions\n        will raise an error.\n    :kwparam bool flatten_subgroups:\n        \"flatten\" any groups inside the raised exception group, extracting all exceptions\n        inside any nested groups, before matching. Without this it expects you to\n        fully specify the nesting structure by passing :class:`RaisesGroup` as expected\n        parameter.\n\n    Examples::\n\n        with RaisesGroup(ValueError):\n            raise ExceptionGroup(\"\", (ValueError(),))\n        # match\n        with RaisesGroup(\n            ValueError,\n            ValueError,\n            RaisesExc(TypeError, match=\"^expected int$\"),\n            match=\"^my group$\",\n        ):\n            raise ExceptionGroup(\n                \"my group\",\n                [\n                    ValueError(),\n                    TypeError(\"expected int\"),\n                    ValueError(),\n                ],\n            )\n        # check\n        with RaisesGroup(\n            KeyboardInterrupt,\n            match=\"^hello$\",\n            check=lambda x: isinstance(x.__cause__, ValueError),\n        ):\n            raise BaseExceptionGroup(\"hello\", [KeyboardInterrupt()]) from ValueError\n        # nested groups\n        with RaisesGroup(RaisesGroup(ValueError)):\n            raise ExceptionGroup(\"\", (ExceptionGroup(\"\", (ValueError(),)),))\n\n        # flatten_subgroups\n        with RaisesGroup(ValueError, flatten_subgroups=True):\n            raise ExceptionGroup(\"\", (ExceptionGroup(\"\", (ValueError(),)),))\n\n        # allow_unwrapped\n        with RaisesGroup(ValueError, allow_unwrapped=True):\n            raise ValueError\n\n\n    :meth:`RaisesGroup.matches` can also be used directly to check a standalone exception group.\n\n\n    The matching algorithm is greedy, which means cases such as this may fail::\n\n        with RaisesGroup(ValueError, RaisesExc(ValueError, match=\"hello\")):\n            raise ExceptionGroup(\"\", (ValueError(\"hello\"), ValueError(\"goodbye\")))\n\n    even though it generally does not care about the order of the exceptions in the group.\n    To avoid the above you should specify the first :exc:`ValueError` with a :class:`RaisesExc` as well.\n\n    .. note::\n        When raised exceptions don't match the expected ones, you'll get a detailed error\n        message explaining why. This includes ``repr(check)`` if set, which in Python can be\n        overly verbose, showing memory locations etc etc.\n\n        If installed and imported (in e.g. ``conftest.py``), the ``hypothesis`` library will\n        monkeypatch this output to provide shorter & more readable repr's.\n    \"\"\"\n\n    # allow_unwrapped=True requires: singular exception, exception not being\n    # RaisesGroup instance, match is None, check is None\n    @overload\n    def __init__(\n        self,\n        expected_exception: type[BaseExcT_co] | RaisesExc[BaseExcT_co],\n        /,\n        *,\n        allow_unwrapped: Literal[True],\n        flatten_subgroups: bool = False,\n    ) -> None: ...\n\n    # flatten_subgroups = True also requires no nested RaisesGroup\n    @overload\n    def __init__(\n        self,\n        expected_exception: type[BaseExcT_co] | RaisesExc[BaseExcT_co],\n        /,\n        *other_exceptions: type[BaseExcT_co] | RaisesExc[BaseExcT_co],\n        flatten_subgroups: Literal[True],\n        match: str | Pattern[str] | None = None,\n        check: Callable[[BaseExceptionGroup[BaseExcT_co]], bool] | None = None,\n    ) -> None: ...\n\n    # simplify the typevars if possible (the following 3 are equivalent but go simpler->complicated)\n    # ... the first handles RaisesGroup[ValueError], the second RaisesGroup[ExceptionGroup[ValueError]],\n    #     the third RaisesGroup[ValueError | ExceptionGroup[ValueError]].\n    # ... otherwise, we will get results like RaisesGroup[ValueError | ExceptionGroup[Never]] (I think)\n    #     (technically correct but misleading)\n    @overload\n    def __init__(\n        self: RaisesGroup[ExcT_1],\n        expected_exception: type[ExcT_1] | RaisesExc[ExcT_1],\n        /,\n        *other_exceptions: type[ExcT_1] | RaisesExc[ExcT_1],\n        match: str | Pattern[str] | None = None,\n        check: Callable[[ExceptionGroup[ExcT_1]], bool] | None = None,\n    ) -> None: ...\n\n    @overload\n    def __init__(\n        self: RaisesGroup[ExceptionGroup[ExcT_2]],\n        expected_exception: RaisesGroup[ExcT_2],\n        /,\n        *other_exceptions: RaisesGroup[ExcT_2],\n        match: str | Pattern[str] | None = None,\n        check: Callable[[ExceptionGroup[ExceptionGroup[ExcT_2]]], bool] | None = None,\n    ) -> None: ...\n\n    @overload\n    def __init__(\n        self: RaisesGroup[ExcT_1 | ExceptionGroup[ExcT_2]],\n        expected_exception: type[ExcT_1] | RaisesExc[ExcT_1] | RaisesGroup[ExcT_2],\n        /,\n        *other_exceptions: type[ExcT_1] | RaisesExc[ExcT_1] | RaisesGroup[ExcT_2],\n        match: str | Pattern[str] | None = None,\n        check: (\n            Callable[[ExceptionGroup[ExcT_1 | ExceptionGroup[ExcT_2]]], bool] | None\n        ) = None,\n    ) -> None: ...\n\n    # same as the above 3 but handling BaseException\n    @overload\n    def __init__(\n        self: RaisesGroup[BaseExcT_1],\n        expected_exception: type[BaseExcT_1] | RaisesExc[BaseExcT_1],\n        /,\n        *other_exceptions: type[BaseExcT_1] | RaisesExc[BaseExcT_1],\n        match: str | Pattern[str] | None = None,\n        check: Callable[[BaseExceptionGroup[BaseExcT_1]], bool] | None = None,\n    ) -> None: ...\n\n    @overload\n    def __init__(\n        self: RaisesGroup[BaseExceptionGroup[BaseExcT_2]],\n        expected_exception: RaisesGroup[BaseExcT_2],\n        /,\n        *other_exceptions: RaisesGroup[BaseExcT_2],\n        match: str | Pattern[str] | None = None,\n        check: (\n            Callable[[BaseExceptionGroup[BaseExceptionGroup[BaseExcT_2]]], bool] | None\n        ) = None,\n    ) -> None: ...\n\n    @overload\n    def __init__(\n        self: RaisesGroup[BaseExcT_1 | BaseExceptionGroup[BaseExcT_2]],\n        expected_exception: type[BaseExcT_1]\n        | RaisesExc[BaseExcT_1]\n        | RaisesGroup[BaseExcT_2],\n        /,\n        *other_exceptions: type[BaseExcT_1]\n        | RaisesExc[BaseExcT_1]\n        | RaisesGroup[BaseExcT_2],\n        match: str | Pattern[str] | None = None,\n        check: (\n            Callable[\n                [BaseExceptionGroup[BaseExcT_1 | BaseExceptionGroup[BaseExcT_2]]],\n                bool,\n            ]\n            | None\n        ) = None,\n    ) -> None: ...\n\n    def __init__(\n        self: RaisesGroup[ExcT_1 | BaseExcT_1 | BaseExceptionGroup[BaseExcT_2]],\n        expected_exception: type[BaseExcT_1]\n        | RaisesExc[BaseExcT_1]\n        | RaisesGroup[BaseExcT_2],\n        /,\n        *other_exceptions: type[BaseExcT_1]\n        | RaisesExc[BaseExcT_1]\n        | RaisesGroup[BaseExcT_2],\n        allow_unwrapped: bool = False,\n        flatten_subgroups: bool = False,\n        match: str | Pattern[str] | None = None,\n        check: (\n            Callable[[BaseExceptionGroup[BaseExcT_1]], bool]\n            | Callable[[ExceptionGroup[ExcT_1]], bool]\n            | None\n        ) = None,\n    ):\n        # The type hint on the `self` and `check` parameters uses different formats\n        # that are *very* hard to reconcile while adhering to the overloads, so we cast\n        # it to avoid an error when passing it to super().__init__\n        check = cast(\n            \"Callable[[BaseExceptionGroup[ExcT_1|BaseExcT_1|BaseExceptionGroup[BaseExcT_2]]], bool]\",\n            check,\n        )\n        super().__init__(match=match, check=check)\n        self.allow_unwrapped = allow_unwrapped\n        self.flatten_subgroups: bool = flatten_subgroups\n        self.is_baseexception = False\n\n        if allow_unwrapped and other_exceptions:\n            raise ValueError(\n                \"You cannot specify multiple exceptions with `allow_unwrapped=True.`\"\n                \" If you want to match one of multiple possible exceptions you should\"\n                \" use a `RaisesExc`.\"\n                \" E.g. `RaisesExc(check=lambda e: isinstance(e, (...)))`\",\n            )\n        if allow_unwrapped and isinstance(expected_exception, RaisesGroup):\n            raise ValueError(\n                \"`allow_unwrapped=True` has no effect when expecting a `RaisesGroup`.\"\n                \" You might want it in the expected `RaisesGroup`, or\"\n                \" `flatten_subgroups=True` if you don't care about the structure.\",\n            )\n        if allow_unwrapped and (match is not None or check is not None):\n            raise ValueError(\n                \"`allow_unwrapped=True` bypasses the `match` and `check` parameters\"\n                \" if the exception is unwrapped. If you intended to match/check the\"\n                \" exception you should use a `RaisesExc` object. If you want to match/check\"\n                \" the exceptiongroup when the exception *is* wrapped you need to\"\n                \" do e.g. `if isinstance(exc.value, ExceptionGroup):\"\n                \" assert RaisesGroup(...).matches(exc.value)` afterwards.\",\n            )\n\n        self.expected_exceptions: tuple[\n            type[BaseExcT_co] | RaisesExc[BaseExcT_co] | RaisesGroup[BaseException], ...\n        ] = tuple(\n            self._parse_excgroup(e, \"a BaseException type, RaisesExc, or RaisesGroup\")\n            for e in (\n                expected_exception,\n                *other_exceptions,\n            )\n        )\n\n    def _parse_excgroup(\n        self,\n        exc: (\n            type[BaseExcT_co]\n            | types.GenericAlias\n            | RaisesExc[BaseExcT_1]\n            | RaisesGroup[BaseExcT_2]\n        ),\n        expected: str,\n    ) -> type[BaseExcT_co] | RaisesExc[BaseExcT_1] | RaisesGroup[BaseExcT_2]:\n        # verify exception type and set `self.is_baseexception`\n        if isinstance(exc, RaisesGroup):\n            if self.flatten_subgroups:\n                raise ValueError(\n                    \"You cannot specify a nested structure inside a RaisesGroup with\"\n                    \" `flatten_subgroups=True`. The parameter will flatten subgroups\"\n                    \" in the raised exceptiongroup before matching, which would never\"\n                    \" match a nested structure.\",\n                )\n            self.is_baseexception |= exc.is_baseexception\n            exc._nested = True\n            return exc\n        elif isinstance(exc, RaisesExc):\n            self.is_baseexception |= exc.is_baseexception\n            exc._nested = True\n            return exc\n        elif isinstance(exc, tuple):\n            raise TypeError(\n                f\"expected exception must be {expected}, not {type(exc).__name__!r}.\\n\"\n                \"RaisesGroup does not support tuples of exception types when expecting one of \"\n                \"several possible exception types like RaisesExc.\\n\"\n                \"If you meant to expect a group with multiple exceptions, list them as separate arguments.\"\n            )\n        else:\n            return super()._parse_exc(exc, expected)\n\n    @overload\n    def __enter__(\n        self: RaisesGroup[ExcT_1],\n    ) -> ExceptionInfo[ExceptionGroup[ExcT_1]]: ...\n    @overload\n    def __enter__(\n        self: RaisesGroup[BaseExcT_1],\n    ) -> ExceptionInfo[BaseExceptionGroup[BaseExcT_1]]: ...\n\n    def __enter__(self) -> ExceptionInfo[BaseExceptionGroup[BaseException]]:\n        self.excinfo: ExceptionInfo[BaseExceptionGroup[BaseExcT_co]] = (\n            ExceptionInfo.for_later()\n        )\n        return self.excinfo\n\n    def __repr__(self) -> str:\n        reqs = [\n            e.__name__ if isinstance(e, type) else repr(e)\n            for e in self.expected_exceptions\n        ]\n        if self.allow_unwrapped:\n            reqs.append(f\"allow_unwrapped={self.allow_unwrapped}\")\n        if self.flatten_subgroups:\n            reqs.append(f\"flatten_subgroups={self.flatten_subgroups}\")\n        if self.match is not None:\n            # If no flags were specified, discard the redundant re.compile() here.\n            reqs.append(f\"match={_match_pattern(self.match)!r}\")\n        if self.check is not None:\n            reqs.append(f\"check={repr_callable(self.check)}\")\n        return f\"RaisesGroup({', '.join(reqs)})\"\n\n    def _unroll_exceptions(\n        self,\n        exceptions: Sequence[BaseException],\n    ) -> Sequence[BaseException]:\n        \"\"\"Used if `flatten_subgroups=True`.\"\"\"\n        res: list[BaseException] = []\n        for exc in exceptions:\n            if isinstance(exc, BaseExceptionGroup):\n                res.extend(self._unroll_exceptions(exc.exceptions))\n\n            else:\n                res.append(exc)\n        return res\n\n    @overload\n    def matches(\n        self: RaisesGroup[ExcT_1],\n        exception: BaseException | None,\n    ) -> TypeGuard[ExceptionGroup[ExcT_1]]: ...\n    @overload\n    def matches(\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_6"
+}
+```
+
+## 13. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_8",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"wc -l src/_pytest/raises.py && grep -nE 'def unescape|def _check_expected|def _check_exceptions|def _repr|def matches|TODO|NotImplemented|pass\"'$'\"' src/_pytest/raises.py && nl -ba src/_pytest/raises.py | sed -n '300,520p' && nl -ba src/_pytest/raises.py | sed -n '820,1160p'\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 14. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"wc -l src/_pytest/raises.py && grep -nE 'def unescape|def _check_expected|def _check_exceptions|def _repr|def matches|TODO|NotImplemented|pass\"'$'\"' src/_pytest/raises.py && nl -ba src/_pytest/raises.py | sed -n '300,520p' && nl -ba src/_pytest/raises.py | sed -n '820,1160p'\""
+  },
+  "call_ref": "item_8"
+}
+```
+
+## 15. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "1486 src/_pytest/raises.py\n495:    # TODO: harmonize with ExceptionInfo.match\n513:            # TODO: it instructs to use `-v` to print leading text, but that doesn't work\n534:    def matches(\n642:    def matches(\n698:    # TODO: move common code into superclass\n1095:    def matches(\n1100:    def matches(\n1105:    def matches(\n1256:    def _check_exceptions(\n1262:    def _check_exceptions(\n   300\t        del excinfo\n   301\t\n   302\t\n   303\t# note: RaisesExc/RaisesGroup uses fail() internally, so this alias\n   304\t#  indicates (to [internal] plugins?) that `pytest.raises` will\n   305\t#  raise `_pytest.outcomes.Failed`, where\n   306\t#  `outcomes.Failed is outcomes.fail.Exception is raises.Exception`\n   307\t# note: this is *not* the same as `_pytest.main.Failed`\n   308\t# note: mypy does not recognize this attribute, and it's not possible\n   309\t#  to use a protocol/decorator like the others in outcomes due to\n   310\t#  https://github.com/python/mypy/issues/18715\n   311\traises.Exception = fail.Exception  # type: ignore[attr-defined]\n   312\t\n   313\t\n   314\tdef _match_pattern(match: Pattern[str]) -> str | Pattern[str]:\n   315\t    \"\"\"Helper function to remove redundant `re.compile` calls when printing regex\"\"\"\n   316\t    return match.pattern if match.flags == _REGEX_NO_FLAGS else match\n   317\t\n   318\t\n   319\tdef repr_callable(fun: Callable[[BaseExcT_1], bool]) -> str:\n   320\t    \"\"\"Get the repr of a ``check`` parameter.\n   321\t\n   322\t    Split out so it can be monkeypatched (e.g. by hypothesis)\n   323\t    \"\"\"\n   324\t    return repr(fun)\n   325\t\n   326\t\n   327\tdef backquote(s: str) -> str:\n   328\t    return \"`\" + s + \"`\"\n   329\t\n   330\t\n   331\tdef _exception_type_name(\n   332\t    e: type[BaseException] | tuple[type[BaseException], ...],\n   333\t) -> str:\n   334\t    if isinstance(e, type):\n   335\t        return e.__name__\n   336\t    if len(e) == 1:\n   337\t        return e[0].__name__\n   338\t    return \"(\" + \", \".join(ee.__name__ for ee in e) + \")\"\n   339\t\n   340\t\n   341\tdef _check_raw_type(\n   342\t    expected_type: type[BaseException] | tuple[type[BaseException], ...] | None,\n   343\t    exception: BaseException,\n   344\t) -> str | None:\n   345\t    if expected_type is None or expected_type == ():\n   346\t        return None\n   347\t\n   348\t    if not isinstance(\n   349\t        exception,\n   350\t        expected_type,\n   351\t    ):\n   352\t        actual_type_str = backquote(_exception_type_name(type(exception)) + \"()\")\n   353\t        expected_type_str = backquote(_exception_type_name(expected_type))\n   354\t        if (\n   355\t            isinstance(exception, BaseExceptionGroup)\n   356\t            and isinstance(expected_type, type)\n   357\t            and not issubclass(expected_type, BaseExceptionGroup)\n   358\t        ):\n   359\t            return f\"Unexpected nested {actual_type_str}, expected {expected_type_str}\"\n   360\t        return f\"{actual_type_str} is not an instance of {expected_type_str}\"\n   361\t    return None\n   362\t\n   363\t\n   364\tdef is_fully_escaped(s: str) -> bool:\n   365\t    # we know we won't compile with re.VERBOSE, so whitespace doesn't need to be escaped\n   366\t    metacharacters = \"{}()+.*?^$[]\"\n   367\t    return not any(\n   368\t        c in metacharacters and (i == 0 or s[i - 1] != \"\\\\\") for (i, c) in enumerate(s)\n   369\t    )\n   370\t\n   371\t\n   372\t\n   373\t\n   374\t\n   375\t\n   376\t# These classes conceptually differ from ExceptionInfo in that ExceptionInfo is tied, and\n   377\t# constructed from, a particular exception - whereas these are constructed with expected\n   378\t# exceptions, and later allow matching towards particular exceptions.\n   379\t# But there's overlap in `ExceptionInfo.match` and `AbstractRaises._check_match`, as with\n   380\t# `AbstractRaises.matches` and `ExceptionInfo.errisinstance`+`ExceptionInfo.group_contains`.\n   381\t# The interaction between these classes should perhaps be improved.\n   382\tclass AbstractRaises(ABC, Generic[BaseExcT_co]):\n   383\t    \"\"\"ABC with common functionality shared between RaisesExc and RaisesGroup\"\"\"\n   384\t\n   385\t    def __init__(\n   386\t        self,\n   387\t        *,\n   388\t        match: str | Pattern[str] | None,\n   389\t        check: Callable[[BaseExcT_co], bool] | None,\n   390\t    ) -> None:\n   391\t        if isinstance(match, str):\n   392\t            # juggle error in order to avoid context to fail (necessary?)\n   393\t            re_error = None\n   394\t            try:\n   395\t                self.match: Pattern[str] | None = re.compile(match)\n   396\t            except re.error as e:\n   397\t                re_error = e\n   398\t            if re_error is not None:\n   399\t                fail(f\"Invalid regex pattern provided to 'match': {re_error}\")\n   400\t            if match == \"\":\n   401\t                warnings.warn(\n   402\t                    PytestWarning(\n   403\t                        \"matching against an empty string will *always* pass. If you want \"\n   404\t                        \"to check for an empty message you need to pass '^$'. If you don't \"\n   405\t                        \"want to match you should pass `None` or leave out the parameter.\"\n   406\t                    ),\n   407\t                    stacklevel=2,\n   408\t                )\n   409\t        else:\n   410\t            self.match = match\n   411\t\n   412\t        # check if this is a fully escaped regex and has ^$ to match fully\n   413\t        # in which case we can do a proper diff on error\n   414\t        self.rawmatch: str | None = None\n   415\t        if isinstance(match, str) or (\n   416\t            isinstance(match, Pattern) and match.flags == _REGEX_NO_FLAGS\n   417\t        ):\n   418\t            if isinstance(match, Pattern):\n   419\t                match = match.pattern\n   420\t            if (\n   421\t                match\n   422\t                and match[0] == \"^\"\n   423\t                and match[-1] == \"$\"\n   424\t                and is_fully_escaped(match[1:-1])\n   425\t            ):\n   426\t                self.rawmatch = unescape(match[1:-1])\n   427\t\n   428\t        self.check = check\n   429\t        self._fail_reason: str | None = None\n   430\t\n   431\t        # used to suppress repeated printing of `repr(self.check)`\n   432\t        self._nested: bool = False\n   433\t\n   434\t        # set in self._parse_exc\n   435\t        self.is_baseexception = False\n   436\t\n   437\t    def _parse_exc(\n   438\t        self, exc: type[BaseExcT_1] | types.GenericAlias, expected: str\n   439\t    ) -> type[BaseExcT_1]:\n   440\t        if isinstance(exc, type) and issubclass(exc, BaseException):\n   441\t            if not issubclass(exc, Exception):\n   442\t                self.is_baseexception = True\n   443\t            return exc\n   444\t        # because RaisesGroup does not support variable number of exceptions there's\n   445\t        # still a use for RaisesExc(ExceptionGroup[Exception]).\n   446\t        origin_exc: type[BaseException] | None = get_origin(exc)\n   447\t        if origin_exc and issubclass(origin_exc, BaseExceptionGroup):\n   448\t            exc_type = get_args(exc)[0]\n   449\t            if (\n   450\t                issubclass(origin_exc, ExceptionGroup) and exc_type in (Exception, Any)\n   451\t            ) or (\n   452\t                issubclass(origin_exc, BaseExceptionGroup)\n   453\t                and exc_type in (BaseException, Any)\n   454\t            ):\n   455\t                if not issubclass(origin_exc, ExceptionGroup):\n   456\t                    self.is_baseexception = True\n   457\t                return cast(type[BaseExcT_1], origin_exc)\n   458\t            else:\n   459\t                raise ValueError(\n   460\t                    f\"Only `ExceptionGroup[Exception]` or `BaseExceptionGroup[BaseException]` \"\n   461\t                    f\"are accepted as generic types but got `{exc}`. \"\n   462\t                    f\"As `raises` will catch all instances of the specified group regardless of the \"\n   463\t                    f\"generic argument specific nested exceptions has to be checked \"\n   464\t                    f\"with `RaisesGroup`.\"\n   465\t                )\n   466\t        # unclear if the Type/ValueError distinction is even helpful here\n   467\t        msg = f\"expected exception must be {expected}, not \"\n   468\t        if isinstance(exc, type):  # type: ignore[unreachable]\n   469\t            raise ValueError(msg + f\"{exc.__name__!r}\")\n   470\t        if isinstance(exc, BaseException):  # type: ignore[unreachable]\n   471\t            raise TypeError(msg + f\"an exception instance ({type(exc).__name__})\")\n   472\t        raise TypeError(msg + repr(type(exc).__name__))\n   473\t\n   474\t    @property\n   475\t    def fail_reason(self) -> str | None:\n   476\t        \"\"\"Set after a call to :meth:`matches` to give a human-readable reason for why the match failed.\n   477\t        When used as a context manager the string will be printed as the reason for the\n   478\t        test failing.\"\"\"\n   479\t        return self._fail_reason\n   480\t\n   481\t    def _check_check(\n   482\t        self: AbstractRaises[BaseExcT_1],\n   483\t        exception: BaseExcT_1,\n   484\t    ) -> bool:\n   485\t        if self.check is None:\n   486\t            return True\n   487\t\n   488\t        if self.check(exception):\n   489\t            return True\n   490\t\n   491\t        check_repr = \"\" if self._nested else \" \" + repr_callable(self.check)\n   492\t        self._fail_reason = f\"check{check_repr} did not return True\"\n   493\t        return False\n   494\t\n   495\t    # TODO: harmonize with ExceptionInfo.match\n   496\t    def _check_match(self, e: BaseException) -> bool:\n   497\t        if self.match is None or re.search(\n   498\t            self.match,\n   499\t            stringified_exception := stringify_exception(\n   500\t                e, include_subexception_msg=False\n   501\t            ),\n   502\t        ):\n   503\t            return True\n   504\t\n   505\t        # if we're matching a group, make sure we're explicit to reduce confusion\n   506\t        # if they're trying to match an exception contained within the group\n   507\t        maybe_specify_type = (\n   508\t            f\" the `{_exception_type_name(type(e))}()`\"\n   509\t            if isinstance(e, BaseExceptionGroup)\n   510\t            else \"\"\n   511\t        )\n   512\t        if isinstance(self.rawmatch, str):\n   513\t            # TODO: it instructs to use `-v` to print leading text, but that doesn't work\n   514\t            # I also don't know if this is the proper entry point, or tool to use at all\n   515\t\n   516\t\n   517\t\n   518\t            diff = _diff_text(self.rawmatch, stringified_exception, dummy_highlighter)\n   519\t            self._fail_reason = (\"\\n\" if diff[0][0] == \"-\" else \"\") + \"\\n\".join(diff)\n   520\t            return False\n   820\t\n   821\t        # allow_unwrapped\n   822\t        with RaisesGroup(ValueError, allow_unwrapped=True):\n   823\t            raise ValueError\n   824\t\n   825\t\n   826\t    :meth:`RaisesGroup.matches` can also be used directly to check a standalone exception group.\n   827\t\n   828\t\n   829\t    The matching algorithm is greedy, which means cases such as this may fail::\n   830\t\n   831\t        with RaisesGroup(ValueError, RaisesExc(ValueError, match=\"hello\")):\n   832\t            raise ExceptionGroup(\"\", (ValueError(\"hello\"), ValueError(\"goodbye\")))\n   833\t\n   834\t    even though it generally does not care about the order of the exceptions in the group.\n   835\t    To avoid the above you should specify the first :exc:`ValueError` with a :class:`RaisesExc` as well.\n   836\t\n   837\t    .. note::\n   838\t        When raised exceptions don't match the expected ones, you'll get a detailed error\n   839\t        message explaining why. This includes ``repr(check)`` if set, which in Python can be\n   840\t        overly verbose, showing memory locations etc etc.\n   841\t\n   842\t        If installed and imported (in e.g. ``conftest.py``), the ``hypothesis`` library will\n   843\t        monkeypatch this output to provide shorter & more readable repr's.\n   844\t    \"\"\"\n   845\t\n   846\t    # allow_unwrapped=True requires: singular exception, exception not being\n   847\t    # RaisesGroup instance, match is None, check is None\n   848\t    @overload\n   849\t    def __init__(\n   850\t        self,\n   851\t        expected_exception: type[BaseExcT_co] | RaisesExc[BaseExcT_co],\n   852\t        /,\n   853\t        *,\n   854\t        allow_unwrapped: Literal[True],\n   855\t        flatten_subgroups: bool = False,\n   856\t    ) -> None: ...\n   857\t\n   858\t    # flatten_subgroups = True also requires no nested RaisesGroup\n   859\t    @overload\n   860\t    def __init__(\n   861\t        self,\n   862\t        expected_exception: type[BaseExcT_co] | RaisesExc[BaseExcT_co],\n   863\t        /,\n   864\t        *other_exceptions: type[BaseExcT_co] | RaisesExc[BaseExcT_co],\n   865\t        flatten_subgroups: Literal[True],\n   866\t        match: str | Pattern[str] | None = None,\n   867\t        check: Callable[[BaseExceptionGroup[BaseExcT_co]], bool] | None = None,\n   868\t    ) -> None: ...\n   869\t\n   870\t    # simplify the typevars if possible (the following 3 are equivalent but go simpler->complicated)\n   871\t    # ... the first handles RaisesGroup[ValueError], the second RaisesGroup[ExceptionGroup[ValueError]],\n   872\t    #     the third RaisesGroup[ValueError | ExceptionGroup[ValueError]].\n   873\t    # ... otherwise, we will get results like RaisesGroup[ValueError | ExceptionGroup[Never]] (I think)\n   874\t    #     (technically correct but misleading)\n   875\t    @overload\n   876\t    def __init__(\n   877\t        self: RaisesGroup[ExcT_1],\n   878\t        expected_exception: type[ExcT_1] | RaisesExc[ExcT_1],\n   879\t        /,\n   880\t        *other_exceptions: type[ExcT_1] | RaisesExc[ExcT_1],\n   881\t        match: str | Pattern[str] | None = None,\n   882\t        check: Callable[[ExceptionGroup[ExcT_1]], bool] | None = None,\n   883\t    ) -> None: ...\n   884\t\n   885\t    @overload\n   886\t    def __init__(\n   887\t        self: RaisesGroup[ExceptionGroup[ExcT_2]],\n   888\t        expected_exception: RaisesGroup[ExcT_2],\n   889\t        /,\n   890\t        *other_exceptions: RaisesGroup[ExcT_2],\n   891\t        match: str | Pattern[str] | None = None,\n   892\t        check: Callable[[ExceptionGroup[ExceptionGroup[ExcT_2]]], bool] | None = None,\n   893\t    ) -> None: ...\n   894\t\n   895\t    @overload\n   896\t    def __init__(\n   897\t        self: RaisesGroup[ExcT_1 | ExceptionGroup[ExcT_2]],\n   898\t        expected_exception: type[ExcT_1] | RaisesExc[ExcT_1] | RaisesGroup[ExcT_2],\n   899\t        /,\n   900\t        *other_exceptions: type[ExcT_1] | RaisesExc[ExcT_1] | RaisesGroup[ExcT_2],\n   901\t        match: str | Pattern[str] | None = None,\n   902\t        check: (\n   903\t            Callable[[ExceptionGroup[ExcT_1 | ExceptionGroup[ExcT_2]]], bool] | None\n   904\t        ) = None,\n   905\t    ) -> None: ...\n   906\t\n   907\t    # same as the above 3 but handling BaseException\n   908\t    @overload\n   909\t    def __init__(\n   910\t        self: RaisesGroup[BaseExcT_1],\n   911\t        expected_exception: type[BaseExcT_1] | RaisesExc[BaseExcT_1],\n   912\t        /,\n   913\t        *other_exceptions: type[BaseExcT_1] | RaisesExc[BaseExcT_1],\n   914\t        match: str | Pattern[str] | None = None,\n   915\t        check: Callable[[BaseExceptionGroup[BaseExcT_1]], bool] | None = None,\n   916\t    ) -> None: ...\n   917\t\n   918\t    @overload\n   919\t    def __init__(\n   920\t        self: RaisesGroup[BaseExceptionGroup[BaseExcT_2]],\n   921\t        expected_exception: RaisesGroup[BaseExcT_2],\n   922\t        /,\n   923\t        *other_exceptions: RaisesGroup[BaseExcT_2],\n   924\t        match: str | Pattern[str] | None = None,\n   925\t        check: (\n   926\t            Callable[[BaseExceptionGroup[BaseExceptionGroup[BaseExcT_2]]], bool] | None\n   927\t        ) = None,\n   928\t    ) -> None: ...\n   929\t\n   930\t    @overload\n   931\t    def __init__(\n   932\t        self: RaisesGroup[BaseExcT_1 | BaseExceptionGroup[BaseExcT_2]],\n   933\t        expected_exception: type[BaseExcT_1]\n   934\t        | RaisesExc[BaseExcT_1]\n   935\t        | RaisesGroup[BaseExcT_2],\n   936\t        /,\n   937\t        *other_exceptions: type[BaseExcT_1]\n   938\t        | RaisesExc[BaseExcT_1]\n   939\t        | RaisesGroup[BaseExcT_2],\n   940\t        match: str | Pattern[str] | None = None,\n   941\t        check: (\n   942\t            Callable[\n   943\t                [BaseExceptionGroup[BaseExcT_1 | BaseExceptionGroup[BaseExcT_2]]],\n   944\t                bool,\n   945\t            ]\n   946\t            | None\n   947\t        ) = None,\n   948\t    ) -> None: ...\n   949\t\n   950\t    def __init__(\n   951\t        self: RaisesGroup[ExcT_1 | BaseExcT_1 | BaseExceptionGroup[BaseExcT_2]],\n   952\t        expected_exception: type[BaseExcT_1]\n   953\t        | RaisesExc[BaseExcT_1]\n   954\t        | RaisesGroup[BaseExcT_2],\n   955\t        /,\n   956\t        *other_exceptions: type[BaseExcT_1]\n   957\t        | RaisesExc[BaseExcT_1]\n   958\t        | RaisesGroup[BaseExcT_2],\n   959\t        allow_unwrapped: bool = False,\n   960\t        flatten_subgroups: bool = False,\n   961\t        match: str | Pattern[str] | None = None,\n   962\t        check: (\n   963\t            Callable[[BaseExceptionGroup[BaseExcT_1]], bool]\n   964\t            | Callable[[ExceptionGroup[ExcT_1]], bool]\n   965\t            | None\n   966\t        ) = None,\n   967\t    ):\n   968\t        # The type hint on the `self` and `check` parameters uses different formats\n   969\t        # that are *very* hard to reconcile while adhering to the overloads, so we cast\n   970\t        # it to avoid an error when passing it to super().__init__\n   971\t        check = cast(\n   972\t            \"Callable[[BaseExceptionGroup[ExcT_1|BaseExcT_1|BaseExceptionGroup[BaseExcT_2]]], bool]\",\n   973\t            check,\n   974\t        )\n   975\t        super().__init__(match=match, check=check)\n   976\t        self.allow_unwrapped = allow_unwrapped\n   977\t        self.flatten_subgroups: bool = flatten_subgroups\n   978\t        self.is_baseexception = False\n   979\t\n   980\t        if allow_unwrapped and other_exceptions:\n   981\t            raise ValueError(\n   982\t                \"You cannot specify multiple exceptions with `allow_unwrapped=True.`\"\n   983\t                \" If you want to match one of multiple possible exceptions you should\"\n   984\t                \" use a `RaisesExc`.\"\n   985\t                \" E.g. `RaisesExc(check=lambda e: isinstance(e, (...)))`\",\n   986\t            )\n   987\t        if allow_unwrapped and isinstance(expected_exception, RaisesGroup):\n   988\t            raise ValueError(\n   989\t                \"`allow_unwrapped=True` has no effect when expecting a `RaisesGroup`.\"\n   990\t                \" You might want it in the expected `RaisesGroup`, or\"\n   991\t                \" `flatten_subgroups=True` if you don't care about the structure.\",\n   992\t            )\n   993\t        if allow_unwrapped and (match is not None or check is not None):\n   994\t            raise ValueError(\n   995\t                \"`allow_unwrapped=True` bypasses the `match` and `check` parameters\"\n   996\t                \" if the exception is unwrapped. If you intended to match/check the\"\n   997\t                \" exception you should use a `RaisesExc` object. If you want to match/check\"\n   998\t                \" the exceptiongroup when the exception *is* wrapped you need to\"\n   999\t                \" do e.g. `if isinstance(exc.value, ExceptionGroup):\"\n  1000\t                \" assert RaisesGroup(...).matches(exc.value)` afterwards.\",\n  1001\t            )\n  1002\t\n  1003\t        self.expected_exceptions: tuple[\n  1004\t            type[BaseExcT_co] | RaisesExc[BaseExcT_co] | RaisesGroup[BaseException], ...\n  1005\t        ] = tuple(\n  1006\t            self._parse_excgroup(e, \"a BaseException type, RaisesExc, or RaisesGroup\")\n  1007\t            for e in (\n  1008\t                expected_exception,\n  1009\t                *other_exceptions,\n  1010\t            )\n  1011\t        )\n  1012\t\n  1013\t    def _parse_excgroup(\n  1014\t        self,\n  1015\t        exc: (\n  1016\t            type[BaseExcT_co]\n  1017\t            | types.GenericAlias\n  1018\t            | RaisesExc[BaseExcT_1]\n  1019\t            | RaisesGroup[BaseExcT_2]\n  1020\t        ),\n  1021\t        expected: str,\n  1022\t    ) -> type[BaseExcT_co] | RaisesExc[BaseExcT_1] | RaisesGroup[BaseExcT_2]:\n  1023\t        # verify exception type and set `self.is_baseexception`\n  1024\t        if isinstance(exc, RaisesGroup):\n  1025\t            if self.flatten_subgroups:\n  1026\t                raise ValueError(\n  1027\t                    \"You cannot specify a nested structure inside a RaisesGroup with\"\n  1028\t                    \" `flatten_subgroups=True`. The parameter will flatten subgroups\"\n  1029\t                    \" in the raised exceptiongroup before matching, which would never\"\n  1030\t                    \" match a nested structure.\",\n  1031\t                )\n  1032\t            self.is_baseexception |= exc.is_baseexception\n  1033\t            exc._nested = True\n  1034\t            return exc\n  1035\t        elif isinstance(exc, RaisesExc):\n  1036\t            self.is_baseexception |= exc.is_baseexception\n  1037\t            exc._nested = True\n  1038\t            return exc\n  1039\t        elif isinstance(exc, tuple):\n  1040\t            raise TypeError(\n  1041\t                f\"expected exception must be {expected}, not {type(exc).__name__!r}.\\n\"\n  1042\t                \"RaisesGroup does not support tuples of exception types when expecting one of \"\n  1043\t                \"several possible exception types like RaisesExc.\\n\"\n  1044\t                \"If you meant to expect a group with multiple exceptions, list them as separate arguments.\"\n  1045\t            )\n  1046\t        else:\n  1047\t            return super()._parse_exc(exc, expected)\n  1048\t\n  1049\t    @overload\n  1050\t    def __enter__(\n  1051\t        self: RaisesGroup[ExcT_1],\n  1052\t    ) -> ExceptionInfo[ExceptionGroup[ExcT_1]]: ...\n  1053\t    @overload\n  1054\t    def __enter__(\n  1055\t        self: RaisesGroup[BaseExcT_1],\n  1056\t    ) -> ExceptionInfo[BaseExceptionGroup[BaseExcT_1]]: ...\n  1057\t\n  1058\t    def __enter__(self) -> ExceptionInfo[BaseExceptionGroup[BaseException]]:\n  1059\t        self.excinfo: ExceptionInfo[BaseExceptionGroup[BaseExcT_co]] = (\n  1060\t            ExceptionInfo.for_later()\n  1061\t        )\n  1062\t        return self.excinfo\n  1063\t\n  1064\t    def __repr__(self) -> str:\n  1065\t        reqs = [\n  1066\t            e.__name__ if isinstance(e, type) else repr(e)\n  1067\t            for e in self.expected_exceptions\n  1068\t        ]\n  1069\t        if self.allow_unwrapped:\n  1070\t            reqs.append(f\"allow_unwrapped={self.allow_unwrapped}\")\n  1071\t        if self.flatten_subgroups:\n  1072\t            reqs.append(f\"flatten_subgroups={self.flatten_subgroups}\")\n  1073\t        if self.match is not None:\n  1074\t            # If no flags were specified, discard the redundant re.compile() here.\n  1075\t            reqs.append(f\"match={_match_pattern(self.match)!r}\")\n  1076\t        if self.check is not None:\n  1077\t            reqs.append(f\"check={repr_callable(self.check)}\")\n  1078\t        return f\"RaisesGroup({', '.join(reqs)})\"\n  1079\t\n  1080\t    def _unroll_exceptions(\n  1081\t        self,\n  1082\t        exceptions: Sequence[BaseException],\n  1083\t    ) -> Sequence[BaseException]:\n  1084\t        \"\"\"Used if `flatten_subgroups=True`.\"\"\"\n  1085\t        res: list[BaseException] = []\n  1086\t        for exc in exceptions:\n  1087\t            if isinstance(exc, BaseExceptionGroup):\n  1088\t                res.extend(self._unroll_exceptions(exc.exceptions))\n  1089\t\n  1090\t            else:\n  1091\t                res.append(exc)\n  1092\t        return res\n  1093\t\n  1094\t    @overload\n  1095\t    def matches(\n  1096\t        self: RaisesGroup[ExcT_1],\n  1097\t        exception: BaseException | None,\n  1098\t    ) -> TypeGuard[ExceptionGroup[ExcT_1]]: ...\n  1099\t    @overload\n  1100\t    def matches(\n  1101\t        self: RaisesGroup[BaseExcT_1],\n  1102\t        exception: BaseException | None,\n  1103\t    ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...\n  1104\t\n  1105\t    def matches(\n  1106\t        self,\n  1107\t        exception: BaseException | None,\n  1108\t    ) -> bool:\n  1109\t        \"\"\"Check if an exception matches the requirements of this RaisesGroup.\n  1110\t        If it fails, `RaisesGroup.fail_reason` will be set.\n  1111\t\n  1112\t        Example::\n  1113\t\n  1114\t            with pytest.raises(TypeError) as excinfo:\n  1115\t                ...\n  1116\t            assert RaisesGroup(ValueError).matches(excinfo.value.__cause__)\n  1117\t            # the above line is equivalent to\n  1118\t            myexc = excinfo.value.__cause\n  1119\t            assert isinstance(myexc, BaseExceptionGroup)\n  1120\t            assert len(myexc.exceptions) == 1\n  1121\t            assert isinstance(myexc.exceptions[0], ValueError)\n  1122\t        \"\"\"\n  1123\t        self._fail_reason = None\n  1124\t        if exception is None:\n  1125\t            self._fail_reason = \"exception is None\"\n  1126\t            return False\n  1127\t        if not isinstance(exception, BaseExceptionGroup):\n  1128\t            # we opt to only print type of the exception here, as the repr would\n  1129\t            # likely be quite long\n  1130\t            not_group_msg = f\"`{type(exception).__name__}()` is not an exception group\"\n  1131\t            if len(self.expected_exceptions) > 1:\n  1132\t                self._fail_reason = not_group_msg\n  1133\t                return False\n  1134\t            # if we have 1 expected exception, check if it would work even if\n  1135\t            # allow_unwrapped is not set\n  1136\t            res = self._check_expected(self.expected_exceptions[0], exception)\n  1137\t            if res is None and self.allow_unwrapped:\n  1138\t                return True\n  1139\t\n  1140\t            if res is None:\n  1141\t                self._fail_reason = (\n  1142\t                    f\"{not_group_msg}, but would match with `allow_unwrapped=True`\"\n  1143\t                )\n  1144\t            elif self.allow_unwrapped:\n  1145\t                self._fail_reason = res\n  1146\t            else:\n  1147\t                self._fail_reason = not_group_msg\n  1148\t            return False\n  1149\t\n  1150\t        actual_exceptions: Sequence[BaseException] = exception.exceptions\n  1151\t        if self.flatten_subgroups:\n  1152\t            actual_exceptions = self._unroll_exceptions(actual_exceptions)\n  1153\t\n  1154\t        if not self._check_match(exception):\n  1155\t            self._fail_reason = cast(str, self._fail_reason)\n  1156\t            old_reason = self._fail_reason\n  1157\t            if (\n  1158\t                len(actual_exceptions) == len(self.expected_exceptions) == 1\n  1159\t                and isinstance(expected := self.expected_exceptions[0], type)\n  1160\t                and isinstance(actual := actual_exceptions[0], expected)\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_8"
+}
+```
+
+## 16. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_10",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"nl -ba src/_pytest/raises.py | sed -n '500,740p'; nl -ba src/_pytest/raises.py | sed -n '1100,1495p'; grep -R -n --include='*.py' -E 'unescape\\\\(|_check_exceptions|RaisesGroup\\\\(' testing | head -n 400\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 17. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"nl -ba src/_pytest/raises.py | sed -n '500,740p'; nl -ba src/_pytest/raises.py | sed -n '1100,1495p'; grep -R -n --include='*.py' -E 'unescape\\\\(|_check_exceptions|RaisesGroup\\\\(' testing | head -n 400\""
+  },
+  "call_ref": "item_10"
+}
+```
+
+## 18. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "   500\t                e, include_subexception_msg=False\n   501\t            ),\n   502\t        ):\n   503\t            return True\n   504\t\n   505\t        # if we're matching a group, make sure we're explicit to reduce confusion\n   506\t        # if they're trying to match an exception contained within the group\n   507\t        maybe_specify_type = (\n   508\t            f\" the `{_exception_type_name(type(e))}()`\"\n   509\t            if isinstance(e, BaseExceptionGroup)\n   510\t            else \"\"\n   511\t        )\n   512\t        if isinstance(self.rawmatch, str):\n   513\t            # TODO: it instructs to use `-v` to print leading text, but that doesn't work\n   514\t            # I also don't know if this is the proper entry point, or tool to use at all\n   515\t\n   516\t\n   517\t\n   518\t            diff = _diff_text(self.rawmatch, stringified_exception, dummy_highlighter)\n   519\t            self._fail_reason = (\"\\n\" if diff[0][0] == \"-\" else \"\") + \"\\n\".join(diff)\n   520\t            return False\n   521\t\n   522\t        # I don't love \"Regex\"+\"Input\" vs something like \"expected regex\"+\"exception message\"\n   523\t        # when they're similar it's not always obvious which is which\n   524\t        self._fail_reason = (\n   525\t            f\"Regex pattern did not match{maybe_specify_type}.\\n\"\n   526\t            f\" Regex: {_match_pattern(self.match)!r}\\n\"\n   527\t            f\" Input: {stringified_exception!r}\"\n   528\t        )\n   529\t        if _match_pattern(self.match) == stringified_exception:\n   530\t            self._fail_reason += \"\\n Did you mean to `re.escape()` the regex?\"\n   531\t        return False\n   532\t\n   533\t    @abstractmethod\n   534\t    def matches(\n   535\t        self: AbstractRaises[BaseExcT_1], exception: BaseException\n   536\t    ) -> TypeGuard[BaseExcT_1]:\n   537\t        \"\"\"Check if an exception matches the requirements of this AbstractRaises.\n   538\t        If it fails, :meth:`AbstractRaises.fail_reason` should be set.\n   539\t        \"\"\"\n   540\t\n   541\t\n   542\t@final\n   543\tclass RaisesExc(AbstractRaises[BaseExcT_co_default]):\n   544\t    \"\"\"\n   545\t    .. versionadded:: 8.4\n   546\t\n   547\t\n   548\t    This is the class constructed when calling :func:`pytest.raises`, but may be used\n   549\t    directly as a helper class with :class:`RaisesGroup` when you want to specify\n   550\t    requirements on sub-exceptions.\n   551\t\n   552\t    You don't need this if you only want to specify the type, since :class:`RaisesGroup`\n   553\t    accepts ``type[BaseException]``.\n   554\t\n   555\t    :param type[BaseException] | tuple[type[BaseException]] | None expected_exception:\n   556\t        The expected type, or one of several possible types.\n   557\t        May be ``None`` in order to only make use of ``match`` and/or ``check``\n   558\t\n   559\t        The type is checked with :func:`isinstance`, and does not need to be an exact match.\n   560\t        If that is wanted you can use the ``check`` parameter.\n   561\t\n   562\t    :kwparam str | Pattern[str] match:\n   563\t        A regex to match.\n   564\t\n   565\t    :kwparam Callable[[BaseException], bool] check:\n   566\t        If specified, a callable that will be called with the exception as a parameter\n   567\t        after checking the type and the match regex if specified.\n   568\t        If it returns ``True`` it will be considered a match, if not it will\n   569\t        be considered a failed match.\n   570\t\n   571\t    :meth:`RaisesExc.matches` can also be used standalone to check individual exceptions.\n   572\t\n   573\t    Examples::\n   574\t\n   575\t        with RaisesGroup(RaisesExc(ValueError, match=\"string\"))\n   576\t            ...\n   577\t        with RaisesGroup(RaisesExc(check=lambda x: x.args == (3, \"hello\"))):\n   578\t            ...\n   579\t        with RaisesGroup(RaisesExc(check=lambda x: type(x) is ValueError)):\n   580\t            ...\n   581\t    \"\"\"\n   582\t\n   583\t    # Trio bundled hypothesis monkeypatching, we will probably instead assume that\n   584\t    # hypothesis will handle that in their pytest plugin by the time this is released.\n   585\t    # Alternatively we could add a version of get_pretty_function_description ourselves\n   586\t    # https://github.com/HypothesisWorks/hypothesis/blob/8ced2f59f5c7bea3344e35d2d53e1f8f8eb9fcd8/hypothesis-python/src/hypothesis/internal/reflection.py#L439\n   587\t\n   588\t    # At least one of the three parameters must be passed.\n   589\t    @overload\n   590\t    def __init__(\n   591\t        self,\n   592\t        expected_exception: (\n   593\t            type[BaseExcT_co_default] | tuple[type[BaseExcT_co_default], ...]\n   594\t        ),\n   595\t        /,\n   596\t        *,\n   597\t        match: str | Pattern[str] | None = ...,\n   598\t        check: Callable[[BaseExcT_co_default], bool] | None = ...,\n   599\t    ) -> None: ...\n   600\t\n   601\t    @overload\n   602\t    def __init__(\n   603\t        self: RaisesExc[BaseException],  # Give E a value.\n   604\t        /,\n   605\t        *,\n   606\t        match: str | Pattern[str] | None,\n   607\t        # If exception_type is not provided, check() must do any typechecks itself.\n   608\t        check: Callable[[BaseException], bool] | None = ...,\n   609\t    ) -> None: ...\n   610\t\n   611\t    @overload\n   612\t    def __init__(self, /, *, check: Callable[[BaseException], bool]) -> None: ...\n   613\t\n   614\t    def __init__(\n   615\t        self,\n   616\t        expected_exception: (\n   617\t            type[BaseExcT_co_default] | tuple[type[BaseExcT_co_default], ...] | None\n   618\t        ) = None,\n   619\t        /,\n   620\t        *,\n   621\t        match: str | Pattern[str] | None = None,\n   622\t        check: Callable[[BaseExcT_co_default], bool] | None = None,\n   623\t    ):\n   624\t        super().__init__(match=match, check=check)\n   625\t        if isinstance(expected_exception, tuple):\n   626\t            expected_exceptions = expected_exception\n   627\t        elif expected_exception is None:\n   628\t            expected_exceptions = ()\n   629\t        else:\n   630\t            expected_exceptions = (expected_exception,)\n   631\t\n   632\t        if (expected_exceptions == ()) and match is None and check is None:\n   633\t            raise ValueError(\"You must specify at least one parameter to match on.\")\n   634\t\n   635\t        self.expected_exceptions = tuple(\n   636\t            self._parse_exc(e, expected=\"a BaseException type\")\n   637\t            for e in expected_exceptions\n   638\t        )\n   639\t\n   640\t        self._just_propagate = False\n   641\t\n   642\t    def matches(\n   643\t        self,\n   644\t        exception: BaseException | None,\n   645\t    ) -> TypeGuard[BaseExcT_co_default]:\n   646\t        \"\"\"Check if an exception matches the requirements of this :class:`RaisesExc`.\n   647\t        If it fails, :attr:`RaisesExc.fail_reason` will be set.\n   648\t\n   649\t        Examples::\n   650\t\n   651\t            assert RaisesExc(ValueError).matches(my_exception):\n   652\t            # is equivalent to\n   653\t            assert isinstance(my_exception, ValueError)\n   654\t\n   655\t            # this can be useful when checking e.g. the ``__cause__`` of an exception.\n   656\t            with pytest.raises(ValueError) as excinfo:\n   657\t                ...\n   658\t            assert RaisesExc(SyntaxError, match=\"foo\").matches(excinfo.value.__cause__)\n   659\t            # above line is equivalent to\n   660\t            assert isinstance(excinfo.value.__cause__, SyntaxError)\n   661\t            assert re.search(\"foo\", str(excinfo.value.__cause__)\n   662\t\n   663\t        \"\"\"\n   664\t        self._just_propagate = False\n   665\t        if exception is None:\n   666\t            self._fail_reason = \"exception is None\"\n   667\t            return False\n   668\t        if not self._check_type(exception):\n   669\t            self._just_propagate = True\n   670\t            return False\n   671\t\n   672\t        if not self._check_match(exception):\n   673\t            return False\n   674\t\n   675\t        return self._check_check(exception)\n   676\t\n   677\t    def __repr__(self) -> str:\n   678\t        parameters = []\n   679\t        if self.expected_exceptions:\n   680\t            parameters.append(_exception_type_name(self.expected_exceptions))\n   681\t        if self.match is not None:\n   682\t            # If no flags were specified, discard the redundant re.compile() here.\n   683\t            parameters.append(\n   684\t                f\"match={_match_pattern(self.match)!r}\",\n   685\t            )\n   686\t        if self.check is not None:\n   687\t            parameters.append(f\"check={repr_callable(self.check)}\")\n   688\t        return f\"RaisesExc({', '.join(parameters)})\"\n   689\t\n   690\t    def _check_type(self, exception: BaseException) -> TypeGuard[BaseExcT_co_default]:\n   691\t        self._fail_reason = _check_raw_type(self.expected_exceptions, exception)\n   692\t        return self._fail_reason is None\n   693\t\n   694\t    def __enter__(self) -> ExceptionInfo[BaseExcT_co_default]:\n   695\t        self.excinfo: ExceptionInfo[BaseExcT_co_default] = ExceptionInfo.for_later()\n   696\t        return self.excinfo\n   697\t\n   698\t    # TODO: move common code into superclass\n   699\t    def __exit__(\n   700\t        self,\n   701\t        exc_type: type[BaseException] | None,\n   702\t        exc_val: BaseException | None,\n   703\t        exc_tb: types.TracebackType | None,\n   704\t    ) -> bool:\n   705\t        __tracebackhide__ = True\n   706\t        if exc_type is None:\n   707\t            if not self.expected_exceptions:\n   708\t                fail(\"DID NOT RAISE any exception\")\n   709\t            if len(self.expected_exceptions) > 1:\n   710\t                fail(f\"DID NOT RAISE any of {self.expected_exceptions!r}\")\n   711\t\n   712\t            fail(f\"DID NOT RAISE {self.expected_exceptions[0]!r}\")\n   713\t\n   714\t        assert self.excinfo is not None, (\n   715\t            \"Internal error - should have been constructed in __enter__\"\n   716\t        )\n   717\t\n   718\t        if not self.matches(exc_val):\n   719\t            if self._just_propagate:\n   720\t                return False\n   721\t            raise AssertionError(self._fail_reason)\n   722\t\n   723\t        # Cast to narrow the exception type now that it's verified....\n   724\t        # even though the TypeGuard in self.matches should be narrowing\n   725\t        exc_info = cast(\n   726\t            \"tuple[type[BaseExcT_co_default], BaseExcT_co_default, types.TracebackType]\",\n   727\t            (exc_type, exc_val, exc_tb),\n   728\t        )\n   729\t        self.excinfo.fill_unfilled(exc_info)\n   730\t        return True\n   731\t\n   732\t\n   733\t@final\n   734\tclass RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):\n   735\t    \"\"\"\n   736\t    .. versionadded:: 8.4\n   737\t\n   738\t    Contextmanager for checking for an expected :exc:`ExceptionGroup`.\n   739\t    This works similar to :func:`pytest.raises`, but allows for specifying the structure of an :exc:`ExceptionGroup`.\n   740\t    :meth:`ExceptionInfo.group_contains` also tries to handle exception groups,\n  1100\t    def matches(\n  1101\t        self: RaisesGroup[BaseExcT_1],\n  1102\t        exception: BaseException | None,\n  1103\t    ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...\n  1104\t\n  1105\t    def matches(\n  1106\t        self,\n  1107\t        exception: BaseException | None,\n  1108\t    ) -> bool:\n  1109\t        \"\"\"Check if an exception matches the requirements of this RaisesGroup.\n  1110\t        If it fails, `RaisesGroup.fail_reason` will be set.\n  1111\t\n  1112\t        Example::\n  1113\t\n  1114\t            with pytest.raises(TypeError) as excinfo:\n  1115\t                ...\n  1116\t            assert RaisesGroup(ValueError).matches(excinfo.value.__cause__)\n  1117\t            # the above line is equivalent to\n  1118\t            myexc = excinfo.value.__cause\n  1119\t            assert isinstance(myexc, BaseExceptionGroup)\n  1120\t            assert len(myexc.exceptions) == 1\n  1121\t            assert isinstance(myexc.exceptions[0], ValueError)\n  1122\t        \"\"\"\n  1123\t        self._fail_reason = None\n  1124\t        if exception is None:\n  1125\t            self._fail_reason = \"exception is None\"\n  1126\t            return False\n  1127\t        if not isinstance(exception, BaseExceptionGroup):\n  1128\t            # we opt to only print type of the exception here, as the repr would\n  1129\t            # likely be quite long\n  1130\t            not_group_msg = f\"`{type(exception).__name__}()` is not an exception group\"\n  1131\t            if len(self.expected_exceptions) > 1:\n  1132\t                self._fail_reason = not_group_msg\n  1133\t                return False\n  1134\t            # if we have 1 expected exception, check if it would work even if\n  1135\t            # allow_unwrapped is not set\n  1136\t            res = self._check_expected(self.expected_exceptions[0], exception)\n  1137\t            if res is None and self.allow_unwrapped:\n  1138\t                return True\n  1139\t\n  1140\t            if res is None:\n  1141\t                self._fail_reason = (\n  1142\t                    f\"{not_group_msg}, but would match with `allow_unwrapped=True`\"\n  1143\t                )\n  1144\t            elif self.allow_unwrapped:\n  1145\t                self._fail_reason = res\n  1146\t            else:\n  1147\t                self._fail_reason = not_group_msg\n  1148\t            return False\n  1149\t\n  1150\t        actual_exceptions: Sequence[BaseException] = exception.exceptions\n  1151\t        if self.flatten_subgroups:\n  1152\t            actual_exceptions = self._unroll_exceptions(actual_exceptions)\n  1153\t\n  1154\t        if not self._check_match(exception):\n  1155\t            self._fail_reason = cast(str, self._fail_reason)\n  1156\t            old_reason = self._fail_reason\n  1157\t            if (\n  1158\t                len(actual_exceptions) == len(self.expected_exceptions) == 1\n  1159\t                and isinstance(expected := self.expected_exceptions[0], type)\n  1160\t                and isinstance(actual := actual_exceptions[0], expected)\n  1161\t                and self._check_match(actual)\n  1162\t            ):\n  1163\t                assert self.match is not None, \"can't be None if _check_match failed\"\n  1164\t                assert self._fail_reason is old_reason is not None\n  1165\t                self._fail_reason += (\n  1166\t                    f\"\\n\"\n  1167\t                    f\" but matched the expected `{self._repr_expected(expected)}`.\\n\"\n  1168\t                    f\" You might want \"\n  1169\t                    f\"`RaisesGroup(RaisesExc({expected.__name__}, match={_match_pattern(self.match)!r}))`\"\n  1170\t                )\n  1171\t            else:\n  1172\t                self._fail_reason = old_reason\n  1173\t            return False\n  1174\t\n  1175\t        # do the full check on expected exceptions\n  1176\t        if not self._check_exceptions(\n  1177\t            exception,\n  1178\t            actual_exceptions,\n  1179\t        ):\n  1180\t            self._fail_reason = cast(str, self._fail_reason)\n  1181\t            assert self._fail_reason is not None\n  1182\t            old_reason = self._fail_reason\n  1183\t            # if we're not expecting a nested structure, and there is one, do a second\n  1184\t            # pass where we try flattening it\n  1185\t            if (\n  1186\t                not self.flatten_subgroups\n  1187\t                and not any(\n  1188\t                    isinstance(e, RaisesGroup) for e in self.expected_exceptions\n  1189\t                )\n  1190\t                and any(isinstance(e, BaseExceptionGroup) for e in actual_exceptions)\n  1191\t                and self._check_exceptions(\n  1192\t                    exception,\n  1193\t                    self._unroll_exceptions(exception.exceptions),\n  1194\t                )\n  1195\t            ):\n  1196\t                # only indent if it's a single-line reason. In a multi-line there's already\n  1197\t                # indented lines that this does not belong to.\n  1198\t                indent = \"  \" if \"\\n\" not in self._fail_reason else \"\"\n  1199\t                self._fail_reason = (\n  1200\t                    old_reason\n  1201\t                    + f\"\\n{indent}Did you mean to use `flatten_subgroups=True`?\"\n  1202\t                )\n  1203\t            else:\n  1204\t                self._fail_reason = old_reason\n  1205\t            return False\n  1206\t\n  1207\t        # Only run `self.check` once we know `exception` is of the correct type.\n  1208\t        if not self._check_check(exception):\n  1209\t            reason = (\n  1210\t                cast(str, self._fail_reason) + f\" on the {type(exception).__name__}\"\n  1211\t            )\n  1212\t            if (\n  1213\t                len(actual_exceptions) == len(self.expected_exceptions) == 1\n  1214\t                and isinstance(expected := self.expected_exceptions[0], type)\n  1215\t                # we explicitly break typing here :)\n  1216\t                and self._check_check(actual_exceptions[0])  # type: ignore[arg-type]\n  1217\t            ):\n  1218\t                self._fail_reason = reason + (\n  1219\t                    f\", but did return True for the expected {self._repr_expected(expected)}.\"\n  1220\t                    f\" You might want RaisesGroup(RaisesExc({expected.__name__}, check=<...>))\"\n  1221\t                )\n  1222\t            else:\n  1223\t                self._fail_reason = reason\n  1224\t            return False\n  1225\t\n  1226\t        return True\n  1227\t\n  1228\t\n  1229\t\n  1230\t\n  1231\t\n  1232\t\n  1233\t\n  1234\t\n  1235\t\n  1236\t\n  1237\t\n  1238\t\n  1239\t\n  1240\t\n  1241\t\n  1242\t\n  1243\t\n  1244\t\n  1245\t\n  1246\t\n  1247\t\n  1248\t\n  1249\t\n  1250\t\n  1251\t\n  1252\t\n  1253\t\n  1254\t\n  1255\t    @overload\n  1256\t    def _check_exceptions(\n  1257\t        self: RaisesGroup[ExcT_1],\n  1258\t        _exception: Exception,\n  1259\t        actual_exceptions: Sequence[Exception],\n  1260\t    ) -> TypeGuard[ExceptionGroup[ExcT_1]]: ...\n  1261\t    @overload\n  1262\t    def _check_exceptions(\n  1263\t        self: RaisesGroup[BaseExcT_1],\n  1264\t        _exception: BaseException,\n  1265\t        actual_exceptions: Sequence[BaseException],\n  1266\t    ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...\n  1267\t\n  1268\t\n  1269\t\n  1270\t\n  1271\t\n  1272\t\n  1273\t\n  1274\t\n  1275\t\n  1276\t\n  1277\t\n  1278\t\n  1279\t\n  1280\t\n  1281\t\n  1282\t\n  1283\t\n  1284\t\n  1285\t\n  1286\t\n  1287\t\n  1288\t\n  1289\t\n  1290\t\n  1291\t\n  1292\t\n  1293\t\n  1294\t\n  1295\t\n  1296\t\n  1297\t\n  1298\t\n  1299\t\n  1300\t\n  1301\t\n  1302\t\n  1303\t\n  1304\t\n  1305\t\n  1306\t\n  1307\t\n  1308\t\n  1309\t\n  1310\t\n  1311\t\n  1312\t\n  1313\t\n  1314\t\n  1315\t\n  1316\t\n  1317\t\n  1318\t\n  1319\t\n  1320\t\n  1321\t\n  1322\t\n  1323\t\n  1324\t\n  1325\t\n  1326\t\n  1327\t\n  1328\t\n  1329\t\n  1330\t\n  1331\t\n  1332\t\n  1333\t\n  1334\t\n  1335\t\n  1336\t\n  1337\t\n  1338\t\n  1339\t\n  1340\t\n  1341\t\n  1342\t\n  1343\t\n  1344\t\n  1345\t\n  1346\t\n  1347\t\n  1348\t\n  1349\t\n  1350\t\n  1351\t\n  1352\t\n  1353\t\n  1354\t\n  1355\t\n  1356\t\n  1357\t\n  1358\t\n  1359\t\n  1360\t\n  1361\t\n  1362\t\n  1363\t\n  1364\t\n  1365\t\n  1366\t\n  1367\t\n  1368\t\n  1369\t\n  1370\t\n  1371\t\n  1372\t\n  1373\t\n  1374\t\n  1375\t\n  1376\t\n  1377\t\n  1378\t\n  1379\t\n  1380\t\n  1381\t\n  1382\t\n  1383\t\n  1384\t\n  1385\t\n  1386\t\n  1387\t\n  1388\t\n  1389\t\n  1390\t\n  1391\t\n  1392\t\n  1393\t\n  1394\t\n  1395\t\n  1396\t\n  1397\t\n  1398\t\n  1399\t\n  1400\t\n  1401\t\n  1402\t\n  1403\t\n  1404\t\n  1405\t\n  1406\t\n  1407\t\n  1408\t\n  1409\t\n  1410\t\n  1411\t    def __exit__(\n  1412\t        self,\n  1413\t        exc_type: type[BaseException] | None,\n  1414\t        exc_val: BaseException | None,\n  1415\t        exc_tb: types.TracebackType | None,\n  1416\t    ) -> bool:\n  1417\t        __tracebackhide__ = True\n  1418\t        if exc_type is None:\n  1419\t            fail(f\"DID NOT RAISE any exception, expected `{self.expected_type()}`\")\n  1420\t\n  1421\t        assert self.excinfo is not None, (\n  1422\t            \"Internal error - should have been constructed in __enter__\"\n  1423\t        )\n  1424\t\n  1425\t        # group_str is the only thing that differs between RaisesExc and RaisesGroup...\n  1426\t        # I might just scrap it? Or make it part of fail_reason\n  1427\t        group_str = (\n  1428\t            \"(group)\"\n  1429\t            if self.allow_unwrapped and not issubclass(exc_type, BaseExceptionGroup)\n  1430\t            else \"group\"\n  1431\t        )\n  1432\t\n  1433\t        if not self.matches(exc_val):\n  1434\t            fail(f\"Raised exception {group_str} did not match: {self._fail_reason}\")\n  1435\t\n  1436\t        # Cast to narrow the exception type now that it's verified....\n  1437\t        # even though the TypeGuard in self.matches should be narrowing\n  1438\t        exc_info = cast(\n  1439\t            \"tuple[type[BaseExceptionGroup[BaseExcT_co]], BaseExceptionGroup[BaseExcT_co], types.TracebackType]\",\n  1440\t            (exc_type, exc_val, exc_tb),\n  1441\t        )\n  1442\t        self.excinfo.fill_unfilled(exc_info)\n  1443\t        return True\n  1444\t\n  1445\t    def expected_type(self) -> str:\n  1446\t        subexcs = []\n  1447\t        for e in self.expected_exceptions:\n  1448\t            if isinstance(e, RaisesExc):\n  1449\t                subexcs.append(repr(e))\n  1450\t            elif isinstance(e, RaisesGroup):\n  1451\t                subexcs.append(e.expected_type())\n  1452\t            elif isinstance(e, type):\n  1453\t                subexcs.append(e.__name__)\n  1454\t            else:  # pragma: no cover\n  1455\t                raise AssertionError(\"unknown type\")\n  1456\t        group_type = \"Base\" if self.is_baseexception else \"\"\n  1457\t        return f\"{group_type}ExceptionGroup({', '.join(subexcs)})\"\n  1458\t\n  1459\t\n  1460\t@final\n  1461\tclass NotChecked:\n  1462\t    \"\"\"Singleton for unchecked values in ResultHolder\"\"\"\n  1463\t\n  1464\t\n  1465\tclass ResultHolder:\n  1466\t    \"\"\"Container for results of checking exceptions.\n  1467\t    Used in RaisesGroup._check_exceptions and possible_match.\n  1468\t    \"\"\"\n  1469\t\n  1470\t    def __init__(\n  1471\t        self,\n  1472\t        expected_exceptions: tuple[\n  1473\t            type[BaseException] | AbstractRaises[BaseException], ...\n  1474\t        ],\n  1475\t        actual_exceptions: Sequence[BaseException],\n  1476\t    ) -> None:\n  1477\t        self.results: list[list[str | type[NotChecked] | None]] = [\n  1478\t            [NotChecked for _ in expected_exceptions] for _ in actual_exceptions\n  1479\t        ]\n  1480\t\n  1481\t\n  1482\t\n  1483\t\n  1484\t\n  1485\t\n  1486\t\ntesting/typing_raises_group.py:36:    with RaisesGroup(ValueError) as e:\ntesting/typing_raises_group.py:44:    if RaisesGroup(ValueError).matches(exc):\ntesting/typing_raises_group.py:48:    if RaisesGroup(KeyboardInterrupt).matches(exc):\ntesting/typing_raises_group.py:60:    if RaisesGroup(ValueError).matches(e):\ntesting/typing_raises_group.py:108:    RaisesGroup(BaseException, check=handle_exc)\ntesting/typing_raises_group.py:109:    RaisesGroup(BaseException, check=handle_kbi)  # type: ignore\ntesting/typing_raises_group.py:111:    RaisesGroup(Exception, check=handle_exc)\ntesting/typing_raises_group.py:112:    RaisesGroup(Exception, check=handle_value)  # type: ignore\ntesting/typing_raises_group.py:114:    RaisesGroup(KeyboardInterrupt, check=handle_exc)\ntesting/typing_raises_group.py:115:    RaisesGroup(KeyboardInterrupt, check=handle_kbi)\ntesting/typing_raises_group.py:116:    RaisesGroup(KeyboardInterrupt, check=handle_value)  # type: ignore\ntesting/typing_raises_group.py:118:    RaisesGroup(ValueError, check=handle_exc)\ntesting/typing_raises_group.py:119:    RaisesGroup(ValueError, check=handle_kbi)  # type: ignore\ntesting/typing_raises_group.py:120:    RaisesGroup(ValueError, check=handle_value)\ntesting/typing_raises_group.py:122:    RaisesGroup(ValueError, KeyboardInterrupt, check=handle_exc)\ntesting/typing_raises_group.py:123:    RaisesGroup(ValueError, KeyboardInterrupt, check=handle_kbi)  # type: ignore\ntesting/typing_raises_group.py:124:    RaisesGroup(ValueError, KeyboardInterrupt, check=handle_value)  # type: ignore\ntesting/typing_raises_group.py:136:    RaisesGroup(ValueError, check=handle_group_value)\ntesting/typing_raises_group.py:138:    RaisesGroup(Exception, check=handle_group)\ntesting/typing_raises_group.py:142:    with RaisesGroup(RaisesExc(ValueError)) as e:\ntesting/typing_raises_group.py:149:    with RaisesGroup(RaisesGroup(ValueError)) as excinfo:\ntesting/typing_raises_group.py:173:    if RaisesGroup(RaisesGroup(ValueError)).matches(exc):\ntesting/typing_raises_group.py:178:    a = RaisesGroup(ValueError, ValueError)\ntesting/typing_raises_group.py:179:    b = RaisesGroup(RaisesExc(ValueError), RaisesExc(ValueError))\ntesting/typing_raises_group.py:180:    c = RaisesGroup(ValueError, RaisesExc(ValueError))\ntesting/typing_raises_group.py:191:    a = RaisesGroup(RaisesExc(ValueError), RaisesExc(TypeError))\ntesting/typing_raises_group.py:192:    b = RaisesGroup(RaisesExc(ValueError), TypeError)\ntesting/typing_raises_group.py:193:    c = RaisesGroup(ValueError, TypeError)\ntesting/typing_raises_group.py:205:    RaisesGroup(ValueError, TypeError, allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:207:    RaisesGroup(RaisesGroup(ValueError), allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:209:    RaisesGroup(ValueError, match=\"foo\", allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:211:    RaisesGroup(ValueError, check=bool, allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:213:    RaisesGroup(ValueError, allow_unwrapped=True)\ntesting/typing_raises_group.py:214:    RaisesGroup(ValueError, allow_unwrapped=True, flatten_subgroups=True)\ntesting/typing_raises_group.py:215:    RaisesGroup(RaisesExc(ValueError), allow_unwrapped=True)\ntesting/typing_raises_group.py:218:    RaisesGroup(RaisesGroup(ValueError), flatten_subgroups=True)  # type: ignore\ntesting/typing_raises_group.py:220:    RaisesGroup(ValueError, TypeError, flatten_subgroups=True)\ntesting/typing_raises_group.py:221:    RaisesGroup(ValueError, match=\"foo\", flatten_subgroups=True)\ntesting/typing_raises_group.py:222:    RaisesGroup(ValueError, check=bool, flatten_subgroups=True)\ntesting/typing_raises_group.py:223:    RaisesGroup(ValueError, flatten_subgroups=True)\ntesting/typing_raises_group.py:224:    RaisesGroup(RaisesExc(ValueError), flatten_subgroups=True)\ntesting/typing_raises_group.py:227:    RaisesGroup(RaisesGroup(ValueError))\ntesting/typing_raises_group.py:231:    with RaisesGroup(RaisesGroup(RaisesGroup(ValueError))) as e:\ntesting/typing_raises_group.py:238:        RaisesGroup(ValueError).check,\ntesting/python/raises.py:234:            with pytest.RaisesGroup(ValueError, allow_unwrapped=True):\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_10"
+}
+```
+
+## 19. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_12",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"find testing -type f -iname '*rais*' -print; grep -R -n --include='*.py' 'ResultHolder\\\\|possible_match\\\\|fail_reason\\\\|RaisesExc' testing | head -n 500; grep -n '\"'^def '\"\\\\|\"'^class '\"' src/_pytest/raises.py; git diff -- src/_pytest/raises.py; sed -n '1,280p' testing/python/raises.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 20. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"find testing -type f -iname '*rais*' -print; grep -R -n --include='*.py' 'ResultHolder\\\\|possible_match\\\\|fail_reason\\\\|RaisesExc' testing | head -n 500; grep -n '\"'^def '\"\\\\|\"'^class '\"' src/_pytest/raises.py; git diff -- src/_pytest/raises.py; sed -n '1,280p' testing/python/raises.py\""
+  },
+  "call_ref": "item_12"
+}
+```
+
+## 21. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "testing/test_unraisableexception.py\ntesting/typing_raises_group.py\ntesting/python/raises.py\ntesting/typing_raises_group.py:11:from pytest import RaisesExc\ntesting/typing_raises_group.py:28:def check_raisesexc_typevar_default(e: RaisesExc) -> None:\ntesting/typing_raises_group.py:70:    RaisesExc()  # type: ignore\ntesting/typing_raises_group.py:71:    RaisesExc(ValueError)\ntesting/typing_raises_group.py:72:    RaisesExc(ValueError, match=\"regex\")\ntesting/typing_raises_group.py:73:    RaisesExc(ValueError, match=\"regex\", check=check_exc)\ntesting/typing_raises_group.py:74:    RaisesExc(match=\"regex\")\ntesting/typing_raises_group.py:75:    RaisesExc(check=check_exc)\ntesting/typing_raises_group.py:76:    RaisesExc(ValueError, match=\"regex\")\ntesting/typing_raises_group.py:77:    RaisesExc(match=\"regex\", check=check_exc)\ntesting/typing_raises_group.py:83:    RaisesExc(FileNotFoundError, check=check_filenotfound)\ntesting/typing_raises_group.py:84:    RaisesExc(ValueError, check=check_filenotfound)  # type: ignore\ntesting/typing_raises_group.py:85:    RaisesExc(check=check_filenotfound)  # type: ignore\ntesting/typing_raises_group.py:86:    RaisesExc(FileNotFoundError, match=\"regex\", check=check_filenotfound)\ntesting/typing_raises_group.py:89:    RaisesExc(expected_exception=ValueError)  # type: ignore\ntesting/typing_raises_group.py:91:    RaisesExc(ValueError, \"regex\")  # type: ignore\ntesting/typing_raises_group.py:142:    with RaisesGroup(RaisesExc(ValueError)) as e:\ntesting/typing_raises_group.py:179:    b = RaisesGroup(RaisesExc(ValueError), RaisesExc(ValueError))\ntesting/typing_raises_group.py:180:    c = RaisesGroup(ValueError, RaisesExc(ValueError))\ntesting/typing_raises_group.py:191:    a = RaisesGroup(RaisesExc(ValueError), RaisesExc(TypeError))\ntesting/typing_raises_group.py:192:    b = RaisesGroup(RaisesExc(ValueError), TypeError)\ntesting/typing_raises_group.py:215:    RaisesGroup(RaisesExc(ValueError), allow_unwrapped=True)\ntesting/typing_raises_group.py:224:    RaisesGroup(RaisesExc(ValueError), flatten_subgroups=True)\ntesting/test_terminal.py:3223:def test_summary_xfail_reason(pytester: Pytester) -> None:\ntesting/test_terminal.py:3233:        def test_xfail_reason():\ntesting/test_terminal.py:3238:    expect1 = \"XFAIL test_summary_xfail_reason.py::test_xfail\"\ntesting/test_terminal.py:3239:    expect2 = \"XFAIL test_summary_xfail_reason.py::test_xfail_reason - foo\"\ntesting/python/raises.py:231:            with pytest.RaisesExc(ValueError):\ntesting/test_doctest.py:251:            >>> pytest.xfail(\"xfail_reason\")\n74:def raises(\n83:def raises(\n92:def raises(*, check: Callable[[BaseException], bool]) -> RaisesExc[BaseException]: ...\n96:def raises(\n104:def raises(\n314:def _match_pattern(match: Pattern[str]) -> str | Pattern[str]:\n319:def repr_callable(fun: Callable[[BaseExcT_1], bool]) -> str:\n327:def backquote(s: str) -> str:\n331:def _exception_type_name(\n341:def _check_raw_type(\n364:def is_fully_escaped(s: str) -> bool:\n382:class AbstractRaises(ABC, Generic[BaseExcT_co]):\n543:class RaisesExc(AbstractRaises[BaseExcT_co_default]):\n734:class RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):\n1461:class NotChecked:\n1465:class ResultHolder:\n# mypy: allow-untyped-defs\nfrom __future__ import annotations\n\nimport io\nimport re\nimport sys\n\nfrom _pytest.outcomes import Failed\nfrom _pytest.pytester import Pytester\nfrom _pytest.warning_types import PytestWarning\nimport pytest\n\n\ndef wrap_escape(s: str) -> str:\n    return \"^\" + re.escape(s) + \"$\"\n\n\nclass TestRaises:\n    def test_check_callable(self) -> None:\n        with pytest.raises(TypeError, match=r\".* must be callable\"):\n            pytest.raises(RuntimeError, \"int('qwe')\")  # type: ignore[call-overload]\n\n    def test_raises(self):\n        excinfo = pytest.raises(ValueError, int, \"qwe\")\n        assert \"invalid literal\" in str(excinfo.value)\n\n    def test_raises_function(self):\n        excinfo = pytest.raises(ValueError, int, \"hello\")\n        assert \"invalid literal\" in str(excinfo.value)\n\n    def test_raises_does_not_allow_none(self):\n        with pytest.raises(\n            ValueError,\n            match=wrap_escape(\"You must specify at least one parameter to match on.\"),\n        ):\n            # We're testing that this invalid usage gives a helpful error,\n            # so we can ignore Mypy telling us that None is invalid.\n            pytest.raises(expected_exception=None)  # type: ignore\n\n    # it's unclear if this message is helpful, and if it is, should it trigger more\n    # liberally? Usually you'd get a TypeError here\n    def test_raises_false_and_arg(self):\n        with pytest.raises(\n            ValueError,\n            match=wrap_escape(\n                \"Expected an exception type or a tuple of exception types, but got `False`. \"\n                \"Raising exceptions is already understood as failing the test, so you don't need \"\n                \"any special code to say 'this should never raise an exception'.\"\n            ),\n        ):\n            pytest.raises(False, int)  # type: ignore[call-overload]\n\n    def test_raises_does_not_allow_empty_tuple(self):\n        with pytest.raises(\n            ValueError,\n            match=wrap_escape(\"You must specify at least one parameter to match on.\"),\n        ):\n            pytest.raises(expected_exception=())\n\n    def test_raises_callable_no_exception(self) -> None:\n        class A:\n            def __call__(self):\n                pass\n\n        try:\n            pytest.raises(ValueError, A())\n        except pytest.fail.Exception:\n            pass\n\n    def test_raises_falsey_type_error(self) -> None:\n        with pytest.raises(TypeError):\n            with pytest.raises(AssertionError, match=0):  # type: ignore[call-overload]\n                raise AssertionError(\"ohai\")\n\n    def test_raises_repr_inflight(self):\n        \"\"\"Ensure repr() on an exception info inside a pytest.raises with block works (#4386)\"\"\"\n\n        class E(Exception):\n            pass\n\n        with pytest.raises(E) as excinfo:\n            # this test prints the inflight uninitialized object\n            # using repr and str as well as pprint to demonstrate\n            # it works\n            print(str(excinfo))\n            print(repr(excinfo))\n            import pprint\n\n            pprint.pprint(excinfo)\n            raise E()\n\n    def test_raises_as_contextmanager(self, pytester: Pytester) -> None:\n        pytester.makepyfile(\n            \"\"\"\n            import pytest\n            import _pytest._code\n\n            def test_simple():\n                with pytest.raises(ZeroDivisionError) as excinfo:\n                    assert isinstance(excinfo, _pytest._code.ExceptionInfo)\n                    1/0\n                print(excinfo)\n                assert excinfo.type == ZeroDivisionError\n                assert isinstance(excinfo.value, ZeroDivisionError)\n\n            def test_noraise():\n                with pytest.raises(pytest.raises.Exception):\n                    with pytest.raises(ValueError):\n                           int()\n\n            def test_raise_wrong_exception_passes_by():\n                with pytest.raises(ZeroDivisionError):\n                    with pytest.raises(ValueError):\n                           1/0\n        \"\"\"\n        )\n        result = pytester.runpytest()\n        result.stdout.fnmatch_lines([\"*3 passed*\"])\n\n    def test_does_not_raise(self, pytester: Pytester) -> None:\n        pytester.makepyfile(\n            \"\"\"\n            from contextlib import nullcontext as does_not_raise\n            import pytest\n\n            @pytest.mark.parametrize('example_input,expectation', [\n                (3, does_not_raise()),\n                (2, does_not_raise()),\n                (1, does_not_raise()),\n                (0, pytest.raises(ZeroDivisionError)),\n            ])\n            def test_division(example_input, expectation):\n                '''Test how much I know division.'''\n                with expectation:\n                    assert (6 / example_input) is not None\n        \"\"\"\n        )\n        result = pytester.runpytest()\n        result.stdout.fnmatch_lines([\"*4 passed*\"])\n\n    def test_does_not_raise_does_raise(self, pytester: Pytester) -> None:\n        pytester.makepyfile(\n            \"\"\"\n            from contextlib import nullcontext as does_not_raise\n            import pytest\n\n            @pytest.mark.parametrize('example_input,expectation', [\n                (0, does_not_raise()),\n                (1, pytest.raises(ZeroDivisionError)),\n            ])\n            def test_division(example_input, expectation):\n                '''Test how much I know division.'''\n                with expectation:\n                    assert (6 / example_input) is not None\n        \"\"\"\n        )\n        result = pytester.runpytest()\n        result.stdout.fnmatch_lines([\"*2 failed*\"])\n\n    def test_raises_with_invalid_regex(self, pytester: Pytester) -> None:\n        pytester.makepyfile(\n            \"\"\"\n            import pytest\n\n            def test_invalid_regex():\n                with pytest.raises(ValueError, match=\"invalid regex character [\"):\n                    raise ValueError()\n            \"\"\"\n        )\n        result = pytester.runpytest()\n        result.stdout.fnmatch_lines(\n            [\n                \"*Invalid regex pattern provided to 'match': unterminated character set at position 24*\",\n            ]\n        )\n        result.stdout.no_fnmatch_line(\"*Traceback*\")\n        result.stdout.no_fnmatch_line(\"*File*\")\n        result.stdout.no_fnmatch_line(\"*line*\")\n\n    def test_noclass(self) -> None:\n        with pytest.raises(TypeError):\n            pytest.raises(\"wrong\", lambda: None)  # type: ignore[call-overload]\n\n    def test_invalid_arguments_to_raises(self) -> None:\n        with pytest.raises(TypeError, match=\"unknown\"):\n            with pytest.raises(TypeError, unknown=\"bogus\"):  # type: ignore[call-overload]\n                raise ValueError()\n\n    def test_tuple(self):\n        with pytest.raises((KeyError, ValueError)):\n            raise KeyError(\"oops\")\n\n    def test_no_raise_message(self) -> None:\n        try:\n            pytest.raises(ValueError, int, \"0\")\n        except pytest.fail.Exception as e:\n            assert e.msg == f\"DID NOT RAISE {ValueError!r}\"\n        else:\n            assert False, \"Expected pytest.raises.Exception\"\n\n        try:\n            with pytest.raises(ValueError):\n                pass\n        except pytest.fail.Exception as e:\n            assert e.msg == f\"DID NOT RAISE {ValueError!r}\"\n        else:\n            assert False, \"Expected pytest.raises.Exception\"\n\n    @pytest.mark.parametrize(\n        \"method\", [\"function\", \"function_match\", \"with\", \"with_raisesexc\", \"with_group\"]\n    )\n    def test_raises_cyclic_reference(self, method):\n        \"\"\"Ensure pytest.raises does not leave a reference cycle (#1965).\"\"\"\n        import gc\n\n        class T:\n            def __call__(self):\n                raise ValueError\n\n        t = T()\n        refcount = len(gc.get_referrers(t))\n\n        if method == \"function\":\n            pytest.raises(ValueError, t)\n        elif method == \"function_match\":\n            pytest.raises(ValueError, t).match(\"^$\")\n        elif method == \"with\":\n            with pytest.raises(ValueError):\n                t()\n        elif method == \"with_raisesexc\":\n            with pytest.RaisesExc(ValueError):\n                t()\n        elif method == \"with_group\":\n            with pytest.RaisesGroup(ValueError, allow_unwrapped=True):\n                t()\n        else:  # pragma: no cover\n            raise AssertionError(\"bad parametrization\")\n\n        # ensure both forms of pytest.raises don't leave exceptions in sys.exc_info()\n        assert sys.exc_info() == (None, None, None)\n\n        assert refcount == len(gc.get_referrers(t))\n\n    def test_raises_match(self) -> None:\n        msg = r\"with base \\d+\"\n        with pytest.raises(ValueError, match=msg):\n            int(\"asdf\")\n\n        msg = \"with base 10\"\n        with pytest.raises(ValueError, match=msg):\n            int(\"asdf\")\n\n        msg = \"with base 16\"\n        expr = (\n            \"Regex pattern did not match.\\n\"\n            f\" Regex: {msg!r}\\n\"\n            \" Input: \\\"invalid literal for int() with base 10: 'asdf'\\\"\"\n        )\n        with pytest.raises(AssertionError, match=\"^\" + re.escape(expr) + \"$\"):\n            with pytest.raises(ValueError, match=msg):\n                int(\"asdf\", base=10)\n\n        # \"match\" without context manager.\n        pytest.raises(ValueError, int, \"asdf\").match(\"invalid literal\")\n        with pytest.raises(AssertionError) as excinfo:\n            pytest.raises(ValueError, int, \"asdf\").match(msg)\n        assert str(excinfo.value) == expr\n\n        pytest.raises(TypeError, int, match=\"invalid\")\n\n        def tfunc(match):\n            raise ValueError(f\"match={match}\")\n\n        pytest.raises(ValueError, tfunc, match=\"asdf\").match(\"match=asdf\")\n        pytest.raises(ValueError, tfunc, match=\"\").match(\"match=\")\n\n        # empty string matches everything, which is probably not what the user wants\n        with pytest.warns(\n            PytestWarning,\n            match=wrap_escape(\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_12"
+}
+```
+
+## 22. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_15",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -R -n --include='*.py' 'def dummy_highlighter\\\\|dummy_highlighter\\\\|def _diff_text' src testing | head -n 50; grep -n 'def stringify_exception' src/_pytest/_code/code.py; grep -R -n --include='*.py' 'Did you mean to use \"'`flatten_subgroups'\"\\\\|Raised exception group did not match\\\\|Unexpected nested' . | head -n 100\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 23. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -R -n --include='*.py' 'def dummy_highlighter\\\\|dummy_highlighter\\\\|def _diff_text' src testing | head -n 50; grep -n 'def stringify_exception' src/_pytest/_code/code.py; grep -R -n --include='*.py' 'Did you mean to use \"'`flatten_subgroups'\"\\\\|Raised exception group did not match\\\\|Unexpected nested' . | head -n 100\""
+  },
+  "call_ref": "item_15"
+}
+```
+
+## 24. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "src/_pytest/assertion/util.py:604:    diff = _diff_text(text, correct_text, dummy_highlighter, verbose)\nsrc/_pytest/raises.py:518:            diff = _diff_text(self.rawmatch, stringified_exception, dummy_highlighter)\n464:def stringify_exception(\n./src/_pytest/raises.py:359:            return f\"Unexpected nested {actual_type_str}, expected {expected_type_str}\"\n./src/_pytest/raises.py:1201:                    + f\"\\n{indent}Did you mean to use `flatten_subgroups=True`?\"\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_15"
+}
+```
+
+## 25. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_17",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"sed -n '1,90p' src/_pytest/assertion/util.py; grep -n '\"'^def _diff_text'\"\\\\|dummy_highlighter' src/_pytest/assertion/util.py; sed -n '420,500p' src/_pytest/_code/code.py; grep -R -n --include='*.py' '_pytest.raises import' testing src | head -n 100\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 26. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"sed -n '1,90p' src/_pytest/assertion/util.py; grep -n '\"'^def _diff_text'\"\\\\|dummy_highlighter' src/_pytest/assertion/util.py; sed -n '420,500p' src/_pytest/_code/code.py; grep -R -n --include='*.py' '_pytest.raises import' testing src | head -n 100\""
+  },
+  "call_ref": "item_17"
+}
+```
+
+## 27. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "# mypy: allow-untyped-defs\n\"\"\"Utilities for assertion debugging.\"\"\"\n\nfrom __future__ import annotations\n\nimport collections.abc\nfrom collections.abc import Callable\nfrom collections.abc import Iterable\nfrom collections.abc import Mapping\nfrom collections.abc import Sequence\nfrom collections.abc import Set as AbstractSet\nimport pprint\nfrom typing import Any\nfrom typing import Literal\nfrom typing import Protocol\nfrom unicodedata import normalize\n\nfrom _pytest import outcomes\nimport _pytest._code\nfrom _pytest._io.pprint import PrettyPrinter\nfrom _pytest._io.saferepr import saferepr\nfrom _pytest._io.saferepr import saferepr_unlimited\nfrom _pytest.compat import running_on_ci\nfrom _pytest.config import Config\n\n\n# The _reprcompare attribute on the util module is used by the new assertion\n# interpretation code and assertion rewriter to detect this plugin was\n# loaded and in turn call the hooks defined here as part of the\n# DebugInterpreter.\n_reprcompare: Callable[[str, object, object], str | None] | None = None\n\n# Works similarly as _reprcompare attribute. Is populated with the hook call\n# when pytest_runtest_setup is called.\n_assertion_pass: Callable[[int, str, str], None] | None = None\n\n# Config object which is assigned during pytest_runtest_protocol.\n_config: Config | None = None\n\n\nclass _HighlightFunc(Protocol):\n    def __call__(self, source: str, lexer: Literal[\"diff\", \"python\"] = \"python\") -> str:\n        \"\"\"Apply highlighting to the given source.\"\"\"\n\n\n\n\n\n\n\n\n\n\ndef format_explanation(explanation: str) -> str:\n    r\"\"\"Format an explanation.\n\n    Normally all embedded newlines are escaped, however there are\n    three exceptions: \\n{, \\n} and \\n~.  The first two are intended\n    cover nested explanations, see function and attribute explanations\n    for examples (.visit_Call(), visit_Attribute()).  The last one is\n    for when one explanation needs to span multiple lines, e.g. when\n    displaying diffs.\n    \"\"\"\n    lines = _split_explanation(explanation)\n    result = _format_lines(lines)\n    return \"\\n\".join(result)\n\n\ndef _split_explanation(explanation: str) -> list[str]:\n    r\"\"\"Return a list of individual lines in the explanation.\n\n    This will return a list of lines split on '\\n{', '\\n}' and '\\n~'.\n    Any other newlines will be escaped and appear in the line as the\n    literal '\\n' characters.\n    \"\"\"\n    raw_lines = (explanation or \"\").split(\"\\n\")\n    lines = [raw_lines[0]]\n    for values in raw_lines[1:]:\n        if values and values[0] in [\"{\", \"}\", \"~\", \">\"]:\n            lines.append(values)\n        else:\n            lines[-1] += \"\\\\n\" + values\n    return lines\n\n\ndef _format_lines(lines: Sequence[str]) -> list[str]:\n    \"\"\"Format the individual lines.\n\n    This will replace the '{', '}' and '~' characters of our mini formatting\n    language with the proper 'where ...', 'and ...' and ' + ...' text, taking\n604:    diff = _diff_text(text, correct_text, dummy_highlighter, verbose)\n        else:\n            return super().__getitem__(key)\n\n    def filter(\n        self,\n        excinfo_or_fn: ExceptionInfo[BaseException] | Callable[[TracebackEntry], bool],\n        /,\n    ) -> Traceback:\n        \"\"\"Return a Traceback instance with certain items removed.\n\n        If the filter is an `ExceptionInfo`, removes all the ``TracebackEntry``s\n        which are hidden (see ishidden() above).\n\n        Otherwise, the filter is a function that gets a single argument, a\n        ``TracebackEntry`` instance, and should return True when the item should\n        be added to the ``Traceback``, False when not.\n        \"\"\"\n        if isinstance(excinfo_or_fn, ExceptionInfo):\n            fn = lambda x: not x.ishidden(excinfo_or_fn)  # noqa: E731\n        else:\n            fn = excinfo_or_fn\n        return Traceback(filter(fn, self))\n\n    def recursionindex(self) -> int | None:\n        \"\"\"Return the index of the frame/TracebackEntry where recursion originates if\n        appropriate, None if no recursion occurred.\"\"\"\n        cache: dict[tuple[Any, int, int], list[dict[str, Any]]] = {}\n        for i, entry in enumerate(self):\n            # id for the code.raw is needed to work around\n            # the strange metaprogramming in the decorator lib from pypi\n            # which generates code objects that have hash/value equality\n            # XXX needs a test\n            key = entry.frame.code.path, id(entry.frame.code.raw), entry.lineno\n            values = cache.setdefault(key, [])\n            # Since Python 3.13 f_locals is a proxy, freeze it.\n            loc = dict(entry.frame.f_locals)\n            if values:\n                for otherloc in values:\n                    if otherloc == loc:\n                        return i\n            values.append(loc)\n        return None\n\n\ndef stringify_exception(\n    exc: BaseException, include_subexception_msg: bool = True\n) -> str:\n    try:\n        notes = getattr(exc, \"__notes__\", [])\n    except KeyError:\n        # Workaround for https://github.com/python/cpython/issues/98778 on\n        # some 3.10 and 3.11 patch versions.\n        HTTPError = getattr(sys.modules.get(\"urllib.error\", None), \"HTTPError\", ())\n        if sys.version_info < (3, 12) and isinstance(exc, HTTPError):\n            notes = []\n        else:  # pragma: no cover\n            # exception not related to above bug, reraise\n            raise\n    if not include_subexception_msg and isinstance(exc, BaseExceptionGroup):\n        message = exc.message\n    else:\n        message = str(exc)\n\n    return \"\\n\".join(\n        [\n            message,\n            *notes,\n        ]\n    )\n\n\nE = TypeVar(\"E\", bound=BaseException, covariant=True)\n\n\n@final\n@dataclasses.dataclass\nclass ExceptionInfo(Generic[E]):\n    \"\"\"Wraps sys.exc_info() objects and offers help for navigating the traceback.\"\"\"\n\n    _assert_start_repr: ClassVar = \"AssertionError('assert \"\n\nsrc/pytest/__init__.py:63:from _pytest.raises import raises\nsrc/pytest/__init__.py:64:from _pytest.raises import RaisesExc\nsrc/pytest/__init__.py:65:from _pytest.raises import RaisesGroup\nsrc/_pytest/skipping.py:22:from _pytest.raises import AbstractRaises\nsrc/_pytest/mark/structures.py:30:from _pytest.raises import AbstractRaises\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_17"
+}
+```
+
+## 28. assistant / message
+
+```
+核查发现缺失不止 `unescape`：`RaisesGroup` 的 `_check_expected`、结果矩阵、贪心配对与诊断整段被清空；同时 `raises.py` 所依赖的断言文本差异助手在 `assertion/util.py` 中也缺失。为完成真实调用闭环，我会一并恢复这两个源码文件，并先依据现有调用点和测试契约确定接口。
+```
+
+## 29. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_21",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -n '_diff_text\\\\|dummy_highlighter' src/_pytest/assertion/util.py; nl -ba src/_pytest/assertion/util.py | sed -n '1,80p'; nl -ba src/_pytest/assertion/util.py | sed -n '520,680p'; grep -R -n --include='*.py' '_diff_text\\\\|dummy_highlighter' testing | head -n 200; grep -n '\"'^def test_.*diff'\"\\\\|_diff_text' testing/test_assertion.py testing/test_error_diffs.py | head -n 100\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 30. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -n '_diff_text\\\\|dummy_highlighter' src/_pytest/assertion/util.py; nl -ba src/_pytest/assertion/util.py | sed -n '1,80p'; nl -ba src/_pytest/assertion/util.py | sed -n '520,680p'; grep -R -n --include='*.py' '_diff_text\\\\|dummy_highlighter' testing | head -n 200; grep -n '\"'^def test_.*diff'\"\\\\|_diff_text' testing/test_assertion.py testing/test_error_diffs.py | head -n 100\""
+  },
+  "call_ref": "item_21"
+}
+```
+
+## 31. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "253:        explanation = _diff_text(left, right, highlighter, verbose)\n604:    diff = _diff_text(text, correct_text, dummy_highlighter, verbose)\n     1\t# mypy: allow-untyped-defs\n     2\t\"\"\"Utilities for assertion debugging.\"\"\"\n     3\t\n     4\tfrom __future__ import annotations\n     5\t\n     6\timport collections.abc\n     7\tfrom collections.abc import Callable\n     8\tfrom collections.abc import Iterable\n     9\tfrom collections.abc import Mapping\n    10\tfrom collections.abc import Sequence\n    11\tfrom collections.abc import Set as AbstractSet\n    12\timport pprint\n    13\tfrom typing import Any\n    14\tfrom typing import Literal\n    15\tfrom typing import Protocol\n    16\tfrom unicodedata import normalize\n    17\t\n    18\tfrom _pytest import outcomes\n    19\timport _pytest._code\n    20\tfrom _pytest._io.pprint import PrettyPrinter\n    21\tfrom _pytest._io.saferepr import saferepr\n    22\tfrom _pytest._io.saferepr import saferepr_unlimited\n    23\tfrom _pytest.compat import running_on_ci\n    24\tfrom _pytest.config import Config\n    25\t\n    26\t\n    27\t# The _reprcompare attribute on the util module is used by the new assertion\n    28\t# interpretation code and assertion rewriter to detect this plugin was\n    29\t# loaded and in turn call the hooks defined here as part of the\n    30\t# DebugInterpreter.\n    31\t_reprcompare: Callable[[str, object, object], str | None] | None = None\n    32\t\n    33\t# Works similarly as _reprcompare attribute. Is populated with the hook call\n    34\t# when pytest_runtest_setup is called.\n    35\t_assertion_pass: Callable[[int, str, str], None] | None = None\n    36\t\n    37\t# Config object which is assigned during pytest_runtest_protocol.\n    38\t_config: Config | None = None\n    39\t\n    40\t\n    41\tclass _HighlightFunc(Protocol):\n    42\t    def __call__(self, source: str, lexer: Literal[\"diff\", \"python\"] = \"python\") -> str:\n    43\t        \"\"\"Apply highlighting to the given source.\"\"\"\n    44\t\n    45\t\n    46\t\n    47\t\n    48\t\n    49\t\n    50\t\n    51\t\n    52\t\n    53\t\n    54\tdef format_explanation(explanation: str) -> str:\n    55\t    r\"\"\"Format an explanation.\n    56\t\n    57\t    Normally all embedded newlines are escaped, however there are\n    58\t    three exceptions: \\n{, \\n} and \\n~.  The first two are intended\n    59\t    cover nested explanations, see function and attribute explanations\n    60\t    for examples (.visit_Call(), visit_Attribute()).  The last one is\n    61\t    for when one explanation needs to span multiple lines, e.g. when\n    62\t    displaying diffs.\n    63\t    \"\"\"\n    64\t    lines = _split_explanation(explanation)\n    65\t    result = _format_lines(lines)\n    66\t    return \"\\n\".join(result)\n    67\t\n    68\t\n    69\tdef _split_explanation(explanation: str) -> list[str]:\n    70\t    r\"\"\"Return a list of individual lines in the explanation.\n    71\t\n    72\t    This will return a list of lines split on '\\n{', '\\n}' and '\\n~'.\n    73\t    Any other newlines will be escaped and appear in the line as the\n    74\t    literal '\\n' characters.\n    75\t    \"\"\"\n    76\t    raw_lines = (explanation or \"\").split(\"\\n\")\n    77\t    lines = [raw_lines[0]]\n    78\t    for values in raw_lines[1:]:\n    79\t        if values and values[0] in [\"{\", \"}\", \"~\", \">\"]:\n    80\t            lines.append(values)\n   520\t                + \" != \"\n   521\t                + highlighter(saferepr({k: right[k]}))\n   522\t            ]\n   523\t    extra_left = set_left - set_right\n   524\t    len_extra_left = len(extra_left)\n   525\t    if len_extra_left:\n   526\t        explanation.append(\n   527\t            f\"Left contains {len_extra_left} more item{'' if len_extra_left == 1 else 's'}:\"\n   528\t        )\n   529\t        explanation.extend(\n   530\t            highlighter(pprint.pformat({k: left[k] for k in extra_left})).splitlines()\n   531\t        )\n   532\t    extra_right = set_right - set_left\n   533\t    len_extra_right = len(extra_right)\n   534\t    if len_extra_right:\n   535\t        explanation.append(\n   536\t            f\"Right contains {len_extra_right} more item{'' if len_extra_right == 1 else 's'}:\"\n   537\t        )\n   538\t        explanation.extend(\n   539\t            highlighter(pprint.pformat({k: right[k] for k in extra_right})).splitlines()\n   540\t        )\n   541\t    return explanation\n   542\t\n   543\t\n   544\tdef _compare_eq_cls(\n   545\t    left: Any, right: Any, highlighter: _HighlightFunc, verbose: int\n   546\t) -> list[str]:\n   547\t    if not has_default_eq(left):\n   548\t        return []\n   549\t    if isdatacls(left):\n   550\t        import dataclasses\n   551\t\n   552\t        all_fields = dataclasses.fields(left)\n   553\t        fields_to_check = [info.name for info in all_fields if info.compare]\n   554\t    elif isattrs(left):\n   555\t        all_fields = left.__attrs_attrs__\n   556\t        fields_to_check = [field.name for field in all_fields if getattr(field, \"eq\")]\n   557\t    elif isnamedtuple(left):\n   558\t        fields_to_check = left._fields\n   559\t    else:\n   560\t        assert False\n   561\t\n   562\t    indent = \"  \"\n   563\t    same = []\n   564\t    diff = []\n   565\t    for field in fields_to_check:\n   566\t        if getattr(left, field) == getattr(right, field):\n   567\t            same.append(field)\n   568\t        else:\n   569\t            diff.append(field)\n   570\t\n   571\t    explanation = []\n   572\t    if same or diff:\n   573\t        explanation += [\"\"]\n   574\t    if same and verbose < 2:\n   575\t        explanation.append(f\"Omitting {len(same)} identical items, use -vv to show\")\n   576\t    elif same:\n   577\t        explanation += [\"Matching attributes:\"]\n   578\t        explanation += highlighter(pprint.pformat(same)).splitlines()\n   579\t    if diff:\n   580\t        explanation += [\"Differing attributes:\"]\n   581\t        explanation += highlighter(pprint.pformat(diff)).splitlines()\n   582\t        for field in diff:\n   583\t            field_left = getattr(left, field)\n   584\t            field_right = getattr(right, field)\n   585\t            explanation += [\n   586\t                \"\",\n   587\t                f\"Drill down into differing attribute {field}:\",\n   588\t                f\"{indent}{field}: {highlighter(repr(field_left))} != {highlighter(repr(field_right))}\",\n   589\t            ]\n   590\t            explanation += [\n   591\t                indent + line\n   592\t                for line in _compare_eq_any(\n   593\t                    field_left, field_right, highlighter, verbose\n   594\t                )\n   595\t            ]\n   596\t    return explanation\n   597\t\n   598\t\n   599\tdef _notin_text(term: str, text: str, verbose: int = 0) -> list[str]:\n   600\t    index = text.find(term)\n   601\t    head = text[:index]\n   602\t    tail = text[index + len(term) :]\n   603\t    correct_text = head + tail\n   604\t    diff = _diff_text(text, correct_text, dummy_highlighter, verbose)\n   605\t    newdiff = [f\"{saferepr(term, maxsize=42)} is contained here:\"]\n   606\t    for line in diff:\n   607\t        if line.startswith(\"Skipping\"):\n   608\t            continue\n   609\t        if line.startswith(\"- \"):\n   610\t            continue\n   611\t        if line.startswith(\"+ \"):\n   612\t            newdiff.append(\"  \" + line[2:])\n   613\t        else:\n   614\t            newdiff.append(line)\n   615\t    return newdiff\ntesting/test_assertion.py:900:        \"\"\"The faulty empty string repr did trigger an unbound local error in _diff_text.\"\"\"\ntesting/test_assertion.py:900:        \"\"\"The faulty empty string repr did trigger an unbound local error in _diff_text.\"\"\"\ntesting/test_assertion.py:1884:def test_diff_newline_at_end(pytester: Pytester) -> None:\ntesting/test_error_diffs.py:291:def test_error_diff(code: str, expected: str, pytester: Pytester) -> None:\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_21"
+}
+```
+
+## 32. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_23",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=4) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/assertion/util.py; nl -ba src/_pytest/assertion/util.py | sed -n '180,340p'; nl -ba testing/test_assertion.py | sed -n '820,940p'; nl -ba testing/test_assertion.py | sed -n '1840,1910p'\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 33. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=4) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/assertion/util.py; nl -ba src/_pytest/assertion/util.py | sed -n '180,340p'; nl -ba testing/test_assertion.py | sed -n '820,940p'; nl -ba testing/test_assertion.py | sed -n '1840,1910p'\""
+  },
+  "call_ref": "item_23"
+}
+```
+
+## 34. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "44-53 (10)\n283-339 (57)\n   180\t) -> list[str] | None:\n   181\t    \"\"\"Return specialised explanations for some operators/operands.\"\"\"\n   182\t    verbose = config.get_verbosity(Config.VERBOSITY_ASSERTIONS)\n   183\t\n   184\t    # Strings which normalize equal are often hard to distinguish when printed; use ascii() to make this easier.\n   185\t    # See issue #3246.\n   186\t    use_ascii = (\n   187\t        isinstance(left, str)\n   188\t        and isinstance(right, str)\n   189\t        and normalize(\"NFD\", left) == normalize(\"NFD\", right)\n   190\t    )\n   191\t\n   192\t    if verbose > 1:\n   193\t        left_repr = saferepr_unlimited(left, use_ascii=use_ascii)\n   194\t        right_repr = saferepr_unlimited(right, use_ascii=use_ascii)\n   195\t    else:\n   196\t        # XXX: \"15 chars indentation\" is wrong\n   197\t        #      (\"E       AssertionError: assert \"); should use term width.\n   198\t        maxsize = (\n   199\t            80 - 15 - len(op) - 2\n   200\t        ) // 2  # 15 chars indentation, 1 space around op\n   201\t\n   202\t        left_repr = saferepr(left, maxsize=maxsize, use_ascii=use_ascii)\n   203\t        right_repr = saferepr(right, maxsize=maxsize, use_ascii=use_ascii)\n   204\t\n   205\t    summary = f\"{left_repr} {op} {right_repr}\"\n   206\t    highlighter = config.get_terminal_writer()._highlight\n   207\t\n   208\t    explanation = None\n   209\t    try:\n   210\t        if op == \"==\":\n   211\t            explanation = _compare_eq_any(left, right, highlighter, verbose)\n   212\t        elif op == \"not in\":\n   213\t            if istext(left) and istext(right):\n   214\t                explanation = _notin_text(left, right, verbose)\n   215\t        elif op == \"!=\":\n   216\t            if isset(left) and isset(right):\n   217\t                explanation = [\"Both sets are equal\"]\n   218\t        elif op == \">=\":\n   219\t            if isset(left) and isset(right):\n   220\t                explanation = _compare_gte_set(left, right, highlighter, verbose)\n   221\t        elif op == \"<=\":\n   222\t            if isset(left) and isset(right):\n   223\t                explanation = _compare_lte_set(left, right, highlighter, verbose)\n   224\t        elif op == \">\":\n   225\t            if isset(left) and isset(right):\n   226\t                explanation = _compare_gt_set(left, right, highlighter, verbose)\n   227\t        elif op == \"<\":\n   228\t            if isset(left) and isset(right):\n   229\t                explanation = _compare_lt_set(left, right, highlighter, verbose)\n   230\t\n   231\t    except outcomes.Exit:\n   232\t        raise\n   233\t    except Exception:\n   234\t        repr_crash = _pytest._code.ExceptionInfo.from_current()._getreprcrash()\n   235\t        explanation = [\n   236\t            f\"(pytest_assertion plugin: representation of details failed: {repr_crash}.\",\n   237\t            \" Probably an object has a faulty __repr__.)\",\n   238\t        ]\n   239\t\n   240\t    if not explanation:\n   241\t        return None\n   242\t\n   243\t    if explanation[0] != \"\":\n   244\t        explanation = [\"\", *explanation]\n   245\t    return [summary, *explanation]\n   246\t\n   247\t\n   248\tdef _compare_eq_any(\n   249\t    left: Any, right: Any, highlighter: _HighlightFunc, verbose: int = 0\n   250\t) -> list[str]:\n   251\t    explanation = []\n   252\t    if istext(left) and istext(right):\n   253\t        explanation = _diff_text(left, right, highlighter, verbose)\n   254\t    else:\n   255\t        from _pytest.python_api import ApproxBase\n   256\t\n   257\t        if isinstance(left, ApproxBase) or isinstance(right, ApproxBase):\n   258\t            # Although the common order should be obtained == expected, this ensures both ways\n   259\t            approx_side = left if isinstance(left, ApproxBase) else right\n   260\t            other_side = right if isinstance(left, ApproxBase) else left\n   261\t\n   262\t            explanation = approx_side._repr_compare(other_side)\n   263\t        elif type(left) is type(right) and (\n   264\t            isdatacls(left) or isattrs(left) or isnamedtuple(left)\n   265\t        ):\n   266\t            # Note: unlike dataclasses/attrs, namedtuples compare only the\n   267\t            # field values, not the type or field names. But this branch\n   268\t            # intentionally only handles the same-type case, which was often\n   269\t            # used in older code bases before dataclasses/attrs were available.\n   270\t            explanation = _compare_eq_cls(left, right, highlighter, verbose)\n   271\t        elif issequence(left) and issequence(right):\n   272\t            explanation = _compare_eq_sequence(left, right, highlighter, verbose)\n   273\t        elif isset(left) and isset(right):\n   274\t            explanation = _compare_eq_set(left, right, highlighter, verbose)\n   275\t        elif isdict(left) and isdict(right):\n   276\t            explanation = _compare_eq_dict(left, right, highlighter, verbose)\n   277\t\n   278\t        if isiterable(left) and isiterable(right):\n   279\t            expl = _compare_eq_iterable(left, right, highlighter, verbose)\n   280\t            explanation.extend(expl)\n   281\t\n   282\t    return explanation\n   283\t\n   284\t\n   285\t\n   286\t\n   287\t\n   288\t\n   289\t\n   290\t\n   291\t\n   292\t\n   293\t\n   294\t\n   295\t\n   296\t\n   297\t\n   298\t\n   299\t\n   300\t\n   301\t\n   302\t\n   303\t\n   304\t\n   305\t\n   306\t\n   307\t\n   308\t\n   309\t\n   310\t\n   311\t\n   312\t\n   313\t\n   314\t\n   315\t\n   316\t\n   317\t\n   318\t\n   319\t\n   320\t\n   321\t\n   322\t\n   323\t\n   324\t\n   325\t\n   326\t\n   327\t\n   328\t\n   329\t\n   330\t\n   331\t\n   332\t\n   333\t\n   334\t\n   335\t\n   336\t\n   337\t\n   338\t\n   339\t\n   340\tdef _compare_eq_iterable(\n   820\t            \"  )\",\n   821\t        ]\n   822\t        lines = callequal((1, 2, 3), (1, 20, 3), verbose=2)\n   823\t        assert lines == [\n   824\t            \"(1, 2, 3) == (1, 20, 3)\",\n   825\t            \"\",\n   826\t            \"At index 1 diff: 2 != 20\",\n   827\t            \"\",\n   828\t            \"Full diff:\",\n   829\t            \"  (\",\n   830\t            \"      1,\",\n   831\t            \"-     20,\",\n   832\t            \"?      -\",\n   833\t            \"+     2,\",\n   834\t            \"      3,\",\n   835\t            \"  )\",\n   836\t        ]\n   837\t\n   838\t    def test_set(self) -> None:\n   839\t        expl = callequal({0, 1}, {0, 2})\n   840\t        assert expl is not None\n   841\t        assert len(expl) > 1\n   842\t\n   843\t    def test_frozenzet(self) -> None:\n   844\t        expl = callequal(frozenset([0, 1]), {0, 2})\n   845\t        assert expl is not None\n   846\t        assert len(expl) > 1\n   847\t\n   848\t    def test_Sequence(self) -> None:\n   849\t        # Test comparing with a Sequence subclass.\n   850\t        class TestSequence(MutableSequence[int]):\n   851\t            def __init__(self, iterable):\n   852\t                self.elements = list(iterable)\n   853\t\n   854\t            def __getitem__(self, item):\n   855\t                return self.elements[item]\n   856\t\n   857\t            def __len__(self):\n   858\t                return len(self.elements)\n   859\t\n   860\t            def __setitem__(self, item, value):\n   861\t                pass\n   862\t\n   863\t            def __delitem__(self, item):\n   864\t                pass\n   865\t\n   866\t            def insert(self, index, value):\n   867\t                pass\n   868\t\n   869\t        expl = callequal(TestSequence([0, 1]), list([0, 2]))\n   870\t        assert expl is not None\n   871\t        assert len(expl) > 1\n   872\t\n   873\t    def test_list_tuples(self) -> None:\n   874\t        expl = callequal([], [(1, 2)])\n   875\t        assert expl is not None\n   876\t        assert len(expl) > 1\n   877\t        expl = callequal([(1, 2)], [])\n   878\t        assert expl is not None\n   879\t        assert len(expl) > 1\n   880\t\n   881\t    def test_list_bad_repr(self) -> None:\n   882\t        class A:\n   883\t            def __repr__(self):\n   884\t                raise ValueError(42)\n   885\t\n   886\t        expl = callequal([], [A()])\n   887\t        assert expl is not None\n   888\t        assert \"ValueError\" in \"\".join(expl)\n   889\t        expl = callequal({}, {\"1\": A()}, verbose=2)\n   890\t        assert expl is not None\n   891\t        assert expl[0].startswith(\"{} == <[ValueError\")\n   892\t        assert \"raised in repr\" in expl[0]\n   893\t        assert expl[2:] == [\n   894\t            \"(pytest_assertion plugin: representation of details failed:\"\n   895\t            f\" {__file__}:{A.__repr__.__code__.co_firstlineno + 1}: ValueError: 42.\",\n   896\t            \" Probably an object has a faulty __repr__.)\",\n   897\t        ]\n   898\t\n   899\t    def test_one_repr_empty(self) -> None:\n   900\t        \"\"\"The faulty empty string repr did trigger an unbound local error in _diff_text.\"\"\"\n   901\t\n   902\t        class A(str):\n   903\t            def __repr__(self):\n   904\t                return \"\"\n   905\t\n   906\t        expl = callequal(A(), \"\")\n   907\t        assert not expl\n   908\t\n   909\t    def test_repr_no_exc(self) -> None:\n   910\t        expl = callequal(\"foo\", \"bar\")\n   911\t        assert expl is not None\n   912\t        assert \"raised in repr()\" not in \" \".join(expl)\n   913\t\n   914\t    def test_unicode(self) -> None:\n   915\t        assert callequal(\"£€\", \"£\") == [\n   916\t            \"'£€' == '£'\",\n   917\t            \"\",\n   918\t            \"- £\",\n   919\t            \"+ £€\",\n   920\t        ]\n   921\t\n   922\t    def test_nonascii_text(self) -> None:\n   923\t        \"\"\"\n   924\t        :issue: 877\n   925\t        non ascii python2 str caused a UnicodeDecodeError\n   926\t        \"\"\"\n   927\t\n   928\t        class A(str):\n   929\t            def __repr__(self):\n   930\t                return \"\\xff\"\n   931\t\n   932\t        expl = callequal(A(), \"1\")\n   933\t        assert expl == [\"ÿ == '1'\", \"\", \"- 1\"]\n   934\t\n   935\t    def test_format_nonascii_explanation(self) -> None:\n   936\t        assert util.format_explanation(\"λ\")\n   937\t\n   938\t    def test_mojibake(self) -> None:\n   939\t        # issue 429\n   940\t        left = b\"e\"\n  1840\t\n  1841\t    result = pytester.run(sys.executable, *cmdline_args)\n  1842\t    result.stdout.fnmatch_lines(warning_output)\n  1843\t\n  1844\t\n  1845\tdef test_recursion_source_decode(pytester: Pytester) -> None:\n  1846\t    pytester.makepyfile(\n  1847\t        \"\"\"\n  1848\t        def test_something():\n  1849\t            pass\n  1850\t    \"\"\"\n  1851\t    )\n  1852\t    pytester.makeini(\n  1853\t        \"\"\"\n  1854\t        [pytest]\n  1855\t        python_files = *.py\n  1856\t    \"\"\"\n  1857\t    )\n  1858\t    result = pytester.runpytest(\"--collect-only\")\n  1859\t    result.stdout.fnmatch_lines(\n  1860\t        [\n  1861\t            \"  <Module*>\",\n  1862\t        ]\n  1863\t    )\n  1864\t\n  1865\t\n  1866\tdef test_AssertionError_message(pytester: Pytester) -> None:\n  1867\t    pytester.makepyfile(\n  1868\t        \"\"\"\n  1869\t        def test_hello():\n  1870\t            x,y = 1,2\n  1871\t            assert 0, (x,y)\n  1872\t    \"\"\"\n  1873\t    )\n  1874\t    result = pytester.runpytest()\n  1875\t    result.stdout.fnmatch_lines(\n  1876\t        \"\"\"\n  1877\t        *def test_hello*\n  1878\t        *assert 0, (x,y)*\n  1879\t        *AssertionError: (1, 2)*\n  1880\t    \"\"\"\n  1881\t    )\n  1882\t\n  1883\t\n  1884\tdef test_diff_newline_at_end(pytester: Pytester) -> None:\n  1885\t    pytester.makepyfile(\n  1886\t        r\"\"\"\n  1887\t        def test_diff():\n  1888\t            assert 'asdf' == 'asdf\\n'\n  1889\t    \"\"\"\n  1890\t    )\n  1891\t\n  1892\t    result = pytester.runpytest()\n  1893\t    result.stdout.fnmatch_lines(\n  1894\t        r\"\"\"\n  1895\t        *assert 'asdf' == 'asdf\\n'\n  1896\t        *  - asdf\n  1897\t        *  ?     -\n  1898\t        *  + asdf\n  1899\t    \"\"\"\n  1900\t    )\n  1901\t\n  1902\t\n  1903\t@pytest.mark.filterwarnings(\"default\")\n  1904\tdef test_assert_tuple_warning(pytester: Pytester) -> None:\n  1905\t    msg = \"assertion is always true\"\n  1906\t    pytester.makepyfile(\n  1907\t        \"\"\"\n  1908\t        def test_tuple():\n  1909\t            assert(False, 'you shall not pass')\n  1910\t    \"\"\"\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_23"
+}
+```
+
+## 35. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_26",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -R -n -E 'allow_unwrapped|flatten_subgroups|RaisesGroup|RaisesExc' testing doc/en | head -n 300; grep -n '\"'^version'\"\\\\|dynamic.*version' pyproject.toml | head\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 36. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -R -n -E 'allow_unwrapped|flatten_subgroups|RaisesGroup|RaisesExc' testing doc/en | head -n 300; grep -n '\"'^version'\"\\\\|dynamic.*version' pyproject.toml | head\""
+  },
+  "call_ref": "item_26"
+}
+```
+
+## 37. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "testing/typing_raises_group.py:11:from pytest import RaisesExc\ntesting/typing_raises_group.py:12:from pytest import RaisesGroup\ntesting/typing_raises_group.py:28:def check_raisesexc_typevar_default(e: RaisesExc) -> None:\ntesting/typing_raises_group.py:36:    with RaisesGroup(ValueError) as e:\ntesting/typing_raises_group.py:44:    if RaisesGroup(ValueError).matches(exc):\ntesting/typing_raises_group.py:48:    if RaisesGroup(KeyboardInterrupt).matches(exc):\ntesting/typing_raises_group.py:60:    if RaisesGroup(ValueError).matches(e):\ntesting/typing_raises_group.py:70:    RaisesExc()  # type: ignore\ntesting/typing_raises_group.py:71:    RaisesExc(ValueError)\ntesting/typing_raises_group.py:72:    RaisesExc(ValueError, match=\"regex\")\ntesting/typing_raises_group.py:73:    RaisesExc(ValueError, match=\"regex\", check=check_exc)\ntesting/typing_raises_group.py:74:    RaisesExc(match=\"regex\")\ntesting/typing_raises_group.py:75:    RaisesExc(check=check_exc)\ntesting/typing_raises_group.py:76:    RaisesExc(ValueError, match=\"regex\")\ntesting/typing_raises_group.py:77:    RaisesExc(match=\"regex\", check=check_exc)\ntesting/typing_raises_group.py:83:    RaisesExc(FileNotFoundError, check=check_filenotfound)\ntesting/typing_raises_group.py:84:    RaisesExc(ValueError, check=check_filenotfound)  # type: ignore\ntesting/typing_raises_group.py:85:    RaisesExc(check=check_filenotfound)  # type: ignore\ntesting/typing_raises_group.py:86:    RaisesExc(FileNotFoundError, match=\"regex\", check=check_filenotfound)\ntesting/typing_raises_group.py:89:    RaisesExc(expected_exception=ValueError)  # type: ignore\ntesting/typing_raises_group.py:91:    RaisesExc(ValueError, \"regex\")  # type: ignore\ntesting/typing_raises_group.py:95:    \"\"\"Check type narrowing on the `check` argument to `RaisesGroup`.\ntesting/typing_raises_group.py:108:    RaisesGroup(BaseException, check=handle_exc)\ntesting/typing_raises_group.py:109:    RaisesGroup(BaseException, check=handle_kbi)  # type: ignore\ntesting/typing_raises_group.py:111:    RaisesGroup(Exception, check=handle_exc)\ntesting/typing_raises_group.py:112:    RaisesGroup(Exception, check=handle_value)  # type: ignore\ntesting/typing_raises_group.py:114:    RaisesGroup(KeyboardInterrupt, check=handle_exc)\ntesting/typing_raises_group.py:115:    RaisesGroup(KeyboardInterrupt, check=handle_kbi)\ntesting/typing_raises_group.py:116:    RaisesGroup(KeyboardInterrupt, check=handle_value)  # type: ignore\ntesting/typing_raises_group.py:118:    RaisesGroup(ValueError, check=handle_exc)\ntesting/typing_raises_group.py:119:    RaisesGroup(ValueError, check=handle_kbi)  # type: ignore\ntesting/typing_raises_group.py:120:    RaisesGroup(ValueError, check=handle_value)\ntesting/typing_raises_group.py:122:    RaisesGroup(ValueError, KeyboardInterrupt, check=handle_exc)\ntesting/typing_raises_group.py:123:    RaisesGroup(ValueError, KeyboardInterrupt, check=handle_kbi)  # type: ignore\ntesting/typing_raises_group.py:124:    RaisesGroup(ValueError, KeyboardInterrupt, check=handle_value)  # type: ignore\ntesting/typing_raises_group.py:136:    RaisesGroup(ValueError, check=handle_group_value)\ntesting/typing_raises_group.py:138:    RaisesGroup(Exception, check=handle_group)\ntesting/typing_raises_group.py:142:    with RaisesGroup(RaisesExc(ValueError)) as e:\ntesting/typing_raises_group.py:149:    with RaisesGroup(RaisesGroup(ValueError)) as excinfo:\ntesting/typing_raises_group.py:167:    \"\"\"Check nested RaisesGroup with .matches\"\"\"\ntesting/typing_raises_group.py:173:    if RaisesGroup(RaisesGroup(ValueError)).matches(exc):\ntesting/typing_raises_group.py:178:    a = RaisesGroup(ValueError, ValueError)\ntesting/typing_raises_group.py:179:    b = RaisesGroup(RaisesExc(ValueError), RaisesExc(ValueError))\ntesting/typing_raises_group.py:180:    c = RaisesGroup(ValueError, RaisesExc(ValueError))\ntesting/typing_raises_group.py:182:    d: RaisesGroup[ValueError]\ntesting/typing_raises_group.py:191:    a = RaisesGroup(RaisesExc(ValueError), RaisesExc(TypeError))\ntesting/typing_raises_group.py:192:    b = RaisesGroup(RaisesExc(ValueError), TypeError)\ntesting/typing_raises_group.py:193:    c = RaisesGroup(ValueError, TypeError)\ntesting/typing_raises_group.py:195:    d: RaisesGroup[Exception]\ntesting/typing_raises_group.py:203:    # allow_unwrapped=True does not allow:\ntesting/typing_raises_group.py:205:    RaisesGroup(ValueError, TypeError, allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:206:    # nested RaisesGroup\ntesting/typing_raises_group.py:207:    RaisesGroup(RaisesGroup(ValueError), allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:209:    RaisesGroup(ValueError, match=\"foo\", allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:211:    RaisesGroup(ValueError, check=bool, allow_unwrapped=True)  # type: ignore\ntesting/typing_raises_group.py:213:    RaisesGroup(ValueError, allow_unwrapped=True)\ntesting/typing_raises_group.py:214:    RaisesGroup(ValueError, allow_unwrapped=True, flatten_subgroups=True)\ntesting/typing_raises_group.py:215:    RaisesGroup(RaisesExc(ValueError), allow_unwrapped=True)\ntesting/typing_raises_group.py:217:    # flatten_subgroups=True does not allow nested RaisesGroup\ntesting/typing_raises_group.py:218:    RaisesGroup(RaisesGroup(ValueError), flatten_subgroups=True)  # type: ignore\ntesting/typing_raises_group.py:220:    RaisesGroup(ValueError, TypeError, flatten_subgroups=True)\ntesting/typing_raises_group.py:221:    RaisesGroup(ValueError, match=\"foo\", flatten_subgroups=True)\ntesting/typing_raises_group.py:222:    RaisesGroup(ValueError, check=bool, flatten_subgroups=True)\ntesting/typing_raises_group.py:223:    RaisesGroup(ValueError, flatten_subgroups=True)\ntesting/typing_raises_group.py:224:    RaisesGroup(RaisesExc(ValueError), flatten_subgroups=True)\ntesting/typing_raises_group.py:227:    RaisesGroup(RaisesGroup(ValueError))\ntesting/typing_raises_group.py:231:    with RaisesGroup(RaisesGroup(RaisesGroup(ValueError))) as e:\ntesting/typing_raises_group.py:238:        RaisesGroup(ValueError).check,\ntesting/python/raises.py:231:            with pytest.RaisesExc(ValueError):\ntesting/python/raises.py:234:            with pytest.RaisesGroup(ValueError, allow_unwrapped=True):\ndoc/en/how-to/assert.rst:178:When expecting a :exc:`BaseExceptionGroup` or :exc:`ExceptionGroup` you can use :class:`pytest.RaisesGroup`:\ndoc/en/how-to/assert.rst:183:        with pytest.RaisesGroup(ValueError):\ndoc/en/how-to/assert.rst:185:        with pytest.RaisesGroup(ValueError, TypeError):\ndoc/en/how-to/assert.rst:194:        with pytest.RaisesGroup(BaseException, match=\"my group msg\"):\ndoc/en/how-to/assert.rst:196:        with pytest.RaisesGroup(\ndoc/en/how-to/assert.rst:201:It is strict about structure and unwrapped exceptions, unlike :ref:`except* <except_star>`, so you might want to set the ``flatten_subgroups`` and/or ``allow_unwrapped`` parameters.\ndoc/en/how-to/assert.rst:206:        with pytest.RaisesGroup(pytest.RaisesGroup(ValueError)):\ndoc/en/how-to/assert.rst:208:        with pytest.RaisesGroup(ValueError, flatten_subgroups=True):\ndoc/en/how-to/assert.rst:210:        with pytest.RaisesGroup(ValueError, allow_unwrapped=True):\ndoc/en/how-to/assert.rst:213:To specify more details about the contained exception you can use :class:`pytest.RaisesExc`\ndoc/en/how-to/assert.rst:218:        with pytest.RaisesGroup(pytest.RaisesExc(ValueError, match=\"foo\")):\ndoc/en/how-to/assert.rst:221:They both supply a method :meth:`pytest.RaisesGroup.matches` :meth:`pytest.RaisesExc.matches` if you want to do matching outside of using it as a contextmanager. This can be helpful when checking ``.__context__`` or ``.__cause__``.\ndoc/en/how-to/assert.rst:228:        if RaisesGroup(ValueError).matches(exc_group):\ndoc/en/how-to/assert.rst:231:        r = RaisesExc(ValueError)\ndoc/en/how-to/assert.rst:234:Check the documentation on :class:`pytest.RaisesGroup` and :class:`pytest.RaisesExc` for more details and examples.\ndoc/en/how-to/assert.rst:261:   You should instead use :class:`pytest.RaisesGroup`, see :ref:`assert-matching-exception-groups`.\ndoc/en/how-to/assert.rst:359:You can also use :class:`pytest.RaisesGroup`:\ndoc/en/how-to/assert.rst:367:    @pytest.mark.xfail(raises=RaisesGroup(IndexError))\ndoc/en/changelog.rst:136:- `#11538 <https://github.com/pytest-dev/pytest/issues/11538>`_: Added :class:`pytest.RaisesGroup` as an equivalent to :func:`pytest.raises` for expecting :exc:`ExceptionGroup`. Also adds :class:`pytest.RaisesExc` which is now the logic behind :func:`pytest.raises` and used as parameter to :class:`pytest.RaisesGroup`. ``RaisesGroup`` includes the ability to specify multiple different expected exceptions, the structure of nested exception groups, and flags for emulating :ref:`except* <except_star>`. See :ref:`assert-matching-exception-groups` and docstrings for more information.\ndoc/en/changelog.rst:142:- `#12504 <https://github.com/pytest-dev/pytest/issues/12504>`_: :func:`pytest.mark.xfail` now accepts :class:`pytest.RaisesGroup` for the ``raises`` parameter when you expect an exception group. You can also pass a :class:`pytest.RaisesExc` if you e.g. want to make use of the ``check`` parameter.\ndoc/en/reference/reference.rst:1037:RaisesExc\ndoc/en/reference/reference.rst:1040:.. autoclass:: pytest.RaisesExc()\ndoc/en/reference/reference.rst:1045:RaisesGroup\ndoc/en/reference/reference.rst:1049:.. autoclass:: pytest.RaisesGroup()\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_26"
+}
+```
+
+## 38. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_28",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_target",
+    "arguments": {
+      "items": [
+        "src/_pytest/raises.py =",
+        "src/_pytest/assertion/util.py ="
+      ]
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 39. assistant / tool_call
+
+```
+{
+  "name": "ortg_target",
+  "server": "ortg",
+  "arguments": {
+    "items": [
+      "src/_pytest/raises.py =",
+      "src/_pytest/assertion/util.py ="
+    ]
+  },
+  "call_ref": "item_28"
+}
+```
+
+## 40. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已写入 src/_pytest/raises.py 的目标纲要（同现在：只改实现，纲要不变）\n（只改实现才能用 =：这次若给文件新增对外接口——Rust 的 pub 项、Go 的导出名、JS/TS 的 export——要写完整目标纲要并在 API 里列出，否则 ortg_update 会拒收。）\n已写入 src/_pytest/assertion/util.py 的目标纲要（同现在：只改实现，纲要不变）\n（只改实现才能用 =：这次若给文件新增对外接口——Rust 的 pub 项、Go 的导出名、JS/TS 的 export——要写完整目标纲要并在 API 里列出，否则 ortg_update 会拒收。）"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_28"
+}
+```
+
+## 41. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_29",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_review",
+    "arguments": {},
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 42. assistant / tool_call
+
+```
+{
+  "name": "ortg_review",
+  "server": "ortg",
+  "arguments": {},
+  "call_ref": "item_29"
+}
+```
+
+## 43. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "ortg: 第 1 次核对改动计划，涉及 2 个文件：\n- src/_pytest/assertion/util.py：只改实现，改完纲要不变（纲要见全局纲要）\n- src/_pytest/raises.py：只改实现，改完纲要不变（纲要见全局纲要）\n\n按全局纲要，下列文件的 Uses 依赖计划里的文件，却没有目标纲要——逐个判断：要跟着改的补目标纲要，不受影响的不用管：\n- .coveragerc（Uses 依赖 src/_pytest/assertion/util.py、src/_pytest/raises.py）\n- doc/en/example/assertion/failure_demo.py（Uses 依赖 src/_pytest/assertion/util.py）\n- doc/en/example/reportingdemo.rst（Uses 依赖 src/_pytest/assertion/util.py）\n- doc/en/how-to/assert.rst（Uses 依赖 src/_pytest/assertion/util.py、src/_pytest/raises.py）\n- src/_pytest/assertion/__init__.py（Uses 依赖 src/_pytest/assertion/util.py）\n- src/_pytest/assertion/rewrite.py（Uses 依赖 src/_pytest/assertion/util.py）\n- src/_pytest/freeze_support.py（Uses 依赖 src/_pytest/assertion/util.py、src/_pytest/raises.py）\n- src/_pytest/mark/structures.py（Uses 依赖 src/_pytest/raises.py）\n- src/_pytest/skipping.py（Uses 依赖 src/_pytest/raises.py）\n- testing/example_scripts/dataclasses/test_compare_dataclasses.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/example_scripts/dataclasses/test_compare_dataclasses_field_comparison_off.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/example_scripts/dataclasses/test_compare_dataclasses_verbose.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/example_scripts/dataclasses/test_compare_dataclasses_with_custom_eq.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/example_scripts/dataclasses/test_compare_initvar.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/example_scripts/dataclasses/test_compare_recursive_dataclasses.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/example_scripts/dataclasses/test_compare_two_different_dataclasses.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/python/approx.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/python/raises.py（Uses 依赖 src/_pytest/raises.py）\n- testing/test_assertion.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/test_assertrewrite.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/test_error_diffs.py（Uses 依赖 src/_pytest/assertion/util.py）\n- testing/test_meta.py（Uses 依赖 src/_pytest/assertion/util.py、src/_pytest/raises.py）\n- testing/typing_raises_group.py（Uses 依赖 src/_pytest/raises.py）\n\n逐项核对（对照全局纲要，不只看上面列出的）：\n1. 接口与调用方：改了名字、参数、返回值或行为的，所有调用方都在计划里吗？\n2. 数据与约定：数据格式、配置项、协议、文件格式的两端是否同改？\n3. 纲要头约定：标签字典、Constraints 配额、模块归属守住了吗？\n4. 新建与删除：新文件有人引用吗？删掉的文件还有人用吗？\n5. 测试与文档：要跟着改的测试、README、规则文档在计划里吗？\n6. 目标纲要本身：每行写的是改完后的 Role/Uses/API/Constraints，而不是待核查的事项吗？\n7. 守护测试：计划里文件的纲要 Constraints 点名了哪些测试（\"必须保持 X（测试名）\"）？改完要逐个运行；会改变被测试锁定的行为的，回到需求确认——需求没有明确要求改变，就改实现，不改测试期望值。\n8. 测试调用的入口：纲要 API 里测试也调用的函数，改动后签名与可见性还在吗？不得为消除未使用警告给它加 cfg(test)/条件编译或收窄可见性。\n9. 执行点：同一个参数或限额会不会被多层同时执行（一层改了，另一层还在兜底，本地测试因此测不出差别）？计划里写明唯一执行点了吗？改了参数流向的文件不要用 = 。\n10. 收尾验证：全部改完、提交之前，按仓库自己的测试配置跑一次不收窄的整包测试（不加 -k、不只跑单个文件或子目录、不用 -o addopts 等改掉收集范围），新出现的失败修掉；删掉或改名的名字，确认没有测试还在导入它；按依赖库版本整类跳过的测试临时去掉门控跑一遍，跑不了的记成「本地验证盲区」，不算通过；测试另起进程调用的构建产物，确认是按测试所用的配置从当前源码新构建的。\n\n任务依赖闭环：发现仓库缺失符号、导入失败或其他依赖缺口，按实际调用路径与可见测试判断是否阻断目标功能或验收。阻断的纳入修复计划，不能仅因文件未点名或改动前已缺失而排除；确与任务无关的按证据说明。恢复或迁移缺失符号后，全库搜索实际使用点，逐个消费者核对导入、名称绑定与调用契约；不能只补定义或修一个分支，遗漏的消费者也要纳入计划并验证。\n多入口契约：同一行为由 setter、预检、包装或快捷分支处理时，按入口与触发条件核对可见契约；提前校验或迁移后，异常类型、已明确给出的词句与输出格式仍须满足各入口约定，并分别覆盖各入口，不只验证底层函数。按任务实际使用的后端与通信入口运行验收；涉及 HTTP、SQLite 等不同实现时分别检查，另一后端或分支通过不能替代任务实际入口的验证。\n最终验证：为绕过仓库缺失实现而临时注入或替换的函数、对象只作诊断。提交或结束任务前，移除这类替代，在新进程中按最终持久源码运行验收；仅替代后的自测通过不算最终源码通过。\n有要补、要改的，用 ortg_target 改完再调用 ortg_review；核对没发现问题，也再调用一次 ortg_review 确认——连续两次核对看到的计划一样，才解锁这些文件开始改代码。"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_29"
+}
+```
+
+## 44. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_31",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_review",
+    "arguments": {},
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 45. assistant / tool_call
+
+```
+{
+  "name": "ortg_review",
+  "server": "ortg",
+  "arguments": {},
+  "call_ref": "item_31"
+}
+```
+
+## 46. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "ortg: 第 2 次核对改动计划，涉及 2 个文件：\n- src/_pytest/assertion/util.py：目标与本计划上次核对时相同\n- src/_pytest/raises.py：目标与本计划上次核对时相同\n（另有 23 个依赖计划文件、没有目标纲要的文件，上次核对已列出）\n\n计划与上次核对一致，已收敛：以上 2 个文件解锁，可以开始改代码（改完每个文件照常用 ortg_update 提交纲要）。计划之外再动多个文件仍会被拦，要改就补目标纲要再核对。"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_31"
+}
+```
+
+## 47. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_33",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=4) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/raises.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 48. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=4) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/raises.py\""
+  },
+  "call_ref": "item_33"
+}
+```
+
+## 49. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "370-375 (6)\n1227-1254 (28)\n1267-1410 (144)\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_33"
+}
+```
+
+## 50. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_36",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"sed -n '110,155p' doc/en/changelog.rst; sed -n '160,245p' doc/en/how-to/assert.rst; grep -R -n 'matched exception\\\\|did not find a match\\\\|Greedy' doc testing src | head -n 100\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 51. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"sed -n '110,155p' doc/en/changelog.rst; sed -n '160,245p' doc/en/how-to/assert.rst; grep -R -n 'matched exception\\\\|did not find a match\\\\|Greedy' doc testing src | head -n 100\""
+  },
+  "call_ref": "item_36"
+}
+```
+
+## 52. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "\n- `#11372 <https://github.com/pytest-dev/pytest/issues/11372>`_: Async tests will now fail, instead of warning+skipping, if you don't have any suitable plugin installed.\n\n\n- `#12346 <https://github.com/pytest-dev/pytest/issues/12346>`_: Tests will now fail, instead of raising a warning, if they return any value other than None.\n\n\n- `#12874 <https://github.com/pytest-dev/pytest/issues/12874>`_: We dropped support for Python 3.8 following its end of life (2024-10-07).\n\n\n- `#12960 <https://github.com/pytest-dev/pytest/issues/12960>`_: Test functions containing a yield now cause an explicit error. They have not been run since pytest 4.0, and were previously marked as an expected failure and deprecation warning.\n\n  See :ref:`the docs <yield tests deprecated>` for more information.\n\n\n\nDeprecations (removal in next major release)\n--------------------------------------------\n\n- `#10839 <https://github.com/pytest-dev/pytest/issues/10839>`_: Requesting an asynchronous fixture without a `pytest_fixture_setup` hook that resolves it will now give a DeprecationWarning. This most commonly happens if a sync test requests an async fixture. This should have no effect on a majority of users with async tests or fixtures using async pytest plugins, but may affect non-standard hook setups or ``autouse=True``. For guidance on how to work around this warning see :ref:`sync-test-async-fixture`.\n\n\n\nNew features\n------------\n\n- `#11538 <https://github.com/pytest-dev/pytest/issues/11538>`_: Added :class:`pytest.RaisesGroup` as an equivalent to :func:`pytest.raises` for expecting :exc:`ExceptionGroup`. Also adds :class:`pytest.RaisesExc` which is now the logic behind :func:`pytest.raises` and used as parameter to :class:`pytest.RaisesGroup`. ``RaisesGroup`` includes the ability to specify multiple different expected exceptions, the structure of nested exception groups, and flags for emulating :ref:`except* <except_star>`. See :ref:`assert-matching-exception-groups` and docstrings for more information.\n\n\n- `#12081 <https://github.com/pytest-dev/pytest/issues/12081>`_: Added :fixture:`capteesys` to capture AND pass output to next handler set by ``--capture=``.\n\n\n- `#12504 <https://github.com/pytest-dev/pytest/issues/12504>`_: :func:`pytest.mark.xfail` now accepts :class:`pytest.RaisesGroup` for the ``raises`` parameter when you expect an exception group. You can also pass a :class:`pytest.RaisesExc` if you e.g. want to make use of the ``check`` parameter.\n\n\n- `#12713 <https://github.com/pytest-dev/pytest/issues/12713>`_: New `--force-short-summary` option to force condensed summary output regardless of verbosity level.\n\n  This lets users still see condensed summary output of failures for quick reference in log files from job outputs, being especially useful if non-condensed output is very verbose.\n\n\n- `#12749 <https://github.com/pytest-dev/pytest/issues/12749>`_: pytest traditionally collects classes/functions in the test module namespace even if they are imported from another file.\n\n  For example:\n\n  .. code-block:: python\n\n\n\n    def test_match():\n        with pytest.raises(ValueError, match=r\".* 123 .*\"):\n            myfunc()\n\nNotes:\n\n* The ``match`` parameter is matched with the :func:`re.search`\n  function, so in the above example ``match='123'`` would have worked as well.\n* The ``match`` parameter also matches against `PEP-678 <https://peps.python.org/pep-0678/>`__ ``__notes__``.\n\n\n.. _`assert-matching-exception-groups`:\n\nAssertions about expected exception groups\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nWhen expecting a :exc:`BaseExceptionGroup` or :exc:`ExceptionGroup` you can use :class:`pytest.RaisesGroup`:\n\n.. code-block:: python\n\n    def test_exception_in_group():\n        with pytest.RaisesGroup(ValueError):\n            raise ExceptionGroup(\"group msg\", [ValueError(\"value msg\")])\n        with pytest.RaisesGroup(ValueError, TypeError):\n            raise ExceptionGroup(\"msg\", [ValueError(\"foo\"), TypeError(\"bar\")])\n\n\nIt accepts a ``match`` parameter, that checks against the group message, and a ``check`` parameter that takes an arbitrary callable which it passes the group to, and only succeeds if the callable returns ``True``.\n\n.. code-block:: python\n\n    def test_raisesgroup_match_and_check():\n        with pytest.RaisesGroup(BaseException, match=\"my group msg\"):\n            raise BaseExceptionGroup(\"my group msg\", [KeyboardInterrupt()])\n        with pytest.RaisesGroup(\n            Exception, check=lambda eg: isinstance(eg.__cause__, ValueError)\n        ):\n            raise ExceptionGroup(\"\", [TypeError()]) from ValueError()\n\nIt is strict about structure and unwrapped exceptions, unlike :ref:`except* <except_star>`, so you might want to set the ``flatten_subgroups`` and/or ``allow_unwrapped`` parameters.\n\n.. code-block:: python\n\n    def test_structure():\n        with pytest.RaisesGroup(pytest.RaisesGroup(ValueError)):\n            raise ExceptionGroup(\"\", (ExceptionGroup(\"\", (ValueError(),)),))\n        with pytest.RaisesGroup(ValueError, flatten_subgroups=True):\n            raise ExceptionGroup(\"1st group\", [ExceptionGroup(\"2nd group\", [ValueError()])])\n        with pytest.RaisesGroup(ValueError, allow_unwrapped=True):\n            raise ValueError\n\nTo specify more details about the contained exception you can use :class:`pytest.RaisesExc`\n\n.. code-block:: python\n\n    def test_raises_exc():\n        with pytest.RaisesGroup(pytest.RaisesExc(ValueError, match=\"foo\")):\n            raise ExceptionGroup(\"\", (ValueError(\"foo\")))\n\nThey both supply a method :meth:`pytest.RaisesGroup.matches` :meth:`pytest.RaisesExc.matches` if you want to do matching outside of using it as a contextmanager. This can be helpful when checking ``.__context__`` or ``.__cause__``.\n\n.. code-block:: python\n\n    def test_matches():\n        exc = ValueError()\n        exc_group = ExceptionGroup(\"\", [exc])\n        if RaisesGroup(ValueError).matches(exc_group):\n            ...\n        # helpful error is available in `.fail_reason` if it fails to match\n        r = RaisesExc(ValueError)\n        assert r.matches(e), r.fail_reason\n\nCheck the documentation on :class:`pytest.RaisesGroup` and :class:`pytest.RaisesExc` for more details and examples.\n\n``ExceptionInfo.group_contains()``\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n.. warning::\n\n   This helper makes it easy to check for the presence of specific exceptions, but it is very bad for checking that the group does *not* contain *any other exceptions*. So this will pass:\n\n    .. code-block:: python\n\n       class EXTREMELYBADERROR(BaseException):\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_36"
+}
+```
+
+## 53. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_38",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/assertion/util.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 54. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_38",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/assertion/util.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_38"
+}
+```
+
+## 55. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_39",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "path": "src/_pytest/assertion/util.py",
+      "outline": "util.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。"
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 56. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "path": "src/_pytest/assertion/util.py",
+    "outline": "util.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。"
+  },
+  "call_ref": "item_39"
+}
+```
+
+## 57. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已提交 src/_pytest/assertion/util.py 的纲要，指纹已前移，状态：对齐"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_39"
+}
+```
+
+## 58. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_43",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -n '\\\\bindent(' src/_pytest/raises.py; grep -n '\\\\bNotChecked\\\\|ResultHolder\\\\|possible_match' src/_pytest/raises.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 59. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -n '\\\\bindent(' src/_pytest/raises.py; grep -n '\\\\bNotChecked\\\\|ResultHolder\\\\|possible_match' src/_pytest/raises.py\""
+  },
+  "call_ref": "item_43"
+}
+```
+
+## 60. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "1461:class NotChecked:\n1462:    \"\"\"Singleton for unchecked values in ResultHolder\"\"\"\n1465:class ResultHolder:\n1467:    Used in RaisesGroup._check_exceptions and possible_match.\n1477:        self.results: list[list[str | type[NotChecked] | None]] = [\n1478:            [NotChecked for _ in expected_exceptions] for _ in actual_exceptions\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_43"
+}
+```
+
+## 61. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_46",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 62. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_46",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_46"
+}
+```
+
+## 63. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_50",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"sed -n '1215,1280p' src/_pytest/raises.py | cat -n\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 64. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"sed -n '1215,1280p' src/_pytest/raises.py | cat -n\""
+  },
+  "call_ref": "item_50"
+}
+```
+
+## 65. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "     1\t            ):\n     2\t                self._fail_reason = reason + (\n     3\t                    f\", but did return True for the expected {self._repr_expected(expected)}.\"\n     4\t                    f\" You might want RaisesGroup(RaisesExc({expected.__name__}, check=<...>))\"\n     5\t                )\n     6\t            else:\n     7\t                self._fail_reason = reason\n     8\t            return False\n     9\t\n    10\t        return True\n    11\t\n    12\t\n    13\t\n    14\t\n    15\t\n    16\t\n    17\t\n    18\t\n    19\t\n    20\t\n    21\t\n    22\t\n    23\t\n    24\t\n    25\t\n    26\t\n    27\t\n    28\t\n    29\t\n    30\t\n    31\t\n    32\t\n    33\t\n    34\t\n    35\t\n    36\t\n    37\t\n    38\t\n    39\t    @overload\n    40\t    def _check_exceptions(\n    41\t        self: RaisesGroup[ExcT_1],\n    42\t        _exception: Exception,\n    43\t        actual_exceptions: Sequence[Exception],\n    44\t    ) -> TypeGuard[ExceptionGroup[ExcT_1]]: ...\n    45\t    @overload\n    46\t    def _check_exceptions(\n    47\t        self: RaisesGroup[BaseExcT_1],\n    48\t        _exception: BaseException,\n    49\t        actual_exceptions: Sequence[BaseException],\n    50\t    ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...\n    51\t\n    52\t\n    53\t\n    54\t\n    55\t\n    56\t\n    57\t\n    58\t\n    59\t\n    60\t\n    61\t\n    62\t\n    63\t\n    64\t\n    65\t\n    66\t\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_50"
+}
+```
+
+## 66. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "type": "error",
+    "message": "Reconnecting... 2/5 (request timed out)"
+  }
+}
+```
+
+## 67. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "type": "error",
+    "message": "Reconnecting... 3/5 (request timed out)"
+  }
+}
+```
+
+## 68. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "type": "error",
+    "message": "Reconnecting... 4/5 (request timed out)"
+  }
+}
+```
+
+## 69. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "type": "error",
+    "message": "Reconnecting... 5/5 (request timed out)"
+  }
+}
+```
+
+## 70. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "id": "item_52",
+    "type": "error",
+    "message": "Falling back from WebSockets to HTTPS transport. request timed out"
+  },
+  "message_ref": "item_52"
+}
+```
+
+## 71. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_54",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 72. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_54",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_54"
+}
+```
+
+## 73. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_56",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 74. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_56",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_56"
+}
+```
+
+## 75. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_58",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -n 'def _check_expected\\\\|def _check_exceptions\\\\|def __exit__' src/_pytest/raises.py; nl -ba src/_pytest/raises.py | sed -n '670,850p'; nl -ba src/_pytest/raises.py | sed -n '1230,1440p'\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 76. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -n 'def _check_expected\\\\|def _check_exceptions\\\\|def __exit__' src/_pytest/raises.py; nl -ba src/_pytest/raises.py | sed -n '670,850p'; nl -ba src/_pytest/raises.py | sed -n '1230,1440p'\""
+  },
+  "call_ref": "item_58"
+}
+```
+
+## 77. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "697:    def _check_exceptions(\n815:    def __exit__(\n1371:    def _check_expected(\n1392:    def _check_exceptions(\n1398:    def _check_exceptions(\n1547:    def __exit__(\n   670\t        if not self._check_match(exception):\n   671\t            return False\n   672\t\n   673\t        return self._check_check(exception)\n   674\t\n   675\t    def __repr__(self) -> str:\n   676\t        parameters = []\n   677\t        if self.expected_exceptions:\n   678\t            parameters.append(_exception_type_name(self.expected_exceptions))\n   679\t        if self.match is not None:\n   680\t            # If no flags were specified, discard the redundant re.compile() here.\n   681\t            parameters.append(\n   682\t                f\"match={_match_pattern(self.match)!r}\",\n   683\t            )\n   684\t        if self.check is not None:\n   685\t            parameters.append(f\"check={repr_callable(self.check)}\")\n   686\t        return f\"RaisesExc({', '.join(parameters)})\"\n   687\t\n   688\t    def _check_type(self, exception: BaseException) -> TypeGuard[BaseExcT_co_default]:\n   689\t        self._fail_reason = _check_raw_type(self.expected_exceptions, exception)\n   690\t        return self._fail_reason is None\n   691\t\n   692\t    def __enter__(self) -> ExceptionInfo[BaseExcT_co_default]:\n   693\t        self.excinfo: ExceptionInfo[BaseExcT_co_default] = ExceptionInfo.for_later()\n   694\t        return self.excinfo\n   695\t\n   696\t    # TODO: move common code into superclass\n   697\t    def _check_exceptions(\n   698\t        self,\n   699\t        _exception: BaseException,\n   700\t        actual_exceptions: Sequence[BaseException],\n   701\t    ) -> bool:\n   702\t        \"\"\"Greedily pair expected and actual exceptions and explain mismatches.\"\"\"\n   703\t        results = ResultHolder(self.expected_exceptions, actual_exceptions)\n   704\t        remaining_actual = list(range(len(actual_exceptions)))\n   705\t        failed_expected: list[int] = []\n   706\t        matches: list[tuple[int, int]] = []\n   707\t\n   708\t        for expected_index, expected in enumerate(self.expected_exceptions):\n   709\t            for remaining_index, actual_index in enumerate(remaining_actual):\n   710\t                result = self._check_expected(\n   711\t                    cast(\n   712\t                        \"type[BaseException] | AbstractRaises[BaseException]\",\n   713\t                        expected,\n   714\t                    ),\n   715\t                    actual_exceptions[actual_index],\n   716\t                )\n   717\t                results.set_result(expected_index, actual_index, result)\n   718\t                if result is None:\n   719\t                    matches.append((expected_index, actual_index))\n   720\t                    remaining_actual.pop(remaining_index)\n   721\t                    break\n   722\t            else:\n   723\t                failed_expected.append(expected_index)\n   724\t\n   725\t        if not failed_expected and not remaining_actual:\n   726\t            return True\n   727\t\n   728\t        # Complete the matrix only after the greedy pass fails. This supports\n   729\t        # detailed diagnostics and identifies failures caused by greedy order.\n   730\t        for actual_index, actual in enumerate(actual_exceptions):\n   731\t            for expected_index, expected in enumerate(self.expected_exceptions):\n   732\t                if results.has_result(expected_index, actual_index):\n   733\t                    continue\n   734\t                result = self._check_expected(\n   735\t                    cast(\n   736\t                        \"type[BaseException] | AbstractRaises[BaseException]\",\n   737\t                        expected,\n   738\t                    ),\n   739\t                    actual,\n   740\t                )\n   741\t                results.set_result(expected_index, actual_index, result)\n   742\t\n   743\t        matched_count = len(matches)\n   744\t        matched = (\n   745\t            f\"{matched_count} matched exception\"\n   746\t            f\"{'s' if matched_count != 1 else ''}. \"\n   747\t            if matched_count\n   748\t            else \"\"\n   749\t        )\n   750\t\n   751\t        if len(failed_expected) == 1 and len(remaining_actual) == 1:\n   752\t            reason = results.get_result(failed_expected[0], remaining_actual[0])\n   753\t            assert isinstance(reason, str)\n   754\t            self._fail_reason = matched + reason\n   755\t        elif not failed_expected:\n   756\t            unexpected = \", \".join(\n   757\t                repr(actual_exceptions[index]) for index in remaining_actual\n   758\t            )\n   759\t            self._fail_reason = matched + f\"Unexpected exception(s): [{unexpected}]\"\n   760\t        elif not remaining_actual:\n   761\t            missing = \", \".join(\n   762\t                self._repr_expected(\n   763\t                    cast(\n   764\t                        \"type[BaseException] | AbstractRaises[BaseException]\",\n   765\t                        self.expected_exceptions[index],\n   766\t                    )\n   767\t                )\n   768\t                for index in failed_expected\n   769\t            )\n   770\t            self._fail_reason = (\n   771\t                matched + f\"Too few exceptions raised, found no match for: [{missing}]\"\n   772\t            )\n   773\t        else:\n   774\t            expected_word = \"exception\" if len(failed_expected) == 1 else \"exceptions\"\n   775\t            raised_word = \"exception\" if len(remaining_actual) == 1 else \"exceptions\"\n   776\t            lines = [\n   777\t                matched.rstrip(),\n   778\t                f\"The following expected {expected_word} did not find a match:\",\n   779\t            ]\n   780\t            if not lines[0]:\n   781\t                lines.pop(0)\n   782\t\n   783\t            for expected_index in failed_expected:\n   784\t                expected = cast(\n   785\t                    \"type[BaseException] | AbstractRaises[BaseException]\",\n   786\t                    self.expected_exceptions[expected_index],\n   787\t                )\n   788\t                lines.append(f\"  {self._repr_expected(expected)}\")\n   789\t                for actual_index in remaining_actual:\n   790\t                    reason = results.get_result(expected_index, actual_index)\n   791\t                    assert isinstance(reason, str)\n   792\t                    lines.append(f\"    {actual_exceptions[actual_index]!r}:\")\n   793\t                    lines.append(indent(reason, \"      \"))\n   794\t\n   795\t            lines.append(\n   796\t                f\"The following raised {raised_word} did not find a match:\"\n   797\t            )\n   798\t            lines.extend(\n   799\t                f\"  {actual_exceptions[index]!r}\" for index in remaining_actual\n   800\t            )\n   801\t            self._fail_reason = \"\\n\".join(lines)\n   802\t\n   803\t        if (\n   804\t            len(self.expected_exceptions) == len(actual_exceptions)\n   805\t            and possible_match(results)\n   806\t        ):\n   807\t            self._fail_reason += (\n   808\t                \"\\nThere is a possible match when attempting an exhaustive check,\"\n   809\t                \" but RaisesGroup uses a greedy algorithm. Please make your expected\"\n   810\t                \" exceptions more stringent with RaisesExc.\"\n   811\t            )\n   812\t\n   813\t        return False\n   814\t\n   815\t    def __exit__(\n   816\t        self,\n   817\t        exc_type: type[BaseException] | None,\n   818\t        exc_val: BaseException | None,\n   819\t        exc_tb: types.TracebackType | None,\n   820\t    ) -> bool:\n   821\t        __tracebackhide__ = True\n   822\t        if exc_type is None:\n   823\t            if not self.expected_exceptions:\n   824\t                fail(\"DID NOT RAISE any exception\")\n   825\t            if len(self.expected_exceptions) > 1:\n   826\t                fail(f\"DID NOT RAISE any of {self.expected_exceptions!r}\")\n   827\t\n   828\t            fail(f\"DID NOT RAISE {self.expected_exceptions[0]!r}\")\n   829\t\n   830\t        assert self.excinfo is not None, (\n   831\t            \"Internal error - should have been constructed in __enter__\"\n   832\t        )\n   833\t\n   834\t        if not self.matches(exc_val):\n   835\t            if self._just_propagate:\n   836\t                return False\n   837\t            raise AssertionError(self._fail_reason)\n   838\t\n   839\t        # Cast to narrow the exception type now that it's verified....\n   840\t        # even though the TypeGuard in self.matches should be narrowing\n   841\t        exc_info = cast(\n   842\t            \"tuple[type[BaseExcT_co_default], BaseExcT_co_default, types.TracebackType]\",\n   843\t            (exc_type, exc_val, exc_tb),\n   844\t        )\n   845\t        self.excinfo.fill_unfilled(exc_info)\n   846\t        return True\n   847\t\n   848\t\n   849\t@final\n   850\tclass RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):\n  1230\t            with pytest.raises(TypeError) as excinfo:\n  1231\t                ...\n  1232\t            assert RaisesGroup(ValueError).matches(excinfo.value.__cause__)\n  1233\t            # the above line is equivalent to\n  1234\t            myexc = excinfo.value.__cause\n  1235\t            assert isinstance(myexc, BaseExceptionGroup)\n  1236\t            assert len(myexc.exceptions) == 1\n  1237\t            assert isinstance(myexc.exceptions[0], ValueError)\n  1238\t        \"\"\"\n  1239\t        self._fail_reason = None\n  1240\t        if exception is None:\n  1241\t            self._fail_reason = \"exception is None\"\n  1242\t            return False\n  1243\t        if not isinstance(exception, BaseExceptionGroup):\n  1244\t            # we opt to only print type of the exception here, as the repr would\n  1245\t            # likely be quite long\n  1246\t            not_group_msg = f\"`{type(exception).__name__}()` is not an exception group\"\n  1247\t            if len(self.expected_exceptions) > 1:\n  1248\t                self._fail_reason = not_group_msg\n  1249\t                return False\n  1250\t            # if we have 1 expected exception, check if it would work even if\n  1251\t            # allow_unwrapped is not set\n  1252\t            res = self._check_expected(self.expected_exceptions[0], exception)\n  1253\t            if res is None and self.allow_unwrapped:\n  1254\t                return True\n  1255\t\n  1256\t            if res is None:\n  1257\t                self._fail_reason = (\n  1258\t                    f\"{not_group_msg}, but would match with `allow_unwrapped=True`\"\n  1259\t                )\n  1260\t            elif self.allow_unwrapped:\n  1261\t                self._fail_reason = res\n  1262\t            else:\n  1263\t                self._fail_reason = not_group_msg\n  1264\t            return False\n  1265\t\n  1266\t        actual_exceptions: Sequence[BaseException] = exception.exceptions\n  1267\t        if self.flatten_subgroups:\n  1268\t            actual_exceptions = self._unroll_exceptions(actual_exceptions)\n  1269\t\n  1270\t        if not self._check_match(exception):\n  1271\t            self._fail_reason = cast(str, self._fail_reason)\n  1272\t            old_reason = self._fail_reason\n  1273\t            if (\n  1274\t                len(actual_exceptions) == len(self.expected_exceptions) == 1\n  1275\t                and isinstance(expected := self.expected_exceptions[0], type)\n  1276\t                and isinstance(actual := actual_exceptions[0], expected)\n  1277\t                and self._check_match(actual)\n  1278\t            ):\n  1279\t                assert self.match is not None, \"can't be None if _check_match failed\"\n  1280\t                assert self._fail_reason is old_reason is not None\n  1281\t                self._fail_reason += (\n  1282\t                    f\"\\n\"\n  1283\t                    f\" but matched the expected `{self._repr_expected(expected)}`.\\n\"\n  1284\t                    f\" You might want \"\n  1285\t                    f\"`RaisesGroup(RaisesExc({expected.__name__}, match={_match_pattern(self.match)!r}))`\"\n  1286\t                )\n  1287\t            else:\n  1288\t                self._fail_reason = old_reason\n  1289\t            return False\n  1290\t\n  1291\t        # do the full check on expected exceptions\n  1292\t        if not self._check_exceptions(\n  1293\t            exception,\n  1294\t            actual_exceptions,\n  1295\t        ):\n  1296\t            self._fail_reason = cast(str, self._fail_reason)\n  1297\t            assert self._fail_reason is not None\n  1298\t            old_reason = self._fail_reason\n  1299\t            # if we're not expecting a nested structure, and there is one, do a second\n  1300\t            # pass where we try flattening it\n  1301\t            if (\n  1302\t                not self.flatten_subgroups\n  1303\t                and not any(\n  1304\t                    isinstance(e, RaisesGroup) for e in self.expected_exceptions\n  1305\t                )\n  1306\t                and any(isinstance(e, BaseExceptionGroup) for e in actual_exceptions)\n  1307\t                and self._check_exceptions(\n  1308\t                    exception,\n  1309\t                    self._unroll_exceptions(exception.exceptions),\n  1310\t                )\n  1311\t            ):\n  1312\t                # only indent if it's a single-line reason. In a multi-line there's already\n  1313\t                # indented lines that this does not belong to.\n  1314\t                indent = \"  \" if \"\\n\" not in self._fail_reason else \"\"\n  1315\t                self._fail_reason = (\n  1316\t                    old_reason\n  1317\t                    + f\"\\n{indent}Did you mean to use `flatten_subgroups=True`?\"\n  1318\t                )\n  1319\t            else:\n  1320\t                self._fail_reason = old_reason\n  1321\t            return False\n  1322\t\n  1323\t        # Only run `self.check` once we know `exception` is of the correct type.\n  1324\t        if not self._check_check(exception):\n  1325\t            reason = (\n  1326\t                cast(str, self._fail_reason) + f\" on the {type(exception).__name__}\"\n  1327\t            )\n  1328\t            if (\n  1329\t                len(actual_exceptions) == len(self.expected_exceptions) == 1\n  1330\t                and isinstance(expected := self.expected_exceptions[0], type)\n  1331\t                # we explicitly break typing here :)\n  1332\t                and self._check_check(actual_exceptions[0])  # type: ignore[arg-type]\n  1333\t            ):\n  1334\t                self._fail_reason = reason + (\n  1335\t                    f\", but did return True for the expected {self._repr_expected(expected)}.\"\n  1336\t                    f\" You might want RaisesGroup(RaisesExc({expected.__name__}, check=<...>))\"\n  1337\t                )\n  1338\t            else:\n  1339\t                self._fail_reason = reason\n  1340\t            return False\n  1341\t\n  1342\t        return True\n  1343\t\n  1344\t\n  1345\t\n  1346\t\n  1347\t\n  1348\t\n  1349\t\n  1350\t\n  1351\t\n  1352\t\n  1353\t\n  1354\t\n  1355\t\n  1356\t\n  1357\t\n  1358\t\n  1359\t\n  1360\t\n  1361\t\n  1362\t\n  1363\t\n  1364\t\n  1365\t\n  1366\t\n  1367\t\n  1368\t\n  1369\t\n  1370\t\n  1371\t    def _check_expected(\n  1372\t        self,\n  1373\t        expected: type[BaseException] | AbstractRaises[BaseException],\n  1374\t        exception: BaseException,\n  1375\t    ) -> str | None:\n  1376\t        \"\"\"Return ``None`` for a match, otherwise a diagnostic reason.\"\"\"\n  1377\t        if isinstance(expected, type):\n  1378\t            return _check_raw_type(expected, exception)\n  1379\t        if expected.matches(exception):\n  1380\t            return None\n  1381\t        assert expected.fail_reason is not None\n  1382\t        return expected.fail_reason\n  1383\t\n  1384\t    def _repr_expected(\n  1385\t        self, expected: type[BaseException] | AbstractRaises[BaseException]\n  1386\t    ) -> str:\n  1387\t        if isinstance(expected, type):\n  1388\t            return expected.__name__\n  1389\t        return repr(expected)\n  1390\t\n  1391\t    @overload\n  1392\t    def _check_exceptions(\n  1393\t        self: RaisesGroup[ExcT_1],\n  1394\t        _exception: Exception,\n  1395\t        actual_exceptions: Sequence[Exception],\n  1396\t    ) -> TypeGuard[ExceptionGroup[ExcT_1]]: ...\n  1397\t    @overload\n  1398\t    def _check_exceptions(\n  1399\t        self: RaisesGroup[BaseExcT_1],\n  1400\t        _exception: BaseException,\n  1401\t        actual_exceptions: Sequence[BaseException],\n  1402\t    ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...\n  1403\t\n  1404\t\n  1405\t\n  1406\t\n  1407\t\n  1408\t\n  1409\t\n  1410\t\n  1411\t\n  1412\t\n  1413\t\n  1414\t\n  1415\t\n  1416\t\n  1417\t\n  1418\t\n  1419\t\n  1420\t\n  1421\t\n  1422\t\n  1423\t\n  1424\t\n  1425\t\n  1426\t\n  1427\t\n  1428\t\n  1429\t\n  1430\t\n  1431\t\n  1432\t\n  1433\t\n  1434\t\n  1435\t\n  1436\t\n  1437\t\n  1438\t\n  1439\t\n  1440\t\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_58"
+}
+```
+
+## 78. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_60",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 79. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_60",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_60"
+}
+```
+
+## 80. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_62",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 81. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_62",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_62"
+}
+```
+
+## 82. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_65",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 83. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_65",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_65"
+}
+```
+
+## 84. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_67",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"python -m py_compile src/_pytest/raises.py src/_pytest/assertion/util.py && PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import RaisesExc, RaisesGroup, unescape\nprint(unescape(r'Hello\\\\.\\\\*World'))\nprint(unescape(r'\\\\[test\\\\]'))\nprint(RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError('ok')])))\nfor matcher, exc in [\n    (RaisesGroup(ValueError), ExceptionGroup('x', [TypeError('bad')])),\n    (RaisesGroup(ValueError, TypeError), ExceptionGroup('x', [ValueError('ok')])),\n    (RaisesGroup(ValueError), ExceptionGroup('x', [ValueError(), TypeError()])),\n    (RaisesGroup(RaisesGroup(ValueError)), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, flatten_subgroups=True), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, allow_unwrapped=True), ValueError()),\n]:\n    print(matcher.matches(exc), matcher.fail_reason)\ng = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nprint(g.matches(ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])))\nprint(g.fail_reason)\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 85. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"python -m py_compile src/_pytest/raises.py src/_pytest/assertion/util.py && PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import RaisesExc, RaisesGroup, unescape\nprint(unescape(r'Hello\\\\.\\\\*World'))\nprint(unescape(r'\\\\[test\\\\]'))\nprint(RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError('ok')])))\nfor matcher, exc in [\n    (RaisesGroup(ValueError), ExceptionGroup('x', [TypeError('bad')])),\n    (RaisesGroup(ValueError, TypeError), ExceptionGroup('x', [ValueError('ok')])),\n    (RaisesGroup(ValueError), ExceptionGroup('x', [ValueError(), TypeError()])),\n    (RaisesGroup(RaisesGroup(ValueError)), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, flatten_subgroups=True), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, allow_unwrapped=True), ValueError()),\n]:\n    print(matcher.matches(exc), matcher.fail_reason)\ng = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nprint(g.matches(ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])))\nprint(g.fail_reason)\nPY\""
+  },
+  "call_ref": "item_67"
+}
+```
+
+## 86. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\n  File \"/testbed/src/_pytest/raises.py\", line 22, in <module>\n    from _pytest.assertion.util import _diff_text\n  File \"/testbed/src/_pytest/assertion/__init__.py\", line 12, in <module>\n    from _pytest.assertion import rewrite\n  File \"/testbed/src/_pytest/assertion/rewrite.py\", line 46, in <module>\n    from _pytest.fixtures import FixtureFunctionDefinition\n  File \"/testbed/src/_pytest/fixtures.py\", line 35, in <module>\n    from _pytest import nodes\n  File \"/testbed/src/_pytest/nodes.py\", line 36, in <module>\n    from _pytest.mark.structures import Mark\n  File \"/testbed/src/_pytest/mark/__init__.py\", line 13, in <module>\n    from .structures import _HiddenParam\n  File \"/testbed/src/_pytest/mark/structures.py\", line 30, in <module>\n    from _pytest.raises import AbstractRaises\nImportError: cannot import name 'AbstractRaises' from partially initialized module '_pytest.raises' (most likely due to a circular import) (/testbed/src/_pytest/raises.py)\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_67"
+}
+```
+
+## 87. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_69",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 88. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_69",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_69"
+}
+```
+
+## 89. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_70",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"python -m py_compile src/_pytest/raises.py src/_pytest/assertion/util.py && PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import RaisesExc, RaisesGroup, unescape\nprint(unescape(r'Hello\\\\.\\\\*World'))\nprint(unescape(r'\\\\[test\\\\]'))\nprint(RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError('ok')])))\nfor matcher, exc in [\n    (RaisesGroup(ValueError), ExceptionGroup('x', [TypeError('bad')])),\n    (RaisesGroup(ValueError, TypeError), ExceptionGroup('x', [ValueError('ok')])),\n    (RaisesGroup(ValueError), ExceptionGroup('x', [ValueError(), TypeError()])),\n    (RaisesGroup(RaisesGroup(ValueError)), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, flatten_subgroups=True), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, allow_unwrapped=True), ValueError()),\n]:\n    print(matcher.matches(exc), matcher.fail_reason)\ng = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nprint(g.matches(ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])))\nprint(g.fail_reason)\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 90. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"python -m py_compile src/_pytest/raises.py src/_pytest/assertion/util.py && PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import RaisesExc, RaisesGroup, unescape\nprint(unescape(r'Hello\\\\.\\\\*World'))\nprint(unescape(r'\\\\[test\\\\]'))\nprint(RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError('ok')])))\nfor matcher, exc in [\n    (RaisesGroup(ValueError), ExceptionGroup('x', [TypeError('bad')])),\n    (RaisesGroup(ValueError, TypeError), ExceptionGroup('x', [ValueError('ok')])),\n    (RaisesGroup(ValueError), ExceptionGroup('x', [ValueError(), TypeError()])),\n    (RaisesGroup(RaisesGroup(ValueError)), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, flatten_subgroups=True), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, allow_unwrapped=True), ValueError()),\n]:\n    print(matcher.matches(exc), matcher.fail_reason)\ng = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nprint(g.matches(ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])))\nprint(g.fail_reason)\nPY\""
+  },
+  "call_ref": "item_70"
+}
+```
+
+## 91. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "Hello.*World\n[test]\nTraceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\nNameError: name 'ExceptionGroup' is not defined\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_70"
+}
+```
+
+## 92. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_72",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup, unescape\nprint(unescape(r'Hello\\\\.\\\\*World'))\nprint(unescape(r'\\\\[test\\\\]'))\nprint(RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError('ok')])))\nfor matcher, exc in [\n    (RaisesGroup(ValueError), ExceptionGroup('x', [TypeError('bad')])),\n    (RaisesGroup(ValueError, TypeError), ExceptionGroup('x', [ValueError('ok')])),\n    (RaisesGroup(ValueError), ExceptionGroup('x', [ValueError(), TypeError()])),\n    (RaisesGroup(RaisesGroup(ValueError)), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, flatten_subgroups=True), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, allow_unwrapped=True), ValueError()),\n]:\n    print(matcher.matches(exc), matcher.fail_reason)\ng = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nprint(g.matches(ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])))\nprint(g.fail_reason)\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 93. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup, unescape\nprint(unescape(r'Hello\\\\.\\\\*World'))\nprint(unescape(r'\\\\[test\\\\]'))\nprint(RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError('ok')])))\nfor matcher, exc in [\n    (RaisesGroup(ValueError), ExceptionGroup('x', [TypeError('bad')])),\n    (RaisesGroup(ValueError, TypeError), ExceptionGroup('x', [ValueError('ok')])),\n    (RaisesGroup(ValueError), ExceptionGroup('x', [ValueError(), TypeError()])),\n    (RaisesGroup(RaisesGroup(ValueError)), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, flatten_subgroups=True), ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])),\n    (RaisesGroup(ValueError, allow_unwrapped=True), ValueError()),\n]:\n    print(matcher.matches(exc), matcher.fail_reason)\ng = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nprint(g.matches(ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])))\nprint(g.fail_reason)\nPY\""
+  },
+  "call_ref": "item_72"
+}
+```
+
+## 94. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "Hello.*World\n[test]\nTrue\nFalse `TypeError()` is not an instance of `ValueError`\nFalse 1 matched exception. Too few exceptions raised, found no match for: [TypeError]\nFalse 1 matched exception. Unexpected exception(s): [TypeError()]\nTrue None\nTrue None\nTrue None\nFalse\n1 matched exception. Regex pattern did not match.\n Regex: 'hello'\n Input: 'goodbye'\nThere is a possible match when attempting an exhaustive check, but RaisesGroup uses a greedy algorithm. Please make your expected exceptions more stringent with RaisesExc.\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_72"
+}
+```
+
+## 95. assistant / message
+
+```
+核心路径已恢复并通过基础烟雾验证：普通组、嵌套组、扁平化、未包装异常及贪心歧义都能正确分流。现在我会运行现有异常与断言差异测试，重点校准差异输出的边界和诊断文本。
+```
+
+## 96. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_75",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest testing/python/raises.py testing/test_assertion.py testing/test_error_diffs.py -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 97. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest testing/python/raises.py testing/test_assertion.py testing/test_error_diffs.py -q'"
+  },
+  "call_ref": "item_75"
+}
+```
+
+## 98. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "....................................................................FFFF [ 35%]\nFFFF.....................F.............................................. [ 70%]\n..............................................F............              [100%]\n=================================== FAILURES ===================================\n_________________ TestAssert_reprcompare_attrsclass.test_attrs _________________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145b276fb0>\n\n    def test_attrs(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1085: AttributeError\n____________ TestAssert_reprcompare_attrsclass.test_attrs_recursive ____________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145b2770d0>\n\n    def test_attrs_recursive(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1101: AttributeError\n________ TestAssert_reprcompare_attrsclass.test_attrs_recursive_verbose ________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145b277670>\n\n    def test_attrs_recursive_verbose(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1122: AttributeError\n_____________ TestAssert_reprcompare_attrsclass.test_attrs_verbose _____________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145a57b430>\n\n    def test_attrs_verbose(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1141: AttributeError\n__ TestAssert_reprcompare_attrsclass.test_attrs_with_attribute_comparison_off __\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145a578460>\n\n    def test_attrs_with_attribute_comparison_off(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1156: AttributeError\n_ TestAssert_reprcompare_attrsclass.test_comparing_two_different_attrs_classes _\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145a57a3b0>\n\n    def test_comparing_two_different_attrs_classes(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1173: AttributeError\n_ TestAssert_reprcompare_attrsclass.test_attrs_with_auto_detect_and_custom_eq __\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145b274490>\n\n    def test_attrs_with_auto_detect_and_custom_eq(self) -> None:\n>       @attr.s(\n            auto_detect=True\n        )  # attr.s doesn't ignore a custom eq if auto_detect=True\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1190: AttributeError\n_________ TestAssert_reprcompare_attrsclass.test_attrs_with_custom_eq __________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a145b274880>\n\n    def test_attrs_with_custom_eq(self) -> None:\n>       @attr.define(slots=False)\nE       AttributeError: module 'attr' has no attribute 'define'\n\ntesting/test_assertion.py:1206: AttributeError\n_________________________ test_reprcompare_whitespaces _________________________\n\n    def test_reprcompare_whitespaces() -> None:\n>       assert callequal(\"\\r\\n\", \"\\n\") == [\n            r\"'\\r\\n' == '\\n'\",\n            \"\",\n            r\"Strings contain only whitespace, escaping them using repr()\",\n            r\"- '\\n'\",\n            r\"+ '\\r\\n'\",\n            r\"?  ++\",\n        ]\nE       assert [\"'\\\\r\\\\n' ==...', '- ', '+ '] == [\"'\\\\r\\\\n' ==...\\n'\", '?  ++']\nE         \nE         At index 2 diff: '- ' != 'Strings contain only whitespace, escaping them using repr()'\nE         Right contains 2 more items, first extra item: \"+ '\\\\r\\\\n'\"\nE         Use -v to get more diff\n\ntesting/test_assertion.py:1588: AssertionError\n____________________ test_error_diff[Compare attrs classes] ____________________\n\ncode = \"\\n        import attr\\n\\n        @attr.s(auto_attribs=True)\\n        class A:\\n            a: int\\n            b: str...         result =   A(1, 'spam')\\n            expected = A(1, 'eggs')\\n            assert result == expected\\n        \"\nexpected = \"\\n        >       assert result == expected\\n        E       AssertionError: assert A(a=1, b='spam') == A(a=1, b='egg...ttribute b:\\n        E           b: 'spam' != 'eggs'\\n        E           - eggs\\n        E           + spam\\n        \"\npytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-0/test_error_diff11')>\n\n    @pytest.mark.parametrize(\"code, expected\", TESTCASES)\n    def test_error_diff(code: str, expected: str, pytester: Pytester) -> None:\n        expected_lines = [line.lstrip() for line in expected.splitlines()]\n        p = pytester.makepyfile(code)\n        result = pytester.runpytest(p, \"-vv\")\n>       result.stdout.fnmatch_lines(expected_lines)\nE       Failed: nomatch: ''\nE           and: '============================= test session starts =============================='\nE           and: 'platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python'\nE           and: 'cachedir: .pytest_cache'\nE           and: 'rootdir: /tmp/pytest-of-root/pytest-0/test_error_diff11'\nE           and: 'collecting ... collected 0 items / 1 error'\nE       exact match: ''\nE       nomatch: '>       assert result == expected'\nE           and: '==================================== ERRORS ===================================='\nE           and: '_____________________ ERROR collecting test_error_diff.py ______________________'\nE           and: 'test_error_diff.py:3: in <module>'\nE           and: '    @attr.s(auto_attribs=True)'\nE           and: \"E   AttributeError: module 'attr' has no attribute 's'\"\nE           and: '=========================== short test summary info ============================'\nE           and: \"ERROR test_error_diff.py - AttributeError: module 'attr' has no attribute 's'\"\nE           and: '!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!'\nE           and: '=============================== 1 error in 0.08s ==============================='\nE       remains unmatched: '>       assert result == expected'\n\n/testbed/testing/test_error_diffs.py:295: Failed\n----------------------------- Captured stdout call -----------------------------\n============================= test session starts ==============================\nplatform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python\ncachedir: .pytest_cache\nrootdir: /tmp/pytest-of-root/pytest-0/test_error_diff11\ncollecting ... collected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________________ ERROR collecting test_error_diff.py ______________________\ntest_error_diff.py:3: in <module>\n    @attr.s(auto_attribs=True)\nE   AttributeError: module 'attr' has no attribute 's'\n=========================== short test summary info ============================\nERROR test_error_diff.py - AttributeError: module 'attr' has no attribute 's'\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n=============================== 1 error in 0.08s ===============================\n=========================== short test summary info ============================\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_recursive\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_recursive_verbose\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_verbose\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_attribute_comparison_off\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_comparing_two_different_attrs_classes\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_auto_detect_and_custom_eq\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_custom_eq\nFAILED testing/test_assertion.py::test_reprcompare_whitespaces - assert [\"'\\\\...\nFAILED testing/test_error_diffs.py::test_error_diff[Compare attrs classes] - ...\n10 failed, 193 passed in 11.98s\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_75"
+}
+```
+
+## 99. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_77",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/assertion/util.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 100. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_77",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/assertion/util.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_77"
+}
+```
+
+## 101. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_79",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest testing/python/raises.py testing/test_assertion.py::test_reprcompare_whitespaces testing/test_assertion.py::test_diff_newline_at_end -q && python -m ruff check src/_pytest/raises.py src/_pytest/assertion/util.py && python -m ruff format --check src/_pytest/raises.py src/_pytest/assertion/util.py'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 102. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest testing/python/raises.py testing/test_assertion.py::test_reprcompare_whitespaces testing/test_assertion.py::test_diff_newline_at_end -q && python -m ruff check src/_pytest/raises.py src/_pytest/assertion/util.py && python -m ruff format --check src/_pytest/raises.py src/_pytest/assertion/util.py'"
+  },
+  "call_ref": "item_79"
+}
+```
+
+## 103. tool / tool_output
+
+```
+{
+  "output": {
+    "output": ".................................                                        [100%]\n33 passed in 0.38s\n/opt/miniconda3/envs/testbed/bin/python: No module named ruff\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_79"
+}
+```
+
+## 104. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_81",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"git diff --check && git diff --stat && git diff -- src/_pytest/assertion/util.py src/_pytest/raises.py | sed -n '1,520p'; grep -n 'def _check_expected\\\\|def _check_exceptions\\\\|def __exit__\\\\|def possible_match' src/_pytest/raises.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 105. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"git diff --check && git diff --stat && git diff -- src/_pytest/assertion/util.py src/_pytest/raises.py | sed -n '1,520p'; grep -n 'def _check_expected\\\\|def _check_exceptions\\\\|def __exit__\\\\|def possible_match' src/_pytest/raises.py\""
+  },
+  "call_ref": "item_81"
+}
+```
+
+## 106. tool / tool_output
+
+```
+{
+  "output": {
+    "output": " src/_pytest/assertion/util.py | 119 ++++++++++++++--------------\n src/_pytest/raises.py         | 177 ++++++++++++++++++++++++++++++++++++++++--\n 2 files changed, 228 insertions(+), 68 deletions(-)\ndiff --git a/src/_pytest/assertion/util.py b/src/_pytest/assertion/util.py\nindex e1ec22a..ce2b0cc 100644\n--- a/src/_pytest/assertion/util.py\n+++ b/src/_pytest/assertion/util.py\n@@ -43,14 +43,11 @@ class _HighlightFunc(Protocol):\n         \"\"\"Apply highlighting to the given source.\"\"\"\n \n \n-\n-\n-\n-\n-\n-\n-\n-\n+def dummy_highlighter(\n+    source: str, lexer: Literal[\"diff\", \"python\"] = \"python\"\n+) -> str:\n+    \"\"\"Return source unchanged, for callers which do not need highlighting.\"\"\"\n+    return source\n def format_explanation(explanation: str) -> str:\n     r\"\"\"Format an explanation.\n \n@@ -282,61 +279,59 @@ def _compare_eq_any(\n     return explanation\n \n \n+def _diff_text(\n+    left: str, right: str, highlighter: _HighlightFunc, verbose: int = 0\n+) -> list[str]:\n+    \"\"\"Return the explanation for the diff between text.\n \n+    Unless verbose output is requested, long identical prefixes and suffixes\n+    are omitted while retaining a small amount of context around the change.\n+    \"\"\"\n+    from difflib import ndiff\n \n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n+    explanation = []\n+    if left.isspace() and right.isspace():\n+        explanation = [\n+            \"Strings contain only whitespace, escaping them using repr()\"\n+        ]\n+        left = repr(left)\n+        right = repr(right)\n+\n+    if verbose < 1:\n+        i = 0  # Keep this defined when either input is empty.\n+        for i in range(min(len(left), len(right))):\n+            if left[i] != right[i]:\n+                break\n+        if i > 42:\n+            i -= 10\n+            explanation = [\n+                f\"Skipping {i} identical leading characters in diff, use -v to show\"\n+            ]\n+            left = left[i:]\n+            right = right[i:]\n+\n+        if len(left) == len(right):\n+            for i in range(1, len(left) + 1):\n+                if left[-i] != right[-i]:\n+                    break\n+            if i > 42:\n+                i -= 10\n+                explanation += [\n+                    f\"Skipping {i} identical trailing characters in diff, use -v to show\"\n+                ]\n+                left = left[:-i]\n+                right = right[:-i]\n+\n+    keepends = True\n+    diff = \"\\n\".join(\n+        line.rstrip(\"\\n\")\n+        for line in ndiff(\n+            right.splitlines(keepends),\n+            left.splitlines(keepends),\n+        )\n+    )\n+    explanation.extend(highlighter(diff, lexer=\"diff\").splitlines())\n+    return explanation\n def _compare_eq_iterable(\n     left: Iterable[Any],\n     right: Iterable[Any],\n@@ -612,4 +607,4 @@ def _notin_text(term: str, text: str, verbose: int = 0) -> list[str]:\n             newdiff.append(\"  \" + line[2:])\n         else:\n             newdiff.append(line)\n-    return newdiff\n\\ No newline at end of file\n+    return newdiff\ndiff --git a/src/_pytest/raises.py b/src/_pytest/raises.py\nindex 34619cd..c602e18 100644\n--- a/src/_pytest/raises.py\n+++ b/src/_pytest/raises.py\n@@ -369,10 +369,9 @@ def is_fully_escaped(s: str) -> bool:\n     )\n \n \n-\n-\n-\n-\n+def unescape(s: str) -> str:\n+    \"\"\"Remove regex escapes which only quote literal metacharacters.\"\"\"\n+    return re.sub(r\"\\\\([{}()+\\-.*?^$\\[\\]\\\\\\s])\", r\"\\1\", s)\n # These classes conceptually differ from ExceptionInfo in that ExceptionInfo is tied, and\n # constructed from, a particular exception - whereas these are constructed with expected\n # exceptions, and later allow matching towards particular exceptions.\n@@ -512,8 +511,8 @@ class AbstractRaises(ABC, Generic[BaseExcT_co]):\n         if isinstance(self.rawmatch, str):\n             # TODO: it instructs to use `-v` to print leading text, but that doesn't work\n             # I also don't know if this is the proper entry point, or tool to use at all\n-\n-\n+            from _pytest.assertion.util import _diff_text\n+            from _pytest.assertion.util import dummy_highlighter\n \n             diff = _diff_text(self.rawmatch, stringified_exception, dummy_highlighter)\n             self._fail_reason = (\"\\n\" if diff[0][0] == \"-\" else \"\") + \"\\n\".join(diff)\n@@ -1251,6 +1250,26 @@ class RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):\n \n \n \n+\n+    def _check_expected(\n+        self,\n+        expected: type[BaseException] | AbstractRaises[BaseException],\n+        exception: BaseException,\n+    ) -> str | None:\n+        \"\"\"Return ``None`` for a match, otherwise a diagnostic reason.\"\"\"\n+        if isinstance(expected, type):\n+            return _check_raw_type(expected, exception)\n+        if expected.matches(exception):\n+            return None\n+        assert expected.fail_reason is not None\n+        return expected.fail_reason\n+\n+    def _repr_expected(\n+        self, expected: type[BaseException] | AbstractRaises[BaseException]\n+    ) -> str:\n+        if isinstance(expected, type):\n+            return expected.__name__\n+        return repr(expected)\n \n     @overload\n     def _check_exceptions(\n@@ -1265,6 +1284,124 @@ class RaisesGroup(AbstractRaises[BaseExceptionGroup[BaseExcT_co]]):\n         actual_exceptions: Sequence[BaseException],\n     ) -> TypeGuard[BaseExceptionGroup[BaseExcT_1]]: ...\n \n+    def _check_exceptions(\n+        self,\n+        _exception: BaseException,\n+        actual_exceptions: Sequence[BaseException],\n+    ) -> bool:\n+        \"\"\"Greedily pair expected and actual exceptions and explain mismatches.\"\"\"\n+        results = ResultHolder(self.expected_exceptions, actual_exceptions)\n+        remaining_actual = list(range(len(actual_exceptions)))\n+        failed_expected: list[int] = []\n+        matches: list[tuple[int, int]] = []\n+\n+        for expected_index, expected in enumerate(self.expected_exceptions):\n+            for remaining_index, actual_index in enumerate(remaining_actual):\n+                result = self._check_expected(\n+                    cast(\n+                        \"type[BaseException] | AbstractRaises[BaseException]\",\n+                        expected,\n+                    ),\n+                    actual_exceptions[actual_index],\n+                )\n+                results.set_result(expected_index, actual_index, result)\n+                if result is None:\n+                    matches.append((expected_index, actual_index))\n+                    remaining_actual.pop(remaining_index)\n+                    break\n+            else:\n+                failed_expected.append(expected_index)\n+\n+        if not failed_expected and not remaining_actual:\n+            return True\n+\n+        # Complete the matrix only after the greedy pass fails. This supports\n+        # detailed diagnostics and identifies failures caused by greedy order.\n+        for actual_index, actual in enumerate(actual_exceptions):\n+            for expected_index, expected in enumerate(self.expected_exceptions):\n+                if results.has_result(expected_index, actual_index):\n+                    continue\n+                result = self._check_expected(\n+                    cast(\n+                        \"type[BaseException] | AbstractRaises[BaseException]\",\n+                        expected,\n+                    ),\n+                    actual,\n+                )\n+                results.set_result(expected_index, actual_index, result)\n+\n+        matched_count = len(matches)\n+        matched = (\n+            f\"{matched_count} matched exception\"\n+            f\"{'s' if matched_count != 1 else ''}. \"\n+            if matched_count\n+            else \"\"\n+        )\n+\n+        if len(failed_expected) == 1 and len(remaining_actual) == 1:\n+            reason = results.get_result(failed_expected[0], remaining_actual[0])\n+            assert isinstance(reason, str)\n+            self._fail_reason = matched + reason\n+        elif not failed_expected:\n+            unexpected = \", \".join(\n+                repr(actual_exceptions[index]) for index in remaining_actual\n+            )\n+            self._fail_reason = matched + f\"Unexpected exception(s): [{unexpected}]\"\n+        elif not remaining_actual:\n+            missing = \", \".join(\n+                self._repr_expected(\n+                    cast(\n+                        \"type[BaseException] | AbstractRaises[BaseException]\",\n+                        self.expected_exceptions[index],\n+                    )\n+                )\n+                for index in failed_expected\n+            )\n+            self._fail_reason = (\n+                matched + f\"Too few exceptions raised, found no match for: [{missing}]\"\n+            )\n+        else:\n+            expected_word = \"exception\" if len(failed_expected) == 1 else \"exceptions\"\n+            raised_word = \"exception\" if len(remaining_actual) == 1 else \"exceptions\"\n+            lines = [\n+                matched.rstrip(),\n+                f\"The following expected {expected_word} did not find a match:\",\n+            ]\n+            if not lines[0]:\n+                lines.pop(0)\n+\n+            for expected_index in failed_expected:\n+                expected = cast(\n+                    \"type[BaseException] | AbstractRaises[BaseException]\",\n+                    self.expected_exceptions[expected_index],\n+                )\n+                lines.append(f\"  {self._repr_expected(expected)}\")\n+                for actual_index in remaining_actual:\n+                    reason = results.get_result(expected_index, actual_index)\n+                    assert isinstance(reason, str)\n+                    lines.append(f\"    {actual_exceptions[actual_index]!r}:\")\n+                    lines.append(indent(reason, \"      \"))\n+\n+            lines.append(\n+                f\"The following raised {raised_word} did not find a match:\"\n+            )\n+            lines.extend(\n+                f\"  {actual_exceptions[index]!r}\" for index in remaining_actual\n+            )\n+            self._fail_reason = \"\\n\".join(lines)\n+\n+        if (\n+            len(self.expected_exceptions) == len(actual_exceptions)\n+            and possible_match(results)\n+        ):\n+            self._fail_reason += (\n+                \"\\nThere is a possible match when attempting an exhaustive check,\"\n+                \" but RaisesGroup uses a greedy algorithm. Please make your expected\"\n+                \" exceptions more stringent with RaisesExc.\"\n+            )\n+\n+        return False\n+\n \n \n \n@@ -1478,9 +1615,37 @@ class ResultHolder:\n             [NotChecked for _ in expected_exceptions] for _ in actual_exceptions\n         ]\n \n+    def set_result(self, expected: int, actual: int, result: str | None) -> None:\n+        self.results[actual][expected] = result\n \n+    def get_result(\n+        self, expected: int, actual: int\n+    ) -> str | type[NotChecked] | None:\n+        return self.results[actual][expected]\n \n+    def has_result(self, expected: int, actual: int) -> bool:\n+        return self.get_result(expected, actual) is not NotChecked\n \n \n+def possible_match(results: ResultHolder) -> bool:\n+    \"\"\"Return whether the result matrix contains a complete one-to-one match.\"\"\"\n+    if not results.results:\n+        return True\n+\n+    expected_count = len(results.results[0])\n+    if expected_count != len(results.results):\n+        return False\n \n+    def search(expected: int, used_actual: set[int]) -> bool:\n+        if expected == expected_count:\n+            return True\n+        for actual, row in enumerate(results.results):\n+            if actual in used_actual or row[expected] is not None:\n+                continue\n+            used_actual.add(actual)\n+            if search(expected + 1, used_actual):\n+                return True\n+            used_actual.remove(actual)\n+        return False\n \n+    return search(0, set())\n698:    def __exit__(\n1254:    def _check_expected(\n1275:    def _check_exceptions(\n1281:    def _check_exceptions(\n1287:    def _check_exceptions(\n1548:    def __exit__(\n1630:def possible_match(results: ResultHolder) -> bool:\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_81"
+}
+```
+
+## 107. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_83",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'command -v black || true; command -v pre-commit || true; command -v tox || true; python -m black --version 2>/dev/null || true'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 108. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'command -v black || true; command -v pre-commit || true; command -v tox || true; python -m black --version 2>/dev/null || true'"
+  },
+  "call_ref": "item_83"
+}
+```
+
+## 109. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_83"
+}
+```
+
+## 110. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_85",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/assertion/util.py",
+        "kind": "update"
+      },
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 111. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_85",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/assertion/util.py",
+        "kind": "update"
+      },
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_85"
+}
+```
+
+## 112. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_88",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'command -v mypy || true; command -v pyright || true; command -v pylint || true; python -m pytest testing/test_meta.py -q; git diff --check'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 113. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'command -v mypy || true; command -v pyright || true; command -v pylint || true; python -m pytest testing/test_meta.py -q; git diff --check'"
+  },
+  "call_ref": "item_88"
+}
+```
+
+## 114. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "....................................................................     [100%]\n68 passed in 6.26s\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_88"
+}
+```
+
+## 115. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_90",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import unescape\ncases = {\n    r'\\\\{\\\\}\\\\(\\\\)\\\\+\\\\-\\\\.\\\\*\\\\?\\\\\"'^'\"\\\\\"'$'\"\\\\[\\\\]': '{}()+-.*?\"'^$[]'\"',\n    '\\\\\\\\ ': ' ',\n    '\\\\\\\\\\\\t': '\\\\t',\n    r'\\\\\\\\': '\\\\\\\\',\n    r'\\\\s': r'\\\\s',\n    r'\\\\a': r'\\\\a',\n    'plain': 'plain',\n}\nfor value, expected in cases.items():\n    actual = unescape(value)\n    print(repr(value), repr(actual))\n    assert actual == expected\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 116. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nfrom _pytest.raises import unescape\ncases = {\n    r'\\\\{\\\\}\\\\(\\\\)\\\\+\\\\-\\\\.\\\\*\\\\?\\\\\"'^'\"\\\\\"'$'\"\\\\[\\\\]': '{}()+-.*?\"'^$[]'\"',\n    '\\\\\\\\ ': ' ',\n    '\\\\\\\\\\\\t': '\\\\t',\n    r'\\\\\\\\': '\\\\\\\\',\n    r'\\\\s': r'\\\\s',\n    r'\\\\a': r'\\\\a',\n    'plain': 'plain',\n}\nfor value, expected in cases.items():\n    actual = unescape(value)\n    print(repr(value), repr(actual))\n    assert actual == expected\nPY\""
+  },
+  "call_ref": "item_90"
+}
+```
+
+## 117. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "'\\\\{\\\\}\\\\(\\\\)\\\\+\\\\-\\\\.\\\\*\\\\?\\\\^\\\\$\\\\[\\\\]' '{}()+-.*?^$[]'\n'\\\\ ' ' '\n'\\\\\\t' '\\t'\n'\\\\\\\\' '\\\\'\n'\\\\s' '\\\\s'\n'\\\\a' '\\\\a'\n'plain' 'plain'\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_90"
+}
+```
+
+## 118. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_92",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "items": [
+        "src/_pytest/assertion/util.py util.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。",
+        "src/_pytest/raises.py raises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。"
+      ]
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 119. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "items": [
+      "src/_pytest/assertion/util.py util.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。",
+      "src/_pytest/raises.py raises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。"
+    ]
+  },
+  "call_ref": "item_92"
+}
+```
+
+## 120. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已提交 src/_pytest/assertion/util.py 的纲要，指纹已前移，状态：对齐\n已提交 src/_pytest/raises.py 的纲要，指纹已前移，状态：对齐"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_92"
+}
+```
+
+## 121. assistant / message
+
+```
+定向验证现已通过（异常测试、空白差异、换行差异和模块独立导入）；之前整组断言测试中剩余失败均来自环境里的 `attr` 包缺少 `s/define` API，而非本次逻辑。按仓库验收规则，我再启动完整测试套件，确认没有其他回归。
+```
+
+## 122. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_95",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 123. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest -q'"
+  },
+  "call_ref": "item_95"
+}
+```
+
+## 124. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "\n==================================== ERRORS ====================================\n_________________ ERROR collecting testing/python/metafunc.py __________________\nImportError while importing test module '/testbed/testing/python/metafunc.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.10/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntesting/python/metafunc.py:14: in <module>\n    import hypothesis\nE   ModuleNotFoundError: No module named 'hypothesis'\n__________________ ERROR collecting testing/test_junitxml.py ___________________\nImportError while importing test module '/testbed/testing/test_junitxml.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.10/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntesting/test_junitxml.py:13: in <module>\n    import xmlschema\nE   ModuleNotFoundError: No module named 'xmlschema'\n=========================== short test summary info ============================\nERROR testing/python/metafunc.py\nERROR testing/test_junitxml.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n2 errors in 3.98s\n",
+    "exit_code": 2,
+    "status": "failed"
+  },
+  "call_ref": "item_95"
+}
+```
+
+## 125. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_97",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nimport re\nimport pytest\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup\n\n# context manager and direct matching\nwith RaisesGroup(ValueError, TypeError) as info:\n    raise ExceptionGroup('msg', [TypeError('t'), ValueError('v')])\nassert len(info.value.exceptions) == 2\n\nwith RaisesGroup(RaisesGroup(RaisesExc(ValueError, match='\"'^v$'\"'))):\n    raise ExceptionGroup('outer', [ExceptionGroup('inner', [ValueError('v')])])\n\nwith RaisesGroup(RaisesExc(ValueError, check=lambda e: e.args == ('v',)), allow_unwrapped=True):\n    raise ValueError('v')\n\nmatcher = RaisesGroup(ValueError, match='\"'^group$'\"', check=lambda eg: len(eg.exceptions) == 1)\nassert matcher.matches(ExceptionGroup('group', [ValueError()]))\n\n# fully escaped matching emits text diff, not generic regex diagnostics\nm = RaisesExc(ValueError, match='\"'^'\"' + re.escape('expected.text') + '\"'$'\"')\nassert not m.matches(ValueError('actual.text'))\nassert '- expected.text' in (m.fail_reason or '')\nassert '+ actual.text' in (m.fail_reason or '')\n\n# group-level match/check remain distinct from member constraints\nm = RaisesGroup(ValueError, match='member')\nassert not m.matches(ExceptionGroup('group', [ValueError('member')]))\nassert 'RaisesGroup(RaisesExc' in (m.fail_reason or '')\nprint('exception helper smoke tests passed')\nPY\npython -m pytest testing/python/raises.py testing/test_meta.py -q\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 126. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nimport re\nimport pytest\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup\n\n# context manager and direct matching\nwith RaisesGroup(ValueError, TypeError) as info:\n    raise ExceptionGroup('msg', [TypeError('t'), ValueError('v')])\nassert len(info.value.exceptions) == 2\n\nwith RaisesGroup(RaisesGroup(RaisesExc(ValueError, match='\"'^v$'\"'))):\n    raise ExceptionGroup('outer', [ExceptionGroup('inner', [ValueError('v')])])\n\nwith RaisesGroup(RaisesExc(ValueError, check=lambda e: e.args == ('v',)), allow_unwrapped=True):\n    raise ValueError('v')\n\nmatcher = RaisesGroup(ValueError, match='\"'^group$'\"', check=lambda eg: len(eg.exceptions) == 1)\nassert matcher.matches(ExceptionGroup('group', [ValueError()]))\n\n# fully escaped matching emits text diff, not generic regex diagnostics\nm = RaisesExc(ValueError, match='\"'^'\"' + re.escape('expected.text') + '\"'$'\"')\nassert not m.matches(ValueError('actual.text'))\nassert '- expected.text' in (m.fail_reason or '')\nassert '+ actual.text' in (m.fail_reason or '')\n\n# group-level match/check remain distinct from member constraints\nm = RaisesGroup(ValueError, match='member')\nassert not m.matches(ExceptionGroup('group', [ValueError('member')]))\nassert 'RaisesGroup(RaisesExc' in (m.fail_reason or '')\nprint('exception helper smoke tests passed')\nPY\npython -m pytest testing/python/raises.py testing/test_meta.py -q\""
+  },
+  "call_ref": "item_97"
+}
+```
+
+## 127. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 22, in <module>\nAssertionError\n........................................................................ [ 72%]\n...........................                                              [100%]\n99 passed in 7.01s\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_97"
+}
+```
+
+## 128. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_100",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nimport re\nfrom _pytest.raises import RaisesExc\nm=RaisesExc(ValueError, match='\"'^'\"'+re.escape('expected.text')+'\"'$'\"')\nprint(m.rawmatch)\nprint(m.matches(ValueError('actual.text')))\nprint(repr(m.fail_reason))\nprint(m.fail_reason)\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 129. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nimport re\nfrom _pytest.raises import RaisesExc\nm=RaisesExc(ValueError, match='\"'^'\"'+re.escape('expected.text')+'\"'$'\"')\nprint(m.rawmatch)\nprint(m.matches(ValueError('actual.text')))\nprint(repr(m.fail_reason))\nprint(m.fail_reason)\nPY\""
+  },
+  "call_ref": "item_100"
+}
+```
+
+## 130. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "expected.text\nFalse\n'\\n- actual.text\\n+ expected.text'\n\n- actual.text\n+ expected.text\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_100"
+}
+```
+
+## 131. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_102",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nimport re\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup\n\nwith RaisesGroup(ValueError, TypeError) as info:\n    raise ExceptionGroup('msg', [TypeError('t'), ValueError('v')])\nassert len(info.value.exceptions) == 2\nwith RaisesGroup(RaisesGroup(RaisesExc(ValueError, match='\"'^v$'\"'))):\n    raise ExceptionGroup('outer', [ExceptionGroup('inner', [ValueError('v')])])\nwith RaisesGroup(RaisesExc(ValueError, check=lambda e: e.args == ('v',)), allow_unwrapped=True):\n    raise ValueError('v')\nmatcher = RaisesGroup(ValueError, match='\"'^group$'\"', check=lambda eg: len(eg.exceptions) == 1)\nassert matcher.matches(ExceptionGroup('group', [ValueError()]))\nm = RaisesExc(ValueError, match='\"'^'\"' + re.escape('expected.text') + '\"'$'\"')\nassert not m.matches(ValueError('actual.text'))\nassert '- actual.text' in (m.fail_reason or '')\nassert '+ expected.text' in (m.fail_reason or '')\nm = RaisesGroup(ValueError, match='member')\nassert not m.matches(ExceptionGroup('group', [ValueError('member')]))\nassert 'RaisesGroup(RaisesExc' in (m.fail_reason or '')\nm = RaisesGroup(ValueError)\nassert not m.matches(ExceptionGroup('outer', [ExceptionGroup('inner', [ValueError()])]))\nassert 'flatten_subgroups=True' in (m.fail_reason or '')\nprint('exception helper smoke tests passed')\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 132. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"PYTHONPATH=src python - <<'PY'\nimport re\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup\n\nwith RaisesGroup(ValueError, TypeError) as info:\n    raise ExceptionGroup('msg', [TypeError('t'), ValueError('v')])\nassert len(info.value.exceptions) == 2\nwith RaisesGroup(RaisesGroup(RaisesExc(ValueError, match='\"'^v$'\"'))):\n    raise ExceptionGroup('outer', [ExceptionGroup('inner', [ValueError('v')])])\nwith RaisesGroup(RaisesExc(ValueError, check=lambda e: e.args == ('v',)), allow_unwrapped=True):\n    raise ValueError('v')\nmatcher = RaisesGroup(ValueError, match='\"'^group$'\"', check=lambda eg: len(eg.exceptions) == 1)\nassert matcher.matches(ExceptionGroup('group', [ValueError()]))\nm = RaisesExc(ValueError, match='\"'^'\"' + re.escape('expected.text') + '\"'$'\"')\nassert not m.matches(ValueError('actual.text'))\nassert '- actual.text' in (m.fail_reason or '')\nassert '+ expected.text' in (m.fail_reason or '')\nm = RaisesGroup(ValueError, match='member')\nassert not m.matches(ExceptionGroup('group', [ValueError('member')]))\nassert 'RaisesGroup(RaisesExc' in (m.fail_reason or '')\nm = RaisesGroup(ValueError)\nassert not m.matches(ExceptionGroup('outer', [ExceptionGroup('inner', [ValueError()])]))\nassert 'flatten_subgroups=True' in (m.fail_reason or '')\nprint('exception helper smoke tests passed')\nPY\""
+  },
+  "call_ref": "item_102"
+}
+```
+
+## 133. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "exception helper smoke tests passed\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_102"
+}
+```
+
+## 134. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_104",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest testing/test_assertion.py testing/test_error_diffs.py -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 135. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest testing/test_assertion.py testing/test_error_diffs.py -q'"
+  },
+  "call_ref": "item_104"
+}
+```
+
+## 136. tool / tool_output
+
+```
+{
+  "output": {
+    "output": ".........................................FFFFFFFF....................... [ 41%]\n........................................................................ [ 83%]\n...............F............                                             [100%]\n=================================== FAILURES ===================================\n_________________ TestAssert_reprcompare_attrsclass.test_attrs _________________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ecee30>\n\n    def test_attrs(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1085: AttributeError\n____________ TestAssert_reprcompare_attrsclass.test_attrs_recursive ____________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ecf1c0>\n\n    def test_attrs_recursive(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1101: AttributeError\n________ TestAssert_reprcompare_attrsclass.test_attrs_recursive_verbose ________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ecf550>\n\n    def test_attrs_recursive_verbose(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1122: AttributeError\n_____________ TestAssert_reprcompare_attrsclass.test_attrs_verbose _____________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ecf8e0>\n\n    def test_attrs_verbose(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1141: AttributeError\n__ TestAssert_reprcompare_attrsclass.test_attrs_with_attribute_comparison_off __\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ecfc70>\n\n    def test_attrs_with_attribute_comparison_off(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1156: AttributeError\n_ TestAssert_reprcompare_attrsclass.test_comparing_two_different_attrs_classes _\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ee0040>\n\n    def test_comparing_two_different_attrs_classes(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1173: AttributeError\n_ TestAssert_reprcompare_attrsclass.test_attrs_with_auto_detect_and_custom_eq __\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ee03d0>\n\n    def test_attrs_with_auto_detect_and_custom_eq(self) -> None:\n>       @attr.s(\n            auto_detect=True\n        )  # attr.s doesn't ignore a custom eq if auto_detect=True\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1190: AttributeError\n_________ TestAssert_reprcompare_attrsclass.test_attrs_with_custom_eq __________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x72f9c0ecfd60>\n\n    def test_attrs_with_custom_eq(self) -> None:\n>       @attr.define(slots=False)\nE       AttributeError: module 'attr' has no attribute 'define'\n\ntesting/test_assertion.py:1206: AttributeError\n____________________ test_error_diff[Compare attrs classes] ____________________\n\ncode = \"\\n        import attr\\n\\n        @attr.s(auto_attribs=True)\\n        class A:\\n            a: int\\n            b: str...         result =   A(1, 'spam')\\n            expected = A(1, 'eggs')\\n            assert result == expected\\n        \"\nexpected = \"\\n        >       assert result == expected\\n        E       AssertionError: assert A(a=1, b='spam') == A(a=1, b='egg...ttribute b:\\n        E           b: 'spam' != 'eggs'\\n        E           - eggs\\n        E           + spam\\n        \"\npytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-3/test_error_diff11')>\n\n    @pytest.mark.parametrize(\"code, expected\", TESTCASES)\n    def test_error_diff(code: str, expected: str, pytester: Pytester) -> None:\n        expected_lines = [line.lstrip() for line in expected.splitlines()]\n        p = pytester.makepyfile(code)\n        result = pytester.runpytest(p, \"-vv\")\n>       result.stdout.fnmatch_lines(expected_lines)\nE       Failed: nomatch: ''\nE           and: '============================= test session starts =============================='\nE           and: 'platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python'\nE           and: 'cachedir: .pytest_cache'\nE           and: 'rootdir: /tmp/pytest-of-root/pytest-3/test_error_diff11'\nE           and: 'collecting ... collected 0 items / 1 error'\nE       exact match: ''\nE       nomatch: '>       assert result == expected'\nE           and: '==================================== ERRORS ===================================='\nE           and: '_____________________ ERROR collecting test_error_diff.py ______________________'\nE           and: 'test_error_diff.py:3: in <module>'\nE           and: '    @attr.s(auto_attribs=True)'\nE           and: \"E   AttributeError: module 'attr' has no attribute 's'\"\nE           and: '=========================== short test summary info ============================'\nE           and: \"ERROR test_error_diff.py - AttributeError: module 'attr' has no attribute 's'\"\nE           and: '!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!'\nE           and: '=============================== 1 error in 0.09s ==============================='\nE       remains unmatched: '>       assert result == expected'\n\n/testbed/testing/test_error_diffs.py:295: Failed\n----------------------------- Captured stdout call -----------------------------\n============================= test session starts ==============================\nplatform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python\ncachedir: .pytest_cache\nrootdir: /tmp/pytest-of-root/pytest-3/test_error_diff11\ncollecting ... collected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________________ ERROR collecting test_error_diff.py ______________________\ntest_error_diff.py:3: in <module>\n    @attr.s(auto_attribs=True)\nE   AttributeError: module 'attr' has no attribute 's'\n=========================== short test summary info ============================\nERROR test_error_diff.py - AttributeError: module 'attr' has no attribute 's'\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n=============================== 1 error in 0.09s ===============================\n=========================== short test summary info ============================\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_recursive\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_recursive_verbose\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_verbose\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_attribute_comparison_off\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_comparing_two_different_attrs_classes\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_auto_detect_and_custom_eq\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_custom_eq\nFAILED testing/test_error_diffs.py::test_error_diff[Compare attrs classes] - ...\n9 failed, 163 passed in 11.30s\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_104"
+}
+```
+
+## 137. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_106",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 138. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_106",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_106"
+}
+```
+
+## 139. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_109",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 140. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_109",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_109"
+}
+```
+
+## 141. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_111",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "path": "src/_pytest/raises.py",
+      "outline": "raises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。"
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 142. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "path": "src/_pytest/raises.py",
+    "outline": "raises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。"
+  },
+  "call_ref": "item_111"
+}
+```
+
+## 143. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已提交 src/_pytest/raises.py 的纲要，指纹已前移，状态：对齐"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_111"
+}
+```
+
+## 144. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_113",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=3) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/raises.py src/_pytest/assertion/util.py; nl -ba src/_pytest/raises.py | sed -n '1330,1395p'; nl -ba src/_pytest/raises.py | sed -n '1510,1565p'; tail -n 65 src/_pytest/raises.py | cat -n\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 145. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=3) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/raises.py src/_pytest/assertion/util.py; nl -ba src/_pytest/raises.py | sed -n '1330,1395p'; nl -ba src/_pytest/raises.py | sed -n '1510,1565p'; tail -n 65 src/_pytest/raises.py | cat -n\""
+  },
+  "call_ref": "item_113"
+}
+```
+
+## 146. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "1233-1260 (28)\n1411-1554 (144)\n  1330\t                    continue\n  1331\t                result = self._check_expected(\n  1332\t                    cast(\n  1333\t                        \"type[BaseException] | AbstractRaises[BaseException]\",\n  1334\t                        expected,\n  1335\t                    ),\n  1336\t                    actual,\n  1337\t                )\n  1338\t                results.set_result(expected_index, actual_index, result)\n  1339\t\n  1340\t        matched_count = len(matches)\n  1341\t        matched = (\n  1342\t            f\"{matched_count} matched exception\"\n  1343\t            f\"{'s' if matched_count != 1 else ''}. \"\n  1344\t            if matched_count\n  1345\t            else \"\"\n  1346\t        )\n  1347\t\n  1348\t        if len(failed_expected) == 1 and len(remaining_actual) == 1:\n  1349\t            reason = results.get_result(failed_expected[0], remaining_actual[0])\n  1350\t            assert isinstance(reason, str)\n  1351\t            self._fail_reason = matched + reason\n  1352\t        elif not failed_expected:\n  1353\t            unexpected = \", \".join(\n  1354\t                repr(actual_exceptions[index]) for index in remaining_actual\n  1355\t            )\n  1356\t            self._fail_reason = matched + f\"Unexpected exception(s): [{unexpected}]\"\n  1357\t        elif not remaining_actual:\n  1358\t            missing = \", \".join(\n  1359\t                self._repr_expected(\n  1360\t                    cast(\n  1361\t                        \"type[BaseException] | AbstractRaises[BaseException]\",\n  1362\t                        self.expected_exceptions[index],\n  1363\t                    )\n  1364\t                )\n  1365\t                for index in failed_expected\n  1366\t            )\n  1367\t            self._fail_reason = (\n  1368\t                matched + f\"Too few exceptions raised, found no match for: [{missing}]\"\n  1369\t            )\n  1370\t        else:\n  1371\t            expected_word = \"exception\" if len(failed_expected) == 1 else \"exceptions\"\n  1372\t            raised_word = \"exception\" if len(remaining_actual) == 1 else \"exceptions\"\n  1373\t            lines = [\n  1374\t                matched.rstrip(),\n  1375\t                f\"The following expected {expected_word} did not find a match:\",\n  1376\t            ]\n  1377\t            if not lines[0]:\n  1378\t                lines.pop(0)\n  1379\t\n  1380\t            for expected_index in failed_expected:\n  1381\t                expected = cast(\n  1382\t                    \"type[BaseException] | AbstractRaises[BaseException]\",\n  1383\t                    self.expected_exceptions[expected_index],\n  1384\t                )\n  1385\t                lines.append(f\"  {self._repr_expected(expected)}\")\n  1386\t                for actual_index in remaining_actual:\n  1387\t                    reason = results.get_result(expected_index, actual_index)\n  1388\t                    assert isinstance(reason, str)\n  1389\t                    lines.append(f\"    {actual_exceptions[actual_index]!r}:\")\n  1390\t                    lines.append(indent(reason, \"      \"))\n  1391\t\n  1392\t            lines.append(\n  1393\t                f\"The following raised {raised_word} did not find a match:\"\n  1394\t            )\n  1395\t            lines.extend(\n  1510\t\n  1511\t\n  1512\t\n  1513\t\n  1514\t\n  1515\t\n  1516\t\n  1517\t\n  1518\t\n  1519\t\n  1520\t\n  1521\t\n  1522\t\n  1523\t\n  1524\t\n  1525\t\n  1526\t\n  1527\t\n  1528\t\n  1529\t\n  1530\t\n  1531\t\n  1532\t\n  1533\t\n  1534\t\n  1535\t\n  1536\t\n  1537\t\n  1538\t\n  1539\t\n  1540\t\n  1541\t\n  1542\t\n  1543\t\n  1544\t\n  1545\t\n  1546\t\n  1547\t\n  1548\t\n  1549\t\n  1550\t\n  1551\t\n  1552\t\n  1553\t\n  1554\t\n  1555\t    def __exit__(\n  1556\t        self,\n  1557\t        exc_type: type[BaseException] | None,\n  1558\t        exc_val: BaseException | None,\n  1559\t        exc_tb: types.TracebackType | None,\n  1560\t    ) -> bool:\n  1561\t        __tracebackhide__ = True\n  1562\t        if exc_type is None:\n  1563\t            fail(f\"DID NOT RAISE any exception, expected `{self.expected_type()}`\")\n  1564\t\n  1565\t        assert self.excinfo is not None, (\n     1\t            elif isinstance(e, RaisesGroup):\n     2\t                subexcs.append(e.expected_type())\n     3\t            elif isinstance(e, type):\n     4\t                subexcs.append(e.__name__)\n     5\t            else:  # pragma: no cover\n     6\t                raise AssertionError(\"unknown type\")\n     7\t        group_type = \"Base\" if self.is_baseexception else \"\"\n     8\t        return f\"{group_type}ExceptionGroup({', '.join(subexcs)})\"\n     9\t\n    10\t\n    11\t@final\n    12\tclass NotChecked:\n    13\t    \"\"\"Singleton for unchecked values in ResultHolder\"\"\"\n    14\t\n    15\t\n    16\tclass ResultHolder:\n    17\t    \"\"\"Container for results of checking exceptions.\n    18\t    Used in RaisesGroup._check_exceptions and possible_match.\n    19\t    \"\"\"\n    20\t\n    21\t    def __init__(\n    22\t        self,\n    23\t        expected_exceptions: tuple[\n    24\t            type[BaseException] | AbstractRaises[BaseException], ...\n    25\t        ],\n    26\t        actual_exceptions: Sequence[BaseException],\n    27\t    ) -> None:\n    28\t        self.results: list[list[str | type[NotChecked] | None]] = [\n    29\t            [NotChecked for _ in expected_exceptions] for _ in actual_exceptions\n    30\t        ]\n    31\t\n    32\t    def set_result(self, expected: int, actual: int, result: str | None) -> None:\n    33\t        self.results[actual][expected] = result\n    34\t\n    35\t    def get_result(\n    36\t        self, expected: int, actual: int\n    37\t    ) -> str | type[NotChecked] | None:\n    38\t        return self.results[actual][expected]\n    39\t\n    40\t    def has_result(self, expected: int, actual: int) -> bool:\n    41\t        return self.get_result(expected, actual) is not NotChecked\n    42\t\n    43\t\n    44\tdef possible_match(results: ResultHolder) -> bool:\n    45\t    \"\"\"Return whether the result matrix contains a complete one-to-one match.\"\"\"\n    46\t    if not results.results:\n    47\t        return True\n    48\t\n    49\t    expected_count = len(results.results[0])\n    50\t    if expected_count != len(results.results):\n    51\t        return False\n    52\t\n    53\t    def search(expected: int, used_actual: set[int]) -> bool:\n    54\t        if expected == expected_count:\n    55\t            return True\n    56\t        for actual, row in enumerate(results.results):\n    57\t            if actual in used_actual or row[expected] is not None:\n    58\t                continue\n    59\t            used_actual.add(actual)\n    60\t            if search(expected + 1, used_actual):\n    61\t                return True\n    62\t            used_actual.remove(actual)\n    63\t        return False\n    64\t\n    65\t    return search(0, set())\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_113"
+}
+```
+
+## 147. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_117",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 148. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_117",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_117"
+}
+```
+
+## 149. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_119",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 150. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_119",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/src/_pytest/raises.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_119"
+}
+```
+
+## 151. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_121",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=3) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/raises.py src/_pytest/assertion/util.py; python -m py_compile src/_pytest/raises.py src/_pytest/assertion/util.py; git diff --check; git status --short\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 152. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"awk 'BEGIN{s=0} /\"'^[[:space:]]*$/{if(!s)s=NR; next} {if(s && NR-s>=3) print s \"-\" NR-1 \" (\" NR-s \")\"; s=0}'\"' src/_pytest/raises.py src/_pytest/assertion/util.py; python -m py_compile src/_pytest/raises.py src/_pytest/assertion/util.py; git diff --check; git status --short\""
+  },
+  "call_ref": "item_121"
+}
+```
+
+## 153. tool / tool_output
+
+```
+{
+  "output": {
+    "output": " M src/_pytest/assertion/util.py\n M src/_pytest/raises.py\n?? ortg.tsv\n?? ortg.tsv.bak\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_121"
+}
+```
+
+## 154. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_123",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "items": [
+        "src/_pytest/assertion/util.py util.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。",
+        "src/_pytest/raises.py raises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。"
+      ]
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 155. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "items": [
+      "src/_pytest/assertion/util.py util.py[9 S A L]: Role:格式化断言解释并为字符串、序列、集合、映射、可迭代对象及数据类/attrs/namedtuple 比较生成专用差异 | Uses:src/_pytest/_code/code.py, src/_pytest/_io/pprint.py, src/_pytest/_io/saferepr.py, src/_pytest/compat.py, src/_pytest/python_api.py | API:- | Constraints:解释迷你语言仅把换行后 { } ~ > 视为结构，其余换行转字面 \\\\n 并维持嵌套 where/and 缩进；比较表示异常除 pytest.exit 外不得破坏测试，须回退为插件表示失败提示；规范等价 Unicode 字符串用 ASCII 表示辨别；详细度>1 取消左右摘要 repr 限长，普通可迭代完整 diff 仅 -v 或 CI 显示；期望值为 diff 基线；字节序列差异显示单字节切片；映射/对象默认省略相同项，-vv 展开；仅默认生成的 dataclass/attrs equality 逐字段钻取，并尊重 compare/eq 字段标志。",
+      "src/_pytest/raises.py raises.py[9 S A V L]: Role:实现 pytest.raises、RaisesExc 与结构化 ExceptionGroup 断言的类型、正则、谓词匹配和诊断 | Uses:src/_pytest/_code/code.py, src/_pytest/outcomes.py, src/_pytest/warning_types.py, src/_pytest/assertion/util.py | API:pytest.raises；pytest.RaisesExc；pytest.RaisesGroup；RaisesExc.matches；RaisesGroup.matches | Constraints:raises 上下文至少提供异常类型、match 或 check 之一，函数式必须提供有效异常类型和可调用对象；类型按 isinstance 含子类，类型不匹配时异常原样传播，类型已匹配而正则/check 失败抛 AssertionError，未抛异常用 pytest.fail；match 以 re.search 匹配异常字符串及 PEP 678 notes，非法正则失败、空串警告，完整转义 ^...$ 失败时生成文本 diff；只允许 ExceptionGroup[Exception] 或 BaseExceptionGroup[BaseException] 泛型宽类型；RaisesGroup 默认要求层级、数量及成员全部对应且无额外项，顺序通过贪心匹配处理；flatten_subgroups 与嵌套 RaisesGroup 互斥；allow_unwrapped 仅单一期望且不能配 group 期望、match 或 check；group 级 match/check 作用于组而非成员，成员条件须用 RaisesExc；失败理由应提示 allow_unwrapped/flatten_subgroups 或把 match/check 下移的可行修正。"
+    ]
+  },
+  "call_ref": "item_123"
+}
+```
+
+## 156. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已提交 src/_pytest/assertion/util.py 的纲要，指纹已前移，状态：对齐\n已提交 src/_pytest/raises.py 的纲要，指纹已前移，状态：对齐"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_123"
+}
+```
+
+## 157. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_125",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"python -m pytest testing/python/raises.py testing/test_meta.py testing/test_assertion.py::test_reprcompare_whitespaces testing/test_assertion.py::test_diff_newline_at_end -q && PYTHONPATH=src python - <<'PY'\nimport re\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup, unescape\n\nassert unescape(r'Hello\\\\.\\\\*World') == 'Hello.*World'\nassert unescape(r'\\\\[test\\\\]') == '[test]'\nassert unescape(r'\\\\s') == r'\\\\s'\nassert RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError()]))\nassert RaisesGroup(RaisesGroup(ValueError)).matches(\n    ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])\n)\nassert RaisesGroup(ValueError, flatten_subgroups=True).matches(\n    ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])\n)\nassert RaisesGroup(ValueError, allow_unwrapped=True).matches(ValueError())\nmatcher = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nassert not matcher.matches(\n    ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])\n)\nassert 'greedy algorithm' in (matcher.fail_reason or '')\nmatcher = RaisesExc(ValueError, match='\"'^'\"' + re.escape('expected.text') + '\"'$'\"')\nassert not matcher.matches(ValueError('actual.text'))\nassert '\\\\n- actual.text\\\\n+ expected.text' == matcher.fail_reason\nprint('additional exception matching checks passed')\nPY\ngit diff --check\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 158. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"python -m pytest testing/python/raises.py testing/test_meta.py testing/test_assertion.py::test_reprcompare_whitespaces testing/test_assertion.py::test_diff_newline_at_end -q && PYTHONPATH=src python - <<'PY'\nimport re\nfrom _pytest.raises import ExceptionGroup, RaisesExc, RaisesGroup, unescape\n\nassert unescape(r'Hello\\\\.\\\\*World') == 'Hello.*World'\nassert unescape(r'\\\\[test\\\\]') == '[test]'\nassert unescape(r'\\\\s') == r'\\\\s'\nassert RaisesGroup(ValueError).matches(ExceptionGroup('x', [ValueError()]))\nassert RaisesGroup(RaisesGroup(ValueError)).matches(\n    ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])\n)\nassert RaisesGroup(ValueError, flatten_subgroups=True).matches(\n    ExceptionGroup('x', [ExceptionGroup('y', [ValueError()])])\n)\nassert RaisesGroup(ValueError, allow_unwrapped=True).matches(ValueError())\nmatcher = RaisesGroup(ValueError, RaisesExc(ValueError, match='hello'))\nassert not matcher.matches(\n    ExceptionGroup('x', [ValueError('hello'), ValueError('goodbye')])\n)\nassert 'greedy algorithm' in (matcher.fail_reason or '')\nmatcher = RaisesExc(ValueError, match='\"'^'\"' + re.escape('expected.text') + '\"'$'\"')\nassert not matcher.matches(ValueError('actual.text'))\nassert '\\\\n- actual.text\\\\n+ expected.text' == matcher.fail_reason\nprint('additional exception matching checks passed')\nPY\ngit diff --check\""
+  },
+  "call_ref": "item_125"
+}
+```
+
+## 159. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "........................................................................ [ 71%]\n.............................                                            [100%]\n101 passed in 7.61s\nadditional exception matching checks passed\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_125"
+}
+```
+
+## 160. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_127",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_status",
+    "arguments": {},
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 161. assistant / tool_call
+
+```
+{
+  "name": "ortg_status",
+  "server": "ortg",
+  "arguments": {},
+  "call_ref": "item_127"
+}
+```
+
+## 162. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "## 对账报告\n- 对齐 630, 观察 9, 忽略 3, 已清除 0\n\n纲要与代码已对齐。\n"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_127"
+}
+```
+
+## 163. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_128",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'git diff --stat && git status --short && git diff --check'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 164. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'git diff --stat && git status --short && git diff --check'"
+  },
+  "call_ref": "item_128"
+}
+```
+
+## 165. tool / tool_output
+
+```
+{
+  "output": {
+    "output": " src/_pytest/assertion/util.py | 115 ++++++++-------\n src/_pytest/raises.py         | 330 +++++++++++++++++++++---------------------\n 2 files changed, 223 insertions(+), 222 deletions(-)\n M src/_pytest/assertion/util.py\n M src/_pytest/raises.py\n?? ortg.tsv\n?? ortg.tsv.bak\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_128"
+}
+```
+
+## 166. assistant / message
+
+```
+Implemented the missing pytest exception-matching helpers.
+
+Changes:
+
+- Added `unescape()` in [raises.py](/testbed/src/_pytest/raises.py).
+- Restored `RaisesGroup` greedy pairing, mismatch diagnostics, nested/flattened/unwrapped handling, and ambiguity detection.
+- Restored assertion text-diff helpers in [util.py](/testbed/src/_pytest/assertion/util.py).
+
+Validation:
+
+- 101 targeted tests passed.
+- Additional nested-group, regex-diff, predicate, and unescape checks passed.
+- Full suite collection is blocked by missing `hypothesis` and `xmlschema`; attrs-specific tests also encounter an incomplete installed `attr` package.
+- ORTG reports all 630 outlined files aligned.
+```
+
+## 167. assistant / message
+
+```
+我会按提醒重跑尚未覆盖的原始命令，并核实 `attr`、`hypothesis`、`xmlschema` 的实际导入来源，区分源码回归与环境依赖阻断。
+```
+
+## 168. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_134",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"python - <<'PY'\nimport importlib.util\nfor name in ('attr', 'hypothesis', 'xmlschema'):\n    spec = importlib.util.find_spec(name)\n    print(name, 'spec=', spec)\n    if spec is not None:\n        print(' origin=', spec.origin)\n        print(' locations=', spec.submodule_search_locations)\n        try:\n            module = __import__(name)\n        except Exception as exc:\n            print(' import_error=', repr(exc))\n        else:\n            print(' file=', getattr(module, '__file__', None))\n            print(' version=', getattr(module, '__version__', None))\n            if name == 'attr':\n                print(' has_s=', hasattr(module, 's'), 'has_define=', hasattr(module, 'define'))\nPY\npython -m pip show attrs hypothesis xmlschema || true\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 169. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"python - <<'PY'\nimport importlib.util\nfor name in ('attr', 'hypothesis', 'xmlschema'):\n    spec = importlib.util.find_spec(name)\n    print(name, 'spec=', spec)\n    if spec is not None:\n        print(' origin=', spec.origin)\n        print(' locations=', spec.submodule_search_locations)\n        try:\n            module = __import__(name)\n        except Exception as exc:\n            print(' import_error=', repr(exc))\n        else:\n            print(' file=', getattr(module, '__file__', None))\n            print(' version=', getattr(module, '__version__', None))\n            if name == 'attr':\n                print(' has_s=', hasattr(module, 's'), 'has_define=', hasattr(module, 'define'))\nPY\npython -m pip show attrs hypothesis xmlschema || true\""
+  },
+  "call_ref": "item_134"
+}
+```
+
+## 170. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "attr spec= ModuleSpec(name='attr', loader=<_frozen_importlib_external.SourceFileLoader object at 0x769e2a91a110>, origin='/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/attr.py')\n origin= /opt/miniconda3/envs/testbed/lib/python3.10/site-packages/attr.py\n locations= None\n file= /opt/miniconda3/envs/testbed/lib/python3.10/site-packages/attr.py\n version= None\n has_s= False has_define= False\nhypothesis spec= None\nxmlschema spec= None\nWARNING: Package(s) not found: attrs, hypothesis, xmlschema\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_134"
+}
+```
+
+## 171. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_135",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest testing/python/raises.py testing/test_assertion.py testing/test_error_diffs.py -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 172. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest testing/python/raises.py testing/test_assertion.py testing/test_error_diffs.py -q'"
+  },
+  "call_ref": "item_135"
+}
+```
+
+## 173. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "....................................................................FFFF [ 35%]\nFFFF.................................................................... [ 70%]\n..............................................F............              [100%]\n=================================== FAILURES ===================================\n_________________ TestAssert_reprcompare_attrsclass.test_attrs _________________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81afc70>\n\n    def test_attrs(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1085: AttributeError\n____________ TestAssert_reprcompare_attrsclass.test_attrs_recursive ____________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81c0040>\n\n    def test_attrs_recursive(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1101: AttributeError\n________ TestAssert_reprcompare_attrsclass.test_attrs_recursive_verbose ________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81c03d0>\n\n    def test_attrs_recursive_verbose(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1122: AttributeError\n_____________ TestAssert_reprcompare_attrsclass.test_attrs_verbose _____________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81c0760>\n\n    def test_attrs_verbose(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1141: AttributeError\n__ TestAssert_reprcompare_attrsclass.test_attrs_with_attribute_comparison_off __\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81c0af0>\n\n    def test_attrs_with_attribute_comparison_off(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1156: AttributeError\n_ TestAssert_reprcompare_attrsclass.test_comparing_two_different_attrs_classes _\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81afa90>\n\n    def test_comparing_two_different_attrs_classes(self) -> None:\n>       @attr.s\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1173: AttributeError\n_ TestAssert_reprcompare_attrsclass.test_attrs_with_auto_detect_and_custom_eq __\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81af340>\n\n    def test_attrs_with_auto_detect_and_custom_eq(self) -> None:\n>       @attr.s(\n            auto_detect=True\n        )  # attr.s doesn't ignore a custom eq if auto_detect=True\nE       AttributeError: module 'attr' has no attribute 's'\n\ntesting/test_assertion.py:1190: AttributeError\n_________ TestAssert_reprcompare_attrsclass.test_attrs_with_custom_eq __________\n\nself = <test_assertion.TestAssert_reprcompare_attrsclass object at 0x7a70f81ac040>\n\n    def test_attrs_with_custom_eq(self) -> None:\n>       @attr.define(slots=False)\nE       AttributeError: module 'attr' has no attribute 'define'\n\ntesting/test_assertion.py:1206: AttributeError\n____________________ test_error_diff[Compare attrs classes] ____________________\n\ncode = \"\\n        import attr\\n\\n        @attr.s(auto_attribs=True)\\n        class A:\\n            a: int\\n            b: str...         result =   A(1, 'spam')\\n            expected = A(1, 'eggs')\\n            assert result == expected\\n        \"\nexpected = \"\\n        >       assert result == expected\\n        E       AssertionError: assert A(a=1, b='spam') == A(a=1, b='egg...ttribute b:\\n        E           b: 'spam' != 'eggs'\\n        E           - eggs\\n        E           + spam\\n        \"\npytester = <Pytester PosixPath('/tmp/pytest-of-root/pytest-5/test_error_diff11')>\n\n    @pytest.mark.parametrize(\"code, expected\", TESTCASES)\n    def test_error_diff(code: str, expected: str, pytester: Pytester) -> None:\n        expected_lines = [line.lstrip() for line in expected.splitlines()]\n        p = pytester.makepyfile(code)\n        result = pytester.runpytest(p, \"-vv\")\n>       result.stdout.fnmatch_lines(expected_lines)\nE       Failed: nomatch: ''\nE           and: '============================= test session starts =============================='\nE           and: 'platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python'\nE           and: 'cachedir: .pytest_cache'\nE           and: 'rootdir: /tmp/pytest-of-root/pytest-5/test_error_diff11'\nE           and: 'collecting ... collected 0 items / 1 error'\nE       exact match: ''\nE       nomatch: '>       assert result == expected'\nE           and: '==================================== ERRORS ===================================='\nE           and: '_____________________ ERROR collecting test_error_diff.py ______________________'\nE           and: 'test_error_diff.py:3: in <module>'\nE           and: '    @attr.s(auto_attribs=True)'\nE           and: \"E   AttributeError: module 'attr' has no attribute 's'\"\nE           and: '=========================== short test summary info ============================'\nE           and: \"ERROR test_error_diff.py - AttributeError: module 'attr' has no attribute 's'\"\nE           and: '!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!'\nE           and: '=============================== 1 error in 0.14s ==============================='\nE       remains unmatched: '>       assert result == expected'\n\n/testbed/testing/test_error_diffs.py:295: Failed\n----------------------------- Captured stdout call -----------------------------\n============================= test session starts ==============================\nplatform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python\ncachedir: .pytest_cache\nrootdir: /tmp/pytest-of-root/pytest-5/test_error_diff11\ncollecting ... collected 0 items / 1 error\n\n==================================== ERRORS ====================================\n_____________________ ERROR collecting test_error_diff.py ______________________\ntest_error_diff.py:3: in <module>\n    @attr.s(auto_attribs=True)\nE   AttributeError: module 'attr' has no attribute 's'\n=========================== short test summary info ============================\nERROR test_error_diff.py - AttributeError: module 'attr' has no attribute 's'\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n=============================== 1 error in 0.14s ===============================\n=========================== short test summary info ============================\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_recursive\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_recursive_verbose\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_verbose\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_attribute_comparison_off\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_comparing_two_different_attrs_classes\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_auto_detect_and_custom_eq\nFAILED testing/test_assertion.py::TestAssert_reprcompare_attrsclass::test_attrs_with_custom_eq\nFAILED testing/test_error_diffs.py::test_error_diff[Compare attrs classes] - ...\n9 failed, 194 passed in 10.35s\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_135"
+}
+```
+
+## 174. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_137",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 175. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest -q'"
+  },
+  "call_ref": "item_137"
+}
+```
+
+## 176. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "\n==================================== ERRORS ====================================\n_________________ ERROR collecting testing/python/metafunc.py __________________\nImportError while importing test module '/testbed/testing/python/metafunc.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.10/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntesting/python/metafunc.py:14: in <module>\n    import hypothesis\nE   ModuleNotFoundError: No module named 'hypothesis'\n__________________ ERROR collecting testing/test_junitxml.py ___________________\nImportError while importing test module '/testbed/testing/test_junitxml.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/miniconda3/envs/testbed/lib/python3.10/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntesting/test_junitxml.py:13: in <module>\n    import xmlschema\nE   ModuleNotFoundError: No module named 'xmlschema'\n=========================== short test summary info ============================\nERROR testing/python/metafunc.py\nERROR testing/test_junitxml.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n2 errors in 1.06s\n",
+    "exit_code": 2,
+    "status": "failed"
+  },
+  "call_ref": "item_137"
+}
+```
+
+## 177. assistant / message
+
+```
+Re-ran the original commands on final source:
+
+- Exception/assertion suite: `194 passed, 9 failed`; all 9 failures are caused by `/site-packages/attr.py`, which lacks `attr.s` and `attr.define`. The `attrs` distribution is not installed.
+- Full suite: collection blocked by missing `hypothesis` and `xmlschema`.
+- Task-focused suite remains clean: `101 passed`.
+
+These are environment dependency failures, not failures in the restored exception-matching implementation.
+```
+
+## 178. tool / event
+
+```
+{
+  "name": "turn.completed",
+  "output": {
+    "type": "turn.completed",
+    "usage": {
+      "input_tokens": 12118826,
+      "cached_input_tokens": 11776000,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 31004,
+      "reasoning_output_tokens": 12447
+    }
+  }
+}
+```

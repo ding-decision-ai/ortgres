@@ -1,0 +1,68 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 40 items
+
+pandas/tests/groupby/aggregate/test_other.py ........................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/groupby/aggregate/test_other.py::test_agg_partial_failure_raises
+0.01s call     pandas/tests/groupby/aggregate/test_other.py::test_aggregate_api_consistency
+0.01s call     pandas/tests/groupby/aggregate/test_other.py::test_agg_dict_parameter_cast_result_dtypes
+0.01s call     pandas/tests/groupby/aggregate/test_other.py::test_agg_callables
+
+(26 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_partial_failure_raises
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_datetimes_mixed
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_period_index
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_dict_parameter_cast_result_dtypes
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_cast_results_dtypes
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_aggregate_float64_no_int64
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_aggregate_api_consistency
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_dict_renaming_deprecation
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_compat
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_nested_dicts
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_item_by_item_raise_typeerror
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_series_agg_multikey
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_series_agg_multi_pure_python
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_consistency
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_callables
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_over_numpy_arrays
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_tzaware_non_datetime_result[True]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_tzaware_non_datetime_result[False]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_timezone_round_trip
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_sum_uint64_overflow
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_dataframe[tuple-tuple]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_dataframe[list-list]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_dataframe[<lambda>-tuple]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_dataframe[<lambda>-list]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_series[tuple-tuple]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_series[list-list]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_series[<lambda>-tuple]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_structs_series[<lambda>-list]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_category_nansum[True]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_category_nansum[False]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_list_like_func
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_agg_lambda_with_timezone
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[NotImplementedError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[RuntimeError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[KeyError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[IndexError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[OSError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[ValueError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[ArithmeticError]
+PASSED pandas/tests/groupby/aggregate/test_other.py::test_groupby_agg_err_catching[AttributeError]
+============================== 40 passed in 0.13s ==============================

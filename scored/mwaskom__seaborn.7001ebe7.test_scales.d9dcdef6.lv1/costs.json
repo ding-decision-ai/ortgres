@@ -1,0 +1,247 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "ready": true,
+      "model_elapsed_seconds": 987.0592829989982,
+      "elapsed_seconds": 988.0086417730017,
+      "event_summary": {
+        "turn_usages": {
+          "0": {
+            "input_tokens": 2608669,
+            "cached_input_tokens": 2491136,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 9113,
+            "reasoning_output_tokens": 3603
+          },
+          "1": {
+            "input_tokens": 4885290,
+            "cached_input_tokens": 4686976,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 8135,
+            "reasoning_output_tokens": 3509
+          }
+        },
+        "usage_total": {
+          "input_tokens": 7493959,
+          "cached_input_tokens": 7178112,
+          "output_tokens": 17248
+        }
+      },
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "source_episode_ledger": {
+        "0": {
+          "source_segments": 1,
+          "recorded_model_seconds": 2332.820255162005,
+          "root_and_segment_same_bytes": true,
+          "root_copy_not_extra_cost": true,
+          "recorded_metadata": {
+            "ready": true,
+            "initialization_timeout_seconds": 3600,
+            "tsv_version": 2,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 33160002,
+                  "cached_input_tokens": 32085120,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 86641,
+                  "reasoning_output_tokens": 15322
+                }
+              },
+              "usage_complete": true,
+              "usage_total": {
+                "cache_write_input_tokens": 0,
+                "input_tokens": 33160002,
+                "output_tokens": 86641,
+                "reasoning_output_tokens": 15322,
+                "cached_input_tokens": 32085120
+              }
+            },
+            "model_elapsed_seconds": 2332.820255162005,
+            "model_exit_code": 0,
+            "state_files_saved": {
+              "artifact_24e44c228e5184e3": true,
+              "artifact_2c1f8de3485efb44": false,
+              "artifact_4caf12de69a79acd": false
+            },
+            "elapsed_seconds": 2334.0920186970034,
+            "segment_limit": 4,
+            "segments": {
+              "0": {
+                "number": 1,
+                "metadata": {
+                  "ready": true,
+                  "initialization_timeout_seconds": 3599,
+                  "tsv_version": 2,
+                  "event_summary": {
+                    "completed": true,
+                    "turn_usages": {
+                      "0": {
+                        "input_tokens": 33160002,
+                        "cached_input_tokens": 32085120,
+                        "cache_write_input_tokens": 0,
+                        "output_tokens": 86641,
+                        "reasoning_output_tokens": 15322
+                      }
+                    },
+                    "usage_total": {
+                      "input_tokens": 33160002,
+                      "cached_input_tokens": 32085120,
+                      "output_tokens": 86641
+                    }
+                  },
+                  "model_elapsed_seconds": 2332.820255162005,
+                  "model_exit_code": 0,
+                  "state_files_saved": {
+                    "artifact_24e44c228e5184e3": true,
+                    "artifact_2c1f8de3485efb44": false,
+                    "artifact_4caf12de69a79acd": false
+                  },
+                  "elapsed_seconds": 2333.9557910369913
+                },
+                "continuation_allowed": false
+              }
+            }
+          },
+          "actual_cost_usd": null
+        },
+        "1": {
+          "source_segments": 2,
+          "recorded_model_seconds": 987.0592829989982,
+          "recorded_elapsed_seconds": 988.0086417730017,
+          "segments": {
+            "0": {
+              "number": 1,
+              "recorded_model_seconds": 795.3185463619993,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 2608669,
+                    "cached_input_tokens": 2491136,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 9113,
+                    "reasoning_output_tokens": 3603
+                  }
+                }
+              },
+              "actual_cost_usd": null
+            },
+            "1": {
+              "number": 2,
+              "recorded_model_seconds": 191.74073663699892,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 4885290,
+                    "cached_input_tokens": 4686976,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 8135,
+                    "reasoning_output_tokens": 3509
+                  }
+                }
+              },
+              "actual_cost_usd": null
+            }
+          },
+          "recorded_event_summary": {
+            "turn_usages": {
+              "0": {
+                "input_tokens": 2608669,
+                "cached_input_tokens": 2491136,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 9113,
+                "reasoning_output_tokens": 3603
+              },
+              "1": {
+                "input_tokens": 4885290,
+                "cached_input_tokens": 4686976,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 8135,
+                "reasoning_output_tokens": 3509
+              }
+            },
+            "usage_total": {
+              "input_tokens": 7493959,
+              "cached_input_tokens": 7178112,
+              "output_tokens": 17248
+            }
+          },
+          "actual_cost_usd": null
+        }
+      },
+      "source_event_sha256_unique_count": 3,
+      "source_usage_accounting_complete": true,
+      "original_cognitive_files": 326,
+      "source_tracked_cognitive_files": 326,
+      "genuine_rows_reused_before_new_source": 326,
+      "related_file_count": 7,
+      "related_valid_outline_count": 7,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true,
+      "source_files_four_SHA_mtime_precede_formal_marker": true,
+      "zero_model_mode_failure": {
+        "source_model_calls": 0,
+        "formal_model_calls": 0,
+        "formal_budget_used_seconds": 0,
+        "original_lineage": {
+          "source_model_calls": 0,
+          "formal_model_calls": 0,
+          "formal_budget_used_seconds": 0,
+          "original_scope_unchanged": true
+        },
+        "technical_elapsed_seconds": null,
+        "actual_usd_cost": null
+      },
+      "mode_repair": {
+        "differences": 4,
+        "body_and_tracked_files": 326,
+        "after_source_body_and_modes_exact": true,
+        "scope_unchanged": true,
+        "roles_content_unchanged": true,
+        "TSV_unchanged": true
+      },
+      "source_cost_usd": null,
+      "accounting_note": "unknown"
+    },
+    "formal": {
+      "infer_success": true,
+      "infer_exit_code": 0,
+      "grade_exit_code": 0,
+      "agent_exit_status": null,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_turn_completed_observed": true,
+      "formal_budget_time_exceeded": false,
+      "formal_model_calls": 1,
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "usage": {
+        "input_tokens": 16890119,
+        "cached_input_tokens": 16566912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 42408,
+        "reasoning_output_tokens": 13504
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 211,
+        "turn.started": 1,
+        "item.started": 108,
+        "error": 4,
+        "turn.completed": 1
+      },
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null
+    },
+    "accounting_rule": "unknown"
+  }
+}

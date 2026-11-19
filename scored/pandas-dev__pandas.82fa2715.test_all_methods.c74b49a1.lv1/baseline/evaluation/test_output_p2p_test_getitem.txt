@@ -1,0 +1,67 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 40 items
+
+pandas/tests/frame/indexing/test_getitem.py ........................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-list]
+0.01s call     pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-iter]
+0.01s call     pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-dict_keys]
+
+(27 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitem::test_getitem_unused_level_raises
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitem::test_getitem_periodindex
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitem::test_getitem_list_of_labels_categoricalindex_cols
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitem::test_getitem_sparse_column_return_type_and_dtype
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitem::test_getitem_string_columns
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_list_missing_key
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_list_duplicates
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_dupe_cols
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[1-list]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[1-iter]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[1-Index]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[1-set]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[1-dict]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[1-dict_keys]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-list]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-iter]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-Index]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-set]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-dict]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_listlike[2-dict_keys]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_iloc_generator
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_iloc_two_dimensional_generator
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemListLike::test_getitem_iloc_dateoffset_days
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemCallable::test_getitem_callable
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemCallable::test_loc_multiindex_columns_one_level
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_bool_mask_categorical_index
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_bool_mask_duplicate_columns_mixed_dtypes[data10-data20-expected_data0]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_bool_mask_duplicate_columns_mixed_dtypes[data11-data21-expected_data1]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_boolean_frame_unaligned_with_duplicate_columns
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_boolean_series_with_duplicate_columns
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_boolean_frame_with_duplicate_columns
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_empty_frame_with_boolean
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_returns_view_when_column_is_unique_in_df
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemBooleanMask::test_getitem_frozenset_unique_in_column
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemSlice::test_getitem_slice_float64[DataFrame]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemSlice::test_getitem_slice_float64[Series]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemSlice::test_getitem_datetime_slice
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemSlice::test_getitem_slice_same_dim_only_one_axis
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemDeprecatedIndexers::test_getitem_dict_and_set_deprecated[key0]
+PASSED pandas/tests/frame/indexing/test_getitem.py::TestGetitemDeprecatedIndexers::test_getitem_dict_and_set_deprecated[key1]
+============================== 40 passed in 0.11s ==============================

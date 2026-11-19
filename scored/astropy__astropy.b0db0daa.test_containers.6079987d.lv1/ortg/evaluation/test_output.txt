@@ -1,0 +1,131 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/uncertainty/tests/test_containers.py.
+
+Date: 2026-10-11T00:14:19
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 48 items
+
+astropy/uncertainty/tests/test_containers.py .........F.....F.......F... [ 56%]
+.....................                                                    [100%]
+
+=================================== FAILURES ===================================
+_______________ TestAngles.test_at_limit_for_latitude[value1-f4] _______________
+astropy/uncertainty/tests/test_containers.py:82: in test_at_limit_for_latitude
+    ld = Latitude(qd)
+         ^^^^^^^^^^^^
+astropy/coordinates/angles/core.py:594: in __new__
+    self._validate_angles()
+astropy/coordinates/angles/core.py:626: in _validate_angles
+    raise ValueError(
+E   ValueError: Latitude angle(s) must be within -90 deg <= angle <= 90 deg, got ([(90.00000250447816,)],) deg
+____________ TestAngles.test_at_wrap_angle_for_longitude[value1-f4] ____________
+astropy/uncertainty/tests/test_containers.py:94: in test_at_wrap_angle_for_longitude
+    assert_array_equal(ld.distribution, Longitude(q))
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 1 / 1 (100%)
+E   Max absolute difference among violations: 1.7484555e-07
+E   Max relative difference among violations: inf
+E    ACTUAL: Longitude([1.748456e-07], unit='rad', dtype=float32)
+E    DESIRED: Longitude([0.], unit='rad', dtype=float32)
+_____________ TestAngles.test_earthlocation_geodetic_distribution ______________
+astropy/uncertainty/tests/test_containers.py:131: in test_earthlocation_geodetic_distribution
+    deloc = EarthLocation.from_geodetic(lon=self.dq, lat=self.dq, height=hq)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/earth.py:325: in from_geodetic
+    xyz = geodetic.to_cartesian().get_xyz(xyz_axis=-1) << height.unit
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/units/quantity.py:1139: in __lshift__
+    return self.__class__(self, other, copy=False, subok=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: Distribution.__new__() got an unexpected keyword argument 'copy'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_as_input_for_angle[Angle]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_as_input_for_angle[Longitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_as_input_for_angle[Latitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_using_angle_as_input[Angle]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_using_angle_as_input[Longitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_using_angle_as_input[Latitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_limit_for_latitude[value0-f8]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_limit_for_latitude[value0-f4]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_limit_for_latitude[value1-f8]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_limit_for_latitude[value2-f8]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_limit_for_latitude[value2-f4]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_wrap_angle_for_longitude[value0-f8]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_wrap_angle_for_longitude[value0-f4]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_wrap_angle_for_longitude[value1-f8]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_wrap_angle_for_longitude[value2-f8]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_wrap_angle_for_longitude[value2-f4]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_operation_gives_correct_subclass[Longitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_operation_gives_correct_subclass[Latitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_pdfstd_gives_correct_subclass[Longitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_pdfstd_gives_correct_subclass[Latitude]
+PASSED astropy/uncertainty/tests/test_containers.py::TestAngles::test_earthlocation_geocentric_distribution
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_cartesian
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_cartesian_roundtrip
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[CartesianRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[UnitSphericalRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[RadialRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[SphericalRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[PhysicsSphericalRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[CylindricalRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[WGS84GeodeticRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[WGS72GeodeticRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentation::test_other_reps[GRS80GeodeticRepresentation]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_cartesian
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_cartesian_roundtrip
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[CartesianDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[UnitSphericalDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[SphericalDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[UnitSphericalCosLatDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[SphericalCosLatDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[RadialDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[PhysicsSphericalDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestRepresentationWithDifferential::test_other_reps[CylindricalDifferential]
+PASSED astropy/uncertainty/tests/test_containers.py::TestSkyCoord::test_init
+PASSED astropy/uncertainty/tests/test_containers.py::TestSkyCoord::test_convert[fk5]
+PASSED astropy/uncertainty/tests/test_containers.py::TestSkyCoord::test_convert[galactic]
+FAILED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_limit_for_latitude[value1-f4]
+FAILED astropy/uncertainty/tests/test_containers.py::TestAngles::test_at_wrap_angle_for_longitude[value1-f4]
+FAILED astropy/uncertainty/tests/test_containers.py::TestAngles::test_earthlocation_geodetic_distribution
+========================= 3 failed, 45 passed in 0.43s =========================

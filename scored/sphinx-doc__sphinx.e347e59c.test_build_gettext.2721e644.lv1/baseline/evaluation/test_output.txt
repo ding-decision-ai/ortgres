@@ -1,0 +1,626 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/8149fab, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 13 items
+
+tests/test_builders/test_build_gettext.py .FFFFFFFFFFFF                  [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_build_gettext ______________________________
+tests/test_builders/test_build_gettext.py:57: in test_build_gettext
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/root-gettext
+# outdir: /tmp/pytest-of-root/pytest-0/root-gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+
+_________________________________ test_msgfmt __________________________________
+tests/test_builders/test_build_gettext.py:76: in test_msgfmt
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/root-gettext
+# outdir: /tmp/pytest-of-root/pytest-0/root-gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+
+__________________________ test_gettext_index_entries __________________________
+tests/test_builders/test_build_gettext.py:130: in test_gettext_index_entries
+    app.build(filenames=[app.srcdir / 'index_entries.txt'])
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:434: in build
+    self.builder.build_specific(filenames)
+sphinx/builders/__init__.py:365: in build_specific
+    self.build(
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are specified
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00m1 source files given on command line
+[01mupdating environment: [39;49;00m[new config] 32 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  3%] [35madmonitions[39;49;00m
+
+# warning: 
+
+______________________ test_gettext_disable_index_entries ______________________
+tests/test_builders/test_build_gettext.py:161: in test_gettext_disable_index_entries
+    app.build(filenames=[app.srcdir / 'index_entries.txt'])
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:434: in build
+    self.builder.build_specific(filenames)
+sphinx/builders/__init__.py:365: in build_specific
+    self.build(
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are specified
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00m1 source files given on command line
+[01mupdating environment: [39;49;00m[new config] 32 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  3%] [35madmonitions[39;49;00m
+
+# warning: 
+
+____________________________ test_gettext_template _____________________________
+tests/test_builders/test_build_gettext.py:181: in test_gettext_template
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 32 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  3%] [35madmonitions[39;49;00m
+
+# warning: 
+
+________________ test_gettext_template_msgid_order_in_sphinxpot ________________
+tests/test_builders/test_build_gettext.py:192: in test_gettext_template_msgid_order_in_sphinxpot
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-template
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-template/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+# warning: 
+
+_____________________ test_gettext_custom_output_template ______________________
+tests/test_builders/test_build_gettext.py:210: in test_gettext_custom_output_template
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-custom-output-template
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-custom-output-template/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+# warning: 
+
+____________________________ test_build_single_pot _____________________________
+tests/test_builders/test_build_gettext.py:224: in test_build_single_pot
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/root-gettext
+# outdir: /tmp/pytest-of-root/pytest-0/root-gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 15 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  7%] [35mautodoc[39;49;00m
+
+# warning: 
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.attr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.descr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.excludemeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_comment, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_inline, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.inst_attr_string, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.mdocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.meth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.moore, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.prop, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.skipmeth, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.udocattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.Class.docattr, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ca1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+[91m<unknown>:1: WARNING: duplicate object description of autodoc_target.InstAttCls.ia1, other instance in autodoc, use :no-index: for one of them[39;49;00m
+
+___________________ test_gettext_prolog_epilog_substitution ____________________
+tests/test_builders/test_build_gettext.py:248: in test_gettext_prolog_epilog_substitution
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-subst
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-subst/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mindex[39;49;00m
+
+# warning: 
+
+_______________ test_gettext_prolog_epilog_substitution_excluded _______________
+tests/test_builders/test_build_gettext.py:275: in test_gettext_prolog_epilog_substitution_excluded
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext-subst
+# outdir: /tmp/pytest-of-root/pytest-0/gettext-subst/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mindex[39;49;00m
+
+# warning: 
+
+_____________________ test_gettext_literalblock_additional _____________________
+tests/test_builders/test_build_gettext.py:299: in test_gettext_literalblock_additional
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 43 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  2%] [35madmonitions[39;49;00m
+
+# warning: 
+
+______________________ test_gettext_trailing_backslashes _______________________
+tests/test_builders/test_build_gettext.py:330: in test_gettext_trailing_backslashes
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:894: in _parse_str_to_doctree
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/versioning.py:172: in apply
+    list(add_uids(self.document, versioning_condition))
+         ^^^^^^^^
+E   NameError: name 'add_uids' is not defined
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: gettext
+# srcdir: /tmp/pytest-of-root/pytest-0/gettext
+# outdir: /tmp/pytest-of-root/pytest-0/gettext/_build/gettext
+# status: 
+[01mRunning Sphinx v8.3.0+/8149fab[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [gettext]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 43 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  2%] [35madmonitions[39;49;00m
+
+# warning: 
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_builders/test_build_gettext.py::test_Catalog_duplicated_message
+FAILED tests/test_builders/test_build_gettext.py::test_build_gettext - NameEr...
+FAILED tests/test_builders/test_build_gettext.py::test_msgfmt - NameError: na...
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_index_entries
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_disable_index_entries
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_template - Nam...
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_template_msgid_order_in_sphinxpot
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_custom_output_template
+FAILED tests/test_builders/test_build_gettext.py::test_build_single_pot - Nam...
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_prolog_epilog_substitution
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_prolog_epilog_substitution_excluded
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_literalblock_additional
+FAILED tests/test_builders/test_build_gettext.py::test_gettext_trailing_backslashes
+========================= 12 failed, 1 passed in 1.47s =========================

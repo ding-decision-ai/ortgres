@@ -1,0 +1,28 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.58",
+  "initialization": {
+    "coverage": {
+      "ready": true,
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "subset_ready": true,
+      "subset_coverage_complete": true,
+      "full_repository_ready": false,
+      "full_repository_completion_required": false,
+      "original_cognitive_files": 5306,
+      "related_file_count": 14,
+      "related_valid_outline_count": 14
+    }
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/mlflow__mlflow.93dab383.test_rest_store_webhooks.6d85971c.lv1"
+}

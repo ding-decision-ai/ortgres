@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 14 items
+
+tests/test_structures.py ..............                                  [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_structures.py::test_infinity_repr
+PASSED tests/test_structures.py::test_negative_infinity_repr
+PASSED tests/test_structures.py::test_infinity_hash
+PASSED tests/test_structures.py::test_negative_infinity_hash
+PASSED tests/test_structures.py::test_infinity_comparison[1]
+PASSED tests/test_structures.py::test_infinity_comparison[a]
+PASSED tests/test_structures.py::test_infinity_comparison[left2]
+PASSED tests/test_structures.py::test_negative_infinity_lesser[1]
+PASSED tests/test_structures.py::test_negative_infinity_lesser[a]
+PASSED tests/test_structures.py::test_negative_infinity_lesser[left2]
+PASSED tests/test_structures.py::test_infinity_equal
+PASSED tests/test_structures.py::test_negative_infinity_equal
+PASSED tests/test_structures.py::test_negate_infinity
+PASSED tests/test_structures.py::test_negate_negative_infinity
+============================== 14 passed in 0.03s ==============================

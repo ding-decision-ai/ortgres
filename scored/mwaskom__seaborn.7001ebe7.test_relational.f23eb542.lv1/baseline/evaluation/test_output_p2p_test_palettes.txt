@@ -1,0 +1,53 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 38 items
+
+tests/test_palettes.py ......................................            [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_palettes.py::TestColorPalettes::test_current_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_palette_context
+PASSED tests/test_palettes.py::TestColorPalettes::test_big_palette_context
+PASSED tests/test_palettes.py::TestColorPalettes::test_palette_size
+PASSED tests/test_palettes.py::TestColorPalettes::test_seaborn_palettes
+PASSED tests/test_palettes.py::TestColorPalettes::test_hls_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_husl_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_mpl_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_mpl_dark_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_bad_palette_name
+PASSED tests/test_palettes.py::TestColorPalettes::test_terrible_palette_name
+PASSED tests/test_palettes.py::TestColorPalettes::test_bad_palette_colors
+PASSED tests/test_palettes.py::TestColorPalettes::test_palette_desat
+PASSED tests/test_palettes.py::TestColorPalettes::test_palette_is_list_of_tuples
+PASSED tests/test_palettes.py::TestColorPalettes::test_palette_cycles
+PASSED tests/test_palettes.py::TestColorPalettes::test_hls_values
+PASSED tests/test_palettes.py::TestColorPalettes::test_husl_values
+PASSED tests/test_palettes.py::TestColorPalettes::test_cbrewer_qual
+PASSED tests/test_palettes.py::TestColorPalettes::test_mpl_reversal
+PASSED tests/test_palettes.py::TestColorPalettes::test_rgb_from_hls
+PASSED tests/test_palettes.py::TestColorPalettes::test_rgb_from_husl
+PASSED tests/test_palettes.py::TestColorPalettes::test_rgb_from_xkcd
+PASSED tests/test_palettes.py::TestColorPalettes::test_light_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_dark_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_diverging_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_blend_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_cubehelix_against_matplotlib
+PASSED tests/test_palettes.py::TestColorPalettes::test_cubehelix_n_colors
+PASSED tests/test_palettes.py::TestColorPalettes::test_cubehelix_reverse
+PASSED tests/test_palettes.py::TestColorPalettes::test_cubehelix_cmap
+PASSED tests/test_palettes.py::TestColorPalettes::test_cubehelix_code
+PASSED tests/test_palettes.py::TestColorPalettes::test_xkcd_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_crayon_palette
+PASSED tests/test_palettes.py::TestColorPalettes::test_color_codes
+PASSED tests/test_palettes.py::TestColorPalettes::test_as_hex
+PASSED tests/test_palettes.py::TestColorPalettes::test_preserved_palette_length
+PASSED tests/test_palettes.py::TestColorPalettes::test_html_repr
+PASSED tests/test_palettes.py::TestColorPalettes::test_colormap_display_patch
+============================== 38 passed in 0.31s ==============================

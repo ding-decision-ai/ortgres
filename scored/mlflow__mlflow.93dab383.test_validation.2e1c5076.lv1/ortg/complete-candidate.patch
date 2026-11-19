@@ -1,0 +1,295 @@
+diff --git a/mlflow/genai/evaluation/base.py b/mlflow/genai/evaluation/base.py
+index f3cc5bf..c43c03d 100644
+--- a/mlflow/genai/evaluation/base.py
++++ b/mlflow/genai/evaluation/base.py
+@@ -18,7 +18,10 @@ from mlflow.genai.evaluation.utils import (
+ )
+ from mlflow.genai.scorers import Scorer
+ from mlflow.genai.scorers.builtin_scorers import BuiltInScorer
+-
++from mlflow.genai.scorers.validation import (
++    valid_data_for_builtin_scorers,
++    validate_scorers,
++)
+ from mlflow.genai.utils.display_utils import display_evaluation_output
+ from mlflow.genai.utils.trace_utils import convert_predict_fn
+ from mlflow.models.evaluation.base import (
+diff --git a/mlflow/genai/optimize/util.py b/mlflow/genai/optimize/util.py
+index 91a59dc..88ca36c 100644
+--- a/mlflow/genai/optimize/util.py
++++ b/mlflow/genai/optimize/util.py
+@@ -8,7 +8,7 @@ from mlflow.entities import Trace
+ from mlflow.exceptions import MlflowException
+ from mlflow.genai.scorers import Scorer
+ from mlflow.genai.scorers.builtin_scorers import BuiltInScorer
+-
++from mlflow.genai.scorers.validation import valid_data_for_builtin_scorers
+ from mlflow.tracking.client import MlflowClient
+ 
+ if TYPE_CHECKING:
+diff --git a/mlflow/genai/scorers/base.py b/mlflow/genai/scorers/base.py
+index d0cd1cc..2bf73a8 100644
+--- a/mlflow/genai/scorers/base.py
++++ b/mlflow/genai/scorers/base.py
+@@ -996,29 +996,50 @@ def scorer(
+             scorer, name=name, description=description, aggregations=aggregations
+         )
+ 
++    if not callable(func):
++        raise MlflowException.invalid_parameter_value(
++            f"The scorer decorator expects a callable, got {type(func).__name__}."
++        )
+ 
++    from mlflow.genai.scorers.validation import validate_aggregations
+ 
++    validate_aggregations(aggregations)
+ 
++    signature = inspect.signature(func)
++    allowed_inputs = {"inputs", "outputs", "expectations", "trace"}
++    unsupported_required_inputs = {
++        parameter.name
++        for parameter in signature.parameters.values()
++        if parameter.kind
++        not in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD)
++        and parameter.name not in allowed_inputs
++        and parameter.default is inspect.Parameter.empty
++    }
++    if unsupported_required_inputs:
++        raise MlflowException.invalid_parameter_value(
++            "Scorer functions may only require the following evaluation inputs: "
++            f"{sorted(allowed_inputs)}. Got unsupported required parameters: "
++            f"{sorted(unsupported_required_inputs)}."
++        )
+ 
++    class CustomScorer(Scorer):
++        _original_func: Callable[..., Any] = PrivateAttr()
+ 
++        def __init__(self, **data):
++            super().__init__(**data)
++            self._original_func = func
+ 
++        @functools.wraps(func)
++        def __call__(self, *args, **kwargs):
++            return self._original_func(*args, **kwargs)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        @property
++        def kind(self) -> ScorerKind:
++            return ScorerKind.DECORATOR
+ 
+     # Update the __call__ method's signature to match the original function
+     # but add 'self' as the first parameter. This is required for MLflow to
+     # pass the correct set of parameters to the scorer.
+-    signature = inspect.signature(func)
+     params = list(signature.parameters.values())
+     new_params = [inspect.Parameter("self", inspect.Parameter.POSITIONAL_OR_KEYWORD)] + params
+     new_signature = signature.replace(parameters=new_params)
+@@ -1028,4 +1049,4 @@ def scorer(
+         name=name or func.__name__,
+         description=description,
+         aggregations=aggregations,
+-    )
+\ No newline at end of file
++    )
+diff --git a/mlflow/genai/scorers/builtin_scorers.py b/mlflow/genai/scorers/builtin_scorers.py
+index e501d45..f71eb25 100644
+--- a/mlflow/genai/scorers/builtin_scorers.py
++++ b/mlflow/genai/scorers/builtin_scorers.py
+@@ -1564,37 +1564,21 @@ class Equivalence(BuiltInScorer):
+         return _sanitize_feedback(feedback)
+ 
+ 
++def get_all_scorers() -> list[BuiltInScorer]:
++    """Return the built-in scorers available for the current tracking URI."""
++    scorers = [
++        ExpectationsGuidelines(),
++        Correctness(),
++        RelevanceToQuery(),
++        RetrievalSufficiency(),
++        RetrievalGroundedness(),
++        Equivalence(),
++    ]
+ 
++    if is_databricks_uri(mlflow.get_tracking_uri()):
++        scorers.extend([Safety(), RetrievalRelevance()])
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    return scorers
+ 
+ 
+ class MissingColumnsException(MlflowException):
+@@ -1603,4 +1587,4 @@ class MissingColumnsException(MlflowException):
+         self.missing_columns = list(missing_columns)
+         super().__init__(
+             f"The following columns are required for the scorer {scorer}: {missing_columns}"
+-        )
+\ No newline at end of file
++        )
+diff --git a/mlflow/genai/scorers/validation.py b/mlflow/genai/scorers/validation.py
+index f7f2d13..b1a5c21 100644
+--- a/mlflow/genai/scorers/validation.py
++++ b/mlflow/genai/scorers/validation.py
+@@ -1,4 +1,5 @@
+ import importlib
++import inspect
+ import logging
+ from collections import defaultdict
+ from typing import Any, Callable
+@@ -23,6 +24,112 @@ _logger = logging.getLogger(__name__)
+ IS_DBX_AGENTS_INSTALLED = importlib.util.find_spec("databricks.agents") is not None
+ 
+ 
++def valid_data_for_builtin_scorers(
++    data: "pd.DataFrame",
++    builtin_scorers: list[BuiltInScorer],
++    predict_fn: Callable[..., Any] | None = None,
++) -> None:
++    """Validate columns used by built-in scorers without aborting on missing columns."""
++    legacy_column_mapping = {"request": "inputs", "response": "outputs"}
++    available_columns = {legacy_column_mapping.get(column, column) for column in data.columns}
++
++    if predict_fn is not None:
++        available_columns.update({"outputs", "trace"})
++
++    # Inputs and outputs can be recovered from an evaluation trace. Expectations are
++    # deliberately handled below because their individual names are part of the schema.
++    if "trace" in available_columns:
++        available_columns.update({"inputs", "outputs"})
++
++    if "expectations" in data.columns:
++        for row_index, expectations in data["expectations"].items():
++            if expectations is None or expectations is pd.NA:
++                continue
++            if isinstance(expectations, float) and pd.isna(expectations):
++                continue
++            if not isinstance(expectations, dict):
++                raise MlflowException.invalid_parameter_value(
++                    "The `expectations` column must contain dictionaries mapping expectation "
++                    f"names to values. Got {type(expectations).__name__} at row {row_index}."
++                )
++            available_columns.update(f"expectations/{key}" for key in expectations)
++
++    missing_columns_to_scorers: dict[str, list[str]] = defaultdict(list)
++    for builtin_scorer in builtin_scorers:
++        try:
++            builtin_scorer.validate_columns(available_columns)
++        except MissingColumnsException as e:
++            for missing_column in e.missing_columns:
++                missing_columns_to_scorers[str(missing_column)].append(e.scorer)
++
++    if missing_columns_to_scorers:
++        diagnostics = "\n".join(
++            f"  - {column}: required by {', '.join(scorer_names)}"
++            for column, scorer_names in sorted(missing_columns_to_scorers.items())
++        )
++        _logger.warning(
++            "Some built-in scorers are missing required columns and will return null results "
++            "for affected rows:\n%s",
++            diagnostics,
++        )
++
++
++def _get_legacy_metric_type() -> type | None:
++    if not IS_DBX_AGENTS_INSTALLED:
++        return None
++
++    try:
++        from databricks.rag_eval.evaluation.metrics import Metric
++
++        return Metric
++    except ImportError:
++        return None
++
++
++def validate_scorers(scorers: list[Any]) -> list[Scorer]:
++    """Validate and return scorer instances accepted by GenAI evaluation."""
++    if not isinstance(scorers, list):
++        raise MlflowException.invalid_parameter_value(
++            f"`scorers` must be a list of Scorer instances. Got {type(scorers).__name__}."
++        )
++
++    legacy_metric_type = _get_legacy_metric_type()
++    validated_scorers = []
++    for index, candidate in enumerate(scorers):
++        if isinstance(candidate, Scorer):
++            validate_aggregations(candidate.aggregations)
++            validated_scorers.append(candidate)
++            continue
++
++        if legacy_metric_type is not None and isinstance(candidate, legacy_metric_type):
++            _logger.warning(
++                "Passing legacy databricks.rag_eval Metric objects as scorers is deprecated. "
++                "Use mlflow.genai.scorers.Scorer or the @scorer decorator instead."
++            )
++            validated_scorers.append(candidate)
++            continue
++
++        if isinstance(candidate, list):
++            hint = (
++                " Scorer lists must not be nested. If you used `[get_all_scorers()]`, pass "
++                "`get_all_scorers()` directly instead."
++            )
++        elif inspect.isclass(candidate) and issubclass(candidate, Scorer):
++            hint = (
++                f" `{candidate.__name__}` is a scorer class; instantiate it as "
++                f"`{candidate.__name__}()`."
++            )
++        else:
++            hint = " Pass Scorer instances or functions decorated with `@scorer`."
++
++        raise MlflowException.invalid_parameter_value(
++            f"Invalid scorer at index {index}: expected a Scorer instance, got "
++            f"{type(candidate).__name__}.{hint}"
++        )
++
++    return validated_scorers
++
++
+ 
+ 
+ 
+@@ -200,4 +307,4 @@ def validate_aggregations(aggregations: list[str | AggregationFunc] | None) -> N
+             raise MlflowException.invalid_parameter_value(
+                 f"Aggregation must be either a string from {sorted(valid_aggregation_names)} "
+                 f"or a callable function, got {type(agg).__name__}"
+-            )
+\ No newline at end of file
++            )

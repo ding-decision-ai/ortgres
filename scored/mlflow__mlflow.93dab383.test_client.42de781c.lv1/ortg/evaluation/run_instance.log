@@ -1,0 +1,94 @@
+2026-10-14 12:56:42,993 - INFO - ============================================================
+2026-10-14 12:56:42,993 - INFO - Starting evaluation for instance: mlflow__mlflow.93dab383.test_client.42de781c.lv1
+2026-10-14 12:56:42,993 - INFO - Level: 1
+2026-10-14 12:56:42,993 - INFO - Attempt: 1
+2026-10-14 12:56:42,993 - INFO - ============================================================
+2026-10-14 12:56:43,001 - INFO - Docker runtime config: shm_size=4g, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 12:56:43,001 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e
+2026-10-14 12:56:43,002 - INFO - Image docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e found locally
+2026-10-14 12:56:43,002 - INFO - Creating container: fb-eval-mlflow__mlflow-93dab383-test_client-42de781c-lv1-attempt-1-20261014-125643-002723
+2026-10-14 12:56:43,003 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 12:56:43,003 - INFO - Using shared memory size: 4g
+2026-10-14 12:56:43,281 - INFO - Container fb-eval-mlflow__mlflow-93dab383-test_client-42de781c-lv1-attempt-1-20261014-125643-002723 created successfully
+2026-10-14 12:56:43,281 - INFO - Starting Level 1 evaluation for mlflow__mlflow.93dab383.test_client.42de781c.lv1
+2026-10-14 12:56:43,281 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 12:56:45,689 - INFO - Restore project exit code: 0
+2026-10-14 12:56:45,689 - INFO - Output: 
+2026-10-14 12:56:45,689 - INFO - Step 2: Applying patch to mask files
+2026-10-14 12:56:45,694 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 12:56:46,037 - INFO - Mask patch apply exit code: 0
+2026-10-14 12:56:46,037 - INFO - Mask patch output: /tmp/mask_patch.diff:432: new blank line at EOF.
++
+/tmp/mask_patch.diff:506: new blank line at EOF.
++
+warning: 2 lines add whitespace errors.
+
+2026-10-14 12:56:46,037 - INFO - Successfully applied mask patch
+2026-10-14 12:56:46,037 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 12:56:46,042 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 12:56:46,042 - INFO - Deleting F2P test file: /testbed/tests/telemetry/test_client.py
+2026-10-14 12:56:46,282 - INFO - Successfully deleted F2P test file: /testbed/tests/telemetry/test_client.py
+2026-10-14 12:56:46,282 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 12:56:46,282 - INFO - Applying environment fix mlflow_parallel_sources for mlflow/mlflow
+2026-10-14 12:56:46,636 - INFO - Environment fix mlflow_parallel_sources completed for mlflow/mlflow
+2026-10-14 12:56:46,636 - INFO - Step 4: Reinitializing git repository
+2026-10-14 12:57:06,054 - INFO - Step 5: Applying agent patch
+2026-10-14 12:57:06,062 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 12:57:06,326 - INFO - Patch apply exit code: 0
+2026-10-14 12:57:06,326 - INFO - Patch output: Checking patch mlflow/telemetry/client.py...
+Checking patch mlflow/telemetry/track.py...
+Checking patch mlflow/telemetry/utils.py...
+Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Applied patch mlflow/telemetry/client.py cleanly.
+Applied patch mlflow/telemetry/track.py cleanly.
+Applied patch mlflow/telemetry/utils.py cleanly.
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+
+2026-10-14 12:57:06,326 - INFO - >>>>> Applied Patch
+2026-10-14 12:57:06,326 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 12:57:06,326 - INFO - F2P test path: /testbed/tests/telemetry/test_client.py
+2026-10-14 12:57:06,579 - INFO - Delete F2P file exit code: 0
+2026-10-14 12:57:06,579 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 12:57:06,849 - INFO - Reverse apply exit code: 0
+2026-10-14 12:57:06,850 - INFO - Reverse apply output: 
+2026-10-14 12:57:06,850 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 12:57:06,850 - INFO - Step 7: Running tests
+2026-10-14 12:57:06,850 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=20
+2026-10-14 12:57:06,850 - INFO - Test timeout: 1200s
+2026-10-14 12:57:06,850 - INFO - Running F2P test: /testbed/tests/telemetry/test_client.py
+2026-10-14 12:58:05,183 - INFO - F2P test exit code: 1
+2026-10-14 12:58:05,183 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: 
+2026-10-14 12:58:05,184 - INFO - Saved F2P test output to artifact://c4701ef88b8ddca7
+2026-10-14 12:58:05,184 - INFO - Running 5 P2P tests
+2026-10-14 12:58:05,184 - INFO - Running P2P test: /testbed/tests/tracking/_tracking_service/test_tracking_service_client.py
+2026-10-14 12:58:06,992 - INFO - P2P test /testbed/tests/tracking/_tracking_service/test_tracking_service_client.py exit code: 0
+2026-10-14 12:58:06,992 - INFO - Saved P2P test output to artifact://cd9eb463410ca220
+2026-10-14 12:58:06,992 - INFO - Running P2P test: /testbed/tests/ai_commands/test_ai_command_utils.py
+2026-10-14 12:58:08,756 - INFO - P2P test /testbed/tests/ai_commands/test_ai_command_utils.py exit code: 0
+2026-10-14 12:58:08,756 - INFO - Saved P2P test output to artifact://7e894b3c7a8c53d5
+2026-10-14 12:58:08,756 - INFO - Running P2P test: /testbed/tests/utils/test_proto_json_utils.py
+2026-10-14 12:58:10,729 - INFO - P2P test /testbed/tests/utils/test_proto_json_utils.py exit code: 0
+2026-10-14 12:58:10,729 - INFO - Saved P2P test output to artifact://0294b5f84b300679
+2026-10-14 12:58:10,729 - INFO - Running P2P test: /testbed/tests/utils/test_utils.py
+2026-10-14 12:58:12,468 - INFO - P2P test /testbed/tests/utils/test_utils.py exit code: 0
+2026-10-14 12:58:12,468 - INFO - Saved P2P test output to artifact://c0ebee4d2c3f0b27
+2026-10-14 12:58:12,468 - INFO - Running P2P test: /testbed/tests/genai/scorers/test_builtin_scorers_registration.py
+2026-10-14 12:58:23,465 - INFO - P2P test /testbed/tests/genai/scorers/test_builtin_scorers_registration.py exit code: 0
+2026-10-14 12:58:23,465 - INFO - Saved P2P test output to artifact://5a610200cbd3e5c9
+2026-10-14 12:58:23,470 - INFO - ============================================================
+2026-10-14 12:58:23,470 - INFO - Evaluation completed for mlflow__mlflow.93dab383.test_client.42de781c.lv1
+2026-10-14 12:58:23,470 - INFO - Resolved: False
+2026-10-14 12:58:23,470 - INFO - F2P Pass rate: 0.9455
+2026-10-14 12:58:23,470 - INFO - ============================================================
+2026-10-14 12:58:23,470 - INFO - Stopping and removing container
+2026-10-14 12:58:34,189 - INFO - Container removed successfully

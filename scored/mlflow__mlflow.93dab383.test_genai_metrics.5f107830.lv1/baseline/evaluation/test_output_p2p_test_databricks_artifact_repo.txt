@@ -1,0 +1,314 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 68 items
+
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_validation_and_cleaning PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [  1%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs:/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks://getTrackingUriDefault] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [  2%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs://@databricks/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [  4%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs://someProfile@databricks/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks://someProfile] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [  5%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs://scope:key@databricks/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks://scope:key] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [  7%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts-dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts-databricks://getTrackingUriDefault] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [  8%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/awesome/path-dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/awesome/path-databricks://getTrackingUriDefault] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 10%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts-] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 11%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts/arty-arty] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 13%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs://prof@databricks/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts/arty-arty] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 14%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/awesome/path-../awesome/path] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 16%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/456/artifact-456] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 17%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/logged_models/m-123-None] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 19%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/tr-123/artifacts-None] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 20%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/-None] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 22%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_extract_resource PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 23%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 25%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure[output-output/test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 26%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure[-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 27%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure_with_headers[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 29%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure_blob_client_sas_error PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 30%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 32%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2[output-output/test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 33%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2[-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 35%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2_with_headers[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 36%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2_flush_error PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 38%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_aws[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 39%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_aws_with_headers[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 41%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_aws_presigned_url_error PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 42%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_gcp[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 44%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_gcp_with_headers[None-test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 45%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_gcp_presigned_url_error PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 47%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_with_relative_path[None-subdir/path/test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 48%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_with_relative_path[test_path-subdir/path/test_path/test.txt] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 50%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_list_artifacts PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 51%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_list_artifacts_with_relative_path PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 52%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_list_artifacts_handles_pagination PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 54%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_get_read_credential_infos_handles_pagination PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 55%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_get_read_credential_infos_respects_max_request_size PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 57%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_get_write_credential_infos_handles_pagination PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 58%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_get_write_credential_infos_respects_max_request_size PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 60%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file[test_file.txt-] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 61%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file[test_file.txt-None] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 63%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file[output/test_file-None] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 64%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_with_relative_path[test_file.txt-] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 66%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_with_relative_path[test_file.txt-None] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 67%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[None-False] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 69%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[100-False] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 70%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[524287999-False] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 72%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[524288000-True] PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 73%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_get_request_fail PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 75%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_download_artifacts_awaits_download_completion PASSED | MEM 23.7/33.7 GB | DISK 794.1/915.7 GB [ 76%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_artifact_logging PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 77%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_artifact_logging_chunks_upload_list PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 79%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_download_artifacts_provides_failure_info PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 80%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifacts_provides_failure_info PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 82%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_fail_due_to_chunk_size PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 83%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_upload PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 85%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_upload_retry_part_upload PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 86%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_upload_abort PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 88%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[1] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 89%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[4] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 91%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[2] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 92%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[3] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 94%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[1] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 95%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[4] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 97%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[2] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [ 98%]
+tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[3] PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:51 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:53 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+___________________ test_multipart_upload_retry_part_upload ____________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 05:31:57 INFO mlflow.store.artifact.databricks_artifact_repo: Failed to authorize request, possibly due to credential expiration. Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+_________________________ test_multipart_upload_abort __________________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 05:31:57 WARNING mlflow.store.artifact.databricks_artifact_repo: Encountered an unexpected error during multipart upload: Failed to complete multipart upload, aborting
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 05:31:57 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+4.00s call     tests/store/artifact/test_databricks_artifact_repo.py::test_artifact_logging
+2.00s call     tests/store/artifact/test_databricks_artifact_repo.py::test_download_artifacts_awaits_download_completion
+0.04s setup    tests/store/artifact/test_databricks_artifact_repo.py::test_get_write_credential_infos_respects_max_request_size
+0.01s call     tests/store/artifact/test_databricks_artifact_repo.py::test_get_write_credential_infos_respects_max_request_size
+0.01s call     tests/store/artifact/test_databricks_artifact_repo.py::test_get_read_credential_infos_respects_max_request_size
+
+(5 durations < 0.005s hidden.  Use -vv to show these durations.)
+
+========================= per-file durations (sorted) ==========================
+::group::per-file durations (sorted)
+
+| Rank | File                                                    | Duration | Tests | Min    | Max    | Avg    |
+| ---- | ------------------------------------------------------- | -------- | ----- | ------ | ------ | ------ |
+| 1    | `tests/store/artifact/test_databricks_artifact_repo.py` | 6.23s    | 68    | 0.001s | 4.005s | 0.092s |
+
+::endgroup::
+
+============================== Remaining threads ===============================
+1: <Thread(MlflowDatabricksArtifactRepository_0, started 128567548200512)>
+=========================== short test summary info ============================
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_validation_and_cleaning
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs:/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks://getTrackingUriDefault]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs://@databricks/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs://someProfile@databricks/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks://someProfile]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs://scope:key@databricks/databricks/mlflow-tracking/experiment/1/run/2-dbfs:/databricks/mlflow-tracking/experiment/1/run/2-databricks://scope:key]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts-dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts-databricks://getTrackingUriDefault]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_init_artifact_uri[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/awesome/path-dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/awesome/path-databricks://getTrackingUriDefault]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts-]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts/arty-arty]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs://prof@databricks/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/artifacts/arty-arty]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_run_relative_artifact_repo_root_path[dbfs:/databricks/mlflow-tracking/MOCK-EXP/MOCK-RUN-ID/awesome/path-../awesome/path]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/456/artifact-456]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/logged_models/m-123-None]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/tr-123/artifacts-None]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_extract_run_id[dbfs:/databricks/mlflow-tracking/123/-None]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_extract_resource
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure[output-output/test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure[-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure_with_headers[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_azure_blob_client_sas_error
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2[output-output/test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2[-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2_with_headers[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_adls_gen2_flush_error
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_aws[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_aws_with_headers[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_aws_presigned_url_error
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_gcp[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_gcp_with_headers[None-test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_gcp_presigned_url_error
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_with_relative_path[None-subdir/path/test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifact_with_relative_path[test_path-subdir/path/test_path/test.txt]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_list_artifacts
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_list_artifacts_with_relative_path
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_list_artifacts_handles_pagination
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_get_read_credential_infos_handles_pagination
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_get_read_credential_infos_respects_max_request_size
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_get_write_credential_infos_handles_pagination
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_get_write_credential_infos_respects_max_request_size
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file[test_file.txt-]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file[test_file.txt-None]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file[output/test_file-None]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_with_relative_path[test_file.txt-]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_with_relative_path[test_file.txt-None]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[None-False]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[100-False]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[524287999-False]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_in_parallel_when_necessary[524288000-True]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_databricks_download_file_get_request_fail
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_download_artifacts_awaits_download_completion
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_artifact_logging
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_artifact_logging_chunks_upload_list
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_download_artifacts_provides_failure_info
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_log_artifacts_provides_failure_info
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_fail_due_to_chunk_size
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_upload
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_upload_retry_part_upload
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_multipart_upload_abort
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[1]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[4]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[2]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_download_trace_data[3]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[1]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[4]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[2]
+PASSED | MEM 23.6/33.7 GB | DISK 794.2/915.7 GB tests/store/artifact/test_databricks_artifact_repo.py::test_upload_trace_data[3]
+============================== 68 passed in 6.29s ==============================

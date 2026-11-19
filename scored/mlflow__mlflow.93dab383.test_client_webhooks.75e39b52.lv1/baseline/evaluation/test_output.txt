@@ -1,0 +1,1327 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 12 items
+
+tests/tracking/test_client_webhooks.py::test_create_webhook ERROR        [  8%]
+tests/tracking/test_client_webhooks.py::test_get_webhook ERROR           [ 16%]
+tests/tracking/test_client_webhooks.py::test_get_webhook_not_found ERROR [ 25%]
+tests/tracking/test_client_webhooks.py::test_list_webhooks ERROR         [ 33%]
+tests/tracking/test_client_webhooks.py::test_update_webhook ERROR        [ 41%]
+tests/tracking/test_client_webhooks.py::test_update_webhook_partial ERROR [ 50%]
+tests/tracking/test_client_webhooks.py::test_update_webhook_not_found ERROR [ 58%]
+tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace] ERROR [ 66%]
+tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme] ERROR [ 75%]
+tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL] ERROR [ 83%]
+tests/tracking/test_client_webhooks.py::test_delete_webhook ERROR        [ 91%]
+tests/tracking/test_client_webhooks.py::test_delete_webhook_not_found ERROR [100%]
+
+==================================== ERRORS ====================================
+____________________ ERROR at setup of test_create_webhook _____________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_create_webhook0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_create_webhook0'
+        encryption_key = 'CgrT2z7ne8OjHMHZQhVY69FBtsRVHGgHD-9P6Ovucfo='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f48709f50>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_create_webhook0')
+        url        = 'http://127.0.0.1:60493'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:60493'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f45014150>
+        tracking_uri = 'http://127.0.0.1:60493'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f44ce98d0>
+        tracking_uri = 'http://127.0.0.1:60493'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f44ce98d0>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:60493'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:60493'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:60493'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:60493'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:60493'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:02 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:02 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:02 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:02 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:02 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:02 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:02 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:03 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:03 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:03 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:03 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:04 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:05 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:06 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:06 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+______________________ ERROR at setup of test_get_webhook ______________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_get_webhook0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_get_webhook0'
+        encryption_key = 'lExrS3xltyn-2e6Iu5bT7y6zIBuf5KoV-6GTRA_L_2Q='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3f67f950>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_get_webhook0')
+        url        = 'http://127.0.0.1:36129'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:36129'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f44e8e1d0>
+        tracking_uri = 'http://127.0.0.1:36129'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f443b6c90>
+        tracking_uri = 'http://127.0.0.1:36129'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f443b6c90>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:36129'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:36129'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:36129'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:36129'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:36129'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:06 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:06 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:06 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:07 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:07 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:07 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:07 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:08 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:09 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:10 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:10 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_________________ ERROR at setup of test_get_webhook_not_found _________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_get_webhook_not_found0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_get_webhook_not_found0'
+        encryption_key = 'TYFQopSHYZuRI2i-Uxr859UZ2AK18X6NwQeWcLwPEnE='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3f66ae50>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_get_webhook_not_found0')
+        url        = 'http://127.0.0.1:34413'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:34413'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f441f3a50>
+        tracking_uri = 'http://127.0.0.1:34413'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f39ec90>
+        tracking_uri = 'http://127.0.0.1:34413'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f39ec90>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:34413'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:34413'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:34413'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:34413'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:34413'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:10 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:10 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:10 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:10 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:10 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:10 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:11 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:12 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:13 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:13 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:13 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_____________________ ERROR at setup of test_list_webhooks _____________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_list_webhooks0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_list_webhooks0'
+        encryption_key = 'rNwImh0Z4yaHg6r4XaYJdPxfXE7DDRn5aZ6uwM1KZ0E='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3f409b50>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_list_webhooks0')
+        url        = 'http://127.0.0.1:34611'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:34611'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3f30f3d0>
+        tracking_uri = 'http://127.0.0.1:34611'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f093050>
+        tracking_uri = 'http://127.0.0.1:34611'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f093050>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:34611'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:34611'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:34611'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:34611'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:34611'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:13 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:14 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:14 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:14 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:14 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:14 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:15 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:16 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:17 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:17 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+____________________ ERROR at setup of test_update_webhook _____________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_update_webhook0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_update_webhook0'
+        encryption_key = 'kvd8QKh6n3LcBixDHtGBxmU4XXkdX1c3eIofyke3_QU='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f4413fc10>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_update_webhook0')
+        url        = 'http://127.0.0.1:52095'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:52095'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3f056750>
+        tracking_uri = 'http://127.0.0.1:52095'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f2f9750>
+        tracking_uri = 'http://127.0.0.1:52095'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f2f9750>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:52095'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:52095'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:52095'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:52095'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:52095'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:17 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:17 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:17 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:18 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:18 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:18 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:18 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:19 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:20 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:21 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:21 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+________________ ERROR at setup of test_update_webhook_partial _________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_update_webhook_partial0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_update_webhook_partial0'
+        encryption_key = 'Dddx_lIyzNZ7WnhFahHwjQCsVbcgcgC-ZoNEjapnJe8='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3f39f950>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_update_webhook_partial0')
+        url        = 'http://127.0.0.1:54877'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:54877'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3ef38dd0>
+        tracking_uri = 'http://127.0.0.1:54877'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3ed0fc90>
+        tracking_uri = 'http://127.0.0.1:54877'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3ed0fc90>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:54877'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:54877'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:54877'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:54877'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:54877'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:21 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:21 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:21 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:21 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:21 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:21 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:22 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:23 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:24 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:24 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:24 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:24 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:24 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:24 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:25 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:25 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_______________ ERROR at setup of test_update_webhook_not_found ________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_update_webhook_not_found0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_update_webhook_not_found0'
+        encryption_key = 'Rudb2dbclTUVwO3gPJ1eROd0fP96F8arVLcJ6AAm9Zk='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3ee24bd0>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_update_webhook_not_found0')
+        url        = 'http://127.0.0.1:36795'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:36795'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3ed0f650>
+        tracking_uri = 'http://127.0.0.1:36795'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f5c5d50>
+        tracking_uri = 'http://127.0.0.1:36795'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3f5c5d50>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:36795'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:36795'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:36795'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:36795'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:36795'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:25 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:25 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:25 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:26 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:26 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:26 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:26 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:27 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:28 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:29 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:29 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_ ERROR at setup of test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace] _
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur0'
+        encryption_key = 'AFA3cJ7oHJIWFlhbMy2bUja29VDUVn7qmAB-NQYrECw='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3ebbf990>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur0')
+        url        = 'http://127.0.0.1:51795'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:51795'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3f574590>
+        tracking_uri = 'http://127.0.0.1:51795'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e6d12d0>
+        tracking_uri = 'http://127.0.0.1:51795'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e6d12d0>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:51795'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:51795'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:51795'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:51795'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:51795'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:29 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:29 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:29 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:29 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:29 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:29 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:30 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:31 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:32 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:32 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:32 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_ ERROR at setup of test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme] _
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur1/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur1'
+        encryption_key = 'GpvHE3znyU6sC1GExLVyxnmq7L1aGgWlHK00rW0_Wf8='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3e721890>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur1')
+        url        = 'http://127.0.0.1:46387'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:46387'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3e6ddf90>
+        tracking_uri = 'http://127.0.0.1:46387'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e383cd0>
+        tracking_uri = 'http://127.0.0.1:46387'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e383cd0>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:46387'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:46387'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:46387'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:46387'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:46387'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:32 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:33 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:33 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:33 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:33 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:33 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:34 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:35 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:36 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:36 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_ ERROR at setup of test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL] _
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur2/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur2'
+        encryption_key = 'aOtN_XtLLnWUNVdqS2U3GnA-8qHbu5qo0gOciUHbe0c='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3e3e1e10>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_update_webhook_invalid_ur2')
+        url        = 'http://127.0.0.1:32811'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:32811'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3e397190>
+        tracking_uri = 'http://127.0.0.1:32811'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e56eb10>
+        tracking_uri = 'http://127.0.0.1:32811'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e56eb10>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:32811'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:32811'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:32811'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:32811'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:32811'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:36 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:36 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:36 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:37 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:37 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:37 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:37 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:38 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:39 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:40 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+____________________ ERROR at setup of test_delete_webhook _____________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_delete_webhook0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_delete_webhook0'
+        encryption_key = '0YTjrE3-vexuGl1_33Qcqaup1iNNIlNip5byMktZwAY='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3e3d7e90>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_delete_webhook0')
+        url        = 'http://127.0.0.1:49473'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:49473'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3e506690>
+        tracking_uri = 'http://127.0.0.1:49473'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e28cc10>
+        tracking_uri = 'http://127.0.0.1:49473'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3e28cc10>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:49473'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:49473'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:49473'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:49473'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:49473'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:40 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:40 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:40 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:40 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:40 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:41 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:42 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:43 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:43 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:43 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+_______________ ERROR at setup of test_delete_webhook_not_found ________________
+tests/tracking/test_client_webhooks.py:37: in client
+    yield MlflowClient(url)
+          ^^^^^^^^^^^^^^^^^
+        backend_uri = 'sqlite:////tmp/pytest-of-root/pytest-0/test_delete_webhook_not_found0/mlflow.db'
+        default_artifact_root = 'file:///tmp/pytest-of-root/pytest-0/test_delete_webhook_not_found0'
+        encryption_key = 'dYRB_pEQ9nvujO7pqRsZf1l8MO_-rE0R2lewxy2IEEs='
+        monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x771f3e110210>
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_delete_webhook_not_found0')
+        url        = 'http://127.0.0.1:45353'
+mlflow/tracking/client.py:218: in __init__
+    self._tracking_client = TrackingServiceClient(final_tracking_uri)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        final_tracking_uri = 'http://127.0.0.1:45353'
+        registry_uri = None
+        self       = <mlflow.tracking.client.MlflowClient object at 0x771f3e0f7c90>
+        tracking_uri = 'http://127.0.0.1:45353'
+mlflow/tracking/_tracking_service/client.py:96: in __init__
+    self.store
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3dc05d90>
+        tracking_uri = 'http://127.0.0.1:45353'
+mlflow/tracking/_tracking_service/client.py:100: in store
+    return utils._get_store(self.tracking_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.tracking._tracking_service.client.TrackingServiceClient object at 0x771f3dc05d90>
+mlflow/tracking/_tracking_service/utils.py:216: in _get_store
+    return _tracking_store_registry.get_store(store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        store_uri  = 'http://127.0.0.1:45353'
+mlflow/tracking/_tracking_service/registry.py:45: in get_store
+    return self._get_store_with_resolved_uri(resolved_store_uri, artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        resolved_store_uri = 'http://127.0.0.1:45353'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+        store_uri  = 'http://127.0.0.1:45353'
+        utils      = <module 'mlflow.tracking._tracking_service.utils' from '/testbed/mlflow/tracking/_tracking_service/utils.py'>
+mlflow/tracking/_tracking_service/registry.py:56: in _get_store_with_resolved_uri
+    return builder(store_uri=resolved_store_uri, artifact_uri=artifact_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        artifact_uri = None
+        builder    = <function _get_rest_store at 0x771f82779f80>
+        resolved_store_uri = 'http://127.0.0.1:45353'
+        self       = <mlflow.tracking._tracking_service.registry.TrackingStoreRegistry object at 0x771f82748d10>
+mlflow/tracking/_tracking_service/utils.py:152: in _get_rest_store
+    return RestStore(partial(get_default_host_creds, store_uri))
+                             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'get_default_host_creds' is not defined
+        _          = {'artifact_uri': None}
+        store_uri  = 'http://127.0.0.1:45353'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 05:11:43 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:44 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 05:11:44 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 05:11:44 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 05:11:44 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 05:11:44 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 05:11:45 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 05:11:46 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 05:11:47 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 05:11:47 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 05:11:47 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+=============================== warnings summary ===============================
+../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/starlette/middleware/wsgi.py:15
+  /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/starlette/middleware/wsgi.py:15: DeprecationWarning: starlette.middleware.wsgi is deprecated and will be removed in a future release. Please refer to https://github.com/abersheeran/a2wsgi as a replacement.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= slowest 10 durations =============================
+4.29s setup    tests/tracking/test_client_webhooks.py::test_create_webhook
+3.96s setup    tests/tracking/test_client_webhooks.py::test_update_webhook_partial
+3.83s setup    tests/tracking/test_client_webhooks.py::test_list_webhooks
+3.81s setup    tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme]
+3.75s setup    tests/tracking/test_client_webhooks.py::test_update_webhook_not_found
+3.73s setup    tests/tracking/test_client_webhooks.py::test_delete_webhook_not_found
+3.70s setup    tests/tracking/test_client_webhooks.py::test_get_webhook
+3.64s setup    tests/tracking/test_client_webhooks.py::test_update_webhook
+3.60s setup    tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL]
+3.57s setup    tests/tracking/test_client_webhooks.py::test_delete_webhook
+
+========================= per-file durations (sorted) ==========================
+::group::per-file durations (sorted)
+
+| Rank | File                                     | Duration | Tests | Min    | Max    | Avg    |
+| ---- | ---------------------------------------- | -------- | ----- | ------ | ------ | ------ |
+| 1    | `tests/tracking/test_client_webhooks.py` | 45.48s   | 12    | 3.528s | 4.381s | 3.790s |
+
+::endgroup::
+
+=========================== short test summary info ============================
+ERROR tests/tracking/test_client_webhooks.py::test_create_webhook - NameError...
+ERROR tests/tracking/test_client_webhooks.py::test_get_webhook - NameError: n...
+ERROR tests/tracking/test_client_webhooks.py::test_get_webhook_not_found - Na...
+ERROR tests/tracking/test_client_webhooks.py::test_list_webhooks - NameError:...
+ERROR tests/tracking/test_client_webhooks.py::test_update_webhook - NameError...
+ERROR tests/tracking/test_client_webhooks.py::test_update_webhook_partial - N...
+ERROR tests/tracking/test_client_webhooks.py::test_update_webhook_not_found
+ERROR tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace]
+ERROR tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme]
+ERROR tests/tracking/test_client_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL]
+ERROR tests/tracking/test_client_webhooks.py::test_delete_webhook - NameError...
+ERROR tests/tracking/test_client_webhooks.py::test_delete_webhook_not_found
+======================== 1 warning, 12 errors in 45.93s ========================

@@ -1,0 +1,56 @@
+diff --git a/sympy/core/numbers.py b/sympy/core/numbers.py
+index ad0db86..23f4170 100644
+--- a/sympy/core/numbers.py
++++ b/sympy/core/numbers.py
+@@ -204,6 +204,25 @@ def _as_integer_ratio(p):
+     return int(p), int(q)
+ 
+ 
++def _decimal_to_Rational_prec(dec):
++    """Convert a finite ``Decimal`` to an exact number and digit count."""
++    if not dec.is_finite():
++        raise TypeError("non-finite Decimal cannot be converted to Rational")
++
++    sign, digits, exponent = dec.as_tuple()
++    coefficient = 0
++    for digit in digits:
++        coefficient = coefficient * 10 + digit
++    if sign:
++        coefficient = -coefficient
++
++    if exponent >= 0:
++        number = Integer(coefficient*10**exponent)
++    else:
++        number = Rational(coefficient, 10**-exponent)
++    return number, len(digits)
++
++
+ 
+ 
+ 
+@@ -4180,6 +4199,18 @@ def _mpc_(self):
+ I = S.ImaginaryUnit
+ 
+ 
++def int_valued(x):
++    """Return whether *x* is a supported literal integer representation."""
++    if isinstance(x, (SYMPY_INTS, Integer)):
++        return True
++    if type(x) is float:
++        return float.is_integer(x)
++    if isinstance(x, Float):
++        _, man, exponent, bitcount = x._mpf_
++        return (man == 0 and bitcount == 0) or (man != 0 and exponent >= 0)
++    return False
++
++
+ 
+ 
+ 
+@@ -4492,4 +4523,4 @@ def _register_classes():
+ 
+ _register_classes()
+ 
+-_illegal = (S.NaN, S.Infinity, S.NegativeInfinity, S.ComplexInfinity)
+\ No newline at end of file
++_illegal = (S.NaN, S.Infinity, S.NegativeInfinity, S.ComplexInfinity)

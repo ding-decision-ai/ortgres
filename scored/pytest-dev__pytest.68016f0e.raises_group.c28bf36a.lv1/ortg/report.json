@@ -1,0 +1,70 @@
+{
+    "pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.5172,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "testing/python/raises_group.py::test_raises_group",
+                    "testing/python/raises_group.py::test_match",
+                    "testing/python/raises_group.py::test_check",
+                    "testing/python/raises_group.py::test_unwrapped_match_check",
+                    "testing/python/raises_group.py::test_matches",
+                    "testing/python/raises_group.py::test_message",
+                    "testing/python/raises_group.py::test_raisesexc_tostring",
+                    "testing/python/raises_group.py::test_raisesgroup_tostring",
+                    "testing/python/raises_group.py::test_assert_matches",
+                    "testing/python/raises_group.py::test_parametrizing_conditional_raisesgroup[False-handler0]",
+                    "testing/python/raises_group.py::test_parametrizing_conditional_raisesgroup[True-handler1]",
+                    "testing/python/raises_group.py::test_annotated_group",
+                    "testing/python/raises_group.py::test_tuples",
+                    "testing/python/raises_group.py::test_xfail_raisesgroup",
+                    "testing/python/raises_group.py::test_xfail_RaisesExc"
+                ],
+                "failure": [
+                    "testing/python/raises_group.py::test_incorrect_number_exceptions",
+                    "testing/python/raises_group.py::test_flatten_subgroups",
+                    "testing/python/raises_group.py::test_catch_unwrapped_exceptions",
+                    "testing/python/raises_group.py::test_assert_message",
+                    "testing/python/raises_group.py::test_message_indent",
+                    "testing/python/raises_group.py::test_suggestion_on_nested_and_brief_error",
+                    "testing/python/raises_group.py::test_assert_message_nested",
+                    "testing/python/raises_group.py::test_check_no_patched_repr",
+                    "testing/python/raises_group.py::test_misordering_example",
+                    "testing/python/raises_group.py::test_brief_error_on_one_fail",
+                    "testing/python/raises_group.py::test_identity_oopsies",
+                    "testing/python/raises_group.py::test_raisesexc",
+                    "testing/python/raises_group.py::test_raisesexc_match",
+                    "testing/python/raises_group.py::test_RaisesExc_check"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "testing/test_helpconfig.py::test_versions",
+                    "testing/test_helpconfig.py::test_version_verbose",
+                    "testing/test_helpconfig.py::test_help",
+                    "testing/test_helpconfig.py::test_none_help_param_raises_exception",
+                    "testing/test_helpconfig.py::test_empty_help_param",
+                    "testing/test_helpconfig.py::test_hookvalidation_unknown",
+                    "testing/test_helpconfig.py::test_hookvalidation_optional",
+                    "testing/test_helpconfig.py::test_traceconfig",
+                    "testing/test_helpconfig.py::test_version_less_verbose",
+                    "testing/test_helpconfig.py::test_debug",
+                    "testing/test_helpconfig.py::test_PYTEST_DEBUG"
+                ],
+                "failure": [
+                    "test_a.py::test_fail_on_flag",
+                    "b/test_whatever.py",
+                    "sub2/test_foo.py::test_foo",
+                    "test_match_raises_error.py::test_division_zero"
+                ]
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-13T09:17:45.863609"
+    }
+}

@@ -1,0 +1,982 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/0e6ad59, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-3
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 53 items
+
+tests/test_domains/test_domain_py.py ................................... [ 66%]
+..................                                                       [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_____________________________ test_domain_py_xrefs _____________________________
+----------------------------- Captured stdout call -----------------------------
+[<pending_xref: <literal...>>, <pending_xref: <literal...>>]
+<pending_xref py:class="B" py:module="test.extra" refdoc="module_option" refdomain="py" refexplicit="0" reftarget="foo" reftype="meth" refwarn="0"><literal classes="xref py py-meth">foo()</literal></pending_xref>
+<pending_xref py:class="B" py:module="test.extra" refdoc="module_option" refdomain="py" refexplicit="0" reftarget="foo" reftype="meth" refwarn="0"><literal classes="xref py py-meth">foo()</literal></pending_xref>
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mabbr[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mcanonical[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mmodule[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mmodule_option[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mroles[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtype_alias[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mabbr[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mcanonical[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mmodule_option[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mroles[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtype_alias[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mabbr[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mcanonical[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mmodule_option[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mroles[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtype_alias[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex py-modindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-3/domain-py/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mabbr[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mcanonical[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mmodule_option[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mroles[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtype_alias[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mabbr[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mcanonical[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mmodule_option[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mroles[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtype_alias[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex py-modindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-3/domain-py/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mabbr[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mcanonical[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mmodule_option[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mroles[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtype_alias[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/_blank/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+[91m/tmp/pytest-of-root/pytest-3/_blank/index.rst:2: WARNING: duplicate object description of g, other instance in index, use :no-index: for one of them[39;49;00m
+[91m/tmp/pytest-of-root/pytest-3/_blank/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+[91m/tmp/pytest-of-root/pytest-3/_blank/index.rst:2: WARNING: duplicate object description of g, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (2 options: 'html_theme', 'python_use_unqualified_type_names')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m[config changed ('python_use_unqualified_type_names')] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-3/domain-py-python_use_unqualified_type_names/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-xref-warning
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-xref-warning/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/domain-py-xref-warning/index.rst:6: WARNING: undefined label: 'no-label' [ref.ref][39;49;00m
+[91m/tmp/pytest-of-root/pytest-3/domain-py-xref-warning/index.rst:6: WARNING: Failed to create a cross reference. A title or caption not found: 'existing-label' [ref.ref][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (2 options: 'html_theme', 'python_trailing_comma_in_multi_line_signatures')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m[config changed ('python_trailing_comma_in_multi_line_signatures')] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-3/domain-py-python_maximum_signature_line_length/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/_blank
+# outdir: /tmp/pytest-of-root/pytest-3/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of f, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-3/root/index.rst:1: WARNING: duplicate object description of foo.bar, other instance in index, use :no-index: for one of them[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-3/root
+# outdir: /tmp/pytest-of-root/pytest-3/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_domains/test_domain_py.py::test_function_signatures
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_xrefs
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_xrefs_abbreviations
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_objects
+PASSED tests/test_domains/test_domain_py.py::test_resolve_xref_for_properties
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_find_obj
+PASSED tests/test_domains/test_domain_py.py::test_get_full_qualified_name
+PASSED tests/test_domains/test_domain_py.py::test_parse_annotation
+PASSED tests/test_domains/test_domain_py.py::test_parse_annotation_suppress
+PASSED tests/test_domains/test_domain_py.py::test_parse_annotation_Literal
+PASSED tests/test_domains/test_domain_py.py::test_module_index
+PASSED tests/test_domains/test_domain_py.py::test_module_index_submodule
+PASSED tests/test_domains/test_domain_py.py::test_module_index_not_collapsed
+PASSED tests/test_domains/test_domain_py.py::test_modindex_common_prefix
+PASSED tests/test_domains/test_domain_py.py::test_no_index_entry
+PASSED tests/test_domains/test_domain_py.py::test_python_python_use_unqualified_type_names
+PASSED tests/test_domains/test_domain_py.py::test_python_python_use_unqualified_type_names_disabled
+PASSED tests/test_domains/test_domain_py.py::test_warn_missing_reference
+PASSED tests/test_domains/test_domain_py.py::test_signature_line_number[True]
+PASSED tests/test_domains/test_domain_py.py::test_signature_line_number[False]
+PASSED tests/test_domains/test_domain_py.py::test_python_maximum_signature_line_length_overrides_global
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_python_maximum_signature_line_length_in_html
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_python_maximum_signature_line_length_in_text
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_python_trailing_comma_in_multi_line_signatures_in_html
+PASSED tests/test_domains/test_domain_py.py::test_domain_py_python_trailing_comma_in_multi_line_signatures_in_text
+PASSED tests/test_domains/test_domain_py.py::test_module_content_line_number
+PASSED tests/test_domains/test_domain_py.py::test_short_literal_types
+PASSED tests/test_domains/test_domain_py.py::test_function_pep_695
+PASSED tests/test_domains/test_domain_py.py::test_class_def_pep_695
+PASSED tests/test_domains/test_domain_py.py::test_class_def_pep_696
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:int]-[T: int]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:*Ts]-[T: *Ts]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:int|(*Ts)]-[T: int | (*Ts)]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:(*Ts)|int]-[T: (*Ts) | int]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:(int|(*Ts))]-[T: (int | (*Ts))]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:((*Ts)|int)]-[T: ((*Ts) | int)]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_bound[[T:Annotated[int,ctype('char')]]-[T: Annotated[int, ctype('char')]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_constraints[[T:(int,str)]-[T: (int, str)]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_constraints[[T:(int|str,*Ts)]-[T: (int | str, *Ts)]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[T=int]-[T = int]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[T:int=int]-[T: int = int]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[*V=*Ts]-[*V = *Ts]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[*V=(*Ts)]-[*V = (*Ts)]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[*V=*tuple[str,...]]-[*V = *tuple[str, ...]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[*V=*tuple[*Ts,...]]-[*V = *tuple[*Ts, ...]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[*V=*tuple[int,*Ts]]-[*V = *tuple[int, *Ts]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[*V=*tuple[*Ts,int]]-[*V = *tuple[*Ts, int]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[**P=[int,*Ts]]-[**P = [int, *Ts]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[**P=[int, int*3]]-[**P = [int, int * 3]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[**P=[int, *Ts*3]]-[**P = [int, *Ts * 3]]]
+PASSED tests/test_domains/test_domain_py.py::test_pep_695_and_pep_696_whitespaces_in_default[[**P=[int,A[int,ctype("char")]]]-[**P = [int, A[int, ctype("char")]]]]
+PASSED tests/test_domains/test_domain_py.py::test_deco_role
+PASSED tests/test_domains/test_domain_py.py::test_pytype_canonical
+============================== 53 passed in 1.84s ==============================

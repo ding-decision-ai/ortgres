@@ -1,0 +1,828 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/fits/tests/test_tilde_path.py.
+
+Date: 2026-10-14T02:59:25
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 33 items
+
+astropy/io/fits/tests/test_tilde_path.py ............................... [ 93%]
+..                                                                       [100%]
+
+==================================== PASSES ====================================
+_____________________ TestTildePaths.test_fits_printdiff[] _____________________
+----------------------------- Captured stdout call -----------------------------
+
+ fitsdiff: 8.0.0.dev49+gb0db0daac
+ a: /testbed/astropy/io/fits/tests/data/test0.fits
+ b: /testbed/astropy/io/fits/tests/data/tb.fits
+ Maximum number of different data values to be reported: 10
+ Relative tolerance: 0.0, Absolute tolerance: 0.0
+
+Files contain different numbers of HDUs:
+ a: 5
+ b: 2
+
+Primary HDU:
+
+   Headers contain differences:
+     Headers have different number of cards:
+      a: 117
+      b: 11
+     Extra keyword ''       in a: ''
+     Extra keyword 'ATODCORR' in a: 'PERFORM'
+     Extra keyword 'ATODFILE' in a: 'uref$e1b09594u.r1h'
+     Extra keyword 'ATODGAIN' in a: 7.0
+     Extra keyword 'BIASCORR' in a: 'PERFORM'
+     Extra keyword 'BIASDFIL' in a: 'uref$e6o0937du.b2h'
+     Extra keyword 'BIASFILE' in a: 'uref$e6o0937du.r2h'
+     Extra keyword 'BLEVCORR' in a: 'PERFORM'
+     Extra keyword 'BLEVDFIL' in a: 'ucal$u2eq0201t.q1h'
+     Extra keyword 'BLEVFILE' in a: 'ucal$u2eq0201t.x0h'
+     Extra keyword 'BSCALE' in a: 1.0
+     Extra keyword 'BZERO'  in a: 32768.0
+     Extra keyword 'CDBSFILE' in a: 'NO'
+     Extra keyword 'COMPTAB' in a: 'mtab$f7j1535pm.tmc'
+     Extra keyword 'DARKCORR' in a: 'OMIT'
+     Extra keyword 'DARKDFIL' in a: 'uref$e6o09384u.b3h'
+     Extra keyword 'DARKFILE' in a: 'uref$e6o09384u.r3h'
+     Extra keyword 'DARKTIME' in a: 0.23
+     Extra keyword 'DATE'   in a: '01/04/99'
+     Extra keyword 'DATE-OBS' in a: '19/05/94'
+     Extra keyword 'DEC_SUN' in a: 19.8289107164
+     Extra keyword 'DOHISTOS' in a: 'OMIT'
+     Extra keyword 'DOPHOTOM' in a: 'PERFORM'
+     Extra keyword 'DOSATMAP' in a: 'OMIT'
+     Extra keyword 'EPLONGPM' in a: 0.0
+     Extra keyword 'EQNX_SUN' in a: 2000.0
+     Extra keyword 'EQRADTRG' in a: 0.0
+     Extra keyword 'EXPEND' in a: 49491.65366441
+     Extra keyword 'EXPFLAG' in a: 'NORMAL'
+     Extra keyword 'EXPSTART' in a: 49491.65366175
+     Extra keyword 'EXPTIME' in a: 0.23
+     Extra keyword 'FGSLOCK' in a: 'FINE'
+     Extra keyword 'FILETYPE' in a: 'SCI'
+     Extra keyword 'FILTER1' in a: 33
+     Extra keyword 'FILTER2' in a: 0
+     Extra keyword 'FILTNAM1' in a: 'F673N'
+     Extra keyword 'FILTNAM2' in a: ''
+     Extra keyword 'FILTROT' in a: 0.0
+     Extra keyword 'FLATCORR' in a: 'PERFORM'
+     Extra keyword 'FLATDFIL' in a: 'uref$e1c1404ju.b4h'
+     Extra keyword 'FLATFILE' in a: 'uref$e1c1404ju.r4h'
+     Extra keyword 'FLATNTRG' in a: 0.0
+     Extra keyword 'GRAPHTAB' in a: 'mtab$f7d1401pm.tmg'
+     Extra keyword 'GROUPS' in a: False
+     Extra keyword 'IMAGETYP' in a: 'EXT'
+     Extra keyword 'INSTRUME' in a: 'WFPC2'
+     Extra keyword 'IRAF-TLM' in a: 'xxx'
+     Extra keyword 'KSPOTS' in a: 'OFF'
+     Extra keyword 'LONGPMER' in a: 0.0
+     Extra keyword 'LRFWAVE' in a: 0.0
+     Extra keyword 'MASKCORR' in a: 'PERFORM'
+     Extra keyword 'MASKFILE' in a: 'uref$fan15478u.r0h'
+     Extra keyword 'MODE'   in a: 'AREA'
+     Extra keyword 'MOONANGL' in a: 54.995346
+     Extra keyword 'MTFLAG' in a: True
+     Extra keyword 'NPDECTRG' in a: 0.0
+     Extra keyword 'NPRATRG' in a: 0.0
+     Extra keyword 'NSHUTA17' in a: 0
+     Extra keyword 'ORIENTAT' in a: 157.076
+     Extra keyword 'OUTDTYPE' in a: 'REAL'
+     Extra keyword 'PA_V3'  in a: 292.387786865
+     Extra keyword 'PHOTTAB' in a: ''
+     Extra keyword 'PKTFMT' in a: 96
+     Extra keyword 'PODPSFF' in a: False
+     Extra keyword 'PSTPTIME' in a: '1994.139:16:14:39'
+     Extra keyword 'PSTRTIME' in a: '1994.139:15:41:39'
+     Extra keyword 'RA_SUN' in a: 56.2731208362
+     Extra keyword 'READTIME' in a: 151
+     Extra keyword 'ROOTNAME' in a: 'U2EQ0201T'
+     Extra keyword 'ROTRTTRG' in a: 0.0
+     Extra keyword 'RSDPFILL' in a: -100
+     Extra keyword 'SATURATE' in a: 4095
+     Extra keyword 'SERIALS' in a: 'OFF'
+     Extra keyword 'SHADCORR' in a: 'PERFORM'
+     Extra keyword 'SHADFILE' in a: 'uref$e6o09405u.r5h'
+     Extra keyword 'SHUTTER' in a: 'B'
+     Extra keyword 'STDCFFF' in a: False
+     Extra keyword 'STDCFFP' in a: '0x5569'
+     Extra keyword 'SUNANGLE' in a: 158.939133
+     Extra keyword 'SUN_ALT' in a: -11.552458
+     Extra keyword 'SURFALTD' in a: 0.0
+     Extra keyword 'SURFLATD' in a: 0.0
+     Extra keyword 'SURFLONG' in a: 0.0
+     Extra keyword 'TIME-OBS' in a: '15:41:16'
+     Extra keyword 'UBAY3TMP' in a: 14.5969
+     Extra keyword 'UCH1CJTM' in a: -88.3486
+     Extra keyword 'UCH2CJTM' in a: -88.8073
+     Extra keyword 'UCH3CJTM' in a: -88.3945
+     Extra keyword 'UCH4CJTM' in a: -88.9041
+     Extra keyword 'UEXPODUR' in a: 0
+     Extra keyword 'UEXPOTIM' in a: 20272
+     Extra keyword 'USCALE' in a: 1.0
+     Extra keyword 'UZERO'  in a: 0.0
+     Extra keyword 'COMMENT' in b: '  FITS (Flexible Image Transport System) format defined in Astronomy and'
+     Keyword FILENAME has different values:
+        a> vtest3.fits
+        b> tb.fits
+     Keyword FILENAME has different comments:
+        a> File name
+        b> name of file
+     Keyword NEXTEND  has different values:
+        a> 4
+        b> 1
+     Keyword NEXTEND  has different comments:
+        a> Number of standard extensions
+        b> number of extensions in file
+     Keyword ORIGIN   has different values:
+        a> NOAO-IRAF FITS Image Kernel Aug 1 1997
+        b> STScI-STSDAS/TABLES
+     Keyword ORIGIN   has different comments:
+        a> FITS file originator
+        b> Tables version 1999-09-07
+
+Extension HDU 1:
+   Extension types differ:
+    a: IMAGE
+    b: BINTABLE
+   Extension names differ:
+    a: SCI
+    b: 
+
+   Headers contain differences:
+     Headers have different number of cards:
+      a: 61
+      b: 24
+     Extra keyword 'ATODSAT' in a: 0
+     Extra keyword 'BACKGRND' in a: 316.0
+     Extra keyword 'BADPIXEL' in a: 0
+     Extra keyword 'BIASEVEN' in a: 0.0
+     Extra keyword 'BIASODD' in a: 0.0
+     Extra keyword 'CALIBDEF' in a: 0
+     Extra keyword 'CD1_1'  in a: 2.33019e-05
+     Extra keyword 'CD1_2'  in a: 9.85029e-06
+     Extra keyword 'CD2_1'  in a: 9.85462e-06
+     Extra keyword 'CD2_2'  in a: -2.32916e-05
+     Extra keyword 'CRPIX1' in a: 210.25
+     Extra keyword 'CRPIX2' in a: 212.5
+     Extra keyword 'CRVAL1' in a: 215.597167517
+     Extra keyword 'CRVAL2' in a: -12.7376058132
+     Extra keyword 'CTYPE1' in a: 'UNITLESS'
+     Extra keyword 'CTYPE2' in a: 'LINE'
+     Extra keyword 'DATALOST' in a: 0
+     Extra keyword 'DATAMAX' in a: 0.0
+     Extra keyword 'DATAMEAN' in a: 0.0
+     Extra keyword 'DATAMIN' in a: 0.0
+     Extra keyword 'DETECTOR' in a: 1
+     Extra keyword 'DEZERO' in a: 0.0
+     Extra keyword 'ERRCNT' in a: 0
+     Extra keyword 'EXPNAME' in a: 'U2EQ0201T'
+     Extra keyword 'EXTNAME' in a: 'SCI'
+     Extra keyword 'EXTVER' in a: 1
+     Extra keyword 'FILLCNT' in a: 0
+     Extra keyword 'FPKTTIME' in a: 49491.654167
+     Extra keyword 'GOODMAX' in a: 0.0
+     Extra keyword 'GOODMIN' in a: 0.0
+     Extra keyword 'GPIXELS' in a: 0
+     Extra keyword 'HISTWIDE' in a: 1.0
+     Extra keyword 'INHERIT' in a: True
+     Extra keyword 'LPKTTIME' in a: 49491.65422
+     Extra keyword 'MEANC10' in a: 313.16
+     Extra keyword 'MEANC100' in a: 313.4404
+     Extra keyword 'MEANC200' in a: 313.3406
+     Extra keyword 'MEANC25' in a: 313.2493
+     Extra keyword 'MEANC300' in a: 313.3636
+     Extra keyword 'MEANC50' in a: 313.5349
+     Extra keyword 'MEDIAN' in a: 312.0
+     Extra keyword 'MEDSHADO' in a: 314.0
+     Extra keyword 'MIR_REVR' in a: True
+     Extra keyword 'ORIENTAT' in a: 157.076
+     Extra keyword 'OVERLAP' in a: 0
+     Extra keyword 'PHOTBW' in a: 0.0
+     Extra keyword 'PHOTFLAM' in a: 0.0
+     Extra keyword 'PHOTMODE' in a: ''
+     Extra keyword 'PHOTPLAM' in a: 0.0
+     Extra keyword 'PHOTZPT' in a: 0.0
+     Extra keyword 'ROOTNAME' in a: 'U2EQ0201T'
+     Extra keyword 'SKEWNESS' in a: -0.003205
+     Extra keyword 'SOFTERRS' in a: 0
+     Extra keyword 'STATICD' in a: 0
+     Extra keyword 'HISTORY' in b: 'Created Mon 15:05:16 10-Sep-2001'
+     Extra keyword 'TDISP1' in b: 'I11'
+     Extra keyword 'TDISP2' in b: 'A3'
+     Extra keyword 'TDISP3' in b: 'G15.7'
+     Extra keyword 'TDISP4' in b: 'L6'
+     Extra keyword 'TFIELDS' in b: 4
+     Extra keyword 'TFORM1' in b: '1J'
+     Extra keyword 'TFORM2' in b: '3A'
+     Extra keyword 'TFORM3' in b: '1E'
+     Extra keyword 'TFORM4' in b: '1L'
+     Extra keyword 'TNULL1' in b: -2147483647
+     Extra keyword 'TSCAL3' in b: 3
+     Extra keyword 'TTYPE1' in b: 'c1'
+     Extra keyword 'TTYPE2' in b: 'c2'
+     Extra keyword 'TTYPE3' in b: 'c3'
+     Extra keyword 'TTYPE4' in b: 'c4'
+     Extra keyword 'TZERO3' in b: 0.4
+     Keyword BITPIX   has different values:
+        a> 16
+        b> 8
+     Keyword BITPIX   has different comments:
+        a> number of bits per data pixel
+        b> 8-bit bytes
+     Keyword GCOUNT   has different comments:
+        a> required keyword; must = 1
+        b> one data group (required keyword)
+     Keyword NAXIS    has different comments:
+        a> number of data axes
+        b> 2-dimensional binary table
+     Keyword NAXIS1   has different values:
+        a> 40
+        b> 12
+     Keyword NAXIS1   has different comments:
+        a> length of data axis 1
+        b> width of table in bytes
+     Keyword NAXIS2   has different values:
+        a> 40
+        b> 2
+     Keyword NAXIS2   has different comments:
+        a> length of data axis 2
+     Keyword PCOUNT   has different comments:
+        a> required keyword; must = 0
+        b> size of special data area
+     Keyword XTENSION has different values:
+        a> IMAGE
+        b> BINTABLE
+     Keyword XTENSION has different comments:
+        a> IMAGE extension
+        b> binary table extension
+
+_______________ TestTildePaths.test_fits_printdiff[home_is_data] _______________
+----------------------------- Captured stdout call -----------------------------
+
+ fitsdiff: 8.0.0.dev49+gb0db0daac
+ a: /testbed/astropy/io/fits/tests/data/test0.fits
+ b: /testbed/astropy/io/fits/tests/data/tb.fits
+ Maximum number of different data values to be reported: 10
+ Relative tolerance: 0.0, Absolute tolerance: 0.0
+
+Files contain different numbers of HDUs:
+ a: 5
+ b: 2
+
+Primary HDU:
+
+   Headers contain differences:
+     Headers have different number of cards:
+      a: 117
+      b: 11
+     Extra keyword ''       in a: ''
+     Extra keyword 'ATODCORR' in a: 'PERFORM'
+     Extra keyword 'ATODFILE' in a: 'uref$e1b09594u.r1h'
+     Extra keyword 'ATODGAIN' in a: 7.0
+     Extra keyword 'BIASCORR' in a: 'PERFORM'
+     Extra keyword 'BIASDFIL' in a: 'uref$e6o0937du.b2h'
+     Extra keyword 'BIASFILE' in a: 'uref$e6o0937du.r2h'
+     Extra keyword 'BLEVCORR' in a: 'PERFORM'
+     Extra keyword 'BLEVDFIL' in a: 'ucal$u2eq0201t.q1h'
+     Extra keyword 'BLEVFILE' in a: 'ucal$u2eq0201t.x0h'
+     Extra keyword 'BSCALE' in a: 1.0
+     Extra keyword 'BZERO'  in a: 32768.0
+     Extra keyword 'CDBSFILE' in a: 'NO'
+     Extra keyword 'COMPTAB' in a: 'mtab$f7j1535pm.tmc'
+     Extra keyword 'DARKCORR' in a: 'OMIT'
+     Extra keyword 'DARKDFIL' in a: 'uref$e6o09384u.b3h'
+     Extra keyword 'DARKFILE' in a: 'uref$e6o09384u.r3h'
+     Extra keyword 'DARKTIME' in a: 0.23
+     Extra keyword 'DATE'   in a: '01/04/99'
+     Extra keyword 'DATE-OBS' in a: '19/05/94'
+     Extra keyword 'DEC_SUN' in a: 19.8289107164
+     Extra keyword 'DOHISTOS' in a: 'OMIT'
+     Extra keyword 'DOPHOTOM' in a: 'PERFORM'
+     Extra keyword 'DOSATMAP' in a: 'OMIT'
+     Extra keyword 'EPLONGPM' in a: 0.0
+     Extra keyword 'EQNX_SUN' in a: 2000.0
+     Extra keyword 'EQRADTRG' in a: 0.0
+     Extra keyword 'EXPEND' in a: 49491.65366441
+     Extra keyword 'EXPFLAG' in a: 'NORMAL'
+     Extra keyword 'EXPSTART' in a: 49491.65366175
+     Extra keyword 'EXPTIME' in a: 0.23
+     Extra keyword 'FGSLOCK' in a: 'FINE'
+     Extra keyword 'FILETYPE' in a: 'SCI'
+     Extra keyword 'FILTER1' in a: 33
+     Extra keyword 'FILTER2' in a: 0
+     Extra keyword 'FILTNAM1' in a: 'F673N'
+     Extra keyword 'FILTNAM2' in a: ''
+     Extra keyword 'FILTROT' in a: 0.0
+     Extra keyword 'FLATCORR' in a: 'PERFORM'
+     Extra keyword 'FLATDFIL' in a: 'uref$e1c1404ju.b4h'
+     Extra keyword 'FLATFILE' in a: 'uref$e1c1404ju.r4h'
+     Extra keyword 'FLATNTRG' in a: 0.0
+     Extra keyword 'GRAPHTAB' in a: 'mtab$f7d1401pm.tmg'
+     Extra keyword 'GROUPS' in a: False
+     Extra keyword 'IMAGETYP' in a: 'EXT'
+     Extra keyword 'INSTRUME' in a: 'WFPC2'
+     Extra keyword 'IRAF-TLM' in a: 'xxx'
+     Extra keyword 'KSPOTS' in a: 'OFF'
+     Extra keyword 'LONGPMER' in a: 0.0
+     Extra keyword 'LRFWAVE' in a: 0.0
+     Extra keyword 'MASKCORR' in a: 'PERFORM'
+     Extra keyword 'MASKFILE' in a: 'uref$fan15478u.r0h'
+     Extra keyword 'MODE'   in a: 'AREA'
+     Extra keyword 'MOONANGL' in a: 54.995346
+     Extra keyword 'MTFLAG' in a: True
+     Extra keyword 'NPDECTRG' in a: 0.0
+     Extra keyword 'NPRATRG' in a: 0.0
+     Extra keyword 'NSHUTA17' in a: 0
+     Extra keyword 'ORIENTAT' in a: 157.076
+     Extra keyword 'OUTDTYPE' in a: 'REAL'
+     Extra keyword 'PA_V3'  in a: 292.387786865
+     Extra keyword 'PHOTTAB' in a: ''
+     Extra keyword 'PKTFMT' in a: 96
+     Extra keyword 'PODPSFF' in a: False
+     Extra keyword 'PSTPTIME' in a: '1994.139:16:14:39'
+     Extra keyword 'PSTRTIME' in a: '1994.139:15:41:39'
+     Extra keyword 'RA_SUN' in a: 56.2731208362
+     Extra keyword 'READTIME' in a: 151
+     Extra keyword 'ROOTNAME' in a: 'U2EQ0201T'
+     Extra keyword 'ROTRTTRG' in a: 0.0
+     Extra keyword 'RSDPFILL' in a: -100
+     Extra keyword 'SATURATE' in a: 4095
+     Extra keyword 'SERIALS' in a: 'OFF'
+     Extra keyword 'SHADCORR' in a: 'PERFORM'
+     Extra keyword 'SHADFILE' in a: 'uref$e6o09405u.r5h'
+     Extra keyword 'SHUTTER' in a: 'B'
+     Extra keyword 'STDCFFF' in a: False
+     Extra keyword 'STDCFFP' in a: '0x5569'
+     Extra keyword 'SUNANGLE' in a: 158.939133
+     Extra keyword 'SUN_ALT' in a: -11.552458
+     Extra keyword 'SURFALTD' in a: 0.0
+     Extra keyword 'SURFLATD' in a: 0.0
+     Extra keyword 'SURFLONG' in a: 0.0
+     Extra keyword 'TIME-OBS' in a: '15:41:16'
+     Extra keyword 'UBAY3TMP' in a: 14.5969
+     Extra keyword 'UCH1CJTM' in a: -88.3486
+     Extra keyword 'UCH2CJTM' in a: -88.8073
+     Extra keyword 'UCH3CJTM' in a: -88.3945
+     Extra keyword 'UCH4CJTM' in a: -88.9041
+     Extra keyword 'UEXPODUR' in a: 0
+     Extra keyword 'UEXPOTIM' in a: 20272
+     Extra keyword 'USCALE' in a: 1.0
+     Extra keyword 'UZERO'  in a: 0.0
+     Extra keyword 'COMMENT' in b: '  FITS (Flexible Image Transport System) format defined in Astronomy and'
+     Keyword FILENAME has different values:
+        a> vtest3.fits
+        b> tb.fits
+     Keyword FILENAME has different comments:
+        a> File name
+        b> name of file
+     Keyword NEXTEND  has different values:
+        a> 4
+        b> 1
+     Keyword NEXTEND  has different comments:
+        a> Number of standard extensions
+        b> number of extensions in file
+     Keyword ORIGIN   has different values:
+        a> NOAO-IRAF FITS Image Kernel Aug 1 1997
+        b> STScI-STSDAS/TABLES
+     Keyword ORIGIN   has different comments:
+        a> FITS file originator
+        b> Tables version 1999-09-07
+
+Extension HDU 1:
+   Extension types differ:
+    a: IMAGE
+    b: BINTABLE
+   Extension names differ:
+    a: SCI
+    b: 
+
+   Headers contain differences:
+     Headers have different number of cards:
+      a: 61
+      b: 24
+     Extra keyword 'ATODSAT' in a: 0
+     Extra keyword 'BACKGRND' in a: 316.0
+     Extra keyword 'BADPIXEL' in a: 0
+     Extra keyword 'BIASEVEN' in a: 0.0
+     Extra keyword 'BIASODD' in a: 0.0
+     Extra keyword 'CALIBDEF' in a: 0
+     Extra keyword 'CD1_1'  in a: 2.33019e-05
+     Extra keyword 'CD1_2'  in a: 9.85029e-06
+     Extra keyword 'CD2_1'  in a: 9.85462e-06
+     Extra keyword 'CD2_2'  in a: -2.32916e-05
+     Extra keyword 'CRPIX1' in a: 210.25
+     Extra keyword 'CRPIX2' in a: 212.5
+     Extra keyword 'CRVAL1' in a: 215.597167517
+     Extra keyword 'CRVAL2' in a: -12.7376058132
+     Extra keyword 'CTYPE1' in a: 'UNITLESS'
+     Extra keyword 'CTYPE2' in a: 'LINE'
+     Extra keyword 'DATALOST' in a: 0
+     Extra keyword 'DATAMAX' in a: 0.0
+     Extra keyword 'DATAMEAN' in a: 0.0
+     Extra keyword 'DATAMIN' in a: 0.0
+     Extra keyword 'DETECTOR' in a: 1
+     Extra keyword 'DEZERO' in a: 0.0
+     Extra keyword 'ERRCNT' in a: 0
+     Extra keyword 'EXPNAME' in a: 'U2EQ0201T'
+     Extra keyword 'EXTNAME' in a: 'SCI'
+     Extra keyword 'EXTVER' in a: 1
+     Extra keyword 'FILLCNT' in a: 0
+     Extra keyword 'FPKTTIME' in a: 49491.654167
+     Extra keyword 'GOODMAX' in a: 0.0
+     Extra keyword 'GOODMIN' in a: 0.0
+     Extra keyword 'GPIXELS' in a: 0
+     Extra keyword 'HISTWIDE' in a: 1.0
+     Extra keyword 'INHERIT' in a: True
+     Extra keyword 'LPKTTIME' in a: 49491.65422
+     Extra keyword 'MEANC10' in a: 313.16
+     Extra keyword 'MEANC100' in a: 313.4404
+     Extra keyword 'MEANC200' in a: 313.3406
+     Extra keyword 'MEANC25' in a: 313.2493
+     Extra keyword 'MEANC300' in a: 313.3636
+     Extra keyword 'MEANC50' in a: 313.5349
+     Extra keyword 'MEDIAN' in a: 312.0
+     Extra keyword 'MEDSHADO' in a: 314.0
+     Extra keyword 'MIR_REVR' in a: True
+     Extra keyword 'ORIENTAT' in a: 157.076
+     Extra keyword 'OVERLAP' in a: 0
+     Extra keyword 'PHOTBW' in a: 0.0
+     Extra keyword 'PHOTFLAM' in a: 0.0
+     Extra keyword 'PHOTMODE' in a: ''
+     Extra keyword 'PHOTPLAM' in a: 0.0
+     Extra keyword 'PHOTZPT' in a: 0.0
+     Extra keyword 'ROOTNAME' in a: 'U2EQ0201T'
+     Extra keyword 'SKEWNESS' in a: -0.003205
+     Extra keyword 'SOFTERRS' in a: 0
+     Extra keyword 'STATICD' in a: 0
+     Extra keyword 'HISTORY' in b: 'Created Mon 15:05:16 10-Sep-2001'
+     Extra keyword 'TDISP1' in b: 'I11'
+     Extra keyword 'TDISP2' in b: 'A3'
+     Extra keyword 'TDISP3' in b: 'G15.7'
+     Extra keyword 'TDISP4' in b: 'L6'
+     Extra keyword 'TFIELDS' in b: 4
+     Extra keyword 'TFORM1' in b: '1J'
+     Extra keyword 'TFORM2' in b: '3A'
+     Extra keyword 'TFORM3' in b: '1E'
+     Extra keyword 'TFORM4' in b: '1L'
+     Extra keyword 'TNULL1' in b: -2147483647
+     Extra keyword 'TSCAL3' in b: 3
+     Extra keyword 'TTYPE1' in b: 'c1'
+     Extra keyword 'TTYPE2' in b: 'c2'
+     Extra keyword 'TTYPE3' in b: 'c3'
+     Extra keyword 'TTYPE4' in b: 'c4'
+     Extra keyword 'TZERO3' in b: 0.4
+     Keyword BITPIX   has different values:
+        a> 16
+        b> 8
+     Keyword BITPIX   has different comments:
+        a> number of bits per data pixel
+        b> 8-bit bytes
+     Keyword GCOUNT   has different comments:
+        a> required keyword; must = 1
+        b> one data group (required keyword)
+     Keyword NAXIS    has different comments:
+        a> number of data axes
+        b> 2-dimensional binary table
+     Keyword NAXIS1   has different values:
+        a> 40
+        b> 12
+     Keyword NAXIS1   has different comments:
+        a> length of data axis 1
+        b> width of table in bytes
+     Keyword NAXIS2   has different values:
+        a> 40
+        b> 2
+     Keyword NAXIS2   has different comments:
+        a> length of data axis 2
+     Keyword PCOUNT   has different comments:
+        a> required keyword; must = 0
+        b> size of special data area
+     Keyword XTENSION has different values:
+        a> IMAGE
+        b> BINTABLE
+     Keyword XTENSION has different comments:
+        a> IMAGE extension
+        b> binary table extension
+
+__________ TestTildePaths.test_fits_printdiff[home_is_data, pathlib] ___________
+----------------------------- Captured stdout call -----------------------------
+
+ fitsdiff: 8.0.0.dev49+gb0db0daac
+ a: /testbed/astropy/io/fits/tests/data/test0.fits
+ b: /testbed/astropy/io/fits/tests/data/tb.fits
+ Maximum number of different data values to be reported: 10
+ Relative tolerance: 0.0, Absolute tolerance: 0.0
+
+Files contain different numbers of HDUs:
+ a: 5
+ b: 2
+
+Primary HDU:
+
+   Headers contain differences:
+     Headers have different number of cards:
+      a: 117
+      b: 11
+     Extra keyword ''       in a: ''
+     Extra keyword 'ATODCORR' in a: 'PERFORM'
+     Extra keyword 'ATODFILE' in a: 'uref$e1b09594u.r1h'
+     Extra keyword 'ATODGAIN' in a: 7.0
+     Extra keyword 'BIASCORR' in a: 'PERFORM'
+     Extra keyword 'BIASDFIL' in a: 'uref$e6o0937du.b2h'
+     Extra keyword 'BIASFILE' in a: 'uref$e6o0937du.r2h'
+     Extra keyword 'BLEVCORR' in a: 'PERFORM'
+     Extra keyword 'BLEVDFIL' in a: 'ucal$u2eq0201t.q1h'
+     Extra keyword 'BLEVFILE' in a: 'ucal$u2eq0201t.x0h'
+     Extra keyword 'BSCALE' in a: 1.0
+     Extra keyword 'BZERO'  in a: 32768.0
+     Extra keyword 'CDBSFILE' in a: 'NO'
+     Extra keyword 'COMPTAB' in a: 'mtab$f7j1535pm.tmc'
+     Extra keyword 'DARKCORR' in a: 'OMIT'
+     Extra keyword 'DARKDFIL' in a: 'uref$e6o09384u.b3h'
+     Extra keyword 'DARKFILE' in a: 'uref$e6o09384u.r3h'
+     Extra keyword 'DARKTIME' in a: 0.23
+     Extra keyword 'DATE'   in a: '01/04/99'
+     Extra keyword 'DATE-OBS' in a: '19/05/94'
+     Extra keyword 'DEC_SUN' in a: 19.8289107164
+     Extra keyword 'DOHISTOS' in a: 'OMIT'
+     Extra keyword 'DOPHOTOM' in a: 'PERFORM'
+     Extra keyword 'DOSATMAP' in a: 'OMIT'
+     Extra keyword 'EPLONGPM' in a: 0.0
+     Extra keyword 'EQNX_SUN' in a: 2000.0
+     Extra keyword 'EQRADTRG' in a: 0.0
+     Extra keyword 'EXPEND' in a: 49491.65366441
+     Extra keyword 'EXPFLAG' in a: 'NORMAL'
+     Extra keyword 'EXPSTART' in a: 49491.65366175
+     Extra keyword 'EXPTIME' in a: 0.23
+     Extra keyword 'FGSLOCK' in a: 'FINE'
+     Extra keyword 'FILETYPE' in a: 'SCI'
+     Extra keyword 'FILTER1' in a: 33
+     Extra keyword 'FILTER2' in a: 0
+     Extra keyword 'FILTNAM1' in a: 'F673N'
+     Extra keyword 'FILTNAM2' in a: ''
+     Extra keyword 'FILTROT' in a: 0.0
+     Extra keyword 'FLATCORR' in a: 'PERFORM'
+     Extra keyword 'FLATDFIL' in a: 'uref$e1c1404ju.b4h'
+     Extra keyword 'FLATFILE' in a: 'uref$e1c1404ju.r4h'
+     Extra keyword 'FLATNTRG' in a: 0.0
+     Extra keyword 'GRAPHTAB' in a: 'mtab$f7d1401pm.tmg'
+     Extra keyword 'GROUPS' in a: False
+     Extra keyword 'IMAGETYP' in a: 'EXT'
+     Extra keyword 'INSTRUME' in a: 'WFPC2'
+     Extra keyword 'IRAF-TLM' in a: 'xxx'
+     Extra keyword 'KSPOTS' in a: 'OFF'
+     Extra keyword 'LONGPMER' in a: 0.0
+     Extra keyword 'LRFWAVE' in a: 0.0
+     Extra keyword 'MASKCORR' in a: 'PERFORM'
+     Extra keyword 'MASKFILE' in a: 'uref$fan15478u.r0h'
+     Extra keyword 'MODE'   in a: 'AREA'
+     Extra keyword 'MOONANGL' in a: 54.995346
+     Extra keyword 'MTFLAG' in a: True
+     Extra keyword 'NPDECTRG' in a: 0.0
+     Extra keyword 'NPRATRG' in a: 0.0
+     Extra keyword 'NSHUTA17' in a: 0
+     Extra keyword 'ORIENTAT' in a: 157.076
+     Extra keyword 'OUTDTYPE' in a: 'REAL'
+     Extra keyword 'PA_V3'  in a: 292.387786865
+     Extra keyword 'PHOTTAB' in a: ''
+     Extra keyword 'PKTFMT' in a: 96
+     Extra keyword 'PODPSFF' in a: False
+     Extra keyword 'PSTPTIME' in a: '1994.139:16:14:39'
+     Extra keyword 'PSTRTIME' in a: '1994.139:15:41:39'
+     Extra keyword 'RA_SUN' in a: 56.2731208362
+     Extra keyword 'READTIME' in a: 151
+     Extra keyword 'ROOTNAME' in a: 'U2EQ0201T'
+     Extra keyword 'ROTRTTRG' in a: 0.0
+     Extra keyword 'RSDPFILL' in a: -100
+     Extra keyword 'SATURATE' in a: 4095
+     Extra keyword 'SERIALS' in a: 'OFF'
+     Extra keyword 'SHADCORR' in a: 'PERFORM'
+     Extra keyword 'SHADFILE' in a: 'uref$e6o09405u.r5h'
+     Extra keyword 'SHUTTER' in a: 'B'
+     Extra keyword 'STDCFFF' in a: False
+     Extra keyword 'STDCFFP' in a: '0x5569'
+     Extra keyword 'SUNANGLE' in a: 158.939133
+     Extra keyword 'SUN_ALT' in a: -11.552458
+     Extra keyword 'SURFALTD' in a: 0.0
+     Extra keyword 'SURFLATD' in a: 0.0
+     Extra keyword 'SURFLONG' in a: 0.0
+     Extra keyword 'TIME-OBS' in a: '15:41:16'
+     Extra keyword 'UBAY3TMP' in a: 14.5969
+     Extra keyword 'UCH1CJTM' in a: -88.3486
+     Extra keyword 'UCH2CJTM' in a: -88.8073
+     Extra keyword 'UCH3CJTM' in a: -88.3945
+     Extra keyword 'UCH4CJTM' in a: -88.9041
+     Extra keyword 'UEXPODUR' in a: 0
+     Extra keyword 'UEXPOTIM' in a: 20272
+     Extra keyword 'USCALE' in a: 1.0
+     Extra keyword 'UZERO'  in a: 0.0
+     Extra keyword 'COMMENT' in b: '  FITS (Flexible Image Transport System) format defined in Astronomy and'
+     Keyword FILENAME has different values:
+        a> vtest3.fits
+        b> tb.fits
+     Keyword FILENAME has different comments:
+        a> File name
+        b> name of file
+     Keyword NEXTEND  has different values:
+        a> 4
+        b> 1
+     Keyword NEXTEND  has different comments:
+        a> Number of standard extensions
+        b> number of extensions in file
+     Keyword ORIGIN   has different values:
+        a> NOAO-IRAF FITS Image Kernel Aug 1 1997
+        b> STScI-STSDAS/TABLES
+     Keyword ORIGIN   has different comments:
+        a> FITS file originator
+        b> Tables version 1999-09-07
+
+Extension HDU 1:
+   Extension types differ:
+    a: IMAGE
+    b: BINTABLE
+   Extension names differ:
+    a: SCI
+    b: 
+
+   Headers contain differences:
+     Headers have different number of cards:
+      a: 61
+      b: 24
+     Extra keyword 'ATODSAT' in a: 0
+     Extra keyword 'BACKGRND' in a: 316.0
+     Extra keyword 'BADPIXEL' in a: 0
+     Extra keyword 'BIASEVEN' in a: 0.0
+     Extra keyword 'BIASODD' in a: 0.0
+     Extra keyword 'CALIBDEF' in a: 0
+     Extra keyword 'CD1_1'  in a: 2.33019e-05
+     Extra keyword 'CD1_2'  in a: 9.85029e-06
+     Extra keyword 'CD2_1'  in a: 9.85462e-06
+     Extra keyword 'CD2_2'  in a: -2.32916e-05
+     Extra keyword 'CRPIX1' in a: 210.25
+     Extra keyword 'CRPIX2' in a: 212.5
+     Extra keyword 'CRVAL1' in a: 215.597167517
+     Extra keyword 'CRVAL2' in a: -12.7376058132
+     Extra keyword 'CTYPE1' in a: 'UNITLESS'
+     Extra keyword 'CTYPE2' in a: 'LINE'
+     Extra keyword 'DATALOST' in a: 0
+     Extra keyword 'DATAMAX' in a: 0.0
+     Extra keyword 'DATAMEAN' in a: 0.0
+     Extra keyword 'DATAMIN' in a: 0.0
+     Extra keyword 'DETECTOR' in a: 1
+     Extra keyword 'DEZERO' in a: 0.0
+     Extra keyword 'ERRCNT' in a: 0
+     Extra keyword 'EXPNAME' in a: 'U2EQ0201T'
+     Extra keyword 'EXTNAME' in a: 'SCI'
+     Extra keyword 'EXTVER' in a: 1
+     Extra keyword 'FILLCNT' in a: 0
+     Extra keyword 'FPKTTIME' in a: 49491.654167
+     Extra keyword 'GOODMAX' in a: 0.0
+     Extra keyword 'GOODMIN' in a: 0.0
+     Extra keyword 'GPIXELS' in a: 0
+     Extra keyword 'HISTWIDE' in a: 1.0
+     Extra keyword 'INHERIT' in a: True
+     Extra keyword 'LPKTTIME' in a: 49491.65422
+     Extra keyword 'MEANC10' in a: 313.16
+     Extra keyword 'MEANC100' in a: 313.4404
+     Extra keyword 'MEANC200' in a: 313.3406
+     Extra keyword 'MEANC25' in a: 313.2493
+     Extra keyword 'MEANC300' in a: 313.3636
+     Extra keyword 'MEANC50' in a: 313.5349
+     Extra keyword 'MEDIAN' in a: 312.0
+     Extra keyword 'MEDSHADO' in a: 314.0
+     Extra keyword 'MIR_REVR' in a: True
+     Extra keyword 'ORIENTAT' in a: 157.076
+     Extra keyword 'OVERLAP' in a: 0
+     Extra keyword 'PHOTBW' in a: 0.0
+     Extra keyword 'PHOTFLAM' in a: 0.0
+     Extra keyword 'PHOTMODE' in a: ''
+     Extra keyword 'PHOTPLAM' in a: 0.0
+     Extra keyword 'PHOTZPT' in a: 0.0
+     Extra keyword 'ROOTNAME' in a: 'U2EQ0201T'
+     Extra keyword 'SKEWNESS' in a: -0.003205
+     Extra keyword 'SOFTERRS' in a: 0
+     Extra keyword 'STATICD' in a: 0
+     Extra keyword 'HISTORY' in b: 'Created Mon 15:05:16 10-Sep-2001'
+     Extra keyword 'TDISP1' in b: 'I11'
+     Extra keyword 'TDISP2' in b: 'A3'
+     Extra keyword 'TDISP3' in b: 'G15.7'
+     Extra keyword 'TDISP4' in b: 'L6'
+     Extra keyword 'TFIELDS' in b: 4
+     Extra keyword 'TFORM1' in b: '1J'
+     Extra keyword 'TFORM2' in b: '3A'
+     Extra keyword 'TFORM3' in b: '1E'
+     Extra keyword 'TFORM4' in b: '1L'
+     Extra keyword 'TNULL1' in b: -2147483647
+     Extra keyword 'TSCAL3' in b: 3
+     Extra keyword 'TTYPE1' in b: 'c1'
+     Extra keyword 'TTYPE2' in b: 'c2'
+     Extra keyword 'TTYPE3' in b: 'c3'
+     Extra keyword 'TTYPE4' in b: 'c4'
+     Extra keyword 'TZERO3' in b: 0.4
+     Keyword BITPIX   has different values:
+        a> 16
+        b> 8
+     Keyword BITPIX   has different comments:
+        a> number of bits per data pixel
+        b> 8-bit bytes
+     Keyword GCOUNT   has different comments:
+        a> required keyword; must = 1
+        b> one data group (required keyword)
+     Keyword NAXIS    has different comments:
+        a> number of data axes
+        b> 2-dimensional binary table
+     Keyword NAXIS1   has different values:
+        a> 40
+        b> 12
+     Keyword NAXIS1   has different comments:
+        a> length of data axis 1
+        b> width of table in bytes
+     Keyword NAXIS2   has different values:
+        a> 40
+        b> 2
+     Keyword NAXIS2   has different comments:
+        a> length of data axis 2
+     Keyword PCOUNT   has different comments:
+        a> required keyword; must = 0
+        b> size of special data area
+     Keyword XTENSION has different values:
+        a> IMAGE
+        b> BINTABLE
+     Keyword XTENSION has different comments:
+        a> IMAGE extension
+        b> binary table extension
+
+=========================== short test summary info ============================
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_info[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_info[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_info[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_printdiff[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_printdiff[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_printdiff[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_data[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_data[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_data[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_header[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_header[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_header[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_set_del_val[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_set_del_val[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_fits_get_set_del_val[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_header_formatter[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_header_formatter[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_header_formatter[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_BinTableHDU_dump_load[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_BinTableHDU_dump_load[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_BinTableHDU_dump_load[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_BinTableHDU_writeto[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_BinTableHDU_writeto[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_BinTableHDU_writeto[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_TableHDU_writeto[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_TableHDU_writeto[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_TableHDU_writeto[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_ImageHDU_writeto[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_ImageHDU_writeto[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_ImageHDU_writeto[home_is_data, pathlib]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_CompImageHDU_writeto[]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_CompImageHDU_writeto[home_is_data]
+PASSED astropy/io/fits/tests/test_tilde_path.py::TestTildePaths::test_CompImageHDU_writeto[home_is_data, pathlib]
+============================== 33 passed in 0.30s ==============================

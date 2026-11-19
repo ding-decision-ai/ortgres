@@ -1,0 +1,139 @@
+Internet access disabled
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python
+cachedir: .pytest_cache
+hypothesis profile 'ci' -> database=None, deadline=None, print_blob=True, derandomize=True, suppress_health_check=(HealthCheck.differing_executors,)
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in astropy/io/fits/hdu/compressed/tests/test_compressed.py.
+
+Date: 2026-10-16T11:54:05
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+collecting ... collected 92 items
+
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_empty PASSED [  1%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data0-RICE_1-16] PASSED [  2%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data1-GZIP_1--0.01] PASSED [  3%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data2-GZIP_2--0.01] PASSED [  4%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data3-HCOMPRESS_1-16] PASSED [  5%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[<-data4-PLIO_1-16] PASSED [  6%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data0-RICE_1-16] PASSED [  7%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data1-GZIP_1--0.01] PASSED [  8%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data2-GZIP_2--0.01] PASSED [  9%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data3-HCOMPRESS_1-16] PASSED [ 10%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image[>-data4-PLIO_1-16] PASSED [ 11%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_quantize_level SKIPPED [ 13%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_hcompression_1_invalid_data PASSED [ 14%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_hcompress_image_stack PASSED [ 15%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_subtractive_dither_seed PASSED [ 16%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_disable_image_compression PASSED [ 17%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_open_comp_image_in_update_mode PASSED [ 18%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_open_scaled_in_update_mode_compressed SKIPPED [ 19%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_comp_hdu_direct_from_existing PASSED [ 20%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_rewriting_large_scaled_image_compressed PASSED [ 21%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_scale_back_compressed PASSED [ 22%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_lossless_gzip_compression PASSED [ 23%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_column_tforms PASSED [ 25%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_update_header PASSED [ 26%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_update_header_with_reserved PASSED [ 27%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_append PASSED [ 28%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_append2 PASSED [ 29%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_insert PASSED [ 30%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_set_before_after PASSED [ 31%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_header_append_commentary PASSED [ 32%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compression_with_gzip_column PASSED [ 33%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_duplicate_compression_header_keywords PASSED [ 34%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_scale_bzero_with_compressed_int_data PASSED [ 35%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_scale_back_compressed_uint_assignment PASSED [ 36%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_header_double_extname PASSED [ 38%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_header_extname PASSED [ 39%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_header_minimal PASSED [ 40%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BSCALE-uint8-float32] PASSED [ 41%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BSCALE-int16-float32] PASSED [ 42%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BSCALE-int32-float64] PASSED [ 43%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BZERO-uint8-float32] PASSED [ 44%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BZERO-int16-float32] PASSED [ 45%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_scaled_float[BZERO-int32-float64] PASSED [ 46%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[uint8] PASSED [ 47%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[int16] PASSED [ 48%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[uint16] PASSED [ 50%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[int32] PASSED [ 51%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_integers[uint32] PASSED [ 52%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[NOCOMPRESS-f] PASSED [ 53%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[NOCOMPRESS-i4] PASSED [ 54%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[RICE_1-f] PASSED [ 55%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[RICE_1-i4] PASSED [ 56%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_1-f] PASSED [ 57%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_1-i4] PASSED [ 58%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_2-f] PASSED [ 59%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[GZIP_2-i4] PASSED [ 60%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[PLIO_1-f] PASSED [ 61%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[PLIO_1-i4] PASSED [ 63%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[HCOMPRESS_1-f] PASSED [ 64%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_write_non_contiguous_data[HCOMPRESS_1-i4] PASSED [ 65%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_slice_and_write_comp_hdu PASSED [ 66%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_properties_default PASSED [ 67%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_comp_image_properties_set PASSED [ 68%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_compressed_optional_prefix_tform PASSED [ 69%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_info PASSED [ 70%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_shape PASSED [ 71%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_inplace_data_modify PASSED [ 72%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_summary_noload PASSED [ 73%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompressedImage::test_fileinfo PASSED [ 75%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_slicing PASSED [ 76%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_slicing_scaling PASSED [ 77%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::TestCompHDUSections::test_section_properties PASSED [ 78%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_comphdu_fileobj PASSED [ 79%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_comphdu_bscale PASSED [ 80%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_image_write_readonly PASSED [ 81%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_uint_option PASSED [ 82%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_incorrect_bzero PASSED [ 83%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_custom_extname PASSED [ 84%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_pickle PASSED [ 85%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_settings_delayed_data PASSED [ 86%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_header_assignment_issue PASSED [ 88%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_section_unwritten PASSED [ 89%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_section_scaling PASSED [ 90%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_header PASSED [ 91%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_rice_one_alias PASSED [ 92%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_header_order PASSED [ 93%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_hdu_lazy_loading PASSED [ 94%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_w_data] PASSED [ 95%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_wo_data] PASSED [ 96%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_dither_seed_w_data] PASSED [ 97%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_compression_options_with_mutated_data[quantize_level_dither_seed_wo_data] PASSED [ 98%]
+astropy/io/fits/hdu/compressed/tests/test_compressed.py::test_reserved_keywords_stripped PASSED [100%]
+
+======================== 90 passed, 2 skipped in 4.24s =========================

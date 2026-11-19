@@ -1,0 +1,77 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/votable/tests/test_converter.py.
+
+Date: 2026-10-11T02:57:53
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 27 items
+
+astropy/io/votable/tests/test_converter.py ...........................   [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/votable/tests/test_converter.py::test_invalid_arraysize
+PASSED astropy/io/votable/tests/test_converter.py::test_oversize_char
+PASSED astropy/io/votable/tests/test_converter.py::test_char_mask
+PASSED astropy/io/votable/tests/test_converter.py::test_oversize_unicode
+PASSED astropy/io/votable/tests/test_converter.py::test_bounded_variable_size_unicode
+PASSED astropy/io/votable/tests/test_converter.py::test_unicode_mask
+PASSED astropy/io/votable/tests/test_converter.py::test_unicode_as_char
+PASSED astropy/io/votable/tests/test_converter.py::test_unicode_as_char_binary
+PASSED astropy/io/votable/tests/test_converter.py::test_wrong_number_of_elements
+PASSED astropy/io/votable/tests/test_converter.py::test_float_mask
+PASSED astropy/io/votable/tests/test_converter.py::test_float_mask_permissive
+PASSED astropy/io/votable/tests/test_converter.py::test_double_array
+PASSED astropy/io/votable/tests/test_converter.py::test_complex_array_vararray
+PASSED astropy/io/votable/tests/test_converter.py::test_complex_array_vararray2
+PASSED astropy/io/votable/tests/test_converter.py::test_complex_array_vararray3
+PASSED astropy/io/votable/tests/test_converter.py::test_complex_vararray
+PASSED astropy/io/votable/tests/test_converter.py::test_complex
+PASSED astropy/io/votable/tests/test_converter.py::test_bit
+PASSED astropy/io/votable/tests/test_converter.py::test_bit_mask
+PASSED astropy/io/votable/tests/test_converter.py::test_boolean
+PASSED astropy/io/votable/tests/test_converter.py::test_boolean_array
+PASSED astropy/io/votable/tests/test_converter.py::test_invalid_type
+PASSED astropy/io/votable/tests/test_converter.py::test_precision
+PASSED astropy/io/votable/tests/test_converter.py::test_integer_overflow
+PASSED astropy/io/votable/tests/test_converter.py::test_float_default_precision
+PASSED astropy/io/votable/tests/test_converter.py::test_vararray
+PASSED astropy/io/votable/tests/test_converter.py::test_gemini_v1_2
+============================== 27 passed in 0.08s ==============================

@@ -1,0 +1,93 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "current_partial_continuation": {
+      "canonical_phase_ledger": {
+        "bytes": 36174
+      },
+      "coordinator_phase_cap_seconds": 1200,
+      "evaluation_reserve_seconds": 300,
+      "budget_consumed_seconds": 809.6712619240034,
+      "known_measured_actual_seconds": 809.6712619240034,
+      "remaining_budget_seconds": 390.3287380759966,
+      "budget_is_not_measured_elapsed": false,
+      "whole_model_outer_seconds": 601.4239718170065,
+      "inner_model_seconds_included": 600.5804577770032,
+      "whole_full_outer_seconds": 21.429640671000016,
+      "inner_full_seconds_included": 21.002925550000327,
+      "inner_outer_not_double_charged": true,
+      "full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.17685387899928173,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 4.706669584999872,
+          "inner_budget_already_charged": 4.4605151040004785,
+          "inner_known_actual_already_charged": 4.4605151040004785,
+          "additional_budget": 0.24615448099939385,
+          "additional_known_actual": 0.24615448099939385,
+          "models": 0
+        },
+        "2": {
+          "whole_seconds": 21.429640671000016,
+          "inner_budget_already_charged": 21.002925550000327,
+          "inner_known_actual_already_charged": 21.002925550000327,
+          "additional_budget": 0.4267151209996882,
+          "additional_known_actual": 0.4267151209996882,
+          "models": 0
+        }
+      },
+      "historical_ledger_references": {
+        "previous_method_spent_seconds_known": 845.6582546360052,
+        "previous_lost_outer_wrapper_elapsed_seconds": null,
+        "previous_strict_remaining_seconds": 354.34174536399485,
+        "cumulative_actual_all_history_seconds": null,
+        "historical_costs_preserved_by_reference": {
+          "original_exact_remaining_seconds": null,
+          "all_older_records_retained": true
+        },
+        "prior_case_cumulative_base": null
+      },
+      "new_original_budget_reset": false,
+      "case_cumulative_actual_seconds": null,
+      "exact_actual_current_segment_total_seconds": null,
+      "USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "unknown_or_unmeasured_costs_not_rewritten_to_zero": true,
+      "prearm_field_name_error": {
+        "unused_GO": {
+          "bytes": 4007
+        },
+        "error_receipt": {
+          "bytes": 395
+        },
+        "benchmark_dispatches": 0,
+        "old_guard_same_RAM_unarmed_wait_seconds_charged": 32.91882068699488,
+        "budget_reset_or_arm_replay": false
+      },
+      "current_phase_ledger": {
+        "bytes": 36174
+      },
+      "current_phase_charged_seconds": 809.6712619240034,
+      "current_phase_remaining_seconds": 390.3287380759966
+    },
+    "supplemental_original_baseline_CPU": {
+      "cpu_ledger": {
+        "bytes": 16083
+      },
+      "Root_whole_outer": {
+        "bytes": 822
+      },
+      "known_actual_CPU_seconds": 21.442041120000795,
+      "charged_CPU_seconds": 21.442041120000795,
+      "original_model_and_case_phase_ledger_unchanged": true,
+      "old_BASE_costs_unchanged": true,
+      "do_not_add_inner_again": true,
+      "all_history_USD_backend_active_RD_seconds": null
+    },
+    "source_history_and_ALL_old_ledger_refs_preserved": true,
+    "all_history_measured_elapsed_USD_backend_RD": null
+  }
+}

@@ -1,0 +1,184 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 41 items
+
+tests/genai/optimize/test_util.py::test_infer_primitive_types[None-NoneType] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [  2%]
+tests/genai/optimize/test_util.py::test_infer_primitive_types[True-bool] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [  4%]
+tests/genai/optimize/test_util.py::test_infer_primitive_types[42-int] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [  7%]
+tests/genai/optimize/test_util.py::test_infer_primitive_types[3.14-float] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [  9%]
+tests/genai/optimize/test_util.py::test_infer_primitive_types[hello-str] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 12%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list0-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 14%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list1-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 17%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list2-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 19%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list3-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 21%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list4-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 24%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list5-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 26%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list6-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 29%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list7-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 31%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list8-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 34%]
+tests/genai/optimize/test_util.py::test_infer_list_types[input_list9-list] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 36%]
+tests/genai/optimize/test_util.py::test_infer_simple_dict[input_dict0-expected_fields0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 39%]
+tests/genai/optimize/test_util.py::test_infer_simple_dict[input_dict1-expected_fields1] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 41%]
+tests/genai/optimize/test_util.py::test_infer_nested_dict PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 43%]
+tests/genai/optimize/test_util.py::test_infer_pydantic_model[UserModel-model_data0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 46%]
+tests/genai/optimize/test_util.py::test_infer_pydantic_model[ProductModel-model_data1] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 48%]
+tests/genai/optimize/test_util.py::test_infer_unsupported_type[CustomClass] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 51%]
+tests/genai/optimize/test_util.py::test_infer_unsupported_type[AnotherClass] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 53%]
+tests/genai/optimize/test_util.py::test_model_name_parameter[input_dict0-UserData] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 56%]
+tests/genai/optimize/test_util.py::test_model_name_parameter[input_dict1-TestModel] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 58%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[yes-1.0_0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 60%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[no-0.0_0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 63%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[yes-1.0_1] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 65%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[no-0.0_1] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 68%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[True-1.0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 70%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[False-0.0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 73%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[1-1.0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 75%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[0-0.0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 78%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[1.0-1.0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 80%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[0.0-0.0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 82%]
+tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_multiple_categorical_ratings PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 85%]
+tests/genai/optimize/test_util.py::test_validate_train_data_errors[train_data0-scorers0-Record 0 is missing required 'inputs' field or it is empty] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 87%]
+tests/genai/optimize/test_util.py::test_validate_train_data_errors[train_data1-scorers1-Record 0 is missing required 'inputs' field or it is empty] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 90%]
+tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data0] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 92%]
+tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data1] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 95%]
+tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data2] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [ 97%]
+tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data3] PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:06 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+0.41s setup    tests/genai/optimize/test_util.py::test_infer_primitive_types[None-NoneType]
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_primitive_types[None-NoneType]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_primitive_types[True-bool]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_primitive_types[42-int]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_primitive_types[3.14-float]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_primitive_types[hello-str]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list0-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list1-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list2-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list3-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list4-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list5-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list6-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list7-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list8-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_list_types[input_list9-list]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_simple_dict[input_dict0-expected_fields0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_simple_dict[input_dict1-expected_fields1]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_nested_dict
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_pydantic_model[UserModel-model_data0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_pydantic_model[ProductModel-model_data1]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_unsupported_type[CustomClass]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_infer_unsupported_type[AnotherClass]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_model_name_parameter[input_dict0-UserData]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_model_name_parameter[input_dict1-TestModel]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[yes-1.0_0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[no-0.0_0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[yes-1.0_1]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[no-0.0_1]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[True-1.0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[False-0.0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[1-1.0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[0-0.0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[1.0-1.0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_single_score[0.0-0.0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_create_metric_from_scorers_with_multiple_categorical_ratings
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_validate_train_data_errors[train_data0-scorers0-Record 0 is missing required 'inputs' field or it is empty]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_validate_train_data_errors[train_data1-scorers1-Record 0 is missing required 'inputs' field or it is empty]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data0]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data1]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data2]
+PASSED | MEM 20.0/46.9 GB | DISK 791.5/915.7 GB tests/genai/optimize/test_util.py::test_validate_train_data_success[train_data3]
+============================== 41 passed in 0.51s ==============================

@@ -1,0 +1,70 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, inline-snapshot-0.31.1, cov-7.0.0, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+
+tests/test_compat.py ....FF.FF.                                          [100%]
+
+=================================== FAILURES ===================================
+_________________________________ test_complex _________________________________
+tests/test_compat.py:64: in test_complex
+    def foo(foo: Union[str, List[int]]):
+fastapi/routing.py:1085: in decorator
+    self.add_api_route(
+fastapi/routing.py:1024: in add_api_route
+    route = route_class(
+fastapi/routing.py:643: in __init__
+    self.dependant = get_dependant(
+fastapi/dependencies/utils.py:259: in get_dependant
+    param_details = analyze_param(
+fastapi/dependencies/utils.py:457: in analyze_param
+    elif is_uploadfile_or_nonable_uploadfile_annotation(
+E   NameError: name 'is_uploadfile_or_nonable_uploadfile_annotation' is not defined
+____________________ test_propagates_pydantic2_model_config ____________________
+tests/test_compat.py:98: in test_propagates_pydantic2_model_config
+    def foo(req: Model) -> Dict[str, Union[str, None]]:
+fastapi/routing.py:1085: in decorator
+    self.add_api_route(
+fastapi/routing.py:1024: in add_api_route
+    route = route_class(
+fastapi/routing.py:643: in __init__
+    self.dependant = get_dependant(
+fastapi/dependencies/utils.py:259: in get_dependant
+    param_details = analyze_param(
+fastapi/dependencies/utils.py:457: in analyze_param
+    elif is_uploadfile_or_nonable_uploadfile_annotation(
+E   NameError: name 'is_uploadfile_or_nonable_uploadfile_annotation' is not defined
+____________________ test_is_uploadfile_sequence_annotation ____________________
+tests/test_compat.py:136: in test_is_uploadfile_sequence_annotation
+    assert is_uploadfile_sequence_annotation(Union[List[str], List[UploadFile]])
+fastapi/_compat/shared.py:189: in is_uploadfile_sequence_annotation
+    if is_uploadfile_sequence_annotation(arg):
+fastapi/_compat/shared.py:193: in is_uploadfile_sequence_annotation
+    return field_annotation_is_sequence(annotation) and all(
+fastapi/_compat/shared.py:194: in <genexpr>
+    is_uploadfile_or_nonable_uploadfile_annotation(sub_annotation)
+E   NameError: name 'is_uploadfile_or_nonable_uploadfile_annotation' is not defined
+___________________________ test_is_pv1_scalar_field ___________________________
+tests/test_compat.py:148: in test_is_pv1_scalar_field
+    assert not is_scalar_field(fields[0])
+fastapi/_compat/main.py:189: in is_scalar_field
+    return v1.is_scalar_field(field)
+E   AttributeError: module 'fastapi._compat.v1' has no attribute 'is_scalar_field'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_compat.py::test_model_field_default_required
+PASSED tests/test_compat.py::test_v1_plain_validator_function
+PASSED tests/test_compat.py::test_is_model_field
+PASSED tests/test_compat.py::test_get_model_config
+PASSED tests/test_compat.py::test_is_bytes_sequence_annotation_union
+PASSED tests/test_compat.py::test_get_model_fields_cached
+FAILED tests/test_compat.py::test_complex - NameError: name 'is_uploadfile_or...
+FAILED tests/test_compat.py::test_propagates_pydantic2_model_config - NameErr...
+FAILED tests/test_compat.py::test_is_uploadfile_sequence_annotation - NameErr...
+FAILED tests/test_compat.py::test_is_pv1_scalar_field - AttributeError: modul...
+========================= 4 failed, 6 passed in 0.36s ==========================

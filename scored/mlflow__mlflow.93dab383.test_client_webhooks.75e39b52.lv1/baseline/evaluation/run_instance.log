@@ -1,0 +1,96 @@
+2026-10-11 05:10:32,418 - INFO - ============================================================
+2026-10-11 05:10:32,419 - INFO - Starting evaluation for instance: mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1
+2026-10-11 05:10:32,419 - INFO - Level: 1
+2026-10-11 05:10:32,419 - INFO - Attempt: 1
+2026-10-11 05:10:32,419 - INFO - ============================================================
+2026-10-11 05:10:32,426 - INFO - Docker runtime config: shm_size=4g, number_once=1, env_vars=[], env_exports=0 items
+2026-10-11 05:10:32,426 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e
+2026-10-11 05:10:32,428 - INFO - Image docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e found locally
+2026-10-11 05:10:32,428 - INFO - Creating container: fb-eval-mlflow__mlflow-93dab383-test_client_webhooks-75e39b52-lv1-attempt-1-20261011-051032-428156
+2026-10-11 05:10:32,429 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-11 05:10:32,429 - INFO - Using shared memory size: 4g
+2026-10-11 05:10:32,723 - INFO - Container fb-eval-mlflow__mlflow-93dab383-test_client_webhooks-75e39b52-lv1-attempt-1-20261011-051032-428156 created successfully
+2026-10-11 05:10:32,723 - INFO - Starting Level 1 evaluation for mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1
+2026-10-11 05:10:32,723 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-11 05:10:37,429 - INFO - Restore project exit code: 0
+2026-10-11 05:10:37,429 - INFO - Output: 
+2026-10-11 05:10:37,429 - INFO - Step 2: Applying patch to mask files
+2026-10-11 05:10:37,434 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-11 05:10:37,701 - INFO - Mask patch apply exit code: 0
+2026-10-11 05:10:37,702 - INFO - Mask patch output: /tmp/mask_patch.diff:1294: new blank line at EOF.
++
+/tmp/mask_patch.diff:1339: new blank line at EOF.
++
+/tmp/mask_patch.diff:2611: new blank line at EOF.
++
+warning: 3 lines add whitespace errors.
+
+2026-10-11 05:10:37,702 - INFO - Successfully applied mask patch
+2026-10-11 05:10:37,702 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-11 05:10:37,705 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-11 05:10:37,705 - INFO - Deleting F2P test file: /testbed/tests/tracking/test_client_webhooks.py
+2026-10-11 05:10:37,977 - INFO - Successfully deleted F2P test file: /testbed/tests/tracking/test_client_webhooks.py
+2026-10-11 05:10:37,977 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-11 05:10:37,977 - INFO - Applying environment fix mlflow_parallel_sources for mlflow/mlflow
+2026-10-11 05:10:38,344 - INFO - Environment fix mlflow_parallel_sources completed for mlflow/mlflow
+2026-10-11 05:10:38,344 - INFO - Step 4: Reinitializing git repository
+2026-10-11 05:10:58,887 - INFO - Step 5: Applying agent patch
+2026-10-11 05:10:58,890 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-11 05:10:59,146 - INFO - Patch apply exit code: 0
+2026-10-11 05:10:59,146 - INFO - Patch output: Checking patch mlflow/entities/webhook.py...
+Checking patch mlflow/tracking/_model_registry/client.py...
+Checking patch mlflow/tracking/_model_registry/registry.py...
+Checking patch mlflow/tracking/_model_registry/utils.py...
+Checking patch mlflow/tracking/client.py...
+Applied patch mlflow/entities/webhook.py cleanly.
+Applied patch mlflow/tracking/_model_registry/client.py cleanly.
+Applied patch mlflow/tracking/_model_registry/registry.py cleanly.
+Applied patch mlflow/tracking/_model_registry/utils.py cleanly.
+Applied patch mlflow/tracking/client.py cleanly.
+
+2026-10-11 05:10:59,146 - INFO - >>>>> Applied Patch
+2026-10-11 05:10:59,146 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-11 05:10:59,146 - INFO - F2P test path: /testbed/tests/tracking/test_client_webhooks.py
+2026-10-11 05:10:59,402 - INFO - Delete F2P file exit code: 0
+2026-10-11 05:10:59,403 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-11 05:10:59,662 - INFO - Reverse apply exit code: 0
+2026-10-11 05:10:59,662 - INFO - Reverse apply output: 
+2026-10-11 05:10:59,662 - INFO - Successfully restored F2P test file using test_patch
+2026-10-11 05:10:59,662 - INFO - Step 7: Running tests
+2026-10-11 05:10:59,662 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=20
+2026-10-11 05:10:59,663 - INFO - Test timeout: 1200s
+2026-10-11 05:10:59,663 - INFO - Running F2P test: /testbed/tests/tracking/test_client_webhooks.py
+2026-10-11 05:11:49,655 - INFO - F2P test exit code: 1
+2026-10-11 05:11:49,655 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: 
+2026-10-11 05:11:49,656 - INFO - Saved F2P test output to artifact://688864ccbcb32f6b
+2026-10-11 05:11:49,656 - INFO - Running 5 P2P tests
+2026-10-11 05:11:49,656 - INFO - Running P2P test: /testbed/tests/metrics/genai/test_prompt_template.py
+2026-10-11 05:11:51,888 - INFO - P2P test /testbed/tests/metrics/genai/test_prompt_template.py exit code: 0
+2026-10-11 05:11:51,888 - INFO - Saved P2P test output to artifact://fe7eea09a5588d30
+2026-10-11 05:11:51,888 - INFO - Running P2P test: /testbed/tests/entities/test_run.py
+2026-10-11 05:11:53,874 - INFO - P2P test /testbed/tests/entities/test_run.py exit code: 0
+2026-10-11 05:11:53,874 - INFO - Saved P2P test output to artifact://c4871c779e8f4dd5
+2026-10-11 05:11:53,874 - INFO - Running P2P test: /testbed/tests/tracking/_model_registry/test_model_registry_client.py
+2026-10-11 05:11:56,093 - INFO - P2P test /testbed/tests/tracking/_model_registry/test_model_registry_client.py exit code: 0
+2026-10-11 05:11:56,094 - INFO - Saved P2P test output to artifact://302f3f323563a274
+2026-10-11 05:11:56,094 - INFO - Running P2P test: /testbed/tests/entities/test_run_status.py
+2026-10-11 05:11:57,926 - INFO - P2P test /testbed/tests/entities/test_run_status.py exit code: 0
+2026-10-11 05:11:57,927 - INFO - Saved P2P test output to artifact://b2454a90de8fe236
+2026-10-11 05:11:57,927 - INFO - Running P2P test: /testbed/tests/entities/test_span.py
+2026-10-11 05:12:41,796 - INFO - P2P test /testbed/tests/entities/test_span.py exit code: 0
+2026-10-11 05:12:41,797 - INFO - Saved P2P test output to artifact://f089ba9014e08a9f
+2026-10-11 05:12:41,799 - INFO - ============================================================
+2026-10-11 05:12:41,799 - INFO - Evaluation completed for mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1
+2026-10-11 05:12:41,799 - INFO - Resolved: False
+2026-10-11 05:12:41,799 - INFO - F2P Pass rate: 0.0
+2026-10-11 05:12:41,799 - INFO - ============================================================
+2026-10-11 05:12:41,799 - INFO - Stopping and removing container
+2026-10-11 05:12:52,369 - INFO - Container removed successfully

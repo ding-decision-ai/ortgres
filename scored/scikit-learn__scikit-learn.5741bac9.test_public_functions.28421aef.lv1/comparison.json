@@ -1,0 +1,36 @@
+{
+  "instance_id": "scikit-learn__scikit-learn.5741bac9.test_public_functions.28421aef.lv1",
+  "repo": "scikit-learn/scikit-learn",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 215,
+      "failure": 3,
+      "total": 218
+    },
+    "p2p": {
+      "success": 788,
+      "failure": 0,
+      "total": 788
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "10aff89f7a0765137f0b2f21baed7e4e272e3c3ac73f66b63badf63cfe3a812f"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 218,
+      "failure": 0,
+      "total": 218
+    },
+    "p2p": {
+      "success": 788,
+      "failure": 0,
+      "total": 788
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "fb23a4011924c2dba6a3bccc34606b3892d7918e306fc5ed68cb1ce41fcff0bf"
+  },
+  "conditions": "conditions.json",
+  "costs": null
+}

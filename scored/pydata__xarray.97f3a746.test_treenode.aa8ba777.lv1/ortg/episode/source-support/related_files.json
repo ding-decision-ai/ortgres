@@ -1,0 +1,116 @@
+{
+  "visible_tests_status": "read",
+  "visible_test_files": [
+    "xarray/tests/test_datatree.py",
+    "xarray/tests/test_datatree_mapping.py",
+    "xarray/tests/test_backends_datatree.py"
+  ],
+  "unknown_evidence": [
+    "No dedicated visible TreeNode test module exists.",
+    "No selected visible test directly exercises ancestors, lineage, siblings, level, depth, width, direct cycle prevention, or zip_subtrees; their exact unobserved implementation remains unknown beyond the public task and visible consumers."
+  ],
+  "related_files": [
+    {
+      "path": "xarray/core/treenode.py",
+      "reason": "The public task names this as the implementation path and requires TreeNode path, relationship, traversal, level, orphaning, group_subtrees, and zip_subtrees interfaces defined here.",
+      "visible_test_entries": [
+        "xarray/tests/test_datatree.py::TestPaths",
+        "xarray/tests/test_datatree.py::TestGetItem",
+        "xarray/tests/test_datatree.py::TestSetItem",
+        "xarray/tests/test_datatree.py::TestTreeFromDict::test_full",
+        "xarray/tests/test_datatree.py::TestOps::test_binary_op_order_invariant",
+        "xarray/tests/test_datatree.py::TestOps::test_dont_broadcast_single_node_tree",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_not_isomorphic",
+        "xarray/tests/test_backends_datatree.py::assert_chunks_equal"
+      ],
+      "source_entry": "TreeNode; NamedNode; group_subtrees; zip_subtrees"
+    },
+    {
+      "path": "xarray/core/datatree.py",
+      "reason": "DataTree is the public NamedNode subclass through which visible tests construct trees and invoke inherited path, assignment, relationship, and traversal behavior; it also visibly calls zip_subtrees.",
+      "visible_test_entries": [
+        "xarray/tests/test_datatree.py::TestTreeCreation",
+        "xarray/tests/test_datatree.py::TestFamilyTree",
+        "xarray/tests/test_datatree.py::TestPaths",
+        "xarray/tests/test_datatree.py::TestGetItem",
+        "xarray/tests/test_datatree.py::TestSetItem",
+        "xarray/tests/test_datatree.py::TestTreeFromDict",
+        "xarray/tests/test_datatree.py::TestRestructuring",
+        "xarray/tests/test_datatree.py::TestIsomorphicEqualsAndIdentical"
+      ],
+      "source_entry": "DataTree"
+    },
+    {
+      "path": "xarray/core/datatree_mapping.py",
+      "reason": "map_over_datasets is a public consumer that iterates group_subtrees, exposing structural-mismatch propagation and breadth-first path alignment; the current visible module has no binding/import for group_subtrees.",
+      "visible_test_entries": [
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_no_trees_passed",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_not_isomorphic",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_multiple_tree_args",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_trees_with_different_node_names"
+      ],
+      "source_entry": "map_over_datasets"
+    },
+    {
+      "path": "xarray/core/formatting.py",
+      "reason": "The public tree-diff consumers call group_subtrees and rely on breadth-first comparison order; the current visible module has no binding/import for group_subtrees.",
+      "visible_test_entries": [
+        "xarray/tests/test_datatree.py::TestIsomorphicEqualsAndIdentical",
+        "xarray/tests/test_datatree.py::TestOps::test_dont_broadcast_single_node_tree"
+      ],
+      "source_entry": "diff_treestructure; diff_nodewise_summary"
+    },
+    {
+      "path": "xarray/structure/concat.py",
+      "reason": "The public concat path imports group_subtrees to align corresponding DataTree nodes and is an actual production consumer of its structural contract.",
+      "visible_test_entries": [],
+      "source_entry": "concat; _datatree_concat"
+    },
+    {
+      "path": "xarray/__init__.py",
+      "reason": "This is the top-level public acquisition surface: __all__ advertises group_subtrees and visible backend tests call xr.group_subtrees, while the current visible imports do not bind that name.",
+      "visible_test_entries": [
+        "xarray/tests/test_backends_datatree.py::assert_chunks_equal"
+      ],
+      "source_entry": "xarray.group_subtrees"
+    },
+    {
+      "path": "xarray/tests/test_datatree.py",
+      "reason": "Visible tests exercise public DataTree construction plus inherited paths, lookup, assignment, parent/child restructuring, breadth-first subtree order, and structural matching relevant to TreeNode.",
+      "visible_test_entries": [
+        "xarray/tests/test_datatree.py::TestTreeCreation",
+        "xarray/tests/test_datatree.py::TestFamilyTree",
+        "xarray/tests/test_datatree.py::TestPaths",
+        "xarray/tests/test_datatree.py::TestGetItem",
+        "xarray/tests/test_datatree.py::TestSetItem",
+        "xarray/tests/test_datatree.py::TestTreeFromDict",
+        "xarray/tests/test_datatree.py::TestRestructuring",
+        "xarray/tests/test_datatree.py::TestIsomorphicEqualsAndIdentical",
+        "xarray/tests/test_datatree.py::TestOps::test_binary_op_order_invariant",
+        "xarray/tests/test_datatree.py::TestOps::test_dont_broadcast_single_node_tree"
+      ],
+      "source_entry": "pytest module for DataTree public behavior"
+    },
+    {
+      "path": "xarray/tests/test_datatree_mapping.py",
+      "reason": "Visible tests exercise the public group_subtrees consumer for empty input, non-isomorphic inputs, multiple trees, and differing node names.",
+      "visible_test_entries": [
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_no_trees_passed",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_not_isomorphic",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_multiple_tree_args",
+        "xarray/tests/test_datatree_mapping.py::TestMapOverSubTree::test_trees_with_different_node_names"
+      ],
+      "source_entry": "pytest module for map_over_datasets"
+    },
+    {
+      "path": "xarray/tests/test_backends_datatree.py",
+      "reason": "Its shared chunk assertion directly acquires top-level xr.group_subtrees and consumes aligned path/node tuples; backend subgroup tests also visibly call orphan().",
+      "visible_test_entries": [
+        "xarray/tests/test_backends_datatree.py::assert_chunks_equal",
+        "xarray/tests/test_backends_datatree.py::NetCDFIOBase::test_open_datatree_specific_group",
+        "xarray/tests/test_backends_datatree.py::TestZarrDatatreeIO::test_open_datatree_specific_group"
+      ],
+      "source_entry": "assert_chunks_equal; subgroup round-trip tests"
+    }
+  ]
+}

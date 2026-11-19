@@ -1,0 +1,16 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.3.33",
+  "initialization": {
+    "coverage": {}
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "web_enabled",
+    "configured_search": "enabled",
+    "actual_external_information_obtained": false,
+    "observed_activity": "two_failed_http403_requests_no_target_content"
+  },
+  "run_conditions": "../../run-conditions.json#/cases/scikit-learn__scikit-learn.5741bac9.test_public_functions.28421aef.lv1"
+}

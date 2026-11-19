@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/1160ded, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-5
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 1 item
+
+tests/test_markup/test_parser.py .                                       [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/basic
+# outdir: /tmp/pytest-of-root/pytest-5/basic/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_markup/test_parser.py::test_RSTParser_prolog_epilog
+============================== 1 passed in 0.14s ===============================

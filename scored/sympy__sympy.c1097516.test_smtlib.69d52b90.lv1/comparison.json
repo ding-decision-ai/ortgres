@@ -1,0 +1,40 @@
+{
+  "instance_id": "sympy__sympy.c1097516.test_smtlib.69d52b90.lv1",
+  "repo": "sympy/sympy",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 0,
+      "failure": 16,
+      "total": 16
+    },
+    "p2p": {
+      "success": 50,
+      "failure": 0,
+      "total": 50
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "a020829b3b0853fe1a00322f69c8d70ccb3de159760d359a819a7126f3f0e064"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 0,
+      "failure": 16,
+      "total": 16
+    },
+    "p2p": {
+      "success": 50,
+      "failure": 0,
+      "total": 50
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "a2fa3429bf85db937675ed36abc5657ea57d5225ed2c35cc5d7f05f4da0fc40b"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "d6a99fd96bc8715b7b563014967dd63b6c183d62f5e8e0c25765d774355aa86c",
+    "p2p": "e566244953be6661db78d594ef7cd052edb84c660b66752ccc4f02730f8a40ac"
+  }
+}

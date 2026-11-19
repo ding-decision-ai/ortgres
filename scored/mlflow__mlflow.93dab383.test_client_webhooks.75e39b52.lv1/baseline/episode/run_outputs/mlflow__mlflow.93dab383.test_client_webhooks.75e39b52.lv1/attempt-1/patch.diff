@@ -1,0 +1,333 @@
+diff --git a/mlflow/entities/webhook.py b/mlflow/entities/webhook.py
+index dfffba3..d3db3fe 100644
+--- a/mlflow/entities/webhook.py
++++ b/mlflow/entities/webhook.py
+@@ -235,10 +235,10 @@ class WebhookEvent:
+     def __str__(self) -> str:
+         return f"{self.entity.value}.{self.action.value}"
+ 
+-
+-
+-
+-
++    def __eq__(self, other: object) -> bool:
++        if not isinstance(other, WebhookEvent):
++            return False
++        return self.entity == other.entity and self.action == other.action
+ 
+     def __hash__(self) -> int:
+         return hash((self.entity, self.action))
+@@ -315,9 +315,9 @@ class Webhook:
+     def status(self) -> WebhookStatus:
+         return self._status
+ 
+-
+-
+-
++    @property
++    def secret(self) -> str | None:
++        return self._secret
+ 
+     @property
+     def creation_timestamp(self) -> int:
+@@ -434,4 +434,4 @@ class WebhookTestResult:
+             f"response_body={self.response_body!r}, "
+             f"error_message={self.error_message!r}"
+             f")"
+-        )
+\ No newline at end of file
++        )
+diff --git a/mlflow/tracking/_model_registry/client.py b/mlflow/tracking/_model_registry/client.py
+index 64e3b49..3a421fe 100644
+--- a/mlflow/tracking/_model_registry/client.py
++++ b/mlflow/tracking/_model_registry/client.py
+@@ -893,6 +893,68 @@ class ModelRegistryClient:
+ 
+ 
+ 
++
++    @experimental(version="3.3.0")
++    @record_usage_event(CreateWebhookEvent)
++    def create_webhook(
++        self,
++        name: str,
++        url: str,
++        events: list[WebhookEventStr | WebhookEvent],
++        description: str | None = None,
++        secret: str | None = None,
++        status: str | WebhookStatus | None = None,
++    ) -> Webhook:
++        events = [
++            WebhookEvent.from_str(event) if isinstance(event, str) else event for event in events
++        ]
++        if isinstance(status, str):
++            status = WebhookStatus(status)
++        return self.store.create_webhook(name, url, events, description, secret, status)
++
++    @experimental(version="3.3.0")
++    def get_webhook(self, webhook_id: str) -> Webhook:
++        return self.store.get_webhook(webhook_id)
++
++    @experimental(version="3.3.0")
++    def list_webhooks(
++        self,
++        max_results: int | None = None,
++        page_token: str | None = None,
++    ) -> PagedList[Webhook]:
++        return self.store.list_webhooks(max_results=max_results, page_token=page_token)
++
++    @experimental(version="3.3.0")
++    def update_webhook(
++        self,
++        webhook_id: str,
++        name: str | None = None,
++        description: str | None = None,
++        url: str | None = None,
++        events: list[WebhookEventStr | WebhookEvent] | None = None,
++        secret: str | None = None,
++        status: str | WebhookStatus | None = None,
++    ) -> Webhook:
++        if events is not None:
++            events = [
++                WebhookEvent.from_str(event) if isinstance(event, str) else event
++                for event in events
++            ]
++        if isinstance(status, str):
++            status = WebhookStatus(status)
++        return self.store.update_webhook(
++            webhook_id=webhook_id,
++            name=name,
++            description=description,
++            url=url,
++            events=events,
++            secret=secret,
++            status=status,
++        )
++
++    @experimental(version="3.3.0")
++    def delete_webhook(self, webhook_id: str) -> None:
++        self.store.delete_webhook(webhook_id)
+ 
+     @experimental(version="3.3.0")
+     def test_webhook(
+@@ -914,4 +976,4 @@ class ModelRegistryClient:
+         # Convert string to WebhookEvent if needed
+         if isinstance(event, str):
+             event = WebhookEvent.from_str(event)
+-        return self.store.test_webhook(webhook_id, event)
+\ No newline at end of file
++        return self.store.test_webhook(webhook_id, event)
+diff --git a/mlflow/tracking/_model_registry/registry.py b/mlflow/tracking/_model_registry/registry.py
+index 6d5b2ba..dd98198 100644
+--- a/mlflow/tracking/_model_registry/registry.py
++++ b/mlflow/tracking/_model_registry/registry.py
+@@ -42,6 +42,7 @@ class ModelRegistryStoreRegistry(StoreRegistry):
+ 
+         """
+ 
++        from mlflow.tracking._model_registry.utils import _resolve_registry_uri
+         from mlflow.tracking._tracking_service.utils import _resolve_tracking_uri
+ 
+         resolved_store_uri = _resolve_registry_uri(store_uri)
+diff --git a/mlflow/tracking/_model_registry/utils.py b/mlflow/tracking/_model_registry/utils.py
+index 4c4e79c..2e11c3f 100644
+--- a/mlflow/tracking/_model_registry/utils.py
++++ b/mlflow/tracking/_model_registry/utils.py
+@@ -148,6 +148,32 @@ def set_registry_uri(uri: str) -> None:
+ 
+ 
+ 
++
++
++def _get_registry_uri_from_spark_session() -> str | None:
++    if spark_session := _get_active_spark_session():
++        return spark_session.conf.get("spark.mlflow.modelRegistryUri", None)
++    return None
++
++
++def _resolve_registry_uri(registry_uri=None, tracking_uri=None):
++    if registry_uri is not None:
++        return registry_uri
++    if _registry_uri is not None:
++        return _registry_uri or None
++    if uri := MLFLOW_REGISTRY_URI.get():
++        return uri
++    if uri := _get_registry_uri_from_spark_session():
++        return uri
++    if is_in_databricks_serverless_runtime():
++        return _DATABRICKS_UNITY_CATALOG_SCHEME
++
++    tracking_uri = _resolve_tracking_uri(tracking_uri)
++    if is_databricks_uri(tracking_uri):
++        profile, key_prefix = get_db_info_from_uri(tracking_uri)
++        profile = f"{profile}:{key_prefix}" if key_prefix else profile
++        return construct_db_uc_uri_from_profile(profile)
++    return tracking_uri
+ 
+ 
+ def get_registry_uri() -> str:
+@@ -201,6 +227,12 @@ def _get_sqlalchemy_store(store_uri):
+ 
+ 
+ 
++def _get_rest_store(store_uri, **_):
++    from mlflow.utils.credentials import get_default_host_creds
++
++    return RestStore(partial(get_default_host_creds, store_uri))
++
++
+ def _get_databricks_rest_store(store_uri, tracking_uri, **_):
+     warn_on_deprecated_cross_workspace_registry_uri(registry_uri=store_uri)
+     return DatabricksWorkspaceModelRegistryRestStore(store_uri, tracking_uri)
+@@ -241,7 +273,31 @@ def _get_file_store(store_uri, **_):
+ 
+ 
+ 
++
++
++def _get_databricks_uc_rest_store(store_uri, tracking_uri, **_):
++    from mlflow.store._unity_catalog.registry.rest_store import UcModelRegistryStore
++
++    return UcModelRegistryStore(store_uri, tracking_uri)
++
++
++def _get_store_registry():
++    global _model_registry_store_registry
++    if _model_registry_store_registry is None:
++        registry = ModelRegistryStoreRegistry()
++        registry.register("", _get_file_store)
++        registry.register("file", _get_file_store)
++        for scheme in DATABASE_ENGINES:
++            registry.register(scheme, _get_sqlalchemy_store)
++        for scheme in ("http", "https"):
++            registry.register(scheme, _get_rest_store)
++        registry.register("databricks", _get_databricks_rest_store)
++        registry.register(_DATABRICKS_UNITY_CATALOG_SCHEME, _get_databricks_uc_rest_store)
++        registry.register(_OSS_UNITY_CATALOG_SCHEME, _get_databricks_uc_rest_store)
++        registry.register_entrypoints()
++        _model_registry_store_registry = registry
++    return _model_registry_store_registry
+ 
+ 
+ def _get_store(store_uri=None, tracking_uri=None):
+-    return _get_store_registry().get_store(store_uri, tracking_uri)
+\ No newline at end of file
++    return _get_store_registry().get_store(store_uri, tracking_uri)
+diff --git a/mlflow/tracking/client.py b/mlflow/tracking/client.py
+index cdb0c83..27471af 100644
+--- a/mlflow/tracking/client.py
++++ b/mlflow/tracking/client.py
+@@ -262,6 +262,24 @@ class MlflowClient:
+ 
+ 
+ 
++
++    def _get_registry_client(self) -> ModelRegistryClient:
++        """Create and cache the registry client on first use."""
++        try:
++            return self._registry_client
++        except AttributeError:
++            try:
++                registry_client = ModelRegistryClient(
++                    self._registry_uri, self._tracking_client.tracking_uri
++                )
++            except UnsupportedModelRegistryStoreURIException as exc:
++                raise MlflowException(
++                    "Model Registry features are not supported by the store with URI: "
++                    f"'{self._registry_uri}'. Stores with the following URI schemes are supported: "
++                    f"{exc.supported_uri_schemes}."
++                ) from exc
++            self._registry_client = registry_client
++            return registry_client
+ 
+     # Tracking API
+ 
+@@ -6432,6 +6450,81 @@ class MlflowClient:
+ 
+ 
+ 
++
++    @experimental(version="3.3.0")
++    def create_webhook(
++        self,
++        name: str,
++        url: str,
++        events: list[WebhookEventStr | WebhookEvent],
++        description: str | None = None,
++        secret: str | None = None,
++        status: str | WebhookStatus | None = None,
++    ) -> Webhook:
++        """Create a webhook for the specified events."""
++        events = [
++            WebhookEvent.from_str(event) if isinstance(event, str) else event for event in events
++        ]
++        if isinstance(status, str):
++            status = WebhookStatus(status)
++        return self._get_registry_client().create_webhook(
++            name=name,
++            url=url,
++            events=events,
++            description=description,
++            secret=secret,
++            status=status,
++        )
++
++    @experimental(version="3.3.0")
++    def delete_webhook(self, webhook_id: str) -> None:
++        """Delete a webhook by ID."""
++        self._get_registry_client().delete_webhook(webhook_id)
++
++    @experimental(version="3.3.0")
++    def get_webhook(self, webhook_id: str) -> Webhook:
++        """Get a webhook by ID."""
++        return self._get_registry_client().get_webhook(webhook_id)
++
++    @experimental(version="3.3.0")
++    def list_webhooks(
++        self,
++        max_results: int | None = None,
++        page_token: str | None = None,
++    ) -> PagedList[Webhook]:
++        """List webhooks, preserving the page token on the returned result."""
++        return self._get_registry_client().list_webhooks(
++            max_results=max_results, page_token=page_token
++        )
++
++    @experimental(version="3.3.0")
++    def update_webhook(
++        self,
++        webhook_id: str,
++        name: str | None = None,
++        description: str | None = None,
++        url: str | None = None,
++        events: list[WebhookEventStr | WebhookEvent] | None = None,
++        secret: str | None = None,
++        status: str | WebhookStatus | None = None,
++    ) -> Webhook:
++        """Update the supplied fields of an existing webhook."""
++        if events is not None:
++            events = [
++                WebhookEvent.from_str(event) if isinstance(event, str) else event
++                for event in events
++            ]
++        if isinstance(status, str):
++            status = WebhookStatus(status)
++        return self._get_registry_client().update_webhook(
++            webhook_id=webhook_id,
++            name=name,
++            description=description,
++            url=url,
++            events=events,
++            secret=secret,
++            status=status,
++        )
+ 
+     @experimental(version="3.3.0")
+     def test_webhook(
+@@ -6449,4 +6542,4 @@ class MlflowClient:
+         Returns:
+             WebhookTestResult indicating success/failure and response details.
+         """
+-        return self._get_registry_client().test_webhook(webhook_id, event)
+\ No newline at end of file
++        return self._get_registry_client().test_webhook(webhook_id, event)

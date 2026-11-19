@@ -1,0 +1,2172 @@
+diff --git a/xarray/coding/times.py b/xarray/coding/times.py
+index d5c2b60..f10b9b8 100644
+--- a/xarray/coding/times.py
++++ b/xarray/coding/times.py
+@@ -24,8 +24,8 @@ from xarray.coding.common import (
+ from xarray.compat.pdcompat import default_precision_timestamp, timestamp_as_unit
+ from xarray.core import indexing
+ from xarray.core.common import contains_cftime_datetimes, is_np_datetime_like
+-
+-from xarray.core.formatting import format_timestamp, last_item
++from xarray.core.duck_array_ops import array_all, asarray, ravel, reshape
++from xarray.core.formatting import first_n_items, format_timestamp, last_item
+ from xarray.core.utils import attempt_import, emit_user_level_warning
+ from xarray.core.variable import Variable
+ from xarray.namedarray.parallelcompat import T_ChunkedArray, get_chunked_array_type
+diff --git a/xarray/compat/array_api_compat.py b/xarray/compat/array_api_compat.py
+index e831340..897310e 100644
+--- a/xarray/compat/array_api_compat.py
++++ b/xarray/compat/array_api_compat.py
+@@ -3,6 +3,35 @@ import numpy as np
+ from xarray.namedarray.pycompat import array_type
+ 
+ 
++def get_array_namespace(*values):
++    """Return a common array namespace, defaulting to NumPy."""
++    flattened = values
++    if len(values) == 1 and isinstance(values[0], (list, tuple)):
++        flattened = tuple(values[0])
++    namespaces = []
++    for value in flattened:
++        # Dtypes, scalar classes and Python scalars do not select an array
++        # namespace. NumPy scalar classes expose an unbound namespace method.
++        if isinstance(value, type | np.dtype | np.ndarray) or np.isscalar(value):
++            continue
++        if isinstance(value, array_type("dask")):
++            import dask.array as da
++
++            namespaces.append(da)
++            continue
++        namespace = getattr(value, "__array_namespace__", None)
++        if namespace is not None:
++            namespaces.append(namespace())
++        # NumPy arrays can be consumed by the other supported namespaces, so
++        # they deliberately do not select NumPy here.
++    if not namespaces:
++        return np
++    first = namespaces[0]
++    if any(namespace is not first for namespace in namespaces[1:]):
++        raise TypeError("Mixed array types are not supported")
++    return first
++
++
+ def is_weak_scalar_type(t):
+     return isinstance(t, bool | int | float | complex | str | bytes)
+ 
+@@ -79,4 +108,4 @@ def to_like_array(array, like):
+     if xp is not np:
+         return xp.asarray(array)
+     # avoid casting things like pint quantities to numpy arrays
+-    return array
+\ No newline at end of file
++    return array
+diff --git a/xarray/computation/apply_ufunc.py b/xarray/computation/apply_ufunc.py
+index 16f5b5a..d92faae 100644
+--- a/xarray/computation/apply_ufunc.py
++++ b/xarray/computation/apply_ufunc.py
+@@ -47,6 +47,24 @@ _NO_FILL_VALUE = utils.ReprObject("<no-fill-value>")
+ _JOINS_WITHOUT_FILL_VALUES = frozenset({"inner", "exact"})
+ 
+ 
++def merge_attrs(*args, **kwargs):
++    from xarray.structure.merge import merge_attrs as _merge_attrs
++
++    return _merge_attrs(*args, **kwargs)
++
++
++def merge_coordinates_without_align(*args, **kwargs):
++    from xarray.structure.merge import merge_coordinates_without_align as _merge
++
++    return _merge(*args, **kwargs)
++
++
++def filter_indexes_from_coords(*args, **kwargs):
++    from xarray.core.indexes import filter_indexes_from_coords as _filter
++
++    return _filter(*args, **kwargs)
++
++
+ def _first_of_type(args, kind):
+     """Return either first object of type 'kind' or raise if not found."""
+     for arg in args:
+diff --git a/xarray/core/coordinate_transform.py b/xarray/core/coordinate_transform.py
+index 5c3a0d2..fd52187 100644
+--- a/xarray/core/coordinate_transform.py
++++ b/xarray/core/coordinate_transform.py
+@@ -7,11 +7,10 @@ import numpy as np
+ 
+ 
+ class CoordinateTransform:
+-    """Abstract coordinate transform with dimension & coordinate names.
++    """Abstract coordinate transform with dimension and coordinate names.
+ 
+     .. caution::
+-        This API is experimental and subject to change. Please report any bugs or surprising
+-        behaviour you encounter.
++        This API is experimental and subject to change.
+     """
+ 
+     coord_names: tuple[Hashable, ...]
+@@ -19,53 +18,16 @@ class CoordinateTransform:
+     dim_size: dict[str, int]
+     dtype: Any
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(
++        self,
++        coord_names: Iterable[Hashable],
++        dim_size: Mapping[str, int],
++        dtype: Any = None,
++    ):
++        self.coord_names = tuple(coord_names)
++        self.dims = tuple(dim_size)
++        self.dim_size = dict(dim_size)
++        self.dtype = np.dtype(np.float64 if dtype is None else dtype)
+ 
+     @overload
+     def equals(self, other: CoordinateTransform) -> bool: ...
+@@ -75,3 +37,25 @@ class CoordinateTransform:
+         self, other: CoordinateTransform, *, exclude: frozenset[Hashable] | None = None
+     ) -> bool: ...
+ 
++    def equals(self, other: CoordinateTransform, **kwargs) -> bool:
++        """Check equality with another transform of the same kind."""
++        raise NotImplementedError()
++
++    def forward(self, dim_positions: dict[str, Any]) -> dict[Hashable, Any]:
++        """Perform the grid-to-world coordinate transformation."""
++        raise NotImplementedError()
++
++    def generate_coords(
++        self, dims: tuple[str, ...] | None = None
++    ) -> dict[Hashable, Any]:
++        """Compute labels over the Cartesian grid for ``dims``."""
++        if dims is None:
++            dims = self.dims
++        positions = np.meshgrid(
++            *(np.arange(self.dim_size[dim]) for dim in dims), indexing="ij"
++        )
++        return self.forward(dict(zip(dims, positions, strict=True)))
++
++    def reverse(self, coord_labels: dict[Hashable, Any]) -> dict[str, Any]:
++        """Perform the world-to-grid coordinate transformation."""
++        raise NotImplementedError()
+diff --git a/xarray/core/coordinates.py b/xarray/core/coordinates.py
+index 363b3da..c88b276 100644
+--- a/xarray/core/coordinates.py
++++ b/xarray/core/coordinates.py
+@@ -30,7 +30,7 @@ from xarray.core.utils import (
+ )
+ from xarray.core.variable import Variable, as_variable, calculate_dimensions
+ from xarray.structure.alignment import Aligner
+-from xarray.structure.merge import merge_coords
++from xarray.structure.merge import merge_coordinates_without_align, merge_coords
+ 
+ if TYPE_CHECKING:
+     from xarray.core.common import DataWithCoords
+@@ -363,34 +363,14 @@ class Coordinates(AbstractCoordinates):
+         )
+         return obj
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @classmethod
++    def from_xindex(cls, index: Index) -> Self:
++        """Create indexed coordinates from an existing xarray index."""
++        variables = index.create_variables()
++        if not variables:
++            raise ValueError("The index did not create any coordinate variables")
++        indexes = dict.fromkeys(variables, index)
++        return cls(coords=variables, indexes=indexes)
+ 
+     @classmethod
+     def from_pandas_multiindex(cls, midx: pd.MultiIndex, dim: Hashable) -> Self:
+@@ -429,11 +409,10 @@ class Coordinates(AbstractCoordinates):
+         """Mapping from dimension names to lengths or tuple of dimension names."""
+         return self._data.dims
+ 
+-
+-
+-
+-
+-
++    @property
++    def sizes(self) -> Frozen[Hashable, int]:
++        """Mapping from dimension names to lengths."""
++        return Frozen(self._data.sizes)
+     @property
+     def dtypes(self) -> Frozen[Hashable, np.dtype]:
+         """Mapping from coordinate names to dtypes.
+@@ -1118,13 +1097,15 @@ class DataArrayCoordinates(Coordinates, Generic[T_DataArray]):
+     def variables(self):
+         return Frozen(self._data._coords)
+ 
++    def to_dataset(self) -> Dataset:
++        """Convert these coordinates into a new Dataset."""
++        from xarray.core.dataset import Dataset
+ 
+-
+-
+-
+-
+-
+-
++        return Dataset._construct_direct(
++            variables=dict(self._data._coords),
++            coord_names=set(self._data._coords),
++            indexes=dict(self._data._indexes),
++        )
+     def __delitem__(self, key: Hashable) -> None:
+         if key not in self:
+             raise KeyError(
+@@ -1184,21 +1165,19 @@ def drop_indexed_coords(
+ 
+     return Coordinates._construct_direct(coords=new_variables, indexes=new_indexes)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def assert_coordinate_consistent(
++    obj: T_Xarray, coords: Mapping[Any, Variable]
++) -> None:
++    """Raise if shared dimension coordinates have conflicting values."""
++    obj_coord_names = set(obj.coords)
++    for dim in obj.dims:
++        if dim in obj_coord_names and dim in coords:
++            if not obj.coords[dim].variable.equals(coords[dim]):
++                raise IndexError(
++                    f"dimension coordinate {dim!r} conflicts between indexed and "
++                    "indexing objects:\n"
++                    f"{obj.coords[dim]}\nvs.\n{coords[dim]}"
++                )
+ 
+ def create_coords_with_default_indexes(
+     coords: Mapping[Any, Any], data_vars: DataVars | None = None
+@@ -1338,4 +1317,4 @@ def coordinates_from_variable(variable: Variable) -> Coordinates:
+     indexes = dict.fromkeys(index_vars, new_index)
+     new_vars = new_index.create_variables()
+     new_vars[name].attrs = variable.attrs
+-    return Coordinates(new_vars, indexes)
+\ No newline at end of file
++    return Coordinates(new_vars, indexes)
+diff --git a/xarray/core/dataarray.py b/xarray/core/dataarray.py
+index e9b29c3..914a2d8 100644
+--- a/xarray/core/dataarray.py
++++ b/xarray/core/dataarray.py
+@@ -28,7 +28,7 @@ from xarray.core._aggregations import DataArrayAggregations
+ from xarray.core.accessor_dt import CombinedDatetimelikeAccessor
+ from xarray.core.accessor_str import StringAccessor
+ from xarray.core.common import AbstractArray, DataWithCoords, get_chunksizes
+-from xarray.core.coordinates import Coordinates, DataArrayCoordinates, create_coords_with_default_indexes, validate_dataarray_coords
++from xarray.core.coordinates import Coordinates, DataArrayCoordinates, assert_coordinate_consistent, create_coords_with_default_indexes, validate_dataarray_coords
+ 
+ 
+ 
+@@ -38,14 +38,14 @@ from xarray.core.coordinates import Coordinates, DataArrayCoordinates, create_co
+ from xarray.core.dataset import Dataset
+ from xarray.core.extension_array import PandasExtensionArray
+ from xarray.core.formatting import format_item
+-from xarray.core.indexes import Index, Indexes, PandasMultiIndex
++from xarray.core.indexes import Index, Indexes, PandasMultiIndex, filter_indexes_from_coords, isel_indexes
+ 
+ 
+ 
+ 
+ 
+ 
+-from xarray.core.indexing import is_fancy_indexer
++from xarray.core.indexing import is_fancy_indexer, map_index_queries
+ from xarray.core.options import OPTIONS, _get_keep_attrs
+ from xarray.core.types import (
+     Bins,
+@@ -56,7 +56,7 @@ from xarray.core.types import (
+     T_DataArrayOrSet,
+     ZarrWriteModes,
+ )
+-from xarray.core.utils import Default, FilteredMapping, ReprObject, _default, either_dict_or_kwargs, hashable, result_name
++from xarray.core.utils import Default, FilteredMapping, ReprObject, _default, either_dict_or_kwargs, hashable, infix_dims, result_name
+ 
+ 
+ 
+@@ -863,6 +863,10 @@ class DataArray(
+             ".rename() or .swap_dims() instead."
+         )
+ 
++    @property
++    def sizes(self) -> Mapping[Hashable, int]:
++        return utils.Frozen(dict(zip(self.dims, self.shape, strict=True)))
++
+     def _item_key_to_dict(self, key: Any) -> Mapping[Hashable, Any]:
+         if utils.is_dict_like(key):
+             return key
+diff --git a/xarray/core/dataset.py b/xarray/core/dataset.py
+index 8b0581f..99b0360 100644
+--- a/xarray/core/dataset.py
++++ b/xarray/core/dataset.py
+@@ -43,7 +43,7 @@ from xarray.core.common import (
+     _is_numeric_aggregatable_dtype,
+     get_chunksizes,
+ )
+-from xarray.core.coordinates import Coordinates, DatasetCoordinates
++from xarray.core.coordinates import Coordinates, DatasetCoordinates, assert_coordinate_consistent
+ 
+ 
+ 
+@@ -51,7 +51,7 @@ from xarray.core.coordinates import Coordinates, DatasetCoordinates
+ from xarray.core.dataset_utils import _get_virtual_variable, _LocIndexer
+ from xarray.core.dataset_variables import DataVariables
+ from xarray.core.duck_array_ops import datetime_to_numeric
+-from xarray.core.indexes import Index, Indexes, PandasIndex, PandasMultiIndex, assert_no_index_corrupted, create_default_index_implicit, remove_unused_levels_categories, roll_indexes
++from xarray.core.indexes import Index, Indexes, PandasIndex, PandasMultiIndex, assert_no_index_corrupted, create_default_index_implicit, filter_indexes_from_coords, isel_indexes, remove_unused_levels_categories, roll_indexes
+ 
+ 
+ 
+@@ -63,7 +63,7 @@ from xarray.core.indexes import Index, Indexes, PandasIndex, PandasMultiIndex, a
+ 
+ 
+ 
+-from xarray.core.indexing import is_fancy_indexer
++from xarray.core.indexing import is_fancy_indexer, map_index_queries
+ from xarray.core.options import OPTIONS, _get_keep_attrs
+ from xarray.core.types import (
+     Bins,
+@@ -76,7 +76,7 @@ from xarray.core.types import (
+     T_DataArrayOrSet,
+     ZarrWriteModes,
+ )
+-from xarray.core.utils import Default, FilteredMapping, Frozen, FrozenMappingWarningOnValuesAccess, OrderedSet, _default, decode_numpy_dict_values, either_dict_or_kwargs, emit_user_level_warning, is_allowed_extension_array, is_dict_like, is_duck_array, is_duck_dask_array, is_scalar, maybe_wrap_array, parse_dims_as_set
++from xarray.core.utils import Default, FilteredMapping, Frozen, FrozenMappingWarningOnValuesAccess, OrderedSet, _default, decode_numpy_dict_values, drop_dims_from_indexers, either_dict_or_kwargs, emit_user_level_warning, infix_dims, is_allowed_extension_array, is_dict_like, is_duck_array, is_duck_dask_array, is_scalar, maybe_wrap_array, parse_dims_as_set
+ 
+ 
+ 
+@@ -114,7 +114,7 @@ from xarray.structure.alignment import (
+     align,
+ )
+ from xarray.structure.chunks import _maybe_chunk, unify_chunks
+-from xarray.structure.merge import dataset_merge_method, dataset_update_method, merge_data_and_coords
++from xarray.structure.merge import dataset_merge_method, dataset_update_method, merge_coordinates_without_align, merge_data_and_coords
+ 
+ 
+ 
+diff --git a/xarray/core/dtypes.py b/xarray/core/dtypes.py
+index b47c242..7a343ae 100644
+--- a/xarray/core/dtypes.py
++++ b/xarray/core/dtypes.py
+@@ -48,6 +48,25 @@ PROMOTE_TO_OBJECT: tuple[tuple[type[np.generic], type[np.generic]], ...] = (
+ )
+ 
+ 
++def _is_numpy_subdtype(dtype, kind) -> bool:
++    try:
++        if isinstance(kind, tuple):
++            return any(np.issubdtype(dtype, item) for item in kind)
++        return np.issubdtype(dtype, kind)
++    except TypeError:
++        return False
++
++
++def isdtype(dtype, kind, xp=None) -> bool:
++    """Return whether *dtype* belongs to an Array API dtype category."""
++    kinds = kind if isinstance(kind, tuple) else (kind,)
++    if not all(isinstance(item, (str, np.dtype)) for item in kinds):
++        raise TypeError("kind must be a string, dtype, or tuple of these")
++    if xp is None or xp is np or not hasattr(xp, "isdtype"):
++        return npcompat.isdtype(dtype, kind)
++    return xp.isdtype(dtype, kind)
++
++
+ def maybe_promote(dtype: np.dtype) -> tuple[np.dtype, Any]:
+     """Simpler equivalent of pandas.core.common._maybe_promote
+ 
+@@ -278,4 +297,4 @@ def result_type(
+ 
+     return array_api_compat.result_type(
+         *map(preprocess_types, arrays_and_dtypes), xp=xp
+-    )
+\ No newline at end of file
++    )
+diff --git a/xarray/core/duck_array_ops.py b/xarray/core/duck_array_ops.py
+index 57ecb9e..5a47e22 100644
+--- a/xarray/core/duck_array_ops.py
++++ b/xarray/core/duck_array_ops.py
+@@ -25,6 +25,7 @@ from numpy import (
+ )
+ 
+ from xarray.compat import dask_array_compat, dask_array_ops
++from xarray.compat.array_api_compat import get_array_namespace
+ 
+ from xarray.core import dtypes, nputils
+ from xarray.core.extension_array import PandasExtensionArray
+@@ -47,6 +48,63 @@ else:
+ dask_available = module_available("dask")
+ 
+ 
++def asarray(data, dtype=None, xp=None):
++    if xp is None:
++        xp = get_array_namespace(data)
++    if is_duck_array(data) and dtype is None:
++        return data
++    return xp.asarray(data, dtype=dtype)
++
++
++def astype(data, dtype, *, copy=True, xp=None):
++    if xp is None:
++        xp = get_array_namespace(data)
++    # xarray objects and the established NumPy/Dask duck arrays implement
++    # their own casting method, which also preserves their metadata.
++    method = getattr(data, "astype", None)
++    if method is not None:
++        return method(dtype, copy=copy)
++    try:
++        return xp.astype(data, dtype, copy=copy)
++    except AttributeError:
++        return data.astype(dtype, copy=copy)
++
++
++def reshape(array, shape):
++    return get_array_namespace(array).reshape(array, shape)
++
++
++def ravel(array):
++    xp = get_array_namespace(array)
++    return xp.reshape(array, (-1,))
++
++
++def array_all(array, axis=None):
++    return get_array_namespace(array).all(array, axis=axis)
++
++
++def array_any(array, axis=None):
++    return get_array_namespace(array).any(array, axis=axis)
++
++
++def lazy_array_equiv(arr1, arr2):
++    if getattr(arr1, "shape", None) != getattr(arr2, "shape", None):
++        return False
++    if arr1 is arr2:
++        return True
++    if is_duck_dask_array(arr1) or is_duck_dask_array(arr2):
++        if is_duck_dask_array(arr1) and is_duck_dask_array(arr2):
++            try:
++                from dask.base import tokenize
++
++                if tokenize(arr1) == tokenize(arr2):
++                    return True
++            except ImportError:
++                pass
++        return None
++    return None
++
++
+ def einsum(*args, **kwargs):
+     if OPTIONS["use_opt_einsum"] and module_available("opt_einsum"):
+         import opt_einsum
+@@ -157,6 +215,12 @@ def isna(data: Any) -> bool:
+     return data is pd.NA or data is np.nan  # noqa: PLW0177
+ 
+ 
++def isnull(data):
++    if isna(data):
++        return True
++    return pandas_isnull(data)
++
++
+ 
+ 
+ 
+@@ -238,6 +302,10 @@ def empty_like(a, **kwargs):
+     return xp.empty_like(a, **kwargs)
+ 
+ 
++def ones_like(a, **kwargs):
++    return get_array_namespace(a).ones_like(a, **kwargs)
++
++
+ 
+ 
+ 
+@@ -911,4 +979,4 @@ def chunked_nanfirst(darray, axis):
+ 
+ 
+ def chunked_nanlast(darray, axis):
+-    return _chunked_first_or_last(darray, axis, op=nputils.nanlast)
+\ No newline at end of file
++    return _chunked_first_or_last(darray, axis, op=nputils.nanlast)
+diff --git a/xarray/core/formatting.py b/xarray/core/formatting.py
+index 19313b5..53f6a99 100644
+--- a/xarray/core/formatting.py
++++ b/xarray/core/formatting.py
+@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
+ from itertools import chain, zip_longest
+ from reprlib import recursive_repr
+ from textwrap import indent
++import textwrap
+ from typing import TYPE_CHECKING, Any
+ 
+ import numpy as np
+@@ -61,6 +62,64 @@ def wrap_indent(text, start="", length=None):
+     return start + indent.join(x for x in text.splitlines())
+ 
+ 
++def _get_indexer_at_least_n_items(shape, n_desired, from_end):
++    if n_desired < 1:
++        raise ValueError("must request at least one item")
++    if not shape:
++        return ()
++    indexer: list[Any] = [slice(None)] * len(shape)
++    cumulative = 1
++    selected_axis = 0
++    for axis in range(len(shape) - 1, -1, -1):
++        if cumulative * shape[axis] >= n_desired:
++            selected_axis = axis
++            count = min(shape[axis], math.ceil(n_desired / cumulative))
++            indexer[axis] = slice(-count, None) if from_end else slice(count)
++            for prior in range(axis):
++                indexer[prior] = -1 if from_end else 0
++            break
++        cumulative *= shape[axis]
++    else:
++        selected_axis = 0
++        indexer[0] = slice(-shape[0], None) if from_end else slice(shape[0])
++    return tuple(indexer)
++
++
++def _ravel(array):
++    try:
++        return array.reshape(-1)
++    except AttributeError:
++        return np.asarray(array).reshape(-1)
++
++
++def _to_duck_array(array):
++    if isinstance(array, ExplicitlyIndexed):
++        return array.get_duck_array()
++    return array
++
++
++def first_n_items(array, n_desired):
++    if n_desired < 1:
++        raise ValueError("must request at least one item")
++    if array.size == 0:
++        return np.asarray(array).reshape(-1)
++    indexer = _get_indexer_at_least_n_items(array.shape, n_desired, False)
++    if isinstance(array, ExplicitlyIndexed):
++        indexer = BasicIndexer(indexer)
++    return _ravel(_to_duck_array(array[indexer]))[:n_desired]
++
++
++def last_n_items(array, n_desired):
++    if n_desired < 1:
++        raise ValueError("must request at least one item")
++    if array.size == 0:
++        return np.asarray(array).reshape(-1)
++    indexer = _get_indexer_at_least_n_items(array.shape, n_desired, True)
++    if isinstance(array, ExplicitlyIndexed):
++        indexer = BasicIndexer(indexer)
++    return _ravel(_to_duck_array(array[indexer]))[-n_desired:]
++
++
+ 
+ 
+ 
+@@ -133,7 +192,7 @@ def wrap_indent(text, start="", length=None):
+ def last_item(array):
+     """Returns the last item of an array."""
+     indexer = (slice(-1, None),) * array.ndim
+-    return ravel(to_duck_array(array[indexer]))
++    return _ravel(_to_duck_array(array[indexer]))
+ 
+ 
+ def calc_max_rows_first(max_rows: int) -> int:
+@@ -204,6 +263,57 @@ def format_item(x, timedelta_format=None, quote_strings=True):
+         return str(x)
+ 
+ 
++def format_items(x):
++    """Return succinct string representations for items in an array."""
++    x = np.asarray(x) if not hasattr(x, "dtype") else x
++    timedelta_format = None
++    if np.issubdtype(x.dtype, np.timedelta64):
++        values = np.asarray(x).reshape(-1)
++        valid = values[~pd.isnull(values)]
++        if valid.size:
++            ns = valid.astype("timedelta64[ns]").astype(np.int64)
++            day = 24 * 60 * 60 * 1_000_000_000
++            if np.all(ns % day == 0):
++                timedelta_format = "date"
++            elif np.all(np.abs(ns) < day):
++                timedelta_format = "time"
++    return [
++        format_item(item, timedelta_format=timedelta_format)
++        for item in np.asarray(x).reshape(-1)
++    ]
++
++
++def format_array_flat(array, max_width):
++    """Format an array on one line, truncating its middle as needed."""
++    size = array.size
++    if size == 0:
++        return ""
++    max_items = max(1, min(size, max_width // 2 + 1))
++    front = format_items(first_n_items(array, max_items))
++    if size <= max_items and len(" ".join(front)) <= max_width:
++        return " ".join(front)
++    back = format_items(last_n_items(array, max_items))
++
++    best = "..."
++    for total in range(2, 2 * max_items + 1):
++        n_front = (total + 1) // 2
++        n_back = total // 2
++        if n_front + n_back >= size:
++            candidate = " ".join(format_items(first_n_items(array, size)))
++        else:
++            candidate = " ".join(front[:n_front] + ["..."] + back[-n_back:])
++        if len(candidate) <= max_width:
++            best = candidate
++        else:
++            # Later candidates are no shorter in the normal case.
++            continue
++    if best == "...":
++        if max_width < 3:
++            return "..."
++        return maybe_truncate(f"{front[0]} ... {back[-1]}", max_width)
++    return maybe_truncate(best, max_width)
++
++
+ 
+ 
+ 
+@@ -546,6 +656,51 @@ def dim_summary(obj):
+     return ", ".join(elements)
+ 
+ 
++def _element_formatter(
++    elements: Collection[Any], col_width: int, max_rows: int | None = None
++) -> str:
++    width = OPTIONS["display_width"]
++    subsequent = " " * col_width
++    available = max(1, width - col_width)
++    lines: list[str] = []
++    current = ""
++    values = [str(element) for element in elements]
++    for i, value in enumerate(values):
++        token = value + ("," if i < len(values) - 1 else "")
++        candidate = token if not current else current + " " + token
++        if current and len(candidate) > available:
++            lines.append(current)
++            current = token
++        else:
++            current = candidate
++    if current:
++        lines.append(current)
++    if max_rows is not None and len(lines) > max_rows:
++        first = max_rows // 2
++        last = max_rows - first
++        lines = lines[:first] + ["..."] + lines[-last:]
++    rendered = ("\n" + subsequent).join(lines)
++    if max_rows is not None:
++        pass
++    return rendered
++
++
++def dim_summary_limited(sizes, col_width: int, max_rows: int | None = None):
++    elements = [f"{key}: {value}" for key, value in sizes.items()]
++    return _element_formatter(elements, col_width=col_width, max_rows=max_rows)
++
++
++def render_human_readable_nbytes(nbytes: int) -> str:
++    value = float(nbytes)
++    for unit in UNITS:
++        if abs(value) < 1000 or unit == UNITS[-1]:
++            if unit == "B":
++                return f"{int(value)}{unit}"
++            return f"{value:.0f}{unit}"
++        value /= 1000
++    raise AssertionError("unreachable")
++
++
+ 
+ 
+ 
+@@ -648,10 +803,8 @@ def short_array_repr(array):
+         array = array.data
+     if isinstance(array, pd.api.extensions.ExtensionArray):
+         return repr(array)
+-    array = to_duck_array(array)
++    array = _to_duck_array(array)
+ 
+-    # default to lower precision so a full (abbreviated) line can fit on
+-    # one line with the default display_width
+     options = {
+         "precision": 6,
+         "linewidth": OPTIONS["display_width"],
+@@ -668,6 +821,66 @@ def short_array_repr(array):
+         return repr(array)
+ 
+ 
++def short_data_repr(array):
++    """A compact representation that does not load lazy array data."""
++    variable = getattr(array, "variable", array)
++    if variable._in_memory:
++        return short_array_repr(variable)
++    if variable.ndim == 0 and variable._in_memory:
++        return format_item(variable.data.item())
++    return f"[{variable.size} values with dtype={variable.dtype}]"
++
++
++@recursive_repr("<recursive array>")
++def array_repr(arr):
++    """Return the console representation of a DataArray or Variable."""
++    nbytes_str = render_human_readable_nbytes(arr.nbytes)
++    name = getattr(arr, "name", None)
++    name_str = "" if name is None else f" {name!r}"
++    dims = getattr(arr, "dims", ())
++    sizes = getattr(arr, "sizes", dict(zip(dims, arr.shape, strict=True)))
++    if dims:
++        dims_str = ", ".join(f"{dim}: {sizes[dim]}" for dim in dims)
++        dims_str = f" ({dims_str})"
++    else:
++        dims_str = ""
++    summary = [f"<xarray.{type(arr).__name__}{name_str}{dims_str}> Size: {nbytes_str}"]
++
++    data = getattr(arr, "variable", arr)
++    expand_option = OPTIONS["display_expand_data"]
++    expand_data = _get_boolean_with_default("display_expand_data", False)
++    if expand_option is False and data._in_memory:
++        summary.append(inline_variable_array_repr(data, OPTIONS["display_width"]))
++    elif data._in_memory or expand_data:
++        summary.append(short_array_repr(data))
++    else:
++        summary.append(short_data_repr(data))
++
++    coords = getattr(arr, "coords", None)
++    max_rows = OPTIONS["display_max_rows"]
++    if coords:
++        col_width = _calculate_col_width(coords)
++        summary.append(coords_repr(coords, col_width=col_width, max_rows=max_rows))
++        unindexed = unindexed_dims_repr(dims, coords, max_rows=max_rows)
++    else:
++        unindexed = unindexed_dims_repr(dims, {}, max_rows=max_rows)
++    if unindexed:
++        summary.append(unindexed)
++
++    xindexes = getattr(arr, "xindexes", None)
++    if xindexes is not None:
++        display_default = _get_boolean_with_default("display_default_indexes", False)
++        indexes = filter_nondefault_indexes(
++            _get_indexes_dict(xindexes), not display_default
++        )
++        if indexes:
++            summary.append(indexes_repr(indexes, max_rows=max_rows))
++
++    if arr.attrs:
++        summary.append(attrs_repr(arr.attrs, max_rows=max_rows))
++    return "\n".join(summary)
++
++
+ 
+ 
+ 
+@@ -1208,12 +1421,3 @@ def shorten_list_repr(items: Sequence, max_items: int) -> str:
+         ]  # Convert to string and remove brackets
+         return f"[{first_half}, ..., {second_half}]"
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+diff --git a/xarray/core/formatting_html.py b/xarray/core/formatting_html.py
+index 624c437..649f7f2 100644
+--- a/xarray/core/formatting_html.py
++++ b/xarray/core/formatting_html.py
+@@ -9,7 +9,7 @@ from importlib.resources import files
+ from math import ceil
+ from typing import TYPE_CHECKING, Literal
+ 
+-from xarray.core.formatting import filter_nondefault_indexes, inherited_vars, inline_index_repr, inline_variable_array_repr
++from xarray.core.formatting import filter_nondefault_indexes, inherited_vars, inline_index_repr, inline_variable_array_repr, short_data_repr
+ 
+ 
+ 
+diff --git a/xarray/core/indexes.py b/xarray/core/indexes.py
+index c745b43..e3781d3 100644
+--- a/xarray/core/indexes.py
++++ b/xarray/core/indexes.py
+@@ -198,6 +198,12 @@ class Index:
+         else:
+             return {}
+ 
++    def should_add_coord_to_array(
++        self, name: Hashable, var: Variable, dims: set[Hashable]
++    ) -> bool:
++        """Whether an indexed coordinate can be attached to an array."""
++        return set(var.dims) <= dims
++
+ 
+ 
+ 
+@@ -1497,6 +1503,69 @@ class CoordinateTransformIndex(Index):
+ 
+         return new_variables
+ 
++    def rename(self, name_dict, dims_dict):
++        if not set(self.transform.coord_names) & set(name_dict) and not set(
++            self.transform.dims
++        ) & set(dims_dict):
++            return self
++        transform = copy.copy(self.transform)
++        transform.coord_names = tuple(
++            name_dict.get(name, name) for name in self.transform.coord_names
++        )
++        transform.dims = tuple(dims_dict.get(dim, dim) for dim in self.transform.dims)
++        transform.dim_size = {
++            dims_dict.get(dim, dim): size
++            for dim, size in self.transform.dim_size.items()
++        }
++        return type(self)(transform)
++
++    def sel(self, labels, method=None, tolerance=None) -> IndexSelResult:
++        if method != "nearest":
++            raise ValueError(
++                "CoordinateTransformIndex only supports selection with "
++                "method='nearest'"
++            )
++        if tolerance is not None:
++            raise ValueError(
++                "CoordinateTransformIndex does not support tolerance yet"
++            )
++
++        from xarray.core.dataarray import DataArray
++        from xarray.core.variable import Variable
++
++        variables = {
++            name: value.variable if isinstance(value, DataArray) else value
++            for name, value in labels.items()
++        }
++        if not all(isinstance(value, Variable) for value in variables.values()):
++            raise TypeError("coordinate transform labels must be xarray Variables")
++        dims = {value.dims for value in variables.values()}
++        if len(dims) != 1:
++            raise ValueError(
++                "CoordinateTransformIndex only supports advanced (point-wise) "
++                "indexing with labels that have matching dimensions"
++            )
++        label_dims = next(iter(dims))
++        values = [value.data for value in variables.values()]
++        if set(variables) == set(self.transform.coord_names):
++            coord_labels = {
++                name: variables[name].data for name in self.transform.coord_names
++            }
++        elif len(values) == len(self.transform.coord_names):
++            coord_labels = dict(
++                zip(self.transform.coord_names, values, strict=True)
++            )
++        else:
++            raise ValueError(
++                f"missing labels for coordinate(s) {self.transform.coord_names!r}"
++            )
++        positions = self.transform.reverse(coord_labels)
++        dim_indexers = {
++            dim: Variable(label_dims, np.rint(position).astype(np.int64))
++            for dim, position in positions.items()
++        }
++        return IndexSelResult(dim_indexers)
++
+ 
+ 
+ 
+@@ -2085,43 +2154,33 @@ def _apply_indexes_fast(indexes: Indexes[Index], args: Mapping[Any, Any], func:
+                     new_indexes.pop(k, None)
+     return new_indexes, new_index_variables
+ 
++def _apply_indexes(
++    indexes: Indexes[Index], args: Mapping[Any, Any], func: str
++) -> tuple[dict[Hashable, Index], dict[Hashable, Variable]]:
++    new_indexes: dict[Hashable, Index] = {}
++    new_index_variables: dict[Hashable, Variable] = {}
+ 
++    for index, index_vars in indexes.group_by_index():
++        index_dims = {dim for var in index_vars.values() for dim in var.dims}
++        index_args = {key: value for key, value in args.items() if key in index_dims}
++        if index_args:
++            new_index = getattr(index, func)(index_args)
++            if new_index is None:
++                continue
++            new_vars = new_index.create_variables(index_vars)
++            new_index_variables.update(new_vars)
++            new_indexes.update(dict.fromkeys(new_vars, new_index))
++        else:
++            new_indexes.update(dict.fromkeys(index_vars, index))
+ 
++    return new_indexes, new_index_variables
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def isel_indexes(
++    indexes: Indexes[Index], indexers: Mapping[Any, Any]
++) -> tuple[dict[Hashable, Index], dict[Hashable, Variable]]:
++    """Apply positional indexers to all affected indexes."""
++    return _apply_indexes(indexes, indexers, "isel")
+ 
+ 
+ def roll_indexes(
+@@ -2130,31 +2189,22 @@ def roll_indexes(
+ ) -> tuple[dict[Hashable, Index], dict[Hashable, Variable]]:
+     return _apply_indexes(indexes, shifts, "roll")
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def filter_indexes_from_coords(
++    indexes: Mapping[Any, Index], filtered_coord_names: set
++) -> dict[Hashable, Index]:
++    """Filter indexes without retaining only part of a multi-coordinate index."""
++    grouped: dict[int, list[Hashable]] = defaultdict(list)
++    objects: dict[int, Index] = {}
++    for name, index in indexes.items():
++        ident = id(index)
++        grouped[ident].append(name)
++        objects[ident] = index
++
++    result: dict[Hashable, Index] = {}
++    for ident, names in grouped.items():
++        if set(names).issubset(filtered_coord_names):
++            result.update(dict.fromkeys(names, objects[ident]))
++    return result
+ def assert_no_index_corrupted(
+     indexes: Indexes[Index],
+     coord_names: set[Hashable],
+@@ -2173,4 +2223,4 @@ def assert_no_index_corrupted(
+                 f"cannot {action} {common_names_str}, which would corrupt "
+                 f"the following index built from coordinates {index_names_str}:\n"
+                 f"{index}"
+-            )
+\ No newline at end of file
++            )
+diff --git a/xarray/core/indexing.py b/xarray/core/indexing.py
+index 8c82b2f..3542812 100644
+--- a/xarray/core/indexing.py
++++ b/xarray/core/indexing.py
+@@ -78,6 +78,117 @@ class IndexSelResult:
+     drop_indexes: list[Hashable] = field(default_factory=list)
+     rename_dims: dict[Any, Hashable] = field(default_factory=dict)
+ 
++    def as_tuple(self):
++        return (
++            self.dim_indexers,
++            self.indexes,
++            self.variables,
++            self.drop_coords,
++            self.drop_indexes,
++            self.rename_dims,
++        )
++
++
++def merge_sel_results(results: list[IndexSelResult]) -> IndexSelResult:
++    if not results:
++        return IndexSelResult({})
++
++    dim_indexers: dict[Any, Any] = {}
++    indexes: dict[Any, Index] = {}
++    variables: dict[Any, Variable] = {}
++    drop_coords: list[Hashable] = []
++    drop_indexes: list[Hashable] = []
++    rename_dims: dict[Any, Hashable] = {}
++    for result in results:
++        duplicate = set(dim_indexers) & set(result.dim_indexers)
++        if duplicate:
++            raise ValueError(
++                f"Xarray does not support label-based selection with more than "
++                f"one index over these dimensions: {duplicate!r}"
++            )
++        dim_indexers.update(result.dim_indexers)
++        indexes.update(result.indexes)
++        variables.update(result.variables)
++        drop_coords.extend(result.drop_coords)
++        drop_indexes.extend(result.drop_indexes)
++        rename_dims.update(result.rename_dims)
++    return IndexSelResult(
++        dim_indexers, indexes, variables, drop_coords, drop_indexes, rename_dims
++    )
++
++
++def group_indexers_by_index(
++    obj: T_Xarray,
++    indexers: Mapping[Any, Any],
++    options: Mapping[str, Any],
++) -> list[tuple[Index | None, dict[Any, Any]]]:
++    grouped: dict[int | None, tuple[Index | None, dict[Any, Any]]] = {}
++    for key, label in indexers.items():
++        if key in obj.xindexes:
++            index = obj.xindexes[key]
++            ident: int | None = id(index)
++        elif key in obj.coords:
++            raise KeyError(f"no index found for coordinate {key!r}")
++        elif key in obj.dims:
++            if options:
++                raise ValueError(
++                    f"cannot supply selection options {options!r} for dimension "
++                    f"{key!r} that has no associated coordinate or index"
++                )
++            index = None
++            ident = None
++        else:
++            raise KeyError(f"{key!r} is not a valid dimension or coordinate")
++        if ident not in grouped:
++            grouped[ident] = (index, {})
++        grouped[ident][1][key] = label
++    return list(grouped.values())
++
++
++def map_index_queries(
++    obj: T_Xarray,
++    indexers: Mapping[Any, Any],
++    method=None,
++    tolerance=None,
++    **indexers_kwargs: Any,
++) -> IndexSelResult:
++    indexers = either_dict_or_kwargs(indexers, indexers_kwargs, "sel")
++    options = {key: value for key, value in {"method": method, "tolerance": tolerance}.items() if value is not None}
++    grouped = group_indexers_by_index(obj, indexers, options)
++    results = []
++    for index, labels in grouped:
++        if index is None:
++            results.append(IndexSelResult(labels))
++        else:
++            results.append(index.sel(labels, **options))
++    return merge_sel_results(results)
++
++
++def expanded_indexer(key, ndim):
++    if not isinstance(key, tuple):
++        key = (key,)
++    ellipsis = [i for i, value in enumerate(key) if value is Ellipsis]
++    if len(ellipsis) > 1:
++        raise IndexError("more than one ellipsis found in index")
++    if ellipsis:
++        i = ellipsis[0]
++        key = key[:i] + (slice(None),) * (ndim - len(key) + 1) + key[i + 1 :]
++    if len(key) > ndim:
++        raise IndexError("too many indices")
++    return key + (slice(None),) * (ndim - len(key))
++
++
++def normalize_slice(sl: slice, size: int) -> slice:
++    return slice(*sl.indices(size))
++
++
++def as_integer_slice(value: slice) -> slice:
++    return slice(
++        as_integer_or_none(value.start),
++        as_integer_or_none(value.stop),
++        as_integer_or_none(value.step),
++    )
++
+ 
+ 
+ 
+@@ -402,10 +513,9 @@ class ExplicitIndexer:
+             raise TypeError("cannot instantiate base ExplicitIndexer objects")
+         self._key = tuple(key)
+ 
+-
+-
+-
+-
++    @property
++    def tuple(self) -> tuple[Any, ...]:
++        return self._key
+     def __repr__(self) -> str:
+         return f"{type(self).__name__}({self.tuple})"
+ 
+@@ -415,15 +525,8 @@ def as_integer_or_none(value: int) -> int: ...
+ @overload
+ def as_integer_or_none(value: None) -> None: ...
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def as_integer_or_none(value):
++    return None if value is None else operator.index(value)
+ 
+ class IndexCallable:
+     """Provide getitem and setitem syntax for callable objects."""
+@@ -974,28 +1077,72 @@ class MemoryCachedArray(ExplicitlyIndexedNDArrayMixin):
+         self._check_and_raise_if_non_basic_indexer(indexer)
+         self.array[indexer] = value
+ 
++def as_indexable(array):
++    """Adapt an arbitrary supported array to explicit xarray indexing."""
++    if isinstance(array, ExplicitlyIndexed):
++        return array
++    if isinstance(array, pd.Index):
++        return PandasIndexingAdapter(array)
++    if isinstance(array, pd.api.extensions.ExtensionArray):
++        from xarray.core.extension_array import PandasExtensionArray
++
++        return PandasExtensionArray(array)
++    if is_duck_dask_array(array):
++        return DaskIndexingAdapter(array)
++    if isinstance(array, np.ndarray):
++        return NumpyIndexingAdapter(array)
++    if hasattr(array, "__array_namespace__"):
++        return ArrayApiIndexingAdapter(array)
++    if hasattr(array, "__array_function__"):
++        return NdArrayLikeIndexingAdapter(array)
++    return NumpyIndexingAdapter(np.asarray(array))
++
++
++def apply_indexer(indexable, indexer: ExplicitIndexer):
++    if isinstance(indexer, VectorizedIndexer):
++        return indexable.vindex[indexer]
++    if isinstance(indexer, OuterIndexer):
++        return indexable.oindex[indexer]
++    return indexable[indexer]
+ 
+ 
++def set_with_indexer(indexable, indexer: ExplicitIndexer, value: Any) -> None:
++    if isinstance(indexer, VectorizedIndexer):
++        indexable.vindex[indexer] = value
++    elif isinstance(indexer, OuterIndexer):
++        indexable.oindex[indexer] = value
++    else:
++        indexable[indexer] = value
+ 
+ 
++def _arrayize_vectorized_indexer(indexer: ExplicitIndexer, shape) -> VectorizedIndexer:
++    n_slice = sum(isinstance(key, slice) for key in indexer.tuple)
++    array_ndim = max(
++        (np.ndim(key) for key in indexer.tuple if not isinstance(key, slice)),
++        default=0,
++    )
++    arrays = []
++    slice_axis = 0
++    for key, size in zip(indexer.tuple, shape, strict=True):
++        if isinstance(key, slice):
++            values = np.arange(size)[key]
++            new_shape = (1,) * array_ndim + (1,) * slice_axis + (
++                values.size,
++            ) + (1,) * (n_slice - slice_axis - 1)
++            arrays.append(values.reshape(new_shape))
++            slice_axis += 1
++        else:
++            values = np.asarray(key)
++            arrays.append(values.reshape(values.shape + (1,) * n_slice))
++    return VectorizedIndexer(tuple(arrays))
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def _arrayize_outer_indexer(indexer: ExplicitIndexer, shape) -> OuterIndexer:
++    key = tuple(
++        np.arange(size)[value] if isinstance(value, slice) else value
++        for value, size in zip(indexer.tuple, shape, strict=True)
++    )
++    return OuterIndexer(key)
+ 
+ def _outer_to_vectorized_indexer(
+     indexer: BasicIndexer | OuterIndexer, shape: _Shape
+@@ -1781,16 +1928,21 @@ def _apply_vectorized_indexer_dask_wrapper(indices, coord):
+         as_indexable(coord), VectorizedIndexer((indices.squeeze(axis=-1),))
+     )
+ 
++def _assert_not_chunked_indexer(indexer: tuple[Any, ...]) -> None:
++    if any(is_chunked_array(key) for key in indexer):
++        raise ValueError(
++            "Cannot index with a chunked array indexer using vectorized indexing. "
++            "Please call `.compute()` on the indexer first."
++        )
+ 
+ 
++def _posify_indices(indices, size):
++    return np.where(indices < 0, indices + size, indices)
+ 
+ 
+-
+-
+-
+-
+-
+-
++def _check_bounds(indices, size):
++    if np.any((indices < 0) | (indices >= size)):
++        raise IndexError("index out of bounds")
+ 
+ class DaskIndexingAdapter(IndexingAdapter):
+     """Wrap a dask array to support explicit indexing."""
+@@ -2221,6 +2373,6 @@ class CoordinateTransformIndexingAdapter(IndexingAdapter):
+     def _repr_inline_(self, max_width: int) -> str:
+         # we want to display values in the inline repr for this lazy coordinate
+         # `format_array_flat` prevents loading the whole array in memory.
++        from xarray.core.formatting import format_array_flat
+ 
+-
+-        return format_array_flat(self, max_width)
+\ No newline at end of file
++        return format_array_flat(self, max_width)
+diff --git a/xarray/core/nputils.py b/xarray/core/nputils.py
+index f5500b0..4ac0b8d 100644
+--- a/xarray/core/nputils.py
++++ b/xarray/core/nputils.py
+@@ -7,6 +7,7 @@ import numpy as np
+ import pandas as pd
+ from packaging.version import Version
+ 
++from xarray.compat.array_api_compat import get_array_namespace
+ 
+ from xarray.core.utils import is_duck_array, module_available
+ from xarray.namedarray import pycompat
+@@ -165,16 +166,42 @@ class NumpyVIndexAdapter:
+ 
+ 
+ 
++    def __init__(self, array):
++        self._array = array
++
+     def __getitem__(self, key):
++        if not isinstance(key, tuple):
++            key = (key,)
+         mixed_positions, vindex_positions = _advanced_indexer_subspaces(key)
+         return np.moveaxis(self._array[key], mixed_positions, vindex_positions)
+ 
+     def __setitem__(self, key, value):
+         """Value must have dimensionality matching the key."""
++        if not isinstance(key, tuple):
++            key = (key,)
+         mixed_positions, vindex_positions = _advanced_indexer_subspaces(key)
+         self._array[key] = np.moveaxis(value, vindex_positions, mixed_positions)
+ 
+ 
++def _is_contiguous(positions) -> bool:
++    """Return whether integer positions form one consecutive run."""
++    return all(current == previous + 1 for previous, current in zip(positions, positions[1:]))
++
++
++def _advanced_indexer_subspaces(key):
++    advanced = [i for i, value in enumerate(key) if not isinstance(value, slice)]
++    if not advanced:
++        return (), ()
++    arrays = [np.asarray(key[i]) for i in advanced]
++    ndim = len(np.broadcast_shapes(*(array.shape for array in arrays)))
++    contiguous = advanced == list(range(advanced[0], advanced[-1] + 1))
++    if contiguous:
++        mixed = tuple(range(advanced[0], advanced[0] + ndim))
++    else:
++        mixed = tuple(range(ndim))
++    return mixed, tuple(range(ndim))
++
++
+ def _create_method(name, npmodule=np) -> Callable:
+     def f(values, axis=None, **kwargs):
+         dtype = kwargs.get("dtype")
+@@ -313,4 +340,4 @@ nancumsum = _create_method("nancumsum")
+ nancumprod = _create_method("nancumprod")
+ nanargmin = _create_method("nanargmin")
+ nanargmax = _create_method("nanargmax")
+-nanquantile = _create_method("nanquantile")
+\ No newline at end of file
++nanquantile = _create_method("nanquantile")
+diff --git a/xarray/core/utils.py b/xarray/core/utils.py
+index cc4746f..c658b1c 100644
+--- a/xarray/core/utils.py
++++ b/xarray/core/utils.py
+@@ -406,34 +406,45 @@ def to_0d_array(value: Any) -> np.ndarray:
+     else:
+         return to_0d_object_array(value)
+ 
++def dict_equiv(
++    first: Mapping[K, V],
++    second: Mapping[K, V],
++    compat: Callable[[V, V], bool] = equivalent,
++) -> bool:
++    """Test equivalence of two mappings, including array-valued items."""
++    if first.keys() != second.keys():
++        return False
++    return all(compat(first[k], second[k]) for k in first)
+ 
+ 
++def drop_dims_from_indexers(
++    indexers: Mapping[Any, Any],
++    dims: Iterable[Hashable] | Mapping[Any, int],
++    missing_dims: ErrorOptionsWithWarn,
++) -> Mapping[Hashable, Any]:
++    """Drop indexers for dimensions absent from ``dims``."""
++    if missing_dims not in {"raise", "warn", "ignore"}:
++        raise ValueError(
++            f"Unrecognized option missing_dims={missing_dims!r}. "
++            "Expected one of 'raise', 'warn' or 'ignore'."
++        )
+ 
++    dims_set = set(dims)
++    invalid = set(indexers) - dims_set
++    if invalid:
++        if missing_dims == "raise":
++            raise ValueError(
++                f"Dimensions {invalid} do not exist. Expected one or more of {dims_set}"
++            )
++        if missing_dims == "warn":
++            emit_user_level_warning(
++                f"Dimensions {invalid} do not exist. Expected one or more of {dims_set}",
++                UserWarning,
++            )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    if missing_dims == "raise":
++        return indexers
++    return {key: value for key, value in indexers.items() if key in dims_set}
+ def compat_dict_intersection(
+     first_dict: Mapping[K, V],
+     second_dict: Mapping[K, V],
+@@ -637,12 +648,11 @@ class OrderedSet(MutableSet[T]):
+         self._d[value] = None
+ 
+     def discard(self, value: T) -> None:
+-        del self._d[value]
++        self._d.pop(value, None)
+ 
+     # Additional methods
+-
+-
+-
++    def update(self, values: Iterable[T]) -> None:
++        self._d.update(dict.fromkeys(values))
+ 
+     def __repr__(self) -> str:
+         return f"{type(self).__name__}({list(self)!r})"
+@@ -666,19 +676,9 @@ class NdimSizeLenMixin:
+         """
+         return len(self.shape)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def size(self: Any) -> int:
++        return math.prod(self.shape)
+     def __len__(self: Any) -> int:
+         try:
+             return self.shape[0]
+@@ -916,55 +916,37 @@ def get_temp_dimname(dims: Container[Hashable], new_dim: Hashable) -> Hashable:
+         new_dim = "_" + str(new_dim)
+     return new_dim
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def infix_dims(
++    dims_supplied: Iterable[Hashable],
++    dims_all: Iterable[Hashable],
++    missing_dims: ErrorOptionsWithWarn = "raise",
++) -> Iterator[Hashable]:
++    """Resolve an ellipsis in a dimension ordering."""
++    supplied = list(dims_supplied)
++    all_dims = list(dims_all)
++    if len(set(all_dims)) != len(all_dims):
++        raise ValueError("Dimensions cannot be repeated")
++    if supplied.count(...) > 1:
++        raise ValueError("More than one ellipsis supplied")
++
++    explicit = [dim for dim in supplied if dim is not ...]
++    valid = drop_dims_from_indexers(
++        dict.fromkeys(explicit), all_dims, missing_dims
++    )
++    explicit = [dim for dim in explicit if dim in valid]
++    if len(set(explicit)) != len(explicit):
++        raise ValueError("Dimensions cannot be repeated")
++
++    if ... not in supplied:
++        yield from explicit
++        return
++
++    index = supplied.index(...)
++    before = [dim for dim in supplied[:index] if dim in valid]
++    after = [dim for dim in supplied[index + 1 :] if dim in valid]
++    yield from before
++    yield from (dim for dim in all_dims if dim not in explicit)
++    yield from after
+ @overload
+ def parse_dims_as_tuple(
+     dim: Dims,
+@@ -1422,4 +1404,4 @@ def _get_func_args(func, param_names):
+             raise ValueError(
+                 "`param_names` must be provided because `func` takes variable length arguments."
+             )
+-    return params, func_args
+\ No newline at end of file
++    return params, func_args
+diff --git a/xarray/core/variable.py b/xarray/core/variable.py
+index f44c2f0..9a5dc34 100644
+--- a/xarray/core/variable.py
++++ b/xarray/core/variable.py
+@@ -22,7 +22,7 @@ from xarray.computation.arithmetic import VariableArithmetic
+ from xarray.core import common, dtypes, duck_array_ops, indexing, nputils, utils
+ from xarray.core.common import AbstractArray
+ from xarray.core.extension_array import PandasExtensionArray
+-from xarray.core.indexing import BasicIndexer, CoordinateTransformIndexingAdapter, OuterIndexer, PandasIndexingAdapter, VectorizedIndexer
++from xarray.core.indexing import BasicIndexer, CoordinateTransformIndexingAdapter, OuterIndexer, PandasIndexingAdapter, VectorizedIndexer, as_indexable
+ 
+ 
+ 
+@@ -31,7 +31,7 @@ from xarray.core.indexing import BasicIndexer, CoordinateTransformIndexingAdapte
+ 
+ 
+ from xarray.core.options import OPTIONS, _get_keep_attrs
+-from xarray.core.utils import OrderedSet, _default, consolidate_dask_from_array_kwargs, decode_numpy_dict_values, either_dict_or_kwargs, emit_user_level_warning, ensure_us_time_resolution, is_allowed_extension_array, is_dict_like, is_duck_array, is_duck_dask_array, maybe_coerce_to_str
++from xarray.core.utils import OrderedSet, _default, consolidate_dask_from_array_kwargs, decode_numpy_dict_values, drop_dims_from_indexers, either_dict_or_kwargs, emit_user_level_warning, ensure_us_time_resolution, infix_dims, is_allowed_extension_array, is_dict_like, is_duck_array, is_duck_dask_array, maybe_coerce_to_str
+ 
+ 
+ 
+@@ -49,7 +49,8 @@ from xarray.core.utils import OrderedSet, _default, consolidate_dask_from_array_
+ 
+ from xarray.namedarray.core import NamedArray
+ from xarray.namedarray.parallelcompat import get_chunked_array_type
+-from xarray.namedarray.pycompat import async_to_duck_array, integer_types, is_0d_dask_array, is_chunked_array
++from xarray.namedarray.pycompat import async_to_duck_array, integer_types, is_0d_dask_array, is_chunked_array, to_duck_array
++
+ 
+ 
+ 
+@@ -2438,7 +2439,7 @@ class Variable(NamedArray, AbstractArray, VariableArithmetic):
+         keep_attrs = _get_keep_attrs(default=True)
+         if keep_attrs:
+             # Combine attributes from both operands, dropping conflicts
+-
++            from xarray.structure.merge import merge_attrs
+ 
+             # Access attrs property to normalize None to {} due to property side effect
+             self_attrs = self.attrs
+@@ -2994,6 +2995,26 @@ class IndexVariable(Variable):
+         )
+ 
+ 
++def _unified_dims(variables: Sequence[Variable]) -> dict[Hashable, int]:
++    all_dims: dict[Hashable, int] = {}
++    for var in variables:
++        for dim, size in zip(var.dims, var.shape, strict=True):
++            if dim in all_dims and all_dims[dim] != size:
++                raise ValueError(
++                    f"operands cannot be broadcast together with mismatched "
++                    f"lengths for dimension {dim!r}: {all_dims[dim]} vs {size}"
++                )
++            all_dims[dim] = size
++    return all_dims
++
++
++def _broadcast_compat_variables(*variables: Variable) -> tuple[Variable, ...]:
++    dims = tuple(_unified_dims(variables))
++    if all(var.dims == dims for var in variables):
++        return variables
++    return broadcast_variables(*variables)
++
++
+ 
+ 
+ 
+@@ -3142,4 +3163,4 @@ def calculate_dimensions(variables: Mapping[Any, Variable]) -> dict[Hashable, in
+                     f"conflicting sizes for dimension {dim!r}: "
+                     f"length {size} on {k!r} and length {dims[dim]} on {last_used!r}"
+                 )
+-    return dims
+\ No newline at end of file
++    return dims
+diff --git a/xarray/groupers.py b/xarray/groupers.py
+index a766524..a56ca72 100644
+--- a/xarray/groupers.py
++++ b/xarray/groupers.py
+@@ -31,7 +31,7 @@ from xarray.core.common import (
+ )
+ from xarray.core.coordinates import Coordinates, coordinates_from_variable
+ from xarray.core.dataarray import DataArray
+-
++from xarray.core.duck_array_ops import array_all, isnull
+ 
+ from xarray.core.groupby import T_Group, _DummyGroup
+ from xarray.core.indexes import safe_cast_to_index
+diff --git a/xarray/namedarray/core.py b/xarray/namedarray/core.py
+index 95b8597..0f8042f 100644
+--- a/xarray/namedarray/core.py
++++ b/xarray/namedarray/core.py
+@@ -43,6 +43,16 @@ from xarray.namedarray._typing import (
+ from xarray.namedarray.parallelcompat import guess_chunkmanager
+ from xarray.namedarray.pycompat import to_numpy
+ from xarray.namedarray.utils import either_dict_or_kwargs, is_dict_like, is_duck_dask_array, to_0d_object_array
++from xarray.core.utils import infix_dims
++
++
++def _raise_if_any_duplicate_dimensions(dims: tuple[Hashable, ...]) -> None:
++    if len(set(dims)) < len(dims):
++        repeated = {dim for dim in dims if dims.count(dim) > 1}
++        raise ValueError(
++            f"This function cannot handle duplicate dimensions, but dimensions "
++            f"{repeated!r} appear more than once on this object's dims: {dims!r}"
++        )
+ 
+ 
+ 
+@@ -1161,4 +1171,3 @@ class NamedArray(NamedArrayAggregations, Generic[_ShapeType_co, _DType_co]):
+ 
+ _NamedArray = NamedArray[Any, np.dtype[_ScalarType_co]]
+ 
+-
+diff --git a/xarray/namedarray/pycompat.py b/xarray/namedarray/pycompat.py
+index 036efe9..77b9145 100644
+--- a/xarray/namedarray/pycompat.py
++++ b/xarray/namedarray/pycompat.py
+@@ -126,26 +126,18 @@ def to_numpy(
+ 
+     return data
+ 
++def to_duck_array(data: Any, **kwargs: dict[str, Any]):
++    """Convert indexed wrappers to their underlying duck array."""
++    from xarray.core.indexing import (
++        ExplicitlyIndexed,
++        ImplicitToExplicitIndexingAdapter,
++    )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    if isinstance(data, ExplicitlyIndexed | ImplicitToExplicitIndexingAdapter):
++        return data.get_duck_array()
++    if is_duck_array(data):
++        return data
++    return np.asarray(data)
+ 
+ async def async_to_duck_array(
+     data: Any, **kwargs: dict[str, Any]
+@@ -158,4 +150,4 @@ async def async_to_duck_array(
+     if isinstance(data, ExplicitlyIndexed | ImplicitToExplicitIndexingAdapter):
+         return await data.async_get_duck_array()  # type: ignore[union-attr, no-any-return]
+     else:
+-        return to_duck_array(data, **kwargs)
+\ No newline at end of file
++        return to_duck_array(data, **kwargs)
+diff --git a/xarray/structure/merge.py b/xarray/structure/merge.py
+index fe3febf..0099e74 100644
+--- a/xarray/structure/merge.py
++++ b/xarray/structure/merge.py
+@@ -7,9 +7,9 @@ from typing import TYPE_CHECKING, Any, NamedTuple, Union, cast, overload
+ 
+ import pandas as pd
+ 
+-from xarray.core import dtypes
++from xarray.core import dtypes, duck_array_ops
+ 
+-from xarray.core.indexes import Index, create_default_index_implicit, indexes_equal
++from xarray.core.indexes import Index, create_default_index_implicit, filter_indexes_from_coords, indexes_equal
+ 
+ 
+ 
+@@ -98,6 +98,86 @@ class MergeError(ValueError):
+     # TODO: move this to an xarray.exceptions module?
+ 
+ 
++def _assert_compat_valid(compat):
++    if not isinstance(compat, CombineKwargDefault) and compat not in _VALID_COMPAT:
++        raise ValueError(
++            f"compat={compat!r} invalid: must be one of {set(_VALID_COMPAT)}"
++        )
++
++
++def unique_variable(
++    name: Hashable,
++    variables: list[Variable],
++    compat: CompatOptions | CombineKwargDefault = "broadcast_equals",
++    equals: bool | None = None,
++) -> tuple[bool | None, Variable]:
++    """Return the compatible variable represented by ``variables``."""
++    out = variables[0]
++    if len(variables) == 1 or compat == "override":
++        return equals, out
++
++    compat_str = compat._value if isinstance(compat, CombineKwargDefault) else compat
++    if compat_str == "minimal":
++        compat_str = "broadcast_equals"
++
++    combine_method = None
++    if compat_str == "broadcast_equals":
++        dimensions = broadcast_dimension_size(variables)
++        if out.dims != tuple(dimensions):
++            out = out.set_dims(dimensions)
++    elif compat_str == "no_conflicts":
++        combine_method = "fillna"
++
++    if equals is None:
++        for var in variables[1:]:
++            equals = getattr(out, compat_str)(
++                var, equiv=duck_array_ops.lazy_array_equiv
++            )
++            if equals is not True:
++                break
++
++    if equals is None:
++        for var in variables[1:]:
++            equals = getattr(out.compute(), compat_str)(var.compute())
++            if not equals:
++                break
++
++    if not equals:
++        raise MergeError(
++            f"conflicting values for variable {name!r} on objects to be combined. "
++            "You can skip this check by specifying compat='override'."
++        )
++
++    if isinstance(compat, CombineKwargDefault) and compat != "override":
++        broadcast_results = []
++        for var in variables[1:]:
++            result = out.broadcast_equals(
++                var, equiv=duck_array_ops.lazy_array_equiv
++            )
++            if result is None and not (
++                duck_array_ops.is_duck_dask_array(out._data)
++                or duck_array_ops.is_duck_dask_array(var._data)
++            ):
++                result = out.broadcast_equals(var)
++            broadcast_results.append(result)
++        broadcast_equal = all(result is not False for result in broadcast_results) and all(
++            out.dims == var.dims for var in variables[1:]
++        )
++        if not broadcast_equal:
++            emit_user_level_warning(
++                compat.warning_message(
++                    "This change will result in datasets being merged without "
++                    "checking for conflicting values."
++                ),
++                FutureWarning,
++            )
++
++    if combine_method is not None:
++        for var in variables[1:]:
++            out = getattr(out, combine_method)(var)
++    return equals, out
++
++
+ 
+ 
+ 
+@@ -186,6 +266,156 @@ class MergeError(ValueError):
+ MergeElement = tuple[Variable, Index | None]
+ 
+ 
++def _assert_prioritized_valid(
++    grouped: dict[Hashable, list[MergeElement]],
++    prioritized: Mapping[Any, MergeElement],
++) -> None:
++    index_names: dict[int, set[Hashable]] = defaultdict(set)
++    index_objects: dict[int, Index] = {}
++    for name, elements in grouped.items():
++        for _, index in elements:
++            if index is not None:
++                index_names[id(index)].add(name)
++                index_objects[id(index)] = index
++
++    prioritized_names = set(prioritized)
++    for ident, names in index_names.items():
++        common = names & prioritized_names
++        if common and common != names:
++            raise ValueError(
++                f"cannot prioritize only {common!r}; this would corrupt the index "
++                f"built from coordinates {names!r}:\n{index_objects[ident]}"
++            )
++
++
++def merge_collected(
++    grouped: dict[Any, list[MergeElement]],
++    prioritized: Mapping[Any, MergeElement] | None = None,
++    compat: CompatOptions | CombineKwargDefault = "minimal",
++    combine_attrs: CombineAttrsOptions = "override",
++    equals: dict[Any, bool] | None = None,
++) -> tuple[dict[Hashable, Variable], dict[Hashable, Index]]:
++    """Merge grouped variables and associated indexes."""
++    _assert_compat_valid(compat)
++    if prioritized is None:
++        prioritized = {}
++    if equals is None:
++        equals = {}
++    _assert_prioritized_valid(grouped, prioritized)
++
++    merged_vars: dict[Hashable, Variable] = {}
++    merged_indexes: dict[Hashable, Index] = {}
++    index_cmp_cache: dict[tuple[int, int], bool | None] = {}
++
++    for name, elements in grouped.items():
++        if name in prioritized:
++            variable, index = prioritized[name]
++        else:
++            variables = [variable for variable, _ in elements]
++            indexed = [(variable, index) for variable, index in elements if index]
++            index = indexed[0][1] if indexed else None
++
++            conflict = False
++            if indexed:
++                first_var, first_index = indexed[0]
++                assert first_index is not None
++                for other_var, other_index in indexed[1:]:
++                    assert other_index is not None
++                    if not indexes_equal(
++                        first_index,
++                        other_index,
++                        first_var,
++                        other_var,
++                        cache=index_cmp_cache,
++                    ):
++                        conflict = True
++                        break
++
++            if conflict:
++                if compat == "minimal":
++                    continue
++                raise MergeError(
++                    f"conflicting values/indexes on objects to be combined for "
++                    f"coordinate {name!r}"
++                )
++
++            if indexed:
++                # An indexed coordinate takes precedence over an unindexed
++                # variable of the same name. Coordinate/data-variable
++                # ambiguity is diagnosed later by ``determine_coords``.
++                checked_variables = [item[0] for item in indexed]
++            else:
++                checked_variables = variables
++            try:
++                equals[name], variable = unique_variable(
++                    name,
++                    checked_variables,
++                    compat=compat,
++                    equals=equals.get(name),
++                )
++            except MergeError:
++                if compat == "minimal":
++                    continue
++                raise
++
++        variable = variable.copy(deep=False)
++        try:
++            variable.attrs = merge_attrs(
++                [element[0].attrs for element in elements], combine_attrs
++            )
++        except MergeError:
++            if isinstance(compat, CombineKwargDefault) and compat != "override":
++                emit_user_level_warning(
++                    compat.warning_message(
++                        "This change will result in datasets being merged without "
++                        "checking for conflicting values."
++                    ),
++                    FutureWarning,
++                )
++            raise
++        merged_vars[name] = variable
++        if index is not None:
++            merged_indexes[name] = index
++
++    for name, (variable, index) in prioritized.items():
++        if name not in merged_vars:
++            merged_vars[name] = variable.copy(deep=False)
++            if index is not None:
++                merged_indexes[name] = index
++
++    # Index entries are atomic: never return only part of the coordinates
++    # attached to one particular index instance.
++    required_names: dict[int, set[Hashable]] = defaultdict(set)
++    for name, elements in grouped.items():
++        for _, index in elements:
++            if index is not None:
++                required_names[id(index)].add(name)
++    for name, (_, index) in prioritized.items():
++        if index is not None:
++            required_names[id(index)].add(name)
++
++    present_names: dict[int, set[Hashable]] = defaultdict(set)
++    for name, index in merged_indexes.items():
++        present_names[id(index)].add(name)
++    for ident, names in present_names.items():
++        if not required_names[ident].issubset(names):
++            for name in names:
++                merged_indexes.pop(name, None)
++
++    return merged_vars, merged_indexes
++
++
++def collect_from_coordinates(
++    list_of_coords: list[Coordinates],
++) -> dict[Hashable, list[MergeElement]]:
++    """Collect coordinate variables and associated indexes by name."""
++    grouped: dict[Hashable, list[MergeElement]] = defaultdict(list)
++    for coords in list_of_coords:
++        for name, variable in coords.variables.items():
++            grouped[name].append((variable, coords.xindexes.get(name)))
++    return grouped
++
++
+ 
+ 
+ 
+@@ -413,6 +643,42 @@ def collect_variables_and_indexes(
+     return grouped
+ 
+ 
++def merge_coordinates_without_align(
++    objects: list[Coordinates],
++    prioritized: Mapping[Any, MergeElement] | None = None,
++    exclude_dims: AbstractSet = frozenset(),
++    combine_attrs: CombineAttrsOptions = "override",
++) -> tuple[dict[Hashable, Variable], dict[Hashable, Index]]:
++    """Merge already-aligned coordinate collections."""
++    grouped = collect_from_coordinates(objects)
++    if exclude_dims:
++        excluded = set(exclude_dims)
++        grouped = {
++            name: [
++                element
++                for element in elements
++                if not (set(element[0].dims) & excluded)
++            ]
++            for name, elements in grouped.items()
++        }
++        grouped = {name: elements for name, elements in grouped.items() if elements}
++        if prioritized is not None:
++            prioritized = {
++                name: element
++                for name, element in prioritized.items()
++                if not (set(element[0].dims) & excluded)
++            }
++
++    merged_coords, merged_indexes = merge_collected(
++        grouped,
++        prioritized=prioritized,
++        compat="minimal",
++        combine_attrs=combine_attrs,
++    )
++    merged_indexes = filter_indexes_from_coords(merged_indexes, set(merged_coords))
++    return merged_coords, merged_indexes
++
++
+ 
+ 
+ 
+@@ -627,6 +893,60 @@ def equivalent_attrs(a: Any, b: Any) -> bool:
+         return False
+ 
+ 
++def merge_attrs(variable_attrs, combine_attrs, context=None):
++    """Combine attribute mappings according to ``combine_attrs``."""
++    if not variable_attrs:
++        return None
++    if callable(combine_attrs):
++        return combine_attrs(variable_attrs, context=context)
++    if combine_attrs == "drop":
++        return {}
++    if combine_attrs == "override":
++        return dict(variable_attrs[0])
++    if combine_attrs == "identical":
++        result = dict(variable_attrs[0])
++        if not all(
++            all(
++                key in attrs and equivalent_attrs(value, attrs[key])
++                for key, value in result.items()
++            )
++            and len(attrs) == len(result)
++            for attrs in variable_attrs[1:]
++        ):
++            raise MergeError(
++                "combine_attrs='identical', but attrs differ. First is "
++                f"{variable_attrs[0]!r}, other is {variable_attrs[1:]!r}."
++            )
++        return result
++    if combine_attrs == "no_conflicts":
++        result: dict[Any, Any] = {}
++        for attrs in variable_attrs:
++            try:
++                result = compat_dict_union(result, attrs, compat=equivalent_attrs)
++            except ValueError as err:
++                raise MergeError(
++                    "combine_attrs='no_conflicts', but some values are not the same"
++                ) from err
++        return result
++    if combine_attrs == "drop_conflicts":
++        result = {}
++        dropped: set[Any] = set()
++        for attrs in variable_attrs:
++            for key, value in attrs.items():
++                if key in dropped:
++                    continue
++                if key not in result:
++                    result[key] = value
++                elif not equivalent_attrs(result[key], value):
++                    result.pop(key, None)
++                    dropped.add(key)
++        return result
++    raise ValueError(
++        "combine_attrs must be one of 'drop', 'identical', 'no_conflicts', "
++        "'drop_conflicts', 'override', or a callable"
++    )
++
++
+ 
+ 
+ 
+@@ -1250,4 +1570,4 @@ def merge_data_and_coords(data_vars: DataVars, coords) -> _MergeResult:
+         indexes=coords.xindexes,
+         priority_arg=1,
+         skip_align_args=[1],
+-    )
+\ No newline at end of file
++    )

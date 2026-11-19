@@ -1,0 +1,152 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/15b114b, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+
+tests/test_command_line.py FFFx.FFFxF                                    [100%]
+
+=================================== FAILURES ===================================
+__________________ test_build_main_parse_arguments_pos_first ___________________
+tests/test_command_line.py:104: in test_build_main_parse_arguments_pos_first
+    assert parse_arguments(args) == EXPECTED_BUILD_MAIN
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...g': True, ...}
+E     
+E     Omitting 7 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'confdir': '', 'doctreedir': ''}
+E     Use -v to get more diff
+___________________ test_build_main_parse_arguments_pos_last ___________________
+tests/test_command_line.py:113: in test_build_main_parse_arguments_pos_last
+    assert parse_arguments(args) == EXPECTED_BUILD_MAIN
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...g': True, ...}
+E     
+E     Omitting 7 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'confdir': '', 'doctreedir': ''}
+E     Use -v to get more diff
+__________________ test_build_main_parse_arguments_pos_middle __________________
+tests/test_command_line.py:124: in test_build_main_parse_arguments_pos_middle
+    assert parse_arguments(args) == EXPECTED_BUILD_MAIN
+E   AssertionError: assert {'builder': '...ename2'], ...} == {'builder': '...g': True, ...}
+E     
+E     Omitting 7 identical items, use -vv to show
+E     Left contains 2 more items:
+E     {'confdir': '', 'doctreedir': ''}
+E     Use -v to get more diff
+___________________ test_make_mode_parse_arguments_pos_first ___________________
+tests/test_command_line.py:166: in test_make_mode_parse_arguments_pos_first
+    assert run_make_mode(args) == EXPECTED_MAKE_MODE
+           ^^^^^^^^^^^^^^^^^^^
+sphinx/cmd/make_mode.py:212: in run_make_mode
+    return make.run_generic_build(builder)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/cmd/make_mode.py:84: in run_generic_build
+    return build_main(build_args)  # type: ignore[arg-type]
+           ^^^^^^^^^^^^^^^^^^^^^^
+tests/test_command_line.py:94: in parse_arguments
+    parsed = vars(get_parser().parse_args(args))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:1877: in parse_args
+    self.error(msg % ' '.join(argv))
+                     ^^^^^^^^^^^^^^
+E   TypeError: sequence item 0: expected str instance, _StrPath found
+___________________ test_make_mode_parse_arguments_pos_last ____________________
+tests/test_command_line.py:180: in test_make_mode_parse_arguments_pos_last
+    run_make_mode(args)
+sphinx/cmd/make_mode.py:212: in run_make_mode
+    return make.run_generic_build(builder)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/cmd/make_mode.py:84: in run_generic_build
+    return build_main(build_args)  # type: ignore[arg-type]
+           ^^^^^^^^^^^^^^^^^^^^^^
+tests/test_command_line.py:94: in parse_arguments
+    parsed = vars(get_parser().parse_args(args))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:1874: in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:1907: in parse_known_args
+    namespace, args = self._parse_known_args(args, namespace)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:1950: in _parse_known_args
+    option_tuple = self._parse_optional(arg_string)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2288: in _parse_optional
+    if self._negative_number_matcher.match(arg_string):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: expected string or bytes-like object, got '_StrPath'
+__________________ test_make_mode_parse_arguments_pos_middle ___________________
+tests/test_command_line.py:199: in test_make_mode_parse_arguments_pos_middle
+    assert stderr[-1].endswith('error: argument --builder/-b: expected one argument')
+E   AssertionError: assert False
+E    +  where False = <built-in method endswith of str object at 0x7834906eec60>('error: argument --builder/-b: expected one argument')
+E    +    where <built-in method endswith of str object at 0x7834906eec60> = 'pytest: error: argument -b/--builder: expected one argument'.endswith
+________________ test_make_mode_parse_arguments_pos_intermixed _________________
+tests/test_command_line.py:236: in test_make_mode_parse_arguments_pos_intermixed
+    assert stderr[-1].endswith('error: argument --builder/-b: expected one argument')
+E   AssertionError: assert False
+E    +  where False = <built-in method endswith of str object at 0x7834906ef910>('error: argument --builder/-b: expected one argument')
+E    +    where <built-in method endswith of str object at 0x7834906ef910> = 'pytest: error: argument -b/--builder: expected one argument'.endswith
+=============================== warnings summary ===============================
+tests/test_command_line.py: 13 warnings
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:1942: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    if arg_string == '--':
+
+tests/test_command_line.py: 13 warnings
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2249: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    if not arg_string[0] in self.prefix_chars:
+
+tests/test_command_line.py::test_make_mode_parse_arguments_pos_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2258: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    if len(arg_string) == 1:
+
+tests/test_command_line.py::test_make_mode_parse_arguments_pos_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2262: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    option_string, sep, explicit_arg = arg_string.partition('=')
+
+tests/test_command_line.py::test_make_mode_parse_arguments_pos_last
+tests/test_command_line.py::test_make_mode_parse_arguments_pos_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2306: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    if option_string[0] in chars and option_string[1] in chars:
+
+tests/test_command_line.py::test_make_mode_parse_arguments_pos_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2308: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    option_prefix, sep, explicit_arg = option_string.partition('=')
+
+tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last
+tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/argparse.py:2479: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    arg_strings.remove('--')
+
+tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last
+tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/_pytest/assertion/util.py:508: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    same = {k: left[k] for k in common if left[k] == right[k]}
+
+tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last
+tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last
+  /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/_pytest/assertion/util.py:514: RemovedInSphinx90Warning: Sphinx 9 will drop support for representing paths as strings. Use "pathlib.Path" or "os.fspath" instead.
+    diff = {k for k in common if left[k] != right[k]}
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_command_line.py::test_build_main_parse_arguments_pos_intermixed
+XFAIL tests/test_command_line.py::test_build_main_parse_arguments_filenames_last - sphinx-build does not yet support filenames after options
+XFAIL tests/test_command_line.py::test_make_mode_parse_arguments_filenames_last - sphinx-build does not yet support filenames after options
+FAILED tests/test_command_line.py::test_build_main_parse_arguments_pos_first
+FAILED tests/test_command_line.py::test_build_main_parse_arguments_pos_last
+FAILED tests/test_command_line.py::test_build_main_parse_arguments_pos_middle
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_first
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_last - ...
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_middle
+FAILED tests/test_command_line.py::test_make_mode_parse_arguments_pos_intermixed
+============= 7 failed, 1 passed, 2 xfailed, 37 warnings in 0.14s ==============

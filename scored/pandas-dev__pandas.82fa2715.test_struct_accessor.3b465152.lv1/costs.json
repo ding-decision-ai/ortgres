@@ -1,0 +1,390 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source_stage_04_deduplicated": {
+      "episodes": {
+        "0": {
+          "all_actual_jsonl_sha_verified": true,
+          "segment_count": 17,
+          "recorded_model_seconds": 7234.056937545043,
+          "recorded_usage_total": {
+            "input_tokens": 118474683,
+            "cached_input_tokens": 113012480,
+            "output_tokens": 336738
+          },
+          "segments": {
+            "0": {
+              "number": 1,
+              "model_elapsed_seconds": 993.8834265470068,
+              "model_exit_code": 0
+            },
+            "1": {
+              "number": 2,
+              "model_elapsed_seconds": 179.6405535130034,
+              "model_exit_code": 0
+            },
+            "2": {
+              "number": 3,
+              "model_elapsed_seconds": 507.07269295900187,
+              "model_exit_code": 0
+            },
+            "3": {
+              "number": 4,
+              "model_elapsed_seconds": 197.46838788500463,
+              "model_exit_code": 0
+            },
+            "4": {
+              "number": 5,
+              "model_elapsed_seconds": 263.28889611401246,
+              "model_exit_code": 0
+            },
+            "5": {
+              "number": 6,
+              "model_elapsed_seconds": 468.7258263800031,
+              "model_exit_code": 0
+            },
+            "6": {
+              "number": 7,
+              "model_elapsed_seconds": 223.40233535099833,
+              "model_exit_code": 0
+            },
+            "7": {
+              "number": 8,
+              "model_elapsed_seconds": 710.7236494149984,
+              "model_exit_code": 0
+            },
+            "8": {
+              "number": 9,
+              "model_elapsed_seconds": 422.1871909160109,
+              "model_exit_code": 0
+            },
+            "9": {
+              "number": 10,
+              "model_elapsed_seconds": 379.949736732,
+              "model_exit_code": 0
+            },
+            "10": {
+              "number": 11,
+              "model_elapsed_seconds": 380.97969729399483,
+              "model_exit_code": 0
+            },
+            "11": {
+              "number": 12,
+              "model_elapsed_seconds": 327.4560054320027,
+              "model_exit_code": 0
+            },
+            "12": {
+              "number": 13,
+              "model_elapsed_seconds": 397.4799042049999,
+              "model_exit_code": 0
+            },
+            "13": {
+              "number": 14,
+              "model_elapsed_seconds": 838.1226364780014,
+              "model_exit_code": 0
+            },
+            "14": {
+              "number": 15,
+              "model_elapsed_seconds": 189.73559417700744,
+              "model_exit_code": 0
+            },
+            "15": {
+              "number": 16,
+              "model_elapsed_seconds": 445.2834975059959,
+              "model_exit_code": 0
+            },
+            "16": {
+              "number": 17,
+              "model_elapsed_seconds": 308.6569066410011,
+              "model_exit_code": 0
+            }
+          }
+        },
+        "1": {
+          "all_actual_jsonl_sha_verified": true,
+          "segment_count": 37,
+          "recorded_model_seconds": 18587.922507115,
+          "recorded_usage_total": {
+            "input_tokens": 240702681,
+            "cached_input_tokens": 229931264,
+            "output_tokens": 774614
+          },
+          "segments": {
+            "0": {
+              "number": 1020,
+              "model_elapsed_seconds": 962.7495117470003,
+              "model_exit_code": 0
+            },
+            "1": {
+              "number": 1021,
+              "model_elapsed_seconds": 1316.314924243,
+              "model_exit_code": 0
+            },
+            "2": {
+              "number": 1022,
+              "model_elapsed_seconds": 381.1100309080002,
+              "model_exit_code": 0
+            },
+            "3": {
+              "number": 1023,
+              "model_elapsed_seconds": 255.8451412200002,
+              "model_exit_code": 0
+            },
+            "4": {
+              "number": 1024,
+              "model_elapsed_seconds": 306.55239570400045,
+              "model_exit_code": 0
+            },
+            "5": {
+              "number": 1025,
+              "model_elapsed_seconds": 312.0310625789998,
+              "model_exit_code": 0
+            },
+            "6": {
+              "number": 1026,
+              "model_elapsed_seconds": 260.40530301299987,
+              "model_exit_code": 0
+            },
+            "7": {
+              "number": 1027,
+              "model_elapsed_seconds": 133.35898118300065,
+              "model_exit_code": 0
+            },
+            "8": {
+              "number": 1028,
+              "model_elapsed_seconds": 161.70609253600014,
+              "model_exit_code": 0
+            },
+            "9": {
+              "number": 1029,
+              "model_elapsed_seconds": 134.8995306859997,
+              "model_exit_code": 0
+            },
+            "10": {
+              "number": 1030,
+              "model_elapsed_seconds": 1077.1576056459999,
+              "model_exit_code": 0
+            },
+            "11": {
+              "number": 1031,
+              "model_elapsed_seconds": 219.44347260299946,
+              "model_exit_code": 0
+            },
+            "12": {
+              "number": 1032,
+              "model_elapsed_seconds": 337.72903748000044,
+              "model_exit_code": 0
+            },
+            "13": {
+              "number": 1033,
+              "model_elapsed_seconds": 318.64638880500024,
+              "model_exit_code": 0
+            },
+            "14": {
+              "number": 1034,
+              "model_elapsed_seconds": 332.22854637099954,
+              "model_exit_code": 0
+            },
+            "15": {
+              "number": 1035,
+              "model_elapsed_seconds": 291.46871753099913,
+              "model_exit_code": 0
+            },
+            "16": {
+              "number": 1036,
+              "model_elapsed_seconds": 391.0638173710013,
+              "model_exit_code": 0
+            },
+            "17": {
+              "number": 1037,
+              "model_elapsed_seconds": 826.6198849640004,
+              "model_exit_code": 0
+            },
+            "18": {
+              "number": 1038,
+              "model_elapsed_seconds": 412.75682212599895,
+              "model_exit_code": 0
+            },
+            "19": {
+              "number": 1039,
+              "model_elapsed_seconds": 696.9828165969993,
+              "model_exit_code": 0
+            },
+            "20": {
+              "number": 1040,
+              "model_elapsed_seconds": 778.1927557210001,
+              "model_exit_code": 0
+            },
+            "21": {
+              "number": 1041,
+              "model_elapsed_seconds": 376.6821585990001,
+              "model_exit_code": 0
+            },
+            "22": {
+              "number": 1042,
+              "model_elapsed_seconds": 481.4718103260002,
+              "model_exit_code": 0
+            },
+            "23": {
+              "number": 1043,
+              "model_elapsed_seconds": 398.5238331370001,
+              "model_exit_code": 0
+            },
+            "24": {
+              "number": 1044,
+              "model_elapsed_seconds": 152.05887437599995,
+              "model_exit_code": 0
+            },
+            "25": {
+              "number": 1045,
+              "model_elapsed_seconds": 107.42449554300038,
+              "model_exit_code": 0
+            },
+            "26": {
+              "number": 1046,
+              "model_elapsed_seconds": 1128.567523171001,
+              "model_exit_code": 0
+            },
+            "27": {
+              "number": 1047,
+              "model_elapsed_seconds": 1233.0197028169987,
+              "model_exit_code": 0
+            },
+            "28": {
+              "number": 1048,
+              "model_elapsed_seconds": 816.988523723001,
+              "model_exit_code": 0
+            },
+            "29": {
+              "number": 1049,
+              "model_elapsed_seconds": 868.8927316869995,
+              "model_exit_code": 0
+            },
+            "30": {
+              "number": 1050,
+              "model_elapsed_seconds": 175.72253339000235,
+              "model_exit_code": 0
+            },
+            "31": {
+              "number": 1051,
+              "model_elapsed_seconds": 219.8470274829997,
+              "model_exit_code": 0
+            },
+            "32": {
+              "number": 1052,
+              "model_elapsed_seconds": 186.08457119100058,
+              "model_exit_code": 0
+            },
+            "33": {
+              "number": 1053,
+              "model_elapsed_seconds": 117.30823904999852,
+              "model_exit_code": 0
+            },
+            "34": {
+              "number": 1054,
+              "model_elapsed_seconds": 704.5818449170001,
+              "model_exit_code": 0
+            },
+            "35": {
+              "number": 1055,
+              "model_elapsed_seconds": 261.9845287979988,
+              "model_exit_code": 0
+            },
+            "36": {
+              "number": 1056,
+              "model_elapsed_seconds": 1451.5012698729988,
+              "model_exit_code": 0
+            }
+          }
+        }
+      },
+      "event_sha_overlap_count": 0,
+      "unique_segment_count": 54,
+      "deduplicated_recorded_model_seconds": 25821.979444660043,
+      "deduplicated_recorded_usage_total": {
+        "input_tokens": 359177364,
+        "cached_input_tokens": 342943744,
+        "output_tokens": 1111352
+      },
+      "prior_stage_02_and_technical_failures_counted_separately": true,
+      "model_active_billing_duration_or_usd": null
+    },
+    "source_prior_stage_02_null": {
+      "ready": false,
+      "recorded_model_seconds": 3593.1097048260026,
+      "recorded_elapsed_seconds": 3600.2043879079993,
+      "recorded_partial_terminal_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 33887616,
+        "output_tokens": 91349,
+        "reasoning_output_tokens": 15480,
+        "input_tokens": 35500546
+      },
+      "usage_complete": false,
+      "cost_usd": null,
+      "formal_score": null
+    },
+    "source_technical_failed_episodes": {
+      "0": {
+        "ready": false,
+        "segments": 1,
+        "recorded_process_model_seconds": 16.741332007999972,
+        "recorded_elapsed_seconds": 17.64654451699994,
+        "terminal_usage": null,
+        "cost_usd": null,
+        "note": "unknown"
+      },
+      "1": {
+        "ready": false,
+        "segments": 2,
+        "recorded_process_model_seconds": 0.4123375809999743,
+        "recorded_elapsed_seconds": 32.86400915799993,
+        "terminal_usage": null,
+        "cost_usd": null,
+        "note": "unknown"
+      }
+    },
+    "formal": {
+      "infer_success": true,
+      "agent_exit_status": null,
+      "infer_exit_code": 0,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_model_calls": 1,
+      "formal_elapsed_observation_span_seconds": 1147.635939,
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null,
+      "usage": {
+        "input_tokens": 4493004,
+        "cached_input_tokens": 4329344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 25927,
+        "reasoning_output_tokens": 9555
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 121,
+        "turn.started": 1,
+        "item.started": 54,
+        "turn.completed": 1
+      },
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "new_formal_actor_resampled": false,
+      "note": "unknown"
+    },
+    "baseline_formal": {
+      "recorded_terminal_usage": {
+        "input_tokens": 1362788,
+        "cached_input_tokens": 1303808,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15667,
+        "reasoning_output_tokens": 7946
+      },
+      "model_active_seconds": null,
+      "cost_usd": null
+    },
+    "overall_cost_usd": null,
+    "historical_source_cost_is_not_zero": true
+  }
+}

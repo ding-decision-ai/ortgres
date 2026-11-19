@@ -1,0 +1,567 @@
+diff --git a/mlflow/telemetry/client.py b/mlflow/telemetry/client.py
+index 92630f7..300c218 100644
+--- a/mlflow/telemetry/client.py
++++ b/mlflow/telemetry/client.py
+@@ -20,150 +20,192 @@ from mlflow.telemetry.constant import (
+     UNRECOVERABLE_ERRORS,
+ )
+ from mlflow.telemetry.schemas import Record, TelemetryConfig, TelemetryInfo, get_source_sdk
+-from mlflow.telemetry.utils import _log_error, is_telemetry_disabled
++from mlflow.telemetry.utils import _get_config_url, _log_error, is_telemetry_disabled
+ from mlflow.utils.logging_utils import should_suppress_logs_in_thread
++from mlflow.version import VERSION
+ 
+ 
+ class TelemetryClient:
++    """A bounded, asynchronous client for MLflow usage telemetry."""
++
++    def __enter__(self):
++        return self
++
++    def __exit__(self, exc_type, exc_value, traceback):
++        self.flush(terminate=True)
++        for thread in self._threads:
++            if thread.is_alive():
++                thread.join(timeout=1)
++
++    def __init__(self):
++        session_id = _MLFLOW_TELEMETRY_SESSION_ID.get() or uuid.uuid4().hex
++        self.info = asdict(TelemetryInfo(session_id=session_id))
++        self.config: TelemetryConfig | None = None
++        self._is_config_fetched = False
++        self._is_active = False
++        self._is_stopped = False
++        self._queue: Queue[list[Record]] = Queue(maxsize=MAX_QUEUE_SIZE)
++        self._pending_records: list[Record] = []
++        self._batch_size = BATCH_SIZE
++        self._batch_time_interval = BATCH_TIME_INTERVAL_SECONDS
++        self._max_workers = MAX_WORKERS
++        self._last_batch_time = time.time()
++        self._batch_lock = threading.Lock()
++        self._activation_lock = threading.Lock()
++        self._threads: list[threading.Thread] = []
++        self._consumer_threads = self._threads
++        self._config_thread: threading.Thread | None = None
++        self._atexit_registered = False
++
++    def _at_exit_callback(self) -> None:
++        try:
++            with warnings.catch_warnings():
++                warnings.simplefilter("ignore")
++                should_suppress_logs_in_thread.set(True)
++                self.flush(terminate=True)
++        except Exception as e:
++            _log_error(f"Failed to clean up telemetry client: {e}")
+ 
++    def _get_config(self):
++        try:
++            config_url = _get_config_url(VERSION)
++            if config_url is None:
++                return
++            response = requests.get(config_url, timeout=1)
++            if response.status_code != 200:
++                return
++            config = response.json()
++            if config.get("mlflow_version") != VERSION:
++                return
++            if config.get("disable_telemetry", False):
++                return
++            ingestion_url = config.get("ingestion_url")
++            if not ingestion_url:
++                return
++            source_sdk = get_source_sdk()
++            source_sdk = getattr(source_sdk, "value", source_sdk)
++            if source_sdk in config.get("disable_sdks", []):
++                return
++            if sys.platform in config.get("disable_os", []):
++                return
++            rollout_percentage = config.get("rollout_percentage", 100)
++            if not isinstance(rollout_percentage, (int, float)):
++                return
++            if rollout_percentage <= 0 or random.random() * 100 > rollout_percentage:
++                return
++            self.config = TelemetryConfig(
++                ingestion_url=ingestion_url,
++                disable_events=set(config.get("disable_events", [])),
++            )
++        except (requests.exceptions.RequestException, ConnectionError, TimeoutError):
++            return
++        except Exception as e:
++            _log_error(f"Failed to fetch telemetry config: {e}")
+ 
++    def _fetch_config(self) -> None:
++        try:
++            self._get_config()
++        finally:
++            self._is_config_fetched = True
++            if self.config is None:
++                self._is_stopped = True
++                self.is_active = False
++                _set_telemetry_client(None)
+ 
++    def activate(self) -> None:
++        with self._activation_lock:
++            if self.is_active or self._is_stopped:
++                return
++            self.is_active = True
++            self._threads.extend(
++                threading.Thread(
++                    target=self._consumer,
++                    name=f"mlflow-telemetry-consumer-{index}",
++                    daemon=True,
++                )
++                for index in range(self._max_workers)
++            )
++            for thread in self._threads:
++                thread.start()
++            self._config_thread = threading.Thread(
++                target=self._fetch_config,
++                name="mlflow-telemetry-config",
++                daemon=True,
++            )
++            self._config_thread.start()
++            atexit.register(self._at_exit_callback)
++            self._atexit_registered = True
++
++    def add_record(self, record: Record):
++        if self._is_stopped:
++            return
++        if not self.is_active:
++            self.activate()
++        if self._is_stopped:
++            return
++        with self._batch_lock:
++            if self._is_stopped:
++                return
++            self._pending_records.append(record)
++            if len(self._pending_records) >= self._batch_size:
++                self._send_batch()
++
++    def _send_batch(self) -> None:
++        """Enqueue the current batch, retaining it when the queue is full."""
++        if not self._pending_records:
++            return
++        try:
++            self._queue.put_nowait(self._pending_records)
++            self._pending_records = []
++            self._last_batch_time = time.time()
++        except Full:
++            _log_error("Failed to add telemetry records to queue: the queue is full")
++
++    def flush(self, terminate=False) -> None:
++        if not self.is_active:
++            return
++        if terminate:
++            self._is_stopped = True
++            self.is_active = False
++            return
++        if self._config_thread is not None and self._config_thread.is_alive():
++            self._config_thread.join(timeout=1)
++        if self.config is not None and not self._is_stopped:
++            with self._batch_lock:
++                self._send_batch()
++        try:
++            self._queue.join()
++        except Exception as e:
++            _log_error(f"Failed to flush telemetry records: {e}")
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def _clean_up(self) -> None:
++        self.__exit__(None, None, None)
++        if self._atexit_registered:
++            try:
++                atexit.unregister(self._at_exit_callback)
++            except Exception:
++                pass
++            self._atexit_registered = False
+ 
+     def _process_records(self, records: list[Record], request_timeout: float = 1):
+         """Process a batch of telemetry records."""
+         try:
++            if self._is_stopped:
++                return
+             self._update_backend_store()
+             if self.info["tracking_uri_scheme"] in ["databricks", "databricks-uc", "uc"]:
+                 self._is_stopped = True
+-                # set config to None to allow consumer thread drop records in the queue
+                 self.config = None
+                 self.is_active = False
+                 _set_telemetry_client(None)
+                 return
+-
+             records = [
+                 {
+                     "data": self.info | record.to_dict(),
+-                    # use random uuid as partition key to make sure records are
+-                    # distributed evenly across shards
+                     "partition-key": uuid.uuid4().hex,
+                 }
+                 for record in records
+             ]
+-            # changing this value can affect total time for processing records
+-            # the total time = request_timeout * max_attempts + sleep_time * (max_attempts - 1)
+             max_attempts = 3
+             sleep_time = 1
+             for i in range(max_attempts):
+@@ -177,22 +219,20 @@ class TelemetryClient:
+                         timeout=request_timeout,
+                     )
+                     should_retry = response.status_code in RETRYABLE_ERRORS
+-                except (ConnectionError, TimeoutError):
++                except (
++                    requests.exceptions.ConnectionError,
++                    requests.exceptions.Timeout,
++                    ConnectionError,
++                    TimeoutError,
++                ):
+                     should_retry = True
+-                # NB: DO NOT retry when terminating
+-                # otherwise this increases shutdown overhead significantly
+                 if self._is_stopped:
+                     return
+                 if i < max_attempts - 1 and should_retry:
+-                    # we do not use exponential backoff to avoid increasing
+-                    # the processing time significantly
+                     time.sleep(sleep_time)
+-                elif response and response.status_code in UNRECOVERABLE_ERRORS:
++                elif response is not None and response.status_code in UNRECOVERABLE_ERRORS:
+                     self._is_stopped = True
+                     self.is_active = False
+-                    # this is executed in the consumer thread, so
+-                    # we cannot join the thread here, but this should
+-                    # be enough to stop the telemetry collection
+                     return
+                 else:
+                     return
+@@ -200,58 +240,30 @@ class TelemetryClient:
+             _log_error(f"Failed to send telemetry records: {e}")
+ 
+     def _consumer(self) -> None:
+-        """Individual consumer that processes records from the queue."""
+-        # suppress logs in the consumer thread to avoid emitting any irrelevant
+-        # logs during telemetry collection.
++        """Consume and deliver batches until configuration fails or shutdown begins."""
+         should_suppress_logs_in_thread.set(True)
+-
+-        while not self._is_config_fetched:
++        while not self._is_config_fetched and not self._is_stopped:
+             time.sleep(0.1)
+-
+-        while self.config and not self._is_stopped:
++        while self.config is not None and not self._is_stopped:
+             try:
+                 records = self._queue.get(timeout=1)
+             except Empty:
+-                # check if batch time interval has passed and send data if needed
+                 if time.time() - self._last_batch_time >= self._batch_time_interval:
+-                    self._last_batch_time = time.time()
+                     with self._batch_lock:
+                         if self._pending_records:
+                             self._send_batch()
+                 continue
+-
+-            self._process_records(records)
+-            self._queue.task_done()
+-
+-        # clear the queue if config is None
+-        while self.config is None and not self._queue.empty():
++            try:
++                if not self._is_stopped:
++                    self._process_records(records)
++            finally:
++                self._queue.task_done()
++        while not self._queue.empty():
+             try:
+                 self._queue.get_nowait()
+                 self._queue.task_done()
+             except Empty:
+                 break
+-        # drop remaining records when terminating to avoid
+-        # causing any overhead
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+ 
+     @property
+     def is_active(self) -> bool:
+@@ -261,66 +273,9 @@ class TelemetryClient:
+     def is_active(self, value: bool) -> None:
+         self._is_active = value
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+     def _update_backend_store(self):
+-        """
+-        Backend store might be changed after mlflow is imported, we should use this
+-        method to update the backend store info at sending telemetry step.
+-        """
++        """Update backend information because the tracking URI can change after import."""
+         try:
+-            # import here to avoid circular import
+             from mlflow.tracking._tracking_service.utils import _get_tracking_scheme
+ 
+             self.info["tracking_uri_scheme"] = _get_tracking_scheme()
+@@ -328,21 +283,12 @@ class TelemetryClient:
+             _log_error(f"Failed to update backend store: {e}")
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+ _MLFLOW_TELEMETRY_CLIENT = None
+ _client_lock = threading.Lock()
+ 
+ 
+ def set_telemetry_client():
+     if is_telemetry_disabled():
+-        # set to None again so this function can be used to
+-        # re-initialize the telemetry client
+         _set_telemetry_client(None)
+     else:
+         try:
+@@ -364,4 +310,4 @@ def _set_telemetry_client(value: TelemetryClient | None):
+ 
+ def get_telemetry_client() -> TelemetryClient | None:
+     with _client_lock:
+-        return _MLFLOW_TELEMETRY_CLIENT
+\ No newline at end of file
++        return _MLFLOW_TELEMETRY_CLIENT
+diff --git a/mlflow/telemetry/track.py b/mlflow/telemetry/track.py
+index 1482c07..88fa52c 100644
+--- a/mlflow/telemetry/track.py
++++ b/mlflow/telemetry/track.py
+@@ -16,6 +16,21 @@ R = TypeVar("R")
+ _logger = logging.getLogger(__name__)
+ 
+ 
++def _is_telemetry_disabled_for_event(event: type[Event]) -> bool:
++    try:
++        client = get_telemetry_client()
++        if client is None:
++            return True
++        if not client._is_config_fetched:
++            return False
++        if client.config is None:
++            return True
++        return event.name in client.config.disable_events
++    except Exception as e:
++        _log_error(f"Failed to check telemetry status for event {event.name}: {e}")
++        return True
++
++
+ def record_usage_event(event: type[Event]) -> Callable[[Callable[P, R]], Callable[P, R]]:
+     def decorator(func: Callable[P, R]) -> Callable[P, R]:
+         @functools.wraps(func)
+@@ -100,4 +115,3 @@ def _record_event(event: type[Event], params: dict[str, Any] | None = None) -> N
+     except Exception as e:
+         _log_error(f"Failed to record telemetry event {event.name}: {e}")
+ 
+-
+diff --git a/mlflow/telemetry/utils.py b/mlflow/telemetry/utils.py
+index d1e7568..2ecdd68 100644
+--- a/mlflow/telemetry/utils.py
++++ b/mlflow/telemetry/utils.py
+@@ -99,6 +99,19 @@ def is_telemetry_disabled() -> bool:
+ 
+ 
+ 
++def _get_config_url(version: str) -> str | None:
++    """Return the telemetry configuration URL appropriate for an MLflow version."""
++    try:
++        parsed_version = Version(version)
++        if parsed_version.local is not None:
++            return None
++        base_url = CONFIG_STAGING_URL if parsed_version.is_devrelease else CONFIG_URL
++        return f"{base_url}/{version}.json"
++    except Exception as e:
++        _log_error(f"Failed to construct telemetry config URL: {e}")
++        return None
++
++
+ def _log_error(message: str) -> None:
+     if _MLFLOW_TELEMETRY_LOGGING.get():
+-        _logger.error(message, exc_info=True)
+\ No newline at end of file
++        _logger.error(message, exc_info=True)

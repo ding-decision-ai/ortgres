@@ -1,0 +1,95 @@
+2026-10-14 19:42:51,805 - INFO - ============================================================
+2026-10-14 19:42:51,805 - INFO - Starting evaluation for instance: mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1
+2026-10-14 19:42:51,805 - INFO - Level: 1
+2026-10-14 19:42:51,805 - INFO - Attempt: 1
+2026-10-14 19:42:51,805 - INFO - ============================================================
+2026-10-14 19:42:51,812 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 19:42:51,812 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb
+2026-10-14 19:42:51,814 - INFO - Image docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb found locally
+2026-10-14 19:42:51,814 - INFO - Creating container: fb-eval-mwaskom__seaborn-7001ebe7-test_regression-ce8c62e2-lv1-attempt-1-20261014-194251-814244
+2026-10-14 19:42:51,815 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 19:42:52,065 - INFO - Container fb-eval-mwaskom__seaborn-7001ebe7-test_regression-ce8c62e2-lv1-attempt-1-20261014-194251-814244 created successfully
+2026-10-14 19:42:52,065 - INFO - Starting Level 1 evaluation for mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1
+2026-10-14 19:42:52,065 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 19:42:52,392 - INFO - Restore project exit code: 0
+2026-10-14 19:42:52,392 - INFO - Output: 
+2026-10-14 19:42:52,392 - INFO - Step 2: Applying patch to mask files
+2026-10-14 19:42:52,396 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 19:42:52,619 - INFO - Mask patch apply exit code: 0
+2026-10-14 19:42:52,619 - INFO - Mask patch output: 
+2026-10-14 19:42:52,619 - INFO - Successfully applied mask patch
+2026-10-14 19:42:52,619 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 19:42:52,623 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 19:42:52,623 - INFO - Deleting F2P test file: /testbed/tests/test_regression.py
+2026-10-14 19:42:52,849 - INFO - Successfully deleted F2P test file: /testbed/tests/test_regression.py
+2026-10-14 19:42:52,849 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 19:42:52,850 - INFO - Step 4: Reinitializing git repository
+2026-10-14 19:42:54,325 - INFO - Step 5: Applying agent patch
+2026-10-14 19:42:54,330 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 19:42:54,554 - INFO - Patch apply exit code: 0
+2026-10-14 19:42:54,554 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Checking patch seaborn/axisgrid.py...
+Checking patch seaborn/categorical.py...
+Checking patch seaborn/matrix.py...
+Checking patch seaborn/regression.py...
+Checking patch seaborn/utils.py...
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+Applied patch seaborn/axisgrid.py cleanly.
+Applied patch seaborn/categorical.py cleanly.
+Applied patch seaborn/matrix.py cleanly.
+Applied patch seaborn/regression.py cleanly.
+Applied patch seaborn/utils.py cleanly.
+
+2026-10-14 19:42:54,554 - INFO - >>>>> Applied Patch
+2026-10-14 19:42:54,554 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 19:42:54,554 - INFO - F2P test path: /testbed/tests/test_regression.py
+2026-10-14 19:42:54,780 - INFO - Delete F2P file exit code: 0
+2026-10-14 19:42:54,780 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 19:42:55,006 - INFO - Reverse apply exit code: 0
+2026-10-14 19:42:55,006 - INFO - Reverse apply output: 
+2026-10-14 19:42:55,006 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 19:42:55,006 - INFO - Step 7: Running tests
+2026-10-14 19:42:55,006 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-14 19:42:55,006 - INFO - Test timeout: 600s
+2026-10-14 19:42:55,006 - INFO - Running F2P test: /testbed/tests/test_regression.py
+2026-10-14 19:43:00,587 - INFO - F2P test exit code: 1
+2026-10-14 19:43:00,587 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 61 items
+
+tests/test_regression.py FFFFF..FFF..FFF.ss....ss.........ssss....F..... [ 77%]
+....FF...s.F.F                                                           [100%]
+
+======================
+2026-10-14 19:43:00,587 - INFO - Saved F2P test output to artifact://63bc7f98a2260a8f
+2026-10-14 19:43:00,587 - INFO - Running 5 P2P tests
+2026-10-14 19:43:00,587 - INFO - Running P2P test: /testbed/tests/_marks/test_bar.py
+2026-10-14 19:43:02,046 - INFO - P2P test /testbed/tests/_marks/test_bar.py exit code: 0
+2026-10-14 19:43:02,046 - INFO - Saved P2P test output to artifact://3c6191dc4781f7cd
+2026-10-14 19:43:02,046 - INFO - Running P2P test: /testbed/tests/test_algorithms.py
+2026-10-14 19:43:04,561 - INFO - P2P test /testbed/tests/test_algorithms.py exit code: 0
+2026-10-14 19:43:04,561 - INFO - Saved P2P test output to artifact://d810bed19419854f
+2026-10-14 19:43:04,561 - INFO - Running P2P test: /testbed/tests/test_objects.py
+2026-10-14 19:43:05,525 - INFO - P2P test /testbed/tests/test_objects.py exit code: 0
+2026-10-14 19:43:05,526 - INFO - Saved P2P test output to artifact://9733ed363ba557eb
+2026-10-14 19:43:05,526 - INFO - Running P2P test: /testbed/tests/test_base.py
+2026-10-14 19:43:09,406 - INFO - P2P test /testbed/tests/test_base.py exit code: 0
+2026-10-14 19:43:09,406 - INFO - Saved P2P test output to artifact://97a92e39dbcbebc2
+2026-10-14 19:43:09,406 - INFO - Running P2P test: /testbed/tests/_stats/test_density.py
+2026-10-14 19:43:10,519 - INFO - P2P test /testbed/tests/_stats/test_density.py exit code: 0
+2026-10-14 19:43:10,519 - INFO - Saved P2P test output to artifact://195a750df21c3c29
+2026-10-14 19:43:10,522 - INFO - ============================================================
+2026-10-14 19:43:10,522 - INFO - Evaluation completed for mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1
+2026-10-14 19:43:10,522 - INFO - Resolved: False
+2026-10-14 19:43:10,522 - INFO - F2P Pass rate: 0.6923
+2026-10-14 19:43:10,522 - INFO - ============================================================
+2026-10-14 19:43:10,522 - INFO - Stopping and removing container
+2026-10-14 19:43:20,769 - INFO - Container removed successfully

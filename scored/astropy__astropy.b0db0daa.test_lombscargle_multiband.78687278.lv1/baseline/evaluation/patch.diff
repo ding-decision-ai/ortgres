@@ -1,0 +1,214 @@
+diff --git a/astropy/table/table.py b/astropy/table/table.py
+index bf8eea2..57ec1fe 100644
+--- a/astropy/table/table.py
++++ b/astropy/table/table.py
+@@ -646,6 +646,23 @@ class Table:
+     pprint_exclude_names = PprintIncludeExclude()
+     pprint_include_names = PprintIncludeExclude()
+ 
++    def __array__(self, dtype=None, copy=COPY_IF_NEEDED):
++        """Support converting a table to a NumPy structured array."""
++        if dtype is not None:
++            if np.dtype(dtype) != np.dtype(object):
++                raise ValueError("Datatype coercion is not allowed")
++
++            # Assignment into a pre-existing object array avoids recursively
++            # invoking this method and treats the table as a scalar object.
++            out = np.empty((), dtype=object)
++            out[()] = self
++            return out
++
++        table_array = self.as_array()
++        if isinstance(table_array, ma.MaskedArray):
++            table_array = table_array.data
++        return np.array(table_array, copy=copy)
++
+     def as_array(self, keep_byteorder=False, names=None):
+         """
+         Return a new copy of the table in the form of a structured np.ndarray or
+@@ -4424,4 +4441,4 @@ class QTable(Table):
+ 
+         return super()._convert_data_to_col(
+             data, copy=copy, default_name=default_name, dtype=dtype, name=name
+-        )
+\ No newline at end of file
++        )
+diff --git a/astropy/time/core.py b/astropy/time/core.py
+index 4dac02e..d96913b 100644
+--- a/astropy/time/core.py
++++ b/astropy/time/core.py
+@@ -3352,6 +3352,27 @@ def _make_array(val, copy=COPY_IF_NEEDED):
+     return val
+ 
+ 
++def _check_leapsec():
++    """Update the ERFA leap-second table once, if necessary."""
++    global _LEAP_SECONDS_CHECK
++
++    if _LEAP_SECONDS_CHECK is _LeapSecondsCheck.DONE:
++        return
++
++    with _LEAP_SECONDS_LOCK:
++        # Another thread may have completed the check while this one waited
++        # for the lock.  A re-entrant call sees RUNNING while holding the
++        # re-entrant lock and likewise does not start another update.
++        if _LEAP_SECONDS_CHECK is not _LeapSecondsCheck.NOT_STARTED:
++            return
++
++        _LEAP_SECONDS_CHECK = _LeapSecondsCheck.RUNNING
++        try:
++            update_leap_seconds()
++        finally:
++            _LEAP_SECONDS_CHECK = _LeapSecondsCheck.DONE
++
++
+ class OperandTypeError(TypeError):
+     def __init__(self, left, right, op=None):
+         op_string = "" if op is None else f" for {op}"
+@@ -3411,4 +3432,4 @@ def update_leap_seconds(files=None):
+             f"leap-second auto-update failed due to the following exception: {exc!r}",
+             AstropyWarning,
+         )
+-        return 0
+\ No newline at end of file
++        return 0
+diff --git a/astropy/time/formats.py b/astropy/time/formats.py
+index 9de1735..d5b0f4b 100644
+--- a/astropy/time/formats.py
++++ b/astropy/time/formats.py
+@@ -17,7 +17,7 @@ from astropy.utils.exceptions import AstropyDeprecationWarning, AstropyUserWarni
+ from astropy.utils.masked import Masked
+ 
+ from . import _parse_times, conf, utils
+-from .utils import day_frac, two_product, two_sum
++from .utils import day_frac, quantity_day_frac, two_product, two_sum
+ 
+ __all__ = [
+     "TIME_DELTA_FORMATS",
+@@ -2557,4 +2557,4 @@ def _broadcast_writeable(jd1, jd2):
+ 
+ # Import symbols from core.py that are used in this module. This succeeds
+ # because __init__.py imports format.py just before core.py.
+-from .core import TIME_DELTA_SCALES, TIME_SCALES, ScaleValueError, Time  # noqa: E402
+\ No newline at end of file
++from .core import TIME_DELTA_SCALES, TIME_SCALES, ScaleValueError, Time  # noqa: E402
+diff --git a/astropy/time/utils.py b/astropy/time/utils.py
+index 34c6490..55a1d4d 100644
+--- a/astropy/time/utils.py
++++ b/astropy/time/utils.py
+@@ -117,6 +117,42 @@ def day_frac(val1, val2, factor=None, divisor=None):
+ 
+ 
+ 
++
++
++def quantity_day_frac(val1, val2=None):
++    """Return time quantities in days as pairs of float64 values.
++
++    For units whose conversion to days is a simple scaling, the scaling is
++    incorporated into :func:`day_frac` so that the conversion does not lose
++    the low-order part of the value.  More general unit conversions fall back
++    to the normal quantity conversion machinery.
++    """
++
++    def to_day_pair(value):
++        try:
++            scale = value.unit._to(u.day)
++        except u.UnitsError:
++            # A conversion through an equivalency (or another non-scaling
++            # conversion) cannot be split into exact floating-point
++            # operations.  Keep its result in the first component.
++            day = value.to_value(u.day)
++            return day, np.zeros_like(day)
++
++        # Prefer division for units smaller than a day.  In particular, this
++        # turns seconds into division by the exactly representable 86400,
++        # instead of multiplication by its inexact reciprocal.
++        if abs(scale) < 1.0:
++            return day_frac(value.value, 0.0, divisor=1.0 / scale)
++        else:
++            return day_frac(value.value, 0.0, factor=scale)
++
++    day, frac = to_day_pair(val1)
++    if val2 is not None:
++        day2, frac2 = to_day_pair(val2)
++        day = day + day2
++        frac = frac + frac2
++
++    return day, frac
+ 
+ 
+ def two_sum(a, b):
+@@ -247,4 +283,4 @@ decimal_to_twoval = np.vectorize(decimal_to_twoval1)
+ bytes_to_twoval = np.vectorize(bytes_to_twoval1)
+ twoval_to_decimal = np.vectorize(twoval_to_decimal1)
+ twoval_to_string = np.vectorize(twoval_to_string1, excluded="fmt")
+-twoval_to_bytes = np.vectorize(twoval_to_bytes1, excluded="fmt")
+\ No newline at end of file
++twoval_to_bytes = np.vectorize(twoval_to_bytes1, excluded="fmt")
+diff --git a/astropy/timeseries/periodograms/lombscargle/core.py b/astropy/timeseries/periodograms/lombscargle/core.py
+index f5e36ba..ecb2023 100644
+--- a/astropy/timeseries/periodograms/lombscargle/core.py
++++ b/astropy/timeseries/periodograms/lombscargle/core.py
+@@ -16,6 +16,11 @@ from .implementations.mle import design_matrix, periodic_fit
+ 
+ 
+ 
++def has_units(obj):
++    """Return whether *obj* has a ``unit`` attribute."""
++    return hasattr(obj, "unit")
++
++
+ def get_unit(obj):
+     return getattr(obj, "unit", 1)
+ 
+@@ -759,4 +764,4 @@ class LombScargle(BasePeriodogram):
+             normalization=self.normalization,
+             method=method,
+             method_kwds=method_kwds,
+-        )
+\ No newline at end of file
++        )
+diff --git a/astropy/utils/masked/function_helpers.py b/astropy/utils/masked/function_helpers.py
+index 59a0a71..8703d4e 100644
+--- a/astropy/utils/masked/function_helpers.py
++++ b/astropy/utils/masked/function_helpers.py
+@@ -290,6 +290,31 @@ def broadcast_to(array, shape, subok=False):
+     return (data,), (mask,), dict(shape=shape, subok=subok), None
+ 
+ 
++@dispatched_function
++def broadcast_arrays(*args, subok=False):
++    """Broadcast arrays, applying the same operation to any masks."""
++    from .core import Masked, get_data_and_mask
++
++    data_and_masks = [get_data_and_mask(arg) for arg in args]
++    data = [item[0] for item in data_and_masks]
++    masks = [
++        np.zeros(np.shape(item_data), dtype=bool) if item_mask is None else item_mask
++        for item_data, item_mask in data_and_masks
++    ]
++
++    broadcasted_data = np.broadcast_arrays(*data, subok=subok)
++    broadcasted_masks = np.broadcast_arrays(*masks, subok=subok)
++    result = type(broadcasted_data)(
++        Masked(item_data, mask=item_mask)
++        if original_mask is not None
++        else item_data
++        for item_data, item_mask, (_, original_mask) in zip(
++            broadcasted_data, broadcasted_masks, data_and_masks
++        )
++    )
++    return result, None, None
++
++
+ @dispatched_function
+ def outer(a, b, out=None):
+     return np.multiply.outer(np.ravel(a), np.ravel(b), out=out), None, None
+@@ -1587,4 +1612,4 @@ __all__ += sorted(  # noqa: PLE0605
+         set(APPLY_TO_BOTH_FUNCTIONS.values()) | set(DISPATCHED_FUNCTIONS.values())
+     )
+     if helper.__doc__
+-)
+\ No newline at end of file
++)

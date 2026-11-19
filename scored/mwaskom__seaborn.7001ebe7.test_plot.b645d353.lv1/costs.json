@@ -1,0 +1,30 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "original_source_cost": {
+      "model_elapsed_seconds": 1342.295453469007
+    },
+    "original_baseline_public_usage": {
+      "0": {
+        "input_tokens": 8240473,
+        "cached_input_tokens": 8045056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 14645,
+        "reasoning_output_tokens": 6669
+      }
+    },
+    "original_ortg_public_usage": {
+      "0": {
+        "input_tokens": 5244433,
+        "cached_input_tokens": 4970752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 23438,
+        "reasoning_output_tokens": 12188
+      }
+    },
+    "source_usage_and_exact_total_usd_not_inferred": true,
+    "original_formal_model_active_seconds": null,
+    "original_total_cost_usd": null,
+    "original_costs_retained_not_replaced_by_zero": true
+  }
+}

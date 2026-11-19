@@ -1,0 +1,109 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 18 items
+
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_artifact_uri PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [  5%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_list_artifact_pagination PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 11%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_list_artifacts_failure PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 16%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_get_read_credentials PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 22%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_get_write_credentials PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 27%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_download_from_cloud PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 33%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_download_from_cloud_fail PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 38%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_log_artifact PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 44%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_upload_to_cloud PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 50%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_upload_to_cloud_fail PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 55%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-True-True] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 61%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-True-False] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 66%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-False-True] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 72%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-False-False] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 77%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-True-True] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 83%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-True-False] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 88%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-False-True] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [ 94%]
+tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-False-False] PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_download_from_cloud_fail _________________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/16 05:30:29 INFO mlflow.store.artifact.artifact_repo: Failed to complete request, possibly due to credential expiration (Error: ENDPOINT_NOT_FOUND: Endpoint not found for /api/2.0/fs/create-download-url.). Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+__________________________ test_upload_to_cloud_fail ___________________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/16 05:30:29 INFO mlflow.store.artifact.artifact_repo: Failed to complete request, possibly due to credential expiration (Error: ENDPOINT_NOT_FOUND: Endpoint not found for /api/2.0/fs/create-upload-url.). Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+_______________ test_retry_refresh_creds_no_creds[401-True-True] _______________
+----------------------------- Captured stderr call -----------------------------
+2026/10/16 05:30:29 INFO mlflow.store.artifact.artifact_repo: Failed to complete request, possibly due to credential expiration (Error: ). Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+______________ test_retry_refresh_creds_no_creds[401-False-True] _______________
+----------------------------- Captured stderr call -----------------------------
+2026/10/16 05:30:29 INFO mlflow.store.artifact.artifact_repo: Failed to complete request, possibly due to credential expiration (Error: ). Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+_______________ test_retry_refresh_creds_no_creds[403-True-True] _______________
+----------------------------- Captured stderr call -----------------------------
+2026/10/16 05:30:29 INFO mlflow.store.artifact.artifact_repo: Failed to complete request, possibly due to credential expiration (Error: ). Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+______________ test_retry_refresh_creds_no_creds[403-False-True] _______________
+----------------------------- Captured stderr call -----------------------------
+2026/10/16 05:30:29 INFO mlflow.store.artifact.artifact_repo: Failed to complete request, possibly due to credential expiration (Error: ). Refreshing credentials and trying again...
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:29 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_artifact_uri
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_list_artifact_pagination
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_list_artifacts_failure
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_get_read_credentials
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_get_write_credentials
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_download_from_cloud
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_download_from_cloud_fail
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_log_artifact
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_upload_to_cloud
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_upload_to_cloud_fail
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-True-True]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-True-False]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-False-True]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[401-False-False]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-True-True]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-True-False]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-False-True]
+PASSED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB tests/store/artifact/test_presigned_url_artifact_repo.py::test_retry_refresh_creds_no_creds[403-False-False]
+============================== 18 passed in 0.06s ==============================

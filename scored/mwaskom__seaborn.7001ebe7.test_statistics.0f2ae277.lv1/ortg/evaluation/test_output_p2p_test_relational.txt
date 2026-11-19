@@ -1,0 +1,135 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 119 items
+
+tests/test_relational.py ............................................... [ 39%]
+........................................................................ [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_df_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_df_with_nonnumeric_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_array_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_flat_array_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_flat_list_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_flat_series_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_list_of_series_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_list_of_arrays_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_list_of_list_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_dict_of_series_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_dict_of_arrays_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_dict_of_lists_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_simple
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_complex
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_vectors[series]
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_vectors[numpy]
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_vectors[list]
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_wide
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_hues
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_sizes
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_styles
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_weighted_estimator
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_stringy_numerics
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_legend
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_unshared_axis_labels
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_data
+PASSED tests/test_relational.py::TestRelationalPlotter::test_facet_variable_collision
+PASSED tests/test_relational.py::TestRelationalPlotter::test_relplot_scatter_unused_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_ax_kwarg_removal
+PASSED tests/test_relational.py::TestRelationalPlotter::test_legend_has_no_offset
+PASSED tests/test_relational.py::TestRelationalPlotter::test_lineplot_2d_dashes
+PASSED tests/test_relational.py::TestRelationalPlotter::test_legend_attributes_hue
+PASSED tests/test_relational.py::TestRelationalPlotter::test_legend_attributes_style
+PASSED tests/test_relational.py::TestRelationalPlotter::test_legend_attributes_hue_and_style
+PASSED tests/test_relational.py::TestLinePlotter::test_color
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_no_semantics
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_hue_categorical
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_hue_and_style_same
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_hue_and_style_diff
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_hue_and_size_same
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_numerical_full[hue]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_numerical_full[size]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_numerical_full[style]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_numerical_brief[hue]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_numerical_brief[size]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_numerical_brief[style]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_value_error
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_log_norm[hue]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_log_norm[size]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_binary_var[hue]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_binary_var[size]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_binary_numberic_brief[hue]
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_binary_numberic_brief[size]
+PASSED tests/test_relational.py::TestLinePlotter::test_plot
+PASSED tests/test_relational.py::TestLinePlotter::test_weights
+PASSED tests/test_relational.py::TestLinePlotter::test_non_aggregated_data
+PASSED tests/test_relational.py::TestLinePlotter::test_orient
+PASSED tests/test_relational.py::TestLinePlotter::test_log_scale
+PASSED tests/test_relational.py::TestLinePlotter::test_axis_labels
+PASSED tests/test_relational.py::TestLinePlotter::test_matplotlib_kwargs
+PASSED tests/test_relational.py::TestLinePlotter::test_nonmapped_dashes
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_axes
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_attributes_with_hue
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_attributes_with_style
+PASSED tests/test_relational.py::TestLinePlotter::test_legend_attributes_with_hue_and_style
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics0]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics1]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics2]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics3]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics4]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics5]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics6]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics7]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics8]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics9]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics10]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics11]
+PASSED tests/test_relational.py::TestLinePlotter::test_lineplot_smoke
+PASSED tests/test_relational.py::TestLinePlotter::test_ci_deprecation
+PASSED tests/test_relational.py::TestScatterPlotter::test_color
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_no_semantics
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_hue
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_hue_style_same
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_hue_style_different
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_data_hue_size_same
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_size_numeric_list
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_size_numeric_dict
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_hue_full
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_hue_brief
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_size_full
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_size_brief
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_attributes_hue
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_attributes_style
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_attributes_hue_and_style
+PASSED tests/test_relational.py::TestScatterPlotter::test_legend_value_error
+PASSED tests/test_relational.py::TestScatterPlotter::test_plot
+PASSED tests/test_relational.py::TestScatterPlotter::test_axis_labels
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_axes
+PASSED tests/test_relational.py::TestScatterPlotter::test_literal_attribute_vectors
+PASSED tests/test_relational.py::TestScatterPlotter::test_supplied_color_array
+PASSED tests/test_relational.py::TestScatterPlotter::test_hue_order
+PASSED tests/test_relational.py::TestScatterPlotter::test_linewidths
+PASSED tests/test_relational.py::TestScatterPlotter::test_size_norm_extrapolation
+PASSED tests/test_relational.py::TestScatterPlotter::test_datetime_scale
+PASSED tests/test_relational.py::TestScatterPlotter::test_unfilled_marker_edgecolor_warning
+PASSED tests/test_relational.py::TestScatterPlotter::test_short_form_kwargs
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics0]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics1]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics2]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics3]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics4]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics5]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics6]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics7]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics8]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics9]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics10]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics11]
+PASSED tests/test_relational.py::TestScatterPlotter::test_scatterplot_smoke
+============================= 119 passed in 23.39s =============================

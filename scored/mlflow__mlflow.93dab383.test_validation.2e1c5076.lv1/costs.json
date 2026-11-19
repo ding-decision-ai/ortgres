@@ -1,0 +1,52 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "020",
+    "source_and_execution": {
+      "whole_full_eval_outer_seconds": 61.22774175399991,
+      "inner_eval_already_in_whole_outer_seconds": 60.73719996199998,
+      "charge_inner_and_outer_twice": false,
+      "fresh_evaluator_creation_seconds": 0.1842753939999966,
+      "current_phase_ledger": {
+        "bytes": 122545
+      },
+      "current_phase_charged_seconds": 848.6319733019891,
+      "current_phase_remaining_seconds": 351.3680266980109,
+      "phase_and_all_history_actual_total_seconds": null,
+      "all_history_USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "existing_full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.1842753939999966,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 61.22774175399991,
+          "inner_budget_already_charged": 60.73719996199998,
+          "inner_known_actual_already_charged": 60.73719996199998,
+          "additional_budget": 0.49054179199993087,
+          "additional_known_actual": 0.49054179199993087,
+          "models": 0
+        }
+      },
+      "known_actual_elapsed_seconds_is_not_complete_phase_total": 847.6593563569886
+    },
+    "historical_source_and_method_reference": {
+      "previous_method_spent_seconds": 889.7341512980202,
+      "original_known_prefix_seconds": null,
+      "known_case_spent_before_new_method_seconds": null,
+      "old_known_actual_segments_seconds": 804.7341512980202,
+      "old_conservative_reservation_seconds": 85,
+      "old_actual_total_seconds": null,
+      "counter_scopes": {
+        "prior_model_dispatch_attempts": 1,
+        "prior_stage_06_model_dispatch_attempts": 0,
+        "prior_stage_07_model_dispatch_attempts": 1,
+        "new_method_initial_model_dispatch_attempts": 1,
+        "planned_next_model_dispatch_number": 2
+      }
+    },
+    "accounting_rule": "unknown"
+  }
+}

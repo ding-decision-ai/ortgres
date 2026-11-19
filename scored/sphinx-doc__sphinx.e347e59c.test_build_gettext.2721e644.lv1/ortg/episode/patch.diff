@@ -1,0 +1,2455 @@
+diff --git a/ortg.tsv b/ortg.tsv
+new file mode 100644
+index 0000000..2886f31
+--- /dev/null
++++ b/ortg.tsv
+@@ -0,0 +1,2040 @@
++#ORTG-TSV: 2
++#====项目纲要====
++#【部署】Python Sphinx package；本次仅维护 gettext 接口相关语义纲要，不声明全库实现或测试就绪
++#【系统】Sphinx 文档生成系统 | Python 构建器、Jinja 模板渲染与 gettext 国际化目录 | 公共任务契约与当前被遮蔽实现必须分开记录，未读或无证据部分保持未知
++#【整体规范】任务模式只为已选且完整阅读的相关文件维护事实纲要；Uses 仅列仓库内强依赖；API 记录对外或测试调用契约；Constraints 明示任务要求、可见测试约束、占位与验证盲区
++#纲要格式：文件名[标签]: Role:职责 | Uses:依赖 | API:对外契约 | Constraints:约束；文件名不带路径；四字段必填，无内容写-
++#A层级：E入口 C核心 S服务 D数据 I集成 U工具 T测试 B构建 X配置 O文档
++#B模块：I国际化 T模板 U通用 P包元数据
++#D特征：J-Jinja模板 P-路径语义
++#E规模：L大于400行 M为200至400行 S为100至200行 T小于100行
++#【契约】gettext-render：用户模板路径须保持给定顺序并先于内置 gettext 路径；渲染上下文须取得从输出基目录到源路径的规范相对路径 callable；e 与 escape 过滤器执行 gettext 字符串转义。
++
++{
++  "dirs": {},
++  "ignore_dirs": [],
++  "ignore_files": [],
++  "keep_files": [],
++  "mode": "task",
++  "observe_dirs": [],
++  "observe_files": []
++}
++
++path	crc32	ignored	deleted	mtime	module	outline	outline_time	target_outline	target_time	target_delete
++.codecov.yml	45007a74	0	0	2025-11-03T14:43:22Z						0
++.git-blame-ignore-revs	c25f0e03	0	0	2025-11-03T14:43:22Z						0
++.gitattributes	b7e3a10e	0	0	2025-11-03T14:43:22Z						0
++.github/ISSUE_TEMPLATE/bug-report.yml	1b3170c9	0	0	2025-11-03T14:43:22Z						0
++.github/ISSUE_TEMPLATE/config.yml	9535cba6	0	0	2025-11-03T14:43:22Z						0
++.github/ISSUE_TEMPLATE/feature_request.md	1667cea6	0	0	2025-11-03T14:43:22Z						0
++.github/PULL_REQUEST_TEMPLATE.md	0c1bce43	0	0	2025-11-03T14:43:22Z						0
++.github/dependabot.yml	02652475	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/builddoc.yml	8ff7b131	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/create-release.yml	e7714e0b	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/lint.yml	a9e69d84	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/lock.yml	01a5ef78	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/main.yml	1fe0c1a5	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/nodejs.yml	21f5263d	0	0	2025-11-03T14:43:22Z						0
++.github/workflows/transifex.yml	ea62dbaf	0	0	2025-11-03T14:43:22Z						0
++.gitignore	bb7e0d86	0	0	2025-11-03T14:43:22Z						0
++.mailmap	96b937b6	0	0	2025-11-03T14:43:22Z						0
++.prettierrc.toml	0e99ce8f	0	0	2025-11-03T14:43:22Z						0
++.readthedocs.yml	8e98bc2c	0	0	2025-11-03T14:43:22Z						0
++.ruff.toml	5102931c	0	0	2025-11-03T14:43:22Z						0
++AUTHORS.rst	4d7fae0e	0	0	2026-10-16T04:43:42Z						0
++CHANGES.rst	14377561	0	0	2026-10-16T04:43:42Z						0
++CODE_OF_CONDUCT.rst	c38041cf	0	0	2026-10-16T04:43:42Z						0
++CONTRIBUTING.rst	d5d0d9b5	0	0	2026-10-16T04:43:42Z						0
++EXAMPLES.rst	4b6ff0f6	0	0	2026-10-16T04:43:42Z						0
++LICENSE.rst	2dc047c8	0	0	2026-10-16T04:43:42Z						0
++Makefile	d5eee981	0	0	2026-10-16T04:43:42Z						0
++README.rst	4b8ce830	0	0	2026-10-16T04:43:42Z						0
++bindep.txt	61672ce8	0	0	2026-10-16T04:43:42Z						0
++doc/Makefile	3105863f	0	0	2026-10-16T04:43:42Z						0
++doc/_static/Makefile	bb315bd8	0	0	2026-10-16T04:43:42Z						0
++doc/_static/bookcover.png	6b032a1b	0	0	2026-10-16T04:43:42Z						0
++doc/_static/diagrams/sphinx_build_flow.dot	e18882b3	0	0	2026-10-16T04:43:42Z						0
++doc/_static/diagrams/sphinx_build_phases.dot	0fc353cc	0	0	2026-10-16T04:43:42Z						0
++doc/_static/diagrams/sphinx_core_events_flow.dot	a96030cf	0	0	2026-10-16T04:43:42Z						0
++doc/_static/favicon.svg	84fc92bd	0	0	2026-10-16T04:43:42Z						0
++doc/_static/jupyter-logo.png	cc443bc9	0	0	2026-10-16T04:43:42Z						0
++doc/_static/linux-logo.png	5b5f90dc	0	0	2026-10-16T04:43:42Z						0
++doc/_static/python-logo.png	87391aa0	0	0	2026-10-16T04:43:42Z						0
++doc/_static/sphinx.png	9e0e981e	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/agogo.png	5edf788b	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/alabaster.png	5b1a910a	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/bizstyle.png	5f32a28f	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/classic.png	b5d68d2b	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/agogo.png	23ba4101	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/alabaster.png	29e3c775	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/bizstyle.png	61e2a199	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/classic.png	3522fc80	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/haiku.png	16efbf03	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/nature.png	e7a31452	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/pyramid.png	2f2da3f7	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/scrolls.png	6aa0d9ca	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/sphinx_rtd_theme.png	e76bb530	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/sphinxdoc.png	ad21f0c2	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/fullsize/traditional.png	8ef0fa60	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/haiku.png	85f8b197	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/nature.png	6e3d7b34	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/pyramid.png	dc875567	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/scrolls.png	efcac240	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/sphinx_rtd_theme.png	c7c65bac	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/sphinxdoc.png	5d42c8c0	0	0	2026-10-16T04:43:42Z						0
++doc/_static/themes/traditional.png	61f24e23	0	0	2026-10-16T04:43:42Z						0
++doc/_static/translation.png	f003bb03	0	0	2026-10-16T04:43:42Z						0
++doc/_static/translation.puml	8ebfad9f	0	0	2026-10-16T04:43:42Z						0
++doc/_static/translation.svg	81b9f4ee	0	0	2026-10-16T04:43:42Z						0
++doc/_static/tutorial/lumache-autosummary.png	6490dca4	0	0	2026-10-16T04:43:42Z						0
++doc/_static/tutorial/lumache-first-light.png	e5649e7d	0	0	2026-10-16T04:43:42Z						0
++doc/_static/tutorial/lumache-furo.png	ea2f5b5c	0	0	2026-10-16T04:43:42Z						0
++doc/_static/tutorial/lumache-py-function-full.png	bc73d01a	0	0	2026-10-16T04:43:42Z						0
++doc/_static/tutorial/lumache-py-function.png	f6bb02ae	0	0	2026-10-16T04:43:42Z						0
++doc/_templates/contents.html	1f0d9174	0	0	2026-10-16T04:43:42Z						0
++doc/_themes/sphinx13/layout.html	48da6d57	0	0	2026-10-16T04:43:42Z						0
++doc/_themes/sphinx13/static/sphinx-logo.svg	5ecde958	0	0	2026-10-16T04:43:42Z						0
++doc/_themes/sphinx13/static/sphinx13.css	ba1752c5	0	0	2026-10-16T04:43:42Z						0
++doc/_themes/sphinx13/theme.toml	e07ca001	0	0	2026-10-16T04:43:42Z						0
++doc/authors.rst	e4445aeb	0	0	2026-10-16T04:43:42Z						0
++doc/changes/0.1.rst	83da4df1	0	0	2026-10-16T04:43:42Z						0
++doc/changes/0.2.rst	c7ebf3dc	0	0	2026-10-16T04:43:42Z						0
++doc/changes/0.3.rst	5fd262ee	0	0	2026-10-16T04:43:42Z						0
++doc/changes/0.4.rst	12f478ea	0	0	2026-10-16T04:43:42Z						0
++doc/changes/0.5.rst	b7eedc4a	0	0	2026-10-16T04:43:42Z						0
++doc/changes/0.6.rst	3d988bb5	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.0.rst	8c8d80e6	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.1.rst	16683ef6	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.2.rst	0abab2b1	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.3.rst	f59217b9	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.4.rst	6267ae05	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.5.rst	9e8abdb8	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.6.rst	6748885a	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.7.rst	ec737249	0	0	2026-10-16T04:43:42Z						0
++doc/changes/1.8.rst	299c3301	0	0	2026-10-16T04:43:42Z						0
++doc/changes/2.0.rst	a2332fde	0	0	2026-10-16T04:43:42Z						0
++doc/changes/2.1.rst	944aa959	0	0	2026-10-16T04:43:42Z						0
++doc/changes/2.2.rst	8b1faa32	0	0	2026-10-16T04:43:42Z						0
++doc/changes/2.3.rst	2d59ac2e	0	0	2026-10-16T04:43:42Z						0
++doc/changes/2.4.rst	d57441f5	0	0	2026-10-16T04:43:42Z						0
++doc/changes/3.0.rst	ce227fa2	0	0	2026-10-16T04:43:42Z						0
++doc/changes/3.1.rst	3f5db12d	0	0	2026-10-16T04:43:42Z						0
++doc/changes/3.2.rst	12cd9d79	0	0	2026-10-16T04:43:42Z						0
++doc/changes/3.3.rst	d22eaacc	0	0	2026-10-16T04:43:42Z						0
++doc/changes/3.4.rst	b4acff4b	0	0	2026-10-16T04:43:42Z						0
++doc/changes/3.5.rst	596283cb	0	0	2026-10-16T04:43:42Z						0
++doc/changes/4.0.rst	417b5e6b	0	0	2026-10-16T04:43:42Z						0
++doc/changes/4.1.rst	75c9c5ea	0	0	2026-10-16T04:43:42Z						0
++doc/changes/4.2.rst	2aeae795	0	0	2026-10-16T04:43:42Z						0
++doc/changes/4.3.rst	2c4ae1bd	0	0	2026-10-16T04:43:42Z						0
++doc/changes/4.4.rst	80fbf04c	0	0	2026-10-16T04:43:42Z						0
++doc/changes/4.5.rst	fe9f61c6	0	0	2026-10-16T04:43:42Z						0
++doc/changes/5.0.rst	860d5715	0	0	2026-10-16T04:43:42Z						0
++doc/changes/5.1.rst	6af470d1	0	0	2026-10-16T04:43:42Z						0
++doc/changes/5.2.rst	d7ef851c	0	0	2026-10-16T04:43:42Z						0
++doc/changes/5.3.rst	aef8ede1	0	0	2026-10-16T04:43:42Z						0
++doc/changes/6.0.rst	531cfb04	0	0	2026-10-16T04:43:42Z						0
++doc/changes/6.1.rst	2c4f6195	0	0	2026-10-16T04:43:42Z						0
++doc/changes/6.2.rst	cd2d61a1	0	0	2026-10-16T04:43:42Z						0
++doc/changes/7.0.rst	9c249857	0	0	2026-10-16T04:43:42Z						0
++doc/changes/7.1.rst	b9b35ece	0	0	2026-10-16T04:43:42Z						0
++doc/changes/7.2.rst	c27cf3f6	0	0	2026-10-16T04:43:42Z						0
++doc/changes/7.3.rst	336b5b79	0	0	2026-10-16T04:43:42Z						0
++doc/changes/7.4.rst	b3a3c53a	0	0	2026-10-16T04:43:42Z						0
++doc/changes/8.0.rst	8d222431	0	0	2026-10-16T04:43:42Z						0
++doc/changes/8.1.rst	80a9843d	0	0	2026-10-16T04:43:42Z						0
++doc/changes/8.2.rst	d815fd75	0	0	2026-10-16T04:43:42Z						0
++doc/changes/index.rst	c3b0ee32	0	0	2026-10-16T04:43:42Z						0
++doc/conf.py	8441ae1c	0	0	2026-10-16T04:43:42Z						0
++doc/development/howtos/builders.rst	71978e59	0	0	2026-10-16T04:43:42Z						0
++doc/development/howtos/index.rst	771f18e1	0	0	2026-10-16T04:43:42Z						0
++doc/development/howtos/setup_extension.rst	2d8da3c1	0	0	2026-10-16T04:43:42Z						0
++doc/development/html_themes/index.rst	4615e978	0	0	2026-10-16T04:43:42Z						0
++doc/development/html_themes/templating.rst	87d08f84	0	0	2026-10-16T04:43:42Z						0
++doc/development/index.rst	e2a9962e	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/adding_domain.rst	1e1c971d	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/autodoc_ext.rst	b3a51cd1	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/examples/README.rst	2e62f6e0	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/examples/autodoc_intenum.py	ebaf499a	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/examples/helloworld.py	d4196906	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/examples/recipe.py	04eab6e2	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/examples/todo.py	8c1b0180	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/extending_build.rst	a808eca7	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/extending_syntax.rst	f4797f2b	0	0	2026-10-16T04:43:42Z						0
++doc/development/tutorials/index.rst	c551a0a6	0	0	2026-10-16T04:43:42Z						0
++doc/examples.rst	a483d4dd	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/appapi.rst	ae0f7c0b	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/builderapi.rst	f5c14ee8	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/collectorapi.rst	82aff54b	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/deprecated.rst	c47f97c0	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/domainapi.rst	ca79721a	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/envapi.rst	81716d9c	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/event_callbacks.rst	5e34b195	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/i18n.rst	36ac6a00	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/index.rst	243674d7	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/logging.rst	3c58a2ae	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/markupapi.rst	ecd12cdf	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/nodes.rst	5009e182	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/parserapi.rst	8604674a	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/projectapi.rst	cd514eeb	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/testing.rst	43dc0711	0	0	2026-10-16T04:43:42Z						0
++doc/extdev/utils.rst	ed8bed59	0	0	2026-10-16T04:43:42Z						0
++doc/faq.rst	cb651f41	0	0	2026-10-16T04:43:42Z						0
++doc/glossary.rst	12900f32	0	0	2026-10-16T04:43:42Z						0
++doc/index.rst	97710b9d	0	0	2026-10-16T04:43:42Z						0
++doc/internals/code-of-conduct.rst	8a0cfd2b	0	0	2026-10-16T04:43:42Z						0
++doc/internals/contributing.rst	0d85c57b	0	0	2026-10-16T04:43:42Z						0
++doc/internals/index.rst	a8e50bc9	0	0	2026-10-16T04:43:42Z						0
++doc/internals/organization.rst	4686349a	0	0	2026-10-16T04:43:42Z						0
++doc/internals/release-process.rst	5d970f0e	0	0	2026-10-16T04:43:42Z						0
++doc/latex.rst	fa2087d6	0	0	2026-10-16T04:43:42Z						0
++doc/make.bat	f55991b6	0	0	2026-10-16T04:43:42Z						0
++doc/man/index.rst	beaa1b65	0	0	2026-10-16T04:43:42Z						0
++doc/man/sphinx-apidoc.rst	d1af3fdc	0	0	2026-10-16T04:43:42Z						0
++doc/man/sphinx-autogen.rst	5cc27764	0	0	2026-10-16T04:43:42Z						0
++doc/man/sphinx-build.rst	102069fd	0	0	2026-10-16T04:43:42Z						0
++doc/man/sphinx-quickstart.rst	f98ba866	0	0	2026-10-16T04:43:42Z						0
++doc/support.rst	1d6e0b45	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/automatic-doc-generation.rst	9b001455	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/deploying.rst	bd9b63b0	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/describing-code.rst	7dc8457d	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/end.rst	f6eb8652	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/first-steps.rst	974ab263	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/getting-started.rst	2f3d6c75	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/index.rst	62178230	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/more-sphinx-customization.rst	0a2fad15	0	0	2026-10-16T04:43:42Z						0
++doc/tutorial/narrative-documentation.rst	8bf91eec	0	0	2026-10-16T04:43:42Z						0
++doc/usage/advanced/intl.rst	154d4f67	0	0	2026-10-16T04:43:42Z						0
++doc/usage/advanced/websupport/api.rst	bfc65fc8	0	0	2026-10-16T04:43:42Z						0
++doc/usage/advanced/websupport/index.rst	aedfface	0	0	2026-10-16T04:43:42Z						0
++doc/usage/advanced/websupport/quickstart.rst	209da98c	0	0	2026-10-16T04:43:42Z						0
++doc/usage/advanced/websupport/searchadapters.rst	5f8a5de1	0	0	2026-10-16T04:43:42Z						0
++doc/usage/advanced/websupport/storagebackends.rst	f3851182	0	0	2026-10-16T04:43:42Z						0
++doc/usage/builders/index.rst	16c4f8a5	0	0	2026-10-16T04:43:42Z						0
++doc/usage/configuration.rst	cef31b4f	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/c.rst	578989fd	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/cpp.rst	1d6317ab	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/index.rst	00e64446	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/javascript.rst	95a93311	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/mathematics.rst	d1b76676	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/python.rst	a529c950	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/restructuredtext.rst	8e075a6e	0	0	2026-10-16T04:43:42Z						0
++doc/usage/domains/standard.rst	58a0c02b	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/apidoc.rst	c0c87b7a	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/autodoc.rst	2c4ffca5	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/autosectionlabel.rst	4090fdfe	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/autosummary.rst	e7f9b845	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/coverage.rst	0401f07a	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/doctest.rst	c5f64c0f	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/duration.rst	ccec83d0	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/example_google.py	a3f603d0	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/example_google.rst	1c602763	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/example_numpy.py	387ef0fa	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/example_numpy.rst	602cd84b	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/extlinks.rst	3002c361	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/githubpages.rst	563e2fc4	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/graphviz.rst	275b8d28	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/ifconfig.rst	7e684472	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/imgconverter.rst	6bb00a92	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/index.rst	bd381062	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/inheritance.rst	fa7d76d6	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/intersphinx.rst	e7798037	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/linkcode.rst	cbb49433	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/math.rst	87f7f5ce	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/napoleon.rst	7bb51fe8	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/todo.rst	1455535e	0	0	2026-10-16T04:43:42Z						0
++doc/usage/extensions/viewcode.rst	6580be02	0	0	2026-10-16T04:43:42Z						0
++doc/usage/index.rst	cbc37c2a	0	0	2026-10-16T04:43:42Z						0
++doc/usage/installation.rst	b82d238f	0	0	2026-10-16T04:43:42Z						0
++doc/usage/markdown.rst	59c1ebb8	0	0	2026-10-16T04:43:42Z						0
++doc/usage/quickstart.rst	58b6963f	0	0	2026-10-16T04:43:42Z						0
++doc/usage/referencing.rst	eb1e443f	0	0	2026-10-16T04:43:42Z						0
++doc/usage/restructuredtext/basics.rst	f22b42cc	0	0	2026-10-16T04:43:42Z						0
++doc/usage/restructuredtext/directives.rst	e863576d	0	0	2026-10-16T04:43:42Z						0
++doc/usage/restructuredtext/domains.rst	5d2241d7	0	0	2026-10-16T04:43:42Z						0
++doc/usage/restructuredtext/field-lists.rst	dec96853	0	0	2026-10-16T04:43:42Z						0
++doc/usage/restructuredtext/index.rst	3b0ac1c9	0	0	2026-10-16T04:43:42Z						0
++doc/usage/restructuredtext/roles.rst	a8ba870e	0	0	2026-10-16T04:43:42Z						0
++doc/usage/theming.rst	31754eea	0	0	2026-10-16T04:43:42Z						0
++package-lock.json	3d24faaa	0	0	2026-10-16T04:43:42Z						0
++package.json	8ec0d4e0	0	0	2026-10-16T04:43:42Z						0
++pyproject.toml	25e5afa0	0	0	2026-10-16T04:43:42Z						0
++pyrefly.toml	2d4c0459	0	0	2026-10-16T04:43:42Z						0
++sphinx/__init__.py	3d36b5d3	0	0	2026-10-16T04:43:42Z	P	__init__.py[7 C P P T]: Role:暴露 Sphinx 版本元数据并确定已安装包目录 | Uses:- | API:__version__；__display_version__；version_info；package_dir | Constraints:package_dir 由当前 __file__ 解析并取父目录；开发标志为真时导入会尝试 git rev-parse 并可能把短提交号附加到显示版本	2026-10-16T04:48:07Z			0
++sphinx/__main__.py	56421eb8	0	0	2026-10-16T04:43:42Z						0
++sphinx/_cli/__init__.py	2531f0be	0	0	2026-10-16T04:43:42Z						0
++sphinx/_cli/util/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++sphinx/_cli/util/colour.py	b0f896e8	0	0	2026-10-16T04:43:42Z						0
++sphinx/_cli/util/errors.py	11e14a3a	0	0	2026-10-16T04:43:42Z						0
++sphinx/addnodes.py	96b99f4c	0	0	2026-10-16T04:43:42Z	U	addnodes.py[8 D U I L]: Role:定义 Sphinx 在 Docutils 之上的可翻译、目录树、对象签名、索引、交叉引用及布局节点并统一注册 | Uses:- | API:translatable；toctree；各 desc_* 节点；index；only；pending_xref；setup(app) | Constraints:translatable 子类必须按保存原消息→应用译文→提取所保存消息的顺序实现且应用译文不得覆盖原消息；toctree 保存并提取显式条目标题与 caption；index.entries 是含分类键的五元组列表；SIG_ELEMENTS 可由扩展追加	2026-10-16T05:10:49Z			0
++sphinx/application.py	1b5de14e	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/__init__.py	f1c57e7b	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/_epub_base.py	2fb56d1d	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/changes.py	01fc9c00	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/dirhtml.py	329e51e9	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/dummy.py	0febbb94	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/epub3.py	9e26e164	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/gettext.py	f851329f	0	0	2026-10-16T05:08:14Z	I	gettext.py[9 C I J P M]: Role:定义 gettext 消息数据模型、国际化/消息目录构建器及其扩展注册；消息登记与 gettext 模板渲染接口已恢复但更广泛构建器仍有遮蔽空白 | Uses:sphinx/__init__.py(package_dir),sphinx/util/template.py(SphinxRenderer),sphinx/jinja2glue.py(有序文件模板加载),sphinx/util/osutil.py(canon_path与relpath),sphinx/templates/gettext/message.pot.jinja(输出模板) | API:Message；Catalog（metadata、add(msg: str, origin: Element | MsgOrigin) -> None、迭代与messages）；MsgOrigin；GettextRenderer（__init__(template_path=None, outdir=None)、escape(value)、render(filename, context) -> str）；I18nTags；I18nBuilder；MessageCatalogBuilder；setup(app) | Constraints:Catalog.add 忽略无 uid origin，否则向同一 msg 的 metadata 追加(source 或空串，line 仅在 None 时为 -1，uid)并保留多次出现；GettextRenderer 按用户给定顺序搜索并以 DEFAULT_TEMPLATE_PATH 兜底，e/escape 执行 gettext 反斜杠、双引号与换行延续转义，保存 outdir，render 向原 context 注入 relpath(source) 并经自身 Jinja 环境返回文本；I18nTags 和构建器中仍存在任务范围外空白。必须保持 gettext 集成构建生成的 POT 含对应 PO 的非空 msgid（test_gettext_section、test_gettext_toctree、test_gettext_table、test_gettext_topic、test_gettext_definition_terms、test_gettext_glossary_terms、test_gettext_glossary_term_inconsistencies、test_gettext_literalblock）；这些可见测试未隔离验证三项接口且更广泛遮蔽使端到端结果不能归因于本任务 | Keys:gettext-render(目标接口与组合者)	2026-10-16T05:08:19Z			0
++sphinx/builders/html/__init__.py	69cfdd6e	0	0	2026-10-16T04:43:43Z						0
++sphinx/builders/html/_assets.py	f2b67329	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/html/_build_info.py	23c14516	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/latex/__init__.py	8d68e682	0	0	2026-10-16T04:43:43Z						0
++sphinx/builders/latex/constants.py	5202709c	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/latex/nodes.py	ecf0d09a	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/latex/theming.py	d5e590fb	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/latex/transforms.py	dc004210	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/latex/util.py	84589a15	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/linkcheck.py	f97b8c46	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/manpage.py	405c8eef	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/singlehtml.py	d246c36d	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/texinfo.py	ee18c578	0	0	2026-10-16T04:43:43Z						0
++sphinx/builders/text.py	da6266a3	0	0	2026-10-16T04:43:42Z						0
++sphinx/builders/xml.py	23d50373	0	0	2026-10-16T04:43:42Z						0
++sphinx/cmd/__init__.py	265c285d	0	0	2026-10-16T04:43:42Z						0
++sphinx/cmd/build.py	4386562a	0	0	2026-10-16T04:43:42Z						0
++sphinx/cmd/make_mode.py	446ec90a	0	0	2026-10-16T04:43:42Z						0
++sphinx/cmd/quickstart.py	3a464b56	0	0	2026-10-16T04:43:42Z						0
++sphinx/config.py	90eee15c	0	0	2026-10-16T04:43:42Z						0
++sphinx/deprecation.py	a8b39202	0	0	2026-10-16T04:43:42Z						0
++sphinx/directives/__init__.py	3e4a2243	0	0	2026-10-16T04:43:42Z						0
++sphinx/directives/admonitions.py	049e2949	0	0	2026-10-16T04:43:42Z						0
++sphinx/directives/code.py	6afeaf2c	0	0	2026-10-16T04:43:42Z						0
++sphinx/directives/other.py	9b5743fa	0	0	2026-10-16T04:43:42Z						0
++sphinx/directives/patches.py	ff5083a0	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/__init__.py	369b831e	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/_domains_container.py	f2a770bf	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/_index.py	42f26acd	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/c/__init__.py	4f662eec	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/c/_ast.py	ebc40475	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/c/_ids.py	8a259600	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/c/_parser.py	12d6fb7f	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/c/_symbol.py	31e2b1f8	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/changeset.py	6649dda8	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/citation.py	587852a3	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/cpp/__init__.py	c490d43f	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/cpp/_ast.py	11bfc160	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/cpp/_ids.py	7860d332	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/cpp/_parser.py	71c5d908	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/cpp/_symbol.py	68a7a47b	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/index.py	a2ab94d2	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/javascript.py	b38ac56e	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/math.py	472fd590	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/python/__init__.py	e646d788	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/python/_annotations.py	787b59fe	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/python/_object.py	b2d7501a	0	0	2026-10-16T04:43:42Z						0
++sphinx/domains/rst.py	df5d7a57	0	0	2026-10-16T04:43:43Z						0
++sphinx/domains/std/__init__.py	e3a4e56d	0	0	2026-10-16T04:43:43Z						0
++sphinx/environment/__init__.py	419d95e2	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/adapters/__init__.py	6447a86f	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/adapters/asset.py	3a431f1b	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/adapters/indexentries.py	092712e7	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/adapters/toctree.py	01727fd3	0	0	2026-10-16T04:43:43Z						0
++sphinx/environment/collectors/__init__.py	b6d0198b	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/collectors/asset.py	e91a70b4	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/collectors/dependencies.py	30b36506	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/collectors/metadata.py	7cb5ee43	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/collectors/title.py	0d20434a	0	0	2026-10-16T04:43:42Z						0
++sphinx/environment/collectors/toctree.py	3acb6045	0	0	2026-10-16T04:43:42Z						0
++sphinx/errors.py	0f3e7c08	0	0	2026-10-16T04:43:42Z						0
++sphinx/events.py	7e043e84	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/__init__.py	0cc98880	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/apidoc/__init__.py	b0611795	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/apidoc/__main__.py	f47d1952	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/apidoc/_cli.py	138cf228	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/apidoc/_extension.py	b3e83376	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/apidoc/_generate.py	aeb04963	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/apidoc/_shared.py	f0903275	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/__init__.py	245a737c	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_directive_options.py	3432cdd3	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_docstrings.py	332cadd8	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_documenters.py	43793918	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_event_listeners.py	4baf4d1d	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_generate.py	c2e9b49c	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_member_finder.py	3decf8a6	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_property_types.py	bbd27fe5	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_renderer.py	754f74eb	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/_sentinels.py	e4edf25c	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/directive.py	6a5118b8	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/importer.py	c6271e2f	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/mock.py	e40b58d5	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/preserve_defaults.py	ff8f2020	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/type_comment.py	d0476e6c	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autodoc/typehints.py	d6de66a1	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autosectionlabel.py	4fd43188	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autosummary/__init__.py	ab369145	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autosummary/generate.py	7c74a876	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autosummary/templates/autosummary/base.rst	d49f621b	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autosummary/templates/autosummary/class.rst	746b6060	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/autosummary/templates/autosummary/module.rst	efb48952	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/coverage.py	983fa115	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/doctest.py	bea68f39	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/duration.py	8ae2d2a5	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/extlinks.py	ac296dff	0	0	2026-10-16T04:43:43Z						0
++sphinx/ext/githubpages.py	aa66a127	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/graphviz.py	2ebf8a9d	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/ifconfig.py	9001dd2c	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/imgconverter.py	e2dc781e	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/imgmath.py	56b11076	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/inheritance_diagram.py	a781e3cb	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/intersphinx/__init__.py	9dc77cc7	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/intersphinx/__main__.py	78a92b80	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/intersphinx/_cli.py	ec64376f	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/intersphinx/_load.py	faeeedb5	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/intersphinx/_resolve.py	4790ef9e	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/intersphinx/_shared.py	3b5ab96f	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/linkcode.py	aba36b30	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/mathjax.py	55e398ed	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/napoleon/__init__.py	0111d43e	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/napoleon/docstring.py	70eb5300	0	0	2026-10-16T04:43:42Z						0
++sphinx/ext/todo.py	6912de28	0	0	2026-10-16T04:43:43Z						0
++sphinx/ext/viewcode.py	3b8e79b5	0	0	2026-10-16T04:43:42Z						0
++sphinx/extension.py	1484a35d	0	0	2026-10-16T04:43:42Z						0
++sphinx/highlighting.py	32af383c	0	0	2026-10-16T04:43:42Z						0
++sphinx/io.py	2e72beae	0	0	2026-10-16T04:43:42Z						0
++sphinx/jinja2glue.py	f0e806dc	0	0	2026-10-16T04:43:43Z	T	jinja2glue.py[8 I T J P S]: Role:连接 Sphinx 与 Jinja，提供按路径查找的文件加载器以及构建器模板桥环境 | Uses:sphinx/util/osutil.py(模板mtime) | API:SphinxFileSystemLoader；BuiltinTemplateLoader；accesskey；warning；idgen | Constraints:SphinxFileSystemLoader 按 searchpath 顺序返回首个存在模板，.jinja 缺失时同路径尝试旧 _t 后缀，并用修改时间闭包判断缓存新鲜度；BuiltinTemplateLoader.render/render_string 返回文本。文件当前止于“Loader interface”注释，BuiltinTemplateLoader 未出现其 BaseLoader get_source 实现；主题 loader 完整构造不属公开任务 | Keys:gettext-render(有序文件查找)	2026-10-16T04:48:07Z			0
++sphinx/locale/__init__.py	4e3b5b07	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ar/LC_MESSAGES/sphinx.js	87cb2081	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ar/LC_MESSAGES/sphinx.mo	503aabc7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ar/LC_MESSAGES/sphinx.po	cf0f796a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/bg/LC_MESSAGES/sphinx.js	9908f97b	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/bg/LC_MESSAGES/sphinx.mo	28ef5622	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/bg/LC_MESSAGES/sphinx.po	78a81ba8	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/bn/LC_MESSAGES/sphinx.js	798cd998	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/bn/LC_MESSAGES/sphinx.mo	e21a81c1	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/bn/LC_MESSAGES/sphinx.po	c3f060bb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ca/LC_MESSAGES/sphinx.js	5e30842e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ca/LC_MESSAGES/sphinx.mo	f8f106d1	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ca/LC_MESSAGES/sphinx.po	7af33328	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ca@valencia/LC_MESSAGES/sphinx.js	eb14fdb7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ca@valencia/LC_MESSAGES/sphinx.mo	05776f51	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ca@valencia/LC_MESSAGES/sphinx.po	6dda1eef	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cak/LC_MESSAGES/sphinx.js	75d0dc5e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cak/LC_MESSAGES/sphinx.mo	4df18be3	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cak/LC_MESSAGES/sphinx.po	6c25633f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cs/LC_MESSAGES/sphinx.js	22e1c300	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cs/LC_MESSAGES/sphinx.mo	20754aec	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cs/LC_MESSAGES/sphinx.po	48bc9f19	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cy/LC_MESSAGES/sphinx.js	ce254b92	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cy/LC_MESSAGES/sphinx.mo	32ad5e86	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/cy/LC_MESSAGES/sphinx.po	30951dbb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/da/LC_MESSAGES/sphinx.js	da48383d	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/da/LC_MESSAGES/sphinx.mo	6350a494	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/da/LC_MESSAGES/sphinx.po	d3e9a9b8	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/de/LC_MESSAGES/sphinx.js	9bf55d28	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/de/LC_MESSAGES/sphinx.mo	450d8d30	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/de/LC_MESSAGES/sphinx.po	7bd7e658	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/de_DE/LC_MESSAGES/sphinx.js	1959b5d2	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/de_DE/LC_MESSAGES/sphinx.mo	84b279ff	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/de_DE/LC_MESSAGES/sphinx.po	3371c258	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/el/LC_MESSAGES/sphinx.js	e109e2be	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/el/LC_MESSAGES/sphinx.mo	cfbd3088	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/el/LC_MESSAGES/sphinx.po	2e938ade	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_DE/LC_MESSAGES/sphinx.js	55bb13e5	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_DE/LC_MESSAGES/sphinx.mo	1191e2a8	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_DE/LC_MESSAGES/sphinx.po	e3e68120	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_FR/LC_MESSAGES/sphinx.js	2500bffb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_FR/LC_MESSAGES/sphinx.mo	d466f12d	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_FR/LC_MESSAGES/sphinx.po	fd942107	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_GB/LC_MESSAGES/sphinx.js	8fd896e3	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_GB/LC_MESSAGES/sphinx.mo	a711493e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_GB/LC_MESSAGES/sphinx.po	eaee5263	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_HK/LC_MESSAGES/sphinx.js	488380e0	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_HK/LC_MESSAGES/sphinx.mo	43ae9d0f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/en_HK/LC_MESSAGES/sphinx.po	f4b155e5	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/eo/LC_MESSAGES/sphinx.js	e17e34b3	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/eo/LC_MESSAGES/sphinx.mo	aa3e4bf5	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/eo/LC_MESSAGES/sphinx.po	342d26cc	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/es/LC_MESSAGES/sphinx.js	f85f4cfb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/es/LC_MESSAGES/sphinx.mo	f3caad90	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/es/LC_MESSAGES/sphinx.po	23ee4766	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/es_CO/LC_MESSAGES/sphinx.js	d7deae33	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/es_CO/LC_MESSAGES/sphinx.mo	f2495524	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/es_CO/LC_MESSAGES/sphinx.po	e5e3f250	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/et/LC_MESSAGES/sphinx.js	f05b935c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/et/LC_MESSAGES/sphinx.mo	63ea67e3	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/et/LC_MESSAGES/sphinx.po	d616fdc0	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/eu/LC_MESSAGES/sphinx.js	c89e6b0a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/eu/LC_MESSAGES/sphinx.mo	b116de51	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/eu/LC_MESSAGES/sphinx.po	ae6e46c2	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fa/LC_MESSAGES/sphinx.js	5df48d09	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fa/LC_MESSAGES/sphinx.mo	adc16f30	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fa/LC_MESSAGES/sphinx.po	8ee8af20	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fi/LC_MESSAGES/sphinx.js	aa74d7ce	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fi/LC_MESSAGES/sphinx.mo	f59ed61e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fi/LC_MESSAGES/sphinx.po	a7397b6c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fr/LC_MESSAGES/sphinx.js	e6b791cb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fr/LC_MESSAGES/sphinx.mo	78d8c420	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fr/LC_MESSAGES/sphinx.po	1256d796	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fr_FR/LC_MESSAGES/sphinx.js	aa914e54	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fr_FR/LC_MESSAGES/sphinx.mo	4fc66ed8	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/fr_FR/LC_MESSAGES/sphinx.po	e55a6ac7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/gl/LC_MESSAGES/sphinx.js	40ebf2fb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/gl/LC_MESSAGES/sphinx.mo	19395dc5	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/gl/LC_MESSAGES/sphinx.po	0affa340	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/he/LC_MESSAGES/sphinx.js	a336edf7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/he/LC_MESSAGES/sphinx.mo	3b1abe7f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/he/LC_MESSAGES/sphinx.po	1d62a398	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hi/LC_MESSAGES/sphinx.js	4b22bba3	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hi/LC_MESSAGES/sphinx.mo	1efc176d	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hi/LC_MESSAGES/sphinx.po	f505411f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hi_IN/LC_MESSAGES/sphinx.js	e22faeeb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hi_IN/LC_MESSAGES/sphinx.mo	f2d2c830	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hi_IN/LC_MESSAGES/sphinx.po	be3f52f0	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hr/LC_MESSAGES/sphinx.js	00013156	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hr/LC_MESSAGES/sphinx.mo	dd606b20	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hr/LC_MESSAGES/sphinx.po	49f9ee36	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hu/LC_MESSAGES/sphinx.js	ea187aaa	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hu/LC_MESSAGES/sphinx.mo	587829af	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/hu/LC_MESSAGES/sphinx.po	fdc1769b	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/id/LC_MESSAGES/sphinx.js	a1ed0097	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/id/LC_MESSAGES/sphinx.mo	15d06638	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/id/LC_MESSAGES/sphinx.po	98ad4bab	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/is/LC_MESSAGES/sphinx.js	f9187303	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/is/LC_MESSAGES/sphinx.mo	2f2455f5	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/is/LC_MESSAGES/sphinx.po	6b98a530	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/it/LC_MESSAGES/sphinx.js	45930005	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/it/LC_MESSAGES/sphinx.mo	1fd9bf35	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/it/LC_MESSAGES/sphinx.po	240eec1a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ja/LC_MESSAGES/sphinx.js	4755f45a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ja/LC_MESSAGES/sphinx.mo	1dc67496	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ja/LC_MESSAGES/sphinx.po	dba6aa59	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ka/LC_MESSAGES/sphinx.js	bc86b638	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ka/LC_MESSAGES/sphinx.mo	c1bb496c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ka/LC_MESSAGES/sphinx.po	62e1196a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ko/LC_MESSAGES/sphinx.js	afa94a99	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ko/LC_MESSAGES/sphinx.mo	9efb829c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ko/LC_MESSAGES/sphinx.po	b2811feb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/lt/LC_MESSAGES/sphinx.js	e4682f4a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/lt/LC_MESSAGES/sphinx.mo	55bb8b1c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/lt/LC_MESSAGES/sphinx.po	dca1ec89	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/lv/LC_MESSAGES/sphinx.js	d3762f6f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/lv/LC_MESSAGES/sphinx.mo	3bfb1523	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/lv/LC_MESSAGES/sphinx.po	06fc5eeb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/mk/LC_MESSAGES/sphinx.js	4476f286	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/mk/LC_MESSAGES/sphinx.mo	b03e6927	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/mk/LC_MESSAGES/sphinx.po	b7559842	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/nb_NO/LC_MESSAGES/sphinx.js	b06a96f2	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/nb_NO/LC_MESSAGES/sphinx.mo	a336f319	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/nb_NO/LC_MESSAGES/sphinx.po	3c9e423e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ne/LC_MESSAGES/sphinx.js	f98e9396	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ne/LC_MESSAGES/sphinx.mo	449bf628	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ne/LC_MESSAGES/sphinx.po	25a40471	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/nl/LC_MESSAGES/sphinx.js	e4d38c6a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/nl/LC_MESSAGES/sphinx.mo	7cea01f2	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/nl/LC_MESSAGES/sphinx.po	37e766d4	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pl/LC_MESSAGES/sphinx.js	2827c288	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pl/LC_MESSAGES/sphinx.mo	9978e937	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pl/LC_MESSAGES/sphinx.po	c4e85e08	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt/LC_MESSAGES/sphinx.js	beaedd51	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt/LC_MESSAGES/sphinx.mo	682c4190	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt/LC_MESSAGES/sphinx.po	ea1a9bb8	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt_BR/LC_MESSAGES/sphinx.js	71a39b36	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt_BR/LC_MESSAGES/sphinx.mo	33b11c90	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt_BR/LC_MESSAGES/sphinx.po	a9fba495	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt_PT/LC_MESSAGES/sphinx.js	72787d97	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt_PT/LC_MESSAGES/sphinx.mo	f0314ed2	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/pt_PT/LC_MESSAGES/sphinx.po	efeed7a1	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ro/LC_MESSAGES/sphinx.js	055b6fdf	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ro/LC_MESSAGES/sphinx.mo	dcf53cc1	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ro/LC_MESSAGES/sphinx.po	e5a9aa39	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ru/LC_MESSAGES/sphinx.js	cd1d70c9	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ru/LC_MESSAGES/sphinx.mo	bf9d79d0	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ru/LC_MESSAGES/sphinx.po	275e1052	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/si/LC_MESSAGES/sphinx.js	351ccfff	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/si/LC_MESSAGES/sphinx.mo	61f0c852	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/si/LC_MESSAGES/sphinx.po	164cad9f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sk/LC_MESSAGES/sphinx.js	f84e2aaf	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sk/LC_MESSAGES/sphinx.mo	0867082d	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sk/LC_MESSAGES/sphinx.po	8e638c5e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sl/LC_MESSAGES/sphinx.js	ad0ddf96	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sl/LC_MESSAGES/sphinx.mo	f110e727	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sl/LC_MESSAGES/sphinx.po	f9d6a108	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sphinx.pot	26c05f96	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sq/LC_MESSAGES/sphinx.js	b8414160	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sq/LC_MESSAGES/sphinx.mo	ffbbcb99	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sq/LC_MESSAGES/sphinx.po	6f33b877	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr/LC_MESSAGES/sphinx.js	552f857c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr/LC_MESSAGES/sphinx.mo	e46acf13	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr/LC_MESSAGES/sphinx.po	1dd0523b	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr@latin/LC_MESSAGES/sphinx.js	3390f6e8	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr@latin/LC_MESSAGES/sphinx.mo	42b4bf3e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr@latin/LC_MESSAGES/sphinx.po	13a225fb	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr_RS/LC_MESSAGES/sphinx.js	96356656	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr_RS/LC_MESSAGES/sphinx.mo	21e4c1c6	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sr_RS/LC_MESSAGES/sphinx.po	6ee48097	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sv/LC_MESSAGES/sphinx.js	55d7b627	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sv/LC_MESSAGES/sphinx.mo	a7e754a5	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/sv/LC_MESSAGES/sphinx.po	df26035d	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ta/LC_MESSAGES/sphinx.js	43c9661c	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ta/LC_MESSAGES/sphinx.mo	05801735	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ta/LC_MESSAGES/sphinx.po	39517cc7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/te/LC_MESSAGES/sphinx.js	f243e95a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/te/LC_MESSAGES/sphinx.mo	b71de09a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/te/LC_MESSAGES/sphinx.po	b6770385	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/tr/LC_MESSAGES/sphinx.js	b0f24d8d	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/tr/LC_MESSAGES/sphinx.mo	9c185874	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/tr/LC_MESSAGES/sphinx.po	30daaca4	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/uk_UA/LC_MESSAGES/sphinx.js	0958edf7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/uk_UA/LC_MESSAGES/sphinx.mo	46638248	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/uk_UA/LC_MESSAGES/sphinx.po	e1cca3c3	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ur/LC_MESSAGES/sphinx.js	f6c0d3e7	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ur/LC_MESSAGES/sphinx.mo	9e5facc1	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/ur/LC_MESSAGES/sphinx.po	225b9931	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/vi/LC_MESSAGES/sphinx.js	4c1d55b0	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/vi/LC_MESSAGES/sphinx.mo	3f986f6b	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/vi/LC_MESSAGES/sphinx.po	44e0261e	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/yue/LC_MESSAGES/sphinx.js	8547e09b	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/yue/LC_MESSAGES/sphinx.mo	917e34cd	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/yue/LC_MESSAGES/sphinx.po	27c1653a	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_CN/LC_MESSAGES/sphinx.js	beaddf03	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_CN/LC_MESSAGES/sphinx.mo	50fa6443	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_CN/LC_MESSAGES/sphinx.po	746ebc99	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_HK/LC_MESSAGES/sphinx.js	11dc2623	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_HK/LC_MESSAGES/sphinx.mo	bd8429a6	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_HK/LC_MESSAGES/sphinx.po	e8d390bc	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_TW.Big5/LC_MESSAGES/sphinx.js	fc6ac0a6	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_TW.Big5/LC_MESSAGES/sphinx.mo	88b1b81b	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_TW.Big5/LC_MESSAGES/sphinx.po	685acc0f	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_TW/LC_MESSAGES/sphinx.js	cbf116e0	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_TW/LC_MESSAGES/sphinx.mo	22b20c77	0	0	2026-10-16T04:43:42Z						0
++sphinx/locale/zh_TW/LC_MESSAGES/sphinx.po	ad24ec13	0	0	2026-10-16T04:43:42Z						0
++sphinx/parsers.py	7e584fd0	0	0	2026-10-16T04:43:42Z						0
++sphinx/project.py	129c13cc	0	0	2026-10-16T04:43:42Z						0
++sphinx/py.typed	00000000	0	0	2026-10-16T04:43:42Z						0
++sphinx/pycode/__init__.py	905fd663	0	0	2026-10-16T04:43:42Z						0
++sphinx/pycode/ast.py	b07f7692	0	0	2026-10-16T04:43:42Z						0
++sphinx/pycode/parser.py	87982eb8	0	0	2026-10-16T04:43:42Z						0
++sphinx/pygments_styles.py	5628b3db	0	0	2026-10-16T04:43:42Z						0
++sphinx/registry.py	14a00d9e	0	0	2026-10-16T04:43:42Z						0
++sphinx/roles.py	6f6df99b	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/__init__.py	f70017da	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/da.py	d569ae9c	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/da.txt	c96ea28b	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/de.py	87bbcc88	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/de.txt	2c25eacc	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/en.py	402fc187	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/en.txt	19805dc0	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/es.py	33a8bcaa	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/es.txt	8830483a	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/fi.py	c828f2c1	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/fi.txt	269d35cf	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/fr.py	09cdb5b9	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/fr.txt	fbcb1cd9	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/hu.py	cde28334	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/hu.txt	e125f927	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/it.py	e38f80c9	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/it.txt	1518295b	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/nl.py	53a117a3	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/nl.txt	9186bb92	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/no.py	48f6cd80	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/no.txt	2008c15c	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/pt.py	194d0c15	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/pt.txt	53f5107a	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/ru.py	65c8afc2	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/ru.txt	2a42f007	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/sv.py	d2835e8a	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/_stopwords/sv.txt	6d3ae190	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/da.py	3fd2d255	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/de.py	6e834302	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/en.py	90485d6e	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/es.py	b1ae3e4c	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/fi.py	5abded88	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/fr.py	bcd90ba0	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/hu.py	cd81bd95	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/it.py	1a858c6e	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/ja.py	388c8434	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/README.rst	fa512e1e	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/arabic-stemmer.js	f8053536	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/armenian-stemmer.js	878d1824	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/base-stemmer.js	dcfd9b20	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/basque-stemmer.js	e4b76a8c	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/catalan-stemmer.js	cb88ef61	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/danish-stemmer.js	263a7887	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/dutch-stemmer.js	ecc55bfb	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/dutch_porter-stemmer.js	442bd2c6	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/english-stemmer.js	966e17c8	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/esperanto-stemmer.js	bc892123	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/estonian-stemmer.js	9c1039c0	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/finnish-stemmer.js	bc45c948	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/french-stemmer.js	4e29bc5c	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/german-stemmer.js	8401bce9	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/greek-stemmer.js	54ac50e5	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/hindi-stemmer.js	e8aff5e4	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/hungarian-stemmer.js	e5350cf7	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/indonesian-stemmer.js	ea82a369	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/irish-stemmer.js	feac5aac	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/italian-stemmer.js	31be2e55	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/lithuanian-stemmer.js	230edb06	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/nepali-stemmer.js	b101c7d8	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/norwegian-stemmer.js	8b06312f	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/porter-stemmer.js	f20b841b	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/portuguese-stemmer.js	91382779	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/romanian-stemmer.js	aa23de40	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/russian-stemmer.js	3f9b19e2	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/serbian-stemmer.js	c77a024d	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/spanish-stemmer.js	74bc4c56	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/swedish-stemmer.js	f53facb9	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/tamil-stemmer.js	09a4ea52	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/turkish-stemmer.js	c2122000	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/minified-js/yiddish-stemmer.js	c94c2072	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/nl.py	07c2ab2c	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/no.py	9e40e77b	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/arabic-stemmer.js	2b314dfa	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/armenian-stemmer.js	64430215	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/base-stemmer.js	96d7c891	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/basque-stemmer.js	9395849f	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/catalan-stemmer.js	5ef54189	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/danish-stemmer.js	f708cb76	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/dutch-stemmer.js	b5b72525	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/dutch_porter-stemmer.js	895ffbbe	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/english-stemmer.js	58d84345	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/esperanto-stemmer.js	c5c33aa6	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/estonian-stemmer.js	57a41df0	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/finnish-stemmer.js	0edbc003	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/french-stemmer.js	22096404	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/german-stemmer.js	1bbd5c4f	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/greek-stemmer.js	00519ac5	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/hindi-stemmer.js	9d277cdf	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/hungarian-stemmer.js	3e01e8bf	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/indonesian-stemmer.js	99793c49	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/irish-stemmer.js	08546927	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/italian-stemmer.js	7665030b	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/lithuanian-stemmer.js	f2dbd5e0	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/nepali-stemmer.js	fca8f46d	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/norwegian-stemmer.js	dc1711e0	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/porter-stemmer.js	36e34c64	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/portuguese-stemmer.js	66894030	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/romanian-stemmer.js	e02ab339	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/russian-stemmer.js	bb1423ff	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/serbian-stemmer.js	62a8b759	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/spanish-stemmer.js	420d618e	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/swedish-stemmer.js	4e551632	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/tamil-stemmer.js	de99688f	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/turkish-stemmer.js	ddb176c1	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/non-minified-js/yiddish-stemmer.js	0cc8a221	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/pt.py	8bffbf54	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/ro.py	d4d942f2	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/ru.py	3d5316a1	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/sv.py	1a46dd8d	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/tr.py	28f52247	0	0	2026-10-16T04:43:42Z						0
++sphinx/search/zh.py	22d1b048	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/apidoc/module.rst.jinja	5e70b45d	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/apidoc/package.rst.jinja	903683d8	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/apidoc/toc.rst.jinja	bf570e3d	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/epub3/container.xml	75a8bf96	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/epub3/content.opf.jinja	4440c12c	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/epub3/mimetype	2cab616f	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/epub3/nav.xhtml.jinja	5bdba9c1	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/epub3/toc.ncx.jinja	3d918351	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/gettext/message.pot.jinja	8c0d6028	0	0	2026-10-16T04:43:42Z	I	message.pot.jinja[8 O I J P T]: Role:把消息目录上下文渲染为 gettext POT 头、位置/UUID 注释及 msgid 条目 | Uses:sphinx/builders/gettext.py(Message 与 renderer 上下文) | API:内置模板名 message.pot.jinja，供 GettextRenderer.render 按文件名加载 | Constraints:头字段与消息文本经 e 过滤；display_location 时逐个调用 relpath(source) 并输出“#: 路径:行号”，display_uuid 时逐个输出 UUID；每条消息生成带引号 msgid 与空 msgstr，因此 context 必须提供项目元数据、messages、显示开关、relpath | Keys:gettext-render(输出消费者)	2026-10-16T04:48:07Z			0
++sphinx/templates/graphviz/graphviz.css	4ae1632d	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/htmlhelp/project.hhc	933cb55f	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/htmlhelp/project.hhp	c76284db	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/htmlhelp/project.stp	a4d19c9b	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/imgmath/preview.tex.jinja	a2ed5f6d	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/imgmath/template.tex.jinja	ac0569d1	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/latex/latex.tex.jinja	d8bd4117	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/latex/longtable.tex.jinja	0ab56fe8	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/latex/sphinxmessages.sty.jinja	b97c6ff9	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/latex/tabular.tex.jinja	ae456656	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/latex/tabulary.tex.jinja	95b666ab	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/quickstart/Makefile.new.jinja	1888f16f	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/quickstart/conf.py.jinja	a7ce8ddc	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/quickstart/make.bat.new.jinja	67edcb13	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/quickstart/root_doc.rst.jinja	c1b28146	0	0	2026-10-16T04:43:42Z						0
++sphinx/templates/texinfo/Makefile	e6332b58	0	0	2026-10-16T04:43:42Z						0
++sphinx/testing/__init__.py	c2fc8626	0	0	2026-10-16T04:43:42Z						0
++sphinx/testing/fixtures.py	ce38cf6c	0	0	2026-10-16T04:43:42Z						0
++sphinx/testing/path.py	539652b5	0	0	2026-10-16T04:43:42Z						0
++sphinx/testing/restructuredtext.py	749913c2	0	0	2026-10-16T04:43:42Z						0
++sphinx/testing/util.py	7650dd58	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/LICRcyr2utf8.xdy	7f45348c	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/LICRlatin2utf8.xdy	10e6ff1c	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/LatinRules.xdy	1bedd711	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/Makefile.jinja	9a5a14e7	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/latexmkjarc.jinja	1f91cb56	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/latexmkrc.jinja	7d58ba28	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/make.bat.jinja	d166bdfa	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/python.ist	bd0d612f	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinx.sty	9b456ab3	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinx.xdy	9c7766a4	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxhowto.cls	47d73ac4	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexadmonitions.sty	0954e900	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexcontainers.sty	d984bcf2	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexgraphics.sty	da10fae6	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexindbibtoc.sty	03cf5626	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexlists.sty	a57d03f7	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexliterals.sty	f585c33f	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexnumfig.sty	0069cb00	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexobjects.sty	f07fa0cc	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexshadowbox.sty	0870735c	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexstyleheadings.sty	f136d604	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexstylepage.sty	80b33b3b	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatexstyletext.sty	ae0b7f62	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxlatextables.sty	dd4e9295	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxmanual.cls	b9428d94	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxoptionsgeometry.sty	2629894b	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxoptionshyperref.sty	e588b4cf	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxpackageboxes.sty	648db3d8	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxpackagecyrillic.sty	acd068c0	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxpackagefootnote.sty	7f4999a7	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs/sphinxpackagesubstitutefont.sty	40157c45	0	0	2026-10-16T04:43:42Z						0
++sphinx/texinputs_win/Makefile.jinja	82d30f2a	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/agogo/layout.html	cb27be80	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/agogo/static/agogo.css.jinja	a5b5e72e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/agogo/static/bgfooter.png	0826e0c3	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/agogo/static/bgtop.png	8f129909	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/agogo/theme.toml	57f63a41	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/changes/frameset.html	0ca3eab1	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/changes/rstsource.html	227ad750	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/changes/versionchanges.html	0acf2495	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/defindex.html	7f493ed5	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/domainindex.html	d26a066e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/genindex-single.html	72323fc3	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/genindex-split.html	542431f4	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/genindex.html	fb78e205	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/globaltoc.html	339ebcd8	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/layout.html	c9ff5bea	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/localtoc.html	efb62b1f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/opensearch.xml	136475b5	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/page.html	1b40b418	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/relations.html	0810b86d	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/search.html	67195289	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/searchbox.html	3ae5e043	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/searchfield.html	057abdc3	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/sourcelink.html	eb2f2531	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/basic.css.jinja	4245e9e3	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/doctools.js	fd6eb6e6	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/documentation_options.js.jinja	edfcb7a8	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/file.png	53af5b53	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/language_data.js.jinja	5d8ef6d9	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/minus.png	b0b5917f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/plus.png	5a25d2d1	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/searchtools.js	c7255e28	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/static/sphinx_highlight.js	5572e0a9	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/basic/theme.toml	6afb2ab7	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/layout.html	61d72d45	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/static/background_b01.png	bcb0720c	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/static/bizstyle.css.jinja	1977ff71	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/static/bizstyle.js.jinja	dc2dc587	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/static/css3-mediaqueries.js	403acee6	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/static/css3-mediaqueries_src.js	424e59d7	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/bizstyle/theme.toml	68d7fc66	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/classic/layout.html	6be8161e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/classic/static/classic.css.jinja	c5530320	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/classic/static/sidebar.js.jinja	288c4faa	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/classic/theme.toml	2e18024a	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/default/static/default.css	bae79c5f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/default/theme.toml	3e46b726	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/epub/epub-cover.html	c63464bf	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/epub/layout.html	f300f19e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/epub/static/epub.css.jinja	49db038a	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/epub/theme.toml	81074378	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/layout.html	5e82af7b	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/static/alert_info_32.png	6d9e9dac	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/static/alert_warning_32.png	4a2313ad	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/static/bg-page.png	b8af3c9f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/static/bullet_orange.png	cafe15c9	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/static/haiku.css.jinja	b8685bd9	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/haiku/theme.toml	18154cc1	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/nature/static/nature.css.jinja	1273cf0e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/nature/theme.toml	23ca23c4	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/nonav/layout.html	c846d34f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/nonav/static/nonav.css.jinja	f4a53a7d	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/nonav/theme.toml	9f4c66c7	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/layout.html	175c4d06	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/dialog-note.png	1c64dc4e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/dialog-seealso.png	52817fef	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/dialog-todo.png	edb0370a	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/dialog-topic.png	403b0cae	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/dialog-warning.png	38809748	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/epub.css.jinja	bb5da8af	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/footerbg.png	cd07213f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/headerbg.png	79f953bf	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/ie6.css	cc821cb8	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/middlebg.png	b97c2189	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/pyramid.css.jinja	f44137c1	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/static/transparent.gif	46cc1dc8	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/pyramid/theme.toml	23b7bd32	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/artwork/logo.svg	ef363b77	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/layout.html	3ebfd047	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/darkmetal.png	6ae72db6	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/headerbg.png	bd8c3632	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/logo.png	5e83eb2e	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/metal.png	af4ef7f9	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/navigation.png	28e4d365	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/print.css	ec7ee106	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/scrolls.css.jinja	380e10dc	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/theme_extras.js	c8f89259	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/watermark.png	ccb387c7	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/static/watermark_blur.png	5d01da5c	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/scrolls/theme.toml	0f6a626f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/sphinxdoc/static/contents.png	c364c675	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/sphinxdoc/static/navigation.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/sphinxdoc/static/sphinxdoc.css.jinja	50d70a4b	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/sphinxdoc/theme.toml	9bffed5f	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/traditional/static/traditional.css.jinja	30f6ac82	0	0	2026-10-16T04:43:42Z						0
++sphinx/themes/traditional/theme.toml	78decac6	0	0	2026-10-16T04:43:42Z						0
++sphinx/theming.py	6ba75df8	0	0	2026-10-16T04:43:42Z						0
++sphinx/transforms/__init__.py	f75cbe09	0	0	2026-10-16T05:13:48Z	I	__init__.py[8 C I L]: Role:定义读取阶段的 Sphinx 转换基类以及默认替换、来源修补、可翻译节点、脚注、智能引号、术语与目标排序转换 | Uses:sphinx/util/nodes.py(节点来源与智能引号判定),sphinx/util/i18n.py(format_date),sphinx/addnodes.py(扩展节点) | API:SphinxTransform；SphinxTransformer；DefaultSubstitutions；ApplySourceWorkaround；ExtraTranslatableNodes；其余读取转换；setup(app) | Constraints:DefaultSubstitutions 的 today 分支通过 format_date 按配置语言生成日期；转换优先级维持来源修补和额外可翻译节点先于国际化、事件与 UID 等顺序	2026-10-16T05:13:52Z			0
++sphinx/transforms/compact_bullet_list.py	ef92352c	0	0	2026-10-16T04:43:42Z						0
++sphinx/transforms/i18n.py	087b5580	0	0	2026-10-16T05:11:23Z	I	i18n.py[9 C I L]: Role:在读取文档时保存原消息、应用目录翻译、翻译索引、统计进度并标记或移除翻译辅助节点 | Uses:sphinx/util/nodes.py(节点匹配、消息与索引提取、类型集合),sphinx/domains/std/__init__.py(术语重建),sphinx/util/i18n.py(文本域和目录),sphinx/transforms/__init__.py(SphinxTransform),sphinx/addnodes.py(可翻译节点) | API:parse_noqa；PreserveTranslatableMessages；Locale；TranslationProgressTotaliser；AddTranslationClasses；RemoveTranslatableInline；setup(app) | Constraints:Locale 分两阶段遍历 extract_messages，先处理标题与术语映射再更新正文/引用/图片/meta，并在 index 目标启用时经 traverse_translatable_index 翻译索引；literal 翻译需包装为 literal block，引用数量不一致会告警，空或相同译文保留原文	2026-10-16T05:11:27Z			0
++sphinx/transforms/post_transforms/__init__.py	3700be75	0	0	2026-10-16T04:43:43Z						0
++sphinx/transforms/post_transforms/code.py	8d7f4e39	0	0	2026-10-16T04:43:43Z						0
++sphinx/transforms/post_transforms/images.py	5b1b0d28	0	0	2026-10-16T04:43:42Z						0
++sphinx/transforms/references.py	d09ec344	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/__init__.py	4927faff	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_files.py	4452f46a	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_importer.py	2860342d	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_inventory_file_reader.py	546e95c9	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_io.py	924146f9	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_lines.py	6016d621	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_pathlib.py	763c4b2a	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_serialise.py	bca58ef4	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_timestamps.py	d69fd758	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/_uri.py	3b1df511	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/build_phase.py	7160b890	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/cfamily.py	773ec05a	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/console.py	8378267c	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/display.py	ce41ec0f	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/docfields.py	0f545174	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/docstrings.py	8289ae01	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/docutils.py	3e45d172	0	0	2026-10-16T04:43:43Z						0
++sphinx/util/fileutil.py	b1f87bf0	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/http_date.py	287b10cd	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/i18n.py	deb5cda2	0	0	2026-10-16T05:13:42Z	I	i18n.py[9 U I M]: Role:提供消息目录文件/仓库管理、文档名到文本域映射、国际化日期格式转换与本地化图片路径查找 | Uses:sphinx/util/osutil.py(路径分隔与修改时间),sphinx/util/_pathlib.py(_StrPath) | API:CatalogInfo；CatalogRepository；docname_to_domain；format_date；get_image_filename_for_language；search_image_for_language | Constraints:format_date 把支持的 strftime 指令转换为 Babel 格式，按 date/datetime 及 %x/%X 选择日期、时间或日期时间 formatter；未知或空语言回退英文，datetime 默认 UTC 且 local_time 可转换本地时区，无指令字符串原样返回；CatalogRepository 仅枚举存在语言目录中的非点目录 PO 并按相对路径形成 domain	2026-10-16T05:13:46Z			0
++sphinx/util/images.py	d6576a24	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/index_entries.py	64b30793	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/inspect.py	b5bf7529	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/inventory.py	b69ee18c	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/logging.py	0c27b94f	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/matching.py	8180581d	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/math.py	c4b5cf67	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/nodes.py	afc809ae	0	0	2026-10-16T05:11:15Z	U	nodes.py[9 U U M]: Role:提供 Docutils 节点匹配、翻译消息与索引提取、来源修补、索引处理、树遍历及节点复制等通用操作 | Uses:sphinx/addnodes.py(扩展与可翻译节点),sphinx/util/parsing.py(嵌套解析标题上下文),sphinx/domains/python/(索引类型映射) | API:NodeMatcher；get_full_module_name；repr_domxml；apply_source_workaround；is_translatable；extract_messages；traverse_translatable_index；LITERAL_TYPE_NODES；IMAGE_TYPE_NODES；get_node_source；get_node_line；traverse_parent；get_prev_node；nested_parse_with_titles；clean_astext；split_explicit_title；process_index_entry；inline_all_toctrees；make_id；set_source_info；set_role_source_info；copy_source_info；is_smartquotable；process_only_nodes | Constraints:extract_messages 对 addnodes.translatable 产出其保存的每条非空原消息，对图片 alt、meta content 和普通可翻译 TextElement 分别产出其非空约定文本；traverse_translatable_index 产出 index 节点及原始或当前五元组条目；翻译候选排除无 source 的内建消息、未显式标记的 Inline 与忽略类节点；apply_source_workaround 为部分 Docutils 节点补 source、line、rawsource；节点 copy/deepcopy 在模块尾被猴补以排除 _document 并维护父子/文档关系	2026-10-16T05:11:21Z			0
++sphinx/util/osutil.py	30f992a8	0	0	2026-10-16T04:43:42Z	U	osutil.py[8 U U P M]: Role:集中提供跨平台路径、文件复制、目录创建、相对路径与避免无变化写入等操作系统工具 | Uses:- | API:SEP；os_path；canon_path；path_stabilize；relative_uri；ensuredir；copyfile；make_filename；make_filename_from_project；relpath；safe_relpath；fs_encoding；abspath；FileAvoidWrite；rmtree | Constraints:canon_path 仅把本机分隔符替换为“/”；relpath 委托 os.path.relpath，Windows 跨盘 ValueError 时返回原 path 字符串。copyfile 默认不覆盖内容不同的既有目标并记录警告，force 才覆盖；FileAvoidWrite 空缓冲 close 抛错且上下文退出总返回 True | Keys:gettext-render(规范相对路径原语)	2026-10-16T04:48:07Z			0
++sphinx/util/parallel.py	4c85c730	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/parsing.py	04759fc1	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/png.py	36a9aca2	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/requests.py	ab0f6432	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/rst.py	35895e9e	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/tags.py	34be4e0e	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/template.py	7851c6b9	0	0	2026-10-16T04:43:43Z	T	template.py[8 C T J P S]: Role:提供沙箱化 Jinja 环境、字符串/文件模板加载器及 Sphinx、LaTeX、reStructuredText 专用 renderer | Uses:sphinx/__init__.py(内置模板根),sphinx/jinja2glue.py(SphinxFileSystemLoader) | API:BaseRenderer；FileRenderer；SphinxRenderer；LaTeXRenderer；ReSTRenderer；SphinxTemplateLoader；render_string(source, context) -> str；render_from_file(filename, context) -> str | Constraints:FileRenderer 保持输入搜索路径顺序、将单一路径包装成列表并过滤假值；SphinxRenderer 仅在 template_path 为 None 时使用 sphinx/templates。当前 BaseRenderer 在 __init__ 与 render_string 之间存在空白且未定义 render，因此 GettextRenderer 不能依赖已实现的通用 render；公开 gettext 任务只要求其专用 override。必须保持 ReSTRenderer 的 e 转义星号及 heading 过滤器输出（test_ReSTRenderer_escape、test_ReSTRenderer_heading） | Keys:gettext-render(基础环境与路径传递)	2026-10-16T04:48:07Z			0
++sphinx/util/texescape.py	8eb8a4ac	0	0	2026-10-16T04:43:42Z						0
++sphinx/util/typing.py	e045d96e	0	0	2026-10-16T04:43:42Z						0
++sphinx/versioning.py	1469f535	0	0	2026-10-16T05:11:54Z	I	versioning.py[8 C I S]: Role:为匹配条件的 doctree 节点分配稳定 UID，并在新旧树之间按文本相似度迁移或生成 UID | Uses:sphinx/transforms/__init__.py(SphinxTransform) | API:add_uids；merge_doctrees；get_ratio；levenshtein_distance；UIDTransform；setup(app) | Constraints:add_uids 为每个匹配节点分配新的 uuid4 十六进制 UID 并依次产出；merge_doctrees 对相同节点复用旧 UID，对低于阈值的变化视作同节点，对新增或差异达到阈值者生成 UID 并产出；VERSIONING_RATIO 为65，可选 python-Levenshtein 加速	2026-10-16T05:11:58Z			0
++sphinx/writers/__init__.py	4845f5a6	0	0	2026-10-16T04:43:42Z						0
++sphinx/writers/html.py	b0f3227f	0	0	2026-10-16T04:43:42Z						0
++sphinx/writers/html5.py	be6c3d55	0	0	2026-10-16T04:43:42Z						0
++sphinx/writers/latex.py	1092ff2a	0	0	2026-10-16T04:43:42Z						0
++sphinx/writers/manpage.py	e5ad42d5	0	0	2026-10-16T04:43:43Z						0
++sphinx/writers/texinfo.py	32fe614b	0	0	2026-10-16T04:43:43Z						0
++sphinx/writers/text.py	28fce3d7	0	0	2026-10-16T04:43:42Z						0
++sphinx/writers/xml.py	e6fd47eb	0	0	2026-10-16T04:43:42Z						0
++tests/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/certs/cert.pem	12c046cc	0	0	2026-10-16T04:43:42Z						0
++tests/conftest.py	d595db51	0	0	2026-10-16T04:43:42Z						0
++tests/js/documentation_options.js	2825803e	0	0	2026-10-16T04:43:42Z						0
++tests/js/fixtures/cpp/searchindex.js	77416336	0	0	2026-10-16T04:43:42Z						0
++tests/js/fixtures/multiterm/searchindex.js	96e18ac9	0	0	2026-10-16T04:43:42Z						0
++tests/js/fixtures/partial/searchindex.js	70f877b7	0	0	2026-10-16T04:43:42Z						0
++tests/js/fixtures/titles/searchindex.js	660dbed5	0	0	2026-10-16T04:43:42Z						0
++tests/js/jasmine-browser.mjs	7dc56c46	0	0	2026-10-16T04:43:42Z						0
++tests/js/language_data.js	14db2885	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/cpp/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/cpp/index.rst	1039af18	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/multiterm/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/multiterm/index.rst	62e30c77	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/partial/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/partial/index.rst	1d4f1b61	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/titles/conf.py	81f9ba0e	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/titles/index.rst	85ab27c9	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/titles/relevance.py	f70b7853	0	0	2026-10-16T04:43:42Z						0
++tests/js/roots/titles/relevance.rst	dee46bf2	0	0	2026-10-16T04:43:42Z						0
++tests/js/searchtools.spec.js	ee292104	0	0	2026-10-16T04:43:42Z						0
++tests/js/sphinx_highlight.spec.js	9db0db1f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-_blank/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-_blank/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_enumerable_node/conf.py	be58fdc0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_enumerable_node/enumerable_node.py	4eb9e864	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_enumerable_node/index.rst	a900ad1b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_enumerable_node/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_source_parser-conflicts-with-users-setting/conf.py	55d74c53	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_source_parser-conflicts-with-users-setting/source_parser.py	401e51f6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_source_parser/conf.py	b3e64e30	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-add_source_parser/source_parser.py	401e51f6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-api-set-translator/conf.py	be571f05	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-api-set-translator/index.rst	8b87bde9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-api-set-translator/nonext/conf.py	be8ccd3e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-api-set-translator/translator.py	c40bfad0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-basic/conf.py	f07bc1a1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-basic/index.rst	a875fab8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-html-theme-having-multiple-stylesheets/_themes/mytheme/_static/extra.css	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-html-theme-having-multiple-stylesheets/_themes/mytheme/_static/mytheme.css	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-html-theme-having-multiple-stylesheets/_themes/mytheme/theme.conf	767f5260	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-html-theme-having-multiple-stylesheets/conf.py	2dcb8353	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-html-theme-having-multiple-stylesheets/index.rst	6f41f880	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/conf.py	bd7bc956	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/doc1.txt	a5fd3274	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/doc2.txt	9c5c2ca5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/index.txt	4d10dc6d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/lineblock.txt	039c3da8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/listitems.txt	e1be7e80	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/maxwidth.txt	fbbd4baf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/nonascii_maxwidth.txt	a0b70b5f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/nonascii_table.txt	09665e55	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/nonascii_title.txt	2d266f67	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/table.txt	f9032a13	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/table_colspan.txt	407b423f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/table_colspan_and_rowspan.txt	0f9f77b6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/table_colspan_left.txt	449c0427	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-build-text/table_rowspan.txt	5416d498	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-dirhtml/bar.rst	a82d0e52	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-dirhtml/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-dirhtml/foo/foo_1.rst	f239ee93	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-dirhtml/foo/foo_2.rst	ddb9954b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-dirhtml/foo/index.rst	526394a4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-dirhtml/index.rst	44d577c5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-gettext-dont-rebuild-mo/bom.rst	62c98f5b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-gettext-dont-rebuild-mo/conf.py	3f515346	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-gettext-dont-rebuild-mo/index.rst	efa72456	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-builder-gettext-dont-rebuild-mo/xx/LC_MESSAGES/bom.po	e26bb4ef	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-changes/base.rst	3d85e1f3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-changes/c-api.rst	bc8cf971	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-changes/conf.py	aabbc5ba	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-changes/contents.rst	5a9f5666	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-changes/library/utils.rst	994a9cb0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-circular/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-circular/index.rst	9ff7ab31	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-circular/sub.rst	ad02bed9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-config/conf.py	429a6d4e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-copyright-multiline/conf.py	d969f273	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-copyright-multiline/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-default_role/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-default_role/foo.rst	c68ce1d1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-default_role/index.rst	5a8f70e9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/caption.rst	bbd4e1e3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/classes.rst	edc52627	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/conf.py	bcb7a933	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/dedent.rst	88139bed	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/emphasize.rst	bba27f10	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/empty.inc	e8ec5d50	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/error.inc	0ba47939	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/force.rst	4c5d44dd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/highlight.rst	293cfb99	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/index.rst	d1f143d9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/linenos.rst	04a27e83	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/linenothreshold.rst	029ef26f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/literal-diff.inc	03c8fac6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/literal-short.inc	4cbe3580	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/literal.inc	28cca9b9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/namedblocks.rst	aeec42b1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/py-decorators.inc	dc7bc09a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/py-decorators.rst	4a5912be	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/python.rst	51685a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-code/target.py	ab2bbca6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-csv-table/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-csv-table/example.csv	2b542b96	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-csv-table/subdir/example.csv	c638efe9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-include/bar.txt	a36c6434	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-include/baz/baz.rst	faa3ea6d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-include/conf.py	3773a1e7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-include/foo.rst	56fe1e9d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-include/text.txt	b5b30406	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-only/conf.py	83c4cd24	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-only/index.rst	790d536d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directive-only/only.rst	b1ca6870	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directives-admonition-collapse/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directives-admonition-collapse/index.rst	370552db	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directives-raw/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-directives-raw/index.rst	03501e71	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-docutilsconf/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-docutilsconf/docutils.conf	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-docutilsconf/index.rst	8cbbcb97	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c-c_maximum_signature_line_length/conf.py	f0a8db50	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c-c_maximum_signature_line_length/index.rst	17844651	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c-intersphinx/conf.py	73a08251	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c-intersphinx/index.rst	91554eea	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/anon-dup-decl.rst	38d8d725	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/field-role.rst	689b0de2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/function_param_target.rst	c610f8e4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/index.rst	540dbf38	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/namespace.rst	74d62bd1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-c/ns_lookup.rst	5b0de0c3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp-cpp_maximum_signature_line_length/conf.py	b911565b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp-cpp_maximum_signature_line_length/index.rst	2edf1768	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp-intersphinx/conf.py	73a08251	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp-intersphinx/index.rst	e5e87870	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/anon-dup-decl.rst	90326cfc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/any-role.rst	82201626	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/backslash.rst	411657f6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/field-role.rst	3a6ceaa9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/index.rst	4711827c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/lookup-key-overload.rst	afe9f2e1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/multi-decl-lookup.rst	1b916137	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/operator-lookup.rst	0ce0f987	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/roles-targets-ok.rst	d652bce6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/roles-targets-warn.rst	189b721f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/roles.rst	af88ab42	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/roles2.rst	02f34e6d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/semicolon.rst	7cd027fd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/warn-template-param-qualified-name.rst	95749368	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-cpp/xref_consistency.rst	c2050f82	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-js-javascript_maximum_signature_line_length/conf.py	96d60132	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-js-javascript_maximum_signature_line_length/index.rst	1aef86ee	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-js/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-js/index.rst	a5fbb8b1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-js/module.rst	14afd6b7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-js/roles.rst	c0590b2c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py-python_maximum_signature_line_length/conf.py	5e195ae0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py-python_maximum_signature_line_length/index.rst	9c1df266	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py-python_use_unqualified_type_names/conf.py	1b81b36e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py-python_use_unqualified_type_names/index.rst	ba8b5cb3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py-xref-warning/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py-xref-warning/index.rst	a63e14fe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/abbr.rst	c80baa2a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/canonical.rst	cdcaae44	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/index.rst	d146f81d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/module.rst	f04b8d24	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/module_option.rst	edff6999	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/roles.rst	24131dfc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-domain-py/type_alias.rst	26a027ad	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-double-inheriting-theme/base_themes_dir/base_theme1/theme.conf	2300da8c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-double-inheriting-theme/base_themes_dir/base_theme2/theme.conf	bd5249a2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-double-inheriting-theme/conf.py	051cd31c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-double-inheriting-theme/index.rst	a602a21e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-environment-record-dependencies/api.rst	3f643831	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-environment-record-dependencies/conf.py	81f9ba0e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-environment-record-dependencies/example_module.py	554d5895	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-environment-record-dependencies/index.rst	6e4d9198	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-epub-anchor-id/conf.py	52e8738a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-epub-anchor-id/index.rst	d6ea93b7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-custom-templates/_templates/module.rst.jinja	974d7855	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-custom-templates/_templates/module.rst_t	cec455a5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-custom-templates/_templates/package.rst_t	f65da5b2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-custom-templates/mypackage/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-custom-templates/mypackage/mymodule.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-duplicates/fish_licence/halibut.pyd	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-duplicates/fish_licence/halibut.pyi	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-duplicates/fish_licence/halibut.pyx	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-pep420/a/b/c/__init__.py	0cf31c34	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-pep420/a/b/c/d.py	4421605b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-pep420/a/b/e/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-pep420/a/b/e/f.py	3ee1333b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-pep420/a/b/x/y.py	dc513368	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-subpackage-in-toc/parent/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-subpackage-in-toc/parent/child/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-subpackage-in-toc/parent/child/foo.py	c3450a5c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-toc/mypackage/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-toc/mypackage/main.py	72cc88a1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-toc/mypackage/no_init/foo.py	1cc7bd3c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-toc/mypackage/resource/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-toc/mypackage/resource/resource.txt	bae0be93	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-toc/mypackage/something/__init__.py	90565227	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-trailing-underscore/package_/__init__.py	5511f0fc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc-trailing-underscore/package_/module_.py	25acdf0a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc/conf.py	3ee12e9c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc/index.rst	460de084	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc/src/exclude_package.py	d722d0f5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-apidoc/src/my_package.py	e2a73b8f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc-type-alias-xref/alias_module.py	5c5c324e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc-type-alias-xref/conf.py	7337ca8a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc-type-alias-xref/index.rst	7ad113a5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/autodoc_dummy_bar.py	b506d727	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/autodoc_dummy_module.py	36d113bf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/bug2437/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/bug2437/autodoc_dummy_foo.py	0573dd0d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/circular_import/__init__.py	159cbd0e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/circular_import/a.py	5dbe5eb2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/circular_import/b.py	ca00c4f9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/circular_import/c.py	5ef5cccd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/conf.py	e7658753	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/index.rst	49bc5afa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/TYPE_CHECKING.py	8d82e9c0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/__init__.py	e3a820d3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/_functions_to_import.py	db28a39f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/abstractmethods.py	9cbdd2aa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/annotated.py	b6bcd0d7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/autoclass_content.py	21cf44ae	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/autodoc_type_aliases.py	7f70f515	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/bound_method.py	53b217ff	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/cached_property.py	8bea24cd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/callable.py	2ee9c30c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/canonical/__init__.py	f40f6254	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/canonical/original.py	40e2b61e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/classes.py	653fe0ec	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/coroutine.py	b5f5a80e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/cython.pyx	647d9b56	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/decorator.py	8337e5ec	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/descriptor.py	6b8f91bd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/docstring_signature.py	2010501b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/empty_all.py	44697e71	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/enums.py	4af96d62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/final.py	23139b4a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/functions.py	dbf1a9ba	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/generic_class.py	7915397e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/genericalias.py	35f27a23	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/hide_value.py	19553de8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/imported_members.py	4c937138	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/inheritance.py	832055f2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/inherited_annotations.py	c42b9534	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/instance_variable.py	8e2ff397	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/literal.py	730cc09e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/metadata.py	d4d44f0f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/methods.py	c4e167e9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/module.py	df3ab9e2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/name_conflict/__init__.py	776fd172	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/name_conflict/foo.py	d2748b3f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/name_mangling.py	71c50514	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/need_mocks.py	07fb5704	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/overload.py	992f626d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/overload2.py	5db9e480	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/overload3.py	5adc7faa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/partialfunction.py	60047446	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/partialmethod.py	54332dee	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/pep570.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/pep604.py	8db53957	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/pep695.py	3023e797	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/preserve_defaults.py	b6825a93	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/preserve_defaults_special_constructs.py	e159585c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/private.py	14b875f3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/process_docstring.py	956dc53b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/properties.py	7ac8e8fa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/singledispatch.py	90a22f29	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/singledispatchmethod.py	a00e3341	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/singledispatchmethod_classmethod.py	da049ae2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/slots.py	f969d084	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/sort_by_all.py	407794d9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/typed_vars.py	22e647b4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/typehints.py	61a80b4e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/typevar.py	c23f5446	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/uninitialized_attributes.py	d3173585	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autodoc/target/wrappedfunction.py	83770270	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosectionlabel-prefix-document/conf.py	06471f0f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosectionlabel-prefix-document/index.rst	4276dd01	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosectionlabel/conf.py	9af0efcb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosectionlabel/index.rst	15177137	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-ext/conf.py	64efe7e4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-ext/dummy_module.py	9494c114	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-ext/index.rst	a5f7495f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-ext/sphinx.rst	a7a2165e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-ext/underscore_module_.py	ad4b7f46	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-filename-map/autosummary_dummy_module.py	cba81c84	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-filename-map/conf.py	3a68d3da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-filename-map/index.rst	b6764df3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-import_cycle/conf.py	e0d8ebd0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-import_cycle/index.rst	43807c77	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-import_cycle/spam/__init__.py	086fc78f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-import_cycle/spam/eggs.py	6a72f08d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-imported_members/autosummary_dummy_package/__init__.py	6f657855	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-imported_members/autosummary_dummy_package/autosummary_dummy_module.py	27e3f468	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-imported_members/conf.py	21aba5a9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-imported_members/index.rst	228d60a9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-mock_imports/conf.py	a80e4934	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-mock_imports/foo.py	726b1e22	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-mock_imports/index.rst	fc154cc9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_all/autosummary_dummy_package_all/__init__.py	df102d11	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_all/autosummary_dummy_package_all/autosummary_dummy_module.py	64caf997	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_all/autosummary_dummy_package_all/extra_dummy_module.py	64caf997	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_all/conf.py	3f44b7c4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_all/index.rst	f892a5b3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_empty_all/autosummary_dummy_package_empty_all/__init__.py	bace71ab	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_empty_all/conf.py	9b71d162	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_empty_all/index.rst	cdb28b76	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_empty_all/templates/autosummary/module.rst	0c2789bf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_prefix/conf.py	a3f349ea	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_prefix/index.rst	a03d1f9a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_prefix/pkg/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_prefix/pkg/mod0/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-module_prefix/pkg/mod1/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/conf.py	8886d354	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/index.rst	ff545999	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package/module.py	83260006	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package/module_importfail.py	89d67d14	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package/package/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package/package/module.py	83260006	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package2/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-recursive/package2/module.py	83260006	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-skip-member/conf.py	ea1cbd2a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-skip-member/index.rst	aaaec6b3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-skip-member/target.py	ca24fa21	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-template/_templates/empty.rst	65202049	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-template/conf.py	32caad30	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-template/index.rst	b5c242e1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary-template/target.py	7780aaf1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary/autosummary_class_module.py	f818e6cf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary/autosummary_dummy_inherited_module.py	ee001b8c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary/autosummary_dummy_module.py	948f6890	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary/autosummary_importfail.py	89d67d14	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary/conf.py	8886d354	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-autosummary/index.rst	0bf29e67	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-coverage/conf.py	09bf2e2e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-coverage/grog/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-coverage/grog/coverage_ignored.py	3796396d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-coverage/grog/coverage_missing.py	e65e4138	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-coverage/grog/coverage_not_ignored.py	3796396d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-coverage/index.rst	8a151d5d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-fail-fast/conf.py	20a50835	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-fail-fast/fail-fast.txt	34a005ef	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-skipif/conf.py	6af2e9b7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-skipif/skipif.txt	c5aa9f4d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-with-autodoc/conf.py	5166712f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-with-autodoc/dir/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-with-autodoc/dir/bar.py	65181fe8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-with-autodoc/dir/inner.rst	64bc1800	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-with-autodoc/foo.py	fdbf8535	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest-with-autodoc/index.rst	3e13a98a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest/conf.py	179b37d1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-doctest/doctest.txt	c46655d6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-extlinks-hardcoded-urls-multiple-replacements/conf.py	de4d3993	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-extlinks-hardcoded-urls-multiple-replacements/index.rst	074296bf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-extlinks-hardcoded-urls/conf.py	54fd08c6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-extlinks-hardcoded-urls/index.rst	001e8943	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-githubpages/conf.py	42d52609	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-githubpages/index.rst	d69845b7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-graphviz/_static/images/test.svg	7a0966e0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-graphviz/conf.py	79de5ab5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-graphviz/graph.dot	c0f5bb51	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-graphviz/graph.xx.dot	8b792187	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-graphviz/index.rst	2a52a77d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-ifconfig/conf.py	3e1c7c90	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-ifconfig/index.rst	07e4f1f7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgconverter/conf.py	247f4024	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgconverter/img.pdf	06e8ce47	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgconverter/index.rst	37a58baa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgconverter/svgimg.svg	3dd3c4da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgmockconverter/1/svgimg.svg	fb128c71	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgmockconverter/2/svgimg.svg	3dd3c4da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgmockconverter/conf.py	ca8339c8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgmockconverter/index.rst	4f19e563	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-imgmockconverter/mocksvgconverter.py	0e8a759e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/conf.py	29c724dc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/example/__init__.py	15a21911	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/example/sphinx.py	fbc709ee	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/external/other.py	d0662329	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/index.rst	db2365d2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/subdir/page1.rst	0c8f60b7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/subdir/page2.rst	be6f345e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-inheritance_diagram/test.py	4cddbd96	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-intersphinx-cppdomain/conf.py	698de72e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-intersphinx-cppdomain/index.rst	704896c8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-intersphinx-role/conf.py	6b28cea2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-intersphinx-role/index.rst	82dbcb8e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-compat/conf.py	1d9204e9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-compat/index.rst	3e7181ca	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-duplicate-label/conf.py	67d22bf5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-duplicate-label/index.rst	75a5371e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-include/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-include/included.rst	692d74c8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-include/index.rst	42d375b0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-include/math.rst	c84faca5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-simple/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math-simple/index.rst	684bf8ac	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math/index.rst	394698f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math/math.rst	ac48125d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math/nomath.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-math/page.rst	bd8481fe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon-paramtype/conf.py	30bf738f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon-paramtype/index.rst	e507d78a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon-paramtype/pkg/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon-paramtype/pkg/bar.py	3211e880	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon-paramtype/pkg/foo.py	eeb2b9c6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon/conf.py	28bbe7d4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon/index.rst	0812ee00	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon/mypackage/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon/mypackage/typehints.py	9c6b4d8c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-napoleon/typehints.rst	07e8f9e3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-todo/bar.rst	7c136628	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-todo/conf.py	774a7ead	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-todo/foo.rst	1609fff8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-todo/index.rst	c6b40e84	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find-package/conf.py	1d4de3e9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find-package/index.rst	4c20d4fe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find-package/main_package/__init__.py	b41e31e2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find-package/main_package/subpackage/__init__.py	7f54336d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find-package/main_package/subpackage/_subpackage2/__init__.py	32d70693	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find-package/main_package/subpackage/_subpackage2/submodule.py	944a618b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find/conf.py	e99266dd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find/index.rst	82d47cd6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find/not_a_package/__init__.py	0a1c4c49	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode-find/not_a_package/submodule.py	6bc891aa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/conf.py	5047fe16	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/index.rst	f4a3bc6b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/objects.rst	abaa7261	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/spam/__init__.py	3021fc03	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/spam/mod1.py	5e3db897	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/spam/mod2.py	475795c7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-ext-viewcode/spam/mod3.py	f7b42716	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-extensions/conf.py	2153313a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-extensions/read_parallel.py	5b0e8f7d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-extensions/read_serial.py	6e11c86c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-extensions/write_parallel.py	a0bd6e40	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-extensions/write_serial.py	3682379c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-footnotes/bar.rst	c9e2b3ba	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-footnotes/baz.rst	ba8ad642	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-footnotes/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-footnotes/index.rst	752ef116	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-footnotes/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-gettext-custom-output-template/_templates/message.pot.jinja	557f9dd5	0	0	2026-10-16T04:43:42Z	I	message.pot.jinja[5 T I J T]: Role:为 gettext 自定义输出模板测试提供替代 POT 文本布局 | Uses:sphinx/builders/gettext.py(GettextRenderer上下文与转义过滤器) | API:测试夹具模板名 message.pot.jinja | Constraints:以“EVEN MORE DESCRIPTIVE TITLE.”区分用户模板优先级，头字段与消息文本使用 e 过滤器并为每条消息输出非空 msgid，不输出位置或 UUID	2026-10-16T05:08:11Z			0
++tests/roots/test-gettext-custom-output-template/conf.py	4fb76742	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-gettext-custom-output-template/index.rst	10db9fef	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-gettext-template/_templates/template1.html	5bc156b2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-gettext-template/_templates/template2.html	af074287	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-gettext-template/conf.py	4fb76742	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-gettext-template/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-glossary/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-glossary/index.rst	a2fe19a0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-highlight_options/conf.py	274bf05e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-highlight_options/index.rst	5fdc740c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/conf.py	bfe57761	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/.htaccess	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/.htpasswd	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/API.html.jinja	f4338e44	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/css/style.css	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/subdir/.htaccess	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/extra/subdir/.htpasswd	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/index.rst	8b29ef45	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/.htaccess	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/.htpasswd	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/API.html.jinja	f4338e44	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/css/style.css	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/js/custom.js	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/subdir/.htaccess	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/static/subdir/.htpasswd	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/subdir/_build/index.html	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_assets/subdir/background.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_entity/conf.py	46cac186	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_entity/index.rst	a9be6058	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_file_checksum/conf.py	93a6c91f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_file_checksum/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_file_checksum/static/empty.js	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_file_checksum/static/script.js	48278d48	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_file_checksum/static/stylesheet-a.css	e575b6df	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_file_checksum/static/stylesheet-b.css	a2d5cc0f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_scaled_image_link/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_scaled_image_link/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_scaled_image_link/index.rst	2a47c671	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_signaturereturn_icon/conf.py	4b47e907	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_signaturereturn_icon/index.rst	ff954f9b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_style/_static/default.css	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_style/conf.py	b9ccf651	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-html_style/index.rst	3931a190	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-escape/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-escape/img_#1.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-escape/index.rst	e0d25d52	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-in-parsed-literal/conf.py	2f83c315	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-in-parsed-literal/index.rst	9313ecca	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-in-parsed-literal/pic.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-in-section/conf.py	848ba61c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-in-section/index.rst	f7650377	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-image-in-section/pic.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/img.gif	76c01ce0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/img.ja.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/img.pdf	06e8ce47	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/img.zh.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/index.rst	8b4298b2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/rimg.png.xx	fed87df8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/rimg.xx.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/subdir/index.rst	cb04baa0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/subdir/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/subdir/rimg.xx.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/subdir/svgimg.pdf	06e8ce47	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/subdir/svgimg.svg	3dd3c4da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/subdir/svgimg.xx.svg	3dd3c4da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-images/testimäge.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-index_on_title/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-index_on_title/contents.rst	2ea33aee	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/basic_diagram.rst	fba40867	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/conf.py	a2e10908	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/diagram_module_w_2_top_classes.rst	8281c146	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/diagram_w_1_top_class.rst	8f133925	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/diagram_w_2_top_classes.rst	766ebf7b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/diagram_w_nested_classes.rst	12c015f9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/diagram_w_parts.rst	da92d6ef	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/dummy/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/dummy/test.py	3d3aaa35	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/dummy/test_nested.py	1a6e00f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-inheritance/index.rst	447bbf4b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/_templates/contents.html	9c698b0e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/admonitions.txt	67fa6ee1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/backslashes.txt	6b642c0c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/bom.txt	62c98f5b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/conf.py	6a4464d6	0	0	2026-10-16T04:43:42Z	I	conf.py[5 T I T]: Role:配置国际化集成测试的源码后缀、模板、语言目录行为与 gettext 索引提取 | Uses:- | API:测试根配置 | Constraints:gettext_additional_targets 含 index，故国际化调用链必须支持可翻译索引遍历；源码为 .txt reStructuredText，项目名含尖括号以覆盖转义	2026-10-16T05:10:49Z			0
++tests/roots/test-intl/definition_terms.txt	d7ceb22b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/docfields.txt	c3b926ff	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/external_links.txt	0bc0c6eb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/figure.txt	69fffbc5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/footnote.txt	9f813750	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/glossary_terms.txt	2d981306	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/glossary_terms_inconsistency.txt	0743c3f8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/i18n.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/index.txt	5e6ee03f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/index_entries.txt	75281276	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/label_target.txt	c1dd85d1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/literalblock.txt	e3a9dbb0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/markup.txt	bba9560b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/noqa.txt	ee1bebe1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/only.txt	80932936	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/raw.txt	ecccc87d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/refs.txt	5794d3a9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/refs_inconsistency.txt	6f42a5a0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/refs_python_domain.txt	255bfbdf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/role_xref.txt	ed6b9e2b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/rubric.txt	95b68deb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/section.txt	362f05df	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/seealso.txt	238c31bb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/subdir/index.txt	4f10bf27	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/table.txt	a05f2830	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/toctree.txt	88352f49	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/topic.txt	4e6b021d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/translation_progress.txt	aebdbaad	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/versionchange.txt	2860acb9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/warnings.txt	75ddafbc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/admonitions.po	8b005940	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/bom.po	e26bb4ef	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/definition_terms.po	699d424f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/docfields.po	15bba140	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/external_links.po	ab4365fe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/figure.po	e1720e25	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/footnote.po	11e01ed6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/glossary_terms.po	66626913	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/glossary_terms_inconsistency.po	e6a94d98	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/index.po	460de6d1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/index_entries.po	f177780f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/label_target.po	c5028fb2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/literalblock.po	f880a1d8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/markup.po	9379d692	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/noqa.po	9cfb9ffb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/only.po	ec5a677b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/raw.po	05232c1c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/refs.po	28af3347	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/refs_inconsistency.po	1391e8ea	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/refs_python_domain.po	22305a22	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/role_xref.po	b433e085	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/rubric.po	70faeaa9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/section.po	ed6296d8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/seealso.po	7754f1ba	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/sphinx.po	c17cefc4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/table.po	b24787cf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/toctree.po	8a250b46	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/topic.po	6b0bc3c4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/translation_progress.po	1e5de4fa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/versionchange.po	10bedf70	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl/xx/LC_MESSAGES/warnings.po	6eb788bf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/conf.py	a66351c9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/i18n.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/index.rst	ca333ee1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/prolog_epilog_substitution.rst	a17161fc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/prolog_epilog_substitution_excluded.rst	01ac34ef	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-intl_substitution_definitions/xx/LC_MESSAGES/prolog_epilog_substitution.po	7fd7498d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-keep_warnings/conf.py	92184bd1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-keep_warnings/index.rst	ee57c4b1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-babel/bar.rst	6a4b2837	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-babel/conf.py	e8e871bb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-babel/foo.rst	24249607	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-babel/index.rst	0569fed8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-container/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-container/index.rst	6bbc0f49	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-contents-topic-sidebar/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-contents-topic-sidebar/index.rst	509040d9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-equations/conf.py	47d371d9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-equations/equations.rst	923e84bb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-equations/expects/latex-equations.tex	73f89164	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-figure-in-admonition/conf.py	f21698ae	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-figure-in-admonition/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-figure-in-admonition/index.rst	4a930279	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-images-css3-lengths/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-images-css3-lengths/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-images-css3-lengths/index.rst	450357d6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-includegraphics/conf.py	e46fe352	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-includegraphics/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-includegraphics/index.rst	6bd2e677	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-includegraphics/sphinx.png	9e0e981e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-includegraphics/tall.png	bbf83260	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-index/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-index/index.rst	812fd646	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels-before-module/automodule1.py	02c43952	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels-before-module/automodule2a.py	02c43952	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels-before-module/automodule2b.py	02c43952	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels-before-module/automodule3.py	02c43952	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels-before-module/conf.py	3fb8ccdf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels-before-module/index.rst	cf1c008c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels/index.rst	9f080717	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-labels/otherdoc.rst	56f9cd20	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-numfig/conf.py	cb29f435	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-numfig/index.rst	d6d3f2e1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-numfig/indexhowto.rst	60df5c20	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-numfig/indexmanual.rst	81c98f9e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/_mytemplates/latex/longtable.tex.jinja	a97bf948	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/_mytemplates/latex/tabulary.tex_t	debd9e1b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/complex.rst	84c7692b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/complex_spanning_cell.tex	dd75f0f8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/grid_table.tex	db846536	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/grid_table_with_tabularcolumns.tex	f77af2f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable.tex	935e6de2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_align_option.tex	e3edf5b5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_caption.tex	4f7ac7f3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_formerly_problematic.tex	9b25946d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_stub_columns_and_formerly_problematic.tex	c1bc604c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_verbatim.tex	c10ed1dd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_widths_and_formerly_problematic.tex	423102f1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_having_widths_option.tex	9317d7b4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/longtable_with_tabularcolumns.tex	eb8cab26	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/simple_table.tex	784428f5	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_caption.tex	1a262597	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_formerly_problematic.tex	fc729561	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_stub_columns_and_formerly_problematic.tex	6dd17300	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_three_paragraphs_cell_in_first_col.tex	9d00b92b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_verbatim.tex	ed5275f9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_widths_and_formerly_problematic.tex	04b51820	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_having_widths_option.tex	42c51c96	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/table_with_tabularcolumns.tex	a9a82e3c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/tabular_having_align_option.tex	02a2e1e1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/expects/tabulary_having_align_option.tex	952e0998	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/index.rst	28c311a3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/longtable.rst	14fa409f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-table/tabular.rst	631bd68e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-theme/conf.py	4f3dc469	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-theme/index.rst	6b0c6106	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-theme/theme/custom/theme.conf	d5ec2ddc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-title/conf.py	c8411e24	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-title/index.rst	a7b0cf24	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-unicode/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-latex-unicode/index.rst	8013a941	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-anchors-ignore-for-url/conf.py	0fc67dbe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-anchors-ignore-for-url/index.rst	69c9052c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-anchors-ignore/conf.py	0fc67dbe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-anchors-ignore/index.rst	c122d138	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-documents_exclude/br0ken_link.rst	6fa114bb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-documents_exclude/broken_link.rst	d4b10249	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-documents_exclude/conf.py	c8a5a67b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-documents_exclude/index.rst	f3d10892	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver-anchor/conf.py	0fc67dbe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver-anchor/index.rst	a5504cea	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver-https/conf.py	a0da8343	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver-https/index.rst	06684009	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver-warn-redirects/conf.py	a0da8343	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver-warn-redirects/index.rst	8a4f44e3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver/conf.py	a0da8343	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-localserver/index.rst	ac5c400f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-raw-node/conf.py	a0da8343	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-too-many-retries/conf.py	0fc67dbe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck-too-many-retries/index.rst	403927a7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck/conf.py	e31db955	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-linkcheck/links.rst	b0baae80	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-local-logo/conf.py	4e5e4120	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-local-logo/images/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-local-logo/index.rst	a875fab8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-locale/locale1/en/LC_MESSAGES/myext.mo	e70e7a82	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-locale/locale1/en/LC_MESSAGES/myext.po	1bb53f61	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-locale/locale1/et/LC_MESSAGES/myext.mo	eb0ca68b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-locale/locale1/et/LC_MESSAGES/myext.po	62658519	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-locale/locale2/en/LC_MESSAGES/myext.mo	8eeb261c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-locale/locale2/en/LC_MESSAGES/myext.po	8e8a45df	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-manpage_url/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-manpage_url/index.rst	c489a730	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-markup-citation/conf.py	6ae9cae3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-markup-citation/index.rst	48a9b823	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-markup-rubric/conf.py	d68dc454	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-markup-rubric/index.rst	fe521391	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-maxlistdepth/conf.py	4cb66a4d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-maxlistdepth/index.rst	7ff6e6b0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-metadata/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-metadata/index.rst	fca9d954	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/bar.rst	72b87c8a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/baz.rst	9eebfee7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/conf.py	62706064	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/foo.rst	0c019224	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/index.rst	8e552f80	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/quux.rst	27e7a9bc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-need-escaped/qux.rst	32bc046e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-nested-enumerated-list/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-nested-enumerated-list/index.rst	3dad2852	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-nested-tables/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-nested-tables/index.rst	101c0641	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-nitpicky-warnings/conf.py	1067702f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-nitpicky-warnings/index.rst	989a395d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numbered-circular/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numbered-circular/index.rst	768e5edd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numbered-circular/sub.rst	ad02bed9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numfig/bar.rst	9f507440	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numfig/baz.rst	c1da38b9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numfig/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numfig/foo.rst	18dab47d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numfig/index.rst	0e45b5a2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-numfig/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-object-description-sections/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-object-description-sections/index.rst	43b43e68	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/Bare.rst	6a29f340	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/Dup1.rst	35f5efac	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/Dup2.rst	53f13a9c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/LineContinuation.rst	0be295b3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/P1.rst	2d9decd6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/P2.rst	e6dec109	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/firstLineRule.rst	669d6801	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-productionlist/index.rst	7b5debbe	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-prolog/conf.py	0ed72a1c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-prolog/index.rst	5f5df0dd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-prolog/markdown.md	626c3c15	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-prolog/prolog_markdown_parser.py	51ff0e66	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-prolog/restructuredtext.rst	a62873e7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-pycode/cp_1251_coded.py	d19318b6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-reST-code-block/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-reST-code-block/index.rst	ea087195	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-reST-code-role/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-reST-code-role/index.rst	a35fa5c0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-refonly_bullet_list/conf.py	f7823bcd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-refonly_bullet_list/index.rst	7ca54f21	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-remote-logo/conf.py	4a369950	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-remote-logo/index.rst	a875fab8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-roles-download/another/dummy.dat	243d7d6d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-roles-download/conf.py	6ae9cae3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-roles-download/dummy.dat	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-roles-download/index.rst	ed189415	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/Makefile	06668cc6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/_templates/contentssb.html	326186e6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/_templates/customsb.html	492261b9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/_templates/layout.html	6906d960	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/autodoc.txt	576a2210	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/autodoc_target.py	270343f3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/bom.txt	62c98f5b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/conf.py	5eec2549	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/extapi.txt	ea8c0679	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/extensions.txt	ab7adc11	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/file_with_special_#_chars.xyz	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/footnote.txt	70e2a64e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/images.txt	84c6563e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/img.foo.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/img.gif	76c01ce0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/img.pdf	06e8ce47	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/includes.txt	96907503	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/index.txt	2464f478	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/lists.txt	673a32f3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/literal.inc	641c2108	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/literal_orig.inc	c041a5de	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/markup.txt	2e6d43bd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/math.txt	eb1bd01d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/objects.txt	3f3c6567	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/otherext.foo	dbdb60ea	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/parsermod.py	7d541d86	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/quotes.inc	ac4ec1ca	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/rimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/special/api.h	8e61da67	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/special/code.py	1f23548b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/subdir/excluded.txt	784f2908	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/subdir/images.txt	b15f73a6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/subdir/img.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/subdir/include.inc	f81bfb45	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/subdir/includes.txt	041c446b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/subdir/simg.png	e1b2b0f4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/svgimg.pdf	06e8ce47	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/svgimg.svg	3dd3c4da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/tabs.inc	df54d8c9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/test.inc	6dba43c9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-root/wrongenc.inc	fd6791b8	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-search/conf.py	24d458bd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-search/index.rst	142cdc29	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-search/nosearch.rst	9552376d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-search/tocitem.rst	d8bbc6b9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-smartquotes/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-smartquotes/index.rst	72c8d594	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-smartquotes/literals.rst	ee92ce8a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-stylesheets/_templates/layout.html	fac063bd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-stylesheets/conf.py	96b79181	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-stylesheets/index.rst	583b3cba	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-templating/_templates/autosummary/class.rst	0057f73f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-templating/_templates/layout.html	bbe4ab5c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-templating/autosummary_templating.txt	979c4554	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-templating/conf.py	1f1be74f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-templating/index.txt	72e742c2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/child.zip	a36340ed	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/conf.py	c05905ec	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/index.rst	c36a6545	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/parent.zip	1dd14a3a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/staticfiles/layout.html	819ecdcb	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/staticfiles/static/legacytmpl.html_t	496a0036	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/staticfiles/static/staticimg.png	9a8aed0b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/staticfiles/static/statictmpl.html.jinja	51da0111	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/staticfiles/theme.conf	8334eab0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/test_theme/test-theme/theme.conf	d25acf66	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-theming/ziptheme.zip	1dd14a3a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-tocdepth/bar.rst	35868d54	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-tocdepth/baz.rst	f2c2af7b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-tocdepth/conf.py	46cac186	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-tocdepth/foo.rst	f5e817bf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-tocdepth/index.rst	4125dab4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-domain-objects/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-domain-objects/document_scoping.rst	61740941	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-domain-objects/domains.rst	46fa74d2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-domain-objects/index.rst	730da085	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-duplicated/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-duplicated/foo.rst	19851868	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-duplicated/index.rst	3b0ccaf2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-empty/_templates/localtoc.html	866ad147	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-empty/conf.py	ac92553a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-empty/index.rst	922cd846	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/bar/bar_1.rst	8b1c5af7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/bar/bar_2.rst	36d63639	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/bar/bar_3.rst	eb40efbc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/bar/bar_4/index.rst	9633e9e4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/bar/index.rst	484459c7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/baz.rst	64eba03a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/foo.rst	208b2d72	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/index.rst	3fa251f9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/quux.rst	aca9d73f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/qux/index.rst	6f97abfa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/qux/qux_1.rst	39a28c56	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-glob/qux/qux_2.rst	39a28c56	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-index/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-index/foo.rst	7cf8c19f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-index/index.rst	19bf382c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-maxdepth/bar.rst	35868d54	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-maxdepth/baz.rst	f2c2af7b	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-maxdepth/conf.py	8b043a62	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-maxdepth/foo.rst	f5e817bf	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-maxdepth/index.rst	ff184916	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-maxdepth/qux.rst	582cfe1e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/alpha.rst	6cb3bc20	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/bravo.rst	17544ba4	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/charlie.rst	a4aaf9bd	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/conf.py	e7cfb422	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/delta.rst	c51aa94d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/index.rst	074c6eaa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-multiple-parents/relation_graph.txt	b00abcf9	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-only/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree-only/index.rst	c983b3e3	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/bar.rst	72b87c8a	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/baz.rst	9eebfee7	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/foo.rst	4e62ce7c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/index.rst	fe3a9071	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/quux.rst	27e7a9bc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/qux.rst	32bc046e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-toctree/tocdepth.rst	c6e536f2	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-transforms-post_transforms-keyboard/conf.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-transforms-post_transforms-keyboard/index.rst	15e28fdc	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-transforms-post_transforms-missing-reference/conf.py	1067702f	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-transforms-post_transforms-missing-reference/index.rst	5b2d74c1	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-trim_doctest_flags/conf.py	24a5dcaa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-trim_doctest_flags/index.rst	435e5e2e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-util-copyasset_overwrite/conf.py	374ad375	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-util-copyasset_overwrite/index.rst	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-util-copyasset_overwrite/myext.py	af8720f6	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-util-copyasset_overwrite/myext_static/custom-styles.css	322cf26d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-util-copyasset_overwrite/user_static/custom-styles.css	6a7e025d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/added.txt	8b753672	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/conf.py	1cbbc19d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/deleted.txt	4b76fd16	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/deleted_end.txt	1a84867d	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/index.txt	b22a9635	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/insert.txt	0bb70e1c	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/insert_beginning.txt	1d47a488	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/insert_similar.txt	1116c282	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/modified.txt	b7e489fa	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-versioning/original.txt	9e3788da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/autodoc_fodder.py	3a058cd0	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/conf.py	81f9ba0e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/index.rst	ade2072e	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/svgimg.pdf	06e8ce47	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/svgimg.svg	3dd3c4da	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/undecodable.rst	854aae09	0	0	2026-10-16T04:43:42Z						0
++tests/roots/test-warnings/wrongenc.inc	fd6791b8	0	0	2026-10-16T04:43:42Z						0
++tests/test__cli/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test__cli/test__cli_util_errors.py	3a425e4d	0	0	2026-10-16T04:43:42Z						0
++tests/test_addnodes.py	088af4c1	0	0	2026-10-16T04:43:42Z						0
++tests/test_application.py	1aaae7e8	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/conftest.py	7b4ae504	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build.py	351f76e4	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_all.py	e8eb0af1	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_changes.py	ccdfe1bb	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_dirhtml.py	ec73d3c7	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_epub.py	178a1f0b	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html.py	85924bf9	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_5_output.py	951acdc2	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_assets.py	36bcce83	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_code.py	e93361b2	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_copyright.py	b802ab8f	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_download.py	a1ba408d	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_highlight.py	c6e6fa60	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_image.py	5e8cfbc8	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_maths.py	31715998	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_numfig.py	a44d2ad2	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_tocdepth.py	efb57644	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_html_toctree.py	54ffad35	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_latex.py	c9ca0189	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_linkcheck.py	4a88300d	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_manpage.py	7130e409	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_texinfo.py	e8681e39	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_text.py	99566afa	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_build_warnings.py	fd805b1a	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/test_incremental_reading.py	577a5acf	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/xpath_data.py	b52bd93f	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/xpath_html_util.py	db705953	0	0	2026-10-16T04:43:42Z						0
++tests/test_builders/xpath_util.py	d66812af	0	0	2026-10-16T04:43:42Z						0
++tests/test_command_line.py	448d8ada	0	0	2026-10-16T04:43:42Z						0
++tests/test_config/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_config/test_config.py	2ae8656e	0	0	2026-10-16T04:43:42Z						0
++tests/test_config/test_copyright.py	b04ccf48	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_code.py	033dd8d0	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_object_description.py	f6972108	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_only.py	77ef83d3	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_option.py	c3f180e0	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_other.py	955e654a	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_patch.py	84ca79d2	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directive_productionlist.py	b3277f8a	0	0	2026-10-16T04:43:42Z						0
++tests/test_directives/test_directives_no_typesetting.py	d9bc1ada	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_c.py	409e40a8	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_cpp.py	37a72bff	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_js.py	fbd9a85b	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_py.py	1c2706ce	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_py_canonical.py	d59d57f5	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_py_fields.py	6df28764	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_py_pyfunction.py	dc48b278	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_py_pyobject.py	69feff8e	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_rst.py	79c471b2	0	0	2026-10-16T04:43:42Z						0
++tests/test_domains/test_domain_std.py	b7ed53b9	0	0	2026-10-16T04:43:42Z						0
++tests/test_environment/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_environment/test_environment.py	78312fab	0	0	2026-10-16T04:43:42Z						0
++tests/test_environment/test_environment_indexentries.py	bb92f58c	0	0	2026-10-16T04:43:42Z						0
++tests/test_environment/test_environment_record_dependencies.py	93f102f9	0	0	2026-10-16T04:43:42Z						0
++tests/test_environment/test_environment_toctree.py	e3674661	0	0	2026-10-16T04:43:42Z						0
++tests/test_errors.py	2a9ff435	0	0	2026-10-16T04:43:42Z						0
++tests/test_events.py	2fd63d50	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/autodoc_util.py	6ff33796	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc.py	b0993fd2	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_autoattribute.py	49eb34d8	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_autoclass.py	a68d5ae1	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_autodata.py	0589123d	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_autofunction.py	95143c72	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_automodule.py	828cf216	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_autoproperty.py	ce3ad9b3	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_configs.py	3bed7adc	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_events.py	b38b8b7a	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_importer.py	3190a94e	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_mock.py	aacf81d8	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_preserve_defaults.py	7ea705aa	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_private_members.py	7f6ce26d	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autodoc/test_ext_autodoc_type_alias_nitpicky.py	a8a5ee68	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autosummary/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autosummary/test_ext_autosummary.py	388dd8df	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_autosummary/test_ext_autosummary_imports.py	4da92956	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_imgconverter/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_imgconverter/test_ext_imgconverter.py	fb3b2a58	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_imgconverter/test_ext_imgmockconverter.py	00cdfa9d	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_intersphinx/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_intersphinx/test_ext_intersphinx.py	4f0696b8	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_intersphinx/test_ext_intersphinx_cache.py	78f149c1	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_napoleon/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_napoleon/pep526_data_google.py	307bbea5	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_napoleon/pep526_data_numpy.py	cc289d26	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_napoleon/test_ext_napoleon.py	33811104	0	0	2026-10-16T04:43:42Z						0
++tests/test_ext_napoleon/test_ext_napoleon_docstring.py	6830a416	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_apidoc.py	af8ad7f3	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_autosectionlabel.py	8f425339	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_coverage.py	cef4d65a	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_doctest.py	43b1c5dc	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_duration.py	a72e3ea8	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_extlinks.py	fc81ad00	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_githubpages.py	52b4cf30	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_graphviz.py	edea94d0	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_ifconfig.py	e8708b35	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_inheritance_diagram.py	41259da3	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_math.py	76ef7eed	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_todo.py	ef774527	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_ext_viewcode.py	f436490c	0	0	2026-10-16T04:43:42Z						0
++tests/test_extensions/test_extension.py	ff7345af	0	0	2026-10-16T04:43:42Z						0
++tests/test_highlighting.py	f65d62ed	0	0	2026-10-16T04:43:42Z						0
++tests/test_intl/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_intl/test_catalogs.py	d3402b6e	0	0	2026-10-16T04:43:42Z						0
++tests/test_intl/test_intl.py	1029a733	0	0	2026-10-16T04:43:42Z	I	test_intl.py[8 T I L]: Role:以 gettext、text、HTML、XML 与 dummy 构建覆盖消息提取、目录编译、翻译替换及国际化回归行为 | Uses:sphinx/builders/gettext.py(gettext builder),sphinx/util/i18n.py(目录编译路径) | API:- | Constraints:相关可见 gettext 用例构建 POT、用 Babel 解析，并要求 section、toctree、table、topic、definition/glossary terms 与单行 literal-block 的既有非空 msgid 被包含；该文件没有直接构造本任务的 Catalog 或 GettextRenderer，也没有直接断言用户模板路径、过滤器或 relpath callable，故这些精确接口行为仍仅由公开任务规定	2026-10-16T04:48:07Z			0
++tests/test_intl/test_locale.py	8e9e00bb	0	0	2026-10-16T04:43:42Z						0
++tests/test_markup/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_markup/test_markup.py	def7a089	0	0	2026-10-16T04:43:42Z						0
++tests/test_markup/test_metadata.py	b3811b2f	0	0	2026-10-16T04:43:42Z						0
++tests/test_markup/test_parser.py	6522b6fc	0	0	2026-10-16T04:43:42Z						0
++tests/test_markup/test_smartquotes.py	7fd808f3	0	0	2026-10-16T04:43:42Z						0
++tests/test_project.py	91e10bf8	0	0	2026-10-16T04:43:42Z						0
++tests/test_pycode/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_pycode/test_pycode.py	27955dc5	0	0	2026-10-16T04:43:42Z						0
++tests/test_pycode/test_pycode_ast.py	eecf6095	0	0	2026-10-16T04:43:42Z						0
++tests/test_pycode/test_pycode_parser.py	d72bc9ca	0	0	2026-10-16T04:43:42Z						0
++tests/test_quickstart.py	c60062c7	0	0	2026-10-16T04:43:42Z						0
++tests/test_roles.py	c96e9640	0	0	2026-10-16T04:43:42Z						0
++tests/test_search.py	9ec72fa6	0	0	2026-10-16T04:43:42Z						0
++tests/test_theming/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_theming/test_html_theme.py	e8cf6f29	0	0	2026-10-16T04:43:42Z						0
++tests/test_theming/test_templating.py	95c134e4	0	0	2026-10-16T04:43:42Z						0
++tests/test_theming/test_theming.py	e6462123	0	0	2026-10-16T04:43:42Z						0
++tests/test_theming/theme.conf	8639fb67	0	0	2026-10-16T04:43:42Z						0
++tests/test_theming/theme.toml	1724a80c	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/test_transforms_move_module_targets.py	aedad59e	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/test_transforms_post_transforms.py	507ab9ae	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/test_transforms_post_transforms_code.py	804b4650	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/test_transforms_post_transforms_images.py	66de2400	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/test_transforms_reorder_nodes.py	7b9d10e3	0	0	2026-10-16T04:43:42Z						0
++tests/test_transforms/test_unreferenced_footnotes.py	3e9f30d5	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/intersphinx_data.py	4a072a64	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util.py	5640371e	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_display.py	8c5ee6ec	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_docstrings.py	8b47960b	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_docutils.py	38691117	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_docutils_sphinx_directive.py	9b6392ca	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_fileutil.py	7c379bc1	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_i18n.py	06409c4e	0	0	2026-10-16T04:43:42Z	I	test_util_i18n.py[8 T I M]: Role:验证目录路径/过期/编译、日期本地化与时区、语言图片路径以及目录仓库枚举 | Uses:sphinx/util/i18n.py(被测国际化工具) | API:- | Constraints:format_date 锁定英日德月份、零填充与非填充时分秒、%x/%X/%c、UTC 名称与偏移；local_time 在非 GMT 环境须将 UTC datetime 转本地而 false 保持 UTC；原始无指令字符串原样返回，未知或空语言用英文	2026-10-16T05:13:14Z			0
++tests/test_util/test_util_images.py	2a024a8c	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_importer.py	63301e67	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_inspect.py	47c85c6f	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_inventory.py	7ce5960a	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_lines.py	6057f1fe	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_logging.py	7ceadf4c	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_matching.py	3b07f053	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_nodes.py	3779b07d	0	0	2026-10-16T04:43:42Z	U	test_util_nodes.py[7 T U S]: Role:验证节点匹配、翻译消息提取、文本清理、ID 生成、显式标题拆分与来源修补行为 | Uses:sphinx/util/nodes.py(被测节点工具),sphinx/transforms/__init__.py(来源修补转换) | API:- | Constraints:extract_messages 必须从应用来源修补后的标题、图片题注、rubric、line、表格和列表行节点提取指定数量；无 rawsource 的 paragraph 经修补后须作为一个 TextElement 消息“test sentence”提取；ID 与显式标题参数化用例锁定其输出	2026-10-16T05:10:25Z			0
++tests/test_util/test_util_rst.py	8f659c85	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_template.py	9f9ee9e2	0	0	2026-10-16T04:43:42Z	T	test_util_template.py[5 T T T]: Role:验证 ReSTRenderer 的转义与标题过滤器字符串输出 | Uses:sphinx/util/template.py(ReSTRenderer) | API:- | Constraints:必须保持 e 将“*hello*”渲染为反斜杠转义形式，heading 对默认/级别1用等号、级别2用连字符，并在 ja 环境按显示宽度生成下划线；不直接覆盖 GettextRenderer	2026-10-16T04:48:07Z			0
++tests/test_util/test_util_typing.py	39a63372	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/test_util_uri.py	f3d30f8f	0	0	2026-10-16T04:43:42Z						0
++tests/test_util/typing_test_data.py	de5e34cc	0	0	2026-10-16T04:43:42Z						0
++tests/test_versioning.py	e44a4616	0	0	2026-10-16T04:43:42Z	I	test_versioning.py[7 T I S]: Role:验证 doctree UID 分配、序列化及新增、删除、插入和相似文本合并规则 | Uses:sphinx/versioning.py(UID和树合并算法),sphinx/testing/util.py(SphinxTestApp) | API:- | Constraints:add_uids 对三个 paragraph 全部分配 UID；合并时修改与删除不报告新节点，新增/插入报告一个且未变节点保持 UID，近似插入只把“Anyway I need more”判为新节点	2026-10-16T05:11:51Z			0
++tests/test_writers/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++tests/test_writers/test_api_translator.py	0e34fcaf	0	0	2026-10-16T04:43:42Z						0
++tests/test_writers/test_docutilsconf.py	5455d1ea	0	0	2026-10-16T04:43:42Z						0
++tests/test_writers/test_writer_latex.py	a75a7c37	0	0	2026-10-16T04:43:42Z						0
++tests/utils.py	b1b45062	0	0	2026-10-16T04:43:42Z						0
++tox.ini	e4a8bfea	0	0	2026-10-16T04:43:42Z						0
++ty.toml	7823efce	0	0	2026-10-16T04:43:42Z						0
++utils/CHANGES_template.rst	b62d87a7	0	0	2026-10-16T04:43:42Z						0
++utils/__init__.py	00000000	0	0	2026-10-16T04:43:42Z						0
++utils/babel_runner.py	ae168963	0	0	2026-10-16T04:43:42Z						0
++utils/bump_docker.py	ebdcd11a	0	0	2026-10-16T04:43:42Z						0
++utils/bump_version.py	ddfa6dc2	0	0	2026-10-16T04:43:42Z						0
++utils/convert_attestations.py	c855666b	0	0	2026-10-16T04:43:42Z						0
++utils/generate_js_fixtures.py	ebd82bbc	0	0	2026-10-16T04:43:42Z						0
++utils/generate_snowball.py	f45fcb30	0	0	2026-10-16T04:43:42Z						0
++utils/release-checklist.rst	330048d1	0	0	2026-10-16T04:43:42Z						0
+diff --git a/sphinx/builders/gettext.py b/sphinx/builders/gettext.py
+index f55c629..51cee6a 100644
+--- a/sphinx/builders/gettext.py
++++ b/sphinx/builders/gettext.py
+@@ -76,14 +76,14 @@ def __init__(self) -> None:
+         # msgid -> file, line, uid
+         self.metadata: dict[str, list[tuple[str, int, str]]] = {}
+ 
++    def add(self, msg: str, origin: Element | MsgOrigin) -> None:
++        if not hasattr(origin, 'uid'):
++            # Replicated nodes, such as todo nodes, do not need translating.
++            return
+ 
+-
+-
+-
+-
+-
+-
+-
++        source = origin.source or ''
++        line = origin.line if origin.line is not None else -1
++        self.metadata.setdefault(msg, []).append((source, line, origin.uid))
+ 
+     def __iter__(self) -> Iterator[Message]:
+         for message, msg_metadata in self.metadata.items():
+@@ -115,21 +115,29 @@ def __repr__(self) -> str:
+ 
+ 
+ class GettextRenderer(SphinxRenderer):
+-    pass
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(
++        self,
++        template_path: Sequence[str | os.PathLike[str]] | None = None,
++        outdir: str | os.PathLike[str] | None = None,
++    ) -> None:
++        search_path = list(template_path or ())
++        search_path.append(DEFAULT_TEMPLATE_PATH)
++        super().__init__(search_path)
+ 
++        self.env.filters['e'] = self.env.filters['escape'] = self.escape
++        self.outdir = outdir
+ 
++    @staticmethod
++    def escape(value: str) -> str:
++        return (
++            value.replace('\\', '\\\\')
++            .replace('"', '\\"')
++            .replace('\n', '\\n"\n"')
++        )
+ 
++    def render(self, filename: str, context: dict[str, Any]) -> str:
++        context['relpath'] = lambda source: canon_path(relpath(source, self.outdir))
++        return self.env.get_template(filename).render(context)
+ 
+ 
+ 
+@@ -361,4 +369,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }
+diff --git a/sphinx/transforms/__init__.py b/sphinx/transforms/__init__.py
+index 0eb8812..b0bfbf2 100644
+--- a/sphinx/transforms/__init__.py
++++ b/sphinx/transforms/__init__.py
+@@ -18,7 +18,7 @@
+ from sphinx.deprecation import _deprecation_warning
+ from sphinx.locale import _, __
+ from sphinx.util import logging
+-
++from sphinx.util.i18n import format_date
+ from sphinx.util.nodes import apply_source_workaround, is_smartquotable
+ 
+ if TYPE_CHECKING:
+diff --git a/sphinx/transforms/i18n.py b/sphinx/transforms/i18n.py
+index 4cb7220..909520a 100644
+--- a/sphinx/transforms/i18n.py
++++ b/sphinx/transforms/i18n.py
+@@ -19,14 +19,13 @@
+ from sphinx.util.docutils import LoggingReporter
+ from sphinx.util.i18n import docname_to_domain
+ from sphinx.util.index_entries import split_index_msg
+-from sphinx.util.nodes import IMAGE_TYPE_NODES, LITERAL_TYPE_NODES, NodeMatcher
+-
+-
+-
+-
+-
+-
+-
++from sphinx.util.nodes import (
++    IMAGE_TYPE_NODES,
++    LITERAL_TYPE_NODES,
++    NodeMatcher,
++    extract_messages,
++    traverse_translatable_index,
++)
+ if TYPE_CHECKING:
+     from collections.abc import Sequence
+ 
+diff --git a/sphinx/util/i18n.py b/sphinx/util/i18n.py
+index 23e5c65..1462925 100644
+--- a/sphinx/util/i18n.py
++++ b/sphinx/util/i18n.py
+@@ -216,103 +216,47 @@ def docname_to_domain(docname: str, compaction: bool | str) -> str:
+ 
+ date_format_re = re.compile('(%s)' % '|'.join(date_format_mappings))
+ 
++def format_date(
++    format: str,
++    date: dt.date | dt.datetime | None = None,
++    language: str | None = None,
++    *,
++    local_time: bool = False,
++) -> str:
++    """Format a date using strftime-style directives and Babel locales."""
++    if not date_format_re.search(format):
++        return format
+ 
++    if date is None:
++        value: dt.date | dt.datetime = datetime.now(tz=UTC)
++    else:
++        value = date
+ 
++    is_datetime = isinstance(value, datetime)
++    if is_datetime:
++        if value.tzinfo is None:
++            value = value.replace(tzinfo=UTC)
++        value = value.astimezone() if local_time else value.astimezone(UTC)
+ 
++    babel_format = date_format_re.sub(
++        lambda match: date_format_mappings[match.group()], format
++    )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    locale = language or 'en'
++    try:
++        babel.dates.get_date_format(locale=locale)
++    except babel.core.UnknownLocaleError:
++        locale = 'en'
++
++    if not is_datetime or format == '%x':
++        return babel.dates.format_date(value, babel_format, locale=locale)
++    if format == '%X':
++        return babel.dates.format_time(
++            value, babel_format, tzinfo=value.tzinfo, locale=locale
++        )
++    return babel.dates.format_datetime(
++        value, babel_format, tzinfo=value.tzinfo, locale=locale
++    )
+ def get_image_filename_for_language(
+     filename: str | os.PathLike[str],
+     env: BuildEnvironment,
+@@ -340,4 +284,4 @@ def search_image_for_language(filename: str, env: BuildEnvironment) -> str:
+     if os.path.exists(abspath):
+         return translated
+     else:
+-        return filename
+\ No newline at end of file
++        return filename
+diff --git a/sphinx/util/nodes.py b/sphinx/util/nodes.py
+index 60244d4..5ad964a 100644
+--- a/sphinx/util/nodes.py
++++ b/sphinx/util/nodes.py
+@@ -289,66 +289,32 @@ def is_translatable(node: Node) -> bool:
+     nodes.image,
+ )  # fmt: skip
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def extract_messages(doctree: Node) -> Iterator[tuple[Element, str]]:
++    """Extract translatable messages from a document tree."""
++    for node in doctree.findall(is_translatable):
++        if isinstance(node, addnodes.translatable):
++            for message in node.extract_original_messages():
++                if message:
++                    yield node, message
++        elif isinstance(node, nodes.image):
++            if alt := node.get('alt'):
++                yield node, alt
++        elif isinstance(node, nodes.meta):
++            if content := node.get('content'):
++                yield node, content
++        elif isinstance(node, nodes.TextElement) and node.rawsource:
++            yield node, node.rawsource
++
++
++def traverse_translatable_index(
++    doctree: Node,
++) -> Iterator[
++    tuple[addnodes.index, list[tuple[str, str, str, str, str | None]]]
++]:
++    """Yield index nodes and the original entries used for translation."""
++    for node in doctree.findall(addnodes.index):
++        entries = node.get('raw_entries', node['entries'])
++        yield node, entries
+ def get_node_source(node: Element) -> str:
+     for pnode in traverse_parent(node):
+         if pnode.source:
+@@ -780,4 +746,4 @@ def _deepcopy(el: Element) -> Element:
+     return newnode
+ 
+ 
+-nodes.Element.deepcopy = _deepcopy  # type: ignore[assignment]
+\ No newline at end of file
++nodes.Element.deepcopy = _deepcopy  # type: ignore[assignment]
+diff --git a/sphinx/versioning.py b/sphinx/versioning.py
+index 2a690dc..f88ed9a 100644
+--- a/sphinx/versioning.py
++++ b/sphinx/versioning.py
+@@ -29,22 +29,11 @@
+ # anything below that ratio is considered equal/changed
+ VERSIONING_RATIO = 65
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def add_uids(doctree: Node, condition: Callable[[Node], bool]) -> Iterator[Node]:
++    """Add a unique identifier to each node matching *condition*."""
++    for node in doctree.findall(condition):
++        node.uid = uuid4().hex  # type: ignore[attr-defined]
++        yield node
+ def merge_doctrees(
+     old: Node, new: Node, condition: Callable[[Node], bool]
+ ) -> Iterator[Node]:
+@@ -181,4 +170,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }

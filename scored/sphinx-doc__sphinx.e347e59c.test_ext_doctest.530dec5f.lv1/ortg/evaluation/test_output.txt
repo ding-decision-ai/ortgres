@@ -1,0 +1,331 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/2420e63, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 11 items
+
+tests/test_extensions/test_ext_doctest.py EFF.EEEEEEE                    [100%]
+
+==================================== ERRORS ====================================
+_________________________ ERROR at setup of test_build _________________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+________________________ ERROR at setup of test_skipif _________________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+________________ ERROR at setup of test_reporting_with_autodoc _________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+___________________ ERROR at setup of test_fail_fast[False] ____________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+____________________ ERROR at setup of test_fail_fast[True] ____________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+____________________ ERROR at setup of test_fail_fast[None] ____________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+________ ERROR at setup of test_doctest_block_group_name[None-default] _________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+_ ERROR at setup of test_doctest_block_group_name[CustomGroupName-CustomGroupName] _
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/ext/doctest.py:317: in init
+    doctest.compile = self.compile  # type: ignore[attr-defined]
+                      ^^^^^^^^^^^^
+E   AttributeError: 'DocTestBuilder' object has no attribute 'compile'
+=================================== FAILURES ===================================
+_______________________ test_highlight_language_default ________________________
+tests/test_extensions/test_ext_doctest.py:35: in test_highlight_language_default
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:1379: in bullet
+    i, blank_finish = self.list_item(match.end())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:1403: in list_item
+    self.nested_parse(indented, input_offset=line_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:357: in nested_parse
+    my_state_machine.run(block, input_offset, self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2487: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/__init__.py:334: in run
+    raise NotImplementedError('Must override run() in subclass.')
+E   NotImplementedError: Must override run() in subclass.
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-doctest
+# outdir: /tmp/pytest-of-root/pytest-0/ext-doctest/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/2420e63[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mdoctest[39;49;00m
+
+# warning: 
+
+_______________________ test_highlight_language_python3 ________________________
+tests/test_extensions/test_ext_doctest.py:47: in test_highlight_language_python3
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:1379: in bullet
+    i, blank_finish = self.list_item(match.end())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:1403: in list_item
+    self.nested_parse(indented, input_offset=line_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:357: in nested_parse
+    my_state_machine.run(block, input_offset, self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2487: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/__init__.py:334: in run
+    raise NotImplementedError('Must override run() in subclass.')
+E   NotImplementedError: Must override run() in subclass.
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-doctest
+# outdir: /tmp/pytest-of-root/pytest-0/ext-doctest/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/2420e63[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mdoctest[39;49;00m
+
+# warning: 
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_extensions/test_ext_doctest.py::test_is_allowed_version
+ERROR tests/test_extensions/test_ext_doctest.py::test_build - AttributeError:...
+ERROR tests/test_extensions/test_ext_doctest.py::test_skipif - AttributeError...
+ERROR tests/test_extensions/test_ext_doctest.py::test_reporting_with_autodoc
+ERROR tests/test_extensions/test_ext_doctest.py::test_fail_fast[False] - Attr...
+ERROR tests/test_extensions/test_ext_doctest.py::test_fail_fast[True] - Attri...
+ERROR tests/test_extensions/test_ext_doctest.py::test_fail_fast[None] - Attri...
+ERROR tests/test_extensions/test_ext_doctest.py::test_doctest_block_group_name[None-default]
+ERROR tests/test_extensions/test_ext_doctest.py::test_doctest_block_group_name[CustomGroupName-CustomGroupName]
+FAILED tests/test_extensions/test_ext_doctest.py::test_highlight_language_default
+FAILED tests/test_extensions/test_ext_doctest.py::test_highlight_language_python3
+==================== 2 failed, 1 passed, 8 errors in 1.25s =====================

@@ -1,0 +1,38 @@
+{
+  "ready": false,
+  "initialization_timeout_seconds": 3476,
+  "ortg_version": "0.5.31",
+  "tsv_version": 2,
+  "cbm": "off",
+  "repo": "/testbed",
+  "validator_sha256": "18ab66b8d690df9a9e45883e84dc057481d802d6f89bcb8970a93eab5063190e",
+  "prompt_sha256": "f98cd1ff180ab2dcbf8156d254a008d8056d4315eb1383554b02575506702f21",
+  "event_summary": {
+    "completed": true,
+    "last_event_type": "turn.completed",
+    "turn_usages": [
+      {
+        "input_tokens": 5358582,
+        "cached_input_tokens": 5121920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 25839,
+        "reasoning_output_tokens": 8250
+      }
+    ],
+    "usage_total": {
+      "input_tokens": 5358582,
+      "cached_input_tokens": 5121920,
+      "output_tokens": 25839
+    }
+  },
+  "model_elapsed_seconds": 542.1954201220069,
+  "scope_sha256": "280e422f8d0c513b471f3aa7342e8513e772d2b02893a669a963e15c5c576508",
+  "model_exit_code": 0,
+  "error": "Readiness verification failed (exit 1); see initialization.log",
+  "state_files_saved": {
+    "/testbed/ortg.tsv": true,
+    "/testbed/overview.txt": false,
+    "/testbed/.ortg/config.json": false
+  },
+  "elapsed_seconds": 543.5653086540115
+}

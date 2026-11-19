@@ -1,0 +1,78 @@
+diff --git a/sphinx/builders/gettext.py b/sphinx/builders/gettext.py
+index f55c629..2ec4b42 100644
+--- a/sphinx/builders/gettext.py
++++ b/sphinx/builders/gettext.py
+@@ -76,6 +76,15 @@ def __init__(self) -> None:
+         # msgid -> file, line, uid
+         self.metadata: dict[str, list[tuple[str, int, str]]] = {}
+ 
++    def add(self, msg: str, origin: Element | MsgOrigin) -> None:
++        if not hasattr(origin, 'uid'):
++            # Replicated nodes, such as todo items, can lack a stable UID.
++            return
++
++        source = origin.source or ''
++        line = origin.line if origin.line is not None else -1
++        self.metadata.setdefault(msg, []).append((source, line, origin.uid))
++
+ 
+ 
+ 
+@@ -115,7 +124,28 @@ def __repr__(self) -> str:
+ 
+ 
+ class GettextRenderer(SphinxRenderer):
+-    pass
++    def __init__(
++        self,
++        template_path: Sequence[str | os.PathLike[str]] | None = None,
++        outdir: str | os.PathLike[str] | None = None,
++    ) -> None:
++        search_path = list(template_path or ())
++        search_path.append(DEFAULT_TEMPLATE_PATH)
++        super().__init__(search_path)
++
++        self.env.filters['e'] = self.escape
++        self.env.filters['escape'] = self.escape
++        self.outdir = outdir
++
++    def render(self, filename: str, context: dict[str, Any]) -> str:
++        context['relpath'] = lambda source: canon_path(relpath(source, self.outdir))
++        return super().render(filename, context)
++
++    @staticmethod
++    def escape(value: str) -> str:
++        return (
++            value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n"\n"')
++        )
+ 
+ 
+ 
+@@ -361,4 +391,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }
+diff --git a/sphinx/util/template.py b/sphinx/util/template.py
+index 6642329..feee476 100644
+--- a/sphinx/util/template.py
++++ b/sphinx/util/template.py
+@@ -36,6 +36,9 @@ def __init__(self, loader: BaseLoader | None = None) -> None:
+ 
+ 
+ 
++    def render(self, template: str, context: dict[str, Any]) -> str:
++        return self.env.get_template(template).render(context)
++
+     def render_string(self, source: str, context: dict[str, Any]) -> str:
+         return self.env.from_string(source).render(context)
+ 
+@@ -160,4 +163,4 @@ def get_source(
+                 return loader.get_source(environment, template)
+             except TemplateNotFound:
+                 pass
+-        raise TemplateNotFound(template)
+\ No newline at end of file
++        raise TemplateNotFound(template)

@@ -1,0 +1,129 @@
+diff --git a/fastapi/_compat/__init__.py b/fastapi/_compat/__init__.py
+index 4ebe162..7b9d26c 100644
+--- a/fastapi/_compat/__init__.py
++++ b/fastapi/_compat/__init__.py
+@@ -6,9 +6,10 @@ from .main import UndefinedType as UndefinedType
+ from .main import Url as Url
+ from .main import Validator as Validator
+ 
++from .main import _get_model_config as _get_model_config
+ from .main import _is_error_wrapper as _is_error_wrapper
+ from .main import _is_model_class as _is_model_class
+-
++from .main import _is_model_field as _is_model_field
+ from .main import _is_undefined as _is_undefined
+ from .main import _model_dump as _model_dump
+ from .main import _model_rebuild as _model_rebuild
+diff --git a/fastapi/_compat/main.py b/fastapi/_compat/main.py
+index ab3d761..574775e 100644
+--- a/fastapi/_compat/main.py
++++ b/fastapi/_compat/main.py
+@@ -71,6 +71,15 @@ def _is_undefined(value: object) -> bool:
+     return False
+ 
+ 
++def _get_model_config(model: BaseModel) -> Any:
++    if isinstance(model, may_v1.BaseModel):
++        from fastapi._compat import v1
++
++        return v1._get_model_config(model)
++    elif PYDANTIC_V2:
++        return model.model_config
++
++
+ 
+ 
+ 
+@@ -352,6 +361,16 @@ def get_schema_from_model_field(
+ 
+ 
+ 
++def _is_model_field(value: Any) -> bool:
++    if isinstance(value, may_v1.ModelField):
++        return True
++    elif PYDANTIC_V2:
++        from . import v2
++
++        return isinstance(value, v2.ModelField)
++    return False
++
++
+ def _is_model_class(value: Any) -> bool:
+     if lenient_issubclass(value, may_v1.BaseModel):
+         return True
+@@ -359,4 +378,4 @@ def _is_model_class(value: Any) -> bool:
+         from . import v2
+ 
+         return lenient_issubclass(value, v2.BaseModel)  # type: ignore[attr-defined]
+-    return False
+\ No newline at end of file
++    return False
+diff --git a/fastapi/_compat/v1.py b/fastapi/_compat/v1.py
+index bd164c4..6972c96 100644
+--- a/fastapi/_compat/v1.py
++++ b/fastapi/_compat/v1.py
+@@ -157,6 +157,16 @@ class PydanticSchemaGenerationError(Exception):
+ RequestErrorModel: Type[BaseModel] = create_model("Request")
+ 
+ 
++def with_info_plain_validator_function(
++    function: Callable[..., Any],
++    *,
++    ref: Union[str, None] = None,
++    metadata: Any = None,
++    serialization: Any = None,
++) -> Any:
++    return {}
++
++
+ 
+ 
+ 
+@@ -265,6 +275,10 @@ def get_definitions(
+     return {}, get_model_definitions(flat_models=models, model_name_map=model_name_map)
+ 
+ 
++def get_model_fields(model: Type[BaseModel]) -> List[ModelField]:
++    return list(model.__fields__.values())
++
++
+ 
+ 
+ 
+@@ -307,4 +321,3 @@ def create_body_model(
+         BodyModel.__fields__[f.name] = f  # type: ignore[index]
+     return BodyModel
+ 
+-
+diff --git a/fastapi/openapi/utils.py b/fastapi/openapi/utils.py
+index 3a86718..cbbac78 100644
+--- a/fastapi/openapi/utils.py
++++ b/fastapi/openapi/utils.py
+@@ -8,6 +8,7 @@ from fastapi._compat import (
+     JsonSchemaValue,
+     ModelField,
+     Undefined,
++    _is_model_field,
+     get_compat_model_name_map,
+     get_definitions,
+     get_schema_from_model_field,
+diff --git a/fastapi/routing.py b/fastapi/routing.py
+index 702b0d9..d91a7cd 100644
+--- a/fastapi/routing.py
++++ b/fastapi/routing.py
+@@ -26,7 +26,14 @@ from typing import (
+ 
+ from annotated_doc import Doc
+ from fastapi import params, temp_pydantic_v1_params
+-from fastapi._compat import ModelField, Undefined, _model_dump, _normalize_errors, lenient_issubclass
++from fastapi._compat import (
++    ModelField,
++    Undefined,
++    _get_model_config,
++    _model_dump,
++    _normalize_errors,
++    lenient_issubclass,
++)
+ 
+ 
+ 

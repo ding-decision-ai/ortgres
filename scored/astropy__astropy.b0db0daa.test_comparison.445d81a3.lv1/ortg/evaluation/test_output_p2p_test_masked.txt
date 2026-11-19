@@ -1,0 +1,163 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/table/tests/test_masked.py.
+
+Date: 2026-10-15T02:19:40
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 111 items
+
+astropy/table/tests/test_masked.py ..................................... [ 33%]
+........................................................................ [ 98%]
+..                                                                       [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/table/tests/test_masked.py::TestPprint::test_pformat
+PASSED astropy/table/tests/test_masked.py::TestFilled::test_filled_column
+PASSED astropy/table/tests/test_masked.py::TestFilled::test_filled_masked_table[True]
+PASSED astropy/table/tests/test_masked.py::TestFilled::test_filled_masked_table[False]
+PASSED astropy/table/tests/test_masked.py::TestFilled::test_filled_unmasked_table[True]
+PASSED astropy/table/tests/test_masked.py::TestFilled::test_filled_unmasked_table[False]
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_init_set_fill_value
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_set_get_fill_value_for_bare_column
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_set_get_fill_value_for_str_column
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_set_get_fill_value_for_structured_column
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_table_column_mask_not_ref
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_set_get_fill_value_for_table_column
+PASSED astropy/table/tests/test_masked.py::TestFillValue::test_data_attribute_fill_and_mask
+PASSED astropy/table/tests/test_masked.py::TestMaskedColumnInit::test_set_mask_and_not_ref
+PASSED astropy/table/tests/test_masked.py::TestMaskedColumnInit::test_set_mask_from_list
+PASSED astropy/table/tests/test_masked.py::TestMaskedColumnInit::test_override_existing_mask
+PASSED astropy/table/tests/test_masked.py::TestMaskedColumnInit::test_incomplete_mask_spec
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-?]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-b]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-i2]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-f4]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-c8]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-S]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-U]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-O]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-StrDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-BytesDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape0-StringDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-?]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-b]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-i2]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-f4]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-c8]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-S]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-U]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-O]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-StrDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-BytesDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape1-StringDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-?]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-b]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-i2]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-f4]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-c8]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-S]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-U]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-O]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-StrDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-BytesDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_typed[shape2-StringDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-?]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-b]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-i2]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-f4]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-c8]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-S]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-U]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-O]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-StrDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-BytesDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape0-StringDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-?]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-b]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-i2]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-f4]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-c8]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-S]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-U]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-O]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-StrDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-BytesDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape1-StringDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-?]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-b]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-i2]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-f4]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-c8]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-S]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-U]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-O]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-StrDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-BytesDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_init_from_sequence_data_numeric_untyped[shape2-StringDType]
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_initialization_with_all_columns
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_mask_false_if_input_mask_not_true
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_mask_false_if_no_input_masked
+PASSED astropy/table/tests/test_masked.py::TestTableInit::test_mask_property
+PASSED astropy/table/tests/test_masked.py::TestAddColumn::test_add_masked_column_to_masked_table
+PASSED astropy/table/tests/test_masked.py::TestAddColumn::test_add_masked_column_to_non_masked_table
+PASSED astropy/table/tests/test_masked.py::TestAddColumn::test_add_non_masked_column_to_masked_table
+PASSED astropy/table/tests/test_masked.py::TestAddColumn::test_convert_to_masked_table_only_if_necessary
+PASSED astropy/table/tests/test_masked.py::TestRenameColumn::test_rename_masked_column
+PASSED astropy/table/tests/test_masked.py::TestRemoveColumn::test_remove_masked_column
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_masked_table_iterable
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_masked_table_mapping1
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_masked_table_mapping2
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_masked_table_mapping3
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_masked_table_mapping4
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_masked_table_mismatch
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_masked_row_to_non_masked_table_iterable
+PASSED astropy/table/tests/test_masked.py::TestAddRow::test_add_row_cannot_mask_column_raises_typeerror
+PASSED astropy/table/tests/test_masked.py::test_setting_from_masked_column
+PASSED astropy/table/tests/test_masked.py::test_coercing_fill_value_type
+PASSED astropy/table/tests/test_masked.py::test_mask_copy
+PASSED astropy/table/tests/test_masked.py::test_masked_as_array_with_mixin
+PASSED astropy/table/tests/test_masked.py::test_masked_column_with_unit_in_qtable
+PASSED astropy/table/tests/test_masked.py::test_masked_quantity_in_table
+PASSED astropy/table/tests/test_masked.py::test_masked_column_data_attribute_is_plain_masked_array
+PASSED astropy/table/tests/test_masked.py::test_mask_slicing_count_array_finalize
+PASSED astropy/table/tests/test_masked.py::test_set_masked_bytes_column
+PASSED astropy/table/tests/test_masked.py::test_qtable_masked_true_basics
+============================= 111 passed in 0.33s ==============================

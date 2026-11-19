@@ -1,0 +1,16 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.69",
+  "initialization": {
+    "coverage": {}
+  },
+  "model_exit_code": null,
+  "network": {
+    "baseline_configured": "web_enabled",
+    "ortg_configured": "offline",
+    "conditions_matched": false,
+    "actual_external_information_obtained": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/sphinx-doc__sphinx.e347e59c.test_domain_c.4068b9e8.lv1"
+}

@@ -1,0 +1,168 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 103 items
+
+tests/_core/test_scales.py FFFF......................F.................. [ 43%]
+..........x...............................................               [100%]
+
+=================================== FAILURES ===================================
+___________________ TestContinuous.test_coordinate_defaults ____________________
+tests/_core/test_scales.py:55: in test_coordinate_defaults
+    assert_series_equal(s(x), x)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pandas/_testing/asserters.py:167: in _check_isinstance
+    raise AssertionError(
+E   AssertionError: Series Expected type <class 'pandas.core.series.Series'>, found <class 'numpy.ndarray'> instead
+___________________ TestContinuous.test_coordinate_transform ___________________
+tests/_core/test_scales.py:60: in test_coordinate_transform
+    assert_series_equal(s(x), np.log10(x))
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pandas/_testing/asserters.py:167: in _check_isinstance
+    raise AssertionError(
+E   AssertionError: Series Expected type <class 'pandas.core.series.Series'>, found <class 'numpy.ndarray'> instead
+___________ TestContinuous.test_coordinate_transform_with_parameter ____________
+tests/_core/test_scales.py:65: in test_coordinate_transform_with_parameter
+    assert_series_equal(s(x), np.power(x, 3))
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pandas/_testing/asserters.py:167: in _check_isinstance
+    raise AssertionError(
+E   AssertionError: Series Expected type <class 'pandas.core.series.Series'>, found <class 'numpy.ndarray'> instead
+________________ TestContinuous.test_coordinate_transform_error ________________
+tests/_core/test_scales.py:71: in test_coordinate_transform_error
+    s._setup(x, Coordinate())
+seaborn/_core/scales.py:444: in _setup
+    forward, inverse = new._get_transform()
+seaborn/_core/scales.py:526: in _get_transform
+    raise ValueError(f"Unknown transform {trans!r}.")
+E   ValueError: Unknown transform 'bad'.
+
+During handling of the above exception, another exception occurred:
+tests/_core/test_scales.py:70: in test_coordinate_transform_error
+    with pytest.raises(ValueError, match="Unknown value provided"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Unknown value provided'
+E     Actual message: "Unknown transform 'bad'."
+______________________ TestContinuous.test_log_tick_count ______________________
+tests/_core/test_scales.py:224: in test_log_tick_count
+    assert_array_equal(a.major.locator(), [1, 10, 100, 1000])
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/numpy/_utils/__init__.py:85: in wrapper
+    return fun(*args, **kwargs)
+/opt/miniconda3/envs/testbed/lib/python3.10/contextlib.py:79: in inner
+    return func(*args, **kwds)
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 3 / 4 (75%)
+E   Max absolute difference among violations: 1.02318154e-12
+E   Max relative difference among violations: 1.02318154e-15
+E    ACTUAL: array([   1.,   10.,  100., 1000.])
+E    DESIRED: array([   1,   10,  100, 1000])
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_core/test_scales.py::TestContinuous::test_interval_defaults
+PASSED tests/_core/test_scales.py::TestContinuous::test_interval_with_range
+PASSED tests/_core/test_scales.py::TestContinuous::test_interval_with_norm
+PASSED tests/_core/test_scales.py::TestContinuous::test_interval_with_range_norm_and_transform
+PASSED tests/_core/test_scales.py::TestContinuous::test_interval_with_bools
+PASSED tests/_core/test_scales.py::TestContinuous::test_color_defaults
+PASSED tests/_core/test_scales.py::TestContinuous::test_color_named_values
+PASSED tests/_core/test_scales.py::TestContinuous::test_color_tuple_values
+PASSED tests/_core/test_scales.py::TestContinuous::test_color_callable_values
+PASSED tests/_core/test_scales.py::TestContinuous::test_color_with_norm
+PASSED tests/_core/test_scales.py::TestContinuous::test_color_with_transform
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_locator
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_locator_input_check
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_upto
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_every
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_every_between
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_at
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_count
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_count_between
+PASSED tests/_core/test_scales.py::TestContinuous::test_tick_minor
+PASSED tests/_core/test_scales.py::TestContinuous::test_log_tick_default
+PASSED tests/_core/test_scales.py::TestContinuous::test_log_tick_upto
+PASSED tests/_core/test_scales.py::TestContinuous::test_log_tick_format_disabled
+PASSED tests/_core/test_scales.py::TestContinuous::test_log_tick_every
+PASSED tests/_core/test_scales.py::TestContinuous::test_symlog_tick_default
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_formatter
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_like_pattern
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_like_string
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_like_function
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_base
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_unit
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_unit_with_sep
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_empty_unit
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_base_from_transform
+PASSED tests/_core/test_scales.py::TestContinuous::test_label_type_checks
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_defaults
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_with_order
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_with_subset_order
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_axis
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_axis_with_order
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_axis_with_subset_order
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_axis_with_category_dtype
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_numeric_data
+PASSED tests/_core/test_scales.py::TestNominal::test_coordinate_numeric_data_with_order
+PASSED tests/_core/test_scales.py::TestNominal::test_color_defaults
+PASSED tests/_core/test_scales.py::TestNominal::test_color_named_palette
+PASSED tests/_core/test_scales.py::TestNominal::test_color_list_palette
+PASSED tests/_core/test_scales.py::TestNominal::test_color_dict_palette
+PASSED tests/_core/test_scales.py::TestNominal::test_color_numeric_data
+PASSED tests/_core/test_scales.py::TestNominal::test_color_numeric_with_order_subset
+PASSED tests/_core/test_scales.py::TestNominal::test_color_alpha_in_palette
+PASSED tests/_core/test_scales.py::TestNominal::test_color_unknown_palette
+PASSED tests/_core/test_scales.py::TestNominal::test_object_defaults
+PASSED tests/_core/test_scales.py::TestNominal::test_object_list
+PASSED tests/_core/test_scales.py::TestNominal::test_object_dict
+PASSED tests/_core/test_scales.py::TestNominal::test_object_order
+PASSED tests/_core/test_scales.py::TestNominal::test_object_order_subset
+PASSED tests/_core/test_scales.py::TestNominal::test_objects_that_are_weird
+PASSED tests/_core/test_scales.py::TestNominal::test_alpha_default
+PASSED tests/_core/test_scales.py::TestNominal::test_fill
+PASSED tests/_core/test_scales.py::TestNominal::test_fill_dict
+PASSED tests/_core/test_scales.py::TestNominal::test_fill_nunique_warning
+PASSED tests/_core/test_scales.py::TestNominal::test_interval_defaults
+PASSED tests/_core/test_scales.py::TestNominal::test_interval_tuple
+PASSED tests/_core/test_scales.py::TestNominal::test_interval_tuple_numeric
+PASSED tests/_core/test_scales.py::TestNominal::test_interval_list
+PASSED tests/_core/test_scales.py::TestNominal::test_interval_dict
+PASSED tests/_core/test_scales.py::TestNominal::test_interval_with_transform
+PASSED tests/_core/test_scales.py::TestNominal::test_empty_data
+PASSED tests/_core/test_scales.py::TestNominal::test_finalize
+PASSED tests/_core/test_scales.py::TestTemporal::test_coordinate_defaults
+PASSED tests/_core/test_scales.py::TestTemporal::test_interval_defaults
+PASSED tests/_core/test_scales.py::TestTemporal::test_interval_with_range
+PASSED tests/_core/test_scales.py::TestTemporal::test_interval_with_norm
+PASSED tests/_core/test_scales.py::TestTemporal::test_color_defaults
+PASSED tests/_core/test_scales.py::TestTemporal::test_color_named_values
+PASSED tests/_core/test_scales.py::TestTemporal::test_coordinate_axis
+PASSED tests/_core/test_scales.py::TestTemporal::test_tick_locator
+PASSED tests/_core/test_scales.py::TestTemporal::test_tick_upto
+PASSED tests/_core/test_scales.py::TestTemporal::test_label_formatter
+PASSED tests/_core/test_scales.py::TestTemporal::test_label_concise
+PASSED tests/_core/test_scales.py::TestBoolean::test_coordinate
+PASSED tests/_core/test_scales.py::TestBoolean::test_coordinate_axis
+PASSED tests/_core/test_scales.py::TestBoolean::test_coordinate_missing[object-nan]
+PASSED tests/_core/test_scales.py::TestBoolean::test_coordinate_missing[object-None]
+PASSED tests/_core/test_scales.py::TestBoolean::test_coordinate_missing[boolean-value2]
+PASSED tests/_core/test_scales.py::TestBoolean::test_color_defaults
+PASSED tests/_core/test_scales.py::TestBoolean::test_color_list_palette
+PASSED tests/_core/test_scales.py::TestBoolean::test_color_tuple_palette
+PASSED tests/_core/test_scales.py::TestBoolean::test_color_dict_palette
+PASSED tests/_core/test_scales.py::TestBoolean::test_object_defaults
+PASSED tests/_core/test_scales.py::TestBoolean::test_object_list
+PASSED tests/_core/test_scales.py::TestBoolean::test_object_dict
+PASSED tests/_core/test_scales.py::TestBoolean::test_fill
+PASSED tests/_core/test_scales.py::TestBoolean::test_interval_defaults
+PASSED tests/_core/test_scales.py::TestBoolean::test_interval_tuple
+PASSED tests/_core/test_scales.py::TestBoolean::test_finalize
+XFAIL tests/_core/test_scales.py::TestNominal::test_color_numeric_int_float_mix - Need to sort out float/int order
+FAILED tests/_core/test_scales.py::TestContinuous::test_coordinate_defaults
+FAILED tests/_core/test_scales.py::TestContinuous::test_coordinate_transform
+FAILED tests/_core/test_scales.py::TestContinuous::test_coordinate_transform_with_parameter
+FAILED tests/_core/test_scales.py::TestContinuous::test_coordinate_transform_error
+FAILED tests/_core/test_scales.py::TestContinuous::test_log_tick_count - Asse...
+=================== 5 failed, 97 passed, 1 xfailed in 1.82s ====================

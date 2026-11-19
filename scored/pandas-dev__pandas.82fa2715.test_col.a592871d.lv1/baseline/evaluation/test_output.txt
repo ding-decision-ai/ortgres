@@ -1,0 +1,807 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /testbed/build/cp311
+Build type: native build
+Project name: pandas
+Project version: 0+untagged.1.gae6e170.dirty
+C compiler for the host machine: cc (gcc 11.4.0 "cc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C linker for the host machine: cc ld.bfd 2.38
+C++ compiler for the host machine: c++ (gcc 11.4.0 "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C++ linker for the host machine: c++ ld.bfd 2.38
+Cython compiler for the host machine: cython (cython 3.2.1)
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python found: YES (/opt/miniconda3/envs/testbed/bin/python)
+Program cython found: YES (/opt/miniconda3/envs/testbed/bin/cython)
+Configuring free_threading_config.pxi using configuration
+Build targets in project: 56
+
+pandas 0+untagged.1.gae6e170.dirty
+
+  User defined options
+    Native files: /testbed/build/cp311/meson-python-native-file.ini
+    buildtype   : release
+    vsenv       : True
+    b_ndebug    : if-release
+    b_vscrt     : md
+
+Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at /opt/miniconda3/envs/testbed/bin/ninja
+
+Visual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:
+/opt/miniconda3/envs/testbed/bin/meson compile -C .
+[1/155] Generating pandas/_libs/algos_common_helper_pxi with a custom command
+[2/155] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command
+[3/155] Generating pandas/_libs/algos_take_helper_pxi with a custom command
+[4/155] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command
+[5/155] Generating pandas/_libs/sparse_op_helper_pxi with a custom command
+[6/155] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command
+[7/155] Generating pandas/_libs/intervaltree_helper_pxi with a custom command
+[8/155] Generating pandas/_libs/index_class_helper_pxi with a custom command
+[9/155] Compiling Cython source /testbed/pandas/_libs/ops_dispatch.pyx
+[10/155] Compiling Cython source /testbed/pandas/_libs/properties.pyx
+[11/155] Compiling Cython source /testbed/pandas/_libs/indexing.pyx
+[12/155] Compiling Cython source /testbed/pandas/_libs/byteswap.pyx
+[13/155] Compiling Cython source /testbed/pandas/_libs/tslibs/nattype.pyx
+[14/155] Compiling Cython source /testbed/pandas/_libs/tslibs/vectorized.pyx
+[15/155] Compiling Cython source /testbed/pandas/_libs/tslibs/parsing.pyx
+[16/155] Compiling Cython source /testbed/pandas/_libs/tslibs/ccalendar.pyx
+[17/155] Compiling Cython source /testbed/pandas/_libs/reshape.pyx
+[18/155] Compiling Cython source /testbed/pandas/_libs/ops.pyx
+[19/155] Compiling Cython source /testbed/pandas/_libs/tslibs/tzconversion.pyx
+[20/155] Compiling Cython source /testbed/pandas/_libs/tslibs/dtypes.pyx
+[21/155] Compiling Cython source /testbed/pandas/_libs/sas.pyx
+[22/155] Compiling Cython source /testbed/pandas/_libs/tslibs/base.pyx
+[23/155] Compiling Cython source /testbed/pandas/_libs/tslibs/np_datetime.pyx
+[24/155] Compiling Cython source /testbed/pandas/_libs/missing.pyx
+[25/155] Compiling Cython source /testbed/pandas/_libs/tslibs/fields.pyx
+[26/155] Compiling Cython source /testbed/pandas/_libs/arrays.pyx
+[27/155] Compiling Cython source /testbed/pandas/_libs/tslibs/strptime.pyx
+[28/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timedeltas.pyx
+[29/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timestamps.pyx
+[30/155] Compiling Cython source /testbed/pandas/_libs/testing.pyx
+[31/155] Compiling C object pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_base.pyx.c.o
+[32/155] Compiling Cython source /testbed/pandas/_libs/tslib.pyx
+[33/155] Compiling Cython source /testbed/pandas/_libs/parsers.pyx
+[34/155] Compiling Cython source /testbed/pandas/_libs/hashing.pyx
+[35/155] Compiling Cython source /testbed/pandas/_libs/tslibs/period.pyx
+[36/155] Compiling Cython source /testbed/pandas/_libs/tslibs/conversion.pyx
+[37/155] Compiling C object pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_ccalendar.pyx.c.o
+[38/155] Compiling Cython source /testbed/pandas/_libs/internals.pyx
+warning: /testbed/pandas/_libs/internals.pyx:31:0: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:916:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:921:12: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:955:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:973:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:994:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+[39/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/.._src_parser_tokenizer.c.o
+[40/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timezones.pyx
+[41/155] Compiling Cython source /testbed/pandas/_libs/lib.pyx
+[42/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime.c.o
+[43/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[44/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_date_conversions.c.o
+[45/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime_strings.c.o
+[46/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_pd_datetime.c.o
+[47/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[48/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_pd_parser.c.o
+[49/155] Compiling C object pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_vectorized.pyx.c.o
+[50/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[51/155] Compiling Cython source /testbed/pandas/_libs/writers.pyx
+[52/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_ujson.c.o
+[53/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[54/155] Compiling C object pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_indexing.pyx.c.o
+[55/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_JSONtoObj.c.o
+[56/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsonenc.c.o
+[57/155] Compiling C object pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_np_datetime.pyx.c.o
+[58/155] Compiling Cython source /testbed/pandas/_libs/tslibs/offsets.pyx
+[59/155] Compiling C object pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashing.pyx.c.o
+[60/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_objToJSON.c.o
+[61/155] Compiling Cython source /testbed/pandas/_libs/window/indexers.pyx
+[62/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsondec.c.o
+[63/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[64/155] Compiling Cython source /testbed/pandas/_libs/index.pyx
+[65/155] Compiling Cython source /testbed/pandas/_libs/window/aggregations.pyx
+[66/155] Compiling C object pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops_dispatch.pyx.c.o
+[67/155] Compiling Cython source /testbed/pandas/_libs/join.pyx
+[68/155] Compiling C object pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_arrays.pyx.c.o
+[69/155] Compiling C object pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_byteswap.pyx.c.o
+[70/155] Generating write_version_file with a custom command
+[71/155] Generating pandas/__init__.py with a custom command
+[72/155] Compiling Cython source /testbed/pandas/_libs/sparse.pyx
+[73/155] Linking target pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so
+[74/155] Linking target pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so
+[75/155] Linking target pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so
+[76/155] Linking target pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so
+[77/155] Linking target pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so
+[78/155] Linking target pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so
+[79/155] Linking target pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so
+[80/155] Linking target pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so
+[81/155] Compiling Cython source /testbed/pandas/_libs/interval.pyx
+[82/155] Linking target pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so
+[83/155] Linking target pandas/_libs/json.cpython-311-x86_64-linux-gnu.so
+[84/155] Linking target pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so
+[85/155] Linking target pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so
+[86/155] Compiling C object pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_properties.pyx.c.o
+[87/155] Linking target pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so
+[88/155] Compiling C object pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_missing.pyx.c.o
+[89/155] Linking target pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so
+[90/155] Compiling C object pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_fields.pyx.c.o
+[91/155] Compiling C object _cyutility.cpython-311-x86_64-linux-gnu.so.p/meson-generated_..__cyutility.c.o
+[92/155] Linking target pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so
+[93/155] Linking target _cyutility.cpython-311-x86_64-linux-gnu.so
+[94/155] Compiling C object pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_conversion.pyx.c.o
+[95/155] Linking target pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so
+[96/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_parsing.pyx.c.o
+[97/155] Linking target pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so
+[98/155] Compiling C object pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslib.pyx.c.o
+[99/155] Linking target pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so
+[100/155] Compiling Cython source /testbed/pandas/_libs/hashtable.pyx
+[101/155] Compiling C object pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_reshape.pyx.c.o
+[102/155] Linking target pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so
+[103/155] Compiling C object pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_testing.pyx.c.o
+[104/155] Compiling C object pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_dtypes.pyx.c.o
+[105/155] Linking target pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so
+[106/155] Linking target pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so
+[107/155] Compiling C object pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_writers.pyx.c.o
+[108/155] Linking target pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so
+[109/155] Compiling C object pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops.pyx.c.o
+[110/155] Compiling C object pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timezones.pyx.c.o
+[111/155] Linking target pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so
+[112/155] Linking target pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so
+[113/155] Compiling C object pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sas.pyx.c.o
+[114/155] Linking target pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so
+[115/155] Compiling C object pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_nattype.pyx.c.o
+[116/155] Linking target pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so
+[117/155] Compiling Cython source /testbed/pandas/_libs/algos.pyx
+[118/155] Compiling C object pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_tzconversion.pyx.c.o
+[119/155] Linking target pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so
+[120/155] Compiling C object pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_strptime.pyx.c.o
+[121/155] Linking target pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so
+[122/155] Compiling Cython source /testbed/pandas/_libs/groupby.pyx
+[123/155] Compiling C object pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_indexers.pyx.c.o
+[124/155] Linking target pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so
+[125/155] Compiling C object pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_internals.pyx.c.o
+[126/155] Linking target pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so
+[127/155] Compiling C object pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_period.pyx.c.o
+[128/155] Linking target pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so
+[129/155] Compiling C object pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timestamps.pyx.c.o
+[130/155] Linking target pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so
+[131/155] Compiling C object pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timedeltas.pyx.c.o
+[132/155] Linking target pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so
+[133/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_parsers.pyx.c.o
+[134/155] Linking target pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so
+[135/155] Compiling C++ object pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_aggregations.pyx.cpp.o
+[136/155] Linking target pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so
+[137/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o
+[138/155] Linking target pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so
+[139/155] Compiling C object pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o
+[140/155] Linking target pandas/_libs/index.cpython-311-x86_64-linux-gnu.so
+[141/155] Compiling C object pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o
+[142/155] Linking target pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so
+[143/155] Compiling C object pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o
+[144/155] Linking target pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so
+[145/155] Compiling C object pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o
+[146/155] Linking target pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so
+[147/155] Compiling C object pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o
+[148/155] Linking target pandas/_libs/join.cpython-311-x86_64-linux-gnu.so
+[149/155] Compiling C object pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o
+[150/155] Linking target pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so
+[151/155] Compiling C object pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o
+[152/155] Linking target pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so
+[153/155] Compiling C object pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o
+[154/155] Linking target pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 27 items
+
+pandas/tests/test_col.py FFFFFFFFFFFFFFFFFFFFFFFFF.F
+
+=================================== FAILURES ===================================
+_______________ test_col_simple[expr0-expected_values0-col('a')] _______________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5491: in _sanitize_column
+    return _reindex_for_setitem(value, self.index)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_reindex_for_setitem' is not defined
+____________ test_col_simple[expr1-expected_values1-(col('a') * 2)] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__mul__'
+____________ test_col_simple[expr2-expected_values2-col('a').sum()] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5495: in _sanitize_column
+    return sanitize_array(value, self.index, copy=True, allow_2d=True), None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:585: in sanitize_array
+    data = construct_1d_arraylike_from_scalar(data, len(index), dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/cast.py:1408: in construct_1d_arraylike_from_scalar
+    dtype, value = infer_dtype_from_scalar(value)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'infer_dtype_from_scalar' is not defined
+____________ test_col_simple[expr3-expected_values3-(col('a') + 1)] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__add__'
+____________ test_col_simple[expr4-expected_values4-(1 + col('a'))] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__radd__'
+____________ test_col_simple[expr5-expected_values5-(col('a') - 1)] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__sub__'
+____________ test_col_simple[expr6-expected_values6-(1 - col('a'))] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__rsub__'
+____________ test_col_simple[expr7-expected_values7-(col('a') * 1)] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__mul__'
+____________ test_col_simple[expr8-expected_values8-(1 * col('a'))] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__rmul__'
+____________ test_col_simple[expr9-expected_values9-(col('a') / 1)] ____________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__truediv__'
+___________ test_col_simple[expr10-expected_values10-(1 / col('a'))] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__rtruediv__'
+__________ test_col_simple[expr11-expected_values11-(col('a') // 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__floordiv__'
+__________ test_col_simple[expr12-expected_values12-(1 // col('a'))] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__rfloordiv__'
+___________ test_col_simple[expr13-expected_values13-(col('a') % 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__mod__'
+___________ test_col_simple[expr14-expected_values14-(1 % col('a'))] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:107: in <lambda>
+    return Expression(lambda df: getattr(self(df), op)(other), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Series' object has no attribute '__rmod__'
+___________ test_col_simple[expr15-expected_values15-(col('a') > 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5495: in _sanitize_column
+    return sanitize_array(value, self.index, copy=True, allow_2d=True), None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:585: in sanitize_array
+    data = construct_1d_arraylike_from_scalar(data, len(index), dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/cast.py:1408: in construct_1d_arraylike_from_scalar
+    dtype, value = infer_dtype_from_scalar(value)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'infer_dtype_from_scalar' is not defined
+__________ test_col_simple[expr16-expected_values16-(col('a') >= 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5495: in _sanitize_column
+    return sanitize_array(value, self.index, copy=True, allow_2d=True), None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:585: in sanitize_array
+    data = construct_1d_arraylike_from_scalar(data, len(index), dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/cast.py:1408: in construct_1d_arraylike_from_scalar
+    dtype, value = infer_dtype_from_scalar(value)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'infer_dtype_from_scalar' is not defined
+___________ test_col_simple[expr17-expected_values17-(col('a') < 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5495: in _sanitize_column
+    return sanitize_array(value, self.index, copy=True, allow_2d=True), None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:585: in sanitize_array
+    data = construct_1d_arraylike_from_scalar(data, len(index), dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/cast.py:1408: in construct_1d_arraylike_from_scalar
+    dtype, value = infer_dtype_from_scalar(value)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'infer_dtype_from_scalar' is not defined
+__________ test_col_simple[expr18-expected_values18-(col('a') <= 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5495: in _sanitize_column
+    return sanitize_array(value, self.index, copy=True, allow_2d=True), None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/construction.py:585: in sanitize_array
+    data = construct_1d_arraylike_from_scalar(data, len(index), dtype)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/cast.py:1408: in construct_1d_arraylike_from_scalar
+    dtype, value = infer_dtype_from_scalar(value)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'infer_dtype_from_scalar' is not defined
+__________ test_col_simple[expr19-expected_values19-(col('a') == 1)] ___________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+    ^^^^^^^
+pandas/core/frame.py:4425: in __setitem__
+    self._set_item(key, value)
+pandas/core/frame.py:4626: in _set_item
+    value, refs = self._sanitize_column(value)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5491: in _sanitize_column
+    return _reindex_for_setitem(value, self.index)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_reindex_for_setitem' is not defined
+_________ test_col_simple[expr20-expected_values20-power(col('a'), 2)] _________
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:170: in func
+    return ufunc(*parsed_inputs, **parsed_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:2061: in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.core.arraylike' has no attribute 'array_ufunc'
+_____ test_col_simple[expr21-expected_values21-divide(col('a'), col('a'))] _____
+pandas/tests/test_col.py:43: in test_col_simple
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:170: in func
+    return ufunc(*parsed_inputs, **parsed_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:2061: in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.core.arraylike' has no attribute 'array_ufunc'
+___________ test_namespaces[expr0-expected_values0-col('a').dt.year] ___________
+pandas/tests/test_col.py:61: in test_namespaces
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:211: in <lambda>
+    lambda df: getattr(getattr(self(df), self._namespace), attr),
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/accessor.py:231: in __get__
+    return self._accessor(obj)
+           ^^^^^^^^^^^^^^^^^^^
+pandas/core/indexes/accessors.py:690: in __new__
+    return DatetimeProperties(data, orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/indexes/accessors.py:71: in __init__
+    self._freeze()
+    ^^^^^^^^^^^^
+E   AttributeError: 'DatetimeProperties' object has no attribute '_freeze'
+______ test_namespaces[expr1-expected_values1-col('a').dt.strftime('%B')] ______
+pandas/tests/test_col.py:61: in test_namespaces
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:225: in <lambda>
+    return Expression(lambda df: func(df, *args, **kwargs), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:218: in func
+    return getattr(getattr(self(df), self._namespace), attr)(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/accessor.py:231: in __get__
+    return self._accessor(obj)
+           ^^^^^^^^^^^^^^^^^^^
+pandas/core/indexes/accessors.py:690: in __new__
+    return DatetimeProperties(data, orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/indexes/accessors.py:71: in __init__
+    self._freeze()
+    ^^^^^^^^^^^^
+E   AttributeError: 'DatetimeProperties' object has no attribute '_freeze'
+_________ test_namespaces[expr2-expected_values2-col('b').str.upper()] _________
+pandas/tests/test_col.py:61: in test_namespaces
+    result = df.assign(c=expr)
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:225: in <lambda>
+    return Expression(lambda df: func(df, *args, **kwargs), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:218: in func
+    return getattr(getattr(self(df), self._namespace), attr)(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/generic.py:6179: in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/accessor.py:231: in __get__
+    return self._accessor(obj)
+           ^^^^^^^^^^^^^^^^^^^
+pandas/core/strings/accessor.py:222: in __init__
+    self._freeze()
+    ^^^^^^^^^^^^
+E   AttributeError: 'StringMethods' object has no attribute '_freeze'
+_____________________________ test_custom_accessor _____________________________
+pandas/tests/test_col.py:97: in test_custom_accessor
+    result = df.assign(b=pd.col("a").xyz.mean())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:5467: in assign
+    data[k] = com.apply_if_callable(v, data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/common.py:384: in apply_if_callable
+    return maybe_callable(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:88: in __call__
+    return self._func(df)
+           ^^^^^^^^^^^^^^
+pandas/core/col.py:225: in <lambda>
+    return Expression(lambda df: func(df, *args, **kwargs), repr_str)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/col.py:218: in func
+    return getattr(getattr(self(df), self._namespace), attr)(
+pandas/tests/test_col.py:93: in mean
+    return self._obj.mean()
+           ^^^^^^^^^^^^^^^^
+pandas/util/_decorators.py:336: in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:7732: in mean
+    return NDFrame.mean(
+pandas/core/generic.py:11668: in mean
+    "mean", nanops.nanmean, axis, skipna, numeric_only, **kwargs
+            ^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.core.nanops' has no attribute 'nanmean'
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/test_col.py::test_invalid
+FAILED pandas/tests/test_col.py::test_col_simple[expr0-expected_values0-col('a')]
+FAILED pandas/tests/test_col.py::test_col_simple[expr1-expected_values1-(col('a') * 2)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr2-expected_values2-col('a').sum()]
+FAILED pandas/tests/test_col.py::test_col_simple[expr3-expected_values3-(col('a') + 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr4-expected_values4-(1 + col('a'))]
+FAILED pandas/tests/test_col.py::test_col_simple[expr5-expected_values5-(col('a') - 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr6-expected_values6-(1 - col('a'))]
+FAILED pandas/tests/test_col.py::test_col_simple[expr7-expected_values7-(col('a') * 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr8-expected_values8-(1 * col('a'))]
+FAILED pandas/tests/test_col.py::test_col_simple[expr9-expected_values9-(col('a') / 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr10-expected_values10-(1 / col('a'))]
+FAILED pandas/tests/test_col.py::test_col_simple[expr11-expected_values11-(col('a') // 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr12-expected_values12-(1 // col('a'))]
+FAILED pandas/tests/test_col.py::test_col_simple[expr13-expected_values13-(col('a') % 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr14-expected_values14-(1 % col('a'))]
+FAILED pandas/tests/test_col.py::test_col_simple[expr15-expected_values15-(col('a') > 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr16-expected_values16-(col('a') >= 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr17-expected_values17-(col('a') < 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr18-expected_values18-(col('a') <= 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr19-expected_values19-(col('a') == 1)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr20-expected_values20-power(col('a'), 2)]
+FAILED pandas/tests/test_col.py::test_col_simple[expr21-expected_values21-divide(col('a'), col('a'))]
+FAILED pandas/tests/test_col.py::test_namespaces[expr0-expected_values0-col('a').dt.year]
+FAILED pandas/tests/test_col.py::test_namespaces[expr1-expected_values1-col('a').dt.strftime('%B')]
+FAILED pandas/tests/test_col.py::test_namespaces[expr2-expected_values2-col('b').str.upper()]
+FAILED pandas/tests/test_col.py::test_custom_accessor - AttributeError: modul...
+========================= 26 failed, 1 passed in 4.00s =========================

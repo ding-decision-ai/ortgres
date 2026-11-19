@@ -1,0 +1,92 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/coordinates/tests/test_finite_difference_velocities.py.
+
+Date: 2026-10-11T02:57:54
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 13 items
+
+astropy/coordinates/tests/test_finite_difference_velocities.py .....F... [ 69%]
+..xx                                                                     [100%]
+
+=================================== FAILURES ===================================
+_______________________________ test_gcrs_diffs ________________________________
+astropy/time/core.py:3406: in update_leap_seconds
+    table = iers.LeapSeconds.auto_open(files)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/utils/iers/iers.py:1207: in auto_open
+    warn("leap-second file is expired.", IERSStaleWarning)
+E   astropy.utils.iers.iers.IERSStaleWarning: leap-second file is expired.
+
+During handling of the above exception, another exception occurred:
+astropy/coordinates/tests/test_finite_difference_velocities.py:144: in test_gcrs_diffs
+    sung = get_sun(time)  # should have very little vhelio
+           ^^^^^^^^^^^^^
+astropy/coordinates/funcs.py:157: in get_sun
+    earth_pv_helio, earth_pv_bary = erfa.epv00(*get_jd12(time, "tdb"))
+                                                ^^^^^^^^^^^^^^^^^^^^^
+astropy/coordinates/builtin_frames/utils.py:115: in get_jd12
+    newtime = getattr(time, scale)
+              ^^^^^^^^^^^^^^^^^^^^
+astropy/time/core.py:1768: in __getattr__
+    tm._set_scale(attr)
+astropy/time/core.py:797: in _set_scale
+    _check_leapsec()
+astropy/time/core.py:3377: in _check_leapsec
+    update_leap_seconds()
+astropy/time/core.py:3410: in update_leap_seconds
+    warn(
+E   astropy.utils.exceptions.AstropyWarning: leap-second auto-update failed due to the following exception: IERSStaleWarning('leap-second file is expired.')
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_faux_lsr[symmetric_dt-1.0 s]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_faux_lsr[symmetric_dt-1.0 yr]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_faux_lsr[asymmetric_dt-1.0 s]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_faux_lsr[asymmetric_dt-1.0 yr]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_faux_fk5_galactic
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_altaz_diffs
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_dt_function[small_dt]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_dt_function[huge_dt]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_numerical_limits[1000.0 AU]
+PASSED astropy/coordinates/tests/test_finite_difference_velocities.py::test_numerical_limits[10.0 pc]
+XFAIL astropy/coordinates/tests/test_finite_difference_velocities.py::test_numerical_limits[10.0 kpc] - too distant for our finite difference transformation implementation
+XFAIL astropy/coordinates/tests/test_finite_difference_velocities.py::test_numerical_limits[100.0 kpc] - too distant for our finite difference transformation implementation
+FAILED astropy/coordinates/tests/test_finite_difference_velocities.py::test_gcrs_diffs
+=================== 1 failed, 10 passed, 2 xfailed in 1.05s ====================

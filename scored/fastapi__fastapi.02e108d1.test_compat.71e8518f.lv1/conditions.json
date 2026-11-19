@@ -1,0 +1,16 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.31",
+  "initialization": {
+    "coverage": {}
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1"
+}

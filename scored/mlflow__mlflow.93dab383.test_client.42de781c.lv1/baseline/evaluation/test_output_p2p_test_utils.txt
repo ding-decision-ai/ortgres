@@ -1,0 +1,75 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 14 items
+
+tests/utils/test_utils.py::test_truncate_dict PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [  7%]
+tests/utils/test_utils.py::test_merge_dicts PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 14%]
+tests/utils/test_utils.py::test_chunk_dict PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 21%]
+tests/utils/test_utils.py::test_get_fully_qualified_class_name PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 28%]
+tests/utils/test_utils.py::test_inspect_original_var_name PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 35%]
+tests/utils/test_utils.py::test_random_name_generation PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 42%]
+tests/utils/test_utils.py::test_basic_attribute_access PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 50%]
+tests/utils/test_utils.py::test_nested_attribute_access PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 57%]
+tests/utils/test_utils.py::test_non_existent_attribute PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 64%]
+tests/utils/test_utils.py::test_hasattr PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 71%]
+tests/utils/test_utils.py::test_subclass_hasattr PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 78%]
+tests/utils/test_utils.py::test_setattr PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 85%]
+tests/utils/test_utils.py::test_delattr PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [ 92%]
+tests/utils/test_utils.py::test_delattr_non_existent PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:08:55 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_truncate_dict
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_merge_dicts
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_chunk_dict
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_get_fully_qualified_class_name
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_inspect_original_var_name
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_random_name_generation
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_basic_attribute_access
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_nested_attribute_access
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_non_existent_attribute
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_hasattr
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_subclass_hasattr
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_setattr
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_delattr
+PASSED | MEM 22.5/33.7 GB | DISK 796.2/915.7 GB tests/utils/test_utils.py::test_delattr_non_existent
+============================== 14 passed in 0.05s ==============================

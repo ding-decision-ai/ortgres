@@ -1,0 +1,1339 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: mock-3.15.1, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 29 items
+
+testing/python/raises_group.py .FFF.....FFFFFFFFFFF.........             [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_incorrect_number_exceptions _______________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 109, in test_incorrect_number_exceptions
+  |     raise ExceptionGroup("", (ValueError(),))
+  | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | ValueError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 103, in test_incorrect_number_exceptions
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: Too few exceptions raised, found no match for: [SyntaxError]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 103, in test_incorrect_number_exceptions
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: Too few exceptions raised, found no match for: [SyntaxError]
++ Raised exception group did not match: 1 matched exception. Too few exceptions raised, found no match for: [SyntaxError]
+?                                       +++++++++++++++++++++
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:103: in test_incorrect_number_exceptions
+    with (
+E   Failed: Raised exception group did not match: Too few exceptions raised, found no match for: [SyntaxError]
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:103: in test_incorrect_number_exceptions
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: Too few exceptions raised, found no match for: [SyntaxError]
+E   + Raised exception group did not match: 1 matched exception. Too few exceptions raised, found no match for: [SyntaxError]
+E   ?                                       +++++++++++++++++++++
+____________________________ test_flatten_subgroups ____________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 193, in test_flatten_subgroups
+  |     raise ExceptionGroup("", (ValueError(),))
+  | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | ValueError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 187, in test_flatten_subgroups
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: `ValueError()` is not an exception group, but would match with `allow_unwrapped=True`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 187, in test_flatten_subgroups
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: `ValueError()` is not an exception group, but would match with `allow_unwrapped=True`
++ Raised exception group did not match: RaisesGroup(ValueError, flatten_subgroups=True): `ValueError()` is not an exception group, but would match with `allow_unwrapped=True`
+?                                      +++++++++++++++++++++++++++++++++++++++++++++++++
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:187: in test_flatten_subgroups
+    with (
+E   Failed: Raised exception group did not match: `ValueError()` is not an exception group, but would match with `allow_unwrapped=True`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:187: in test_flatten_subgroups
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: `ValueError()` is not an exception group, but would match with `allow_unwrapped=True`
+E   + Raised exception group did not match: RaisesGroup(ValueError, flatten_subgroups=True): `ValueError()` is not an exception group, but would match with `allow_unwrapped=True`
+E   ?                                      +++++++++++++++++++++++++++++++++++++++++++++++++
+_______________________ test_catch_unwrapped_exceptions ________________________
+testing/python/raises_group.py:350: in test_catch_unwrapped_exceptions
+    raise TypeError
+E   TypeError
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:343: in test_catch_unwrapped_exceptions
+    with (
+E   Failed: Raised exception (group) did not match: `TypeError()` is not an instance of `ValueError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:343: in test_catch_unwrapped_exceptions
+    with (
+E   AssertionError: 
+E   - Raised exception (group) did not match: `TypeError()` is not an instance of `ValueError`
+E   + Raised exception (group) did not match: RaisesExc(ValueError): `TypeError()` is not an instance of `ValueError`
+E   ?                                        +++++++++++++++++++++++
+_____________________________ test_assert_message ______________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 582, in test_assert_message
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup:  (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | RuntimeError
+      +------------------------------------
+    +---------------- 2 ----------------
+    | RuntimeError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 563, in test_assert_message
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: RaisesGroup(ValueError):
+  ExceptionGroup('', [RuntimeError()]):
+    `RuntimeError()` is not an instance of `ValueError`
+  RuntimeError():
+    `RuntimeError()` is not an exception group
+RaisesGroup(ValueError, match='a'):
+  ExceptionGroup('', [RuntimeError()]):
+    Regex pattern did not match the `ExceptionGroup()`.
+     Regex: 'a'
+     Input: ''
+  RuntimeError():
+    `RuntimeError()` is not an exception group
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 563, in test_assert_message
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: RaisesGroup(ValueError):
+?                                       ------------------------
++ Raised exception group did not match: 
++ The following expected exceptions did not find a match:
++   RaisesGroup(ValueError)
++   RaisesGroup(ValueError, match='a')
++ The following raised exceptions did not find a match
+    ExceptionGroup('', [RuntimeError()]):
+-     `RuntimeError()` is not an instance of `ValueError`
++     RaisesGroup(ValueError): `RuntimeError()` is not an instance of `ValueError`
+?    +++++++++++++++++++++++++
+-   RuntimeError():
+-     `RuntimeError()` is not an exception group
+- RaisesGroup(ValueError, match='a'):
+-   ExceptionGroup('', [RuntimeError()]):
+-     Regex pattern did not match the `ExceptionGroup()`.
++     RaisesGroup(ValueError, match='a'): Regex pattern did not match the `ExceptionGroup()`.
+?    ++++++++++++++++++++++++++++++++++++
+       Regex: 'a'
+       Input: ''
+    RuntimeError():
+-     `RuntimeError()` is not an exception group
++     RaisesGroup(ValueError): `RuntimeError()` is not an exception group
+?    +++++++++++++++++++++++++                                           +
++     RaisesGroup(ValueError, match='a'): `RuntimeError()` is not an exception group
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:563: in test_assert_message
+    with (
+E   Failed: Raised exception group did not match: RaisesGroup(ValueError):
+E     ExceptionGroup('', [RuntimeError()]):
+E       `RuntimeError()` is not an instance of `ValueError`
+E     RuntimeError():
+E       `RuntimeError()` is not an exception group
+E   RaisesGroup(ValueError, match='a'):
+E     ExceptionGroup('', [RuntimeError()]):
+E       Regex pattern did not match the `ExceptionGroup()`.
+E        Regex: 'a'
+E        Input: ''
+E     RuntimeError():
+E       `RuntimeError()` is not an exception group
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:563: in test_assert_message
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: RaisesGroup(ValueError):
+E   ?                                       ------------------------
+E   + Raised exception group did not match: 
+E   + The following expected exceptions did not find a match:
+E   +   RaisesGroup(ValueError)
+E   +   RaisesGroup(ValueError, match='a')
+E   + The following raised exceptions did not find a match
+E       ExceptionGroup('', [RuntimeError()]):
+E   -     `RuntimeError()` is not an instance of `ValueError`
+E   +     RaisesGroup(ValueError): `RuntimeError()` is not an instance of `ValueError`
+E   ?    +++++++++++++++++++++++++
+E   -   RuntimeError():
+E   -     `RuntimeError()` is not an exception group
+E   - RaisesGroup(ValueError, match='a'):
+E   -   ExceptionGroup('', [RuntimeError()]):
+E   -     Regex pattern did not match the `ExceptionGroup()`.
+E   +     RaisesGroup(ValueError, match='a'): Regex pattern did not match the `ExceptionGroup()`.
+E   ?    ++++++++++++++++++++++++++++++++++++
+E          Regex: 'a'
+E          Input: ''
+E       RuntimeError():
+E   -     `RuntimeError()` is not an exception group
+E   +     RaisesGroup(ValueError): `RuntimeError()` is not an exception group
+E   ?    +++++++++++++++++++++++++                                           +
+E   +     RaisesGroup(ValueError, match='a'): `RuntimeError()` is not an exception group
+_____________________________ test_message_indent ______________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 710, in test_message_indent
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup:  (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | exceptiongroup.ExceptionGroup:  (2 sub-exceptions)
+    +-+---------------- 1 ----------------
+      | TypeError
+      +---------------- 2 ----------------
+      | RuntimeError
+      +------------------------------------
+    +---------------- 2 ----------------
+    | TypeError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 678, in test_message_indent
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: RaisesGroup(ValueError, ValueError):
+  ExceptionGroup('', [TypeError(), RuntimeError()]):
+    ValueError:
+      TypeError():
+        `TypeError()` is not an instance of `ValueError`
+      RuntimeError():
+        `RuntimeError()` is not an instance of `ValueError`
+    ValueError:
+      TypeError():
+        `TypeError()` is not an instance of `ValueError`
+      RuntimeError():
+        `RuntimeError()` is not an instance of `ValueError`
+  TypeError():
+    `TypeError()` is not an exception group
+ValueError:
+  ExceptionGroup('', [TypeError(), RuntimeError()]):
+    Unexpected nested `ExceptionGroup()`, expected `ValueError`
+  TypeError():
+    `TypeError()` is not an instance of `ValueError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 678, in test_message_indent
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: RaisesGroup(ValueError, ValueError):
++ Raised exception group did not match: 
++ The following expected exceptions did not find a match:
++   RaisesGroup(ValueError, ValueError)
++   ValueError
++ The following raised exceptions did not find a match
+    ExceptionGroup('', [TypeError(), RuntimeError()]):
++     RaisesGroup(ValueError, ValueError): 
++       The following expected exceptions did not find a match:
+-     ValueError:
+?               -
++         ValueError
+? ++++
++         ValueError
++       The following raised exceptions did not find a match
+-       TypeError():
++         TypeError():
+? ++
+-         `TypeError()` is not an instance of `ValueError`
++           `TypeError()` is not an instance of `ValueError`
+? ++
++           `TypeError()` is not an instance of `ValueError`
+-       RuntimeError():
++         RuntimeError():
+? ++
+-         `RuntimeError()` is not an instance of `ValueError`
++           `RuntimeError()` is not an instance of `ValueError`
+? ++
+-     ValueError:
+-       TypeError():
+-         `TypeError()` is not an instance of `ValueError`
+-       RuntimeError():
+-         `RuntimeError()` is not an instance of `ValueError`
++           `RuntimeError()` is not an instance of `ValueError`
+? ++
+-   TypeError():
+-     `TypeError()` is not an exception group
+- ValueError:
+-   ExceptionGroup('', [TypeError(), RuntimeError()]):
+      Unexpected nested `ExceptionGroup()`, expected `ValueError`
+    TypeError():
++     RaisesGroup(ValueError, ValueError): `TypeError()` is not an exception group
+      `TypeError()` is not an instance of `ValueError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:678: in test_message_indent
+    with (
+E   Failed: Raised exception group did not match: RaisesGroup(ValueError, ValueError):
+E     ExceptionGroup('', [TypeError(), RuntimeError()]):
+E       ValueError:
+E         TypeError():
+E           `TypeError()` is not an instance of `ValueError`
+E         RuntimeError():
+E           `RuntimeError()` is not an instance of `ValueError`
+E       ValueError:
+E         TypeError():
+E           `TypeError()` is not an instance of `ValueError`
+E         RuntimeError():
+E           `RuntimeError()` is not an instance of `ValueError`
+E     TypeError():
+E       `TypeError()` is not an exception group
+E   ValueError:
+E     ExceptionGroup('', [TypeError(), RuntimeError()]):
+E       Unexpected nested `ExceptionGroup()`, expected `ValueError`
+E     TypeError():
+E       `TypeError()` is not an instance of `ValueError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:678: in test_message_indent
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: RaisesGroup(ValueError, ValueError):
+E   + Raised exception group did not match: 
+E   + The following expected exceptions did not find a match:
+E   +   RaisesGroup(ValueError, ValueError)
+E   +   ValueError
+E   + The following raised exceptions did not find a match
+E       ExceptionGroup('', [TypeError(), RuntimeError()]):
+E   +     RaisesGroup(ValueError, ValueError): 
+E   +       The following expected exceptions did not find a match:
+E   -     ValueError:
+E   ?               -
+E   +         ValueError
+E   ? ++++
+E   +         ValueError
+E   +       The following raised exceptions did not find a match
+E   -       TypeError():
+E   +         TypeError():
+E   ? ++
+E   -         `TypeError()` is not an instance of `ValueError`
+E   +           `TypeError()` is not an instance of `ValueError`
+E   ? ++
+E   +           `TypeError()` is not an instance of `ValueError`
+E   -       RuntimeError():
+E   +         RuntimeError():
+E   ? ++
+E   -         `RuntimeError()` is not an instance of `ValueError`
+E   +           `RuntimeError()` is not an instance of `ValueError`
+E   ? ++
+E   -     ValueError:
+E   -       TypeError():
+E   -         `TypeError()` is not an instance of `ValueError`
+E   -       RuntimeError():
+E   -         `RuntimeError()` is not an instance of `ValueError`
+E   +           `RuntimeError()` is not an instance of `ValueError`
+E   ? ++
+E   -   TypeError():
+E   -     `TypeError()` is not an exception group
+E   - ValueError:
+E   -   ExceptionGroup('', [TypeError(), RuntimeError()]):
+E         Unexpected nested `ExceptionGroup()`, expected `ValueError`
+E       TypeError():
+E   +     RaisesGroup(ValueError, ValueError): `TypeError()` is not an exception group
+E         `TypeError()` is not an instance of `ValueError`
+__________________ test_suggestion_on_nested_and_brief_error ___________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 761, in test_suggestion_on_nested_and_brief_error
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+      +-+---------------- 1 ----------------
+        | ValueError
+        +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 747, in test_suggestion_on_nested_and_brief_error
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: RaisesGroup(ValueError):
+  ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+    Unexpected nested `ExceptionGroup()`, expected `ValueError`
+      Did you mean to use `flatten_subgroups=True`?
+ValueError:
+  ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+    Unexpected nested `ExceptionGroup()`, expected `ValueError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 747, in test_suggestion_on_nested_and_brief_error
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: RaisesGroup(ValueError):
+?                                       ------------------------
++ Raised exception group did not match: 
++ The following expected exceptions did not find a match:
++   RaisesGroup(ValueError)
++   ValueError
++ The following raised exceptions did not find a match
+    ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+-     Unexpected nested `ExceptionGroup()`, expected `ValueError`
++     RaisesGroup(ValueError): Unexpected nested `ExceptionGroup()`, expected `ValueError`
+?    +++++++++++++++++++++++++
+        Did you mean to use `flatten_subgroups=True`?
+- ValueError:
+-   ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+      Unexpected nested `ExceptionGroup()`, expected `ValueError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:747: in test_suggestion_on_nested_and_brief_error
+    with (
+E   Failed: Raised exception group did not match: RaisesGroup(ValueError):
+E     ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+E       Unexpected nested `ExceptionGroup()`, expected `ValueError`
+E         Did you mean to use `flatten_subgroups=True`?
+E   ValueError:
+E     ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+E       Unexpected nested `ExceptionGroup()`, expected `ValueError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:747: in test_suggestion_on_nested_and_brief_error
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: RaisesGroup(ValueError):
+E   ?                                       ------------------------
+E   + Raised exception group did not match: 
+E   + The following expected exceptions did not find a match:
+E   +   RaisesGroup(ValueError)
+E   +   ValueError
+E   + The following raised exceptions did not find a match
+E       ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+E   -     Unexpected nested `ExceptionGroup()`, expected `ValueError`
+E   +     RaisesGroup(ValueError): Unexpected nested `ExceptionGroup()`, expected `ValueError`
+E   ?    +++++++++++++++++++++++++
+E           Did you mean to use `flatten_subgroups=True`?
+E   - ValueError:
+E   -   ExceptionGroup('', [ExceptionGroup('', [ValueError()])]):
+E         Unexpected nested `ExceptionGroup()`, expected `ValueError`
+__________________________ test_assert_message_nested __________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 882, in test_assert_message_nested
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup:  (3 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | TypeError: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    +---------------- 2 ----------------
+    | exceptiongroup.ExceptionGroup: Exceptions from Trio nursery (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | TypeError: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      +------------------------------------
+    +---------------- 3 ----------------
+    | exceptiongroup.ExceptionGroup: Exceptions from Trio nursery (2 sub-exceptions)
+    +-+---------------- 1 ----------------
+      | TypeError: cccccccccccccccccccccccccccccc
+      +---------------- 2 ----------------
+      | TypeError: dddddddddddddddddddddddddddddd
+      +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 815, in test_assert_message_nested
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: RaisesGroup(ValueError):
+  TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+    `TypeError()` is not an exception group
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+    `TypeError()` is not an instance of `ValueError`
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+    ValueError:
+      TypeError('cccccccccccccccccccccccccccccc'):
+        `TypeError()` is not an instance of `ValueError`
+      TypeError('dddddddddddddddddddddddddddddd'):
+        `TypeError()` is not an instance of `ValueError`
+RaisesGroup(RaisesGroup(ValueError)):
+  TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+    `TypeError()` is not an exception group
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+    `TypeError()` is not an exception group
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+    RaisesGroup(ValueError):
+      TypeError('cccccccccccccccccccccccccccccc'):
+        `TypeError()` is not an exception group
+      TypeError('dddddddddddddddddddddddddddddd'):
+        `TypeError()` is not an exception group
+RaisesGroup(RaisesExc(TypeError, match='foo')):
+  TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+    `TypeError()` is not an exception group
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+    Regex pattern did not match.
+     Regex: 'foo'
+     Input: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+    RaisesExc(TypeError, match='foo'):
+      TypeError('cccccccccccccccccccccccccccccc'):
+        Regex pattern did not match.
+         Regex: 'foo'
+         Input: 'cccccccccccccccccccccccccccccc'
+      TypeError('dddddddddddddddddddddddddddddd'):
+        Regex pattern did not match.
+         Regex: 'foo'
+         Input: 'dddddddddddddddddddddddddddddd'
+RaisesGroup(TypeError, ValueError):
+  TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+    `TypeError()` is not an exception group
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+    Too few exceptions raised, found no match for: [ValueError]
+  ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+    1 matched exception.
+    ValueError:
+      TypeError('dddddddddddddddddddddddddddddd'):
+        `TypeError()` is not an instance of `ValueError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 815, in test_assert_message_nested
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: RaisesGroup(ValueError):
+?                                       ------------------------
++ Raised exception group did not match: 
++ The following expected exceptions did not find a match:
++   RaisesGroup(ValueError)
++   RaisesGroup(RaisesGroup(ValueError))
++   RaisesGroup(RaisesExc(TypeError, match='foo'))
++   RaisesGroup(TypeError, ValueError)
++ The following raised exceptions did not find a match
+    TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+-     `TypeError()` is not an exception group
++     RaisesGroup(ValueError): `TypeError()` is not an exception group
+?    +++++++++++++++++++++++++
++     RaisesGroup(RaisesGroup(ValueError)): `TypeError()` is not an exception group
++     RaisesGroup(RaisesExc(TypeError, match='foo')): `TypeError()` is not an exception group
++     RaisesGroup(TypeError, ValueError): `TypeError()` is not an exception group
+    ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+-     `TypeError()` is not an instance of `ValueError`
++     RaisesGroup(ValueError): `TypeError()` is not an instance of `ValueError`
+?    +++++++++++++++++++++++++
++     RaisesGroup(RaisesGroup(ValueError)): RaisesGroup(ValueError): `TypeError()` is not an exception group
++     RaisesGroup(RaisesExc(TypeError, match='foo')): RaisesExc(TypeError, match='foo'): Regex pattern did not match.
+-   ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+-     ValueError:
+-       TypeError('cccccccccccccccccccccccccccccc'):
+-         `TypeError()` is not an instance of `ValueError`
+-       TypeError('dddddddddddddddddddddddddddddd'):
+-         `TypeError()` is not an instance of `ValueError`
+- RaisesGroup(RaisesGroup(ValueError)):
+-   TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+-     `TypeError()` is not an exception group
+-   ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+-     `TypeError()` is not an exception group
+-   ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+-     RaisesGroup(ValueError):
+-       TypeError('cccccccccccccccccccccccccccccc'):
+-         `TypeError()` is not an exception group
+-       TypeError('dddddddddddddddddddddddddddddd'):
+-         `TypeError()` is not an exception group
+- RaisesGroup(RaisesExc(TypeError, match='foo')):
+-   TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+-     `TypeError()` is not an exception group
+-   ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+-     Regex pattern did not match.
+       Regex: 'foo'
+       Input: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
++     RaisesGroup(TypeError, ValueError): 1 matched exception. Too few exceptions raised, found no match for: [ValueError]
+    ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+-     RaisesExc(TypeError, match='foo'):
++     RaisesGroup(ValueError): 
++       The following expected exceptions did not find a match:
++         ValueError
++       The following raised exceptions did not find a match
+-       TypeError('cccccccccccccccccccccccccccccc'):
++         TypeError('cccccccccccccccccccccccccccccc'):
+? ++
++           `TypeError()` is not an instance of `ValueError`
+-         Regex pattern did not match.
+-          Regex: 'foo'
+-          Input: 'cccccccccccccccccccccccccccccc'
+-       TypeError('dddddddddddddddddddddddddddddd'):
++         TypeError('dddddddddddddddddddddddddddddd'):
+? ++
++           `TypeError()` is not an instance of `ValueError`
++     RaisesGroup(RaisesGroup(ValueError)): 
++       The following expected exceptions did not find a match:
++         RaisesGroup(ValueError)
++       The following raised exceptions did not find a match
++         TypeError('cccccccccccccccccccccccccccccc'):
++           RaisesGroup(ValueError): `TypeError()` is not an exception group
+-         Regex pattern did not match.
+-          Regex: 'foo'
+-          Input: 'dddddddddddddddddddddddddddddd'
+- RaisesGroup(TypeError, ValueError):
+-   TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+-     `TypeError()` is not an exception group
+-   ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+-     Too few exceptions raised, found no match for: [ValueError]
+-   ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+-     1 matched exception.
+-     ValueError:
+-       TypeError('dddddddddddddddddddddddddddddd'):
++         TypeError('dddddddddddddddddddddddddddddd'):
+? ++
++           RaisesGroup(ValueError): `TypeError()` is not an exception group
++     RaisesGroup(RaisesExc(TypeError, match='foo')): 
++       The following expected exceptions did not find a match:
++         RaisesExc(TypeError, match='foo')
++       The following raised exceptions did not find a match
++         TypeError('cccccccccccccccccccccccccccccc'):
++           RaisesExc(TypeError, match='foo'): Regex pattern did not match.
++            Regex: 'foo'
++            Input: 'cccccccccccccccccccccccccccccc'
++         TypeError('dddddddddddddddddddddddddddddd'):
++           RaisesExc(TypeError, match='foo'): Regex pattern did not match.
++            Regex: 'foo'
++            Input: 'dddddddddddddddddddddddddddddd'
++     RaisesGroup(TypeError, ValueError): 
++       1 matched exception. 
++       The following expected exceptions did not find a match:
++         ValueError
++       The following raised exceptions did not find a match
++         TypeError('dddddddddddddddddddddddddddddd'):
++           It matches `TypeError` which was paired with `TypeError('cccccccccccccccccccccccccccccc')`
+-         `TypeError()` is not an instance of `ValueError`
++           `TypeError()` is not an instance of `ValueError`
+? ++
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:815: in test_assert_message_nested
+    with (
+E   Failed: Raised exception group did not match: RaisesGroup(ValueError):
+E     TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E       `TypeError()` is not an exception group
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E       `TypeError()` is not an instance of `ValueError`
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E       ValueError:
+E         TypeError('cccccccccccccccccccccccccccccc'):
+E           `TypeError()` is not an instance of `ValueError`
+E         TypeError('dddddddddddddddddddddddddddddd'):
+E           `TypeError()` is not an instance of `ValueError`
+E   RaisesGroup(RaisesGroup(ValueError)):
+E     TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E       `TypeError()` is not an exception group
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E       `TypeError()` is not an exception group
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E       RaisesGroup(ValueError):
+E         TypeError('cccccccccccccccccccccccccccccc'):
+E           `TypeError()` is not an exception group
+E         TypeError('dddddddddddddddddddddddddddddd'):
+E           `TypeError()` is not an exception group
+E   RaisesGroup(RaisesExc(TypeError, match='foo')):
+E     TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E       `TypeError()` is not an exception group
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E       Regex pattern did not match.
+E        Regex: 'foo'
+E        Input: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E       RaisesExc(TypeError, match='foo'):
+E         TypeError('cccccccccccccccccccccccccccccc'):
+E           Regex pattern did not match.
+E            Regex: 'foo'
+E            Input: 'cccccccccccccccccccccccccccccc'
+E         TypeError('dddddddddddddddddddddddddddddd'):
+E           Regex pattern did not match.
+E            Regex: 'foo'
+E            Input: 'dddddddddddddddddddddddddddddd'
+E   RaisesGroup(TypeError, ValueError):
+E     TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E       `TypeError()` is not an exception group
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E       Too few exceptions raised, found no match for: [ValueError]
+E     ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E       1 matched exception.
+E       ValueError:
+E         TypeError('dddddddddddddddddddddddddddddd'):
+E           `TypeError()` is not an instance of `ValueError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:815: in test_assert_message_nested
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: RaisesGroup(ValueError):
+E   ?                                       ------------------------
+E   + Raised exception group did not match: 
+E   + The following expected exceptions did not find a match:
+E   +   RaisesGroup(ValueError)
+E   +   RaisesGroup(RaisesGroup(ValueError))
+E   +   RaisesGroup(RaisesExc(TypeError, match='foo'))
+E   +   RaisesGroup(TypeError, ValueError)
+E   + The following raised exceptions did not find a match
+E       TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E   -     `TypeError()` is not an exception group
+E   +     RaisesGroup(ValueError): `TypeError()` is not an exception group
+E   ?    +++++++++++++++++++++++++
+E   +     RaisesGroup(RaisesGroup(ValueError)): `TypeError()` is not an exception group
+E   +     RaisesGroup(RaisesExc(TypeError, match='foo')): `TypeError()` is not an exception group
+E   +     RaisesGroup(TypeError, ValueError): `TypeError()` is not an exception group
+E       ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E   -     `TypeError()` is not an instance of `ValueError`
+E   +     RaisesGroup(ValueError): `TypeError()` is not an instance of `ValueError`
+E   ?    +++++++++++++++++++++++++
+E   +     RaisesGroup(RaisesGroup(ValueError)): RaisesGroup(ValueError): `TypeError()` is not an exception group
+E   +     RaisesGroup(RaisesExc(TypeError, match='foo')): RaisesExc(TypeError, match='foo'): Regex pattern did not match.
+E   -   ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E   -     ValueError:
+E   -       TypeError('cccccccccccccccccccccccccccccc'):
+E   -         `TypeError()` is not an instance of `ValueError`
+E   -       TypeError('dddddddddddddddddddddddddddddd'):
+E   -         `TypeError()` is not an instance of `ValueError`
+E   - RaisesGroup(RaisesGroup(ValueError)):
+E   -   TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E   -     `TypeError()` is not an exception group
+E   -   ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E   -     `TypeError()` is not an exception group
+E   -   ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E   -     RaisesGroup(ValueError):
+E   -       TypeError('cccccccccccccccccccccccccccccc'):
+E   -         `TypeError()` is not an exception group
+E   -       TypeError('dddddddddddddddddddddddddddddd'):
+E   -         `TypeError()` is not an exception group
+E   - RaisesGroup(RaisesExc(TypeError, match='foo')):
+E   -   TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E   -     `TypeError()` is not an exception group
+E   -   ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E   -     Regex pattern did not match.
+E          Regex: 'foo'
+E          Input: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+E   +     RaisesGroup(TypeError, ValueError): 1 matched exception. Too few exceptions raised, found no match for: [ValueError]
+E       ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E   -     RaisesExc(TypeError, match='foo'):
+E   +     RaisesGroup(ValueError): 
+E   +       The following expected exceptions did not find a match:
+E   +         ValueError
+E   +       The following raised exceptions did not find a match
+E   -       TypeError('cccccccccccccccccccccccccccccc'):
+E   +         TypeError('cccccccccccccccccccccccccccccc'):
+E   ? ++
+E   +           `TypeError()` is not an instance of `ValueError`
+E   -         Regex pattern did not match.
+E   -          Regex: 'foo'
+E   -          Input: 'cccccccccccccccccccccccccccccc'
+E   -       TypeError('dddddddddddddddddddddddddddddd'):
+E   +         TypeError('dddddddddddddddddddddddddddddd'):
+E   ? ++
+E   +           `TypeError()` is not an instance of `ValueError`
+E   +     RaisesGroup(RaisesGroup(ValueError)): 
+E   +       The following expected exceptions did not find a match:
+E   +         RaisesGroup(ValueError)
+E   +       The following raised exceptions did not find a match
+E   +         TypeError('cccccccccccccccccccccccccccccc'):
+E   +           RaisesGroup(ValueError): `TypeError()` is not an exception group
+E   -         Regex pattern did not match.
+E   -          Regex: 'foo'
+E   -          Input: 'dddddddddddddddddddddddddddddd'
+E   - RaisesGroup(TypeError, ValueError):
+E   -   TypeError('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'):
+E   -     `TypeError()` is not an exception group
+E   -   ExceptionGroup('Exceptions from Trio nursery', [TypeError('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')]):
+E   -     Too few exceptions raised, found no match for: [ValueError]
+E   -   ExceptionGroup('Exceptions from Trio nursery', [TypeError('cccccccccccccccccccccccccccccc'), TypeError('dddddddddddddddddddddddddddddd')]):
+E   -     1 matched exception.
+E   -     ValueError:
+E   -       TypeError('dddddddddddddddddddddddddddddd'):
+E   +         TypeError('dddddddddddddddddddddddddddddd'):
+E   ? ++
+E   +           RaisesGroup(ValueError): `TypeError()` is not an exception group
+E   +     RaisesGroup(RaisesExc(TypeError, match='foo')): 
+E   +       The following expected exceptions did not find a match:
+E   +         RaisesExc(TypeError, match='foo')
+E   +       The following raised exceptions did not find a match
+E   +         TypeError('cccccccccccccccccccccccccccccc'):
+E   +           RaisesExc(TypeError, match='foo'): Regex pattern did not match.
+E   +            Regex: 'foo'
+E   +            Input: 'cccccccccccccccccccccccccccccc'
+E   +         TypeError('dddddddddddddddddddddddddddddd'):
+E   +           RaisesExc(TypeError, match='foo'): Regex pattern did not match.
+E   +            Regex: 'foo'
+E   +            Input: 'dddddddddddddddddddddddddddddd'
+E   +     RaisesGroup(TypeError, ValueError): 
+E   +       1 matched exception. 
+E   +       The following expected exceptions did not find a match:
+E   +         ValueError
+E   +       The following raised exceptions did not find a match
+E   +         TypeError('dddddddddddddddddddddddddddddd'):
+E   +           It matches `TypeError` which was paired with `TypeError('cccccccccccccccccccccccccccccc')`
+E   -         `TypeError()` is not an instance of `ValueError`
+E   +           `TypeError()` is not an instance of `ValueError`
+E   ? ++
+__________________________ test_check_no_patched_repr __________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 929, in test_check_no_patched_repr
+  |     raise ExceptionGroup("", [ValueError("foo"), ValueError("bar")])
+  | exceptiongroup.ExceptionGroup:  (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | ValueError: foo
+    +---------------- 2 ----------------
+    | ValueError: bar
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 925, in test_check_no_patched_repr
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: RaisesExc(check=<function test_check_no_patched_repr.<locals>.<lambda> at 0x7e80a6351ea0>):
+  ValueError('foo'):
+    check did not return True
+  ValueError('bar'):
+    check did not return True
+TypeError:
+  ValueError('foo'):
+    `ValueError()` is not an instance of `TypeError`
+  ValueError('bar'):
+    `ValueError()` is not an instance of `TypeError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 925, in test_check_no_patched_repr
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: Regex pattern did not match.
+ Regex: "^Raised exception group did not match: \\nThe following expected exceptions did not find a match:\\n  RaisesExc\\(check=<function test_check_no_patched_repr.<locals>.<lambda> at .*>\\)\\n  TypeError\\nThe following raised exceptions did not find a match\\n  ValueError\\('foo'\\):\\n    RaisesExc\\(check=<function test_check_no_patched_repr.<locals>.<lambda> at .*>\\): check did not return True\\n    `ValueError\\(\\)` is not an instance of `TypeError`\\n  ValueError\\('bar'\\):\\n    RaisesExc\\(check=<function test_check_no_patched_repr.<locals>.<lambda> at .*>\\): check did not return True\\n    `ValueError\\(\\)` is not an instance of `TypeError`$"
+ Input: "Raised exception group did not match: RaisesExc(check=<function test_check_no_patched_repr.<locals>.<lambda> at 0x7e80a6351ea0>):\n  ValueError('foo'):\n    check did not return True\n  ValueError('bar'):\n    check did not return True\nTypeError:\n  ValueError('foo'):\n    `ValueError()` is not an instance of `TypeError`\n  ValueError('bar'):\n    `ValueError()` is not an instance of `TypeError`"
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:925: in test_check_no_patched_repr
+    with (
+E   Failed: Raised exception group did not match: RaisesExc(check=<function test_check_no_patched_repr.<locals>.<lambda> at 0x7e80a6351ea0>):
+E     ValueError('foo'):
+E       check did not return True
+E     ValueError('bar'):
+E       check did not return True
+E   TypeError:
+E     ValueError('foo'):
+E       `ValueError()` is not an instance of `TypeError`
+E     ValueError('bar'):
+E       `ValueError()` is not an instance of `TypeError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:925: in test_check_no_patched_repr
+    with (
+E   AssertionError: Regex pattern did not match.
+E    Regex: "^Raised exception group did not match: \\nThe following expected exceptions did not find a match:\\n  RaisesExc\\(check=<function test_check_no_patched_repr.<locals>.<lambda> at .*>\\)\\n  TypeError\\nThe following raised exceptions did not find a match\\n  ValueError\\('foo'\\):\\n    RaisesExc\\(check=<function test_check_no_patched_repr.<locals>.<lambda> at .*>\\): check did not return True\\n    `ValueError\\(\\)` is not an instance of `TypeError`\\n  ValueError\\('bar'\\):\\n    RaisesExc\\(check=<function test_check_no_patched_repr.<locals>.<lambda> at .*>\\): check did not return True\\n    `ValueError\\(\\)` is not an instance of `TypeError`$"
+E    Input: "Raised exception group did not match: RaisesExc(check=<function test_check_no_patched_repr.<locals>.<lambda> at 0x7e80a6351ea0>):\n  ValueError('foo'):\n    check did not return True\n  ValueError('bar'):\n    check did not return True\nTypeError:\n  ValueError('foo'):\n    `ValueError()` is not an instance of `TypeError`\n  ValueError('bar'):\n    `ValueError()` is not an instance of `TypeError`"
+___________________________ test_misordering_example ___________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 956, in test_misordering_example
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup:  (4 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | ValueError: foo
+    +---------------- 2 ----------------
+    | ValueError: foo
+    +---------------- 3 ----------------
+    | ValueError: foo
+    +---------------- 4 ----------------
+    | ValueError: bar
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 933, in test_misordering_example
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: 3 matched exceptions.
+RaisesExc(ValueError, match='foo'):
+  It matches ValueError('foo') which was paired with ValueError
+  It matches ValueError('foo') which was paired with ValueError
+  It matches ValueError('foo') which was paired with ValueError
+  ValueError('bar'):
+    Regex pattern did not match.
+     Regex: 'foo'
+     Input: 'bar'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 933, in test_misordering_example
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: 3 matched exceptions.
+?                                       ---------------------
++ Raised exception group did not match: 
++ 3 matched exceptions. 
++ The following expected exceptions did not find a match:
+- RaisesExc(ValueError, match='foo'):
+?                                   -
++   RaisesExc(ValueError, match='foo')
+? ++
+-   It matches ValueError('foo') which was paired with ValueError
++     It matches `ValueError('foo')` which was paired with `ValueError`
+? ++             +                 +                       +          +
+-   It matches ValueError('foo') which was paired with ValueError
++     It matches `ValueError('foo')` which was paired with `ValueError`
+? ++             +                 +                       +          +
+-   It matches ValueError('foo') which was paired with ValueError
++     It matches `ValueError('foo')` which was paired with `ValueError`
+? ++             +                 +                       +          +
++ The following raised exceptions did not find a match
+    ValueError('bar'):
+-     Regex pattern did not match.
++     It matches `ValueError` which was paired with `ValueError('foo')`
++     It matches `ValueError` which was paired with `ValueError('foo')`
++     It matches `ValueError` which was paired with `ValueError('foo')`
++     RaisesExc(ValueError, match='foo'): Regex pattern did not match.
+       Regex: 'foo'
+-      Input: 'bar'
++      Input: 'bar'
+?                  +
++ There exist a possible match when attempting an exhaustive check, but RaisesGroup uses a greedy algorithm. Please make your expected exceptions more stringent with `RaisesExc` etc so the greedy algorithm can function.
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:933: in test_misordering_example
+    with (
+E   Failed: Raised exception group did not match: 3 matched exceptions.
+E   RaisesExc(ValueError, match='foo'):
+E     It matches ValueError('foo') which was paired with ValueError
+E     It matches ValueError('foo') which was paired with ValueError
+E     It matches ValueError('foo') which was paired with ValueError
+E     ValueError('bar'):
+E       Regex pattern did not match.
+E        Regex: 'foo'
+E        Input: 'bar'
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:933: in test_misordering_example
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: 3 matched exceptions.
+E   ?                                       ---------------------
+E   + Raised exception group did not match: 
+E   + 3 matched exceptions. 
+E   + The following expected exceptions did not find a match:
+E   - RaisesExc(ValueError, match='foo'):
+E   ?                                   -
+E   +   RaisesExc(ValueError, match='foo')
+E   ? ++
+E   -   It matches ValueError('foo') which was paired with ValueError
+E   +     It matches `ValueError('foo')` which was paired with `ValueError`
+E   ? ++             +                 +                       +          +
+E   -   It matches ValueError('foo') which was paired with ValueError
+E   +     It matches `ValueError('foo')` which was paired with `ValueError`
+E   ? ++             +                 +                       +          +
+E   -   It matches ValueError('foo') which was paired with ValueError
+E   +     It matches `ValueError('foo')` which was paired with `ValueError`
+E   ? ++             +                 +                       +          +
+E   + The following raised exceptions did not find a match
+E       ValueError('bar'):
+E   -     Regex pattern did not match.
+E   +     It matches `ValueError` which was paired with `ValueError('foo')`
+E   +     It matches `ValueError` which was paired with `ValueError('foo')`
+E   +     It matches `ValueError` which was paired with `ValueError('foo')`
+E   +     RaisesExc(ValueError, match='foo'): Regex pattern did not match.
+E          Regex: 'foo'
+E   -      Input: 'bar'
+E   +      Input: 'bar'
+E   ?                  +
+E   + There exist a possible match when attempting an exhaustive check, but RaisesGroup uses a greedy algorithm. Please make your expected exceptions more stringent with `RaisesExc` etc so the greedy algorithm can function.
+_________________________ test_brief_error_on_one_fail _________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 977, in test_brief_error_on_one_fail
+  |     raise ExceptionGroup("", [ValueError(), TypeError()])
+  | exceptiongroup.ExceptionGroup:  (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | ValueError
+    +---------------- 2 ----------------
+    | TypeError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 971, in test_brief_error_on_one_fail
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: 1 matched exception.
+RuntimeError:
+  TypeError():
+    `TypeError()` is not an instance of `RuntimeError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 971, in test_brief_error_on_one_fail
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: Skipping 48 identical leading characters in diff, use -v to show
+- exception.
+- RuntimeError:
+-   TypeError():
+-     `TypeError()` is not an instance of `RuntimeError`
+? ^^^
++ exception. `TypeError()` is not an instance of `RuntimeError`
+? ^^^^^^^^^^
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:971: in test_brief_error_on_one_fail
+    with (
+E   Failed: Raised exception group did not match: 1 matched exception.
+E   RuntimeError:
+E     TypeError():
+E       `TypeError()` is not an instance of `RuntimeError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:971: in test_brief_error_on_one_fail
+    with (
+E   AssertionError: Skipping 48 identical leading characters in diff, use -v to show
+E   - exception.
+E   - RuntimeError:
+E   -   TypeError():
+E   -     `TypeError()` is not an instance of `RuntimeError`
+E   ? ^^^
+E   + exception. `TypeError()` is not an instance of `RuntimeError`
+E   ? ^^^^^^^^^^
+____________________________ test_identity_oopsies _____________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 1023, in test_identity_oopsies
+  |     raise ExceptionGroup(
+  | exceptiongroup.ExceptionGroup:  (4 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | ValueError
+    +---------------- 2 ----------------
+    | ValueError
+    +---------------- 3 ----------------
+    | ValueError
+    +---------------- 4 ----------------
+    | RuntimeError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1017, in test_identity_oopsies
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: 3 matched exceptions.
+TypeError:
+  RuntimeError():
+    `RuntimeError()` is not an instance of `TypeError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1017, in test_identity_oopsies
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: Skipping 49 identical leading characters in diff, use -v to show
+- xceptions.
+- TypeError:
+-   RuntimeError():
+-     `RuntimeError()` is not an instance of `TypeError`
+? ^^^
++ xceptions. `RuntimeError()` is not an instance of `TypeError`
+? ^^^^^^^^^^
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1017: in test_identity_oopsies
+    with (
+E   Failed: Raised exception group did not match: 3 matched exceptions.
+E   TypeError:
+E     RuntimeError():
+E       `RuntimeError()` is not an instance of `TypeError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1017: in test_identity_oopsies
+    with (
+E   AssertionError: Skipping 49 identical leading characters in diff, use -v to show
+E   - xceptions.
+E   - TypeError:
+E   -   RuntimeError():
+E   -     `RuntimeError()` is not an instance of `TypeError`
+E   ? ^^^
+E   + xceptions. `RuntimeError()` is not an instance of `TypeError`
+E   ? ^^^^^^^^^^
+________________________________ test_raisesexc ________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 1095, in test_raisesexc
+  |     raise ExceptionGroup("", (ValueError(),))
+  | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | ValueError
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1089, in test_raisesexc
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: `ValueError()` is not an instance of `TypeError`
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1089, in test_raisesexc
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: `ValueError()` is not an instance of `TypeError`
++ Raised exception group did not match: RaisesExc(TypeError): `ValueError()` is not an instance of `TypeError`
+?                                      ++++++++++++++++++++++
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1089: in test_raisesexc
+    with (
+E   Failed: Raised exception group did not match: `ValueError()` is not an instance of `TypeError`
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1089: in test_raisesexc
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: `ValueError()` is not an instance of `TypeError`
+E   + Raised exception group did not match: RaisesExc(TypeError): `ValueError()` is not an instance of `TypeError`
+E   ?                                      ++++++++++++++++++++++
+_____________________________ test_raisesexc_match _____________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 1140, in test_raisesexc_match
+  |     raise ExceptionGroup("", (ValueError("bar"),))
+  | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | ValueError: bar
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1132, in test_raisesexc_match
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: Regex pattern did not match.
+ Regex: 'foo'
+ Input: 'bar'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1132, in test_raisesexc_match
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: Regex pattern did not match.
++ Raised exception group did not match: RaisesExc(ValueError, match='foo'): Regex pattern did not match.
+?                                       ++++++++++++++++++++++++++++++++++++
+   Regex: 'foo'
+   Input: 'bar'
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1132: in test_raisesexc_match
+    with (
+E   Failed: Raised exception group did not match: Regex pattern did not match.
+E    Regex: 'foo'
+E    Input: 'bar'
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1132: in test_raisesexc_match
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: Regex pattern did not match.
+E   + Raised exception group did not match: RaisesExc(ValueError, match='foo'): Regex pattern did not match.
+E   ?                                       ++++++++++++++++++++++++++++++++++++
+E      Regex: 'foo'
+E      Input: 'bar'
+_____________________________ test_RaisesExc_check _____________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/testbed/testing/python/raises_group.py", line 1188, in test_RaisesExc_check
+  |     raise ExceptionGroup("", (OSError(6, ""),))
+  | exceptiongroup.ExceptionGroup:  (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | OSError: [Errno 6] 
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1182, in test_RaisesExc_check
+    with (
+  File "/testbed/src/_pytest/raises.py", line 1581, in __exit__
+    fail(f"Raised exception {group_str} did not match: {self._fail_reason}")
+  File "/testbed/src/_pytest/outcomes.py", line 163, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Raised exception group did not match: check did not return True
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/testbed/testing/python/raises_group.py", line 1182, in test_RaisesExc_check
+    with (
+  File "/testbed/src/_pytest/raises.py", line 733, in __exit__
+    raise AssertionError(self._fail_reason)
+AssertionError: 
+- Raised exception group did not match: check did not return True
++ Raised exception group did not match: RaisesExc(OSError, check=<function test_RaisesExc_check.<locals>.check_errno_is_5 at 0x7e80a6570b80>): check did not return True
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1182: in test_RaisesExc_check
+    with (
+E   Failed: Raised exception group did not match: check did not return True
+
+During handling of the above exception, another exception occurred:
+testing/python/raises_group.py:1182: in test_RaisesExc_check
+    with (
+E   AssertionError: 
+E   - Raised exception group did not match: check did not return True
+E   + Raised exception group did not match: RaisesExc(OSError, check=<function test_RaisesExc_check.<locals>.check_errno_is_5 at 0x7e80a6570b80>): check did not return True
+==================================== PASSES ====================================
+____________________________ test_xfail_raisesgroup ____________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_xfail_raisesgroup0
+collected 1 item
+
+test_xfail_raisesgroup.py x                                              [100%]
+
+============================== 1 xfailed in 0.00s ==============================
+_____________________________ test_xfail_RaisesExc _____________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /tmp/pytest-of-root/pytest-0/test_xfail_RaisesExc0
+collected 1 item
+
+test_xfail_RaisesExc.py x                                                [100%]
+
+============================== 1 xfailed in 0.00s ==============================
+=========================== short test summary info ============================
+PASSED testing/python/raises_group.py::test_raises_group
+PASSED testing/python/raises_group.py::test_match
+PASSED testing/python/raises_group.py::test_check
+PASSED testing/python/raises_group.py::test_unwrapped_match_check
+PASSED testing/python/raises_group.py::test_matches
+PASSED testing/python/raises_group.py::test_message
+PASSED testing/python/raises_group.py::test_raisesexc_tostring
+PASSED testing/python/raises_group.py::test_raisesgroup_tostring
+PASSED testing/python/raises_group.py::test_assert_matches
+PASSED testing/python/raises_group.py::test_parametrizing_conditional_raisesgroup[False-handler0]
+PASSED testing/python/raises_group.py::test_parametrizing_conditional_raisesgroup[True-handler1]
+PASSED testing/python/raises_group.py::test_annotated_group
+PASSED testing/python/raises_group.py::test_tuples
+PASSED testing/python/raises_group.py::test_xfail_raisesgroup
+PASSED testing/python/raises_group.py::test_xfail_RaisesExc
+FAILED testing/python/raises_group.py::test_incorrect_number_exceptions - Ass...
+FAILED testing/python/raises_group.py::test_flatten_subgroups - AssertionError: 
+FAILED testing/python/raises_group.py::test_catch_unwrapped_exceptions - Asse...
+FAILED testing/python/raises_group.py::test_assert_message - AssertionError: 
+FAILED testing/python/raises_group.py::test_message_indent - AssertionError: 
+FAILED testing/python/raises_group.py::test_suggestion_on_nested_and_brief_error
+FAILED testing/python/raises_group.py::test_assert_message_nested - Assertion...
+FAILED testing/python/raises_group.py::test_check_no_patched_repr - Assertion...
+FAILED testing/python/raises_group.py::test_misordering_example - AssertionEr...
+FAILED testing/python/raises_group.py::test_brief_error_on_one_fail - Asserti...
+FAILED testing/python/raises_group.py::test_identity_oopsies - AssertionError...
+FAILED testing/python/raises_group.py::test_raisesexc - AssertionError: 
+FAILED testing/python/raises_group.py::test_raisesexc_match - AssertionError: 
+FAILED testing/python/raises_group.py::test_RaisesExc_check - AssertionError: 
+======================== 14 failed, 15 passed in 0.24s =========================

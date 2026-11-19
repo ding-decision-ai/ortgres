@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 6 items
+
+tests/env/collectors/test_custom.py ......                               [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/env/collectors/test_custom.py::test_no_path
+PASSED tests/env/collectors/test_custom.py::test_path_not_string
+PASSED tests/env/collectors/test_custom.py::test_nonexistent
+PASSED tests/env/collectors/test_custom.py::test_default
+PASSED tests/env/collectors/test_custom.py::test_explicit_path
+PASSED tests/env/collectors/test_custom.py::test_no_subclass
+============================== 6 passed in 0.05s ===============================

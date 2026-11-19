@@ -1,0 +1,689 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 19 items
+
+tests/cli/fmt/test_fmt.py FFFFFFF.F.F.F......                            [100%]
+
+=================================== FAILURES ===================================
+____________________________ TestDefaults.test_fix _____________________________
+/testbed/tests/cli/fmt/test_fmt.py:93: in test_fix
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | ru...ults.toml .\n' == 'cmd [1] | ru...ject.toml .\n'
+E     
+E     Skipping 46 identical leading characters in diff, use -v to show
+E     - /data/env/.internal/hatch-static-analysis/.config/GL_CVoCQ/pyproject.toml --fix .
+E     ?           ^ ^ ^^^                         --------         --- ^^ ^
+E     + /data/env/virtual/.config/hatch-static-analysis/GL_CVoCQ/ruff_defaults.toml --fix .
+E     ?           ^ ^ ^  ++++++++                                 ^^^^^ ^^^^ +
+E     - cmd [2] | ruff format --config /tmp/tmphzwcojif/data/env/.internal/hatch-static-analysis/.config/GL_CVoCQ/pyproject.toml ....
+E     
+E     ...Full output truncated (3 lines hidden), use '-vv' to show
+___________________________ TestDefaults.test_check ____________________________
+/testbed/tests/cli/fmt/test_fmt.py:141: in test_check
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | ru...ck --diff .\n' == 'cmd [1] | ru...ck --diff .\n'
+E     
+E     Skipping 46 identical leading characters in diff, use -v to show
+E     - /data/env/.internal/hatch-static-analysis/.config/iLyZLG51/pyproject.toml .
+E     + /data/env/virtual/.config/hatch-static-analysis/iLyZLG51/ruff_defaults.toml .
+E     - cmd [2] | ruff format --config /tmp/tmpemznpzgk/data/env/.internal/hatch-static-analysis/.config/iLyZLG51/pyproject.toml --check --diff .
+E     ?                                                          ^ ^ ^^^                         --------         --- ^^ ^
+E     + cmd [2] | ruff format --config /tmp/tmpemznpzgk/data/env/virtual/.config/hatch-static-analysis/iLyZLG51/ruff_defaults.toml --check --diff ....
+E     
+E     ...Full output truncated (1 line hidden), use '-vv' to show
+______________________ TestDefaults.test_existing_config _______________________
+/testbed/tests/cli/fmt/test_fmt.py:195: in test_existing_config
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | ru...ck --diff .\n' == 'cmd [1] | ru...ck --diff .\n'
+E     
+E     Skipping 46 identical leading characters in diff, use -v to show
+E     - /data/env/.internal/hatch-static-analysis/.config/cS2bKGWA/pyproject.toml .
+E     + /data/env/virtual/.config/hatch-static-analysis/cS2bKGWA/ruff_defaults.toml .
+E     - cmd [2] | ruff format --config /tmp/tmpsrmfzsxc/data/env/.internal/hatch-static-analysis/.config/cS2bKGWA/pyproject.toml --check --diff .
+E     ?                                                          ^ ^ ^^^                         --------         --- ^^ ^
+E     + cmd [2] | ruff format --config /tmp/tmpsrmfzsxc/data/env/virtual/.config/hatch-static-analysis/cS2bKGWA/ruff_defaults.toml --check --diff ....
+E     
+E     ...Full output truncated (1 line hidden), use '-vv' to show
+__________________________ TestPreview.test_fix_flag ___________________________
+/testbed/tests/cli/fmt/test_fmt.py:244: in test_fix_flag
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | ru...--preview .\n' == 'cmd [1] | ru...--preview .\n'
+E     
+E     Skipping 46 identical leading characters in diff, use -v to show
+E     - /data/env/.internal/hatch-static-analysis/.config/18dDlxkz/pyproject.toml --preview --fix .
+E     ?           ^ ^ ^^^                         --------         --- ^^ ^
+E     + /data/env/virtual/.config/hatch-static-analysis/18dDlxkz/ruff_defaults.toml --preview --fix .
+E     ?           ^ ^ ^  ++++++++                                 ^^^^^ ^^^^ +
+E     - cmd [2] | ruff format --config /tmp/tmpdl319u2n/data/env/.internal/hatch-static-analysis/.config/18dDlxkz/pyproject.toml --preview ....
+E     
+E     ...Full output truncated (3 lines hidden), use '-vv' to show
+_________________________ TestPreview.test_check_flag __________________________
+/testbed/tests/cli/fmt/test_fmt.py:292: in test_check_flag
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | ru...ck --diff .\n' == 'cmd [1] | ru...ck --diff .\n'
+E     
+E     Skipping 46 identical leading characters in diff, use -v to show
+E     - /data/env/.internal/hatch-static-analysis/.config/2LdILkKT/pyproject.toml --preview .
+E     ?           ^ ^ ^^^                         --------         --- ^^ ^
+E     + /data/env/virtual/.config/hatch-static-analysis/2LdILkKT/ruff_defaults.toml --preview .
+E     ?           ^ ^ ^  ++++++++                                 ^^^^^ ^^^^ +
+E     - cmd [2] | ruff format --config /tmp/tmpidc90mi_/data/env/.internal/hatch-static-analysis/.config/2LdILkKT/pyproject.toml --preview --check --diff ....
+E     
+E     ...Full output truncated (3 lines hidden), use '-vv' to show
+_______________________ TestComponents.test_only_linter ________________________
+/testbed/tests/cli/fmt/test_fmt.py:340: in test_only_linter
+    config_dir = next(root_data_path.iterdir())
+/opt/miniconda3/envs/testbed/lib/python3.10/pathlib.py:1017: in iterdir
+    for name in self._accessor.listdir(self):
+E   FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpp0kyw8g6/data/env/.internal/hatch-static-analysis/.config'
+______________________ TestComponents.test_only_formatter ______________________
+/testbed/tests/cli/fmt/test_fmt.py:383: in test_only_formatter
+    config_dir = next(root_data_path.iterdir())
+/opt/miniconda3/envs/testbed/lib/python3.10/pathlib.py:1017: in iterdir
+    for name in self._accessor.listdir(self):
+E   FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp33lbyfma/data/env/.internal/hatch-static-analysis/.config'
+________________________ TestArguments.test_forwarding _________________________
+/testbed/tests/cli/fmt/test_fmt.py:456: in test_forwarding
+    assert result.output == helpers.dedent(
+E   AssertionError: assert 'cmd [1] | ru...l --foo bar\n' == 'cmd [1] | ru...l --foo bar\n'
+E     
+E     Skipping 46 identical leading characters in diff, use -v to show
+E     - /data/env/.internal/hatch-static-analysis/.config/TC9mh3K1/pyproject.toml --fix --foo bar
+E     ?           ^ ^ ^^^                         --------         --- ^^ ^
+E     + /data/env/virtual/.config/hatch-static-analysis/TC9mh3K1/ruff_defaults.toml --fix --foo bar
+E     ?           ^ ^ ^  ++++++++                                 ^^^^^ ^^^^ +
+E     - cmd [2] | ruff format --config /tmp/tmpmwtfuvh9/data/env/.internal/hatch-static-analysis/.config/TC9mh3K1/pyproject.toml --foo bar...
+E     
+E     ...Full output truncated (3 lines hidden), use '-vv' to show
+___________________________ TestConfigPath.test_sync ___________________________
+/testbed/tests/cli/fmt/test_fmt.py:550: in test_sync
+    assert default_config_file.read_text() == defaults_file_stable
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:507: in _call_reprcompare
+    custom = util._reprcompare(ops[i], each_obj[i], each_obj[i + 1])
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/__init__.py:167: in callbinrepr
+    hook_result = ihook.pytest_assertrepr_compare(
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/__init__.py:208: in pytest_assertrepr_compare
+    return util.assertrepr_compare(config=config, op=op, left=left, right=right)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:211: in assertrepr_compare
+    explanation = _compare_eq_any(left, right, highlighter, verbose)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:253: in _compare_eq_any
+    explanation = _diff_text(left, right, highlighter, verbose)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:330: in _diff_text
+    "\n".join(
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:330: in <genexpr>
+    "\n".join(
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:872: in compare
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:938: in _fancy_replace
+    cruncher.quick_ratio() > best_ratio and \
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:647: in quick_ratio
+    if numb > 0:
+E   Failed: Timeout (>10.0s) from pytest-timeout.
+____________________ TestConfigPath.test_sync_legacy_config ____________________
+/testbed/tests/cli/fmt/test_fmt.py:639: in test_sync_legacy_config
+    assert default_config_file.read_text() == defaults_file_stable
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:507: in _call_reprcompare
+    custom = util._reprcompare(ops[i], each_obj[i], each_obj[i + 1])
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/__init__.py:167: in callbinrepr
+    hook_result = ihook.pytest_assertrepr_compare(
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_hooks.py:512: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/pluggy/_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/__init__.py:208: in pytest_assertrepr_compare
+    return util.assertrepr_compare(config=config, op=op, left=left, right=right)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:211: in assertrepr_compare
+    explanation = _compare_eq_any(left, right, highlighter, verbose)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:253: in _compare_eq_any
+    explanation = _diff_text(left, right, highlighter, verbose)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:330: in _diff_text
+    "\n".join(
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/_pytest/assertion/util.py:330: in <genexpr>
+    "\n".join(
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:872: in compare
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:985: in _fancy_replace
+    yield from self._fancy_helper(a, best_i+1, ahi, b, best_j+1, bhi)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:997: in _fancy_helper
+    yield from g
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:930: in _fancy_replace
+    cruncher.set_seq1(ai)
+/opt/miniconda3/envs/testbed/lib/python3.10/difflib.py:196: in set_seq1
+    def set_seq1(self, a):
+E   Failed: Timeout (>10.0s) from pytest-timeout.
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/cli/fmt/test_fmt.py::TestComponents::test_select_multiple
+PASSED tests/cli/fmt/test_fmt.py::TestConfigPath::test_sync_without_config
+PASSED tests/cli/fmt/test_fmt.py::TestConfigPath::test_no_sync
+PASSED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_linter_fix
+PASSED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_linter_check
+PASSED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_formatter_fix
+PASSED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_only_formatter_check
+PASSED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_fix
+PASSED tests/cli/fmt/test_fmt.py::TestCustomScripts::test_check
+FAILED tests/cli/fmt/test_fmt.py::TestDefaults::test_fix - AssertionError: as...
+FAILED tests/cli/fmt/test_fmt.py::TestDefaults::test_check - AssertionError: ...
+FAILED tests/cli/fmt/test_fmt.py::TestDefaults::test_existing_config - Assert...
+FAILED tests/cli/fmt/test_fmt.py::TestPreview::test_fix_flag - AssertionError...
+FAILED tests/cli/fmt/test_fmt.py::TestPreview::test_check_flag - AssertionErr...
+FAILED tests/cli/fmt/test_fmt.py::TestComponents::test_only_linter - FileNotF...
+FAILED tests/cli/fmt/test_fmt.py::TestComponents::test_only_formatter - FileN...
+FAILED tests/cli/fmt/test_fmt.py::TestArguments::test_forwarding - AssertionE...
+FAILED tests/cli/fmt/test_fmt.py::TestConfigPath::test_sync - Failed: Timeout...
+FAILED tests/cli/fmt/test_fmt.py::TestConfigPath::test_sync_legacy_config - F...
+======================== 10 failed, 9 passed in 22.00s =========================

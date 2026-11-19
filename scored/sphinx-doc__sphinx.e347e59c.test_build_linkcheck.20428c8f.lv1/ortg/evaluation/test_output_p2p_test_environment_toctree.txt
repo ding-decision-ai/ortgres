@@ -1,0 +1,553 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/7a4d966, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-2
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 14 items
+
+tests/test_environment/test_environment_toctree.py ..............        [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/toctree-glob
+# outdir: /tmp/pytest-of-root/pytest-2/toctree-glob/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 12 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 12 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[  8%] [35mbar/bar_1[39;49;00m
+[01mreading sources... [39;49;00m[ 17%] [35mbar/bar_2[39;49;00m
+[01mreading sources... [39;49;00m[ 25%] [35mbar/bar_3[39;49;00m
+[01mreading sources... [39;49;00m[ 33%] [35mbar/bar_4/index[39;49;00m
+[01mreading sources... [39;49;00m[ 42%] [35mbar/index[39;49;00m
+[01mreading sources... [39;49;00m[ 50%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 58%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 75%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 83%] [35mqux/index[39;49;00m
+[01mreading sources... [39;49;00m[ 92%] [35mqux/qux_1[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mqux/qux_2[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00m/tmp/pytest-of-root/pytest-2/toctree-glob/bar/bar_1.rst: document is referenced in multiple toctrees: ['bar/index', 'index', 'index'], selecting: index <- bar/bar_1
+/tmp/pytest-of-root/pytest-2/toctree-glob/bar/bar_2.rst: document is referenced in multiple toctrees: ['bar/index', 'index', 'index'], selecting: index <- bar/bar_2
+/tmp/pytest-of-root/pytest-2/toctree-glob/bar/bar_3.rst: document is referenced in multiple toctrees: ['bar/index', 'index', 'index'], selecting: index <- bar/bar_3
+/tmp/pytest-of-root/pytest-2/toctree-glob/bar/index.rst: document is referenced in multiple toctrees: ['index', 'index'], selecting: index <- bar/index
+/tmp/pytest-of-root/pytest-2/toctree-glob/baz.rst: document is referenced in multiple toctrees: ['index', 'index'], selecting: index <- baz
+/tmp/pytest-of-root/pytest-2/toctree-glob/foo.rst: document is referenced in multiple toctrees: ['index', 'index'], selecting: index <- foo
+/tmp/pytest-of-root/pytest-2/toctree-glob/qux/index.rst: document is referenced in multiple toctrees: ['index', 'index'], selecting: index <- qux/index
+done
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[  8%] [32mbar/bar_1[39;49;00m
+[01mwriting output... [39;49;00m[ 17%] [32mbar/bar_2[39;49;00m
+[01mwriting output... [39;49;00m[ 25%] [32mbar/bar_3[39;49;00m
+[01mwriting output... [39;49;00m[ 33%] [32mbar/bar_4/index[39;49;00m
+[01mwriting output... [39;49;00m[ 42%] [32mbar/index[39;49;00m
+[01mwriting output... [39;49;00m[ 50%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 58%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 75%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 83%] [32mqux/index[39;49;00m
+[01mwriting output... [39;49;00m[ 92%] [32mqux/qux_1[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mqux/qux_2[39;49;00m
+
+[01mbuild succeeded, 1 warning.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/toctree-glob/quux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/toctree-domain-objects
+# outdir: /tmp/pytest-of-root/pytest-2/toctree-domain-objects/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 3 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mdocument_scoping[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mdomains[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mdocument_scoping[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mdomains[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/toctree-domain-objects
+# outdir: /tmp/pytest-of-root/pytest-2/toctree-domain-objects/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 3 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mdocument_scoping[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mdomains[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic
+# outdir: /tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+0m
+[01mbuilding [xml]: [39;49;00mtargets for 7 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 7 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 14%] [35mbar[39;49;00m
+[01mreading sources... [39;49;00m[ 29%] [35mbaz[39;49;00m
+[01mreading sources... [39;49;00m[ 43%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[ 57%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 71%] [35mquux[39;49;00m
+[01mreading sources... [39;49;00m[ 86%] [35mqux[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mtocdepth[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 14%] [32mbar[39;49;00m
+[01mwriting output... [39;49;00m[ 29%] [32mbaz[39;49;00m
+[01mwriting output... [39;49;00m[ 43%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[ 57%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 71%] [32mquux[39;49;00m
+[01mwriting output... [39;49;00m[ 86%] [32mqux[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mtocdepth[39;49;00m
+
+[01mbuild succeeded, 2 warnings.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/_build/xml.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/qux.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/test_environment_toctree_basic/tocdepth.rst: WARNING: document isn't included in any toctree [toc.not_included][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: xml
+# srcdir: /tmp/pytest-of-root/pytest-2/toctree-index
+# outdir: /tmp/pytest-of-root/pytest-2/toctree-index/_build/xml
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [xml]: [39;49;00mtargets for 2 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 2 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 50%] [35mfoo[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 50%] [32mfoo[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The XML files are in ../tmp/pytest-of-root/pytest-2/toctree-index/_build/xml.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/toctree-only
+# outdir: /tmp/pytest-of-root/pytest-2/toctree-only/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/7a4d966[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded, 1 warning.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/toctree-only/index.rst:24: WARNING: duplicate data description of test_toctree_only2, other data in index[39;49;00m
+
+=========================== short test summary info ============================
+PASSED tests/test_environment/test_environment_toctree.py::test_process_doc
+PASSED tests/test_environment/test_environment_toctree.py::test_glob
+PASSED tests/test_environment/test_environment_toctree.py::test_domain_objects
+PASSED tests/test_environment/test_environment_toctree.py::test_domain_objects_document_scoping
+PASSED tests/test_environment/test_environment_toctree.py::test_document_toc
+PASSED tests/test_environment/test_environment_toctree.py::test_document_toc_only
+PASSED tests/test_environment/test_environment_toctree.py::test_document_toc_tocdepth
+PASSED tests/test_environment/test_environment_toctree.py::test_global_toctree_for_doc
+PASSED tests/test_environment/test_environment_toctree.py::test_global_toctree_for_doc_collapse
+PASSED tests/test_environment/test_environment_toctree.py::test_global_toctree_for_doc_maxdepth
+PASSED tests/test_environment/test_environment_toctree.py::test_global_toctree_for_doc_includehidden
+PASSED tests/test_environment/test_environment_toctree.py::test_toctree_index
+PASSED tests/test_environment/test_environment_toctree.py::test_toctree_only
+PASSED tests/test_environment/test_environment_toctree.py::test_toctree_copy_only
+============================== 14 passed in 0.47s ==============================

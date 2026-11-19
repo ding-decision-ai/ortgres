@@ -1,0 +1,36 @@
+{
+  "instance_id": "matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1",
+  "repo": "matplotlib/matplotlib",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 28,
+      "failure": 1,
+      "total": 29
+    },
+    "p2p": {
+      "success": 29,
+      "failure": 0,
+      "total": 29
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "b252e64401729974368043debd0fc982ff6923bc5b90a10b7a1c27151135adc8"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 29,
+      "failure": 0,
+      "total": 29
+    },
+    "p2p": {
+      "success": 29,
+      "failure": 0,
+      "total": 29
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "a2f66a16b888a37b37df8302374a8ea3a6cb13f7eac6dea188cfb49a37b2dc13"
+  },
+  "conditions": "conditions.json",
+  "costs": null
+}

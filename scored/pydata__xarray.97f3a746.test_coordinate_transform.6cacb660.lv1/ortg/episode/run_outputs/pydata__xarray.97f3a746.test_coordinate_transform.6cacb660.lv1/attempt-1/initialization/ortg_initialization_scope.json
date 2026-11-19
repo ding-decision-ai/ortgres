@@ -1,0 +1,2589 @@
+{
+  "cognitive": [
+    ".binder/environment.yml",
+    ".codecov.yml",
+    ".git-blame-ignore-revs",
+    ".git_archival.txt",
+    ".gitattributes",
+    ".github/FUNDING.yml",
+    ".github/ISSUE_TEMPLATE/bugreport.yml",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/ISSUE_TEMPLATE/misc.yml",
+    ".github/ISSUE_TEMPLATE/newfeature.yml",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/config.yml",
+    ".github/dependabot.yml",
+    ".github/labeler.yml",
+    ".github/release.yml",
+    ".github/stale.yml",
+    ".github/workflows/benchmarks-last-release.yml",
+    ".github/workflows/benchmarks.yml",
+    ".github/workflows/ci-additional.yaml",
+    ".github/workflows/ci.yaml",
+    ".github/workflows/configure-testpypi-version.py",
+    ".github/workflows/hypothesis.yaml",
+    ".github/workflows/label-prs.yml",
+    ".github/workflows/nightly-wheels.yml",
+    ".github/workflows/publish-test-results.yaml",
+    ".github/workflows/pypi-release.yaml",
+    ".github/workflows/upstream-dev-ci.yaml",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yaml",
+    "CITATION.cff",
+    "CLAUDE.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "CORE_TEAM_GUIDE.md",
+    "DATATREE_MIGRATION_GUIDE.md",
+    "HOW_TO_RELEASE.md",
+    "LICENSE",
+    "README.md",
+    "asv_bench/asv.conf.json",
+    "asv_bench/benchmarks/README_CI.md",
+    "asv_bench/benchmarks/__init__.py",
+    "asv_bench/benchmarks/accessors.py",
+    "asv_bench/benchmarks/alignment.py",
+    "asv_bench/benchmarks/coding.py",
+    "asv_bench/benchmarks/combine.py",
+    "asv_bench/benchmarks/dataarray_missing.py",
+    "asv_bench/benchmarks/dataset.py",
+    "asv_bench/benchmarks/dataset_io.py",
+    "asv_bench/benchmarks/datatree.py",
+    "asv_bench/benchmarks/groupby.py",
+    "asv_bench/benchmarks/import.py",
+    "asv_bench/benchmarks/indexing.py",
+    "asv_bench/benchmarks/interp.py",
+    "asv_bench/benchmarks/merge.py",
+    "asv_bench/benchmarks/pandas.py",
+    "asv_bench/benchmarks/polyfit.py",
+    "asv_bench/benchmarks/reindexing.py",
+    "asv_bench/benchmarks/renaming.py",
+    "asv_bench/benchmarks/repr.py",
+    "asv_bench/benchmarks/rolling.py",
+    "asv_bench/benchmarks/unstacking.py",
+    "ci/install-upstream-wheels.sh",
+    "ci/policy.yaml",
+    "ci/release_contributors.py",
+    "ci/requirements/all-but-dask.yml",
+    "ci/requirements/all-but-numba.yml",
+    "ci/requirements/bare-min-and-scipy.yml",
+    "ci/requirements/bare-minimum.yml",
+    "ci/requirements/doc.yml",
+    "ci/requirements/environment-3.14.yml",
+    "ci/requirements/environment-benchmark.yml",
+    "ci/requirements/environment-windows-3.14.yml",
+    "ci/requirements/environment-windows.yml",
+    "ci/requirements/environment.yml",
+    "ci/requirements/min-all-deps.yml",
+    "conftest.py",
+    "design_notes/flexible_indexes_notes.md",
+    "design_notes/grouper_objects.md",
+    "design_notes/named_array_design_doc.md",
+    "doc/Makefile",
+    "doc/README.rst",
+    "doc/_static/.gitignore",
+    "doc/_static/advanced_selection_interpolation.svg",
+    "doc/_static/ci.png",
+    "doc/_static/dask-array.svg",
+    "doc/_static/dataset-diagram.png",
+    "doc/_static/index_api.svg",
+    "doc/_static/index_contribute.svg",
+    "doc/_static/index_getting_started.svg",
+    "doc/_static/index_user_guide.svg",
+    "doc/_static/logos/Xarray_Icon_Final.png",
+    "doc/_static/logos/Xarray_Icon_Final.svg",
+    "doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.png",
+    "doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.svg",
+    "doc/_static/logos/Xarray_Logo_RGB_Final.png",
+    "doc/_static/logos/Xarray_Logo_RGB_Final.svg",
+    "doc/_static/numfocus_logo.png",
+    "doc/_static/opendap-prism-tmax.png",
+    "doc/_static/style.css",
+    "doc/_static/thumbnails/ERA5-GRIB-example.png",
+    "doc/_static/thumbnails/ROMS_ocean_model.png",
+    "doc/_static/thumbnails/area_weighted_temperature.png",
+    "doc/_static/thumbnails/monthly-means.png",
+    "doc/_static/thumbnails/multidimensional-coords.png",
+    "doc/_static/thumbnails/toy-weather-data.png",
+    "doc/_static/thumbnails/visualization_gallery.png",
+    "doc/_static/view-docs.png",
+    "doc/_templates/autosummary/accessor.rst",
+    "doc/_templates/autosummary/accessor_attribute.rst",
+    "doc/_templates/autosummary/accessor_callable.rst",
+    "doc/_templates/autosummary/accessor_method.rst",
+    "doc/api-hidden.rst",
+    "doc/api.rst",
+    "doc/api/accessors.rst",
+    "doc/api/advanced.rst",
+    "doc/api/backends.rst",
+    "doc/api/coarsen.rst",
+    "doc/api/coordinates.rst",
+    "doc/api/dataarray.rst",
+    "doc/api/dataset.rst",
+    "doc/api/datatree.rst",
+    "doc/api/deprecated.rst",
+    "doc/api/encoding.rst",
+    "doc/api/exceptions.rst",
+    "doc/api/groupby.rst",
+    "doc/api/indexes.rst",
+    "doc/api/io.rst",
+    "doc/api/plotting.rst",
+    "doc/api/resample.rst",
+    "doc/api/rolling-exp.rst",
+    "doc/api/rolling.rst",
+    "doc/api/testing.rst",
+    "doc/api/top-level.rst",
+    "doc/api/tutorial.rst",
+    "doc/api/ufuncs.rst",
+    "doc/api/weighted.rst",
+    "doc/badge.json",
+    "doc/combined.json",
+    "doc/conf.py",
+    "doc/contribute/contributing.rst",
+    "doc/contribute/developers-meeting.rst",
+    "doc/contribute/index.rst",
+    "doc/examples/ERA5-GRIB-example.ipynb",
+    "doc/examples/ROMS_ocean_model.ipynb",
+    "doc/examples/_code/accessor_example.py",
+    "doc/examples/apply_ufunc_vectorize_1d.ipynb",
+    "doc/examples/area_weighted_temperature.ipynb",
+    "doc/examples/blank_template.ipynb",
+    "doc/examples/monthly-means.ipynb",
+    "doc/examples/multidimensional-coords.ipynb",
+    "doc/examples/visualization_gallery.ipynb",
+    "doc/examples/weather-data.ipynb",
+    "doc/gallery.rst",
+    "doc/gallery.yml",
+    "doc/gallery/README.txt",
+    "doc/gallery/plot_cartopy_facetgrid.py",
+    "doc/gallery/plot_colorbar_center.py",
+    "doc/gallery/plot_control_colorbar.py",
+    "doc/gallery/plot_lines_from_2d.py",
+    "doc/get-help/faq.rst",
+    "doc/get-help/help-diagram.rst",
+    "doc/get-help/howdoi.rst",
+    "doc/get-help/socials.rst",
+    "doc/getting-started-guide/index.rst",
+    "doc/getting-started-guide/installing.rst",
+    "doc/getting-started-guide/quick-overview.rst",
+    "doc/getting-started-guide/tutorials-and-videos.rst",
+    "doc/getting-started-guide/why-xarray.rst",
+    "doc/index.rst",
+    "doc/internals/chunked-arrays.rst",
+    "doc/internals/duck-arrays-integration.rst",
+    "doc/internals/extending-xarray.rst",
+    "doc/internals/how-to-add-new-backend.rst",
+    "doc/internals/how-to-create-custom-index.rst",
+    "doc/internals/index.rst",
+    "doc/internals/internal-design.rst",
+    "doc/internals/interoperability.rst",
+    "doc/internals/time-coding.rst",
+    "doc/internals/zarr-encoding-spec.rst",
+    "doc/roadmap.rst",
+    "doc/user-guide/combining.rst",
+    "doc/user-guide/complex-numbers.rst",
+    "doc/user-guide/computation.rst",
+    "doc/user-guide/dask.rst",
+    "doc/user-guide/data-structures.rst",
+    "doc/user-guide/duckarrays.rst",
+    "doc/user-guide/ecosystem.rst",
+    "doc/user-guide/groupby.rst",
+    "doc/user-guide/hierarchical-data.rst",
+    "doc/user-guide/index.rst",
+    "doc/user-guide/indexing.rst",
+    "doc/user-guide/interpolation.rst",
+    "doc/user-guide/io.rst",
+    "doc/user-guide/options.rst",
+    "doc/user-guide/pandas.rst",
+    "doc/user-guide/plotting.rst",
+    "doc/user-guide/reshaping.rst",
+    "doc/user-guide/terminology.rst",
+    "doc/user-guide/testing.rst",
+    "doc/user-guide/time-series.rst",
+    "doc/user-guide/weather-climate.rst",
+    "doc/videos.yml",
+    "doc/whats-new.rst",
+    "licenses/ANYTREE_LICENSE",
+    "licenses/DASK_LICENSE",
+    "licenses/ICOMOON_LICENSE",
+    "licenses/NUMPY_LICENSE",
+    "licenses/PANDAS_LICENSE",
+    "licenses/PYTHON_LICENSE",
+    "licenses/SCIKIT_LEARN_LICENSE",
+    "licenses/SEABORN_LICENSE",
+    "properties/README.md",
+    "properties/__init__.py",
+    "properties/conftest.py",
+    "properties/test_encode_decode.py",
+    "properties/test_index_manipulation.py",
+    "properties/test_pandas_roundtrip.py",
+    "properties/test_properties.py",
+    "pyproject.toml",
+    "setup.py",
+    "xarray/__init__.py",
+    "xarray/backends/__init__.py",
+    "xarray/backends/api.py",
+    "xarray/backends/chunks.py",
+    "xarray/backends/common.py",
+    "xarray/backends/file_manager.py",
+    "xarray/backends/h5netcdf_.py",
+    "xarray/backends/locks.py",
+    "xarray/backends/lru_cache.py",
+    "xarray/backends/memory.py",
+    "xarray/backends/netCDF4_.py",
+    "xarray/backends/netcdf3.py",
+    "xarray/backends/plugins.py",
+    "xarray/backends/pydap_.py",
+    "xarray/backends/scipy_.py",
+    "xarray/backends/store.py",
+    "xarray/backends/writers.py",
+    "xarray/backends/zarr.py",
+    "xarray/coders.py",
+    "xarray/coding/__init__.py",
+    "xarray/coding/calendar_ops.py",
+    "xarray/coding/cftime_offsets.py",
+    "xarray/coding/cftimeindex.py",
+    "xarray/coding/common.py",
+    "xarray/coding/frequencies.py",
+    "xarray/coding/strings.py",
+    "xarray/coding/times.py",
+    "xarray/coding/variables.py",
+    "xarray/compat/__init__.py",
+    "xarray/compat/array_api_compat.py",
+    "xarray/compat/dask_array_compat.py",
+    "xarray/compat/dask_array_ops.py",
+    "xarray/compat/npcompat.py",
+    "xarray/compat/pdcompat.py",
+    "xarray/compat/toolzcompat.py",
+    "xarray/computation/__init__.py",
+    "xarray/computation/apply_ufunc.py",
+    "xarray/computation/arithmetic.py",
+    "xarray/computation/computation.py",
+    "xarray/computation/fit.py",
+    "xarray/computation/nanops.py",
+    "xarray/computation/ops.py",
+    "xarray/computation/rolling.py",
+    "xarray/computation/rolling_exp.py",
+    "xarray/computation/weighted.py",
+    "xarray/conventions.py",
+    "xarray/convert.py",
+    "xarray/core/__init__.py",
+    "xarray/core/_aggregations.py",
+    "xarray/core/_typed_ops.py",
+    "xarray/core/accessor_dt.py",
+    "xarray/core/accessor_str.py",
+    "xarray/core/common.py",
+    "xarray/core/coordinate_transform.py",
+    "xarray/core/coordinates.py",
+    "xarray/core/dataarray.py",
+    "xarray/core/dataset.py",
+    "xarray/core/dataset_utils.py",
+    "xarray/core/dataset_variables.py",
+    "xarray/core/datatree.py",
+    "xarray/core/datatree_mapping.py",
+    "xarray/core/datatree_render.py",
+    "xarray/core/dtypes.py",
+    "xarray/core/duck_array_ops.py",
+    "xarray/core/extension_array.py",
+    "xarray/core/extensions.py",
+    "xarray/core/formatting.py",
+    "xarray/core/formatting_html.py",
+    "xarray/core/groupby.py",
+    "xarray/core/indexes.py",
+    "xarray/core/indexing.py",
+    "xarray/core/missing.py",
+    "xarray/core/nputils.py",
+    "xarray/core/options.py",
+    "xarray/core/parallel.py",
+    "xarray/core/resample.py",
+    "xarray/core/resample_cftime.py",
+    "xarray/core/treenode.py",
+    "xarray/core/types.py",
+    "xarray/core/utils.py",
+    "xarray/core/variable.py",
+    "xarray/groupers.py",
+    "xarray/indexes/__init__.py",
+    "xarray/indexes/nd_point_index.py",
+    "xarray/indexes/range_index.py",
+    "xarray/namedarray/__init__.py",
+    "xarray/namedarray/_aggregations.py",
+    "xarray/namedarray/_array_api.py",
+    "xarray/namedarray/_typing.py",
+    "xarray/namedarray/core.py",
+    "xarray/namedarray/daskmanager.py",
+    "xarray/namedarray/dtypes.py",
+    "xarray/namedarray/parallelcompat.py",
+    "xarray/namedarray/pycompat.py",
+    "xarray/namedarray/utils.py",
+    "xarray/plot/__init__.py",
+    "xarray/plot/accessor.py",
+    "xarray/plot/dataarray_plot.py",
+    "xarray/plot/dataset_plot.py",
+    "xarray/plot/facetgrid.py",
+    "xarray/plot/utils.py",
+    "xarray/py.typed",
+    "xarray/static/__init__.py",
+    "xarray/static/css/__init__.py",
+    "xarray/static/css/style.css",
+    "xarray/static/html/__init__.py",
+    "xarray/static/html/icons-svg-inline.html",
+    "xarray/structure/__init__.py",
+    "xarray/structure/alignment.py",
+    "xarray/structure/chunks.py",
+    "xarray/structure/combine.py",
+    "xarray/structure/concat.py",
+    "xarray/structure/merge.py",
+    "xarray/testing/__init__.py",
+    "xarray/testing/assertions.py",
+    "xarray/testing/strategies.py",
+    "xarray/tests/CLAUDE.md",
+    "xarray/tests/__init__.py",
+    "xarray/tests/arrays.py",
+    "xarray/tests/conftest.py",
+    "xarray/tests/data/bears.nc",
+    "xarray/tests/data/example.grib",
+    "xarray/tests/data/example.ict",
+    "xarray/tests/data/example.uamiv",
+    "xarray/tests/data/example_1.nc",
+    "xarray/tests/data/example_1.nc.gz",
+    "xarray/tests/indexes.py",
+    "xarray/tests/namespace.py",
+    "xarray/tests/test_accessor_dt.py",
+    "xarray/tests/test_accessor_str.py",
+    "xarray/tests/test_array_api.py",
+    "xarray/tests/test_assertions.py",
+    "xarray/tests/test_backends.py",
+    "xarray/tests/test_backends_api.py",
+    "xarray/tests/test_backends_chunks.py",
+    "xarray/tests/test_backends_common.py",
+    "xarray/tests/test_backends_datatree.py",
+    "xarray/tests/test_backends_file_manager.py",
+    "xarray/tests/test_backends_locks.py",
+    "xarray/tests/test_backends_lru_cache.py",
+    "xarray/tests/test_calendar_ops.py",
+    "xarray/tests/test_cftime_offsets.py",
+    "xarray/tests/test_cftimeindex.py",
+    "xarray/tests/test_cftimeindex_resample.py",
+    "xarray/tests/test_coarsen.py",
+    "xarray/tests/test_coding.py",
+    "xarray/tests/test_coding_strings.py",
+    "xarray/tests/test_coding_times.py",
+    "xarray/tests/test_combine.py",
+    "xarray/tests/test_computation.py",
+    "xarray/tests/test_concat.py",
+    "xarray/tests/test_conventions.py",
+    "xarray/tests/test_coordinates.py",
+    "xarray/tests/test_cupy.py",
+    "xarray/tests/test_dask.py",
+    "xarray/tests/test_dataarray.py",
+    "xarray/tests/test_dataarray_typing.yml",
+    "xarray/tests/test_dataset.py",
+    "xarray/tests/test_dataset_typing.yml",
+    "xarray/tests/test_datatree.py",
+    "xarray/tests/test_datatree_mapping.py",
+    "xarray/tests/test_datatree_typing.yml",
+    "xarray/tests/test_deprecation_helpers.py",
+    "xarray/tests/test_distributed.py",
+    "xarray/tests/test_dtypes.py",
+    "xarray/tests/test_duck_array_ops.py",
+    "xarray/tests/test_duck_array_wrapping.py",
+    "xarray/tests/test_error_messages.py",
+    "xarray/tests/test_extensions.py",
+    "xarray/tests/test_formatting.py",
+    "xarray/tests/test_formatting_html.py",
+    "xarray/tests/test_groupby.py",
+    "xarray/tests/test_hashable.py",
+    "xarray/tests/test_indexes.py",
+    "xarray/tests/test_indexing.py",
+    "xarray/tests/test_interp.py",
+    "xarray/tests/test_merge.py",
+    "xarray/tests/test_missing.py",
+    "xarray/tests/test_namedarray.py",
+    "xarray/tests/test_nd_point_index.py",
+    "xarray/tests/test_nputils.py",
+    "xarray/tests/test_options.py",
+    "xarray/tests/test_pandas_to_xarray.py",
+    "xarray/tests/test_parallelcompat.py",
+    "xarray/tests/test_plot.py",
+    "xarray/tests/test_plugins.py",
+    "xarray/tests/test_print_versions.py",
+    "xarray/tests/test_range_index.py",
+    "xarray/tests/test_rolling.py",
+    "xarray/tests/test_sparse.py",
+    "xarray/tests/test_strategies.py",
+    "xarray/tests/test_treenode.py",
+    "xarray/tests/test_tutorial.py",
+    "xarray/tests/test_typed_ops.py",
+    "xarray/tests/test_ufuncs.py",
+    "xarray/tests/test_units.py",
+    "xarray/tests/test_utils.py",
+    "xarray/tests/test_variable.py",
+    "xarray/tests/test_weighted.py",
+    "xarray/tutorial.py",
+    "xarray/typing.py",
+    "xarray/ufuncs.py",
+    "xarray/util/__init__.py",
+    "xarray/util/deprecation_helpers.py",
+    "xarray/util/generate_aggregations.py",
+    "xarray/util/generate_ops.py",
+    "xarray/util/print_versions.py"
+  ],
+  "roles": {
+    "ignore_dirs": [],
+    "ignore_files": [],
+    "keep_files": [],
+    "observe_dirs": [],
+    "observe_files": []
+  },
+  "counts": [
+    0,
+    0,
+    1,
+    0
+  ],
+  "tracked": [
+    ".binder/environment.yml",
+    ".codecov.yml",
+    ".git-blame-ignore-revs",
+    ".git_archival.txt",
+    ".gitattributes",
+    ".github/FUNDING.yml",
+    ".github/ISSUE_TEMPLATE/bugreport.yml",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/ISSUE_TEMPLATE/misc.yml",
+    ".github/ISSUE_TEMPLATE/newfeature.yml",
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/config.yml",
+    ".github/dependabot.yml",
+    ".github/labeler.yml",
+    ".github/release.yml",
+    ".github/stale.yml",
+    ".github/workflows/benchmarks-last-release.yml",
+    ".github/workflows/benchmarks.yml",
+    ".github/workflows/ci-additional.yaml",
+    ".github/workflows/ci.yaml",
+    ".github/workflows/configure-testpypi-version.py",
+    ".github/workflows/hypothesis.yaml",
+    ".github/workflows/label-prs.yml",
+    ".github/workflows/nightly-wheels.yml",
+    ".github/workflows/publish-test-results.yaml",
+    ".github/workflows/pypi-release.yaml",
+    ".github/workflows/upstream-dev-ci.yaml",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yaml",
+    "CITATION.cff",
+    "CLAUDE.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "CORE_TEAM_GUIDE.md",
+    "DATATREE_MIGRATION_GUIDE.md",
+    "HOW_TO_RELEASE.md",
+    "LICENSE",
+    "README.md",
+    "asv_bench/asv.conf.json",
+    "asv_bench/benchmarks/README_CI.md",
+    "asv_bench/benchmarks/__init__.py",
+    "asv_bench/benchmarks/accessors.py",
+    "asv_bench/benchmarks/alignment.py",
+    "asv_bench/benchmarks/coding.py",
+    "asv_bench/benchmarks/combine.py",
+    "asv_bench/benchmarks/dataarray_missing.py",
+    "asv_bench/benchmarks/dataset.py",
+    "asv_bench/benchmarks/dataset_io.py",
+    "asv_bench/benchmarks/datatree.py",
+    "asv_bench/benchmarks/groupby.py",
+    "asv_bench/benchmarks/import.py",
+    "asv_bench/benchmarks/indexing.py",
+    "asv_bench/benchmarks/interp.py",
+    "asv_bench/benchmarks/merge.py",
+    "asv_bench/benchmarks/pandas.py",
+    "asv_bench/benchmarks/polyfit.py",
+    "asv_bench/benchmarks/reindexing.py",
+    "asv_bench/benchmarks/renaming.py",
+    "asv_bench/benchmarks/repr.py",
+    "asv_bench/benchmarks/rolling.py",
+    "asv_bench/benchmarks/unstacking.py",
+    "ci/install-upstream-wheels.sh",
+    "ci/policy.yaml",
+    "ci/release_contributors.py",
+    "ci/requirements/all-but-dask.yml",
+    "ci/requirements/all-but-numba.yml",
+    "ci/requirements/bare-min-and-scipy.yml",
+    "ci/requirements/bare-minimum.yml",
+    "ci/requirements/doc.yml",
+    "ci/requirements/environment-3.14.yml",
+    "ci/requirements/environment-benchmark.yml",
+    "ci/requirements/environment-windows-3.14.yml",
+    "ci/requirements/environment-windows.yml",
+    "ci/requirements/environment.yml",
+    "ci/requirements/min-all-deps.yml",
+    "conftest.py",
+    "design_notes/flexible_indexes_notes.md",
+    "design_notes/grouper_objects.md",
+    "design_notes/named_array_design_doc.md",
+    "doc/Makefile",
+    "doc/README.rst",
+    "doc/_static/.gitignore",
+    "doc/_static/advanced_selection_interpolation.svg",
+    "doc/_static/ci.png",
+    "doc/_static/dask-array.svg",
+    "doc/_static/dataset-diagram.png",
+    "doc/_static/index_api.svg",
+    "doc/_static/index_contribute.svg",
+    "doc/_static/index_getting_started.svg",
+    "doc/_static/index_user_guide.svg",
+    "doc/_static/logos/Xarray_Icon_Final.png",
+    "doc/_static/logos/Xarray_Icon_Final.svg",
+    "doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.png",
+    "doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.svg",
+    "doc/_static/logos/Xarray_Logo_RGB_Final.png",
+    "doc/_static/logos/Xarray_Logo_RGB_Final.svg",
+    "doc/_static/numfocus_logo.png",
+    "doc/_static/opendap-prism-tmax.png",
+    "doc/_static/style.css",
+    "doc/_static/thumbnails/ERA5-GRIB-example.png",
+    "doc/_static/thumbnails/ROMS_ocean_model.png",
+    "doc/_static/thumbnails/area_weighted_temperature.png",
+    "doc/_static/thumbnails/monthly-means.png",
+    "doc/_static/thumbnails/multidimensional-coords.png",
+    "doc/_static/thumbnails/toy-weather-data.png",
+    "doc/_static/thumbnails/visualization_gallery.png",
+    "doc/_static/view-docs.png",
+    "doc/_templates/autosummary/accessor.rst",
+    "doc/_templates/autosummary/accessor_attribute.rst",
+    "doc/_templates/autosummary/accessor_callable.rst",
+    "doc/_templates/autosummary/accessor_method.rst",
+    "doc/api-hidden.rst",
+    "doc/api.rst",
+    "doc/api/accessors.rst",
+    "doc/api/advanced.rst",
+    "doc/api/backends.rst",
+    "doc/api/coarsen.rst",
+    "doc/api/coordinates.rst",
+    "doc/api/dataarray.rst",
+    "doc/api/dataset.rst",
+    "doc/api/datatree.rst",
+    "doc/api/deprecated.rst",
+    "doc/api/encoding.rst",
+    "doc/api/exceptions.rst",
+    "doc/api/groupby.rst",
+    "doc/api/indexes.rst",
+    "doc/api/io.rst",
+    "doc/api/plotting.rst",
+    "doc/api/resample.rst",
+    "doc/api/rolling-exp.rst",
+    "doc/api/rolling.rst",
+    "doc/api/testing.rst",
+    "doc/api/top-level.rst",
+    "doc/api/tutorial.rst",
+    "doc/api/ufuncs.rst",
+    "doc/api/weighted.rst",
+    "doc/badge.json",
+    "doc/combined.json",
+    "doc/conf.py",
+    "doc/contribute/contributing.rst",
+    "doc/contribute/developers-meeting.rst",
+    "doc/contribute/index.rst",
+    "doc/examples/ERA5-GRIB-example.ipynb",
+    "doc/examples/ROMS_ocean_model.ipynb",
+    "doc/examples/_code/accessor_example.py",
+    "doc/examples/apply_ufunc_vectorize_1d.ipynb",
+    "doc/examples/area_weighted_temperature.ipynb",
+    "doc/examples/blank_template.ipynb",
+    "doc/examples/monthly-means.ipynb",
+    "doc/examples/multidimensional-coords.ipynb",
+    "doc/examples/visualization_gallery.ipynb",
+    "doc/examples/weather-data.ipynb",
+    "doc/gallery.rst",
+    "doc/gallery.yml",
+    "doc/gallery/README.txt",
+    "doc/gallery/plot_cartopy_facetgrid.py",
+    "doc/gallery/plot_colorbar_center.py",
+    "doc/gallery/plot_control_colorbar.py",
+    "doc/gallery/plot_lines_from_2d.py",
+    "doc/get-help/faq.rst",
+    "doc/get-help/help-diagram.rst",
+    "doc/get-help/howdoi.rst",
+    "doc/get-help/socials.rst",
+    "doc/getting-started-guide/index.rst",
+    "doc/getting-started-guide/installing.rst",
+    "doc/getting-started-guide/quick-overview.rst",
+    "doc/getting-started-guide/tutorials-and-videos.rst",
+    "doc/getting-started-guide/why-xarray.rst",
+    "doc/index.rst",
+    "doc/internals/chunked-arrays.rst",
+    "doc/internals/duck-arrays-integration.rst",
+    "doc/internals/extending-xarray.rst",
+    "doc/internals/how-to-add-new-backend.rst",
+    "doc/internals/how-to-create-custom-index.rst",
+    "doc/internals/index.rst",
+    "doc/internals/internal-design.rst",
+    "doc/internals/interoperability.rst",
+    "doc/internals/time-coding.rst",
+    "doc/internals/zarr-encoding-spec.rst",
+    "doc/roadmap.rst",
+    "doc/user-guide/combining.rst",
+    "doc/user-guide/complex-numbers.rst",
+    "doc/user-guide/computation.rst",
+    "doc/user-guide/dask.rst",
+    "doc/user-guide/data-structures.rst",
+    "doc/user-guide/duckarrays.rst",
+    "doc/user-guide/ecosystem.rst",
+    "doc/user-guide/groupby.rst",
+    "doc/user-guide/hierarchical-data.rst",
+    "doc/user-guide/index.rst",
+    "doc/user-guide/indexing.rst",
+    "doc/user-guide/interpolation.rst",
+    "doc/user-guide/io.rst",
+    "doc/user-guide/options.rst",
+    "doc/user-guide/pandas.rst",
+    "doc/user-guide/plotting.rst",
+    "doc/user-guide/reshaping.rst",
+    "doc/user-guide/terminology.rst",
+    "doc/user-guide/testing.rst",
+    "doc/user-guide/time-series.rst",
+    "doc/user-guide/weather-climate.rst",
+    "doc/videos.yml",
+    "doc/whats-new.rst",
+    "licenses/ANYTREE_LICENSE",
+    "licenses/DASK_LICENSE",
+    "licenses/ICOMOON_LICENSE",
+    "licenses/NUMPY_LICENSE",
+    "licenses/PANDAS_LICENSE",
+    "licenses/PYTHON_LICENSE",
+    "licenses/SCIKIT_LEARN_LICENSE",
+    "licenses/SEABORN_LICENSE",
+    "properties/README.md",
+    "properties/__init__.py",
+    "properties/conftest.py",
+    "properties/test_encode_decode.py",
+    "properties/test_index_manipulation.py",
+    "properties/test_pandas_roundtrip.py",
+    "properties/test_properties.py",
+    "pyproject.toml",
+    "setup.py",
+    "xarray/__init__.py",
+    "xarray/backends/__init__.py",
+    "xarray/backends/api.py",
+    "xarray/backends/chunks.py",
+    "xarray/backends/common.py",
+    "xarray/backends/file_manager.py",
+    "xarray/backends/h5netcdf_.py",
+    "xarray/backends/locks.py",
+    "xarray/backends/lru_cache.py",
+    "xarray/backends/memory.py",
+    "xarray/backends/netCDF4_.py",
+    "xarray/backends/netcdf3.py",
+    "xarray/backends/plugins.py",
+    "xarray/backends/pydap_.py",
+    "xarray/backends/scipy_.py",
+    "xarray/backends/store.py",
+    "xarray/backends/writers.py",
+    "xarray/backends/zarr.py",
+    "xarray/coders.py",
+    "xarray/coding/__init__.py",
+    "xarray/coding/calendar_ops.py",
+    "xarray/coding/cftime_offsets.py",
+    "xarray/coding/cftimeindex.py",
+    "xarray/coding/common.py",
+    "xarray/coding/frequencies.py",
+    "xarray/coding/strings.py",
+    "xarray/coding/times.py",
+    "xarray/coding/variables.py",
+    "xarray/compat/__init__.py",
+    "xarray/compat/array_api_compat.py",
+    "xarray/compat/dask_array_compat.py",
+    "xarray/compat/dask_array_ops.py",
+    "xarray/compat/npcompat.py",
+    "xarray/compat/pdcompat.py",
+    "xarray/compat/toolzcompat.py",
+    "xarray/computation/__init__.py",
+    "xarray/computation/apply_ufunc.py",
+    "xarray/computation/arithmetic.py",
+    "xarray/computation/computation.py",
+    "xarray/computation/fit.py",
+    "xarray/computation/nanops.py",
+    "xarray/computation/ops.py",
+    "xarray/computation/rolling.py",
+    "xarray/computation/rolling_exp.py",
+    "xarray/computation/weighted.py",
+    "xarray/conventions.py",
+    "xarray/convert.py",
+    "xarray/core/__init__.py",
+    "xarray/core/_aggregations.py",
+    "xarray/core/_typed_ops.py",
+    "xarray/core/accessor_dt.py",
+    "xarray/core/accessor_str.py",
+    "xarray/core/common.py",
+    "xarray/core/coordinate_transform.py",
+    "xarray/core/coordinates.py",
+    "xarray/core/dataarray.py",
+    "xarray/core/dataset.py",
+    "xarray/core/dataset_utils.py",
+    "xarray/core/dataset_variables.py",
+    "xarray/core/datatree.py",
+    "xarray/core/datatree_mapping.py",
+    "xarray/core/datatree_render.py",
+    "xarray/core/dtypes.py",
+    "xarray/core/duck_array_ops.py",
+    "xarray/core/extension_array.py",
+    "xarray/core/extensions.py",
+    "xarray/core/formatting.py",
+    "xarray/core/formatting_html.py",
+    "xarray/core/groupby.py",
+    "xarray/core/indexes.py",
+    "xarray/core/indexing.py",
+    "xarray/core/missing.py",
+    "xarray/core/nputils.py",
+    "xarray/core/options.py",
+    "xarray/core/parallel.py",
+    "xarray/core/resample.py",
+    "xarray/core/resample_cftime.py",
+    "xarray/core/treenode.py",
+    "xarray/core/types.py",
+    "xarray/core/utils.py",
+    "xarray/core/variable.py",
+    "xarray/groupers.py",
+    "xarray/indexes/__init__.py",
+    "xarray/indexes/nd_point_index.py",
+    "xarray/indexes/range_index.py",
+    "xarray/namedarray/__init__.py",
+    "xarray/namedarray/_aggregations.py",
+    "xarray/namedarray/_array_api.py",
+    "xarray/namedarray/_typing.py",
+    "xarray/namedarray/core.py",
+    "xarray/namedarray/daskmanager.py",
+    "xarray/namedarray/dtypes.py",
+    "xarray/namedarray/parallelcompat.py",
+    "xarray/namedarray/pycompat.py",
+    "xarray/namedarray/utils.py",
+    "xarray/plot/__init__.py",
+    "xarray/plot/accessor.py",
+    "xarray/plot/dataarray_plot.py",
+    "xarray/plot/dataset_plot.py",
+    "xarray/plot/facetgrid.py",
+    "xarray/plot/utils.py",
+    "xarray/py.typed",
+    "xarray/static/__init__.py",
+    "xarray/static/css/__init__.py",
+    "xarray/static/css/style.css",
+    "xarray/static/html/__init__.py",
+    "xarray/static/html/icons-svg-inline.html",
+    "xarray/structure/__init__.py",
+    "xarray/structure/alignment.py",
+    "xarray/structure/chunks.py",
+    "xarray/structure/combine.py",
+    "xarray/structure/concat.py",
+    "xarray/structure/merge.py",
+    "xarray/testing/__init__.py",
+    "xarray/testing/assertions.py",
+    "xarray/testing/strategies.py",
+    "xarray/tests/CLAUDE.md",
+    "xarray/tests/__init__.py",
+    "xarray/tests/arrays.py",
+    "xarray/tests/conftest.py",
+    "xarray/tests/data/bears.nc",
+    "xarray/tests/data/example.grib",
+    "xarray/tests/data/example.ict",
+    "xarray/tests/data/example.uamiv",
+    "xarray/tests/data/example_1.nc",
+    "xarray/tests/data/example_1.nc.gz",
+    "xarray/tests/indexes.py",
+    "xarray/tests/namespace.py",
+    "xarray/tests/test_accessor_dt.py",
+    "xarray/tests/test_accessor_str.py",
+    "xarray/tests/test_array_api.py",
+    "xarray/tests/test_assertions.py",
+    "xarray/tests/test_backends.py",
+    "xarray/tests/test_backends_api.py",
+    "xarray/tests/test_backends_chunks.py",
+    "xarray/tests/test_backends_common.py",
+    "xarray/tests/test_backends_datatree.py",
+    "xarray/tests/test_backends_file_manager.py",
+    "xarray/tests/test_backends_locks.py",
+    "xarray/tests/test_backends_lru_cache.py",
+    "xarray/tests/test_calendar_ops.py",
+    "xarray/tests/test_cftime_offsets.py",
+    "xarray/tests/test_cftimeindex.py",
+    "xarray/tests/test_cftimeindex_resample.py",
+    "xarray/tests/test_coarsen.py",
+    "xarray/tests/test_coding.py",
+    "xarray/tests/test_coding_strings.py",
+    "xarray/tests/test_coding_times.py",
+    "xarray/tests/test_combine.py",
+    "xarray/tests/test_computation.py",
+    "xarray/tests/test_concat.py",
+    "xarray/tests/test_conventions.py",
+    "xarray/tests/test_coordinates.py",
+    "xarray/tests/test_cupy.py",
+    "xarray/tests/test_dask.py",
+    "xarray/tests/test_dataarray.py",
+    "xarray/tests/test_dataarray_typing.yml",
+    "xarray/tests/test_dataset.py",
+    "xarray/tests/test_dataset_typing.yml",
+    "xarray/tests/test_datatree.py",
+    "xarray/tests/test_datatree_mapping.py",
+    "xarray/tests/test_datatree_typing.yml",
+    "xarray/tests/test_deprecation_helpers.py",
+    "xarray/tests/test_distributed.py",
+    "xarray/tests/test_dtypes.py",
+    "xarray/tests/test_duck_array_ops.py",
+    "xarray/tests/test_duck_array_wrapping.py",
+    "xarray/tests/test_error_messages.py",
+    "xarray/tests/test_extensions.py",
+    "xarray/tests/test_formatting.py",
+    "xarray/tests/test_formatting_html.py",
+    "xarray/tests/test_groupby.py",
+    "xarray/tests/test_hashable.py",
+    "xarray/tests/test_indexes.py",
+    "xarray/tests/test_indexing.py",
+    "xarray/tests/test_interp.py",
+    "xarray/tests/test_merge.py",
+    "xarray/tests/test_missing.py",
+    "xarray/tests/test_namedarray.py",
+    "xarray/tests/test_nd_point_index.py",
+    "xarray/tests/test_nputils.py",
+    "xarray/tests/test_options.py",
+    "xarray/tests/test_pandas_to_xarray.py",
+    "xarray/tests/test_parallelcompat.py",
+    "xarray/tests/test_plot.py",
+    "xarray/tests/test_plugins.py",
+    "xarray/tests/test_print_versions.py",
+    "xarray/tests/test_range_index.py",
+    "xarray/tests/test_rolling.py",
+    "xarray/tests/test_sparse.py",
+    "xarray/tests/test_strategies.py",
+    "xarray/tests/test_treenode.py",
+    "xarray/tests/test_tutorial.py",
+    "xarray/tests/test_typed_ops.py",
+    "xarray/tests/test_ufuncs.py",
+    "xarray/tests/test_units.py",
+    "xarray/tests/test_utils.py",
+    "xarray/tests/test_variable.py",
+    "xarray/tests/test_weighted.py",
+    "xarray/tutorial.py",
+    "xarray/typing.py",
+    "xarray/ufuncs.py",
+    "xarray/util/__init__.py",
+    "xarray/util/deprecation_helpers.py",
+    "xarray/util/generate_aggregations.py",
+    "xarray/util/generate_ops.py",
+    "xarray/util/print_versions.py"
+  ],
+  "source": {
+    ".binder/environment.yml": [
+      "8eeb4718e77b6760c2d80a6a4fdac2d42a2e7fef2aa9e8789c15d23f6b0e34b8",
+      436
+    ],
+    ".codecov.yml": [
+      "43a045e744c51250579a680a9760218a82fbf4c7528cdb0e2fe1256b883720f9",
+      436
+    ],
+    ".git-blame-ignore-revs": [
+      "5a3a9d79b7e5f27c3ca11c90e0f98a4af824f9614122b1f0793dd8d12b07e900",
+      436
+    ],
+    ".git_archival.txt": [
+      "ee1850b42b17c7212741c73c86365815c240c010dbc329d82e8a5e898127ea6d",
+      436
+    ],
+    ".gitattributes": [
+      "1c7fc16c19a164635dba2e7e1aaa70da60f342459ad9f108a63225087a572903",
+      436
+    ],
+    ".github/FUNDING.yml": [
+      "81db0b36b16ebd640703ec1338cd808dc0820244d04a9eefcdd0aca7b9ce4ba7",
+      436
+    ],
+    ".github/ISSUE_TEMPLATE/bugreport.yml": [
+      "0f3a45444f178ba91a4b68580dcb9192e054e5410edc950e045e4c0e4f6ebabc",
+      436
+    ],
+    ".github/ISSUE_TEMPLATE/config.yml": [
+      "f9a331f4d39fded3aa2ebf87e03e601ebaa4d87ebc5d1414a88bbad5c2b728e1",
+      436
+    ],
+    ".github/ISSUE_TEMPLATE/misc.yml": [
+      "e66769563278fc21a452dde8bc606e54ae7604647db4681c044da88d91c5e33c",
+      436
+    ],
+    ".github/ISSUE_TEMPLATE/newfeature.yml": [
+      "b401304bdf10bbc6431122de658c79ed5434f1253c71e65d2176bca9c6328425",
+      436
+    ],
+    ".github/PULL_REQUEST_TEMPLATE.md": [
+      "0de0f937b1a692fb42ddbf3c15118380d1174dd360575724dc0a79d232e8d886",
+      436
+    ],
+    ".github/config.yml": [
+      "9675346b6f61044a2e27c9a4e59ec7365265696ea4b4927f8b58b3641f355606",
+      436
+    ],
+    ".github/dependabot.yml": [
+      "585246e913bcbd7500d671b8f7cc1587e45c73b0d105f93b9ee069335b8ebefe",
+      436
+    ],
+    ".github/labeler.yml": [
+      "b5ea9559d6f05599dc489443237ea0c69fea1ee89b41360f9b4986786553ffa4",
+      436
+    ],
+    ".github/release.yml": [
+      "9c7ad5d889af97a7d0892fb93e120b1d4dad5167086ee1972cf82406351b08c8",
+      436
+    ],
+    ".github/stale.yml": [
+      "669f7ed4f28ab0641292a8ea3f2ad2c1945df614a95a24fb3539df3adc4d7f0c",
+      436
+    ],
+    ".github/workflows/benchmarks-last-release.yml": [
+      "45e3c048f3b61af6bcccbaa1ac3e90e93c73fde13e1cacf2b6052d3007988749",
+      436
+    ],
+    ".github/workflows/benchmarks.yml": [
+      "618f028285b95e40bed04338dd7b3d8b53c58d104653b6972b30a9ca1835e72b",
+      436
+    ],
+    ".github/workflows/ci-additional.yaml": [
+      "bb7146d8fcb0a1b0e38f40e2e547ff186fc851ae957275e8362ef43faa1105ad",
+      436
+    ],
+    ".github/workflows/ci.yaml": [
+      "866b3efdbb9ae952bcafe16ac9660ec9e7eb280cfa9f1323298943e36f22a4b4",
+      436
+    ],
+    ".github/workflows/configure-testpypi-version.py": [
+      "dbcae88cd4612cda988556f8527e354752207883877d9ee6f589891818f8ad36",
+      436
+    ],
+    ".github/workflows/hypothesis.yaml": [
+      "13131914e3d5aeb16faba2aa122468a73c530a43bc88a0147af2dc04c3e4ae0c",
+      436
+    ],
+    ".github/workflows/label-prs.yml": [
+      "0a03a394b9021bbd2e9a6140e0cbc2a6e9fa61a1526c0c67937321ef8dd7f7c0",
+      436
+    ],
+    ".github/workflows/nightly-wheels.yml": [
+      "88266791c9ec7a7b454da9526e574486fc7fcf8177279e591ee059f9adaa4d31",
+      436
+    ],
+    ".github/workflows/publish-test-results.yaml": [
+      "a48a495ab2efa1a631997ba66b07a30901fd64301f6eb22b30409b17403bdb8e",
+      436
+    ],
+    ".github/workflows/pypi-release.yaml": [
+      "7e449db3bb5b7e47655d0a811789e8b06012d2bf785fb1468c4e42d5ba16c8b2",
+      436
+    ],
+    ".github/workflows/upstream-dev-ci.yaml": [
+      "9a6286233f678c918261a5671bf827f0a4e0ce16e4a01ce87b2b031df3cf9a15",
+      436
+    ],
+    ".gitignore": [
+      "34547069bc0f6d2965620d871e74e9b10bdae8d6238242cc9814da11972533e3",
+      436
+    ],
+    ".pre-commit-config.yaml": [
+      "db3fdedeffbc328476d25ba91c43d7637d120df522951836dd2027d13cdbb733",
+      436
+    ],
+    ".readthedocs.yaml": [
+      "7664dc0bf4c0bc0b8e8f847de9b57ff130dd7777858a9be13f2ccd11377a0a3d",
+      436
+    ],
+    "CITATION.cff": [
+      "a4981ae5bfdd7220acef491e00b2b0cb42fe4612fc923307bed5ddf4a7ef6cb5",
+      420
+    ],
+    "CLAUDE.md": [
+      "cec29c0c255cda7c40e3d497cc5603a595174e470f364957ad233623496df353",
+      420
+    ],
+    "CODE_OF_CONDUCT.md": [
+      "f0d665ce50739edc27890e525bb1665c6b96e33acda7d13f50893315cab10673",
+      420
+    ],
+    "CONTRIBUTING.md": [
+      "60d9e41c6e8d0cafbded999a0fc62e9f6e29a859e7c7a270d05566a4b8baad57",
+      420
+    ],
+    "CORE_TEAM_GUIDE.md": [
+      "100922c3b95413498a34842e1872db9dcba735bbc585e0f1f18d10d8f0cd3f70",
+      420
+    ],
+    "DATATREE_MIGRATION_GUIDE.md": [
+      "6657bc8737698528f15cfdbe192fcb38290c5f0540c6754b3c705f49b51a80ad",
+      420
+    ],
+    "HOW_TO_RELEASE.md": [
+      "a4cff9309d5d8ada739a9352c381d546bf15f9d39d6290c3ff1bf1568430427b",
+      420
+    ],
+    "LICENSE": [
+      "533d735a2bbc40eccebe20014c38a2bf6fb1afd488398d2c508006496099af17",
+      420
+    ],
+    "README.md": [
+      "f282bbf4bb246b0b7c8a7ceaca398c1bb55b02079451b89d7f3d4c7163dc9614",
+      420
+    ],
+    "asv_bench/asv.conf.json": [
+      "a29def8f54ab210e3d75f22807f0dbd6619cb7796de7c0eb6fd995b9188a9915",
+      420
+    ],
+    "asv_bench/benchmarks/README_CI.md": [
+      "20a034d9b71540022c3deb055f19eb19efb8e709ca35ae987df02e1f1eaec3b3",
+      420
+    ],
+    "asv_bench/benchmarks/__init__.py": [
+      "9b5a4758c7433403d51c33ab1def3d8bf83244f3cfecb7ab5eeae9aea1a3c5f0",
+      420
+    ],
+    "asv_bench/benchmarks/accessors.py": [
+      "8f012d01f1b8f427b967cac53004fd2102c15f4f2a76ce20cd808e62d1675e47",
+      420
+    ],
+    "asv_bench/benchmarks/alignment.py": [
+      "cca3d4b3829479d92e70ada1270c11d4c993be1b8b7238ca5a5186ce63f98476",
+      420
+    ],
+    "asv_bench/benchmarks/coding.py": [
+      "75142ceb24e6a73d60f189dd7ecd0f1e36c068fa06c7a8a74c22ac54d9b71ccb",
+      420
+    ],
+    "asv_bench/benchmarks/combine.py": [
+      "214b48d7b69b96fd5bc034abfea60b60e5fbc2e4c36e569160fcc822e18afece",
+      420
+    ],
+    "asv_bench/benchmarks/dataarray_missing.py": [
+      "6a76c33feb2c21fbe57e50470e2301d58eeec01638f98349b8cb66b0f2f42070",
+      420
+    ],
+    "asv_bench/benchmarks/dataset.py": [
+      "e0175372e4b9c62c493ae41f9fc4c4a867e2ef1dc1ec4664b0e91b5e2de36098",
+      420
+    ],
+    "asv_bench/benchmarks/dataset_io.py": [
+      "4362de5730fd0e24b1ce420273a8577d20afa8ec1fbbe0c876f2df542954eeaf",
+      420
+    ],
+    "asv_bench/benchmarks/datatree.py": [
+      "091b157d916d71f182b51c3a5c2fe6b9eb948c097546729f8ee1484dbf9791de",
+      420
+    ],
+    "asv_bench/benchmarks/groupby.py": [
+      "89c98c2f4f8e85181c7d3cdf4ee17e4c6c76612d99323dcd9f09bed040cd07a3",
+      420
+    ],
+    "asv_bench/benchmarks/import.py": [
+      "d2d4825660c35f0987184ea1801081a78273c2d87de3f4c7599062f41e0800fe",
+      420
+    ],
+    "asv_bench/benchmarks/indexing.py": [
+      "bcdc63db3d6c4ec9d062bf5eccf0fe7ee1759cab11574fa0ce2e65c73b83a2d3",
+      420
+    ],
+    "asv_bench/benchmarks/interp.py": [
+      "884a4b7d0075e3136ae6ce3639aede68b550666082e6c3f583d87c432972ee65",
+      420
+    ],
+    "asv_bench/benchmarks/merge.py": [
+      "211ce830164d6e98fa56cbf43c0ad7dd152b7226e54843733e3e0539064bb858",
+      420
+    ],
+    "asv_bench/benchmarks/pandas.py": [
+      "c7832c0e7fc682a4e6eec84746ed68b0786b667321375ebb131da1ed4adf1b3f",
+      420
+    ],
+    "asv_bench/benchmarks/polyfit.py": [
+      "a1734195eec83414c8f6deb9d5b0ae76d94ab8762f403301d834268b4c476f30",
+      420
+    ],
+    "asv_bench/benchmarks/reindexing.py": [
+      "4605bbf69ac3a84dac6d98e7d4d219c0931e9c2b00d78af3fa33580dbdc54ef3",
+      420
+    ],
+    "asv_bench/benchmarks/renaming.py": [
+      "a50030161f70b2eaa68caac13202c0017dd2871e5a1e451bfe53cb2b54c285b4",
+      420
+    ],
+    "asv_bench/benchmarks/repr.py": [
+      "a068017443e48c6bdd5f2e66cf16936db475e24216aafea8494702f0d1fd8abe",
+      420
+    ],
+    "asv_bench/benchmarks/rolling.py": [
+      "ee380895e8383dd289ba6533f12dbae361acc99069a674bc88570badf47817b4",
+      420
+    ],
+    "asv_bench/benchmarks/unstacking.py": [
+      "0636492ee994f733de5c50647b73cfd30471146e4be1a1c59c00a98a5c6e781c",
+      420
+    ],
+    "ci/install-upstream-wheels.sh": [
+      "ab83a8d4d86a9b3a0561f621357db26dc885383f69f754615744336b87953837",
+      493
+    ],
+    "ci/policy.yaml": [
+      "44b4b908a7e008c0a3f39e6290010ce819cdc8aac77441d45fbfdd161da962a6",
+      420
+    ],
+    "ci/release_contributors.py": [
+      "d058d261ef9369fb003806f4de2e0e773fc891c28a471d34a039b68019137a5b",
+      420
+    ],
+    "ci/requirements/all-but-dask.yml": [
+      "77d916d51a19a5ec58e0ab39277a131676224ad23bf2f7c267aab0761b0d875d",
+      420
+    ],
+    "ci/requirements/all-but-numba.yml": [
+      "55d9cd644cdf10b6400b83650a48bb5ec68e4bdef9024c6dd2de61fecc5960c1",
+      420
+    ],
+    "ci/requirements/bare-min-and-scipy.yml": [
+      "33e51b7f50be1b72b133bdde7e78e6ed4b7262621b3611c188d99c54ca35edcc",
+      420
+    ],
+    "ci/requirements/bare-minimum.yml": [
+      "d839c611db70235c08aa37e28764180a4eb8a17e758853bf03bb919747019b81",
+      420
+    ],
+    "ci/requirements/doc.yml": [
+      "52532934507a1b8e753b179fee10f30fe45e652c92a1b51bc11de86906e23b66",
+      420
+    ],
+    "ci/requirements/environment-3.14.yml": [
+      "98a0f74dafe1f190e2be5c3aca6c080ae605bec7dbfff8dfd584200ea496930a",
+      420
+    ],
+    "ci/requirements/environment-benchmark.yml": [
+      "cab76998261df653b254394c576f58e89418263cb0b5d75c5bf0dc51a240a326",
+      420
+    ],
+    "ci/requirements/environment-windows-3.14.yml": [
+      "f84db959893f47d3411afee5c4994be7e2f12b6960af3b46bb148c717bea5510",
+      420
+    ],
+    "ci/requirements/environment-windows.yml": [
+      "cc0c7ce86ee7e588be9163735f12d786503d8374e843c9bcc23c6a54636ba5a2",
+      420
+    ],
+    "ci/requirements/environment.yml": [
+      "fbf58b2d7afe45c2c6490e757aa9ab44041a287f6060e6c8b64f1bc743e1b04f",
+      420
+    ],
+    "ci/requirements/min-all-deps.yml": [
+      "54f1d973f0ba9ceeb047e5a202ed8f3525de61c33ea607c2e2f1a8f44fb27e7d",
+      420
+    ],
+    "conftest.py": [
+      "a29a062705565d40e6dac51c878263d773c3c35ca25c40d155b5c2c6c7a0a197",
+      420
+    ],
+    "design_notes/flexible_indexes_notes.md": [
+      "8c78ed9fe2f2f2780d285c91f051ea003fdb6c6bae101bcb5b076e56aedc78ad",
+      420
+    ],
+    "design_notes/grouper_objects.md": [
+      "f4d8bdce55d9844471fa8ccf3f0a056cc64cadf4a9e35e095db4a56a1e19855e",
+      420
+    ],
+    "design_notes/named_array_design_doc.md": [
+      "eccd329c1599ba2e455af19d230d2ac01536f2232c9e008d189ced3dbf73e10e",
+      420
+    ],
+    "doc/Makefile": [
+      "026b72888edfef60ca51054fdb9a533cc597fdeebd5893ee44a000e4bd1836ad",
+      420
+    ],
+    "doc/README.rst": [
+      "69622014da8a2e7f99feb0de7f0fe25783e8594a3b10634687fb50b7df9646c0",
+      420
+    ],
+    "doc/_static/.gitignore": [
+      "298a093b3bb808afcc89b432f8228c3e42f20fa93033c2991f3c61347069952c",
+      420
+    ],
+    "doc/_static/advanced_selection_interpolation.svg": [
+      "f08ce97c976b01f83583b3dbf81e0977b0e156a895d926da04d44fe699fad688",
+      420
+    ],
+    "doc/_static/ci.png": [
+      "00dc13dab26682b513db9a6e5a84549553e1a80db731e03fc5242659c9e7d849",
+      420
+    ],
+    "doc/_static/dask-array.svg": [
+      "157df8b8fbfdeb4e53f060816df04aa31728fcc68670d7e242be546fab7e46a7",
+      420
+    ],
+    "doc/_static/dataset-diagram.png": [
+      "7dd46d70112252548084a459107f19ef48906401321dd6e162057caa977d9a89",
+      420
+    ],
+    "doc/_static/index_api.svg": [
+      "09e60fc2a629b3eca07f003afdfacd111e3057743b106a16fa5b6545a08e3a93",
+      420
+    ],
+    "doc/_static/index_contribute.svg": [
+      "3828ef601c3f261718fc3e5977b7f531cb50bead5835a95896a3cdc01d57061b",
+      420
+    ],
+    "doc/_static/index_getting_started.svg": [
+      "5b0c3539799ab98968b990f9d4047af951b6bf1ac48a0f3e8e3b833e1ce43717",
+      420
+    ],
+    "doc/_static/index_user_guide.svg": [
+      "b118cac0e1d5252b416084141557277e66de5dddaa029d0762395e4a9eba5c22",
+      420
+    ],
+    "doc/_static/logos/Xarray_Icon_Final.png": [
+      "be3c7f82e140948d4ba61ad5fd5225bf554fc067c9743a6e3bc7f4040027f9de",
+      420
+    ],
+    "doc/_static/logos/Xarray_Icon_Final.svg": [
+      "ccb01fad18dd58d5aea4015a2b267ac2dcb4d3fd8e57a16f7454343ffbe127a2",
+      420
+    ],
+    "doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.png": [
+      "0bae3160343e54afdcd65783d5c6bf09a1b34552c17bc5579d0e85b4ea34148b",
+      420
+    ],
+    "doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.svg": [
+      "66f6095806c39d7db7c333fdc2c81e1a43643f555f7a0ea4f6495b4b0363bbf3",
+      420
+    ],
+    "doc/_static/logos/Xarray_Logo_RGB_Final.png": [
+      "0152487071e426c49f45d1cf4f0b62c799408cca6c2282402bc17f806cd1a028",
+      420
+    ],
+    "doc/_static/logos/Xarray_Logo_RGB_Final.svg": [
+      "f7aca930f836dc9a615b155a97dca361784a8a9c9e9344cc55f0fe5ca6da59a3",
+      420
+    ],
+    "doc/_static/numfocus_logo.png": [
+      "6a8bd8f03ee10d66dde376918853f0010e75f4077e70cca9c2dec56b059c6df1",
+      420
+    ],
+    "doc/_static/opendap-prism-tmax.png": [
+      "d01b53c3d67fce58a3edc666f527072acccb67d796d6d69c06f17b3955f7aa44",
+      420
+    ],
+    "doc/_static/style.css": [
+      "9f58b8158a55d6aab9b8b87306bad2ef5d40c1296583f18ba7fd597fb3954842",
+      420
+    ],
+    "doc/_static/thumbnails/ERA5-GRIB-example.png": [
+      "4346cf6df6aaf0f5bd96e9dde96da3add004f1c96d31424ebe2a65e8be6347c3",
+      420
+    ],
+    "doc/_static/thumbnails/ROMS_ocean_model.png": [
+      "04f94c3d2b6ba95e2a8e45ebee3fee9ffb8d331852fb30c566bebc949155158c",
+      420
+    ],
+    "doc/_static/thumbnails/area_weighted_temperature.png": [
+      "38b8aa1591f0c569ba15eed8cbb2a9998a0c1c14e02abc57dc9d4c95118102df",
+      420
+    ],
+    "doc/_static/thumbnails/monthly-means.png": [
+      "24384b7fb65a2835b1260a768093d0901d67cef723cb777a0d111e5ab081bddd",
+      420
+    ],
+    "doc/_static/thumbnails/multidimensional-coords.png": [
+      "500415122d82b2e5c827ec3ab0554b7ffa35fe362da8c50f93433f7ef2007118",
+      420
+    ],
+    "doc/_static/thumbnails/toy-weather-data.png": [
+      "f18dcbe3861989a3fd20d69f64ffb00b2767ffa28248482cb8188b1171524a03",
+      420
+    ],
+    "doc/_static/thumbnails/visualization_gallery.png": [
+      "78a0f00a1c8a4e2614a1c8968c144288eb35386c73ceb5c0b93b21fff4b38168",
+      420
+    ],
+    "doc/_static/view-docs.png": [
+      "16b6778a557781ac44a55fffe166f122342387e8cca92bb287139e281bd5f685",
+      420
+    ],
+    "doc/_templates/autosummary/accessor.rst": [
+      "20eeeba6d87f86dea01f673e9d0eb1148eda4c5c62d7f4dbf8ff1bb8471f755f",
+      420
+    ],
+    "doc/_templates/autosummary/accessor_attribute.rst": [
+      "6ba65c1efec7e41dabcfacfb10fc561bcf61d726d2c9facf15d539b2d7584367",
+      420
+    ],
+    "doc/_templates/autosummary/accessor_callable.rst": [
+      "cba0a947ebc1fefc4f2a78d7042e7c248cc7cbf1df18d3bd44c7324b94182411",
+      420
+    ],
+    "doc/_templates/autosummary/accessor_method.rst": [
+      "86b5381c984be1fb51a8cbd095782283f798a5c692a758d82bed37d276e86fd6",
+      420
+    ],
+    "doc/api-hidden.rst": [
+      "006668cafacc36a10cb1121777a65cf014f1c2e4ceaaddef8eaf17476705183e",
+      420
+    ],
+    "doc/api.rst": [
+      "9db3ba9cbb57d95684d143013154ac079767f3f715c2bbaaed981d8ccae51d27",
+      420
+    ],
+    "doc/api/accessors.rst": [
+      "ac884451bc6a5988d2fa94fcf923123584911ddcd1ef60ad4ee97bebc9f4e5bc",
+      420
+    ],
+    "doc/api/advanced.rst": [
+      "f20b622958d17ac077608bfc7be06289d04a48f99758c451b3a8d8e5562dbc76",
+      420
+    ],
+    "doc/api/backends.rst": [
+      "82852014e69901a5d01b2359b7980ff893ba07827f6909d6768e870667795380",
+      420
+    ],
+    "doc/api/coarsen.rst": [
+      "3599e6dab06aadf72383334588a0aa1efc7827bf05373f8f91508f01734c18d1",
+      420
+    ],
+    "doc/api/coordinates.rst": [
+      "018fe7561badb7b9f9ff6ded2df20c5fc5c924b77f399e936e9cdc0efebf8b24",
+      420
+    ],
+    "doc/api/dataarray.rst": [
+      "dbaec7ce4ee92dcfd584baa01acc546166580db6813808e75d2ca306697dd11c",
+      420
+    ],
+    "doc/api/dataset.rst": [
+      "82caf9e2c318923768956833dd757478b4f5c6d6bf43b86cdf10b9425b416154",
+      420
+    ],
+    "doc/api/datatree.rst": [
+      "b38dd189eb089e246941596436be4128b07fd827292d60cb8ed699224614cf51",
+      420
+    ],
+    "doc/api/deprecated.rst": [
+      "2446086baa300c8b857ae979227f3169b12fc968a310dabb68856fecd516a6ce",
+      420
+    ],
+    "doc/api/encoding.rst": [
+      "be998b7b5f01dfce1dd60dbec6f69adb6a5428e0b0432788b47b5e5a66a47916",
+      420
+    ],
+    "doc/api/exceptions.rst": [
+      "1dc572fc747481bab60c92a10ed57a773fa10be123715ec3a1fe5d6905d14bb4",
+      420
+    ],
+    "doc/api/groupby.rst": [
+      "e9a55aa25ae11e6dcbd2d81be96de0d3a156e8f5af3720611c0d974188355b1a",
+      420
+    ],
+    "doc/api/indexes.rst": [
+      "a3d10394f290a461c8e505f2bb4d9ea55bbed66cbd6d1d432243ed9f092f37f2",
+      420
+    ],
+    "doc/api/io.rst": [
+      "b439806e28955dd8af9b6dbf34719808ad87d220edcc29b46d83bd666d266bde",
+      420
+    ],
+    "doc/api/plotting.rst": [
+      "68e8b33a3f74208ba3c77d68ce8994e92fc071651bbd2b0a192d57ec6b54a696",
+      420
+    ],
+    "doc/api/resample.rst": [
+      "7d5ea53c41041d56bc84d8e837669bc7bfddf0bf40d6c59ce7073ac92232dc4a",
+      420
+    ],
+    "doc/api/rolling-exp.rst": [
+      "db90a5c1ded1b4c89500368fb9476f09ccd6ed617e7d6d66e311de4e8ea4d5cf",
+      420
+    ],
+    "doc/api/rolling.rst": [
+      "9cfa891a892451a1433e78b389c86396e253fc24dd8ec13506788b1b7f8067b6",
+      420
+    ],
+    "doc/api/testing.rst": [
+      "80c36301242056407f58316b064971594efdddaa344976b45d2ea177474c8aa9",
+      420
+    ],
+    "doc/api/top-level.rst": [
+      "680c372392c8af36a92824ffe0d2f3e6cb156dea45062968ba1caf24b5fe6e65",
+      420
+    ],
+    "doc/api/tutorial.rst": [
+      "cd3c5a51b57ce04d24c36bf0344c3bfba02aee8fae0c736c66a2347e247c9d10",
+      420
+    ],
+    "doc/api/ufuncs.rst": [
+      "4c0aa6037f2b1fcec5686595f63c176fc872c9eb5f70512456deba08c5f0198b",
+      420
+    ],
+    "doc/api/weighted.rst": [
+      "fcccd9432569b6f06683ef1fd15c7a46ff399f54bad6c612f50253e8c2ffe247",
+      420
+    ],
+    "doc/badge.json": [
+      "ef32a2b27a2f3762b66063be8bcbb3e854dea8a8e7cae70d3ae4566ee3f9ddfb",
+      420
+    ],
+    "doc/combined.json": [
+      "d95e0bc9953b078bc7245a4332e69983511fe4c0fa0ade1ae0262371268dde8f",
+      420
+    ],
+    "doc/conf.py": [
+      "9cf7ea4ebd1c0472fbe91ea2339eb2df0100e3667ef80b4cb60c61c2e869fec5",
+      420
+    ],
+    "doc/contribute/contributing.rst": [
+      "d6d63050016abc3d35d84dc6d08e0fb0a9cdae4286c03b6b61fe27b4aed2b46c",
+      420
+    ],
+    "doc/contribute/developers-meeting.rst": [
+      "a16daa51b7a163bd6f57d6877d69cadb5f1213f11a8444b8f9bd594f3546a812",
+      420
+    ],
+    "doc/contribute/index.rst": [
+      "321ede94652fc0a754c27adf25aa5974c9735aa10fc0282506bd921478b675e1",
+      420
+    ],
+    "doc/examples/ERA5-GRIB-example.ipynb": [
+      "f18ac583612404da33399ff62a139f61ee06093f49441ac6d5586dcd1e271873",
+      420
+    ],
+    "doc/examples/ROMS_ocean_model.ipynb": [
+      "3d34ec77825fac910e5ac03130865b21359db26fde278f805b7451a1030002ee",
+      420
+    ],
+    "doc/examples/_code/accessor_example.py": [
+      "14fab29087ef706f85d2184e2247719cf35dbc18ce1a758a4163308cc90cf467",
+      420
+    ],
+    "doc/examples/apply_ufunc_vectorize_1d.ipynb": [
+      "95b439428cf28c770662143e3d5827e3297444a24b6317c03b45b2ed338715e7",
+      420
+    ],
+    "doc/examples/area_weighted_temperature.ipynb": [
+      "f46069473a77f5154ff2db4eb25a7b0ef6a50d32e96c9d81123f7faf99b28334",
+      420
+    ],
+    "doc/examples/blank_template.ipynb": [
+      "c673625f0af04243f2c280b4d6f626eb00331813d722c3e5cea63b8a1cd27dcd",
+      420
+    ],
+    "doc/examples/monthly-means.ipynb": [
+      "8edc863961099ee02309230679376c58e341877c124ea1d9e7f91dcc234c9dc6",
+      420
+    ],
+    "doc/examples/multidimensional-coords.ipynb": [
+      "baa405b52f902ad3a03be1d8e84ff889a8352085d5be4dd506d601e784fda3d4",
+      420
+    ],
+    "doc/examples/visualization_gallery.ipynb": [
+      "6fc28c3ee72b409ad1dc6c207f4525e154e95915b4d7054b7b213f6347ce156f",
+      420
+    ],
+    "doc/examples/weather-data.ipynb": [
+      "8425d38b33c8b617969c73953d6b934554a6db231264a7251adbf6a4ef9b7f8b",
+      420
+    ],
+    "doc/gallery.rst": [
+      "05903fc2ff0cc64b29db67bb1d7e6f0b589425bdcb691f0d7cc239e5965fcab7",
+      420
+    ],
+    "doc/gallery.yml": [
+      "28769097bd466486e3e5e66313fa20b5619d58dcef938a40221411cc53c97c7e",
+      420
+    ],
+    "doc/gallery/README.txt": [
+      "3ec6173358d7e2aff3590d083f288429fa69274f22bf5bc499c4d1e9ab1f9623",
+      420
+    ],
+    "doc/gallery/plot_cartopy_facetgrid.py": [
+      "98ccd5fffd085f8f5d67d8fc01cf89d03afb81e75b9e584f31194c71c603239d",
+      420
+    ],
+    "doc/gallery/plot_colorbar_center.py": [
+      "8da767f02e5d68f0ded1aabd3d00a241a9e55760600191b007ee2b77844f4273",
+      420
+    ],
+    "doc/gallery/plot_control_colorbar.py": [
+      "a8261e7bc9d02caef03b54a27b7408f2ed1a2c3d22639867f9b973a236b4f217",
+      420
+    ],
+    "doc/gallery/plot_lines_from_2d.py": [
+      "06db0ff323564e5c1233737f90dfc4ff98eb8f993e4178be2b091d977c09cb4d",
+      420
+    ],
+    "doc/get-help/faq.rst": [
+      "466326452a0016e5043192139e61ec9db2532d9f7c1fb798586d705487a208fb",
+      420
+    ],
+    "doc/get-help/help-diagram.rst": [
+      "12d6e9028402f599df505fb983c413bd3c5ae944a21d400d29efba5ba8bbfa12",
+      420
+    ],
+    "doc/get-help/howdoi.rst": [
+      "d32e06bba83759010238eb448e728f2119da4ca5e9ee87497665ccc4b8e82a25",
+      420
+    ],
+    "doc/get-help/socials.rst": [
+      "6d29f7dc1f2f8a11647040692ddb3c1789dc9c03459187ae297b50aa8c33a6d9",
+      420
+    ],
+    "doc/getting-started-guide/index.rst": [
+      "d879230fa06d16ecf1076e46b7e76e17dc0c5c2c6a0f6774258a03bfa4916896",
+      420
+    ],
+    "doc/getting-started-guide/installing.rst": [
+      "dd49f5d88cd4d9de195000bcaf11809854f602a41251e3859cea39d236fd3093",
+      420
+    ],
+    "doc/getting-started-guide/quick-overview.rst": [
+      "22e9d1286a13161dd8320261bc95e9356dfbd2f005fb5f07704d5045bfda95d1",
+      420
+    ],
+    "doc/getting-started-guide/tutorials-and-videos.rst": [
+      "9e063d2f82674e20eefef0cc06aa20fd5c803fcf80be946a66b6fd69e2a177bf",
+      420
+    ],
+    "doc/getting-started-guide/why-xarray.rst": [
+      "46464fb320b65c29b7e98617f3e30607bfeb10455c94c74653b33f2d36c33e1a",
+      420
+    ],
+    "doc/index.rst": [
+      "21127b33f019535be002dbf501a4f98879f08c750f1b86c81a66fab09efb0aa4",
+      420
+    ],
+    "doc/internals/chunked-arrays.rst": [
+      "7f6413aee854c7620a814c93f70191dc42e3cf86bf08a5011cfc90f406d8916c",
+      420
+    ],
+    "doc/internals/duck-arrays-integration.rst": [
+      "389413eaa78c893320ab864510e6f18de05ca7fc7671126d72c4282456a348d6",
+      420
+    ],
+    "doc/internals/extending-xarray.rst": [
+      "74a59c88d08f971d16b5ee511bb8c3437ea1473236fcc57a47b87a707694a1b6",
+      420
+    ],
+    "doc/internals/how-to-add-new-backend.rst": [
+      "8c8463db0e7677320dff4606aae3d18fdc3f65ec00f122836f50f45cba284c54",
+      420
+    ],
+    "doc/internals/how-to-create-custom-index.rst": [
+      "b2e295f8da0b05fce9e241f8ee8162d4bdea8631c68367521cc75d308da219ed",
+      420
+    ],
+    "doc/internals/index.rst": [
+      "66f67f330532c09ce092503d0126af5e2d5d683e5c43aee1e5211dc83df8120b",
+      420
+    ],
+    "doc/internals/internal-design.rst": [
+      "11ddf15ea74c40217344ba496444d87a9aac65e53bd78a4497a0d1f84ed4a5b5",
+      420
+    ],
+    "doc/internals/interoperability.rst": [
+      "bc92af89995a831fbc67bf6e26022ab62d92483fc63f3f3696097a9b54e63dfd",
+      420
+    ],
+    "doc/internals/time-coding.rst": [
+      "c11f9eebd8f41900aac212d56bf1354a31863617bd10bc05ec948b4a4fc04c4c",
+      420
+    ],
+    "doc/internals/zarr-encoding-spec.rst": [
+      "ccc57ab53ded8f0cc0b2784a8e6ce23345d3c9f0d54c3219dce0c24f6c49f43a",
+      420
+    ],
+    "doc/roadmap.rst": [
+      "fb998486f4a62bf022e83c70a68c85f48ca17530c83bf29917c505e2552133a0",
+      420
+    ],
+    "doc/user-guide/combining.rst": [
+      "6339fb7827a821731a598f07241ddeccfa1b9bfe71e0f1cc1bea1adebf33978f",
+      420
+    ],
+    "doc/user-guide/complex-numbers.rst": [
+      "2c1b7faff15f48ed5082776b0f333a3a3a35fefe57504cca2d7109124b20b271",
+      420
+    ],
+    "doc/user-guide/computation.rst": [
+      "1c449a3ca41b55eef16bb0b71b6de182ed7a2008746791af869f2f26d36bd0be",
+      420
+    ],
+    "doc/user-guide/dask.rst": [
+      "5c1b910a712d615ad7542b26c4b32785c386c563f15a12d684761fc07f715617",
+      420
+    ],
+    "doc/user-guide/data-structures.rst": [
+      "40d2f98fd2f54e33cdc08c308ab44ef4198bd64b8b75f77201251a2022b57bbc",
+      420
+    ],
+    "doc/user-guide/duckarrays.rst": [
+      "8cec24cbdfce3601bb8e6dfb8a6535b9f19d76d96c43a00499f736cfe6d2fa96",
+      420
+    ],
+    "doc/user-guide/ecosystem.rst": [
+      "728a7cb7df1a12760f7f6076494626287aa1ac70e1b83f4c1a3b2dd095660478",
+      420
+    ],
+    "doc/user-guide/groupby.rst": [
+      "3621fe7f61ad0f5e88c0d418fa97803bb090797d2adf7a78c84711d1db8efb50",
+      420
+    ],
+    "doc/user-guide/hierarchical-data.rst": [
+      "7a96686273060859fe556d5e9f00d8e62bf8d12e43edeb9bff7fd89f64cacab2",
+      420
+    ],
+    "doc/user-guide/index.rst": [
+      "e58709d733bc4f84f2345f71ca708de5344ac4eb42d48b6559d75008c7da5398",
+      420
+    ],
+    "doc/user-guide/indexing.rst": [
+      "f984bb9bdf9a1ee72fa666c7dd566c0c3d140a7f854c0506ceca9d61885351d7",
+      420
+    ],
+    "doc/user-guide/interpolation.rst": [
+      "8007a0b7064f2dfb790e54f536fc5ca50f75b5bc2a5288d667c03c801142f951",
+      420
+    ],
+    "doc/user-guide/io.rst": [
+      "e7c68d0158b269576e917eb0f50e54d57c6b6cc4a98b8a988cc53abd7a4be670",
+      420
+    ],
+    "doc/user-guide/options.rst": [
+      "a2c78564bbf016d7fd2205d1b021b5024534c14b4729caa2aad7cf847be858ca",
+      420
+    ],
+    "doc/user-guide/pandas.rst": [
+      "8e1dc4e2ba99ca5d8e0795e52d558a0e982a2877339b0c6f76f413eccc1bd35e",
+      420
+    ],
+    "doc/user-guide/plotting.rst": [
+      "5b465af18d637eae97d9124370535df3f74770b98c9134b099b8a4148e6bf547",
+      420
+    ],
+    "doc/user-guide/reshaping.rst": [
+      "3113e042c0ab6fa5380006e21f994eef6cc695b753e6e1785de706f842c5cd76",
+      420
+    ],
+    "doc/user-guide/terminology.rst": [
+      "ea9cae763683cef2a2481ce47f474e29147d88dde01b9c464415347f7f05b720",
+      420
+    ],
+    "doc/user-guide/testing.rst": [
+      "72ac6addf2ac6cc0992128c8ca1a128aa4d54217ab6c17afa765916c01f45b11",
+      420
+    ],
+    "doc/user-guide/time-series.rst": [
+      "1aa4a7ad4c39edebcace39f752a02a3e693c5deb3d4a340e380cdec1adf7e5eb",
+      420
+    ],
+    "doc/user-guide/weather-climate.rst": [
+      "9624d96ca032a6bc18e84d2ebad85a6a48fb35d1a64e4efcba844fec671a4c85",
+      420
+    ],
+    "doc/videos.yml": [
+      "59f781a9f636e523133e3cb7dbd1159cda4c72c81e230c62972c8d00688bc40e",
+      420
+    ],
+    "doc/whats-new.rst": [
+      "89dc7ac1e02439fcd3cbe47471ff74224b6749a5c02dd517e7d040736f11958d",
+      420
+    ],
+    "licenses/ANYTREE_LICENSE": [
+      "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      420
+    ],
+    "licenses/DASK_LICENSE": [
+      "b395df29efa3f895cb00b33f5542c210ce5da670d9fa4b657d9805c98a479c12",
+      420
+    ],
+    "licenses/ICOMOON_LICENSE": [
+      "9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94",
+      420
+    ],
+    "licenses/NUMPY_LICENSE": [
+      "5a91226ddfd61461d8dd6bca70ce98e1037af9db5ffa1f8357bcf71f28eb727f",
+      420
+    ],
+    "licenses/PANDAS_LICENSE": [
+      "b029c4ef433cd9fabc38e6ae25c9b343f32afc7295ca2c3bac8925ec5d32c4b4",
+      420
+    ],
+    "licenses/PYTHON_LICENSE": [
+      "0a4f3b38055f50f047a42521568fa6ddb9a5976c2884f6ae138796d0f71150ca",
+      420
+    ],
+    "licenses/SCIKIT_LEARN_LICENSE": [
+      "dd8388c51376fee77bcd70829a00ef5b97dab56f2922a9556693296ca4aa2ea8",
+      420
+    ],
+    "licenses/SEABORN_LICENSE": [
+      "00687272b85470da9e447967b81f9b61b990e6eb4f61ca0b13aab45b083a9a3c",
+      420
+    ],
+    "properties/README.md": [
+      "26a597470140edde56677decbea70f708ee294671a73d0e4fd52c37db19080d8",
+      420
+    ],
+    "properties/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "properties/conftest.py": [
+      "5da721284b858861a28e39b9146b2f1301ebbea0c9b7103df9310bde54dd5d8e",
+      420
+    ],
+    "properties/test_encode_decode.py": [
+      "a2182ab18522f6a07936cc34f5fb0f0ea70e6facb09103943e7e4a1b0ad110c5",
+      420
+    ],
+    "properties/test_index_manipulation.py": [
+      "9e595f4175daa83193e3d57a089e4f2a437770876fc1177602b371dc31ae58f0",
+      420
+    ],
+    "properties/test_pandas_roundtrip.py": [
+      "e2644cc9775bc726668385e05c8635700829f319a28bced1f7d1c520ed1c0079",
+      420
+    ],
+    "properties/test_properties.py": [
+      "6cce0614fd03e57c2831ac21d86d41fd45b10f595d0976130c7472df6dee1290",
+      420
+    ],
+    "pyproject.toml": [
+      "fef0ef0df5e85aa11071754c5ca683a34fcf20b289699162ef537698d6ea78b5",
+      420
+    ],
+    "setup.py": [
+      "70cb28b135b4f3b64b273b6abb8b857a1a684c42ef8e2b6103187c1c86a92e83",
+      493
+    ],
+    "xarray/__init__.py": [
+      "13f1697a875a75fab10d51849d7f1ca7ead4e979adb915633b2e3808608868b5",
+      420
+    ],
+    "xarray/backends/__init__.py": [
+      "67f9fb879bd520a8511028f479563f483f9d9762a57b567bddd3c2c0ba40afb3",
+      420
+    ],
+    "xarray/backends/api.py": [
+      "86a15807d2fa1c5e8ccf5cd59bc9c83ce07fbab9fe4d2402b00762d239bc36d3",
+      420
+    ],
+    "xarray/backends/chunks.py": [
+      "8194057767173632a6917a60ecebc2a951f53f460441dfafc0aae102a9527e7f",
+      420
+    ],
+    "xarray/backends/common.py": [
+      "2e6f7d5f589c19b61487fe402b8dd1ab10dadfcb7a5059e3cbc2206524d48467",
+      420
+    ],
+    "xarray/backends/file_manager.py": [
+      "04f6d02ba62a8eef13639881e24f2406803a3c84dc8f26487b8a45ad1c000780",
+      420
+    ],
+    "xarray/backends/h5netcdf_.py": [
+      "f450b997f2b13a00c3838b3e23422e957df4ca981a4a19bfa0a23ef89e1021d4",
+      420
+    ],
+    "xarray/backends/locks.py": [
+      "e07fb0123a9982048d36cd0b157430abb3b63419fa25b275fcfdc2aee48c9908",
+      420
+    ],
+    "xarray/backends/lru_cache.py": [
+      "a99b0595d73531976e5a7909b8b35ee48321c724db8b891386b2d4c0e22978f2",
+      420
+    ],
+    "xarray/backends/memory.py": [
+      "48be0979a70e5e38bb62e6ba7fbc847fa8f5a1eb8ebe785c3567338384e12556",
+      420
+    ],
+    "xarray/backends/netCDF4_.py": [
+      "1adff1da749bf3f73825485f7946a5aeda2c94082586dc18d5e211dd99412544",
+      420
+    ],
+    "xarray/backends/netcdf3.py": [
+      "86dfd87b7bf55b762eca46bd5f212eb8358657fd5d3f502877d8046f3aeb4c0d",
+      420
+    ],
+    "xarray/backends/plugins.py": [
+      "d659b5c3505771e8e58a13cec1045759d04a1f9fbde2c97440c7aa4c1d7ea76c",
+      420
+    ],
+    "xarray/backends/pydap_.py": [
+      "fbf2acb778c4ace84e436b2e5e99a508f7d8e8e9537f935fe25eaba7a85ee827",
+      420
+    ],
+    "xarray/backends/scipy_.py": [
+      "fce6582d36e0a1a5b9635fc8435e6a4434a8d6d36818a7b61fc8a1155f468cfa",
+      420
+    ],
+    "xarray/backends/store.py": [
+      "3f4adca2cfa8ee93a32b557be4731a63f3fb6159cf38ebf0405fbdc3fef7b9db",
+      420
+    ],
+    "xarray/backends/writers.py": [
+      "79ded8011c6017e0506513343698e23ffb7f6b11b75adf0987e0b206907781e4",
+      420
+    ],
+    "xarray/backends/zarr.py": [
+      "29d00d38de7123e564aa5d3d3f459d43d8f15828c8c88c0db051fa89842d1478",
+      420
+    ],
+    "xarray/coders.py": [
+      "25cd95f88225b2b5753f85397f7ad1efd627a9495d563521a56a932b7ce859d7",
+      420
+    ],
+    "xarray/coding/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/coding/calendar_ops.py": [
+      "abba6294897598bfb9cab16d6b72d1a4d62c960d0cff9aaa41600d5cfcf10e45",
+      420
+    ],
+    "xarray/coding/cftime_offsets.py": [
+      "efb1ca08b891888693212473830a73ffbdbe430a3c11cd94fd64493528b7d9e6",
+      420
+    ],
+    "xarray/coding/cftimeindex.py": [
+      "3b44c464f032a0f8a112f1037b63e124f32603334180a34bf29467aeea1844c9",
+      420
+    ],
+    "xarray/coding/common.py": [
+      "e2fbf1970486947db715b7c67be10382885a46233c83af9fca45d023c2c613aa",
+      420
+    ],
+    "xarray/coding/frequencies.py": [
+      "bf6732eeb830218d653fc4cab6affdf7de093f929eb56d806368bdc22cee3705",
+      438
+    ],
+    "xarray/coding/strings.py": [
+      "cde2ac9ccb695a34b5da02b595c3e3c4674ac7e41c106d4e467f7e606eff31be",
+      420
+    ],
+    "xarray/coding/times.py": [
+      "291c5e1f7f01d3410f328cb48e3a2caf8642b49d3cc2c25814a430758a27c18e",
+      438
+    ],
+    "xarray/coding/variables.py": [
+      "81f52e9b31511966b5b707ef26906774c6040a04a4a00097cf49807e18d7488a",
+      420
+    ],
+    "xarray/compat/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/compat/array_api_compat.py": [
+      "ea129e18de05ec8fa1e358cec79cc05eb1557e5a95722b744bc6891d3b390f6a",
+      438
+    ],
+    "xarray/compat/dask_array_compat.py": [
+      "d40a83e2fab1564e91b2fce68939399e5dcc16121b0c0a5e8bfc47d5cc565361",
+      420
+    ],
+    "xarray/compat/dask_array_ops.py": [
+      "69b266b96aefb6d52d1a4aaec83371410dc55d62790f3f6ef441eb74947a4b04",
+      420
+    ],
+    "xarray/compat/npcompat.py": [
+      "771a6e26cc679f6574e1c3961d9d7702e5929af701326d522da0a7c23b705647",
+      420
+    ],
+    "xarray/compat/pdcompat.py": [
+      "fd2f0df3f495cc04a3719ed1d18594cb26b2ed202ed9a387f23c8f83c857d81c",
+      420
+    ],
+    "xarray/compat/toolzcompat.py": [
+      "e9cd5e790f2c94ebaece660ca8736429e572232fddd7a9b48765c53846a36bc5",
+      420
+    ],
+    "xarray/computation/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/computation/apply_ufunc.py": [
+      "b745b83b79428dcb443f3f395e98b36eaf275308931c9cb2f162c93998f9303e",
+      438
+    ],
+    "xarray/computation/arithmetic.py": [
+      "de0735de7121e0b495f5685b371fee75ac869bb1546782aa6a3583daeea87837",
+      420
+    ],
+    "xarray/computation/computation.py": [
+      "d63acd71bd0cb09f1972db90de00529d4d6e02296d6404ad9eb9c3212bb3a918",
+      420
+    ],
+    "xarray/computation/fit.py": [
+      "e0f5535954b20eed8d400299d924916bc888e36ff7febb7225f96726eac88876",
+      420
+    ],
+    "xarray/computation/nanops.py": [
+      "fd1497d0bda9a2057d26ba123425ce251c321f728ec6ca5e483d522c4a4e641d",
+      420
+    ],
+    "xarray/computation/ops.py": [
+      "2e40973e64c5fa33da3827202ff08cf3c79708cd32edb0e9ae6dce9eee9c6f12",
+      420
+    ],
+    "xarray/computation/rolling.py": [
+      "376c1de29dfa669cea2dd6f8c22f05a6faf0d934850d6842f590829602810170",
+      420
+    ],
+    "xarray/computation/rolling_exp.py": [
+      "516d1d0e26f10a4af58f7611c9ec8e76243be1e6e7251c42fae9703752080358",
+      420
+    ],
+    "xarray/computation/weighted.py": [
+      "914ed4493cb949d38264d51bb9fd1d50fdce1392b018b1e043348aa0620fc266",
+      420
+    ],
+    "xarray/conventions.py": [
+      "969f1dd27559fd46312d5cfbb61898b2641e6cebbd7f2b94246031bbf3e64db4",
+      420
+    ],
+    "xarray/convert.py": [
+      "2c11186b3e0c55219c00a249cb055167ac88fe58f7d03d069556258e72a22a50",
+      420
+    ],
+    "xarray/core/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/core/_aggregations.py": [
+      "67d91870a0305b8e7898d8a6ccf5af934bd357d498d83730a797c8490c4c5959",
+      420
+    ],
+    "xarray/core/_typed_ops.py": [
+      "77d04de324babd11f1cb94b9a17cdd8a05fdf5e52cf738051bc8768365b4d7d3",
+      420
+    ],
+    "xarray/core/accessor_dt.py": [
+      "595dd832c791acddfe26c5131bf56f9fdce5dee9edf3286e147344f498e0bb98",
+      420
+    ],
+    "xarray/core/accessor_str.py": [
+      "c47fb105ed769912e12a9a3587f0e22b1128471763e097a50a0a90d807395cd2",
+      420
+    ],
+    "xarray/core/common.py": [
+      "3097bef02b30b723e649926e4dc37dbed9f69fded92b4e832437af53ddc08750",
+      438
+    ],
+    "xarray/core/coordinate_transform.py": [
+      "2982c29b59c7df8c24d6e0041ca67b5fa6a87c87e6613c3d188a7508ba0e3136",
+      438
+    ],
+    "xarray/core/coordinates.py": [
+      "6b8f75fdaeda7a464910b7e98e693d5cc401c3c1a6836dd6eac9acc0b25e2391",
+      438
+    ],
+    "xarray/core/dataarray.py": [
+      "1ece7831c0f8fac506894aac62308fb07e03386ced3d666e449801e5df30f484",
+      438
+    ],
+    "xarray/core/dataset.py": [
+      "0547f948be885e2b31bdc76cd2ab5c01cdc350ab3135122d8dbe66e6a3286828",
+      438
+    ],
+    "xarray/core/dataset_utils.py": [
+      "e3b6274d0c14f2de52e3b4156453c02dddf5b4e73215dfa8b9d356c6117289b6",
+      438
+    ],
+    "xarray/core/dataset_variables.py": [
+      "f76862028fdb90da226e968bbeea400a579bbb4e1d8572f616d5576ab4c86288",
+      420
+    ],
+    "xarray/core/datatree.py": [
+      "ed5878dc224ca7afa03ebfeacc0e051fa285d9b490c0286925870252394b8868",
+      438
+    ],
+    "xarray/core/datatree_mapping.py": [
+      "3bf8b2c87740840ed0b11ba41f1423cbf053195434d4b04942d799798f6a8566",
+      420
+    ],
+    "xarray/core/datatree_render.py": [
+      "fa4f52a85ad0d2f38d87fa494d1ee0ed36ce136b5728218c2cb61c3dbd227967",
+      420
+    ],
+    "xarray/core/dtypes.py": [
+      "7c18f005b71ad912cb37bccd249e1e1f0c5e3c23ca477aff5438a8431fbd1e61",
+      438
+    ],
+    "xarray/core/duck_array_ops.py": [
+      "744dcb0b61531968c6dc4de4b6100693f70f5562f16a51c116c19d6bc50c0e65",
+      438
+    ],
+    "xarray/core/extension_array.py": [
+      "52f61e022204d44e264599765b78755b4e7079db638c5c65080334d875d616e6",
+      420
+    ],
+    "xarray/core/extensions.py": [
+      "07bd476322cb145ecd296883e9c1c7336987c7fe96c8e6de14dedc90e2c6a01d",
+      420
+    ],
+    "xarray/core/formatting.py": [
+      "b96f3cd965fdf13d09b56271847746163ac2b98295daa525a9f2b66888d4b73a",
+      438
+    ],
+    "xarray/core/formatting_html.py": [
+      "77ef03bbaddc78242fd4318eafafbb0fe54d0b48fc69c564a590cb26cba1f5dd",
+      438
+    ],
+    "xarray/core/groupby.py": [
+      "9d0f78db1b4f5a28656f35bfb5d5ee9976508d15204a76afb4c0a6949926edaa",
+      438
+    ],
+    "xarray/core/indexes.py": [
+      "941e2b58e69de5eaffb988a80d1d4de9b3760a591d661af967371e08c6d2aef6",
+      438
+    ],
+    "xarray/core/indexing.py": [
+      "c39c14781d3e4feac87ff1ea1ffe10e4c952de996fbd03ed5ac6d1bdb4ce07c6",
+      438
+    ],
+    "xarray/core/missing.py": [
+      "cd37ca3dd3f4cfbc761c88bb4c00963672441a82d4af00c8e3492885ea339ae4",
+      420
+    ],
+    "xarray/core/nputils.py": [
+      "ab5e232767d09610a0ad829d74803b5a4def300f9c00c0042bebaa38ba1fc058",
+      438
+    ],
+    "xarray/core/options.py": [
+      "7071d07150c9d1ed24e631386137af7aa24b987df5381b66e1a60675c811c9be",
+      420
+    ],
+    "xarray/core/parallel.py": [
+      "b75d630e4cacddf7b00e762e78f92b0f1b0b7289ea54cd9c8e92ed4b57b09035",
+      420
+    ],
+    "xarray/core/resample.py": [
+      "ecd1a0ffae44dab00de859ebeaa4d3c5fd288dce8736d066061fbf5cf6eb4bd2",
+      420
+    ],
+    "xarray/core/resample_cftime.py": [
+      "c0e06c9338d6305fe105266ccb9329470851a173b07c9a0d587b999f93bae0b6",
+      420
+    ],
+    "xarray/core/treenode.py": [
+      "913c572e78fdaaad16e16765977415a7a145078dca3476a8ed22bcf6d25a8c33",
+      420
+    ],
+    "xarray/core/types.py": [
+      "f89ddb6f5ecfe18b639c2ef4885b307b78c0f7f0e1771424211857f40d241153",
+      420
+    ],
+    "xarray/core/utils.py": [
+      "d85da1487a9598a79bb3ce9fc7c7fb57c5f91c0bca0a7a2943975d417dac7eaa",
+      438
+    ],
+    "xarray/core/variable.py": [
+      "3b1e432ed7ba44fb45cc954f181154bfecae72ce86b85a40ebb39cbc567fc8d9",
+      438
+    ],
+    "xarray/groupers.py": [
+      "7fc685ef8dfed3523b0db70df979d7dd8d060322c3be5fba9302c9a2368c1dd7",
+      438
+    ],
+    "xarray/indexes/__init__.py": [
+      "af1e51aef1eb56ac6398c6d397fddf580cdd74b2a91eb939b1cc2450e798e3f2",
+      420
+    ],
+    "xarray/indexes/nd_point_index.py": [
+      "f73d2a01c67d0345ad14190476d791533e7fd56785d8e75e88cfb380f8157f94",
+      420
+    ],
+    "xarray/indexes/range_index.py": [
+      "721e7e8b00d1423ec352c87fc76aef709209805a8a2f3ae58946f5e5fdcb9959",
+      420
+    ],
+    "xarray/namedarray/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/namedarray/_aggregations.py": [
+      "435c6b08d98aa410935a4b0df9b2ea17442a016644d2b46247af7547a2b02e49",
+      420
+    ],
+    "xarray/namedarray/_array_api.py": [
+      "fdd1090d0c10d839916a618940cfdadc88805bb8dd041104c502cd8856e57eef",
+      420
+    ],
+    "xarray/namedarray/_typing.py": [
+      "e66473afa346effc8f86a26e97983b9c38d4b286c5d6e33137c48ec0c67da750",
+      420
+    ],
+    "xarray/namedarray/core.py": [
+      "2a31bd4e3b5acb72a4c11d05cfa1ee84ff1c61e762265715de3332cd5179fa5e",
+      438
+    ],
+    "xarray/namedarray/daskmanager.py": [
+      "4a846027daeffa43133fb799521ce51167c5ec1255944b329047749929bd6d98",
+      420
+    ],
+    "xarray/namedarray/dtypes.py": [
+      "3efcd3c376b8d3cae3dba29e82466328b922d94c5f9f64d2439acdf7e26e105c",
+      420
+    ],
+    "xarray/namedarray/parallelcompat.py": [
+      "6e81bada5cf2deea5383db706e3c37e78f0acb3132fe63c370f60c6c0190dcce",
+      420
+    ],
+    "xarray/namedarray/pycompat.py": [
+      "a96a2e627f4e766e680b1ac549d8e1d4582850a616f9d8c8bbe4249b717b6aec",
+      438
+    ],
+    "xarray/namedarray/utils.py": [
+      "d7980950120f23fb9b66d2626acce476fde108dd2f9fb3d02d85bc41a1505885",
+      438
+    ],
+    "xarray/plot/__init__.py": [
+      "2d733edf95a3de9ecb3f84eac6d82d18f7eae5fe0d12f18e2a9bc4c177e01ab3",
+      420
+    ],
+    "xarray/plot/accessor.py": [
+      "c498f2084a67301d90fa071ca818967319bed74a9222b2b17a203f3be1c47d62",
+      420
+    ],
+    "xarray/plot/dataarray_plot.py": [
+      "eedccbd941d265ff73303b4b545678ee52e2e6d65913377e74c18a627075b93c",
+      420
+    ],
+    "xarray/plot/dataset_plot.py": [
+      "700e5552a4728f5ae8bf4f4733995268fbb4fbda6c9f4c8c340128179b3b3a1c",
+      420
+    ],
+    "xarray/plot/facetgrid.py": [
+      "84202aaae2ae98517b216ba58ffc25627663be84884896cf8d29479774551441",
+      420
+    ],
+    "xarray/plot/utils.py": [
+      "6bed2f990f47b4361246662e2965209f655ea6968b90830b6933af4960100b9a",
+      420
+    ],
+    "xarray/py.typed": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/static/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/static/css/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/static/css/style.css": [
+      "7f68321507fc07565a99e2ff5d93e20d73603675af1d7c1e388175c73aff9e6d",
+      420
+    ],
+    "xarray/static/html/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/static/html/icons-svg-inline.html": [
+      "b7e0a16ed4b51aff2e671737d430894bc4ae5c3b0b1941e82a0c2ff33bba8f63",
+      420
+    ],
+    "xarray/structure/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/structure/alignment.py": [
+      "e58da53fccd008e17fb372ac29e9c77e031aa8946d1386074a92d33e157b5358",
+      420
+    ],
+    "xarray/structure/chunks.py": [
+      "1f84b4dfa52c16b1403637392e961bf2ca007885198857fe8d503f11ade63bc1",
+      420
+    ],
+    "xarray/structure/combine.py": [
+      "a7bc3a738d16d97dc73f77c03b57da640a19199f18eb605906d6c0627f592776",
+      420
+    ],
+    "xarray/structure/concat.py": [
+      "fc2bfb00b9df1a2b2ceaa89d0052748fadb762e8d0a5778a7053cd36622cab19",
+      438
+    ],
+    "xarray/structure/merge.py": [
+      "1b946cd05a1614f3042dda1251bba52787bfed3706015d110c801286f18a9b3c",
+      438
+    ],
+    "xarray/testing/__init__.py": [
+      "1b716dac9f16030f5ab5e9054bdf6f891d3eb0ea5e43c51d77f289a05133610a",
+      420
+    ],
+    "xarray/testing/assertions.py": [
+      "a3785f10b7a429678ae344da4f254400c952570b6faa91ab7f1062c3480496a5",
+      420
+    ],
+    "xarray/testing/strategies.py": [
+      "1b080c0dfc4af5273ac9e1884f0e58c26edfd479dfa39817dd170774b5fd2bb8",
+      420
+    ],
+    "xarray/tests/CLAUDE.md": [
+      "0f659aa544ce0d20e9cd0af59ed72722683a7825a32950cdc4005b67f0ae1152",
+      420
+    ],
+    "xarray/tests/__init__.py": [
+      "901949d71c958754968d8ee10b915873752a49abea0beeb41a6502eff4dd7f03",
+      420
+    ],
+    "xarray/tests/arrays.py": [
+      "7afef3f6371468f45aa379da1975ad9551ad9bc64592e19b2d064858427d2f12",
+      420
+    ],
+    "xarray/tests/conftest.py": [
+      "b18082b928f96771af74abcc2cfae2f45888f33c7f86a9982921a6acdc265f61",
+      420
+    ],
+    "xarray/tests/data/bears.nc": [
+      "f75dad4397c7212f950d305edd4a65422dab75172b78c490d2d21d08e83d1512",
+      420
+    ],
+    "xarray/tests/data/example.grib": [
+      "902bf30a5065f3faff1b9361ce9778667fa1681feb74d343d4f17aae498ab26d",
+      420
+    ],
+    "xarray/tests/data/example.ict": [
+      "879de0bc56074326fef4d380ba522c55850ec0acb9c5967184d1d7020ecbf261",
+      420
+    ],
+    "xarray/tests/data/example.uamiv": [
+      "6b7f8e94fc56698ea268e90b3f34d5ad8c04de664317bcef87ee822bc779ab7a",
+      420
+    ],
+    "xarray/tests/data/example_1.nc": [
+      "1247c2e7b7565de963817cb9b2276b247246d760f5826414c8f0cad7c5b3953e",
+      420
+    ],
+    "xarray/tests/data/example_1.nc.gz": [
+      "d88def15dddb52a79c63a1b412922b30c9112eba30d374944176110ba523261e",
+      420
+    ],
+    "xarray/tests/indexes.py": [
+      "d65d67d4e3fa4f470bcfbfe69c968fffdd3359c63dee5a6abf9ca9351575991b",
+      420
+    ],
+    "xarray/tests/namespace.py": [
+      "61505af499e6423c7af3239e35ae3bf50de39f50f185e42b2ddfeea45ea3a7cc",
+      420
+    ],
+    "xarray/tests/test_accessor_dt.py": [
+      "aa67d209c78f810d53c548788178175104d838e27a795f0631e87c0f309a6ad6",
+      420
+    ],
+    "xarray/tests/test_accessor_str.py": [
+      "de134391cf5e74dc5b61877503e8c63cb42a856acc18c629a3b64cfce8cb9f0d",
+      420
+    ],
+    "xarray/tests/test_array_api.py": [
+      "2ba8109e1a2c796ba7f369f819b89676972c7fd303e6668e7d6807da3f6c1046",
+      420
+    ],
+    "xarray/tests/test_assertions.py": [
+      "a833416c77dd26a59f2fff47cf5f0ae4b07d71d146de988c5f82a0fc352e5fc6",
+      420
+    ],
+    "xarray/tests/test_backends.py": [
+      "a783984471caae40d1cf9accc2e76ad0adf358f0162cd43acfd99d2d1f2ecb64",
+      420
+    ],
+    "xarray/tests/test_backends_api.py": [
+      "a6cb780af9ec10cf87335202fecab86006af0bb64997e81c64b7346eeebd81f8",
+      420
+    ],
+    "xarray/tests/test_backends_chunks.py": [
+      "51f65f0baabf3c36272e43c00c7078f1c0b2f9f762076bed48cca2dddea8a3ce",
+      420
+    ],
+    "xarray/tests/test_backends_common.py": [
+      "57254954f572ca91ff49f4be67c652e3b6298421a30855b0d7cdadac1dfac0aa",
+      420
+    ],
+    "xarray/tests/test_backends_datatree.py": [
+      "a5d77b77e086de2ad85c8121ae3cbec04cf85da202ca4a12fe24c31657f1c15f",
+      420
+    ],
+    "xarray/tests/test_backends_file_manager.py": [
+      "9956cbf80de1a45b4ccf404dff021a3a22f650afe7f56819c1bb77280d1097e2",
+      420
+    ],
+    "xarray/tests/test_backends_locks.py": [
+      "4582e6648045bd0826c4807c8c5ace770e06633c050ddfe0aafcf9954899fec2",
+      420
+    ],
+    "xarray/tests/test_backends_lru_cache.py": [
+      "3760e888347c9c5c2f981d957836f355e4b9e5706f3d83aa59f52444d5a79cdd",
+      420
+    ],
+    "xarray/tests/test_calendar_ops.py": [
+      "35b52e12afa4276eae1a54a26bf1516901eedd339dd91c2b6ae22c190285f48c",
+      420
+    ],
+    "xarray/tests/test_cftime_offsets.py": [
+      "069414dea8977ab1235d522cf5e402422fdbe51375bd54092521ab0af83b3dfa",
+      420
+    ],
+    "xarray/tests/test_cftimeindex.py": [
+      "e10087838e84f03b2da11343b107df8ff134b4f653a5dc1f3881589529d16b4a",
+      420
+    ],
+    "xarray/tests/test_cftimeindex_resample.py": [
+      "d34bd4162b9522761c7701703f86d1c2f8a0babe95d9544fd6445990a89ce110",
+      420
+    ],
+    "xarray/tests/test_coarsen.py": [
+      "2a5b5084b6f44693f9417fdd4d187fdf768e3f19e1ca6b60b3057ebb63083cf9",
+      420
+    ],
+    "xarray/tests/test_coding.py": [
+      "90ec9c1cc14e9aa0bc92d6112dfd31487d03a9514135ff632c5e72a1dff13dcf",
+      420
+    ],
+    "xarray/tests/test_coding_strings.py": [
+      "ddcb48dd897f31e2a84e2967be177538ba3e15edd4c5bd93c88ef059b5c06734",
+      420
+    ],
+    "xarray/tests/test_coding_times.py": [
+      "6ebe4dc1a9b60063fab0de0528996edd13838cd28ede9d51315d15937c6dab79",
+      420
+    ],
+    "xarray/tests/test_combine.py": [
+      "65968c80522c5c7de0717e1e33631a21486f3d9dabc05c570ee08db16c98f5cc",
+      420
+    ],
+    "xarray/tests/test_computation.py": [
+      "23a63ec7f5677d3c6dc0c26e2069f8476f8926d3540bab60b6b341d1a31fbb16",
+      420
+    ],
+    "xarray/tests/test_concat.py": [
+      "1b8894fec18e460ede55abb95fa158968c109e7a31995bba79b1bb015f6c6d2b",
+      420
+    ],
+    "xarray/tests/test_conventions.py": [
+      "7c324e158481a013d6c8b10ac112309a6ce07819bc710fbfb48c3ea15b63762c",
+      420
+    ],
+    "xarray/tests/test_coordinates.py": [
+      "b2bb73db73a6075ff2cf1b50fb3a89f98eff311b4984cff95009bec02f300e09",
+      420
+    ],
+    "xarray/tests/test_cupy.py": [
+      "0d540e5f62443bc54b78a45153bf143e752aa02fbc75a9927077afafa575b163",
+      420
+    ],
+    "xarray/tests/test_dask.py": [
+      "400c0efa3eb5823015f47796322c5487d03adef0fb0a1d363d6d6ba00b0b2d14",
+      420
+    ],
+    "xarray/tests/test_dataarray.py": [
+      "e72dc7c17b8e374475bb0c0d8b8d6e843ebe258ff7a8de58284fb02e04b581b8",
+      420
+    ],
+    "xarray/tests/test_dataarray_typing.yml": [
+      "413a877fd1db84b86afde503669e3372c6760029bd361627e0d151ee4aeb3d94",
+      420
+    ],
+    "xarray/tests/test_dataset.py": [
+      "f0fa13c9af3dfb8dacaacb4d9584ead9ebc97115dabb4722ed07bb29dc160a11",
+      420
+    ],
+    "xarray/tests/test_dataset_typing.yml": [
+      "6fb6d09f7b99be58052becac0577b17beb00d7e9472befe2e7a1cd93b32e96f7",
+      420
+    ],
+    "xarray/tests/test_datatree.py": [
+      "84688ab06c9d4fbed70624a1c92b137438118f53f43d1d7f9a98eb0eb0c84991",
+      420
+    ],
+    "xarray/tests/test_datatree_mapping.py": [
+      "36550b9c772b635e255fd65c9242bf17521efddbe3256785b047ec4f392fc72f",
+      420
+    ],
+    "xarray/tests/test_datatree_typing.yml": [
+      "7038f76d4a8a7d0b99a10e3c1c0e419039ee9e8de9f9e3e4344887ed2cc63e97",
+      420
+    ],
+    "xarray/tests/test_deprecation_helpers.py": [
+      "5a9081f20ce62ea3f5b4a5ac42124f39e3177b4978ef4f722cf53994e0a2b565",
+      420
+    ],
+    "xarray/tests/test_distributed.py": [
+      "fa7c43a9dd02523df60a86bbaf9b5e2056411bc736e821d46050f71314234ef7",
+      420
+    ],
+    "xarray/tests/test_dtypes.py": [
+      "2b304f9624804acd91ab90cdf1583eb13916f12b843dc4d9e0fbf8342869b399",
+      420
+    ],
+    "xarray/tests/test_duck_array_ops.py": [
+      "05ff28d91d5e0751aa1b8541640749ff30c49e43dac1b643f4759294c702ac0a",
+      420
+    ],
+    "xarray/tests/test_duck_array_wrapping.py": [
+      "44f8f86509904dae38d61857fc1f5449406328f49ee5db12c0c0c8d8b9a9a403",
+      420
+    ],
+    "xarray/tests/test_error_messages.py": [
+      "4a739a03e43b525f04fddb2fb17b71873db5138c2eb6ade33190bf8da648e1f2",
+      420
+    ],
+    "xarray/tests/test_extensions.py": [
+      "6867626c10898dfdb508c9b76b267f5e66bf2a2e5d8cefd16ebbd5bfe9514334",
+      420
+    ],
+    "xarray/tests/test_formatting.py": [
+      "18f5a6e3f4583ddef04450ca6092388e4b7adb49c21d2868079762dc7bc62fc5",
+      420
+    ],
+    "xarray/tests/test_formatting_html.py": [
+      "a2fb90c4504a8967b63059485fe67081b434c6caf7b682f9101d988fb9e62d1a",
+      420
+    ],
+    "xarray/tests/test_groupby.py": [
+      "88718453a0a6ed614d0fd3c3ee09b8bf73f1108070badd1665ca3544c09e43a9",
+      420
+    ],
+    "xarray/tests/test_hashable.py": [
+      "a55d74f7671190a98d18ad25e3e6e9b5eecac4ea213415a0521ed6caf5536b27",
+      420
+    ],
+    "xarray/tests/test_indexes.py": [
+      "884320a64218e318315298007636462cf9a690a2f91b83249a888eb426069f79",
+      420
+    ],
+    "xarray/tests/test_indexing.py": [
+      "a2aa2a8d14e4778cc0caec9195dce4c529163e42c6e4c67a2c6770854434cecd",
+      420
+    ],
+    "xarray/tests/test_interp.py": [
+      "5c1b209425d2acdbacf048575120162509d9cc1c92aedb68b01c5d11bd1abc76",
+      420
+    ],
+    "xarray/tests/test_merge.py": [
+      "7113dd29cc4ff889dad18f8357d3d438e2c27662bb0586cf52b4b53c529a1f27",
+      420
+    ],
+    "xarray/tests/test_missing.py": [
+      "4a96cc28709882232ec37247d5320a956e6ca3e0ce96f9d6e3e63fd60b1c37c1",
+      420
+    ],
+    "xarray/tests/test_namedarray.py": [
+      "199beeb5819d6719ec9e2ff6461676a0b62dd42c085557f7410bf7a2eadfa96d",
+      420
+    ],
+    "xarray/tests/test_nd_point_index.py": [
+      "deb94ea12f48378ba68f8f418c5170103900e32e7732c22e229e67c18d2fc629",
+      420
+    ],
+    "xarray/tests/test_nputils.py": [
+      "49ad4e9874d48b0eb3d4b650b01931d4ef310b925e5ecb128d8fcbceab3e8abe",
+      420
+    ],
+    "xarray/tests/test_options.py": [
+      "d1ea7692a9477fc98c37fec21f1b2b4861f0e4b2154d76a665d43b7020d42e17",
+      420
+    ],
+    "xarray/tests/test_pandas_to_xarray.py": [
+      "eebfd1cb6f4f1cdd9c2ed5ba48ff6302687465b4b1a13accb32dbfc6dadf6dbd",
+      420
+    ],
+    "xarray/tests/test_parallelcompat.py": [
+      "2f4980337d6b1b13b0ca5c5e537d06b04801f96ccb6dac4fb7ffda62c7085eba",
+      420
+    ],
+    "xarray/tests/test_plot.py": [
+      "eea7e2795e75e08006d7070bd7e24621ac8febc6115b46f3367db53917d4127c",
+      420
+    ],
+    "xarray/tests/test_plugins.py": [
+      "28ffa571079cc50d0c40cc1385d9568da57ddf3b6fd473e5042e96f5c724175c",
+      420
+    ],
+    "xarray/tests/test_print_versions.py": [
+      "4d5e9f4076a3616ef554bbd04697a6410bfcb6b325158ad7457c0b4c5462ed83",
+      420
+    ],
+    "xarray/tests/test_range_index.py": [
+      "146fdb77507ba4aaeea6817b29a0c5b9f11e34628e2ee0c325333024c09baf7d",
+      420
+    ],
+    "xarray/tests/test_rolling.py": [
+      "20dcebbc5058d9efbb0d0b1c16244d3d44e4306777e0f7ff2896a2af25a16424",
+      420
+    ],
+    "xarray/tests/test_sparse.py": [
+      "a0c2ebfff5d7cbefa7b0480561902cfdbf18be6adb70d4092e115de5fe72250c",
+      420
+    ],
+    "xarray/tests/test_strategies.py": [
+      "88969d626b5d9a9e700be6c73476af0fb8724684a18bc23db924f94a0b40509b",
+      420
+    ],
+    "xarray/tests/test_treenode.py": [
+      "f600cf9ad78226935b99a9e8b229c7cb36fa488d68a514437c40e87f847263f3",
+      420
+    ],
+    "xarray/tests/test_tutorial.py": [
+      "e6c7bea0826383e689d112ffaf7a81d871e8106b2fe0860e8d6e0bc3aa75e295",
+      420
+    ],
+    "xarray/tests/test_typed_ops.py": [
+      "cab34e54c63614c9253834516de09155e0846e304008b97a6e90ee60b2a41a73",
+      420
+    ],
+    "xarray/tests/test_ufuncs.py": [
+      "30d630b3a5b498f5ad69eb0f8300f454e9fdf8cc60a1441402ef06391ac6b882",
+      420
+    ],
+    "xarray/tests/test_units.py": [
+      "703be00f0b3f718f9362cb24b5deaf2520a1437c83f2482439d618f03759e8a3",
+      420
+    ],
+    "xarray/tests/test_utils.py": [
+      "8f126cb70badb06d7d22457fdd33f012d33b6af72212a50ddcdab295933d78e3",
+      420
+    ],
+    "xarray/tests/test_variable.py": [
+      "01d9ee914ca1065345842ec98e5f5c9006a78a83f9016bb8b734ef829602a82c",
+      420
+    ],
+    "xarray/tests/test_weighted.py": [
+      "62208abe23f1e8074f9eb362c33a523ae2a7a4554aae62ce2ddb4d3c8ec015b0",
+      420
+    ],
+    "xarray/tutorial.py": [
+      "69d170ce15fca0f124b78494e83cd5aa4f4a9ba4eca023ff6ba5167cd380c1f1",
+      420
+    ],
+    "xarray/typing.py": [
+      "d15f33279efc2b5d0a7cd64ae03d8e13ce26e639ac27aae9d821576badd880ff",
+      420
+    ],
+    "xarray/ufuncs.py": [
+      "eb9f8b88f531de411a344e976f5b86048d53f6a1b18e52c7c66a7f0f1d9570ad",
+      420
+    ],
+    "xarray/util/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "xarray/util/deprecation_helpers.py": [
+      "2d83f5b4e524ff6044a4d285f9e632d58f072a020a7f14605ca634fbe61e7ab8",
+      420
+    ],
+    "xarray/util/generate_aggregations.py": [
+      "fe8a5622473639379710a482bc3b707a0e00f06b7df3acb9a157f8a5b0a31591",
+      420
+    ],
+    "xarray/util/generate_ops.py": [
+      "5781026e61408e9d00840875e0a5035d111e5fa45f8b641a0e833c8f085a37f7",
+      420
+    ],
+    "xarray/util/print_versions.py": [
+      "3ede12e3f1b79e78e7e0e20d4bcde6b8fa9586248cbd6e4a07e69a63ec81a31e",
+      420
+    ]
+  }
+}

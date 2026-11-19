@@ -1,0 +1,2420 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/fb15428, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 45 items
+
+tests/test_builders/test_build_linkcheck.py FFFFFFFFFFFFFFFFFF.FFFFFFFFF [ 62%]
+FFFFFFFFFFFFFFFFF                                                        [100%]
+
+=================================== FAILURES ===================================
+________________________________ test_defaults _________________________________
+tests/test_builders/test_build_linkcheck.py:128: in test_defaults
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mlinks[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mlinks[39;49;00m
+
+# warning: 
+
+________________________ test_check_link_response_only _________________________
+tests/test_builders/test_build_linkcheck.py:216: in test_check_link_response_only
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mlinks[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mlinks[39;49;00m
+
+# warning: 
+
+____________________________ test_too_many_retries _____________________________
+tests/test_builders/test_build_linkcheck.py:234: in test_too_many_retries
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-too-many-retries
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-too-many-retries/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________________ test_raw_node _________________________________
+tests/test_builders/test_build_linkcheck.py:276: in test_raw_node
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 02:31:44] "GET / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-raw-node
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-raw-node/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_____________________________ test_anchors_ignored _____________________________
+tests/test_builders/test_build_linkcheck.py:304: in test_anchors_ignored
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-anchors-ignore
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-anchors-ignore/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_________________________ test_anchors_ignored_for_url _________________________
+tests/test_builders/test_build_linkcheck.py:383: in test_anchors_ignored_for_url
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-anchors-ignore-for-url
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-anchors-ignore-for-url/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_raises_for_invalid_status ________________________
+tests/test_builders/test_build_linkcheck.py:431: in test_raises_for_invalid_status
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-anchor
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-anchor/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_________________________ test_incomplete_html_anchor __________________________
+tests/test_builders/test_build_linkcheck.py:457: in test_incomplete_html_anchor
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-anchor
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-anchor/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+______________________ test_decoding_error_anchor_ignored ______________________
+tests/test_builders/test_build_linkcheck.py:483: in test_decoding_error_anchor_ignored
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-anchor
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-anchor/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+______________________ test_auth_header_uses_first_match _______________________
+tests/test_builders/test_build_linkcheck.py:559: in test_auth_header_uses_first_match
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+___________________________ test_unauthorized_broken ___________________________
+tests/test_builders/test_build_linkcheck.py:577: in test_unauthorized_broken
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+__________________________ test_auth_header_no_match ___________________________
+tests/test_builders/test_build_linkcheck.py:596: in test_auth_header_no_match
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_linkcheck_request_headers ________________________
+tests/test_builders/test_build_linkcheck.py:623: in test_linkcheck_request_headers
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+___________________ test_linkcheck_request_headers_no_slash ____________________
+tests/test_builders/test_build_linkcheck.py:649: in test_linkcheck_request_headers_no_slash
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+____________________ test_linkcheck_request_headers_default ____________________
+tests/test_builders/test_build_linkcheck.py:675: in test_linkcheck_request_headers_default
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_follows_redirects_on_HEAD ________________________
+tests/test_builders/test_build_linkcheck.py:719: in test_follows_redirects_on_HEAD
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_follows_redirects_on_GET _________________________
+tests/test_builders/test_build_linkcheck.py:746: in test_follows_redirects_on_GET
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________________ test_warns_disallowed_redirects ________________________
+tests/test_builders/test_build_linkcheck.py:775: in test_warns_disallowed_redirects
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________________ test_linkcheck_allowed_redirects _______________________
+tests/test_builders/test_build_linkcheck.py:824: in test_linkcheck_allowed_redirects
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-warn-redirects
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-warn-redirects/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________________________ test_invalid_ssl _______________________________
+tests/test_builders/test_build_linkcheck.py:873: in test_invalid_ssl
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________________ test_connect_to_selfsigned_fails _______________________
+tests/test_builders/test_build_linkcheck.py:892: in test_connect_to_selfsigned_fails
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________ test_connect_to_selfsigned_with_tls_verify_false _______________
+tests/test_builders/test_build_linkcheck.py:911: in test_connect_to_selfsigned_with_tls_verify_false
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_________________ test_connect_to_selfsigned_with_tls_cacerts __________________
+tests/test_builders/test_build_linkcheck.py:933: in test_connect_to_selfsigned_with_tls_cacerts
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________ test_connect_to_selfsigned_with_requests_env_var _______________
+tests/test_builders/test_build_linkcheck.py:955: in test_connect_to_selfsigned_with_requests_env_var
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________ test_connect_to_selfsigned_nonexistent_cert_file _______________
+tests/test_builders/test_build_linkcheck.py:977: in test_connect_to_selfsigned_nonexistent_cert_file
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_TooManyRedirects_on_HEAD _________________________
+tests/test_builders/test_build_linkcheck.py:1022: in test_TooManyRedirects_on_HEAD
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_ignore_local_redirection _________________________
+tests/test_builders/test_build_linkcheck.py:1040: in test_ignore_local_redirection
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_ignore_remote_redirection ________________________
+tests/test_builders/test_build_linkcheck.py:1071: in test_ignore_remote_redirection
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_________________ test_too_many_requests_retry_after_int_delay _________________
+tests/test_builders/test_build_linkcheck.py:1119: in test_too_many_requests_retry_after_int_delay
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+______________ test_too_many_requests_retry_after_HTTP_date[None] ______________
+tests/test_builders/test_build_linkcheck.py:1161: in test_too_many_requests_retry_after_HTTP_date
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+______________ test_too_many_requests_retry_after_HTTP_date[GMT] _______________
+tests/test_builders/test_build_linkcheck.py:1161: in test_too_many_requests_retry_after_HTTP_date
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_____________ test_too_many_requests_retry_after_HTTP_date[GMT+3] ______________
+tests/test_builders/test_build_linkcheck.py:1161: in test_too_many_requests_retry_after_HTTP_date
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_____________ test_too_many_requests_retry_after_HTTP_date[GMT-3] ______________
+tests/test_builders/test_build_linkcheck.py:1161: in test_too_many_requests_retry_after_HTTP_date
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+______________ test_too_many_requests_retry_after_without_header _______________
+tests/test_builders/test_build_linkcheck.py:1199: in test_too_many_requests_retry_after_without_header
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+____________________________ test_requests_timeout _____________________________
+tests/test_builders/test_build_linkcheck.py:1238: in test_requests_timeout
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_____________________ test_too_many_requests_user_timeout ______________________
+tests/test_builders/test_build_linkcheck.py:1254: in test_too_many_requests_user_timeout
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+________________________ test_limit_rate_default_sleep _________________________
+tests/test_builders/test_build_linkcheck.py:1273: in test_limit_rate_default_sleep
+    worker = HyperlinkAvailabilityCheckWorker(app.config, Queue(), Queue(), {})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/linkcheck.py:414: in __init__
+    self._session = requests._Session(
+E   TypeError: Session.__init__() got an unexpected keyword argument '_ignored_redirects'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+________________________ test_limit_rate_user_max_delay ________________________
+tests/test_builders/test_build_linkcheck.py:1285: in test_limit_rate_user_max_delay
+    worker = HyperlinkAvailabilityCheckWorker(app.config, Queue(), Queue(), {})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/linkcheck.py:414: in __init__
+    self._session = requests._Session(
+E   TypeError: Session.__init__() got an unexpected keyword argument '_ignored_redirects'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+__________________ test_limit_rate_doubles_previous_wait_time __________________
+tests/test_builders/test_build_linkcheck.py:1295: in test_limit_rate_doubles_previous_wait_time
+    worker = HyperlinkAvailabilityCheckWorker(app.config, Queue(), Queue(), rate_limits)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/linkcheck.py:414: in __init__
+    self._session = requests._Session(
+E   TypeError: Session.__init__() got an unexpected keyword argument '_ignored_redirects'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_________________ test_limit_rate_clips_wait_time_to_max_time __________________
+tests/test_builders/test_build_linkcheck.py:1308: in test_limit_rate_clips_wait_time_to_max_time
+    worker = HyperlinkAvailabilityCheckWorker(app.config, Queue(), Queue(), rate_limits)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/linkcheck.py:414: in __init__
+    self._session = requests._Session(
+E   TypeError: Session.__init__() got an unexpected keyword argument '_ignored_redirects'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_______________ test_limit_rate_bails_out_after_waiting_max_time _______________
+tests/test_builders/test_build_linkcheck.py:1322: in test_limit_rate_bails_out_after_waiting_max_time
+    worker = HyperlinkAvailabilityCheckWorker(app.config, Queue(), Queue(), rate_limits)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/builders/linkcheck.py:414: in __init__
+    self._session = requests._Session(
+E   TypeError: Session.__init__() got an unexpected keyword argument '_ignored_redirects'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+__________________________ test_connection_contention __________________________
+tests/test_builders/test_build_linkcheck.py:1358: in test_connection_contention
+    threads = [
+tests/test_builders/test_build_linkcheck.py:1359: in <listcomp>
+    HyperlinkAvailabilityCheckWorker(
+sphinx/builders/linkcheck.py:414: in __init__
+    self._session = requests._Session(
+E   TypeError: Session.__init__() got an unexpected keyword argument '_ignored_redirects'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/root
+# outdir: /tmp/pytest-of-root/pytest-0/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_________________ test_get_after_head_raises_connection_error __________________
+tests/test_builders/test_build_linkcheck.py:1399: in test_get_after_head_raises_connection_error
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+# warning: 
+
+_______________________ test_linkcheck_exclude_documents _______________________
+tests/test_builders/test_build_linkcheck.py:1420: in test_linkcheck_exclude_documents
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:460: in build
+    self.write(docnames, updated_docnames, method)
+sphinx/builders/__init__.py:755: in write
+    self.write_documents(docnames)
+sphinx/builders/__init__.py:769: in write_documents
+    self._write_serial(sorted_docnames)
+sphinx/builders/__init__.py:784: in _write_serial
+    _write_docname(docname, env=self.env, builder=self, tags=self.tags)
+sphinx/builders/__init__.py:894: in _write_docname
+    doctree = env.get_and_resolve_doctree(docname, builder=builder, tags=tags)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/environment/__init__.py:687: in get_and_resolve_doctree
+    self.apply_post_transforms(doctree, docname)
+sphinx/environment/__init__.py:760: in apply_post_transforms
+    transformer.apply_transforms()
+sphinx/transforms/__init__.py:95: in apply_transforms
+    super().apply_transforms()  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/transforms/__init__.py:193: in apply_transforms
+    transform.apply(**kwargs)
+sphinx/transforms/post_transforms/__init__.py:46: in apply
+    self.run(**kwargs)
+sphinx/builders/linkcheck.py:226: in run
+    if uri := self.find_uri(node):
+              ^^^^^^^^^^^^^
+E   AttributeError: 'HyperlinkCollector' object has no attribute 'find_uri'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-0/linkcheck-documents_exclude
+# outdir: /tmp/pytest-of-root/pytest-0/linkcheck-documents_exclude/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/fb15428[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 3 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mbr0ken_link[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mbroken_link[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mbr0ken_link[39;49;00m
+
+# warning: 
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_allowed_redirects_config
+FAILED tests/test_builders/test_build_linkcheck.py::test_defaults - Attribute...
+FAILED tests/test_builders/test_build_linkcheck.py::test_check_link_response_only
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_retries - A...
+FAILED tests/test_builders/test_build_linkcheck.py::test_raw_node - Attribute...
+FAILED tests/test_builders/test_build_linkcheck.py::test_anchors_ignored - At...
+FAILED tests/test_builders/test_build_linkcheck.py::test_anchors_ignored_for_url
+FAILED tests/test_builders/test_build_linkcheck.py::test_raises_for_invalid_status
+FAILED tests/test_builders/test_build_linkcheck.py::test_incomplete_html_anchor
+FAILED tests/test_builders/test_build_linkcheck.py::test_decoding_error_anchor_ignored
+FAILED tests/test_builders/test_build_linkcheck.py::test_auth_header_uses_first_match
+FAILED tests/test_builders/test_build_linkcheck.py::test_unauthorized_broken
+FAILED tests/test_builders/test_build_linkcheck.py::test_auth_header_no_match
+FAILED tests/test_builders/test_build_linkcheck.py::test_linkcheck_request_headers
+FAILED tests/test_builders/test_build_linkcheck.py::test_linkcheck_request_headers_no_slash
+FAILED tests/test_builders/test_build_linkcheck.py::test_linkcheck_request_headers_default
+FAILED tests/test_builders/test_build_linkcheck.py::test_follows_redirects_on_HEAD
+FAILED tests/test_builders/test_build_linkcheck.py::test_follows_redirects_on_GET
+FAILED tests/test_builders/test_build_linkcheck.py::test_warns_disallowed_redirects
+FAILED tests/test_builders/test_build_linkcheck.py::test_linkcheck_allowed_redirects
+FAILED tests/test_builders/test_build_linkcheck.py::test_invalid_ssl - Attrib...
+FAILED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_fails
+FAILED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_with_tls_verify_false
+FAILED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_with_tls_cacerts
+FAILED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_with_requests_env_var
+FAILED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_nonexistent_cert_file
+FAILED tests/test_builders/test_build_linkcheck.py::test_TooManyRedirects_on_HEAD
+FAILED tests/test_builders/test_build_linkcheck.py::test_ignore_local_redirection
+FAILED tests/test_builders/test_build_linkcheck.py::test_ignore_remote_redirection
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_int_delay
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[None]
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[GMT]
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[GMT+3]
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[GMT-3]
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_without_header
+FAILED tests/test_builders/test_build_linkcheck.py::test_requests_timeout - A...
+FAILED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_user_timeout
+FAILED tests/test_builders/test_build_linkcheck.py::test_limit_rate_default_sleep
+FAILED tests/test_builders/test_build_linkcheck.py::test_limit_rate_user_max_delay
+FAILED tests/test_builders/test_build_linkcheck.py::test_limit_rate_doubles_previous_wait_time
+FAILED tests/test_builders/test_build_linkcheck.py::test_limit_rate_clips_wait_time_to_max_time
+FAILED tests/test_builders/test_build_linkcheck.py::test_limit_rate_bails_out_after_waiting_max_time
+FAILED tests/test_builders/test_build_linkcheck.py::test_connection_contention
+FAILED tests/test_builders/test_build_linkcheck.py::test_get_after_head_raises_connection_error
+FAILED tests/test_builders/test_build_linkcheck.py::test_linkcheck_exclude_documents
+========================= 44 failed, 1 passed in 3.90s =========================

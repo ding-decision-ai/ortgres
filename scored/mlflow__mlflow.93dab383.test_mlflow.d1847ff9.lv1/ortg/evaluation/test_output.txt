@@ -1,0 +1,72 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 13 items
+
+tests/deployments/mlflow/test_mlflow.py::test_get_deploy_client PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [  7%]
+tests/deployments/mlflow/test_mlflow.py::test_create_endpoint PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 15%]
+tests/deployments/mlflow/test_mlflow.py::test_update_endpoint PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 23%]
+tests/deployments/mlflow/test_mlflow.py::test_delete_endpoint PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 30%]
+tests/deployments/mlflow/test_mlflow.py::test_get_endpoint PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 38%]
+tests/deployments/mlflow/test_mlflow.py::test_list_endpoints PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 46%]
+tests/deployments/mlflow/test_mlflow.py::test_list_endpoints_paginated PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 53%]
+tests/deployments/mlflow/test_mlflow.py::test_predict PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 61%]
+tests/deployments/mlflow/test_mlflow.py::test_call_endpoint_uses_default_timeout PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 69%]
+tests/deployments/mlflow/test_mlflow.py::test_call_endpoint_respects_custom_timeout PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 76%]
+tests/deployments/mlflow/test_mlflow.py::test_call_endpoint_timeout_with_environment_variable PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 84%]
+tests/deployments/mlflow/test_mlflow.py::test_get_endpoint_uses_deployment_client_timeout PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [ 92%]
+tests/deployments/mlflow/test_mlflow.py::test_list_endpoints_uses_deployment_client_timeout PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:00:38 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+0.02s call     tests/deployments/mlflow/test_mlflow.py::test_get_endpoint
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_get_deploy_client
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_create_endpoint
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_update_endpoint
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_delete_endpoint
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_get_endpoint
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_list_endpoints
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_list_endpoints_paginated
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_predict
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_call_endpoint_uses_default_timeout
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_call_endpoint_respects_custom_timeout
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_call_endpoint_timeout_with_environment_variable
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_get_endpoint_uses_deployment_client_timeout
+PASSED | MEM 10.9/46.9 GB | DISK 821.5/915.7 GB tests/deployments/mlflow/test_mlflow.py::test_list_endpoints_uses_deployment_client_timeout
+============================== 13 passed in 0.07s ==============================

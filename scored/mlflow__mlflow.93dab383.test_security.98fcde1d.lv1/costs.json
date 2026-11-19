@@ -1,0 +1,29 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "018",
+    "current_additional_phase": {
+      "cap_seconds": 1200,
+      "charged_measured_seconds": 746.2089238900189,
+      "remaining_measured_seconds": 453.7910761099811,
+      "whole_final_ledger": {
+        "bytes": 42623
+      },
+      "source_only_outer_seconds_once": 33.75366664000103,
+      "unknown_entry_metadata_failure_actual_seconds": null,
+      "unused_conservative_holdback_seconds": 30,
+      "holdback_is_measured_cost": false
+    },
+    "previous_recorded_costs_preserved": {
+      "bytes": 3528
+    },
+    "previous093_ledger": {
+      "bytes": 20587
+    },
+    "old093_and3600_budget_reset": false,
+    "all_history_total_seconds": null,
+    "all_history_USD": null,
+    "backend_active_billed_seconds": null,
+    "operator_RD_seconds": null
+  }
+}

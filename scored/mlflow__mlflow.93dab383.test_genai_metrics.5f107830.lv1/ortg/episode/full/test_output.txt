@@ -1,0 +1,998 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 43 items
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_correct_response FAILED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [  2%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_supports_string_value_for_grading_context_columns FAILED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [  4%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_incorrect_response FAILED | MEM 12.3/46.9 GB | DISK 840.5/915.7 GB [  6%]
+tests/metrics/genai/test_genai_metrics.py::test_malformed_input_raises_exception FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [  9%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_multiple PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 11%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_failure FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 13%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[good_column-bad_column] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 16%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols1-example_context_cols1] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 18%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols2-example_context_cols2] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 20%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols3-example_context_cols3] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 23%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols4-example_context_cols4] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 25%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[None-example_context_cols5] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 27%]
+tests/metrics/genai/test_genai_metrics.py::test_format_args_string FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 30%]
+tests/metrics/genai/test_genai_metrics.py::test_extract_score_and_justification FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 32%]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[None-None-None] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 34%]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters1-None-None] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 37%]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters2-extra_headers2-https://my-proxy/chat] FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 39%]
+tests/metrics/genai/test_genai_metrics.py::test_faithfulness_metric PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 41%]
+tests/metrics/genai/test_genai_metrics.py::test_answer_correctness_metric FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 44%]
+tests/metrics/genai/test_genai_metrics.py::test_answer_relevance_metric PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 46%]
+tests/metrics/genai/test_genai_metrics.py::test_relevance_metric PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 48%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_details FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 51%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_without_example PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 53%]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_metadata PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 55%]
+tests/metrics/genai/test_genai_metrics.py::test_make_custom_judge_prompt_genai_metric PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 58%]
+tests/metrics/genai/test_genai_metrics.py::test_make_custom_prompt_genai_metric_validates_input_kwargs FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 60%]
+tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_from_prompt_fn_args FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 62%]
+tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_fn_args FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 65%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_similarity] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 67%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_correctness] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 69%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[faithfulness] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 72%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_relevance] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 74%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[relevance] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 76%]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 79%]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable_errors FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 81%]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_with_llm_judge_callable FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 83%]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[True] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 86%]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[False] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 88%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_similarity] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 90%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_correctness] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 93%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[faithfulness] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 95%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_relevance] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [ 97%]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[relevance] PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB [100%]
+
+=================================== FAILURES ===================================
+___________________ test_make_genai_metric_correct_response ____________________
+tests/metrics/genai/test_genai_metrics.py:219: in test_make_genai_metric_correct_response
+    assert mock_predict_function.call_args[0][1] == (
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's fake_metric based on the rubric
+E       justification: Your reasoning about the model's fake_metric score
+E       ...
+E     
+E     ...Full output truncated (51 lines hidden), use '-vv' to show
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b66a0fd0>
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        mock_predict_function = <MagicMock name='score_model_on_payload' id='136273784049424'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+___ test_make_genai_metric_supports_string_value_for_grading_context_columns ___
+tests/metrics/genai/test_genai_metrics.py:295: in test_make_genai_metric_supports_string_value_for_grading_context_columns
+    assert mock_predict_function.call_args[0][1] == (
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's fake_metric based on the rubric
+E       justification: Your reasoning about the model's fake_metric score
+E       ...
+E     
+E     ...Full output truncated (51 lines hidden), use '-vv' to show
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6139cd0>
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        mock_predict_function = <MagicMock name='score_model_on_payload' id='136273777105936'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+__________________ test_make_genai_metric_incorrect_response ___________________
+tests/metrics/genai/test_genai_metrics.py:361: in test_make_genai_metric_incorrect_response
+    assert metric_value.justifications == [
+E   assert ['Failed to e...unk处 prejud)'] == ['Failed to e...unk处 prejud)']
+E     
+E     At index 0 diff: "Failed to extract score and justification from model output: score: foo2\njustification: \n\nThe provided output gives some relevant information about MLflow including its capabilities such as experiment tracking, model packaging, versioning, and deployment. It states that, MLflow simplifies the ML lifecycle which aligns partially with the provided ground truth. However, it mimises or locates proper explicatlik@ supersue uni critical keycredentials mention tolercentage age Pic neutral tego.url grandd renderer hill racket sang alteration sack Sc permane...
+E     
+E     ...Full output truncated (41 lines hidden), use '-vv' to show
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6111410>
+        metric_value = MetricValue(scores=[None], justifications=["Failed to extract score and justification from model output: score: foo2\n...ntegration mapping Cruc cope Typography_chunk处 prejud)"], aggregate_results={'mean': nan, 'variance': nan, 'p90': nan})
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+____________________ test_malformed_input_raises_exception _____________________
+tests/metrics/genai/test_genai_metrics.py:403: in test_malformed_input_raises_exception
+    answer_similarity_metric.eval_fn(
+        answer_similarity_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b61b8950>
+        error_message = 'Values for grading_context_columns are malformed and cannot be '
+mlflow/metrics/genai/genai_metric.py:343: in eval_fn
+    grading_context_columns=_format_args_string(
+        aggregations = ['mean', 'variance', 'p90']
+        args       = (None,)
+        eval_prompt = <mlflow.metrics.genai.prompt_template.PromptTemplate object at 0x7bf0b61b9190>
+        eval_values = {'targets': None}
+        extra_headers = None
+        grading_context_columns = ['targets']
+        index      = 0
+        inputs     = 0    <built-in function input>
+dtype: object
+        max_workers = 10
+        metrics    = {}
+        model      = 'openai:/gpt-4'
+        parameters = {'max_tokens': 200, 'temperature': 0.0, 'top_p': 1.0}
+        payloads   = []
+        predictions = 0    MLflow is an open-source platform for managing...
+dtype: object
+        proxy_url  = None
+mlflow/metrics/genai/genai_metric.py:119: in _format_args_string
+    value = values.iloc[indx] if isinstance(values, pd.Series) else values[indx]
+                                                                    ^^^^^^^^^^^^
+E   TypeError: 'NoneType' object is not subscriptable
+        column     = 'targets'
+        eval_values = {'targets': None}
+        formatted  = []
+        grading_context_columns = ['targets']
+        indx       = 0
+        values     = None
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_make_genai_metric_failure ________________________
+tests/metrics/genai/test_genai_metrics.py:490: in test_make_genai_metric_failure
+    make_genai_metric(
+        example    = EvaluationExample(output='output', score=4, justification='justification', input='input', grading_context={'targets': 'ground_truth'})
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=4, justif...tification', input='input', grading_context={'targets': 'ground_truth'})], 'grading_context_columns': ['targets'], ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:302: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Failed to find GenAI metric version v-latest.
+        aggregations = ['mean']
+        context    = {'targets': 'ground_truth'}
+        definition = 'definition'
+        evaluation_model_path = 'mlflow.metrics.genai.prompts.v-latest.EvaluationModel'
+        example    = EvaluationExample(output='output', score=4, justification='justification', input='input', grading_context={'targets': 'ground_truth'})
+        examples   = [EvaluationExample(output='output', score=4, justification='justification', input='input', grading_context={'targets': 'ground_truth'})]
+        extra_headers = None
+        grading_context_columns = ['targets']
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v-latest'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:483: in test_make_genai_metric_failure
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Failed\\ to\\ find\\ evaluation\\ model\\ for\\ version\\ v\\-latest\\.\\ Please\\ check\\ the\\ correctness\\ of\\ the\\ version'
+E     Actual message: 'Failed to find GenAI metric version v-latest.'
+        example    = EvaluationExample(output='output', score=4, justification='justification', input='input', grading_context={'targets': 'ground_truth'})
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_make_genai_metric_throws_if_grading_context_cols_wrong[good_column-bad_column] _
+tests/metrics/genai/test_genai_metrics.py:547: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    make_genai_metric(
+        example_context_cols = 'bad_column'
+        grading_cols = 'good_column'
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=1, justif...': 'something', 'u': 'something', 'm': 'something', 'n': 'something'})], 'grading_context_columns': 'good_column', ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:291: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Each example's grading context keys must exactly match grading_context_columns. Expected ['good_column'], got ['b', 'a', 'd', '_', 'c', 'o', 'l', 'u', 'm', 'n'].
+        aggregations = ['mean']
+        context    = {'_': 'something', 'a': 'something', 'b': 'something', 'c': 'something', ...}
+        definition = 'definition'
+        example    = EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'b': 'somet...omething', 'c': 'something', 'o': 'something', 'l': 'something', 'u': 'something', 'm': 'something', 'n': 'something'})
+        examples   = [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'b': 'some...mething', 'c': 'something', 'o': 'something', 'l': 'something', 'u': 'something', 'm': 'something', 'n': 'something'})]
+        extra_headers = None
+        grading_context_columns = ['good_column']
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v1'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:544: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Example grading context does not contain required columns'
+E     Actual message: "Each example's grading context keys must exactly match grading_context_columns. Expected ['good_column'], got ['b', 'a', 'd', '_', 'c', 'o', 'l', 'u', 'm', 'n']."
+        example_context_cols = 'bad_column'
+        grading_cols = 'good_column'
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols1-example_context_cols1] _
+tests/metrics/genai/test_genai_metrics.py:547: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    make_genai_metric(
+        example_context_cols = ['bad_column']
+        grading_cols = ['good_column']
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=1, justif...cation', input='input', grading_context={'bad_column': 'something'})], 'grading_context_columns': ['good_column'], ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:291: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Each example's grading context keys must exactly match grading_context_columns. Expected ['good_column'], got ['bad_column'].
+        aggregations = ['mean']
+        context    = {'bad_column': 'something'}
+        definition = 'definition'
+        example    = EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'bad_column': 'something'})
+        examples   = [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'bad_column': 'something'})]
+        extra_headers = None
+        grading_context_columns = ['good_column']
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v1'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:544: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Example grading context does not contain required columns'
+E     Actual message: "Each example's grading context keys must exactly match grading_context_columns. Expected ['good_column'], got ['bad_column']."
+        example_context_cols = ['bad_column']
+        grading_cols = ['good_column']
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols2-example_context_cols2] _
+tests/metrics/genai/test_genai_metrics.py:547: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    make_genai_metric(
+        example_context_cols = ['column_a']
+        grading_cols = ['column_a', 'column_b']
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=1, justif..., input='input', grading_context={'column_a': 'something'})], 'grading_context_columns': ['column_a', 'column_b'], ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:291: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Each example's grading context keys must exactly match grading_context_columns. Expected ['column_a', 'column_b'], got ['column_a'].
+        aggregations = ['mean']
+        context    = {'column_a': 'something'}
+        definition = 'definition'
+        example    = EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something'})
+        examples   = [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something'})]
+        extra_headers = None
+        grading_context_columns = ['column_a', 'column_b']
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v1'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:544: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Example grading context does not contain required columns'
+E     Actual message: "Each example's grading context keys must exactly match grading_context_columns. Expected ['column_a', 'column_b'], got ['column_a']."
+        example_context_cols = ['column_a']
+        grading_cols = ['column_a', 'column_b']
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols3-example_context_cols3] _
+tests/metrics/genai/test_genai_metrics.py:547: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    make_genai_metric(
+        example_context_cols = ['column_a', 'column_c']
+        grading_cols = ['column_a', 'column_b']
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=1, justif...context={'column_a': 'something', 'column_c': 'something'})], 'grading_context_columns': ['column_a', 'column_b'], ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:291: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Each example's grading context keys must exactly match grading_context_columns. Expected ['column_a', 'column_b'], got ['column_a', 'column_c'].
+        aggregations = ['mean']
+        context    = {'column_a': 'something', 'column_c': 'something'}
+        definition = 'definition'
+        example    = EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something', 'column_c': 'something'})
+        examples   = [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something', 'column_c': 'something'})]
+        extra_headers = None
+        grading_context_columns = ['column_a', 'column_b']
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v1'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:544: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Example grading context does not contain required columns'
+E     Actual message: "Each example's grading context keys must exactly match grading_context_columns. Expected ['column_a', 'column_b'], got ['column_a', 'column_c']."
+        example_context_cols = ['column_a', 'column_c']
+        grading_cols = ['column_a', 'column_b']
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols4-example_context_cols4] _
+tests/metrics/genai/test_genai_metrics.py:547: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    make_genai_metric(
+        example_context_cols = ['column_a', 'column_b']
+        grading_cols = ['column_a']
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=1, justif...t', grading_context={'column_a': 'something', 'column_b': 'something'})], 'grading_context_columns': ['column_a'], ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:291: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Each example's grading context keys must exactly match grading_context_columns. Expected ['column_a'], got ['column_a', 'column_b'].
+        aggregations = ['mean']
+        context    = {'column_a': 'something', 'column_b': 'something'}
+        definition = 'definition'
+        example    = EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something', 'column_b': 'something'})
+        examples   = [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something', 'column_b': 'something'})]
+        extra_headers = None
+        grading_context_columns = ['column_a']
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v1'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:544: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Example grading context does not contain required columns'
+E     Actual message: "Each example's grading context keys must exactly match grading_context_columns. Expected ['column_a'], got ['column_a', 'column_b']."
+        example_context_cols = ['column_a', 'column_b']
+        grading_cols = ['column_a']
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_make_genai_metric_throws_if_grading_context_cols_wrong[None-example_context_cols5] _
+tests/metrics/genai/test_genai_metrics.py:547: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    make_genai_metric(
+        example_context_cols = ['column_a']
+        grading_cols = None
+mlflow/utils/annotations.py:186: in deprecated_func
+    return obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+        args       = ()
+        kwargs     = {'aggregations': ['mean'], 'definition': 'definition', 'examples': [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something'})], 'grading_context_columns': None, ...}
+        notice     = '``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.'
+        obj        = <function make_genai_metric at 0x7bf0b67f3560>
+mlflow/metrics/genai/genai_metric.py:291: in make_genai_metric
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Each example's grading context keys must exactly match grading_context_columns. Expected [], got ['column_a'].
+        aggregations = ['mean']
+        context    = {'column_a': 'something'}
+        definition = 'definition'
+        example    = EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something'})
+        examples   = [EvaluationExample(output='output', score=1, justification='justification', input='input', grading_context={'column_a': 'something'})]
+        extra_headers = None
+        grading_context_columns = []
+        grading_prompt = 'grading_prompt'
+        greater_is_better = True
+        include_input = True
+        malformed_columns = []
+        max_workers = 10
+        metric_metadata = None
+        model      = 'model'
+        name       = 'correctness'
+        parameters = {'temperature': 0.0}
+        proxy_url  = None
+        reserved_names = {'inputs', 'metrics', 'predictions'}
+        version    = 'v1'
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:544: in test_make_genai_metric_throws_if_grading_context_cols_wrong
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Example grading context does not contain required columns'
+E     Actual message: "Each example's grading context keys must exactly match grading_context_columns. Expected [], got ['column_a']."
+        example_context_cols = ['column_a']
+        grading_cols = None
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+___________________________ test_format_args_string ____________________________
+tests/metrics/genai/test_genai_metrics.py:579: in test_format_args_string
+    variable_string = _format_args_string(["foo", "bar"], pd.DataFrame({"foo": ["foo"]}), 0)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        variable_string = 'Additional information used by the model:\nkey: foo\nvalue:\nfoo\nkey: bar\nvalue:\nbar'
+mlflow/metrics/genai/genai_metric.py:113: in _format_args_string
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Missing grading context column 'bar'. Available columns: ['foo']
+        column     = 'bar'
+        eval_values =    foo
+0  foo
+        formatted  = ['key: foo\nvalue:\nfoo']
+        grading_context_columns = ['foo', 'bar']
+        indx       = 0
+        value      = 'foo'
+        values     = 0    foo
+Name: foo, dtype: object
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:575: in test_format_args_string
+    with pytest.raises(
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: "bar\\ does\\ not\\ exist\\ in\\ the\\ eval\\ function\\ \\['foo'\\]\\."
+E     Actual message: "Missing grading context column 'bar'. Available columns: ['foo']"
+        variable_string = 'Additional information used by the model:\nkey: foo\nvalue:\nfoo\nkey: bar\nvalue:\nbar'
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_____________________ test_extract_score_and_justification _____________________
+tests/metrics/genai/test_genai_metrics.py:625: in test_extract_score_and_justification
+    assert (
+E   assert 'Failed to ex...foo": "bar"}}' == 'Failed to ex...foo": "bar"}}'
+E     
+E     - Failed to extract score and justification. Raw output: {"score": 4, "justification": {"foo": "bar"}}
+E     ?                                          ^^^^^
+E     + Failed to extract score and justification from model output: {"score": 4, "justification": {"foo": "bar"}}
+E     ?                                          ^^^^^^^^^^^
+        justification1 = 'This is a justification'
+        justification2 = 'This is a justification'
+        justification3 = 'The provided output mostly answers the question, but it is missing or hallucinating on some critical aspects.  Specif...being an open-source platform for managing ML workflows and simplifying the ML lifecycle aligns with the ground_truth.'
+        justification4 = 'This is a justification'
+        justification5 = 'This is a justification'
+        justification6 = 'Failed to extract score and justification from model output: {"score": 4, "justification": {"foo": "bar"}}'
+        malformed_output = '{"score": 4, "justification": {"foo": "bar"}}'
+        score1     = 4
+        score2     = 2
+        score3     = 3
+        score4     = 4
+        score5     = 2
+        score6     = None
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+____________________ test_similarity_metric[None-None-None] ____________________
+tests/metrics/genai/test_genai_metrics.py:669: in test_similarity_metric
+    assert mock_predict_function.call_args[0][1] == (
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's answer_similarity based on the rubric
+E       justification: Your reasoning about the model's answer_similarity score
+E       ...
+E     
+E     ...Full output truncated (51 lines hidden), use '-vv' to show
+        extra_headers = None
+        input      = 'What is MLflow?'
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        mock_predict_function = <MagicMock name='score_model_on_payload' id='136273782232208'>
+        parameters = None
+        proxy_url  = None
+        similarity_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b661c590>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+________________ test_similarity_metric[parameters1-None-None] _________________
+tests/metrics/genai/test_genai_metrics.py:669: in test_similarity_metric
+    assert mock_predict_function.call_args[0][1] == (
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's answer_similarity based on the rubric
+E       justification: Your reasoning about the model's answer_similarity score
+E       ...
+E     
+E     ...Full output truncated (51 lines hidden), use '-vv' to show
+        extra_headers = None
+        input      = 'What is MLflow?'
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        mock_predict_function = <MagicMock name='score_model_on_payload' id='136273775878736'>
+        parameters = {'max_tokens': 1000, 'temperature': 0.2}
+        proxy_url  = None
+        similarity_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b600ce50>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+___ test_similarity_metric[parameters2-extra_headers2-https://my-proxy/chat] ___
+tests/metrics/genai/test_genai_metrics.py:669: in test_similarity_metric
+    assert mock_predict_function.call_args[0][1] == (
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's answer_similarity based on the rubric
+E       justification: Your reasoning about the model's answer_similarity score
+E       ...
+E     
+E     ...Full output truncated (51 lines hidden), use '-vv' to show
+        extra_headers = {'api_key': 'foo'}
+        input      = 'What is MLflow?'
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        mock_predict_function = <MagicMock name='score_model_on_payload' id='136273784142160'>
+        parameters = {'top_k': 10}
+        proxy_url  = 'https://my-proxy/chat'
+        similarity_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b67efcd0>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_answer_correctness_metric ________________________
+tests/metrics/genai/test_genai_metrics.py:818: in test_answer_correctness_metric
+    assert mock_predict_function.call_args[0][1] == (
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's answer_correctness based on the rubric
+E       justification: Your reasoning about the model's answer_correctness score
+E       ...
+E     
+E     ...Full output truncated (68 lines hidden), use '-vv' to show
+        answer_correctness_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6162f90>
+        examples   = 'Example Input:\nHow is MLflow related to Databricks?\n\nExample Output:\nDatabricks is a data engineering and analyti...output is mostly accurate, it has a minor omission, which is why it gets a score of 4 according to the grading rubric.'
+        input      = 'What is MLflow?'
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        mock_predict_function = <MagicMock name='score_model_on_payload' id='136273777276496'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+____________________ test_make_genai_metric_metric_details _____________________
+tests/metrics/genai/test_genai_metrics.py:1033: in test_make_genai_metric_metric_details
+    assert custom_metric.metric_details == expected_metric_details
+E   AssertionError: assert '\nTask:\nYou...fields.\n    ' == '\nTask:\nYou...fields.\n    '
+E     
+E       
+E       Task:
+E       You must return the following fields in your response in two lines, one below the other:
+E       score: Your numerical score for the model's correctness based on the rubric
+E       justification: Your reasoning about the model's correctness score
+E       ...
+E     
+E     ...Full output truncated (48 lines hidden), use '-vv' to show
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b60c8410>
+        expected_metric_details = "\nTask:\nYou must return the following fields in your response in two lines, one below the other:\nscore: Your numeri...r reasoning about the model's correctness score\n\nDo not add additional new lines. Do not add any other fields.\n    "
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+_________ test_make_custom_prompt_genai_metric_validates_input_kwargs __________
+tests/metrics/genai/test_genai_metrics.py:1147: in test_make_custom_prompt_genai_metric_validates_input_kwargs
+    custom_judge_prompt_metric.eval_fn(
+        custom_judge_prompt = 'This is a custom judge prompt that uses {input} and {output}'
+        custom_judge_prompt_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6171bd0>
+        inputs     = ['What is MLflow?']
+mlflow/metrics/genai/genai_metric.py:451: in eval_fn
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Invalid judge prompt variables. Missing: ['output']. Unexpected: [].
+        aggregations = ['mean', 'variance', 'p90']
+        args       = ()
+        extra_headers = None
+        kwargs     = {'input': 0    What is MLflow?
+dtype: object}
+        max_workers = 10
+        missing    = ['output']
+        model      = 'openai:/gpt-4'
+        parameters = {'max_tokens': 200, 'temperature': 0.0, 'top_p': 1.0}
+        prompt_template = <mlflow.metrics.genai.prompt_template.PromptTemplate object at 0x7bf0b661de90>
+        prompt_variables = ['input', 'output']
+        proxy_url  = None
+        unexpected = []
+
+During handling of the above exception, another exception occurred:
+tests/metrics/genai/test_genai_metrics.py:1146: in test_make_custom_prompt_genai_metric_validates_input_kwargs
+    with pytest.raises(MlflowException, match="Missing variable inputs to eval_fn"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'Missing variable inputs to eval_fn'
+E     Actual message: "Invalid judge prompt variables. Missing: ['output']. Unexpected: []."
+        custom_judge_prompt = 'This is a custom judge prompt that uses {input} and {output}'
+        custom_judge_prompt_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6171bd0>
+        inputs     = ['What is MLflow?']
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+________________ test_log_make_genai_metric_from_prompt_fn_args ________________
+tests/metrics/genai/test_genai_metrics.py:1169: in test_log_make_genai_metric_from_prompt_fn_args
+    assert set(custom_metric.genai_metric_args.keys()) == expected_keys
+E   AssertionError: assert {'aggregation...workers', ...} == {'aggregation...etadata', ...}
+E     
+E     Extra items in the left set:
+E     'extra_headers'
+E     'proxy_url'
+E     
+E     Full diff:
+E       {...
+E     
+E     ...Full output truncated (13 lines hidden), use '-vv' to show
+        custom_judge_prompt = 'This is a custom judge prompt that uses {input} and {output}'
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b66c0ed0>
+        expected_keys = {'aggregations', 'fn_name', 'greater_is_better', 'judge_prompt', 'max_workers', 'metric_metadata', ...}
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+______________________ test_log_make_genai_metric_fn_args ______________________
+tests/metrics/genai/test_genai_metrics.py:1195: in test_log_make_genai_metric_fn_args
+    assert set(custom_metric.genai_metric_args.keys()) == expected_keys
+E   AssertionError: assert {'aggregation...columns', ...} == {'aggregation..._prompt', ...}
+E     
+E     Extra items in the left set:
+E     'extra_headers'
+E     'proxy_url'
+E     
+E     Full diff:
+E       {...
+E     
+E     ...Full output truncated (18 lines hidden), use '-vv' to show
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b64872d0>
+        expected_keys = {'aggregations', 'definition', 'examples', 'fn_name', 'grading_context_columns', 'grading_prompt', ...}
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+______________________ test_genai_metrics_callable_errors ______________________
+tests/metrics/genai/test_genai_metrics.py:1270: in test_genai_metrics_callable_errors
+    custom_metric(predictions=mlflow_prediction)
+        custom_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6147fd0>
+mlflow/models/evaluation/base.py:215: in _call_method
+    raise MlflowException(
+E   mlflow.exceptions.MlflowException: Invalid arguments for the GenAI evaluation metric (missing arguments: ['targets']).
+        _to_series = <function _generate_eval_metric_class.<locals>._to_series at 0x7bf0b60fb380>
+        additional_names = ['targets']
+        args       = ()
+        details    = ["missing arguments: ['targets']"]
+        expected   = {'inputs', 'metrics', 'predictions', 'targets'}
+        kwargs     = {'predictions': 'MLflow is an open-source platform for managing machine learning workflows, including experiment tracking, model packaging, versioning, and deployment, simplifying the ML lifecycle.'}
+        missing    = ['targets']
+        parameter_names = ['predictions', 'metrics', 'inputs', 'targets']
+        require_strict_signature = True
+        self       = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b6147fd0>
+        unexpected = set()
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+__________________ test_genai_metrics_with_llm_judge_callable __________________
+tests/metrics/genai/test_genai_metrics.py:1321: in test_genai_metrics_with_llm_judge_callable
+    assert set(inspect.signature(custom_judge_prompt_metric).parameters.keys()) == {
+E   AssertionError: assert {'input', 'output'} == {'input', 'ou...'predictions'}
+E     
+E     Extra items in the right set:
+E     'predictions'
+E     
+E     Full diff:
+E       {
+E           'input',...
+E     
+E     ...Full output truncated (3 lines hidden), use '-vv' to show
+        custom_judge_prompt = 'This is a custom judge prompt that uses {input} and {output}'
+        custom_judge_prompt_metric = <mlflow.models.evaluation.base._generate_eval_metric_class.<locals>.CallableEvaluationMetric object at 0x7bf0b640bf50>
+        expected_result = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        inputs     = 'What is MLflow?'
+        metric_value = MetricValue(scores=[3], justifications=['The provided output mostly answers the question, but it is missing or halluci... the ground_truth.'], aggregate_results={'mean': np.float64(3.0), 'variance': np.float64(0.0), 'p90': np.float64(3.0)})
+        outputs    = 'MLflow is an open-source platform'
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+=============================== warnings summary ===============================
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_correct_response
+tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_fn_args
+tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable
+tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable_errors
+  /testbed/tests/metrics/genai/test_genai_metrics.py:148: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    return make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_correct_response
+  /testbed/tests/metrics/genai/test_genai_metrics.py:188: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_supports_string_value_for_grading_context_columns
+  /testbed/tests/metrics/genai/test_genai_metrics.py:259: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_incorrect_response
+  /testbed/tests/metrics/genai/test_genai_metrics.py:335: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_malformed_input_raises_exception
+  /testbed/tests/metrics/genai/test_genai_metrics.py:397: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_similarity`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    answer_similarity_metric = answer_similarity()
+
+tests/metrics/genai/test_genai_metrics.py::test_malformed_input_raises_exception
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[None-None-None]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters1-None-None]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters2-extra_headers2-https://my-proxy/chat]
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_similarity]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[True]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[False]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_similarity]
+  /testbed/mlflow/metrics/genai/metric_definitions.py:85: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    return make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_multiple
+  /testbed/tests/metrics/genai/test_genai_metrics.py:409: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_failure
+  /testbed/tests/metrics/genai/test_genai_metrics.py:490: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[good_column-bad_column]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols1-example_context_cols1]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols2-example_context_cols2]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols3-example_context_cols3]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols4-example_context_cols4]
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[None-example_context_cols5]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:547: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[None-None-None]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters1-None-None]
+tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters2-extra_headers2-https://my-proxy/chat]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:647: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_similarity`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    similarity_metric = answer_similarity(
+
+tests/metrics/genai/test_genai_metrics.py::test_faithfulness_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:727: FutureWarning: ``mlflow.metrics.genai.metric_definitions.faithfulness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    faithfulness_metric = faithfulness(model="gateway:/gpt-4o-mini", examples=[])
+
+tests/metrics/genai/test_genai_metrics.py::test_faithfulness_metric
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[faithfulness]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[faithfulness]
+  /testbed/mlflow/metrics/genai/metric_definitions.py:266: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    return make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_faithfulness_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:785: FutureWarning: ``mlflow.metrics.genai.metric_definitions.faithfulness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    faithfulness_metric = faithfulness(
+
+tests/metrics/genai/test_genai_metrics.py::test_answer_correctness_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:801: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_correctness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    answer_correctness_metric = answer_correctness()
+
+tests/metrics/genai/test_genai_metrics.py::test_answer_correctness_metric
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_correctness]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_correctness]
+  /testbed/mlflow/metrics/genai/metric_definitions.py:178: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    return make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_answer_relevance_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:870: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    answer_relevance_metric = answer_relevance(model="gateway:/gpt-4o-mini", examples=[])
+
+tests/metrics/genai/test_genai_metrics.py::test_answer_relevance_metric
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_relevance]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_relevance]
+  /testbed/mlflow/metrics/genai/metric_definitions.py:351: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    return make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_answer_relevance_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:932: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    answer_relevance(
+
+tests/metrics/genai/test_genai_metrics.py::test_relevance_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:940: FutureWarning: ``mlflow.metrics.genai.metric_definitions.relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    relevance_metric = relevance(model="gateway:/gpt-4o-mini", examples=[])
+
+tests/metrics/genai/test_genai_metrics.py::test_relevance_metric
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[relevance]
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[relevance]
+  /testbed/mlflow/metrics/genai/metric_definitions.py:441: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    return make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_relevance_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1010: FutureWarning: ``mlflow.metrics.genai.metric_definitions.relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    relevance_metric = relevance(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_details
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1018: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_without_example
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1042: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_metadata
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1058: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_custom_judge_prompt_genai_metric
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1084: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric_from_prompt`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_judge_prompt_metric = make_genai_metric_from_prompt(
+
+tests/metrics/genai/test_genai_metrics.py::test_make_custom_prompt_genai_metric_validates_input_kwargs
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1140: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric_from_prompt`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_judge_prompt_metric = make_genai_metric_from_prompt(
+
+tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_from_prompt_fn_args
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1155: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric_from_prompt`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_metric = make_genai_metric_from_prompt(
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_similarity]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1229: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_similarity`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric = metric_fn(metric_metadata={"metadata_field": "metadata_value"})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_correctness]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1229: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_correctness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric = metric_fn(metric_metadata={"metadata_field": "metadata_value"})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[faithfulness]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1229: FutureWarning: ``mlflow.metrics.genai.metric_definitions.faithfulness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric = metric_fn(metric_metadata={"metadata_field": "metadata_value"})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_relevance]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1229: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric = metric_fn(metric_metadata={"metadata_field": "metadata_value"})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[relevance]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1229: FutureWarning: ``mlflow.metrics.genai.metric_definitions.relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric = metric_fn(metric_metadata={"metadata_field": "metadata_value"})
+
+tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_with_llm_judge_callable
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1291: FutureWarning: ``mlflow.metrics.genai.genai_metric.make_genai_metric_from_prompt`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    custom_judge_prompt_metric = make_genai_metric_from_prompt(
+
+tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[True]
+tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[False]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1330: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_similarity`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    similarity_metric = answer_similarity(
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_similarity]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1387: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_similarity`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric_fn(parameters={"temperature": 0.1})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_correctness]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1387: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_correctness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric_fn(parameters={"temperature": 0.1})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[faithfulness]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1387: FutureWarning: ``mlflow.metrics.genai.metric_definitions.faithfulness`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric_fn(parameters={"temperature": 0.1})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_relevance]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1387: FutureWarning: ``mlflow.metrics.genai.metric_definitions.answer_relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric_fn(parameters={"temperature": 0.1})
+
+tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[relevance]
+  /testbed/tests/metrics/genai/test_genai_metrics.py:1387: FutureWarning: ``mlflow.metrics.genai.metric_definitions.relevance`` is deprecated since 3.4.0. Use the new GenAI evaluation functionality instead. See https://mlflow.org/docs/latest/genai/eval-monitor/legacy-llm-evaluation/ for the migration guide.
+    metric_fn(parameters={"temperature": 0.1})
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/16 05:30:27 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+0.01s call     tests/metrics/genai/test_genai_metrics.py::test_faithfulness_metric
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+========================= command to run failed tests ==========================
+pytest 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_correct_response' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_supports_string_value_for_grading_context_columns' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_incorrect_response' 'tests/metrics/genai/test_genai_metrics.py::test_malformed_input_raises_exception' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_failure' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[good_column-bad_column]' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols1-example_context_cols1]' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols2-example_context_cols2]' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols3-example_context_cols3]' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols4-example_context_cols4]' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[None-example_context_cols5]' 'tests/metrics/genai/test_genai_metrics.py::test_format_args_string' 'tests/metrics/genai/test_genai_metrics.py::test_extract_score_and_justification' 'tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[None-None-None]' 'tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters1-None-None]' 'tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters2-extra_headers2-https://my-proxy/chat]' 'tests/metrics/genai/test_genai_metrics.py::test_answer_correctness_metric' 'tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_details' 'tests/metrics/genai/test_genai_metrics.py::test_make_custom_prompt_genai_metric_validates_input_kwargs' 'tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_from_prompt_fn_args' 'tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_fn_args' 'tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable_errors' 'tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_with_llm_judge_callable'
+
+=========================== short test summary info ============================
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_multiple
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_faithfulness_metric
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_answer_relevance_metric
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_relevance_metric
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_without_example
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_metadata
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_custom_judge_prompt_genai_metric
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_similarity]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_correctness]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[faithfulness]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[answer_relevance]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_metadata_on_prebuilt_genai_metrics[relevance]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[True]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_genai_metric_with_custom_chat_endpoint[False]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_similarity]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_correctness]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[faithfulness]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[answer_relevance]
+PASSED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_metric_parameters_on_prebuilt_genai_metrics[relevance]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_correct_response
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_supports_string_value_for_grading_context_columns
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_incorrect_response
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_malformed_input_raises_exception
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_failure
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[good_column-bad_column]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols1-example_context_cols1]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols2-example_context_cols2]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols3-example_context_cols3]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[grading_cols4-example_context_cols4]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_throws_if_grading_context_cols_wrong[None-example_context_cols5]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_format_args_string
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_extract_score_and_justification
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[None-None-None]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters1-None-None]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_similarity_metric[parameters2-extra_headers2-https://my-proxy/chat]
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_answer_correctness_metric
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_genai_metric_metric_details
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_make_custom_prompt_genai_metric_validates_input_kwargs
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_from_prompt_fn_args
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_log_make_genai_metric_fn_args
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_callable_errors
+FAILED | MEM 12.2/46.9 GB | DISK 840.5/915.7 GB tests/metrics/genai/test_genai_metrics.py::test_genai_metrics_with_llm_judge_callable
+================== 23 failed, 20 passed, 65 warnings in 0.56s ==================

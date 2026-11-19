@@ -1,0 +1,85 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 61 items
+
+pandas/tests/arrays/floating/test_function.py .............................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single[True-absolute]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single[True-sign]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single[False-absolute]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single[False-sign]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[True-log]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[True-exp]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[True-sin]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[True-cos]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[True-sqrt]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[False-log]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[False-exp]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[False-sin]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[False-cos]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_single_float[False-sqrt]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_binary_float[True-add]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_binary_float[True-subtract]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_binary_float[False-add]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufuncs_binary_float[False-subtract]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufunc_reduce_raises[values0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_ufunc_reduce_raises[values1]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[var-kwargs0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[var-kwargs1]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[std-kwargs2]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[std-kwargs3]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[kurtosis-kwargs4]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[skew-kwargs5]
+PASSED pandas/tests/arrays/floating/test_function.py::test_stat_method[sem-kwargs6]
+PASSED pandas/tests/arrays/floating/test_function.py::test_value_counts_na
+PASSED pandas/tests/arrays/floating/test_function.py::test_value_counts_empty
+PASSED pandas/tests/arrays/floating/test_function.py::test_value_counts_with_normalize
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[True-Float32Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[True-Float32Dtype-4]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[True-Float64Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[True-Float64Dtype-4]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[False-Float32Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[False-Float32Dtype-4]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[False-Float64Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_sum[False-Float64Dtype-4]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_numpy_sum[values0-6.0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_numpy_sum[values1-6.0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_numpy_sum[values2-0.0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_preserve_dtypes[sum]
+PASSED pandas/tests/arrays/floating/test_function.py::test_preserve_dtypes[min]
+PASSED pandas/tests/arrays/floating/test_function.py::test_preserve_dtypes[max]
+PASSED pandas/tests/arrays/floating/test_function.py::test_preserve_dtypes[prod]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[True-Float32Dtype-min]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[True-Float32Dtype-max]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[True-Float64Dtype-min]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[True-Float64Dtype-max]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[False-Float32Dtype-min]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[False-Float32Dtype-max]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[False-Float64Dtype-min]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_min_max[False-Float64Dtype-max]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[True-Float32Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[True-Float32Dtype-9]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[True-Float64Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[True-Float64Dtype-9]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[False-Float32Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[False-Float32Dtype-9]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[False-Float64Dtype-0]
+PASSED pandas/tests/arrays/floating/test_function.py::test_floating_array_prod[False-Float64Dtype-9]
+============================== 61 passed in 0.08s ==============================

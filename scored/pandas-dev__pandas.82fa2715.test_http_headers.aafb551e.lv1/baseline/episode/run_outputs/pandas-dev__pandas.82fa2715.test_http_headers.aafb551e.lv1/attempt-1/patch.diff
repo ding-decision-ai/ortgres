@@ -1,0 +1,1662 @@
+diff --git a/pandas/__init__.py b/pandas/__init__.py
+index 234fb68..f3fcb7c 100644
+--- a/pandas/__init__.py
++++ b/pandas/__init__.py
+@@ -135,7 +135,7 @@ from pandas import api, arrays, errors, io, plotting, tseries
+ from pandas import testing
+ from pandas.util._print_versions import show_versions
+ 
+-from pandas.io.api import ExcelFile, ExcelWriter, read_excel, read_csv, read_fwf, read_table, read_pickle, HDFStore, read_hdf, read_sql, read_sql_query, read_sql_table, read_clipboard, read_parquet, read_orc, read_feather, read_xml, read_json, read_stata, read_sas, read_spss, read_iceberg
++from pandas.io.api import ExcelFile, ExcelWriter, read_excel, read_csv, read_fwf, read_table, read_pickle, to_pickle, read_html, HDFStore, read_hdf, read_sql, read_sql_query, read_sql_table, read_clipboard, read_parquet, read_orc, read_feather, read_xml, read_json, read_stata, read_sas, read_spss, read_iceberg
+ 
+ 
+ 
+diff --git a/pandas/_testing/contexts.py b/pandas/_testing/contexts.py
+index e9f2337..84fe85b 100644
+--- a/pandas/_testing/contexts.py
++++ b/pandas/_testing/contexts.py
+@@ -29,6 +29,8 @@ if TYPE_CHECKING:
+         FilePath,
+     )
+ 
++from pandas.io.common import get_handle
++
+ 
+ @contextmanager
+ def decompress_file(
+diff --git a/pandas/core/frame.py b/pandas/core/frame.py
+index 1fd212f..c4f9f1c 100644
+--- a/pandas/core/frame.py
++++ b/pandas/core/frame.py
+@@ -3036,6 +3036,8 @@ class DataFrame(NDFrame, OpsMixin):
+         """
+ 
+ 
++        from pandas.io.parquet import to_parquet
++
+         return to_parquet(
+             self,
+             path,
+diff --git a/pandas/core/generic.py b/pandas/core/generic.py
+index abd104e..c053d0b 100644
+--- a/pandas/core/generic.py
++++ b/pandas/core/generic.py
+@@ -101,7 +101,12 @@ from pandas.util._decorators import (
+     doc,
+ )
+ from pandas.util._exceptions import find_stack_level
+-from pandas.util._validators import validate_ascending, validate_bool_kwarg, validate_inclusive
++from pandas.util._validators import (
++    check_dtype_backend,
++    validate_ascending,
++    validate_bool_kwarg,
++    validate_inclusive,
++)
+ 
+ 
+ 
+@@ -3115,6 +3120,8 @@ class NDFrame(PandasObject, indexing.IndexingMixin):
+         """
+ 
+ 
++        from pandas.io.pickle import to_pickle
++
+         to_pickle(
+             self,
+             path,
+diff --git a/pandas/core/indexes/base.py b/pandas/core/indexes/base.py
+index 92a1f3e..3b824be 100644
+--- a/pandas/core/indexes/base.py
++++ b/pandas/core/indexes/base.py
+@@ -291,6 +291,26 @@ def _maybe_return_indexers(meth: F) -> F:
+     return cast(F, join)
+ 
+ 
++def _new_Index(cls, d):
++    """Unpickle an Index while retaining compatibility with older state."""
++    if issubclass(cls, ABCPeriodIndex):
++        from pandas.core.indexes.period import _new_PeriodIndex
++
++        return _new_PeriodIndex(cls, **d)
++
++    if "data" not in d and "labels" in d:
++        d["data"] = d.pop("labels")
++
++    # Going through Index.__new__ performs dtype inference.  That is normally
++    # desirable for user construction, but not while unpickling: an Index that
++    # was explicitly stored with object dtype must retain that dtype (including
++    # when future string inference is enabled).
++    data = d.get("data")
++    if isinstance(data, np.ndarray) and data.dtype == np.dtype(object):
++        return cls._simple_new(data, name=d.get("name"))
++    return cls.__new__(cls, **d)
++
++
+ 
+ 
+ 
+@@ -7980,4 +8000,4 @@ def get_values_for_csv(
+ 
+         values[mask] = na_rep
+         values = values.astype(object, copy=False)
+-        return values
+\ No newline at end of file
++        return values
+diff --git a/pandas/io/api.py b/pandas/io/api.py
+index 51d7fa7..b4e6773 100644
+--- a/pandas/io/api.py
++++ b/pandas/io/api.py
+@@ -11,6 +11,7 @@ from pandas.io.excel import (
+ from pandas.io.feather_format import read_feather
+ 
+ from pandas.io.iceberg import read_iceberg
++from pandas.io.html import read_html
+ from pandas.io.json import read_json
+ from pandas.io.orc import read_orc
+ from pandas.io.parquet import read_parquet
+@@ -20,6 +21,7 @@ from pandas.io.parsers import (
+     read_table,
+ )
+ from pandas.io.pickle import read_pickle
++from pandas.io.pickle import to_pickle
+ 
+ 
+ 
+diff --git a/pandas/io/common.py b/pandas/io/common.py
+index f96f0ca..8487432 100644
+--- a/pandas/io/common.py
++++ b/pandas/io/common.py
+@@ -6,6 +6,7 @@ from abc import (
+     ABC,
+     abstractmethod,
+ )
++import bz2
+ import codecs
+ from collections import defaultdict
+ from collections.abc import (
+@@ -24,6 +25,7 @@ from io import (
+     TextIOBase,
+     TextIOWrapper,
+ )
++import lzma
+ import mmap
+ import os
+ from pathlib import Path
+@@ -142,6 +144,17 @@ class IOHandles(Generic[AnyStr]):
+         self.created_handles = []
+         self.is_wrapped = False
+ 
++    def __enter__(self) -> IOHandles[AnyStr]:
++        return self
++
++    def __exit__(
++        self,
++        exc_type: type[BaseException] | None,
++        exc_value: BaseException | None,
++        traceback: TracebackType | None,
++    ) -> None:
++        self.close()
++
+ 
+ 
+ 
+@@ -199,6 +212,33 @@ def _expand_user(filepath_or_buffer: str | BaseBufferT) -> str | BaseBufferT:
+     return filepath_or_buffer
+ 
+ 
++def validate_header_arg(header: object) -> None:
++    """Validate that a parser header argument has an accepted shape."""
++    if isinstance(header, bool):
++        raise TypeError(
++            "Passing a bool to header is invalid. Use header=None for no header or "
++            "header=int or list-like of ints to specify the row(s) making up the "
++            "column names"
++        )
++    if header is not None:
++        if is_integer(header):
++            if header < 0:
++                raise ValueError(
++                    "Passing negative integer to header is invalid. "
++                    "For no header, use header=None instead"
++                )
++            return
++        if is_list_like(header, allow_sets=False):
++            if not all(is_integer(item) for item in header):
++                raise ValueError("header must be integer or list of integers")
++            if any(item < 0 for item in header):
++                raise ValueError(
++                    "cannot specify multi-index header with negative integers"
++                )
++        else:
++            raise ValueError("header must be integer or list of integers")
++
++
+ 
+ 
+ 
+@@ -240,6 +280,19 @@ def stringify_path(
+ ) -> BaseBufferT: ...
+ 
+ 
++def stringify_path(
++    filepath_or_buffer: FilePath | BaseBufferT,
++    convert_file_like: bool = False,
++) -> str | BaseBufferT:
++    """Convert a path-like object to a string without consuming file-like objects."""
++    if not convert_file_like and is_file_like(filepath_or_buffer):
++        return filepath_or_buffer
++
++    if isinstance(filepath_or_buffer, os.PathLike):
++        filepath_or_buffer = filepath_or_buffer.__fspath__()
++    return _expand_user(filepath_or_buffer)
++
++
+ 
+ 
+ 
+@@ -296,6 +349,96 @@ def is_fsspec_url(url: FilePath | BaseBuffer) -> bool:
+     )
+ 
+ 
++@doc(storage_options=_shared_docs["storage_options"])
++def _get_filepath_or_buffer(
++    filepath_or_buffer: FilePath | BaseBuffer,
++    encoding: str = "utf-8",
++    compression: CompressionOptions | None = None,
++    mode: str = "r",
++    storage_options: StorageOptions | None = None,
++) -> IOArgs:
++    """
++    Convert a path or buffer into the object consumed by ``get_handle``.
++
++    HTTP(S) storage options are request headers. Other remote schemes are
++    delegated to fsspec, while local paths and user-owned buffers reject
++    storage options to avoid silently ignoring them.
++    """
++    filepath_or_buffer = stringify_path(filepath_or_buffer)
++
++    compression_method, compression_args = get_compression_method(compression)
++    compression_method = infer_compression(filepath_or_buffer, compression_method)
++    compression_dict = {"method": compression_method, **compression_args}
++
++    if isinstance(filepath_or_buffer, str) and is_url(filepath_or_buffer):
++        from urllib.request import Request
++
++        headers = dict(storage_options or {})
++        request = Request(filepath_or_buffer, headers=headers)
++        with urlopen(request) as response:
++            content_encoding = response.headers.get("Content-Encoding", None)
++            if content_encoding == "gzip":
++                compression_dict = {"method": "gzip"}
++            reader = BytesIO(response.read())
++        return IOArgs(
++            filepath_or_buffer=reader,
++            encoding=encoding,
++            mode=mode,
++            compression=compression_dict,
++            should_close=True,
++        )
++
++    if is_fsspec_url(filepath_or_buffer):
++        fsspec = import_optional_dependency("fsspec")
++
++        # fsspec does not consistently accept the text-mode marker; pandas
++        # supplies its own TextIOWrapper below when text is requested.
++        fsspec_mode = mode.replace("t", "")
++        if "b" not in fsspec_mode:
++            fsspec_mode += "b"
++
++        file_obj = fsspec.open(
++            filepath_or_buffer, mode=fsspec_mode, **(storage_options or {})
++        ).open()
++        return IOArgs(
++            filepath_or_buffer=file_obj,
++            encoding=encoding,
++            mode=fsspec_mode,
++            compression=compression_dict,
++            should_close=True,
++        )
++
++    if storage_options:
++        raise ValueError(
++            "storage_options passed with file object or non-fsspec file path"
++        )
++
++    if isinstance(filepath_or_buffer, (str, bytes, mmap.mmap)):
++        return IOArgs(
++            filepath_or_buffer=filepath_or_buffer,
++            encoding=encoding,
++            mode=mode,
++            compression=compression_dict,
++            should_close=False,
++        )
++
++    if not (
++        hasattr(filepath_or_buffer, "read")
++        or hasattr(filepath_or_buffer, "write")
++    ):
++        raise ValueError(
++            f"Invalid file path or buffer object type: {type(filepath_or_buffer)}"
++        )
++
++    return IOArgs(
++        filepath_or_buffer=filepath_or_buffer,
++        encoding=encoding,
++        mode=mode,
++        compression=compression_dict,
++        should_close=False,
++    )
++
++
+ 
+ 
+ 
+@@ -666,6 +809,169 @@ def get_handle(
+ ) -> IOHandles[str] | IOHandles[bytes]: ...
+ 
+ 
++@doc(compression_options=_shared_docs["compression_options"] % "path_or_buf")
++def get_handle(
++    path_or_buf: FilePath | BaseBuffer,
++    mode: str,
++    *,
++    encoding: str | None = None,
++    compression: CompressionOptions = None,
++    memory_map: bool = False,
++    is_text: bool = True,
++    errors: str | None = None,
++    storage_options: StorageOptions | None = None,
++) -> IOHandles[str] | IOHandles[bytes]:
++    """Get a file handle for a path, URL, or user-provided buffer."""
++    encoding = encoding or "utf-8"
++    errors = errors or "strict"
++
++    codecs.lookup(encoding)
++    if not isinstance(errors, str):
++        raise ValueError(
++            f"encoding_errors must be a string, got {type(errors).__name__}"
++        )
++    codecs.lookup_error(errors)
++
++    ioargs = _get_filepath_or_buffer(
++        path_or_buf,
++        encoding=encoding,
++        compression=compression,
++        mode=mode,
++        storage_options=storage_options,
++    )
++    handle = ioargs.filepath_or_buffer
++    handles: list[BaseBuffer] = []
++
++    if "r" not in mode and isinstance(handle, str):
++        check_parent_directory(handle)
++
++    handle, memory_map, memory_map_handles = _maybe_memory_map(handle, memory_map)
++    handles.extend(memory_map_handles)
++
++    compression_args = dict(ioargs.compression)
++    compression_method = compression_args.pop("method")
++
++    if compression_method:
++        ioargs.mode = ioargs.mode.replace("t", "")
++        if "b" not in ioargs.mode:
++            ioargs.mode += "b"
++
++        if (
++            "w" in ioargs.mode
++            and compression_method in ("bz2", "xz")
++            and ioargs.encoding.replace("_", "-").lower()
++            in ("utf-16", "utf-32")
++        ):
++            warnings.warn(
++                f"{compression_method} will not write the byte order mark for "
++                f'"{ioargs.encoding}", which may cause problems when reading the '
++                "file with that encoding.",
++                UnicodeWarning,
++                stacklevel=find_stack_level(),
++            )
++
++        if compression_method == "gzip":
++            if isinstance(handle, str):
++                handle = gzip.GzipFile(filename=handle, mode=ioargs.mode, **compression_args)
++            else:
++                handle = gzip.GzipFile(
++                    fileobj=handle, mode=ioargs.mode, **compression_args
++                )
++        elif compression_method == "bz2":
++            handle = bz2.BZ2File(handle, mode=ioargs.mode, **compression_args)
++        elif compression_method == "zip":
++            handle = _BytesZipFile(handle, mode=ioargs.mode, **compression_args)
++            if handle.buffer.mode == "r":
++                handles.append(handle)
++                names = handle.buffer.namelist()
++                if len(names) == 1:
++                    handle = handle.buffer.open(names[0])
++                elif not names:
++                    raise ValueError(f"Zero files found in ZIP file {path_or_buf}")
++                else:
++                    raise ValueError(
++                        "Multiple files found in ZIP file. "
++                        f"Only one file per ZIP: {names}"
++                    )
++        elif compression_method == "tar":
++            if isinstance(handle, str):
++                handle = _BytesTarFile(name=handle, mode=ioargs.mode, **compression_args)
++            else:
++                handle = _BytesTarFile(
++                    fileobj=handle, mode=ioargs.mode, **compression_args
++                )
++            if handle.buffer.mode.startswith("r"):
++                handles.append(handle)
++                names = handle.buffer.getnames()
++                if len(names) == 1:
++                    extracted = handle.buffer.extractfile(names[0])
++                    assert extracted is not None
++                    handle = extracted
++                elif not names:
++                    raise ValueError(f"Zero files found in TAR archive {path_or_buf}")
++                else:
++                    raise ValueError(
++                        "Multiple files found in TAR archive. "
++                        f"Only one file per TAR archive: {names}"
++                    )
++        elif compression_method == "xz":
++            handle = lzma.LZMAFile(handle, mode=ioargs.mode, **compression_args)
++        elif compression_method == "zstd":
++            zstd = import_optional_dependency("zstandard")
++            if "r" in ioargs.mode:
++                open_args = {"dctx": zstd.ZstdDecompressor(**compression_args)}
++            else:
++                open_args = {"cctx": zstd.ZstdCompressor(**compression_args)}
++            handle = zstd.open(handle, mode=ioargs.mode, **open_args)
++        else:  # pragma: no cover - validated by infer_compression
++            raise ValueError(f"Unrecognized compression type: {compression_method}")
++
++        handles.append(handle)
++
++    elif isinstance(handle, str):
++        if ioargs.encoding and "b" not in ioargs.mode:
++            handle = open(
++                handle,
++                ioargs.mode,
++                encoding=ioargs.encoding,
++                errors=errors,
++                newline="",
++            )
++        else:
++            handle = open(handle, ioargs.mode)
++        handles.append(handle)
++
++    if not is_text and isinstance(handle, (TextIOBase, StringIO)):
++        handle = _BytesIOWrapper(handle, encoding=ioargs.encoding)
++
++    is_wrapped = False
++    if is_text and (
++        compression_method or memory_map or _is_binary_mode(handle, ioargs.mode)
++    ):
++        is_wrapped = not (
++            isinstance(handle, TextIOBase) or isinstance(handle, StringIO)
++        )
++        buffer = handle if isinstance(handle, _IOWrapper) else _IOWrapper(handle)
++        handle = TextIOWrapper(
++            buffer,
++            encoding=ioargs.encoding,
++            errors=errors,
++            newline="",
++        )
++        handles.append(handle)
++
++    if ioargs.should_close:
++        assert not isinstance(ioargs.filepath_or_buffer, str)
++        handles.append(ioargs.filepath_or_buffer)
++
++    return IOHandles(
++        handle=handle,
++        created_handles=handles[::-1],
++        compression=ioargs.compression,
++        is_wrapped=is_wrapped,
++    )
++
++
+ 
+ 
+ 
+@@ -1131,6 +1437,29 @@ class _BytesIOWrapper:
+             return to_return
+ 
+ 
++def _maybe_memory_map(
++    handle: str | BaseBuffer, memory_map: bool
++) -> tuple[str | BaseBuffer, bool, list[BaseBuffer]]:
++    """Memory-map a path or file descriptor when requested."""
++    handles: list[BaseBuffer] = []
++    memory_map &= hasattr(handle, "fileno") or isinstance(handle, str)
++    if not memory_map:
++        return handle, memory_map, handles
++
++    opened = None
++    if isinstance(handle, str):
++        opened = open(handle, "rb")
++        handle = opened
++    try:
++        mapped = mmap.mmap(handle.fileno(), 0, access=mmap.ACCESS_READ)
++    finally:
++        if opened is not None:
++            opened.close()
++
++    wrapped = _IOWrapper(mapped)
++    return wrapped, memory_map, [wrapped]
++
++
+ 
+ 
+ 
+@@ -1181,6 +1510,27 @@ def file_exists(filepath_or_buffer: FilePath | BaseBuffer) -> bool:
+     return exists
+ 
+ 
++def _is_binary_mode(handle: BaseBuffer, mode: str) -> bool:
++    """Whether a handle or explicit mode expects bytes."""
++    if "t" in mode:
++        return False
++    if "b" in mode:
++        return True
++
++    text_classes = (
++        TextIOBase,
++        StringIO,
++        codecs.StreamWriter,
++        codecs.StreamReader,
++        codecs.StreamReaderWriter,
++    )
++    if isinstance(handle, text_classes):
++        return False
++    return isinstance(handle, _get_binary_io_classes()) or "b" in getattr(
++        handle, "mode", mode
++    )
++
++
+ 
+ 
+ 
+@@ -1285,4 +1635,4 @@ def dedup_names(
+         names[i] = col
+         counts[col] = cur_count + 1
+ 
+-    return names
+\ No newline at end of file
++    return names
+diff --git a/pandas/io/excel/_base.py b/pandas/io/excel/_base.py
+index f82004c..b392191 100644
+--- a/pandas/io/excel/_base.py
++++ b/pandas/io/excel/_base.py
+@@ -42,6 +42,7 @@ from pandas.util._decorators import (
+     set_module,
+ )
+ from pandas.util._exceptions import find_stack_level
++from pandas.util._validators import check_dtype_backend
+ 
+ 
+ from pandas.core.dtypes.common import (
+@@ -57,7 +58,12 @@ from pandas.core.frame import DataFrame
+ from pandas.core.shared_docs import _shared_docs
+ from pandas.util.version import Version
+ 
+-from pandas.io.common import IOHandles
++from pandas.io.common import (
++    IOHandles,
++    get_handle,
++    stringify_path,
++    validate_header_arg,
++)
+ 
+ 
+ 
+diff --git a/pandas/io/formats/csvs.py b/pandas/io/formats/csvs.py
+index 33aba61..12d30f5 100644
+--- a/pandas/io/formats/csvs.py
++++ b/pandas/io/formats/csvs.py
+@@ -34,6 +34,8 @@ from pandas.core.dtypes.missing import notna
+ 
+ from pandas.core.indexes.api import Index
+ 
++from pandas.io.common import get_handle
++
+ 
+ 
+ if TYPE_CHECKING:
+diff --git a/pandas/io/formats/format.py b/pandas/io/formats/format.py
+index 6bf94c2..bd795ac 100644
+--- a/pandas/io/formats/format.py
++++ b/pandas/io/formats/format.py
+@@ -896,6 +896,30 @@ class DataFrameRenderer:
+     def __init__(self, fmt: DataFrameFormatter) -> None:
+         self.fmt = fmt
+ 
++    def to_html(
++        self,
++        buf: FilePath | WriteBuffer[str] | None = None,
++        encoding: str | None = None,
++        classes: str | list | tuple | None = None,
++        notebook: bool = False,
++        border: int | bool | None = None,
++        table_id: str | None = None,
++        render_links: bool = False,
++    ) -> str | None:
++        """Render the formatted frame as an HTML table."""
++        from pandas.io.formats.html import HTMLFormatter, NotebookFormatter
++
++        klass = NotebookFormatter if notebook else HTMLFormatter
++        html_formatter = klass(
++            self.fmt,
++            classes=classes,
++            border=border,
++            table_id=table_id,
++            render_links=render_links,
++        )
++        string = html_formatter.to_string()
++        return save_to_buffer(string, buf=buf, encoding=encoding)
++
+ 
+ 
+ 
+@@ -977,6 +1001,75 @@ class DataFrameRenderer:
+         string = string_formatter.to_string()
+         return save_to_buffer(string, buf=buf, encoding=encoding)
+ 
++    def to_csv(
++        self,
++        path_or_buf: FilePath | WriteBuffer[str] | WriteBuffer[bytes] | None = None,
++        encoding: str | None = None,
++        sep: str = ",",
++        columns: Sequence[Hashable] | None = None,
++        index_label: IndexLabel | None = None,
++        mode: str = "w",
++        compression: CompressionOptions = "infer",
++        quoting: int | None = None,
++        quotechar: str = '"',
++        lineterminator: str | None = None,
++        chunksize: int | None = None,
++        date_format: str | None = None,
++        doublequote: bool = True,
++        escapechar: str | None = None,
++        errors: str = "strict",
++        storage_options: StorageOptions | None = None,
++    ) -> str | None:
++        from pandas.io.formats.csvs import CSVFormatter
++
++        created_buffer = path_or_buf is None
++        if created_buffer:
++            path_or_buf = StringIO()
++
++        csv_formatter = CSVFormatter(
++            path_or_buf=path_or_buf,
++            lineterminator=lineterminator,
++            sep=sep,
++            encoding=encoding,
++            errors=errors,
++            compression=compression,
++            quoting=quoting,
++            cols=columns,
++            index_label=index_label,
++            mode=mode,
++            chunksize=chunksize,
++            quotechar=quotechar,
++            date_format=date_format,
++            doublequote=doublequote,
++            escapechar=escapechar,
++            storage_options=storage_options,
++            formatter=self.fmt,
++        )
++        csv_formatter.save()
++
++        if created_buffer:
++            assert isinstance(path_or_buf, StringIO)
++            return path_or_buf.getvalue()
++        return None
++
++
++def save_to_buffer(
++    string: str,
++    buf: FilePath | WriteBuffer[str] | None = None,
++    encoding: str | None = None,
++) -> str | None:
++    """Write a rendered string to a path/buffer, or return it."""
++    if buf is None:
++        return string
++    if hasattr(buf, "write"):
++        buf.write(string)
++        return None
++
++    check_parent_directory(buf)
++    with open(buf, "w", encoding=encoding or "utf-8", newline="") as handle:
++        handle.write(string)
++    return None
++
+ 
+ 
+ 
+@@ -1888,6 +1981,12 @@ class EngFormatter:
+         24: "Y",
+     }
+ 
++    def __init__(
++        self, accuracy: int | None = None, use_eng_prefix: bool = False
++    ) -> None:
++        self.accuracy = accuracy
++        self.use_eng_prefix = use_eng_prefix
++
+ 
+ 
+ 
+@@ -2081,4 +2180,4 @@ def buffer_put_lines(buf: WriteBuffer[str], lines: list[str]) -> None:
+     """
+     if any(isinstance(x, str) for x in lines):
+         lines = [str(x) for x in lines]
+-    buf.write("\n".join(lines))
+\ No newline at end of file
++    buf.write("\n".join(lines))
+diff --git a/pandas/io/formats/html.py b/pandas/io/formats/html.py
+index 233d37d..5780270 100644
+--- a/pandas/io/formats/html.py
++++ b/pandas/io/formats/html.py
+@@ -48,6 +48,36 @@ class HTMLFormatter:
+ 
+     indent_delta: Final = 2
+ 
++    def __init__(
++        self,
++        formatter,
++        classes: str | list[str] | tuple[str, ...] | None = None,
++        border: int | bool | None = None,
++        table_id: str | None = None,
++        render_links: bool = False,
++    ) -> None:
++        self.fmt = formatter
++        self.classes = classes
++        self.frame = self.fmt.frame
++        self.columns = self.fmt.tr_frame.columns
++        self.elements: list[str] = []
++        self.bold_rows = self.fmt.bold_rows
++        self.escape = self.fmt.escape
++        self.table_id = table_id
++        self.render_links = render_links
++
++        if border is None or border is True:
++            border = get_option("display.html.border")
++        self.border = border if border else None
++
++        self.col_space = {
++            column: f"{value}px" if isinstance(value, int) else value
++            for column, value in self.fmt.col_space.items()
++        }
++
++    def to_string(self) -> str:
++        return "\n".join(self.render())
++
+ 
+ 
+ 
+@@ -170,6 +200,10 @@ class HTMLFormatter:
+         A written <th> cell.
+         """
+         col_space = self.col_space.get(s, None)
++        if col_space is None and self.col_space:
++            unique_col_spaces = set(self.col_space.values())
++            if len(unique_col_spaces) == 1:
++                col_space = next(iter(unique_col_spaces))
+ 
+         if header and col_space is not None:
+             tags = tags or ""
+@@ -619,6 +653,13 @@ class NotebookFormatter(HTMLFormatter):
+         # only reached with non-Multi Index
+         return self.columns._format_flat(include_name=False)
+ 
++    def render(self) -> list[str]:
++        self.write("<div>")
++        self.write_style()
++        super().render()
++        self.write("</div>")
++        return self.elements
++
+     def write_style(self) -> None:
+         # We use the "scoped" attribute here so that the desired
+         # style properties for the data frame are not then applied
+@@ -646,4 +687,3 @@ class NotebookFormatter(HTMLFormatter):
+         template_mid = "\n\n".join(template_select % t for t in element_props)
+         template = dedent(f"{template_first}\n{template_mid}\n{template_last}")
+         self.write(template)
+-
+diff --git a/pandas/io/html.py b/pandas/io/html.py
+index 737a9ac..0081cce 100644
+--- a/pandas/io/html.py
++++ b/pandas/io/html.py
+@@ -28,6 +28,7 @@ from pandas.util._decorators import (
+     doc,
+     set_module,
+ )
++from pandas.util._validators import check_dtype_backend
+ 
+ 
+ from pandas.core.dtypes.common import is_list_like
+@@ -38,7 +39,7 @@ from pandas.core.indexes.multi import MultiIndex
+ from pandas.core.series import Series
+ from pandas.core.shared_docs import _shared_docs
+ 
+-from pandas.io.common import is_url
++from pandas.io.common import get_handle, is_url
+ 
+ 
+ 
+@@ -216,6 +217,28 @@ class _HtmlFrameParser:
+     functionality.
+     """
+ 
++    def __init__(
++        self,
++        io: FilePath | ReadBuffer[str],
++        match: str | Pattern,
++        attrs: dict[str, str] | None,
++        encoding: str | None,
++        displayed_only: bool,
++        extract_links: Literal["header", "footer", "body", "all"] | None,
++        storage_options: StorageOptions | None,
++    ) -> None:
++        self.io = io
++        self.match = match
++        self.attrs = attrs or {}
++        self.encoding = encoding
++        self.displayed_only = displayed_only
++        self.extract_links = extract_links
++        self.storage_options = storage_options
++
++    def parse_tables(self):
++        tables = self._parse_tables(self._build_doc(), self.match, self.attrs)
++        return (self._parse_thead_tbody_tfoot(table) for table in tables)
++
+ 
+ 
+ 
+@@ -794,7 +817,12 @@ class _LxmlFrameParser(_HtmlFrameParser):
+         parser = HTMLParser(recover=True, encoding=self.encoding)
+ 
+         if is_url(self.io):
+-            with get_handle(self.io, "r", storage_options=self.storage_options) as f:
++            with get_handle(
++                self.io,
++                "r",
++                encoding=self.encoding,
++                storage_options=self.storage_options,
++            ) as f:
+                 r = parse(f.handle, parser=parser)
+         else:
+             # try to parse the input in the simplest way
+@@ -856,6 +884,129 @@ def _expand_elements(body) -> None:
+         body[ind] += empty * (lens_max - length)
+ 
+ 
++def _data_to_frame(*, extract_links=None, **kwargs):
++    """Convert one parser's (header, body, footer) tuple to a DataFrame."""
++    head, body, foot = kwargs.pop("data")
++    header = kwargs.pop("header")
++
++    if head:
++        body = head + body
++        if header is None:
++            if len(head) == 1:
++                header = 0
++            else:
++                header = [
++                    row_num
++                    for row_num, row in enumerate(head)
++                    if any(not isna(cell) and cell != "" for cell in row)
++                ]
++
++    if foot:
++        body += foot
++
++    _expand_elements(body)
++    with TextParser(body, header=header, **kwargs) as tp:
++        df = tp.read()
++
++    if extract_links in ("all", "header") and len(head) == 1:
++        # A link is represented by a (text, href) tuple.  TextParser normally
++        # interprets tuple labels as a MultiIndex, but these tuples are atomic
++        # column labels.
++        df.columns = Index(head[0], tupleize_cols=False)
++    return df
++
++
++def _parser_dispatch(flavor: HTMLFlavors | None) -> type[_HtmlFrameParser]:
++    """Return the parser class for a validated flavor."""
++    valid_parsers = list(_valid_parsers.keys())
++    if flavor not in valid_parsers:
++        raise ValueError(
++            f"{flavor!r} is not a valid flavor, valid flavors are {valid_parsers}"
++        )
++
++    if flavor in ("bs4", "html5lib"):
++        import_optional_dependency("html5lib")
++        import_optional_dependency("bs4")
++    else:
++        import_optional_dependency("lxml.etree")
++
++    return _valid_parsers[flavor]
++
++
++def _validate_flavor(flavor: HTMLFlavors | Sequence[HTMLFlavors] | None):
++    if flavor is None:
++        flavor = ["lxml", "bs4"]
++    elif isinstance(flavor, str):
++        flavor = [flavor]
++    elif isinstance(flavor, abc.Iterable):
++        flavor = list(flavor)
++    else:
++        flavor = [flavor]
++
++    valid_flavors = set(_valid_parsers) - {None}
++    invalid = set(flavor) - valid_flavors
++    if invalid:
++        raise ValueError(
++            f"{_print_as_set(invalid)} is not a valid set of flavors, "
++            f"valid flavors are {_print_as_set(valid_flavors)}"
++        )
++    return flavor
++
++
++def _parse(
++    flavor,
++    io,
++    match,
++    attrs,
++    encoding,
++    displayed_only,
++    extract_links,
++    storage_options,
++    **kwargs,
++):
++    retained = None
++    for flav in flavor:
++        parser = _parser_dispatch(flav)
++        p = parser(
++            io,
++            compiled_match := re.compile(match),
++            attrs,
++            encoding,
++            displayed_only,
++            extract_links,
++            storage_options,
++        )
++
++        try:
++            tables = p.parse_tables()
++        except ValueError as caught:
++            retained = caught
++            if hasattr(io, "seekable"):
++                if io.seekable():
++                    io.seek(0)
++                else:
++                    raise ValueError(
++                        f"The flavor {flav} failed to parse your input. Since you "
++                        "passed a non-rewindable file object, we can't rewind it to "
++                        "try another parser. Try read_html() with a different flavor."
++                    ) from caught
++            continue
++
++        result = []
++        for table in tables:
++            try:
++                df = _data_to_frame(
++                    data=table, extract_links=extract_links, **kwargs
++                )
++            except EmptyDataError:
++                continue
++            result.append(df)
++        return result
++
++    assert retained is not None
++    raise retained
++
++
+ 
+ 
+ 
+@@ -928,8 +1079,64 @@ def _print_as_set(s) -> str:
+     return f"{{{arg}}}"
+ 
+ 
++@set_module("pandas")
++@doc(storage_options=_shared_docs["storage_options"])
++def read_html(
++    io: FilePath | ReadBuffer[str],
++    *,
++    match: str | Pattern = ".+",
++    flavor: HTMLFlavors | Sequence[HTMLFlavors] | None = None,
++    header: int | Sequence[int] | None = None,
++    index_col: int | Sequence[int] | None = None,
++    skiprows: int | Sequence[int] | slice | None = None,
++    attrs: dict[str, str] | None = None,
++    parse_dates: bool = False,
++    thousands: str | None = ",",
++    encoding: str | None = None,
++    decimal: str = ".",
++    converters: dict | None = None,
++    na_values: Iterable[object] | None = None,
++    keep_default_na: bool = True,
++    displayed_only: bool = True,
++    extract_links: Literal["header", "footer", "body", "all"] | None = None,
++    dtype_backend: DtypeBackend | lib.NoDefault = lib.no_default,
++    storage_options: StorageOptions = None,
++) -> list[DataFrame]:
++    """Read HTML tables into a list of DataFrames."""
++    check_dtype_backend(dtype_backend)
++
++    if isinstance(skiprows, numbers.Integral) and skiprows < 0:
++        raise ValueError("cannot skip rows starting from the end of the data (you passed a negative value)")
++
++    valid_extract_links = {None, "header", "footer", "body", "all"}
++    if extract_links not in valid_extract_links:
++        raise ValueError(
++            "`extract_links` must be one of "
++            '{None, "header", "footer", "body", "all"}, '
++            f'got "{extract_links}"'
++        )
+ 
+-
++    flavor = _validate_flavor(flavor)
++    return _parse(
++        flavor=flavor,
++        io=io,
++        match=match,
++        attrs=attrs,
++        encoding=encoding,
++        displayed_only=displayed_only,
++        extract_links=extract_links,
++        storage_options=storage_options,
++        header=header,
++        index_col=index_col,
++        skiprows=_get_skiprows(skiprows),
++        parse_dates=parse_dates,
++        thousands=thousands,
++        decimal=decimal,
++        converters=converters,
++        na_values=na_values,
++        keep_default_na=keep_default_na,
++        dtype_backend=dtype_backend,
++    )
+ 
+ 
+ 
+diff --git a/pandas/io/json/__init__.py b/pandas/io/json/__init__.py
+index 316f700..7c91833 100644
+--- a/pandas/io/json/__init__.py
++++ b/pandas/io/json/__init__.py
+@@ -1,4 +1,4 @@
+-from pandas.io.json._json import read_json, ujson_dumps, ujson_loads
++from pandas.io.json._json import read_json, to_json, ujson_dumps, ujson_loads
+ 
+ 
+ 
+diff --git a/pandas/io/json/_json.py b/pandas/io/json/_json.py
+index ff2b7ed..2bd49a3 100644
+--- a/pandas/io/json/_json.py
++++ b/pandas/io/json/_json.py
+@@ -33,6 +33,7 @@ from pandas.util._decorators import (
+     doc,
+     set_module,
+ )
++from pandas.util._validators import check_dtype_backend
+ 
+ 
+ from pandas.core.dtypes.common import (
+@@ -56,7 +57,13 @@ from pandas.core.reshape.concat import concat
+ from pandas.core.shared_docs import _shared_docs
+ 
+ from pandas.io._util import arrow_table_to_pandas
+-from pandas.io.common import IOHandles, dedup_names, is_potential_multi_index
++from pandas.io.common import (
++    IOHandles,
++    dedup_names,
++    get_handle,
++    is_potential_multi_index,
++    stringify_path,
++)
+ 
+ 
+ 
+@@ -136,6 +143,90 @@ def to_json(
+ ) -> str: ...
+ 
+ 
++def to_json(
++    path_or_buf: FilePath | WriteBuffer[str] | WriteBuffer[bytes] | None,
++    obj: NDFrame,
++    orient: str | None = None,
++    date_format: str = "epoch",
++    double_precision: int = 10,
++    force_ascii: bool = True,
++    date_unit: str = "ms",
++    default_handler: Callable[[Any], JSONSerializable] | None = None,
++    lines: bool = False,
++    compression: CompressionOptions = "infer",
++    index: bool | None = None,
++    indent: int = 0,
++    storage_options: StorageOptions | None = None,
++    mode: Literal["a", "w"] = "w",
++) -> str | None:
++    """Serialize a Series or DataFrame to JSON."""
++    if orient in ("records", "values") and index is True:
++        raise ValueError(
++            "'index=True' is only valid when 'orient' is 'split', "
++            "'table', 'index', or 'columns'"
++        )
++    if orient in ("index", "columns") and index is False:
++        raise ValueError(
++            "'index=False' is only valid when 'orient' is 'split', "
++            "'table', 'records', or 'values'"
++        )
++    if index is None:
++        index = True
++
++    if lines and orient != "records":
++        raise ValueError("'lines' keyword only valid when 'orient' is records")
++
++    if mode not in ("a", "w"):
++        raise ValueError(
++            f"mode={mode} is not a valid option.Only 'w' and 'a' are currently "
++            "supported."
++        )
++    if mode == "a" and (not lines or orient != "records"):
++        raise ValueError(
++            "mode='a' (append) is only supported when lines is True and orient "
++            "is 'records'"
++        )
++
++    if orient == "table" and isinstance(obj, Series):
++        obj = obj.to_frame(name=obj.name or "values")
++
++    if orient == "table":
++        writer = JSONTableWriter
++    elif isinstance(obj, Series):
++        writer = SeriesWriter
++    elif isinstance(obj, DataFrame):
++        writer = FrameWriter
++    else:
++        raise NotImplementedError("'obj' should be a Series or a DataFrame")
++
++    s = writer(
++        obj,
++        orient=orient,
++        date_format=date_format,
++        double_precision=double_precision,
++        ensure_ascii=force_ascii,
++        date_unit=date_unit,
++        index=index,
++        default_handler=default_handler,
++        indent=indent,
++    ).write()
++
++    if lines:
++        s = convert_to_line_delimits(s)
++
++    if path_or_buf is not None:
++        with get_handle(
++            path_or_buf,
++            mode,
++            encoding="utf-8",
++            compression=compression,
++            storage_options=storage_options,
++        ) as handles:
++            handles.handle.write(s)
++        return None
++    return s
++
++
+ 
+ 
+ 
+@@ -1112,6 +1203,29 @@ class Parser:
+     }
+     json: str
+ 
++    def __init__(
++        self,
++        json: str,
++        orient: str | None,
++        dtype: DtypeArg | None,
++        convert_axes: bool,
++        convert_dates: bool | list[str],
++        keep_default_dates: bool,
++        precise_float: bool,
++        date_unit: str | None,
++        dtype_backend: DtypeBackend | lib.NoDefault,
++    ) -> None:
++        self.json = json
++        self.orient = orient or self._default_orient
++        self.dtype = dtype
++        self.convert_axes = convert_axes
++        self.convert_dates = convert_dates
++        self.keep_default_dates = keep_default_dates
++        self.precise_float = precise_float
++        self.date_unit = date_unit
++        self.dtype_backend = dtype_backend
++        self.min_stamp = self._MIN_STAMPS[date_unit or "s"]
++
+ 
+ 
+ 
+@@ -1424,4 +1538,4 @@ def _should_convert_dates(
+         or col_lower.startswith("timestamp")
+     ):
+         return True
+-    return False
+\ No newline at end of file
++    return False
+diff --git a/pandas/io/parquet.py b/pandas/io/parquet.py
+index 0641563..1653ec4 100644
+--- a/pandas/io/parquet.py
++++ b/pandas/io/parquet.py
+@@ -25,6 +25,7 @@ from pandas.util._decorators import (
+     doc,
+     set_module,
+ )
++from pandas.util._validators import check_dtype_backend
+ 
+ 
+ from pandas import (
+@@ -34,7 +35,13 @@ from pandas import (
+ from pandas.core.shared_docs import _shared_docs
+ 
+ from pandas.io._util import arrow_table_to_pandas
+-from pandas.io.common import IOHandles, is_fsspec_url, is_url
++from pandas.io.common import (
++    IOHandles,
++    get_handle,
++    is_fsspec_url,
++    is_url,
++    stringify_path,
++)
+ 
+ 
+ 
+@@ -53,6 +60,32 @@ if TYPE_CHECKING:
+     )
+ 
+ 
++def get_engine(engine: str) -> BaseImpl:
++    """Return an initialized parquet implementation."""
++    if engine == "auto":
++        engine = get_option("io.parquet.engine")
++
++    if engine == "auto":
++        errors = ""
++        for implementation in (PyArrowImpl, FastParquetImpl):
++            try:
++                return implementation()
++            except ImportError as err:
++                errors += "\n - " + str(err)
++        raise ImportError(
++            "Unable to find a usable engine; tried using: 'pyarrow', "
++            "'fastparquet'.\nA suitable version of pyarrow or fastparquet is "
++            "required for parquet support.\nTrying to import the above resulted "
++            f"in these errors:{errors}"
++        )
++
++    if engine == "pyarrow":
++        return PyArrowImpl()
++    if engine == "fastparquet":
++        return FastParquetImpl()
++    raise ValueError("engine must be one of 'pyarrow', 'fastparquet'")
++
++
+ 
+ 
+ 
+@@ -299,6 +332,125 @@ class FastParquetImpl(BaseImpl):
+         )
+         self.api = fastparquet
+ 
++    def write(
++        self,
++        df: DataFrame,
++        path,
++        compression="snappy",
++        index=None,
++        storage_options=None,
++        partition_cols=None,
++        filesystem=None,
++        **kwargs,
++    ) -> None:
++        self.validate_dataframe(df)
++        if filesystem is not None:
++            raise NotImplementedError(
++                "filesystem is not implemented for the fastparquet engine."
++            )
++
++        path = stringify_path(path)
++        if is_fsspec_url(path):
++            fsspec = import_optional_dependency("fsspec")
++            kwargs["open_with"] = lambda path, mode="rb": fsspec.open(
++                path, mode=mode, **(storage_options or {})
++            ).open()
++        elif storage_options:
++            raise ValueError("storage_options passed with buffer, or non-supported URL")
++
++        self.api.write(
++            path,
++            df,
++            compression=compression,
++            write_index=index,
++            partition_on=partition_cols,
++            **kwargs,
++        )
++
++    def read(
++        self,
++        path,
++        columns=None,
++        filters=None,
++        storage_options=None,
++        filesystem=None,
++        dtype_backend=lib.no_default,
++        **kwargs,
++    ) -> DataFrame:
++        if filesystem is not None:
++            raise NotImplementedError(
++                "filesystem is not implemented for the fastparquet engine."
++            )
++        if dtype_backend is not lib.no_default:
++            raise ValueError(
++                "The 'dtype_backend' argument is not supported for the "
++                "fastparquet engine"
++            )
++
++        path = stringify_path(path)
++        handles = None
++        if is_fsspec_url(path):
++            fsspec = import_optional_dependency("fsspec")
++            kwargs["open_with"] = lambda path, mode="rb": fsspec.open(
++                path, mode=mode, **(storage_options or {})
++            ).open()
++        else:
++            handles = get_handle(
++                path, "rb", is_text=False, storage_options=storage_options
++            )
++            path = handles.handle
++
++        try:
++            parquet_file = self.api.ParquetFile(path, **kwargs)
++            return parquet_file.to_pandas(columns=columns, filters=filters)
++        finally:
++            if handles is not None:
++                handles.close()
++
++
++@set_module("pandas")
++@doc(storage_options=_shared_docs["storage_options"])
++def to_parquet(
++    df: DataFrame,
++    path: FilePath | WriteBuffer[bytes] | None = None,
++    engine: str = "auto",
++    compression: ParquetCompressionOptions = "snappy",
++    index: bool | None = None,
++    storage_options: StorageOptions | None = None,
++    partition_cols: list[str] | None = None,
++    filesystem: Any = None,
++    **kwargs,
++) -> bytes | None:
++    """Write a DataFrame to Parquet format."""
++    impl = get_engine(engine)
++
++    if isinstance(partition_cols, str):
++        partition_cols = [partition_cols]
++
++    path_or_buf: FilePath | WriteBuffer[bytes]
++    if path is None:
++        if partition_cols is not None:
++            raise ValueError("path must be specified when partition_cols is used")
++        path_or_buf = io.BytesIO()
++    else:
++        path_or_buf = path
++
++    impl.write(
++        df,
++        path_or_buf,
++        compression=compression,
++        index=index,
++        partition_cols=partition_cols,
++        storage_options=storage_options,
++        filesystem=filesystem,
++        **kwargs,
++    )
++
++    if path is None:
++        assert isinstance(path_or_buf, io.BytesIO)
++        return path_or_buf.getvalue()
++    return None
++
+ 
+ 
+ 
+@@ -662,6 +814,9 @@ def read_parquet(
+     impl = get_engine(engine)
+     check_dtype_backend(dtype_backend)
+ 
++    if to_pandas_kwargs is not None:
++        kwargs["to_pandas_kwargs"] = to_pandas_kwargs
++
+     return impl.read(
+         path,
+         columns=columns,
+@@ -669,6 +824,5 @@ def read_parquet(
+         storage_options=storage_options,
+         dtype_backend=dtype_backend,
+         filesystem=filesystem,
+-        to_pandas_kwargs=to_pandas_kwargs,
+         **kwargs,
+-    )
+\ No newline at end of file
++    )
+diff --git a/pandas/io/parsers/readers.py b/pandas/io/parsers/readers.py
+index bd0d284..79d57d0 100644
+--- a/pandas/io/parsers/readers.py
++++ b/pandas/io/parsers/readers.py
+@@ -38,6 +38,7 @@ from pandas.util._decorators import (
+     set_module,
+ )
+ from pandas.util._exceptions import find_stack_level
++from pandas.util._validators import check_dtype_backend
+ 
+ 
+ from pandas.core.dtypes.common import (
+@@ -52,7 +53,12 @@ from pandas import Series
+ from pandas.core.frame import DataFrame
+ from pandas.core.indexes.api import RangeIndex
+ 
+-from pandas.io.common import IOHandles
++from pandas.io.common import (
++    IOHandles,
++    get_handle,
++    stringify_path,
++    validate_header_arg,
++)
+ 
+ 
+ 
+@@ -255,6 +261,105 @@ def _validate_names(names: Sequence[Hashable] | None) -> None:
+             raise ValueError("Names should be an ordered collection.")
+ 
+ 
++def _read(
++    filepath_or_buffer: FilePath | ReadCsvBuffer[bytes] | ReadCsvBuffer[str],
++    kwds,
++) -> DataFrame | TextFileReader:
++    """Create a TextFileReader and either return it or consume it."""
++    encoding_errors = kwds.get("encoding_errors", "strict")
++    if not isinstance(encoding_errors, str):
++        raise ValueError(
++            "encoding_errors must be a string, got "
++            f"{type(encoding_errors).__name__}"
++        )
++
++    if kwds.get("parse_dates", None) is None:
++        if kwds.get("date_format", None) is None:
++            kwds["parse_dates"] = False
++        else:
++            kwds["parse_dates"] = True
++
++    iterator = kwds.get("iterator", False)
++    if kwds.get("engine") == "pyarrow":
++        # Let TextFileReader report unsupported pyarrow keywords before doing
++        # their ordinary scalar validation.
++        if iterator:
++            raise ValueError(
++                "The 'iterator' option is not supported with the 'pyarrow' engine"
++            )
++        chunksize = kwds.get("chunksize", None)
++        nrows = kwds.get("nrows", None)
++    else:
++        chunksize = validate_integer("chunksize", kwds.get("chunksize", None), 1)
++        nrows = validate_integer("nrows", kwds.get("nrows", None), 0)
++
++    _validate_names(kwds.get("names", None))
++    parser = TextFileReader(filepath_or_buffer, **kwds)
++    if chunksize or iterator:
++        return parser
++
++    with parser:
++        return parser.read(nrows)
++
++
++def _refine_defaults_read(
++    dialect,
++    delimiter,
++    engine,
++    sep,
++    on_bad_lines,
++    names,
++    *,
++    defaults,
++    dtype_backend,
++):
++    """Resolve aliases and public defaults shared by read_csv/read_table."""
++    if delimiter is not None and sep is not lib.no_default:
++        raise ValueError("Specified a sep and a delimiter; you can only specify one.")
++
++    if delimiter is not None:
++        sep_override = False
++    elif sep is lib.no_default:
++        delimiter = defaults["delimiter"]
++        sep_override = True
++    else:
++        delimiter = sep
++        sep_override = sep == defaults["delimiter"]
++
++    if names is lib.no_default:
++        names = None
++
++    engine_specified = engine is not None
++    if engine is None:
++        engine = "c"
++
++    if callable(on_bad_lines):
++        if engine not in ("python", "pyarrow"):
++            raise ValueError(
++                "on_bad_line can only be a callable function if engine='python' "
++                "or 'pyarrow'"
++            )
++    elif on_bad_lines == "error":
++        on_bad_lines = ParserBase.BadLineHandleMethod.ERROR
++    elif on_bad_lines == "warn":
++        on_bad_lines = ParserBase.BadLineHandleMethod.WARN
++    elif on_bad_lines == "skip":
++        on_bad_lines = ParserBase.BadLineHandleMethod.SKIP
++    else:
++        raise ValueError(f"Argument {on_bad_lines} is invalid for on_bad_lines")
++
++    check_dtype_backend(dtype_backend)
++    return {
++        "delimiter": delimiter,
++        "engine": engine,
++        "dialect": dialect,
++        "on_bad_lines": on_bad_lines,
++        "names": names,
++        "engine_specified": engine_specified,
++        "sep_override": sep_override,
++    }
++
++
+ 
+ 
+ 
+@@ -2417,4 +2522,4 @@ def _validate_skipfooter(kwds: dict[str, Any]) -> None:
+         if kwds.get("iterator") or kwds.get("chunksize"):
+             raise ValueError("'skipfooter' not supported for iteration")
+         if kwds.get("nrows"):
+-            raise ValueError("'skipfooter' not supported with 'nrows'")
+\ No newline at end of file
++            raise ValueError("'skipfooter' not supported with 'nrows'")
+diff --git a/pandas/io/pickle.py b/pandas/io/pickle.py
+index d236045..502eeeb 100644
+--- a/pandas/io/pickle.py
++++ b/pandas/io/pickle.py
+@@ -17,9 +17,16 @@ from pandas.util._decorators import (
+ 
+ from pandas.core.shared_docs import _shared_docs
+ 
++from pandas.io.common import get_handle
++
+ 
+ 
+ if TYPE_CHECKING:
++    from pandas import (
++        DataFrame,
++        Series,
++    )
++
+     from pandas._typing import (
+         CompressionOptions,
+         FilePath,
+@@ -28,10 +35,31 @@ if TYPE_CHECKING:
+         WriteBuffer,
+     )
+ 
+-    from pandas import (
+-        DataFrame,
+-        Series,
+-    )
++
++@set_module("pandas")
++@doc(
++    storage_options=_shared_docs["storage_options"],
++    compression_options=_shared_docs["compression_options"] % "filepath_or_buffer",
++)
++def to_pickle(
++    obj: Any,
++    filepath_or_buffer: FilePath | WriteBuffer[bytes],
++    compression: CompressionOptions = "infer",
++    protocol: int = pickle.HIGHEST_PROTOCOL,
++    storage_options: StorageOptions | None = None,
++) -> None:
++    """Pickle an object to a path or binary buffer."""
++    if protocol < 0:
++        protocol = pickle.HIGHEST_PROTOCOL
++
++    with get_handle(
++        filepath_or_buffer,
++        "wb",
++        compression=compression,
++        is_text=False,
++        storage_options=storage_options,
++    ) as handles:
++        pickle.dump(obj, handles.handle, protocol=protocol)
+ 
+ 
+ 
+@@ -211,4 +239,4 @@ def read_pickle(
+             #  "No module named 'pandas.core.sparse.series'"
+             #  "Can't get attribute '_nat_unpickle' on <module 'pandas._libs.tslib"
+             handles.handle.seek(0)
+-            return pickle_compat.Unpickler(handles.handle).load()
+\ No newline at end of file
++            return pickle_compat.Unpickler(handles.handle).load()
+diff --git a/pandas/io/stata.py b/pandas/io/stata.py
+index 042bee3..c9655f6 100644
+--- a/pandas/io/stata.py
++++ b/pandas/io/stata.py
+@@ -70,6 +70,8 @@ from pandas.core.indexes.range import RangeIndex
+ from pandas.core.series import Series
+ from pandas.core.shared_docs import _shared_docs
+ 
++from pandas.io.common import get_handle
++
+ 
+ 
+ if TYPE_CHECKING:
+@@ -3941,4 +3943,4 @@ class StataWriterUTF8(StataWriter117):
+             ):
+                 name = name.replace(c, "_")
+ 
+-        return name
+\ No newline at end of file
++        return name
+diff --git a/pandas/util/_validators.py b/pandas/util/_validators.py
+index 352de77..73697c3 100644
+--- a/pandas/util/_validators.py
++++ b/pandas/util/_validators.py
+@@ -473,3 +473,15 @@ def validate_insert_loc(loc: int, length: int) -> int:
+     return loc  # pyright: ignore[reportReturnType]
+ 
+ 
++def check_dtype_backend(dtype_backend) -> None:
++    """Validate the public nullable dtype backend keyword."""
++    from pandas._libs import lib
++
++    if dtype_backend is not lib.no_default and dtype_backend not in (
++        "numpy_nullable",
++        "pyarrow",
++    ):
++        raise ValueError(
++            f"dtype_backend {dtype_backend} is invalid, only 'numpy_nullable' and "
++            "'pyarrow' are allowed."
++        )

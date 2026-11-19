@@ -1,0 +1,900 @@
+{
+  "ready": true,
+  "error": null,
+  "condition": "continuous_source_only_compact_handoff_v2",
+  "source_only": true,
+  "native_version": "0.5.43",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "segments": [
+    {
+      "number": 1,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 278.64148973400006,
+      "events_sha256": "beb27b91ee41818d1bda714afed91ffcd1230c33d3096749efc014c95c483fe2",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 1173464,
+            "cached_input_tokens": 1072896,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 8380,
+            "reasoning_output_tokens": 3008
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 1173464,
+          "cached_input_tokens": 1072896,
+          "output_tokens": 8380
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段完成 4 个核心文件纲要，未修改任何源码、测试或文档：\n\n- `sphinx/domains/c/__init__.py`\n- `sphinx/domains/c/_ids.py`\n- `sphinx/domains/c/_parser.py`\n- `sphinx/domains/c/_symbol.py`\n\n同时在纲要头登记了四项 C 域配置契约：`c_id_attributes`、`c_paren_attributes`、`c_extra_keywords`、`c_maximum_signature_line_length`。原生模式保持 `build`。\n\n当前已填 930/2017 条，剩余 1087 条；核心阶段下一处为 `sphinx/domains/c/_ast.py`，之后进入 `sphinx/domains/cpp/`。全库尚未完成。"
+      }
+    },
+    {
+      "number": 2,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 274.10010537400376,
+      "events_sha256": "897b4684a2231cab069a7117961a0f6040a4b423b1e23f4eb206397e7599016e",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 4050704,
+            "cached_input_tokens": 3879936,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 12025,
+            "reasoning_output_tokens": 3344
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 4050704,
+          "cached_input_tokens": 3879936,
+          "output_tokens": 12025
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 6 条完整纲要：\n\n- `sphinx/domains/c/_ast.py`\n- `tests/test_domains/test_domain_c.py`\n- `sphinx/domains/cpp/__init__.py`\n- `sphinx/domains/cpp/_ids.py`\n- `sphinx/domains/cpp/_parser.py`\n- `sphinx/domains/cpp/_symbol.py`\n\n同时：\n\n- 登记了 6 项 C++ 域配置契约。\n- 为 `doc/usage/configuration.rst` 补齐 C/C++ 配置 Keys。\n- 原生模式保持 `build`。\n- 未修改任何源码、测试或文档。\n- 当前约为已填 936/2017 条，剩余 1081 条。\n\n`সphinx/domains/cpp/_ast.py` 共 4748 行，本段已连续读完第 1–1200 行，尚未提交；下一段应从第 1201 行继续，全文完成后再处理 `tests/test_domains/test_domain_cpp.py`。全库建设尚未完成。"
+      }
+    },
+    {
+      "number": 3,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 141.07859626399295,
+      "events_sha256": "f315db7d81eb509c0bfebe3382f0e15ef7ba2887979e2c72c265ecdda1685b0e",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 4658502,
+            "cached_input_tokens": 4413824,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5456,
+            "reasoning_output_tokens": 1611
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 4658502,
+          "cached_input_tokens": 4413824,
+          "output_tokens": 5456
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段已完成并提交 5 条真实语义纲要：\n\n- `sphinx/domains/cpp/_ast.py`\n- `tests/test_domains/test_domain_cpp.py`\n- `sphinx/ext/autodoc/__init__.py`\n- `sphinx/ext/autodoc/_docstrings.py`\n- `sphinx/ext/autodoc/_event_listeners.py`\n\n原生模式保持 `build`，未修改任何源码、测试或文档。下一位置为 `sphinx/ext/autodoc/_documenters.py`，之后继续补齐 autodoc 模块。"
+      }
+    },
+    {
+      "number": 4,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 258.96356723899953,
+      "events_sha256": "93dd553eebdb9a343642eed395bf57dd539c3cef9276188ed8713d66dd865dbf",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 9427296,
+            "cached_input_tokens": 9186816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 11955,
+            "reasoning_output_tokens": 3417
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 9427296,
+          "cached_input_tokens": 9186816,
+          "output_tokens": 11955
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 16 条真实语义纲要，当前累计 957/2017，剩余 1060 条。\n\n已完成：\n\n- autodoc 剩余 10 个核心文件\n- autosummary 两个核心文件及两份相关测试\n- Napoleon 扩展入口\n- autodoc 原生模块 `.pyi` 导入测试\n\n项目纲要头经核对暂不需修订。原生模式保持 `build`，未修改任何源码、测试或文档，也未从外部恢复实现。\n\n下一位置：`sphinx/ext/napoleon/docstring.py`。"
+      }
+    },
+    {
+      "number": 5,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 249.29127664800035,
+      "events_sha256": "a3a132ce01452595e2e15e2bf470468a954ec664cacfea21e4dad677b54ff7e7",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 1300050,
+            "cached_input_tokens": 1203200,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6125,
+            "reasoning_output_tokens": 2435
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 1300050,
+          "cached_input_tokens": 1203200,
+          "output_tokens": 6125
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 8 条真实语义纲要，累计已填 965/2017，剩余 1052 条：\n\n- `sphinx/ext/napoleon/docstring.py`\n- 两份 Napoleon 测试\n- 阿拉伯语 `.po`、`.js`、`.mo`\n- 保加利亚语 `.js`、`.mo`\n\n保持原生 `build` 模式，未修改源码、测试、文档或资源。项目纲要头暂无需修订。\n\n下一位置：继续全文读取并提交 `sphinx/locale/bg/LC_MESSAGES/sphinx.po`。"
+      }
+    },
+    {
+      "number": 6,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 159.96894780900038,
+      "events_sha256": "826501de6198717e5bd57af17ef70d5eb7ef35b882ee6fc4e67fe5f5dfe20a23",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 2431409,
+            "cached_input_tokens": 2265472,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 8379,
+            "reasoning_output_tokens": 2267
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 2431409,
+          "cached_input_tokens": 2265472,
+          "output_tokens": 8379
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 19 条真实语义纲要，累计已填 984/2017，剩余 1033 条：\n\n- 补齐保加利亚语 `sphinx.po`\n- 补齐 `bn`、`ca`、`ca@valencia`、`cak`、`cs`、`cy` 六组本地化三件套（JS、MO、PO）\n\n保持原生 `build` 模式，未修改任何源码、测试、文档或资源。项目纲要头暂无需修订。\n\n下一位置：`sphinx/locale/da/LC_MESSAGES/sphinx.js`。"
+      }
+    },
+    {
+      "number": 7,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 163.3239596330095,
+      "events_sha256": "3e626adb5ba40763ac76ecbeac5e99a4f51a73b70c44675933e22cd26c7814d4",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 2575192,
+            "cached_input_tokens": 2426496,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6881,
+            "reasoning_output_tokens": 1906
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 2575192,
+          "cached_input_tokens": 2426496,
+          "output_tokens": 6881
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 11 条真实语义纲要，累计已填 995/2017，剩余 1022 条：\n\n- 完成 `da`、`de`、`de_DE` 三组本地化三件套\n- 完成希腊语 `el` 的 JS 与 MO\n- `de_DE` 经核查为无实际译文的区域变体骨架，已准确记录原文回退语义\n\n保持原生 `build` 模式，未修改任何源码、测试、文档或资源；项目纲要头无需修订。\n\n下一位置：`sphinx/locale/el/LC_MESSAGES/sphinx.po`，需分段全文读取后提交。"
+      }
+    },
+    {
+      "number": 8,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 383.10689171700506,
+      "events_sha256": "f72900a8a6ebb8480de5f5ad1a35db60a88cef987e6365eb08b5c1c5f367f182",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 8077019,
+            "cached_input_tokens": 7645056,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 15855,
+            "reasoning_output_tokens": 4096
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 8077019,
+          "cached_input_tokens": 7645056,
+          "output_tokens": 15855
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段已新增并提交 34 条真实语义纲要，累计完成 1029/2017，剩余 988 条。\n\n完成范围：\n\n- `el` 的 PO\n- `en_DE`、`en_FR`、`en_GB`、`en_HK`\n- `eo`、`es`、`es_CO`\n- `et`、`eu`、`fa`、`fi`\n\n均已核查 JS 全文、MO 类型及 PO 全文或可信逐行差异。原生模式保持 `build`，项目纲要头无需修订；未修改任何源码、测试、文档或资源字节。\n\n下一位置：`sphinx/locale/fr/LC_MESSAGES/sphinx.js`。"
+      }
+    },
+    {
+      "number": 9,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 320.7961473389878,
+      "events_sha256": "9033592fdd4cc0aa49511d292872e0af6ca917619c1951240bb6f5d0f621cae8",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 5612475,
+            "cached_input_tokens": 5192064,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 15433,
+            "reasoning_output_tokens": 3124
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 5612475,
+          "cached_input_tokens": 5192064,
+          "output_tokens": 15433
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段已新增并提交 33 条真实语义纲要，累计完成 1062/2017，剩余 955 条。\n\n完成范围：\n\n- `fr`、`fr_FR`\n- `gl`、`he`\n- `hi`、`hi_IN`\n- `hr`、`hu`\n- `id`、`is`\n- `it`\n\n均已全文核查 JS、PO，并确认 MO 格式及记录数。原生模式保持 `build`，项目纲要头无需修订；未修改任何源码、测试、文档或资源字节。\n\n下一位置：`sphinx/locale/ja/LC_MESSAGES/sphinx.js`。"
+      }
+    },
+    {
+      "number": 10,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 155.18559528200421,
+      "events_sha256": "beba66fdfd5f89a7321430caebb34295bdeb082e07f231694efb2533a502ac53",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 2728675,
+            "cached_input_tokens": 2573696,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6204,
+            "reasoning_output_tokens": 1981
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 2728675,
+          "cached_input_tokens": 2573696,
+          "output_tokens": 6204
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 8 条真实语义纲要：\n\n- 完成 `ja`：JS、MO、PO\n- 完成 `ka`：JS、MO、PO\n- 完成 `ko`：JS、MO\n\n累计约 1070/2017 条，剩余约 947 条。原生模式保持 `build`，项目纲要头无需修订；未修改任何源码、测试、文档或资源字节。\n\n下一位置：`sphinx/locale/ko/LC_MESSAGES/sphinx.po`，需分段全文读取后提交。"
+      }
+    },
+    {
+      "number": 11,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 239.07696533900162,
+      "events_sha256": "e9518d8d795bdbf2df7e03a6e27c668c8c6032d4db8070f23b06afedf289d331",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 2811641,
+            "cached_input_tokens": 2628864,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5716,
+            "reasoning_output_tokens": 1678
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 2811641,
+          "cached_input_tokens": 2628864,
+          "output_tokens": 5716
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 9 条真实语义纲要：\n\n- 完成 `ko`：PO\n- 完成 `lt`：JS、MO、PO\n- 完成 `lv`：JS、MO、PO\n- 完成 `mk`：JS、MO\n\n累计约 1079/2017 条，剩余约 938 条。原生模式保持 `build`，项目纲要头无需修订；未修改任何源码、测试、文档或资源字节。\n\n下一续接位置：`sphinx/locale/mk/LC_MESSAGES/sphinx.po`，需分段全文读取后提交。"
+      }
+    },
+    {
+      "number": 12,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 231.72289765399182,
+      "events_sha256": "7b0f2426b9b99fd8e5d695ffc901a4c7e3b36ea5d2f42610b77beb5bbeac3f11",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 3543594,
+            "cached_input_tokens": 3359488,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6328,
+            "reasoning_output_tokens": 1495
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 3543594,
+          "cached_input_tokens": 3359488,
+          "output_tokens": 6328
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段完成并提交 10 条真实语义纲要：\n\n- `mk`：PO\n- `nb_NO`：JS、MO、PO\n- `ne`：JS、MO、PO\n- `nl`：JS、MO、PO\n\n累计约 1089/2017 条，剩余约 928 条。原生模式保持 `build`，纲要头无需修订；未修改任何源码、测试、文档或资源字节。\n\n下一续接位置：`sphinx/locale/pl/LC_MESSAGES/sphinx.js`。"
+      }
+    },
+    {
+      "number": 13,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 1163.705575398999,
+      "events_sha256": "b6a1a076824cfe74400f5aaaed36078b49fbca4e09911c240a78a4d1fc64e5d0",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 4605113,
+            "cached_input_tokens": 4394880,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 26336,
+            "reasoning_output_tokens": 4524
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 4605113,
+          "cached_input_tokens": 4394880,
+          "output_tokens": 26336
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 91 条真实语义纲要，当前累计约 1180/2017，剩余约 837 条。\n\n完成范围：\n\n- 补齐 `pl` 至 `zh_TW` 的全部本地化 JS、MO、PO/POT 资源。\n- 补齐 `sphinx/py.typed`。\n- 补齐基础、亚美尼亚语、丹麦语、挪威语、印地语、印度尼西亚语和爱尔兰语词干器的压缩版与可读版。\n- 原生模式保持 `build`，项目纲要头无需修订。\n- 未修改任何源码、测试、文档或资源字节。\n\n下一续接位置：`sphinx/search/minified-js/arabic-stemmer.js`，宜与对应的 `non-minified-js/arabic-stemmer.js` 成对全文核查。"
+      }
+    },
+    {
+      "number": 14,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 380.32075781800086,
+      "events_sha256": "05fe4b4178b8cab711890fbb49a1195160e7ad296ffd8bc31cc3ec503743dff0",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 8771233,
+            "cached_input_tokens": 8512768,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 11925,
+            "reasoning_output_tokens": 3071
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 8771233,
+          "cached_input_tokens": 8512768,
+          "output_tokens": 11925
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段已补齐并提交 19 条真实语义纲要：\n\n- 阿拉伯语至芬兰语的 9 组压缩版/可读版词干器\n- `utils/generate_snowball.py`\n\n当前状态：对齐 1199/2017，过期 0，无纲要 818。原生模式保持 `build`，项目纲要头无需修订；未修改源码、测试、文档或资源。\n\n下一续接位置：成对核查 `sphinx/search/minified-js/french-stemmer.js` 与 `sphinx/search/non-minified-js/french-stemmer.js`。"
+      }
+    },
+    {
+      "number": 15,
+      "model_exit_code": 124,
+      "model_elapsed_seconds": 1800.361089647995,
+      "events_sha256": "2ce20af79017683c0f61f48b2514f3d6ee318446a98c5c21f97e787935a37c41",
+      "event_summary": {
+        "completed": false,
+        "turn_usages": [],
+        "usage_total": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        },
+        "last_event_type": "item.completed",
+        "last_source_note": "塞尔维亚语两版已提交。下一批继续核查西班牙语词干器，重点确认区域边界、重音归一和动词后缀分支。"
+      }
+    },
+    {
+      "number": 16,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 773.3943821260036,
+      "events_sha256": "2570c86bf1c33ba71944f2a929f3a37a908fa0079981096c12321d7715d862dd",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 11629944,
+            "cached_input_tokens": 11163008,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 40751,
+            "reasoning_output_tokens": 6642
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 11629944,
+          "cached_input_tokens": 11163008,
+          "output_tokens": 40751
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 82 条纲要，累计约 1340/2017，剩余约 677 条。\n\n已完成：\n\n- 全部 `sphinx/texinputs` 与 `texinputs_win`\n- `agogo`、`basic`、`bizstyle`、`classic`、`default`、`epub` 主题\n- 相关二进制资源按实际格式、尺寸和消费者登记\n- 全程保持 build mode，未修改源码、测试、文档或资源字节\n\n下一段可从 `sphinx/themes/haiku/` 继续。"
+      }
+    },
+    {
+      "number": 17,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 810.6873918580095,
+      "events_sha256": "5094d4868690c1d500e1ac2c430954919d332c9570cf9061c6a6c2aba3ae1cdb",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 8670728,
+            "cached_input_tokens": 8223744,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 43405,
+            "reasoning_output_tokens": 12227
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 8670728,
+          "cached_input_tokens": 8223744,
+          "output_tokens": 43405
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段已新增并对齐 87 条纲要，当前约 1427/2017，剩余 590 条。\n\n同时：\n\n- 保持原生 `mode=build`\n- 新增并关联 `inventory:objects.inv` 跨模块协议契约\n- 未修改任何源码、测试、文档或资源\n- 长文件未按截断内容伪填\n\n下一段从 `sphinx/util/cfamily.py`、`docfields.py`、`docutils.py` 等尚未补齐的长型核心工具继续；`sphinx/util/typing.py` 及其 1041 行直测也仍保持未填状态。"
+      }
+    },
+    {
+      "number": 18,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 248.66600439799367,
+      "events_sha256": "2c4adaf6f7a4220df0235c3e20b2713507725446cae73351b902e70225fcbba5",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 2639739,
+            "cached_input_tokens": 2480000,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 12466,
+            "reasoning_output_tokens": 2831
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 2639739,
+          "cached_input_tokens": 2480000,
+          "output_tokens": 12466
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并对齐 15 条纲要，实时状态为：\n\n- 已对齐：1442\n- 过期：0\n- 无纲要：575\n- 忽略：3\n\n已完整补齐 `sphinx/util/` 剩余核心文件及其已触达直测，包括 C-family、Docutils、反射、日志、节点、路径、HTTP 和类型工具。项目纲要头经核对无需修订，原生模式保持 `build`。\n\n未修改任何源码、测试、文档或资源。下一段从 `sphinx/writers/html5.py`、`latex.py`、`manpage.py`、`texinfo.py`、`text.py` 继续。"
+      }
+    },
+    {
+      "number": 19,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 671.4149956789915,
+      "events_sha256": "6df12213def4b6c02785049550da56d1fca41dcecf8b0ae9cf1870f661e7552a",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 10503658,
+            "cached_input_tokens": 10088704,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 46724,
+            "reasoning_output_tokens": 6206
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 10503658,
+          "cached_input_tokens": 10088704,
+          "output_tokens": 46724
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并对齐 216 条纲要。当前原生状态：\n\n- 已对齐：1658\n- 过期：0\n- 无纲要：359\n- 忽略：3\n- 模式：`build`\n\n已完成核心 Writer 余项，并推进普通文件至 autosummary 递归、模板与 skip-member 夹具。项目纲要头经复核无需修改；未修改任何源码、测试、文档或资源。\n\n下一段从 `tests/roots/test-ext-autosummary/autosummary_class_module.py` 继续。"
+      }
+    },
+    {
+      "number": 20,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 400.0929807950015,
+      "events_sha256": "d317821c67fd3fe7454829001762e3e59b6af3e61b280a102501d1c113727941",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 5783432,
+            "cached_input_tokens": 5606656,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 22296,
+            "reasoning_output_tokens": 3913
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 5783432,
+          "cached_input_tokens": 5606656,
+          "output_tokens": 22296
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并对齐 124 条纲要。当前状态：\n\n- 已对齐：1782\n- 过期：0\n- 无纲要：235\n- 忽略：3\n- 模式：`build`\n\n已推进至国际化目录；下一段从 `tests/roots/test-intl/xx/LC_MESSAGES/role_xref.po` 继续。\n\n项目纲要头无需修订。未修改任何源码、测试、文档或二进制资源。"
+      }
+    },
+    {
+      "number": 21,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 703.6341496870009,
+      "events_sha256": "417eeaa13f0d8f0edf506ee10469b79c371c9aa6e0bdc2fa07666065ea91480a",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 8598844,
+            "cached_input_tokens": 8162816,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 41975,
+            "reasoning_output_tokens": 5322
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 8598844,
+          "cached_input_tokens": 8162816,
+          "output_tokens": 41975
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "本段新增并提交 232 条真实语义纲要，当前预计对齐 2014/2017，剩余 3 条：\n\n- `tests/test_builders/test_build_html_numfig.py`\n- `tests/test_ext_autodoc/test_ext_autodoc.py`\n- `tests/test_ext_autodoc/test_ext_autodoc_configs.py`\n\n下一段从 `test_build_html_numfig.py` 开始分段全文读取。项目纲要头无需修订；原生 mode 保持 `build`，未修改任何源码、测试、文档或二进制资源。"
+      }
+    },
+    {
+      "number": 22,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 188.01457670600212,
+      "events_sha256": "dff697eea58666dd569f7ba66933c3beb87781a3fb894895eaecc414735f4253",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 1692308,
+            "cached_input_tokens": 1375488,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 6644,
+            "reasoning_output_tokens": 2760
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 1692308,
+          "cached_input_tokens": 1375488,
+          "output_tokens": 6644
+        },
+        "last_event_type": "turn.completed",
+        "last_source_note": "全库认知纲要建设已完成：\n\n- 补齐剩余 3 个测试文件的真实语义纲要。\n- 逐模块完整复审 T、B、L、X、D、O、U、C、P。\n- 项目纲要头及跨模块契约无需修订。\n- 原生 mode 保持 `build`，scope、ignore、observe 均未改变。\n- 未修改任何源码、测试、文档或二进制资源。\n\n最终原生状态：对齐 2017，观察 0，忽略 3，无缺失或过期条目。纲要与代码已对齐。"
+      }
+    }
+  ],
+  "model_elapsed_seconds": 9995.548344145995,
+  "elapsed_seconds": 10018.971858067001,
+  "segment_timeout_seconds": 1800,
+  "initialization_total_budget": "No hard segment/total cap; all source-only costs accumulated separately",
+  "formal_solver_budget_separate_seconds": 3600,
+  "cache_source_run": "artifact://b645ece87c5c6d81",
+  "prior_source_initialization_cost": {
+    "previous_paid_cache_source": {
+      "ready": false,
+      "ortg_version": "0.5.34",
+      "preparation_recipe": "bounded_source_only_v1",
+      "model_elapsed_seconds": 3595.890366830001,
+      "elapsed_seconds": 3600.672177497001,
+      "model_exit_code": 124,
+      "error": "ORTG method initialization failed: ORTG initialization failed: Initialization session failed or timed out (exit 124)",
+      "segment_limit": 4
+    },
+    "latest_completed_source_metadata": {
+      "native_version": "0.5.42",
+      "condition": "continuous_source_only_completion_v1",
+      "model_elapsed_seconds": 5202.546244384008,
+      "elapsed_seconds": 5382.913687530003,
+      "segments": [
+        {
+          "number": 1,
+          "model_exit_code": 0,
+          "model_elapsed_seconds": 484.8328506079997,
+          "events_sha256": "2456cbbdfc328e361a8d754405c485891ca651f45da117963ca5aecb08de2499",
+          "event_summary": {
+            "completed": true,
+            "turn_usages": [
+              {
+                "input_tokens": 7434031,
+                "cached_input_tokens": 7020416,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 20534,
+                "reasoning_output_tokens": 4570
+              }
+            ],
+            "usage_total": {
+              "input_tokens": 7434031,
+              "cached_input_tokens": 7020416,
+              "output_tokens": 20534
+            },
+            "last_event_type": "turn.completed"
+          }
+        },
+        {
+          "number": 2,
+          "model_exit_code": 0,
+          "model_elapsed_seconds": 680.9909522020025,
+          "events_sha256": "577aa46c2c0f3b1f923adf8c347dece3ce58b32425896c3ab6ffd94de4398ee3",
+          "event_summary": {
+            "completed": true,
+            "turn_usages": [
+              {
+                "input_tokens": 14889330,
+                "cached_input_tokens": 14407040,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 22275,
+                "reasoning_output_tokens": 5325
+              }
+            ],
+            "usage_total": {
+              "input_tokens": 14889330,
+              "cached_input_tokens": 14407040,
+              "output_tokens": 22275
+            },
+            "last_event_type": "turn.completed"
+          }
+        },
+        {
+          "number": 3,
+          "model_exit_code": 124,
+          "model_elapsed_seconds": 1800.3352935220028,
+          "events_sha256": "31c5e9764c9cbdb66b8955e289b2bb1a03fb647e9e46e03f9fc944cc66a9a68c",
+          "event_summary": {
+            "completed": false,
+            "turn_usages": [],
+            "usage_total": {
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "output_tokens": 0
+            },
+            "last_event_type": "item.completed"
+          }
+        },
+        {
+          "number": 4,
+          "model_exit_code": 124,
+          "model_elapsed_seconds": 1800.30192914301,
+          "events_sha256": "dcf073f66b6dd1c8cdcffbff20da513ecef34ecec046151a0ce0f364d27fcd83",
+          "event_summary": {
+            "completed": false,
+            "turn_usages": [],
+            "usage_total": {
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "output_tokens": 0
+            },
+            "last_event_type": "error"
+          }
+        },
+        {
+          "number": 5,
+          "model_exit_code": 1,
+          "model_elapsed_seconds": 223.5045368229912,
+          "events_sha256": "ba2cc1452b3313b9e2b30e6c0a00a551169a03a3471a5fd16f46ca9ff525ae12",
+          "event_summary": {
+            "completed": false,
+            "turn_usages": [],
+            "usage_total": {
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "output_tokens": 0
+            },
+            "last_event_type": "turn.failed"
+          }
+        },
+        {
+          "number": 6,
+          "model_exit_code": 1,
+          "model_elapsed_seconds": 212.58068208600162,
+          "events_sha256": "728c0c01324fcb7fbeb8a581997ed5c431fc0658a21fca2d2e875313fab6705f",
+          "event_summary": {
+            "completed": false,
+            "turn_usages": [],
+            "usage_total": {
+              "input_tokens": 0,
+              "cached_input_tokens": 0,
+              "output_tokens": 0
+            },
+            "last_event_type": "turn.failed"
+          }
+        }
+      ],
+      "event_summary": {
+        "turn_usages": [
+          {
+            "input_tokens": 7434031,
+            "cached_input_tokens": 7020416,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 20534,
+            "reasoning_output_tokens": 4570
+          },
+          {
+            "input_tokens": 14889330,
+            "cached_input_tokens": 14407040,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 22275,
+            "reasoning_output_tokens": 5325
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 22323361,
+          "cached_input_tokens": 21427456,
+          "output_tokens": 42809
+        }
+      },
+      "error": null,
+      "ready": false
+    },
+    "actual_extra_segment6_api_retry": {
+      "events": "artifact://46c881d16d8cd036",
+      "elapsed_seconds": null,
+      "tokens": null,
+      "cost": null
+    },
+    "original_metadata_path": "artifact://780dfc73a9bd50b1",
+    "original_metadata_sha256": "a46a3959eaa39681344dc407c71061a0369c369fffa8eb8e66fcb0581eb47328",
+    "all_paid_costs_retained": true
+  },
+  "snapshot_sha256": "ca05795785a2c5eecf99d14cb90941506ecfdde6c25bfe5f77ade45e09173010",
+  "current_readiness": {
+    "source_identity_preserved": true,
+    "roles_preserved": true,
+    "total_cognitive_files": 2017,
+    "native_outline_rows": 2017,
+    "missing_count": 0,
+    "missing_paths": [],
+    "malformed_paths": [],
+    "native_status_bad_states": {},
+    "coverage_complete": true,
+    "native_status_counts": [
+      2017,
+      0,
+      2,
+      0
+    ],
+    "semantic_fidelity": "Row/native completeness is checked; semantic fidelity relies on current-source model maintenance, not row count."
+  },
+  "event_summary": {
+    "turn_usages": [
+      {
+        "input_tokens": 1173464,
+        "cached_input_tokens": 1072896,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8380,
+        "reasoning_output_tokens": 3008
+      },
+      {
+        "input_tokens": 4050704,
+        "cached_input_tokens": 3879936,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 12025,
+        "reasoning_output_tokens": 3344
+      },
+      {
+        "input_tokens": 4658502,
+        "cached_input_tokens": 4413824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5456,
+        "reasoning_output_tokens": 1611
+      },
+      {
+        "input_tokens": 9427296,
+        "cached_input_tokens": 9186816,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11955,
+        "reasoning_output_tokens": 3417
+      },
+      {
+        "input_tokens": 1300050,
+        "cached_input_tokens": 1203200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6125,
+        "reasoning_output_tokens": 2435
+      },
+      {
+        "input_tokens": 2431409,
+        "cached_input_tokens": 2265472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8379,
+        "reasoning_output_tokens": 2267
+      },
+      {
+        "input_tokens": 2575192,
+        "cached_input_tokens": 2426496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6881,
+        "reasoning_output_tokens": 1906
+      },
+      {
+        "input_tokens": 8077019,
+        "cached_input_tokens": 7645056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15855,
+        "reasoning_output_tokens": 4096
+      },
+      {
+        "input_tokens": 5612475,
+        "cached_input_tokens": 5192064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 15433,
+        "reasoning_output_tokens": 3124
+      },
+      {
+        "input_tokens": 2728675,
+        "cached_input_tokens": 2573696,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6204,
+        "reasoning_output_tokens": 1981
+      },
+      {
+        "input_tokens": 2811641,
+        "cached_input_tokens": 2628864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5716,
+        "reasoning_output_tokens": 1678
+      },
+      {
+        "input_tokens": 3543594,
+        "cached_input_tokens": 3359488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6328,
+        "reasoning_output_tokens": 1495
+      },
+      {
+        "input_tokens": 4605113,
+        "cached_input_tokens": 4394880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 26336,
+        "reasoning_output_tokens": 4524
+      },
+      {
+        "input_tokens": 8771233,
+        "cached_input_tokens": 8512768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11925,
+        "reasoning_output_tokens": 3071
+      },
+      {
+        "input_tokens": 11629944,
+        "cached_input_tokens": 11163008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 40751,
+        "reasoning_output_tokens": 6642
+      },
+      {
+        "input_tokens": 8670728,
+        "cached_input_tokens": 8223744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 43405,
+        "reasoning_output_tokens": 12227
+      },
+      {
+        "input_tokens": 2639739,
+        "cached_input_tokens": 2480000,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 12466,
+        "reasoning_output_tokens": 2831
+      },
+      {
+        "input_tokens": 10503658,
+        "cached_input_tokens": 10088704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 46724,
+        "reasoning_output_tokens": 6206
+      },
+      {
+        "input_tokens": 5783432,
+        "cached_input_tokens": 5606656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 22296,
+        "reasoning_output_tokens": 3913
+      },
+      {
+        "input_tokens": 8598844,
+        "cached_input_tokens": 8162816,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 41975,
+        "reasoning_output_tokens": 5322
+      },
+      {
+        "input_tokens": 1692308,
+        "cached_input_tokens": 1375488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6644,
+        "reasoning_output_tokens": 2760
+      }
+    ],
+    "usage_total": {
+      "input_tokens": 111285020,
+      "cached_input_tokens": 105855872,
+      "output_tokens": 361259
+    }
+  }
+}

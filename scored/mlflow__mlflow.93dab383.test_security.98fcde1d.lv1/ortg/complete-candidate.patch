@@ -1,0 +1,208 @@
+diff --git a/mlflow/server/security.py b/mlflow/server/security.py
+index 3856968..f623018 100644
+--- a/mlflow/server/security.py
++++ b/mlflow/server/security.py
+@@ -8,20 +8,92 @@ from mlflow.environment_variables import (
+     MLFLOW_SERVER_DISABLE_SECURITY_MIDDLEWARE,
+     MLFLOW_SERVER_X_FRAME_OPTIONS,
+ )
+-from mlflow.server.security_utils import CORS_BLOCKED_MSG, HEALTH_ENDPOINTS, INVALID_HOST_MSG, LOCALHOST_ORIGIN_PATTERNS, should_block_cors_request
++from mlflow.server.security_utils import (
++    CORS_BLOCKED_MSG,
++    HEALTH_ENDPOINTS,
++    INVALID_HOST_MSG,
++    LOCALHOST_ORIGIN_PATTERNS,
++    get_allowed_hosts_from_env,
++    get_allowed_origins_from_env,
++    get_default_allowed_hosts,
++    is_allowed_host_header,
++    is_api_endpoint,
++    should_block_cors_request,
++)
++from mlflow.tracing.constant import TRACE_RENDERER_ASSET_PATH
+ 
++_logger = logging.getLogger(__name__)
+ 
+ 
++def get_allowed_hosts() -> list[str]:
++    """Get the allowed Host patterns from the environment or the secure defaults."""
++    return get_allowed_hosts_from_env() or get_default_allowed_hosts()
+ 
+ 
++def get_allowed_origins() -> list[str]:
++    """Get the additional allowed CORS origins configured in the environment."""
++    return get_allowed_origins_from_env() or []
+ 
+ 
++def init_security_middleware(app: Flask) -> None:
++    """Install Host, CORS, and response-header protections on a Flask app."""
++    if MLFLOW_SERVER_DISABLE_SECURITY_MIDDLEWARE.get() == "true":
++        return
+ 
++    allowed_hosts = get_allowed_hosts()
++    allowed_origins = get_allowed_origins()
++    cors_origins = "*" if "*" in allowed_origins else [*LOCALHOST_ORIGIN_PATTERNS, *allowed_origins]
+ 
++    CORS(
++        app,
++        origins=cors_origins,
++        supports_credentials=True,
++        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
++        allow_headers="*",
++        expose_headers="*",
++    )
+ 
++    if "*" not in allowed_hosts:
+ 
+-from mlflow.tracing.constant import TRACE_RENDERER_ASSET_PATH
++        @app.before_request
++        def validate_host_header():
++            if request.path in HEALTH_ENDPOINTS:
++                return None
+ 
+-_logger = logging.getLogger(__name__)
++            host = request.host
++            if not is_allowed_host_header(allowed_hosts, host):
++                _logger.warning(f"Rejected request with invalid Host header: {host}")
++                return Response(
++                    INVALID_HOST_MSG,
++                    status=HTTPStatus.FORBIDDEN,
++                    mimetype="text/plain",
++                )
++
++    @app.before_request
++    def block_disallowed_cross_origin_requests():
++        if not is_api_endpoint(request.path):
++            return None
++
++        origin = request.headers.get("Origin", "")
++        if should_block_cors_request(origin, request.method, allowed_origins):
++            _logger.warning(f"Blocked cross-origin request from {origin}")
++            return Response(CORS_BLOCKED_MSG, status=HTTPStatus.FORBIDDEN, mimetype="text/plain")
++
++    x_frame_options = MLFLOW_SERVER_X_FRAME_OPTIONS.get()
++
++    @app.after_request
++    def add_security_headers(response: Response):
++        response.headers["X-Content-Type-Options"] = "nosniff"
++
++        is_notebook_renderer = request.path.startswith(TRACE_RENDERER_ASSET_PATH)
++        if x_frame_options and x_frame_options.upper() != "NONE" and not is_notebook_renderer:
++            response.headers["X-Frame-Options"] = x_frame_options.upper()
+ 
++        if (
++            request.method == "OPTIONS"
++            and response.status_code == HTTPStatus.OK
++            and is_api_endpoint(request.path)
++        ):
++            response.status_code = HTTPStatus.NO_CONTENT
+ 
++        return response
+diff --git a/mlflow/server/security_utils.py b/mlflow/server/security_utils.py
+index b074ffa..267bb88 100644
+--- a/mlflow/server/security_utils.py
++++ b/mlflow/server/security_utils.py
+@@ -45,48 +45,60 @@ LOCALHOST_ORIGIN_PATTERNS = [
+ ]
+ 
+ 
++def _parse_comma_separated_list(value: str | None) -> list[str]:
++    """Parse a comma-separated environment variable into non-empty values."""
++    if not value:
++        return []
++    return [item.strip() for item in value.split(",") if item.strip()]
+ 
+ 
++def get_allowed_hosts_from_env() -> list[str]:
++    """Get allowed Host patterns configured through the environment."""
++    return _parse_comma_separated_list(MLFLOW_SERVER_ALLOWED_HOSTS.get())
+ 
+ 
++def get_allowed_origins_from_env() -> list[str]:
++    """Get allowed CORS origins configured through the environment."""
++    return _parse_comma_separated_list(MLFLOW_SERVER_CORS_ALLOWED_ORIGINS.get())
+ 
+ 
++def get_default_allowed_hosts() -> list[str]:
++    """Return the localhost and private-network Host patterns allowed by default."""
++    allowed_hosts = []
++    for host in LOCALHOST_VARIANTS:
++        allowed_hosts.extend([host, f"{host}:*"])
+ 
++    allowed_hosts.extend(["10.*", "192.168.*"])
++    allowed_hosts.extend(
++        f"172.{second_octet}.*"
++        for second_octet in range(PRIVATE_172_RANGE_START, PRIVATE_172_RANGE_END)
++    )
++    return allowed_hosts
+ 
+ 
++def is_allowed_host_header(allowed_hosts: list[str], host: str) -> bool:
++    """Return whether a non-empty Host header matches an allowed Host pattern."""
++    if not host:
++        return False
++    if "*" in allowed_hosts:
++        return True
+ 
++    for pattern in allowed_hosts:
++        if "*" in pattern:
++            # A leading '[' denotes a bracketed IPv6 address here, not an
++            # fnmatch character class. Preserve normal fnmatch semantics for
++            # every other pattern.
++            fnmatch_pattern = f"[[]{pattern[1:]}" if pattern.startswith("[") else pattern
++            if fnmatch.fnmatchcase(host, fnmatch_pattern):
++                return True
++        elif host == pattern:
++            return True
++    return False
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def is_api_endpoint(path: str) -> bool:
++    """Return whether a path is an MLflow API endpoint subject to CORS checks."""
++    return path.startswith(API_PATH_PREFIX) and path not in TEST_ENDPOINTS
+ 
+ 
+ def is_localhost_origin(origin: str) -> bool:
+@@ -118,12 +130,3 @@ def should_block_cors_request(origin: str, method: str, allowed_origins: list[st
+             return False
+ 
+     return True
+-
+-
+-
+-
+-
+-
+-
+-
+-

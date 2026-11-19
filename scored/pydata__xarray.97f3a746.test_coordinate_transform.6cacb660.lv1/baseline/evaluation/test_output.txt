@@ -1,0 +1,80 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: zarr-3.1.3, env-1.2.0, asyncio-1.3.0, hypothesis-6.147.0, xdist-3.8.0, mypy-plugins-3.2.0, cov-7.0.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 14 items
+
+xarray/tests/test_coordinate_transform.py ......FFF...F.                 [100%]
+
+=================================== FAILURES ===================================
+___________________ test_coordinate_transform_variable_repr ____________________
+/testbed/xarray/tests/test_coordinate_transform.py:134: in test_coordinate_transform_variable_repr
+    assert actual == expected
+E   AssertionError: assert '<xarray.Vari...dinates: y, x' == '<xarray.Vari...type=float64]'
+E     
+E     Skipping 59 identical leading characters in diff, use -v to show
+E     - pe=float64]
+E     + pe=float64]
+E     ?            +
+E     + Dimensions without coordinates: y, x
+___________ test_coordinate_transform_variable_basic_outer_indexing ____________
+/testbed/xarray/tests/test_coordinate_transform.py:142: in test_coordinate_transform_variable_basic_outer_indexing
+    assert var[0, -1] == 6.0
+E   assert <xarray.Variable> Size: 8B\narray(-2.) == 6.0
+____________ test_coordinate_transform_variable_vectorized_indexing ____________
+/testbed/xarray/tests/test_coordinate_transform.py:160: in test_coordinate_transform_variable_vectorized_indexing
+    var[{"x": xr.Variable("z", [5]), "y": xr.Variable("z", [5])}]
+/testbed/xarray/core/variable.py:821: in __getitem__
+    data = indexing.apply_indexer(indexable, indexer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/testbed/xarray/core/indexing.py:1103: in apply_indexer
+    return indexable.vindex[indexer]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+/testbed/xarray/core/indexing.py:543: in __getitem__
+    return self.getter(key)
+           ^^^^^^^^^^^^^^^^
+/testbed/xarray/core/indexing.py:2343: in _vindex_get
+    _check_bounds(pos, self.shape[i])
+/testbed/xarray/core/indexing.py:1945: in _check_bounds
+    raise IndexError("index out of bounds")
+E   IndexError: index out of bounds
+
+During handling of the above exception, another exception occurred:
+/testbed/xarray/tests/test_coordinate_transform.py:159: in test_coordinate_transform_variable_vectorized_indexing
+    with pytest.raises(IndexError, match="out of bounds index"):
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'out of bounds index'
+E     Actual message: 'index out of bounds'
+________________________ test_coordinate_transform_sel _________________________
+/testbed/xarray/tests/test_coordinate_transform.py:224: in test_coordinate_transform_sel
+    ds.sel(x=[0.5, 5.5], method="nearest")
+/testbed/xarray/core/dataset.py:2983: in sel
+    query_results = map_index_queries(
+/testbed/xarray/core/indexing.py:163: in map_index_queries
+    results.append(index.sel(labels, **options))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/testbed/xarray/core/indexes.py:1541: in sel
+    raise TypeError("coordinate transform labels must be xarray Variables")
+E   TypeError: coordinate transform labels must be xarray Variables
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED xarray/tests/test_coordinate_transform.py::test_abstract_coordinate_transform
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_init
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_generate_coords[None]
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_generate_coords[dims1]
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_variable
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_variable_repr_inline
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_setitem_error
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_transpose
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_equals
+PASSED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_rename
+FAILED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_variable_repr
+FAILED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_variable_basic_outer_indexing
+FAILED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_variable_vectorized_indexing
+FAILED xarray/tests/test_coordinate_transform.py::test_coordinate_transform_sel
+========================= 4 failed, 10 passed in 0.99s =========================

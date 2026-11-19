@@ -1,0 +1,40 @@
+{
+  "instance_id": "mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1",
+  "repo": "mwaskom/seaborn",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 34,
+      "failure": 18,
+      "total": 52
+    },
+    "p2p": {
+      "success": 218,
+      "failure": 0,
+      "total": 218
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "ec3113da5b7d14b39c807463b94d43760c95598445070f6f5763fb7d064e4ca3"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 36,
+      "failure": 16,
+      "total": 52
+    },
+    "p2p": {
+      "success": 218,
+      "failure": 0,
+      "total": 218
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "0d711847e38044dace54443ab4241f458ca9812e66fb30825d8c02bcb945847a"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "4f10cb5523dc7e7e0780db82392ca0006a7ddd524c3cce4d9263f3270c606dd6",
+    "p2p": "e7a02aa9390b41291f20109d808bc53a7d8fef71e1df5700ffe61d2079c669e1"
+  }
+}

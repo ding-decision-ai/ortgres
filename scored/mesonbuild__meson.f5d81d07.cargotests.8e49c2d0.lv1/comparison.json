@@ -1,0 +1,102 @@
+{
+  "instance_id": "mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1",
+  "repo": "mesonbuild/meson",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "observed_original_parent_tests",
+  "baseline": {
+    "f2p": {
+      "success": 16,
+      "failure": 7,
+      "total": 23
+    },
+    "p2p": {
+      "success": 103,
+      "failure": 0,
+      "total": 103
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "a955f5536109efceea81b2a4f0b5e23fcc7c471de5be163acebad9f05e5a18d1"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 13,
+      "failure": 20,
+      "total": 33
+    },
+    "p2p": {
+      "success": 103,
+      "failure": 0,
+      "total": 103
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "dc11e9d601fd2f11c96f9901b601737c03f7966209e33fbe356e4b4bb2578d53"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "raw_report_counts_comparable": false,
+  "paired_original_parent_counts": {
+    "baseline": {
+      "f2p": {
+        "success": 16,
+        "failure": 0,
+        "total": 16
+      },
+      "p2p": {
+        "success": 103,
+        "failure": 0,
+        "total": 103
+      },
+      "original_SKIP_count": 2
+    },
+    "ortg": {
+      "f2p": {
+        "success": 13,
+        "failure": 3,
+        "total": 16
+      },
+      "p2p": {
+        "success": 103,
+        "failure": 0,
+        "total": 103
+      },
+      "original_SKIP_count": 2
+    }
+  },
+  "raw_report_counts": {
+    "baseline": {
+      "f2p": {
+        "success": 16,
+        "failure": 7,
+        "total": 23
+      },
+      "p2p": {
+        "success": 103,
+        "failure": 0,
+        "total": 103
+      }
+    },
+    "ortg": {
+      "f2p": {
+        "success": 13,
+        "failure": 20,
+        "total": 33
+      },
+      "p2p": {
+        "success": 103,
+        "failure": 0,
+        "total": 103
+      }
+    }
+  },
+  "exact_child_pairing": {
+    "baseline_passed": 24,
+    "baseline_total": 31,
+    "ortg_passed": 14,
+    "ortg_total": 31
+  },
+  "remaining_child_identity_pairing": null,
+  "remaining_child_outcomes_each": {
+    "passed": 32
+  },
+  "pool_with_other_raw_test_counts": false
+}

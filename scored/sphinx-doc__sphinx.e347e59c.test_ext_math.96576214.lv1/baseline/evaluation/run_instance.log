@@ -1,0 +1,96 @@
+2026-10-12 05:28:07,435 - INFO - ============================================================
+2026-10-12 05:28:07,435 - INFO - Starting evaluation for instance: sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1
+2026-10-12 05:28:07,435 - INFO - Level: 1
+2026-10-12 05:28:07,435 - INFO - Attempt: 1
+2026-10-12 05:28:07,435 - INFO - ============================================================
+2026-10-12 05:28:07,441 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-12 05:28:07,441 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_sphinx-instance_6191afb1
+2026-10-12 05:28:07,442 - INFO - Image docker.io/libercoders/featurebench-specs_sphinx-instance_6191afb1 found locally
+2026-10-12 05:28:07,442 - INFO - Creating container: fb-eval-sphinx-doc__sphinx-e347e59c-test_ext_math-96576214-lv1-attempt-1-20261012-052807-442645
+2026-10-12 05:28:07,443 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-12 05:28:07,607 - INFO - Container fb-eval-sphinx-doc__sphinx-e347e59c-test_ext_math-96576214-lv1-attempt-1-20261012-052807-442645 created successfully
+2026-10-12 05:28:07,607 - INFO - Starting Level 1 evaluation for sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1
+2026-10-12 05:28:07,607 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-12 05:28:08,352 - INFO - Restore project exit code: 0
+2026-10-12 05:28:08,352 - INFO - Output: 
+2026-10-12 05:28:08,352 - INFO - Step 2: Applying patch to mask files
+2026-10-12 05:28:08,357 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-12 05:28:08,604 - INFO - Mask patch apply exit code: 0
+2026-10-12 05:28:08,604 - INFO - Mask patch output: /tmp/mask_patch.diff:1474: new blank line at EOF.
++
+/tmp/mask_patch.diff:1539: new blank line at EOF.
++
+warning: 2 lines add whitespace errors.
+
+2026-10-12 05:28:08,604 - INFO - Successfully applied mask patch
+2026-10-12 05:28:08,604 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-12 05:28:08,607 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-12 05:28:08,607 - INFO - Deleting F2P test file: /testbed/tests/test_extensions/test_ext_math.py
+2026-10-12 05:28:08,838 - INFO - Successfully deleted F2P test file: /testbed/tests/test_extensions/test_ext_math.py
+2026-10-12 05:28:08,838 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-12 05:28:08,838 - INFO - Step 4: Reinitializing git repository
+2026-10-12 05:28:10,880 - INFO - Step 5: Applying agent patch
+2026-10-12 05:28:10,883 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-12 05:28:11,108 - INFO - Patch apply exit code: 0
+2026-10-12 05:28:11,108 - INFO - Patch output: Checking patch sphinx/application.py...
+Checking patch sphinx/builders/latex/transforms.py...
+Checking patch sphinx/builders/singlehtml.py...
+Checking patch sphinx/ext/imgmath.py...
+Checking patch sphinx/transforms/post_transforms/code.py...
+Applied patch sphinx/application.py cleanly.
+Applied patch sphinx/builders/latex/transforms.py cleanly.
+Applied patch sphinx/builders/singlehtml.py cleanly.
+Applied patch sphinx/ext/imgmath.py cleanly.
+Applied patch sphinx/transforms/post_transforms/code.py cleanly.
+
+2026-10-12 05:28:11,108 - INFO - >>>>> Applied Patch
+2026-10-12 05:28:11,108 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-12 05:28:11,108 - INFO - F2P test path: /testbed/tests/test_extensions/test_ext_math.py
+2026-10-12 05:28:11,319 - INFO - Delete F2P file exit code: 0
+2026-10-12 05:28:11,319 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-12 05:28:11,531 - INFO - Reverse apply exit code: 0
+2026-10-12 05:28:11,531 - INFO - Reverse apply output: 
+2026-10-12 05:28:11,531 - INFO - Successfully restored F2P test file using test_patch
+2026-10-12 05:28:11,531 - INFO - Step 7: Running tests
+2026-10-12 05:28:11,531 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-12 05:28:11,531 - INFO - Test timeout: 600s
+2026-10-12 05:28:11,531 - INFO - Running F2P test: /testbed/tests/test_extensions/test_ext_math.py
+2026-10-12 05:28:15,455 - INFO - F2P test exit code: 1
+2026-10-12 05:28:15,455 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/6f61854, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 27 items
+
+tests/test_extensions/test_ext_math.py FEEFFFEEEFEFFFFFFE
+2026-10-12 05:28:15,455 - INFO - Saved F2P test output to artifact://8ef942ea4b271c60
+2026-10-12 05:28:15,455 - INFO - Running 5 P2P tests
+2026-10-12 05:28:15,455 - INFO - Running P2P test: /testbed/tests/test_extensions/test_ext_ifconfig.py
+2026-10-12 05:28:16,130 - INFO - P2P test /testbed/tests/test_extensions/test_ext_ifconfig.py exit code: 0
+2026-10-12 05:28:16,130 - INFO - Saved P2P test output to artifact://4fa2e72c5fc66414
+2026-10-12 05:28:16,130 - INFO - Running P2P test: /testbed/tests/test_ext_autodoc/test_ext_autodoc_private_members.py
+2026-10-12 05:28:16,898 - INFO - P2P test /testbed/tests/test_ext_autodoc/test_ext_autodoc_private_members.py exit code: 0
+2026-10-12 05:28:16,899 - INFO - Saved P2P test output to artifact://1c9293c420bf93ba
+2026-10-12 05:28:16,899 - INFO - Running P2P test: /testbed/tests/test_builders/test_build_dirhtml.py
+2026-10-12 05:28:17,658 - INFO - P2P test /testbed/tests/test_builders/test_build_dirhtml.py exit code: 0
+2026-10-12 05:28:17,659 - INFO - Saved P2P test output to artifact://74dad6826d8acb4b
+2026-10-12 05:28:17,659 - INFO - Running P2P test: /testbed/tests/test_builders/test_build_text.py
+2026-10-12 05:28:18,539 - INFO - P2P test /testbed/tests/test_builders/test_build_text.py exit code: 0
+2026-10-12 05:28:18,539 - INFO - Saved P2P test output to artifact://14b9726efff4d1ac
+2026-10-12 05:28:18,539 - INFO - Running P2P test: /testbed/tests/test_ext_autodoc/test_ext_autodoc_automodule.py
+2026-10-12 05:28:19,376 - INFO - P2P test /testbed/tests/test_ext_autodoc/test_ext_autodoc_automodule.py exit code: 0
+2026-10-12 05:28:19,377 - INFO - Saved P2P test output to artifact://e5cdb6017ed4ecc0
+2026-10-12 05:28:19,378 - INFO - ============================================================
+2026-10-12 05:28:19,378 - INFO - Evaluation completed for sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1
+2026-10-12 05:28:19,378 - INFO - Resolved: False
+2026-10-12 05:28:19,378 - INFO - F2P Pass rate: 0.0741
+2026-10-12 05:28:19,378 - INFO - ============================================================
+2026-10-12 05:28:19,378 - INFO - Stopping and removing container
+2026-10-12 05:28:29,731 - INFO - Container removed successfully

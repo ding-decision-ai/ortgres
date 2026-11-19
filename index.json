@@ -1,0 +1,2149 @@
+{
+  "benchmark": "FeatureBench",
+  "artifact_kind": "case_comparisons",
+  "benchmark_aggregate": null,
+  "cases": [
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 16,
+          "failure": 1,
+          "total": 17
+        },
+        "p2p": {
+          "success": 98,
+          "failure": 0,
+          "total": 98
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 11,
+          "failure": 6,
+          "total": 17
+        },
+        "p2p": {
+          "success": 98,
+          "failure": 0,
+          "total": 98
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_comparison.445d81a3.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 56,
+          "failure": 4,
+          "total": 60
+        },
+        "p2p": {
+          "success": 158,
+          "failure": 0,
+          "total": 158
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 58,
+          "failure": 2,
+          "total": 60
+        },
+        "p2p": {
+          "success": 158,
+          "failure": 0,
+          "total": 158
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_comparison.445d81a3.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_comparison.445d81a3.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_comparison.445d81a3.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_compressed.8daeb7d6.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 7,
+          "failure": 83,
+          "total": 90
+        },
+        "p2p": {
+          "success": 398,
+          "failure": 2,
+          "total": 400
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 17,
+          "failure": 73,
+          "total": 90
+        },
+        "p2p": {
+          "success": 398,
+          "failure": 2,
+          "total": 400
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_compressed.8daeb7d6.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_compressed.8daeb7d6.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_compressed.8daeb7d6.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 6,
+          "failure": 30,
+          "total": 36
+        },
+        "p2p": {
+          "success": 711,
+          "failure": 0,
+          "total": 711
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 7,
+          "failure": 29,
+          "total": 36
+        },
+        "p2p": {
+          "success": 711,
+          "failure": 0,
+          "total": 711
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_compression_failures.48dc420b.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_containers.6079987d.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 45,
+          "failure": 3,
+          "total": 48
+        },
+        "p2p": {
+          "success": 160,
+          "failure": 0,
+          "total": 160
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 45,
+          "failure": 3,
+          "total": 48
+        },
+        "p2p": {
+          "success": 160,
+          "failure": 0,
+          "total": 160
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_containers.6079987d.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_containers.6079987d.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_containers.6079987d.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 27,
+          "failure": 0,
+          "total": 27
+        },
+        "p2p": {
+          "success": 53,
+          "failure": 1,
+          "total": 54
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 27,
+          "failure": 0,
+          "total": 27
+        },
+        "p2p": {
+          "success": 53,
+          "failure": 1,
+          "total": 54
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_functions.40530bf7.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 6,
+          "failure": 4,
+          "total": 10
+        },
+        "p2p": {
+          "success": 48,
+          "failure": 0,
+          "total": 48
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 6,
+          "failure": 4,
+          "total": 10
+        },
+        "p2p": {
+          "success": 48,
+          "failure": 0,
+          "total": 48
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_functions.40530bf7.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_functions.40530bf7.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_functions.40530bf7.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 28,
+          "failure": 932,
+          "total": 960
+        },
+        "p2p": {
+          "success": 66,
+          "failure": 0,
+          "total": 66
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 28,
+          "failure": 932,
+          "total": 960
+        },
+        "p2p": {
+          "success": 66,
+          "failure": 0,
+          "total": 66
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 24,
+          "failure": 20,
+          "total": 44
+        },
+        "p2p": {
+          "success": 279,
+          "failure": 1,
+          "total": 280
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 28,
+          "failure": 16,
+          "total": 44
+        },
+        "p2p": {
+          "success": 279,
+          "failure": 1,
+          "total": 280
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_realizations.5b9cf523.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 53,
+          "failure": 1,
+          "total": 54
+        },
+        "p2p": {
+          "success": 75,
+          "failure": 0,
+          "total": 75
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 53,
+          "failure": 1,
+          "total": 54
+        },
+        "p2p": {
+          "success": 75,
+          "failure": 0,
+          "total": 75
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_realizations.5b9cf523.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_realizations.5b9cf523.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_realizations.5b9cf523.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_table.48eef659.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 32,
+          "failure": 11,
+          "total": 43
+        },
+        "p2p": {
+          "success": 191,
+          "failure": 0,
+          "total": 191
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 40,
+          "failure": 3,
+          "total": 43
+        },
+        "p2p": {
+          "success": 191,
+          "failure": 0,
+          "total": 191
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_table.48eef659.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_table.48eef659.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_table.48eef659.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_tiled_compression.a4fe298a.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 319,
+          "failure": 29,
+          "total": 348
+        },
+        "p2p": {
+          "success": 21,
+          "failure": 0,
+          "total": 21
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 343,
+          "failure": 5,
+          "total": 348
+        },
+        "p2p": {
+          "success": 21,
+          "failure": 0,
+          "total": 21
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_tiled_compression.a4fe298a.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_tiled_compression.a4fe298a.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_tiled_compression.a4fe298a.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_tree.261bac3c.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 2,
+          "failure": 27,
+          "total": 29
+        },
+        "p2p": {
+          "success": 66,
+          "failure": 12,
+          "total": 78
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 22,
+          "failure": 7,
+          "total": 29
+        },
+        "p2p": {
+          "success": 66,
+          "failure": 12,
+          "total": 78
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_tree.261bac3c.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_tree.261bac3c.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_tree.261bac3c.lv1/README.md"
+    },
+    {
+      "instance_id": "astropy__astropy.b0db0daa.test_vo.8fd473ce.lv1",
+      "repo": "astropy/astropy",
+      "baseline": {
+        "f2p": {
+          "success": 178,
+          "failure": 6,
+          "total": 184
+        },
+        "p2p": {
+          "success": 16,
+          "failure": 0,
+          "total": 16
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 179,
+          "failure": 5,
+          "total": 184
+        },
+        "p2p": {
+          "success": 16,
+          "failure": 0,
+          "total": 16
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/astropy__astropy.b0db0daa.test_vo.8fd473ce.lv1/comparison.json",
+      "conditions": "scored/astropy__astropy.b0db0daa.test_vo.8fd473ce.lv1/conditions.json",
+      "readme": "scored/astropy__astropy.b0db0daa.test_vo.8fd473ce.lv1/README.md"
+    },
+    {
+      "instance_id": "fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1",
+      "repo": "fastapi/fastapi",
+      "baseline": {
+        "f2p": {
+          "success": 6,
+          "failure": 4,
+          "total": 10
+        },
+        "p2p": {
+          "success": 48,
+          "failure": 0,
+          "total": 48
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 6,
+          "failure": 4,
+          "total": 10
+        },
+        "p2p": {
+          "success": 48,
+          "failure": 0,
+          "total": 48
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1/comparison.json",
+      "conditions": "scored/fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1/conditions.json",
+      "readme": "scored/fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1/README.md"
+    },
+    {
+      "instance_id": "matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1",
+      "repo": "matplotlib/matplotlib",
+      "baseline": {
+        "f2p": {
+          "success": 28,
+          "failure": 1,
+          "total": 29
+        },
+        "p2p": {
+          "success": 29,
+          "failure": 0,
+          "total": 29
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 29,
+          "failure": 0,
+          "total": 29
+        },
+        "p2p": {
+          "success": 29,
+          "failure": 0,
+          "total": 29
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1/comparison.json",
+      "conditions": "scored/matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1/conditions.json",
+      "readme": "scored/matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1/README.md"
+    },
+    {
+      "instance_id": "mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1",
+      "repo": "mesonbuild/meson",
+      "baseline": {
+        "f2p": {
+          "success": 16,
+          "failure": 7,
+          "total": 23
+        },
+        "p2p": {
+          "success": 103,
+          "failure": 0,
+          "total": 103
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 13,
+          "failure": 20,
+          "total": 33
+        },
+        "p2p": {
+          "success": 103,
+          "failure": 0,
+          "total": 103
+        }
+      },
+      "comparison_metric": "observed_original_parent_tests",
+      "comparison": "scored/mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1/comparison.json",
+      "conditions": "scored/mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1/conditions.json",
+      "readme": "scored/mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1/README.md",
+      "paired_original_parent_counts": {
+        "baseline": {
+          "f2p": {
+            "success": 16,
+            "failure": 0,
+            "total": 16
+          },
+          "p2p": {
+            "success": 103,
+            "failure": 0,
+            "total": 103
+          },
+          "original_SKIP_count": 2
+        },
+        "ortg": {
+          "f2p": {
+            "success": 13,
+            "failure": 3,
+            "total": 16
+          },
+          "p2p": {
+            "success": 103,
+            "failure": 0,
+            "total": 103
+          },
+          "original_SKIP_count": 2
+        }
+      }
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_client.42de781c.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 52,
+          "failure": 3,
+          "total": 55
+        },
+        "p2p": {
+          "success": 84,
+          "failure": 0,
+          "total": 84
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 52,
+          "failure": 3,
+          "total": 55
+        },
+        "p2p": {
+          "success": 84,
+          "failure": 0,
+          "total": 84
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_client.42de781c.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_client.42de781c.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_client.42de781c.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 0,
+          "failure": 12,
+          "total": 12
+        },
+        "p2p": {
+          "success": 80,
+          "failure": 0,
+          "total": 80
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 12,
+          "failure": 0,
+          "total": 12
+        },
+        "p2p": {
+          "success": 80,
+          "failure": 0,
+          "total": 80
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_client_webhooks.75e39b52.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 10,
+          "failure": 9,
+          "total": 19
+        },
+        "p2p": {
+          "success": 122,
+          "failure": 0,
+          "total": 122
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 10,
+          "failure": 9,
+          "total": 19
+        },
+        "p2p": {
+          "success": 122,
+          "failure": 0,
+          "total": 122
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_genai_eval_utils.2d5441f2.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 19,
+          "failure": 1,
+          "total": 20
+        },
+        "p2p": {
+          "success": 71,
+          "failure": 0,
+          "total": 71
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 19,
+          "failure": 1,
+          "total": 20
+        },
+        "p2p": {
+          "success": 71,
+          "failure": 0,
+          "total": 71
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_genai_eval_utils.2d5441f2.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_genai_eval_utils.2d5441f2.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_genai_eval_utils.2d5441f2.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 22,
+          "failure": 21,
+          "total": 43
+        },
+        "p2p": {
+          "success": 162,
+          "failure": 0,
+          "total": 162
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 20,
+          "failure": 23,
+          "total": 43
+        },
+        "p2p": {
+          "success": 162,
+          "failure": 0,
+          "total": 162
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 11,
+          "failure": 7,
+          "total": 18
+        },
+        "p2p": {
+          "success": 88,
+          "failure": 0,
+          "total": 88
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 10,
+          "failure": 8,
+          "total": 18
+        },
+        "p2p": {
+          "success": 88,
+          "failure": 0,
+          "total": 88
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 9,
+          "failure": 4,
+          "total": 13
+        },
+        "p2p": {
+          "success": 61,
+          "failure": 0,
+          "total": 61
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 13,
+          "failure": 0,
+          "total": 13
+        },
+        "p2p": {
+          "success": 61,
+          "failure": 0,
+          "total": 61
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 0,
+          "failure": 15,
+          "total": 15
+        },
+        "p2p": {
+          "success": 112,
+          "failure": 0,
+          "total": 112
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 10,
+          "failure": 5,
+          "total": 15
+        },
+        "p2p": {
+          "success": 112,
+          "failure": 0,
+          "total": 112
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_numpy_dataset.1beaad57.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_rest_store_webhooks.6d85971c.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 0,
+          "failure": 12,
+          "total": 12
+        },
+        "p2p": {
+          "success": 195,
+          "failure": 0,
+          "total": 195
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 12,
+          "failure": 0,
+          "total": 12
+        },
+        "p2p": {
+          "success": 195,
+          "failure": 0,
+          "total": 195
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_rest_store_webhooks.6d85971c.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_rest_store_webhooks.6d85971c.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_rest_store_webhooks.6d85971c.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_security.98fcde1d.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 28,
+          "failure": 2,
+          "total": 30
+        },
+        "p2p": {
+          "success": 94,
+          "failure": 0,
+          "total": 94
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 29,
+          "failure": 1,
+          "total": 30
+        },
+        "p2p": {
+          "success": 94,
+          "failure": 0,
+          "total": 94
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_security.98fcde1d.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_security.98fcde1d.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_security.98fcde1d.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_utils.3c9647bf.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 26,
+          "failure": 7,
+          "total": 33
+        },
+        "p2p": {
+          "success": 52,
+          "failure": 0,
+          "total": 52
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 27,
+          "failure": 6,
+          "total": 33
+        },
+        "p2p": {
+          "success": 52,
+          "failure": 0,
+          "total": 52
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_utils.3c9647bf.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_utils.3c9647bf.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_utils.3c9647bf.lv1/README.md"
+    },
+    {
+      "instance_id": "mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1",
+      "repo": "mlflow/mlflow",
+      "baseline": {
+        "f2p": {
+          "success": 7,
+          "failure": 4,
+          "total": 11
+        },
+        "p2p": {
+          "success": 54,
+          "failure": 0,
+          "total": 54
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 7,
+          "failure": 4,
+          "total": 11
+        },
+        "p2p": {
+          "success": 54,
+          "failure": 0,
+          "total": 54
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1/comparison.json",
+      "conditions": "scored/mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1/conditions.json",
+      "readme": "scored/mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 15,
+          "failure": 1,
+          "total": 16
+        },
+        "p2p": {
+          "success": 159,
+          "failure": 0,
+          "total": 159
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 16,
+          "failure": 0,
+          "total": 16
+        },
+        "p2p": {
+          "success": 159,
+          "failure": 0,
+          "total": 159
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_bar.123ed709.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 257,
+          "total": 258
+        },
+        "p2p": {
+          "success": 162,
+          "failure": 0,
+          "total": 162
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 1,
+          "failure": 257,
+          "total": 258
+        },
+        "p2p": {
+          "success": 162,
+          "failure": 0,
+          "total": 162
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_line.25304a8b.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 11,
+          "failure": 18,
+          "total": 29
+        },
+        "p2p": {
+          "success": 199,
+          "failure": 0,
+          "total": 199
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 18,
+          "failure": 11,
+          "total": 29
+        },
+        "p2p": {
+          "success": 199,
+          "failure": 0,
+          "total": 199
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_line.25304a8b.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_line.25304a8b.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_line.25304a8b.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 196,
+          "failure": 6,
+          "total": 202
+        },
+        "p2p": {
+          "success": 245,
+          "failure": 0,
+          "total": 245
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 196,
+          "failure": 6,
+          "total": 202
+        },
+        "p2p": {
+          "success": 245,
+          "failure": 0,
+          "total": 245
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 34,
+          "failure": 18,
+          "total": 52
+        },
+        "p2p": {
+          "success": 218,
+          "failure": 0,
+          "total": 218
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 36,
+          "failure": 16,
+          "total": 52
+        },
+        "p2p": {
+          "success": 218,
+          "failure": 0,
+          "total": 218
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 14,
+          "failure": 105,
+          "total": 119
+        },
+        "p2p": {
+          "success": 354,
+          "failure": 0,
+          "total": 354
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 14,
+          "failure": 105,
+          "total": 119
+        },
+        "p2p": {
+          "success": 354,
+          "failure": 0,
+          "total": 354
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 82,
+          "failure": 21,
+          "total": 103
+        },
+        "p2p": {
+          "success": 96,
+          "failure": 0,
+          "total": 96
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 98,
+          "failure": 5,
+          "total": 103
+        },
+        "p2p": {
+          "success": 96,
+          "failure": 0,
+          "total": 96
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_scales.d9dcdef6.lv1/README.md"
+    },
+    {
+      "instance_id": "mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1",
+      "repo": "mwaskom/seaborn",
+      "baseline": {
+        "f2p": {
+          "success": 52,
+          "failure": 17,
+          "total": 69
+        },
+        "p2p": {
+          "success": 321,
+          "failure": 0,
+          "total": 321
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 55,
+          "failure": 14,
+          "total": 69
+        },
+        "p2p": {
+          "success": 321,
+          "failure": 0,
+          "total": 321
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1/comparison.json",
+      "conditions": "scored/mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1/conditions.json",
+      "readme": "scored/mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_all_methods.c74b49a1.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 160,
+          "failure": 4,
+          "total": 164
+        },
+        "p2p": {
+          "success": 212,
+          "failure": 0,
+          "total": 212
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 164,
+          "failure": 0,
+          "total": 164
+        },
+        "p2p": {
+          "success": 212,
+          "failure": 0,
+          "total": 212
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_all_methods.c74b49a1.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_all_methods.c74b49a1.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_all_methods.c74b49a1.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_col.a592871d.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 26,
+          "total": 27
+        },
+        "p2p": {
+          "success": 213,
+          "failure": 0,
+          "total": 213
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 1,
+          "failure": 26,
+          "total": 27
+        },
+        "p2p": {
+          "success": 213,
+          "failure": 0,
+          "total": 213
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_col.a592871d.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_col.a592871d.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_col.a592871d.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 53,
+          "total": 54
+        },
+        "p2p": {
+          "success": 218,
+          "failure": 0,
+          "total": 218
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 1,
+          "failure": 53,
+          "total": 54
+        },
+        "p2p": {
+          "success": 218,
+          "failure": 0,
+          "total": 218
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_groupby_shift_diff.e13d5358.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 35,
+          "failure": 12,
+          "total": 47
+        },
+        "p2p": {
+          "success": 447,
+          "failure": 0,
+          "total": 447
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 39,
+          "failure": 8,
+          "total": 47
+        },
+        "p2p": {
+          "success": 447,
+          "failure": 0,
+          "total": 447
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_groupby_shift_diff.e13d5358.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_groupby_shift_diff.e13d5358.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_groupby_shift_diff.e13d5358.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 26,
+          "failure": 3,
+          "total": 29
+        },
+        "p2p": {
+          "success": 645,
+          "failure": 0,
+          "total": 645
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 29,
+          "failure": 0,
+          "total": 29
+        },
+        "p2p": {
+          "success": 645,
+          "failure": 0,
+          "total": 645
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_http_headers.aafb551e.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 39,
+          "total": 40
+        },
+        "p2p": {
+          "success": 64,
+          "failure": 0,
+          "total": 64
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 5,
+          "failure": 35,
+          "total": 40
+        },
+        "p2p": {
+          "success": 64,
+          "failure": 0,
+          "total": 64
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 6,
+          "failure": 9,
+          "total": 15
+        },
+        "p2p": {
+          "success": 161,
+          "failure": 0,
+          "total": 161
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 6,
+          "failure": 9,
+          "total": 15
+        },
+        "p2p": {
+          "success": 161,
+          "failure": 0,
+          "total": 161
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_quantile.f4b69e49.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 316,
+          "failure": 5,
+          "total": 321
+        },
+        "p2p": {
+          "success": 657,
+          "failure": 0,
+          "total": 657
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 318,
+          "failure": 3,
+          "total": 321
+        },
+        "p2p": {
+          "success": 657,
+          "failure": 0,
+          "total": 657
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_quantile.f4b69e49.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_quantile.f4b69e49.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_quantile.f4b69e49.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_sample.5d2ba03e.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 12,
+          "failure": 2,
+          "total": 14
+        },
+        "p2p": {
+          "success": 95,
+          "failure": 0,
+          "total": 95
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 13,
+          "failure": 1,
+          "total": 14
+        },
+        "p2p": {
+          "success": 95,
+          "failure": 0,
+          "total": 95
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_sample.5d2ba03e.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_sample.5d2ba03e.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_sample.5d2ba03e.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_spec_conformance.3aff206b.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 14,
+          "failure": 2,
+          "total": 16
+        },
+        "p2p": {
+          "success": 1948,
+          "failure": 0,
+          "total": 1948
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 16,
+          "failure": 0,
+          "total": 16
+        },
+        "p2p": {
+          "success": 1948,
+          "failure": 0,
+          "total": 1948
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_spec_conformance.3aff206b.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_spec_conformance.3aff206b.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_spec_conformance.3aff206b.lv1/README.md"
+    },
+    {
+      "instance_id": "pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1",
+      "repo": "pandas-dev/pandas",
+      "baseline": {
+        "f2p": {
+          "success": 11,
+          "failure": 1,
+          "total": 12
+        },
+        "p2p": {
+          "success": 167,
+          "failure": 0,
+          "total": 167
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 11,
+          "failure": 1,
+          "total": 12
+        },
+        "p2p": {
+          "success": 167,
+          "failure": 0,
+          "total": 167
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1/comparison.json",
+      "conditions": "scored/pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1/conditions.json",
+      "readme": "scored/pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1/README.md"
+    },
+    {
+      "instance_id": "pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1",
+      "repo": "pydata/xarray",
+      "baseline": {
+        "f2p": {
+          "success": 10,
+          "failure": 4,
+          "total": 14
+        },
+        "p2p": {
+          "success": 74,
+          "failure": 0,
+          "total": 74
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 11,
+          "failure": 3,
+          "total": 14
+        },
+        "p2p": {
+          "success": 74,
+          "failure": 0,
+          "total": 74
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1/comparison.json",
+      "conditions": "scored/pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1/conditions.json",
+      "readme": "scored/pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1/README.md"
+    },
+    {
+      "instance_id": "pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1",
+      "repo": "pydata/xarray",
+      "baseline": {
+        "f2p": {
+          "success": 33,
+          "failure": 1,
+          "total": 34
+        },
+        "p2p": {
+          "success": 40,
+          "failure": 0,
+          "total": 40
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 31,
+          "failure": 3,
+          "total": 34
+        },
+        "p2p": {
+          "success": 40,
+          "failure": 0,
+          "total": 40
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1/comparison.json",
+      "conditions": "scored/pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1/conditions.json",
+      "readme": "scored/pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1/README.md"
+    },
+    {
+      "instance_id": "pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1",
+      "repo": "pypa/hatch",
+      "baseline": {
+        "f2p": {
+          "success": 2,
+          "failure": 17,
+          "total": 19
+        },
+        "p2p": {
+          "success": 144,
+          "failure": 0,
+          "total": 144
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 9,
+          "failure": 10,
+          "total": 19
+        },
+        "p2p": {
+          "success": 144,
+          "failure": 0,
+          "total": 144
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1/comparison.json",
+      "conditions": "scored/pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1/conditions.json",
+      "readme": "scored/pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1/README.md"
+    },
+    {
+      "instance_id": "pypa__packaging.013f3b03.test_metadata.e00b5801.lv1",
+      "repo": "pypa/packaging",
+      "baseline": {
+        "f2p": {
+          "success": 275,
+          "failure": 19,
+          "total": 294
+        },
+        "p2p": {
+          "success": 3508,
+          "failure": 0,
+          "total": 3508
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 280,
+          "failure": 14,
+          "total": 294
+        },
+        "p2p": {
+          "success": 3508,
+          "failure": 0,
+          "total": 3508
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pypa__packaging.013f3b03.test_metadata.e00b5801.lv1/comparison.json",
+      "conditions": "scored/pypa__packaging.013f3b03.test_metadata.e00b5801.lv1/conditions.json",
+      "readme": "scored/pypa__packaging.013f3b03.test_metadata.e00b5801.lv1/README.md"
+    },
+    {
+      "instance_id": "pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1",
+      "repo": "pytest-dev/pytest",
+      "baseline": {
+        "f2p": {
+          "success": 15,
+          "failure": 14,
+          "total": 29
+        },
+        "p2p": {
+          "success": 11,
+          "failure": 4,
+          "total": 15
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 15,
+          "failure": 14,
+          "total": 29
+        },
+        "p2p": {
+          "success": 11,
+          "failure": 4,
+          "total": 15
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1/comparison.json",
+      "conditions": "scored/pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1/conditions.json",
+      "readme": "scored/pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1/README.md"
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1",
+      "repo": "scikit-learn/scikit-learn",
+      "baseline": {
+        "f2p": {
+          "success": 9,
+          "failure": 1,
+          "total": 10
+        },
+        "p2p": {
+          "success": 433,
+          "failure": 0,
+          "total": 433
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 9,
+          "failure": 1,
+          "total": 10
+        },
+        "p2p": {
+          "success": 433,
+          "failure": 0,
+          "total": 433
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1/comparison.json",
+      "conditions": "scored/scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1/conditions.json",
+      "readme": "scored/scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1/README.md"
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn.5741bac9.test_public_functions.28421aef.lv1",
+      "repo": "scikit-learn/scikit-learn",
+      "baseline": {
+        "f2p": {
+          "success": 215,
+          "failure": 3,
+          "total": 218
+        },
+        "p2p": {
+          "success": 788,
+          "failure": 0,
+          "total": 788
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 218,
+          "failure": 0,
+          "total": 218
+        },
+        "p2p": {
+          "success": 788,
+          "failure": 0,
+          "total": 788
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/scikit-learn__scikit-learn.5741bac9.test_public_functions.28421aef.lv1/comparison.json",
+      "conditions": "scored/scikit-learn__scikit-learn.5741bac9.test_public_functions.28421aef.lv1/conditions.json",
+      "readme": "scored/scikit-learn__scikit-learn.5741bac9.test_public_functions.28421aef.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_build_gettext.2721e644.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 12,
+          "total": 13
+        },
+        "p2p": {
+          "success": 137,
+          "failure": 0,
+          "total": 137
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 1,
+          "failure": 12,
+          "total": 13
+        },
+        "p2p": {
+          "success": 137,
+          "failure": 0,
+          "total": 137
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_build_gettext.2721e644.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_build_gettext.2721e644.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_build_gettext.2721e644.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_build_html.d253ea54.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 26,
+          "failure": 38,
+          "total": 64
+        },
+        "p2p": {
+          "success": 134,
+          "failure": 0,
+          "total": 134
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 27,
+          "failure": 37,
+          "total": 64
+        },
+        "p2p": {
+          "success": 134,
+          "failure": 0,
+          "total": 134
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_build_html.d253ea54.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_build_html.d253ea54.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_build_html.d253ea54.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_build_linkcheck.20428c8f.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 44,
+          "total": 45
+        },
+        "p2p": {
+          "success": 30,
+          "failure": 0,
+          "total": 30
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 1,
+          "failure": 44,
+          "total": 45
+        },
+        "p2p": {
+          "success": 30,
+          "failure": 0,
+          "total": 30
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_build_linkcheck.20428c8f.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_build_linkcheck.20428c8f.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_build_linkcheck.20428c8f.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 3,
+          "failure": 7,
+          "total": 10
+        },
+        "p2p": {
+          "success": 32,
+          "failure": 0,
+          "total": 32
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 3,
+          "failure": 7,
+          "total": 10
+        },
+        "p2p": {
+          "success": 32,
+          "failure": 0,
+          "total": 32
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 1,
+          "failure": 10,
+          "total": 11
+        },
+        "p2p": {
+          "success": 124,
+          "failure": 0,
+          "total": 124
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 1,
+          "failure": 10,
+          "total": 11
+        },
+        "p2p": {
+          "success": 124,
+          "failure": 0,
+          "total": 124
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 18,
+          "failure": 10,
+          "total": 28
+        },
+        "p2p": {
+          "success": 28,
+          "failure": 0,
+          "total": 28
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 21,
+          "failure": 7,
+          "total": 28
+        },
+        "p2p": {
+          "success": 28,
+          "failure": 0,
+          "total": 28
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 2,
+          "failure": 25,
+          "total": 27
+        },
+        "p2p": {
+          "success": 29,
+          "failure": 0,
+          "total": 29
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 2,
+          "failure": 25,
+          "total": 27
+        },
+        "p2p": {
+          "success": 29,
+          "failure": 0,
+          "total": 29
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_ext_napoleon_docstring.50dabe1f.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 47,
+          "failure": 4,
+          "total": 51
+        },
+        "p2p": {
+          "success": 20,
+          "failure": 0,
+          "total": 20
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 47,
+          "failure": 4,
+          "total": 51
+        },
+        "p2p": {
+          "success": 20,
+          "failure": 0,
+          "total": 20
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_ext_napoleon_docstring.50dabe1f.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_ext_napoleon_docstring.50dabe1f.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_ext_napoleon_docstring.50dabe1f.lv1/README.md"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_util_nodes.08cdc62d.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 20,
+          "failure": 7,
+          "total": 27
+        },
+        "p2p": {
+          "success": 95,
+          "failure": 0,
+          "total": 95
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 27,
+          "failure": 0,
+          "total": 27
+        },
+        "p2p": {
+          "success": 95,
+          "failure": 0,
+          "total": 95
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_util_nodes.08cdc62d.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_util_nodes.08cdc62d.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_util_nodes.08cdc62d.lv1/README.md"
+    },
+    {
+      "instance_id": "sympy__sympy.c1097516.test_smtlib.69d52b90.lv1",
+      "repo": "sympy/sympy",
+      "baseline": {
+        "f2p": {
+          "success": 0,
+          "failure": 16,
+          "total": 16
+        },
+        "p2p": {
+          "success": 50,
+          "failure": 0,
+          "total": 50
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 0,
+          "failure": 16,
+          "total": 16
+        },
+        "p2p": {
+          "success": 50,
+          "failure": 0,
+          "total": 50
+        }
+      },
+      "comparison_metric": "official_report_test_counts",
+      "comparison": "scored/sympy__sympy.c1097516.test_smtlib.69d52b90.lv1/comparison.json",
+      "conditions": "scored/sympy__sympy.c1097516.test_smtlib.69d52b90.lv1/conditions.json",
+      "readme": "scored/sympy__sympy.c1097516.test_smtlib.69d52b90.lv1/README.md"
+    }
+  ],
+  "independent_cases": [
+    {
+      "instance_id": "sphinx-doc__sphinx.e347e59c.test_domain_c.4068b9e8.lv1",
+      "repo": "sphinx-doc/sphinx",
+      "baseline": {
+        "f2p": {
+          "success": 28,
+          "failure": 7,
+          "total": 35
+        },
+        "p2p": {
+          "success": 81,
+          "failure": 0,
+          "total": 81
+        }
+      },
+      "ortg": {
+        "f2p": {
+          "success": 35,
+          "failure": 0,
+          "total": 35
+        },
+        "p2p": {
+          "success": 81,
+          "failure": 0,
+          "total": 81
+        }
+      },
+      "comparison_metric": "independent_different_network_conditions",
+      "comparison": "scored/sphinx-doc__sphinx.e347e59c.test_domain_c.4068b9e8.lv1/comparison.json",
+      "conditions": "scored/sphinx-doc__sphinx.e347e59c.test_domain_c.4068b9e8.lv1/conditions.json",
+      "readme": "scored/sphinx-doc__sphinx.e347e59c.test_domain_c.4068b9e8.lv1/README.md"
+    }
+  ]
+}

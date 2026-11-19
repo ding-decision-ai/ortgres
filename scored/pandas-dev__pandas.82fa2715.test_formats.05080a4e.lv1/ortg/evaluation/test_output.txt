@@ -1,0 +1,679 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /testbed/build/cp311
+Build type: native build
+Project name: pandas
+Project version: 0+untagged.1.gdb303dd.dirty
+C compiler for the host machine: cc (gcc 11.4.0 "cc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C linker for the host machine: cc ld.bfd 2.38
+C++ compiler for the host machine: c++ (gcc 11.4.0 "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C++ linker for the host machine: c++ ld.bfd 2.38
+Cython compiler for the host machine: cython (cython 3.2.1)
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python found: YES (/opt/miniconda3/envs/testbed/bin/python)
+Program cython found: YES (/opt/miniconda3/envs/testbed/bin/cython)
+Configuring free_threading_config.pxi using configuration
+Build targets in project: 56
+
+pandas 0+untagged.1.gdb303dd.dirty
+
+  User defined options
+    Native files: /testbed/build/cp311/meson-python-native-file.ini
+    buildtype   : release
+    vsenv       : True
+    b_ndebug    : if-release
+    b_vscrt     : md
+
+Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at /opt/miniconda3/envs/testbed/bin/ninja
+
+Visual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:
+/opt/miniconda3/envs/testbed/bin/meson compile -C .
+[1/155] Generating pandas/_libs/intervaltree_helper_pxi with a custom command
+[2/155] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command
+[3/155] Generating pandas/_libs/algos_take_helper_pxi with a custom command
+[4/155] Generating pandas/_libs/algos_common_helper_pxi with a custom command
+[5/155] Generating pandas/_libs/index_class_helper_pxi with a custom command
+[6/155] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command
+[7/155] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command
+[8/155] Generating pandas/_libs/sparse_op_helper_pxi with a custom command
+[9/155] Compiling Cython source /testbed/pandas/_libs/indexing.pyx
+[10/155] Compiling Cython source /testbed/pandas/_libs/tslibs/base.pyx
+[11/155] Compiling Cython source /testbed/pandas/_libs/ops_dispatch.pyx
+[12/155] Compiling Cython source /testbed/pandas/_libs/tslibs/ccalendar.pyx
+[13/155] Compiling Cython source /testbed/pandas/_libs/sas.pyx
+[14/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timezones.pyx
+[15/155] Compiling Cython source /testbed/pandas/_libs/properties.pyx
+[16/155] Compiling Cython source /testbed/pandas/_libs/reshape.pyx
+[17/155] Compiling Cython source /testbed/pandas/_libs/tslibs/fields.pyx
+[18/155] Compiling Cython source /testbed/pandas/_libs/missing.pyx
+[19/155] Compiling Cython source /testbed/pandas/_libs/ops.pyx
+[20/155] Compiling Cython source /testbed/pandas/_libs/hashing.pyx
+[21/155] Compiling Cython source /testbed/pandas/_libs/tslibs/conversion.pyx
+[22/155] Compiling Cython source /testbed/pandas/_libs/tslibs/nattype.pyx
+[23/155] Compiling Cython source /testbed/pandas/_libs/tslibs/dtypes.pyx
+[24/155] Compiling Cython source /testbed/pandas/_libs/tslibs/vectorized.pyx
+[25/155] Compiling Cython source /testbed/pandas/_libs/tslibs/tzconversion.pyx
+[26/155] Compiling Cython source /testbed/pandas/_libs/byteswap.pyx
+[27/155] Compiling Cython source /testbed/pandas/_libs/tslibs/np_datetime.pyx
+[28/155] Compiling Cython source /testbed/pandas/_libs/tslibs/parsing.pyx
+[29/155] Compiling Cython source /testbed/pandas/_libs/arrays.pyx
+[30/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timestamps.pyx
+[31/155] Compiling Cython source /testbed/pandas/_libs/tslibs/strptime.pyx
+[32/155] Compiling Cython source /testbed/pandas/_libs/internals.pyx
+warning: /testbed/pandas/_libs/internals.pyx:31:0: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:916:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:921:12: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:955:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:973:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:994:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+[33/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/.._src_parser_tokenizer.c.o
+[34/155] Compiling Cython source /testbed/pandas/_libs/testing.pyx
+[35/155] Compiling Cython source /testbed/pandas/_libs/tslibs/period.pyx
+[36/155] Compiling Cython source /testbed/pandas/_libs/tslib.pyx
+[37/155] Compiling C object pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_base.pyx.c.o
+[38/155] Compiling Cython source /testbed/pandas/_libs/writers.pyx
+[39/155] Compiling Cython source /testbed/pandas/_libs/parsers.pyx
+[40/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timedeltas.pyx
+[41/155] Compiling Cython source /testbed/pandas/_libs/lib.pyx
+[42/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime_strings.c.o
+[43/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime.c.o
+[44/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_date_conversions.c.o
+[45/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[46/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_pd_datetime.c.o
+[47/155] Compiling C object pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_ccalendar.pyx.c.o
+[48/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[49/155] Compiling Cython source /testbed/pandas/_libs/window/indexers.pyx
+[50/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_pd_parser.c.o
+[51/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[52/155] Compiling C object pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_indexing.pyx.c.o
+[53/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_ujson.c.o
+[54/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_JSONtoObj.c.o
+[55/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsonenc.c.o
+[56/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[57/155] Compiling C object pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashing.pyx.c.o
+[58/155] Compiling Cython source /testbed/pandas/_libs/tslibs/offsets.pyx
+[59/155] Compiling Cython source /testbed/pandas/_libs/index.pyx
+[60/155] Compiling C object pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_arrays.pyx.c.o
+[61/155] Compiling C object pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_vectorized.pyx.c.o
+[62/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[63/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsondec.c.o
+[64/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_objToJSON.c.o
+[65/155] Compiling Cython source /testbed/pandas/_libs/interval.pyx
+[66/155] Compiling Cython source /testbed/pandas/_libs/sparse.pyx
+[67/155] Compiling Cython source /testbed/pandas/_libs/window/aggregations.pyx
+[68/155] Compiling Cython source /testbed/pandas/_libs/join.pyx
+[69/155] Compiling C object pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_np_datetime.pyx.c.o
+[70/155] Compiling C object pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_byteswap.pyx.c.o
+[71/155] Compiling C object pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timezones.pyx.c.o
+[72/155] Compiling C object pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops_dispatch.pyx.c.o
+[73/155] Generating pandas/__init__.py with a custom command
+[74/155] Linking target pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so
+[75/155] Generating write_version_file with a custom command
+[76/155] Linking target pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so
+[77/155] Linking target pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so
+[78/155] Linking target pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so
+[79/155] Compiling C object _cyutility.cpython-311-x86_64-linux-gnu.so.p/meson-generated_..__cyutility.c.o
+[80/155] Compiling C object pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_conversion.pyx.c.o
+[81/155] Linking target pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so
+[82/155] Linking target pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so
+[83/155] Linking target _cyutility.cpython-311-x86_64-linux-gnu.so
+[84/155] Linking target pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so
+[85/155] Linking target pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so
+[86/155] Linking target pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so
+[87/155] Linking target pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so
+[88/155] Linking target pandas/_libs/json.cpython-311-x86_64-linux-gnu.so
+[89/155] Linking target pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so
+[90/155] Linking target pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so
+[91/155] Linking target pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so
+[92/155] Compiling C object pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_dtypes.pyx.c.o
+[93/155] Linking target pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so
+[94/155] Compiling C object pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_properties.pyx.c.o
+[95/155] Linking target pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so
+[96/155] Compiling C object pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_nattype.pyx.c.o
+[97/155] Linking target pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so
+[98/155] Compiling C object pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_writers.pyx.c.o
+[99/155] Linking target pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so
+[100/155] Compiling C object pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops.pyx.c.o
+[101/155] Linking target pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so
+[102/155] Compiling C object pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_reshape.pyx.c.o
+[103/155] Linking target pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so
+[104/155] Compiling C object pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sas.pyx.c.o
+[105/155] Linking target pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so
+[106/155] Compiling C object pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_fields.pyx.c.o
+[107/155] Linking target pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so
+[108/155] Compiling C object pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_missing.pyx.c.o
+[109/155] Linking target pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so
+[110/155] Compiling C object pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_testing.pyx.c.o
+[111/155] Linking target pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so
+[112/155] Compiling Cython source /testbed/pandas/_libs/hashtable.pyx
+[113/155] Compiling C object pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslib.pyx.c.o
+[114/155] Linking target pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so
+[115/155] Compiling C object pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_tzconversion.pyx.c.o
+[116/155] Linking target pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so
+[117/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_parsing.pyx.c.o
+[118/155] Linking target pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so
+[119/155] Compiling C object pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_internals.pyx.c.o
+[120/155] Linking target pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so
+[121/155] Compiling Cython source /testbed/pandas/_libs/groupby.pyx
+[122/155] Compiling C object pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_strptime.pyx.c.o
+[123/155] Linking target pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so
+[124/155] Compiling C object pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_indexers.pyx.c.o
+[125/155] Linking target pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so
+[126/155] Compiling Cython source /testbed/pandas/_libs/algos.pyx
+[127/155] Compiling C object pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_period.pyx.c.o
+[128/155] Linking target pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so
+[129/155] Compiling C object pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timestamps.pyx.c.o
+[130/155] Linking target pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so
+[131/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_parsers.pyx.c.o
+[132/155] Linking target pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so
+[133/155] Compiling C object pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timedeltas.pyx.c.o
+[134/155] Linking target pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so
+[135/155] Compiling C++ object pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_aggregations.pyx.cpp.o
+[136/155] Linking target pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so
+[137/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o
+[138/155] Linking target pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so
+[139/155] Compiling C object pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o
+[140/155] Linking target pandas/_libs/index.cpython-311-x86_64-linux-gnu.so
+[141/155] Compiling C object pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o
+[142/155] Linking target pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so
+[143/155] Compiling C object pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o
+[144/155] Linking target pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so
+[145/155] Compiling C object pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o
+[146/155] Linking target pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so
+[147/155] Compiling C object pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o
+[148/155] Linking target pandas/_libs/join.cpython-311-x86_64-linux-gnu.so
+[149/155] Compiling C object pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o
+[150/155] Linking target pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so
+[151/155] Compiling C object pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o
+[152/155] Linking target pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so
+[153/155] Compiling C object pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o
+[154/155] Linking target pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 54 items
+
+pandas/tests/series/test_formats.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFF
+
+=================================== FAILURES ===================================
+_________________ TestSeriesRepr.test_multilevel_name_print_0 __________________
+pandas/tests/series/test_formats.py:29: in test_multilevel_name_print_0
+    res = repr(ser)
+          ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestSeriesRepr.test_multilevel_name_print ___________________
+pandas/tests/series/test_formats.py:51: in test_multilevel_name_print
+    assert repr(ser) == expected
+           ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________________ TestSeriesRepr.test_small_name_printing ____________________
+pandas/tests/series/test_formats.py:58: in test_small_name_printing
+    assert "Name: test" in repr(s)
+                           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________________ TestSeriesRepr.test_big_name_printing _____________________
+pandas/tests/series/test_formats.py:68: in test_big_name_printing
+    assert "Name: test" in repr(s)
+                           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________________ TestSeriesRepr.test_empty_name_printing ____________________
+pandas/tests/series/test_formats.py:75: in test_empty_name_printing
+    assert "Name: test" in repr(s)
+                           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________________ TestSeriesRepr.test_float_range[args0] ____________________
+pandas/tests/series/test_formats.py:79: in test_float_range
+    str(
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________________ TestSeriesRepr.test_float_range[args1] ____________________
+pandas/tests/series/test_formats.py:79: in test_float_range
+    str(
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________________ TestSeriesRepr.test_empty_object _______________________
+pandas/tests/series/test_formats.py:88: in test_empty_object
+    str(Series(dtype=object))
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________________ TestSeriesRepr.test_string __________________________
+pandas/tests/series/test_formats.py:91: in test_string
+    str(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________________ TestSeriesRepr.test_object __________________________
+pandas/tests/series/test_formats.py:99: in test_object
+    str(object_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_________________________ TestSeriesRepr.test_datetime _________________________
+pandas/tests/series/test_formats.py:102: in test_datetime
+    str(datetime_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_____________________ TestSeriesRepr.test_various_names[] ______________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_____________________ TestSeriesRepr.test_various_names[1] _____________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________________ TestSeriesRepr.test_various_names[1.2] ____________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________________ TestSeriesRepr.test_various_names[foo] ____________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________ TestSeriesRepr.test_various_names[\u03b1\u03b2\u03b3] _____________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_ TestSeriesRepr.test_various_names[loooooooooooooooooooooooooooooooooooooooooooooooooooong] _
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________________ TestSeriesRepr.test_various_names[name6] ___________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________________ TestSeriesRepr.test_various_names[name7] ___________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________________ TestSeriesRepr.test_various_names[name8] ___________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________________ TestSeriesRepr.test_various_names[name9] ___________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestSeriesRepr.test_various_names[name10] ___________________
+pandas/tests/series/test_formats.py:127: in test_various_names
+    repr(string_series)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+________________________ TestSeriesRepr.test_tuple_name ________________________
+pandas/tests/series/test_formats.py:135: in test_tuple_name
+    repr(biggie)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestSeriesRepr.test_tidy_repr_name_0[100] ___________________
+pandas/tests/series/test_formats.py:141: in test_tidy_repr_name_0
+    rep_str = repr(ser)
+              ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestSeriesRepr.test_tidy_repr_name_0[1001] __________________
+pandas/tests/series/test_formats.py:141: in test_tidy_repr_name_0
+    rep_str = repr(ser)
+              ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestSeriesRepr.test_newline[string=object] __________________
+pandas/tests/series/test_formats.py:151: in test_newline
+    assert "\t" not in repr(ser)
+                       ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+______________ TestSeriesRepr.test_newline[string=string[python]] ______________
+pandas/tests/series/test_formats.py:151: in test_newline
+    assert "\t" not in repr(ser)
+                       ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_____________ TestSeriesRepr.test_newline[string=string[pyarrow]] ______________
+pandas/tests/series/test_formats.py:151: in test_newline
+    assert "\t" not in repr(ser)
+                       ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________ TestSeriesRepr.test_newline[string=str[pyarrow]] _______________
+pandas/tests/series/test_formats.py:151: in test_newline
+    assert "\t" not in repr(ser)
+                       ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________ TestSeriesRepr.test_newline[string=str[python]] ________________
+pandas/tests/series/test_formats.py:151: in test_newline
+    assert "\t" not in repr(ser)
+                       ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___ TestSeriesRepr.test_empty_int64[foo-Series([], Name: foo, dtype: int64)] ___
+pandas/tests/series/test_formats.py:165: in test_empty_int64
+    assert repr(s) == expected
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+________ TestSeriesRepr.test_empty_int64[None-Series([], dtype: int64)] ________
+pandas/tests/series/test_formats.py:165: in test_empty_int64
+    assert repr(s) == expected
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_____________________ TestSeriesRepr.test_repr_bool_fails ______________________
+pandas/tests/series/test_formats.py:176: in test_repr_bool_fails
+    repr(s)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________ TestSeriesRepr.test_repr_name_iterable_indexable _______________
+pandas/tests/series/test_formats.py:185: in test_repr_name_iterable_indexable
+    repr(s)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+______________________ TestSeriesRepr.test_repr_max_rows _______________________
+pandas/tests/series/test_formats.py:193: in test_repr_max_rows
+    str(Series(range(1001)))  # should not raise exception
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________ TestSeriesRepr.test_unicode_string_with_unicode ________________
+pandas/tests/series/test_formats.py:197: in test_unicode_string_with_unicode
+    str(df)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________ TestSeriesRepr.test_timeseries_repr_object_dtype _______________
+pandas/tests/series/test_formats.py:218: in test_timeseries_repr_object_dtype
+    repr(ts)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+________________________ TestSeriesRepr.test_latex_repr ________________________
+pandas/tests/series/test_formats.py:244: in test_latex_repr
+    assert result == s._repr_latex_()
+                     ^^^^^^^^^^^^^^^^
+pandas/core/generic.py:2130: in _repr_latex_
+    return self.to_latex()
+           ^^^^^^^^^^^^^^^
+pandas/core/generic.py:3623: in to_latex
+    return self._to_latex_via_styler(
+pandas/core/generic.py:3696: in _to_latex_via_styler
+    getattr(styler, kw_name)(**kw)
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Styler' object has no attribute 'format'
+_______________ TestSeriesRepr.test_index_repr_in_frame_with_nan _______________
+pandas/tests/series/test_formats.py:254: in test_index_repr_in_frame_with_nan
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_____________________ TestSeriesRepr.test_series_repr_nat ______________________
+pandas/tests/series/test_formats.py:259: in test_series_repr_nat
+    result = repr(series)
+             ^^^^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+________________________ TestSeriesRepr.test_float_repr ________________________
+pandas/tests/series/test_formats.py:274: in test_float_repr
+    assert repr(ser) == expected
+           ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestSeriesRepr.test_different_null_objects __________________
+pandas/tests/series/test_formats.py:279: in test_different_null_objects
+    result = repr(ser)
+             ^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+____________________ TestSeriesRepr.test_2d_extension_type _____________________
+pandas/tests/series/test_formats.py:308: in test_2d_extension_type
+    res = repr(series)  # This line crashed before GH#33770 was fixed.
+          ^^^^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+______________ TestCategoricalRepr.test_categorical_repr_unicode _______________
+pandas/tests/series/test_formats.py:330: in test_categorical_repr_unicode
+    repr(ser)
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________________ TestCategoricalRepr.test_categorical_repr ___________________
+pandas/tests/series/test_formats.py:340: in test_categorical_repr
+    assert exp == a.__str__()
+                  ^^^^^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______________ TestCategoricalRepr.test_categorical_series_repr _______________
+pandas/tests/series/test_formats.py:374: in test_categorical_series_repr
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________ TestCategoricalRepr.test_categorical_series_repr_ordered ___________
+pandas/tests/series/test_formats.py:400: in test_categorical_series_repr_ordered
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________ TestCategoricalRepr.test_categorical_series_repr_datetime ___________
+pandas/tests/series/test_formats.py:430: in test_categorical_series_repr_datetime
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+______ TestCategoricalRepr.test_categorical_series_repr_datetime_ordered _______
+pandas/tests/series/test_formats.py:458: in test_categorical_series_repr_datetime_ordered
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+___________ TestCategoricalRepr.test_categorical_series_repr_period ____________
+pandas/tests/series/test_formats.py:486: in test_categorical_series_repr_period
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+_______ TestCategoricalRepr.test_categorical_series_repr_period_ordered ________
+pandas/tests/series/test_formats.py:512: in test_categorical_series_repr_period_ordered
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+__________ TestCategoricalRepr.test_categorical_series_repr_timedelta __________
+pandas/tests/series/test_formats.py:537: in test_categorical_series_repr_timedelta
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+______ TestCategoricalRepr.test_categorical_series_repr_timedelta_ordered ______
+pandas/tests/series/test_formats.py:569: in test_categorical_series_repr_timedelta_ordered
+    assert repr(s) == exp
+           ^^^^^^^
+pandas/core/series.py:1436: in __repr__
+    repr_params = fmt.get_series_repr_params()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.io.formats.format' has no attribute 'get_series_repr_params'
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.04s call     pandas/tests/series/test_formats.py::TestSeriesRepr::test_latex_repr
+
+(29 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/series/test_formats.py::TestSeriesRepr::test_str_to_bytes_raises
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_multilevel_name_print_0
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_multilevel_name_print
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_small_name_printing
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_big_name_printing
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_empty_name_printing
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_float_range[args0]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_float_range[args1]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_empty_object
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_string - Att...
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_object - Att...
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_datetime - A...
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[1]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[1.2]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[foo]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[\u03b1\u03b2\u03b3]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[loooooooooooooooooooooooooooooooooooooooooooooooooooong]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[name6]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[name7]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[name8]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[name9]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_various_names[name10]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_tuple_name
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_tidy_repr_name_0[100]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_tidy_repr_name_0[1001]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_newline[string=object]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_newline[string=string[python]]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_newline[string=string[pyarrow]]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_newline[string=str[pyarrow]]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_newline[string=str[python]]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_empty_int64[foo-Series([], Name: foo, dtype: int64)]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_empty_int64[None-Series([], dtype: int64)]
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_repr_bool_fails
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_repr_name_iterable_indexable
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_repr_max_rows
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_unicode_string_with_unicode
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_timeseries_repr_object_dtype
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_latex_repr
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_index_repr_in_frame_with_nan
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_series_repr_nat
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_float_repr
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_different_null_objects
+FAILED pandas/tests/series/test_formats.py::TestSeriesRepr::test_2d_extension_type
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_repr_unicode
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_repr
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_ordered
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_datetime
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_datetime_ordered
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_period
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_period_ordered
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_timedelta
+FAILED pandas/tests/series/test_formats.py::TestCategoricalRepr::test_categorical_series_repr_timedelta_ordered
+========================= 53 failed, 1 passed in 2.66s =========================

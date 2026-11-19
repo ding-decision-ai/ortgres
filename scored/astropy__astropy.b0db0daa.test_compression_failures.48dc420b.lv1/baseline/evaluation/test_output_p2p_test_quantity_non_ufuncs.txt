@@ -1,0 +1,631 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/units/tests/test_quantity_non_ufuncs.py.
+
+Date: 2026-10-10T22:49:20
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 610 items
+
+astropy/units/tests/test_quantity_non_ufuncs.py ........................ [  3%]
+...................s.................................................... [ 15%]
+................................ss.s.s...s.............................. [ 27%]
+........................................................................ [ 39%]
+.s...................................................................... [ 51%]
+.............................................s.s.....sssss...s..s....... [ 62%]
+s.....s.....ss.ss.................s................................s.... [ 74%]
+......................sss....s.s.....sssss...s..s.......s.....s.....ss.s [ 86%]
+s.................s................................s.................... [ 98%]
+......sss.                                                               [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeInformation::test_shape
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeInformation::test_size
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeInformation::test_ndim
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_reshape
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_ravel
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_moveaxis
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_rollaxis
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_swapaxes
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_transpose
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_atleast_1d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_atleast_2d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_atleast_3d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_expand_dims
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_squeeze
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_flip
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_fliplr
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_flipud
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_rot90
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_broadcast_to
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_broadcast_arrays
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestShapeManipulation::test_matrix_transpose
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_argmin
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_argmax
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_argsort
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_lexsort
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_searchsorted
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_nonzero
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_argwhere
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_argpartition
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArgFunctions::test_flatnonzero
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_take_along_axis
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_put_along_axis
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_apply_along_axis[0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_apply_along_axis[1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_apply_over_axes[axes0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_apply_over_axes[axes1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAlongAxis::test_apply_over_axes[axes2]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIndicesFrom::test_diag_indices_from
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIndicesFrom::test_triu_indices_from
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIndicesFrom::test_tril_indices_from
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRealImag::test_real
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRealImag::test_imag
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_copy
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_empty_like
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_zeros_like
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_ones_like
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_full_like
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_astype
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: stop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: start, stop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: start, stop, step]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: start, stop; kw: step]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: start; kw: stop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: stop, followed by 1 None]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: stop, followed by 2 None]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange[pos: stop, followed by 3 None]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange_like_quantity_subclass
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange_pos_dtype
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange_default_unit
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange_invalid_inputs
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestCopyAndCreation::test_arange_unit_from_stop
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_empty
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_ones
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_zeros
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_full
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_full_unit_from_fill_value
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_require
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_array
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_array_unit_from_data
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_asarray
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_asanyarray
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_ascontiguousarray
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_asfortranarray
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_genfromtxt
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_loadtxt
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_fromfile
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_frombuffer
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_fromfunction
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_fromfunction_unit_from_retv
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_fromiter
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_fromstring
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_identity
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_eye
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestArrayCreation::test_tri
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_diag
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_diag_1d_input
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_diagonal
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_diagflat
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_compress
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_extract
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_delete
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_trim_zeros
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_roll
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestAccessingParts::test_take
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSettingParts::test_put
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSettingParts::test_putmask
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSettingParts::test_place
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSettingParts::test_copyto
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSettingParts::test_fill_diagonal
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRepeat::test_tile
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRepeat::test_repeat
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRepeat::test_resize
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_concatenate
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_stack
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_column_stack
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_hstack
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_vstack
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_dstack
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_block
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_append
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_insert
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestConcatenate::test_pad
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSplit::test_split
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSplit::test_array_split
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSplit::test_hsplit
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSplit::test_vsplit
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSplit::test_dsplit
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSplit::test_unstack
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_max
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_min
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_amax
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_amin
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_sum
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_cumsum
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_cumulative_sum
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_any
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_all
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_prod
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_cumprod
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncReductions::test_cumulative_prod
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_ptp
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_round
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_around
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_fix
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_angle
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_i0
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_clip
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_sinc
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_where
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_choose
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_select
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_real_if_close
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_tril
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_triu
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_unwrap
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_nan_to_num
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLike::test_nan_to_num_complex
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLikeTests::test_isposinf
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLikeTests::test_isneginf
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLikeTests::test_isreal
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLikeTests::test_iscomplex
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLikeTests::test_isclose
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestUfuncLikeTests::test_allclose_atol_default_unit
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_average
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_mean
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_std
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_var
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_median
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_median_nan_scalar
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_quantile
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_percentile
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_trace
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_count_nonzero
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_allclose
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_allclose_atol_default_unit
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_allclose_failures
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_array_equal
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_array_equal_nan[False]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_array_equal_nan[True]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_array_equal_incompatible_units
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_array_equiv
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestReductionLikeFunctions::test_array_equiv_incompatible_units
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmax
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmin
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanargmin
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanargmax
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmean
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmedian[None]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmedian[0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmedian[1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmedian[-1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanmedian_out
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nansum
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nancumsum
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanstd
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanstd_out[out with correct unit]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanstd_out[out with a different unit]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanvar
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanvar_out[out with correct unit]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanvar_out[out with a different unit]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanprod
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nancumprod
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanquantile
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestNanFunctions::test_nanpercentile
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_cross
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_outer
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_inner
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_dot
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_vdot
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_tensordot
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_kron
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_einsum
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestVariousProductFunctions::test_einsum_path
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIntDiffFunctions::test_trapezoid
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIntDiffFunctions::test_diff
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIntDiffFunctions::test_diff_prepend_append
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIntDiffFunctions::test_gradient
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestIntDiffFunctions::test_gradient_spacing
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSpaceFunctions::test_linspace
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSpaceFunctions::test_logspace
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSpaceFunctions::test_geomspace
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestInterpolationFunctions::test_interp
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestInterpolationFunctions::test_piecewise
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBincountDigitize::test_bincount
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBincountDigitize::test_digitize
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram_range[range0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram_range[range1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram_bin_edges
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram_bin_edges_range[range0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram_bin_edges_range[range1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram2d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram2d_range[range0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram2d_range[range1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogram2d_range[range2]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogramdd
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogramdd_range[range0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogramdd_range[range1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_histogramdd_range[range2]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_correlate
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_convolve
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_cov
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestHistogramFunctions::test_corrcoef
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSortFunctions::test_sort
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSortFunctions::test_sort_axis
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSortFunctions::test_sort_complex
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSortFunctions::test_partition
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestStringFunctions::test_array2string
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestStringFunctions::test_array_repr
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestStringFunctions::test_array_str
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBitAndIndexFunctions::test_packbits
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBitAndIndexFunctions::test_unpackbits
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBitAndIndexFunctions::test_unravel_index
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBitAndIndexFunctions::test_ravel_multi_index
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestBitAndIndexFunctions::test_ix_
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDtypeFunctions::test_common_type
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDtypeFunctions::test_result_type
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDtypeFunctions::test_can_cast
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDtypeFunctions::test_min_scalar_type
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDtypeFunctions::test_iscomplexobj
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDtypeFunctions::test_isrealobj
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestMeshGrid::test_meshgrid
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestMemoryFunctions::test_shares_memory
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestMemoryFunctions::test_may_share_memory
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique[kwargs0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique[kwargs1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique[kwargs2]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_more_complex[kwargs0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_more_complex[kwargs1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_more_complex[kwargs2]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_all
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_counts
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_inverse
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_unique_values
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_intersect1d[kwargs0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_intersect1d[kwargs1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_setxor1d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_union1d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_setdiff1d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_in1d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_isin
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestSetOpsFunctions::test_ediff1d
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDatetimeFunctions::test_busday_count
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDatetimeFunctions::test_busday_offset
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDatetimeFunctions::test_datetime_as_string
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestDatetimeFunctions::test_is_busday
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::test_fft_frequencies[fftfreq]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::test_fft_frequencies[rfftfreq]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_fft
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_ifft
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_rfft
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_irfft
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_fft2
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_ifft2
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_rfft2
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_irfft2
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_fftn
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_ifftn
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_rfftn
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_irfftn
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_hfft
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_ihfft
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_fftshift
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFFT::test_ifftshift
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_cond
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matrix_rank
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matrix_rank_with_tol
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matrix_power
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matrix_inv_power
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_multi_dot
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_svd
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_inv
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_pinv
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_tensorinv
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_det
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_slogdet
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_solve
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_tensorsolve
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_lstsq
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_norm
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_cholesky
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_qr
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_eig
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_eigvals
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_eigh
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_eigvalsh
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_diagonal
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_trace
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_cross
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_outer
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_svdvals
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_vecdot
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_tensordot
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matmul
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matrix_transpose
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_matrix_norm
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestLinAlg::test_vector_norm
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_structured_to_unstructured
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_unstructured_to_structured
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays_repeat_dtypes
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays[True]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays[False]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_array_nested_structure
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays_flatten_nested_structure
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays_asrecarray
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays_usemask
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays_str[True]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestRecFunctions::test_merge_arrays_str[False]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::test_testing_completeness
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_no_duplicates[one0-two0]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_no_duplicates[one1-two1]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_no_duplicates[one2-two2]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_no_duplicates[one3-two3]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_no_duplicates[one4-two4]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_no_duplicates[one5-two5]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_all_included
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersCompleteness::test_ignored_are_untested
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[allclose-close]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[append-append]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[apply_over_axes-apply_over_axes]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[argpartition-argpartition]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[array2string-array2string]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[array_equal-array_equal]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[array_equiv-array_equiv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[array_repr-array_repr]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[array_str-array_str]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[block-block]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[cholesky-cholesky]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[choose-choose]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[convolve-cross_like_a_v]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[copy-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[correlate-cross_like_a_v]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[count_nonzero-count_nonzero]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[cross-cross_like_a_b]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[det-det]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[diag-diag]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[diff-diff]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[digitize-digitize]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[eig-eig]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[eigh-eig]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[eigvals-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[eigvalsh-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[einsum-einsum]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[eye-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[fft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[fft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[fftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[fftshift-invariant_x_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[fromfunction-fromfunction]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[full-full]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[full_like-full_like]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[genfromtxt-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[geomspace-geomspace]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[gradient-gradient]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[hfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[histogram-histogram]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[histogram2d-histogram2d]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[histogram_bin_edges-histogram_bin_edges]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[histogramdd-histogramdd]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[identity-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ifft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ifft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ifftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ifftshift-invariant_x_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ihfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[in1d-in1d]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[insert-insert]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[interp-interp]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[intersect1d-intersect1d]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[inv-inv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[irfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[irfft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[irfftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[isclose-close]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[isin-isin]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[kron-cross_like_a_b]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[loadtxt-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[logspace-logspace]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[lstsq-lstsq]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[matrix_power-matrix_power]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[matrix_rank-matrix_rank]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[merge_arrays-merge_arrays]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[nan_to_num-nan_to_num]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[nanmedian-nanmedian]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[nanpercentile-percentile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[nanquantile-quantile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[nanstd-nanstd]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[nanvar-nanvar]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[norm-norm]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ones-creation_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[ones_like-like_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[outer-dot_like]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[outer-outer]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[pad-pad]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[percentile-percentile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[piecewise-piecewise]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[pinv-pinv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[place-place]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[qr-qr]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[quantile-quantile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[real_if_close-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[require-require]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[resize-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[rfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[rfft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[rfftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[select-select]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[setdiff1d-twosetop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[setxor1d-twosetop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[sinc-sinc]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[solve-solve]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[sort_complex-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[structured_to_unstructured-structured_to_unstructured]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[svd-svd]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[tensordot-cross_like_a_b]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[tensorinv-inv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[tensorsolve-solve]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[tri-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[tril-invariant_m_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[triu-invariant_m_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[union1d-twosetop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[unique-unique]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[unstructured_to_structured-unstructured_to_structured]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[unwrap-unwrap]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_all_arguments_reexposed[zeros_like-like_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[allclose-close]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[append-append]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[apply_over_axes-apply_over_axes]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[argpartition-argpartition]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[array2string-array2string]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[array_equal-array_equal]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[array_equiv-array_equiv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[array_repr-array_repr]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[array_str-array_str]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[block-block]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[cholesky-cholesky]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[choose-choose]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[convolve-cross_like_a_v]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[copy-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[correlate-cross_like_a_v]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[count_nonzero-count_nonzero]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[cross-cross_like_a_b]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[det-det]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[diag-diag]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[diff-diff]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[digitize-digitize]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[eig-eig]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[eigh-eig]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[eigvals-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[eigvalsh-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[einsum-einsum]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[eye-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[fft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[fft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[fftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[fftshift-invariant_x_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[fromfunction-fromfunction]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[full-full]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[full_like-full_like]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[genfromtxt-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[geomspace-geomspace]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[gradient-gradient]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[hfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[histogram-histogram]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[histogram2d-histogram2d]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[histogram_bin_edges-histogram_bin_edges]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[histogramdd-histogramdd]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[identity-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ifft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ifft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ifftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ifftshift-invariant_x_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ihfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[in1d-in1d]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[insert-insert]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[interp-interp]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[intersect1d-intersect1d]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[inv-inv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[irfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[irfft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[irfftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[isclose-close]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[isin-isin]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[kron-cross_like_a_b]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[loadtxt-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[logspace-logspace]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[lstsq-lstsq]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[matrix_power-matrix_power]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[matrix_rank-matrix_rank]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[merge_arrays-merge_arrays]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[nan_to_num-nan_to_num]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[nanmedian-nanmedian]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[nanpercentile-percentile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[nanquantile-quantile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[nanstd-nanstd]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[nanvar-nanvar]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[norm-norm]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ones-creation_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[ones_like-like_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[outer-dot_like]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[outer-outer]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[pad-pad]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[percentile-percentile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[piecewise-piecewise]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[pinv-pinv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[place-place]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[qr-qr]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[quantile-quantile]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[real_if_close-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[require-require]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[resize-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[rfft-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[rfft2-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[rfftn-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[select-select]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[setdiff1d-twosetop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[setxor1d-twosetop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[sinc-sinc]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[solve-solve]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[sort_complex-invariant_a_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[structured_to_unstructured-structured_to_unstructured]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[svd-svd]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[tensordot-cross_like_a_b]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[tensorinv-inv]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[tensorsolve-solve]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[tri-generic_like_array_function_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[tril-invariant_m_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[triu-invariant_m_helper]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[union1d-twosetop]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[unique-unique]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[unstructured_to_structured-unstructured_to_structured]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[unwrap-unwrap]
+PASSED astropy/units/tests/test_quantity_non_ufuncs.py::TestFunctionHelpersSignatureCompatibility::test_known_arguments[zeros_like-like_helper]
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:322: np.asfarray is removed in NumPy 2.0
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:890: np.sometrue is removed in NumPy 2.0
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:896: np.alltrue is removed in NumPy 2.0
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:906: np.product is removed in NumPy 2.0
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:916: np.cumproduct is removed in NumPy 2.0
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:938: np.round_ is removed in NumPy 2.0
+SKIPPED [1] astropy/units/tests/test_quantity_non_ufuncs.py:2033: np.msort was removed in numpy 2.0
+SKIPPED [20] astropy/units/tests/test_quantity_non_ufuncs.py:2931: Non Python function cannot be inspected at runtime
+SKIPPED [20] astropy/units/tests/test_quantity_non_ufuncs.py:2992: Non Python function cannot be inspected at runtime
+======================= 563 passed, 47 skipped in 0.80s ========================

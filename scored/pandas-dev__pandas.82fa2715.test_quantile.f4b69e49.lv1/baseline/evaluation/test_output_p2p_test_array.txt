@@ -1,0 +1,115 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 91 items
+
+pandas/tests/arrays/test_array.py ...........................................................................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/arrays/test_array.py::test_dt64_array[M8[h]]
+PASSED pandas/tests/arrays/test_array.py::test_dt64_array[M8[m]]
+PASSED pandas/tests/arrays/test_array.py::test_dt64_array[m8[h]]
+PASSED pandas/tests/arrays/test_array.py::test_array[data0-None-expected0]
+PASSED pandas/tests/arrays/test_array.py::test_array[data1-None-expected1]
+PASSED pandas/tests/arrays/test_array.py::test_array[data2-object-expected2]
+PASSED pandas/tests/arrays/test_array.py::test_array[data3-dtype3-expected3]
+PASSED pandas/tests/arrays/test_array.py::test_array[data4-None-expected4]
+PASSED pandas/tests/arrays/test_array.py::test_array[data5-None-expected5]
+PASSED pandas/tests/arrays/test_array.py::test_array[data6-None-expected6]
+PASSED pandas/tests/arrays/test_array.py::test_array[data7-float32-expected7]
+PASSED pandas/tests/arrays/test_array.py::test_array[data8-int64-expected8]
+PASSED pandas/tests/arrays/test_array.py::test_array[data9-None-expected9]
+PASSED pandas/tests/arrays/test_array.py::test_array[data10-None-expected10]
+PASSED pandas/tests/arrays/test_array.py::test_array[data11-Period[D]-expected11]
+PASSED pandas/tests/arrays/test_array.py::test_array[data12-dtype12-expected12]
+PASSED pandas/tests/arrays/test_array.py::test_array[data13-dtype13-expected13]
+PASSED pandas/tests/arrays/test_array.py::test_array[data14-dtype14-expected14]
+PASSED pandas/tests/arrays/test_array.py::test_array[data15-None-expected15]
+PASSED pandas/tests/arrays/test_array.py::test_array[data16-dtype16-expected16]
+PASSED pandas/tests/arrays/test_array.py::test_array[data17-None-expected17]
+PASSED pandas/tests/arrays/test_array.py::test_array[data18-dtype18-expected18]
+PASSED pandas/tests/arrays/test_array.py::test_array[data19-dtype19-expected19]
+PASSED pandas/tests/arrays/test_array.py::test_array[data20-dtype20-expected20]
+PASSED pandas/tests/arrays/test_array.py::test_array[data21-dtype21-expected21]
+PASSED pandas/tests/arrays/test_array.py::test_array[data22-dtype22-expected22]
+PASSED pandas/tests/arrays/test_array.py::test_array[data23-None-expected23]
+PASSED pandas/tests/arrays/test_array.py::test_array[data24-None-expected24]
+PASSED pandas/tests/arrays/test_array.py::test_array[data25-dtype25-expected25]
+PASSED pandas/tests/arrays/test_array.py::test_array[data26-category-expected26]
+PASSED pandas/tests/arrays/test_array.py::test_array[data27-dtype27-expected27]
+PASSED pandas/tests/arrays/test_array.py::test_array[data28-interval-expected28]
+PASSED pandas/tests/arrays/test_array.py::test_array[data29-Sparse[int64]-expected29]
+PASSED pandas/tests/arrays/test_array.py::test_array[data30-Int16-expected30]
+PASSED pandas/tests/arrays/test_array.py::test_array[data31-None-expected31]
+PASSED pandas/tests/arrays/test_array.py::test_array[data32-string-expected32]
+PASSED pandas/tests/arrays/test_array.py::test_array[data33-str-expected33]
+PASSED pandas/tests/arrays/test_array.py::test_array[data34-dtype34-expected34]
+PASSED pandas/tests/arrays/test_array.py::test_array[data35-dtype35-expected35]
+PASSED pandas/tests/arrays/test_array.py::test_array[data36-dtype36-expected36]
+PASSED pandas/tests/arrays/test_array.py::test_array[data37-dtype37-expected37]
+PASSED pandas/tests/arrays/test_array.py::test_array[data38-boolean-expected38]
+PASSED pandas/tests/arrays/test_array.py::test_array[data39-dtype39-expected39]
+PASSED pandas/tests/arrays/test_array.py::test_array[data40-None-expected40]
+PASSED pandas/tests/arrays/test_array.py::test_array[data41-None-expected41]
+PASSED pandas/tests/arrays/test_array.py::test_array[data42-decimal-expected42]
+PASSED pandas/tests/arrays/test_array.py::test_array[data43-category-expected43]
+PASSED pandas/tests/arrays/test_array.py::test_array[data44-None-expected44]
+PASSED pandas/tests/arrays/test_array.py::test_array_copy
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data0-expected0]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data1-expected1]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data2-expected2]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data3-expected3]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data4-expected4]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data5-expected5]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data6-expected6]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data7-expected7]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data8-expected8]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data9-expected9]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data10-expected10]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data11-expected11]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data12-expected12]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data13-expected13]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data14-expected14]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data15-expected15]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data16-expected16]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data17-expected17]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data18-expected18]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data19-expected19]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data20-expected20]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data21-expected21]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data22-expected22]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data23-expected23]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data24-expected24]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data25-expected25]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data26-expected26]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data27-expected27]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data28-expected28]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference[data29-expected29]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference_fails[data0]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference_fails[data1]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference_fails[data2]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference_fails[data3]
+PASSED pandas/tests/arrays/test_array.py::test_array_inference_fails[data4]
+PASSED pandas/tests/arrays/test_array.py::test_nd_raises[data0]
+PASSED pandas/tests/arrays/test_array.py::test_scalar_raises
+PASSED pandas/tests/arrays/test_array.py::test_dataframe_raises
+PASSED pandas/tests/arrays/test_array.py::test_bounds_check
+PASSED pandas/tests/arrays/test_array.py::test_array_unboxes[index]
+PASSED pandas/tests/arrays/test_array.py::test_array_unboxes[series]
+PASSED pandas/tests/arrays/test_array.py::test_array_to_numpy_na
+============================== 91 passed in 0.14s ==============================

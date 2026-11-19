@@ -1,0 +1,29 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 14 items
+
+tests/_marks/test_dot.py ..............                                  [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_marks/test_dot.py::TestDot::test_simple
+PASSED tests/_marks/test_dot.py::TestDot::test_filled_unfilled_mix
+PASSED tests/_marks/test_dot.py::TestDot::test_missing_coordinate_data
+PASSED tests/_marks/test_dot.py::TestDot::test_missing_semantic_data[color]
+PASSED tests/_marks/test_dot.py::TestDot::test_missing_semantic_data[fill]
+PASSED tests/_marks/test_dot.py::TestDot::test_missing_semantic_data[marker]
+PASSED tests/_marks/test_dot.py::TestDot::test_missing_semantic_data[pointsize]
+PASSED tests/_marks/test_dot.py::TestDots::test_simple
+PASSED tests/_marks/test_dot.py::TestDots::test_set_color
+PASSED tests/_marks/test_dot.py::TestDots::test_map_color
+PASSED tests/_marks/test_dot.py::TestDots::test_fill
+PASSED tests/_marks/test_dot.py::TestDots::test_pointsize
+PASSED tests/_marks/test_dot.py::TestDots::test_stroke
+PASSED tests/_marks/test_dot.py::TestDots::test_filled_unfilled_mix
+============================== 14 passed in 0.65s ==============================

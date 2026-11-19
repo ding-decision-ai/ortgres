@@ -1,0 +1,228 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/fits/hdu/compressed/tests/test_compression_failures.py.
+
+Date: 2026-10-10T23:36:10
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 36 items
+
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py .FF.F. [ 16%]
+..FFFFF..FFFFFFFFFFFFFFFFFFFFF                                           [100%]
+
+=================================== FAILURES ===================================
+____________ TestCompressionFunction.test_unknown_compression_type _____________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:28: in test_unknown_compression_type
+    assert "Unrecognized compression type: fun" in str(exc.value)
+E   assert 'Unrecognized compression type: fun' in "Unrecognized compression type: 'fun'"
+E    +  where "Unrecognized compression type: 'fun'" = str(ValueError("Unrecognized compression type: 'fun'"))
+E    +    where ValueError("Unrecognized compression type: 'fun'") = <ExceptionInfo ValueError("Unrecognized compression type: 'fun'") tblen=3>.value
+_________________ TestCompressionFunction.test_zbitpix_unknown _________________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:38: in test_zbitpix_unknown
+    assert "Invalid value for BITPIX: 13" in str(exc.value)
+E   AssertionError: assert 'Invalid value for BITPIX: 13' in 'Invalid value for ZBITPIX: 13'
+E    +  where 'Invalid value for ZBITPIX: 13' = str(ValueError('Invalid value for ZBITPIX: 13'))
+E    +    where ValueError('Invalid value for ZBITPIX: 13') = <ExceptionInfo ValueError('Invalid value for ZBITPIX: 13') tblen=3>.value
+__________________ TestCompressionFunction.test_invalid_tform __________________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:55: in test_invalid_tform
+    with pytest.raises(RuntimeError) as exc:
+E   Failed: DID NOT RAISE <class 'RuntimeError'>
+________ TestCompressionFunction.test_header_value_int_overflow[ZNAXIS] ________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:87: in test_header_value_int_overflow
+    compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:535: in compress_image_data
+    _check_compressed_header(compressed_header)
+astropy/io/fits/hdu/compressed/_tiled_compression.py:176: in _check_compressed_header
+    raise KeyError(
+E   KeyError: "Missing required compressed-image keyword 'ZNAXIS3'."
+________ TestCompressionFunction.test_header_value_int_overflow[ZVAL1] _________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:86: in test_header_value_int_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+________ TestCompressionFunction.test_header_value_int_overflow[ZVAL2] _________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:86: in test_header_value_int_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+________ TestCompressionFunction.test_header_value_int_overflow[ZBLANK] ________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:86: in test_header_value_int_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+________ TestCompressionFunction.test_header_value_int_overflow[BLANK] _________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:86: in test_header_value_int_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+_____ TestCompressionFunction.test_header_value_longlong_overflow[NAXIS1] ______
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:106: in test_header_value_longlong_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+_____ TestCompressionFunction.test_header_value_longlong_overflow[NAXIS2] ______
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:106: in test_header_value_longlong_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+_____ TestCompressionFunction.test_header_value_longlong_overflow[TNULL1] ______
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:106: in test_header_value_longlong_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+_____ TestCompressionFunction.test_header_value_longlong_overflow[PCOUNT] ______
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:106: in test_header_value_longlong_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+______ TestCompressionFunction.test_header_value_longlong_overflow[THEAP] ______
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:106: in test_header_value_longlong_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+_______ TestCompressionFunction.test_header_value_float_overflow[ZVAL3] ________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:116: in test_header_value_float_overflow
+    with pytest.raises(OverflowError):
+E   Failed: DID NOT RAISE <class 'OverflowError'>
+__________ TestCompressionFunction.test_header_value_negative[NAXIS1] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:126: in test_header_value_negative
+    with pytest.raises(ValueError) as exc:
+E   Failed: DID NOT RAISE <class 'ValueError'>
+__________ TestCompressionFunction.test_header_value_negative[NAXIS2] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:126: in test_header_value_negative
+    with pytest.raises(ValueError) as exc:
+E   Failed: DID NOT RAISE <class 'ValueError'>
+_________ TestCompressionFunction.test_header_value_negative[TFIELDS] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:126: in test_header_value_negative
+    with pytest.raises(ValueError) as exc:
+E   Failed: DID NOT RAISE <class 'ValueError'>
+__________ TestCompressionFunction.test_header_value_negative[PCOUNT] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:126: in test_header_value_negative
+    with pytest.raises(ValueError) as exc:
+E   Failed: DID NOT RAISE <class 'ValueError'>
+__ TestCompressionFunction.test_header_value_exceeds_custom_limit[ZNAXIS-999] __
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:138: in test_header_value_exceeds_custom_limit
+    compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:535: in compress_image_data
+    _check_compressed_header(compressed_header)
+astropy/io/fits/hdu/compressed/_tiled_compression.py:176: in _check_compressed_header
+    raise KeyError(
+E   KeyError: "Missing required compressed-image keyword 'ZNAXIS3'."
+_ TestCompressionFunction.test_header_value_exceeds_custom_limit[TFIELDS-999] __
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:137: in test_header_value_exceeds_custom_limit
+    with pytest.raises(ValueError) as exc:
+E   Failed: DID NOT RAISE <class 'ValueError'>
+_________ TestCompressionFunction.test_header_value_no_string[TTYPE1] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:150: in test_header_value_no_string
+    with pytest.raises(TypeError):
+E   Failed: DID NOT RAISE <class 'TypeError'>
+_________ TestCompressionFunction.test_header_value_no_string[TFORM1] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:150: in test_header_value_no_string
+    with pytest.raises(TypeError):
+E   Failed: DID NOT RAISE <class 'TypeError'>
+________ TestCompressionFunction.test_header_value_no_string[ZCMPTYPE] _________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:151: in test_header_value_no_string
+    compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:535: in compress_image_data
+    _check_compressed_header(compressed_header)
+astropy/io/fits/hdu/compressed/_tiled_compression.py:170: in _check_compressed_header
+    raise ValueError(f"Unrecognized compression type: {header['ZCMPTYPE']!r}")
+E   ValueError: Unrecognized compression type: 1
+_________ TestCompressionFunction.test_header_value_no_string[ZNAME1] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:151: in test_header_value_no_string
+    compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:551: in compress_image_data
+    noisebit = _get_compression_setting(compressed_header, "noisebit", 0)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/_tiled_compression.py:279: in _get_compression_setting
+    if header[f"ZNAME{i}"].lower() == name.lower():
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'int' object has no attribute 'lower'
+________ TestCompressionFunction.test_header_value_no_string[ZQUANTIZ] _________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:151: in test_header_value_no_string
+    compress_image_data(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:569: in compress_image_data
+    dither_method = DITHER_METHODS[
+E   KeyError: 1
+_________ TestCompressionFunction.test_header_value_no_double[TZERO1] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:160: in test_header_value_no_double
+    with pytest.raises(TypeError):
+E   Failed: DID NOT RAISE <class 'TypeError'>
+_________ TestCompressionFunction.test_header_value_no_double[TSCAL1] __________
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:160: in test_header_value_no_double
+    with pytest.raises(TypeError):
+E   Failed: DID NOT RAISE <class 'TypeError'>
+____ TestCompressionFunction.test_header_value_no_double_int_image[ZSCALE] _____
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:170: in test_header_value_no_double_int_image
+    with pytest.raises(TypeError):
+E   Failed: DID NOT RAISE <class 'TypeError'>
+_____ TestCompressionFunction.test_header_value_no_double_int_image[ZZERO] _____
+astropy/io/fits/hdu/compressed/tests/test_compression_failures.py:170: in test_header_value_no_double_int_image
+    with pytest.raises(TypeError):
+E   Failed: DID NOT RAISE <class 'TypeError'>
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_wrong_argument_number
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_data_none
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_invalid_zdither
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_missing_keyword[ZNAXIS]
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_missing_keyword[ZBITPIX]
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_long_overflow[ZTILE1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_long_overflow[ZNAXIS1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_unknown_compression_type
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_zbitpix_unknown
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_invalid_tform
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_int_overflow[ZNAXIS]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_int_overflow[ZVAL1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_int_overflow[ZVAL2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_int_overflow[ZBLANK]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_int_overflow[BLANK]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_longlong_overflow[NAXIS1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_longlong_overflow[NAXIS2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_longlong_overflow[TNULL1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_longlong_overflow[PCOUNT]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_longlong_overflow[THEAP]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_float_overflow[ZVAL3]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_negative[NAXIS1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_negative[NAXIS2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_negative[TFIELDS]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_negative[PCOUNT]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_exceeds_custom_limit[ZNAXIS-999]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_exceeds_custom_limit[TFIELDS-999]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_string[TTYPE1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_string[TFORM1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_string[ZCMPTYPE]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_string[ZNAME1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_string[ZQUANTIZ]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_double[TZERO1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_double[TSCAL1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_double_int_image[ZSCALE]
+FAILED astropy/io/fits/hdu/compressed/tests/test_compression_failures.py::TestCompressionFunction::test_header_value_no_double_int_image[ZZERO]
+========================= 29 failed, 7 passed in 0.33s =========================

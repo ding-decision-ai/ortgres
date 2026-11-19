@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 3 items
+
+tests/tracking/context/test_databricks_command_context.py::test_databricks_command_run_context_in_context PASSED | MEM 22.0/46.9 GB | DISK 827.4/915.7 GB [ 33%]
+tests/tracking/context/test_databricks_command_context.py::test_databricks_command_run_context_tags PASSED | MEM 22.0/46.9 GB | DISK 827.4/915.7 GB [ 66%]
+tests/tracking/context/test_databricks_command_context.py::test_databricks_command_run_context_tags_nones PASSED | MEM 22.0/46.9 GB | DISK 827.4/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:30:59 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:30:59 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:30:59 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 22.0/46.9 GB | DISK 827.4/915.7 GB tests/tracking/context/test_databricks_command_context.py::test_databricks_command_run_context_in_context
+PASSED | MEM 22.0/46.9 GB | DISK 827.4/915.7 GB tests/tracking/context/test_databricks_command_context.py::test_databricks_command_run_context_tags
+PASSED | MEM 22.0/46.9 GB | DISK 827.4/915.7 GB tests/tracking/context/test_databricks_command_context.py::test_databricks_command_run_context_tags_nones
+============================== 3 passed in 0.04s ===============================

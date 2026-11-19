@@ -1,0 +1,59 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "original_source_cost": {
+      "outline_rows": 630,
+      "total_cognitive_files": 630,
+      "observed_files": 9,
+      "coverage_complete": true,
+      "source_identity_preserved": true,
+      "new_initialization_model_calls": 0,
+      "model_elapsed_seconds": 0,
+      "ready": true
+    },
+    "original_public_event_usage_arrays": {
+      "baseline": {
+        "event_types_after_projection": {
+          "thread.started": 1,
+          "turn.started": 1,
+          "item.completed": 54,
+          "item.started": 49,
+          "turn.completed": 1
+        },
+        "raw_usage_arrays_not_summed": {
+          "0": {
+            "input_tokens": 3096974,
+            "cached_input_tokens": 3006848,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 23155,
+            "reasoning_output_tokens": 11978
+          }
+        }
+      },
+      "ortg": {
+        "event_types_after_projection": {
+          "thread.started": 1,
+          "item.completed": 69,
+          "turn.started": 1,
+          "item.started": 58,
+          "error": 4,
+          "turn.completed": 1
+        },
+        "raw_usage_arrays_not_summed": {
+          "0": {
+            "input_tokens": 12118826,
+            "cached_input_tokens": 11776000,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 31004,
+            "reasoning_output_tokens": 12447
+          }
+        }
+      }
+    },
+    "raw_usage_arrays_not_added_across_threads_or_source": true,
+    "original_exact_total_usd": null,
+    "original_model_active_seconds": null,
+    "preserves_all_original_source_segments_in_cost_and_provenance": true,
+    "unknown_not_zero": true
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "current_branch_cli_invocations": 2,
+    "current_attempt_cli_invocations": 1,
+    "prior_401_cli_wall_seconds": 38.09762606100003,
+    "current_timed_out_cli_wall_monotonic_seconds": 3261.1205475469997,
+    "combined_cli_wall_monotonic_seconds": 3299.2181736079997,
+    "configured_combined_actor_cap_seconds": 3300,
+    "configured_current_attempt_actor_cap_seconds": 3261.902373939,
+    "current_attempt_effective_cli_timeout_seconds": 3261,
+    "timeout_exit_preserved": 124,
+    "prior_normal_prepare_actual_seconds": null,
+    "prior_normal_prepare_upper_bound_seconds": 402.0,
+    "prior_power_recovery_wall_seconds": 867.768998,
+    "current_preflight_technical_wall_seconds": 124.956705,
+    "zero_model_verification_seconds": 26.502963546999126,
+    "verification_segments": {
+      "0": {
+        "seconds": 2.8399221649997344,
+        "available_at_start": 300.7818263920003,
+        "new_model_calls": 0
+      },
+      "1": {
+        "seconds": 4.751193361999867,
+        "available_at_start": 297.9419042270006,
+        "new_model_calls": 0
+      },
+      "2": {
+        "seconds": 5.856394243000068,
+        "available_at_start": 293.1907108650007,
+        "new_model_calls": 0
+      },
+      "3": {
+        "seconds": 13.055453776999457,
+        "available_at_start": 287.33431662200064,
+        "new_model_calls": 0
+      }
+    },
+    "verification_new_model_calls": 0,
+    "budget_remaining_seconds": 274.2788628450012,
+    "incremental_tokens": null,
+    "api_request_count": null,
+    "api_active_seconds": null,
+    "usd": null,
+    "original_prewrite_prefix_elapsed_seconds": 299.099,
+    "earlier_task_only_source_wall_seconds": 513.752708539,
+    "prior_full_formal_actual_seconds_not_recomputed": null,
+    "prior_source_formal_and_failed_continuation_history": {
+      "0": {
+        "bytes": 1989
+      },
+      "1": {
+        "bytes": 1350
+      },
+      "2": {
+        "bytes": 13303
+      },
+      "3": {
+        "bytes": 12465
+      },
+      "4": {
+        "bytes": 39080
+      }
+    },
+    "timing_discrepancy": {
+      "configured_monotonic_model_timer_seconds": 3261,
+      "measured_model_monotonic_seconds": 3261.1205475469997,
+      "manual_extension_or_new_inference": false,
+      "no_clock_repair_or_original_record_rewrite": true
+    }
+  }
+}

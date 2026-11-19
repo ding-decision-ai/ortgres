@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 23 items
+
+tests/test_rcmod.py ....................s.s                              [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_rcmod.py::TestAxesStyle::test_default_return
+PASSED tests/test_rcmod.py::TestAxesStyle::test_key_usage
+PASSED tests/test_rcmod.py::TestAxesStyle::test_bad_style
+PASSED tests/test_rcmod.py::TestAxesStyle::test_rc_override
+PASSED tests/test_rcmod.py::TestAxesStyle::test_set_style
+PASSED tests/test_rcmod.py::TestAxesStyle::test_style_context_manager
+PASSED tests/test_rcmod.py::TestAxesStyle::test_style_context_independence
+PASSED tests/test_rcmod.py::TestAxesStyle::test_set_rc
+PASSED tests/test_rcmod.py::TestAxesStyle::test_set_with_palette
+PASSED tests/test_rcmod.py::TestAxesStyle::test_reset_defaults
+PASSED tests/test_rcmod.py::TestAxesStyle::test_reset_orig
+PASSED tests/test_rcmod.py::TestAxesStyle::test_set_is_alias
+PASSED tests/test_rcmod.py::TestPlottingContext::test_default_return
+PASSED tests/test_rcmod.py::TestPlottingContext::test_key_usage
+PASSED tests/test_rcmod.py::TestPlottingContext::test_bad_context
+PASSED tests/test_rcmod.py::TestPlottingContext::test_font_scale
+PASSED tests/test_rcmod.py::TestPlottingContext::test_rc_override
+PASSED tests/test_rcmod.py::TestPlottingContext::test_set_context
+PASSED tests/test_rcmod.py::TestPlottingContext::test_context_context_manager
+PASSED tests/test_rcmod.py::TestPalette::test_set_palette
+PASSED tests/test_rcmod.py::TestFonts::test_set_serif_font
+SKIPPED [1] tests/test_rcmod.py:277: Verdana font is not present
+SKIPPED [1] tests/test_rcmod.py:300: Verdana font is not present
+======================== 21 passed, 2 skipped in 0.35s =========================

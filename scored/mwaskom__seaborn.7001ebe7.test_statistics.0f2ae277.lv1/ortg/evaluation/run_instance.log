@@ -1,0 +1,85 @@
+2026-10-10 20:17:07,925 - INFO - ============================================================
+2026-10-10 20:17:07,925 - INFO - Starting evaluation for instance: mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1
+2026-10-10 20:17:07,925 - INFO - Level: 1
+2026-10-10 20:17:07,925 - INFO - Attempt: 1
+2026-10-10 20:17:07,925 - INFO - ============================================================
+2026-10-10 20:17:07,932 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-10 20:17:07,932 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb
+2026-10-10 20:17:07,933 - INFO - Image docker.io/libercoders/featurebench-specs_seaborn-instance_52738fbb found locally
+2026-10-10 20:17:07,933 - INFO - Creating container: fb-eval-mwaskom__seaborn-7001ebe7-test_statistics-0f2ae277-lv1-attempt-1-20261010-201707-933859
+2026-10-10 20:17:07,934 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-10 20:17:08,181 - INFO - Container fb-eval-mwaskom__seaborn-7001ebe7-test_statistics-0f2ae277-lv1-attempt-1-20261010-201707-933859 created successfully
+2026-10-10 20:17:08,182 - INFO - Starting Level 1 evaluation for mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1
+2026-10-10 20:17:08,182 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-10 20:17:08,576 - INFO - Restore project exit code: 0
+2026-10-10 20:17:08,576 - INFO - Output: 
+2026-10-10 20:17:08,576 - INFO - Step 2: Applying patch to mask files
+2026-10-10 20:17:08,580 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-10 20:17:08,829 - INFO - Mask patch apply exit code: 0
+2026-10-10 20:17:08,829 - INFO - Mask patch output: 
+2026-10-10 20:17:08,829 - INFO - Successfully applied mask patch
+2026-10-10 20:17:08,829 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-10 20:17:08,833 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-10 20:17:08,833 - INFO - Deleting F2P test file: /testbed/tests/test_statistics.py
+2026-10-10 20:17:09,070 - INFO - Successfully deleted F2P test file: /testbed/tests/test_statistics.py
+2026-10-10 20:17:09,070 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-10 20:17:09,070 - INFO - Step 4: Reinitializing git repository
+2026-10-10 20:17:10,705 - INFO - Step 5: Applying agent patch
+2026-10-10 20:17:10,708 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-10 20:17:10,952 - INFO - Patch apply exit code: 0
+2026-10-10 20:17:10,953 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch seaborn/_statistics.py...
+Applied patch ortg.tsv cleanly.
+Applied patch seaborn/_statistics.py cleanly.
+
+2026-10-10 20:17:10,953 - INFO - >>>>> Applied Patch
+2026-10-10 20:17:10,953 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-10 20:17:10,953 - INFO - F2P test path: /testbed/tests/test_statistics.py
+2026-10-10 20:17:11,198 - INFO - Delete F2P file exit code: 0
+2026-10-10 20:17:11,198 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-10 20:17:11,438 - INFO - Reverse apply exit code: 0
+2026-10-10 20:17:11,438 - INFO - Reverse apply output: 
+2026-10-10 20:17:11,438 - INFO - Successfully restored F2P test file using test_patch
+2026-10-10 20:17:11,438 - INFO - Step 7: Running tests
+2026-10-10 20:17:11,438 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-10 20:17:11,438 - INFO - Test timeout: 600s
+2026-10-10 20:17:11,438 - INFO - Running F2P test: /testbed/tests/test_statistics.py
+2026-10-10 20:17:15,498 - INFO - F2P test exit code: 1
+2026-10-10 20:17:15,498 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 72 items
+
+tests/test_statistics.py ....s.....s.....F..........................FFFF [ 65%]
+Fs.F..............FFFFFFF                                                [100%]
+
+======================
+2026-10-10 20:17:15,498 - INFO - Saved F2P test output to artifact://71ec8e43d541168b
+2026-10-10 20:17:15,498 - INFO - Running 5 P2P tests
+2026-10-10 20:17:15,498 - INFO - Running P2P test: /testbed/tests/_stats/test_density.py
+2026-10-10 20:17:16,924 - INFO - P2P test /testbed/tests/_stats/test_density.py exit code: 0
+2026-10-10 20:17:16,925 - INFO - Saved P2P test output to artifact://f940f82169a2d22e
+2026-10-10 20:17:16,925 - INFO - Running P2P test: /testbed/tests/_marks/test_area.py
+2026-10-10 20:17:18,087 - INFO - P2P test /testbed/tests/_marks/test_area.py exit code: 0
+2026-10-10 20:17:18,087 - INFO - Saved P2P test output to artifact://a931f9fb582cd48b
+2026-10-10 20:17:18,087 - INFO - Running P2P test: /testbed/tests/_core/test_properties.py
+2026-10-10 20:17:19,501 - INFO - P2P test /testbed/tests/_core/test_properties.py exit code: 0
+2026-10-10 20:17:19,502 - INFO - Saved P2P test output to artifact://144087df085c8529
+2026-10-10 20:17:19,502 - INFO - Running P2P test: /testbed/tests/test_relational.py
+2026-10-10 20:17:43,850 - INFO - P2P test /testbed/tests/test_relational.py exit code: 0
+2026-10-10 20:17:43,850 - INFO - Saved P2P test output to artifact://73d0b3af7f1a30e3
+2026-10-10 20:17:43,850 - INFO - Running P2P test: /testbed/tests/_marks/test_dot.py
+2026-10-10 20:17:45,277 - INFO - P2P test /testbed/tests/_marks/test_dot.py exit code: 0
+2026-10-10 20:17:45,277 - INFO - Saved P2P test output to artifact://2812cae7e4437f81
+2026-10-10 20:17:45,280 - INFO - ============================================================
+2026-10-10 20:17:45,280 - INFO - Evaluation completed for mwaskom__seaborn.7001ebe7.test_statistics.0f2ae277.lv1
+2026-10-10 20:17:45,280 - INFO - Resolved: False
+2026-10-10 20:17:45,280 - INFO - F2P Pass rate: 0.7971
+2026-10-10 20:17:45,280 - INFO - ============================================================
+2026-10-10 20:17:45,280 - INFO - Stopping and removing container
+2026-10-10 20:17:55,494 - INFO - Container removed successfully

@@ -1,0 +1,834 @@
+diff --git a/seaborn/_core/properties.py b/seaborn/_core/properties.py
+index d1e65a5..de5562a 100644
+--- a/seaborn/_core/properties.py
++++ b/seaborn/_core/properties.py
+@@ -36,6 +36,10 @@ MarkerPattern = Union[
+ Mapping = Callable[[ArrayLike], ArrayLike]
+ 
+ 
++def identity(x):
++    return x
++
++
+ # =================================================================================== #
+ # Base classes
+ # =================================================================================== #
+@@ -99,6 +103,26 @@ class Property:
+         """Coerce flexible property value to standardized representation."""
+         return val
+ 
++    def _check_dict_entries(self, levels: list, values: dict) -> None:
++        missing = [x for x in levels if x not in values]
++        if missing:
++            raise ValueError(
++                f"No entry in {self.variable} dictionary for {missing[0]!r}"
++            )
++
++    def _check_list_length(self, levels: list, values: list) -> list:
++        n_levels, n_values = len(levels), len(values)
++        if n_values != n_levels:
++            relation = "fewer" if n_values < n_levels else "more"
++            warnings.warn(
++                f"The {self.variable} list has {relation} values ({n_values}) "
++                f"than needed ({n_levels}), which may not be intended.",
++                UserWarning,
++            )
++        if not values:
++            return values
++        return list(itertools.islice(itertools.cycle(values), n_levels))
++
+ 
+ 
+ 
+@@ -271,6 +295,12 @@ class PointSize(IntervalProperty):
+     """Size (diameter) of a point mark, in points, with scaling by area."""
+     _default_range = 2, 8  # TODO use rcparams?
+ 
++    def _forward(self, values: ArrayLike) -> ArrayLike:
++        return np.square(values)
++
++    def _inverse(self, values: ArrayLike) -> ArrayLike:
++        return np.sqrt(values)
++
+ 
+ 
+ 
+@@ -319,6 +349,11 @@ class FontSize(IntervalProperty):
+     """Font size for textual marks, in points."""
+     _legend = False
+ 
++    @property
++    def default_range(self) -> tuple[float, float]:
++        base = mpl.rcParams["font.size"]
++        return base * .5, base * 2
++
+ 
+ 
+ 
+@@ -568,6 +603,9 @@ class Color(Property):
+         else:
+             return to_rgb(val)
+ 
++    def _standardize_color_sequence(self, colors):
++        return [self.standardize(color) for color in colors]
++
+ 
+ 
+ 
+@@ -663,8 +701,50 @@ class Color(Property):
+ 
+ 
+ 
++        def _mapping(x):
++            x = np.asarray(x)
++            rgba = np.asarray(mapping(x))
++            if rgba.ndim == 1:
++                rgba = rgba[None, :]
++            rgba = rgba.astype(float, copy=True)
++            rgba[Series(x).isna().to_numpy()] = np.nan
++            if rgba.shape[1] == 4 and np.all(rgba[:, 3] == 1):
++                return rgba[:, :3]
++            return rgba
++
+         return _mapping
+ 
++    def _get_nominal_mapping(self, scale: Scale, data: Series) -> Mapping:
++        levels = categorical_order(data, scale.order)
++        colors = self._get_values(scale, levels)
++
++        def mapping(x):
++            x = np.asarray(x)
++            rgba = any(len(color) == 4 for color in colors)
++            out = np.full((len(x), 4 if rgba else 3), np.nan)
++            use = np.isfinite(x)
++            if use.any():
++                selected = [colors[int(i)] for i in x[use]]
++                out[use] = to_rgba_array(selected)[:, :out.shape[1]]
++            return out
++
++        return mapping
++
++    def _get_boolean_mapping(self, scale: Scale, data: Series) -> Mapping:
++        colors = self._get_values(scale, [True, False])[::-1]
++
++        def mapping(x):
++            x = np.asarray(x)
++            rgba = any(len(color) == 4 for color in colors)
++            out = np.full((len(x), 4 if rgba else 3), np.nan)
++            use = np.isfinite(x)
++            if use.any():
++                selected = [colors[int(bool(i))] for i in x[use]]
++                out[use] = to_rgba_array(selected)[:, :out.shape[1]]
++            return out
++
++        return mapping
++
+ 
+ 
+ 
+@@ -745,6 +825,41 @@ class Fill(Property):
+     def standardize(self, val: Any) -> bool:
+         return bool(val)
+ 
++    def get_mapping(self, scale: Scale, data: Series) -> Mapping:
++        boolean_scale = isinstance(scale, Boolean)
++        order = [True, False] if boolean_scale else getattr(scale, "order", None)
++        levels = categorical_order(data, order)
++
++        if isinstance(scale.values, dict):
++            self._check_dict_entries(levels, scale.values)
++            values = [bool(scale.values[x]) for x in levels]
++        elif isinstance(scale.values, list):
++            values = [bool(x) for x in self._check_list_length(levels, scale.values)]
++        elif scale.values is None:
++            if len(levels) > 2:
++                warnings.warn(
++                    "The variable assigned to fill has more than two levels; "
++                    "the mapping will cycle between True and False.",
++                    UserWarning,
++                )
++            values = list(itertools.islice(itertools.cycle([True, False]), len(levels)))
++        else:
++            raise TypeError(
++                f"Scale values for fill must be a dict or list; "
++                f"not {type(scale.values)}."
++            )
++
++        if boolean_scale:
++            values = values[::-1]
++
++        def mapping(x):
++            x = np.asarray(x)
++            return np.asarray([
++                values[int(i)] if np.isfinite(i) else False for i in x
++            ], dtype=bool)
++
++        return mapping
++
+ 
+ 
+ 
+@@ -831,4 +946,4 @@ PROPERTY_CLASSES = {
+     # TODO gradient?
+ }
+ 
+-PROPERTIES = {var: cls(var) for var, cls in PROPERTY_CLASSES.items()}
+\ No newline at end of file
++PROPERTIES = {var: cls(var) for var, cls in PROPERTY_CLASSES.items()}
+diff --git a/seaborn/_core/scales.py b/seaborn/_core/scales.py
+index a809e1c..3230eac 100644
+--- a/seaborn/_core/scales.py
++++ b/seaborn/_core/scales.py
+@@ -32,6 +32,8 @@ from matplotlib.dates import (
+ )
+ from matplotlib.axis import Axis
+ from matplotlib.scale import ScaleBase
++from matplotlib.axis import Ticker
++from matplotlib import units as munits
+ from pandas import Series
+ 
+ from seaborn._core.rules import categorical_order
+@@ -64,6 +66,21 @@ class Scale:
+     _legend: tuple[list[Any], list[str]] | None
+ 
+ 
++    def __call__(self, data: Series) -> ArrayLike:
++        scalar = np.ndim(data) == 0
++        if scalar:
++            data = Series([data])
++        for func in self._pipeline:
++            if func is not None:
++                data = func(data)
++        return data[0] if scalar else data
++
++    def __post_init__(self):
++        self._tick_params = None
++        self._label_params = None
++        self._legend = None
++
++
+ 
+ 
+ 
+@@ -229,7 +246,7 @@ class Boolean(Scale):
+ 
+     def _get_locators(self, locator):
+         if locator is not None:
+-            return locator
++            return locator, None
+         return FixedLocator([0, 1]), None
+ 
+     def _get_formatter(self, locator, formatter):
+@@ -322,6 +339,17 @@ class Nominal(Scale):
+         return new
+ 
+ 
++    def _finalize(self, p: Plot, axis: Axis) -> None:
++        axis.grid(False, which="both")
++        name = axis.axis_name
++        if name not in p._limits:
++            nticks = len(axis.get_major_ticks())
++            lo, hi = -.5, nticks - .5
++            if name == "y":
++                lo, hi = hi, lo
++            getattr(axis.axes, f"set_{name}lim")(lo, hi, auto=None)
++
++
+ 
+ 
+ 
+@@ -417,6 +445,136 @@ class ContinuousBase(Scale):
+     norm: tuple | None = None
+ 
+ 
++    def _setup(
++        self, data: Series, prop: Property, axis: Axis | None = None,
++    ) -> Scale:
++        new = copy(self)
++        if new._tick_params is None:
++            new = new.tick()
++        if new._label_params is None:
++            new = new.label()
++
++        forward, inverse = new._get_transform()
++        mpl_scale = new._get_scale(str(data.name), forward, inverse)
++        axis = PseudoAxis(mpl_scale) if axis is None else axis
++
++        axis.update_units(data)
++        get_converter = getattr(axis, "get_converter", None)
++        converter = get_converter() if get_converter is not None else axis.converter
++        invalid_temporal = isinstance(new, Temporal) and isinstance(
++            converter, mpl.category.StrCategoryConverter
++        )
++        mpl_scale.set_default_locators_and_formatters(axis)
++
++        major_locator, minor_locator = new._get_locators(**new._tick_params)
++        axis.set_major_locator(major_locator)
++        if minor_locator is not None:
++            axis.set_minor_locator(minor_locator)
++        formatter = new._get_formatter(major_locator, **new._label_params)
++        axis.set_major_formatter(formatter)
++
++        # Setting a ScaleBase on an Axes asks it to configure the axis again.
++        # Retain this scale's user-selected locator/formatter choices for that
++        # later call as well as for the pseudo axis used by semantic mappings.
++        def set_defaults(target_axis):
++            target_axis.set_major_locator(major_locator)
++            if minor_locator is not None:
++                target_axis.set_minor_locator(minor_locator)
++            target_axis.set_major_formatter(formatter)
++
++        mpl_scale.set_default_locators_and_formatters = set_defaults
++
++        converted = np.asarray(axis.convert_units(data), dtype=float)
++        finite = converted[np.isfinite(converted)]
++        if new.norm is None:
++            if finite.size:
++                vmin, vmax = float(finite.min()), float(finite.max())
++            else:
++                vmin, vmax = 0.0, 1.0
++        else:
++            vmin, vmax = np.asarray(axis.convert_units(new.norm), dtype=float)
++
++        normalize = None
++        if prop.normed:
++            tmin, tmax = np.asarray(forward(np.asarray([vmin, vmax])), dtype=float)
++            normalizer = mpl.colors.Normalize(tmin, tmax, clip=False)
++            normalize = normalizer
++
++        convert_units = axis.convert_units
++        if invalid_temporal:
++            def convert_units(x):
++                raise TypeError("Temporal scales require date or datetime values.")
++
++        new._pipeline = [convert_units, forward, normalize,
++                         prop.get_mapping(new, data)]
++        new._spacer = _default_spacer
++        new._matplotlib_scale = mpl_scale
++
++        axis.set_data_interval(vmin, vmax)
++        axis.set_view_interval(vmin, vmax)
++        if prop.legend:
++            locs = np.asarray(axis.get_majorticklocs())
++            lo, hi = sorted([vmin, vmax])
++            locs = locs[(locs >= lo) & (locs <= hi)]
++            legend_formatter = copy(formatter)
++            if isinstance(legend_formatter, ScalarFormatter):
++                legend_formatter.set_useOffset(False)
++                legend_formatter.set_scientific(False)
++            labels = legend_formatter.format_ticks(locs)
++            new._legend = list(locs), list(labels)
++
++        return new
++
++    @staticmethod
++    def _parse_for_log_params(trans):
++        log_base = symlog_thresh = None
++        if isinstance(trans, str):
++            if trans.startswith("symlog"):
++                suffix = trans[6:]
++                symlog_thresh = float(suffix) if suffix else 1.0
++            elif trans.startswith("log") and not trans.startswith("logit"):
++                suffix = trans[3:]
++                log_base = float(suffix) if suffix else 10.0
++        return log_base, symlog_thresh
++
++    def _get_transform(self):
++        trans = self.trans
++        if trans is None:
++            return _make_identity_transforms()
++        if isinstance(trans, tuple) and len(trans) == 2:
++            if not all(callable(f) for f in trans):
++                raise TypeError("Transform functions must be callable.")
++            return trans
++        if not isinstance(trans, str):
++            raise TypeError("Scale transform must be a string or 2-tuple of functions.")
++        if trans == "sqrt":
++            return _make_sqrt_transforms()
++        if trans == "logit":
++            return _make_logit_transforms()
++        if trans.startswith("symlog"):
++            threshold = self._parse_for_log_params(trans)[1]
++            return _make_symlog_transforms(threshold)
++        if trans.startswith("log"):
++            base = self._parse_for_log_params(trans)[0]
++            return _make_log_transforms(base)
++        if trans.startswith("pow"):
++            suffix = trans[3:]
++            return _make_power_transforms(float(suffix) if suffix else 2.0)
++        raise ValueError(f"Unknown transform: {trans!r}")
++
++    def _get_scale(self, name, forward, inverse):
++        log_base, symlog_thresh = self._parse_for_log_params(self.trans)
++        if self.trans is None:
++            return mpl.scale.LinearScale(name)
++        if log_base is not None:
++            return mpl.scale.LogScale(name, base=log_base)
++        if symlog_thresh is not None:
++            return mpl.scale.SymmetricalLogScale(
++                name, base=10, linthresh=symlog_thresh,
++            )
++        return mpl.scale.FuncScale(name, (forward, inverse))
++
++
+ 
+ 
+ 
+@@ -778,6 +936,49 @@ class Temporal(ContinuousBase):
+     _priority: ClassVar[int] = 2
+ 
+ 
++    def label(
++        self,
++        formatter: Formatter | None = None,
++        *,
++        concise: bool = False,
++    ) -> Temporal:
++        if formatter is not None and not isinstance(formatter, Formatter):
++            raise TypeError(
++                f"Label formatter must be an instance of {Formatter!r}, "
++                f"not {type(formatter)!r}"
++            )
++        new = copy(self)
++        new._label_params = {"formatter": formatter, "concise": concise}
++        return new
++
++    def tick(
++        self,
++        locator: Locator | None = None,
++        *,
++        upto: int | None = None,
++    ) -> Temporal:
++        if locator is not None and not isinstance(locator, Locator):
++            raise TypeError(
++                f"Tick locator must be an instance of {Locator!r}, "
++                f"not {type(locator)!r}."
++            )
++        new = copy(self)
++        new._tick_params = {"locator": locator, "upto": upto}
++        return new
++
++    def _get_locators(self, locator, upto):
++        if locator is None:
++            locator = AutoDateLocator(minticks=2, maxticks=upto or 6)
++        return locator, None
++
++    def _get_formatter(self, locator, formatter, concise):
++        if formatter is not None:
++            return formatter
++        if concise:
++            return ConciseDateFormatter(locator)
++        return AutoDateFormatter(locator)
++
++
+ 
+ 
+ 
+@@ -899,6 +1100,36 @@ class PseudoAxis:
+     axis_name = ""  # Matplotlib requirement but not actually used
+ 
+ 
++    def __init__(self, scale):
++        self._scale = scale
++        self.major = Ticker()
++        self.minor = Ticker()
++        self.converter = None
++        self.units = None
++        self._data_interval = (0.0, 1.0)
++        self._view_interval = (0.0, 1.0)
++        scale.set_default_locators_and_formatters(self)
++
++    def get_scale(self):
++        return self._scale
++
++    def set_view_interval(self, vmin, vmax):
++        self._view_interval = vmin, vmax
++
++    def get_view_interval(self):
++        return self._view_interval
++
++    def get_tick_space(self):
++        # Locators only use this as a conservative upper bound.
++        return 9
++
++    def get_units(self):
++        return self.units
++
++    def set_units(self, units):
++        self.units = units
++
++
+ 
+ 
+ 
+@@ -931,6 +1162,25 @@ class PseudoAxis:
+         return self._data_interval
+ 
+ 
++    def set_major_locator(self, locator):
++        self.major.locator = locator
++        if self.major.formatter is not None:
++            self.major.formatter._set_locator(locator)
++        locator.set_axis(self)
++
++    def set_minor_locator(self, locator):
++        self.minor.locator = locator
++        if self.minor.formatter is not None:
++            self.minor.formatter._set_locator(locator)
++        locator.set_axis(self)
++
++    def set_major_formatter(self, formatter):
++        self.major.formatter = formatter
++        formatter.set_axis(self)
++        if self.major.locator is not None:
++            formatter._set_locator(self.major.locator)
++
++
+ 
+ 
+ 
+@@ -980,6 +1230,16 @@ class PseudoAxis:
+             return x
+         return self.converter.convert(x, self.units, self)
+ 
++    def update_units(self, data):
++        converter = munits.registry.get_converter(data)
++        if converter is None:
++            return False
++        self.converter = converter
++        units = converter.default_units(data, self)
++        if units is not None:
++            self.units = units
++        return True
++
+ 
+ 
+ 
+@@ -996,6 +1256,90 @@ class PseudoAxis:
+ # Transform function creation
+ 
+ 
++class CatScale(mpl.scale.LinearScale):
++    """A linear matplotlib scale used together with categorical units."""
++    name = "categorical"
++
++    def set_default_locators_and_formatters(self, axis):
++        # The categorical units converter installs its own locator and
++        # formatter. A linear-scale reset would overwrite both of them.
++        pass
++
++
++def na_safe_cast(x):
++    values = np.asarray(x)
++    missing = Series(values).isna().to_numpy()
++    out = np.full(values.shape, np.nan)
++    out[~missing] = values[~missing].astype(bool)
++    return out
++
++
++def _make_identity_transforms() -> TransFuncs:
++    def identity(x):
++        return np.asarray(x)
++    return identity, identity
++
++
++def _make_log_transforms(base: float | None = None) -> TransFuncs:
++    base = 10.0 if base is None else float(base)
++    if base <= 0 or base == 1:
++        raise ValueError("Logarithm base must be positive and not equal to 1.")
++    log_base = np.log(base)
++
++    def log(x):
++        with np.errstate(invalid="ignore", divide="ignore"):
++            return np.log(np.asarray(x)) / log_base
++
++    def exp(x):
++        with np.errstate(over="ignore", invalid="ignore"):
++            return np.power(base, np.asarray(x))
++
++    return log, exp
++
++
++def _make_symlog_transforms(thresh: float, base: float = 10.0) -> TransFuncs:
++    if thresh is None or thresh <= 0:
++        raise ValueError("Symmetrical-log threshold must be positive.")
++    adjustment = 1.0 / (1.0 - base ** -1)
++    log_base = np.log(base)
++
++    def symlog(x):
++        x = np.asarray(x)
++        abs_x = np.abs(x)
++        with np.errstate(invalid="ignore", divide="ignore"):
++            out = np.sign(x) * thresh * (
++                adjustment + np.log(abs_x / thresh) / log_base
++            )
++        return np.where(abs_x <= thresh, x * adjustment, out)
++
++    def inv_symlog(x):
++        x = np.asarray(x)
++        abs_x = np.abs(x)
++        boundary = thresh * adjustment
++        with np.errstate(invalid="ignore", over="ignore"):
++            out = np.sign(x) * thresh * np.power(
++                base, abs_x / thresh - adjustment,
++            )
++        return np.where(abs_x <= boundary, x / adjustment, out)
++
++    return symlog, inv_symlog
++
++
++def _make_power_transforms(exponent: float) -> TransFuncs:
++    if exponent == 0:
++        raise ValueError("Power transform exponent cannot be zero.")
++
++    def power(x):
++        x = np.asarray(x)
++        return np.sign(x) * np.power(np.abs(x), exponent)
++
++    def root(x):
++        x = np.asarray(x)
++        return np.sign(x) * np.power(np.abs(x), 1.0 / exponent)
++
++    return power, root
++
++
+ 
+ 
+ 
+@@ -1087,4 +1431,8 @@ def _make_sqrt_transforms() -> TransFuncs:
+ 
+ 
+ def _default_spacer(x: Series) -> float:
+-    return 1
+\ No newline at end of file
++    values = np.asarray(x, dtype=float)
++    values = np.unique(values[np.isfinite(values)])
++    if len(values) < 2:
++        return np.nan
++    return float(np.min(np.diff(values)))
+diff --git a/seaborn/external/husl.py b/seaborn/external/husl.py
+index 63d19fa..19496b5 100644
+--- a/seaborn/external/husl.py
++++ b/seaborn/external/husl.py
+@@ -29,6 +29,32 @@ lab_k = 903.3
+ # Public API
+ 
+ 
++def husl_to_lch(triple):
++    H, S, L = triple
++    if L > 99.9999999:
++        return [100.0, 0.0, H]
++    if L < 0.00000001:
++        return [0.0, 0.0, H]
++    return [L, max_chroma(L, H) / 100.0 * S, H]
++
++
++def husl_to_rgb(h, s, l):
++    return lch_to_rgb(*husl_to_lch([h, s, l]))
++
++
++def lch_to_husl(triple):
++    L, C, H = triple
++    if L > 99.9999999:
++        return [H, 0.0, 100.0]
++    if L < 0.00000001:
++        return [H, 0.0, 0.0]
++    return [H, C / max_chroma(L, H) * 100.0, L]
++
++
++def lch_to_rgb(l, c, h):
++    return xyz_to_rgb(luv_to_xyz(lch_to_luv([l, c, h])))
++
++
+ 
+ 
+ 
+@@ -60,6 +86,39 @@ def hex_to_huslp(hex):
+     return rgb_to_huslp(*hex_to_rgb(hex))
+ 
+ 
++def rgb_to_husl(r, g, b):
++    return lch_to_husl(rgb_to_lch(r, g, b))
++
++
++def rgb_to_lch(r, g, b):
++    return luv_to_lch(xyz_to_luv(rgb_to_xyz([r, g, b])))
++
++
++def max_chroma(L, H):
++    """Return the maximum in-gamut chroma for lightness and hue."""
++    if L < 0.00000001 or L > 99.9999999:
++        return 0.0
++    hrad = math.radians(H)
++    sub1 = math.pow(L + 16.0, 3.0) / 1560896.0
++    sub2 = sub1 if sub1 > lab_e else L / lab_k
++    result = float("inf")
++    for m1, m2, m3 in m:
++        for t in (0.0, 1.0):
++            bottom = ((632260.0 * m3 - 126452.0 * m2) * sub2
++                      + 126452.0 * t)
++            slope = (284517.0 * m1 - 94839.0 * m3) * sub2 / bottom
++            intercept = (
++                (838422.0 * m3 + 769860.0 * m2 + 731718.0 * m1)
++                * L * sub2 - 769860.0 * t * L
++            ) / bottom
++            divisor = math.sin(hrad) - slope * math.cos(hrad)
++            if divisor:
++                length = intercept / divisor
++                if length >= 0:
++                    result = min(result, length)
++    return result
++
++
+ 
+ 
+ 
+@@ -123,6 +182,66 @@ def dot_product(a, b):
+     return sum(map(operator.mul, a, b))
+ 
+ 
++def from_linear(c):
++    if c <= 0.0031308:
++        return 12.92 * c
++    return 1.055 * math.pow(c, 1.0 / 2.4) - 0.055
++
++
++def to_linear(c):
++    if c > 0.04045:
++        return math.pow((c + 0.055) / 1.055, 2.4)
++    return c / 12.92
++
++
++def xyz_to_rgb(triple):
++    return [from_linear(dot_product(row, triple)) for row in m]
++
++
++def rgb_to_xyz(triple):
++    linear = [to_linear(c) for c in triple]
++    return [dot_product(row, linear) for row in m_inv]
++
++
++def xyz_to_luv(triple):
++    X, Y, Z = triple
++    denominator = X + 15.0 * Y + 3.0 * Z
++    if denominator == 0:
++        var_u = var_v = 0.0
++    else:
++        var_u = 4.0 * X / denominator
++        var_v = 9.0 * Y / denominator
++    L = 116.0 * math.pow(Y, 1.0 / 3.0) - 16.0 if Y > lab_e else lab_k * Y
++    if L == 0:
++        return [0.0, 0.0, 0.0]
++    return [L, 13.0 * L * (var_u - refU), 13.0 * L * (var_v - refV)]
++
++
++def luv_to_xyz(triple):
++    L, U, V = triple
++    if L == 0:
++        return [0.0, 0.0, 0.0]
++    var_u = U / (13.0 * L) + refU
++    var_v = V / (13.0 * L) + refV
++    Y = math.pow((L + 16.0) / 116.0, 3.0) if L > 8.0 else L / lab_k
++    X = -(9.0 * Y * var_u) / ((var_u - 4.0) * var_v - var_u * var_v)
++    Z = (9.0 * Y - 15.0 * var_v * Y - var_v * X) / (3.0 * var_v)
++    return [X, Y, Z]
++
++
++def luv_to_lch(triple):
++    L, U, V = triple
++    C = math.sqrt(U * U + V * V)
++    H = 0.0 if C < 0.00000001 else math.degrees(math.atan2(V, U)) % 360.0
++    return [L, C, H]
++
++
++def lch_to_luv(triple):
++    L, C, H = triple
++    hrad = math.radians(H)
++    return [L, math.cos(hrad) * C, math.sin(hrad) * C]
++
++
+ 
+ 
+ 
+@@ -310,4 +429,4 @@ def lch_to_huslp(triple):
+     mx = max_chroma_pastel(L)
+     S = C / mx * 100.0
+ 
+-    return [H, S, L]
+\ No newline at end of file
++    return [H, S, L]
+diff --git a/seaborn/palettes.py b/seaborn/palettes.py
+index ceaf94a..4867d59 100644
+--- a/seaborn/palettes.py
++++ b/seaborn/palettes.py
+@@ -417,6 +417,46 @@ def mpl_palette(name, n_colors=6, as_cmap=False):
+         return _ColorPalette(palette)
+ 
+ 
++def _color_to_rgb(color, input):
++    """Convert a flexible color specification to an RGB tuple."""
++    if input == "hls":
++        return colorsys.hls_to_rgb(*color)
++    elif input == "husl":
++        return tuple(np.clip(husl.husl_to_rgb(*color), 0, 1))
++    elif input == "xkcd":
++        color = xkcd_rgb[color]
++    return mpl.colors.to_rgb(color)
++
++
++def _parse_cubehelix_args(argstr):
++    """Parse the compact ``ch:`` palette specification."""
++    reverse = argstr.endswith("_r")
++    if reverse:
++        argstr = argstr[:-2]
++    if argstr.startswith("ch:"):
++        argstr = argstr[3:]
++
++    args = []
++    kwargs = {}
++    key_map = {
++        "s": "start", "r": "rot", "g": "gamma",
++        "h": "hue", "l": "light", "d": "dark",
++    }
++    if argstr.strip():
++        for item in argstr.split(","):
++            item = item.strip()
++            if not item:
++                continue
++            if "=" in item:
++                key, value = (part.strip() for part in item.split("=", 1))
++                kwargs[key_map.get(key, key)] = float(value)
++            else:
++                args.append(float(item))
++    if reverse:
++        kwargs["reverse"] = True
++    return args, kwargs
++
++
+ 
+ 
+ 
+@@ -737,6 +777,16 @@ def cubehelix_palette(n_colors=6, start=0, rot=.4, gamma=1.0, hue=0.8,
+ 
+ 
+ 
++    def get_color_function(p0, p1):
++
++        def color(x):
++            xg = x ** gamma
++            amplitude = hue * xg * (1 - xg) / 2
++            phi = 2 * np.pi * (start / 3 + rot * x)
++            return xg + amplitude * (p0 * np.cos(phi) + p1 * np.sin(phi))
++
++        return color
++
+     cdict = {
+         "red": get_color_function(-0.14861, 1.78277),
+         "green": get_color_function(-0.29227, -0.90649),
+@@ -838,4 +888,4 @@ def set_color_codes(palette="deep"):
+ 
+     for code, color in zip("bgrmyck", colors):
+         rgb = mpl.colors.colorConverter.to_rgb(color)
+-        mpl.colors.colorConverter.colors[code] = rgb
+\ No newline at end of file
++        mpl.colors.colorConverter.colors[code] = rgb

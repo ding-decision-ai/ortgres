@@ -1,0 +1,83 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 41 items
+
+pandas/tests/io/pytables/test_put.py .........................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.08s call     pandas/tests/io/pytables/test_put.py::test_store_multiindex
+0.03s call     pandas/tests/io/pytables/test_put.py::test_api_default_format
+0.02s call     pandas/tests/io/pytables/test_put.py::test_put_mixed_type[True]
+0.02s call     pandas/tests/io/pytables/test_put.py::test_put
+0.02s call     pandas/tests/io/pytables/test_put.py::test_put_mixed_type[False]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_put_string_index
+0.01s call     pandas/tests/io/pytables/test_put.py::test_store_periodindex[table]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_format_type
+0.01s call     pandas/tests/io/pytables/test_put.py::test_put_compression
+0.01s call     pandas/tests/io/pytables/test_put.py::test_put_compression_blosc
+0.01s call     pandas/tests/io/pytables/test_put.py::test_store_periodindex[fixed]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_store_index_types[index0-table]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_store_index_types[index3-table]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_store_index_types[index1-table]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_put_str_frame[True-string=string[python]]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_put_str_frame[False-string=str[pyarrow]]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_put_str_frame[True-string=str[python]]
+0.01s call     pandas/tests/io/pytables/test_put.py::test_store_index_types[index4-table]
+
+(12 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/io/pytables/test_put.py::test_format_type
+PASSED pandas/tests/io/pytables/test_put.py::test_format_kwarg_in_constructor
+PASSED pandas/tests/io/pytables/test_put.py::test_api_default_format
+PASSED pandas/tests/io/pytables/test_put.py::test_put
+PASSED pandas/tests/io/pytables/test_put.py::test_put_string_index
+PASSED pandas/tests/io/pytables/test_put.py::test_put_compression
+PASSED pandas/tests/io/pytables/test_put.py::test_put_compression_blosc
+PASSED pandas/tests/io/pytables/test_put.py::test_put_datetime_ser[True]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_datetime_ser[False]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_mixed_type[True]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_mixed_type[False]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[True-string=string[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[True-string=string[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[True-string=str[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[True-string=str[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[False-string=string[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[False-string=string[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[False-string=str[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_frame[False-string=str[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[True-string=string[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[True-string=string[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[True-string=str[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[True-string=str[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[False-string=string[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[False-string=string[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[False-string=str[pyarrow]]
+PASSED pandas/tests/io/pytables/test_put.py::test_put_str_series[False-string=str[python]]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index0-table]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index0-fixed]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index1-table]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index1-fixed]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index2-table]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index2-fixed]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index3-table]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index3-fixed]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index4-table]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_index_types[index4-fixed]
+PASSED pandas/tests/io/pytables/test_put.py::test_column_multiindex
+PASSED pandas/tests/io/pytables/test_put.py::test_store_multiindex
+PASSED pandas/tests/io/pytables/test_put.py::test_store_periodindex[fixed]
+PASSED pandas/tests/io/pytables/test_put.py::test_store_periodindex[table]
+============================== 41 passed in 0.44s ==============================

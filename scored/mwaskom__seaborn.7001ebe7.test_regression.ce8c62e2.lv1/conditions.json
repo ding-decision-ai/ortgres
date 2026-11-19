@@ -1,0 +1,28 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.59",
+  "initialization": {
+    "coverage": {
+      "ready": true,
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "related_file_count": 4,
+      "related_valid_outline_count": 4,
+      "original_cognitive_files": 326,
+      "genuine_rows_reused_before_new_source": 326,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true
+    }
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/mwaskom__seaborn.7001ebe7.test_regression.ce8c62e2.lv1"
+}

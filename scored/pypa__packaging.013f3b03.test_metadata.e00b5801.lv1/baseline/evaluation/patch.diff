@@ -1,0 +1,686 @@
+diff --git a/src/packaging/_parser.py b/src/packaging/_parser.py
+index d4408d8..fbc426d 100644
+--- a/src/packaging/_parser.py
++++ b/src/packaging/_parser.py
+@@ -60,6 +60,152 @@ class ParsedRequirement(NamedTuple):
+ # --------------------------------------------------------------------------------------
+ 
+ 
++def parse_requirement(source: str) -> ParsedRequirement:
++    """Parse a complete PEP 508 dependency specifier."""
++    return _parse_requirement(Tokenizer(source, rules=DEFAULT_RULES))
++
++
++def _parse_requirement(tokenizer: Tokenizer) -> ParsedRequirement:
++    tokenizer.consume("WS")
++    name_token = tokenizer.expect(
++        "IDENTIFIER", expected="package name at the start of dependency specifier"
++    )
++    name = name_token.text
++    tokenizer.consume("WS")
++
++    extras = _parse_extras(tokenizer)
++    tokenizer.consume("WS")
++
++    url, specifier, marker = _parse_requirement_details(tokenizer)
++    tokenizer.expect("END", expected="end of dependency specifier")
++    return ParsedRequirement(name, url, extras, specifier, marker)
++
++
++def _parse_extras(tokenizer: Tokenizer) -> list[str]:
++    """extras = LEFT_BRACKET (IDENTIFIER (COMMA IDENTIFIER)*)? RIGHT_BRACKET"""
++    if not tokenizer.check("LEFT_BRACKET", peek=True):
++        return []
++
++    extras: list[str] = []
++    with tokenizer.enclosing_tokens(
++        "LEFT_BRACKET", "RIGHT_BRACKET", around="extras"
++    ):
++        tokenizer.consume("WS")
++        if tokenizer.check("IDENTIFIER"):
++            extras.append(tokenizer.read().text)
++            while True:
++                tokenizer.consume("WS")
++                if tokenizer.check("IDENTIFIER", peek=True):
++                    tokenizer.raise_syntax_error("Expected comma between extra names")
++                if not tokenizer.check("COMMA"):
++                    break
++                tokenizer.read()
++                tokenizer.consume("WS")
++                extras.append(
++                    tokenizer.expect(
++                        "IDENTIFIER", expected="extra name after comma"
++                    ).text
++                )
++        tokenizer.consume("WS")
++    return extras
++
++
++def _parse_requirement_details(
++    tokenizer: Tokenizer,
++) -> tuple[str, str, MarkerList | None]:
++    """Parse the URL-or-specifier and optional environment marker."""
++    specifier = ""
++    url = ""
++    marker = None
++
++    if tokenizer.check("AT"):
++        tokenizer.read()
++        tokenizer.consume("WS")
++        url_start = tokenizer.position
++        url = tokenizer.expect("URL", expected="URL after @").text
++
++        if tokenizer.check("WS"):
++            tokenizer.read()
++            if tokenizer.check("END", peek=True):
++                return url, specifier, marker
++            if not tokenizer.check("SEMICOLON"):
++                tokenizer.raise_syntax_error(
++                    "Expected semicolon (after URL and whitespace) or end",
++                    span_start=url_start,
++                )
++            tokenizer.read()
++            marker = _parse_requirement_marker(tokenizer)
++        elif not tokenizer.check("END", peek=True):
++            tokenizer.raise_syntax_error(
++                "Expected semicolon (after URL and whitespace) or end",
++                span_start=url_start,
++            )
++        return url, specifier, marker
++
++    specifier_start = tokenizer.position
++    specifier = _parse_specifier(tokenizer)
++    tokenizer.consume("WS")
++    if tokenizer.check("SEMICOLON"):
++        tokenizer.read()
++        marker = _parse_requirement_marker(tokenizer)
++    elif not tokenizer.check("END", peek=True):
++        if specifier:
++            message = (
++                "Expected comma (within version specifier), "
++                "semicolon (after version specifier) or end"
++            )
++        else:
++            message = "Expected semicolon (after name with no version specifier) or end"
++        tokenizer.raise_syntax_error(message, span_start=specifier_start)
++
++    return url, specifier, marker
++
++
++def _parse_requirement_marker(tokenizer: Tokenizer) -> MarkerList:
++    tokenizer.consume("WS")
++    return _parse_marker(tokenizer)
++
++
++def _parse_specifier(tokenizer: Tokenizer) -> str:
++    with tokenizer.enclosing_tokens(
++        "LEFT_PARENTHESIS",
++        "RIGHT_PARENTHESIS",
++        around="version specifier",
++    ):
++        tokenizer.consume("WS")
++        specifier = _parse_version_many(tokenizer)
++        tokenizer.consume("WS")
++    return specifier
++
++
++def _parse_version_many(tokenizer: Tokenizer) -> str:
++    parsed_specifiers: list[str] = []
++    while tokenizer.check("SPECIFIER"):
++        token = tokenizer.read()
++        parsed_specifiers.append(token.text)
++
++        if tokenizer.check("VERSION_PREFIX_TRAIL"):
++            trail = tokenizer.read()
++            tokenizer.raise_syntax_error(
++                ".* suffix can only be used with `==` or `!=` operators",
++                span_start=token.position,
++                span_end=trail.position + 1,
++            )
++        if tokenizer.check("VERSION_LOCAL_LABEL_TRAIL"):
++            tokenizer.raise_syntax_error(
++                "Local version label can only be used with `==` or `!=` operators",
++                span_start=token.position,
++            )
++
++        tokenizer.consume("WS")
++        if not tokenizer.check("COMMA"):
++            break
++        tokenizer.read()
++        tokenizer.consume("WS")
++
++    return ",".join(parsed_specifiers)
++
++
+ 
+ 
+ 
+@@ -353,4 +499,4 @@ def _parse_marker_op(tokenizer: Tokenizer) -> Op:
+     else:
+         return tokenizer.raise_syntax_error(
+             "Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, in, not in"
+-        )
+\ No newline at end of file
++        )
+diff --git a/src/packaging/metadata.py b/src/packaging/metadata.py
+index e431061..b55e0a5 100644
+--- a/src/packaging/metadata.py
++++ b/src/packaging/metadata.py
+@@ -1,6 +1,5 @@
+ from __future__ import annotations
+ 
+-import email.feedparser
+ import email.header
+ import email.message
+ import email.parser
+@@ -11,7 +10,6 @@ import sys
+ import typing
+ from typing import (
+     Any,
+-    Callable,
+     Generic,
+     Literal,
+     TypedDict,
+@@ -39,6 +37,14 @@ else:  # pragma: no cover
+         message: str
+         exceptions: list[Exception]
+ 
++        def __init__(self, message: str, exceptions: list[Exception]) -> None:
++            self.message = message
++            self.exceptions = exceptions
++            super().__init__(message, exceptions)
++
++        def __repr__(self) -> str:
++            return f"ExceptionGroup({self.message!r}, {self.exceptions!r})"
++
+ 
+ 
+ 
+@@ -181,6 +187,104 @@ _DICT_FIELDS = {
+ }
+ 
+ 
++def _decode_email_header(value: Any) -> str:
++    """Decode an email header while enforcing core metadata's UTF-8 rule."""
++    decoded: list[str] = []
++    for chunk, _encoding in email.header.decode_header(value):
++        if isinstance(chunk, bytes):
++            decoded.append(chunk.decode("utf-8"))
++        else:
++            decoded.append(chunk)
++    return "".join(decoded)
++
++
++def parse_email(data: bytes | str) -> tuple[RawMetadata, dict[str, list[str]]]:
++    """Parse distribution metadata serialized as RFC822-style headers."""
++    if isinstance(data, bytes):
++        message = email.parser.BytesParser(policy=email.policy.compat32).parsebytes(data)
++    else:
++        message = email.parser.Parser(policy=email.policy.compat32).parsestr(data)
++
++    raw: RawMetadata = {}
++    unparsed: dict[str, list[str]] = {}
++
++    # Iterating over a set of names prevents repeated headers from being processed
++    # more than once while preserving the order of their values via get_all().
++    names = list(dict.fromkeys(name.lower() for name in message.keys()))
++    for email_name in names:
++        values = message.get_all(email_name, [])
++        raw_name = _EMAIL_TO_RAW_MAPPING.get(email_name)
++        if raw_name is None:
++            unparsed[email_name] = [str(value) for value in values]
++            continue
++
++        decoded_values: list[str] = []
++        malformed = False
++        for value in values:
++            try:
++                decoded_values.append(_decode_email_header(value))
++            except (UnicodeDecodeError, LookupError, email.errors.HeaderParseError):
++                malformed = True
++                break
++        if malformed:
++            unparsed[email_name] = [str(value) for value in values]
++            continue
++
++        if raw_name in _STRING_FIELDS:
++            if len(decoded_values) == 1:
++                raw[raw_name] = decoded_values[0]  # type: ignore[literal-required]
++            else:
++                unparsed[email_name] = decoded_values
++        elif raw_name == "keywords":
++            if len(decoded_values) == 1:
++                raw["keywords"] = decoded_values[0].split(",")
++            else:
++                unparsed[email_name] = decoded_values
++        elif raw_name in _LIST_FIELDS:
++            raw[raw_name] = decoded_values  # type: ignore[literal-required]
++        elif raw_name == "project_urls":
++            project_urls: dict[str, str] = {}
++            valid = True
++            for value in decoded_values:
++                label, separator, url = value.partition(",")
++                label = label.strip()
++                url = url.strip()
++                if not separator or label in project_urls:
++                    valid = False
++                    break
++                project_urls[label] = url
++            if valid:
++                raw["project_urls"] = project_urls
++            else:
++                unparsed[email_name] = decoded_values
++
++    payload = message.get_payload(decode=True)
++    if payload is not None and payload != b"":
++        if isinstance(data, bytes):
++            try:
++                description: str | bytes = payload.decode("utf-8")
++            except UnicodeDecodeError:
++                description = payload
++        else:
++            text_payload = message.get_payload()
++            description = (
++                text_payload if isinstance(text_payload, str) else str(text_payload)
++            )
++
++        if "description" in raw:
++            header_description = raw.pop("description")
++            unparsed.setdefault("description", []).append(header_description)
++            unparsed["description"].append(description)  # type: ignore[arg-type]
++        elif "description" in unparsed:
++            unparsed["description"].append(description)  # type: ignore[arg-type]
++        elif isinstance(description, bytes):
++            unparsed["description"] = [description]  # type: ignore[list-item]
++        else:
++            raw["description"] = description
++
++    return raw, unparsed
++
++
+ 
+ 
+ 
+@@ -305,6 +409,13 @@ class RFC822Policy(email.policy.EmailPolicy):
+     mangle_from_ = False
+     max_line_length = 0
+ 
++    def header_store_parse(self, name: str, value: Any) -> tuple[str, Any]:
++        # Metadata permits folded/multiline values.  EmailPolicy normally rejects
++        # those when values are assigned programmatically.
++        if isinstance(value, str) and ("\n" in value or "\r" in value):
++            return name, value
++        return super().header_store_parse(name, value)
++
+ 
+ 
+ 
+@@ -322,6 +433,13 @@ class RFC822Message(email.message.EmailMessage):
+     def __init__(self) -> None:
+         super().__init__(policy=RFC822Policy())
+ 
++    def as_bytes(
++        self,
++        unixfrom: bool = False,
++        policy: email.policy.Policy | None = None,
++    ) -> bytes:
++        return self.as_string(unixfrom=unixfrom, policy=policy).encode("utf-8")
++
+ 
+ 
+ 
+@@ -549,6 +667,207 @@ class _Validator(Generic[T]):
+         self.name = name
+         self.raw_name = _RAW_TO_EMAIL_MAPPING[name]
+ 
++    def __get__(self, instance: Metadata | None, _owner: type[Metadata]) -> T:
++        if instance is None:
++            return cast(T, self)
++        if self.name in instance.__dict__:
++            return cast(T, instance.__dict__[self.name])
++
++        value = instance._raw.get(self.name, _NOT_FOUND)  # type: ignore[misc]
++        if value is _NOT_FOUND:
++            if self.name in _REQUIRED_ATTRS:
++                raise self._invalid_metadata("{field} is a required field")
++            return cast(T, None)
++
++        metadata_version = instance._raw.get("metadata_version")
++        if (
++            self.name != "metadata_version"
++            and metadata_version in _VALID_METADATA_VERSIONS
++            and _VALID_METADATA_VERSIONS.index(cast(str, metadata_version))
++            < _VALID_METADATA_VERSIONS.index(self.added)
++        ):
++            raise self._invalid_metadata(
++                f"{{field}} introduced in metadata version {self.added}, "
++                f"not {metadata_version}"
++            )
++
++        if self.name in _STRING_FIELDS or self.name in {
++            "name",
++            "version",
++            "summary",
++            "requires_python",
++        }:
++            if not isinstance(value, str):
++                raise self._invalid_metadata("{field} must be a string")
++        elif self.name in _LIST_FIELDS or self.name == "keywords":
++            if not isinstance(value, list) or not all(
++                isinstance(item, str) for item in value
++            ):
++                raise self._invalid_metadata("{field} must be a list of strings")
++        elif self.name in _DICT_FIELDS:
++            if not isinstance(value, dict) or not all(
++                isinstance(key, str) and isinstance(item, str)
++                for key, item in value.items()
++            ):
++                raise self._invalid_metadata("{field} must be a mapping of strings")
++
++        processor = getattr(self, f"_process_{self.name}", None)
++        processed = processor(value) if processor is not None else value
++        instance.__dict__[self.name] = processed
++        return cast(T, processed)
++
++    def _invalid_metadata(self, message: str) -> InvalidMetadata:
++        return InvalidMetadata(self.raw_name, message.format(field=self.raw_name))
++
++    def _process_description_content_type(self, value: str) -> str:
++        valid_content_types = {"text/plain", "text/x-rst", "text/markdown"}
++        try:
++            message = email.message.EmailMessage()
++            message["Content-Type"] = value
++            content_type = message.get_content_type()
++            parameters = message.get_params() or []
++            declared_content_type = (
++                str(parameters[0][0]).lower() if parameters else "text/plain"
++            )
++        except (TypeError, ValueError, email.errors.HeaderParseError) as exc:
++            raise self._invalid_metadata(f"{value!r} is invalid for {{field}}") from exc
++
++        if (
++            content_type not in valid_content_types
++            or declared_content_type not in valid_content_types
++        ):
++            allowed = ", ".join(sorted(valid_content_types))
++            raise self._invalid_metadata(
++                f"{value!r} is invalid for {{field}}; use one of {allowed}"
++            )
++
++        charset = message.get_param("charset")
++        if charset is not None and str(charset).lower() != "utf-8":
++            raise self._invalid_metadata("{field} can only specify the UTF-8 charset")
++
++        variant = message.get_param("variant")
++        if (
++            content_type == "text/markdown"
++            and variant is not None
++            and str(variant).lower() not in {"gfm", "commonmark"}
++        ):
++            raise self._invalid_metadata(
++                "{field} has an invalid Markdown variant; use 'GFM' or 'CommonMark'"
++            )
++        return value
++
++    def _process_dynamic(self, value: list[str]) -> list[str]:
++        dynamic = [field.lower() for field in value]
++        restricted = {"name", "version", "metadata-version"}
++        for field in dynamic:
++            if field in restricted:
++                raise self._invalid_metadata(
++                    f"{field!r} is not allowed as a dynamic field"
++                )
++            if field not in _EMAIL_TO_RAW_MAPPING:
++                raise self._invalid_metadata(
++                    f"{field!r} is not a valid core metadata field"
++                )
++        return dynamic
++
++    def _process_license_expression(
++        self, value: str
++    ) -> NormalizedLicenseExpression:
++        try:
++            return licenses.canonicalize_license_expression(value)
++        except licenses.InvalidLicenseExpression as exc:
++            raise self._invalid_metadata(
++                f"{value!r} is invalid for {{field}}"
++            ) from exc
++
++    def _process_license_files(self, value: list[str]) -> list[str]:
++        for path in value:
++            posix_path = pathlib.PurePosixPath(path)
++            windows_path = pathlib.PureWindowsPath(path)
++            if not path:
++                raise self._invalid_metadata("{field} entries must not be empty")
++            if ".." in posix_path.parts or ".." in windows_path.parts:
++                raise self._invalid_metadata(
++                    f"{path!r} is invalid for {{field}}; parent directory "
++                    "indicators are not allowed"
++                )
++            if "*" in path:
++                raise self._invalid_metadata(
++                    f"{path!r} is invalid for {{field}}; paths must be resolved"
++                )
++            if posix_path.is_absolute() or windows_path.is_absolute():
++                raise self._invalid_metadata(
++                    f"{path!r} is invalid for {{field}}; paths must be relative"
++                )
++            if "\\" in path:
++                raise self._invalid_metadata(
++                    f"{path!r} is invalid for {{field}}; use '/' as the path separator"
++                )
++        return value
++
++    def _process_metadata_version(self, value: str) -> _MetadataVersion:
++        if value not in _VALID_METADATA_VERSIONS:
++            raise self._invalid_metadata(
++                f"{value!r} is not a valid metadata version"
++            )
++        return cast(_MetadataVersion, value)
++
++    def _process_name(self, value: str) -> str:
++        if not value:
++            raise self._invalid_metadata("{field} is a required field")
++        try:
++            utils.canonicalize_name(value, validate=True)
++        except utils.InvalidName as exc:
++            raise self._invalid_metadata(f"{value!r} is invalid for {{field}}") from exc
++        return value
++
++    def _process_provides_extra(
++        self, value: list[str]
++    ) -> list[utils.NormalizedName]:
++        normalized: list[utils.NormalizedName] = []
++        for extra in value:
++            try:
++                normalized.append(utils.canonicalize_name(extra, validate=True))
++            except utils.InvalidName as exc:
++                raise self._invalid_metadata(
++                    f"{extra!r} is invalid for {{field}}"
++                ) from exc
++        return normalized
++
++    def _process_requires_dist(
++        self, value: list[str]
++    ) -> list[requirements.Requirement]:
++        result: list[requirements.Requirement] = []
++        for requirement in value:
++            try:
++                result.append(requirements.Requirement(requirement))
++            except requirements.InvalidRequirement as exc:
++                raise self._invalid_metadata(
++                    f"{requirement!r} is invalid for {{field}}"
++                ) from exc
++        return result
++
++    def _process_requires_python(self, value: str) -> specifiers.SpecifierSet:
++        try:
++            return specifiers.SpecifierSet(value)
++        except specifiers.InvalidSpecifier as exc:
++            raise self._invalid_metadata(
++                f"{value!r} is invalid for {{field}}"
++            ) from exc
++
++    def _process_summary(self, value: str) -> str:
++        if "\n" in value:
++            raise self._invalid_metadata("{field} must be a single line")
++        return value
++
++    def _process_version(self, value: str) -> version_module.Version:
++        if not value:
++            raise self._invalid_metadata("{field} is a required field")
++        try:
++            return version_module.Version(value)
++        except version_module.InvalidVersion as exc:
++            raise self._invalid_metadata(f"{value!r} is invalid for {{field}}") from exc
++
+ 
+ 
+ 
+@@ -772,6 +1091,84 @@ class Metadata:
+ 
+     _raw: RawMetadata
+ 
++    def as_rfc822(self) -> RFC822Message:
++        message = RFC822Message()
++        description: str | None = None
++
++        for raw_name, value in self._raw.items():
++            email_name = _RAW_TO_EMAIL_MAPPING.get(raw_name)
++            if email_name is None:
++                continue
++            header_name = email_name.title()
++
++            if raw_name == "description":
++                description = cast(str, value)
++            elif raw_name == "keywords":
++                message[header_name] = ",".join(cast(list[str], value))
++            elif raw_name == "project_urls":
++                for label, url in cast(dict[str, str], value).items():
++                    message[header_name] = f"{label}, {url}"
++            elif raw_name in _LIST_FIELDS:
++                items = cast(list[str], value)
++                if raw_name == "import_names" and not items:
++                    message[header_name] = ""
++                else:
++                    for item in items:
++                        message[header_name] = str(item)
++            else:
++                message[header_name] = str(value)
++
++        if description is not None:
++            message.set_payload(description)
++        return message
++
++    @classmethod
++    def from_email(cls, data: bytes | str, *, validate: bool = True) -> Metadata:
++        raw, unparsed = parse_email(data)
++        if validate and unparsed:
++            exceptions: list[Exception] = []
++            for field in unparsed:
++                if field in _EMAIL_TO_RAW_MAPPING:
++                    error = InvalidMetadata(field, f"{field!r} has invalid data")
++                else:
++                    error = InvalidMetadata(field, f"unrecognized field: {field!r}")
++                exceptions.append(error)
++            raise ExceptionGroup("unparsed metadata", exceptions)
++        return cls.from_raw(raw, validate=validate)
++
++    @classmethod
++    def from_raw(cls, data: RawMetadata, *, validate: bool = True) -> Metadata:
++        instance = cls()
++        instance._raw = data.copy()
++
++        if validate:
++            exceptions: list[Exception] = []
++            validators = {
++                name: validator
++                for name, validator in cls.__dict__.items()
++                if isinstance(validator, _Validator)
++            }
++
++            for key in instance._raw:
++                if key not in validators:
++                    raw_field = key.replace("_", "-")
++                    exceptions.append(
++                        InvalidMetadata(
++                            raw_field, f"unrecognized field: {raw_field!r}"
++                        )
++                    )
++
++            for name in validators:
++                try:
++                    getattr(instance, name)
++                except InvalidMetadata as exc:
++                    exceptions.append(exc)
++
++            if exceptions:
++                raise ExceptionGroup("invalid metadata", exceptions)
++
++        return instance
++
+ 
+ 
+ 
+diff --git a/src/packaging/requirements.py b/src/packaging/requirements.py
+index b2c926f..0edb7c6 100644
+--- a/src/packaging/requirements.py
++++ b/src/packaging/requirements.py
+@@ -6,6 +6,7 @@ from __future__ import annotations
+ from typing import Iterator
+ 
+ 
++from ._parser import parse_requirement as _parse_requirement
+ from ._tokenizer import ParserSyntaxError
+ from .markers import Marker, _normalize_extra_values
+ from .specifiers import SpecifierSet
+@@ -31,6 +32,42 @@ class Requirement:
+     #       the thing as well as the version? What about the markers?
+     # TODO: Can we normalize the name and extra name?
+ 
++    def __init__(self, requirement_string: str) -> None:
++        try:
++            parsed = _parse_requirement(requirement_string)
++        except ParserSyntaxError as e:
++            raise InvalidRequirement(str(e)) from e
++
++        self.name = parsed.name
++        self.url = parsed.url or None
++        self.extras = set(parsed.extras)
++        self.specifier = SpecifierSet(parsed.specifier)
++        self.marker: Marker | None
++        if parsed.marker is None:
++            self.marker = None
++        else:
++            self.marker = Marker.__new__(Marker)
++            self.marker._markers = _normalize_extra_values(parsed.marker)
++
++    def _iter_parts(self, name: str) -> Iterator[str]:
++        yield name
++        if self.extras:
++            yield f"[{','.join(sorted(self.extras))}]"
++        if self.specifier:
++            yield str(self.specifier)
++        if self.url:
++            yield f"@ {self.url}"
++        if self.marker:
++            yield f"{' ;' if self.url else ';'} {self.marker}"
++
++    def __str__(self) -> str:
++        parts = list(self._iter_parts(self.name))
++        result = "".join(parts)
++        if self.url:
++            # Direct references require whitespace on both sides of ``@``.
++            result = result.replace("@ ", " @ ", 1)
++        return result
++
+ 
+ 
+ 
+@@ -88,4 +125,4 @@ class Requirement:
+             and self.specifier == other.specifier
+             and self.url == other.url
+             and self.marker == other.marker
+-        )
+\ No newline at end of file
++        )

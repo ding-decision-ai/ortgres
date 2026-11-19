@@ -1,0 +1,37 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 12 items
+
+pandas/tests/series/methods/test_sort_values.py ............
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_categorical
+
+(29 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_categorical
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_ignore_index[original_list0-sorted_list0-True-output_index0-True]
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_ignore_index[original_list0-sorted_list0-True-output_index0-False]
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_ignore_index[original_list1-sorted_list1-False-output_index1-True]
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_ignore_index[original_list1-sorted_list1-False-output_index1-False]
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_mergesort_descending_stability
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_validate_ascending_for_value_error
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_validate_ascending_functional[True]
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortValues::test_sort_values_validate_ascending_functional[False]
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortingKey::test_sort_values_key
+PASSED pandas/tests/series/methods/test_sort_values.py::TestSeriesSortingKey::test_sort_values_key_nan
+============================== 12 passed in 0.04s ==============================

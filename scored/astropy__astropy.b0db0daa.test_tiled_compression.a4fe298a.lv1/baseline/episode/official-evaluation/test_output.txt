@@ -1,0 +1,851 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py.
+
+Date: 2026-10-11T01:15:52
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 348 items
+
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py .FFFFF... [  2%]
+........................................................................ [ 23%]
+................xxxx.xxxx.xxxx.xxxx.xxxx.xxxx........................... [ 43%]
+........................................................................ [ 64%]
+.............................................................FFFF.FFFF.F [ 85%]
+FFF.FFFF.FxxxxFxxxxFxxxxFxxxxFxxxxFxxxxFxxxxFxxxx..                      [100%]
+
+=================================== FAILURES ===================================
+______________________ test_canonical_data[m13_plio.fits] ______________________
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:41: in test_canonical_data
+    assert_allclose(original_int_hdu.data, canonical_int_hdus.data)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 89678 / 90000 (99.6%)
+E   Max absolute difference among violations: 3618
+E   Max relative difference among violations: 1227.5
+E    ACTUAL: array([[112, 112, 113, ..., 110, 112, 112],
+E          [113, 113, 114, ..., 109, 110, 110],
+E          [113, 113, 114, ..., 109, 110, 110],...
+E    DESIRED: array([[112, 112, 113, ..., 110, 112, 112],
+E          [  2,   2,   0, ...,  -2,   0,   0],
+E          [  1,   1,   2, ...,   0,   0,   0],...
+______________________ test_canonical_data[m13_rice.fits] ______________________
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:41: in test_canonical_data
+    assert_allclose(original_int_hdu.data, canonical_int_hdus.data)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:498: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:80: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:680: in decompress_image_data_section
+    tile_buffer = _decompress_tile(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:225: in _decompress_tile
+    return codec.decode(compressed_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/_codecs.py:287: in decode
+    dbytes = decompress_rice_1_c(
+E   _compression.CfitsioException: decompression error: hit end of compressed byte stream
+______________________ test_canonical_data[m13_gzip.fits] ______________________
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:41: in test_canonical_data
+    assert_allclose(original_int_hdu.data, canonical_int_hdus.data)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:498: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:80: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:684: in decompress_image_data_section
+    tile_data = _finalize_array(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:239: in _finalize_array
+    return array.reshape(tuple(tile_shape))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ValueError: cannot reshape array of size 600 into shape (1,300)
+_____________________________ test_zblank_support ______________________________
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:61: in test_zblank_support
+    assert_equal(np.round(hdul[1].data), reference)
+                          ^^^^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:498: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:80: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:559: in decompress_image_data_section
+    _check_compressed_header(compressed_header)
+astropy/io/fits/hdu/compressed/_tiled_compression.py:134: in _check_compressed_header
+    raise RuntimeError(f"Invalid TFORM value: {value}")
+E   RuntimeError: Invalid TFORM value: 1D
+__________________________ test_integer_blank_support __________________________
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:160: in test_integer_blank_support
+    assert_equal(hdul[1].data, reference)
+                 ^^^^^^^^^^^^
+astropy/utils/decorators.py:949: in __get__
+    val = self.fget(obj)
+          ^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/compressed.py:498: in data
+    data = self.section[...]
+           ^^^^^^^^^^^^^^^^^
+astropy/io/fits/hdu/compressed/section.py:80: in __getitem__
+    data = decompress_image_data_section(
+astropy/io/fits/hdu/compressed/_tiled_compression.py:559: in decompress_image_data_section
+    _check_compressed_header(compressed_header)
+astropy/io/fits/hdu/compressed/_tiled_compression.py:134: in _check_compressed_header
+    raise RuntimeError(f"Invalid TFORM value: {value}")
+E   RuntimeError: Invalid TFORM value: I
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 96 / 100 (96%)
+E   Max absolute difference among violations: 8.038605e+09
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[  0.      , 103.73361 ,  54.497154,  16.489452,  68.36892 ,
+E            76.70571 ,   4.796962,  58.77613 ,  77.030876, 167.4969  ],
+E          [226.95416 , 116.423965, 197.74437 ,  41.35736 , 166.46848 ,...
+E    DESIRED: array([[1.203294e+00, 4.638708e+09, 4.607842e+09, 4.550520e+09,
+E           4.623276e+09, 7.930155e+09, 6.603947e+00, 7.914934e+09,
+E           7.930155e+09, 7.998650e+09],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape1-tile_shape1] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 121 / 125 (96.8%)
+E   Max absolute difference among violations: 8.5322276e+09
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[0.000000e+00, 9.671439e+01, 1.642319e+02, 1.646372e+02,
+E            9.363706e+01],
+E           [1.781291e+01, 2.020965e+02, 9.322953e+01, 1.998741e+02,...
+E    DESIRED: array([[[ 8.241536e-01,  8.441352e+09,  8.485780e+09,  8.485780e+09,
+E             8.433274e+09],
+E           [ 8.271717e+09,  8.505974e+09,  8.433274e+09,  8.505974e+09,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape2-tile_shape2] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 2937 / 3000 (97.9%)
+E   Max absolute difference among violations: 1.080995e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[  0.      , 116.10089 , 128.09442 , ..., 234.41962 ,
+E            218.11255 , 111.01368 ],
+E           [ 57.356785, 166.60478 , 128.6831  , ...,  26.27733 ,...
+E    DESIRED: array([[[ 7.872360e-01,  6.947938e+09,  6.951248e+09, ...,
+E             7.383070e+09,  7.379577e+09,  7.325431e+09],
+E           [ 6.891666e+09,  6.971109e+09,  6.954558e+09, ...,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape3-tile_shape3] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 593 / 600 (98.8%)
+E   Max absolute difference among violations: 8.3581594e+09
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[  0.      , 103.30815 , 130.88765 , 217.38339 , 164.515   ,
+E            200.42863 ,  13.739246,  53.32588 , 156.00525 ,  58.267582,
+E            110.86939 ,  66.741714],...
+E    DESIRED: array([[[-4.467341e-02,  8.226880e+09,  8.250476e+09,  8.293733e+09,
+E             8.266206e+09,  7.348390e+09,  7.129087e+09,  7.240479e+09,
+E             7.320543e+09,  7.240479e+09,  4.064869e+09,  4.041730e+09],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 65 / 100 (65%)
+E   Max absolute difference among violations: 214.01050601
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[  0.      , 212.984322,  72.286137, 108.926083,  96.095769,
+E           212.048831,  10.169481, 126.701789, 155.16852 ,   9.335739],
+E          [ 20.475822, 180.337704,  12.072903, 130.385059, 108.884278,...
+E    DESIRED: array([[5.446553e-310, 0.000000e+000, 1.440409e+002, 2.947182e+001,
+E           1.616261e+002, 5.446553e-310, 0.000000e+000, 1.440409e+002,
+E           2.947182e+001, 1.616261e+002],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape1-tile_shape1] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 116 / 125 (92.8%)
+E   Max absolute difference among violations: 252.07668488
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[[  0.      , 156.606796,  33.945111,  77.767241, 115.600939],
+E           [201.547934,  39.836311,  91.869268, 131.302847,  76.537646],
+E           [158.419391,  56.103916, 242.58486 ,   3.217132, 125.658497],...
+E    DESIRED: array([[[5.446554e-310, 0.000000e+000, 0.000000e+000, 0.000000e+000,
+E            0.000000e+000],
+E           [0.000000e+000, 0.000000e+000, 0.000000e+000, 0.000000e+000,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape2-tile_shape2] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 2514 / 3000 (83.8%)
+E   Max absolute difference among violations: 252.69239812
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[[  0.      ,  86.110251, 117.856445, ..., 144.768846,
+E            175.707738, 170.688461],
+E           [ 36.865872,  56.336023, 197.332179, ..., 176.036805,...
+E    DESIRED: array([[[5.446554e-310, 0.000000e+000, 5.284786e+001, ...,
+E            5.284786e+001, 1.266768e+002, 1.819205e+002],
+E           [1.977536e+002, 7.425264e+001, 1.794542e+002, ...,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape3-tile_shape3] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 373 / 600 (62.2%)
+E   Max absolute difference among violations: 250.43350729
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[[  0.      , 234.763683, 204.768099,   1.106364,  60.178964,
+E            114.435822, 242.897904,  13.272263, 150.629041, 128.119701,
+E            185.744598, 165.088855],...
+E    DESIRED: array([[[5.446554e-310, 0.000000e+000, 9.867611e+001, 1.386338e+001,
+E            1.752016e+002, 5.446554e-310, 0.000000e+000, 9.867611e+001,
+E            1.386338e+001, 1.752016e+002, 5.446554e-310, 0.000000e+000],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 93 / 100 (93%)
+E   Max absolute difference among violations: 1.208614e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[  0.      , 104.191246, 183.88646 , 176.38766 , 250.8135  ,
+E           104.659454,  61.181694, 106.22891 , 196.48763 , 141.91637 ],
+E          [198.09627 , 139.21654 , 182.75507 ,  78.11479 , 159.90204 ,...
+E    DESIRED: array([[ 1.526534e-01,  4.593371e+09,  4.621739e+09,  4.619557e+09,
+E            4.639196e+09,  4.784674e+09,  4.745923e+09,  4.786953e+09,
+E            4.823426e+09,  4.805189e+09],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape1-tile_shape1] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 122 / 125 (97.6%)
+E   Max absolute difference among violations: 8.193838e+09
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[  0.      , 114.51394 ,  16.158812, 109.11754 ,  46.51859 ],
+E           [211.16922 , 199.61902 , 249.50858 , 118.35775 , 145.87067 ],
+E           [221.81598 ,  54.478123, 108.59496 ,  33.296375,  93.88759 ],...
+E    DESIRED: array([[[-3.060742e+00,  8.127916e+09,  7.941780e+09,  8.120160e+09,
+E             8.034848e+09],
+E           [ 8.178327e+09,  8.170571e+09,  8.193838e+09,  8.127916e+09,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape2-tile_shape2] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 2939 / 3000 (98%)
+E   Max absolute difference among violations: 1.0102376e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[0.000000e+00, 2.006761e+02, 2.260408e+02, ..., 1.591266e+02,
+E            8.126342e+01, 2.156217e+02],
+E           [7.524341e+01, 1.503694e+02, 2.218780e+02, ..., 2.164235e+02,...
+E    DESIRED: array([[[-1.099157e-01,  8.407762e+09,  8.423731e+09, ...,
+E             8.398377e+09,  8.330423e+09,  8.426359e+09],
+E           [ 8.319932e+09,  8.383809e+09,  8.423731e+09, ...,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape3-tile_shape3] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 590 / 600 (98.3%)
+E   Max absolute difference among violations: 9.343675e+09
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[0.000000e+00, 1.758052e+02, 1.497432e+02, 2.189397e+02,
+E            1.216725e+02, 1.077739e+02, 2.212693e+02, 3.512696e+01,
+E            1.994992e+02, 1.537956e+02, 2.003825e+02, 6.199811e+01],...
+E    DESIRED: array([[[-1.289087e+00,  9.303821e+09,  9.290536e+09,  9.325962e+09,
+E             9.263966e+09,  7.143115e+09,  7.201051e+09,  7.047692e+09,
+E             7.194235e+09,  7.170379e+09,  7.301743e+09,  7.201434e+09],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 66 / 100 (66%)
+E   Max absolute difference among violations: 234.0507382
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[  0.      , 164.625856,  41.743567, 209.646433, 229.075585,
+E           192.65075 ,   5.909376, 232.557897,  22.972169,  33.034863],
+E          [194.403109,  58.021679, 216.590573, 253.510786, 186.510701,...
+E    DESIRED: array([[5.446553e-310, 0.000000e+000, 1.691908e+002, 2.040070e+002,
+E           2.233588e+002, 5.446553e-310, 0.000000e+000, 1.691908e+002,
+E           2.040070e+002, 2.233588e+002],...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape1-tile_shape1] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 110 / 125 (88%)
+E   Max absolute difference among violations: 383.31775463
+E   Max relative difference among violations: 341.20499302
+E    ACTUAL: array([[[  0.      , 102.11674 , 171.716634,  74.442475,  31.326706],
+E           [127.446913, 190.720242, 236.349471,  96.261425, 154.483049],
+E           [ 19.050601,  65.522408,  12.209887, 150.178151,  96.647366],...
+E    DESIRED: array([[[5.446554e-310, 0.000000e+000, 1.196873e+000, 5.244684e+000,
+E            1.311257e+001],
+E           [3.724286e-001, 5.363245e+000, 1.279762e+001, 4.474084e+000,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape2-tile_shape2] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 2513 / 3000 (83.8%)
+E   Max absolute difference among violations: 253.71202872
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[[  0.      , 184.279995,   6.901693, ..., 102.878314,
+E            248.874636, 113.888901],
+E           [122.727313, 186.388856, 159.580926, ...,  77.523465,...
+E    DESIRED: array([[[5.446554e-310, 0.000000e+000, 2.372025e+002, ...,
+E            2.372025e+002, 1.465845e+001, 2.078832e+002],
+E           [2.216542e+002, 2.452946e+002, 1.599216e+002, ...,...
+_ test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape3-tile_shape3] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 369 / 600 (61.5%)
+E   Max absolute difference among violations: 250.58781634
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[[  0.      , 135.606248, 169.972911, 152.758487, 212.736754,
+E            158.020998, 206.876791,  86.125061,  83.708986,  76.000627,
+E            250.587816, 240.085411],...
+E    DESIRED: array([[[5.446554e-310, 0.000000e+000, 7.804840e+001, 2.053747e+002,
+E            1.881435e+002, 5.446554e-310, 0.000000e+000, 7.804840e+001,
+E            2.053747e+002, 1.881435e+002, 5.446554e-310, 0.000000e+000],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f4-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 100 / 100 (100%)
+E   Max absolute difference among violations: 2.1705791e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[  0.      ,   1.933438, 143.76512 , 109.06585 , 240.03065 ,
+E            96.91213 , 165.5854  , 147.69415 ,   5.256987, 194.98753 ],
+E          [102.71337 ,  93.20009 ,  79.20485 ,  19.442049, 253.1357  ,...
+E    DESIRED: array([[2.145265e+10, 2.159231e+10, 2.167786e+10, 2.165865e+10,
+E           2.170230e+10, 9.899534e+09, 9.917459e+09, 9.913078e+09,
+E           9.853327e+09, 9.921443e+09],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f8-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 65 / 100 (65%)
+E   Max absolute difference among violations: 235.93536812
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[  0.      ,  71.675955,  51.269267,   5.88361 , 243.778207,
+E            32.102423, 196.065297,  20.17909 , 231.895077,   5.336278],
+E          [219.741596,  50.672728,  56.759397,  48.016078,  67.676933,...
+E    DESIRED: array([[5.446553e-310, 0.000000e+000, 1.840870e+002, 2.418190e+002,
+E           2.396493e+002, 5.446553e-310, 0.000000e+000, 1.840870e+002,
+E           2.418190e+002, 2.396493e+002],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f4-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 100 / 100 (100%)
+E   Max absolute difference among violations: 1.6051538e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[  0.      , 107.83399 ,  70.00556 , 107.980804,  63.145313,
+E            60.202477, 101.86294 , 242.33177 , 181.73947 , 238.30765 ],
+E          [ 68.83365 ,   1.800897, 124.09856 , 183.57033 ,  98.26323 ,...
+E    DESIRED: array([[8.050395e+09, 8.148666e+09, 8.138839e+09, 8.148666e+09,
+E           8.136873e+09, 1.083230e+10, 1.084627e+10, 1.087508e+10,
+E           1.086722e+10, 1.087464e+10],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f8-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 68 / 100 (68%)
+E   Max absolute difference among violations: 249.69240314
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[  0.      , 122.341119, 196.604633,  99.731527, 197.506894,
+E            20.923367,  37.961969,  25.117481, 221.209285, 226.598306],
+E          [ 15.480967,  57.857444, 159.64415 , 139.785226, 104.711177,...
+E    DESIRED: array([[5.446553e-310, 0.000000e+000, 5.465321e+001, 9.794854e+001,
+E           1.030309e+002, 5.446553e-310, 0.000000e+000, 5.465321e+001,
+E           9.794854e+001, 1.030309e+002],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f4-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 95 / 100 (95%)
+E   Max absolute difference among violations: 1.3368897e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[  0.      , 189.84511 ,  37.965763,   4.851611,   9.956788,
+E             5.185063, 157.50618 , 211.32257 ,  93.367676, 216.18765 ],
+E          [189.8158  ,  58.97004 , 213.95706 ,  27.980602, 232.8389  ,...
+E    DESIRED: array([[ 1.975837e+00,  5.370769e+09,  5.280643e+09,  5.158781e+09,
+E            5.199401e+09,  5.290005e+00,  9.659754e+09,  9.687393e+09,
+E            9.599870e+09,  9.691999e+09],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f8-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 72 / 100 (72%)
+E   Max absolute difference among violations: 243.78361194
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[  0.      ,  49.699781,  49.836892, 119.095392, 244.610888,
+E           183.735237, 193.76487 ,   4.38953 ,  57.553382,  87.729799],
+E          [ 32.962705,  38.421801,  90.757091,  37.004306, 177.067696,...
+E    DESIRED: array([[5.446553e-310, 0.000000e+000, 1.570505e+002, 2.355777e+002,
+E           1.759875e+002, 5.446553e-310, 0.000000e+000, 1.570505e+002,
+E           2.355777e+002, 1.759875e+002],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f4-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 95 / 100 (95%)
+E   Max absolute difference among violations: 1.1539625e+10
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[0.000000e+00, 1.311548e+02, 1.517060e+02, 1.871008e+02,
+E           1.984722e+02, 2.189928e+02, 1.758209e+01, 2.194566e+02,
+E           2.558538e-02, 2.430982e+02],...
+E    DESIRED: array([[ 4.556806e-01,  1.889826e+09,  1.892708e+09,  1.897363e+09,
+E            1.898694e+09,  3.947127e+09,  3.837639e+09,  3.947127e+09,
+E           -6.946042e-01,  3.951302e+09],...
+_ test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f8-shape0-tile_shape0] _
+astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py:240: in test_roundtrip_high_D
+    np.testing.assert_allclose(original_data, hdul[1].data, atol=atol)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=17
+E   
+E   Mismatched elements: 69 / 100 (69%)
+E   Max absolute difference among violations: 241.08465375
+E   Max relative difference among violations: inf
+E    ACTUAL: array([[0.000000e+00, 2.410847e+02, 2.331152e+02, 1.368157e+02,
+E           1.225672e+02, 4.950553e+01, 1.477356e+02, 1.549084e+01,
+E           1.333113e+02, 1.164892e+02],...
+E    DESIRED: array([[5.446553e-310, 0.000000e+000, 2.188807e+002, 2.373810e+002,
+E           1.606157e+002, 5.446553e-310, 0.000000e+000, 2.188807e+002,
+E           2.373810e+002, 1.606157e+002],...
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_canonical_data[m13_hcomp.fits]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} <u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {} >u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} <u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {} >u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} <u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {} >u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} <u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[PLIO_1 {} >u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i2-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i2-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i2-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i2-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i2-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >i4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} <u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >u1-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >u1-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >u1-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >u1-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {} >u1-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} <f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': None} >f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} <f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': None} >f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} <f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[NOCOMPRESS {'qlevel': None} >f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} <f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_1 {'qlevel': 5, 'qmethod': -1} >f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} <f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f4-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f4-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f4-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f4-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f8-shape0-tile_shape0]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f8-shape1-tile_shape1]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f8-shape2-tile_shape2]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f8-shape3-tile_shape3]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[GZIP_2 {'qlevel': 5, 'qmethod': -1} >f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape4-tile_shape4]
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_plio_1_out_of_range
+PASSED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_invalid_tile
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i2-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i2-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i2-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i2-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i4-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i4-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i4-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <i4-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i2-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i2-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i2-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i2-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i4-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i4-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i4-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >i4-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <u1-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <u1-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <u1-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} <u1-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >u1-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >u1-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >u1-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {} >u1-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f4-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f4-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f4-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f4-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f8-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f8-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f8-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f8-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f4-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f4-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f4-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f4-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f8-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f8-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f8-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f8-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f4-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f4-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f4-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f4-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f8-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f8-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f8-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f8-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f4-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f4-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f4-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f4-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f8-shape1-tile_shape1] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f8-shape2-tile_shape2] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f8-shape3-tile_shape3] - HCOMPRESS requires 2D tiles.
+XFAIL astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f8-shape4-tile_shape4] - HCOMPRESS requires 2D tiles.
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_canonical_data[m13_plio.fits]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_canonical_data[m13_rice.fits]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_canonical_data[m13_gzip.fits]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_zblank_support
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_integer_blank_support
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape1-tile_shape1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape2-tile_shape2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f4-shape3-tile_shape3]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape1-tile_shape1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape2-tile_shape2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} <f8-shape3-tile_shape3]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape1-tile_shape1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape2-tile_shape2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f4-shape3-tile_shape3]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape1-tile_shape1]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape2-tile_shape2]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[RICE_1 {'qlevel': 10, 'qmethod': 1} >f8-shape3-tile_shape3]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f4-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} <f8-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f4-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 20, 'qmethod': 2} >f8-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f4-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} <f8-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f4-shape0-tile_shape0]
+FAILED astropy/io/fits/hdu/compressed/tests/test_tiled_compression.py::test_roundtrip_high_D[HCOMPRESS_1 {'qlevel': 10, 'qmethod': 1} >f8-shape0-tile_shape0]
+================== 29 failed, 263 passed, 56 xfailed in 2.67s ==================

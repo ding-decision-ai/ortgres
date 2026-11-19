@@ -1,0 +1,37 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: mock-3.15.1, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 1 item
+
+testing/test_link_resolve.py .                                           [100%]
+
+==================================== PASSES ====================================
+______________________________ test_link_resolve _______________________________
+----------------------------- Captured stdout call -----------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-8.5.0.dev216+g68016f0ef, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.10
+cachedir: .pytest_cache
+rootdir: /tmp/pytest-of-root/pytest-5/test_link_resolve0
+collecting ... collected 1 item
+
+sub2/test_foo.py::test_foo FAILED                                        [100%]
+
+=================================== FAILURES ===================================
+___________________________________ test_foo ___________________________________
+
+    def test_foo():
+>       raise AssertionError()
+E       AssertionError
+
+sub2/test_foo.py:4: AssertionError
+=========================== short test summary info ============================
+FAILED sub2/test_foo.py::test_foo - AssertionError
+============================== 1 failed in 0.01s ===============================
+=========================== short test summary info ============================
+PASSED testing/test_link_resolve.py::test_link_resolve
+============================== 1 passed in 0.04s ===============================

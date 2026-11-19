@@ -1,0 +1,62 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "016",
+    "source_and_execution": {
+      "whole_full_eval_outer_seconds": 59.204532894000295,
+      "inner_eval_already_in_whole_outer_seconds": 58.793278334000206,
+      "charge_inner_and_outer_twice": false,
+      "prior005_controller_not_running_zero_grade_failure_outer_seconds": 0.2851266659999965,
+      "prior005_grade_or_model_calls": 0,
+      "fresh_evaluator_creation_seconds": 0.20312081899919576,
+      "current_phase_ledger": {
+        "bytes": 29349
+      },
+      "current_phase_charged_seconds": 261.2575589240123,
+      "current_phase_remaining_seconds": 938.7424410759877,
+      "phase_and_all_history_actual_total_seconds": null,
+      "all_history_USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "existing_full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.20312081899919576,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 0.2851266659999965,
+          "inner_budget_already_charged": 0.0,
+          "inner_known_actual_already_charged": 0.0,
+          "additional_budget": 0.2851266659999965,
+          "additional_known_actual": 0.2851266659999965,
+          "models": 0
+        },
+        "2": {
+          "whole_seconds": 59.204532894000295,
+          "inner_budget_already_charged": 58.793278334000206,
+          "inner_known_actual_already_charged": 0.0,
+          "additional_budget": 0.41125456000008853,
+          "additional_known_actual": 59.204532894000295,
+          "models": 0
+        }
+      }
+    },
+    "historical_source_and_method_reference": {
+      "protocol_historical_costs": {
+        "new_prepare_segments_not_reset": true,
+        "historical_source_model_elapsed_seconds": 915.6655633699847,
+        "original_formal_cap_seconds": 3600,
+        "preserve_all_historical_costs_and_dispatches": true,
+        "original_formal_exact_seconds": null,
+        "original_remaining_seconds": null,
+        "Root_model_method_cap_not_yet_bound": null,
+        "USD": null,
+        "backend_seconds": null,
+        "operator_RD_seconds": null
+      },
+      "original_exact_remaining_seconds": null,
+      "all_older_records_retained": true
+    },
+    "accounting_rule": "unknown"
+  }
+}

@@ -1,0 +1,566 @@
+diff --git a/seaborn/axisgrid.py b/seaborn/axisgrid.py
+index bef5b6d..ac25f55 100644
+--- a/seaborn/axisgrid.py
++++ b/seaborn/axisgrid.py
+@@ -123,6 +123,40 @@ class Grid(_BaseGrid):
+         self._figure.tight_layout(*args, **kwargs)
+         return self
+ 
++    def add_legend(
++        self, legend_data=None, title=None, label_order=None,
++        adjust_subtitles=False, **kwargs,
++    ):
++        """Draw a legend using labeled artists found across the grid."""
++        if legend_data is None:
++            legend_data = {}
++            for ax in self.axes.flat:
++                handles, labels = ax.get_legend_handles_labels()
++                for handle, label in zip(handles, labels):
++                    if label and not label.startswith("_"):
++                        legend_data.setdefault(label, handle)
++
++        if label_order is None:
++            label_order = list(legend_data)
++        handles = [legend_data[label] for label in label_order
++                   if label in legend_data]
++        labels = [label for label in label_order if label in legend_data]
++        if title is None:
++            title = getattr(self, "_hue_var", None)
++
++        if self._legend_out:
++            kwargs.setdefault("loc", "center right")
++            self._legend = self.figure.legend(
++                handles, labels, title=title, **kwargs,
++            )
++        else:
++            self._legend = self.axes.flat[0].legend(
++                handles, labels, title=title, **kwargs,
++            )
++        if adjust_subtitles and self._legend is not None:
++            adjust_legend_subtitles(self._legend)
++        return self
++
+ 
+ 
+ 
+@@ -679,6 +713,66 @@ class FacetGrid(Grid):
+ 
+ 
+ 
++
++    def facet_data(self):
++        """Yield the subset of data associated with each facet."""
++        row_items = [(0, None)] if self._row_var is None else enumerate(self.row_names)
++        col_items = [(0, None)] if self._col_var is None else enumerate(self.col_names)
++        hue_items = [(0, None)] if self._hue_var is None else enumerate(self.hue_names)
++
++        # Materialize these because the products need to traverse them more
++        # than once when there are two or three faceting dimensions.
++        row_items = list(row_items)
++        col_items = list(col_items)
++        hue_items = list(hue_items)
++        for (row_i, row_name), (col_j, col_name), (hue_k, hue_name) in product(
++            row_items, col_items, hue_items,
++        ):
++            mask = self._not_na.copy()
++            if self._row_var is not None:
++                mask &= self.data[self._row_var] == row_name
++            if self._col_var is not None:
++                mask &= self.data[self._col_var] == col_name
++            if self._hue_var is not None:
++                mask &= self.data[self._hue_var] == hue_name
++            yield (row_i, col_j, hue_k), self.data.loc[mask]
++
++    def facet_axis(self, row_i, col_j, modify_state=True):
++        """Return the axes corresponding to a row/column facet."""
++        if self._col_wrap is not None:
++            ax = self.axes.flat[col_j]
++        else:
++            ax = self.axes[row_i, col_j]
++        if modify_state:
++            plt.sca(ax)
++        return ax
++
++    def _facet_color(self, hue_index, color):
++        return self._colors[hue_index] if color is None else color
++
++    def map_dataframe(self, func, *args, **kwargs):
++        """Apply a plotting function to each facet, passing subset data."""
++        kw_color = kwargs.pop("color", None)
++        for (row_i, col_j, hue_k), data_ijk in self.facet_data():
++            if not data_ijk.values.size:
++                continue
++            ax = self.facet_axis(row_i, col_j, False)
++            plot_kws = kwargs.copy()
++            plot_kws["color"] = self._facet_color(hue_k, kw_color)
++            for key, values in self.hue_kws.items():
++                plot_kws[key] = values[hue_k]
++            if self._hue_var is not None:
++                plot_kws["label"] = utils.to_utf8(self.hue_names[hue_k])
++            if self._dropna and args:
++                data_ijk = data_ijk.dropna(subset=list(args))
++            func(*args, data=data_ijk, ax=ax, **plot_kws)
++
++        x_var = kwargs.get("x", args[0] if args else None)
++        y_var = kwargs.get("y", args[1] if len(args) > 1 else None)
++        self.set_axis_labels(x_var, y_var)
++        self.set_titles()
++        self.tight_layout()
++        return self
+ 
+     def map(self, func, *args, **kwargs):
+         """Apply a plotting function to each facet's subset of the data.
+@@ -891,6 +985,30 @@ class FacetGrid(Grid):
+ 
+         return self
+ 
++    def set_xlabels(self, label=None, clear_inner=True, **kwargs):
++        """Label x axes along the bottom edge of the grid."""
++        if label is None:
++            label = self._x_var
++        for ax in self.axes.flat:
++            if ax is not None:
++                ax.set_xlabel(label, **kwargs)
++        if clear_inner:
++            for ax in self._not_bottom_axes:
++                ax.set_xlabel("")
++        return self
++
++    def set_ylabels(self, label=None, clear_inner=True, **kwargs):
++        """Label y axes along the left edge of the grid."""
++        if label is None:
++            label = self._y_var
++        for ax in self.axes.flat:
++            if ax is not None:
++                ax.set_ylabel(label, **kwargs)
++        if clear_inner:
++            for ax in self._not_left_axes:
++                ax.set_ylabel("")
++        return self
++
+ 
+ 
+ 
+@@ -2398,4 +2516,4 @@ Examples
+     params=_param_docs,
+     returns=_core_docs["returns"],
+     seealso=_core_docs["seealso"],
+-)
+\ No newline at end of file
++)
+diff --git a/seaborn/regression.py b/seaborn/regression.py
+index eeea806..2ae5b7b 100644
+--- a/seaborn/regression.py
++++ b/seaborn/regression.py
+@@ -62,6 +62,57 @@ class _LinearPlotter:
+ 
+ 
+ 
++
++    def establish_variables(self, data, **kws):
++        """Extract variables from a data frame or accept vectors directly."""
++        for var, val in kws.items():
++            if isinstance(val, str):
++                if data is None:
++                    err = f"Must pass `data` if using named variables: `{var}`"
++                    raise ValueError(err)
++                vector = data[val]
++            else:
++                vector = val
++
++            if isinstance(vector, list):
++                vector = np.asarray(vector)
++
++            if vector is not None:
++                # Preserve a one-element vector.  In particular, squeezing it
++                # to a scalar would make later row filtering impossible.
++                shape = np.shape(vector)
++                if shape != (1,):
++                    vector = np.squeeze(vector)
++                if np.ndim(vector) > 1:
++                    err = f"regplot inputs must be 1d, but `{var}` is {np.ndim(vector)}d"
++                    raise ValueError(err)
++
++            setattr(self, var, vector)
++
++            if isinstance(val, str):
++                label = val
++            else:
++                label = getattr(val, "name", None)
++            setattr(self, f"{var}_label", label)
++
++    def dropna(self, *vars):
++        """Remove rows that are missing in any of the named variables."""
++        vals = [getattr(self, var) for var in vars
++                if getattr(self, var, None) is not None]
++        if not vals:
++            return
++
++        not_na = np.all(np.column_stack([pd.notnull(v) for v in vals]), axis=1)
++        for var in vars:
++            val = getattr(self, var, None)
++            if val is not None:
++                # Boolean indexing should be positional even for a Series
++                # whose index is itself boolean or otherwise non-standard.
++                if hasattr(val, "iloc"):
++                    val = val.iloc[not_na]
++                else:
++                    val = np.asarray(val)[not_na]
++                setattr(self, var, val)
+ 
+     def plot(self, ax):
+         raise NotImplementedError
+@@ -254,6 +305,174 @@ class _RegressionPlotter(_LinearPlotter):
+ 
+ 
+ 
++
++    def __init__(
++        self, x, y, data=None, x_estimator=None, x_bins=None, x_ci="ci",
++        scatter=True, fit_reg=True, ci=95, n_boot=1000, units=None,
++        seed=None, order=1, logistic=False, lowess=False, robust=False,
++        logx=False, x_partial=None, y_partial=None, truncate=False,
++        dropna=True, x_jitter=None, y_jitter=None, color=None, label=None,
++    ):
++        self.establish_variables(
++            data, x=x, y=y, units=units,
++            x_partial=x_partial, y_partial=y_partial,
++        )
++
++        if dropna:
++            self.dropna("x", "y", "units", "x_partial", "y_partial")
++
++        if sum((order > 1, logistic, robust, lowess, logx)) > 1:
++            err = "Mutually exclusive regression options."
++            raise ValueError(err)
++
++        self.x_estimator = x_estimator
++        self.x_ci = ci if x_ci == "ci" else x_ci
++        self.scatter = scatter
++        self.fit_reg = fit_reg
++        self.ci = ci
++        self.n_boot = n_boot
++        self.seed = seed
++        self.order = order
++        self.logistic = logistic
++        self.lowess = lowess
++        self.robust = robust
++        self.logx = logx
++        self.truncate = truncate
++        self.x_jitter = x_jitter
++        self.y_jitter = y_jitter
++        self.color = color
++        self.label = label
++
++        self._check_statsmodels()
++
++        if self.x_partial is not None:
++            self.x = self.regress_out(self.x, self.x_partial)
++        if self.y_partial is not None:
++            self.y = self.regress_out(self.y, self.y_partial)
++
++        self.x_range = self.x.min(), self.x.max()
++
++        if x_bins is not None:
++            self.x_discrete, self.x_bins = self.bin_predictor(x_bins)
++            if self.x_estimator is None:
++                self.x_estimator = np.mean
++        else:
++            self.x_discrete = self.x
++
++    def _check_statsmodels(self):
++        """Check whether an enabled model needs the optional dependency."""
++        if _has_statsmodels:
++            return
++        for option in ("logistic", "robust", "lowess"):
++            if getattr(self, option):
++                msg = (f"`{option}=True` requires statsmodels, an optional "
++                       "dependency, to be installed.")
++                raise RuntimeError(msg)
++
++    def regress_out(self, a, b):
++        """Remove the linear effect of *b* from *a*, retaining its mean."""
++        a = np.asarray(a)
++        b = np.asarray(b)
++        a_mean = a.mean()
++        a_centered = a - a_mean
++        if b.ndim == 1:
++            b = b[:, None]
++        b_centered = b - b.mean(axis=0)
++        # The pseudoinverse keeps this well-defined with duplicated or
++        # constant nuisance variables.
++        a_resid = a_centered - b_centered @ np.linalg.pinv(b_centered) @ a_centered
++        return a_resid + a_mean
++
++    def bin_predictor(self, bins):
++        """Discretize the predictor by assigning each value to its nearest bin."""
++        if np.isscalar(bins):
++            percentiles = np.linspace(0, 100, int(bins) + 2)[1:-1]
++            bins = np.percentile(self.x, percentiles)
++        else:
++            bins = np.ravel(np.asarray(bins))
++
++        dist = np.abs(np.subtract.outer(np.asarray(self.x), bins))
++        x_binned = bins[np.argmin(dist, axis=1)]
++        return x_binned, bins
++
++    @property
++    def estimate_data(self):
++        """Return point estimates and intervals for each discrete x value."""
++        vals, points, cis = [], [], []
++        for val in np.sort(np.unique(self.x_discrete)):
++            _y = np.asarray(self.y)[self.x_discrete == val]
++            vals.append(val)
++            points.append(self.x_estimator(_y))
++
++            if self.x_ci is None:
++                cis.append(None)
++            elif self.x_ci == "sd":
++                sd = np.std(_y)
++                cis.append((points[-1] - sd, points[-1] + sd))
++            else:
++                if self.units is None:
++                    _units = None
++                else:
++                    _units = np.asarray(self.units)[self.x_discrete == val]
++                boots = algo.bootstrap(
++                    _y, func=self.x_estimator, n_boot=self.n_boot,
++                    units=_units, seed=self.seed,
++                )
++                cis.append(utils.ci(boots, self.x_ci))
++        return vals, points, cis
++
++    @property
++    def scatter_data(self):
++        """Return observation coordinates, applying visual-only jitter."""
++        x = self.x_discrete
++        y = self.y
++        if self.x_jitter is not None:
++            x = np.asarray(x) + np.random.uniform(
++                -self.x_jitter, self.x_jitter, len(x),
++            )
++        if self.y_jitter is not None:
++            y = np.asarray(y) + np.random.uniform(
++                -self.y_jitter, self.y_jitter, len(y),
++            )
++        return x, y
++
++    def fit_fast(self, grid):
++        """Fit and predict an ordinary least-squares line."""
++        grid = np.asarray(grid)
++        grid_matrix = np.c_[np.ones(len(grid)), grid]
++
++        def reg_func(_x, _y):
++            design = np.c_[np.ones(len(_x)), _x]
++            return grid_matrix @ np.linalg.pinv(design) @ _y
++
++        x, y = np.asarray(self.x), np.asarray(self.y)
++        yhat = reg_func(x, y)
++        if self.ci is None:
++            return yhat, None
++        yhat_boots = algo.bootstrap(
++            x, y, func=reg_func, n_boot=self.n_boot,
++            units=self.units, seed=self.seed,
++        )
++        return yhat, yhat_boots
++
++    def fit_logx(self, grid):
++        """Fit and predict a line whose predictor is log-transformed."""
++        grid = np.asarray(grid)
++        grid_matrix = np.c_[np.ones(len(grid)), np.log(grid)]
++
++        def reg_func(_x, _y):
++            design = np.c_[np.ones(len(_x)), np.log(_x)]
++            return grid_matrix @ np.linalg.pinv(design) @ _y
++
++        x, y = np.asarray(self.x), np.asarray(self.y)
++        yhat = reg_func(x, y)
++        if self.ci is None:
++            return yhat, None
++        yhat_boots = algo.bootstrap(
++            x, y, func=reg_func, n_boot=self.n_boot,
++            units=self.units, seed=self.seed,
++        )
++        return yhat, yhat_boots
+ 
+     def fit_poly(self, grid, order):
+         """Regression using numpy polyfit for higher-order trends."""
+@@ -309,6 +528,118 @@ class _RegressionPlotter(_LinearPlotter):
+         grid, yhat = lowess(self.y, self.x).T
+         return grid, yhat
+ 
++    def fit_regression(self, ax=None, x_range=None, grid=None):
++        """Fit the configured model and return its predictions and interval."""
++        if grid is None:
++            if self.truncate:
++                x_min, x_max = self.x_range
++            elif ax is not None:
++                x_min, x_max = ax.get_xlim()
++            else:
++                if x_range is None:
++                    raise ValueError("x_range must be provided when ax is None")
++                x_min, x_max = x_range
++            grid = np.linspace(x_min, x_max, 100)
++        else:
++            grid = np.asarray(grid)
++
++        if self.order > 1:
++            yhat, yhat_boots = self.fit_poly(grid, self.order)
++        elif self.logistic:
++            import statsmodels.api as sm
++            yhat, yhat_boots = self.fit_statsmodels(
++                grid, sm.GLM, family=sm.families.Binomial(),
++            )
++        elif self.lowess:
++            grid, yhat = self.fit_lowess()
++            return grid, yhat, None
++        elif self.robust:
++            import statsmodels.api as sm
++            yhat, yhat_boots = self.fit_statsmodels(grid, sm.RLM)
++        elif self.logx:
++            yhat, yhat_boots = self.fit_logx(grid)
++        else:
++            yhat, yhat_boots = self.fit_fast(grid)
++
++        if self.ci is None:
++            err_bands = None
++        else:
++            err_bands = utils.ci(yhat_boots, self.ci, axis=0)
++        return grid, yhat, err_bands
++
++    def scatterplot(self, ax, kws):
++        """Draw observations, or estimates for discrete predictor values."""
++        if self.x_estimator is None:
++            x, y = self.scatter_data
++        else:
++            vals, points, cis = self.estimate_data
++            x, y = vals, points
++            if self.x_ci is not None:
++                points = np.asarray(points)
++                cis = np.asarray(cis)
++                err = np.vstack([points - cis[:, 0], cis[:, 1] - points])
++                ci_kws = {"color": kws.get("color")}
++                if "alpha" in kws:
++                    ci_kws["alpha"] = kws["alpha"]
++                ax.errorbar(vals, points, yerr=err, fmt="none", **ci_kws)
++
++        kws.setdefault("linewidths", .75)
++        kws.setdefault("edgecolor", "w")
++        scatter_artist = ax.scatter(x, y, **kws)
++        if self.label is not None:
++            scatter_artist.set_label(self.label)
++
++    def lineplot(self, ax, kws):
++        """Draw the fitted model and, when requested, its confidence band."""
++        grid, yhat, err_bands = self.fit_regression(ax)
++        edges = grid[0], grid[-1]
++        fill_color = kws["color"]
++        lw = kws.pop("lw", mpl.rcParams["lines.linewidth"] * 1.5)
++        kws.setdefault("linewidth", lw)
++        line, = ax.plot(grid, yhat, **kws)
++        if not self.scatter:
++            line.sticky_edges.x[:] = edges
++            if self.label is not None:
++                line.set_label(self.label)
++        if err_bands is not None:
++            ax.fill_between(
++                grid, err_bands[0], err_bands[1],
++                facecolor=fill_color, alpha=.15,
++            )
++
++    def plot(self, ax, scatter_kws, line_kws):
++        """Draw this regression plot on a matplotlib axes."""
++        # Pull exactly one color from the property cycle and share it between
++        # the points, fitted line, and interval band.
++        if self.color is None:
++            scout, = ax.plot([], [])
++            color = scout.get_color()
++            scout.remove()
++        else:
++            color = self.color
++
++        scatter_kws.setdefault("color", color)
++        line_kws.setdefault("color", color)
++
++        if self.scatter:
++            scatter_kws.setdefault("alpha", .8)
++            self.scatterplot(ax, scatter_kws)
++
++        if self.fit_reg:
++            self.lineplot(ax, line_kws)
++
++        if self.x_label is not None:
++            ax.set_xlabel(self.x_label)
++        if self.y_label is not None:
++            ax.set_ylabel(self.y_label)
++
++
++def update_datalim(data, x, y, ax, **kws):
++    """Update an axes' x limits before a facet's regression is fitted."""
++    xys = data[[x, y]].to_numpy().astype(float)
++    ax.update_datalim(xys, updatey=False)
++    ax.autoscale_view(scaley=False)
++
+ 
+ 
+ 
+@@ -593,15 +924,13 @@ def lmplot(
+     if facet_kws is None:
+         facet_kws = {}
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def facet_kw_deprecation(key, val):
++        if val is not None:
++            msg = (f"The `{key}` parameter is deprecated and will be removed "
++                   f"in a future version. Pass `{key}` directly to "
++                   "`FacetGrid` using the `facet_kws` dictionary instead.")
++            warnings.warn(msg, UserWarning)
++            facet_kws[key] = val
+     facet_kw_deprecation("sharex", sharex)
+     facet_kw_deprecation("sharey", sharey)
+     facet_kw_deprecation("legend_out", legend_out)
+@@ -947,4 +1276,4 @@ def residplot(
+     scatter_kws = {} if scatter_kws is None else scatter_kws.copy()
+     line_kws = {} if line_kws is None else line_kws.copy()
+     plotter.plot(ax, scatter_kws, line_kws)
+-    return ax
+\ No newline at end of file
++    return ax
+diff --git a/seaborn/utils.py b/seaborn/utils.py
+index 5f0659c..875b2eb 100644
+--- a/seaborn/utils.py
++++ b/seaborn/utils.py
+@@ -55,6 +55,18 @@ def ci_to_errsize(cis, heights):
+     return errsize
+ 
+ 
++def ci(a, which=95, axis=None):
++    """Return a percentile interval from an array.
++
++    The interval is centred on the median in percentile space.  ``nan``
++    values are ignored, which is important for bootstrap distributions from
++    models that occasionally cannot be estimated (for example, a separated
++    logistic-regression resample).
++    """
++    p = 50 - which / 2, 50 + which / 2
++    return np.nanpercentile(a, p, axis)
++
++
+ 
+ 
+ 
+@@ -894,4 +906,4 @@ def _get_patch_legend_artist(fill):
+ 
+         return mpl.patches.Rectangle((0, 0), 0, 0, **kws)
+ 
+-    return legend_artist
+\ No newline at end of file
++    return legend_artist

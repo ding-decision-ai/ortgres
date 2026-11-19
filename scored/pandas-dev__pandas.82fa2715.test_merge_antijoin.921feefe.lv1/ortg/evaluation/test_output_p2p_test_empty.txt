@@ -1,0 +1,81 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 64 items
+
+pandas/tests/io/parser/dtypes/test_empty.py ...s...s...s...s...s...s...s............................ssssssss
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_dtype_all_columns_empty[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_dtype_all_columns_empty[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_dtype_all_columns_empty[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_pass_dtype[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_pass_dtype[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_pass_dtype[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_index_pass_dtype[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_index_pass_dtype[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_index_pass_dtype[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_multi_index_pass_dtype[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_multi_index_pass_dtype[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_multi_index_pass_dtype[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_mangled_column_pass_dtype_by_names[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_mangled_column_pass_dtype_by_names[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_mangled_column_pass_dtype_by_names[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_mangled_column_pass_dtype_by_indexes[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_mangled_column_pass_dtype_by_indexes[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_mangled_column_pass_dtype_by_indexes[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes_raises[c_high]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes_raises[c_low]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes_raises[python]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_with_dup_column_pass_dtype_by_indexes_raises[pyarrow]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-float64-expected0]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-category-expected1]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-dtype2-expected2]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-datetime64[ns]-expected3]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-timedelta64[ns]-expected4]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-dtype5-expected5]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-dtype6-expected6]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_high-dtype7-expected7]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-float64-expected0]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-category-expected1]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-dtype2-expected2]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-datetime64[ns]-expected3]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-timedelta64[ns]-expected4]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-dtype5-expected5]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-dtype6-expected6]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[c_low-dtype7-expected7]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-float64-expected0]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-category-expected1]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-dtype2-expected2]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-datetime64[ns]-expected3]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-timedelta64[ns]-expected4]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-dtype5-expected5]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-dtype6-expected6]
+PASSED pandas/tests/io/parser/dtypes/test_empty.py::test_empty_dtype[python-dtype7-expected7]
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:24: https://github.com/apache/arrow/issues/38676
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:34: https://github.com/apache/arrow/issues/38676
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:47: https://github.com/apache/arrow/issues/38676
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:62: https://github.com/apache/arrow/issues/38676
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:79: https://github.com/apache/arrow/issues/38676
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:92: https://github.com/apache/arrow/issues/38676
+SKIPPED [1] pandas/tests/io/parser/dtypes/test_empty.py:105: https://github.com/apache/arrow/issues/38676
+SKIPPED [8] pandas/tests/io/parser/dtypes/test_empty.py:132: https://github.com/apache/arrow/issues/38676
+======================== 49 passed, 15 skipped in 0.10s ========================

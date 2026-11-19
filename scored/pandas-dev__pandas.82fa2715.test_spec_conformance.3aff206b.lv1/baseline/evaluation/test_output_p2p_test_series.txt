@@ -1,0 +1,45 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 21 items
+
+pandas/tests/reshape/concat/test_series.py .....................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[int64-bool]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[int64-boolean]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[float64-bool]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[float64-boolean]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[Int64-bool]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[Int64-boolean]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[Float64-bool]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_bool_and_numeric[Float64-boolean]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_empty_and_non_empty_series_regression
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_axis1
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_axis1_preserves_series_names
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_axis1_with_reindex[True]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_axis1_with_reindex[False]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_axis1_names_applied
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_axis1_same_names_ignore_index
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_name_npscalar_tuple[s1name0]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_name_npscalar_tuple[190]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_partial_columns_names
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_length_one_reversed[DataFrame]
+PASSED pandas/tests/reshape/concat/test_series.py::TestSeriesConcat::test_concat_series_length_one_reversed[Series]
+============================== 21 passed in 0.08s ==============================

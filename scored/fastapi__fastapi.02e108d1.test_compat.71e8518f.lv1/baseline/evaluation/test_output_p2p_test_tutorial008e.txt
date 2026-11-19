@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, inline-snapshot-0.31.1, cov-7.0.0, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 3 items
+
+tests/test_tutorial/test_dependencies/test_tutorial008e.py ...           [100%]
+
+==================================== PASSES ====================================
+_______________________ test_get_users_me[tutorial008e] ________________________
+----------------------------- Captured stdout call -----------------------------
+Cleanup up before response is sent
+______________________ test_get_users_me[tutorial008e_an] ______________________
+----------------------------- Captured stdout call -----------------------------
+Cleanup up before response is sent
+___________________ test_get_users_me[tutorial008e_an_py39] ____________________
+----------------------------- Captured stdout call -----------------------------
+Cleanup up before response is sent
+=========================== short test summary info ============================
+PASSED tests/test_tutorial/test_dependencies/test_tutorial008e.py::test_get_users_me[tutorial008e]
+PASSED tests/test_tutorial/test_dependencies/test_tutorial008e.py::test_get_users_me[tutorial008e_an]
+PASSED tests/test_tutorial/test_dependencies/test_tutorial008e.py::test_get_users_me[tutorial008e_an_py39]
+============================== 3 passed in 0.26s ===============================

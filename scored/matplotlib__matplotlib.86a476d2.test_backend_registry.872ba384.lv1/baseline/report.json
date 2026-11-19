@@ -1,0 +1,83 @@
+{
+    "matplotlib__matplotlib.86a476d2.test_backend_registry.872ba384.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.9655,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[qt-qtagg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[gtk3-gtk3agg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[gtk4-gtk4agg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[wx-wxagg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[tk-tkagg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[macosx-macosx]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[headless-agg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_for_gui_framework[does not exist-None]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_list_builtin",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_list_builtin_with_filter[BackendFilter.INTERACTIVE-expected0]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_list_builtin_with_filter[BackendFilter.NON_INTERACTIVE-expected1]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_list_gui_frameworks",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_is_valid_backend[agg-True]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_is_valid_backend[QtAgg-True]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_is_valid_backend[module://anything-True]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_is_valid_backend[made-up-name-False]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_normalization[agg-matplotlib.backends.backend_agg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_normalization[QtAgg-matplotlib.backends.backend_qtagg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_backend_normalization[module://Anything-Anything]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_entry_point_name_shadows_builtin",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_entry_point_name_duplicate",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_entry_point_name_is_module",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_load_entry_points_only_if_needed[agg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_load_entry_points_only_if_needed[module://matplotlib.backends.backend_agg]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_resolve_gui_or_backend[agg-agg-None]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_resolve_gui_or_backend[qt-qtagg-qt]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_resolve_gui_or_backend[TkCairo-tkcairo-tk]",
+                    "lib/matplotlib/tests/test_backend_registry.py::test_resolve_gui_or_backend_invalid"
+                ],
+                "failure": [
+                    "lib/matplotlib/tests/test_backend_registry.py::test_entry_point_identical"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[home-Home]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[backspace-Backspace]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[f1-F1]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[ctrl+a-Ctrl+A]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[ctrl+A-Ctrl+Shift+A]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[a-a]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[A-A]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[ctrl+shift+f1-Ctrl+Shift+F1]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[1-1]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[cmd+p-Cmd+P]",
+                    "lib/matplotlib/tests/test_backend_tools.py::test_format_shortcut[cmd+1-Cmd+1]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_SubplotZero[png]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_Subplot[png]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_Axes",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_ParasiteAxesAuxTrans[png]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_axisline_style[png]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_axisline_style_size_color[png]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_axisline_style_tight[png]",
+                    "lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_subplotzero_ylabel[png]",
+                    "lib/matplotlib/tests/test_bezier.py::test_split_bezier_with_large_values",
+                    "lib/matplotlib/tests/test_axis.py::test_tick_labelcolor_array",
+                    "lib/matplotlib/tests/test_axis.py::test_axis_not_in_layout",
+                    "lib/matplotlib/tests/test_axis.py::test_tick_not_in_layout[png]",
+                    "lib/matplotlib/tests/test_axis.py::test_translate_tick_params_reverse",
+                    "lib/matplotlib/tests/test_axis.py::test_get_tick_position_rcParams",
+                    "lib/matplotlib/tests/test_axis.py::test_get_tick_position_tick_top_tick_right",
+                    "lib/matplotlib/tests/test_axis.py::test_get_tick_position_tick_params",
+                    "lib/matplotlib/tests/test_axis.py::test_grid_rcparams",
+                    "lib/matplotlib/tests/test_cm_stubs.py::test_cm_stub_matches_runtime_colormaps"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-10T21:43:30.937450"
+    }
+}

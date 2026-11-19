@@ -1,0 +1,507 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 15 items
+
+tests/data/test_numpy_dataset.py::test_conversion_to_json FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [  6%]
+tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0] FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 13%]
+tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1] FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 20%]
+tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features2-targets2] FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 26%]
+tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0] FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 33%]
+tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1] FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 40%]
+tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features2-targets2] FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 46%]
+tests/data/test_numpy_dataset.py::test_digest_property_has_expected_value FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 53%]
+tests/data/test_numpy_dataset.py::test_features_property FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 60%]
+tests/data/test_numpy_dataset.py::test_targets_property FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 66%]
+tests/data/test_numpy_dataset.py::test_to_pyfunc FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 73%]
+tests/data/test_numpy_dataset.py::test_to_evaluation_dataset FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 80%]
+tests/data/test_numpy_dataset.py::test_from_numpy_features_only FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 86%]
+tests/data/test_numpy_dataset.py::test_from_numpy_features_and_targets FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [ 93%]
+tests/data/test_numpy_dataset.py::test_from_numpy_no_source_specified FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_conversion_to_json ____________________________
+tests/data/test_numpy_dataset.py:22: in test_conversion_to_json
+    dataset = NumpyDataset(features=np.array([1, 2, 3]), source=source, name="testname")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bcc2c50>
+        source_uri = 'test:/my/test/uri'
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bcc3590>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bcc2c50>
+        targets    = None
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bcc3590>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bcc2c50>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bcc3590>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0] _
+tests/data/test_numpy_dataset.py:69: in test_conversion_to_json_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc05c50>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc05e50>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc05c50>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc05e50>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc05c50>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc05e50>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1] _
+tests/data/test_numpy_dataset.py:69: in test_conversion_to_json_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bcb3b10>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bcb3f10>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bcb3b10>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bcb3f10>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bcb3b10>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bcb3f10>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_conversion_to_json_with_multi_tensor_features_and_targets[features2-targets2] _
+tests/data/test_numpy_dataset.py:69: in test_conversion_to_json_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc10c10>
+        source_uri = 'test:/my/test/uri'
+        targets    = array([1, 2, 3])
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc10ed0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc10c10>
+        targets    = array([1, 2, 3])
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc10ed0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc10c10>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc10ed0>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0] _
+tests/data/test_numpy_dataset.py:115: in test_schema_and_profile_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc76990>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc74590>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc76990>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc74590>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc76990>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc74590>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1] _
+tests/data/test_numpy_dataset.py:115: in test_schema_and_profile_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bdd07d0>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bdd0bd0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bdd07d0>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bdd0bd0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bdd07d0>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bdd0bd0>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_schema_and_profile_with_multi_tensor_features_and_targets[features2-targets2] _
+tests/data/test_numpy_dataset.py:115: in test_schema_and_profile_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc3d110>
+        source_uri = 'test:/my/test/uri'
+        targets    = array([1, 2, 3])
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc3fa90>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc3d110>
+        targets    = array([1, 2, 3])
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc3fa90>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc3d110>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc3fa90>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+___________________ test_digest_property_has_expected_value ____________________
+tests/data/test_numpy_dataset.py:153: in test_digest_property_has_expected_value
+    dataset_with_features = NumpyDataset(features=features, source=source, name="testname")
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bddd650>
+        source_uri = 'test:/my/test/uri'
+        targets    = array([4, 5, 6])
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bddf9d0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bddd650>
+        targets    = None
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bddf9d0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bddd650>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bddf9d0>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+____________________________ test_features_property ____________________________
+tests/data/test_numpy_dataset.py:170: in test_features_property
+    dataset = NumpyDataset(features=features, source=source, name="testname")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc63390>
+        source_uri = 'test:/my/test/uri'
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc62bd0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc63390>
+        targets    = None
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc62bd0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc63390>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc62bd0>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+____________________________ test_targets_property _____________________________
+tests/data/test_numpy_dataset.py:179: in test_targets_property
+    dataset_with_targets = NumpyDataset(
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc12990>
+        source_uri = 'test:/my/test/uri'
+        targets    = array([4, 5, 6])
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc10210>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc12990>
+        targets    = array([4, 5, 6])
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc10210>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc12990>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc10210>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+________________________________ test_to_pyfunc ________________________________
+tests/data/test_numpy_dataset.py:191: in test_to_pyfunc
+    dataset = NumpyDataset(features=features, source=source, name="testname")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bde4e50>
+        source_uri = 'test:/my/test/uri'
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bde4e10>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bde4e50>
+        targets    = None
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bde4e10>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bde4e50>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bde4e10>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+__________________________ test_to_evaluation_dataset __________________________
+tests/data/test_numpy_dataset.py:200: in test_to_evaluation_dataset
+    dataset = NumpyDataset(features=features, targets=targets, source=source, name="testname")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([[1, 2],
+       [3, 4]])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc30c10>
+        source_uri = 'test:/my/test/uri'
+        targets    = array([0, 1])
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([[1, 2],
+       [3, 4]])
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc32510>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc30c10>
+        targets    = array([0, 1])
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = 'testname'
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc32510>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x73608bc30c10>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x73608bc32510>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_from_numpy_features_only _________________________
+tests/data/test_numpy_dataset.py:211: in test_from_numpy_features_only
+    mlflow_features = mlflow.data.from_numpy(features, source=path)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        path       = PosixPath('/tmp/pytest-of-root/pytest-0/test_from_numpy_features_only0/temp.csv')
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_from_numpy_features_only0')
+mlflow/data/numpy_dataset.py:215: in from_numpy
+    resolved_source = resolve_dataset_source(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'resolve_dataset_source' is not defined
+        CodeDatasetSource = <class 'mlflow.data.code_dataset_source.CodeDatasetSource'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        registry   = <module 'mlflow.tracking.context.registry' from '/testbed/mlflow/tracking/context/registry.py'>
+        source     = PosixPath('/tmp/pytest-of-root/pytest-0/test_from_numpy_features_only0/temp.csv')
+        targets    = None
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_____________________ test_from_numpy_features_and_targets _____________________
+tests/data/test_numpy_dataset.py:230: in test_from_numpy_features_and_targets
+    mlflow_ds = mlflow.data.from_numpy(features, targets=targets, source=path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([[1, 2, 3],
+       [3, 2, 1],
+       [2, 3, 1]])
+        path       = PosixPath('/tmp/pytest-of-root/pytest-0/test_from_numpy_features_and_t0/temp.csv')
+        targets    = array([4, 5, 6])
+        tmp_path   = PosixPath('/tmp/pytest-of-root/pytest-0/test_from_numpy_features_and_t0')
+mlflow/data/numpy_dataset.py:215: in from_numpy
+    resolved_source = resolve_dataset_source(
+                      ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'resolve_dataset_source' is not defined
+        CodeDatasetSource = <class 'mlflow.data.code_dataset_source.CodeDatasetSource'>
+        digest     = None
+        features   = array([[1, 2, 3],
+       [3, 2, 1],
+       [2, 3, 1]])
+        name       = None
+        registry   = <module 'mlflow.tracking.context.registry' from '/testbed/mlflow/tracking/context/registry.py'>
+        source     = PosixPath('/tmp/pytest-of-root/pytest-0/test_from_numpy_features_and_t0/temp.csv')
+        targets    = array([4, 5, 6])
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+_____________________ test_from_numpy_no_source_specified ______________________
+tests/data/test_numpy_dataset.py:252: in test_from_numpy_no_source_specified
+    mlflow_features = mlflow.data.from_numpy(features)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+mlflow/data/numpy_dataset.py:221: in from_numpy
+    return NumpyDataset(
+        CodeDatasetSource = <class 'mlflow.data.code_dataset_source.CodeDatasetSource'>
+        context_tags = {'mlflow.source.name': '/opt/miniconda3/envs/testbed/bin/pytest', 'mlflow.source.type': 'LOCAL', 'mlflow.user': 'root'}
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        registry   = <module 'mlflow.tracking.context.registry' from '/testbed/mlflow/tracking/context/registry.py'>
+        resolved_source = <mlflow.data.code_dataset_source.CodeDatasetSource object at 0x73608bb04510>
+        source     = None
+        targets    = None
+mlflow/data/numpy_dataset.py:45: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x736090542e90>
+        source     = <mlflow.data.code_dataset_source.CodeDatasetSource object at 0x73608bb04510>
+        targets    = None
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x736090542e90>
+        source     = <mlflow.data.code_dataset_source.CodeDatasetSource object at 0x73608bb04510>
+mlflow/data/numpy_dataset.py:52: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'compute_numpy_digest' is not defined
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x736090542e90>
+----------------------------- Captured stderr call -----------------------------
+2026/10/11 19:45:02 WARNING mlflow.tracking.context.registry: Encountered unexpected error during resolving tags: name '_get_source_version' is not defined
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 19:45:02 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+========================= command to run failed tests ==========================
+pytest 'tests/data/test_numpy_dataset.py::test_conversion_to_json' 'tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0]' 'tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1]' 'tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features2-targets2]' 'tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0]' 'tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1]' 'tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features2-targets2]' 'tests/data/test_numpy_dataset.py::test_digest_property_has_expected_value' 'tests/data/test_numpy_dataset.py::test_features_property' 'tests/data/test_numpy_dataset.py::test_targets_property' 'tests/data/test_numpy_dataset.py::test_to_pyfunc' 'tests/data/test_numpy_dataset.py::test_to_evaluation_dataset' 'tests/data/test_numpy_dataset.py::test_from_numpy_features_only' 'tests/data/test_numpy_dataset.py::test_from_numpy_features_and_targets' 'tests/data/test_numpy_dataset.py::test_from_numpy_no_source_specified'
+
+=========================== short test summary info ============================
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0]
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1]
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features2-targets2]
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0]
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1]
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features2-targets2]
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_digest_property_has_expected_value
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_features_property
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_targets_property
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_to_pyfunc
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_to_evaluation_dataset
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_from_numpy_features_only
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_from_numpy_features_and_targets
+FAILED | MEM 19.8/46.9 GB | DISK 791.5/915.7 GB tests/data/test_numpy_dataset.py::test_from_numpy_no_source_specified
+============================== 15 failed in 0.17s ==============================

@@ -1,0 +1,81 @@
+{
+    "sphinx-doc__sphinx.e347e59c.test_ext_intersphinx.04901873.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.75,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_pydomain",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_stddomain",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_ambiguous_reference_handling[A TERM-False]",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_cppdomain",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_jsdomain",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference_disabled_domain",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inventory_not_having_version",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::TestStripBasicAuth::test_auth_stripped",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::TestStripBasicAuth::test_no_auth",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::TestStripBasicAuth::test_having_port",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_getsafeurl_authed",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_getsafeurl_authed_having_port",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_getsafeurl_unauthed",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inspect_main_file",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inspect_main_url",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_role",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[5-False]",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[1-True]",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[0-True]",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_cache_limit[-1-False]",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_intersphinx_fetch_inventory_group_url"
+                ],
+                "failure": [
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_fetch_inventory_redirection",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_missing_reference",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_ambiguous_reference_handling[B TERM-True]",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_validate_intersphinx_mapping_warnings",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_load_mappings_fallback",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inspect_main_noargs",
+                    "tests/test_ext_intersphinx/test_ext_intersphinx.py::test_inventory_text_version"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "tests/test_markup/test_parser.py::test_RSTParser_prolog_epilog",
+                    "tests/test_writers/test_writer_latex.py::test_rstdim_to_latexdim",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_single_index",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_pair_index",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_triple_index",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_see_index",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_seealso_index",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_main_index",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_index_with_name",
+                    "tests/test_environment/test_environment_indexentries.py::test_create_index_by_key",
+                    "tests/test_transforms/test_transforms_post_transforms.py::test_nitpicky_warning",
+                    "tests/test_transforms/test_transforms_post_transforms.py::test_missing_reference",
+                    "tests/test_transforms/test_transforms_post_transforms.py::test_missing_reference_conditional_pending_xref",
+                    "tests/test_transforms/test_transforms_post_transforms.py::test_keyboard_hyphen_spaces",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[with_default_visitors_for_desc_sig_elements-no_explicit_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[with_default_visitors_for_desc_sig_elements-explicit_desc_inline_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[without_default_visitors_for_desc_sig_elements-no_explicit_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[without_default_visitors_for_desc_sig_elements-explicit_desc_inline_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-no_explicit_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_element_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_and_desc_sig_element_visitors]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-no_explicit_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_element_visitor]",
+                    "tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_and_desc_sig_element_visitors]",
+                    "tests/test_builders/test_build_html_download.py::test_html_download",
+                    "tests/test_builders/test_build_html_download.py::test_html_download_role"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-13T18:42:41.155420"
+    }
+}

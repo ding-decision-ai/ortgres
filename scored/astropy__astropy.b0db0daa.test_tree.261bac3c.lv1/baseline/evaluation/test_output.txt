@@ -1,0 +1,439 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/votable/tests/test_tree.py.
+
+Date: 2026-10-11T00:59:10
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 29 items
+
+astropy/io/votable/tests/test_tree.py F.FFFFFFFFFFFFFFFFF.FFFFFFFFF      [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_check_astroyear_fail ___________________________
+astropy/io/votable/tests/test_tree.py:29: in test_check_astroyear_fail
+    field = tree.Field(None, name="astroyear", arraysize="1")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1470: in __init__
+    self.values = Values(self._votable, self)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1021: in __init__
+    self.min = None
+    ^^^^^^^^
+astropy/io/votable/tree.py:1122: in min
+    self._min = self._parse_minmax(min)
+                ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Values' object has no attribute '_parse_minmax'
+_______________________________ test_make_Fields _______________________________
+astropy/io/votable/tests/test_tree.py:51: in test_make_Fields
+    [tree.Field(votable, name="Test", datatype="float", unit="mag")]
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1470: in __init__
+    self.values = Values(self._votable, self)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1021: in __init__
+    self.min = None
+    ^^^^^^^^
+astropy/io/votable/tree.py:1122: in min
+    self._min = self._parse_minmax(min)
+                ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'Values' object has no attribute '_parse_minmax'
+_______________________________ test_unit_format _______________________________
+astropy/io/votable/tests/test_tree.py:56: in test_unit_format
+    data = parse(get_pkg_data_filename("data/irsa-nph-error.xml"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+____________________________ test_namespace_warning ____________________________
+astropy/io/votable/tests/test_tree.py:85: in test_namespace_warning
+    parse(io.BytesIO(bad_namespace), verify="exception")
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+
+During handling of the above exception, another exception occurred:
+astropy/io/votable/tests/test_tree.py:84: in test_namespace_warning
+    with pytest.warns(W41):
+E   Failed: DID NOT WARN. No warnings of type (<class 'astropy.io.votable.exceptions.W41'>,) were emitted.
+E    Emitted warnings: [].
+______________________ test_votable_values_empty_min_max _______________________
+astropy/io/votable/tests/test_tree.py:126: in test_votable_values_empty_min_max
+    parse(io.BytesIO(with_empty_minmax), verify="exception")
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals0] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals1] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals2] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals3] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals4] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals5] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals6] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals7] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals8] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals9] ______________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals10] _____________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________ test_min_max_with_arrays[testvals11] _____________________
+astropy/io/votable/tests/test_tree.py:228: in test_min_max_with_arrays
+    vot = parse(io.BytesIO(xml_bytes), verify="exception")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_________________________________ test_version _________________________________
+astropy/io/votable/tests/test_tree.py:270: in test_version
+    parse(
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+____________________________ test_mivot_constructor ____________________________
+astropy/io/votable/tests/test_tree.py:334: in test_mivot_constructor
+    MivotBlock(
+astropy/io/votable/tree.py:3704: in __init__
+    self.check_content_format()
+astropy/io/votable/tree.py:3839: in check_content_format
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+______________________________ test_mivot_readout ______________________________
+astropy/io/votable/tests/test_tree.py:349: in test_mivot_readout
+    votable = parse(get_pkg_data_filename("data/mivot_annotated_table.xml"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_______________________________ test_mivot_write _______________________________
+astropy/io/votable/tests/test_tree.py:367: in test_mivot_write
+    mivot_block = MivotBlock(
+astropy/io/votable/tree.py:3704: in __init__
+    self.check_content_format()
+astropy/io/votable/tree.py:3839: in check_content_format
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_________________________ test_mivot_write_after_table _________________________
+astropy/io/votable/tests/test_tree.py:408: in test_mivot_write_after_table
+    mivot_block = MivotBlock(
+astropy/io/votable/tree.py:3704: in __init__
+    self.check_content_format()
+astropy/io/votable/tree.py:3839: in check_content_format
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_____________________________ test_write_no_mivot ______________________________
+astropy/io/votable/tests/test_tree.py:469: in test_write_no_mivot
+    vtf2 = parse(buff)
+           ^^^^^^^^^^^
+astropy/io/votable/table.py:161: in parse
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_______________________ test_mivot_write_after_resource ________________________
+astropy/io/votable/tests/test_tree.py:485: in test_mivot_write_after_resource
+    mivot_block = MivotBlock(
+astropy/io/votable/tree.py:3704: in __init__
+    self.check_content_format()
+astropy/io/votable/tree.py:3839: in check_content_format
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+__________________________ test_mivot_forbidden_write __________________________
+astropy/io/votable/tests/test_tree.py:531: in test_mivot_forbidden_write
+    mivot_block = MivotBlock(
+astropy/io/votable/tree.py:3704: in __init__
+    self.check_content_format()
+astropy/io/votable/tree.py:3839: in check_content_format
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_______________________________ test_mivot_order _______________________________
+astropy/io/votable/tests/test_tree.py:555: in test_mivot_order
+    mivot_block = MivotBlock(
+astropy/io/votable/tree.py:3704: in __init__
+    self.check_content_format()
+astropy/io/votable/tree.py:3839: in check_content_format
+    with iterparser.get_xml_iterator(
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+astropy/utils/xml/iterparser.py:156: in get_xml_iterator
+    with _convert_to_fd_or_read_function(source) as fd:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_convert_to_fd_or_read_function' is not defined
+_________________________ test_version_checks_from_api _________________________
+astropy/io/votable/tests/test_tree.py:676: in test_version_checks_from_api
+    tree.CooSys(
+astropy/io/votable/tree.py:1943: in __init__
+    self.system = system
+    ^^^^^^^^^^^
+astropy/io/votable/tree.py:1979: in system
+    if system not in self.reference_frames:
+                     ^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'CooSys' object has no attribute 'reference_frames'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/votable/tests/test_tree.py::test_string_fail
+PASSED astropy/io/votable/tests/test_tree.py::test_votable_tag
+FAILED astropy/io/votable/tests/test_tree.py::test_check_astroyear_fail - Att...
+FAILED astropy/io/votable/tests/test_tree.py::test_make_Fields - AttributeErr...
+FAILED astropy/io/votable/tests/test_tree.py::test_unit_format - NameError: n...
+FAILED astropy/io/votable/tests/test_tree.py::test_namespace_warning - Failed...
+FAILED astropy/io/votable/tests/test_tree.py::test_votable_values_empty_min_max
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals0]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals1]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals2]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals3]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals4]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals5]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals6]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals7]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals8]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals9]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals10]
+FAILED astropy/io/votable/tests/test_tree.py::test_min_max_with_arrays[testvals11]
+FAILED astropy/io/votable/tests/test_tree.py::test_version - NameError: name ...
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_constructor - NameEr...
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_readout - NameError:...
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_write - NameError: n...
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_write_after_table - ...
+FAILED astropy/io/votable/tests/test_tree.py::test_write_no_mivot - NameError...
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_write_after_resource
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_forbidden_write - Na...
+FAILED astropy/io/votable/tests/test_tree.py::test_mivot_order - NameError: n...
+FAILED astropy/io/votable/tests/test_tree.py::test_version_checks_from_api - ...
+========================= 27 failed, 2 passed in 0.78s =========================

@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 5 items
+
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_dataclass_input_no_dataclass PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB [ 20%]
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_dataclass_simple PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB [ 40%]
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_dataclass_complex PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB [ 60%]
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_child_dataclass PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB [ 80%]
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_optional_dataclass PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB [100%]
+
+=============================== warnings summary ===============================
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_child_dataclass
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_optional_dataclass
+  /testbed/mlflow/models/rag_signatures.py:25: FutureWarning: ``mlflow.models.rag_signatures.Message`` is deprecated. This method will be removed in a future release. Use ``mlflow.types.llm.ChatMessage`` instead.
+    messages: list[Message] = field(default_factory=lambda: [Message()])
+
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_child_dataclass
+tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_optional_dataclass
+  /testbed/mlflow/pyfunc/utils/input_converter.py:45: FutureWarning: ``mlflow.models.rag_signatures.Message`` is deprecated. This method will be removed in a future release. Use ``mlflow.types.llm.ChatMessage`` instead.
+    return dataclass_type(**kwargs)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:44:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:44:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:44:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:44:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 18:44:39 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_dataclass_input_no_dataclass
+PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_dataclass_simple
+PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_dataclass_complex
+PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_child_dataclass
+PASSED | MEM 16.4/46.9 GB | DISK 834.5/915.7 GB tests/pyfunc/test_pyfunc_input_converter.py::test_hydrate_optional_dataclass
+======================== 5 passed, 4 warnings in 0.08s =========================

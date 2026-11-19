@@ -1,0 +1,629 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /testbed/build/cp311
+Build type: native build
+Project name: pandas
+Project version: 0+untagged.1.gf319d8f.dirty
+C compiler for the host machine: cc (gcc 11.4.0 "cc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C linker for the host machine: cc ld.bfd 2.38
+C++ compiler for the host machine: c++ (gcc 11.4.0 "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C++ linker for the host machine: c++ ld.bfd 2.38
+Cython compiler for the host machine: cython (cython 3.2.1)
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python found: YES (/opt/miniconda3/envs/testbed/bin/python)
+Program cython found: YES (/opt/miniconda3/envs/testbed/bin/cython)
+Configuring free_threading_config.pxi using configuration
+Build targets in project: 56
+
+pandas 0+untagged.1.gf319d8f.dirty
+
+  User defined options
+    Native files: /testbed/build/cp311/meson-python-native-file.ini
+    buildtype   : release
+    vsenv       : True
+    b_ndebug    : if-release
+    b_vscrt     : md
+
+Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at /opt/miniconda3/envs/testbed/bin/ninja
+
+Visual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:
+/opt/miniconda3/envs/testbed/bin/meson compile -C .
+[1/155] Generating pandas/_libs/index_class_helper_pxi with a custom command
+[2/155] Generating pandas/_libs/algos_common_helper_pxi with a custom command
+[3/155] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command
+[4/155] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command
+[5/155] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command
+[6/155] Generating pandas/_libs/sparse_op_helper_pxi with a custom command
+[7/155] Generating pandas/_libs/intervaltree_helper_pxi with a custom command
+[8/155] Generating pandas/_libs/algos_take_helper_pxi with a custom command
+[9/155] Compiling Cython source /testbed/pandas/_libs/indexing.pyx
+[10/155] Compiling Cython source /testbed/pandas/_libs/ops_dispatch.pyx
+[11/155] Compiling Cython source /testbed/pandas/_libs/tslibs/ccalendar.pyx
+[12/155] Compiling Cython source /testbed/pandas/_libs/properties.pyx
+[13/155] Compiling Cython source /testbed/pandas/_libs/sas.pyx
+[14/155] Compiling Cython source /testbed/pandas/_libs/tslibs/base.pyx
+[15/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timezones.pyx
+[16/155] Compiling Cython source /testbed/pandas/_libs/tslibs/dtypes.pyx
+[17/155] Compiling Cython source /testbed/pandas/_libs/tslibs/np_datetime.pyx
+[18/155] Compiling Cython source /testbed/pandas/_libs/hashing.pyx
+[19/155] Compiling Cython source /testbed/pandas/_libs/missing.pyx
+[20/155] Compiling Cython source /testbed/pandas/_libs/arrays.pyx
+[21/155] Compiling Cython source /testbed/pandas/_libs/byteswap.pyx
+[22/155] Compiling Cython source /testbed/pandas/_libs/tslibs/strptime.pyx
+[23/155] Compiling Cython source /testbed/pandas/_libs/tslibs/parsing.pyx
+[24/155] Compiling Cython source /testbed/pandas/_libs/tslibs/nattype.pyx
+[25/155] Compiling Cython source /testbed/pandas/_libs/tslibs/tzconversion.pyx
+[26/155] Compiling Cython source /testbed/pandas/_libs/tslibs/vectorized.pyx
+[27/155] Compiling Cython source /testbed/pandas/_libs/tslibs/fields.pyx
+[28/155] Compiling Cython source /testbed/pandas/_libs/ops.pyx
+[29/155] Compiling Cython source /testbed/pandas/_libs/internals.pyx
+warning: /testbed/pandas/_libs/internals.pyx:31:0: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:916:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:921:12: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:955:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:973:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:994:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+[30/155] Compiling Cython source /testbed/pandas/_libs/tslibs/conversion.pyx
+[31/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/.._src_parser_tokenizer.c.o
+[32/155] Compiling Cython source /testbed/pandas/_libs/tslibs/period.pyx
+[33/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timestamps.pyx
+[34/155] Compiling Cython source /testbed/pandas/_libs/reshape.pyx
+[35/155] Compiling C object pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_base.pyx.c.o
+[36/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timedeltas.pyx
+[37/155] Compiling Cython source /testbed/pandas/_libs/lib.pyx
+[38/155] Compiling Cython source /testbed/pandas/_libs/tslib.pyx
+[39/155] Compiling Cython source /testbed/pandas/_libs/writers.pyx
+[40/155] Compiling Cython source /testbed/pandas/_libs/testing.pyx
+[41/155] Compiling Cython source /testbed/pandas/_libs/parsers.pyx
+[42/155] Compiling C object pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_indexing.pyx.c.o
+[43/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[44/155] Compiling Cython source /testbed/pandas/_libs/window/indexers.pyx
+[45/155] Compiling Cython source /testbed/pandas/_libs/index.pyx
+[46/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_date_conversions.c.o
+[47/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime.c.o
+[48/155] Compiling C object pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashing.pyx.c.o
+[49/155] Compiling Cython source /testbed/pandas/_libs/tslibs/offsets.pyx
+[50/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[51/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_pd_parser.c.o
+[52/155] Compiling C object pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_ccalendar.pyx.c.o
+[53/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_pd_datetime.c.o
+[54/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime_strings.c.o
+[55/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[56/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_JSONtoObj.c.o
+[57/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_ujson.c.o
+[58/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsondec.c.o
+[59/155] Compiling C object pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_arrays.pyx.c.o
+[60/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[61/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsonenc.c.o
+[62/155] Compiling Cython source /testbed/pandas/_libs/join.pyx
+[63/155] Compiling Cython source /testbed/pandas/_libs/window/aggregations.pyx
+[64/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[65/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_objToJSON.c.o
+[66/155] Compiling C object pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_np_datetime.pyx.c.o
+[67/155] Compiling Cython source /testbed/pandas/_libs/interval.pyx
+[68/155] Compiling C object pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timezones.pyx.c.o
+[69/155] Compiling Cython source /testbed/pandas/_libs/sparse.pyx
+[70/155] Compiling C object pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_byteswap.pyx.c.o
+[71/155] Compiling C object pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_vectorized.pyx.c.o
+[72/155] Generating write_version_file with a custom command
+[73/155] Compiling C object pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_properties.pyx.c.o
+[74/155] Compiling C object pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_dtypes.pyx.c.o
+[75/155] Compiling C object _cyutility.cpython-311-x86_64-linux-gnu.so.p/meson-generated_..__cyutility.c.o
+[76/155] Linking target pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so
+[77/155] Linking target pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so
+[78/155] Generating pandas/__init__.py with a custom command
+[79/155] Linking target _cyutility.cpython-311-x86_64-linux-gnu.so
+[80/155] Linking target pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so
+[81/155] Linking target pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so
+[82/155] Linking target pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so
+[83/155] Linking target pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so
+[84/155] Compiling C object pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops_dispatch.pyx.c.o
+[85/155] Linking target pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so
+[86/155] Linking target pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so
+[87/155] Linking target pandas/_libs/json.cpython-311-x86_64-linux-gnu.so
+[88/155] Linking target pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so
+[89/155] Linking target pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so
+[90/155] Linking target pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so
+[91/155] Linking target pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so
+[92/155] Linking target pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so
+[93/155] Linking target pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so
+[94/155] Compiling C object pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_conversion.pyx.c.o
+[95/155] Linking target pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so
+[96/155] Compiling C object pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_writers.pyx.c.o
+[97/155] Linking target pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so
+[98/155] Compiling C object pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_fields.pyx.c.o
+[99/155] Linking target pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so
+[100/155] Compiling C object pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops.pyx.c.o
+[101/155] Compiling C object pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_reshape.pyx.c.o
+[102/155] Linking target pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so
+[103/155] Linking target pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so
+[104/155] Compiling C object pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sas.pyx.c.o
+[105/155] Compiling C object pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_nattype.pyx.c.o
+[106/155] Linking target pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so
+[107/155] Linking target pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so
+[108/155] Compiling C object pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_tzconversion.pyx.c.o
+[109/155] Linking target pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so
+[110/155] Compiling C object pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_testing.pyx.c.o
+[111/155] Linking target pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so
+[112/155] Compiling C object pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_missing.pyx.c.o
+[113/155] Linking target pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so
+[114/155] Compiling C object pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslib.pyx.c.o
+[115/155] Compiling Cython source /testbed/pandas/_libs/hashtable.pyx
+[116/155] Linking target pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so
+[117/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_parsing.pyx.c.o
+[118/155] Linking target pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so
+[119/155] Compiling C object pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_internals.pyx.c.o
+[120/155] Linking target pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so
+[121/155] Compiling Cython source /testbed/pandas/_libs/algos.pyx
+[122/155] Compiling C object pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_strptime.pyx.c.o
+[123/155] Linking target pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so
+[124/155] Compiling Cython source /testbed/pandas/_libs/groupby.pyx
+[125/155] Compiling C object pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_indexers.pyx.c.o
+[126/155] Linking target pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so
+[127/155] Compiling C object pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_period.pyx.c.o
+[128/155] Linking target pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so
+[129/155] Compiling C object pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timestamps.pyx.c.o
+[130/155] Linking target pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so
+[131/155] Compiling C object pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timedeltas.pyx.c.o
+[132/155] Linking target pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so
+[133/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_parsers.pyx.c.o
+[134/155] Linking target pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so
+[135/155] Compiling C++ object pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_aggregations.pyx.cpp.o
+[136/155] Linking target pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so
+[137/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o
+[138/155] Linking target pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so
+[139/155] Compiling C object pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o
+[140/155] Linking target pandas/_libs/index.cpython-311-x86_64-linux-gnu.so
+[141/155] Compiling C object pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o
+[142/155] Linking target pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so
+[143/155] Compiling C object pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o
+[144/155] Linking target pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so
+[145/155] Compiling C object pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o
+[146/155] Linking target pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so
+[147/155] Compiling C object pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o
+[148/155] Linking target pandas/_libs/join.cpython-311-x86_64-linux-gnu.so
+[149/155] Compiling C object pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o
+[150/155] Linking target pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so
+[151/155] Compiling C object pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o
+[152/155] Compiling C object pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o
+[153/155] Linking target pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so
+[154/155] Linking target pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 40 items
+
+pandas/tests/frame/methods/test_info.py FFFFFFFFFFFFFFFFFFFFFFFFFFxFFFFFFFFFFFFF
+
+=================================== FAILURES ===================================
+_______________________________ test_info_empty ________________________________
+pandas/tests/frame/methods/test_info.py:43: in test_info_empty
+    df.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+___________________ test_info_categorical_column_smoke_test ____________________
+pandas/tests/frame/methods/test_info.py:64: in test_info_categorical_column_smoke_test
+    df.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________________ test_info_smoke_test[int_frame] ________________________
+pandas/tests/frame/methods/test_info.py:84: in test_info_smoke_test
+    frame.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+______________________ test_info_smoke_test[float_frame] _______________________
+pandas/tests/frame/methods/test_info.py:84: in test_info_smoke_test
+    frame.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_____________________ test_info_smoke_test[datetime_frame] _____________________
+pandas/tests/frame/methods/test_info.py:84: in test_info_smoke_test
+    frame.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+________________ test_info_smoke_test[duplicate_columns_frame] _________________
+pandas/tests/frame/methods/test_info.py:84: in test_info_smoke_test
+    frame.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+___________________ test_info_smoke_test[float_string_frame] ___________________
+pandas/tests/frame/methods/test_info.py:84: in test_info_smoke_test
+    frame.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________________ test_info_smoke_test2 _____________________________
+pandas/tests/frame/methods/test_info.py:95: in test_info_smoke_test2
+    float_frame.reindex(columns=["A"]).info(verbose=False, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________ test_info_default_verbose_selection[10-100-True] _______________
+pandas/tests/frame/methods/test_info.py:116: in test_info_default_verbose_selection
+    frame.info(buf=io_default)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________ test_info_default_verbose_selection[10-11-True] ________________
+pandas/tests/frame/methods/test_info.py:116: in test_info_default_verbose_selection
+    frame.info(buf=io_default)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________ test_info_default_verbose_selection[10-10-True] ________________
+pandas/tests/frame/methods/test_info.py:116: in test_info_default_verbose_selection
+    frame.info(buf=io_default)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________ test_info_default_verbose_selection[10-9-False] ________________
+pandas/tests/frame/methods/test_info.py:116: in test_info_default_verbose_selection
+    frame.info(buf=io_default)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________ test_info_default_verbose_selection[10-1-False] ________________
+pandas/tests/frame/methods/test_info.py:116: in test_info_default_verbose_selection
+    frame.info(buf=io_default)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+________________ test_info_verbose_check_header_separator_body _________________
+pandas/tests/frame/methods/test_info.py:131: in test_info_verbose_check_header_separator_body
+    frame.info(verbose=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_ test_info_verbose_with_counts_spacing[4- #   Column  Non-Null Count  Dtype  ----  ------  --------------  -----  - 0   0       3 non-null      float64- 3   3       3 non-null      float64] _
+pandas/tests/frame/methods/test_info.py:194: in test_info_verbose_with_counts_spacing
+    frame.info(verbose=True, show_counts=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_ test_info_verbose_with_counts_spacing[11- #   Column  Non-Null Count  Dtype  ----  ------  --------------  -----  - 0   0       3 non-null      float64- 10  10      3 non-null      float64] _
+pandas/tests/frame/methods/test_info.py:194: in test_info_verbose_with_counts_spacing
+    frame.info(verbose=True, show_counts=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_ test_info_verbose_with_counts_spacing[101- #    Column  Non-Null Count  Dtype  ----   ------  --------------  -----  - 0    0       3 non-null      float64- 100  100     3 non-null      float64] _
+pandas/tests/frame/methods/test_info.py:194: in test_info_verbose_with_counts_spacing
+    frame.info(verbose=True, show_counts=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_ test_info_verbose_with_counts_spacing[1001- #     Column  Non-Null Count  Dtype  ----    ------  --------------  -----  - 0     0       3 non-null      float64- 1000  1000    3 non-null      float64] _
+pandas/tests/frame/methods/test_info.py:194: in test_info_verbose_with_counts_spacing
+    frame.info(verbose=True, show_counts=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_ test_info_verbose_with_counts_spacing[10001- #      Column  Non-Null Count  Dtype  ----     ------  --------------  -----  - 0      0       3 non-null      float64- 10000  10000   3 non-null      float64] _
+pandas/tests/frame/methods/test_info.py:194: in test_info_verbose_with_counts_spacing
+    frame.info(verbose=True, show_counts=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________________________ test_info_memory _______________________________
+pandas/tests/frame/methods/test_info.py:210: in test_info_memory
+    df.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+________________________________ test_info_wide ________________________________
+pandas/tests/frame/methods/test_info.py:231: in test_info_wide
+    df.info(buf=io)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_______________ test_info_duplicate_columns_shows_correct_dtypes _______________
+pandas/tests/frame/methods/test_info.py:250: in test_info_duplicate_columns_shows_correct_dtypes
+    frame.info(buf=io)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+________________________ test_info_shows_column_dtypes _________________________
+pandas/tests/frame/methods/test_info.py:272: in test_info_shows_column_dtypes
+    df.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+______________________________ test_info_max_cols ______________________________
+pandas/tests/frame/methods/test_info.py:290: in test_info_max_cols
+    df.info(buf=buf, verbose=verbose)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________________ test_info_memory_usage ____________________________
+pandas/tests/frame/methods/test_info.py:337: in test_info_memory_usage
+    df.info(buf=buf, memory_usage=True)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+_____________________ test_info_memory_usage_deep_not_pypy _____________________
+pandas/tests/frame/methods/test_info.py:407: in test_info_memory_usage_deep_not_pypy
+    df_with_object_index.memory_usage(index=True, deep=True).sum()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:3832: in memory_usage
+    result = index_memory_usage._append_internal(result)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:2996: in _append_internal
+    return concat([self, to_append], ignore_index=ignore_index)
+           ^^^^^^
+E   NameError: name 'concat' is not defined
+___________________________ test_usage_via_getsizeof ___________________________
+pandas/tests/frame/methods/test_info.py:432: in test_usage_via_getsizeof
+    mem = df.memory_usage(deep=True).sum()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:3832: in memory_usage
+    result = index_memory_usage._append_internal(result)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:2996: in _append_internal
+    return concat([self, to_append], ignore_index=ignore_index)
+           ^^^^^^
+E   NameError: name 'concat' is not defined
+_______________________ test_info_memory_usage_qualified _______________________
+pandas/tests/frame/methods/test_info.py:442: in test_info_memory_usage_qualified
+    df.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+___________________ test_info_memory_usage_bug_on_multiindex ___________________
+pandas/tests/frame/methods/test_info.py:493: in test_info_memory_usage_bug_on_multiindex
+    unstacked = df.unstack("id")
+                ^^^^^^^^^^^^^^^^
+pandas/core/frame.py:10400: in unstack
+    result = unstack(self, level, fill_value, sort)
+             ^^^^^^^
+E   NameError: name 'unstack' is not defined
+____________________________ test_info_categorical _____________________________
+pandas/tests/frame/methods/test_info.py:507: in test_info_categorical
+    df.info(buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________________ test_info_int_columns _____________________________
+pandas/tests/frame/methods/test_info.py:515: in test_info_int_columns
+    df.info(show_counts=True, buf=buf)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+______________________ test_memory_usage_empty_no_warning ______________________
+pandas/tests/frame/methods/test_info.py:537: in test_memory_usage_empty_no_warning
+    result = df.memory_usage()
+             ^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:3832: in memory_usage
+    result = index_memory_usage._append_internal(result)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/series.py:2996: in _append_internal
+    return concat([self, to_append], ignore_index=ignore_index)
+           ^^^^^^
+E   NameError: name 'concat' is not defined
+___________________________ test_info_compute_numba ____________________________
+pandas/_config/config.py:514: in option_context
+    set_option(pat, val)
+pandas/_config/config.py:288: in set_option
+    opt.cb(key)
+pandas/core/config_init.py:74: in use_numba_cb
+    numba_.set_use_numba(cf.get_option(key))
+    ^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.core.util.numba_' has no attribute 'set_use_numba'
+
+During handling of the above exception, another exception occurred:
+pandas/tests/frame/methods/test_info.py:554: in test_info_compute_numba
+    with option_context("compute.use_numba", True):
+/opt/miniconda3/envs/testbed/lib/python3.11/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+pandas/_config/config.py:518: in option_context
+    set_option(pat, val)
+pandas/_config/config.py:288: in set_option
+    opt.cb(key)
+pandas/core/config_init.py:74: in use_numba_cb
+    numba_.set_use_numba(cf.get_option(key))
+    ^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pandas.core.util.numba_' has no attribute 'set_use_numba'
+____________________ test_info_show_counts[20-20-None-True] ____________________
+pandas/tests/frame/methods/test_info.py:585: in test_info_show_counts
+    df.info(buf=buf, show_counts=show_counts)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________ test_info_show_counts[20-20-True-True] ____________________
+pandas/tests/frame/methods/test_info.py:585: in test_info_show_counts
+    df.info(buf=buf, show_counts=show_counts)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+___________________ test_info_show_counts[20-20-False-False] ___________________
+pandas/tests/frame/methods/test_info.py:585: in test_info_show_counts
+    df.info(buf=buf, show_counts=show_counts)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________ test_info_show_counts[5-5-None-False] _____________________
+pandas/tests/frame/methods/test_info.py:585: in test_info_show_counts
+    df.info(buf=buf, show_counts=show_counts)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________ test_info_show_counts[5-5-True-False] _____________________
+pandas/tests/frame/methods/test_info.py:585: in test_info_show_counts
+    df.info(buf=buf, show_counts=show_counts)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+____________________ test_info_show_counts[5-5-False-False] ____________________
+pandas/tests/frame/methods/test_info.py:585: in test_info_show_counts
+    df.info(buf=buf, show_counts=show_counts)
+pandas/core/frame.py:3724: in info
+    info = DataFrameInfo(
+pandas/io/formats/info.py:458: in __init__
+    self.memory_usage = _initialize_memory_usage(memory_usage)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name '_initialize_memory_usage' is not defined
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.15s call     pandas/tests/frame/methods/test_info.py::test_info_compute_numba
+
+(29 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+XFAIL pandas/tests/frame/methods/test_info.py::test_info_memory_usage_deep_pypy - on PyPy deep=True does not change result
+FAILED pandas/tests/frame/methods/test_info.py::test_info_empty - NameError: ...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_categorical_column_smoke_test
+FAILED pandas/tests/frame/methods/test_info.py::test_info_smoke_test[int_frame]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_smoke_test[float_frame]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_smoke_test[datetime_frame]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_smoke_test[duplicate_columns_frame]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_smoke_test[float_string_frame]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_smoke_test2 - NameE...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_default_verbose_selection[10-100-True]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_default_verbose_selection[10-11-True]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_default_verbose_selection[10-10-True]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_default_verbose_selection[10-9-False]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_default_verbose_selection[10-1-False]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_verbose_check_header_separator_body
+FAILED pandas/tests/frame/methods/test_info.py::test_info_verbose_with_counts_spacing[4- #   Column  Non-Null Count  Dtype  ----  ------  --------------  -----  - 0   0       3 non-null      float64- 3   3       3 non-null      float64]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_verbose_with_counts_spacing[11- #   Column  Non-Null Count  Dtype  ----  ------  --------------  -----  - 0   0       3 non-null      float64- 10  10      3 non-null      float64]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_verbose_with_counts_spacing[101- #    Column  Non-Null Count  Dtype  ----   ------  --------------  -----  - 0    0       3 non-null      float64- 100  100     3 non-null      float64]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_verbose_with_counts_spacing[1001- #     Column  Non-Null Count  Dtype  ----    ------  --------------  -----  - 0     0       3 non-null      float64- 1000  1000    3 non-null      float64]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_verbose_with_counts_spacing[10001- #      Column  Non-Null Count  Dtype  ----     ------  --------------  -----  - 0      0       3 non-null      float64- 10000  10000   3 non-null      float64]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_memory - NameError:...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_wide - NameError: n...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_duplicate_columns_shows_correct_dtypes
+FAILED pandas/tests/frame/methods/test_info.py::test_info_shows_column_dtypes
+FAILED pandas/tests/frame/methods/test_info.py::test_info_max_cols - NameErro...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_memory_usage - Name...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_memory_usage_deep_not_pypy
+FAILED pandas/tests/frame/methods/test_info.py::test_usage_via_getsizeof - Na...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_memory_usage_qualified
+FAILED pandas/tests/frame/methods/test_info.py::test_info_memory_usage_bug_on_multiindex
+FAILED pandas/tests/frame/methods/test_info.py::test_info_categorical - NameE...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_int_columns - NameE...
+FAILED pandas/tests/frame/methods/test_info.py::test_memory_usage_empty_no_warning
+FAILED pandas/tests/frame/methods/test_info.py::test_info_compute_numba - Att...
+FAILED pandas/tests/frame/methods/test_info.py::test_info_show_counts[20-20-None-True]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_show_counts[20-20-True-True]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_show_counts[20-20-False-False]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_show_counts[5-5-None-False]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_show_counts[5-5-True-False]
+FAILED pandas/tests/frame/methods/test_info.py::test_info_show_counts[5-5-False-False]
+======================== 39 failed, 1 xfailed in 4.69s =========================

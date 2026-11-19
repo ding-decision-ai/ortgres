@@ -1,0 +1,52 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 37 items
+
+tests/_core/test_data.py ....................................s           [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_core/test_data.py::TestPlotData::test_named_vectors
+PASSED tests/_core/test_data.py::TestPlotData::test_named_and_given_vectors
+PASSED tests/_core/test_data.py::TestPlotData::test_index_as_variable
+PASSED tests/_core/test_data.py::TestPlotData::test_multiindex_as_variables
+PASSED tests/_core/test_data.py::TestPlotData::test_int_as_variable_key
+PASSED tests/_core/test_data.py::TestPlotData::test_int_as_variable_value
+PASSED tests/_core/test_data.py::TestPlotData::test_tuple_as_variable_key
+PASSED tests/_core/test_data.py::TestPlotData::test_dict_as_data
+PASSED tests/_core/test_data.py::TestPlotData::test_vectors_various_types[series]
+PASSED tests/_core/test_data.py::TestPlotData::test_vectors_various_types[numpy]
+PASSED tests/_core/test_data.py::TestPlotData::test_vectors_various_types[list]
+PASSED tests/_core/test_data.py::TestPlotData::test_none_as_variable_value
+PASSED tests/_core/test_data.py::TestPlotData::test_frame_and_vector_mismatched_lengths
+PASSED tests/_core/test_data.py::TestPlotData::test_empty_data_input[arg0]
+PASSED tests/_core/test_data.py::TestPlotData::test_empty_data_input[arg1]
+PASSED tests/_core/test_data.py::TestPlotData::test_index_alignment_series_to_dataframe
+PASSED tests/_core/test_data.py::TestPlotData::test_index_alignment_between_series
+PASSED tests/_core/test_data.py::TestPlotData::test_key_not_in_data_raises
+PASSED tests/_core/test_data.py::TestPlotData::test_key_with_no_data_raises
+PASSED tests/_core/test_data.py::TestPlotData::test_data_vector_different_lengths_raises
+PASSED tests/_core/test_data.py::TestPlotData::test_undefined_variables_raise
+PASSED tests/_core/test_data.py::TestPlotData::test_contains_operation
+PASSED tests/_core/test_data.py::TestPlotData::test_join_add_variable
+PASSED tests/_core/test_data.py::TestPlotData::test_join_replace_variable
+PASSED tests/_core/test_data.py::TestPlotData::test_join_remove_variable
+PASSED tests/_core/test_data.py::TestPlotData::test_join_all_operations
+PASSED tests/_core/test_data.py::TestPlotData::test_join_all_operations_same_data
+PASSED tests/_core/test_data.py::TestPlotData::test_join_add_variable_new_data
+PASSED tests/_core/test_data.py::TestPlotData::test_join_replace_variable_new_data
+PASSED tests/_core/test_data.py::TestPlotData::test_join_add_variable_different_index
+PASSED tests/_core/test_data.py::TestPlotData::test_join_replace_variable_different_index
+PASSED tests/_core/test_data.py::TestPlotData::test_join_subset_data_inherit_variables
+PASSED tests/_core/test_data.py::TestPlotData::test_join_multiple_inherits_from_orig
+PASSED tests/_core/test_data.py::TestPlotData::test_bad_type
+PASSED tests/_core/test_data.py::TestPlotData::test_data_interchange
+PASSED tests/_core/test_data.py::TestPlotData::test_data_interchange_failure
+SKIPPED [1] tests/_core/test_data.py:432: Tests graceful failure without support for dataframe interchange
+======================== 36 passed, 1 skipped in 0.33s =========================

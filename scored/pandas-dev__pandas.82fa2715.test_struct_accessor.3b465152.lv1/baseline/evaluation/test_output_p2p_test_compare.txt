@@ -1,0 +1,53 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 26 items
+
+pandas/tests/frame/methods/test_compare.py ..........................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/frame/methods/test_compare.py::test_compare_multi_index[1]
+0.01s call     pandas/tests/frame/methods/test_compare.py::test_compare_multi_index[0]
+0.01s call     pandas/tests/frame/methods/test_compare.py::test_compare_axis[0]
+
+(27 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_axis[0]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_axis[1]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_axis[index]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_axis[columns]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_various_formats[True-False]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_various_formats[False-True]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_various_formats[True-True]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_with_equal_nulls
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_with_non_equal_nulls
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_multi_index[0]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_multi_index[1]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_different_indices
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_different_shapes
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_result_names
+PASSED pandas/tests/frame/methods/test_compare.py::test_invalid_input_result_names[result_names0]
+PASSED pandas/tests/frame/methods/test_compare.py::test_invalid_input_result_names[HK]
+PASSED pandas/tests/frame/methods/test_compare.py::test_invalid_input_result_names[result_names2]
+PASSED pandas/tests/frame/methods/test_compare.py::test_invalid_input_result_names[3]
+PASSED pandas/tests/frame/methods/test_compare.py::test_invalid_input_result_names[3.0]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_ea_and_np_dtype[4-val20]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_ea_and_np_dtype[val11-val21]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_ea_and_np_dtype[val12-4]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_nullable_int64_dtype[4-3-4-3]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_nullable_int64_dtype[4-4-diff_self1-diff_other1]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_nullable_int64_dtype[4-df2_val2-4-diff_other2]
+PASSED pandas/tests/frame/methods/test_compare.py::test_compare_nullable_int64_dtype[df1_val3-df2_val3-diff_self3-diff_other3]
+============================== 26 passed in 0.12s ==============================

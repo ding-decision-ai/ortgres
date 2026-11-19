@@ -1,0 +1,241 @@
+diff --git a/astropy/units/core.py b/astropy/units/core.py
+index e0df3f2..168c381 100644
+--- a/astropy/units/core.py
++++ b/astropy/units/core.py
+@@ -302,6 +302,14 @@ class UnitBase:
+             return NotImplemented
+ 
+     def __mul__(self, m):
++        # A StructuredUnit implements multiplication field by field.  Let its
++        # reflected operator handle the operation instead of first turning
++        # this unit into a scalar Quantity.
++        from .structured import StructuredUnit
++
++        if isinstance(m, StructuredUnit):
++            return NotImplemented
++
+         if isinstance(m, UnitBase):
+             if m.is_unity():
+                 return self
+@@ -508,14 +516,12 @@ class UnitBase:
+                 except UnitsError:
+                     pass
+ 
+-
+-
+-
+-
+-
+-
+-
+-
++        def get_err_str(unit):
++            unit_str = f"'{unit}'"
++            physical_type = unit.physical_type
++            if physical_type != "unknown":
++                unit_str += f" ({', '.join(physical_type)})"
++            return unit_str
+ 
+         unit_str = get_err_str(unit)
+         other_str = get_err_str(other)
+@@ -2753,4 +2759,4 @@ dimensionless_unscaled: Final[CompositeUnit] = CompositeUnit(
+     1, [], [], _error_check=False
+ )
+ # Abbreviation of the above, see #1980
+-one: Final[CompositeUnit] = dimensionless_unscaled
+\ No newline at end of file
++one: Final[CompositeUnit] = dimensionless_unscaled
+diff --git a/astropy/units/quantity_helper/function_helpers.py b/astropy/units/quantity_helper/function_helpers.py
+index 677d8cc..45f2e35 100644
+--- a/astropy/units/quantity_helper/function_helpers.py
++++ b/astropy/units/quantity_helper/function_helpers.py
+@@ -254,9 +254,14 @@ def invariant_x_helper(x, *args, **kwargs):
+ # structured unit), so we include it here too.
+ 
+ 
+-
+-
+-
++@function_helper(helps={np.ones_like, np.zeros_like})
++def like_helper(a, *args, **kwargs):
++    """Handle array creation functions that preserve a Quantity's unit."""
++    # ``subok`` is the fourth positional argument of ones_like/zeros_like.
++    # It is normally passed by keyword, but account for both call styles.
++    subok = kwargs.pop("subok", args[2] if len(args) > 2 else True)
++    unit = a.unit if subok else None
++    return (a.view(np.ndarray),) + args, kwargs, unit, None
+ 
+ 
+ def _quantity_out_as_array(out):
+@@ -418,6 +423,11 @@ def _as_quantity(a):
+         raise NotImplementedError
+ 
+ 
++def _as_quantities(*args):
++    """Convert all arguments to quantities (or raise NotImplementedError)."""
++    return tuple(_as_quantity(arg) for arg in args)
++
++
+ 
+ 
+ 
+@@ -470,13 +480,12 @@ def _quantities2arrays(*args, unit_from_first=False):
+     return arrays, q.unit
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
++def _iterable_helper(*args, out=None, **kwargs):
++    """Convert iterable arguments to compatible arrays and handle ``out``."""
++    arrays, unit = _quantities2arrays(*args)
++    if out is not None:
++        kwargs["out"] = _quantity_out_as_array(out)
++    return arrays, kwargs, unit, out
+ 
+ 
+ if NUMPY_LT_2_4:
+@@ -944,6 +953,23 @@ def cross_like_a_v(a, v, *args, **kwargs):
+     return (a.view(np.ndarray), v.view(np.ndarray)) + args, kwargs, unit, None
+ 
+ 
++@function_helper
++def einsum(*operands, out=None, **kwargs):
++    """Prepare Quantity operands for an Einstein summation."""
++    if not operands or not isinstance(operands[0], str):
++        raise ValueError("only the subscripts string form of einsum is supported")
++
++    quantities = _as_quantities(*operands[1:])
++    unit = functools.reduce(
++        operator.mul, (q.unit for q in quantities), dimensionless_unscaled
++    )
++    args = (operands[0],) + tuple(q.view(np.ndarray) for q in quantities)
++
++    if out is not None:
++        kwargs["out"] = _quantity_out_as_array(out)
++    return args, kwargs, unit, out
++
++
+ 
+ 
+ 
+@@ -1641,4 +1667,4 @@ def merge_arrays(
+         ),
+         unit,
+         None,
+-    )
+\ No newline at end of file
++    )
+diff --git a/astropy/units/structured.py b/astropy/units/structured.py
+index 5c5eff3..690749a 100644
+--- a/astropy/units/structured.py
++++ b/astropy/units/structured.py
+@@ -11,6 +11,8 @@ from typing import Self
+ 
+ import numpy as np
+ 
++from astropy.utils.compat import COPY_IF_NEEDED
++
+ from .core import UNITY, Unit, UnitBase
+ 
+ __all__ = ["StructuredUnit"]
+@@ -31,6 +33,33 @@ def _names_from_dtype(dtype):
+     return tuple(names)
+ 
+ 
++def _normalize_names(names):
++    """Normalize possibly nested field names for a structured unit."""
++    normalized = []
++    for name in names:
++        if isinstance(name, str) and name:
++            normalized.append(name)
++        elif isinstance(name, tuple) and name:
++            subnames = _normalize_names(name)
++            combined = "".join(
++                subname[0] if isinstance(subname, list) else subname
++                for subname in subnames
++            )
++            normalized.append([combined, subnames])
++        elif (
++            isinstance(name, list)
++            and len(name) == 2
++            and isinstance(name[0], str)
++            and name[0]
++            and isinstance(name[1], tuple)
++            and name[1]
++        ):
++            normalized.append([name[0], _normalize_names(name[1])])
++        else:
++            raise ValueError(f"invalid entry {name!r} in names.")
++    return tuple(normalized)
++
++
+ 
+ 
+ 
+@@ -446,6 +475,54 @@ class StructuredUnit:
+     __array_ufunc__ = None
+ 
+ 
++    def __rlshift__(self, m):
++        """Create a structured Quantity from ``m << self``."""
++        try:
++            from .quantity import Quantity
++
++            return Quantity(m, self, copy=COPY_IF_NEEDED, subok=True)
++        except Exception:
++            if isinstance(m, np.ndarray):
++                raise
++            return NotImplemented
++
++    def __mul__(self, other):
++        if isinstance(other, str):
++            try:
++                other = Unit(other, parse_strict="silent")
++            except Exception:
++                return NotImplemented
++
++        if isinstance(other, UnitBase):
++            new_units = tuple(part * other for part in self.values())
++            return self.__class__(new_units, names=self)
++
++        try:
++            from .quantity import Quantity
++
++            return Quantity(other, unit=self)
++        except TypeError:
++            if isinstance(other, np.ndarray):
++                raise
++            return NotImplemented
++
++    def __rmul__(self, other):
++        """Multiply a unit by this unit, or attach this unit to a value."""
++        if isinstance(other, (str, UnitBase)):
++            return self * other
++
++        try:
++            from .quantity import Quantity
++
++            if hasattr(other, "unit"):
++                return Quantity(other.value, unit=self * other.unit)
++            return Quantity(other, unit=self)
++        except TypeError:
++            if isinstance(other, np.ndarray):
++                raise
++            return NotImplemented
++
++
+ 
+ 
+ 
+@@ -573,4 +650,4 @@ def _structured_unit_like_dtype(
+             units.append(_structured_unit_like_dtype(unit, subdtype))
+         else:
+             units.append(unit)
+-    return StructuredUnit(tuple(units), names=dtype.names)
+\ No newline at end of file
++    return StructuredUnit(tuple(units), names=dtype.names)

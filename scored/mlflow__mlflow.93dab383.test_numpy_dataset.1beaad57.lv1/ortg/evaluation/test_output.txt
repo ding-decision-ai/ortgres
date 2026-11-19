@@ -1,0 +1,285 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 120.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 15 items
+
+tests/data/test_numpy_dataset.py::test_conversion_to_json PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [  6%]
+tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0] FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 13%]
+tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1] FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 20%]
+tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features2-targets2] PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 26%]
+tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0] FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 33%]
+tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1] FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 40%]
+tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features2-targets2] PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 46%]
+tests/data/test_numpy_dataset.py::test_digest_property_has_expected_value FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 53%]
+tests/data/test_numpy_dataset.py::test_features_property PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 60%]
+tests/data/test_numpy_dataset.py::test_targets_property PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 66%]
+tests/data/test_numpy_dataset.py::test_to_pyfunc PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 73%]
+tests/data/test_numpy_dataset.py::test_to_evaluation_dataset PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 80%]
+tests/data/test_numpy_dataset.py::test_from_numpy_features_only PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 86%]
+tests/data/test_numpy_dataset.py::test_from_numpy_features_and_targets PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [ 93%]
+tests/data/test_numpy_dataset.py::test_from_numpy_no_source_specified PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB [100%]
+
+=================================== FAILURES ===================================
+_ test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0] _
+tests/data/test_numpy_dataset.py:69: in test_conversion_to_json_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9605c950>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:47: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d9605c710>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9605c950>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d9605c710>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9605c950>
+mlflow/data/numpy_dataset.py:54: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d9605c710>
+mlflow/data/digest_utils.py:65: in compute_numpy_digest
+    target_hash = compute_array_digest(targets) if targets is not None else None
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        compute_array_digest = <function compute_numpy_digest.<locals>.compute_array_digest at 0x700d96094720>
+        feature_hashes = [array([ 6238072747940578789, 15839785061582574730,  2185194620014831856],
+      dtype=uint64), array([13232826040865663252, 13168350753275463132], dtype=uint64)]
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/digest_utils.py:51: in compute_array_digest
+    flattened_array = array.flatten()
+                      ^^^^^^^^^^^^^
+E   AttributeError: 'dict' object has no attribute 'flatten'
+        array      = {'c': array([1]), 'd': array([[[2]]])}
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1] _
+tests/data/test_numpy_dataset.py:69: in test_conversion_to_json_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d96152b50>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:47: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d96152650>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d96152b50>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d96152650>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d96152b50>
+mlflow/data/numpy_dataset.py:54: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d96152650>
+mlflow/data/digest_utils.py:65: in compute_numpy_digest
+    target_hash = compute_array_digest(targets) if targets is not None else None
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        compute_array_digest = <function compute_numpy_digest.<locals>.compute_array_digest at 0x700d96096980>
+        feature_hashes = [array([ 6238072747940578789, 15839785061582574730,  2185194620014831856],
+      dtype=uint64)]
+        features   = array([1, 2, 3])
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/digest_utils.py:51: in compute_array_digest
+    flattened_array = array.flatten()
+                      ^^^^^^^^^^^^^
+E   AttributeError: 'dict' object has no attribute 'flatten'
+        array      = {'c': array([1]), 'd': array([[[2]]])}
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0] _
+tests/data/test_numpy_dataset.py:115: in test_schema_and_profile_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9606a610>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:47: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d96068dd0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9606a610>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d96068dd0>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9606a610>
+mlflow/data/numpy_dataset.py:54: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d96068dd0>
+mlflow/data/digest_utils.py:65: in compute_numpy_digest
+    target_hash = compute_array_digest(targets) if targets is not None else None
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        compute_array_digest = <function compute_numpy_digest.<locals>.compute_array_digest at 0x700d96118c20>
+        feature_hashes = [array([ 6238072747940578789, 15839785061582574730,  2185194620014831856],
+      dtype=uint64), array([13232826040865663252, 13168350753275463132], dtype=uint64)]
+        features   = {'a': array([1, 2, 3]), 'b': array([[4, 5]])}
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/digest_utils.py:51: in compute_array_digest
+    flattened_array = array.flatten()
+                      ^^^^^^^^^^^^^
+E   AttributeError: 'dict' object has no attribute 'flatten'
+        array      = {'c': array([1]), 'd': array([[[2]]])}
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1] _
+tests/data/test_numpy_dataset.py:115: in test_schema_and_profile_with_multi_tensor_features_and_targets
+    dataset = NumpyDataset(features=features, targets=targets, source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d95fb59d0>
+        source_uri = 'test:/my/test/uri'
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/numpy_dataset.py:47: in __init__
+    super().__init__(source=source, name=name, digest=digest)
+        __class__  = <class 'mlflow.data.numpy_dataset.NumpyDataset'>
+        digest     = None
+        features   = array([1, 2, 3])
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d95fb5e10>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d95fb59d0>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/dataset.py:35: in __init__
+    self._digest = digest or self._compute_digest()
+                             ^^^^^^^^^^^^^^^^^^^^^^
+        digest     = None
+        name       = None
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d95fb5e10>
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d95fb59d0>
+mlflow/data/numpy_dataset.py:54: in _compute_digest
+    return compute_numpy_digest(self._features, self._targets)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d95fb5e10>
+mlflow/data/digest_utils.py:65: in compute_numpy_digest
+    target_hash = compute_array_digest(targets) if targets is not None else None
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        compute_array_digest = <function compute_numpy_digest.<locals>.compute_array_digest at 0x700d96119080>
+        feature_hashes = [array([ 6238072747940578789, 15839785061582574730,  2185194620014831856],
+      dtype=uint64)]
+        features   = array([1, 2, 3])
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+        targets    = {'c': array([1]), 'd': array([[[2]]])}
+mlflow/data/digest_utils.py:51: in compute_array_digest
+    flattened_array = array.flatten()
+                      ^^^^^^^^^^^^^
+E   AttributeError: 'dict' object has no attribute 'flatten'
+        array      = {'c': array([1]), 'd': array([[[2]]])}
+        np         = <module 'numpy' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/__init__.py'>
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+___________________ test_digest_property_has_expected_value ____________________
+tests/data/test_numpy_dataset.py:155: in test_digest_property_has_expected_value
+    assert dataset_with_features.digest == "fdf1765f"
+E   AssertionError: assert '1d588c4e' == 'fdf1765f'
+E     
+E     - fdf1765f
+E     + 1d588c4e
+        dataset_with_features = <mlflow.data.numpy_dataset.NumpyDataset object at 0x700d9600b490>
+        features   = array([1, 2, 3])
+        source     = <tests.resources.data.dataset_source.SampleDatasetSource object at 0x700d9600a910>
+        source_uri = 'test:/my/test/uri'
+        targets    = array([4, 5, 6])
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+=============================== warnings summary ===============================
+tests/data/test_numpy_dataset.py::test_from_numpy_features_only
+tests/data/test_numpy_dataset.py::test_from_numpy_features_and_targets
+  /testbed/mlflow/data/dataset_source_registry.py:174: UserWarning: The specified dataset source can be interpreted in multiple ways: LocalArtifactDatasetSource, LocalArtifactDatasetSource. MLflow will assume that this is a LocalArtifactDatasetSource source.
+    return _dataset_source_registry.resolve(raw_source, candidate_sources=candidate_sources)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+_____________________ test_from_numpy_no_source_specified ______________________
+----------------------------- Captured stderr call -----------------------------
+2026/10/14 14:41:48 WARNING mlflow.tracking.context.registry: Encountered unexpected error during resolving tags: name '_get_source_version' is not defined
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 14:41:48 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+========================= command to run failed tests ==========================
+pytest 'tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0]' 'tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1]' 'tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0]' 'tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1]' 'tests/data/test_numpy_dataset.py::test_digest_property_has_expected_value'
+
+=========================== short test summary info ============================
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features2-targets2]
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features2-targets2]
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_features_property
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_targets_property
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_to_pyfunc
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_to_evaluation_dataset
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_from_numpy_features_only
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_from_numpy_features_and_targets
+PASSED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_from_numpy_no_source_specified
+FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features0-targets0]
+FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_conversion_to_json_with_multi_tensor_features_and_targets[features1-targets1]
+FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features0-targets0]
+FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_schema_and_profile_with_multi_tensor_features_and_targets[features1-targets1]
+FAILED | MEM 23.8/46.9 GB | DISK 826.1/915.7 GB tests/data/test_numpy_dataset.py::test_digest_property_has_expected_value
+=================== 5 failed, 10 passed, 2 warnings in 0.21s ===================

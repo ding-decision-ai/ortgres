@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/stats/tests/test_circstats.py.
+
+Date: 2026-10-11T01:21:41
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 9 items
+
+astropy/stats/tests/test_circstats.py ..s....s.                          [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/stats/tests/test_circstats.py::test__length
+PASSED astropy/stats/tests/test_circstats.py::test_circmean
+PASSED astropy/stats/tests/test_circstats.py::test_circvar
+PASSED astropy/stats/tests/test_circstats.py::test_circmoment
+PASSED astropy/stats/tests/test_circstats.py::test_circcorrcoef
+PASSED astropy/stats/tests/test_circstats.py::test_rayleightest
+PASSED astropy/stats/tests/test_circstats.py::test_vonmisesmle
+SKIPPED [1] astropy/stats/tests/test_circstats.py:36: requires scipy
+SKIPPED [1] astropy/stats/tests/test_circstats.py:118: requires scipy
+========================= 7 passed, 2 skipped in 0.04s =========================

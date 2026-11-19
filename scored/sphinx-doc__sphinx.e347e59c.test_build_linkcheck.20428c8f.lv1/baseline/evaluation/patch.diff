@@ -1,0 +1,81 @@
+diff --git a/sphinx/builders/linkcheck.py b/sphinx/builders/linkcheck.py
+index 5e8560f..ae669b1 100644
+--- a/sphinx/builders/linkcheck.py
++++ b/sphinx/builders/linkcheck.py
+@@ -7,6 +7,7 @@
+ import re
+ import socket
+ import time
++from email.utils import parsedate_to_datetime
+ from enum import StrEnum
+ from html.parser import HTMLParser
+ from queue import PriorityQueue, Queue
+@@ -416,6 +417,41 @@ def __init__(
+ 
+         super().__init__(daemon=True)
+ 
++    def limit_rate(self, response_url: str, retry_after: str | None) -> float | None:
++        """Schedule another check after a response has been rate limited."""
++        netloc = urlsplit(response_url).netloc
++        now = time.time()
++
++        delay: float | None = None
++        next_check: float | None = None
++        if retry_after is not None:
++            try:
++                delay = float(retry_after)
++            except (TypeError, ValueError):
++                try:
++                    next_check = parsedate_to_datetime(retry_after).timestamp()
++                except (TypeError, ValueError, OverflowError, OSError):
++                    pass
++                else:
++                    delay = next_check - now
++            else:
++                next_check = now + delay
++
++        if delay is None or next_check is None:
++            previous = self.rate_limits.get(netloc)
++            if previous is None:
++                delay = DEFAULT_DELAY
++            else:
++                delay = previous.delay * 2
++                if previous.delay < self.rate_limit_timeout < delay:
++                    delay = float(self.rate_limit_timeout)
++                elif delay > self.rate_limit_timeout:
++                    return None
++            next_check = now + delay
++
++        self.rate_limits[netloc] = RateLimit(delay, next_check)
++        return next_check
++
+ 
+ 
+ 
+@@ -715,6 +751,19 @@ def __init__(
+ class AnchorCheckParser(HTMLParser):
+     """Specialised HTML parser that looks for a specific anchor."""
+ 
++    def __init__(self, search_anchor: str) -> None:
++        super().__init__()
++        self.search_anchor = search_anchor
++        self.found = False
++
++    def handle_starttag(
++        self, tag: str, attrs: list[tuple[str, str | None]]
++    ) -> None:
++        self.found = self.found or any(
++            name in {'id', 'name'} and value == self.search_anchor
++            for name, value in attrs
++        )
++
+ 
+ 
+ 
+@@ -830,4 +879,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }

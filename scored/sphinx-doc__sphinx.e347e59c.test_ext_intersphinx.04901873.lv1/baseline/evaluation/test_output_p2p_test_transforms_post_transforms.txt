@@ -1,0 +1,514 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/1160ded, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-1
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 16 items
+
+tests/test_transforms/test_transforms_post_transforms.py ............... [ 93%]
+.                                                                        [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference
+# outdir: /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded, 1 warning.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html.
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/index.rst:4: WARNING: py:class reference target not found: io.StringIO [ref.class][39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference
+# outdir: /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-1/transforms-post_transforms-missing-reference/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/domain-py-python_use_unqualified_type_names
+# outdir: /tmp/pytest-of-root/pytest-1/domain-py-python_use_unqualified_type_names/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/domain-py-python_use_unqualified_type_names/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/domain-py-python_use_unqualified_type_names/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/domain-py-python_use_unqualified_type_names/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-1/domain-py-python_use_unqualified_type_names/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-1/transforms-post_transforms-keyboard
+# outdir: /tmp/pytest-of-root/pytest-1/transforms-post_transforms-keyboard/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-keyboard/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-keyboard/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-1/transforms-post_transforms-keyboard/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-1/transforms-post_transforms-keyboard/_build/html.
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_support_desc_inline[with_default_visitors_for_desc_sig_elements-no_explicit_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_support_desc_inline[with_default_visitors_for_desc_sig_elements-explicit_desc_inline_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_support_desc_inline[without_default_visitors_for_desc_sig_elements-no_explicit_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_support_desc_inline[without_default_visitors_for_desc_sig_elements-explicit_desc_inline_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[with_default_visitors_for_desc_sig_elements-no_explicit_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_element_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_and_desc_sig_element_visitors] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[without_default_visitors_for_desc_sig_elements-no_explicit_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_element_visitor] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_ TestSigElementFallbackTransform.test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_and_desc_sig_element_visitors] _
+------------------------------ Captured log call -------------------------------
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_string'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword_type'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_punctuation'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_name'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_char'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_literal_number'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_space'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_keyword'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:164 mark: 'desc_sig_operator'
+INFO     tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:153 generic visit: 'inline'
+WARNING  tests.test_transforms.test_transforms_post_transforms:test_transforms_post_transforms.py:157 unknown visit: 'inline'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-1/root
+# outdir: /tmp/pytest-of-root/pytest-1/root/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/1160ded[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_transforms/test_transforms_post_transforms.py::test_nitpicky_warning
+PASSED tests/test_transforms/test_transforms_post_transforms.py::test_missing_reference
+PASSED tests/test_transforms/test_transforms_post_transforms.py::test_missing_reference_conditional_pending_xref
+PASSED tests/test_transforms/test_transforms_post_transforms.py::test_keyboard_hyphen_spaces
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[with_default_visitors_for_desc_sig_elements-no_explicit_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[with_default_visitors_for_desc_sig_elements-explicit_desc_inline_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[without_default_visitors_for_desc_sig_elements-no_explicit_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_support_desc_inline[without_default_visitors_for_desc_sig_elements-explicit_desc_inline_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-no_explicit_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_element_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[with_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_and_desc_sig_element_visitors]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-no_explicit_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_element_visitor]
+PASSED tests/test_transforms/test_transforms_post_transforms.py::TestSigElementFallbackTransform::test_custom_implementation[without_default_visitors_for_desc_sig_elements-explicit_desc_sig_space_and_desc_sig_element_visitors]
+============================== 16 passed in 0.52s ==============================

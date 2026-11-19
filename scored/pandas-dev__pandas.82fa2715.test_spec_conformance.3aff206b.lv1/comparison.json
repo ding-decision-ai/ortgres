@@ -1,0 +1,40 @@
+{
+  "instance_id": "pandas-dev__pandas.82fa2715.test_spec_conformance.3aff206b.lv1",
+  "repo": "pandas-dev/pandas",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 14,
+      "failure": 2,
+      "total": 16
+    },
+    "p2p": {
+      "success": 1948,
+      "failure": 0,
+      "total": 1948
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "d00dc666437b92805770a10b09ff5cd932bd47e957333d96f4033962ed196f6e"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 16,
+      "failure": 0,
+      "total": 16
+    },
+    "p2p": {
+      "success": 1948,
+      "failure": 0,
+      "total": 1948
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "a341c23ee87a3fb5de55c32ad129888504ed237493bda95ffb4a107c99e26e17"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "df53f25ddd17bfef088f29ac15a4c4e2d9a1497bafea8cacb2b42ca04bdbbd68",
+    "p2p": "55cfc936065b96896aaf850bdc697222b4036f20f78cc72f9e796866d3d07068"
+  }
+}

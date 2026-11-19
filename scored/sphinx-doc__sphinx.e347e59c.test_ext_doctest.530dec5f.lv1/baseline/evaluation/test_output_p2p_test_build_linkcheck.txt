@@ -1,0 +1,1451 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/0e6ad59, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-5
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 45 items
+
+tests/test_builders/test_build_linkcheck.py ............................ [ 62%]
+.................                                                        [100%]
+
+==================================== PASSES ====================================
+________________________________ test_defaults _________________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET /anchor.html HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD /image.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD /image2.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET /image.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET /image2.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mlinks[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mlinks[39;49;00m
+
+
+(           links: line    8) [32mok        [39;49;00mconf.py
+(           links: line    3) [32mok        [39;49;00mhttp://localhost:39345/
+(           links: line    4) [32mok        [39;49;00mhttp://localhost:39345/#!bar
+(           links: line    7) [91mbroken    [39;49;00mhttp://localhost:39345#does-not-exist[91m - Anchor 'does-not-exist' not found[39;49;00m
+(           links: line   11) [91mbroken    [39;49;00mhttp://localhost:39345/image.png[91m - 404 Client Error: Not Found for url: http://localhost:39345/image.png[39;49;00m
+(           links: line    9) [91mbroken    [39;49;00mpath/to/notfound[91m - [39;49;00m
+(           links: line   12) [91mbroken    [39;49;00mhttp://localhost:39345/image2.png[91m - 404 Client Error: Not Found for url: http://localhost:39345/image2.png[39;49;00m
+(           links: line    5) [32mok        [39;49;00mhttp://localhost:39345#!bar
+(           links: line    6) [91mbroken    [39;49;00mhttp://localhost:39345/#top[91m - Anchor 'top' not found[39;49;00m
+(           links: line   14) [32mok        [39;49;00mhttp://localhost:39345/anchor.html#found
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+________________________ test_check_link_response_only _________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD /anchor.html HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD /image2.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD /image.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET /image.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET /image2.png HTTP/1.1" 404 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mlinks[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mlinks[39;49;00m
+
+
+(           links: line    8) [32mok        [39;49;00mconf.py
+(           links: line    5) [32mok        [39;49;00mhttp://localhost:41991#!bar
+(           links: line    3) [32mok        [39;49;00mhttp://localhost:41991/
+(           links: line   14) [32mok        [39;49;00mhttp://localhost:41991/anchor.html#found
+(           links: line    7) [32mok        [39;49;00mhttp://localhost:41991#does-not-exist
+(           links: line    9) [91mbroken    [39;49;00mpath/to/notfound[91m - [39;49;00m
+(           links: line    6) [32mok        [39;49;00mhttp://localhost:41991/#top
+(           links: line    4) [32mok        [39;49;00mhttp://localhost:41991/#!bar
+(           links: line   11) [91mbroken    [39;49;00mhttp://localhost:41991/image.png[91m - 404 Client Error: Not Found for url: http://localhost:41991/image.png[39;49;00m
+(           links: line   12) [91mbroken    [39;49;00mhttp://localhost:41991/image2.png[91m - 404 Client Error: Not Found for url: http://localhost:41991/image2.png[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+____________________________ test_too_many_retries _____________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:05] code 400, message Bad request version ('\\x00\\x02\\x01\\x00\\x00')
+127.0.0.1 - - [12/Oct/2026 11:18:05] "\x16\x03\x01\x05ô\x01\x00\x05ð\x03\x03çU£/eF?¥°\x9a\x82\x89ª?DÔNÑ,j\x07\x7f*ã?Jó\x06Eo\x84N \x99ûá¦kå\x8a\x90È\x93Ú\x00\x81ûÝ\x0cÜñ 1j\x8d;u,Ú'Z\\\x0e#®\x00"\x13\x02\x13\x03\x13\x01À,À0À+À/Ì©Ì¨À$À(À#À'\x00\x9f\x00\x9e\x00k\x00g\x01\x00\x05\x85ÿ\x01\x00\x01\x00\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x0b\x00\x02\x01\x00\x00" 400 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-too-many-retries
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-too-many-retries/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttps://localhost:33879/doesnotexist[91m - HTTPSConnectionPool(host='localhost', port=33879): Max retries exceeded with url: /doesnotexist (Caused by SSLError(SSLError(1, '[SSL] record layer failure (_ssl.c:1016)')))[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+________________________________ test_raw_node _________________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:05] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-raw-node
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-raw-node/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:42497/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-raw-node/_build/linkcheck/output.txt
+
+# warning: 
+
+_____________________________ test_anchors_ignored _____________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-anchors-ignore
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-anchors-ignore/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:37291/#!bar
+(           index: line    2) [32mok        [39;49;00mhttp://localhost:37291/#top
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-anchors-ignore/_build/linkcheck/output.txt
+
+# warning: 
+
+_________________________ test_anchors_ignored_for_url _________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /ignored HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET /valid HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /ignored HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /valid HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET /valid HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET /valid HTTP/1.1" 200 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /invalid HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET /invalid HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /invalid HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] [Errno 32] Broken pipe
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET /invalid HTTP/1.1" 404 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] [Errno 32] Broken pipe
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-anchors-ignore-for-url
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-anchors-ignore-for-url/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    6) [32mok        [39;49;00mhttp://localhost:37731/ignored#invalid-anchor
+(           index: line    5) [32mok        [39;49;00mhttp://localhost:37731/ignored
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:37731/valid
+(           index: line    7) [91mbroken    [39;49;00mhttp://localhost:37731/invalid[91m - 404 Client Error: Not Found for url: http://localhost:37731/invalid[39;49;00m
+(           index: line    8) [91mbroken    [39;49;00mhttp://localhost:37731/invalid#anchor[91m - 404 Client Error: Not Found for url: http://localhost:37731/invalid[39;49;00m
+(           index: line    4) [91mbroken    [39;49;00mhttp://localhost:37731/valid#invalid-anchor[91m - Anchor 'invalid-anchor' not found[39;49;00m
+(           index: line    3) [91mbroken    [39;49;00mhttp://localhost:37731/valid#py:module::urllib.parse[91m - Anchor 'py%3Amodule%3A%3Aurllib.parse' not found[39;49;00m
+(           index: line    2) [32mok        [39;49;00mhttp://localhost:37731/valid#valid-anchor
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+________________________ test_raises_for_invalid_status ________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] code 500, message Internal Server Error
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET / HTTP/1.1" 500 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttp://localhost:39041/#anchor[91m - 500 Server Error: Internal Server Error for url: http://localhost:39041/[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+_________________________ test_incomplete_html_anchor __________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:44679/#anchor
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor/_build/linkcheck/output.txt
+
+# warning: 
+
+______________________ test_decoding_error_anchor_ignored ______________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [90m-ignored- [39;49;00mhttp://localhost:44041/#anchor: unable to decode response content
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver-anchor/_build/linkcheck/output.txt
+
+# warning: 
+
+______________________ test_auth_header_uses_first_match _______________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:40233/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+___________________________ test_unauthorized_broken ___________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 401 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttp://localhost:34355/[91m - unauthorized[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+__________________________ test_auth_header_no_match ___________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 401 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttp://localhost:33507/[91m - unauthorized[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+________________________ test_linkcheck_request_headers ________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:34037/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+___________________ test_linkcheck_request_headers_no_slash ____________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:42087/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+____________________ test_linkcheck_request_headers_default ____________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:34627/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [35mredirect  [39;49;00mhttp://localhost:34387/[35m - with Found to http://localhost:34387/?redirected=1[39;49;00m
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [35mredirect  [39;49;00mhttp://localhost:35507/[35m - with Found to http://localhost:35507/?redirected=1[39;49;00m
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [01mbuild succeeded, 1 warning.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-5/linkcheck-localserver/index.rst:1: WARNING: redirect  http://localhost:35217/ - with Found to http://localhost:35217/?redirected=1[39;49;00m
+
+_______________________ test_linkcheck_allowed_redirects _______________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [] "HEAD /path2 HTTP/1.1" 405 -
+127.0.0.1 - - [] "HEAD /path1 HTTP/1.1" 405 -
+127.0.0.1 - - [] "GET /path2 HTTP/1.1" 302 -
+127.0.0.1 - - [] "GET /path1 HTTP/1.1" 302 -
+127.0.0.1 - - [] "GET /?redirected=1 HTTP/1.1" 204 -
+127.0.0.1 - - [] "GET /?redirected=1 HTTP/1.1" 204 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-warn-redirects
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-warn-redirects/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:33797/path1
+(           index: line    3) [01mbuild succeeded, 1 warning.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver-warn-redirects/_build/linkcheck/output.txt
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-5/linkcheck-localserver-warn-redirects/index.rst:3: WARNING: redirect  http://localhost:33797/path2 - with Found to http://localhost:33797/?redirected=1[39;49;00m
+
+_______________________________ test_invalid_ssl _______________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] code 400, message Bad request version ('\\x00\\x02\\x01\\x00\\x00')
+127.0.0.1 - - [12/Oct/2026 11:18:06] "\x16\x03\x01\x05ô\x01\x00\x05ð\x03\x03\x1bþhM¦5\x8eéÆJ\x89\x98*2ïyå^ç\x19ú\x9c«-ÚU'\x85á\x8dz« \x10uGf\x91\x96ðÂ]ñ*d\x81\x0e{¶_Q\x11\x0b\x9dÊ<\x927±jëZXöÍ\x00"\x13\x02\x13\x03\x13\x01À,À0À+À/Ì©Ì¨À$À(À#À'\x00\x9f\x00\x9e\x00k\x00g\x01\x00\x05\x85ÿ\x01\x00\x01\x00\x00\x00\x00\x0e\x00\x0c\x00\x00\x09localhost\x00\x0b\x00\x02\x01\x00\x00" 400 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttps://localhost:42519/[91m - HTTPSConnectionPool(host='localhost', port=42519): Max retries exceeded with url: / (Caused by SSLError(SSLError(1, '[SSL] record layer failure (_ssl.c:1016)')))[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttps://localhost:39443/[91m - HTTPSConnectionPool(host='localhost', port=39443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1016)')))[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+_______________ test_connect_to_selfsigned_with_tls_verify_false _______________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttps://localhost:35735/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck/output.txt
+
+# warning: 
+
+_________________ test_connect_to_selfsigned_with_tls_cacerts __________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttps://localhost:39603/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck/output.txt
+
+# warning: 
+
+_______________ test_connect_to_selfsigned_with_requests_env_var _______________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttps://localhost:45535/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver-https/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttps://localhost:33523/[91m - Could not find a suitable TLS CA certificate bundle, invalid path: does/not/exist[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+________________________ test_TooManyRedirects_on_HEAD _________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:34215/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+________________________ test_ignore_local_redirection _________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 302 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [90m-ignored- [39;49;00mhttp://localhost:44597/: ignored redirect: http://localhost:44597/redirected
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+________________________ test_ignore_remote_redirection ________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD /redirected HTTP/1.1" 302 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET / HTTP/1.1" 301 -
+127.0.0.1 - - [12/Oct/2026 11:18:06] "GET /local HTTP/1.1" 301 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [90m-ignored- [39;49;00mhttp://localhost:42519/: ignored redirect: http://example.test/migrated
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+[90m-rate limited-   [39;49;00mhttp://localhost:39397/[90m | sleeping...[39;49;00m
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:39397/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+[90m-rate limited-   [39;49;00mhttp://localhost:36713/[90m | sleeping...[39;49;00m
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:36713/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+[90m-rate limited-   [39;49;00mhttp://localhost:33569/[90m | sleeping...[39;49;00m
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:33569/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+[90m-rate limited-   [39;49;00mhttp://localhost:41105/[90m | sleeping...[39;49;00m
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:41105/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+[90m-rate limited-   [39;49;00mhttp://localhost:43699/[90m | sleeping...[39;49;00m
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:43699/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+[90m-rate limited-   [39;49;00mhttp://localhost:34869/[90m | sleeping...[39;49;00m
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:34869/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+____________________________ test_requests_timeout _____________________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:06] code 501, message Unsupported method ('HEAD')
+127.0.0.1 - - [12/Oct/2026 11:18:06] "HEAD / HTTP/1.1" 501 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mtimeout   [39;49;00mhttp://localhost:37563/[91m - HTTPConnectionPool(host='localhost', port=37563): Read timed out. (read timeout=0.01)[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+_____________________ test_too_many_requests_user_timeout ______________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [] "HEAD / HTTP/1.1" 429 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [91mbroken    [39;49;00mhttp://localhost:45475/[91m - 429 Client Error: Too Many Requests for url: http://localhost:45475/[39;49;00m
+[01mbuild finished with problems.[39;49;00m
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/root
+# outdir: /tmp/pytest-of-root/pytest-5/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/root
+# outdir: /tmp/pytest-of-root/pytest-5/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/root
+# outdir: /tmp/pytest-of-root/pytest-5/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/root
+# outdir: /tmp/pytest-of-root/pytest-5/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/root
+# outdir: /tmp/pytest-of-root/pytest-5/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+__________________________ test_connection_contention __________________________
+------------------------------ Captured log call -------------------------------
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+WARNING  urllib3.connectionpool:connectionpool.py:327 Connection pool is full, discarding connection: localhost. Connection pool size: 1
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-5/root
+# outdir: /tmp/pytest-of-root/pytest-5/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+_________________ test_get_after_head_raises_connection_error __________________
+----------------------------- Captured stderr call -----------------------------
+127.0.0.1 - - [12/Oct/2026 11:18:07] "GET / HTTP/1.1" 200 -
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(           index: line    1) [32mok        [39;49;00mhttp://localhost:41243/
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-localserver/_build/linkcheck/output.txt
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: linkcheck
+# srcdir: /tmp/pytest-of-root/pytest-5/linkcheck-documents_exclude
+# outdir: /tmp/pytest-of-root/pytest-5/linkcheck-documents_exclude/_build/linkcheck
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [linkcheck]: [39;49;00mtargets for 3 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mbr0ken_link[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mbroken_link[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mbr0ken_link[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mbroken_link[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+
+(     broken_link: line    4) [90m-ignored- [39;49;00mhttps://www.sphinx-doc.org/this-is-a-broken-link: broken_link matched ^broken_link$ from linkcheck_exclude_documents
+(     br0ken_link: line    4) [90m-ignored- [39;49;00mhttps://www.sphinx-doc.org/this-is-another-broken-link: br0ken_link matched br[0-9]ken_link from linkcheck_exclude_documents
+[01mbuild succeeded.[39;49;00m
+
+Look for any errors in the above output or in ../tmp/pytest-of-root/pytest-5/linkcheck-documents_exclude/_build/linkcheck/output.txt
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_builders/test_build_linkcheck.py::test_defaults
+PASSED tests/test_builders/test_build_linkcheck.py::test_check_link_response_only
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_retries
+PASSED tests/test_builders/test_build_linkcheck.py::test_raw_node
+PASSED tests/test_builders/test_build_linkcheck.py::test_anchors_ignored
+PASSED tests/test_builders/test_build_linkcheck.py::test_anchors_ignored_for_url
+PASSED tests/test_builders/test_build_linkcheck.py::test_raises_for_invalid_status
+PASSED tests/test_builders/test_build_linkcheck.py::test_incomplete_html_anchor
+PASSED tests/test_builders/test_build_linkcheck.py::test_decoding_error_anchor_ignored
+PASSED tests/test_builders/test_build_linkcheck.py::test_auth_header_uses_first_match
+PASSED tests/test_builders/test_build_linkcheck.py::test_unauthorized_broken
+PASSED tests/test_builders/test_build_linkcheck.py::test_auth_header_no_match
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_request_headers
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_request_headers_no_slash
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_request_headers_default
+PASSED tests/test_builders/test_build_linkcheck.py::test_follows_redirects_on_HEAD
+PASSED tests/test_builders/test_build_linkcheck.py::test_follows_redirects_on_GET
+PASSED tests/test_builders/test_build_linkcheck.py::test_warns_disallowed_redirects
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_allowed_redirects_config
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_allowed_redirects
+PASSED tests/test_builders/test_build_linkcheck.py::test_invalid_ssl
+PASSED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_fails
+PASSED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_with_tls_verify_false
+PASSED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_with_tls_cacerts
+PASSED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_with_requests_env_var
+PASSED tests/test_builders/test_build_linkcheck.py::test_connect_to_selfsigned_nonexistent_cert_file
+PASSED tests/test_builders/test_build_linkcheck.py::test_TooManyRedirects_on_HEAD
+PASSED tests/test_builders/test_build_linkcheck.py::test_ignore_local_redirection
+PASSED tests/test_builders/test_build_linkcheck.py::test_ignore_remote_redirection
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_int_delay
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[None]
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[GMT]
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[GMT+3]
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_HTTP_date[GMT-3]
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_retry_after_without_header
+PASSED tests/test_builders/test_build_linkcheck.py::test_requests_timeout
+PASSED tests/test_builders/test_build_linkcheck.py::test_too_many_requests_user_timeout
+PASSED tests/test_builders/test_build_linkcheck.py::test_limit_rate_default_sleep
+PASSED tests/test_builders/test_build_linkcheck.py::test_limit_rate_user_max_delay
+PASSED tests/test_builders/test_build_linkcheck.py::test_limit_rate_doubles_previous_wait_time
+PASSED tests/test_builders/test_build_linkcheck.py::test_limit_rate_clips_wait_time_to_max_time
+PASSED tests/test_builders/test_build_linkcheck.py::test_limit_rate_bails_out_after_waiting_max_time
+PASSED tests/test_builders/test_build_linkcheck.py::test_connection_contention
+PASSED tests/test_builders/test_build_linkcheck.py::test_get_after_head_raises_connection_error
+PASSED tests/test_builders/test_build_linkcheck.py::test_linkcheck_exclude_documents
+============================== 45 passed in 1.49s ==============================

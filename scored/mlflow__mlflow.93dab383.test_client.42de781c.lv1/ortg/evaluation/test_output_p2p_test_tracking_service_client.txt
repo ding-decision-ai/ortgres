@@ -1,0 +1,73 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 13 items
+
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs:/path-databricks://profile-dbfs://profile@databricks/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [  7%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs:/path-databricks://scope:key-dbfs://scope:key@databricks/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 15%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[runs:/path-databricks://scope:key-runs://scope:key@databricks/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 23%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[models:/path-databricks://scope:key-models://scope:key@databricks/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 30%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs://profile@databricks/path-databricks://scope:key-dbfs://profile@databricks/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 38%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs://profile@databricks/path-databricks://profile2-dbfs://profile@databricks/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 46%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[s3:/path-databricks://profile-s3:/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 53%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[ftp://user:pass@host/path-databricks://profile-ftp://user:pass@host/path] PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 61%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_artifact_repo_is_cached_per_run_id PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 69%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 76%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch_with_empty_data PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 84%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch_with_numpy_array PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [ 92%]
+tests/tracking/_tracking_service/test_tracking_service_client.py::test_link_traces_to_run_validation PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/14 12:58:06 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+0.01s call     tests/tracking/_tracking_service/test_tracking_service_client.py::test_artifact_repo_is_cached_per_run_id
+0.01s setup    tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs:/path-databricks://profile-dbfs://profile@databricks/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs:/path-databricks://scope:key-dbfs://scope:key@databricks/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[runs:/path-databricks://scope:key-runs://scope:key@databricks/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[models:/path-databricks://scope:key-models://scope:key@databricks/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs://profile@databricks/path-databricks://scope:key-dbfs://profile@databricks/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[dbfs://profile@databricks/path-databricks://profile2-dbfs://profile@databricks/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[s3:/path-databricks://profile-s3:/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_get_artifact_repo[ftp://user:pass@host/path-databricks://profile-ftp://user:pass@host/path]
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_artifact_repo_is_cached_per_run_id
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch_with_empty_data
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_log_batch_with_numpy_array
+PASSED | MEM 12.5/46.9 GB | DISK 822.6/915.7 GB tests/tracking/_tracking_service/test_tracking_service_client.py::test_link_traces_to_run_validation
+============================== 13 passed in 0.07s ==============================

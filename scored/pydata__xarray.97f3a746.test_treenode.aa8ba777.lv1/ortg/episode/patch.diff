@@ -1,0 +1,897 @@
+diff --git a/ortg.tsv b/ortg.tsv
+new file mode 100644
+index 0000000..a07e5f3
+--- /dev/null
++++ b/ortg.tsv
+@@ -0,0 +1,451 @@
++#ORTG-TSV: 2
++#====项目纲要====
++#【部署】Python xarray library imported as `xarray`; selected visible verification is organized as pytest modules under `xarray/tests/` (no tests or scoring run in this outline-only phase).
++#【系统】Labeled multidimensional-array library whose DataTree layer stores Dataset-like nodes in named hierarchies | Python package with TreeNode/NamedNode structural core, DataTree data layer, mapping/formatting/concat consumers, and top-level exports | Preserve tree acyclicity, path semantics, insertion order, and Dataset alignment invariants.
++#【整体规范】Task mode covers only the selected TreeNode/DataTree path and subtree-operation chain; unrelated bare inventory entries remain unknown. Public-task requirements and visible test contracts are distinguished from missing or masked current definitions.
++#A:E入口 C核心 S服务 D数据 I集成 U工具 T测试 B构建 X配置 O文档
++#B:T树节点 D数据树 M树映射 F格式化 C拼接 P公共入口 B后端
++#E:L大于400行 M中等200至400行 S小型100至200行 T微型少于100行
++#【契约】树路径：NodePath/TreeNode 以无名树根为绝对路径锚点，支持相对路径、"."、空组件和".."；DataTree 的字符串读取、写入和 from_dict 通过该语义取得或放置节点/数组，不能越过根。；【裁决】需求直接规定无名根锚定的绝对/相对路径、点/空组件/父级与不可越根；与DataTree路径守护测试一致，保持测试不变并在TreeNode唯一执行路径解析。
++#【契约】树关系：父子双向关系必须一致且不得形成自身或后代环；公开 parent 只读，children 赋值和 orphan 是结构变更入口，整棵所属树的 level/depth/width 从根计算。；【裁决】需求直接规定父子双向一致、禁止自身及后代成环、parent只读、orphan与整树level/depth/width；与守护测试及现有DataTree入口一致，保持消费者和测试不变，仅在结构核心实现。
++#【契约】同构迭代：group_subtrees/zip_subtrees 按第一棵树的子项插入顺序进行广度优先相对路径对齐；每个节点组先产出、恢复迭代后再比较各树子键集合，结构不符抛 TreeIsomorphismError；零棵树抛 TypeError。；【裁决】需求直接规定按第一棵树插入顺序广度优先对齐、先产出再检查结构、零树 TypeError 与失配异常；与现有守护测试一致，保持测试并据需求实现。concat.py仅消费公开函数且无需改动，三份测试仅守护行为无需修改。
++
++{
++  "dirs": {},
++  "ignore_dirs": [],
++  "ignore_files": [],
++  "keep_files": [],
++  "mode": "task",
++  "observe_dirs": [],
++  "observe_files": []
++}
++
++path	crc32	ignored	deleted	mtime	module	outline	outline_time	target_outline	target_time	target_delete
++.binder/environment.yml	84862d34	0	0	2025-11-06T05:09:51Z						0
++.codecov.yml	3a921eb7	0	0	2025-11-06T05:09:51Z						0
++.git-blame-ignore-revs	b00c25af	0	0	2025-11-06T05:09:51Z						0
++.git_archival.txt	32fac30c	0	0	2025-11-06T05:09:51Z						0
++.gitattributes	e4c0b377	0	0	2025-11-06T05:09:51Z						0
++.github/FUNDING.yml	f9e8098e	0	0	2025-11-06T05:09:51Z						0
++.github/ISSUE_TEMPLATE/bugreport.yml	b071fd88	0	0	2025-11-06T05:09:51Z						0
++.github/ISSUE_TEMPLATE/config.yml	f0a38129	0	0	2025-11-06T05:09:51Z						0
++.github/ISSUE_TEMPLATE/misc.yml	edbc1b37	0	0	2025-11-06T05:09:51Z						0
++.github/ISSUE_TEMPLATE/newfeature.yml	3613119b	0	0	2025-11-06T05:09:51Z						0
++.github/PULL_REQUEST_TEMPLATE.md	a01b974d	0	0	2025-11-06T05:09:51Z						0
++.github/config.yml	1c5f6887	0	0	2025-11-06T05:09:51Z						0
++.github/dependabot.yml	308996f2	0	0	2025-11-06T05:09:51Z						0
++.github/labeler.yml	5fd99e3e	0	0	2025-11-06T05:09:51Z						0
++.github/release.yml	4841b34e	0	0	2025-11-06T05:09:51Z						0
++.github/stale.yml	7f2f097f	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/benchmarks-last-release.yml	2e8e1f10	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/benchmarks.yml	c1dae15e	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/ci-additional.yaml	304fe5f6	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/ci.yaml	c95787ec	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/configure-testpypi-version.py	2a908d81	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/hypothesis.yaml	63d5677e	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/label-prs.yml	8c56e164	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/nightly-wheels.yml	94cff84d	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/publish-test-results.yaml	b089dd2e	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/pypi-release.yaml	57ca9900	0	0	2025-11-06T05:09:51Z						0
++.github/workflows/upstream-dev-ci.yaml	7814d671	0	0	2025-11-06T05:09:51Z						0
++.gitignore	03548eae	0	0	2025-11-06T05:09:51Z						0
++.pre-commit-config.yaml	f7450c7f	0	0	2025-11-06T05:09:51Z						0
++.readthedocs.yaml	1b422690	0	0	2025-11-06T05:09:51Z						0
++CITATION.cff	0e39ac06	0	0	2026-10-16T04:49:16Z						0
++CLAUDE.md	d42956fa	0	0	2026-10-16T04:49:16Z						0
++CODE_OF_CONDUCT.md	64322de8	0	0	2026-10-16T04:49:16Z						0
++CONTRIBUTING.md	5d04d9b8	0	0	2026-10-16T04:49:16Z						0
++CORE_TEAM_GUIDE.md	2088c2b9	0	0	2026-10-16T04:49:16Z						0
++DATATREE_MIGRATION_GUIDE.md	956f62a0	0	0	2026-10-16T04:49:16Z						0
++HOW_TO_RELEASE.md	edddfb40	0	0	2026-10-16T04:49:16Z						0
++LICENSE	34ec32d0	0	0	2026-10-16T04:49:16Z						0
++README.md	89f46c06	0	0	2026-10-16T04:49:16Z						0
++asv_bench/asv.conf.json	1b9e79eb	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/README_CI.md	1668fc8f	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/__init__.py	fa4d32cc	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/accessors.py	314eca3d	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/alignment.py	fca30dfa	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/coding.py	cb59338a	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/combine.py	c6d287e0	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/dataarray_missing.py	72bea206	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/dataset.py	8df510eb	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/dataset_io.py	f72f5baf	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/datatree.py	dcca5a70	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/groupby.py	34de0515	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/import.py	329fa7df	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/indexing.py	93e19ef0	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/interp.py	309e54a1	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/merge.py	bd4827ef	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/pandas.py	9ffeef08	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/polyfit.py	e5de922e	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/reindexing.py	9730cc7e	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/renaming.py	bde649c2	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/repr.py	066cac85	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/rolling.py	de332664	0	0	2026-10-16T04:49:16Z						0
++asv_bench/benchmarks/unstacking.py	1d64d37b	0	0	2026-10-16T04:49:16Z						0
++ci/install-upstream-wheels.sh	7d5d761c	0	0	2026-10-16T04:49:16Z						0
++ci/policy.yaml	126b0503	0	0	2026-10-16T04:49:16Z						0
++ci/release_contributors.py	f23141fa	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/all-but-dask.yml	e794ed43	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/all-but-numba.yml	9bbc32ce	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/bare-min-and-scipy.yml	98f88731	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/bare-minimum.yml	baf4b9a8	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/doc.yml	6db8cad5	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/environment-3.14.yml	5c0c3eda	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/environment-benchmark.yml	1cd22285	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/environment-windows-3.14.yml	2ff5d0b4	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/environment-windows.yml	41374a20	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/environment.yml	e4f87105	0	0	2026-10-16T04:49:16Z						0
++ci/requirements/min-all-deps.yml	57ee0321	0	0	2026-10-16T04:49:16Z						0
++conftest.py	be456b33	0	0	2026-10-16T04:49:16Z						0
++design_notes/flexible_indexes_notes.md	2b6855ac	0	0	2026-10-16T04:49:16Z						0
++design_notes/grouper_objects.md	edce9be2	0	0	2026-10-16T04:49:16Z						0
++design_notes/named_array_design_doc.md	1411e39f	0	0	2026-10-16T04:49:16Z						0
++doc/Makefile	38d6536c	0	0	2026-10-16T04:49:16Z						0
++doc/README.rst	996732cf	0	0	2026-10-16T04:49:16Z						0
++doc/_static/.gitignore	5207eb9b	0	0	2026-10-16T04:49:16Z						0
++doc/_static/advanced_selection_interpolation.svg	88801487	0	0	2026-10-16T04:49:16Z						0
++doc/_static/ci.png	36cabb32	0	0	2026-10-16T04:49:16Z						0
++doc/_static/dask-array.svg	105b9345	0	0	2026-10-16T04:49:16Z						0
++doc/_static/dataset-diagram.png	9d4fb840	0	0	2026-10-16T04:49:16Z						0
++doc/_static/index_api.svg	cd3e0f67	0	0	2026-10-16T04:49:16Z						0
++doc/_static/index_contribute.svg	3274cdec	0	0	2026-10-16T04:49:16Z						0
++doc/_static/index_getting_started.svg	0e6896da	0	0	2026-10-16T04:49:16Z						0
++doc/_static/index_user_guide.svg	8e06c5f9	0	0	2026-10-16T04:49:16Z						0
++doc/_static/logos/Xarray_Icon_Final.png	44c651c7	0	0	2026-10-16T04:49:16Z						0
++doc/_static/logos/Xarray_Icon_Final.svg	1b7f7e07	0	0	2026-10-16T04:49:16Z						0
++doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.png	12baf05b	0	0	2026-10-16T04:49:16Z						0
++doc/_static/logos/Xarray_Logo_FullColor_InverseRGB_Final.svg	a8c53a9b	0	0	2026-10-16T04:49:16Z						0
++doc/_static/logos/Xarray_Logo_RGB_Final.png	fb5aa51d	0	0	2026-10-16T04:49:16Z						0
++doc/_static/logos/Xarray_Logo_RGB_Final.svg	db975b01	0	0	2026-10-16T04:49:17Z						0
++doc/_static/numfocus_logo.png	4c7a3bb8	0	0	2026-10-16T04:49:17Z						0
++doc/_static/opendap-prism-tmax.png	b79c924a	0	0	2026-10-16T04:49:17Z						0
++doc/_static/style.css	6408c4fd	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/ERA5-GRIB-example.png	26caa534	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/ROMS_ocean_model.png	15a1470a	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/area_weighted_temperature.png	6a21a211	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/monthly-means.png	6b318fb4	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/multidimensional-coords.png	30344aba	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/toy-weather-data.png	5853fa46	0	0	2026-10-16T04:49:17Z						0
++doc/_static/thumbnails/visualization_gallery.png	36163d49	0	0	2026-10-16T04:49:17Z						0
++doc/_static/view-docs.png	0a1935dc	0	0	2026-10-16T04:49:17Z						0
++doc/_templates/autosummary/accessor.rst	5d887f56	0	0	2026-10-16T04:49:17Z						0
++doc/_templates/autosummary/accessor_attribute.rst	677d0789	0	0	2026-10-16T04:49:17Z						0
++doc/_templates/autosummary/accessor_callable.rst	9c12e335	0	0	2026-10-16T04:49:17Z						0
++doc/_templates/autosummary/accessor_method.rst	02b1da17	0	0	2026-10-16T04:49:17Z						0
++doc/api-hidden.rst	33e683f8	0	0	2026-10-16T04:49:17Z						0
++doc/api.rst	4b4701b1	0	0	2026-10-16T04:49:17Z						0
++doc/api/accessors.rst	b4684109	0	0	2026-10-16T04:49:17Z						0
++doc/api/advanced.rst	22eb18d9	0	0	2026-10-16T04:49:17Z						0
++doc/api/backends.rst	97df3e57	0	0	2026-10-16T04:49:17Z						0
++doc/api/coarsen.rst	3e0fb9a0	0	0	2026-10-16T04:49:17Z						0
++doc/api/coordinates.rst	35559630	0	0	2026-10-16T04:49:17Z						0
++doc/api/dataarray.rst	62e2c1e8	0	0	2026-10-16T04:49:17Z						0
++doc/api/dataset.rst	0ce90cdb	0	0	2026-10-16T04:49:17Z						0
++doc/api/datatree.rst	b02b5e64	0	0	2026-10-16T04:49:17Z						0
++doc/api/deprecated.rst	df80573d	0	0	2026-10-16T04:49:17Z						0
++doc/api/encoding.rst	ad459075	0	0	2026-10-16T04:49:17Z						0
++doc/api/exceptions.rst	cb68f667	0	0	2026-10-16T04:49:17Z						0
++doc/api/groupby.rst	2173baf7	0	0	2026-10-16T04:49:17Z						0
++doc/api/indexes.rst	42a29206	0	0	2026-10-16T04:49:17Z						0
++doc/api/io.rst	4f6408f0	0	0	2026-10-16T04:49:17Z						0
++doc/api/plotting.rst	90c37bdc	0	0	2026-10-16T04:49:17Z						0
++doc/api/resample.rst	13dde3e4	0	0	2026-10-16T04:49:17Z						0
++doc/api/rolling-exp.rst	01bfb9f5	0	0	2026-10-16T04:49:17Z						0
++doc/api/rolling.rst	0ec7c6dc	0	0	2026-10-16T04:49:17Z						0
++doc/api/testing.rst	b9ebfa2c	0	0	2026-10-16T04:49:17Z						0
++doc/api/top-level.rst	aaabaa52	0	0	2026-10-16T04:49:17Z						0
++doc/api/tutorial.rst	8bb4c651	0	0	2026-10-16T04:49:17Z						0
++doc/api/ufuncs.rst	13770abc	0	0	2026-10-16T04:49:17Z						0
++doc/api/weighted.rst	67e63c23	0	0	2026-10-16T04:49:17Z						0
++doc/badge.json	0dd30915	0	0	2026-10-16T04:49:17Z						0
++doc/combined.json	7d703637	0	0	2026-10-16T04:49:17Z						0
++doc/conf.py	f9a9ccf3	0	0	2026-10-16T04:49:17Z						0
++doc/contribute/contributing.rst	c6b30eb8	0	0	2026-10-16T04:49:17Z						0
++doc/contribute/developers-meeting.rst	da8a897b	0	0	2026-10-16T04:49:17Z						0
++doc/contribute/index.rst	bcfa8669	0	0	2026-10-16T04:49:17Z						0
++doc/examples/ERA5-GRIB-example.ipynb	62812438	0	0	2026-10-16T04:49:17Z						0
++doc/examples/ROMS_ocean_model.ipynb	9e41aff4	0	0	2026-10-16T04:49:17Z						0
++doc/examples/_code/accessor_example.py	58f37655	0	0	2026-10-16T04:49:17Z						0
++doc/examples/apply_ufunc_vectorize_1d.ipynb	947eb3bc	0	0	2026-10-16T04:49:17Z						0
++doc/examples/area_weighted_temperature.ipynb	27a54c20	0	0	2026-10-16T04:49:17Z						0
++doc/examples/blank_template.ipynb	f1068b28	0	0	2026-10-16T04:49:17Z						0
++doc/examples/monthly-means.ipynb	e370679f	0	0	2026-10-16T04:49:17Z						0
++doc/examples/multidimensional-coords.ipynb	96b436d6	0	0	2026-10-16T04:49:17Z						0
++doc/examples/visualization_gallery.ipynb	b204e1a9	0	0	2026-10-16T04:49:17Z						0
++doc/examples/weather-data.ipynb	f679be03	0	0	2026-10-16T04:49:17Z						0
++doc/gallery.rst	0fbf5959	0	0	2026-10-16T04:49:17Z						0
++doc/gallery.yml	cbb2c6a9	0	0	2026-10-16T04:49:17Z						0
++doc/gallery/README.txt	d26c9b55	0	0	2026-10-16T04:49:17Z						0
++doc/gallery/plot_cartopy_facetgrid.py	feb54096	0	0	2026-10-16T04:49:17Z						0
++doc/gallery/plot_colorbar_center.py	26539b4d	0	0	2026-10-16T04:49:17Z						0
++doc/gallery/plot_control_colorbar.py	c670500d	0	0	2026-10-16T04:49:17Z						0
++doc/gallery/plot_lines_from_2d.py	c139192a	0	0	2026-10-16T04:49:17Z						0
++doc/get-help/faq.rst	41d3d3a4	0	0	2026-10-16T04:49:17Z						0
++doc/get-help/help-diagram.rst	e236bbc9	0	0	2026-10-16T04:49:17Z						0
++doc/get-help/howdoi.rst	2a9ec5b3	0	0	2026-10-16T04:49:17Z						0
++doc/get-help/socials.rst	cba2b17b	0	0	2026-10-16T04:49:17Z						0
++doc/getting-started-guide/index.rst	f023df62	0	0	2026-10-16T04:49:17Z						0
++doc/getting-started-guide/installing.rst	1f2b3400	0	0	2026-10-16T04:49:17Z						0
++doc/getting-started-guide/quick-overview.rst	509a645d	0	0	2026-10-16T04:49:17Z						0
++doc/getting-started-guide/tutorials-and-videos.rst	887de427	0	0	2026-10-16T04:49:17Z						0
++doc/getting-started-guide/why-xarray.rst	4f4bd088	0	0	2026-10-16T04:49:17Z						0
++doc/index.rst	4ab249d0	0	0	2026-10-16T04:49:17Z						0
++doc/internals/chunked-arrays.rst	53e049e9	0	0	2026-10-16T04:49:17Z						0
++doc/internals/duck-arrays-integration.rst	6a9f67e8	0	0	2026-10-16T04:49:17Z						0
++doc/internals/extending-xarray.rst	da5c3b82	0	0	2026-10-16T04:49:17Z						0
++doc/internals/how-to-add-new-backend.rst	079ded77	0	0	2026-10-16T04:49:17Z						0
++doc/internals/how-to-create-custom-index.rst	a8d9a3a9	0	0	2026-10-16T04:49:17Z						0
++doc/internals/index.rst	ca278e8e	0	0	2026-10-16T04:49:17Z						0
++doc/internals/internal-design.rst	90f287ae	0	0	2026-10-16T04:49:17Z						0
++doc/internals/interoperability.rst	f55b4ec8	0	0	2026-10-16T04:49:17Z						0
++doc/internals/time-coding.rst	81b6860d	0	0	2026-10-16T04:49:17Z						0
++doc/internals/zarr-encoding-spec.rst	7721621e	0	0	2026-10-16T04:49:17Z						0
++doc/roadmap.rst	12121d50	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/combining.rst	aeaaf2ca	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/complex-numbers.rst	88a9f49c	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/computation.rst	5febfe0e	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/dask.rst	6de99c60	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/data-structures.rst	820842b9	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/duckarrays.rst	e3e498d1	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/ecosystem.rst	e14094b1	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/groupby.rst	ffe8e950	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/hierarchical-data.rst	d5a850f4	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/index.rst	85c9773f	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/indexing.rst	9d54b217	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/interpolation.rst	cdd91acd	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/io.rst	68075ab3	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/options.rst	909672d7	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/pandas.rst	2fef364e	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/plotting.rst	d60cf93f	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/reshaping.rst	92b42e60	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/terminology.rst	1d518d31	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/testing.rst	80b706bc	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/time-series.rst	e17300a3	0	0	2026-10-16T04:49:17Z						0
++doc/user-guide/weather-climate.rst	6fa89b42	0	0	2026-10-16T04:49:17Z						0
++doc/videos.yml	c22e2f2e	0	0	2026-10-16T04:49:17Z						0
++doc/whats-new.rst	84ad3e03	0	0	2026-10-16T04:49:17Z						0
++licenses/ANYTREE_LICENSE	55ec3bee	0	0	2026-10-16T04:49:17Z						0
++licenses/DASK_LICENSE	0b939884	0	0	2026-10-16T04:49:17Z						0
++licenses/ICOMOON_LICENSE	2308c551	0	0	2026-10-16T04:49:17Z						0
++licenses/NUMPY_LICENSE	7d16781c	0	0	2026-10-16T04:49:17Z						0
++licenses/PANDAS_LICENSE	ebc920ba	0	0	2026-10-16T04:49:17Z						0
++licenses/PYTHON_LICENSE	86eabbdd	0	0	2026-10-16T04:49:17Z						0
++licenses/SCIKIT_LEARN_LICENSE	09e35c4c	0	0	2026-10-16T04:49:17Z						0
++licenses/SEABORN_LICENSE	9249685f	0	0	2026-10-16T04:49:17Z						0
++properties/README.md	2a768a5c	0	0	2026-10-16T04:49:17Z						0
++properties/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++properties/conftest.py	d86be673	0	0	2026-10-16T04:49:17Z						0
++properties/test_encode_decode.py	72f8cbbe	0	0	2026-10-16T04:49:17Z						0
++properties/test_index_manipulation.py	87ee183c	0	0	2026-10-16T04:49:17Z						0
++properties/test_pandas_roundtrip.py	09579951	0	0	2026-10-16T04:49:17Z						0
++properties/test_properties.py	26a8d781	0	0	2026-10-16T04:49:17Z						0
++pyproject.toml	d1de0d84	0	0	2026-10-16T04:49:17Z						0
++setup.py	00c6f898	0	0	2026-10-16T04:49:17Z						0
++xarray/__init__.py	d5f3ed6e	0	0	2026-10-16T05:14:18Z	P	__init__.py[9 E P S]: Role:汇集 xarray 顶层公共类型、函数、异常与 __all__ 导出清单 | Uses:xarray/core/datatree.py(DataTree),xarray/core/datatree_mapping.py(map_over_datasets),xarray/core/treenode.py(树异常与group_subtrees),xarray/structure/concat.py(concat),xarray/backends/api.py(公开I/O) | API:xarray 顶层命名空间；与本任务相关为 DataTree、map_over_datasets、group_subtrees、InvalidTreeError、NotFoundInTreeError、TreeIsomorphismError | Constraints:__all__ 与实际绑定一致；group_subtrees供后端比较 helper 按路径并行遍历树，zip_subtrees保持treenode模块级接口而非顶层导出。必须保持 xarray.group_subtrees 向后端比较 helper 提供可调用的分组迭代入口（test_backends_datatree.py::assert_chunks_equal） | Keys:同构迭代(发布)	2026-10-16T05:14:23Z			0
++xarray/backends/__init__.py	3943e14d	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/api.py	a8ecf156	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/chunks.py	91eb08a0	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/common.py	fccf3b23	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/file_manager.py	63a90b6f	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/h5netcdf_.py	06c266e3	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/locks.py	d09fb7f1	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/lru_cache.py	8c48b0de	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/memory.py	a102a129	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/netCDF4_.py	a3c1c0ce	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/netcdf3.py	524d6eb4	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/plugins.py	931491bb	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/pydap_.py	4e4c0dd3	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/scipy_.py	0d4080d4	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/store.py	2032f194	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/writers.py	4f9b5e78	0	0	2026-10-16T04:49:17Z						0
++xarray/backends/zarr.py	49140af7	0	0	2026-10-16T04:49:17Z						0
++xarray/coders.py	646a7d54	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/calendar_ops.py	9eb6371c	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/cftime_offsets.py	31876183	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/cftimeindex.py	95ae346e	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/common.py	b9c476b4	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/frequencies.py	6ec89511	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/strings.py	27f355ce	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/times.py	fc6ab215	0	0	2026-10-16T04:49:17Z						0
++xarray/coding/variables.py	a01ee865	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/array_api_compat.py	ceb14021	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/dask_array_compat.py	826241b9	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/dask_array_ops.py	4de8aff5	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/npcompat.py	8f71bd92	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/pdcompat.py	7299056e	0	0	2026-10-16T04:49:17Z						0
++xarray/compat/toolzcompat.py	ab85bd5c	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/apply_ufunc.py	71ae6711	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/arithmetic.py	922f623b	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/computation.py	30d1a2d8	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/fit.py	aa4a8c16	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/nanops.py	97742969	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/ops.py	36e05d05	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/rolling.py	1854e369	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/rolling_exp.py	3838c520	0	0	2026-10-16T04:49:17Z						0
++xarray/computation/weighted.py	67684538	0	0	2026-10-16T04:49:17Z						0
++xarray/conventions.py	85121ccd	0	0	2026-10-16T04:49:17Z						0
++xarray/convert.py	d8031871	0	0	2026-10-16T04:49:17Z						0
++xarray/core/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/core/_aggregations.py	24e4c5e2	0	0	2026-10-16T04:49:17Z						0
++xarray/core/_typed_ops.py	4166fad6	0	0	2026-10-16T04:49:17Z						0
++xarray/core/accessor_dt.py	71eeff39	0	0	2026-10-16T04:49:17Z						0
++xarray/core/accessor_str.py	2ced9b55	0	0	2026-10-16T04:49:17Z						0
++xarray/core/common.py	08fec6fe	0	0	2026-10-16T04:49:17Z						0
++xarray/core/coordinate_transform.py	892ca071	0	0	2026-10-16T04:49:17Z						0
++xarray/core/coordinates.py	8ed836b7	0	0	2026-10-16T04:49:17Z						0
++xarray/core/dataarray.py	73e78788	0	0	2026-10-16T04:49:17Z						0
++xarray/core/dataset.py	b49d8065	0	0	2026-10-16T04:49:17Z						0
++xarray/core/dataset_utils.py	b5c20dde	0	0	2026-10-16T04:49:17Z						0
++xarray/core/dataset_variables.py	091b3c69	0	0	2026-10-16T04:49:17Z						0
++xarray/core/datatree.py	e3a93e2f	0	0	2026-10-16T05:11:57Z	D	datatree.py[9 C D L]: Role:在 NamedNode 结构上提供每节点 Dataset 存储、继承坐标、路径式访问/赋值、树级变换比较与序列化的公开 DataTree | Uses:xarray/core/treenode.py(结构、路径与zip_subtrees),xarray/core/datatree_mapping.py(逐节点映射),xarray/core/formatting.py(表示与结构差异),xarray/core/dataset.py(节点数据),xarray/structure/alignment.py(父子对齐) | API:DatasetView；DataTree 构造、from_dict/to_dict、get/索引/赋值、isomorphic/equals/identical、filter/match/prune/map_over_datasets、树级计算与 I/O | Constraints:DataTree.__getitem__ 将字符串包装为 NodePath 后调用继承的 _get_item，__setitem__ 将 Dataset 包装为 DataTree 后以 new_nodes_along_path=True 调用继承的 _set_item；from_dict 将路径绝对化、按深度稳定排序并以 allow_overwrite=False 建树。挂接前拒绝子名与变量冲突、检查父子 Dataset 精确对齐并去重继承索引；复制挂接树避免改写原对象名称；equals/identical通过zip_subtrees按相对路径配对。必须保持路径与名称行为（TestTreeCreation::test_name、TestPaths），查节点或 DataArray 及缺失 KeyError（TestGetItem），多段赋值创建中间节点且已有节点数据按公开赋值规则处理（TestSetItem），from_dict 的 subtree 为广度优先并保留同层插入顺序（TestTreeFromDict::test_full/test_insertion_order），不同子插入顺序仍 isomorphic 且二元运算按路径配对（TestIsomorphicEqualsAndIdentical::test_isomorphic、TestOps::test_binary_op_order_invariant） | Keys:树路径(消费),树关系(消费),同构迭代(消费)	2026-10-16T05:12:03Z			0
++xarray/core/datatree_mapping.py	bb9fd19c	0	0	2026-10-16T05:13:58Z	M	datatree_mapping.py[8 S M S]: Role:把可调用对象逐路径应用到一个或多个 DataTree 的 Dataset，并按返回元数重建一棵或多棵结果树 | Uses:xarray/core/treenode.py(group_subtrees同构分组),xarray/core/datatree.py(DataTree重建),xarray/core/dataset.py(结果类型),xarray/core/utils.py(结果名称) | API:map_over_datasets；add_path_context_to_errors | Constraints:只把 DataTree 实参按对应节点替换为 dataset，非树实参保持原位置；结果只能是 Dataset/None 或定长同型元组，各节点返回元数必须一致，节点异常追加路径 note。必须保持无树实参时 TypeError 含“must pass at least one tree object”、非同构树在 set1/set2 抛 TreeIsomorphismError 且列出 [] vs ['extra']、多树同路径数据相加后重建等结构结果（TestMapOverSubTree::test_no_trees_passed/test_not_isomorphic/test_multiple_tree_args） | Keys:同构迭代(消费)	2026-10-16T05:14:03Z			0
++xarray/core/datatree_render.py	53ac50f3	0	0	2026-10-16T04:49:17Z						0
++xarray/core/dtypes.py	a194b2e5	0	0	2026-10-16T04:49:17Z						0
++xarray/core/duck_array_ops.py	9b2a6e36	0	0	2026-10-16T04:49:17Z						0
++xarray/core/extension_array.py	99f3396f	0	0	2026-10-16T04:49:17Z						0
++xarray/core/extensions.py	0832e40d	0	0	2026-10-16T04:49:17Z						0
++xarray/core/formatting.py	f739ddc8	0	0	2026-10-16T05:14:07Z	F	formatting.py[8 U F L]: Role:生成数组、Dataset 与 DataTree 的文本表示和差异摘要 | Uses:xarray/core/treenode.py(group_subtrees同构分组),xarray/core/datatree_render.py(树形渲染),xarray/core/options.py(显示选项),xarray/core/duck_array_ops.py(值比较),xarray/core/indexing.py(惰性数组格式) | API:array_repr、dataset_repr、datatree_repr、diff_array_repr、diff_dataset_repr、diff_datatree_repr、diff_treestructure、diff_nodewise_summary | Constraints:diff_treestructure 借助 group_subtrees 的先产出后核对子键语义，在当前节点自行比较 keys 并返回最浅结构差异；根写作 root node，非根写作 node 'path'。必须保持不同插入顺序但相同子键集合视为同构、不同节点集合视为不同构（TestIsomorphicEqualsAndIdentical::test_isomorphic），且单节点树与有 subnode 子树运算的公开错误包含“children at root node do not match: ['subnode'] vs []”（TestOps::test_dont_broadcast_single_node_tree） | Keys:同构迭代(消费)	2026-10-16T05:14:12Z			0
++xarray/core/formatting_html.py	1beea3e9	0	0	2026-10-16T04:49:17Z						0
++xarray/core/groupby.py	7e6bdf69	0	0	2026-10-16T04:49:17Z						0
++xarray/core/indexes.py	7d712dfc	0	0	2026-10-16T04:49:17Z						0
++xarray/core/indexing.py	dbc41b12	0	0	2026-10-16T04:49:17Z						0
++xarray/core/missing.py	d0aecb23	0	0	2026-10-16T04:49:17Z						0
++xarray/core/nputils.py	64017a9d	0	0	2026-10-16T04:49:17Z						0
++xarray/core/options.py	0bbfb90d	0	0	2026-10-16T04:49:17Z						0
++xarray/core/parallel.py	90afb346	0	0	2026-10-16T04:49:17Z						0
++xarray/core/resample.py	7d65a175	0	0	2026-10-16T04:49:17Z						0
++xarray/core/resample_cftime.py	16ac65ac	0	0	2026-10-16T04:49:17Z						0
++xarray/core/treenode.py	63e6bdbe	0	0	2026-10-16T05:13:26Z	T	treenode.py[9 C T L]: Role:定义树路径、父子结构、命名节点与多树同构遍历的结构核心 | Uses:xarray/core/utils.py(Frozen子映射与映射判定),xarray/core/types.py(Self类型) | API:InvalidTreeError、NotFoundInTreeError、TreeIsomorphismError、NodePath、TreeNode、NamedNode、group_subtrees、zip_subtrees | Constraints:绝对路径以无名树根为锚，支持相对路径、空路径、点与父级；父子挂接保持双向一致、覆盖时正确孤立旧节点并在变更前拒绝自身或后代成环；subtree及带键遍历为稳定广度优先，depth/width按所属整树计算；同构分组忽略同胞插入顺序但按第一树顺序输出，并在先产出节点组、恢复迭代后核对子键集合，失配文案区分root node与相对path。必须保持 DataTree 路径往返、相对路径和同树判断（TestPaths），字符串查节点/数组及缺失 KeyError（TestGetItem），多段赋值创建中间节点并挂接正确父名（TestSetItem），subtree 广度优先且同层保留插入顺序（TestTreeFromDict::test_full），根结构失配含明确 children 文案（TestOps::test_dont_broadcast_single_node_tree），映射深层失配列出两侧子键（TestMapOverSubTree::test_not_isomorphic），顶层分组入口产出 path 与对应节点元组（test_backends_datatree.py::assert_chunks_equal） | Keys:树路径(实现),树关系(实现),同构迭代(实现)	2026-10-16T05:13:32Z			0
++xarray/core/types.py	6c7d28fe	0	0	2026-10-16T04:49:17Z						0
++xarray/core/utils.py	b916865d	0	0	2026-10-16T04:49:17Z	P	utils.py[7 U P L]: Role:提供 xarray 核心共享的映射、维度、类型判定、名称推导、导入与警告等内部工具 | Uses:xarray/namedarray/utils.py(通用判定与表示工具) | API:- | Constraints:Frozen 仅提供不可变映射接口但保留对原映射的实时视图；FilteredMapping 由调用方保证键集合是底层映射子集；维度解析保留输入顺序并按 missing_dims 策略处理不存在维度	2026-10-16T05:10:12Z			0
++xarray/core/variable.py	4be5549a	0	0	2026-10-16T04:49:17Z						0
++xarray/groupers.py	60e82d99	0	0	2026-10-16T04:49:17Z						0
++xarray/indexes/__init__.py	46040fce	0	0	2026-10-16T04:49:17Z						0
++xarray/indexes/nd_point_index.py	c24323e1	0	0	2026-10-16T04:49:17Z						0
++xarray/indexes/range_index.py	f8c52f7c	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/_aggregations.py	4894301a	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/_array_api.py	45df2957	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/_typing.py	3256f4f2	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/core.py	09919495	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/daskmanager.py	c56796a4	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/dtypes.py	a68589d5	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/parallelcompat.py	8a480db1	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/pycompat.py	a47d71bc	0	0	2026-10-16T04:49:17Z						0
++xarray/namedarray/utils.py	359cfee3	0	0	2026-10-16T04:49:17Z						0
++xarray/plot/__init__.py	ff351b2a	0	0	2026-10-16T04:49:17Z						0
++xarray/plot/accessor.py	0617a56c	0	0	2026-10-16T04:49:17Z						0
++xarray/plot/dataarray_plot.py	f8746ea3	0	0	2026-10-16T04:49:17Z						0
++xarray/plot/dataset_plot.py	1742471f	0	0	2026-10-16T04:49:17Z						0
++xarray/plot/facetgrid.py	7a5d2790	0	0	2026-10-16T04:49:17Z						0
++xarray/plot/utils.py	fdd42ecf	0	0	2026-10-16T04:49:17Z						0
++xarray/py.typed	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/static/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/static/css/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/static/css/style.css	73003c7b	0	0	2026-10-16T04:49:17Z						0
++xarray/static/html/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/static/html/icons-svg-inline.html	f6ab01c7	0	0	2026-10-16T04:49:17Z						0
++xarray/structure/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/structure/alignment.py	b265475f	0	0	2026-10-16T04:49:17Z						0
++xarray/structure/chunks.py	b31feddb	0	0	2026-10-16T04:49:17Z						0
++xarray/structure/combine.py	a854b4ff	0	0	2026-10-16T04:49:17Z						0
++xarray/structure/concat.py	f9d6b9c1	0	0	2026-10-16T04:49:17Z	C	concat.py[8 S C L]: Role:实现 DataArray、Dataset 与 DataTree 沿维度拼接，并为同构 DataTree 逐对应节点拼接 Dataset | Uses:xarray/core/treenode.py(同构分组与异常),xarray/core/datatree.py(DataTree重建),xarray/structure/alignment.py(索引对齐),xarray/structure/merge.py(变量与属性合并),xarray/core/variable.py(变量拼接) | API:concat | Constraints:入口先取首对象并按 DataTree/DataArray/Dataset 分派；DataTree 分支要求所有对象均为 DataTree，compat=identical 时根名一致，以第一树判断拼接维是否已存在，逐 group_subtrees 路径拼接并由 DataTree.from_dict 重建；TreeIsomorphismError 被转换为 ValueError“ All trees must be isomorphic to be concatenated”。该文件在 _datatree_concat 内局部导入 group_subtrees，是选中生产消费者；本任务未选择 concat 专属可见测试，节点级拼接效果未在本阶段验证 | Keys:同构迭代(消费)	2026-10-16T04:57:43Z			0
++xarray/structure/merge.py	3b5cea26	0	0	2026-10-16T04:49:17Z						0
++xarray/testing/__init__.py	e9b9b711	0	0	2026-10-16T04:49:17Z						0
++xarray/testing/assertions.py	ace96b64	0	0	2026-10-16T04:49:17Z						0
++xarray/testing/strategies.py	45e4e761	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/CLAUDE.md	32d6a55a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/__init__.py	08c3417b	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/arrays.py	dd688bda	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/conftest.py	e2962b80	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/data/bears.nc	4669ee99	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/data/example.grib	ce922f44	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/data/example.ict	97b666e9	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/data/example.uamiv	31b54f78	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/data/example_1.nc	85c76b3b	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/data/example_1.nc.gz	f223b6b0	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/indexes.py	8349bdce	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/namespace.py	e33f70e4	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_accessor_dt.py	1fff3294	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_accessor_str.py	20a17aa3	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_array_api.py	2849b64c	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_assertions.py	4913d6ba	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends.py	68a5c67a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends_api.py	390c56dc	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends_chunks.py	a802c26b	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends_common.py	f18a8b35	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends_datatree.py	ef18a6ce	0	0	2026-10-16T04:49:17Z	B	test_backends_datatree.py[5 T B L]: Role:验证 DataTree 经 NetCDF、HDF5/PyDAP 与 Zarr 后端读写、分组、分块及子树往返 | Uses:xarray/__init__.py(顶层API),xarray/core/datatree.py(DataTree),xarray/testing/assertions.py(相等断言),xarray/tests/test_backends.py(后端基类) | API:- | Constraints:与本任务直接相关的是 assert_chunks_equal 通过 xr.group_subtrees(actual, expected) 消费 path 与对应节点元组后逐变量比较 chunksizes；NetCDF 与 Zarr 的 specific_group 测试复制子树后调用 orphan，并要求打开结果的 root.parent 为 None。其余后端行为不属于本次纲要选择理由；许多用例受可选依赖、网络或平台标记影响，本阶段未运行，保持本地验证状态未知 | Keys:树关系(守护),同构迭代(守护)	2026-10-16T04:57:44Z			0
++xarray/tests/test_backends_file_manager.py	7d706b3a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends_locks.py	f3c307bc	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_backends_lru_cache.py	72e7fbde	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_calendar_ops.py	d7c194b7	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_cftime_offsets.py	bc8805df	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_cftimeindex.py	af245945	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_cftimeindex_resample.py	1bd944bd	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_coarsen.py	9f3a13d7	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_coding.py	b5a0f220	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_coding_strings.py	aa29d8ba	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_coding_times.py	ad45a338	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_combine.py	2c7264bf	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_computation.py	68fc7c9e	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_concat.py	18cd8e96	0	0	2026-10-16T04:49:17Z	C	test_concat.py[6 T C L]: Role:验证 Dataset、DataArray 与 DataTree 在既有或新维度上的拼接、对齐、缺失值、属性及结构错误行为 | Uses:xarray/structure/concat.py(concat实现),xarray/core/datatree.py(DataTree结构),xarray/core/dataset.py(Dataset数据),xarray/core/dataarray.py(DataArray数据),xarray/testing/assertions.py(结果断言) | API:- | Constraints:DataTree 拼接要求树结构同构并逐相对路径拼接节点数据，结构不符转换为 ValueError“All trees must be isomorphic to be concatenated”；节点数据、坐标、名称和新旧维度语义需与对应 Dataset 拼接一致。必须保持同构 DataTree 多层节点结果逐节点 identical，非同构子键抛明确 ValueError（TestConcatDataTree） | Keys:同构迭代(守护)	2026-10-16T05:20:03Z			0
++xarray/tests/test_conventions.py	adf28d43	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_coordinate_transform.py	db8d6972	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_coordinates.py	83a9f047	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_cupy.py	0e720520	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_dask.py	42762525	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_dataarray.py	4d98a8a8	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_dataarray_typing.yml	bf578c0a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_dataset.py	8b4799d6	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_dataset_typing.yml	91cbc001	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_datatree.py	08dfca94	0	0	2026-10-16T04:49:17Z	D	test_datatree.py[8 T D L]: Role:验证 DataTree 构造、路径与赋值、数据继承、表示、结构比较、树级运算和计算行为 | Uses:xarray/core/datatree.py(被测DataTree),xarray/core/treenode.py(路径与结构异常),xarray/testing/assertions.py(结构断言),xarray/core/coordinates.py(DataTreeCoordinates) | API:- | Constraints:与本任务直接相关的守护包括：根路径“/”且根显示名不进入路径，相对路径覆盖祖先/兄弟/自身和异树异常；getitem 可按多段路径取得节点或末端 DataArray并对缺失项抛 KeyError；setitem 可挂接节点、建立中间节点并保持正确父名；from_dict 的 subtree 广度优先且同层保留输入插入顺序；结构同构忽略兄弟插入顺序而区分子键集合，二元树运算按路径配对，根失配错误含精确 children 文案。部分 Dataset 自身赋值与多变量选择测试标为 xfail，不构成当前通过契约；本文件未直接覆盖任务列出的 ancestors/lineage/siblings/level/depth/width、直接环检测或 zip_subtrees | Keys:树路径(守护),树关系(守护),同构迭代(守护)	2026-10-16T04:57:43Z			0
++xarray/tests/test_datatree_mapping.py	a63c77c7	0	0	2026-10-16T04:49:17Z	M	test_datatree_mapping.py[7 T M M]: Role:验证 map_over_datasets 的多树路径配对、结果重建、返回类型校验与错误路径上下文 | Uses:xarray/core/datatree_mapping.py(被测映射入口),xarray/core/datatree.py(树构造与结果),xarray/core/treenode.py(TreeIsomorphismError),xarray/testing/assertions.py(结果断言) | API:- | Constraints:必须保持没有 DataTree 实参时报 TypeError 且消息含“must pass at least one tree object”；在第二树 set1/set2 下增加 extra 时抛 TreeIsomorphismError 且消息为 children at node 'set1/set2' do not match: [] vs ['extra']；两棵同构树逐节点相加重建相同结构，多结果元组拆成多树，非法类型或各节点不同元数抛 TypeError，节点函数异常附带相对路径 note。不同节点名称用例为无条件 xfail，不能视为已验证行为 | Keys:同构迭代(守护)	2026-10-16T04:57:44Z			0
++xarray/tests/test_datatree_typing.yml	04d8d57d	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_deprecation_helpers.py	682095e7	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_distributed.py	f9f410e2	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_dtypes.py	0d6c959a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_duck_array_ops.py	04346f7f	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_duck_array_wrapping.py	c8e116a1	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_error_messages.py	54c06c59	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_extensions.py	50fb9292	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_formatting.py	a80c4d59	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_formatting_html.py	3ab1997c	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_groupby.py	1b2c7e1a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_hashable.py	a232f9b5	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_indexes.py	4a3ede24	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_indexing.py	6db53564	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_interp.py	b9ede12e	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_merge.py	b8a734c3	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_missing.py	222fb352	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_namedarray.py	9b65a71a	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_nd_point_index.py	3389f5d6	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_nputils.py	8742b327	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_options.py	f9dd1918	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_pandas_to_xarray.py	0d696be5	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_parallelcompat.py	dd66e7f3	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_plot.py	33ee17b5	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_plugins.py	1569174f	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_print_versions.py	79752e9b	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_range_index.py	5717dc61	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_rolling.py	1d0e4e17	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_sparse.py	c683df6d	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_strategies.py	00fbba16	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_tutorial.py	3dfdf2eb	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_typed_ops.py	809ab1dd	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_ufuncs.py	dab179e0	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_units.py	9a37c2fc	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_utils.py	488fc247	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_variable.py	e76345b1	0	0	2026-10-16T04:49:17Z						0
++xarray/tests/test_weighted.py	11963b3c	0	0	2026-10-16T04:49:17Z						0
++xarray/tutorial.py	9f413381	0	0	2026-10-16T04:49:17Z						0
++xarray/typing.py	113055c4	0	0	2026-10-16T04:49:17Z						0
++xarray/ufuncs.py	c2abb454	0	0	2026-10-16T04:49:17Z						0
++xarray/util/__init__.py	00000000	0	0	2026-10-16T04:49:17Z						0
++xarray/util/deprecation_helpers.py	f7c04786	0	0	2026-10-16T04:49:17Z						0
++xarray/util/generate_aggregations.py	d351bab9	0	0	2026-10-16T04:49:17Z						0
++xarray/util/generate_ops.py	f3a374e5	0	0	2026-10-16T04:49:17Z						0
++xarray/util/print_versions.py	41a8f77d	0	0	2026-10-16T04:49:17Z						0
+diff --git a/xarray/__init__.py b/xarray/__init__.py
+index 605e73f..7d56816 100644
+--- a/xarray/__init__.py
++++ b/xarray/__init__.py
+@@ -43,12 +43,12 @@ from xarray.core.indexes import Index
+ from xarray.core.indexing import IndexSelResult
+ from xarray.core.options import get_options, set_options
+ from xarray.core.parallel import map_blocks
+-from xarray.core.treenode import InvalidTreeError, NotFoundInTreeError, TreeIsomorphismError
+-
+-
+-
+-
+-
++from xarray.core.treenode import (
++    InvalidTreeError,
++    NotFoundInTreeError,
++    TreeIsomorphismError,
++    group_subtrees,
++)
+ from xarray.core.variable import IndexVariable, Variable, as_variable
+ from xarray.namedarray.core import NamedArray
+ from xarray.structure.alignment import AlignmentError, align, broadcast
+diff --git a/xarray/core/datatree.py b/xarray/core/datatree.py
+index e81d56d..6fb387e 100644
+--- a/xarray/core/datatree.py
++++ b/xarray/core/datatree.py
+@@ -51,7 +51,7 @@ from xarray.core.formatting_html import (
+ from xarray.core.indexes import Index, Indexes
+ from xarray.core.options import OPTIONS as XR_OPTS
+ from xarray.core.options import _get_keep_attrs
+-from xarray.core.treenode import NamedNode, NodePath
++from xarray.core.treenode import NamedNode, NodePath, zip_subtrees
+ from xarray.core.types import Self
+ from xarray.core.utils import (
+     Default,
+diff --git a/xarray/core/datatree_mapping.py b/xarray/core/datatree_mapping.py
+index f92593c..b905545 100644
+--- a/xarray/core/datatree_mapping.py
++++ b/xarray/core/datatree_mapping.py
+@@ -5,7 +5,7 @@ from contextlib import contextmanager
+ from typing import TYPE_CHECKING, Any, cast, overload
+ 
+ from xarray.core.dataset import Dataset
+-
++from xarray.core.treenode import group_subtrees
+ from xarray.core.utils import result_name
+ 
+ if TYPE_CHECKING:
+diff --git a/xarray/core/formatting.py b/xarray/core/formatting.py
+index aeac011..155428e 100644
+--- a/xarray/core/formatting.py
++++ b/xarray/core/formatting.py
+@@ -26,7 +26,7 @@ from xarray.core.indexing import (
+     MemoryCachedArray,
+ )
+ from xarray.core.options import OPTIONS, _get_boolean_with_default
+-
++from xarray.core.treenode import group_subtrees
+ from xarray.core.utils import is_duck_array
+ from xarray.namedarray.pycompat import array_type, to_duck_array
+ 
+diff --git a/xarray/core/treenode.py b/xarray/core/treenode.py
+index ff123fa..0b9b373 100644
+--- a/xarray/core/treenode.py
++++ b/xarray/core/treenode.py
+@@ -2,6 +2,7 @@ from __future__ import annotations
+ 
+ import collections
+ import sys
++import warnings
+ from collections.abc import Iterator, Mapping
+ from pathlib import PurePosixPath
+ from typing import TYPE_CHECKING, Any, TypeVar
+@@ -93,6 +94,289 @@ class TreeNode:
+             "Cannot set parent attribute directly, you must modify the children of the other node instead using dict-like syntax"
+         )
+ 
++    @property
++    def name(self) -> str | None:
++        """Name under which this node is stored in its parent."""
++        if self.parent is None:
++            return None
++        for name, child in self.parent.children.items():
++            if child is self:
++                return name
++        raise InvalidTreeError("node is not present in its parent's children")
++
++    def _check_children(self, children: Mapping[str, Self]) -> None:
++        if not is_dict_like(children):
++            raise TypeError("children must be provided as a mapping")
++
++        seen: set[int] = set()
++        for name, child in children.items():
++            if not isinstance(name, str):
++                raise TypeError("child names must be strings")
++            if "/" in name:
++                raise ValueError("child names cannot contain forward slashes")
++            if not isinstance(child, TreeNode):
++                raise TypeError("children must be TreeNode objects")
++            if id(child) in seen:
++                raise InvalidTreeError(
++                    "the same node cannot be attached under multiple child names"
++                )
++            seen.add(id(child))
++
++    def _set_parent(
++        self, new_parent: Self | None, child_name: str | None = None
++    ) -> None:
++        """Attach this node to *new_parent*, or detach it when passed ``None``."""
++        if new_parent is not None and not isinstance(new_parent, TreeNode):
++            raise TypeError("parent must be a TreeNode or None")
++
++        # Reassigning the same parent is deliberately a no-op. In particular,
++        # this private operation is not a back door for renaming an attached node.
++        if new_parent is self.parent:
++            return
++
++        if new_parent is self:
++            raise InvalidTreeError("a node cannot be a parent of itself")
++        if new_parent is not None and any(
++            node is new_parent for node in self.descendants
++        ):
++            raise InvalidTreeError(
++                "cannot set parent because the proposed parent is already a descendant"
++            )
++
++        if new_parent is not None:
++            if child_name is None:
++                raise ValueError("child_name must be provided when setting a parent")
++            if not isinstance(child_name, str):
++                raise TypeError("child_name must be a string")
++            if "/" in child_name:
++                raise ValueError("child names cannot contain forward slashes")
++
++        old_parent = self.parent
++        old_name = self.name
++        replaced_child = (
++            new_parent._children.get(child_name)
++            if new_parent is not None and child_name is not None
++            else None
++        )
++
++        # Run all validation hooks before changing either tree.
++        if old_parent is not None:
++            self._pre_detach(old_parent)
++        if replaced_child is not None and replaced_child is not self:
++            replaced_child._pre_detach(new_parent)
++        if new_parent is not None and child_name is not None:
++            self._pre_attach(new_parent, child_name)
++
++        if old_parent is not None:
++            if old_name is None or old_parent._children.get(old_name) is not self:
++                raise InvalidTreeError("node is not present in its parent's children")
++            del old_parent._children[old_name]
++            self._parent = None
++
++        if replaced_child is not None and replaced_child is not self:
++            del new_parent._children[child_name]  # type: ignore[index,union-attr]
++            replaced_child._parent = None
++
++        if new_parent is not None and child_name is not None:
++            new_parent._children[child_name] = self
++            self._parent = new_parent
++
++        if old_parent is not None:
++            self._post_detach(old_parent)
++        if replaced_child is not None and replaced_child is not self:
++            replaced_child._post_detach(new_parent)
++        if new_parent is not None and child_name is not None:
++            self._post_attach(new_parent, child_name)
++
++    def _pre_attach(self, parent: Self, name: str) -> None:
++        """Method called before attaching to ``parent``."""
++
++    def _pre_detach(self, parent: Self) -> None:
++        """Method called before detaching from ``parent``."""
++
++    def _post_detach(self, parent: Self) -> None:
++        """Method called after detaching from ``parent``."""
++
++    def _pre_attach_children(self, children: Mapping[str, Self]) -> None:
++        """Method called before replacing this node's children."""
++
++    def _post_attach_children(self, children: Mapping[str, Self]) -> None:
++        """Method called after replacing this node's children."""
++
++    def _pre_detach_children(self, children: Mapping[str, Self]) -> None:
++        """Method called before detaching all children."""
++
++    def _post_detach_children(self, children: Mapping[str, Self]) -> None:
++        """Method called after detaching all children."""
++
++    def _set(self, key: str, item: Self) -> None:
++        """Set one immediate child without path traversal."""
++        if not isinstance(item, TreeNode):
++            raise TypeError("TreeNode children must also be TreeNode objects")
++        item._set_parent(new_parent=self, child_name=key)
++
++    def _get_item(self, path: str | NodePath) -> Self | DataArray:
++        """Return the node or data object at a Unix-like tree path."""
++        path = NodePath(path)
++        current: Any = self.root if path.is_absolute() else self
++        parts = path.parts[1:] if path.is_absolute() else path.parts
++
++        for part in parts:
++            if part == "..":
++                if not isinstance(current, TreeNode) or current.parent is None:
++                    raise KeyError(f"Could not find node at path {path!s}")
++                current = current.parent
++                continue
++
++            if not isinstance(current, TreeNode):
++                raise KeyError(f"Could not find node at path {path!s}")
++            item = current.get(part)
++            if item is None:
++                raise KeyError(f"Could not find node at path {path!s}")
++            current = item
++
++        return current
++
++    def _set_item(
++        self,
++        path: str | NodePath,
++        item: Any,
++        new_nodes_along_path: bool = False,
++        allow_overwrite: bool = True,
++    ) -> None:
++        """Set an item at a Unix-like tree path."""
++        path = NodePath(path)
++        parts = path.parts[1:] if path.is_absolute() else path.parts
++        if not parts or parts[-1] in {".", "..", ""}:
++            raise ValueError(
++                f"The path {str(path)!r} has no final name component; the item has no name"
++            )
++
++        current: TreeNode = self.root if path.is_absolute() else self
++        for part in parts[:-1]:
++            if part == "..":
++                if current.parent is None:
++                    raise KeyError(f"Could not reach {str(path)!r} from this node")
++                current = current.parent
++                continue
++
++            next_item = current.get(part)
++            if next_item is None:
++                if not new_nodes_along_path:
++                    raise KeyError(f"Could not reach {str(path)!r} from this node")
++                next_item = type(current)()
++                current._set(part, next_item)
++                # Subclasses may copy values while setting them (DataTree does),
++                # so continue through the object which was actually attached.
++                next_item = current.get(part)
++            if not isinstance(next_item, TreeNode):
++                raise KeyError(f"Could not reach {str(path)!r} from this node")
++            current = next_item
++
++        name = parts[-1]
++        if not allow_overwrite and name in current.children:
++            raise KeyError(f"Already a node object at path {str(path)!r}")
++        current._set(name, item)
++
++    @property
++    def parents(self) -> tuple[Self, ...]:
++        """All parents, starting with the closest and ending at the root."""
++        result: list[Self] = []
++        node = self.parent
++        while node is not None:
++            result.append(node)
++            node = node.parent
++        return tuple(result)
++
++    @property
++    def root(self) -> Self:
++        """Root node of the tree containing this node."""
++        parents = self.parents
++        return parents[-1] if parents else self
++
++    @property
++    def ancestors(self) -> tuple[Self, ...]:
++        """Deprecated root-to-self lineage."""
++        warnings.warn(
++            "The `ancestors` property is deprecated; use `parents` instead.",
++            FutureWarning,
++            stacklevel=2,
++        )
++        return (*reversed(self.parents), self)
++
++    @property
++    def lineage(self) -> tuple[Self, ...]:
++        """Deprecated self-to-root lineage."""
++        warnings.warn(
++            "The `lineage` property is deprecated; use `parents` instead.",
++            FutureWarning,
++            stacklevel=2,
++        )
++        return (self, *self.parents)
++
++    @property
++    def level(self) -> int:
++        """Number of edges from this node to its root."""
++        return len(self.parents)
++
++    @property
++    def subtree(self) -> Iterator[Self]:
++        """Iterate over this node and its descendants breadth-first."""
++        queue = collections.deque([self])
++        while queue:
++            node = queue.popleft()
++            yield node
++            queue.extend(node.children.values())
++
++    @property
++    def subtree_with_keys(self) -> Iterator[tuple[str, Self]]:
++        """Iterate over relative paths and nodes breadth-first."""
++        queue = collections.deque([(".", self)])
++        while queue:
++            path, node = queue.popleft()
++            yield path, node
++            for name, child in node.children.items():
++                child_path = name if path == "." else f"{path}/{name}"
++                queue.append((child_path, child))
++
++    @property
++    def descendants(self) -> tuple[Self, ...]:
++        """All descendants in breadth-first order."""
++        iterator = self.subtree
++        next(iterator)
++        return tuple(iterator)
++
++    @property
++    def leaves(self) -> tuple[Self, ...]:
++        """Leaf nodes in this subtree, in breadth-first order."""
++        return tuple(node for node in self.subtree if node.is_leaf)
++
++    @property
++    def siblings(self) -> dict[str, Self]:
++        """Other children of this node's parent."""
++        if self.parent is None:
++            return {}
++        return {
++            name: node
++            for name, node in self.parent.children.items()
++            if node is not self
++        }
++
++    @property
++    def depth(self) -> int:
++        """Maximum level in the whole tree containing this node."""
++        return max(node.level for node in self.root.subtree)
++
++    @property
++    def width(self) -> int:
++        """Number of nodes at this node's level in the whole tree."""
++        level = self.level
++        return sum(node.level == level for node in self.root.subtree)
++
++    def orphan(self) -> None:
++        """Detach this node from its parent."""
++        self._set_parent(None)
++
+ 
+ 
+ 
+@@ -170,7 +454,7 @@ class TreeNode:
+         self._check_children(children)
+         children = {**children}
+ 
+-        old_children = self.children
++        old_children = dict(self.children)
+         del self.children
+         try:
+             self._pre_attach_children(children)
+@@ -188,7 +472,7 @@ class TreeNode:
+         # TODO this just detaches all the children, it doesn't actually delete them...
+         children = self.children
+         self._pre_detach_children(children)
+-        for child in self.children.values():
++        for child in list(self.children.values()):
+             child.orphan()
+         assert len(self.children) == 0
+         self._post_detach_children(children)
+@@ -650,7 +934,6 @@ class TreeNode:
+         """Remove a child node from this tree object."""
+         if key in self.children:
+             child = self._children[key]
+-            del self._children[key]
+             child.orphan()
+         else:
+             raise KeyError(key)
+@@ -715,6 +998,10 @@ class NamedNode(TreeNode):
+         name_repr = repr(self.name) if self.name is not None else ""
+         return f"NamedNode({name_repr})"
+ 
++    def _post_attach(self, parent: Self, name: str) -> None:
++        super()._post_attach(parent, name)
++        self._name = name
++
+ 
+ 
+ 
+@@ -800,7 +1087,37 @@ class TreeIsomorphismError(ValueError):
+     """Error raised if two tree objects do not share the same node structure."""
+ 
+ 
+-
++def group_subtrees(
++    *trees: AnyNamedNode,
++) -> Iterator[tuple[str, tuple[AnyNamedNode, ...]]]:
++    """Yield corresponding nodes from isomorphic trees in breadth-first order."""
++    if not trees:
++        raise TypeError("must pass at least one tree object")
++
++    queue = collections.deque([(".", tuple(trees))])
++    while queue:
++        path, nodes = queue.popleft()
++        yield path, nodes
++
++        first_keys = list(nodes[0].children)
++        first_key_set = nodes[0].children.keys()
++        for node in nodes[1:]:
++            if node.children.keys() != first_key_set:
++                location = "root node" if path == "." else f"node {path!r}"
++                raise TreeIsomorphismError(
++                    f"children at {location} do not match: "
++                    f"{first_keys} vs {list(node.children)}"
++                )
++
++        for name in first_keys:
++            child_path = name if path == "." else f"{path}/{name}"
++            queue.append((child_path, tuple(node.children[name] for node in nodes)))
++
++
++def zip_subtrees(*trees: AnyNamedNode) -> Iterator[tuple[AnyNamedNode, ...]]:
++    """Yield corresponding node tuples from isomorphic trees."""
++    for _, nodes in group_subtrees(*trees):
++        yield nodes
+ 
+ 
+ 

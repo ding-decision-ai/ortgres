@@ -1,0 +1,594 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /testbed/build/cp311
+Build type: native build
+Project name: pandas
+Project version: 0+untagged.1.g9263305.dirty
+C compiler for the host machine: cc (gcc 11.4.0 "cc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C linker for the host machine: cc ld.bfd 2.38
+C++ compiler for the host machine: c++ (gcc 11.4.0 "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0")
+C++ linker for the host machine: c++ ld.bfd 2.38
+Cython compiler for the host machine: cython (cython 3.2.1)
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Program python found: YES (/opt/miniconda3/envs/testbed/bin/python)
+Program cython found: YES (/opt/miniconda3/envs/testbed/bin/cython)
+Configuring free_threading_config.pxi using configuration
+Build targets in project: 56
+
+pandas 0+untagged.1.g9263305.dirty
+
+  User defined options
+    Native files: /testbed/build/cp311/meson-python-native-file.ini
+    buildtype   : release
+    vsenv       : True
+    b_ndebug    : if-release
+    b_vscrt     : md
+
+Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at /opt/miniconda3/envs/testbed/bin/ninja
+
+Visual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:
+/opt/miniconda3/envs/testbed/bin/meson compile -C .
+[1/155] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command
+[2/155] Generating pandas/_libs/intervaltree_helper_pxi with a custom command
+[3/155] Generating pandas/_libs/algos_common_helper_pxi with a custom command
+[4/155] Generating pandas/_libs/index_class_helper_pxi with a custom command
+[5/155] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command
+[6/155] Generating pandas/_libs/sparse_op_helper_pxi with a custom command
+[7/155] Generating pandas/_libs/algos_take_helper_pxi with a custom command
+[8/155] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command
+[9/155] Compiling Cython source /testbed/pandas/_libs/indexing.pyx
+[10/155] Compiling Cython source /testbed/pandas/_libs/tslibs/base.pyx
+[11/155] Compiling Cython source /testbed/pandas/_libs/properties.pyx
+[12/155] Compiling Cython source /testbed/pandas/_libs/hashing.pyx
+[13/155] Compiling Cython source /testbed/pandas/_libs/tslibs/dtypes.pyx
+[14/155] Compiling Cython source /testbed/pandas/_libs/ops.pyx
+[15/155] Compiling Cython source /testbed/pandas/_libs/sas.pyx
+[16/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timezones.pyx
+[17/155] Compiling Cython source /testbed/pandas/_libs/tslibs/nattype.pyx
+[18/155] Compiling Cython source /testbed/pandas/_libs/ops_dispatch.pyx
+[19/155] Compiling Cython source /testbed/pandas/_libs/tslibs/ccalendar.pyx
+[20/155] Compiling Cython source /testbed/pandas/_libs/tslibs/vectorized.pyx
+[21/155] Compiling Cython source /testbed/pandas/_libs/tslibs/np_datetime.pyx
+[22/155] Compiling Cython source /testbed/pandas/_libs/tslibs/tzconversion.pyx
+[23/155] Compiling Cython source /testbed/pandas/_libs/tslibs/parsing.pyx
+[24/155] Compiling Cython source /testbed/pandas/_libs/missing.pyx
+[25/155] Compiling Cython source /testbed/pandas/_libs/internals.pyx
+warning: /testbed/pandas/_libs/internals.pyx:31:0: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:916:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:921:12: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:955:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:973:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+warning: /testbed/pandas/_libs/internals.pyx:994:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310
+[26/155] Compiling Cython source /testbed/pandas/_libs/tslibs/strptime.pyx
+[27/155] Compiling Cython source /testbed/pandas/_libs/tslibs/conversion.pyx
+[28/155] Compiling Cython source /testbed/pandas/_libs/tslibs/fields.pyx
+[29/155] Compiling Cython source /testbed/pandas/_libs/arrays.pyx
+[30/155] Compiling Cython source /testbed/pandas/_libs/byteswap.pyx
+[31/155] Compiling Cython source /testbed/pandas/_libs/reshape.pyx
+[32/155] Compiling C object pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_base.pyx.c.o
+[33/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timedeltas.pyx
+[34/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/.._src_parser_tokenizer.c.o
+[35/155] Compiling Cython source /testbed/pandas/_libs/parsers.pyx
+[36/155] Compiling Cython source /testbed/pandas/_libs/testing.pyx
+[37/155] Compiling Cython source /testbed/pandas/_libs/tslibs/period.pyx
+[38/155] Compiling Cython source /testbed/pandas/_libs/lib.pyx
+[39/155] Compiling Cython source /testbed/pandas/_libs/tslib.pyx
+[40/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timestamps.pyx
+[41/155] Compiling Cython source /testbed/pandas/_libs/writers.pyx
+[42/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime.c.o
+[43/155] Compiling Cython source /testbed/pandas/_libs/tslibs/offsets.pyx
+[44/155] Compiling C object pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_ccalendar.pyx.c.o
+[45/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[46/155] Compiling C object pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_indexing.pyx.c.o
+[47/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_date_conversions.c.o
+[48/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[49/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_pd_parser.c.o
+[50/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime_strings.c.o
+[51/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_pd_datetime.c.o
+[52/155] Compiling Cython source /testbed/pandas/_libs/index.pyx
+[53/155] Compiling C object pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashing.pyx.c.o
+[54/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o
+[55/155] Compiling Cython source /testbed/pandas/_libs/window/indexers.pyx
+[56/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_JSONtoObj.c.o
+[57/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_ujson.c.o
+[58/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsonenc.c.o
+[59/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[60/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsondec.c.o
+[61/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_objToJSON.c.o
+[62/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o
+[63/155] Compiling C object pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_vectorized.pyx.c.o
+[64/155] Compiling Cython source /testbed/pandas/_libs/join.pyx
+[65/155] Compiling Cython source /testbed/pandas/_libs/window/aggregations.pyx
+[66/155] Compiling C object pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timezones.pyx.c.o
+[67/155] Compiling C object pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_arrays.pyx.c.o
+[68/155] Compiling Cython source /testbed/pandas/_libs/interval.pyx
+[69/155] Compiling C object pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_byteswap.pyx.c.o
+[70/155] Compiling C object pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops_dispatch.pyx.c.o
+[71/155] Compiling Cython source /testbed/pandas/_libs/sparse.pyx
+[72/155] Compiling C object pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_dtypes.pyx.c.o
+[73/155] Generating write_version_file with a custom command
+[74/155] Linking target pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so
+[75/155] Compiling C object _cyutility.cpython-311-x86_64-linux-gnu.so.p/meson-generated_..__cyutility.c.o
+[76/155] Generating pandas/__init__.py with a custom command
+[77/155] Linking target pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so
+[78/155] Linking target _cyutility.cpython-311-x86_64-linux-gnu.so
+[79/155] Linking target pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so
+[80/155] Linking target pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so
+[81/155] Linking target pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so
+[82/155] Linking target pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so
+[83/155] Linking target pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so
+[84/155] Linking target pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so
+[85/155] Linking target pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so
+[86/155] Linking target pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so
+[87/155] Linking target pandas/_libs/json.cpython-311-x86_64-linux-gnu.so
+[88/155] Linking target pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so
+[89/155] Linking target pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so
+[90/155] Compiling C object pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_np_datetime.pyx.c.o
+[91/155] Linking target pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so
+[92/155] Compiling C object pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_conversion.pyx.c.o
+[93/155] Linking target pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so
+[94/155] Compiling C object pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_properties.pyx.c.o
+[95/155] Linking target pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so
+[96/155] Compiling C object pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_writers.pyx.c.o
+[97/155] Linking target pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so
+[98/155] Compiling C object pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_nattype.pyx.c.o
+[99/155] Linking target pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so
+[100/155] Compiling C object pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops.pyx.c.o
+[101/155] Linking target pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so
+[102/155] Compiling C object pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sas.pyx.c.o
+[103/155] Linking target pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so
+[104/155] Compiling C object pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_reshape.pyx.c.o
+[105/155] Compiling C object pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_fields.pyx.c.o
+[106/155] Linking target pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so
+[107/155] Linking target pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so
+[108/155] Compiling C object pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_missing.pyx.c.o
+[109/155] Linking target pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so
+[110/155] Compiling C object pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_testing.pyx.c.o
+[111/155] Linking target pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so
+[112/155] Compiling C object pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_tzconversion.pyx.c.o
+[113/155] Compiling Cython source /testbed/pandas/_libs/hashtable.pyx
+[114/155] Linking target pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so
+[115/155] Compiling C object pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslib.pyx.c.o
+[116/155] Linking target pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so
+[117/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_parsing.pyx.c.o
+[118/155] Linking target pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so
+[119/155] Compiling C object pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_strptime.pyx.c.o
+[120/155] Linking target pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so
+[121/155] Compiling Cython source /testbed/pandas/_libs/groupby.pyx
+[122/155] Compiling C object pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_internals.pyx.c.o
+[123/155] Linking target pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so
+[124/155] Compiling C object pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_indexers.pyx.c.o
+[125/155] Compiling Cython source /testbed/pandas/_libs/algos.pyx
+[126/155] Linking target pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so
+[127/155] Compiling C object pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_period.pyx.c.o
+[128/155] Linking target pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so
+[129/155] Compiling C object pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timestamps.pyx.c.o
+[130/155] Linking target pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so
+[131/155] Compiling C object pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timedeltas.pyx.c.o
+[132/155] Linking target pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so
+[133/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_parsers.pyx.c.o
+[134/155] Linking target pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so
+[135/155] Compiling C++ object pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_aggregations.pyx.cpp.o
+[136/155] Linking target pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so
+[137/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o
+[138/155] Linking target pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so
+[139/155] Compiling C object pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o
+[140/155] Linking target pandas/_libs/index.cpython-311-x86_64-linux-gnu.so
+[141/155] Compiling C object pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o
+[142/155] Linking target pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so
+[143/155] Compiling C object pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o
+[144/155] Linking target pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so
+[145/155] Compiling C object pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o
+[146/155] Linking target pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so
+[147/155] Compiling C object pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o
+[148/155] Linking target pandas/_libs/join.cpython-311-x86_64-linux-gnu.so
+[149/155] Compiling C object pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o
+[150/155] Linking target pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so
+[151/155] Compiling C object pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o
+[152/155] Linking target pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so
+[153/155] Compiling C object pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o
+[154/155] Linking target pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 321 items
+
+pandas/tests/groupby/methods/test_quantile.py ..........................................................................................................................................................................................................................................................F...............................................................F....F.
+
+=================================== FAILURES ===================================
+___________________ test_groupby_quantile_NA_float[float32] ____________________
+pandas/tests/groupby/methods/test_quantile.py:270: in test_groupby_quantile_NA_float
+    tm.assert_series_equal(result, expected)
+E   AssertionError: Attributes of Series are different
+E   
+E   Attribute "dtype" are different
+E   [left]:  float32
+E   [right]: float64
+_______________________ test_groupby_timedelta_quantile ________________________
+pandas/tests/groupby/methods/test_quantile.py:367: in test_groupby_timedelta_quantile
+    {"value": pd.to_timedelta(np.arange(4), unit="s"), "group": [1, 1, 2, 2]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/tools/timedeltas.py:201: in to_timedelta
+    return _convert_listlike(arg, unit=unit, errors=errors)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/tools/timedeltas.py:244: in _convert_listlike
+    td64arr = sequence_to_td64ns(arg, unit=unit, errors=errors, copy=False)[0]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/arrays/timedeltas.py:1132: in sequence_to_td64ns
+    data, copy_made = _ints_to_td64ns(data, unit=unit)
+                      ^^^^^^^^^^^^^^^
+E   NameError: name '_ints_to_td64ns' is not defined
+_____________________ test_groupby_quantile_dt64tz_period ______________________
+pandas/tests/groupby/methods/test_quantile.py:426: in test_groupby_quantile_dt64tz_period
+    exp = {i: df.iloc[i::5].quantile(0.5) for i in range(5)}
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/tests/groupby/methods/test_quantile.py:426: in <dictcomp>
+    exp = {i: df.iloc[i::5].quantile(0.5) for i in range(5)}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:13856: in quantile
+    res = res_df.iloc[0]
+          ^^^^^^^^^^^^^^
+pandas/core/indexing.py:1220: in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/indexing.py:1788: in _getitem_axis
+    return self.obj._ixs(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/frame.py:4063: in _ixs
+    new_mgr = self._mgr.fast_xs(i)
+              ^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:1145: in fast_xs
+    dtype = interleaved_dtype([blk.dtype for blk in self.blocks])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/internals/managers.py:127: in interleaved_dtype
+    return find_common_type(dtypes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/cast.py:1334: in find_common_type
+    res = t._get_common_dtype(types)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+pandas/core/dtypes/dtypes.py:975: in _get_common_dtype
+    return super()._get_common_dtype(dtypes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'super' object has no attribute '_get_common_dtype'
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+0.01s call     pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_no_segfaults
+
+(29 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals0-b_vals0-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals0-b_vals0-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals0-b_vals0-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals0-b_vals0-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals0-b_vals0-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals1-b_vals1-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals1-b_vals1-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals1-b_vals1-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals1-b_vals1-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals1-b_vals1-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals2-b_vals2-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals2-b_vals2-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals2-b_vals2-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals2-b_vals2-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals2-b_vals2-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals3-b_vals3-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals3-b_vals3-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals3-b_vals3-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals3-b_vals3-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals3-b_vals3-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals4-b_vals4-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals4-b_vals4-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals4-b_vals4-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals4-b_vals4-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals4-b_vals4-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals5-b_vals5-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals5-b_vals5-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals5-b_vals5-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals5-b_vals5-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals5-b_vals5-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals6-b_vals6-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals6-b_vals6-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals6-b_vals6-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals6-b_vals6-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals6-b_vals6-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals7-b_vals7-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals7-b_vals7-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals7-b_vals7-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals7-b_vals7-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals7-b_vals7-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals8-b_vals8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals8-b_vals8-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals8-b_vals8-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals8-b_vals8-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0-a_vals8-b_vals8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals0-b_vals0-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals0-b_vals0-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals0-b_vals0-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals0-b_vals0-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals0-b_vals0-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals1-b_vals1-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals1-b_vals1-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals1-b_vals1-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals1-b_vals1-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals1-b_vals1-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals2-b_vals2-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals2-b_vals2-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals2-b_vals2-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals2-b_vals2-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals2-b_vals2-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals3-b_vals3-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals3-b_vals3-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals3-b_vals3-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals3-b_vals3-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals3-b_vals3-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals4-b_vals4-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals4-b_vals4-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals4-b_vals4-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals4-b_vals4-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals4-b_vals4-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals5-b_vals5-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals5-b_vals5-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals5-b_vals5-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals5-b_vals5-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals5-b_vals5-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals6-b_vals6-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals6-b_vals6-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals6-b_vals6-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals6-b_vals6-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals6-b_vals6-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals7-b_vals7-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals7-b_vals7-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals7-b_vals7-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals7-b_vals7-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals7-b_vals7-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals8-b_vals8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals8-b_vals8-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals8-b_vals8-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals8-b_vals8-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.25-a_vals8-b_vals8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals0-b_vals0-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals0-b_vals0-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals0-b_vals0-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals0-b_vals0-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals0-b_vals0-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals1-b_vals1-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals1-b_vals1-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals1-b_vals1-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals1-b_vals1-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals1-b_vals1-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals2-b_vals2-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals2-b_vals2-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals2-b_vals2-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals2-b_vals2-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals2-b_vals2-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals3-b_vals3-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals3-b_vals3-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals3-b_vals3-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals3-b_vals3-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals3-b_vals3-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals4-b_vals4-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals4-b_vals4-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals4-b_vals4-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals4-b_vals4-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals4-b_vals4-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals5-b_vals5-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals5-b_vals5-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals5-b_vals5-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals5-b_vals5-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals5-b_vals5-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals6-b_vals6-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals6-b_vals6-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals6-b_vals6-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals6-b_vals6-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals6-b_vals6-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals7-b_vals7-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals7-b_vals7-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals7-b_vals7-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals7-b_vals7-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals7-b_vals7-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals8-b_vals8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals8-b_vals8-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals8-b_vals8-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals8-b_vals8-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.5-a_vals8-b_vals8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals0-b_vals0-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals0-b_vals0-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals0-b_vals0-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals0-b_vals0-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals0-b_vals0-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals1-b_vals1-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals1-b_vals1-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals1-b_vals1-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals1-b_vals1-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals1-b_vals1-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals2-b_vals2-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals2-b_vals2-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals2-b_vals2-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals2-b_vals2-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals2-b_vals2-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals3-b_vals3-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals3-b_vals3-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals3-b_vals3-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals3-b_vals3-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals3-b_vals3-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals4-b_vals4-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals4-b_vals4-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals4-b_vals4-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals4-b_vals4-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals4-b_vals4-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals5-b_vals5-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals5-b_vals5-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals5-b_vals5-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals5-b_vals5-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals5-b_vals5-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals6-b_vals6-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals6-b_vals6-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals6-b_vals6-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals6-b_vals6-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals6-b_vals6-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals7-b_vals7-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals7-b_vals7-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals7-b_vals7-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals7-b_vals7-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals7-b_vals7-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals8-b_vals8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals8-b_vals8-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals8-b_vals8-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals8-b_vals8-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[0.75-a_vals8-b_vals8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals0-b_vals0-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals0-b_vals0-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals0-b_vals0-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals0-b_vals0-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals0-b_vals0-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals1-b_vals1-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals1-b_vals1-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals1-b_vals1-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals1-b_vals1-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals1-b_vals1-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals2-b_vals2-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals2-b_vals2-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals2-b_vals2-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals2-b_vals2-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals2-b_vals2-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals3-b_vals3-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals3-b_vals3-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals3-b_vals3-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals3-b_vals3-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals3-b_vals3-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals4-b_vals4-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals4-b_vals4-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals4-b_vals4-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals4-b_vals4-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals4-b_vals4-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals5-b_vals5-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals5-b_vals5-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals5-b_vals5-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals5-b_vals5-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals5-b_vals5-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals6-b_vals6-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals6-b_vals6-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals6-b_vals6-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals6-b_vals6-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals6-b_vals6-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals7-b_vals7-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals7-b_vals7-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals7-b_vals7-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals7-b_vals7-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals7-b_vals7-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals8-b_vals8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals8-b_vals8-lower]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals8-b_vals8-higher]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals8-b_vals8-nearest]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile[1-a_vals8-b_vals8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_array
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_array2
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_array_no_sort
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_array_multiple_levels
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_with_arraylike_q_and_int_columns[q0-groupby0-frame_size0]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_with_arraylike_q_and_int_columns[q0-groupby0-frame_size1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_with_arraylike_q_and_int_columns[q0-groupby1-frame_size0]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_with_arraylike_q_and_int_columns[q0-groupby1-frame_size1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_raises
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_out_of_bounds_q_raises
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_no_segfaults
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_correct_results[key0-val0-expected_key0-expected_val0]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_correct_results[key1-val1-expected_key1-expected_val1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_correct_results[key2-val2-expected_key2-expected_val2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_correct_results[key3-val3-expected_key3-expected_val3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_quantile_missing_group_values_correct_results[key4-val4-expected_key4-expected_val4]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_nullable_array[0.5-values0]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_nullable_array[0.5-values1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_nullable_array[q1-values0]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_nullable_array[q1-values1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_raises_on_invalid_dtype[True-0.5]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_raises_on_invalid_dtype[True-q1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_raises_on_invalid_dtype[False-0.5]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_raises_on_invalid_dtype[False-q1]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_float[float]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_float[float64]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_float[Float32]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_float[Float64]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[UInt8]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[UInt16]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[UInt32]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[UInt64]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[Int8]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[Int16]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[Int32]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_int[Int64]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt8-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt8-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt8-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt16-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt16-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt16-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt32-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt32-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt32-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt64-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt64-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[UInt64-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int8-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int8-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int8-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int16-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int16-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int16-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int32-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int32-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int32-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int64-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int64-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Int64-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Float32-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Float32-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Float32-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Float64-lower-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Float64-higher-2-3]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked[Float64-nearest-2-2]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt16-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt16-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt32-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt32-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt64-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[UInt64-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int8-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int8-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int16-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int16-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int32-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int32-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int64-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Int64-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Float32-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Float32-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Float64-midpoint]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_all_na_group_masked_interp[Float64-linear]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_allNA_column[Float64]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_allNA_column[Float32]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_timestamp_groupby_quantile[s]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_timestamp_groupby_quantile[ms]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_timestamp_groupby_quantile[us]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_timestamp_groupby_quantile[ns]
+PASSED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_nonmulti_levels_order
+FAILED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_NA_float[float32]
+FAILED pandas/tests/groupby/methods/test_quantile.py::test_groupby_timedelta_quantile
+FAILED pandas/tests/groupby/methods/test_quantile.py::test_groupby_quantile_dt64tz_period
+======================== 3 failed, 318 passed in 0.95s =========================

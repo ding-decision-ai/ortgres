@@ -1,0 +1,944 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 12 items
+
+tests/store/model_registry/test_rest_store_webhooks.py::test_create_webhook FAILED | MEM 22.7/33.7 GB | DISK 793.5/915.7 GB [  8%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook FAILED | MEM 22.7/33.7 GB | DISK 793.5/915.7 GB [ 16%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook_not_found FAILED | MEM 22.7/33.7 GB | DISK 793.5/915.7 GB [ 25%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_list_webhooks FAILED | MEM 22.7/33.7 GB | DISK 793.5/915.7 GB [ 33%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook FAILED | MEM 22.6/33.7 GB | DISK 793.5/915.7 GB [ 41%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_partial FAILED | MEM 22.6/33.7 GB | DISK 793.6/915.7 GB [ 50%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_not_found FAILED | MEM 22.7/33.7 GB | DISK 793.6/915.7 GB [ 58%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace] FAILED | MEM 22.7/33.7 GB | DISK 793.5/915.7 GB [ 66%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme] FAILED | MEM 22.7/33.7 GB | DISK 793.5/915.7 GB [ 75%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL] FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB [ 83%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB [ 91%]
+tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook_not_found FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_create_webhook ______________________________
+tests/store/model_registry/test_rest_store_webhooks.py:47: in test_create_webhook
+    webhook = store.create_webhook(
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b42297a810>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'test_webhook'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b42297a810>
+        status     = None
+        url        = 'https://example.com/webhook'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:27 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:27 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:27 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:27 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:27 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:28 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:28 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:28 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:28 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:29 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:29 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:29 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:29 INFO mlflow.tracking.fluent: Active model is cleared
+_______________________________ test_get_webhook _______________________________
+tests/store/model_registry/test_rest_store_webhooks.py:98: in test_get_webhook
+    created_webhook = store.create_webhook(
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b4201eb810>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'test_webhook'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b4201eb810>
+        status     = None
+        url        = 'https://example.com/webhook'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:29 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:30 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:30 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:30 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:30 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:30 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:31 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:31 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:31 INFO mlflow.tracking.fluent: Active model is cleared
+__________________________ test_get_webhook_not_found __________________________
+tests/store/model_registry/test_rest_store_webhooks.py:110: in test_get_webhook_not_found
+    store.get_webhook("nonexistent")
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41f52dd10>
+mlflow/store/model_registry/rest_store.py:533: in get_webhook
+    response_proto = self._call_webhook_endpoint(GetWebhook, webhook_id=webhook_id)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41f52dd10>
+        webhook_id = 'nonexistent'
+mlflow/store/model_registry/rest_store.py:87: in _call_webhook_endpoint
+    return call_endpoint(self.get_host_creds(), endpoint, method, json_body, response_proto)
+           ^^^^^^^^^^^^^
+E   NameError: name 'call_endpoint' is not defined
+        api        = <class 'webhooks_pb2.GetWebhook'>
+        endpoint   = '/api/2.0/mlflow/webhooks/nonexistent'
+        json_body  = None
+        method     = 'GET'
+        response_proto = 
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41f52dd10>
+        webhook_id = 'nonexistent'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:31 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:31 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:31 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:31 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:31 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:31 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:32 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:33 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:33 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:33 INFO mlflow.tracking.fluent: Active model is cleared
+______________________________ test_list_webhooks ______________________________
+tests/store/model_registry/test_rest_store_webhooks.py:117: in test_list_webhooks
+    webhook = store.create_webhook(
+        created_webhooks = []
+        i          = 0
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e9ac5d0>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'webhook0'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e9ac5d0>
+        status     = None
+        url        = 'https://example.com/0'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:33 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:33 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:33 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:33 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:33 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:33 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:34 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:35 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:35 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:35 INFO mlflow.tracking.fluent: Active model is cleared
+_____________________________ test_update_webhook ______________________________
+tests/store/model_registry/test_rest_store_webhooks.py:139: in test_update_webhook
+    webhook = store.create_webhook(
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e85fe90>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'original_name'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e85fe90>
+        status     = None
+        url        = 'https://example.com/original'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:35 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:35 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:35 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:35 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:35 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:35 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:36 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:36 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:36 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:37 INFO mlflow.tracking.fluent: Active model is cleared
+_________________________ test_update_webhook_partial __________________________
+tests/store/model_registry/test_rest_store_webhooks.py:167: in test_update_webhook_partial
+    webhook = store.create_webhook(
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e839d90>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = 'Original description'
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'original_name'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e839d90>
+        status     = None
+        url        = 'https://example.com/original'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:37 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:37 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:37 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:37 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:37 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:37 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:38 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:39 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:39 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:39 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_update_webhook_not_found _________________________
+tests/store/model_registry/test_rest_store_webhooks.py:186: in test_update_webhook_not_found
+    store.update_webhook(webhook_id="nonexistent", name="new_name")
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e343bd0>
+mlflow/store/model_registry/rest_store.py:556: in update_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = None
+        name       = 'new_name'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e343bd0>
+        status     = None
+        url        = None
+        webhook_id = 'nonexistent'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:39 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:39 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:39 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:39 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:39 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:39 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:40 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:40 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:40 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:41 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace] _
+tests/store/model_registry/test_rest_store_webhooks.py:199: in test_update_webhook_invalid_urls
+    webhook = store.create_webhook(
+        expected_match = 'Webhook URL cannot be empty or just whitespace'
+        invalid_url = '   '
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e02ea90>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'test_webhook'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e02ea90>
+        status     = None
+        url        = 'https://example.com/webhook'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:41 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:41 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:41 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:41 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:41 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:41 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:42 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:42 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:42 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:43 INFO mlflow.tracking.fluent: Active model is cleared
+_ test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme] _
+tests/store/model_registry/test_rest_store_webhooks.py:199: in test_update_webhook_invalid_urls
+    webhook = store.create_webhook(
+        expected_match = 'Invalid webhook URL scheme'
+        invalid_url = 'ftp://example.com'
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e517a90>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'test_webhook'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41e517a90>
+        status     = None
+        url        = 'https://example.com/webhook'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:43 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:43 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:43 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:43 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:43 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:43 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:44 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:44 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:44 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:44 INFO mlflow.tracking.fluent: Active model is cleared
+____ test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL] _____
+tests/store/model_registry/test_rest_store_webhooks.py:199: in test_update_webhook_invalid_urls
+    webhook = store.create_webhook(
+        expected_match = 'Invalid webhook URL'
+        invalid_url = 'http://[invalid'
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d9b4e50>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'test_webhook'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d9b4e50>
+        status     = None
+        url        = 'https://example.com/webhook'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:44 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:45 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:45 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:45 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:45 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:45 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:46 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:46 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:46 INFO mlflow.tracking.fluent: Active model is cleared
+_____________________________ test_delete_webhook ______________________________
+tests/store/model_registry/test_rest_store_webhooks.py:210: in test_delete_webhook
+    webhook = store.create_webhook(
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d851fd0>
+mlflow/store/model_registry/rest_store.py:519: in create_webhook
+    req_body = message_to_json(
+               ^^^^^^^^^^^^^^^
+E   NameError: name 'message_to_json' is not defined
+        description = None
+        events     = [WebhookEvent(entity=model_version, action=created)]
+        name       = 'test_webhook'
+        secret     = None
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d851fd0>
+        status     = None
+        url        = 'https://example.com/webhook'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:46 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:46 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:46 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:47 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:47 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:47 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:47 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:48 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:48 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:48 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:48 INFO mlflow.tracking.fluent: Active model is cleared
+________________________ test_delete_webhook_not_found _________________________
+tests/store/model_registry/test_rest_store_webhooks.py:225: in test_delete_webhook_not_found
+    store.delete_webhook("nonexistent")
+        store      = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d466510>
+mlflow/store/model_registry/rest_store.py:570: in delete_webhook
+    self._call_webhook_endpoint(DeleteWebhook, webhook_id=webhook_id)
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d466510>
+        webhook_id = 'nonexistent'
+mlflow/store/model_registry/rest_store.py:87: in _call_webhook_endpoint
+    return call_endpoint(self.get_host_creds(), endpoint, method, json_body, response_proto)
+           ^^^^^^^^^^^^^
+E   NameError: name 'call_endpoint' is not defined
+        api        = <class 'webhooks_pb2.DeleteWebhook'>
+        endpoint   = '/api/2.0/mlflow/webhooks/nonexistent'
+        json_body  = None
+        method     = 'DELETE'
+        response_proto = 
+        self       = <mlflow.store.model_registry.rest_store.RestStore object at 0x78b41d466510>
+        webhook_id = 'nonexistent'
+---------------------------- Captured stderr setup -----------------------------
+2026/10/11 03:45:48 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:49 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2026-10-11 03:45:49 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2026-10-11 03:45:49 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2026-10-11 03:45:49 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2026-10-11 03:45:49 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2026/10/11 03:45:50 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 03:45:50 INFO mlflow.store.db.utils: Updating database tables
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2026-10-11 03:45:50 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:45:50 INFO mlflow.tracking.fluent: Active model is cleared
+=============================== warnings summary ===============================
+../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/starlette/middleware/wsgi.py:15
+  /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/starlette/middleware/wsgi.py:15: DeprecationWarning: starlette.middleware.wsgi is deprecated and will be removed in a future release. Please refer to https://github.com/abersheeran/a2wsgi as a replacement.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= slowest 10 durations =============================
+2.28s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_create_webhook
+1.86s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook
+1.77s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_partial
+1.77s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace]
+1.71s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme]
+1.69s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL]
+1.69s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook_not_found
+1.67s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook_not_found
+1.66s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook
+1.65s setup    tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_not_found
+
+========================= per-file durations (sorted) ==========================
+::group::per-file durations (sorted)
+
+| Rank | File                                                     | Duration | Tests | Min    | Max    | Avg    |
+| ---- | -------------------------------------------------------- | -------- | ----- | ------ | ------ | ------ |
+| 1    | `tests/store/model_registry/test_rest_store_webhooks.py` | 23.36s   | 12    | 1.777s | 2.474s | 1.946s |
+
+::endgroup::
+
+========================= command to run failed tests ==========================
+pytest 'tests/store/model_registry/test_rest_store_webhooks.py::test_create_webhook' 'tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook' 'tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook_not_found' 'tests/store/model_registry/test_rest_store_webhooks.py::test_list_webhooks' 'tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook' 'tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_partial' 'tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_not_found' 'tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace]' 'tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme]' 'tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL]' 'tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook' 'tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook_not_found'
+
+=========================== short test summary info ============================
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_create_webhook
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_get_webhook_not_found
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_list_webhooks
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_partial
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_not_found
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[   -Webhook URL cannot be empty or just whitespace]
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[ftp://example.com-Invalid webhook URL scheme]
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_update_webhook_invalid_urls[http://[invalid-Invalid webhook URL]
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook
+FAILED | MEM 22.9/33.7 GB | DISK 793.5/915.7 GB tests/store/model_registry/test_rest_store_webhooks.py::test_delete_webhook_not_found
+======================== 12 failed, 1 warning in 23.74s ========================

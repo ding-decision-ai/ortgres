@@ -1,0 +1,36 @@
+{
+  "instance_id": "pypa__hatch.ff4b4040.test_fmt.782c88a8.lv1",
+  "repo": "pypa/hatch",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 2,
+      "failure": 17,
+      "total": 19
+    },
+    "p2p": {
+      "success": 144,
+      "failure": 0,
+      "total": 144
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "7639e2abe7c916cbc88a1c863912c1eb7690cb3e33ca17f77515a5f3372bd9a7"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 9,
+      "failure": 10,
+      "total": 19
+    },
+    "p2p": {
+      "success": 144,
+      "failure": 0,
+      "total": 144
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "35df52149ab470d8712c6947102d0f3798964f82db585de40c00b7133af13130"
+  },
+  "conditions": "conditions.json",
+  "costs": null
+}

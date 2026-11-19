@@ -1,0 +1,242 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 19 items
+
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_creation PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [  5%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_timestamps_required PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 10%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_experiment_ids_setter PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 15%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_proto PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 21%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_proto_minimal PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 26%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_dict PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 31%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_dict_minimal PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 36%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_has_records PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 42%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_proto_with_unloaded_experiment_ids PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 47%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_complex_tags PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 52%]
+tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_df FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 57%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_dict_outputs FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 63%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_string_outputs FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 68%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_non_dict_non_string_outputs FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 73%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_numeric_outputs FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 78%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_none_outputs FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 84%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_expectations FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 89%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_multiple_traces FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [ 94%]
+tests/entities/test_evaluation_dataset.py::test_process_trace_records_mixed_types_error FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB [100%]
+
+=================================== FAILURES ===================================
+________________________ test_evaluation_dataset_to_df _________________________
+tests/entities/test_evaluation_dataset.py:314: in test_evaluation_dataset_to_df
+    df_empty = dataset.to_df()
+               ^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb536350>
+mlflow/entities/evaluation_dataset.py:325: in to_df
+    records = self.records
+              ^^^^^^^^^^^^
+        pd         = <module 'pandas' from '/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pandas/__init__.py'>
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb536350>
+mlflow/entities/evaluation_dataset.py:122: in records
+    tracking_store = _get_store()
+                     ^^^^^^^^^^
+E   NameError: name '_get_store' is not defined
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb536350>
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+_________________ test_process_trace_records_with_dict_outputs _________________
+tests/entities/test_evaluation_dataset.py:485: in test_process_trace_records_with_dict_outputs
+    record_dicts = dataset._process_trace_records([trace])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb6bdb90>
+        trace      = Trace(trace_id=trace1)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb6bdb90>
+        trace      = Trace(trace_id=trace1)
+        traces     = [Trace(trace_id=trace1)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+________________ test_process_trace_records_with_string_outputs ________________
+tests/entities/test_evaluation_dataset.py:510: in test_process_trace_records_with_string_outputs
+    record_dicts = dataset._process_trace_records([trace])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb66d250>
+        trace      = Trace(trace_id=trace2)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb66d250>
+        trace      = Trace(trace_id=trace2)
+        traces     = [Trace(trace_id=trace2)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+_________ test_process_trace_records_with_non_dict_non_string_outputs __________
+tests/entities/test_evaluation_dataset.py:532: in test_process_trace_records_with_non_dict_non_string_outputs
+    record_dicts = dataset._process_trace_records([trace])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb68cd50>
+        trace      = Trace(trace_id=trace3)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb68cd50>
+        trace      = Trace(trace_id=trace3)
+        traces     = [Trace(trace_id=trace3)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+_______________ test_process_trace_records_with_numeric_outputs ________________
+tests/entities/test_evaluation_dataset.py:551: in test_process_trace_records_with_numeric_outputs
+    record_dicts = dataset._process_trace_records([trace])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb660850>
+        trace      = Trace(trace_id=trace4)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb660850>
+        trace      = Trace(trace_id=trace4)
+        traces     = [Trace(trace_id=trace4)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+_________________ test_process_trace_records_with_none_outputs _________________
+tests/entities/test_evaluation_dataset.py:570: in test_process_trace_records_with_none_outputs
+    record_dicts = dataset._process_trace_records([trace])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb939350>
+        trace      = Trace(trace_id=trace5)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb939350>
+        trace      = Trace(trace_id=trace5)
+        traces     = [Trace(trace_id=trace5)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:40 INFO mlflow.tracking.fluent: Active model is cleared
+_________________ test_process_trace_records_with_expectations _________________
+tests/entities/test_evaluation_dataset.py:592: in test_process_trace_records_with_expectations
+    record_dicts = dataset._process_trace_records([trace])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb760d50>
+        trace      = Trace(trace_id=trace6)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb760d50>
+        trace      = Trace(trace_id=trace6)
+        traces     = [Trace(trace_id=trace6)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:40 INFO mlflow.tracking.fluent: Active model is cleared
+__________________ test_process_trace_records_multiple_traces __________________
+tests/entities/test_evaluation_dataset.py:613: in test_process_trace_records_multiple_traces
+    record_dicts = dataset._process_trace_records(traces)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb535850>
+        traces     = [Trace(trace_id=trace1), Trace(trace_id=trace2), Trace(trace_id=trace3)]
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb535850>
+        trace      = Trace(trace_id=trace1)
+        traces     = [Trace(trace_id=trace1), Trace(trace_id=trace2), Trace(trace_id=trace3)]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:40 INFO mlflow.tracking.fluent: Active model is cleared
+_________________ test_process_trace_records_mixed_types_error _________________
+tests/entities/test_evaluation_dataset.py:640: in test_process_trace_records_mixed_types_error
+    dataset._process_trace_records([trace, not_a_trace])
+        dataset    = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb7a36d0>
+        not_a_trace = {'not': 'a trace'}
+        trace      = Trace(trace_id=trace1)
+mlflow/entities/evaluation_dataset.py:152: in _process_trace_records
+    root_span = trace.data._get_root_span()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'TraceData' object has no attribute '_get_root_span'
+        Trace      = <class 'mlflow.entities.trace.Trace'>
+        i          = 0
+        record_dicts = []
+        self       = <[ImportError("cannot import name '_get_store' from 'mlflow.tracking._tracking_service.utils' (/testbed/mlflow/tracking/_tracking_service/utils.py)") raised in repr()] EvaluationDataset object at 0x7de4fb7a36d0>
+        trace      = Trace(trace_id=trace1)
+        traces     = [Trace(trace_id=trace1), {'not': 'a trace'}]
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:40 INFO mlflow.tracking.fluent: Active model is cleared
+==================================== PASSES ====================================
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+--------------------------- Captured stderr teardown ---------------------------
+2026/10/11 03:36:39 INFO mlflow.tracking.fluent: Active model is cleared
+============================= slowest 10 durations =============================
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+========================= command to run failed tests ==========================
+pytest 'tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_df' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_dict_outputs' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_string_outputs' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_non_dict_non_string_outputs' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_numeric_outputs' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_none_outputs' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_expectations' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_multiple_traces' 'tests/entities/test_evaluation_dataset.py::test_process_trace_records_mixed_types_error'
+
+=========================== short test summary info ============================
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_creation
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_timestamps_required
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_experiment_ids_setter
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_proto
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_proto_minimal
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_dict
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_from_dict_minimal
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_has_records
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_proto_with_unloaded_experiment_ids
+PASSED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_complex_tags
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_evaluation_dataset_to_df
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_dict_outputs
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_string_outputs
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_non_dict_non_string_outputs
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_numeric_outputs
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_none_outputs
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_with_expectations
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_multiple_traces
+FAILED | MEM 22.3/33.7 GB | DISK 790.9/915.7 GB tests/entities/test_evaluation_dataset.py::test_process_trace_records_mixed_types_error
+========================= 9 failed, 10 passed in 0.25s =========================

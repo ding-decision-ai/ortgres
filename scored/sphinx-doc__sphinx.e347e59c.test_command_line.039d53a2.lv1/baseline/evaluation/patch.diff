@@ -1,0 +1,319 @@
+diff --git a/sphinx/cmd/build.py b/sphinx/cmd/build.py
+index 2fc155c..65aa024 100644
+--- a/sphinx/cmd/build.py
++++ b/sphinx/cmd/build.py
+@@ -286,6 +286,241 @@ def jobs_argument(value: str) -> int:
+ 
+ 
+ 
++
++
++def get_parser() -> argparse.ArgumentParser:
++    """Create the argument parser for ``sphinx-build``."""
++    parser = argparse.ArgumentParser(
++        usage='%(prog)s [OPTIONS] SOURCEDIR OUTPUTDIR [FILENAMES...]',
++        epilog=__('For more information, visit <https://www.sphinx-doc.org/>.'),
++        description=__(
++            '\n'
++            'Generate documentation from source files.\n'
++            '\n'
++            'sphinx-build generates documentation from the files in SOURCEDIR and places it\n'
++            "in OUTPUTDIR. It looks for 'conf.py' in SOURCEDIR for the configuration\n"
++            "settings. The 'sphinx-quickstart' tool may be used to generate template files,\n"
++            "including 'conf.py'\n"
++            '\n'
++            'sphinx-build can create documentation in different formats. A format is\n'
++            'selected by specifying the builder name on the command line; it defaults to\n'
++            'HTML. Builders can also perform other tasks related to documentation\n'
++            'processing.\n'
++            '\n'
++            'By default, everything that is outdated is built. Output only for selected\n'
++            'files can be built by specifying individual filenames.\n'
++        ),
++    )
++    if parser.prog == '__main__.py':
++        parser.prog = 'sphinx-build'
++
++    parser.add_argument(
++        '--version',
++        action='version',
++        dest='show_version',
++        version='%%(prog)s %s' % __display_version__,
++    )
++    parser.add_argument(
++        'sourcedir',
++        metavar='SOURCE_DIR',
++        help=__('path to documentation source files'),
++    )
++    parser.add_argument(
++        'outputdir', metavar='OUTPUT_DIR', help=__('path to output directory')
++    )
++    parser.add_argument(
++        'filenames',
++        metavar='FILENAMES',
++        nargs='*',
++        help=__(
++            '(optional) a list of specific files to rebuild. '
++            'Ignored if --write-all is specified'
++        ),
++    )
++
++    group = parser.add_argument_group(__('general options'))
++    group.add_argument(
++        '-b',
++        '--builder',
++        metavar='BUILDER',
++        dest='builder',
++        default='html',
++        help=__("builder to use (default: 'html')"),
++    )
++    group.add_argument(
++        '-j',
++        '--jobs',
++        metavar='N',
++        dest='jobs',
++        type=jobs_argument,
++        default=1,
++        help=__(
++            "run in parallel with N processes, when possible. 'auto' uses the "
++            'number of CPU cores'
++        ),
++    )
++    group.add_argument(
++        '-a',
++        '--write-all',
++        action='store_true',
++        dest='force_all',
++        help=__('write all files (default: only write new and changed files)'),
++    )
++    group.add_argument(
++        '-E',
++        '--fresh-env',
++        action='store_true',
++        dest='freshenv',
++        help=__("don't use a saved environment, always read all files"),
++    )
++
++    group = parser.add_argument_group(__('path options'))
++    group.add_argument(
++        '-d',
++        '--doctree-dir',
++        metavar='PATH',
++        dest='doctreedir',
++        default='',
++        help=__(
++            'directory for doctree and environment files '
++            '(default: OUTPUT_DIR/.doctrees)'
++        ),
++    )
++    group.add_argument(
++        '-c',
++        '--conf-dir',
++        metavar='PATH',
++        dest='confdir',
++        default='',
++        help=__(
++            'directory for the configuration file (conf.py) '
++            '(default: SOURCE_DIR)'
++        ),
++    )
++    group.add_argument(
++        '-C',
++        '--isolated',
++        action='store_true',
++        dest='noconfig',
++        help=__('use no configuration file, only use settings from -D options'),
++    )
++    group.add_argument(
++        '-D',
++        '--define',
++        metavar='SETTING=VALUE',
++        action='append',
++        dest='define',
++        default=[],
++        help=__('override a setting in configuration file'),
++    )
++    group.add_argument(
++        '-A',
++        '--html-define',
++        metavar='NAME=VALUE',
++        action='append',
++        dest='htmldefine',
++        default=[],
++        help=__('pass a value into HTML templates'),
++    )
++    group.add_argument(
++        '-t',
++        '--tag',
++        metavar='TAG',
++        action='append',
++        dest='tags',
++        default=[],
++        help=__('define tag: include "only" blocks with TAG'),
++    )
++    group.add_argument(
++        '-n',
++        '--nitpicky',
++        action='store_true',
++        dest='nitpicky',
++        help=__('nitpicky mode: warn about all missing references'),
++    )
++
++    group = parser.add_argument_group(__('console output options'))
++    group.add_argument(
++        '-v',
++        '--verbose',
++        action='count',
++        dest='verbosity',
++        default=0,
++        help=__('increase verbosity (can be repeated)'),
++    )
++    group.add_argument(
++        '-q',
++        '--quiet',
++        action='store_true',
++        dest='quiet',
++        help=__('no output on stdout, just warnings on stderr'),
++    )
++    group.add_argument(
++        '-Q',
++        '--silent',
++        action='store_true',
++        dest='really_quiet',
++        help=__('no output at all, not even warnings'),
++    )
++    group.add_argument(
++        '--color',
++        action='store_const',
++        const='yes',
++        default='auto',
++        help=__('do emit colored output (default: auto-detect)'),
++    )
++    group.add_argument(
++        '-N',
++        '--no-color',
++        action='store_const',
++        const='no',
++        dest='color',
++        help=__('do not emit colored output (default: auto-detect)'),
++    )
++
++    group = parser.add_argument_group(__('warning control options'))
++    group.add_argument(
++        '-w',
++        '--warning-file',
++        metavar='FILE',
++        dest='warnfile',
++        help=__('write warnings (and errors) to given file'),
++    )
++    group.add_argument(
++        '-W',
++        '--fail-on-warning',
++        action='store_true',
++        dest='warningiserror',
++        help=__('turn warnings into errors'),
++    )
++    group.add_argument(
++        '--keep-going',
++        action='store_true',
++        dest='keep_going',
++        help=argparse.SUPPRESS,
++    )
++    group.add_argument(
++        '-T',
++        '--show-traceback',
++        action='store_true',
++        dest='traceback',
++        help=__('show full traceback on exception'),
++    )
++    group.add_argument(
++        '-P',
++        '--pdb',
++        action='store_true',
++        dest='pdb',
++        help=__('run Pdb on exception'),
++    )
++    group.add_argument(
++        '--exception-on-warning',
++        action='store_true',
++        dest='exception_on_warning',
++        help=__('raise an exception on warnings'),
++    )
++
++    return parser
+ 
+ 
+ def make_main(argv: Sequence[str]) -> int:
+@@ -494,4 +729,4 @@ def main(argv: Sequence[str] = (), /) -> int:
+ 
+ 
+ if __name__ == '__main__':
+-    raise SystemExit(main(sys.argv[1:]))
+\ No newline at end of file
++    raise SystemExit(main(sys.argv[1:]))
+diff --git a/sphinx/cmd/make_mode.py b/sphinx/cmd/make_mode.py
+index 8492c93..13f6bb1 100644
+--- a/sphinx/cmd/make_mode.py
++++ b/sphinx/cmd/make_mode.py
+@@ -57,19 +57,31 @@
+ 
+ 
+ class Make:
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(self, srcdir: str, builddir: str, opts: Sequence[str]) -> None:
++        self.source_dir = _StrPath(srcdir)
++        self.build_dir = _StrPath(builddir)
++        self.opts = opts
++
++    def build_dir_join(self, *paths: str) -> _StrPath:
++        return self.build_dir.joinpath(*paths)
++
++    def run_generic_build(
++        self, builder: str, doctreedir: str | os.PathLike[str] | None = None
++    ) -> int:
++        if doctreedir is None:
++            doctreedir = self.build_dir_join('doctrees')
++
++        build_args: list[str | os.PathLike[str]] = [
++            '-b',
++            builder,
++            '-d',
++            doctreedir,
++        ]
++        if builder == 'latex' and (paper := os.environ.get('PAPER')):
++            build_args.extend(['-D', f'latex_elements.papersize={paper}paper'])
++        build_args.extend(self.opts)
++        build_args.extend([self.source_dir, self.build_dir_join(builder)])
++        return build_main(build_args)  # type: ignore[arg-type]
+ 
+     def build_clean(self) -> int:
+         source_dir = self.source_dir.resolve()
+@@ -185,3 +197,16 @@ def build_gettext(self) -> int:
+             return 1
+         return 0
+ 
++
++def run_make_mode(args: Sequence[str]) -> int:
++    """Run ``sphinx-build`` in make mode."""
++    if len(args) < 3:
++        print('Error: at least three arguments required.')
++        return 1
++
++    builder, srcdir, builddir = args[:3]
++    make = Make(srcdir, builddir, args[3:])
++    run_method = getattr(make, f'build_{builder}', None)
++    if run_method is not None:
++        return run_method()
++    return make.run_generic_build(builder)

@@ -1,0 +1,130 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source_episode_metadata_literal_refs": {
+      "0": {
+        "ready": true,
+        "segments_count": 33,
+        "recorded_model_seconds": 14450.159096931984,
+        "recorded_elapsed_seconds": 14475.722458389999,
+        "recorded_terminal_usage": {
+          "input_tokens": 200168585,
+          "cached_input_tokens": 191644160,
+          "output_tokens": 644493
+        },
+        "event_file_dedupe_verified": false
+      },
+      "1": {
+        "ready": false,
+        "segments_count": 1,
+        "recorded_model_seconds": 17.251577701999963,
+        "recorded_elapsed_seconds": 18.250609722000036,
+        "recorded_terminal_usage": null,
+        "event_file_dedupe_verified": false
+      },
+      "2": {
+        "ready": false,
+        "segments_count": 5,
+        "recorded_model_seconds": 1987.741953237,
+        "recorded_elapsed_seconds": 1991.8606015710002,
+        "recorded_terminal_usage": {
+          "input_tokens": 15325249,
+          "cached_input_tokens": 14650240,
+          "output_tokens": 51280
+        },
+        "event_file_dedupe_verified": false
+      },
+      "3": {
+        "ready": false,
+        "segments_count": 2,
+        "recorded_model_seconds": 0.38600089299995943,
+        "recorded_elapsed_seconds": 32.94738045500003,
+        "recorded_terminal_usage": null,
+        "event_file_dedupe_verified": false
+      },
+      "4": {
+        "ready": true,
+        "segments_count": 33,
+        "recorded_model_seconds": 14450.159096931984,
+        "recorded_elapsed_seconds": 14475.722458389999,
+        "recorded_terminal_usage": {
+          "input_tokens": 200168585,
+          "cached_input_tokens": 191644160,
+          "output_tokens": 644493
+        },
+        "event_file_dedupe_verified": false
+      },
+      "5": {
+        "ready": false,
+        "segments_count": 13,
+        "recorded_model_seconds": 7419.95235507701,
+        "recorded_elapsed_seconds": 7431.013318536003,
+        "recorded_terminal_usage": {
+          "input_tokens": 95623081,
+          "cached_input_tokens": 91188096,
+          "output_tokens": 262245
+        },
+        "event_file_dedupe_verified": false
+      }
+    },
+    "deduplicated_all_source_episode_model_seconds": null,
+    "deduplicated_all_source_episode_usage": null,
+    "source_prior_stage_02_null": {
+      "ready": false,
+      "recorded_model_seconds": 3020.4812747590004,
+      "recorded_elapsed_seconds": 3029.878514040003,
+      "recorded_terminal_usage": {
+        "reasoning_output_tokens": 23812,
+        "output_tokens": 100851,
+        "input_tokens": 43831441,
+        "cached_input_tokens": 42292224,
+        "cache_write_input_tokens": 0
+      },
+      "usage_complete": true,
+      "cost_usd": null,
+      "formal_score": null
+    },
+    "formal": {
+      "infer_success": true,
+      "agent_exit_status": null,
+      "infer_exit_code": 0,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_model_calls": 1,
+      "formal_elapsed_observation_span_seconds": 1698.025183,
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null,
+      "usage": {
+        "input_tokens": 25421727,
+        "cached_input_tokens": 23862912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 69193,
+        "reasoning_output_tokens": 26931
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 444,
+        "turn.started": 1,
+        "item.started": 227,
+        "turn.completed": 1
+      },
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "new_formal_actor_resampled": false,
+      "note": "unknown"
+    },
+    "baseline_formal": {
+      "recorded_terminal_usage": {
+        "input_tokens": 9054674,
+        "cached_input_tokens": 8872192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 36286,
+        "reasoning_output_tokens": 15603
+      },
+      "model_active_seconds": null,
+      "cost_usd": null
+    },
+    "overall_cost_usd": null,
+    "note": "unknown"
+  }
+}

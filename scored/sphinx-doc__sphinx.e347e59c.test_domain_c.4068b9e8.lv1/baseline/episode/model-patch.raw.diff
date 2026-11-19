@@ -1,0 +1,439 @@
+diff --git a/sphinx/domains/c/_ast.py b/sphinx/domains/c/_ast.py
+index c4e2cff..da141e6 100644
+--- a/sphinx/domains/c/_ast.py
++++ b/sphinx/domains/c/_ast.py
+@@ -1918,6 +1918,11 @@ def get_id(self, version: int, prefixed: bool = True) -> str:
+ 
+ 
+ 
++    def get_newest_id(self) -> str:
++        if self._newest_id_cache is None:
++            self._newest_id_cache = self.get_id(_max_id, True)
++        return self._newest_id_cache
++
+     def _stringify(self, transform: StringifyTransform) -> str:
+         res = transform(self.declaration)
+         if self.semicolon:
+@@ -1965,4 +1970,4 @@ def describe_signature(
+             raise AssertionError
+         self.declaration.describe_signature(main_decl_node, mode, env, self.symbol)
+         if self.semicolon:
+-            main_decl_node += addnodes.desc_sig_punctuation(';', ';')
+\ No newline at end of file
++            main_decl_node += addnodes.desc_sig_punctuation(';', ';')
+diff --git a/sphinx/domains/c/_parser.py b/sphinx/domains/c/_parser.py
+index e955260..97dc25f 100644
+--- a/sphinx/domains/c/_parser.py
++++ b/sphinx/domains/c/_parser.py
+@@ -1081,6 +1081,125 @@ def _parse_type_with_init(
+ 
+ 
+ 
++
++    def _parse_macro(self) -> ASTMacro:
++        name = self._parse_nested_name()
++        self.skip_ws()
++        if not self.skip_string('('):
++            return ASTMacro(name, None)
++
++        args: list[ASTMacroParameter] = []
++        while True:
++            self.skip_ws()
++            if self.skip_string('...'):
++                args.append(ASTMacroParameter(None, ellipsis=True))
++            elif self.match(identifier_re):
++                arg = ASTNestedName(
++                    [ASTIdentifier(self.matched_text)], rooted=False
++                )
++                self.skip_ws()
++                variadic = self.skip_string('...')
++                args.append(ASTMacroParameter(arg, variadic=variadic))
++            elif self.skip_string(')'):
++                break
++            else:
++                self.fail("Expected identifier, ')', or ',' in macro parameter list.")
++
++            self.skip_ws()
++            if self.skip_string(','):
++                continue
++            if self.skip_string(')'):
++                break
++            self.fail("Expected ')' or ',' in macro parameter list.")
++        return ASTMacro(name, args)
++
++    def _parse_struct(self) -> ASTStruct:
++        return ASTStruct(self._parse_nested_name())
++
++    def _parse_union(self) -> ASTUnion:
++        return ASTUnion(self._parse_nested_name())
++
++    def _parse_enum(self) -> ASTEnum:
++        return ASTEnum(self._parse_nested_name())
++
++    def _parse_enumerator(self) -> ASTEnumerator:
++        name = self._parse_nested_name()
++        attrs = self._parse_attribute_list()
++        init = self._parse_initializer()
++        return ASTEnumerator(name, init, attrs)
++
++    def parse_declaration(self, objectType: str, directiveType: str) -> ASTDeclaration:
++        if objectType not in {
++            'function',
++            'member',
++            'macro',
++            'struct',
++            'union',
++            'enum',
++            'enumerator',
++            'type',
++        }:
++            raise Exception('Internal error, unknown objectType "%s".' % objectType)
++        if directiveType not in {
++            'function',
++            'member',
++            'var',
++            'macro',
++            'struct',
++            'union',
++            'enum',
++            'enumerator',
++            'type',
++        }:
++            raise Exception(
++                'Internal error, unknown directiveType "%s".' % directiveType
++            )
++
++        self.skip_ws()
++        if objectType == 'member':
++            declaration = self._parse_type_with_init(named=True, outer='member')
++        elif objectType == 'function':
++            declaration = self._parse_type(named=True, outer='function')
++        elif objectType == 'macro':
++            declaration = self._parse_macro()
++        elif objectType == 'struct':
++            declaration = self._parse_struct()
++        elif objectType == 'union':
++            declaration = self._parse_union()
++        elif objectType == 'enum':
++            declaration = self._parse_enum()
++        elif objectType == 'enumerator':
++            declaration = self._parse_enumerator()
++        elif objectType == 'type':
++            declaration = self._parse_type(named=True, outer='type')
++        else:
++            raise AssertionError
++
++        self.skip_ws()
++        semicolon = objectType != 'macro' and self.skip_string(';')
++        return ASTDeclaration(objectType, directiveType, declaration, semicolon)
++
++    def parse_expression(self) -> ASTExpression | ASTType:
++        pos = self.pos
++        try:
++            expr = self._parse_expression()
++            self.skip_ws()
++            self.assert_end()
++            return expr
++        except DefinitionError as ex_expr:
++            self.pos = pos
++            try:
++                typ = self._parse_type(False)
++                self.skip_ws()
++                self.assert_end()
++                return typ
++            except DefinitionError as ex_type:
++                header = 'Error when parsing (type) expression.'
++                errs = [(ex_expr, 'If expression'), (ex_type, 'If type')]
++                raise self._make_multi_error(errs, header) from ex_type
++
++    def parse_namespace_object(self) -> ASTNestedName:
++        return self._parse_nested_name()
+ 
+     def parse_xref_object(self) -> ASTNestedName:
+         name = self._parse_nested_name()
+@@ -1089,4 +1208,3 @@ def parse_xref_object(self) -> ASTNestedName:
+         self.skip_string('()')
+         self.assert_end()
+         return name
+-
+diff --git a/sphinx/domains/c/_symbol.py b/sphinx/domains/c/_symbol.py
+index 57c8b15..d89c10a 100644
+--- a/sphinx/domains/c/_symbol.py
++++ b/sphinx/domains/c/_symbol.py
+@@ -142,6 +142,16 @@ def __repr__(self) -> str:
+     def _children(self) -> Iterable[Symbol]:
+         return self._children_by_name.values()
+ 
++    def _add_child(self, child: Symbol) -> None:
++        assert child.parent is self
++        assert child.ident is not None
++        name = child.ident.name
++        self._children_by_name[name] = child
++        if child.docname is not None:
++            self._children_by_docname.setdefault(child.docname, {})[name] = child
++        if child.ident.is_anonymous:
++            self._anon_children.add(child)
++
+ 
+ 
+ 
+@@ -176,6 +186,24 @@ def _remove_child(self, child: Symbol) -> None:
+ 
+ 
+ 
++    def _fill_empty(self, declaration: ASTDeclaration, docname: str, line: int) -> None:
++        self._assert_invariants()
++        assert self.declaration is None
++        assert self.docname is None
++        assert self.line is None
++        assert declaration is not None
++        assert docname is not None
++        assert line is not None
++        self.declaration = declaration
++        declaration.symbol = self
++        self.docname = docname
++        self.line = line
++        assert self.parent is not None
++        assert self.ident is not None
++        self.parent._children_by_docname.setdefault(docname, {})[self.ident.name] = self
++        self._assert_invariants()
++        self._add_function_params()
++
+     def _add_function_params(self) -> None:
+         if Symbol.debug_lookup:
+             Symbol.debug_indent += 1
+@@ -504,6 +532,157 @@ def get_full_nested_name(self) -> ASTNestedName:
+ 
+ 
+ 
++
++    def _symbol_lookup(
++        self,
++        nested_name: ASTNestedName,
++        on_missing_qualified_symbol: Callable[[Symbol, ASTIdentifier], Symbol | None],
++        ancestor_lookup_type: str | None,
++        match_self: bool,
++        recurse_in_anon: bool,
++        search_in_siblings: bool,
++    ) -> SymbolLookupResult | None:
++        if Symbol.debug_lookup:
++            Symbol.debug_indent += 1
++            Symbol.debug_print('_symbol_lookup:')
++            Symbol.debug_indent += 1
++            Symbol.debug_print('nested_name:         ', nested_name)
++            Symbol.debug_print('ancestor_lookup_type:', ancestor_lookup_type)
++            Symbol.debug_print('match_self:          ', match_self)
++            Symbol.debug_print('recurse_in_anon:     ', recurse_in_anon)
++            Symbol.debug_print('search_in_siblings:  ', search_in_siblings)
++
++        names = nested_name.names
++        parent_symbol = self
++        if nested_name.rooted:
++            while parent_symbol.parent:
++                parent_symbol = parent_symbol.parent
++        elif ancestor_lookup_type is not None:
++            first_name = names[0]
++            while parent_symbol.parent:
++                if parent_symbol.find_identifier(
++                    first_name,
++                    matchSelf=match_self,
++                    recurseInAnon=recurse_in_anon,
++                    searchInSiblings=search_in_siblings,
++                ):
++                    break
++                parent_symbol = parent_symbol.parent
++
++        for ident in names[:-1]:
++            symbol = parent_symbol.find_identifier(
++                ident,
++                matchSelf=match_self,
++                recurseInAnon=recurse_in_anon,
++                searchInSiblings=search_in_siblings,
++            )
++            if symbol is None:
++                symbol = on_missing_qualified_symbol(parent_symbol, ident)
++                if symbol is None:
++                    if Symbol.debug_lookup:
++                        Symbol.debug_indent -= 2
++                    return None
++            match_self = False
++            parent_symbol = symbol
++
++        ident = names[-1]
++        symbol = parent_symbol.find_identifier(
++            ident,
++            matchSelf=match_self,
++            recurseInAnon=recurse_in_anon,
++            searchInSiblings=search_in_siblings,
++        )
++        symbols: Iterable[Symbol] = () if symbol is None else (symbol,)
++        if Symbol.debug_lookup:
++            Symbol.debug_indent -= 2
++        return SymbolLookupResult(symbols, parent_symbol, ident)
++
++    def _add_symbols(
++        self,
++        nested_name: ASTNestedName,
++        declaration: ASTDeclaration | None,
++        docname: str | None,
++        line: int | None,
++    ) -> Symbol:
++        if Symbol.debug_lookup:
++            Symbol.debug_indent += 1
++            Symbol.debug_print('_add_symbols:')
++            Symbol.debug_indent += 1
++            Symbol.debug_print('nn:       ', nested_name)
++            Symbol.debug_print('decl:     ', declaration)
++            Symbol.debug_print(f'location: {docname}:{line}')
++
++        def on_missing_qualified_symbol(
++            parent_symbol: Symbol, ident: ASTIdentifier
++        ) -> Symbol:
++            return Symbol(parent_symbol, ident, None, None, None)
++
++        lookup_result = self._symbol_lookup(
++            nested_name,
++            on_missing_qualified_symbol,
++            ancestor_lookup_type=None,
++            match_self=False,
++            recurse_in_anon=False,
++            search_in_siblings=False,
++        )
++        assert lookup_result is not None
++        symbols = list(lookup_result.symbols)
++        if not symbols:
++            symbol = self._make_cand_symbol(
++                lookup_result, declaration, docname, line
++            )
++            if Symbol.debug_lookup:
++                Symbol.debug_indent -= 2
++            return symbol
++
++        if declaration is None:
++            if Symbol.debug_lookup:
++                Symbol.debug_indent -= 2
++            return symbols[0]
++
++        no_decl = [symbol for symbol in symbols if symbol.declaration is None]
++        with_decl = [
++            symbol
++            for symbol in symbols
++            if symbol.declaration is not None and not symbol.isRedeclaration
++        ]
++
++        cand_symbol = None
++        if with_decl:
++            cand_symbol = self._make_cand_symbol(
++                lookup_result, declaration, docname, line
++            )
++            if declaration.objectType != 'function':
++                self._handle_duplicate_declaration(
++                    with_decl[0], cand_symbol, declaration
++                )
++
++            cand_id = declaration.get_newest_id()
++            for symbol in with_decl:
++                assert symbol.declaration is not None
++                if symbol.declaration.objectType != 'function':
++                    self._handle_duplicate_declaration(
++                        symbol, cand_symbol, declaration
++                    )
++                if cand_id == symbol.declaration.get_newest_id():
++                    self._handle_duplicate_declaration(
++                        symbol, cand_symbol, declaration
++                    )
++
++        if not no_decl:
++            if Symbol.debug_lookup:
++                Symbol.debug_indent -= 2
++            if cand_symbol is not None:
++                return cand_symbol
++            return self._make_cand_symbol(lookup_result, declaration, docname, line)
++
++        if cand_symbol is not None:
++            cand_symbol.remove()
++        symbol = no_decl[0]
++        symbol._fill_empty(declaration, docname, line)
++        if Symbol.debug_lookup:
++            Symbol.debug_indent -= 2
++        return symbol
+ 
+     @staticmethod
+     def _make_cand_symbol(
+@@ -612,6 +791,31 @@ def merge_with(
+ 
+ 
+ 
++
++    def add_name(self, nestedName: ASTNestedName) -> Symbol:
++        if Symbol.debug_lookup:
++            Symbol.debug_indent += 1
++            Symbol.debug_print('add_name:')
++        result = self._add_symbols(nestedName, None, None, None)
++        if Symbol.debug_lookup:
++            Symbol.debug_indent -= 1
++        return result
++
++    def add_declaration(
++        self, declaration: ASTDeclaration, docname: str, line: int
++    ) -> Symbol:
++        if Symbol.debug_lookup:
++            Symbol.debug_indent += 1
++            Symbol.debug_print('add_declaration:')
++        assert declaration is not None
++        assert docname is not None
++        assert line is not None
++        result = self._add_symbols(
++            declaration.name, declaration, docname, line
++        )
++        if Symbol.debug_lookup:
++            Symbol.debug_indent -= 1
++        return result
+ 
+     def find_identifier(
+         self,
+@@ -684,10 +888,10 @@ def find_declaration(
+             Symbol.debug_indent += 1
+             Symbol.debug_print('find_declaration:')
+ 
+-
+-
+-
+-
++        def on_missing_qualified_symbol(
++            parent_symbol: Symbol, ident: ASTIdentifier
++        ) -> None:
++            return None
+ 
+         lookup_result = self._symbol_lookup(
+             nestedName,
+@@ -735,4 +939,4 @@ def dump(self, indent: int) -> str:
+         return ''.join([
+             self.to_string(indent),
+             *(c.dump(indent + 1) for c in self._children),
+-        ])
+\ No newline at end of file
++        ])
+diff --git a/sphinx/util/cfamily.py b/sphinx/util/cfamily.py
+index c02b798..dd2be0f 100644
+--- a/sphinx/util/cfamily.py
++++ b/sphinx/util/cfamily.py
+@@ -120,8 +120,9 @@ def _stringify(self, transform: StringifyTransform) -> str:
+     def __str__(self) -> str:
+         return self._stringify(str)
+ 
+-
+-
++    def get_display_string(self) -> str:
++        """Return a string using the display form of nested AST nodes."""
++        return self._stringify(lambda ast: ast.get_display_string())
+ 
+     def __repr__(self) -> str:
+         if repr_string := self._stringify(repr):
+@@ -519,4 +520,4 @@ def _parse_attribute_list(self) -> ASTAttributeList:
+         return ASTAttributeList(res)
+ 
+     def _parse_paren_expression_list(self) -> ASTBaseParenExprList | None:
+-        raise NotImplementedError
+\ No newline at end of file
++        raise NotImplementedError

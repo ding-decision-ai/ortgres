@@ -1,0 +1,21 @@
+diff --git a/pandas/core/col.py b/pandas/core/col.py
+index 2e738b1..87a4819 100644
+--- a/pandas/core/col.py
++++ b/pandas/core/col.py
+@@ -87,6 +87,9 @@ class Expression:
+     def __call__(self, df: DataFrame) -> Any:
+         return self._func(df)
+ 
++    def __repr__(self) -> str:
++        return self._repr_str or "Expr(...)"
++
+     def _with_binary_op(self, op: str, other: Any) -> Expression:
+         op_symbol = _OP_SYMBOLS.get(op, op)
+ 
+@@ -285,4 +288,4 @@ def col(col_name: Hashable) -> Expression:
+     return Expression(func, f"col({col_name!r})")
+ 
+ 
+-__all__ = ["Expression", "col"]
+\ No newline at end of file
++__all__ = ["Expression", "col"]

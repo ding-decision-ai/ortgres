@@ -1,0 +1,215 @@
+diff --git a/seaborn/_core/scales.py b/seaborn/_core/scales.py
+index 0c6f8ac..537290c 100644
+--- a/seaborn/_core/scales.py
++++ b/seaborn/_core/scales.py
+@@ -1020,6 +1020,15 @@ def _make_logit_transforms(base: float | None = None) -> TransFuncs:
+ 
+ 
+ def _make_log_transforms(base: float | None = None) -> TransFuncs:
++    """
++    Return a logarithm function and its inverse exponential function.
++
++    ``base=None`` selects the natural logarithm/exponential pair. Bases 2 and 10
++    have the corresponding NumPy functions; any other supplied base uses logarithm
++    to that base and exponentiation by that base. NumPy invalid and divide warnings
++    are suppressed while evaluating either returned callable. The factory does not
++    separately validate the base or the input domain.
++    """
+ 
+     fs: TransFuncs
+     if base is None:
+@@ -1033,9 +1042,9 @@ def _make_log_transforms(base: float | None = None) -> TransFuncs:
+             return np.log(x) / np.log(base)
+         fs = forward, partial(np.power, base)
+ 
+-
+-
+-
++    def log(x: ArrayLike) -> ArrayLike:
++        with np.errstate(invalid="ignore", divide="ignore"):
++            return fs[0](x)
+ 
+     def exp(x: ArrayLike) -> ArrayLike:
+         with np.errstate(invalid="ignore", divide="ignore"):
+@@ -1087,4 +1096,4 @@ def _make_power_transforms(exp: float) -> TransFuncs:
+ 
+ 
+ def _default_spacer(x: Series) -> float:
+-    return 1
+\ No newline at end of file
++    return 1
+diff --git a/seaborn/_marks/bar.py b/seaborn/_marks/bar.py
+index bc3dd3e..faef629 100644
+--- a/seaborn/_marks/bar.py
++++ b/seaborn/_marks/bar.py
+@@ -25,7 +25,88 @@ if TYPE_CHECKING:
+ 
+ 
+ class BarBase(Mark):
+-    pass
++
++    def _make_patches(self, data, scales, orient):
++
++        other = {"x": "y", "y": "x"}[orient]
++
++        # Widths are computed in transformed coordinates before the data are
++        # converted back to native axis units. Invert each edge separately so
++        # bars retain the intended width on nonlinear position scales.
++        transform = scales[orient]._matplotlib_scale.get_transform()
++        forward = transform.transform
++        inverse = transform.inverted().transform
++        center = forward(data[orient].to_numpy())
++        half_width = data["width"].to_numpy() / 2
++        start = inverse(center - half_width)
++        stop = inverse(center + half_width)
++
++        # Moves also operate before coordinate inversion, so baselines remain in
++        # transformed coordinates while the value column is in native units.
++        val_transform = scales[other]._matplotlib_scale.get_transform()
++        baseline = val_transform.inverted().transform(data["baseline"].to_numpy())
++        value = data[other].to_numpy() - baseline
++
++        if orient == "x":
++            x, y = start, baseline
++            width, height = stop - start, value
++        else:
++            x, y = baseline, start
++            width, height = value, stop - start
++
++        resolved = resolve_properties(self, data, scales)
++        facecolor = resolve_color(self, data, "", scales)
++        edgecolor = resolve_color(self, data, "edge", scales)
++        if np.ndim(facecolor) == 1:
++            facecolor = np.tile(facecolor, (len(data), 1))
++        if np.ndim(edgecolor) == 1:
++            edgecolor = np.tile(edgecolor, (len(data), 1))
++
++        bars = []
++        vals = []
++        for i in range(len(data)):
++            # Degenerate and non-finite value spans can interfere with collection
++            # limits and have no visible representation.
++            if not np.isfinite(value[i]) or value[i] == 0:
++                continue
++
++            fc = facecolor[i]
++            if not resolved["fill"][i]:
++                fc = mpl.colors.to_rgba(fc, 0)
++
++            bar = mpl.patches.Rectangle(
++                (x[i], y[i]), width[i], height[i],
++                facecolor=fc,
++                edgecolor=edgecolor[i],
++                linewidth=resolved["edgewidth"][i],
++                linestyle=resolved["edgestyle"][i],
++                **self.artist_kws,
++            )
++            bar._seaborn_fill = bool(resolved["fill"][i])
++            bars.append(bar)
++            vals.append(value[i])
++
++        return bars, np.asarray(vals)
++
++    def _legend_artist(
++        self, variables: list[str], value: Any, scales: dict[str, Scale],
++    ) -> Artist:
++        """Create a legend patch with the bar mark's resolved properties."""
++
++        keys = {v: value for v in variables}
++        resolved = resolve_properties(self, keys, scales)
++
++        facecolor = resolve_color(self, keys, "", scales)
++        if not resolved["fill"]:
++            facecolor = mpl.colors.to_rgba(facecolor, 0)
++
++        return mpl.patches.Patch(
++            facecolor=facecolor,
++            edgecolor=resolve_color(self, keys, "edge", scales),
++            linewidth=resolved["edgewidth"],
++            linestyle=resolved["edgestyle"],
++            **self.artist_kws,
++        )
+ 
+ 
+ 
+@@ -136,6 +217,7 @@ class Bar(BarBase):
+     baseline: MappableFloat = Mappable(0, grouping=False)  # TODO *is* this mappable?
+ 
+     def _plot(self, split_gen, scales, orient):
++        """Plot bars as one patch collection per axes."""
+ 
+         val_idx = ["y", "x"].index(orient)
+ 
+@@ -202,5 +284,72 @@ class Bars(BarBase):
+     width: MappableFloat = Mappable(1, grouping=False)
+     baseline: MappableFloat = Mappable(0, grouping=False)  # TODO *is* this mappable?
+ 
++    def _plot(self, split_gen, scales, orient):
++
++        val_idx = ["y", "x"].index(orient)
++        patches = defaultdict(list)
++        auto_width = defaultdict(list)
+ 
++        for _, data, ax in split_gen():
+ 
++            bars, _ = self._make_patches(data, scales, orient)
++            patches[ax].extend(bars)
++
++            is_auto = (
++                isinstance(self.edgewidth, Mappable)
++                and self.edgewidth._auto
++                and "edgewidth" not in data
++            )
++            if is_auto:
++                auto_width[ax].extend([
++                    bar._seaborn_fill
++                    for bar in bars
++                ])
++            else:
++                auto_width[ax].extend([None] * len(bars))
++
++        for ax, ax_patches in patches.items():
++
++            collection = mpl.collections.PatchCollection(
++                ax_patches, match_original=True, **self.artist_kws,
++            )
++            collection.sticky_edges[val_idx][:] = (0, np.inf)
++
++            # Keep limit handling explicit so collections participate in
++            # autoscaling consistently across matplotlib versions.
++            if ax_patches:
++                vertices = np.concatenate([
++                    patch.get_path().transformed(patch.get_transform()).vertices
++                    for patch in ax_patches
++                ])
++                ax.update_datalim(vertices)
++            ax.add_collection(collection, autolim=False)
++
++            if any(flag is not None for flag in auto_width[ax]):
++                # Automatic edges are proportional to the rendered bar width,
++                # capped by the patch rc default. Outlined bars retain a visible
++                # minimum in dense histograms.
++                ax.autoscale_view()
++                linewidths = collection.get_linewidths()
++                if len(linewidths) == 1:
++                    linewidths = np.repeat(linewidths, len(ax_patches))
++                else:
++                    linewidths = np.asarray(linewidths).copy()
++
++                for i, (bar, filled) in enumerate(zip(ax_patches, auto_width[ax])):
++                    if filled is None:
++                        continue
++                    vertices = bar.get_path().transformed(bar.get_transform()).vertices
++                    display_vertices = ax.transData.transform(vertices)
++                    pos_idx = ["x", "y"].index(orient)
++                    pixels = np.ptp(display_vertices[:, pos_idx])
++                    width_points = pixels * 72 / ax.figure.dpi
++                    max_width = mpl.rcParams["patch.linewidth"]
++                    if not filled:
++                        max_width *= 1.5
++                    linewidth = min(.1 * width_points, max_width)
++                    if not filled:
++                        linewidth = max(linewidth, .5)
++                    linewidths[i] = linewidth
++
++                collection.set_linewidths(linewidths)

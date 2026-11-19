@@ -1,0 +1,1499 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/941ccf0, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 27 items
+
+tests/test_extensions/test_ext_math.py FEEFFFEEEFEFFFFFFEEF.FFF.FF       [100%]
+
+==================================== ERRORS ====================================
+______________________ ERROR at setup of test_imgmath_svg ______________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+___________________ ERROR at setup of test_imgmath_svg_embed ___________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+_________________ ERROR at setup of test_math_number_all_latex _________________
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:334: in __init__
+    self._init_builder()
+sphinx/testing/util.py:207: in _init_builder
+    super()._init_builder()
+sphinx/application.py:423: in _init_builder
+    self.builder.init()
+sphinx/builders/latex/__init__.py:136: in init
+    self.init_babel()
+sphinx/builders/latex/__init__.py:217: in init_babel
+    if not self.babel.is_supported_language():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ExtBabel' object has no attribute 'is_supported_language'
+________________ ERROR at setup of test_math_eqref_format_html _________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+________________ ERROR at setup of test_math_eqref_format_latex ________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+__________________ ERROR at setup of test_mathjax_numsep_html __________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+_____________________ ERROR at setup of test_mathjax_path ______________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+__________________ ERROR at setup of test_mathjax_path_config __________________
+sphinx/events.py:413: in emit
+    results.append(listener.handler(self._app, *args))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:796: in check_confval_types
+    value = getattr(config, name)
+            ^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:467: in __getattr__
+    value = self.convert_overrides(name, value)
+            ^^^^^^^^^^^^^^^^^^^^^^
+sphinx/config.py:488: in __getattr__
+    raise AttributeError(msg)
+E   AttributeError: No such config value: 'convert_overrides'
+
+The above exception was the direct cause of the following exception:
+sphinx/testing/fixtures.py:159: in app
+    app_ = make_app(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/fixtures.py:202: in make
+    app_ = SphinxTestApp(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/testing/util.py:178: in __init__
+    super().__init__(
+sphinx/application.py:319: in __init__
+    self.events.emit('config-inited', self.config)
+sphinx/events.py:423: in emit
+    raise ExtensionError(
+E   sphinx.errors.ExtensionError: Handler <function check_confval_types at 0x74e349587740> for event 'config-inited' threw an exception (exception: No such config value: 'convert_overrides')
+=================================== FAILURES ===================================
+_______________________________ test_imgmath_png _______________________________
+tests/test_extensions/test_ext_math.py:41: in test_imgmath_png
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2487: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math-simple
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math-simple/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+# warning: 
+
+_____________________________ test_mathjax_options _____________________________
+tests/test_extensions/test_ext_math.py:122: in test_mathjax_options
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+______________________________ test_mathjax_align ______________________________
+tests/test_extensions/test_ext_math.py:139: in test_mathjax_align
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+_________________________ test_math_number_all_mathjax _________________________
+tests/test_extensions/test_ext_math.py:157: in test_math_number_all_mathjax
+    app.build()
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:436: in build
+    self.builder.build_update()
+sphinx/builders/__init__.py:381: in build_update
+    self.build(
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 4 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+___________________________ test_mathjax_numfig_html ___________________________
+tests/test_extensions/test_ext_math.py:254: in test_mathjax_numfig_html
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+___________________________ test_imgmath_numfig_html ___________________________
+tests/test_extensions/test_ext_math.py:309: in test_imgmath_numfig_html
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+_______________________________ test_math_compat _______________________________
+tests/test_extensions/test_ext_math.py:325: in test_math_compat
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2487: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math-compat
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math-compat/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+# warning: 
+
+_____________________________ test_mathjax3_config _____________________________
+tests/test_extensions/test_ext_math.py:371: in test_mathjax3_config
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+_____________________________ test_mathjax2_config _____________________________
+tests/test_extensions/test_ext_math.py:388: in test_mathjax2_config
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+___________________ test_mathjax_options_async_for_mathjax3 ____________________
+tests/test_extensions/test_ext_math.py:409: in test_mathjax_options_async_for_mathjax3
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+___________________ test_mathjax_options_defer_for_mathjax2 ____________________
+tests/test_extensions/test_ext_math.py:426: in test_mathjax_options_defer_for_mathjax2
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+____________ test_mathjax_is_installed_only_if_document_having_math ____________
+tests/test_extensions/test_ext_math.py:470: in test_mathjax_is_installed_only_if_document_having_math
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+____________ test_mathjax_is_installed_if_no_equations_when_forced _____________
+tests/test_extensions/test_ext_math.py:498: in test_mathjax_is_installed_if_no_equations_when_forced
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+___________ test_mathjax_is_installed_if_included_file_has_equations ___________
+tests/test_extensions/test_ext_math.py:519: in test_mathjax_is_installed_if_included_file_has_equations
+    assert MATHJAX_URL in content
+E   assert 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' in '<!DOCTYPE html>\n\n<html lang="en" data-content_root="./">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="v...\n      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.3.0+/941ccf0.\n    </div>\n  </body>\n</html>'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math-include
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math-include/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mincluded[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mmath[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-math-include/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-math-include/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-math-include/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mincluded[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mmath[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-0/ext-math-include/_build/html.
+
+# warning: 
+
+______ test_mathjax_is_installed_only_if_document_having_math_singlehtml _______
+tests/test_extensions/test_ext_math.py:537: in test_mathjax_is_installed_only_if_document_having_math_singlehtml
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2489: in explicit_markup
+    self.explicit_list(blank_finish)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2514: in explicit_list
+    newline_offset, blank_finish = self.nested_list_parse(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:420: in nested_list_parse
+    my_state_machine.run(block, input_offset, memo=self.memo,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:215: in run
+    results = StateMachineWS.run(self, input_lines, input_offset)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2791: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: singlehtml
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math/_build/singlehtml
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [singlehtml]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 4 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 25%] [35mindex[39;49;00m
+
+# warning: 
+
+_____ test_mathjax_is_installed_if_included_file_has_equations_singlehtml ______
+tests/test_extensions/test_ext_math.py:568: in test_mathjax_is_installed_if_included_file_has_equations_singlehtml
+    assert MATHJAX_URL in content
+E   assert 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js' in '<!DOCTYPE html>\n\n<html lang="en" data-content_root="./">\n  <head>\n    <meta charset="utf-8" />\n    <meta name="v...\n      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.3.0+/941ccf0.\n    </div>\n  </body>\n</html>'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: singlehtml
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math-include
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math-include/_build/singlehtml
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [singlehtml]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-math-include/_build/singlehtml/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-math-include/_build/singlehtml/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/ext-math-include/_build/singlehtml/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mincluded[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mmath[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML page is in ../tmp/pytest-of-root/pytest-0/ext-math-include/_build/singlehtml.
+
+# warning: 
+
+__________________ test_duplicate_equation_label_warning_type __________________
+tests/test_extensions/test_ext_math.py:578: in test_duplicate_equation_label_warning_type
+    app.build(force_all=True)
+sphinx/testing/util.py:237: in build
+    super().build(force_all, filenames)
+sphinx/application.py:432: in build
+    self.builder.build_all()
+sphinx/builders/__init__.py:325: in build_all
+    self.build(None, summary=__('all source files'), method='all')
+sphinx/builders/__init__.py:409: in build
+    updated_docnames = set(self.read())
+                           ^^^^^^^^^^^
+sphinx/builders/__init__.py:525: in read
+    self._read_serial(docnames)
+sphinx/builders/__init__.py:590: in _read_serial
+    self.read_doc(docname)
+sphinx/builders/__init__.py:660: in read_doc
+    doctree = _parse_str_to_doctree(
+sphinx/util/docutils.py:890: in _parse_str_to_doctree
+    parser.parse(content, document)
+sphinx/parsers.py:99: in parse
+    self.statemachine.run(inputlines, document, inliner=self.inliner)
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:182: in run
+    results = StateMachineWS.run(self, input_lines, input_offset,
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:234: in run
+    context, next_state, result = self.check_line(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/statemachine.py:446: in check_line
+    return method(match, context, next_state)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2487: in explicit_markup
+    nodelist, blank_finish = self.explicit_construct(match)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2499: in explicit_construct
+    return method(self, expmatch)
+           ^^^^^^^^^^^^^^^^^^^^^^
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2236: in directive
+    return self.run_directive(
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/docutils/parsers/rst/states.py:2286: in run_directive
+    result = directive_instance.run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+sphinx/directives/patches.py:173: in run
+    self.add_target(ret)
+    ^^^^^^^^^^^^^^^
+E   AttributeError: 'MathDirective' object has no attribute 'add_target'
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/ext-math-duplicate-label
+# outdir: /tmp/pytest-of-root/pytest-0/ext-math-duplicate-label/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+# warning: 
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-0/basic
+# outdir: /tmp/pytest-of-root/pytest-0/basic/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/basic/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/basic/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/basic/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-0/basic/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: singlehtml
+# srcdir: /tmp/pytest-of-root/pytest-0/basic
+# outdir: /tmp/pytest-of-root/pytest-0/basic/_build/singlehtml
+# status: 
+[01mRunning Sphinx v8.3.0+/941ccf0[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [singlehtml]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/basic/_build/singlehtml/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/basic/_build/singlehtml/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-0/basic/_build/singlehtml/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML page is in ../tmp/pytest-of-root/pytest-0/basic/_build/singlehtml.
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_extensions/test_ext_math.py::test_mathjax_is_not_installed_if_no_equations
+PASSED tests/test_extensions/test_ext_math.py::test_mathjax_is_not_installed_if_no_equations_singlehtml
+ERROR tests/test_extensions/test_ext_math.py::test_imgmath_svg - sphinx.error...
+ERROR tests/test_extensions/test_ext_math.py::test_imgmath_svg_embed - sphinx...
+ERROR tests/test_extensions/test_ext_math.py::test_math_number_all_latex - At...
+ERROR tests/test_extensions/test_ext_math.py::test_math_eqref_format_html - s...
+ERROR tests/test_extensions/test_ext_math.py::test_math_eqref_format_latex - ...
+ERROR tests/test_extensions/test_ext_math.py::test_mathjax_numsep_html - sphi...
+ERROR tests/test_extensions/test_ext_math.py::test_mathjax_path - sphinx.erro...
+ERROR tests/test_extensions/test_ext_math.py::test_mathjax_path_config - sphi...
+FAILED tests/test_extensions/test_ext_math.py::test_imgmath_png - AttributeEr...
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_options - Attribu...
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_align - Attribute...
+FAILED tests/test_extensions/test_ext_math.py::test_math_number_all_mathjax
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_numfig_html - Att...
+FAILED tests/test_extensions/test_ext_math.py::test_imgmath_numfig_html - Att...
+FAILED tests/test_extensions/test_ext_math.py::test_math_compat - AttributeEr...
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax3_config - Attribu...
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax2_config - Attribu...
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_options_async_for_mathjax3
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_options_defer_for_mathjax2
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_only_if_document_having_math
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_if_no_equations_when_forced
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_if_included_file_has_equations
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_only_if_document_having_math_singlehtml
+FAILED tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_if_included_file_has_equations_singlehtml
+FAILED tests/test_extensions/test_ext_math.py::test_duplicate_equation_label_warning_type
+==================== 17 failed, 2 passed, 8 errors in 3.50s ====================

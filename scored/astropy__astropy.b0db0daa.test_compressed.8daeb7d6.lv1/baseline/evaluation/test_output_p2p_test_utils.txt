@@ -1,0 +1,96 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py.
+
+Date: 2026-10-10T22:51:18
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 45 items
+
+astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py . [  2%]
+............................................                             [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N1]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N2]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N3]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N4]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N5]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N6]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N7]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N8]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N9]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[-1-N10]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N1]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N2]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N3]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N4]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N5]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N6]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N7]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N8]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N9]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[0-N10]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N1]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N2]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N3]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N4]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N5]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N6]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N7]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N8]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N9]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_bitceil[1-N10]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_extirpolate[5-100]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_extirpolate[5-None]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_extirpolate_with_integers[5-100]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_extirpolate_with_integers[5-None]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-1-True-0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-1-True-1]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-1-False-0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-1-False-1]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-2-True-0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-2-True-1]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-2-False-0]
+PASSED astropy/timeseries/periodograms/lombscargle/implementations/tests/test_utils.py::test_trig_sum[0.1-2-False-1]
+============================== 45 passed in 0.15s ==============================

@@ -1,0 +1,545 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "ready": true,
+      "model_elapsed_seconds": 573.4131722590027,
+      "elapsed_seconds": 574.8056070390012,
+      "event_summary": {
+        "turn_usages": {
+          "0": {
+            "input_tokens": 5695299,
+            "cached_input_tokens": 5463296,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 18654,
+            "reasoning_output_tokens": 7617
+          },
+          "1": {
+            "input_tokens": 1913788,
+            "cached_input_tokens": 1756416,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 7380,
+            "reasoning_output_tokens": 2386
+          }
+        },
+        "usage_total": {
+          "input_tokens": 7609087,
+          "cached_input_tokens": 7219712,
+          "output_tokens": 26034
+        }
+      },
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "source_episode_ledger": {
+        "0": {
+          "recorded_metadata": {
+            "ready": true,
+            "initialization_timeout_seconds": 3600,
+            "tsv_version": 2,
+            "event_summary": {
+              "completed": true,
+              "turn_usages": {
+                "0": {
+                  "input_tokens": 7188480,
+                  "cached_input_tokens": 6949760,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 24906,
+                  "reasoning_output_tokens": 6042
+                },
+                "1": {
+                  "input_tokens": 633958,
+                  "cached_input_tokens": 558336,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 5067,
+                  "reasoning_output_tokens": 3337
+                },
+                "2": {
+                  "input_tokens": 1171317,
+                  "cached_input_tokens": 1099520,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 24312,
+                  "reasoning_output_tokens": 10222
+                }
+              },
+              "usage_complete": true,
+              "usage_total": {
+                "cache_write_input_tokens": 0,
+                "input_tokens": 8993755,
+                "cached_input_tokens": 8607616,
+                "reasoning_output_tokens": 19601,
+                "output_tokens": 54285
+              }
+            },
+            "model_elapsed_seconds": 1230.8192898629932,
+            "model_exit_code": 0,
+            "state_files_saved": {
+              "artifact_24e44c228e5184e3": true,
+              "artifact_2c1f8de3485efb44": false,
+              "artifact_4caf12de69a79acd": false
+            },
+            "elapsed_seconds": 1235.6821965699928,
+            "segment_limit": 4,
+            "segments": {
+              "0": {
+                "number": 1,
+                "metadata": {
+                  "ready": false,
+                  "initialization_timeout_seconds": 3599,
+                  "tsv_version": 2,
+                  "event_summary": {
+                    "completed": true,
+                    "turn_usages": {
+                      "0": {
+                        "input_tokens": 7188480,
+                        "cached_input_tokens": 6949760,
+                        "cache_write_input_tokens": 0,
+                        "output_tokens": 24906,
+                        "reasoning_output_tokens": 6042
+                      }
+                    },
+                    "usage_total": {
+                      "input_tokens": 7188480,
+                      "cached_input_tokens": 6949760,
+                      "output_tokens": 24906
+                    }
+                  },
+                  "model_elapsed_seconds": 577.3966000680084,
+                  "model_exit_code": 0,
+                  "state_files_saved": {
+                    "artifact_24e44c228e5184e3": true,
+                    "artifact_2c1f8de3485efb44": false,
+                    "artifact_4caf12de69a79acd": false
+                  },
+                  "elapsed_seconds": 578.8634788269992
+                },
+                "continuation_allowed": true
+              },
+              "1": {
+                "number": 2,
+                "metadata": {
+                  "ready": false,
+                  "initialization_timeout_seconds": 3021,
+                  "tsv_version": 2,
+                  "event_summary": {
+                    "completed": true,
+                    "turn_usages": {
+                      "0": {
+                        "input_tokens": 633958,
+                        "cached_input_tokens": 558336,
+                        "cache_write_input_tokens": 0,
+                        "output_tokens": 5067,
+                        "reasoning_output_tokens": 3337
+                      }
+                    },
+                    "usage_total": {
+                      "input_tokens": 633958,
+                      "cached_input_tokens": 558336,
+                      "output_tokens": 5067
+                    }
+                  },
+                  "model_elapsed_seconds": 91.92521868599579,
+                  "model_exit_code": 0,
+                  "state_files_saved": {
+                    "artifact_24e44c228e5184e3": true,
+                    "artifact_2c1f8de3485efb44": false,
+                    "artifact_4caf12de69a79acd": false
+                  },
+                  "elapsed_seconds": 93.39585332199931
+                },
+                "continuation_allowed": true
+              },
+              "2": {
+                "number": 3,
+                "metadata": {
+                  "ready": true,
+                  "initialization_timeout_seconds": 2927,
+                  "tsv_version": 2,
+                  "event_summary": {
+                    "completed": true,
+                    "turn_usages": {
+                      "0": {
+                        "input_tokens": 1171317,
+                        "cached_input_tokens": 1099520,
+                        "cache_write_input_tokens": 0,
+                        "output_tokens": 24312,
+                        "reasoning_output_tokens": 10222
+                      }
+                    },
+                    "usage_total": {
+                      "input_tokens": 1171317,
+                      "cached_input_tokens": 1099520,
+                      "output_tokens": 24312
+                    }
+                  },
+                  "model_elapsed_seconds": 561.497471108989,
+                  "model_exit_code": 0,
+                  "state_files_saved": {
+                    "artifact_24e44c228e5184e3": true,
+                    "artifact_2c1f8de3485efb44": false,
+                    "artifact_4caf12de69a79acd": false
+                  },
+                  "elapsed_seconds": 563.0979517649976
+                },
+                "continuation_allowed": false
+              }
+            }
+          },
+          "source_segments": 3,
+          "recorded_model_seconds": 1230.8192898629932,
+          "recorded_elapsed_seconds": 1235.6821965699928,
+          "segments": {
+            "0": {
+              "number": 1,
+              "recorded_model_seconds": 577.3966000680084,
+              "recorded_metadata": {
+                "ready": false,
+                "initialization_timeout_seconds": 3599,
+                "tsv_version": 2,
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 7188480,
+                      "cached_input_tokens": 6949760,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 24906,
+                      "reasoning_output_tokens": 6042
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 7188480,
+                    "cached_input_tokens": 6949760,
+                    "output_tokens": 24906
+                  }
+                },
+                "model_elapsed_seconds": 577.3966000680084,
+                "model_exit_code": 0,
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 578.8634788269992
+              },
+              "event_completed": true,
+              "actual_cost_usd": null
+            },
+            "1": {
+              "number": 2,
+              "recorded_model_seconds": 91.92521868599579,
+              "recorded_metadata": {
+                "ready": false,
+                "initialization_timeout_seconds": 3021,
+                "tsv_version": 2,
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 633958,
+                      "cached_input_tokens": 558336,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 5067,
+                      "reasoning_output_tokens": 3337
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 633958,
+                    "cached_input_tokens": 558336,
+                    "output_tokens": 5067
+                  }
+                },
+                "model_elapsed_seconds": 91.92521868599579,
+                "model_exit_code": 0,
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 93.39585332199931
+              },
+              "event_completed": true,
+              "actual_cost_usd": null
+            },
+            "2": {
+              "number": 3,
+              "recorded_model_seconds": 561.497471108989,
+              "recorded_metadata": {
+                "ready": true,
+                "initialization_timeout_seconds": 2927,
+                "tsv_version": 2,
+                "event_summary": {
+                  "completed": true,
+                  "turn_usages": {
+                    "0": {
+                      "input_tokens": 1171317,
+                      "cached_input_tokens": 1099520,
+                      "cache_write_input_tokens": 0,
+                      "output_tokens": 24312,
+                      "reasoning_output_tokens": 10222
+                    }
+                  },
+                  "usage_total": {
+                    "input_tokens": 1171317,
+                    "cached_input_tokens": 1099520,
+                    "output_tokens": 24312
+                  }
+                },
+                "model_elapsed_seconds": 561.497471108989,
+                "model_exit_code": 0,
+                "state_files_saved": {
+                  "artifact_24e44c228e5184e3": true,
+                  "artifact_2c1f8de3485efb44": false,
+                  "artifact_4caf12de69a79acd": false
+                },
+                "elapsed_seconds": 563.0979517649976
+              },
+              "event_completed": true,
+              "actual_cost_usd": null
+            }
+          },
+          "root_aggregate_counted_as_additional_source_event": false,
+          "actual_cost_usd": null
+        },
+        "1": {
+          "source_segments": 2,
+          "recorded_model_seconds": 573.4131722590027,
+          "recorded_elapsed_seconds": 574.8056070390012,
+          "segments": {
+            "0": {
+              "number": 1,
+              "recorded_model_seconds": 405.72532254199905,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 5695299,
+                    "cached_input_tokens": 5463296,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 18654,
+                    "reasoning_output_tokens": 7617
+                  }
+                }
+              },
+              "actual_cost_usd": null
+            },
+            "1": {
+              "number": 2,
+              "recorded_model_seconds": 167.6878497170037,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 1913788,
+                    "cached_input_tokens": 1756416,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 7380,
+                    "reasoning_output_tokens": 2386
+                  }
+                }
+              },
+              "actual_cost_usd": null
+            }
+          },
+          "recorded_event_summary": {
+            "turn_usages": {
+              "0": {
+                "input_tokens": 5695299,
+                "cached_input_tokens": 5463296,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 18654,
+                "reasoning_output_tokens": 7617
+              },
+              "1": {
+                "input_tokens": 1913788,
+                "cached_input_tokens": 1756416,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 7380,
+                "reasoning_output_tokens": 2386
+              }
+            },
+            "usage_total": {
+              "input_tokens": 7609087,
+              "cached_input_tokens": 7219712,
+              "output_tokens": 26034
+            }
+          },
+          "actual_cost_usd": null
+        }
+      },
+      "source_event_sha256_unique_count": 5,
+      "source_event_sha256_unique_model_seconds": {
+        "00af59efb80d6c3176c6911278065dae2a164cb41efefe580eff17fdc5c6b9c0": 577.3966000680084,
+        "c14b37cd459db58a90ee46ff1e4ec59f4c490f85d86cc0c7803eda9ed22b0662": 91.92521868599579,
+        "3f2bb0dc527baf84329af87ac572134d202953cbb9d0940a7d04441690c8b987": 561.497471108989,
+        "d19a63ec761d3c8be3514fdc83b3c3d34b3846a2d9227493e1690334b5588c75": 405.72532254199905,
+        "83a046a1c28f9d0cda1ff0ca7d7f52354fee2c0b45f5bf15ca5b54e5d8b09571": 167.6878497170037
+      },
+      "known_source_model_seconds_all_unique": 1804.232462121996,
+      "source_usage_accounting_complete": true,
+      "related_file_count": 6,
+      "related_valid_outline_count": 6,
+      "original_cognitive_files": 1944,
+      "genuine_rows_reused_before_new_source": 0,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true,
+      "historical_cost_preservation": {
+        "root_aggregate_is_concatenation_of_three_source_segments": true,
+        "root_aggregate_charged_as_extra_call": false,
+        "no_prior_failed_stage_pointer_recorded": true,
+        "seed_derivation": {
+          "original_filled_rows": 1944,
+          "active_genuine_rows": 0,
+          "active_bare_unknown_rows": 1944,
+          "outline_table_format": 2,
+          "target_delete_value": "0",
+          "original_generic_rules_and_dictionary_bytes_preserved": true,
+          "unverified_business_architecture_header_removed": true,
+          "source_body_modified": false,
+          "new_role_uses_api_or_semantic_text_created": false,
+          "models_called": 0
+        }
+      },
+      "trusted_mode_repair_receipt": {
+        "original_receipt": {
+          "source_preflight_passed": true,
+          "pass": true,
+          "source_files_checked": 1944,
+          "tracked_files_checked": 1944,
+          "differences": {
+            "0": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "1": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "2": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "3": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "4": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "5": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "6": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "7": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "8": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "9": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "10": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "11": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "12": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "13": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "14": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "15": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            },
+            "16": {
+              "before_mode": 438,
+              "expected_mode": 420,
+              "git_mode": "100644"
+            }
+          },
+          "after_source_body_and_modes_exact": true,
+          "scope_unchanged": true,
+          "tsv_unchanged": true,
+          "roles_content_unchanged": true,
+          "models_called": 0
+        }
+      },
+      "source_cost_usd": null,
+      "accounting_note": "unknown",
+      "source_files_four_SHA_mtime_precede_formal_marker": true,
+      "original_legacy_ast_rows": 1944,
+      "active_genuine_rows_before_new_source": 0,
+      "legacy_ast_outlines_used_for_current_source": false
+    },
+    "formal": {
+      "infer_success": true,
+      "infer_exit_code": 0,
+      "grade_exit_code": 0,
+      "agent_exit_status": null,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_turn_completed_observed": true,
+      "formal_budget_time_exceeded": false,
+      "formal_model_calls": 1,
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "usage": {
+        "input_tokens": 34723492,
+        "cached_input_tokens": 34063232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 65785,
+        "reasoning_output_tokens": 23609
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 429,
+        "turn.started": 1,
+        "item.started": 233,
+        "error": 6,
+        "turn.completed": 1
+      },
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null
+    },
+    "accounting_rule": "unknown"
+  }
+}

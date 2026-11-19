@@ -1,0 +1,898 @@
+diff --git a/pandas/core/common.py b/pandas/core/common.py
+index 6c29140..e95f373 100644
+--- a/pandas/core/common.py
++++ b/pandas/core/common.py
+@@ -306,17 +306,14 @@ def maybe_iterable_to_list(obj: Iterable[T] | T) -> Collection[T] | T:
+     obj = cast(Collection, obj)
+     return obj
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def is_null_slice(obj) -> bool:
++    """Return whether *obj* is a completely unspecified slice."""
++    return (
++        isinstance(obj, slice)
++        and obj.start is None
++        and obj.stop is None
++        and obj.step is None
++    )
+ 
+ 
+ def is_empty_slice(obj) -> bool:
+@@ -651,4 +648,4 @@ def fill_missing_names(names: Sequence[Hashable | None]) -> list[Hashable]:
+     list
+         list of column names with the None values replaced.
+     """
+-    return [f"level_{i}" if name is None else name for i, name in enumerate(names)]
+\ No newline at end of file
++    return [f"level_{i}" if name is None else name for i, name in enumerate(names)]
+diff --git a/pandas/core/dtypes/base.py b/pandas/core/dtypes/base.py
+index 6fdbf9c..5902493 100644
+--- a/pandas/core/dtypes/base.py
++++ b/pandas/core/dtypes/base.py
+@@ -424,22 +424,10 @@ class ExtensionDtype:
+ 
+         return Index
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def _supports_2d(self) -> bool:
++        """Whether arrays with this dtype may be two-dimensional."""
++        return False
+ 
+ 
+     @property
+@@ -591,4 +579,4 @@ class Registry:
+         return None
+ 
+ 
+-_registry = Registry()
+\ No newline at end of file
++_registry = Registry()
+diff --git a/pandas/core/indexing.py b/pandas/core/indexing.py
+index f3b045c..18c0e9f 100644
+--- a/pandas/core/indexing.py
++++ b/pandas/core/indexing.py
+@@ -102,6 +102,15 @@ _NS = slice(None, None)
+ _one_ellipsis_message = "indexer may only contain one '...' entry"
+ 
+ 
++def is_label_like(key) -> bool:
++    """Return whether a key should be treated as a scalar label."""
++    return (
++        not isinstance(key, slice)
++        and not is_list_like_indexer(key)
++        and key is not Ellipsis
++    )
++
++
+ # the public IndexSlicerMaker
+ class _IndexSlice:
+     """
+@@ -2806,4 +2815,4 @@ def check_dict_or_set_indexers(key) -> None:
+     ):
+         raise TypeError(
+             "Passing a dict as an indexer is not supported. Use a list instead."
+-        )
+\ No newline at end of file
++        )
+diff --git a/pandas/core/interchange/buffer.py b/pandas/core/interchange/buffer.py
+index dc3bafd..7c98239 100644
+--- a/pandas/core/interchange/buffer.py
++++ b/pandas/core/interchange/buffer.py
+@@ -37,6 +37,7 @@ class PandasBuffer(Buffer):
+         # Store the numpy array in which the data resides as a private
+         # attribute, so we can use it to retrieve the public attributes
+         self._x = x
++        self._allow_copy = allow_copy
+ 
+     @property
+     def bufsize(self) -> int:
+@@ -56,7 +57,14 @@ class PandasBuffer(Buffer):
+         """
+         Represent this structure as DLPack interface.
+         """
+-        return self._x.__dlpack__()
++        try:
++            return self._x.__dlpack__()
++        except BufferError:
++            if not self._allow_copy:
++                raise RuntimeError(
++                    "DLPack export of a read-only buffer requires a copy"
++                ) from None
++            return self._x.copy().__dlpack__()
+ 
+     def __dlpack_device__(self) -> tuple[DlpackDeviceType, int | None]:
+         """
+@@ -83,31 +91,22 @@ class PandasBufferPyarrow(Buffer):
+     Data in the buffer is guaranteed to be contiguous in memory.
+     """
+ 
++    def __init__(self, x: pa.Buffer) -> None:
++        self._x = x
+ 
++    def __dlpack_device__(self) -> tuple[DlpackDeviceType, int | None]:
++        """Device type and device ID for where the data resides."""
++        return (DlpackDeviceType.CPU, None)
+ 
++    @property
++    def bufsize(self) -> int:
++        """Buffer size in bytes."""
++        return self._x.size
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def ptr(self) -> int:
++        """Pointer to the first byte of the buffer."""
++        return self._x.address
+ 
+     def __dlpack__(self) -> Any:
+         """
+@@ -115,12 +114,6 @@ class PandasBufferPyarrow(Buffer):
+         """
+         raise NotImplementedError
+ 
+-
+-
+-
+-
+-
+-
+     def __repr__(self) -> str:
+         return (
+             "PandasBuffer[pyarrow]("
+@@ -132,4 +125,4 @@ class PandasBufferPyarrow(Buffer):
+                 }
+             )
+             + ")"
+-        )
+\ No newline at end of file
++        )
+diff --git a/pandas/core/interchange/column.py b/pandas/core/interchange/column.py
+index bf74296..71cb83c 100644
+--- a/pandas/core/interchange/column.py
++++ b/pandas/core/interchange/column.py
+@@ -1,15 +1,11 @@
+ from __future__ import annotations
+ 
+-from typing import (
+-    TYPE_CHECKING,
+-    Any,
+-)
++from typing import Any
+ 
+ import numpy as np
+ 
+ from pandas._libs.lib import infer_dtype
+ from pandas._libs.tslibs import iNaT
+-from pandas.errors import NoBufferPresent
+ from pandas.util._decorators import cache_readonly
+ 
+ from pandas.core.dtypes.dtypes import BaseMaskedDtype
+@@ -30,14 +26,11 @@ from pandas.core.interchange.dataframe_protocol import (
+     ColumnNullType,
+     DtypeKind,
+ )
+-from pandas.core.interchange.utils import ArrowCTypes, Endianness
+-
+-
+-
+-
+-
+-if TYPE_CHECKING:
+-    from pandas.core.interchange.dataframe_protocol import Buffer
++from pandas.core.interchange.utils import (
++    ArrowCTypes,
++    Endianness,
++    dtype_to_arrow_c_fmt,
++)
+ 
+ _NP_KINDS = {
+     "i": DtypeKind.INT,
+@@ -55,190 +48,302 @@ _NULL_DESCRIPTION = {
+     DtypeKind.INT: (ColumnNullType.NON_NULLABLE, None),
+     DtypeKind.UINT: (ColumnNullType.NON_NULLABLE, None),
+     DtypeKind.BOOL: (ColumnNullType.NON_NULLABLE, None),
+-    # Null values for categoricals are stored as `-1` sentinel values
+-    # in the category date (e.g., `col.values.codes` is int8 np.ndarray)
+     DtypeKind.CATEGORICAL: (ColumnNullType.USE_SENTINEL, -1),
+-    # follow Arrow in using 1 as valid value and 0 for missing/null value
+     DtypeKind.STRING: (ColumnNullType.USE_BYTEMASK, 0),
+ }
+-
+-_NO_VALIDITY_BUFFER = {
+-    ColumnNullType.NON_NULLABLE: "This column is non-nullable",
+-    ColumnNullType.USE_NAN: "This column uses NaN as null",
+-    ColumnNullType.USE_SENTINEL: "This column uses a sentinel value",
+-}
+-
+-
+-class PandasColumn(Column):
+-    """
+-    A column object, with only the methods and properties required by the
+-    interchange protocol defined.
+-    A column can contain one or more chunks. Each chunk can contain up to three
+-    buffers - a data buffer, a mask buffer (depending on null representation),
+-    and an offsets buffer (if variable-size binary; e.g., variable-length
+-    strings).
+-    Note: this Column object can only be produced by ``__dataframe__``, so
+-          doesn't need its own version or ``__column__`` protocol.
+-    """
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+ 
+ 
++def _dtype_from_numpy(dtype: np.dtype) -> tuple[DtypeKind, int, str, str]:
++    kind = _NP_KINDS.get(dtype.kind)
++    if kind is None:
++        raise NotImplementedError(f"Data type {dtype} is not supported yet")
++    return (
++        kind,
++        dtype.itemsize * 8,
++        dtype_to_arrow_c_fmt(dtype),
++        dtype.byteorder,
++    )
+ 
+ 
++class PandasColumn(Column):
++    """A pandas Series exposed through the dataframe interchange protocol."""
++
++    def __init__(self, column: pd.Series, allow_copy: bool = True) -> None:
++        if not isinstance(column, pd.Series):
++            raise TypeError(
++                f"Expected a Series, got a {type(column).__name__}. This likely "
++                "happened because you called __dataframe__ on a DataFrame which, "
++                "after converting column names to string, resulted in duplicated "
++                f"names: {column.columns}. Please rename these columns before using "
++                "the interchange protocol."
++            )
++        self._col = column
++        self._allow_copy = allow_copy
+ 
++    @property
++    def describe_categorical(self):
++        if self.dtype[0] != DtypeKind.CATEGORICAL:
++            raise TypeError("describe_categorical only works on categorical columns")
++        return {
++            "is_ordered": self._col.cat.ordered,
++            "is_dictionary": True,
++            "categories": PandasColumn(
++                pd.Series(self._col.cat.categories), self._allow_copy
++            ),
++        }
++
++    @cache_readonly
++    def dtype(self) -> tuple[DtypeKind, int, str, str]:
++        dtype = self._col.dtype
++
++        if isinstance(dtype, pd.CategoricalDtype):
++            codes_dtype = self._col.cat.codes.dtype
++            return (
++                DtypeKind.CATEGORICAL,
++                codes_dtype.itemsize * 8,
++                dtype_to_arrow_c_fmt(codes_dtype),
++                Endianness.NATIVE,
++            )
++
++        if is_string_dtype(dtype):
++            inferred = infer_dtype(self._col, skipna=True)
++            if inferred not in ("string", "unicode", "empty"):
++                raise NotImplementedError(
++                    "Non-string object dtypes are not supported yet"
++                )
++            fmt = dtype_to_arrow_c_fmt(dtype)
++            return (DtypeKind.STRING, 8, fmt, Endianness.NATIVE)
++
++        if isinstance(dtype, ArrowDtype):
++            pa_dtype = dtype.pyarrow_dtype
++            try:
++                kind_code = pa_dtype.to_pandas_dtype().kind
++            except (AttributeError, NotImplementedError):
++                kind_code = getattr(dtype, "kind", None)
++            kind = _NP_KINDS.get(kind_code)
++            if kind is None:
++                raise ValueError(
++                    f"Data type {dtype} not supported by interchange protocol"
++                )
++            return (
++                kind,
++                pa_dtype.bit_width,
++                dtype_to_arrow_c_fmt(dtype),
++                Endianness.NATIVE,
++            )
++
++        if isinstance(dtype, DatetimeTZDtype):
++            return (
++                DtypeKind.DATETIME,
++                dtype.itemsize * 8,
++                dtype_to_arrow_c_fmt(dtype),
++                Endianness.NATIVE,
++            )
++
++        np_dtype = getattr(dtype, "numpy_dtype", dtype)
++        kind = _NP_KINDS.get(np_dtype.kind)
++        if kind is None:
++            raise ValueError(f"Data type {dtype} not supported by interchange protocol")
++        return (
++            kind,
++            np_dtype.itemsize * 8,
++            dtype_to_arrow_c_fmt(np_dtype),
++            Endianness.NATIVE,
++        )
+ 
++    @property
++    def describe_null(self) -> tuple[ColumnNullType, Any]:
++        if isinstance(self._col.dtype, ArrowDtype):
++            if self.null_count == 0:
++                return (ColumnNullType.NON_NULLABLE, None)
++            return (ColumnNullType.USE_BITMASK, 0)
++        if isinstance(self._col.dtype, BaseMaskedDtype):
++            if self.null_count == 0:
++                return (ColumnNullType.NON_NULLABLE, None)
++            return (ColumnNullType.USE_BYTEMASK, 1)
++        if self.dtype[0] == DtypeKind.STRING and self.null_count == 0:
++            return (ColumnNullType.NON_NULLABLE, None)
++        return _NULL_DESCRIPTION[self.dtype[0]]
++
++    def get_buffers(self) -> ColumnBuffers:
++        pa_array = getattr(self._col.array, "_pa_array", None)
++        if pa_array is not None and isinstance(self._col.dtype, ArrowDtype):
++            return self._get_pyarrow_buffers(pa_array)
++
++        kind = self.dtype[0]
++        validity = None
++        offsets = None
++
++        if kind == DtypeKind.STRING:
++            data, offsets, validity = self._get_string_buffers()
++            return {"data": data, "validity": validity, "offsets": offsets}
++
++        if kind == DtypeKind.CATEGORICAL:
++            values = self._col.cat.codes.to_numpy(copy=False)
++            data_dtype = _dtype_from_numpy(values.dtype)
++        elif isinstance(self._col.dtype, BaseMaskedDtype):
++            values = self._col.array._data
++            data_dtype = _dtype_from_numpy(values.dtype)
++            mask = self._col.array._mask
++            if mask.any():
++                validity = (
++                    PandasBuffer(mask, self._allow_copy),
++                    (DtypeKind.BOOL, 8, ArrowCTypes.BOOL, Endianness.NATIVE),
++                )
++        elif kind == DtypeKind.DATETIME:
++            values = self._col.array.asi8
++            data_dtype = (
++                DtypeKind.INT,
++                64,
++                ArrowCTypes.INT64,
++                Endianness.NATIVE,
++            )
++        else:
++            values = self._col.to_numpy(copy=False)
++            data_dtype = _dtype_from_numpy(values.dtype)
++
++        return {
++            "data": (PandasBuffer(values, self._allow_copy), data_dtype),
++            "validity": validity,
++            "offsets": offsets,
++        }
++
++    def _arrow_array(self, chunked_array):
++        if chunked_array.num_chunks == 0:
++            import pyarrow as pa
++
++            return pa.array([], type=chunked_array.type)
++        if chunked_array.num_chunks > 1:
++            if not self._allow_copy:
++                raise RuntimeError(
++                    "Found multi-chunk pyarrow array, but `allow_copy` is False"
++                )
++            return chunked_array.combine_chunks()
++        array = chunked_array.chunk(0)
++        if array.offset:
++            if not self._allow_copy:
++                raise RuntimeError(
++                    "A copy is required to export a sliced pyarrow array with offset 0"
++                )
++            import pyarrow as pa
++
++            return pa.concat_arrays([array])
++        return array
++
++    def _get_pyarrow_buffers(self, chunked_array) -> ColumnBuffers:
++        array = self._arrow_array(chunked_array)
++        buffers = array.buffers()
++        kind, bit_width, _, _ = self.dtype
++
++        if kind == DtypeKind.STRING:
++            data_buffer = buffers[2]
++            offset_buffer = buffers[1]
++            offset_width = 64 if str(array.type) == "large_string" else 32
++            offsets = (
++                PandasBufferPyarrow(offset_buffer),
++                (
++                    DtypeKind.INT,
++                    offset_width,
++                    getattr(ArrowCTypes, f"INT{offset_width}"),
++                    Endianness.NATIVE,
++                ),
++            )
++            data_dtype = (
++                DtypeKind.UINT,
++                8,
++                ArrowCTypes.UINT8,
++                Endianness.NATIVE,
++            )
++        else:
++            data_buffer = buffers[1]
++            offsets = None
++            if kind == DtypeKind.DATETIME:
++                data_dtype = (
++                    DtypeKind.INT,
++                    bit_width,
++                    getattr(ArrowCTypes, f"INT{bit_width}"),
++                    Endianness.NATIVE,
++                )
++            else:
++                data_dtype = self.dtype
++
++        validity = None
++        if buffers[0] is not None:
++            validity = (
++                PandasBufferPyarrow(buffers[0]),
++                (DtypeKind.BOOL, 1, ArrowCTypes.BOOL, Endianness.NATIVE),
++            )
++
++        return {
++            "data": (PandasBufferPyarrow(data_buffer), data_dtype),
++            "validity": validity,
++            "offsets": offsets,
++        }
++
++    def _get_string_buffers(self):
++        if not self._allow_copy:
++            raise RuntimeError("String buffers cannot be exported without copying")
++
++        encoded = bytearray()
++        offsets = [0]
++        validity = np.ones(self.size(), dtype=np.uint8)
++        has_nulls = False
++        for i, value in enumerate(self._col):
++            if pd.isna(value):
++                validity[i] = 0
++                has_nulls = True
++            else:
++                encoded.extend(value.encode("utf-8"))
++            offsets.append(len(encoded))
++
++        data_array = np.frombuffer(encoded, dtype=np.uint8)
++        offsets_array = np.asarray(offsets, dtype=np.int64)
++        data = (
++            PandasBuffer(data_array),
++            (DtypeKind.UINT, 8, ArrowCTypes.UINT8, Endianness.NATIVE),
++        )
++        offsets_buffer = (
++            PandasBuffer(offsets_array),
++            (DtypeKind.INT, 64, ArrowCTypes.INT64, Endianness.NATIVE),
++        )
++        validity_buffer = None
++        if has_nulls:
++            validity_buffer = (
++                PandasBuffer(validity),
++                (DtypeKind.BOOL, 8, ArrowCTypes.BOOL, Endianness.NATIVE),
++            )
++        return data, offsets_buffer, validity_buffer
++
++    def get_chunks(self, n_chunks: int | None = None):
++        if not n_chunks or n_chunks == 1:
++            yield self
++            return
++        if n_chunks < 0:
++            yield self
++            return
++        chunk_size = (self.size() + n_chunks - 1) // n_chunks
++        if chunk_size == 0:
++            yield self
++            return
++        for start in range(0, self.size(), chunk_size):
++            yield PandasColumn(
++                self._col._slice(slice(start, start + chunk_size)), self._allow_copy
++            )
++
++    @cache_readonly
++    def null_count(self) -> int:
++        return int(np.count_nonzero(pd.isna(self._col.array)))
++
++    def num_chunks(self) -> int:
++        return 1
+ 
++    @property
++    def offset(self) -> int:
++        return 0
+ 
++    def size(self) -> int:
++        return len(self._col)
+ 
+     @property
+     def metadata(self) -> dict[str, pd.Index]:
+-        """
+-        Store specific metadata of the column.
+-        """
+         return {"pandas.index": self._col.index}
+-
+-
+diff --git a/pandas/core/interchange/dataframe.py b/pandas/core/interchange/dataframe.py
+index 685343b..2a80dc0 100644
+--- a/pandas/core/interchange/dataframe.py
++++ b/pandas/core/interchange/dataframe.py
+@@ -27,29 +27,76 @@ class PandasDataFrameXchg(DataFrameXchg):
+     ``pd.DataFrame.__dataframe__`` as objects with the methods and
+     attributes defined on this class.
+     """
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __init__(self, df: DataFrame, allow_copy: bool = True) -> None:
++        self._df = df.copy(deep=False)
++        self._df.columns = [str(name) for name in df.columns]
++        self._allow_copy = allow_copy
++
++    def column_names(self) -> Index:
++        return self._df.columns
++
++    def get_chunks(self, n_chunks: int | None = None) -> Iterable[PandasDataFrameXchg]:
++        if not n_chunks or n_chunks == 1:
++            yield self
++            return
++
++        if n_chunks < 0:
++            yield self
++            return
++
++        size = self.num_rows()
++        chunk_size = (size + n_chunks - 1) // n_chunks
++        if chunk_size == 0:
++            yield self
++            return
++        for start in range(0, size, chunk_size):
++            yield PandasDataFrameXchg(
++                self._df._slice(slice(start, start + chunk_size), axis=0),
++                self._allow_copy,
++            )
++
++    def get_column(self, i: int) -> PandasColumn:
++        if i < 0:
++            i += self.num_columns()
++        if i < 0 or i >= self.num_columns():
++            raise IndexError("column index is out of bounds")
++        return PandasColumn(self._df._ixs(i, axis=1), self._allow_copy)
++
++    def get_column_by_name(self, name: str) -> PandasColumn:
++        return PandasColumn(self._df[name], self._allow_copy)
++
++    def get_columns(self) -> list[PandasColumn]:
++        return [self.get_column(i) for i in range(self.num_columns())]
++
++    def num_chunks(self) -> int:
++        return 1
++
++    def num_columns(self) -> int:
++        return self._df.shape[1]
++
++    def num_rows(self) -> int:
++        return self._df.shape[0]
++
++    def select_columns(self, indices: Sequence[int]) -> PandasDataFrameXchg:
++        if not isinstance(indices, abc.Sequence):
++            raise ValueError("`indices` is not a sequence")
++        names = [self.column_names()[i] for i in indices]
++        return self.select_columns_by_name(names)
++
++    def select_columns_by_name(self, names: list[str]) -> PandasDataFrameXchg:
++        if not isinstance(names, abc.Sequence):
++            raise ValueError("`names` is not a sequence")
++        return PandasDataFrameXchg(self._df.loc[:, list(names)], self._allow_copy)
+ 
+     def __dataframe__(
+         self, nan_as_null: bool = False, allow_copy: bool = True
+     ) -> PandasDataFrameXchg:
+         # `nan_as_null` can be removed here once it's removed from
+         # Dataframe.__dataframe__
+-        return PandasDataFrameXchg(self._df, allow_copy)
++        return PandasDataFrameXchg(self._df, self._allow_copy and allow_copy)
+ 
+     @property
+     def metadata(self) -> dict[str, Index]:
+         # `index` isn't a regular column, and the protocol doesn't support row
+         # labels - so we export it as Pandas-specific metadata here.
+         return {"pandas.index": self._df.index}
+-
+diff --git a/pandas/core/interchange/from_dataframe.py b/pandas/core/interchange/from_dataframe.py
+index bcbeb54..25fc9e2 100644
+--- a/pandas/core/interchange/from_dataframe.py
++++ b/pandas/core/interchange/from_dataframe.py
+@@ -401,6 +401,14 @@ def parse_datetime_format_str(format_str, data) -> pd.Series | np.ndarray:
+             raise NotImplementedError(f"Date unit is not supported: {unit}")
+         return data
+ 
++    # duration 'tD{unit}'
++    duration_meta = re.match(r"tD([smun])", format_str)
++    if duration_meta:
++        unit = duration_meta.group(1)
++        if unit != "s":
++            unit += "s"
++        return data.astype(f"timedelta64[{unit}]")
++
+     raise NotImplementedError(f"DateTime kind is not supported: {format_str}")
+ 
+ 
+diff --git a/pandas/core/interchange/utils.py b/pandas/core/interchange/utils.py
+index 415e8b8..cfc6ac8 100644
+--- a/pandas/core/interchange/utils.py
++++ b/pandas/core/interchange/utils.py
+@@ -101,5 +101,66 @@ class Endianness:
+     NA = "|"
+ 
+ 
+-
+-
++def dtype_to_arrow_c_fmt(dtype: DtypeObj) -> str:
++    """Convert a pandas or NumPy dtype to an Arrow C format string."""
++    if isinstance(dtype, ArrowDtype):
++        pa_dtype = dtype.pyarrow_dtype
++        if str(pa_dtype).startswith("decimal"):
++            return f"d:{pa_dtype.precision},{pa_dtype.scale}"
++        if str(pa_dtype).startswith("timestamp["):
++            resolution = pa_dtype.unit if pa_dtype.unit == "s" else pa_dtype.unit[0]
++            return ArrowCTypes.TIMESTAMP.format(
++                resolution=resolution, tz=pa_dtype.tz or ""
++            )
++        try:
++            return PYARROW_CTYPES[str(pa_dtype)]
++        except KeyError as err:
++            raise NotImplementedError(
++                f"Conversion of {pa_dtype} to Arrow C format string is not implemented."
++            ) from err
++
++    if isinstance(dtype, CategoricalDtype):
++        return ArrowCTypes.INT64
++
++    if isinstance(dtype, pd.StringDtype):
++        return ArrowCTypes.STRING
++
++    if isinstance(dtype, DatetimeTZDtype):
++        unit = dtype.unit
++        resolution = unit if unit == "s" else unit[0]
++        return ArrowCTypes.TIMESTAMP.format(resolution=resolution, tz=dtype.tz)
++
++    np_dtype = np.dtype(dtype)
++    if np_dtype.kind == "M":
++        unit = np.datetime_data(np_dtype)[0]
++        resolution = unit if unit == "s" else unit[0]
++        return ArrowCTypes.TIMESTAMP.format(resolution=resolution, tz="")
++    if np_dtype.kind == "m":
++        unit = np.datetime_data(np_dtype)[0]
++        resolution = unit if unit == "s" else unit[0]
++        return f"tD{resolution}"
++
++    formats = {
++        "?": ArrowCTypes.BOOL,
++        "b": ArrowCTypes.INT8,
++        "B": ArrowCTypes.UINT8,
++        "h": ArrowCTypes.INT16,
++        "H": ArrowCTypes.UINT16,
++        "i": ArrowCTypes.INT32,
++        "I": ArrowCTypes.UINT32,
++        "l": ArrowCTypes.INT64 if np_dtype.itemsize == 8 else ArrowCTypes.INT32,
++        "L": ArrowCTypes.UINT64 if np_dtype.itemsize == 8 else ArrowCTypes.UINT32,
++        "q": ArrowCTypes.INT64,
++        "Q": ArrowCTypes.UINT64,
++        "e": ArrowCTypes.FLOAT16,
++        "f": ArrowCTypes.FLOAT32,
++        "d": ArrowCTypes.FLOAT64,
++        "O": ArrowCTypes.STRING,
++        "U": ArrowCTypes.STRING,
++    }
++    try:
++        return formats[np_dtype.char]
++    except KeyError as err:
++        raise NotImplementedError(
++            f"Conversion of {dtype} to Arrow C format string is not implemented."
++        ) from err

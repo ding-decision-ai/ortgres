@@ -1,0 +1,2500 @@
+diff --git a/pandas/__init__.py b/pandas/__init__.py
+index b7f2e94..e121d17 100644
+--- a/pandas/__init__.py
++++ b/pandas/__init__.py
+@@ -114,7 +114,7 @@ from pandas.tseries import offsets
+ 
+ from pandas.core.computation.api import eval
+ 
+-from pandas.core.reshape.api import lreshape, melt, wide_to_long, merge, merge_asof, merge_ordered, crosstab, pivot, pivot_table, get_dummies, from_dummies, cut, qcut
++from pandas.core.reshape.api import concat, lreshape, melt, wide_to_long, merge, merge_asof, merge_ordered, crosstab, pivot, pivot_table, get_dummies, from_dummies, cut, qcut
+ 
+ 
+ 
+diff --git a/pandas/_testing/asserters.py b/pandas/_testing/asserters.py
+index c59a324..bf69706 100644
+--- a/pandas/_testing/asserters.py
++++ b/pandas/_testing/asserters.py
+@@ -11,6 +11,8 @@ import warnings
+ 
+ import numpy as np
+ 
++from pandas.io.formats.printing import pprint_thing
++
+ from pandas._libs import lib
+ from pandas._libs.missing import is_matching_na
+ from pandas._libs.sparse import SparseIndex
+diff --git a/pandas/compat/numpy/function.py b/pandas/compat/numpy/function.py
+index cc4bef1..8e60835 100644
+--- a/pandas/compat/numpy/function.py
++++ b/pandas/compat/numpy/function.py
+@@ -34,7 +34,11 @@ from pandas._libs.lib import (
+     is_integer,
+ )
+ from pandas.errors import UnsupportedFunctionCall
+-from pandas.util._validators import validate_args
++from pandas.util._validators import (
++    validate_args,
++    validate_args_and_kwargs,
++    validate_kwargs,
++)
+ 
+ 
+ 
+@@ -368,4 +372,14 @@ _validation_funcs = {
+ }
+ 
+ 
++def validate_func(fname, args, kwargs) -> None:
++    """Validate extra NumPy-style arguments for a statistical method."""
++    if fname not in _validation_funcs:
++        if args or kwargs:
++            raise UnsupportedFunctionCall(
++                f"numpy operations are not valid with pandas objects. "
++                f"Use .{fname}() instead"
++            )
++        return
++    _validation_funcs[fname](args, kwargs)
+ 
+diff --git a/pandas/core/_numba/executor.py b/pandas/core/_numba/executor.py
+index 1870cb3..4a241ee 100644
+--- a/pandas/core/_numba/executor.py
++++ b/pandas/core/_numba/executor.py
+@@ -205,7 +205,20 @@ def generate_shared_aggregator(
+     # Cannot do this in numba nopython mode
+     # (you'll run into type-unification error when you cast int -> float)
+ 
++    def looper_wrapper(values, *args):
++        result_dtype = dtype_mapping[values.dtype]
++        column_looper = make_looper(
++            func, result_dtype, is_grouped_kernel, nopython, nogil, parallel
++        )
++        result, na_positions = column_looper(values, *args)
++        if len(na_positions) > 0:
++            if np.dtype(result_dtype).kind in "iu":
++                result = result.astype(np.float64)
++            for i, positions in na_positions.items():
++                result[i, positions] = np.nan
++        return result
+ 
++    return looper_wrapper
+ 
+ 
+ 
+@@ -242,4 +255,5 @@ def generate_shared_aggregator(
+ 
+ 
+ 
+-    return looper_wrapper
+\ No newline at end of file
++
++    return looper_wrapper
+diff --git a/pandas/core/algorithms.py b/pandas/core/algorithms.py
+index b6537c9..e3254a8 100644
+--- a/pandas/core/algorithms.py
++++ b/pandas/core/algorithms.py
+@@ -115,6 +115,22 @@ if TYPE_CHECKING:
+ # --------------- #
+ # dtype access    #
+ # --------------- #
++def take(
++    arr: ArrayLike,
++    indices: TakeIndexer,
++    axis: AxisInt = 0,
++    allow_fill: bool = False,
++    fill_value=None,
++) -> ArrayLike:
++    if allow_fill:
++        return take_nd(
++            arr, indices, axis=axis, allow_fill=True, fill_value=fill_value
++        )
++    if isinstance(arr, np.ndarray):
++        return arr.take(indices, axis=axis)
++    return arr.take(indices, allow_fill=False)
++
++
+ def _ensure_data(values: ArrayLike) -> np.ndarray:
+     """
+     routine to ensure that our data is of the correct
+@@ -1741,4 +1757,4 @@ def map_array(
+     if na_action is None:
+         return lib.map_infer(values, mapper)
+     else:
+-        return lib.map_infer_mask(values, mapper, mask=isna(values).view(np.uint8))
+\ No newline at end of file
++        return lib.map_infer_mask(values, mapper, mask=isna(values).view(np.uint8))
+diff --git a/pandas/core/array_algos/quantile.py b/pandas/core/array_algos/quantile.py
+index d9a93ce..564cc7d 100644
+--- a/pandas/core/array_algos/quantile.py
++++ b/pandas/core/array_algos/quantile.py
+@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
+ 
+ import numpy as np
+ 
+-from pandas.core.dtypes.missing import isna
++from pandas.core.dtypes.missing import isna, na_value_for_dtype
+ 
+ 
+ 
+diff --git a/pandas/core/array_algos/take.py b/pandas/core/array_algos/take.py
+index 4fd2fc4..889b35a 100644
+--- a/pandas/core/array_algos/take.py
++++ b/pandas/core/array_algos/take.py
+@@ -19,6 +19,7 @@ from pandas.core.dtypes.common import (
+     ensure_platform_int,
+     is_1d_only_ea_dtype,
+ )
++from pandas.core.dtypes.missing import na_value_for_dtype
+ 
+ 
+ from pandas.core.construction import ensure_wrapped_if_datetimelike
+diff --git a/pandas/core/arrays/_mixins.py b/pandas/core/arrays/_mixins.py
+index e5ee2f3..bd07f93 100644
+--- a/pandas/core/arrays/_mixins.py
++++ b/pandas/core/arrays/_mixins.py
+@@ -45,7 +45,7 @@ from pandas.core.dtypes.dtypes import (
+ from pandas.core.dtypes.missing import array_equivalent
+ 
+ from pandas.core import missing
+-from pandas.core.algorithms import unique, value_counts_internal
++from pandas.core.algorithms import take, unique, value_counts_internal
+ 
+ 
+ 
+diff --git a/pandas/core/arrays/arrow/array.py b/pandas/core/arrays/arrow/array.py
+index c09eab6..f527ec4 100644
+--- a/pandas/core/arrays/arrow/array.py
++++ b/pandas/core/arrays/arrow/array.py
+@@ -76,7 +76,7 @@ from pandas.core.arrays.masked import BaseMaskedArray
+ from pandas.core.arrays.string_ import StringDtype
+ import pandas.core.common as com
+ from pandas.core.construction import extract_array
+-from pandas.core.indexers import check_array_indexer, unpack_tuple_and_ellipses
++from pandas.core.indexers import check_array_indexer, unpack_tuple_and_ellipses, validate_indices
+ 
+ 
+ 
+diff --git a/pandas/core/arrays/base.py b/pandas/core/arrays/base.py
+index 1c3c13c..b147aac 100644
+--- a/pandas/core/arrays/base.py
++++ b/pandas/core/arrays/base.py
+@@ -1669,6 +1669,15 @@ class ExtensionArray:
+         Categories (3, str): ['a', 'b', 'c']
+         """
+ 
++    def repeat(
++        self, repeats: int | Sequence[int], axis: AxisInt | None = None
++    ) -> Self:
++        if axis is not None:
++            raise ValueError("axis must be None")
++        repeats = np.asarray(repeats)
++        indices = np.arange(len(self), dtype=np.intp).repeat(repeats)
++        return self.take(indices)
++
+ 
+ 
+ 
+@@ -2903,4 +2912,4 @@ class ExtensionScalarOpsMixin(ExtensionOpsMixin):
+ 
+     @classmethod
+     def _create_comparison_method(cls, op):
+-        return cls._create_method(op, coerce_to_dtype=False, result_dtype=bool)
+\ No newline at end of file
++        return cls._create_method(op, coerce_to_dtype=False, result_dtype=bool)
+diff --git a/pandas/core/arrays/datetimelike.py b/pandas/core/arrays/datetimelike.py
+index f091714..8dc089a 100644
+--- a/pandas/core/arrays/datetimelike.py
++++ b/pandas/core/arrays/datetimelike.py
+@@ -105,6 +105,7 @@ from pandas.core.dtypes.dtypes import (
+ )
+ from pandas.core.dtypes.generic import (
+     ABCCategorical,
++    ABCIndex,
+     ABCMultiIndex,
+ )
+ from pandas.core.dtypes.missing import (
+@@ -169,6 +170,49 @@ if TYPE_CHECKING:
+ DTScalarOrNaT: TypeAlias = DatetimeLikeScalar | NaTType
+ 
+ 
++def dtype_to_unit(dtype: DatetimeTZDtype | np.dtype | ArrowDtype) -> str:
++    """Return the datetime/timedelta resolution unit for dtype."""
++    if isinstance(dtype, DatetimeTZDtype):
++        return dtype.unit
++    if isinstance(dtype, ArrowDtype):
++        if dtype.kind not in "mM":
++            raise ValueError(f"dtype must be datetime-like, got {dtype}")
++        return dtype.pyarrow_dtype.unit
++    return np.datetime_data(dtype)[0]
++
++
++def ensure_arraylike_for_datetimelike(
++    data, copy: bool, cls_name: str
++) -> tuple[ArrayLike, bool]:
++    """Normalize construction input for datetime-like extension arrays."""
++    if isinstance(data, ABCMultiIndex):
++        raise TypeError(f"Cannot create a {cls_name} from a MultiIndex")
++
++    if isinstance(data, ABCCategorical):
++        data = data._internal_get_values()
++        copy = False
++    elif isinstance(data, ABCIndex):
++        data = data._values
++    elif isinstance(data, IntegerArray) or (
++        isinstance(data, ArrowExtensionArray) and is_integer_dtype(data.dtype)
++    ):
++        data = data.to_numpy(dtype="int64", na_value=iNaT)
++        copy = False
++    elif not isinstance(data, (np.ndarray, ExtensionArray)):
++        if not isinstance(data, (list, tuple)) and hasattr(data, "__iter__"):
++            data = list(data)
++        if isinstance(data, (list, tuple)):
++            data = construct_1d_object_array_from_listlike(data)
++            copy = False
++        else:
++            data = np.asarray(data)
++    elif copy:
++        data = data.copy()
++        copy = False
++
++    return data, copy
++
++
+ def _make_unpacked_invalid_op(op_name: str):
+     op = make_invalid_op(op_name)
+     return unpack_zerodim_and_defer(op_name)(op)
+@@ -2582,5 +2626,3 @@ def _validate_inferred_freq(
+     return freq
+ 
+ 
+-
+-
+diff --git a/pandas/core/arrays/datetimes.py b/pandas/core/arrays/datetimes.py
+index 17fd085..f68fab2 100644
+--- a/pandas/core/arrays/datetimes.py
++++ b/pandas/core/arrays/datetimes.py
+@@ -2401,6 +2401,103 @@ default 'raise'
+ # Constructor Helpers
+ 
+ 
++def _sequence_to_dt64(
++    data: ArrayLike,
++    *,
++    copy: bool = False,
++    tz: tzinfo | None = None,
++    dayfirst: bool = False,
++    yearfirst: bool = False,
++    ambiguous: TimeAmbiguous = "raise",
++    out_unit: str | None = None,
++) -> tuple[np.ndarray, tzinfo | None]:
++    data, copy = maybe_convert_dtype(data, copy, tz=tz)
++    dtype = getattr(data, "dtype", None)
++
++    if isinstance(dtype, DatetimeTZDtype):
++        tz = _maybe_infer_tz(tz, data.tz)
++        result = data._ndarray
++    elif dtype is not None and lib.is_np_dtype(dtype, "M"):
++        result, copy = _construct_from_dt64_naive(
++            np.asarray(data), tz=tz, copy=copy, ambiguous=ambiguous
++        )
++    elif dtype is not None and dtype.kind in "iu":
++        result = np.asarray(data).astype(np.int64, copy=copy).view(DT64NS_DTYPE)
++        copy = False
++    else:
++        result, inferred_tz = objects_to_datetime64(
++            np.asarray(data, dtype=object),
++            dayfirst=dayfirst,
++            yearfirst=yearfirst,
++            utc=False,
++            out_unit=out_unit,
++        )
++        if inferred_tz is not None:
++            tz = _maybe_infer_tz(tz, inferred_tz)
++        elif tz is not None:
++            result, copy = _construct_from_dt64_naive(
++                result, tz=tz, copy=False, ambiguous=ambiguous
++            )
++
++    if out_unit is not None and np.datetime_data(result.dtype)[0] != out_unit:
++        result = astype_overflowsafe(
++            result, dtype=np.dtype(f"M8[{out_unit}]"), copy=False
++        )
++        copy = False
++    elif copy:
++        result = result.copy()
++    return result, tz
++
++
++def _validate_dt64_dtype(dtype):
++    if dtype is None:
++        return None
++    dtype = pandas_dtype(dtype)
++    if isinstance(dtype, DatetimeTZDtype):
++        return DatetimeTZDtype(unit=dtype.unit, tz=timezones.maybe_get_tz(dtype.tz))
++    if not isinstance(dtype, np.dtype) or dtype.kind != "M":
++        raise ValueError(
++            f"Unexpected value for 'dtype': '{dtype}'. Must be 'datetime64[s]', "
++            "'datetime64[ms]', 'datetime64[us]', 'datetime64[ns]' or "
++            "DatetimeTZDtype."
++        )
++    if is_unitless(dtype):
++        raise ValueError(
++            "Passing in 'datetime64' dtype with no precision is not allowed. "
++            "Please pass in 'datetime64[ns]' instead."
++        )
++    if not is_supported_dtype(dtype):
++        raise ValueError(f"Unexpected value for 'dtype': '{dtype}'.")
++    return dtype
++
++
++def _validate_tz_from_dtype(
++    dtype, tz: tzinfo | None, explicit_tz_none: bool = False
++) -> tzinfo | None:
++    dtype_tz = None
++    if isinstance(dtype, str):
++        try:
++            dtype = DatetimeTZDtype.construct_from_string(dtype)
++        except TypeError:
++            pass
++    if isinstance(dtype, DatetimeTZDtype):
++        dtype_tz = dtype.tz
++
++    if dtype_tz is not None:
++        if explicit_tz_none:
++            raise ValueError(
++                "Cannot pass both a timezone-aware dtype and tz=None"
++            )
++        if tz is None:
++            tz = dtype_tz
++        elif not timezones.tz_compare(tz, dtype_tz):
++            raise ValueError(
++                "cannot supply both a tz and a dtype with a tz"
++            )
++    elif tz is not None and isinstance(dtype, np.dtype) and dtype.kind == "M":
++        raise ValueError("cannot supply both a tz and a timezone-naive dtype")
++    return tz
++
+ 
+ 
+ 
+@@ -3037,4 +3134,4 @@ def _generate_range(
+             next_date = next_date.as_unit(unit)
+             if next_date >= cur:
+                 raise ValueError(f"Offset {offset} did not decrement date")
+-            cur = next_date
+\ No newline at end of file
++            cur = next_date
+diff --git a/pandas/core/arrays/interval.py b/pandas/core/arrays/interval.py
+index 860be08..04ad4b7 100644
+--- a/pandas/core/arrays/interval.py
++++ b/pandas/core/arrays/interval.py
+@@ -70,7 +70,7 @@ from pandas.core.dtypes.missing import (
+     notna,
+ )
+ 
+-from pandas.core.algorithms import isin, unique
++from pandas.core.algorithms import isin, take, unique
+ 
+ 
+ 
+diff --git a/pandas/core/arrays/masked.py b/pandas/core/arrays/masked.py
+index 3e1e533..06cabae 100644
+--- a/pandas/core/arrays/masked.py
++++ b/pandas/core/arrays/masked.py
+@@ -45,6 +45,7 @@ from pandas.core.dtypes.missing import (
+     array_equivalent,
+     is_valid_na_for_dtype,
+     isna,
++    na_value_for_dtype,
+     notna,
+ )
+ 
+@@ -55,7 +56,7 @@ from pandas.core import (
+     nanops,
+     ops,
+ )
+-from pandas.core.algorithms import factorize_array, isin, map_array, mode
++from pandas.core.algorithms import factorize_array, isin, map_array, mode, take
+ 
+ 
+ 
+diff --git a/pandas/core/arrays/sparse/array.py b/pandas/core/arrays/sparse/array.py
+index 2e540c7..8689c63 100644
+--- a/pandas/core/arrays/sparse/array.py
++++ b/pandas/core/arrays/sparse/array.py
+@@ -60,7 +60,7 @@ from pandas.core.dtypes.generic import (
+     ABCIndex,
+     ABCSeries,
+ )
+-from pandas.core.dtypes.missing import isna, notna
++from pandas.core.dtypes.missing import isna, na_value_for_dtype, notna
+ 
+ 
+ 
+diff --git a/pandas/core/arrays/timedeltas.py b/pandas/core/arrays/timedeltas.py
+index e9e1435..55d8762 100644
+--- a/pandas/core/arrays/timedeltas.py
++++ b/pandas/core/arrays/timedeltas.py
+@@ -1072,6 +1072,60 @@ class TimedeltaArray(dtl.TimelikeOps):
+ # Constructor Helpers
+ 
+ 
++def _validate_td64_dtype(dtype) -> DtypeObj:
++    dtype = pandas_dtype(dtype)
++    if not isinstance(dtype, np.dtype) or dtype.kind != "m":
++        raise ValueError(f"dtype {dtype} cannot be converted to timedelta64[ns]")
++    unit = np.datetime_data(dtype)[0]
++    if unit == "generic":
++        raise ValueError(
++            "Passing in 'timedelta' dtype with no precision is not allowed. "
++            "Please pass in 'timedelta64[ns]' instead."
++        )
++    if not is_supported_dtype(dtype):
++        raise ValueError(f"Unexpected value for 'dtype': '{dtype}'.")
++    return dtype
++
++
++def sequence_to_td64ns(
++    data,
++    copy: bool = False,
++    unit=None,
++    errors: DateTimeErrorChoices = "raise",
++) -> tuple[np.ndarray, Tick | Day | None]:
++    data, copy = dtl.ensure_arraylike_for_datetimelike(
++        data, copy, cls_name="TimedeltaArray"
++    )
++    inferred_freq = data.freq if isinstance(data, TimedeltaArray) else None
++    if isinstance(data, TimedeltaArray):
++        result = data._ndarray
++    else:
++        data = np.asarray(data)
++        kind = data.dtype.kind
++        copy_made = False
++        if kind == "m":
++            result = data
++            if not is_supported_dtype(result.dtype):
++                result = astype_overflowsafe(
++                    result, dtype=get_supported_dtype(result.dtype), copy=False
++                )
++                copy_made = True
++        elif kind in "iu":
++            result, copy_made = _ints_to_td64ns(data, unit=unit or "ns")
++        elif kind == "f":
++            unit = unit or "ns"
++            result = cast_from_unit_vectorized(data, unit or "ns").view(TD64NS_DTYPE)
++            copy_made = True
++        elif kind == "M":
++            raise TypeError(f"dtype {data.dtype} cannot be converted to timedelta64[ns]")
++        else:
++            result = _objects_to_td64ns(data, unit=unit, errors=errors)
++            copy_made = True
++
++        if copy and not copy_made:
++            result = result.copy()
++    return result, inferred_freq
++
+ 
+ 
+ 
+@@ -1247,4 +1301,3 @@ def _objects_to_td64ns(
+ 
+ 
+ 
+-
+diff --git a/pandas/core/common.py b/pandas/core/common.py
+index 7984763..eae18c3 100644
+--- a/pandas/core/common.py
++++ b/pandas/core/common.py
+@@ -651,4 +651,16 @@ def fill_missing_names(names: Sequence[Hashable | None]) -> list[Hashable]:
+     list
+         list of column names with the None values replaced.
+     """
+-    return [f"level_{i}" if name is None else name for i, name in enumerate(names)]
+\ No newline at end of file
++    return [f"level_{i}" if name is None else name for i, name in enumerate(names)]
++
++
++def consensus_name_attr(objs):
++    """Return the common ``name`` attribute, or None if names differ."""
++    name = objs[0].name
++    for obj in objs[1:]:
++        try:
++            if obj.name != name:
++                return None
++        except ValueError:
++            return None
++    return name
+diff --git a/pandas/core/dtypes/base.py b/pandas/core/dtypes/base.py
+index adac017..e8a3e14 100644
+--- a/pandas/core/dtypes/base.py
++++ b/pandas/core/dtypes/base.py
+@@ -167,6 +167,11 @@ class ExtensionDtype:
+         """
+         return np.nan
+ 
++    @property
++    def _supports_2d(self) -> bool:
++        """Whether arrays with this dtype may be two-dimensional."""
++        return False
++
+     @property
+     def type(self) -> type_t[Any]:
+         """
+@@ -591,4 +596,4 @@ class Registry:
+         return None
+ 
+ 
+-_registry = Registry()
+\ No newline at end of file
++_registry = Registry()
+diff --git a/pandas/core/dtypes/cast.py b/pandas/core/dtypes/cast.py
+index 33143c7..6ed8920 100644
+--- a/pandas/core/dtypes/cast.py
++++ b/pandas/core/dtypes/cast.py
+@@ -79,7 +79,7 @@ from pandas.core.dtypes.generic import (
+     ABCSeries,
+ )
+ from pandas.core.dtypes.inference import is_list_like
+-from pandas.core.dtypes.missing import is_valid_na_for_dtype, isna, notna
++from pandas.core.dtypes.missing import is_valid_na_for_dtype, isna, na_value_for_dtype, notna
+ 
+ 
+ 
+@@ -1298,6 +1298,40 @@ def find_common_type(types: list[ExtensionDtype]) -> DtypeObj: ...
+ def find_common_type(types: list[DtypeObj]) -> DtypeObj: ...
+ 
+ 
++def find_common_type(types: list[DtypeObj]) -> DtypeObj:
++    if not types:
++        raise ValueError("no types given")
++    first = types[0]
++    if lib.dtypes_all_equal(types):
++        return first
++
++    unique_types = list(dict.fromkeys(types))
++    if any(isinstance(t, ExtensionDtype) for t in unique_types):
++        for t in unique_types:
++            if isinstance(t, ExtensionDtype):
++                res = t._get_common_dtype(unique_types)
++                if res is not None:
++                    return res
++        return np.dtype("object")
++
++    kinds = {t.kind for t in unique_types}
++    if "b" in kinds and kinds & set("iufc"):
++        return np.dtype("object")
++    return np_find_common_type(*unique_types)
++
++
++def common_dtype_categorical_compat(objs, dtype: DtypeObj) -> DtypeObj:
++    """Adjust a common dtype for categoricals that contain missing codes."""
++    if isinstance(dtype, np.dtype) and dtype.kind in "iu":
++        for obj in objs:
++            if isinstance(getattr(obj, "dtype", None), CategoricalDtype) and obj.hasnans:
++                return np.dtype("float64")
++    return dtype
++
++
++
++
++
+ 
+ 
+ 
+@@ -1380,8 +1414,34 @@ def find_common_type(types: list[DtypeObj]) -> DtypeObj: ...
+ 
+ 
+ 
++def construct_2d_arraylike_from_scalar(
++    value: Scalar,
++    length: int,
++    width: int,
++    dtype: np.dtype,
++    copy: bool,
++) -> np.ndarray:
++    """Construct a two-dimensional ndarray filled with a scalar."""
++    if dtype.kind in "mM":
++        value = _maybe_box_and_unbox_datetimelike(value, dtype)
++    elif dtype == _dtype_obj and isinstance(value, (np.datetime64, np.timedelta64)):
++        # Keep numpy datetime-like scalars as objects; ndarray construction can
++        # otherwise convert them to their Python counterparts.
++        result = np.empty((length, width), dtype=object)
++        result.fill(value)
++        return result
+ 
++    try:
++        arr = np.array(value, dtype=dtype, copy=copy)
++    except (TypeError, ValueError) as err:
++        raise TypeError(
++            "DataFrame constructor called with incompatible data and dtype: "
++            f"{err}"
++        ) from err
+ 
++    if arr.ndim != 0:
++        raise ValueError("DataFrame constructor not properly called!")
++    return np.full((length, width), arr.item(), dtype=dtype)
+ 
+ 
+ def construct_1d_arraylike_from_scalar(
+@@ -1855,4 +1915,4 @@ def np_can_cast_scalar(element: Scalar, dtype: np.dtype) -> bool:
+         np_can_hold_element(dtype, element)
+         return True
+     except (LossySetitemError, NotImplementedError):
+-        return False
+\ No newline at end of file
++        return False
+diff --git a/pandas/core/dtypes/concat.py b/pandas/core/dtypes/concat.py
+index eea80d5..a8f3298 100644
+--- a/pandas/core/dtypes/concat.py
++++ b/pandas/core/dtypes/concat.py
+@@ -15,7 +15,7 @@ from pandas._libs import lib
+ from pandas.util._decorators import set_module
+ 
+ from pandas.core.dtypes.astype import astype_array
+-from pandas.core.dtypes.cast import np_find_common_type
++from pandas.core.dtypes.cast import find_common_type, np_find_common_type
+ 
+ 
+ 
+@@ -49,6 +49,58 @@ def _is_nonempty(x: ArrayLike, axis: AxisInt) -> bool:
+     return x.shape[axis] > 0
+ 
+ 
++def _get_result_dtype(
++    to_concat: Sequence[ArrayLike], non_empties: Sequence[ArrayLike]
++) -> tuple[bool, set[str], DtypeObj | None]:
++    target_dtype = None
++    dtypes = {obj.dtype for obj in to_concat}
++    kinds = {obj.dtype.kind for obj in to_concat}
++    any_ea = any(not isinstance(x, np.ndarray) for x in to_concat)
++
++    if any_ea:
++        if len(dtypes) != 1:
++            if any(isinstance(dtype, CategoricalDtype) for dtype in dtypes):
++                target_dtype = np.dtype(object)
++            else:
++                target_dtype = find_common_type([x.dtype for x in to_concat])
++    elif not len(non_empties):
++        if len(kinds) != 1 and not kinds.issubset(set("iufc")):
++            target_dtype = np.dtype(object)
++            kinds = {"o"}
++    else:
++        target_dtype = np_find_common_type(*dtypes)
++
++    return any_ea, kinds, target_dtype
++
++
++def concat_compat(
++    to_concat: Sequence[ArrayLike],
++    axis: AxisInt = 0,
++    ea_compat_axis: bool = False,
++) -> ArrayLike:
++    if len(to_concat) == 1:
++        return to_concat[0]
++
++    non_empties = [x for x in to_concat if _is_nonempty(x, axis)]
++    any_ea, kinds, target_dtype = _get_result_dtype(to_concat, non_empties)
++
++    if target_dtype is not None:
++        to_concat = [astype_array(arr, target_dtype, copy=False) for arr in to_concat]
++
++    any_ea = any(not isinstance(x, np.ndarray) for x in to_concat)
++
++    if any_ea:
++        ea = next(x for x in to_concat if not isinstance(x, np.ndarray))
++        cls = type(ea)
++        if ea_compat_axis or not getattr(ea.dtype, "_supports_2d", False):
++            return cls._concat_same_type(to_concat)
++        return cls._concat_same_type(to_concat, axis=axis)
++
++    result = np.concatenate(to_concat, axis=axis)
++    if "b" in kinds and result.dtype.kind in "iuf":
++        result = result.astype(object, copy=False)
++    return result
++
+ 
+ 
+ 
+@@ -339,4 +391,4 @@ def union_categoricals(
+         ordered = False
+ 
+     dtype = CategoricalDtype(categories=categories, ordered=ordered)
+-    return Categorical._simple_new(new_codes, dtype=dtype)
+\ No newline at end of file
++    return Categorical._simple_new(new_codes, dtype=dtype)
+diff --git a/pandas/core/dtypes/dtypes.py b/pandas/core/dtypes/dtypes.py
+index 427a403..a7fd7a3 100644
+--- a/pandas/core/dtypes/dtypes.py
++++ b/pandas/core/dtypes/dtypes.py
+@@ -678,6 +678,8 @@ class CategoricalDtype(PandasExtensionDtype, ExtensionDtype):
+         return is_bool_dtype(self.categories)
+ 
+     def _get_common_dtype(self, dtypes: list[DtypeObj]) -> DtypeObj | None:
++        from pandas.core.dtypes.cast import find_common_type
++
+         # check if we have all categorical dtype with identical categories
+         if all(isinstance(x, CategoricalDtype) for x in dtypes):
+             first = dtypes[0]
+diff --git a/pandas/core/dtypes/inference.py b/pandas/core/dtypes/inference.py
+index e1c9b16..a9438ba 100644
+--- a/pandas/core/dtypes/inference.py
++++ b/pandas/core/dtypes/inference.py
+@@ -384,6 +384,24 @@ def is_named_tuple(obj: object) -> bool:
+     return isinstance(obj, abc.Sequence) and hasattr(obj, "_fields")
+ 
+ 
++def is_dataclass(item: object) -> bool:
++    """Return whether item is a dataclass instance (and not its class)."""
++    from dataclasses import is_dataclass as dc_is_dataclass
++
++    return dc_is_dataclass(item) and not isinstance(item, type)
++
++
++def is_sequence(obj: object) -> bool:
++    if isinstance(obj, (str, bytes)):
++        return False
++    try:
++        iter(obj)
++        len(obj)  # type: ignore[arg-type]
++    except (TypeError, AttributeError):
++        return False
++    return True
++
++
+ @set_module("pandas.api.types")
+ def is_hashable(obj: object) -> TypeGuard[Hashable]:
+     """
+@@ -448,5 +466,3 @@ def is_hashable(obj: object) -> TypeGuard[Hashable]:
+ 
+ 
+ 
+-
+-
+diff --git a/pandas/core/dtypes/missing.py b/pandas/core/dtypes/missing.py
+index 09a19f9..2abd12a 100644
+--- a/pandas/core/dtypes/missing.py
++++ b/pandas/core/dtypes/missing.py
+@@ -600,6 +600,22 @@ def maybe_fill(arr: np.ndarray) -> np.ndarray:
+     return arr
+ 
+ 
++def na_value_for_dtype(dtype: DtypeObj, compat: bool = True):
++    """Return a dtype-appropriate missing value."""
++    if isinstance(dtype, ExtensionDtype):
++        return dtype.na_value
++
++    dtype = np.dtype(dtype)
++    if dtype.kind in "mM":
++        return np.array("NaT", dtype=dtype)[()]
++    if dtype.kind in "fc":
++        return np.nan
++    if dtype.kind in "iu":
++        return 0 if compat else np.nan
++    if dtype.kind == "b":
++        return False if compat else np.nan
++    return np.nan
++
+ 
+ 
+ 
+@@ -737,4 +753,4 @@ def isna_all(arr: ArrayLike) -> bool:
+ 
+     return all(
+         checker(arr[i : i + chunk_len]).all() for i in range(0, total_len, chunk_len)
+-    )
+\ No newline at end of file
++    )
+diff --git a/pandas/core/frame.py b/pandas/core/frame.py
+index dfec01b..3da7514 100644
+--- a/pandas/core/frame.py
++++ b/pandas/core/frame.py
+@@ -81,7 +81,7 @@ from pandas.util._validators import (
+     validate_percentile,
+ )
+ 
+-from pandas.core.dtypes.cast import LossySetitemError, can_hold_element, construct_1d_arraylike_from_scalar, infer_dtype_from_scalar, invalidate_string_dtypes, maybe_downcast_to_dtype
++from pandas.core.dtypes.cast import LossySetitemError, can_hold_element, construct_1d_arraylike_from_scalar, construct_2d_arraylike_from_scalar, infer_dtype_from_scalar, invalidate_string_dtypes, maybe_downcast_to_dtype
+ 
+ 
+ 
+@@ -121,6 +121,7 @@ from pandas.core.dtypes.generic import (
+     ABCIndex,
+     ABCSeries,
+ )
++from pandas.core.dtypes.inference import is_dataclass, is_sequence
+ from pandas.core.dtypes.missing import (
+     isna,
+     notna,
+@@ -173,7 +174,17 @@ from pandas.core.indexing import (
+     check_dict_or_set_indexers,
+ )
+ from pandas.core.internals import BlockManager
+-from pandas.core.internals.construction import arrays_to_mgr, dataclasses_to_dicts, dict_to_mgr, rec_array_to_mgr, reorder_arrays
++from pandas.core.internals.construction import (
++    arrays_to_mgr,
++    dataclasses_to_dicts,
++    dict_to_mgr,
++    ndarray_to_mgr,
++    nested_data_to_arrays,
++    rec_array_to_mgr,
++    reorder_arrays,
++    to_arrays,
++    treat_as_nested,
++)
+ 
+ 
+ 
+diff --git a/pandas/core/generic.py b/pandas/core/generic.py
+index 006e641..42d747a 100644
+--- a/pandas/core/generic.py
++++ b/pandas/core/generic.py
+@@ -6525,6 +6525,8 @@ class NDFrame(PandasObject, indexing.IndexingMixin):
+             return self.copy(deep=False)
+ 
+         # GH 19920: retain column metadata after concat
++        from pandas.core.reshape.concat import concat
++
+         result = concat(results, axis=1)
+         # GH#40810 retain subclass
+         # error: Incompatible types in assignment
+@@ -9507,6 +9509,8 @@ class NDFrame(PandasObject, indexing.IndexingMixin):
+ 
+         # error: List item 0 has incompatible type "NDFrame"; expected
+         #  "Union[Series, DataFrame]"
++        from pandas.core.reshape.concat import concat
++
+         diff = concat(
+             [self, other],  # type: ignore[list-item]
+             axis=axis,
+diff --git a/pandas/core/groupby/groupby.py b/pandas/core/groupby/groupby.py
+index b0e34e2..755a336 100644
+--- a/pandas/core/groupby/groupby.py
++++ b/pandas/core/groupby/groupby.py
+@@ -90,7 +90,7 @@ from pandas.core.dtypes.common import (
+     needs_i8_conversion,
+     pandas_dtype,
+ )
+-from pandas.core.dtypes.missing import isna, notna
++from pandas.core.dtypes.missing import isna, na_value_for_dtype, notna
+ 
+ 
+ 
+@@ -123,6 +123,7 @@ from pandas.core.groupby import (
+     numba_,
+     ops,
+ )
++from pandas.core.groupby.grouper import get_grouper
+ 
+ from pandas.core.groupby.indexing import (
+     GroupByIndexingMixin,
+@@ -135,6 +136,7 @@ from pandas.core.indexes.api import (
+ )
+ from pandas.core.internals.blocks import ensure_block_shape
+ from pandas.core.series import Series
++from pandas.core.sorting import get_group_index_sorter
+ 
+ from pandas.core.util.numba_ import (
+     get_jit_arguments,
+@@ -1042,6 +1044,47 @@ class GroupBy(BaseGroupBy[NDFrameT]):
+     _grouper: ops.BaseGrouper
+     as_index: bool
+ 
++    @final
++    def __init__(
++        self,
++        obj: NDFrameT,
++        keys: _KeysArgType | None = None,
++        level: IndexLabel | None = None,
++        grouper: ops.BaseGrouper | None = None,
++        exclusions: frozenset[Hashable] | None = None,
++        selection: IndexLabel | None = None,
++        as_index: bool = True,
++        sort: bool = True,
++        group_keys: bool = True,
++        observed: bool = False,
++        dropna: bool = True,
++    ) -> None:
++        self._selection = selection
++        if not isinstance(obj, NDFrame):
++            raise TypeError("invalid type: expected pandas object")
++
++        self.level = level
++        self.as_index = as_index
++        self.keys = keys
++        self.sort = sort
++        self.group_keys = group_keys
++        self.dropna = dropna
++
++        if grouper is None:
++            grouper, exclusions, obj = get_grouper(
++                obj,
++                keys,
++                level=level,
++                sort=sort,
++                observed=observed,
++                dropna=self.dropna,
++            )
++
++        self.observed = observed
++        self.obj = obj
++        self._grouper = grouper
++        self.exclusions = frozenset() if exclusions is None else frozenset(exclusions)
++
+ 
+ 
+ 
+@@ -5812,4 +5855,4 @@ def _insert_quantile_level(idx: Index, qs: npt.NDArray[np.float64]) -> MultiInde
+         codes = [np.repeat(idx_codes, nqs), np.tile(lev_codes, nidx)]
+         mi = MultiIndex(levels=levels, codes=codes, names=[idx.name, None])
+ 
+-    return mi
+\ No newline at end of file
++    return mi
+diff --git a/pandas/core/groupby/grouper.py b/pandas/core/groupby/grouper.py
+index 82a29b9..56dca47 100644
+--- a/pandas/core/groupby/grouper.py
++++ b/pandas/core/groupby/grouper.py
+@@ -448,6 +448,67 @@ class Grouping:
+     _orig_cats: Index | None
+     _index: Index
+ 
++    def __init__(
++        self,
++        index: Index,
++        grouper=None,
++        obj: NDFrame | None = None,
++        level=None,
++        sort: bool = True,
++        observed: bool = False,
++        in_axis: bool = False,
++        dropna: bool = True,
++        uniques: ArrayLike | None = None,
++    ) -> None:
++        self.level = level
++        self._orig_grouper = grouper
++        self._index = index
++        self._sort = sort
++        self.obj = obj
++        self._observed = observed
++        self.in_axis = in_axis
++        self._dropna = dropna
++        self._uniques = uniques
++        self._orig_cats = None
++        self._codes = None
++
++        ilevel = None
++        if level is not None:
++            ilevel = index._get_level_number(level)
++            if grouper is None:
++                grouper = index.get_level_values(ilevel)
++        self._ilevel = ilevel
++
++        if isinstance(grouper, Grouper):
++            if obj is None:
++                raise ValueError("Grouper requires an object")
++            grouping_vector, obj = grouper._get_grouper(
++                obj, validate=False, observed=observed
++            )
++            self.obj = obj
++        elif isinstance(grouper, ops.BaseGrouper):
++            grouping_vector = grouper
++        else:
++            grouping_vector = _convert_grouper(index, grouper)
++
++        if getattr(grouping_vector, "ndim", 1) != 1:
++            raise ValueError(
++                f"Grouper for '{type(grouping_vector)}' not 1-dimensional"
++            )
++
++        if isinstance(grouping_vector, Index) and isinstance(
++            grouping_vector.dtype, CategoricalDtype
++        ):
++            grouping_vector = grouping_vector._values
++
++        if isinstance(grouping_vector, Categorical):
++            self._orig_cats = grouping_vector.categories
++            grouping_vector = recode_for_groupby(grouping_vector, sort, observed)
++
++        if not isinstance(grouping_vector, ops.BaseGrouper) and len(grouping_vector) != len(index):
++            raise ValueError("Grouper and axis must be same length")
++
++        self.grouping_vector = grouping_vector
+ 
+ 
+ 
+@@ -715,16 +776,146 @@ class Grouping:
+         return grouping
+ 
+ 
++def _convert_grouper(axis: Index, grouper):
++    if isinstance(grouper, dict):
++        return axis.map(grouper.get)
++    if isinstance(grouper, Series):
++        if grouper.index.equals(axis):
++            return grouper._values
++        return grouper.reindex(axis)._values
++    if isinstance(grouper, (list, tuple, Index, Categorical, np.ndarray, ExtensionArray)):
++        if len(grouper) != len(axis):
++            raise ValueError("Grouper and axis must be same length")
++        if isinstance(grouper, (list, tuple)):
++            if len(grouper) == 0:
++                return np.array([], dtype=np.intp)
++            return np.asarray(grouper)
++        return grouper
++    if callable(grouper):
++        return axis.map(grouper)
++    return grouper
++
++
++def get_grouper(
++    obj: NDFrameT,
++    key=None,
++    level=None,
++    sort: bool = True,
++    observed: bool = False,
++    validate: bool = True,
++    dropna: bool = True,
++) -> tuple[ops.BaseGrouper, frozenset[Hashable], NDFrameT]:
++    group_axis = obj.index
++
++    if level is not None and not isinstance(group_axis, MultiIndex):
++        check_levels = level if isinstance(level, (list, tuple)) else [level]
++        if any(isinstance(lev, (int, np.integer)) and lev not in (0, -1) for lev in check_levels):
++            raise ValueError("level > 0 or level < -1 only valid with MultiIndex")
++        for lev in check_levels:
++            if not isinstance(lev, (int, np.integer)) and lev != group_axis.name:
++                raise ValueError(f"level name {lev} is not the name of the index")
++
++    if isinstance(key, Grouper):
++        grouper, obj = key._get_grouper(obj, validate=False, observed=observed)
++        return grouper, frozenset({key.key} if key.key is not None else ()), obj
++
++    if key is None and level is None:
++        raise TypeError("You have to supply one of 'by' and 'level'")
++
++    if isinstance(level, (list, tuple)):
++        levels = list(level)
++    elif level is None:
++        levels = None
++    else:
++        levels = [level]
++
++    if key is None:
++        keys = [None] * len(levels)
++    elif isinstance(key, list):
++        keys = key
++        # A list as long as the axis is usually an external grouping vector,
++        # unless all its entries clearly reference DataFrame columns.
++        all_columns = isinstance(obj, DataFrame)
++        if all_columns:
++            try:
++                all_columns = all(
++                    k in obj.columns or k in group_axis.names for k in keys
++                )
++            except TypeError:
++                all_columns = False
++        has_grouping_spec = any(
++            isinstance(k, (Grouper, Series, Index, np.ndarray, ExtensionArray))
++            or callable(k)
++            or isinstance(k, dict)
++            for k in keys
++        )
++        if len(keys) == len(group_axis) and not all_columns and not has_grouping_spec:
++            keys = [key]
++    else:
++        keys = [key]
++
++    if len(keys) == 0:
++        raise ValueError("No group keys passed!")
++
++    if levels is None:
++        levels = [None] * len(keys)
++    elif len(levels) == 1 and len(keys) > 1:
++        levels = levels * len(keys)
++    elif len(levels) != len(keys):
++        raise ValueError("multiple levels only valid with MultiIndex")
++
++    groupings: list[Grouping] = []
++    exclusions: set[Hashable] = set()
++
++    for gpr, lev in zip(keys, levels, strict=True):
++        in_axis = False
++        if isinstance(gpr, Grouper):
++            if gpr.key is not None:
++                exclusions.add(gpr.key)
++            ping = Grouping(
++                group_axis, gpr, obj=obj, sort=sort, observed=observed,
++                in_axis=gpr.key is not None, dropna=dropna,
++            )
++            groupings.append(ping)
++            continue
++
++        is_label = False
++        if isinstance(obj, DataFrame):
++            try:
++                is_label = gpr in obj.columns
++            except TypeError:
++                pass
++
++        if is_label:
++            if validate:
++                obj._check_label_or_level_ambiguity(gpr, axis=0)
++            grouping_vector = obj[gpr]
++            if isinstance(grouping_vector, DataFrame):
++                raise ValueError(f"Grouper for '{gpr}' not 1-dimensional")
++            exclusions.add(gpr)
++            in_axis = True
++            gpr = grouping_vector
++        elif gpr is not None and is_scalar(gpr) and gpr in group_axis.names:
++            lev = gpr
++            gpr = None
++        elif gpr is None and lev is None:
++            raise ValueError("No group keys passed!")
++
++        groupings.append(
++            Grouping(
++                group_axis,
++                gpr,
++                obj=obj,
++                level=lev,
++                sort=sort,
++                observed=observed,
++                in_axis=in_axis,
++                dropna=dropna,
++            )
++        )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    grouper = ops.BaseGrouper(group_axis, groupings, sort=sort, dropna=dropna)
++    return grouper, frozenset(exclusions), obj
+ 
+ 
+ 
+diff --git a/pandas/core/groupby/ops.py b/pandas/core/groupby/ops.py
+index 3dcacc0..1ca39da 100644
+--- a/pandas/core/groupby/ops.py
++++ b/pandas/core/groupby/ops.py
+@@ -59,7 +59,7 @@ from pandas.core.indexes.api import (
+     ensure_index,
+ )
+ from pandas.core.series import Series
+-from pandas.core.sorting import decons_obs_group_ids, get_indexer_dict
++from pandas.core.sorting import compress_group_index, decons_obs_group_ids, get_group_index, get_group_index_sorter, get_indexer_dict
+ 
+ 
+ 
+@@ -1208,6 +1208,19 @@ def _is_indexed_like(obj, axes) -> bool:
+ 
+ class DataSplitter(Generic[NDFrameT]):
+ 
++    def __init__(
++        self,
++        data: NDFrameT,
++        ngroups: int,
++        *,
++        sort_idx: npt.NDArray[np.intp],
++        sorted_ids: npt.NDArray[np.intp],
++    ) -> None:
++        self.data = data
++        self.ngroups = ngroups
++        self._slabels = sorted_ids
++        self._sort_idx = sort_idx
++
+ 
+ 
+ 
+@@ -1255,4 +1268,4 @@ class FrameSplitter(DataSplitter):
+         # return sdata.iloc[slice_obj]
+         mgr = sdata._mgr.get_slice(slice_obj, axis=1)
+         df = sdata._constructor_from_mgr(mgr, axes=mgr.axes)
+-        return df.__finalize__(sdata, method="groupby")
+\ No newline at end of file
++        return df.__finalize__(sdata, method="groupby")
+diff --git a/pandas/core/indexers/__init__.py b/pandas/core/indexers/__init__.py
+index 5ee86fd..803fb13 100644
+--- a/pandas/core/indexers/__init__.py
++++ b/pandas/core/indexers/__init__.py
+@@ -1,4 +1,4 @@
+-from pandas.core.indexers.utils import check_array_indexer, check_key_length, check_setitem_lengths, disallow_ndim_indexing, is_empty_indexer, is_list_like_indexer, is_scalar_indexer, is_valid_positional_slice, length_of_indexer, maybe_convert_indices, unpack_1tuple, unpack_tuple_and_ellipses
++from pandas.core.indexers.utils import check_array_indexer, check_key_length, check_setitem_lengths, disallow_ndim_indexing, is_empty_indexer, is_list_like_indexer, is_scalar_indexer, is_valid_positional_slice, length_of_indexer, maybe_convert_indices, unpack_1tuple, unpack_tuple_and_ellipses, validate_indices
+ 
+ 
+ 
+diff --git a/pandas/core/indexers/utils.py b/pandas/core/indexers/utils.py
+index 4c6434d..6738c9a 100644
+--- a/pandas/core/indexers/utils.py
++++ b/pandas/core/indexers/utils.py
+@@ -238,6 +238,15 @@ def check_setitem_lengths(indexer, value, values) -> bool:
+ # Indexer Conversion
+ 
+ 
++def validate_indices(indices: np.ndarray, n: int) -> None:
++    if len(indices) == 0:
++        return
++    if indices.max() >= n:
++        raise IndexError("indices are out-of-bounds")
++    if indices.min() < -1:
++        raise ValueError("indices contains values less than allowed (-1)")
++
++
+ def maybe_convert_indices(indices, n: int, verify: bool = True) -> np.ndarray:
+     """
+     Attempt to convert indices into valid, positive indices.
+@@ -561,4 +570,4 @@ def check_array_indexer(array: AnyArrayLike, indexer: Any) -> Any:
+     else:
+         raise IndexError("arrays used as indices must be of integer or boolean type")
+ 
+-    return indexer
+\ No newline at end of file
++    return indexer
+diff --git a/pandas/core/indexes/api.py b/pandas/core/indexes/api.py
+index 38b67bc..259f83d 100644
+--- a/pandas/core/indexes/api.py
++++ b/pandas/core/indexes/api.py
+@@ -13,6 +13,7 @@ from pandas._libs import (
+ )
+ from pandas.errors import InvalidIndexError
+ 
++from pandas.core.dtypes.cast import find_common_type
+ 
+ 
+ from pandas.core.algorithms import safe_sort
+@@ -91,6 +92,35 @@ def get_objs_combined_axis(
+     return _get_combined_index(obs_idxes, intersect=intersect, sort=sort)
+ 
+ 
++def _get_combined_index(
++    indexes: list[Index], intersect: bool = False, sort: bool = False
++) -> Index:
++    """Return the union or intersection of a sequence of indexes."""
++    # De-duplicate by identity. Equality is both more costly and incorrect for
++    # this optimization when indexes contain awkward object values.
++    distinct = []
++    seen: set[int] = set()
++    for index in indexes:
++        ident = id(index)
++        if ident not in seen:
++            seen.add(ident)
++            distinct.append(index)
++
++    if not distinct:
++        index = default_index(0)
++    elif len(distinct) == 1:
++        index = distinct[0]
++    elif intersect:
++        index = distinct[0]
++        for other in distinct[1:]:
++            index = index.intersection(other)
++    else:
++        index = union_indexes(distinct, sort=False)
++
++    if sort:
++        index = safe_sort_index(index)
++    return index
++
+ 
+ 
+ 
+@@ -335,4 +365,4 @@ def all_indexes_same(indexes) -> bool:
+ 
+ def default_index(n: int) -> RangeIndex:
+     rng = range(n)
+-    return RangeIndex._simple_new(rng, name=None)
+\ No newline at end of file
++    return RangeIndex._simple_new(rng, name=None)
+diff --git a/pandas/core/indexes/base.py b/pandas/core/indexes/base.py
+index 3596276..e475159 100644
+--- a/pandas/core/indexes/base.py
++++ b/pandas/core/indexes/base.py
+@@ -85,7 +85,8 @@ from pandas.core.dtypes.astype import (
+     astype_array,
+     astype_is_view,
+ )
+-from pandas.core.dtypes.cast import LossySetitemError, can_hold_element, find_result_type, infer_dtype_from, np_can_hold_element
++from pandas.core.dtypes.cast import LossySetitemError, can_hold_element, common_dtype_categorical_compat, find_result_type, infer_dtype_from, np_can_hold_element
++from pandas.core.dtypes.concat import concat_compat
+ 
+ 
+ 
+diff --git a/pandas/core/indexes/datetimelike.py b/pandas/core/indexes/datetimelike.py
+index 2bfe039..013adf7 100644
+--- a/pandas/core/indexes/datetimelike.py
++++ b/pandas/core/indexes/datetimelike.py
+@@ -45,6 +45,7 @@ from pandas.core.dtypes.common import (
+     is_integer,
+     is_list_like,
+ )
++from pandas.core.dtypes.concat import concat_compat
+ 
+ from pandas.core.dtypes.dtypes import (
+     CategoricalDtype,
+diff --git a/pandas/core/indexes/interval.py b/pandas/core/indexes/interval.py
+index 7330e66..8fe47c0 100644
+--- a/pandas/core/indexes/interval.py
++++ b/pandas/core/indexes/interval.py
+@@ -37,7 +37,7 @@ from pandas.util._decorators import (
+ )
+ from pandas.util._exceptions import rewrite_exception
+ 
+-from pandas.core.dtypes.cast import infer_dtype_from_scalar, maybe_box_datetimelike, maybe_downcast_numeric, maybe_upcast_numeric_to_64bit
++from pandas.core.dtypes.cast import find_common_type, infer_dtype_from_scalar, maybe_box_datetimelike, maybe_downcast_numeric, maybe_upcast_numeric_to_64bit
+ 
+ 
+ 
+diff --git a/pandas/core/indexing.py b/pandas/core/indexing.py
+index cb1437e..bb05bf9 100644
+--- a/pandas/core/indexing.py
++++ b/pandas/core/indexing.py
+@@ -54,7 +54,7 @@ from pandas.core.dtypes.generic import (
+     ABCDataFrame,
+     ABCSeries,
+ )
+-from pandas.core.dtypes.missing import construct_1d_array_from_inferred_fill_value, infer_fill_value, is_valid_na_for_dtype, isna
++from pandas.core.dtypes.missing import construct_1d_array_from_inferred_fill_value, infer_fill_value, is_valid_na_for_dtype, isna, na_value_for_dtype
+ 
+ 
+ 
+diff --git a/pandas/core/internals/blocks.py b/pandas/core/internals/blocks.py
+index 49dc519..9c1bbfc 100644
+--- a/pandas/core/internals/blocks.py
++++ b/pandas/core/internals/blocks.py
+@@ -66,7 +66,7 @@ from pandas.core.dtypes.generic import (
+     ABCSeries,
+ )
+ from pandas.core.dtypes.inference import is_re
+-from pandas.core.dtypes.missing import is_valid_na_for_dtype, isna
++from pandas.core.dtypes.missing import is_valid_na_for_dtype, isna, na_value_for_dtype
+ 
+ 
+ 
+@@ -2256,6 +2256,17 @@ def get_block_type(dtype: DtypeObj) -> type[Block]:
+ 
+ 
+ 
++def new_block_2d(
++    values: ArrayLike,
++    placement: BlockPlacement,
++    refs: BlockValuesRefs | None = None,
++) -> Block:
++    """Create a two-dimensional block from already-shaped values."""
++    values = maybe_coerce_values(values)
++    klass = get_block_type(values.dtype)
++    return klass(values, ndim=2, placement=placement, refs=refs)
++
++
+ def new_block(
+     values,
+     placement: BlockPlacement,
+@@ -2389,4 +2400,4 @@ def external_values(values: ArrayLike) -> ArrayLike:
+ 
+     # TODO(CoW) we should also mark our ExtensionArrays as read-only
+ 
+-    return values
+\ No newline at end of file
++    return values
+diff --git a/pandas/core/internals/concat.py b/pandas/core/internals/concat.py
+index dedd9fc..4cb6d46 100644
+--- a/pandas/core/internals/concat.py
++++ b/pandas/core/internals/concat.py
+@@ -16,7 +16,8 @@ from pandas._libs import (
+ from pandas._libs.missing import NA
+ from pandas.util._decorators import cache_readonly
+ 
+-from pandas.core.dtypes.cast import ensure_dtype_can_hold_na
++from pandas.core.dtypes.cast import ensure_dtype_can_hold_na, find_common_type
++from pandas.core.dtypes.concat import concat_compat
+ 
+ 
+ 
+@@ -29,7 +30,7 @@ from pandas.core.dtypes.dtypes import ExtensionDtype
+ from pandas.core.dtypes.missing import is_valid_na_for_dtype
+ 
+ from pandas.core.construction import ensure_wrapped_if_datetimelike
+-from pandas.core.internals.blocks import ensure_block_shape
++from pandas.core.internals.blocks import ensure_block_shape, new_block_2d
+ 
+ 
+ 
+diff --git a/pandas/core/internals/construction.py b/pandas/core/internals/construction.py
+index e660229..6591905 100644
+--- a/pandas/core/internals/construction.py
++++ b/pandas/core/internals/construction.py
+@@ -65,13 +65,13 @@ from pandas.core.indexes.api import (
+     maybe_sequence_to_range,
+     union_indexes,
+ )
+-from pandas.core.internals.blocks import BlockPlacement, ensure_block_shape, new_block
++from pandas.core.internals.blocks import BlockPlacement, ensure_block_shape, new_block, new_block_2d
+ 
+ 
+ 
+ 
+ 
+-from pandas.core.internals.managers import create_block_manager_from_column_arrays
++from pandas.core.internals.managers import create_block_manager_from_blocks, create_block_manager_from_column_arrays
+ 
+ 
+ 
+@@ -189,6 +189,131 @@ def rec_array_to_mgr(
+ # DataFrame Constructor Interface
+ 
+ 
++def _check_values_indices_shape_match(
++    values: np.ndarray, index: Index, columns: Index
++) -> None:
++    if values.shape[1] != len(columns) or values.shape[0] != len(index):
++        if values.shape[0] == 0 and len(index) != 0:
++            raise ValueError("Empty data passed with indices specified.")
++        passed = values.shape
++        implied = (len(index), len(columns))
++        raise ValueError(f"Shape of passed values is {passed}, indices imply {implied}")
++
++
++def _ensure_2d(values: np.ndarray) -> np.ndarray:
++    if values.ndim == 1:
++        values = values.reshape((values.shape[0], 1))
++    elif values.ndim != 2:
++        raise ValueError(f"Must pass 2-d input. shape={values.shape}")
++    return values
++
++
++def _get_axes(
++    N: int, K: int, index: Index | None, columns: Index | None
++) -> tuple[Index, Index]:
++    index = default_index(N) if index is None else ensure_index(index)
++    columns = default_index(K) if columns is None else ensure_index(columns)
++    return index, columns
++
++
++def ndarray_to_mgr(values, index, columns, dtype: DtypeObj | None, copy: bool) -> Manager:
++    preserve_object_dtype = (
++        isinstance(values, (ABCSeries, Index))
++        and getattr(values, "dtype", None) == np.dtype(object)
++        and dtype is None
++    )
++    if isinstance(values, ABCSeries):
++        if index is None:
++            index = values.index
++        elif not values.index.equals(ensure_index(index)):
++            values = values.reindex(ensure_index(index))
++        values = values._values
++    elif isinstance(values, Index):
++        values = values._values
++
++    values = extract_array(values, extract_numpy=True)
++
++    if isinstance(values, ExtensionArray):
++        if values.ndim == 1:
++            N, K = len(values), 1
++            index, columns = _get_axes(N, K, index, columns)
++            if len(index) != N:
++                if N == 0 and len(index):
++                    raise ValueError("Empty data passed with indices specified.")
++                raise ValueError(
++                    f"Shape of passed values is {(N, K)}, indices imply "
++                    f"{(len(index), len(columns))}"
++                )
++            if len(columns) != 1:
++                raise ValueError("len(arrays) must match len(columns)")
++            arr = sanitize_array(values, index, dtype=dtype, copy=copy)
++            return arrays_to_mgr([arr], columns, index, verify_integrity=False)
++        arrays = [values[:, i] for i in range(values.shape[1])]
++        N, K = values.shape
++        index, columns = _get_axes(N, K, index, columns)
++        if (N, K) != (len(index), len(columns)):
++            raise ValueError(
++                f"Shape of passed values is {(N, K)}, indices imply "
++                f"{(len(index), len(columns))}"
++            )
++        if dtype is None:
++            block = new_block_2d(
++                values.T, placement=BlockPlacement(slice(len(columns)))
++            )
++            return create_block_manager_from_blocks(
++                [block], [columns, index], consolidate=False,
++                verify_integrity=False,
++            )
++        return arrays_to_mgr(arrays, columns, index, dtype=dtype)
++
++    if not isinstance(values, np.ndarray):
++        values = _prep_ndarraylike(values, copy=copy)
++    else:
++        values = _ensure_2d(values)
++        if copy:
++            values = values.copy()
++
++    N, K = values.shape
++    index, columns = _get_axes(N, K, index, columns)
++    if isinstance(dtype, ExtensionDtype) and K != len(columns):
++        raise ValueError("len(arrays) must match len(columns)")
++    _check_values_indices_shape_match(values, index, columns)
++
++    if values.dtype != object and dtype is None and not (
++        using_string_dtype() and values.dtype.kind in "US"
++    ):
++        block = new_block_2d(
++            values.T, placement=BlockPlacement(slice(len(columns)))
++        )
++        return create_block_manager_from_blocks(
++            [block], [columns, index], consolidate=False, verify_integrity=False
++        )
++
++    content = [values[:, i] for i in range(K)]
++    if values.dtype == object and not preserve_object_dtype:
++        content = convert_object_array(content, dtype)
++        if dtype is not None:
++            content = [
++                sanitize_array(x, index, dtype=dtype, copy=False) for x in content
++            ]
++    elif dtype is not None:
++        content = [sanitize_array(x, index, dtype=dtype, copy=False) for x in content]
++    elif using_string_dtype() and values.dtype.kind in "US":
++        str_dtype = StringDtype(na_value=np.nan)
++        content = [pd_array(x, dtype=str_dtype) for x in content]
++
++    if values.dtype == object and content and all(
++        isinstance(arr, np.ndarray) and arr.dtype == object for arr in content
++    ):
++        block = new_block_2d(
++            values.T, placement=BlockPlacement(slice(len(columns)))
++        )
++        return create_block_manager_from_blocks(
++            [block], [columns, index], consolidate=False, verify_integrity=False
++        )
++
++    return arrays_to_mgr(content, columns, index, verify_integrity=False)
++
+ 
+ 
+ 
+@@ -682,6 +807,36 @@ def _get_names_from_index(data) -> Index:
+     return Index(index)
+ 
+ 
++def nested_data_to_arrays(
++    data: Sequence,
++    columns: Index | None,
++    index: Index | None,
++    dtype: DtypeObj | None,
++) -> tuple[list[ArrayLike], Index, Index]:
++    if is_named_tuple(data[0]) and columns is None:
++        columns = ensure_index(data[0]._fields)
++
++    arrays, columns = to_arrays(data, columns, dtype=dtype)
++    columns = ensure_index(columns)
++
++    if index is None:
++        if isinstance(data[0], ABCSeries):
++            index = _get_names_from_index(data)
++        else:
++            index = default_index(len(data))
++    else:
++        index = ensure_index(index)
++    return arrays, columns, index
++
++
++def treat_as_nested(data) -> bool:
++    return (
++        len(data) > 0
++        and is_list_like(data[0])
++        and getattr(data[0], "ndim", 1) == 1
++        and not (isinstance(data, ExtensionArray) and data.ndim == 2)
++    )
++
+ 
+ 
+ 
+@@ -733,6 +888,42 @@ def dataclasses_to_dicts(data):
+ # Conversion of Inputs to Arrays
+ 
+ 
++def _list_to_arrays(data: list[tuple | list]) -> np.ndarray:
++    if isinstance(data[0], tuple):
++        content = lib.to_object_array_tuples(data)
++    else:
++        content = lib.to_object_array(data)
++    return content
++
++
++def to_arrays(
++    data, columns: Index | None, dtype: DtypeObj | None = None
++) -> tuple[list[ArrayLike], Index]:
++    if not len(data):
++        if isinstance(data, np.ndarray) and data.dtype.names is not None:
++            columns = ensure_index(data.dtype.names)
++            return [data[name] for name in columns], columns
++        return [], ensure_index(columns) if columns is not None else default_index(0)
++
++    if isinstance(data, np.ndarray) and data.dtype.names is not None:
++        names = list(data.dtype.names)
++        arrays = [data[name] for name in names]
++        arr_columns = ensure_index(names)
++        if columns is None:
++            return arrays, arr_columns
++        return reorder_arrays(arrays, arr_columns, ensure_index(columns), len(data))
++
++    if isinstance(data[0], (list, tuple)):
++        content = _list_to_arrays(data)
++    elif isinstance(data[0], abc.Mapping):
++        content, columns = _list_of_dict_to_arrays(data, columns)
++    elif isinstance(data[0], (ABCSeries, ABCDataFrame)):
++        content, columns = _list_of_series_to_arrays(data, columns)
++    else:
++        content = _list_to_arrays([tuple(x) for x in data])
++
++    return _finalize_columns_and_data(content, columns, dtype)
++
+ 
+ 
+ 
+@@ -889,6 +1080,20 @@ def _list_of_dict_to_arrays(
+ 
+ 
+ 
++
++
++def _finalize_columns_and_data(
++    content: np.ndarray, columns: Index | None, dtype: DtypeObj | None
++) -> tuple[list[ArrayLike], Index]:
++    contents = list(content.T)
++    try:
++        columns = _validate_or_indexify_columns(contents, columns)
++    except AssertionError as err:
++        raise ValueError(err) from err
++
++    if contents and contents[0].dtype == np.dtype("O"):
++        contents = convert_object_array(contents, dtype)
++    return contents, columns
+ 
+ 
+ def _validate_or_indexify_columns(
+@@ -1024,4 +1229,4 @@ def convert_object_array(
+ 
+     arrays = [convert(arr) for arr in content]
+ 
+-    return arrays
+\ No newline at end of file
++    return arrays
+diff --git a/pandas/core/internals/managers.py b/pandas/core/internals/managers.py
+index 18670f6..19bc9f1 100644
+--- a/pandas/core/internals/managers.py
++++ b/pandas/core/internals/managers.py
+@@ -39,7 +39,7 @@ from pandas.util._decorators import cache_readonly
+ from pandas.util._exceptions import find_stack_level
+ from pandas.util._validators import validate_bool_kwarg
+ 
+-from pandas.core.dtypes.cast import infer_dtype_from_scalar, np_can_hold_element
++from pandas.core.dtypes.cast import find_common_type, infer_dtype_from_scalar, np_can_hold_element
+ 
+ 
+ 
+@@ -78,7 +78,7 @@ from pandas.core.indexes.api import (
+     default_index,
+     ensure_index,
+ )
+-from pandas.core.internals.blocks import Block, NumpyBlock, ensure_block_shape, extend_blocks, get_block_type, maybe_coerce_values, new_block
++from pandas.core.internals.blocks import Block, NumpyBlock, ensure_block_shape, extend_blocks, get_block_type, maybe_coerce_values, new_block, new_block_2d
+ 
+ 
+ 
+@@ -2266,6 +2266,24 @@ class SingleBlockManager(BaseBlockManager):
+ # Constructor Helpers
+ 
+ 
++def create_block_manager_from_blocks(
++    blocks: list[Block],
++    axes: list[Index],
++    consolidate: bool = True,
++    verify_integrity: bool = True,
++) -> BlockManager:
++    try:
++        mgr = BlockManager(blocks, axes, verify_integrity=verify_integrity)
++    except ValueError as err:
++        if not blocks:
++            raise
++        tot_items = sum(block.shape[0] for block in blocks)
++        raise_construction_error(tot_items, blocks[0].shape, axes, err)
++    if consolidate:
++        mgr._consolidate_inplace()
++    return mgr
++
++
+ 
+ 
+ 
+@@ -2417,6 +2435,17 @@ def _form_blocks(arrays: list[ArrayLike], consolidate: bool, refs: list) -> list
+ 
+ 
+ 
++def _tuples_to_blocks_no_consolidate(tuples, refs) -> list[Block]:
++    return [
++        new_block_2d(
++            ensure_block_shape(arr, 2),
++            placement=BlockPlacement(i),
++            refs=refs[i],
++        )
++        for i, arr in tuples
++    ]
++
++
+ def _stack_arrays(tuples, dtype: np.dtype):
+     placement, arrays = zip(*tuples, strict=True)
+ 
+@@ -2537,4 +2566,4 @@ def make_na_array(dtype: DtypeObj, shape: Shape, fill_value) -> ArrayLike:
+ 
+         if dtype.kind in "mM":
+             missing_arr_np = ensure_wrapped_if_datetimelike(missing_arr_np)
+-        return missing_arr_np
+\ No newline at end of file
++        return missing_arr_np
+diff --git a/pandas/core/missing.py b/pandas/core/missing.py
+index 17e52e2..69ca769 100644
+--- a/pandas/core/missing.py
++++ b/pandas/core/missing.py
+@@ -44,7 +44,7 @@ from pandas.core.dtypes.dtypes import (
+     BaseMaskedDtype,
+     DatetimeTZDtype,
+ )
+-from pandas.core.dtypes.missing import is_valid_na_for_dtype, isna
++from pandas.core.dtypes.missing import is_valid_na_for_dtype, isna, na_value_for_dtype
+ 
+ 
+ 
+diff --git a/pandas/core/nanops.py b/pandas/core/nanops.py
+index 2c27d68..cbed166 100644
+--- a/pandas/core/nanops.py
++++ b/pandas/core/nanops.py
+@@ -42,7 +42,7 @@ from pandas.core.dtypes.common import (
+     needs_i8_conversion,
+     pandas_dtype,
+ )
+-from pandas.core.dtypes.missing import isna, notna
++from pandas.core.dtypes.missing import isna, na_value_for_dtype, notna
+ 
+ 
+ 
+diff --git a/pandas/core/reshape/api.py b/pandas/core/reshape/api.py
+index f104882..d1a0f62 100644
+--- a/pandas/core/reshape/api.py
++++ b/pandas/core/reshape/api.py
+@@ -1,4 +1,5 @@
+ 
++from pandas.core.reshape.concat import concat
+ from pandas.core.reshape.encoding import (
+     from_dummies,
+     get_dummies,
+diff --git a/pandas/core/reshape/concat.py b/pandas/core/reshape/concat.py
+index c87ddd9..72e3d5f 100644
+--- a/pandas/core/reshape/concat.py
++++ b/pandas/core/reshape/concat.py
+@@ -25,6 +25,7 @@ from pandas.core.dtypes.common import (
+     is_bool,
+     is_scalar,
+ )
++from pandas.core.dtypes.concat import concat_compat
+ 
+ from pandas.core.dtypes.generic import (
+     ABCDataFrame,
+@@ -119,37 +120,208 @@ def concat(
+ ) -> DataFrame | Series: ...
+ 
+ 
+-@overload
++@set_module("pandas")
+ def concat(
+     objs: Iterable[Series | DataFrame] | Mapping[HashableT, Series | DataFrame],
+     *,
+-    axis: Literal[1, "columns"],
+-    join: str = ...,
+-    ignore_index: bool = ...,
+-    keys: Iterable[Hashable] | None = ...,
+-    levels=...,
+-    names: list[HashableT] | None = ...,
+-    verify_integrity: bool = ...,
+-    sort: bool = ...,
+-    copy: bool | lib.NoDefault = ...,
+-) -> DataFrame: ...
++    axis: Axis = 0,
++    join: str = "outer",
++    ignore_index: bool = False,
++    keys: Iterable[Hashable] | None = None,
++    levels=None,
++    names: list[HashableT] | None = None,
++    verify_integrity: bool = False,
++    sort: bool = False,
++    copy: bool | lib.NoDefault = lib.no_default,
++) -> DataFrame | Series:
++    if ignore_index and keys is not None:
++        raise ValueError(
++            "Cannot set ignore_index=True and specify keys. Either should be used."
++        )
++    if join == "outer":
++        intersect = False
++    elif join == "inner":
++        intersect = True
++    else:
++        raise ValueError("Only can inner (intersect) or outer (union) join the other axis")
++    if not is_bool(sort):
++        raise ValueError(
++            f"The 'sort' keyword only accepts boolean values; {sort} was passed."
++        )
+ 
++    objs, keys, ndims = _clean_keys_and_objs(objs, keys)
++    sample, objs = _get_sample_object(objs, ndims, keys, names, levels, intersect)
++    if axis in (0, "index"):
++        axis = 0
++    elif axis in (1, "columns"):
++        axis = 1
++    else:
++        raise ValueError(f"No axis named {axis} for object type DataFrame")
+ 
+-@overload
+-def concat(
+-    objs: Iterable[Series | DataFrame] | Mapping[HashableT, Series | DataFrame],
+-    *,
+-    axis: Axis = ...,
+-    join: str = ...,
+-    ignore_index: bool = ...,
+-    keys: Iterable[Hashable] | None = ...,
+-    levels=...,
+-    names: list[HashableT] | None = ...,
+-    verify_integrity: bool = ...,
+-    sort: bool = ...,
+-    copy: bool | lib.NoDefault = ...,
+-) -> DataFrame | Series: ...
++    if len(ndims) > 1:
++        mixed_axis = sample._get_block_manager_axis(axis)
++        objs = _sanitize_mixed_ndim(objs, sample, ignore_index, mixed_axis)
++        sample = objs[0]
+ 
++    is_series = isinstance(sample, ABCSeries) and all(
++        isinstance(obj, ABCSeries) for obj in objs
++    )
++    bm_axis = axis if is_series else sample._get_block_manager_axis(axis)
++    return _get_result(
++        objs,
++        is_series,
++        bm_axis,
++        ignore_index,
++        intersect,
++        sort,
++        keys,
++        levels,
++        verify_integrity,
++        names,
++        axis,
++    )
++
++
++def _clean_keys_and_objs(objs, keys):
++    if isinstance(objs, (ABCSeries, ABCDataFrame)) or is_scalar(objs):
++        raise TypeError(
++            "first argument must be an iterable of pandas objects, "
++            f"you passed an object of type \"{type(objs).__name__}\""
++        )
++
++    if isinstance(objs, abc.Mapping):
++        if keys is None:
++            keys = objs.keys()
++        keys = list(keys)
++        try:
++            objs = [objs[k] for k in keys]
++        except KeyError:
++            raise
++    else:
++        objs = list(objs)
++
++    if len(objs) == 0:
++        raise ValueError("No objects to concatenate")
++
++    if keys is not None:
++        keys = ensure_index(keys)
++        if len(keys) != len(objs):
++            raise ValueError(
++                f"The length of the keys ({len(keys)}) must match "
++                f"the length of the objects to concatenate ({len(objs)})"
++            )
++
++    clean_objs = []
++    clean_keys = []
++    ndims: set[int] = set()
++    for i, obj in enumerate(objs):
++        if obj is None:
++            continue
++        if not isinstance(obj, (ABCSeries, ABCDataFrame)):
++            raise TypeError(
++                f"cannot concatenate object of type '{type(obj)}'; "
++                "only Series and DataFrame objs are valid"
++            )
++        clean_objs.append(obj)
++        ndims.add(obj.ndim)
++        if keys is not None:
++            clean_keys.append(keys[i])
++
++    if not clean_objs:
++        raise ValueError("All objects passed were None")
++    if keys is not None:
++        keys = ensure_index(clean_keys)
++    return clean_objs, keys, ndims
++
++
++def _get_sample_object(objs, ndims, keys, names, levels, intersect):
++    if len(ndims) > 1:
++        max_ndim = max(ndims)
++        for obj in objs:
++            if obj.ndim == max_ndim and sum(obj.shape):
++                return obj, objs
++
++    if keys is None and names is None and levels is None and not intersect:
++        non_empties = [
++            obj
++            for obj in objs
++            if not (isinstance(obj, ABCDataFrame) and sum(obj.shape) == 0)
++        ]
++        if non_empties:
++            return non_empties[0], non_empties
++    return objs[0], objs
++
++
++def _get_result(
++    objs,
++    is_series,
++    bm_axis,
++    ignore_index,
++    intersect,
++    sort,
++    keys,
++    levels,
++    verify_integrity,
++    names,
++    axis,
++):
++    if is_series and axis == 0:
++        values = concat_compat([obj._values for obj in objs])
++        concat_axis = _get_concat_axis_series(
++            objs, ignore_index, bm_axis, keys, levels, verify_integrity, names
++        )
++        name = com.consensus_name_attr(objs)
++        result = objs[0]._constructor(
++            values,
++            index=concat_axis,
++            name=name,
++            dtype=getattr(values, "dtype", None),
++            copy=False,
++        )
++        return result.__finalize__(
++            types.SimpleNamespace(input_objs=objs), method="concat"
++        )
++
++    if is_series:
++        from pandas.core.frame import DataFrame
++
++        result_index = get_objs_combined_axis(
++            objs, axis=0, intersect=intersect, sort=sort
++        )
++        arrays = [obj.reindex(result_index)._values for obj in objs]
++        columns = _get_concat_axis_series(
++            objs, ignore_index, bm_axis, keys, levels, verify_integrity, names
++        )
++        result = DataFrame._from_arrays(
++            arrays, columns=columns, index=result_index, verify_integrity=False
++        )
++        return result.__finalize__(
++            types.SimpleNamespace(input_objs=objs), method="concat"
++        )
++
++    result_axes = new_axes(
++        objs, bm_axis, intersect, sort, keys, names, axis, levels,
++        verify_integrity, ignore_index,
++    )
++    mgrs_indexers = []
++    for obj in objs:
++        indexers = {}
++        for ax, new_labels in enumerate(result_axes):
++            if ax == bm_axis:
++                continue
++            obj_labels = obj.axes[1 - ax]
++            if not new_labels.equals(obj_labels):
++                indexers[ax] = obj_labels.get_indexer(new_labels)
++        mgrs_indexers.append((obj._mgr, indexers))
++
++    new_data = concatenate_managers(
++        mgrs_indexers, result_axes, concat_axis=bm_axis, copy=False
++    )
++    result = sample = objs[0]
++    out = sample._constructor_from_mgr(new_data, axes=new_data.axes)
++    return out.__finalize__(
++        types.SimpleNamespace(input_objs=objs), method="concat"
++    )
+ 
+ 
+ 
+@@ -650,6 +822,65 @@ def new_axes(
+     ]
+ 
+ 
++def _concat_indexes(indexes) -> Index:
++    return indexes[0].append(indexes[1:])
++
++
++def _get_concat_axis_series(
++    objs: list[Series | DataFrame],
++    ignore_index: bool,
++    bm_axis: AxisInt,
++    keys: Iterable[Hashable] | None,
++    levels,
++    verify_integrity: bool,
++    names: list[HashableT] | None,
++) -> Index:
++    # For all-Series concatenation, bm_axis follows the public axis.
++    if bm_axis == 0:
++        indexes = [x.index for x in objs]
++        if ignore_index:
++            concat_axis = default_index(sum(len(x) for x in indexes))
++        elif keys is None:
++            if levels is not None:
++                raise ValueError("levels supported only when keys is not None")
++            concat_axis = _concat_indexes(indexes)
++        else:
++            concat_axis = _make_concat_multiindex(indexes, keys, levels, names)
++    else:
++        if ignore_index:
++            concat_axis = default_index(len(objs))
++        elif keys is not None:
++            keys = list(keys)
++            if levels is not None or (keys and isinstance(keys[0], tuple)):
++                concat_axis = _make_concat_multiindex(
++                    [default_index(1)] * len(objs), keys, levels, names
++                )
++                # The synthetic inner level is not part of axis=1 keys.
++                concat_axis = concat_axis.droplevel(-1)
++            else:
++                concat_axis = Index(keys, name=names[0] if names else None)
++        else:
++            names_list = [obj.name for obj in objs]
++            if all(name is not None for name in names_list):
++                concat_axis = Index(names_list)
++            else:
++                num = 0
++                labels = []
++                for name in names_list:
++                    if name is None:
++                        while num in names_list:
++                            num += 1
++                        labels.append(num)
++                        num += 1
++                    else:
++                        labels.append(name)
++                concat_axis = Index(labels)
++
++    if verify_integrity and not concat_axis.is_unique:
++        overlap = concat_axis[concat_axis.duplicated()].unique()
++        raise ValueError(f"Indexes have overlapping values: {overlap}")
++    return concat_axis
++
+ 
+ 
+ 
+@@ -947,4 +1178,4 @@ def _make_concat_multiindex(indexes, keys, levels=None, names=None) -> MultiInde
+ 
+     return MultiIndex(
+         levels=new_levels, codes=new_codes, names=new_names, verify_integrity=False
+-    )
+\ No newline at end of file
++    )
+diff --git a/pandas/core/reshape/merge.py b/pandas/core/reshape/merge.py
+index e1bea38..f04d8d9 100644
+--- a/pandas/core/reshape/merge.py
++++ b/pandas/core/reshape/merge.py
+@@ -71,7 +71,7 @@ from pandas.core.dtypes.generic import (
+     ABCDataFrame,
+     ABCSeries,
+ )
+-from pandas.core.dtypes.missing import isna
++from pandas.core.dtypes.missing import isna, na_value_for_dtype
+ 
+ 
+ 
+diff --git a/pandas/core/reshape/reshape.py b/pandas/core/reshape/reshape.py
+index fb7d63b..4ad8dbd 100644
+--- a/pandas/core/reshape/reshape.py
++++ b/pandas/core/reshape/reshape.py
+@@ -563,6 +563,122 @@ def unstack(
+ ) -> Series | DataFrame: ...
+ 
+ 
++def unstack(
++    obj: Series | DataFrame, level, fill_value=None, sort: bool = True
++) -> Series | DataFrame:
++    """Pivot one or more index levels into the columns."""
++    index = obj.index
++    if not isinstance(index, MultiIndex):
++        if isinstance(obj, Series):
++            raise ValueError(
++                f"index must be a MultiIndex to unstack, {type(index)} was passed"
++            )
++
++        values = obj.to_numpy().T.reshape(-1)
++        if isinstance(obj.columns, MultiIndex):
++            tuples = [tuple(col) + (idx,) for col in obj.columns for idx in index]
++            names = list(obj.columns.names) + [index.name]
++        else:
++            tuples = [(col, idx) for col in obj.columns for idx in index]
++            names = [obj.columns.name, index.name]
++        result_index = MultiIndex.from_tuples(tuples, names=names)
++        return obj._constructor_sliced(values, index=result_index)
++
++    if isinstance(level, (list, tuple)) and level not in index.names:
++        levels = list(level)
++    else:
++        levels = [level]
++    level_nums = [index._get_level_number(lev) for lev in levels]
++    if len(set(level_nums)) != len(level_nums):
++        raise ValueError("level should contain all level names or numbers exactly once")
++
++    remain_nums = [i for i in range(index.nlevels) if i not in level_nums]
++    labels = [tuple(index[i] for i in nums) for nums in [range(index.nlevels)]]
++    # Materialize row/pivot keys from level values instead of codes so that
++    # unused levels do not appear in the result.
++    row_keys = [
++        tuple(index.get_level_values(i)[j] for i in remain_nums)
++        for j in range(len(index))
++    ]
++    pivot_keys = [
++        tuple(index.get_level_values(i)[j] for i in level_nums)
++        for j in range(len(index))
++    ]
++
++    def unique(values):
++        result = []
++        for value in values:
++            if value not in result:
++                result.append(value)
++        if sort:
++            try:
++                result.sort()
++            except TypeError:
++                pass
++        return result
++
++    rows = unique(row_keys) if remain_nums else [()]
++    pivots = unique(pivot_keys)
++    positions = {}
++    for i, key in enumerate(zip(row_keys, pivot_keys, strict=True)):
++        if key in positions:
++            raise ValueError("Index contains duplicate entries, cannot reshape")
++        positions[key] = i
++
++    if remain_nums:
++        if len(remain_nums) == 1:
++            result_index = Index(
++                [x[0] for x in rows], name=index.names[remain_nums[0]]
++            )
++        else:
++            result_index = MultiIndex.from_tuples(
++                rows, names=[index.names[i] for i in remain_nums]
++            )
++    else:
++        result_index = default_index(1)
++
++    arrays = []
++    result_columns = []
++    source_columns = [None] if isinstance(obj, Series) else list(obj.columns)
++    for source_pos, source_col in enumerate(source_columns):
++        source_values = obj._values if isinstance(obj, Series) else obj.iloc[:, source_pos]._values
++        for pivot in pivots:
++            indexer = np.array(
++                [positions.get((row, pivot), -1) for row in rows], dtype=np.intp
++            )
++            arrays.append(
++                algos.take_nd(source_values, indexer, fill_value=fill_value)
++            )
++            if isinstance(obj, Series):
++                result_columns.append(pivot)
++            else:
++                col_tuple = tuple(source_col) if isinstance(obj.columns, MultiIndex) else (source_col,)
++                result_columns.append(col_tuple + pivot)
++
++    if isinstance(obj, Series):
++        if len(level_nums) == 1:
++            columns = Index(
++                [x[0] for x in result_columns], name=index.names[level_nums[0]]
++            )
++        else:
++            columns = MultiIndex.from_tuples(
++                result_columns, names=[index.names[i] for i in level_nums]
++            )
++    else:
++        base_names = (
++            list(obj.columns.names)
++            if isinstance(obj.columns, MultiIndex)
++            else [obj.columns.name]
++        )
++        columns = MultiIndex.from_tuples(
++            result_columns,
++            names=base_names + [index.names[i] for i in level_nums],
++        )
++
++    return DataFrame._from_arrays(
++        arrays, columns=columns, index=result_index, verify_integrity=False
++    )
++
+ 
+ 
+ 
+@@ -1119,4 +1235,4 @@ def stack_reshape(
+         if not result.columns.equals(desired_columns):
+             result = result[desired_columns]
+ 
+-    return result
+\ No newline at end of file
++    return result
+diff --git a/pandas/core/series.py b/pandas/core/series.py
+index 33c3060..564cc7a 100644
+--- a/pandas/core/series.py
++++ b/pandas/core/series.py
+@@ -93,7 +93,7 @@ from pandas.core.dtypes.generic import (
+     ABCSeries,
+ )
+ from pandas.core.dtypes.inference import is_hashable
+-from pandas.core.dtypes.missing import isna, notna, remove_na_arraylike
++from pandas.core.dtypes.missing import isna, na_value_for_dtype, notna, remove_na_arraylike
+ 
+ 
+ 
+diff --git a/pandas/core/sorting.py b/pandas/core/sorting.py
+index 2613611..1782955 100644
+--- a/pandas/core/sorting.py
++++ b/pandas/core/sorting.py
+@@ -118,6 +118,91 @@ def get_indexer_indexer(
+     return indexer
+ 
+ 
++def get_group_index(
++    labels: Sequence[np.ndarray], shape: Shape, sort: bool, xnull: bool
++) -> npt.NDArray[np.int64]:
++    """Encode a cartesian product of integer labels into flat group ids."""
++    labels = [ensure_int64(x) for x in labels]
++    shape = tuple(int(x) for x in shape)
++
++    if any(size == 0 for size in shape):
++        return np.full(len(labels[0]), -1, dtype=np.int64)
++
++    if not xnull:
++        lifted = []
++        new_shape = []
++        for lab, size in zip(labels, shape, strict=True):
++            if (lab == -1).any():
++                lab = lab + 1
++                size += 1
++            lifted.append(lab)
++            new_shape.append(size)
++        labels = lifted
++        shape = tuple(new_shape)
++
++    while True:
++        nlev = 1
++        prod = int(shape[0]) if shape else 1
++        while nlev < len(shape) and prod <= lib.i8max // max(int(shape[nlev]), 1):
++            prod *= int(shape[nlev])
++            nlev += 1
++
++        stride = np.prod(shape[1:nlev], dtype="i8") if nlev > 1 else 1
++        out = labels[0] * stride
++        for i in range(1, nlev):
++            stride //= shape[i]
++            out += labels[i] * stride
++
++        if xnull:
++            mask = labels[0] == -1
++            for lab in labels[1:nlev]:
++                mask |= lab == -1
++            out[mask] = -1
++
++        if nlev == len(shape):
++            return ensure_int64(out)
++
++        comp_ids, obs_ids = compress_group_index(out, sort=sort)
++        labels = [comp_ids] + labels[nlev:]
++        shape = (len(obs_ids),) + shape[nlev:]
++
++
++def compress_group_index(
++    group_index: npt.NDArray[np.int64], sort: bool = True
++) -> tuple[npt.NDArray[np.int64], npt.NDArray[np.int64]]:
++    """Compress arbitrary group ids to consecutive ids."""
++    if len(group_index) == 0:
++        empty = np.empty(0, dtype=np.int64)
++        return empty, empty
++
++    mapping = {}
++    observed = []
++    comp = np.empty(len(group_index), dtype=np.int64)
++    for i, value in enumerate(group_index):
++        key = int(value)
++        if key < 0:
++            comp[i] = -1
++            continue
++        if key not in mapping:
++            mapping[key] = len(observed)
++            observed.append(key)
++        comp[i] = mapping[key]
++    obs = np.asarray(observed, dtype=np.int64)
++
++    if sort and len(obs) > 1:
++        sorter = obs.argsort()
++        reverse = np.empty(len(sorter), dtype=np.int64)
++        reverse[sorter] = np.arange(len(sorter))
++        comp = reverse[comp]
++        obs = obs[sorter]
++    return comp, obs
++
++
++def get_group_index_sorter(
++    group_index: npt.NDArray[np.intp], ngroups: int | None = None
++) -> npt.NDArray[np.intp]:
++    return ensure_platform_int(np.argsort(group_index, kind="stable"))
++
+ 
+ 
+ 
+@@ -281,6 +366,9 @@ def decons_obs_group_ids(
+     xnull : bool
+         If nulls are excluded; i.e. -1 labels are passed through.
+     """
++    if len(obs_ids) == 0:
++        return [np.empty(0, dtype=np.intp) for _ in shape]
++
+     if not xnull:
+         lift = np.fromiter(((a == -1).any() for a in labels), dtype=np.intp)
+         arr_shape = np.asarray(shape, dtype=np.intp) + lift
+@@ -641,7 +729,3 @@ def get_indexer_dict(
+ 
+ 
+ 
+-
+-
+-
+-
+diff --git a/pandas/io/formats/printing.py b/pandas/io/formats/printing.py
+index 1c6f912..706b163 100644
+--- a/pandas/io/formats/printing.py
++++ b/pandas/io/formats/printing.py
+@@ -171,6 +171,41 @@ def _pprint_dict(
+         return fmt.format(things=", ".join(pairs))
+ 
+ 
++def pprint_thing(
++    thing: Any,
++    _nest_lvl: int = 0,
++    escape_chars: EscapeChars | None = None,
++    default_escapes: bool = False,
++    quote_strings: bool = False,
++    max_seq_items: int | None = None,
++) -> str:
++    """Return a readable, bounded representation used by pandas formatters."""
++    if isinstance(thing, str):
++        result = thing
++        if default_escapes:
++            result = result.replace("\t", r"\t").replace("\n", r"\n").replace("\r", r"\r")
++        if escape_chars:
++            if isinstance(escape_chars, Mapping):
++                replacements = escape_chars
++            else:
++                replacements = {char: repr(char)[1:-1] for char in escape_chars}
++            for char, replacement in replacements.items():
++                result = result.replace(char, replacement)
++        return repr(result) if quote_strings else result
++
++    if _nest_lvl < 3:
++        if isinstance(thing, Mapping):
++            return _pprint_dict(
++                thing, _nest_lvl, max_seq_items=max_seq_items,
++                escape_chars=escape_chars, quote_strings=quote_strings,
++            )
++        if isinstance(thing, (list, tuple, set, frozenset)):
++            return _pprint_seq(
++                thing, _nest_lvl, max_seq_items=max_seq_items,
++                escape_chars=escape_chars, quote_strings=quote_strings,
++            )
++    return str(thing)
++
+ 
+ 
+ 
+@@ -584,4 +619,4 @@ def get_adjustment() -> _TextAdjustment:
+     if use_east_asian_width:
+         return _EastAsianTextAdjustment()
+     else:
+-        return _TextAdjustment()
+\ No newline at end of file
++        return _TextAdjustment()
+diff --git a/pandas/util/_validators.py b/pandas/util/_validators.py
+index f4db0d4..db78f83 100644
+--- a/pandas/util/_validators.py
++++ b/pandas/util/_validators.py
+@@ -28,6 +28,19 @@ BoolishT = TypeVar("BoolishT", bool, int)
+ BoolishNoneT = TypeVar("BoolishNoneT", bool, int, None)
+ 
+ 
++def _check_arg_length(fname, args, max_fname_arg_count, compat_args) -> None:
++    if max_fname_arg_count < 0:
++        raise ValueError("'max_fname_arg_count' must be non-negative")
++
++    actual_arg_count = len(args) + max_fname_arg_count
++    allowed_arg_count = len(compat_args) + max_fname_arg_count
++    if actual_arg_count > allowed_arg_count:
++        raise TypeError(
++            f"{fname}() takes at most {allowed_arg_count} "
++            f"argument{'s' if allowed_arg_count != 1 else ''} "
++            f"({actual_arg_count} given)"
++        )
++
+ 
+ 
+ 
+@@ -127,6 +140,29 @@ def validate_args(fname, args, max_fname_arg_count, compat_args) -> None:
+     _check_for_default_values(fname, kwargs, compat_args)
+ 
+ 
++def validate_kwargs(fname, kwargs, compat_args) -> None:
++    """Validate keyword arguments against numpy-compatible defaults."""
++    for key in kwargs:
++        if key not in compat_args:
++            raise TypeError(f"{fname}() got an unexpected keyword argument '{key}'")
++    _check_for_default_values(fname, kwargs, compat_args)
++
++
++def validate_args_and_kwargs(
++    fname, args, kwargs, max_fname_arg_count, compat_args
++) -> None:
++    """Validate positional and keyword compatibility arguments together."""
++    _check_arg_length(fname, args, max_fname_arg_count, compat_args)
++
++    args_dict = dict(zip(compat_args, args, strict=False))
++    for key in args_dict:
++        if key in kwargs:
++            raise TypeError(f"{fname}() got multiple values for keyword argument '{key}'")
++
++    # Historically this helper mutates kwargs; a number of callers rely on it.
++    kwargs.update(args_dict)
++    validate_kwargs(fname, kwargs, compat_args)
++
+ 
+ 
+ 
+@@ -479,4 +515,4 @@ def check_dtype_backend(dtype_backend) -> None:
+             raise ValueError(
+                 f"dtype_backend {dtype_backend} is invalid, only 'numpy_nullable' and "
+                 f"'pyarrow' are allowed.",
+-            )
+\ No newline at end of file
++            )

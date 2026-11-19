@@ -1,0 +1,255 @@
+diff --git a/seaborn/_core/plot.py b/seaborn/_core/plot.py
+index fe3ee20..abcad1c 100644
+--- a/seaborn/_core/plot.py
++++ b/seaborn/_core/plot.py
+@@ -185,6 +185,21 @@ class ThemeConfig(mpl.RcParams):
+             if any(k.startswith(p) for p in self.THEME_GROUPS)
+         }
+ 
++    def _repr_html_(self) -> str:
++        """Return a scrollable HTML table containing the theme parameters."""
++        rows = "".join(
++            "<tr>"
++            f"<td style='text-align: left'>{key}</td>"
++            f"<td style='text-align: left'>{value!r}</td>"
++            "</tr>"
++            for key, value in self.items()
++        )
++        return (
++            "<div style='height: 300px; overflow-y: auto; border: 1px inset'>"
++            f"<table>{rows}</table>"
++            "</div>"
++        )
++
+ 
+ 
+ 
+@@ -439,6 +454,197 @@ class Plot:
+         # ever be strings but I don't think we can type a DataFrame that way yet
+         return [str(v) for v in variables]
+ 
++    def add(
++        self,
++        mark: Mark,
++        *transforms: Stat | Move,
++        orient: str | None = None,
++        legend: bool = True,
++        label: str | None = None,
++        data: DataSource = None,
++        **variables: VariableSpec,
++    ) -> Plot:
++        """Add a layer containing a mark and optional transformations."""
++        if not isinstance(mark, Mark):
++            raise TypeError(f"mark must be a Mark instance, not {type(mark)!r}.")
++
++        stat = None
++        moves: list[Move] = []
++        for i, transform in enumerate(transforms):
++            if isinstance(transform, Stat):
++                if stat is not None or i != 0:
++                    raise TypeError("A Stat transform must be first and may appear once.")
++                stat = transform
++            elif isinstance(transform, Move):
++                moves.append(transform)
++            else:
++                raise TypeError(
++                    "Transforms must be Stat or Move instances, "
++                    f"not {type(transform)!r}."
++                )
++
++        if orient in {"v", "h"}:
++            orient = {"v": "x", "h": "y"}[orient]
++
++        if not moves:
++            move: Move | list[Move] | None = None
++        elif len(moves) == 1:
++            move = moves[0]
++        else:
++            move = moves
++
++        layer: Layer = {
++            "mark": mark,
++            "stat": stat,
++            "move": move,
++            "orient": orient,
++            "legend": legend,
++            "label": label,
++            "source": data,
++            "vars": variables,
++        }
++        new = self._clone()
++        new._layers.append(layer)
++        return new
++
++    def facet(
++        self,
++        col: VariableSpec = None,
++        row: VariableSpec = None,
++        order: OrderSpec | dict[str, OrderSpec] = None,
++        wrap: int | None = None,
++    ) -> Plot:
++        """Produce subplots with conditional subsets of the data."""
++        variables = {k: v for k, v in {"col": col, "row": row}.items() if v is not None}
++
++        if order is not None and not isinstance(order, dict):
++            if col is not None and row is not None:
++                raise RuntimeError(
++                    "When faceting on both `col` and `row`, `order` must be a dict."
++                )
++            dim = "col" if col is not None else "row"
++            order = {dim: order}
++
++        structure = {}
++        if isinstance(order, dict):
++            structure = {
++                dim: list(values)
++                for dim, values in order.items()
++                if dim in variables and values is not None
++            }
++
++        new = self._clone()
++        new._facet_spec = {
++            "variables": variables,
++            "structure": structure,
++            "wrap": wrap,
++        }
++        return new
++
++    def label(
++        self,
++        *,
++        title: str | None = None,
++        legend: str | None = None,
++        **variables: str | Callable[[str], str],
++    ) -> Plot:
++        """Control labels and titles for axes, legends, and subplots."""
++        new = self._clone()
++        new._labels.update(variables)
++        if title is not None:
++            new._labels["title"] = title
++        if legend is not None:
++            new._labels["legend"] = legend
++        return new
++
++    def layout(
++        self,
++        *,
++        size: tuple[float, float] | Default = default,
++        engine: str | None | Default = default,
++        extent: tuple[float, float, float, float] | Default = default,
++    ) -> Plot:
++        """Control the figure size and layout."""
++        new = self._clone()
++        if size is not default:
++            new._figure_spec["figsize"] = size
++        if engine is not default:
++            new._layout_spec["engine"] = engine
++        if extent is not default:
++            new._layout_spec["extent"] = extent
++        return new
++
++    def limit(self, **limits: tuple[Any, Any]) -> Plot:
++        """Control the range of visible data."""
++        new = self._clone()
++        new._limits.update(limits)
++        return new
++
++    def on(self, target: Axes | SubFigure | Figure) -> Plot:
++        """Provide an existing Matplotlib figure or axes as a render target."""
++        target_types = (mpl.axes.Axes, mpl.figure.SubFigure, mpl.figure.Figure)
++        if not isinstance(target, target_types):
++            raise TypeError(
++                "The `target` must be a matplotlib Axes, SubFigure, or Figure "
++                f"instance, not {type(target)!r}."
++            )
++        new = self._clone()
++        new._target = target
++        return new
++
++    def pair(
++        self,
++        x: VariableSpecList = None,
++        y: VariableSpecList = None,
++        wrap: int | None = None,
++        cross: bool = True,
++    ) -> Plot:
++        """Produce subplots by pairing multiple x and/or y variables."""
++        pairings = {"x": x, "y": y}
++        for axis, values in pairings.items():
++            if values is not None and not isinstance(values, (list, tuple, Index)):
++                raise TypeError(f"`{axis}` must be a sequence of variable specifications.")
++
++        if not cross and x is not None and y is not None and len(x) != len(y):
++            raise ValueError("When `cross=False`, `x` and `y` must have equal length.")
++
++        # Zipping is meaningful only when both axes are paired. With one axis
++        # omitted, retain its existing mapping and lay out every supplied variable.
++        effective_cross = cross if x is not None and y is not None else True
++
++        variables = {}
++        structure = {}
++        for axis, values in pairings.items():
++            if values is None:
++                continue
++            keys = []
++            for i, value in enumerate(values):
++                key = f"{axis}{i}"
++                variables[key] = value
++                keys.append(key)
++            structure[axis] = keys
++
++        new = self._clone()
++        new._pair_spec = {
++            "variables": variables,
++            "structure": structure,
++            "cross": effective_cross,
++            "wrap": wrap,
++        }
++        return new
++
++    def scale(self, **scales: Scale) -> Plot:
++        """Specify mappings from data units to visual properties."""
++        new = self._clone()
++        new._scales.update(scales)
++        return new
++
++    def share(self, **shares: bool | str) -> Plot:
++        """Control sharing of axis limits and ticks across subplots."""
++        new = self._clone()
++        new._shares.update(shares)
++        return new
++
+ 
+ 
+ 
+@@ -1827,4 +2033,4 @@ class Plotter:
+                 except TypeError:
+                     # Should we warn / raise? Note that we don't expect to get here
+                     # under any normal circumstances.
+-                    pass
+\ No newline at end of file
++                    pass
+diff --git a/seaborn/external/version.py b/seaborn/external/version.py
+index 6d3c75a..a98c51a 100644
+--- a/seaborn/external/version.py
++++ b/seaborn/external/version.py
+@@ -141,6 +141,12 @@ class _BaseVersion:
+     # in the six comparisons hereunder
+     # unless you find a way to avoid adding overhead function calls.
+ 
++    def __lt__(self, other: "_BaseVersion") -> bool:
++        if not isinstance(other, _BaseVersion):
++            return NotImplemented
++
++        return self._key < other._key
++
+ 
+ 
+ 
+@@ -458,4 +464,4 @@ def _cmpkey(
+             (i, "") if isinstance(i, int) else (NegativeInfinity, i) for i in local
+         )
+ 
+-    return epoch, _release, _pre, _post, _dev, _local
+\ No newline at end of file
++    return epoch, _release, _pre, _post, _dev, _local

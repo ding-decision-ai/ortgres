@@ -1,0 +1,83 @@
+{
+    "fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.6,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "tests/test_compat.py::test_model_field_default_required",
+                    "tests/test_compat.py::test_v1_plain_validator_function",
+                    "tests/test_compat.py::test_is_model_field",
+                    "tests/test_compat.py::test_get_model_config",
+                    "tests/test_compat.py::test_is_bytes_sequence_annotation_union",
+                    "tests/test_compat.py::test_get_model_fields_cached"
+                ],
+                "failure": [
+                    "tests/test_compat.py::test_complex",
+                    "tests/test_compat.py::test_propagates_pydantic2_model_config",
+                    "tests/test_compat.py::test_is_uploadfile_sequence_annotation",
+                    "tests/test_compat.py::test_is_pv1_scalar_field"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004-/items/foo-data0]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004-/items/bar-data1]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004-/items/baz-data2]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py39-/items/foo-data0]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py39-/items/bar-data1]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py39-/items/baz-data2]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py310-/items/foo-data0]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py310-/items/bar-data1]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_get[tutorial004_py310-/items/baz-data2]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_openapi_schema[tutorial004]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_openapi_schema[tutorial004_py39]",
+                    "tests/test_tutorial/test_response_model/test_tutorial004.py::test_openapi_schema[tutorial004_py310]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic[tutorial006]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic[tutorial006_an]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic[tutorial006_an_py39]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_no_credentials[tutorial006]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_no_credentials[tutorial006_an]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_no_credentials[tutorial006_an_py39]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_invalid_credentials[tutorial006]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_invalid_credentials[tutorial006_an]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_invalid_credentials[tutorial006_an_py39]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_non_basic_credentials[tutorial006]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_non_basic_credentials[tutorial006_an]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_security_http_basic_non_basic_credentials[tutorial006_an_py39]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_openapi_schema[tutorial006]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_openapi_schema[tutorial006_an]",
+                    "tests/test_tutorial/test_security/test_tutorial006.py::test_openapi_schema[tutorial006_an_py39]",
+                    "tests/test_enforce_once_required_parameter.py::test_schema",
+                    "tests/test_enforce_once_required_parameter.py::test_get_invalid",
+                    "tests/test_enforce_once_required_parameter.py::test_get_valid",
+                    "tests/test_tutorial/test_dependencies/test_tutorial008e.py::test_get_users_me[tutorial008e]",
+                    "tests/test_tutorial/test_dependencies/test_tutorial008e.py::test_get_users_me[tutorial008e_an]",
+                    "tests/test_tutorial/test_dependencies/test_tutorial008e.py::test_get_users_me[tutorial008e_an_py39]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_hidden_query[tutorial014]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_hidden_query[tutorial014_py310]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_hidden_query[tutorial014_an]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_hidden_query[tutorial014_an_py39]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_hidden_query[tutorial014_an_py310]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_no_hidden_query[tutorial014]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_no_hidden_query[tutorial014_py310]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_no_hidden_query[tutorial014_an]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_no_hidden_query[tutorial014_an_py39]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_no_hidden_query[tutorial014_an_py310]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_openapi_schema[tutorial014]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_openapi_schema[tutorial014_py310]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_openapi_schema[tutorial014_an]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_openapi_schema[tutorial014_an_py39]",
+                    "tests/test_tutorial/test_query_params_str_validations/test_tutorial014.py::test_openapi_schema[tutorial014_an_py310]"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-10T21:41:50.315585"
+    }
+}

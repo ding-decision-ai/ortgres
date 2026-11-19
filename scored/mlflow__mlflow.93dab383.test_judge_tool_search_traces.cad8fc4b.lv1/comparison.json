@@ -1,0 +1,40 @@
+{
+  "instance_id": "mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1",
+  "repo": "mlflow/mlflow",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 11,
+      "failure": 7,
+      "total": 18
+    },
+    "p2p": {
+      "success": 88,
+      "failure": 0,
+      "total": 88
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "800c5cf0891cc009058be1161063b1930c77f57fd98b8a11880d69a47c1849ba"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 10,
+      "failure": 8,
+      "total": 18
+    },
+    "p2p": {
+      "success": 88,
+      "failure": 0,
+      "total": 88
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "57881fdb48cc8607a936091cd9de8a734b9c1ad717fc099bbc7e3b3fb75ce930"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "14f4f2931acc0b407153486134544e95f38ba95782753b55873a97bc2b013883",
+    "p2p": "f0b1769309d78db8fe145ae58881ab420fa098e587924284f011135b142b68d8"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "models_called": 1,
+      "model_elapsed_seconds": 232.28002212200226,
+      "model_exit_code": 0,
+      "turn_usages": {
+        "0": {
+          "input_tokens": 1978603,
+          "cached_input_tokens": 1868160,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 11773,
+          "reasoning_output_tokens": 5615
+        }
+      },
+      "cost_usd": null,
+      "prior_history_preserved": true,
+      "source_budget_separate_from_future_formal_seconds": 3600
+    },
+    "source_event_reference": {
+      "bytes": 1502765,
+      "actual_overview_outputs": {
+        "0": {
+          "call_line": 27,
+          "output_line": 30,
+          "output_chars": 59174,
+          "contains_task_dependency_closure": true,
+          "contains_public_wrapper_rules": true,
+          "contains_outline_truncation_marker": false
+        }
+      },
+      "actual_tool_output_truncation_lines": {
+        "0": 17,
+        "1": 145,
+        "2": 229
+      }
+    },
+    "source_cost_is_same_handoff_event_as_technical_attempt_not_a_new_initialization": true,
+    "source_event_count_once_across_reuses": true,
+    "formal": {
+      "elapsed_seconds": 497.4028921229983,
+      "raw_completed_turn_usages": {
+        "0": {
+          "input_tokens": 6757198,
+          "cached_input_tokens": 6572928,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 27709,
+          "reasoning_output_tokens": 13084
+        }
+      },
+      "usd": null,
+      "exact_inference_api_active_seconds": null
+    },
+    "prior_invalid_formal_attempt_reference": {
+      "formal_elapsed_seconds": 214.77223536599922,
+      "invalid_condition": true,
+      "not_added_to_this_fresh_formal_elapsed": true
+    },
+    "earlier_history_costs_not_erased_or_summed_when_unknown": true,
+    "multiple_versions_and_conditions": true,
+    "incremental_token_usage": null,
+    "actual_input_boundary": {
+      "actual_user_role_messages": {
+        "0": {
+          "line": 6,
+          "utf8_bytes": 619
+        },
+        "1": {
+          "line": 10,
+          "utf8_bytes": 9592
+        },
+        "2": {
+          "line": 145,
+          "utf8_bytes": 1982,
+          "hook_reported_failures": 8,
+          "actor_emitted_matching_command": {
+            "record_line": 115
+          },
+          "human_operator_case_specific_hint": false,
+          "official_grade_feedback_injected": false
+        }
+      },
+      "reasoning_exported": false
+    }
+  }
+}

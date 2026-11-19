@@ -1,0 +1,105 @@
+2026-10-14 02:59:17,381 - INFO - ============================================================
+2026-10-14 02:59:17,381 - INFO - Starting evaluation for instance: astropy__astropy.b0db0daa.test_table.48eef659.lv1
+2026-10-14 02:59:17,381 - INFO - Level: 1
+2026-10-14 02:59:17,381 - INFO - Attempt: 1
+2026-10-14 02:59:17,381 - INFO - ============================================================
+2026-10-14 02:59:17,387 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 02:59:17,388 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_astropy-instance_493bb78b
+2026-10-14 02:59:17,389 - INFO - Image docker.io/libercoders/featurebench-specs_astropy-instance_493bb78b found locally
+2026-10-14 02:59:17,389 - INFO - Creating container: fb-eval-astropy__astropy-b0db0daa-test_table-48eef659-lv1-attempt-1-20261014-025917-389595
+2026-10-14 02:59:17,390 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 02:59:17,638 - INFO - Container fb-eval-astropy__astropy-b0db0daa-test_table-48eef659-lv1-attempt-1-20261014-025917-389595 created successfully
+2026-10-14 02:59:17,639 - INFO - Starting Level 1 evaluation for astropy__astropy.b0db0daa.test_table.48eef659.lv1
+2026-10-14 02:59:17,639 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 02:59:18,177 - INFO - Restore project exit code: 0
+2026-10-14 02:59:18,177 - INFO - Output: 
+2026-10-14 02:59:18,177 - INFO - Step 2: Applying patch to mask files
+2026-10-14 02:59:18,181 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 02:59:18,437 - INFO - Mask patch apply exit code: 0
+2026-10-14 02:59:18,437 - INFO - Mask patch output: /tmp/mask_patch.diff:1537: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+
+2026-10-14 02:59:18,437 - INFO - Successfully applied mask patch
+2026-10-14 02:59:18,437 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 02:59:18,441 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 02:59:18,441 - INFO - Deleting F2P test file: /testbed/astropy/io/votable/tests/test_table.py
+2026-10-14 02:59:18,717 - INFO - Successfully deleted F2P test file: /testbed/astropy/io/votable/tests/test_table.py
+2026-10-14 02:59:18,717 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 02:59:18,717 - INFO - Step 4: Reinitializing git repository
+2026-10-14 02:59:20,816 - INFO - Step 5: Applying agent patch
+2026-10-14 02:59:20,828 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 02:59:21,071 - INFO - Patch apply exit code: 0
+2026-10-14 02:59:21,071 - INFO - Patch output: Checking patch astropy/io/votable/converters.py...
+Checking patch astropy/io/votable/tree.py...
+Checking patch astropy/table/row.py...
+Checking patch astropy/table/table.py...
+Checking patch astropy/units/quantity_helper/function_helpers.py...
+Checking patch astropy/utils/xml/check.py...
+/tmp/agent_patch.diff:735: new blank line at EOF.
++
+Checking patch astropy/utils/xml/writer.py...
+Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Applied patch astropy/io/votable/converters.py cleanly.
+Applied patch astropy/io/votable/tree.py cleanly.
+Applied patch astropy/table/row.py cleanly.
+Applied patch astropy/table/table.py cleanly.
+Applied patch astropy/units/quantity_helper/function_helpers.py cleanly.
+Applied patch astropy/utils/xml/check.py cleanly.
+Applied patch astropy/utils/xml/writer.py cleanly.
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+warning: 1 line adds whitespace errors.
+
+2026-10-14 02:59:21,071 - INFO - >>>>> Applied Patch
+2026-10-14 02:59:21,071 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 02:59:21,071 - INFO - F2P test path: /testbed/astropy/io/votable/tests/test_table.py
+2026-10-14 02:59:21,310 - INFO - Delete F2P file exit code: 0
+2026-10-14 02:59:21,310 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 02:59:21,551 - INFO - Reverse apply exit code: 0
+2026-10-14 02:59:21,551 - INFO - Reverse apply output: 
+2026-10-14 02:59:21,551 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 02:59:21,551 - INFO - Step 7: Running tests
+2026-10-14 02:59:21,551 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-14 02:59:21,551 - INFO - Test timeout: 600s
+2026-10-14 02:59:21,551 - INFO - Running F2P test: /testbed/astropy/io/votable/tests/test_table.py
+2026-10-14 02:59:23,542 - INFO - F2P test exit code: 1
+2026-10-14 02:59:23,542 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/votable/tests/test_table.py.
+
+Date: 2026-10-14T02:59:22
+
+Platform: Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 20
+2026-10-14 02:59:23,542 - INFO - Saved F2P test output to artifact://1009218b0f2f4ebb
+2026-10-14 02:59:23,542 - INFO - Running 5 P2P tests
+2026-10-14 02:59:23,542 - INFO - Running P2P test: /testbed/astropy/io/ascii/tests/test_tdat.py
+2026-10-14 02:59:24,803 - INFO - P2P test /testbed/astropy/io/ascii/tests/test_tdat.py exit code: 0
+2026-10-14 02:59:24,803 - INFO - Saved P2P test output to artifact://ddf435cf907e72e5
+2026-10-14 02:59:24,803 - INFO - Running P2P test: /testbed/astropy/io/fits/tests/test_tilde_path.py
+2026-10-14 02:59:26,040 - INFO - P2P test /testbed/astropy/io/fits/tests/test_tilde_path.py exit code: 0
+2026-10-14 02:59:26,040 - INFO - Saved P2P test output to artifact://77208f510a1a3f8e
+2026-10-14 02:59:26,040 - INFO - Running P2P test: /testbed/astropy/io/fits/tests/test_core.py
+2026-10-14 02:59:27,672 - INFO - P2P test /testbed/astropy/io/fits/tests/test_core.py exit code: 0
+2026-10-14 02:59:27,672 - INFO - Saved P2P test output to artifact://e5e8d168d3d63e87
+2026-10-14 02:59:27,672 - INFO - Running P2P test: /testbed/astropy/io/votable/tests/test_coosys.py
+2026-10-14 02:59:28,787 - INFO - P2P test /testbed/astropy/io/votable/tests/test_coosys.py exit code: 0
+2026-10-14 02:59:28,787 - INFO - Saved P2P test output to artifact://318c221e390374d9
+2026-10-14 02:59:28,787 - INFO - Running P2P test: /testbed/astropy/modeling/tests/test_spline.py
+2026-10-14 02:59:30,215 - INFO - P2P test /testbed/astropy/modeling/tests/test_spline.py exit code: 0
+2026-10-14 02:59:30,215 - INFO - Saved P2P test output to artifact://eb65afd2797fb57a
+2026-10-14 02:59:30,223 - INFO - ============================================================
+2026-10-14 02:59:30,223 - INFO - Evaluation completed for astropy__astropy.b0db0daa.test_table.48eef659.lv1
+2026-10-14 02:59:30,223 - INFO - Resolved: False
+2026-10-14 02:59:30,223 - INFO - F2P Pass rate: 0.9302
+2026-10-14 02:59:30,223 - INFO - ============================================================
+2026-10-14 02:59:30,223 - INFO - Stopping and removing container
+2026-10-14 02:59:40,597 - INFO - Container removed successfully

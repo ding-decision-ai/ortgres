@@ -1,0 +1,81 @@
+{
+    "sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.0741,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_not_installed_if_no_equations",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_not_installed_if_no_equations_singlehtml"
+                ],
+                "failure": [
+                    "tests/test_extensions/test_ext_math.py::test_imgmath_svg",
+                    "tests/test_extensions/test_ext_math.py::test_imgmath_svg_embed",
+                    "tests/test_extensions/test_ext_math.py::test_math_number_all_latex",
+                    "tests/test_extensions/test_ext_math.py::test_math_eqref_format_html",
+                    "tests/test_extensions/test_ext_math.py::test_math_eqref_format_latex",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_numsep_html",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_path",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_path_config",
+                    "tests/test_extensions/test_ext_math.py::test_imgmath_png",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_options",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_align",
+                    "tests/test_extensions/test_ext_math.py::test_math_number_all_mathjax",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_numfig_html",
+                    "tests/test_extensions/test_ext_math.py::test_imgmath_numfig_html",
+                    "tests/test_extensions/test_ext_math.py::test_math_compat",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax3_config",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax2_config",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_options_async_for_mathjax3",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_options_defer_for_mathjax2",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_only_if_document_having_math",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_if_no_equations_when_forced",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_if_included_file_has_equations",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_only_if_document_having_math_singlehtml",
+                    "tests/test_extensions/test_ext_math.py::test_mathjax_is_installed_if_included_file_has_equations_singlehtml",
+                    "tests/test_extensions/test_ext_math.py::test_duplicate_equation_label_warning_type"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "tests/test_ext_autodoc/test_ext_autodoc_private_members.py::test_private_field",
+                    "tests/test_ext_autodoc/test_ext_autodoc_private_members.py::test_private_field_and_private_members",
+                    "tests/test_ext_autodoc/test_ext_autodoc_private_members.py::test_private_members",
+                    "tests/test_ext_autodoc/test_ext_autodoc_private_members.py::test_private_attributes",
+                    "tests/test_ext_autodoc/test_ext_autodoc_private_members.py::test_private_attributes_and_private_members",
+                    "tests/test_ext_autodoc/test_ext_autodoc_automodule.py::test_empty_all",
+                    "tests/test_ext_autodoc/test_ext_autodoc_automodule.py::test_automodule",
+                    "tests/test_ext_autodoc/test_ext_autodoc_automodule.py::test_automodule_undoc_members",
+                    "tests/test_ext_autodoc/test_ext_autodoc_automodule.py::test_automodule_special_members",
+                    "tests/test_ext_autodoc/test_ext_autodoc_automodule.py::test_automodule_inherited_members",
+                    "tests/test_ext_autodoc/test_ext_autodoc_automodule.py::test_subclass_of_mocked_object",
+                    "tests/test_builders/test_build_dirhtml.py::test_dirhtml",
+                    "tests/test_builders/test_build_text.py::test_maxwitdh_with_prefix",
+                    "tests/test_builders/test_build_text.py::test_lineblock",
+                    "tests/test_builders/test_build_text.py::test_nonascii_title_line",
+                    "tests/test_builders/test_build_text.py::test_nonascii_table",
+                    "tests/test_builders/test_build_text.py::test_nonascii_maxwidth",
+                    "tests/test_builders/test_build_text.py::test_table_builder",
+                    "tests/test_builders/test_build_text.py::test_table_separator",
+                    "tests/test_builders/test_build_text.py::test_table_cell",
+                    "tests/test_builders/test_build_text.py::test_table_with_empty_cell",
+                    "tests/test_builders/test_build_text.py::test_table_with_rowspan",
+                    "tests/test_builders/test_build_text.py::test_table_with_colspan",
+                    "tests/test_builders/test_build_text.py::test_table_with_colspan_left",
+                    "tests/test_builders/test_build_text.py::test_table_with_colspan_and_rowspan",
+                    "tests/test_builders/test_build_text.py::test_list_items_in_admonition",
+                    "tests/test_builders/test_build_text.py::test_secnums",
+                    "tests/test_extensions/test_ext_ifconfig.py::test_ifconfig",
+                    "tests/test_extensions/test_ext_ifconfig.py::test_ifconfig_content_line_number"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-13T19:53:11.581159"
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "instance_id": "mlflow__mlflow.93dab383.test_rest_store_webhooks.6d85971c.lv1",
+  "repo": "mlflow/mlflow",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 0,
+      "failure": 12,
+      "total": 12
+    },
+    "p2p": {
+      "success": 195,
+      "failure": 0,
+      "total": 195
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "5d71d4dc61a9b103db3efaf62f34545a6b8f9c3e286c4c656146f8cef681ec01"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 12,
+      "failure": 0,
+      "total": 12
+    },
+    "p2p": {
+      "success": 195,
+      "failure": 0,
+      "total": 195
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "812948124507e800291e14a64d0d3289762aafcbf78f073a816d8af1426eff0a"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "2eb687d3c721c6d0710d45ce37b62ed10030f3064af5b645970ee8dc795fcd6f",
+    "p2p": "26d1e73f39271bfa35ccb3fa610c573f02b54ac466d01224458209fba9f7fff6"
+  }
+}

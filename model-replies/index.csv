@@ -1,0 +1,89 @@
+case,instance_id,condition,phase,initial_input_record,markdown,jsonl
+008,astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/008-baseline-run.md,sessions/008-baseline-run.jsonl
+008,astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1,ortg,task-run,Recorded user inputs retained,sessions/008-ortg-run.md,sessions/008-ortg-run.jsonl
+039,astropy__astropy.b0db0daa.test_containers.6079987d.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/039-baseline-run.md,sessions/039-baseline-run.jsonl
+039,astropy__astropy.b0db0daa.test_containers.6079987d.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/039-ortg-run.md,sessions/039-ortg-run.jsonl
+009,astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/009-baseline-run.md,sessions/009-baseline-run.jsonl
+009,astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/009-ortg-run.md,sessions/009-ortg-run.jsonl
+040,astropy__astropy.b0db0daa.test_functions.40530bf7.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/040-baseline-run.md,sessions/040-baseline-run.jsonl
+040,astropy__astropy.b0db0daa.test_functions.40530bf7.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/040-ortg-run.md,sessions/040-ortg-run.jsonl
+041,astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/041-baseline-run.md,sessions/041-baseline-run.jsonl
+041,astropy__astropy.b0db0daa.test_lombscargle_multiband.78687278.lv1,ortg,task-run,Recorded solver input file,sessions/041-ortg-run.md,sessions/041-ortg-run.jsonl
+042,astropy__astropy.b0db0daa.test_realizations.5b9cf523.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/042-baseline-run.md,sessions/042-baseline-run.jsonl
+042,astropy__astropy.b0db0daa.test_realizations.5b9cf523.lv1,ortg,task-run,Recorded user inputs retained,sessions/042-ortg-run.md,sessions/042-ortg-run.jsonl
+011,fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/011-baseline-run.md,sessions/011-baseline-run.jsonl
+011,fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/011-ortg-run.md,sessions/011-ortg-run.jsonl
+013,mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/013-baseline-run.md,sessions/013-baseline-run.jsonl
+013,mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1,ortg,task-run,Recorded user inputs retained,sessions/013-ortg-run.md,sessions/013-ortg-run.jsonl
+014,mlflow__mlflow.93dab383.test_client.42de781c.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/014-baseline-run.md,sessions/014-baseline-run.jsonl
+014,mlflow__mlflow.93dab383.test_client.42de781c.lv1,ortg,task-run,Recorded solver input file,sessions/014-ortg-run.md,sessions/014-ortg-run.jsonl
+015,mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/015-baseline-run.md,sessions/015-baseline-run.jsonl
+015,mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/015-ortg-run.md,sessions/015-ortg-run.jsonl
+016,mlflow__mlflow.93dab383.test_genai_eval_utils.2d5441f2.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/016-baseline-run.md,sessions/016-baseline-run.jsonl
+016,mlflow__mlflow.93dab383.test_genai_eval_utils.2d5441f2.lv1,ortg,task-run,Recorded user inputs retained,sessions/016-ortg-run.md,sessions/016-ortg-run.jsonl
+049,mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/049-baseline-run.md,sessions/049-baseline-run.jsonl
+049,mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1,ortg,task-run,Recorded user inputs retained,sessions/049-ortg-run.md,sessions/049-ortg-run.jsonl
+050,mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/050-baseline-run.md,sessions/050-baseline-run.jsonl
+050,mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1,ortg,task-run,Recorded user inputs retained,sessions/050-ortg-run.md,sessions/050-ortg-run.jsonl
+018,mlflow__mlflow.93dab383.test_security.98fcde1d.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/018-baseline-run.md,sessions/018-baseline-run.jsonl
+018,mlflow__mlflow.93dab383.test_security.98fcde1d.lv1,ortg,task-run,Recorded user inputs retained,sessions/018-ortg-run.md,sessions/018-ortg-run.jsonl
+020,mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/020-baseline-run.md,sessions/020-baseline-run.jsonl
+020,mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1,ortg,task-run,Recorded user inputs retained,sessions/020-ortg-run.md,sessions/020-ortg-run.jsonl
+003,mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/003-baseline-run.md,sessions/003-baseline-run.jsonl
+003,mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/003-ortg-run.md,sessions/003-ortg-run.jsonl
+004,mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/004-baseline-run.md,sessions/004-baseline-run.jsonl
+004,mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/004-ortg-run.md,sessions/004-ortg-run.jsonl
+005,mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/005-baseline-run.md,sessions/005-baseline-run.jsonl
+005,mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/005-ortg-run.md,sessions/005-ortg-run.jsonl
+021,pandas-dev__pandas.82fa2715.test_col.a592871d.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/021-baseline-run.md,sessions/021-baseline-run.jsonl
+021,pandas-dev__pandas.82fa2715.test_col.a592871d.lv1,ortg,task-run,Recorded solver input file,sessions/021-ortg-run.md,sessions/021-ortg-run.jsonl
+057,pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/057-baseline-run.md,sessions/057-baseline-run.jsonl
+057,pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1,ortg,task-run,Recorded solver input file,sessions/057-ortg-run.md,sessions/057-ortg-run.jsonl
+061,pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/061-baseline-run.md,sessions/061-baseline-run.jsonl
+061,pandas-dev__pandas.82fa2715.test_merge_antijoin.921feefe.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/061-ortg-run.md,sessions/061-ortg-run.jsonl
+022,pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/022-baseline-run.md,sessions/022-baseline-run.jsonl
+022,pandas-dev__pandas.82fa2715.test_struct_accessor.3b465152.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/022-ortg-run.md,sessions/022-ortg-run.jsonl
+xarray,pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/xarray-baseline-run.md,sessions/xarray-baseline-run.jsonl
+xarray,pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1,ortg,task-run,Recorded user inputs retained,sessions/xarray-ortg-run.md,sessions/xarray-ortg-run.jsonl
+069,pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/069-baseline-run.md,sessions/069-baseline-run.jsonl
+069,pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/069-ortg-run.md,sessions/069-ortg-run.jsonl
+025,scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/025-baseline-run.md,sessions/025-baseline-run.jsonl
+025,scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1,ortg,task-run,Recorded user inputs retained,sessions/025-ortg-run.md,sessions/025-ortg-run.jsonl
+027,sphinx-doc__sphinx.e347e59c.test_build_gettext.2721e644.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/027-baseline-run.md,sessions/027-baseline-run.jsonl
+027,sphinx-doc__sphinx.e347e59c.test_build_gettext.2721e644.lv1,ortg,task-run,Recorded user inputs retained,sessions/027-ortg-run.md,sessions/027-ortg-run.jsonl
+028,sphinx-doc__sphinx.e347e59c.test_build_linkcheck.20428c8f.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/028-baseline-run.md,sessions/028-baseline-run.jsonl
+028,sphinx-doc__sphinx.e347e59c.test_build_linkcheck.20428c8f.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/028-ortg-run.md,sessions/028-ortg-run.jsonl
+029,sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/029-baseline-run.md,sessions/029-baseline-run.jsonl
+029,sphinx-doc__sphinx.e347e59c.test_command_line.039d53a2.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/029-ortg-run.md,sessions/029-ortg-run.jsonl
+030,sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/030-baseline-run.md,sessions/030-baseline-run.jsonl
+030,sphinx-doc__sphinx.e347e59c.test_ext_doctest.530dec5f.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/030-ortg-run.md,sessions/030-ortg-run.jsonl
+071,sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/071-baseline-run.md,sessions/071-baseline-run.jsonl
+071,sphinx-doc__sphinx.e347e59c.test_ext_math.96576214.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/071-ortg-run.md,sessions/071-ortg-run.jsonl
+072,sphinx-doc__sphinx.e347e59c.test_ext_napoleon_docstring.50dabe1f.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/072-baseline-run.md,sessions/072-baseline-run.jsonl
+072,sphinx-doc__sphinx.e347e59c.test_ext_napoleon_docstring.50dabe1f.lv1,ortg,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/072-ortg-run.md,sessions/072-ortg-run.jsonl
+032,sympy__sympy.c1097516.test_smtlib.69d52b90.lv1,baseline,task-run,事件未记录初始user；本episode内未发现独立正式输入文件,sessions/032-baseline-run.md,sessions/032-baseline-run.jsonl
+032,sympy__sympy.c1097516.test_smtlib.69d52b90.lv1,ortg,task-run,Recorded solver input file,sessions/032-ortg-run.md,sessions/032-ortg-run.jsonl
+008,astropy__astropy.b0db0daa.test_basic_rgb.067e927c.lv1,ortg,additional-record,Recorded user inputs retained,sessions/008-ortg-record-01.md,sessions/008-ortg-record-01.jsonl
+013,mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1,ortg,additional-record,Recorded user inputs retained,sessions/013-ortg-record-01.md,sessions/013-ortg-record-01.jsonl
+049,mlflow__mlflow.93dab383.test_genai_metrics.5f107830.lv1,ortg,additional-record,Recorded user inputs retained,sessions/049-ortg-record-01.md,sessions/049-ortg-record-01.jsonl
+050,mlflow__mlflow.93dab383.test_judge_tool_search_traces.cad8fc4b.lv1,ortg,additional-record,Recorded user inputs retained,sessions/050-ortg-record-01.md,sessions/050-ortg-record-01.jsonl
+xarray,pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1,ortg,additional-record,Recorded user inputs retained,sessions/xarray-ortg-record-01.md,sessions/xarray-ortg-record-01.jsonl
+013,mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1,ortg,additional-record,Recorded user inputs retained,sessions/013-ortg-record-02.md,sessions/013-ortg-record-02.jsonl
+013,mesonbuild__meson.f5d81d07.cargotests.8e49c2d0.lv1,ortg,additional-record,Recorded user inputs retained,sessions/013-ortg-record-03.md,sessions/013-ortg-record-03.jsonl
+039,astropy__astropy.b0db0daa.test_containers.6079987d.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/039-ortg-initialization-01.md,sessions/039-ortg-initialization-01.jsonl
+039,astropy__astropy.b0db0daa.test_containers.6079987d.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/039-ortg-initialization-02.md,sessions/039-ortg-initialization-02.jsonl
+009,astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/009-ortg-initialization-01.md,sessions/009-ortg-initialization-01.jsonl
+009,astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/009-ortg-initialization-02.md,sessions/009-ortg-initialization-02.jsonl
+009,astropy__astropy.b0db0daa.test_converter.2ef0539f.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/009-ortg-initialization-03.md,sessions/009-ortg-initialization-03.jsonl
+040,astropy__astropy.b0db0daa.test_functions.40530bf7.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/040-ortg-initialization-01.md,sessions/040-ortg-initialization-01.jsonl
+040,astropy__astropy.b0db0daa.test_functions.40530bf7.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/040-ortg-initialization-02.md,sessions/040-ortg-initialization-02.jsonl
+040,astropy__astropy.b0db0daa.test_functions.40530bf7.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/040-ortg-initialization-03.md,sessions/040-ortg-initialization-03.jsonl
+040,astropy__astropy.b0db0daa.test_functions.40530bf7.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/040-ortg-initialization-04.md,sessions/040-ortg-initialization-04.jsonl
+011,fastapi__fastapi.02e108d1.test_compat.71e8518f.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/011-ortg-initialization-01.md,sessions/011-ortg-initialization-01.jsonl
+015,mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/015-ortg-initialization-01.md,sessions/015-ortg-initialization-01.jsonl
+015,mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/015-ortg-initialization-02.md,sessions/015-ortg-initialization-02.jsonl
+015,mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/015-ortg-initialization-03.md,sessions/015-ortg-initialization-03.jsonl
+015,mlflow__mlflow.93dab383.test_evaluation_dataset.4a6528c2.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/015-ortg-initialization-04.md,sessions/015-ortg-initialization-04.jsonl
+003,mwaskom__seaborn.7001ebe7.test_distributions.f700676d.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/003-ortg-initialization-01.md,sessions/003-ortg-initialization-01.jsonl
+004,mwaskom__seaborn.7001ebe7.test_plot.b645d353.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/004-ortg-initialization-01.md,sessions/004-ortg-initialization-01.jsonl
+005,mwaskom__seaborn.7001ebe7.test_relational.f23eb542.lv1,ortg,initialization,Initial prompt is absent from the event stream; any separately recorded input is identified independently,sessions/005-ortg-initialization-01.md,sessions/005-ortg-initialization-01.jsonl

@@ -1,0 +1,29 @@
+{
+  "model": "GPT-5.6 Sol",
+  "reasoning_effort": "high",
+  "ortg_version": "0.5.61",
+  "initialization": {
+    "coverage": {
+      "ready": true,
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "related_file_count": 9,
+      "related_valid_outline_count": 9,
+      "original_cognitive_files": 2504,
+      "genuine_rows_reused_before_new_source": 0,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true,
+      "active_genuine_rows_before_new_source": 0
+    }
+  },
+  "model_exit_code": null,
+  "network": {
+    "protocol_group": "offline",
+    "configured_search": "disabled",
+    "actual_external_information_obtained": null,
+    "observed_activity": null
+  },
+  "run_conditions": "../../run-conditions.json#/cases/pandas-dev__pandas.82fa2715.test_formats.05080a4e.lv1"
+}

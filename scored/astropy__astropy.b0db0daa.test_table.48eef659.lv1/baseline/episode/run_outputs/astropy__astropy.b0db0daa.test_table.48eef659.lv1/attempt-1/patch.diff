@@ -1,0 +1,536 @@
+diff --git a/astropy/io/votable/converters.py b/astropy/io/votable/converters.py
+index 522e98c..b6e2327 100644
+--- a/astropy/io/votable/converters.py
++++ b/astropy/io/votable/converters.py
+@@ -57,6 +57,11 @@ _empty_bytes = b""
+ _zero_byte = b"\0"
+ 
+ 
++def _make_masked_array(data, mask):
++    """Create a masked array while preserving nested/object values."""
++    return ma.array(data, mask=mask)
++
++
+ if sys.byteorder == "little":
+ 
+     def _ensure_bigendian(x):
+@@ -174,7 +179,17 @@ class Converter:
+     """
+ 
+     def __init__(self, field, config=None, pos=None):
+-        pass
++        self._field = field
++        self._config = {} if config is None else config
++        self._pos = pos
++
++    @staticmethod
++    def _parse_length(read):
++        return struct.unpack(">I", read(4))[0]
++
++    @staticmethod
++    def _write_length(length):
++        return struct.pack(">I", length)
+ 
+ 
+ 
+@@ -472,6 +487,35 @@ class UnicodeChar(Converter):
+         return xml_escape_cdata(str(value))
+ 
+ 
++    def _binoutput_var(self, value, mask):
++        if mask or value is None or value == "":
++            return _zero_int
++
++        encoded = str(value).encode("utf-16-be")
++        length = len(encoded) // 2
++        if self.arraysize != "*" and length > self.arraysize:
++            vo_warn(W46, ("unicodeChar", self.arraysize), None, None)
++        return struct.pack(">I", length) + encoded
++
++    def _binparse_var(self, read):
++        length = struct.unpack(">I", read(4))[0]
++        if self.arraysize != "*" and length > self.arraysize:
++            vo_warn(W46, ("unicodeChar", self.arraysize), None, None)
++        return read(length * 2).decode("utf-16-be"), False
++
++    def _binparse_fixed(self, read):
++        value = struct.unpack(self._struct_format, read(self.arraysize * 2))[0]
++        return value.decode("utf-16-be").rstrip("\0"), False
++
++    def _binoutput_fixed(self, value, mask):
++        value = (
++            _empty_bytes
++            if mask or value is None
++            else str(value).encode("utf-16-be")
++        )
++        return struct.pack(self._struct_format, value)
++
++
+ 
+ 
+ 
+@@ -719,6 +763,9 @@ class Numeric(Converter):
+         result = np.frombuffer(read(self._memsize), dtype=self._bigendian_format)
+         return result[0], self.is_null(result[0])
+ 
++    def _is_null(self, value):
++        return value == self.null
++
+ 
+ 
+ 
+@@ -1525,4 +1572,4 @@ def table_column_to_votable_datatype(column):
+     if original_arraysize is not None:
+         result["arraysize"] = original_arraysize
+ 
+-    return result
+\ No newline at end of file
++    return result
+diff --git a/astropy/io/votable/tree.py b/astropy/io/votable/tree.py
+index ef3d127..d58a50b 100644
+--- a/astropy/io/votable/tree.py
++++ b/astropy/io/votable/tree.py
+@@ -121,6 +121,10 @@ __all__ = [
+ DEFAULT_CHUNK_SIZE = 256
+ RESIZE_AMOUNT = 1.5
+ 
++
++def yes_no(value):
++    return "yes" if value else "no"
++
+ ######################################################################
+ # FACTORY FUNCTIONS
+ 
+@@ -2391,6 +2395,21 @@ class Group(
+         self._ref = None
+ 
+ 
++    @property
++    def entries(self):
++        return self._entries
++
++    def _add_fieldref(self, iterator, tag, data, config, pos):
++        fieldref = FieldRef(self._table, config=config, pos=pos, **data)
++        self.entries.append(fieldref)
++        fieldref.parse(iterator, config)
++
++    def _add_paramref(self, iterator, tag, data, config, pos):
++        paramref = ParamRef(self._table, config=config, pos=pos, **data)
++        self.entries.append(paramref)
++        paramref.parse(iterator, config)
++
++
+ 
+ 
+ 
+@@ -2704,6 +2723,29 @@ class TableElement(
+         return self._infos
+ 
+ 
++    def to_table(self, use_names_over_ids=False):
++        """Convert this VOTable table to an `astropy.table.Table`."""
++        from astropy.table import Table
++
++        meta = {}
++        for key in ("ID", "name", "ref", "ucd", "utype"):
++            value = getattr(self, key, None)
++            if value is not None:
++                meta[key] = value
++        if self.description is not None:
++            meta["description"] = self.description
++
++        if use_names_over_ids:
++            names = [field._unique_name for field in self.fields]
++        else:
++            names = [field.ID for field in self.fields]
++
++        table = Table(self.array, names=names, meta=meta)
++        for field, column in zip(self.fields, table.itercols()):
++            field.to_table_column(column)
++        return table
++
++
+ 
+ 
+ 
+@@ -3100,6 +3142,69 @@ class TableElement(
+         return array
+ 
+ 
++    def _parse_binary(self, mode, iterator, colnumbers, config, pos):
++        """Parse an inline BINARY or BINARY2 stream."""
++        stream_attrs = {}
++        stream_data = ""
++        for start, tag, data, _ in iterator:
++            if tag == "STREAM":
++                if start:
++                    stream_attrs = data
++                else:
++                    stream_data = data or ""
++            elif not start and tag in ("BINARY", "BINARY2"):
++                break
++
++        href = stream_attrs.get("href")
++        if href:
++            with urllib.request.urlopen(href) as fd:
++                payload = fd.read()
++        else:
++            payload = stream_data.encode("ascii")
++
++        encoding = stream_attrs.get("encoding")
++        if encoding == "base64":
++            payload = base64.b64decode(payload)
++        elif encoding == "gzip":
++            payload = gzip.decompress(payload)
++        elif encoding not in (None, "none"):
++            vo_raise(
++                NotImplementedError,
++                f"Unknown encoding type '{encoding}'",
++                config,
++                pos,
++            )
++
++        source = io.BytesIO(payload)
++        read = source.read
++        fields = self.all_fields
++        selected = set(colnumbers)
++        rows = []
++        row_masks = []
++        flag_bytes = (len(fields) + 7) // 8
++
++        while source.tell() < len(payload):
++            null_flags = read(flag_bytes) if mode == 2 else b""
++            values = []
++            masks = []
++            for index, field in enumerate(fields):
++                value, mask = field.converter.binparse(read)
++                if mode == 2 and null_flags[index // 8] & (1 << (7 - index % 8)):
++                    mask = True
++                if index in selected:
++                    values.append(value)
++                    masks.append(mask)
++            rows.append(tuple(values))
++            row_masks.append(tuple(masks))
++
++        array = _resize(self.array, len(rows))
++        if rows:
++            array[:] = rows
++            array.mask[:] = row_masks
++        self._nrows = len(rows)
++        return array
++
++
+ 
+ 
+ 
+@@ -3450,6 +3555,33 @@ class TableElement(
+                     write(tr_end)
+ 
+ 
++    def _write_binary(self, mode, w, **kwargs):
++        """Write table data using BINARY or BINARY2 serialization."""
++        fields = self.fields
++        flag_bytes = (len(fields) + 7) // 8
++        chunks = []
++
++        for row_index in range(len(self.array)):
++            data_row = self.array.data[row_index]
++            mask_row = self.array.mask[row_index]
++            if mode == 2:
++                flags = bytearray(flag_bytes)
++                for index in range(len(fields)):
++                    if np.all(mask_row[index]):
++                        flags[index // 8] |= 1 << (7 - index % 8)
++                chunks.append(bytes(flags))
++
++            for index, field in enumerate(fields):
++                chunks.append(
++                    field.converter.binoutput(data_row[index], mask_row[index])
++                )
++
++        encoded = base64.b64encode(b"".join(chunks)).decode("ascii")
++        tag = "BINARY2" if mode == 2 else "BINARY"
++        with w.tag(tag):
++            w.element("STREAM", encoded, encoding="base64")
++
++
+ 
+ 
+ 
+@@ -4496,6 +4628,14 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+             yield from resource.iter_tables()
+ 
+ 
++    def get_first_table(self):
++        """Return the first table that was not skipped during parsing."""
++        for table in self.iter_tables():
++            if not table._empty:
++                return table
++        raise IndexError("No table found in VOTABLE file.")
++
++
+ 
+ 
+ 
+@@ -4574,6 +4714,12 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+         """,
+     )
+ 
++    def iter_values(self):
++        """Iterate over VALUES elements attached to fields and parameters."""
++        for field in self.iter_fields_and_params():
++            if field.values is not None:
++                yield field.values
++
+ 
+ 
+ 
+@@ -4703,4 +4849,4 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+             votable.ID = table_id
+         resource.tables.append(votable)
+         votable_file.resources.append(resource)
+-        return votable_file
+\ No newline at end of file
++        return votable_file
+diff --git a/astropy/table/row.py b/astropy/table/row.py
+index 9151b37..3cca366 100644
+--- a/astropy/table/row.py
++++ b/astropy/table/row.py
+@@ -46,6 +46,14 @@ class Row:
+ 
+ 
+ 
++    def __init__(self, table, index):
++        self._table = table
++        self._index = operator_index(index)
++        if self._index < -len(table) or self._index >= len(table):
++            raise IndexError("Row index out of range")
++        if self._index < 0:
++            self._index += len(table)
++
+     def __getitem__(self, item):
+         try:
+             # Try the most common use case of accessing a single column in the Row.
+@@ -223,4 +231,4 @@ class Row:
+         return str(self).encode("utf-8")
+ 
+ 
+-collections.abc.Sequence.register(Row)
+\ No newline at end of file
++collections.abc.Sequence.register(Row)
+diff --git a/astropy/table/table.py b/astropy/table/table.py
+index bc64f39..3682b47 100644
+--- a/astropy/table/table.py
++++ b/astropy/table/table.py
+@@ -1439,6 +1439,21 @@ class Table:
+         return col
+ 
+ 
++    def _init_from_ndarray(self, data, names, dtype, n_cols, copy):
++        """Initialize the table from a structured or homogeneous ndarray."""
++        if data.dtype.names is not None:
++            default_names = data.dtype.names
++            cols = [data[field_name] for field_name in default_names]
++        else:
++            default_names = _auto_names(n_cols)
++            cols = [data[:, idx] for idx in range(n_cols)]
++
++        names = [
++            name or default_name for name, default_name in zip(names, default_names)
++        ]
++        self._init_from_list(cols, names, dtype, n_cols, copy)
++
++
+ 
+ 
+ 
+@@ -2338,6 +2353,54 @@ class Table:
+             raise ValueError(f"Column {name} does not exist")
+ 
+ 
++    def add_column(
++        self,
++        col,
++        index=None,
++        name=None,
++        rename_duplicate=False,
++        copy=True,
++        default_name=None,
++    ):
++        """Add a column, optionally inserting it at a specified position."""
++        if default_name is None:
++            default_name = f"col{len(self.columns)}"
++
++        col = self._convert_data_to_col(
++            col, copy=copy, default_name=default_name, name=name
++        )
++
++        # Scalar and length-one columns broadcast to the table length.  For an
++        # empty table a scalar therefore becomes an empty column, while a
++        # genuinely non-scalar column establishes the table length.
++        if col.shape == ():
++            col = col.reshape((1,))
++            col = col[np.zeros(len(self), dtype=int)]
++        elif len(self.columns) and len(col) == 1 and len(self) != 1:
++            col = col[np.zeros(len(self), dtype=int)]
++
++        if len(self.columns) and len(col) != len(self):
++            raise ValueError("Inconsistent data column lengths")
++
++        col_name = col.info.name
++        if col_name in self.columns:
++            if not rename_duplicate:
++                raise ValueError(f"Column {col_name} already exists")
++            base_name = col_name
++            suffix = 1
++            while f"{base_name}_{suffix}" in self.columns:
++                suffix += 1
++            col.info.name = f"{base_name}_{suffix}"
++
++        self._set_col_parent_table_and_mask(col)
++
++        if index is None:
++            index = len(self.columns)
++        cols = list(self.columns.values())
++        cols.insert(index, col)
++        self.columns = self.TableColumns(cols)
++
++
+ 
+ 
+ 
+@@ -4424,4 +4487,4 @@ class QTable(Table):
+ 
+         return super()._convert_data_to_col(
+             data, copy=copy, default_name=default_name, dtype=dtype, name=name
+-        )
+\ No newline at end of file
++        )
+diff --git a/astropy/units/quantity_helper/function_helpers.py b/astropy/units/quantity_helper/function_helpers.py
+index 8367757..52d4d6b 100644
+--- a/astropy/units/quantity_helper/function_helpers.py
++++ b/astropy/units/quantity_helper/function_helpers.py
+@@ -432,6 +432,60 @@ def _as_quantities(*args):
+         raise NotImplementedError
+ 
+ 
++def _as_quantity(a):
++    """Convert a single argument to a Quantity."""
++    return _as_quantities(a)[0]
++
++
++def _quantities2arrays(*args, unit_from_first=False):
++    """Convert compatible quantity-like arguments to plain arrays."""
++    from astropy.units import Quantity
++
++    quantities = _as_quantities(*args)
++    if not quantities:
++        return (), dimensionless_unscaled
++
++    if unit_from_first:
++        reference = quantities[0]
++    else:
++        # Plain arrays are interpreted as dimensionless, but should not force
++        # the result to be dimensionless if a later argument supplies a unit.
++        first_has_unit = isinstance(args[0], Quantity) or getattr(
++            args[0], "unit", None
++        ) is not None
++        reference = (
++            quantities[0]
++            if first_has_unit
++            else next(
++                (
++                    q
++                    for q in quantities[1:]
++                    if not q.unit.is_equivalent(dimensionless_unscaled)
++                ),
++                quantities[0],
++            )
++        )
++
++    # Use the original arguments here.  ``_to_own_unit`` deliberately accepts
++    # bare zero/inf/nan values for any unit, while wrapping them in a
++    # dimensionless Quantity first would lose that behavior.
++    arrays = tuple(
++        q.to_value(reference.unit)
++        if isinstance(arg, Quantity) or getattr(arg, "unit", None) is not None
++        else reference._to_own_unit(arg)
++        for arg, q in zip(args, quantities)
++    )
++    return arrays, reference.unit
++
++
++def _iterable_helper(*args, out=None, **kwargs):
++    """Convert arguments to compatible arrays and handle a Quantity output."""
++    arrays, unit = _quantities2arrays(*args)
++    if out is not None:
++        kwargs["out"] = _quantity_out_as_array(out)
++    return arrays, kwargs, unit, out
++
++
+ 
+ 
+ 
+@@ -490,7 +544,12 @@ if NUMPY_LT_2_4:
+         )
+         return (arrays,), kwargs, unit, out
+ else:
+-    pass
++    @function_helper
++    def concatenate(arrays, /, axis=0, out=None, **kwargs):
++        arrays, kwargs, unit, out = _iterable_helper(
++            *arrays, out=out, axis=axis, **kwargs
++        )
++        return (arrays,), kwargs, unit, out
+ 
+ 
+ 
+@@ -1641,4 +1700,4 @@ def merge_arrays(
+         ),
+         unit,
+         None,
+-    )
+\ No newline at end of file
++    )
+diff --git a/astropy/utils/xml/check.py b/astropy/utils/xml/check.py
+index 4c38a5d..2f80659 100644
+--- a/astropy/utils/xml/check.py
++++ b/astropy/utils/xml/check.py
+@@ -62,3 +62,13 @@ def check_mime_content_type(content_type):
+     )
+ 
+ 
++def check_anyuri(uri):
++    """Return whether *uri* is syntactically usable as an RFC-style URI."""
++    if not isinstance(uri, str) or any(char.isspace() for char in uri):
++        return False
++    try:
++        urllib.parse.urlsplit(uri)
++    except ValueError:
++        return False
++    return True
++
+diff --git a/astropy/utils/xml/writer.py b/astropy/utils/xml/writer.py
+index 34f11db..14bf2b9 100644
+--- a/astropy/utils/xml/writer.py
++++ b/astropy/utils/xml/writer.py
+@@ -214,6 +214,12 @@ class XMLWriter:
+         self.write(self.get_indentation_spaces())
+         self.write(f"<!-- {self.xml_escape_cdata(comment)} -->\n")
+ 
++    def data(self, text):
++        """Add character data to the currently open element."""
++        if not self._tags:
++            raise ValueError("no open element for data")
++        self._data.append(str(text))
++
+ 
+ 
+ 
+@@ -330,4 +336,4 @@ class XMLWriter:
+         for attr in attrs:
+             if getattr(obj, attr) is not None:
+                 d[attr.replace("_", "-")] = str(getattr(obj, attr))
+-        return d
+\ No newline at end of file
++        return d

@@ -1,0 +1,120 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/modeling/tests/test_core.py.
+
+Date: 2026-10-10T23:24:28
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 69 items
+
+astropy/modeling/tests/test_core.py ...................s...............s [ 52%]
+.................................                                        [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/modeling/tests/test_core.py::test_Model_instance_repr_and_str
+PASSED astropy/modeling/tests/test_core.py::test_Model_array_parameter
+PASSED astropy/modeling/tests/test_core.py::test_inputless_model
+PASSED astropy/modeling/tests/test_core.py::test_ParametericModel
+PASSED astropy/modeling/tests/test_core.py::test_custom_model_signature
+PASSED astropy/modeling/tests/test_core.py::test_custom_model_subclass
+PASSED astropy/modeling/tests/test_core.py::test_custom_model_parametrized_decorator
+PASSED astropy/modeling/tests/test_core.py::test_custom_model_n_outputs
+PASSED astropy/modeling/tests/test_core.py::test_custom_model_settable_parameters
+PASSED astropy/modeling/tests/test_core.py::test_custom_model_regected_parameters
+PASSED astropy/modeling/tests/test_core.py::test_custom_inverse
+PASSED astropy/modeling/tests/test_core.py::test_custom_inverse_reset
+PASSED astropy/modeling/tests/test_core.py::test_render_model_2d
+PASSED astropy/modeling/tests/test_core.py::test_render_model_1d
+PASSED astropy/modeling/tests/test_core.py::test_render_model_3d
+PASSED astropy/modeling/tests/test_core.py::test_render_model_out_dtype
+PASSED astropy/modeling/tests/test_core.py::test_custom_bounding_box_1d
+PASSED astropy/modeling/tests/test_core.py::test_n_submodels_in_single_models
+PASSED astropy/modeling/tests/test_core.py::test_compound_deepcopy
+PASSED astropy/modeling/tests/test_core.py::test_rename_path
+PASSED astropy/modeling/tests/test_core.py::test_rename_1d[Gaussian1D]
+PASSED astropy/modeling/tests/test_core.py::test_rename_1d[Polynomial1D]
+PASSED astropy/modeling/tests/test_core.py::test_rename_1d[Shift]
+PASSED astropy/modeling/tests/test_core.py::test_rename_1d[Tabular1D]
+PASSED astropy/modeling/tests/test_core.py::test_rename_2d[Gaussian2D]
+PASSED astropy/modeling/tests/test_core.py::test_rename_2d[Polynomial2D]
+PASSED astropy/modeling/tests/test_core.py::test_rename_2d[Tabular2D]
+PASSED astropy/modeling/tests/test_core.py::test_fix_inputs_integer
+PASSED astropy/modeling/tests/test_core.py::test_fix_inputs_empty_dict
+PASSED astropy/modeling/tests/test_core.py::test_rename_inputs_outputs
+PASSED astropy/modeling/tests/test_core.py::test__prepare_output_single_model
+PASSED astropy/modeling/tests/test_core.py::test_prepare_outputs_mixed_broadcast
+PASSED astropy/modeling/tests/test_core.py::test_prepare_outputs_complex_reshape
+PASSED astropy/modeling/tests/test_core.py::test_prepare_outputs_single_entry_vector
+PASSED astropy/modeling/tests/test_core.py::test_coerce_units
+PASSED astropy/modeling/tests/test_core.py::test_bounding_box_general_inverse
+PASSED astropy/modeling/tests/test_core.py::test__add_special_operator
+PASSED astropy/modeling/tests/test_core.py::test_print_special_operator_CompoundModel
+PASSED astropy/modeling/tests/test_core.py::test__validate_input_shape
+PASSED astropy/modeling/tests/test_core.py::test__validate_input_shapes
+PASSED astropy/modeling/tests/test_core.py::test__remove_axes_from_shape
+PASSED astropy/modeling/tests/test_core.py::test_get_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_compound_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_bind_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_bind_compound_bounding_box_using_with_bounding_box_select
+PASSED astropy/modeling/tests/test_core.py::test_fix_inputs_compound_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_model_copy_with_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_compound_model_copy_with_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_model_copy_with_compound_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_compound_model_copy_with_compound_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_compound_model_copy_user_attribute
+PASSED astropy/modeling/tests/test_core.py::test_model_mixed_array_scalar_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_compound_model_mixed_array_scalar_bounding_box
+PASSED astropy/modeling/tests/test_core.py::test_model_with_bounding_box_true_and_single_output
+PASSED astropy/modeling/tests/test_core.py::test_compound_model_with_bounding_box_true_and_single_output
+PASSED astropy/modeling/tests/test_core.py::test_bounding_box_pass_with_ignored
+PASSED astropy/modeling/tests/test_core.py::test_compound_bounding_box_pass_with_ignored
+PASSED astropy/modeling/tests/test_core.py::test_model_integer_indexing[int]
+PASSED astropy/modeling/tests/test_core.py::test_model_integer_indexing[int32]
+PASSED astropy/modeling/tests/test_core.py::test_model_integer_indexing[int64]
+PASSED astropy/modeling/tests/test_core.py::test_model_integer_indexing[uint32]
+PASSED astropy/modeling/tests/test_core.py::test_model_integer_indexing[uint64]
+PASSED astropy/modeling/tests/test_core.py::test_model_string_indexing
+PASSED astropy/modeling/tests/test_core.py::test_has_constraints
+PASSED astropy/modeling/tests/test_core.py::test_has_constraints_with_sync_constraints
+PASSED astropy/modeling/tests/test_core.py::test_reset_parameters_simple
+PASSED astropy/modeling/tests/test_core.py::test_reset_parameters_compound
+SKIPPED [1] astropy/modeling/tests/test_core.py:574: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_core.py:798: requires scipy
+======================== 67 passed, 2 skipped in 0.97s =========================

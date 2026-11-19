@@ -1,0 +1,1579 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "ready": true,
+      "model_elapsed_seconds": 355.956540404979,
+      "elapsed_seconds": 357.6107804170024,
+      "event_summary": {
+        "turn_usages": {
+          "0": {
+            "input_tokens": 762186,
+            "cached_input_tokens": 686848,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 4780,
+            "reasoning_output_tokens": 2429
+          },
+          "1": {
+            "input_tokens": 2834805,
+            "cached_input_tokens": 2631424,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 7732,
+            "reasoning_output_tokens": 3678
+          }
+        },
+        "usage_total": {
+          "input_tokens": 3596991,
+          "cached_input_tokens": 3318272,
+          "output_tokens": 12512
+        }
+      },
+      "coverage_complete": false,
+      "source_identity_preserved": true,
+      "roles_preserved": true,
+      "source_episode_ledger": {
+        "0": {
+          "recorded_model_seconds": 12732.933074722001,
+          "recorded_usage_total": {
+            "input_tokens": 165331287,
+            "cached_input_tokens": 157469440,
+            "output_tokens": 494657
+          },
+          "segments": {
+            "0": {
+              "number": 1,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 203.55617920000077
+            },
+            "1": {
+              "number": 2,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 263.0199328419985
+            },
+            "2": {
+              "number": 3,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 160.34995216600146
+            },
+            "3": {
+              "number": 4,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 111.81842155499908
+            },
+            "4": {
+              "number": 5,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 173.92014710199874
+            },
+            "5": {
+              "number": 6,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 123.56138473700048
+            },
+            "6": {
+              "number": 7,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 174.68932633800068
+            },
+            "7": {
+              "number": 8,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 136.59270935800305
+            },
+            "8": {
+              "number": 9,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 215.6178199370006
+            },
+            "9": {
+              "number": 10,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 216.1426674760005
+            },
+            "10": {
+              "number": 11,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 806.9475156090011
+            },
+            "11": {
+              "number": 12,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 315.4814977290007
+            },
+            "12": {
+              "number": 13,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 471.81524685399927
+            },
+            "13": {
+              "number": 14,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 633.6345620949978
+            },
+            "14": {
+              "number": 15,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 318.8541575099989
+            },
+            "15": {
+              "number": 16,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 594.880265101001
+            },
+            "16": {
+              "number": 17,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 548.4465578769996
+            },
+            "17": {
+              "number": 18,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 278.7400405970002
+            },
+            "18": {
+              "number": 19,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 377.26014230500004
+            },
+            "19": {
+              "number": 20,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 318.96711879899885
+            },
+            "20": {
+              "number": 21,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 337.12219816799916
+            },
+            "21": {
+              "number": 22,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 866.5640416349997
+            },
+            "22": {
+              "number": 23,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 536.753704986997
+            },
+            "23": {
+              "number": 24,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 151.75665953299904
+            },
+            "24": {
+              "number": 25,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 234.79404602200157
+            },
+            "25": {
+              "number": 26,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 594.9552135420017
+            },
+            "26": {
+              "number": 27,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 290.1538631559997
+            },
+            "27": {
+              "number": 28,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 186.65096100499795
+            },
+            "28": {
+              "number": 29,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 1107.5914446919996
+            },
+            "29": {
+              "number": 30,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 318.33259905399973
+            },
+            "30": {
+              "number": 31,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 376.9333280440005
+            },
+            "31": {
+              "number": 32,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 344.4001860720018
+            },
+            "32": {
+              "number": 33,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 942.629183625002
+            }
+          }
+        },
+        "1": {
+          "recorded_model_seconds": 2298.612135024,
+          "recorded_usage_total": {
+            "input_tokens": 27778660,
+            "cached_input_tokens": 26333056,
+            "output_tokens": 111478
+          },
+          "segments": {
+            "0": {
+              "number": 1001,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 361.02623928800017
+            },
+            "1": {
+              "number": 1002,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 323.74012664300017
+            },
+            "2": {
+              "number": 1003,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 243.71935692499983
+            },
+            "3": {
+              "number": 1004,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 651.8180042640001
+            },
+            "4": {
+              "number": 1005,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 386.2751370039996
+            },
+            "5": {
+              "number": 1006,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 332.03327089999993
+            }
+          }
+        },
+        "2": {
+          "recorded_model_seconds": 110.6175098800004,
+          "recorded_usage_total": {
+            "input_tokens": 2427959,
+            "cached_input_tokens": 2223744,
+            "output_tokens": 4500
+          },
+          "segments": {
+            "0": {
+              "number": 1,
+              "model_exit_code": 0,
+              "model_elapsed_seconds": 110.6175098800004
+            }
+          }
+        },
+        "3": {
+          "source_segments": 2,
+          "recorded_model_seconds": 355.956540404979,
+          "recorded_elapsed_seconds": 357.6107804170024,
+          "segments": {
+            "0": {
+              "number": 1,
+              "recorded_model_seconds": 133.11882642398996,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 762186,
+                    "cached_input_tokens": 686848,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 4780,
+                    "reasoning_output_tokens": 2429
+                  }
+                }
+              },
+              "actual_cost_usd": null
+            },
+            "1": {
+              "number": 2,
+              "recorded_model_seconds": 222.83771398098907,
+              "event_completed": true,
+              "recorded_event_summary": {
+                "completed": true,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 2834805,
+                    "cached_input_tokens": 2631424,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 7732,
+                    "reasoning_output_tokens": 3678
+                  }
+                }
+              },
+              "actual_cost_usd": null
+            }
+          },
+          "recorded_event_summary": {
+            "turn_usages": {
+              "0": {
+                "input_tokens": 762186,
+                "cached_input_tokens": 686848,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 4780,
+                "reasoning_output_tokens": 2429
+              },
+              "1": {
+                "input_tokens": 2834805,
+                "cached_input_tokens": 2631424,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 7732,
+                "reasoning_output_tokens": 3678
+              }
+            },
+            "usage_total": {
+              "input_tokens": 3596991,
+              "cached_input_tokens": 3318272,
+              "output_tokens": 12512
+            }
+          },
+          "actual_cost_usd": null
+        }
+      },
+      "source_event_sha256_unique_count": 42,
+      "source_event_sha256_unique_model_seconds": {
+        "ec07bf919800bbf202a54569d00e8e8b61e7ff016339668a2bd9704108d66a0a": 203.55617920000077,
+        "45db080f1d9b38f8bb683a588e3631e19f0657bfd12b24ad1d33e9f761f81ba7": 263.0199328419985,
+        "a113fc0e792df8cfb92a44f806367444c1a4a94874fafd1c6d824ef93ba979f6": 160.34995216600146,
+        "2ace459728f14a7976a1490999e517ff73e42faa467207f3e1fdd76dab404c77": 111.81842155499908,
+        "4f44dadd2c1fee7a92589e310a15f83f67631bcd26d90507c70e72eb93c8a255": 173.92014710199874,
+        "3b549e46d827010b73311d4184affe667fbdf334fcfffc16f89a973b89da9de3": 123.56138473700048,
+        "0dea8277849b7bf4ef10d1c176bafca679b226fe07f5232b4e14e361020ad909": 174.68932633800068,
+        "0a9b0c891cc9171de8ff991f71602932c437faaaf612985da8e04db6863cd29b": 136.59270935800305,
+        "ad387411d0b2e2cc9dc1ecbd5cc5abd8f4195901be4f697efcb2e572aeacd353": 215.6178199370006,
+        "aa6c95121ff4dafb088faef209f9cd5e2c3e8d0d447a2a25dd63854622f482ae": 216.1426674760005,
+        "ab2f032d01f825b7d5725884727c53ee2b10a3bb9aa6b64c7c9f43fdc21ef8c8": 806.9475156090011,
+        "8ff276ce8e072675b5cbe0794ec9bf2697461dbd0719123f8ea9141c9e51d6b9": 315.4814977290007,
+        "5a7f5e593b4dbf428fb907f63f4ddd0851feca5febb1a7552b1818a0988d01b8": 471.81524685399927,
+        "ada6f6b23a10cf2a3cedb7df4122ff93a441d4cd56af5f9872f44ee18ff66229": 633.6345620949978,
+        "8b8de914aa9def68eebdf9da886065e77d0391d99b6e773d9ecbd550e8c30e75": 318.8541575099989,
+        "97859dd29de1a75e7b5cd8ceead78a82b91938af17fba2edb8434ccb348e1df4": 594.880265101001,
+        "e015386ce49903093fdfb315e5ef313325719315bacee2c95d2672651cb2d07e": 548.4465578769996,
+        "82261b479e0bc28ffca3c5b7a4970c1caccf760023b4074789d6e8901a446b36": 278.7400405970002,
+        "c416834e9500c81f021729310927bdc62353114cdd4c138bf3e34bfa86dd638e": 377.26014230500004,
+        "5d45596dd679cbe241ef2b71289ea09074565ae36a9b68e16be8aa7699f262e4": 318.96711879899885,
+        "3206a00e2e5764bd49009d77513080ec2bf6ba6c84609d17d7211e6aab0c49b2": 337.12219816799916,
+        "5551d1e82b2588c8c1aac9492a299927c34869b616d19ae55b7f923cd8899014": 866.5640416349997,
+        "dc0203a366e1aa2c2b4e4003e8f118901a9752c1b032f836bf3d91657c73de18": 536.753704986997,
+        "9cac991a2781ec75d605fddad75848b12da4176f1a3de47c8acb0bb6b2ea3c81": 151.75665953299904,
+        "6ecabdc418418cf943aa30ab9732cb8b1b90f6da25e224c6eb740b93a357be99": 234.79404602200157,
+        "23e7e5ec3863d858f7fd021ed981d9df4762231d9f3ec9cec00b773d1dd79bfd": 594.9552135420017,
+        "4ad64edbc20f9db8a2859fc14658b19c1c99d04c6d0ca5674d327ac44f6efef9": 290.1538631559997,
+        "2e9dc19b098d2085ed87e80a6ad88edd7886d0c62fd90bbb16f6664d3e72fce3": 186.65096100499795,
+        "0352cedd97898f74659a60de61e4c8b124fddea8e030417b3ddd364c8d6d8c90": 1107.5914446919996,
+        "9fe5193180fc40e70468f146cf356287f94ef9e1bb1aceaeaad9e610c5edd9f5": 318.33259905399973,
+        "48044fff91fe0c30aea0c6798e682f0e469787d46277b8b76fd7dc07e81d4840": 376.9333280440005,
+        "10144e0520b71a0c28701a868b82bf4ee1ed12a2c6197789679a7d9bfc42c6db": 344.4001860720018,
+        "d3533bb0dd5da75c63ffde2327e0544281fbd2adfe59eabb0e802fedd24d915d": 942.629183625002,
+        "b40427e7c34f06a20b2cbb529ffeabca475a3c19927cd7988c718ca1e90f4311": 361.02623928800017,
+        "b74c2e4994814ab94f1e40026c4b7d6a9ca5903e2363ca7746fa9c8dba3c6e50": 323.74012664300017,
+        "1d7cc76eccecb90ab3f24e82849f49c59f19186b5ab9e70e8e817e08743e4995": 243.71935692499983,
+        "31cb67345d0fd5a8b5a4f59d8dbd2a91b1c3b169a4d2c43f74da93652e2f0db5": 651.8180042640001,
+        "cc50e5c7596dea4ea7d489a62895fc8ede74118301579324a55bdf0f54d65450": 386.2751370039996,
+        "acac9ade44da6b01a979baa73f8a71da12662b7fa4132ae8af14a5e4bfc83433": 332.03327089999993,
+        "02e3930ba5eb24c6749d068a4e083d8a13c5837f9af154016a1dbbdcc03bda7d": 110.6175098800004,
+        "97b12e147cd3d56e6eeddeb33bdb7fff01afd5a7b592e66dbb2de5558a3d8a70": 133.11882642398996,
+        "ca912e044f10223791ca7bc33373f31e19d6ea8e33fdf0afd71457f95d369668": 222.83771398098907
+      },
+      "known_source_model_seconds_all_unique": 15498.11926003098,
+      "source_usage_accounting_complete": false,
+      "related_file_count": 4,
+      "related_valid_outline_count": 4,
+      "original_cognitive_files": 2504,
+      "genuine_rows_reused_before_new_source": 0,
+      "subset_ready": true,
+      "full_repository_ready": false,
+      "maintenance_turn_performed": true,
+      "historical_cost_preservation": {
+        "all_prior_source_fields_preserved": {
+          "ready": true,
+          "model_elapsed_seconds": 110.6175098800004,
+          "elapsed_seconds": 111.56823530099973,
+          "event_summary": {
+            "turn_usages": {
+              "0": {
+                "input_tokens": 2427959,
+                "cached_input_tokens": 2223744,
+                "cache_write_input_tokens": 0,
+                "output_tokens": 4500,
+                "reasoning_output_tokens": 2286
+              }
+            },
+            "usage_total": {
+              "input_tokens": 2427959,
+              "cached_input_tokens": 2223744,
+              "output_tokens": 4500
+            }
+          },
+          "coverage_complete": false,
+          "source_identity_preserved": true,
+          "roles_preserved": true,
+          "subset_ready": true,
+          "subset_coverage_complete": true,
+          "full_repository_ready": false,
+          "full_repository_completion_required": false,
+          "original_cognitive_files": 2504,
+          "related_file_count": 3,
+          "related_valid_outline_count": 3,
+          "prior_source_initialization_cost": {
+            "ready": false,
+            "model_elapsed_seconds": 3595.900372798,
+            "elapsed_seconds": 3600.976144782,
+            "model_exit_code": 124,
+            "segment_limit": 4
+          },
+          "source_episode_ledger": {
+            "0": {
+              "recorded_model_seconds": 12732.933074722001,
+              "recorded_usage_total": {
+                "input_tokens": 165331287,
+                "cached_input_tokens": 157469440,
+                "output_tokens": 494657
+              },
+              "segments": {
+                "0": {
+                  "number": 1,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 203.55617920000077
+                },
+                "1": {
+                  "number": 2,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 263.0199328419985
+                },
+                "2": {
+                  "number": 3,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 160.34995216600146
+                },
+                "3": {
+                  "number": 4,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 111.81842155499908
+                },
+                "4": {
+                  "number": 5,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 173.92014710199874
+                },
+                "5": {
+                  "number": 6,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 123.56138473700048
+                },
+                "6": {
+                  "number": 7,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 174.68932633800068
+                },
+                "7": {
+                  "number": 8,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 136.59270935800305
+                },
+                "8": {
+                  "number": 9,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 215.6178199370006
+                },
+                "9": {
+                  "number": 10,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 216.1426674760005
+                },
+                "10": {
+                  "number": 11,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 806.9475156090011
+                },
+                "11": {
+                  "number": 12,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 315.4814977290007
+                },
+                "12": {
+                  "number": 13,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 471.81524685399927
+                },
+                "13": {
+                  "number": 14,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 633.6345620949978
+                },
+                "14": {
+                  "number": 15,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 318.8541575099989
+                },
+                "15": {
+                  "number": 16,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 594.880265101001
+                },
+                "16": {
+                  "number": 17,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 548.4465578769996
+                },
+                "17": {
+                  "number": 18,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 278.7400405970002
+                },
+                "18": {
+                  "number": 19,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 377.26014230500004
+                },
+                "19": {
+                  "number": 20,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 318.96711879899885
+                },
+                "20": {
+                  "number": 21,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 337.12219816799916
+                },
+                "21": {
+                  "number": 22,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 866.5640416349997
+                },
+                "22": {
+                  "number": 23,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 536.753704986997
+                },
+                "23": {
+                  "number": 24,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 151.75665953299904
+                },
+                "24": {
+                  "number": 25,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 234.79404602200157
+                },
+                "25": {
+                  "number": 26,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 594.9552135420017
+                },
+                "26": {
+                  "number": 27,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 290.1538631559997
+                },
+                "27": {
+                  "number": 28,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 186.65096100499795
+                },
+                "28": {
+                  "number": 29,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 1107.5914446919996
+                },
+                "29": {
+                  "number": 30,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 318.33259905399973
+                },
+                "30": {
+                  "number": 31,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 376.9333280440005
+                },
+                "31": {
+                  "number": 32,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 344.4001860720018
+                },
+                "32": {
+                  "number": 33,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 942.629183625002
+                }
+              }
+            },
+            "1": {
+              "recorded_model_seconds": 2298.612135024,
+              "recorded_usage_total": {
+                "input_tokens": 27778660,
+                "cached_input_tokens": 26333056,
+                "output_tokens": 111478
+              },
+              "segments": {
+                "0": {
+                  "number": 1001,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 361.02623928800017
+                },
+                "1": {
+                  "number": 1002,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 323.74012664300017
+                },
+                "2": {
+                  "number": 1003,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 243.71935692499983
+                },
+                "3": {
+                  "number": 1004,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 651.8180042640001
+                },
+                "4": {
+                  "number": 1005,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 386.2751370039996
+                },
+                "5": {
+                  "number": 1006,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 332.03327089999993
+                }
+              }
+            },
+            "2": {
+              "recorded_model_seconds": 110.6175098800004,
+              "recorded_usage_total": {
+                "input_tokens": 2427959,
+                "cached_input_tokens": 2223744,
+                "output_tokens": 4500
+              },
+              "segments": {
+                "0": {
+                  "number": 1,
+                  "model_exit_code": 0,
+                  "model_elapsed_seconds": 110.6175098800004
+                }
+              }
+            }
+          },
+          "legacy_stage_02_failed_source": {
+            "recorded_metadata": {
+              "ready": false,
+              "initialization_timeout_seconds": 3600,
+              "tsv_version": 2,
+              "scope_binding": {
+                "original_masked_scope_reference": null,
+                "provenance": {
+                  "order": 21
+                }
+              },
+              "original_masked_scope_reference": null,
+              "protocol_records": null,
+              "event_summary": {
+                "completed": false,
+                "turn_usages": {
+                  "0": {
+                    "input_tokens": 18570452,
+                    "cached_input_tokens": 17947648,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 47635,
+                    "reasoning_output_tokens": 7996
+                  },
+                  "1": {
+                    "input_tokens": 2351405,
+                    "cached_input_tokens": 2154496,
+                    "cache_write_input_tokens": 0,
+                    "output_tokens": 13642,
+                    "reasoning_output_tokens": 3423
+                  }
+                },
+                "usage_complete": false,
+                "usage_total": {
+                  "reasoning_output_tokens": 11419,
+                  "cache_write_input_tokens": 0,
+                  "output_tokens": 61277,
+                  "input_tokens": 20921857,
+                  "cached_input_tokens": 20102144
+                }
+              },
+              "model_elapsed_seconds": 3595.900372798,
+              "model_exit_code": 124,
+              "state_files_saved": {
+                "artifact_24e44c228e5184e3": true,
+                "artifact_2c1f8de3485efb44": false,
+                "artifact_4caf12de69a79acd": false
+              },
+              "elapsed_seconds": 3600.976144782,
+              "segment_limit": 4,
+              "segments": {
+                "0": {
+                  "number": 1,
+                  "metadata": {
+                    "ready": false,
+                    "initialization_timeout_seconds": 3599,
+                    "tsv_version": 2,
+                    "scope_binding": {
+                      "original_masked_scope_reference": null,
+                      "provenance": {
+                        "order": 21
+                      }
+                    },
+                    "original_masked_scope_reference": null,
+                    "protocol_records": {
+                      "ready": false,
+                      "api_abnormal": false,
+                      "scope_drift": false,
+                      "generated_outline_commands": 0,
+                      "known_template_updates": 0,
+                      "product_refusals": 11,
+                      "updated_files": 142,
+                      "submitted_files": 142,
+                      "body_read_files": 82,
+                      "documentation_files": 380,
+                      "header_saves": 1,
+                      "state": {
+                        "offset": 583,
+                        "accepted": {
+                          "README.md": 38,
+                          "doc/source/development/internals.rst": 48,
+                          "doc/source/development/contributing_codebase.rst": 50,
+                          "doc/source/development/developer.rst": 52,
+                          "doc/source/index.rst.template": 54,
+                          "web/README.md": 56,
+                          "doc/cheatsheet/README.md": 86,
+                          "doc/sphinxext/README.rst": 88,
+                          "web/interactive_terminal/README.md": 90,
+                          ".github/PULL_REQUEST_TEMPLATE.md": 92,
+                          "AUTHORS.md": 94,
+                          "doc/.gitignore": 96,
+                          "doc/_templates/api_redirect.html": 98,
+                          "doc/_templates/autosummary/accessor.rst": 100,
+                          "doc/_templates/autosummary/accessor_attribute.rst": 102,
+                          "doc/_templates/autosummary/accessor_callable.rst": 104,
+                          "doc/_templates/autosummary/accessor_method.rst": 106,
+                          "doc/_templates/autosummary/class.rst": 108,
+                          "doc/_templates/autosummary/class_without_autosummary.rst": 110,
+                          "doc/_templates/pandas_footer.html": 112,
+                          "doc/_templates/sidebar-nav-bs.html": 114,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet.pdf": 116,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet.pptx": 118,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf": 120,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx": 122,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf": 124,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx": 126,
+                          "web/pandas/contribute.md": 141,
+                          "web/pandas/getting_started.md": 143,
+                          "web/pandas/try.md": 145,
+                          "web/pandas/robots.txt": 149,
+                          "web/pandas/about/citing.md": 162,
+                          "web/pandas/about/governance.md": 164,
+                          "web/pandas/about/index.md": 166,
+                          "web/pandas/about/roadmap.md": 168,
+                          "web/pandas/about/sponsors.md": 170,
+                          "web/pandas/about/team.md": 172,
+                          "web/pandas/community/benchmarks.md": 177,
+                          "web/pandas/community/coc.md": 179,
+                          "web/pandas/community/ecosystem.md": 181,
+                          "web/pandas/community/blog/2019-user-survey.md": 187,
+                          "web/pandas/community/blog/asv-pandas-grant.md": 189,
+                          "web/pandas/community/blog/extension-arrays.md": 191,
+                          "web/pandas/community/blog/pandas-1.0.md": 193,
+                          "web/pandas/pdeps/0001-purpose-and-guidelines.md": 202,
+                          "web/pandas/pdeps/0005-no-default-index-mode.md": 216,
+                          "web/pandas/pdeps/0006-ban-upcasting.md": 218,
+                          "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 221,
+                          "web/pandas/pdeps/0007-copy-on-write.md": 226,
+                          "web/pandas/pdeps/0008-inplace-methods-in-pandas.md": 230,
+                          "web/pandas/pdeps/0009-io-extensions.md": 234,
+                          "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 241,
+                          "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 243,
+                          "web/pandas/pdeps/0012-compact-and-reversible-JSON-interface.md": 247,
+                          "web/pandas/pdeps/0014-string-dtype.md": 251,
+                          "doc/source/development/community.rst": 266,
+                          "doc/source/development/contributing.rst": 268,
+                          "doc/source/development/contributing_docstring.rst": 274,
+                          "doc/source/development/contributing_documentation.rst": 279,
+                          "doc/source/development/contributing_environment.rst": 281,
+                          "doc/source/development/contributing_gitpod.rst": 283,
+                          "doc/source/development/copy_on_write.rst": 289,
+                          "doc/source/development/debugging_extensions.rst": 291,
+                          "doc/source/development/extending.rst": 293,
+                          "doc/source/development/index.rst": 298,
+                          "doc/source/development/maintaining.rst": 300,
+                          "doc/source/development/policies.rst": 302,
+                          "doc/source/getting_started/index.rst": 307,
+                          "doc/source/getting_started/install.rst": 313,
+                          "doc/source/getting_started/overview.rst": 315,
+                          "doc/source/getting_started/tutorials.rst": 317,
+                          "doc/source/getting_started/comparison/includes/case.rst": 329,
+                          "doc/source/getting_started/comparison/includes/column_operations.rst": 331,
+                          "doc/source/getting_started/comparison/includes/column_record.rst": 333,
+                          "doc/source/getting_started/comparison/includes/construct_dataframe.rst": 335,
+                          "doc/source/getting_started/comparison/includes/copies.rst": 337,
+                          "doc/source/getting_started/comparison/includes/extract_substring.rst": 339,
+                          "doc/source/getting_started/comparison/includes/filtering.rst": 341,
+                          "doc/source/getting_started/comparison/includes/find_substring.rst": 343,
+                          "doc/source/getting_started/comparison/includes/groupby.rst": 345,
+                          "doc/source/getting_started/comparison/includes/if_then.rst": 347,
+                          "doc/source/getting_started/comparison/includes/introduction.rst": 349,
+                          "doc/source/getting_started/comparison/includes/length.rst": 351,
+                          "doc/source/getting_started/comparison/includes/limit.rst": 353,
+                          "doc/source/getting_started/comparison/includes/merge.rst": 355,
+                          "doc/source/getting_started/comparison/includes/merge_setup.rst": 357,
+                          "doc/source/getting_started/comparison/includes/missing.rst": 359,
+                          "doc/source/getting_started/comparison/includes/missing_intro.rst": 361,
+                          "doc/source/getting_started/comparison/includes/nth_word.rst": 363,
+                          "doc/source/getting_started/comparison/includes/sorting.rst": 365,
+                          "doc/source/getting_started/comparison/includes/time_date.rst": 367,
+                          "doc/source/getting_started/comparison/includes/transform.rst": 369,
+                          "doc/source/getting_started/comparison/index.rst": 371,
+                          "doc/source/getting_started/comparison/comparison_with_r.rst": 376,
+                          "doc/source/getting_started/comparison/comparison_with_sas.rst": 380,
+                          "doc/source/getting_started/comparison/comparison_with_spreadsheets.rst": 384,
+                          "doc/source/getting_started/comparison/comparison_with_spss.rst": 388,
+                          "doc/source/getting_started/comparison/comparison_with_sql.rst": 392,
+                          "doc/source/getting_started/comparison/comparison_with_stata.rst": 397,
+                          "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 403,
+                          "doc/source/getting_started/intro_tutorials/02_read_write.rst": 405,
+                          "doc/source/getting_started/intro_tutorials/03_subset_data.rst": 409,
+                          "doc/source/getting_started/intro_tutorials/04_plotting.rst": 413,
+                          "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 415,
+                          "doc/source/getting_started/intro_tutorials/06_calculate_statistics.rst": 420,
+                          "doc/source/getting_started/intro_tutorials/07_reshape_table_layout.rst": 422,
+                          "doc/source/getting_started/intro_tutorials/08_combine_dataframes.rst": 426,
+                          "doc/source/getting_started/intro_tutorials/09_timeseries.rst": 428,
+                          "doc/source/getting_started/intro_tutorials/10_text_data.rst": 432,
+                          "doc/source/getting_started/intro_tutorials/index.rst": 434,
+                          "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 436,
+                          "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 438,
+                          "doc/source/reference/aliases.rst": 447,
+                          "doc/source/reference/extensions.rst": 449,
+                          "doc/source/reference/general_functions.rst": 465,
+                          "doc/source/reference/index.rst": 453,
+                          "doc/source/reference/missing_value.rst": 455,
+                          "doc/source/reference/options.rst": 457,
+                          "doc/source/reference/plotting.rst": 459,
+                          "doc/source/reference/groupby.rst": 469,
+                          "doc/source/reference/resampling.rst": 471,
+                          "doc/source/reference/style.rst": 473,
+                          "doc/source/reference/testing.rst": 475,
+                          "doc/source/reference/window.rst": 477,
+                          "doc/source/reference/frame.rst": 482,
+                          "doc/source/reference/series.rst": 486,
+                          "doc/source/reference/arrays.rst": 491,
+                          "doc/source/reference/indexing.rst": 496,
+                          "doc/source/reference/io.rst": 500,
+                          "doc/source/reference/offset_frequency.rst": 515,
+                          "doc/source/user_guide/templates/myhtml.tpl": 529,
+                          "doc/source/user_guide/templates/html_style_structure.html": 531,
+                          "doc/source/user_guide/templates/html_table_structure.html": 533,
+                          "doc/source/user_guide/index.rst": 535,
+                          "doc/source/user_guide/boolean.rst": 546,
+                          "doc/source/user_guide/integer_na.rst": 548,
+                          "doc/source/user_guide/pyarrow.rst": 550,
+                          "doc/source/user_guide/duplicates.rst": 552,
+                          "doc/source/user_guide/scale.rst": 561,
+                          "doc/source/user_guide/sparse.rst": 563,
+                          "doc/source/user_guide/copy_on_write.rst": 565,
+                          "doc/source/user_guide/gotchas.rst": 571
+                        },
+                        "body_reads": {
+                          "pyproject.toml": 18,
+                          "setup.py": 21,
+                          "meson.build": 24,
+                          "pandas/__init__.py": 26,
+                          "doc/source/development/internals.rst": 29,
+                          "doc/source/development/contributing_codebase.rst": 31,
+                          "web/pandas/pdeps/0001-purpose-and-guidelines.md": 196,
+                          "web/pandas/pdeps/0005-no-default-index-mode.md": 211,
+                          "web/pandas/pdeps/0006-ban-upcasting.md": 211,
+                          "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 211,
+                          "web/pandas/pdeps/0007-copy-on-write.md": 223,
+                          "web/pandas/pdeps/0008-inplace-methods-in-pandas.md": 228,
+                          "web/pandas/pdeps/0009-io-extensions.md": 232,
+                          "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 238,
+                          "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 238,
+                          "web/pandas/pdeps/0012-compact-and-reversible-JSON-interface.md": 245,
+                          "web/pandas/pdeps/0014-string-dtype.md": 249,
+                          "doc/source/development/contributing.rst": 264,
+                          "doc/source/development/community.rst": 264,
+                          "doc/source/development/contributing_docstring.rst": 272,
+                          "doc/source/development/contributing_environment.rst": 277,
+                          "doc/source/development/contributing_gitpod.rst": 277,
+                          "doc/source/development/contributing_documentation.rst": 277,
+                          "doc/source/development/copy_on_write.rst": 286,
+                          "doc/source/development/debugging_extensions.rst": 286,
+                          "doc/source/development/extending.rst": 286,
+                          "doc/source/development/policies.rst": 295,
+                          "doc/source/development/maintaining.rst": 295,
+                          "doc/source/development/index.rst": 295,
+                          "doc/source/getting_started/index.rst": 305,
+                          "doc/source/getting_started/tutorials.rst": 310,
+                          "doc/source/getting_started/overview.rst": 310,
+                          "doc/source/getting_started/install.rst": 310,
+                          "doc/source/getting_started/comparison/index.rst": 320,
+                          "doc/source/getting_started/comparison/comparison_with_r.rst": 374,
+                          "doc/source/getting_started/comparison/comparison_with_sas.rst": 378,
+                          "doc/source/getting_started/comparison/comparison_with_spreadsheets.rst": 382,
+                          "doc/source/getting_started/comparison/comparison_with_spss.rst": 386,
+                          "doc/source/getting_started/comparison/comparison_with_sql.rst": 390,
+                          "doc/source/getting_started/comparison/comparison_with_stata.rst": 394,
+                          "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 400,
+                          "doc/source/getting_started/intro_tutorials/02_read_write.rst": 400,
+                          "doc/source/getting_started/intro_tutorials/03_subset_data.rst": 407,
+                          "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 411,
+                          "doc/source/getting_started/intro_tutorials/04_plotting.rst": 411,
+                          "doc/source/getting_started/intro_tutorials/07_reshape_table_layout.rst": 418,
+                          "doc/source/getting_started/intro_tutorials/06_calculate_statistics.rst": 418,
+                          "doc/source/getting_started/intro_tutorials/08_combine_dataframes.rst": 424,
+                          "doc/source/getting_started/intro_tutorials/09_timeseries.rst": 424,
+                          "doc/source/getting_started/intro_tutorials/10_text_data.rst": 430,
+                          "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 430,
+                          "doc/source/getting_started/intro_tutorials/index.rst": 430,
+                          "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 430,
+                          "doc/source/reference/general_functions.rst": 444,
+                          "doc/source/reference/aliases.rst": 444,
+                          "doc/source/reference/plotting.rst": 444,
+                          "doc/source/reference/index.rst": 444,
+                          "doc/source/reference/options.rst": 444,
+                          "doc/source/reference/extensions.rst": 444,
+                          "doc/source/reference/missing_value.rst": 444,
+                          "doc/source/reference/groupby.rst": 467,
+                          "doc/source/reference/window.rst": 467,
+                          "doc/source/reference/resampling.rst": 467,
+                          "doc/source/reference/style.rst": 467,
+                          "doc/source/reference/testing.rst": 467,
+                          "doc/source/reference/frame.rst": 480,
+                          "doc/source/reference/series.rst": 484,
+                          "doc/source/reference/arrays.rst": 488,
+                          "doc/source/reference/indexing.rst": 494,
+                          "doc/source/reference/io.rst": 498,
+                          "doc/source/user_guide/templates/html_style_structure.html": 521,
+                          "doc/source/user_guide/templates/myhtml.tpl": 523,
+                          "doc/source/user_guide/templates/html_table_structure.html": 525,
+                          "doc/source/user_guide/index.rst": 527,
+                          "doc/source/user_guide/boolean.rst": 538,
+                          "doc/source/user_guide/integer_na.rst": 540,
+                          "doc/source/user_guide/duplicates.rst": 542,
+                          "doc/source/user_guide/pyarrow.rst": 544,
+                          "doc/source/user_guide/scale.rst": 555,
+                          "doc/source/user_guide/sparse.rst": 557,
+                          "doc/source/user_guide/copy_on_write.rst": 559,
+                          "doc/source/user_guide/gotchas.rst": 568
+                        },
+                        "core_files": null,
+                        "header_saves": 1,
+                        "generated_outline_commands": 0,
+                        "known_template_updates": 0,
+                        "product_refusals": 11,
+                        "api_abnormal": false,
+                        "scope_drift": false
+                      }
+                    },
+                    "event_summary": {
+                      "completed": true,
+                      "turn_usages": {
+                        "0": {
+                          "input_tokens": 18570452,
+                          "cached_input_tokens": 17947648,
+                          "cache_write_input_tokens": 0,
+                          "output_tokens": 47635,
+                          "reasoning_output_tokens": 7996
+                        }
+                      },
+                      "usage_total": {
+                        "input_tokens": 18570452,
+                        "cached_input_tokens": 17947648,
+                        "output_tokens": 47635
+                      }
+                    },
+                    "model_elapsed_seconds": 2895.6266954429993,
+                    "model_exit_code": 0,
+                    "stage_evidence_status": {
+                      "valid": true,
+                      "api_abnormal": false
+                    },
+                    "state_files_saved": {
+                      "artifact_24e44c228e5184e3": true,
+                      "artifact_2c1f8de3485efb44": false,
+                      "artifact_4caf12de69a79acd": false
+                    },
+                    "elapsed_seconds": 2897.727426349
+                  },
+                  "continuation_allowed": true
+                },
+                "1": {
+                  "number": 2,
+                  "metadata": {
+                    "ready": false,
+                    "initialization_timeout_seconds": 702,
+                    "tsv_version": 2,
+                    "scope_binding": {
+                      "original_masked_scope_reference": null,
+                      "provenance": {
+                        "order": 21
+                      }
+                    },
+                    "original_masked_scope_reference": null,
+                    "protocol_records": {
+                      "ready": false,
+                      "api_abnormal": false,
+                      "scope_drift": false,
+                      "generated_outline_commands": 0,
+                      "known_template_updates": 0,
+                      "product_refusals": 13,
+                      "updated_files": 202,
+                      "submitted_files": 202,
+                      "body_read_files": 111,
+                      "documentation_files": 380,
+                      "header_saves": 1,
+                      "state": {
+                        "offset": 825,
+                        "accepted": {
+                          "README.md": 38,
+                          "doc/source/development/internals.rst": 48,
+                          "doc/source/development/contributing_codebase.rst": 50,
+                          "doc/source/development/developer.rst": 52,
+                          "doc/source/index.rst.template": 54,
+                          "web/README.md": 56,
+                          "doc/cheatsheet/README.md": 86,
+                          "doc/sphinxext/README.rst": 88,
+                          "web/interactive_terminal/README.md": 90,
+                          ".github/PULL_REQUEST_TEMPLATE.md": 92,
+                          "AUTHORS.md": 94,
+                          "doc/.gitignore": 96,
+                          "doc/_templates/api_redirect.html": 98,
+                          "doc/_templates/autosummary/accessor.rst": 100,
+                          "doc/_templates/autosummary/accessor_attribute.rst": 102,
+                          "doc/_templates/autosummary/accessor_callable.rst": 104,
+                          "doc/_templates/autosummary/accessor_method.rst": 106,
+                          "doc/_templates/autosummary/class.rst": 108,
+                          "doc/_templates/autosummary/class_without_autosummary.rst": 110,
+                          "doc/_templates/pandas_footer.html": 112,
+                          "doc/_templates/sidebar-nav-bs.html": 114,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet.pdf": 116,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet.pptx": 118,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf": 120,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx": 122,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf": 124,
+                          "doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx": 126,
+                          "web/pandas/contribute.md": 141,
+                          "web/pandas/getting_started.md": 143,
+                          "web/pandas/try.md": 145,
+                          "web/pandas/robots.txt": 149,
+                          "web/pandas/about/citing.md": 162,
+                          "web/pandas/about/governance.md": 164,
+                          "web/pandas/about/index.md": 166,
+                          "web/pandas/about/roadmap.md": 168,
+                          "web/pandas/about/sponsors.md": 170,
+                          "web/pandas/about/team.md": 172,
+                          "web/pandas/community/benchmarks.md": 177,
+                          "web/pandas/community/coc.md": 179,
+                          "web/pandas/community/ecosystem.md": 181,
+                          "web/pandas/community/blog/2019-user-survey.md": 187,
+                          "web/pandas/community/blog/asv-pandas-grant.md": 189,
+                          "web/pandas/community/blog/extension-arrays.md": 191,
+                          "web/pandas/community/blog/pandas-1.0.md": 193,
+                          "web/pandas/pdeps/0001-purpose-and-guidelines.md": 202,
+                          "web/pandas/pdeps/0005-no-default-index-mode.md": 216,
+                          "web/pandas/pdeps/0006-ban-upcasting.md": 218,
+                          "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 221,
+                          "web/pandas/pdeps/0007-copy-on-write.md": 226,
+                          "web/pandas/pdeps/0008-inplace-methods-in-pandas.md": 230,
+                          "web/pandas/pdeps/0009-io-extensions.md": 234,
+                          "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 241,
+                          "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 243,
+                          "web/pandas/pdeps/0012-compact-and-reversible-JSON-interface.md": 247,
+                          "web/pandas/pdeps/0014-string-dtype.md": 251,
+                          "doc/source/development/community.rst": 266,
+                          "doc/source/development/contributing.rst": 268,
+                          "doc/source/development/contributing_docstring.rst": 274,
+                          "doc/source/development/contributing_documentation.rst": 279,
+                          "doc/source/development/contributing_environment.rst": 281,
+                          "doc/source/development/contributing_gitpod.rst": 283,
+                          "doc/source/development/copy_on_write.rst": 289,
+                          "doc/source/development/debugging_extensions.rst": 291,
+                          "doc/source/development/extending.rst": 293,
+                          "doc/source/development/index.rst": 298,
+                          "doc/source/development/maintaining.rst": 300,
+                          "doc/source/development/policies.rst": 302,
+                          "doc/source/getting_started/index.rst": 307,
+                          "doc/source/getting_started/install.rst": 313,
+                          "doc/source/getting_started/overview.rst": 315,
+                          "doc/source/getting_started/tutorials.rst": 317,
+                          "doc/source/getting_started/comparison/includes/case.rst": 329,
+                          "doc/source/getting_started/comparison/includes/column_operations.rst": 331,
+                          "doc/source/getting_started/comparison/includes/column_record.rst": 333,
+                          "doc/source/getting_started/comparison/includes/construct_dataframe.rst": 335,
+                          "doc/source/getting_started/comparison/includes/copies.rst": 337,
+                          "doc/source/getting_started/comparison/includes/extract_substring.rst": 339,
+                          "doc/source/getting_started/comparison/includes/filtering.rst": 341,
+                          "doc/source/getting_started/comparison/includes/find_substring.rst": 343,
+                          "doc/source/getting_started/comparison/includes/groupby.rst": 345,
+                          "doc/source/getting_started/comparison/includes/if_then.rst": 347,
+                          "doc/source/getting_started/comparison/includes/introduction.rst": 349,
+                          "doc/source/getting_started/comparison/includes/length.rst": 351,
+                          "doc/source/getting_started/comparison/includes/limit.rst": 353,
+                          "doc/source/getting_started/comparison/includes/merge.rst": 355,
+                          "doc/source/getting_started/comparison/includes/merge_setup.rst": 357,
+                          "doc/source/getting_started/comparison/includes/missing.rst": 359,
+                          "doc/source/getting_started/comparison/includes/missing_intro.rst": 361,
+                          "doc/source/getting_started/comparison/includes/nth_word.rst": 363,
+                          "doc/source/getting_started/comparison/includes/sorting.rst": 365,
+                          "doc/source/getting_started/comparison/includes/time_date.rst": 367,
+                          "doc/source/getting_started/comparison/includes/transform.rst": 369,
+                          "doc/source/getting_started/comparison/index.rst": 371,
+                          "doc/source/getting_started/comparison/comparison_with_r.rst": 376,
+                          "doc/source/getting_started/comparison/comparison_with_sas.rst": 380,
+                          "doc/source/getting_started/comparison/comparison_with_spreadsheets.rst": 384,
+                          "doc/source/getting_started/comparison/comparison_with_spss.rst": 388,
+                          "doc/source/getting_started/comparison/comparison_with_sql.rst": 392,
+                          "doc/source/getting_started/comparison/comparison_with_stata.rst": 397,
+                          "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 403,
+                          "doc/source/getting_started/intro_tutorials/02_read_write.rst": 405,
+                          "doc/source/getting_started/intro_tutorials/03_subset_data.rst": 409,
+                          "doc/source/getting_started/intro_tutorials/04_plotting.rst": 413,
+                          "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 415,
+                          "doc/source/getting_started/intro_tutorials/06_calculate_statistics.rst": 420,
+                          "doc/source/getting_started/intro_tutorials/07_reshape_table_layout.rst": 422,
+                          "doc/source/getting_started/intro_tutorials/08_combine_dataframes.rst": 426,
+                          "doc/source/getting_started/intro_tutorials/09_timeseries.rst": 428,
+                          "doc/source/getting_started/intro_tutorials/10_text_data.rst": 432,
+                          "doc/source/getting_started/intro_tutorials/index.rst": 434,
+                          "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 436,
+                          "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 438,
+                          "doc/source/reference/aliases.rst": 447,
+                          "doc/source/reference/extensions.rst": 449,
+                          "doc/source/reference/general_functions.rst": 465,
+                          "doc/source/reference/index.rst": 453,
+                          "doc/source/reference/missing_value.rst": 455,
+                          "doc/source/reference/options.rst": 457,
+                          "doc/source/reference/plotting.rst": 459,
+                          "doc/source/reference/groupby.rst": 469,
+                          "doc/source/reference/resampling.rst": 471,
+                          "doc/source/reference/style.rst": 473,
+                          "doc/source/reference/testing.rst": 475,
+                          "doc/source/reference/window.rst": 477,
+                          "doc/source/reference/frame.rst": 482,
+                          "doc/source/reference/series.rst": 486,
+                          "doc/source/reference/arrays.rst": 491,
+                          "doc/source/reference/indexing.rst": 496,
+                          "doc/source/reference/io.rst": 500,
+                          "doc/source/reference/offset_frequency.rst": 515,
+                          "doc/source/user_guide/templates/myhtml.tpl": 529,
+                          "doc/source/user_guide/templates/html_style_structure.html": 531,
+                          "doc/source/user_guide/templates/html_table_structure.html": 533,
+                          "doc/source/user_guide/index.rst": 535,
+                          "doc/source/user_guide/boolean.rst": 546,
+                          "doc/source/user_guide/integer_na.rst": 548,
+                          "doc/source/user_guide/pyarrow.rst": 550,
+                          "doc/source/user_guide/duplicates.rst": 552,
+                          "doc/source/user_guide/scale.rst": 561,
+                          "doc/source/user_guide/sparse.rst": 563,
+                          "doc/source/user_guide/copy_on_write.rst": 565,
+                          "doc/source/user_guide/gotchas.rst": 571,
+                          "doc/source/whatsnew/v0.23.3.rst": 620,
+                          "doc/source/whatsnew/v0.25.3.rst": 622,
+                          "doc/source/whatsnew/v1.0.3.rst": 624,
+                          "doc/source/whatsnew/v2.1.3.rst": 626,
+                          "doc/source/whatsnew/v1.0.5.rst": 628,
+                          "doc/source/whatsnew/v0.7.2.rst": 630,
+                          "doc/source/whatsnew/v0.7.1.rst": 632,
+                          "doc/source/whatsnew/v0.23.4.rst": 634,
+                          "doc/source/whatsnew/v1.2.5.rst": 636,
+                          "doc/source/whatsnew/v2.2.3.rst": 638,
+                          "doc/source/whatsnew/v2.3.2.rst": 640,
+                          "doc/source/whatsnew/v1.2.4.rst": 642,
+                          "doc/source/whatsnew/v1.2.3.rst": 644,
+                          "doc/source/whatsnew/v0.25.2.rst": 646,
+                          "doc/source/whatsnew/v0.8.1.rst": 648,
+                          "doc/source/whatsnew/v1.3.5.rst": 650,
+                          "doc/source/_static/css/pandas.css": 675,
+                          "doc/source/_static/logo_stata.svg": 677,
+                          "doc/sphinxext/contributors.py": 679,
+                          "doc/source/_static/logo_r.svg": 681,
+                          "doc/source/whatsnew/v1.5.2.rst": 683,
+                          "doc/source/whatsnew/v0.6.1.rst": 685,
+                          "doc/source/whatsnew/v2.0.3.rst": 687,
+                          "doc/source/_static/question_mark_noback.svg": 689,
+                          "doc/source/_static/index_contribute.svg": 691,
+                          "doc/source/whatsnew/v2.2.2.rst": 693,
+                          "doc/source/whatsnew/v1.4.2.rst": 695,
+                          "doc/source/whatsnew/v2.1.4.rst": 697,
+                          "doc/scripts/eval_performance.py": 699,
+                          "doc/source/whatsnew/v1.1.5.rst": 701,
+                          "doc/source/whatsnew/v1.3.1.rst": 703,
+                          "doc/source/_static/spreadsheets/logo_excel.svg": 705,
+                          "doc/source/whatsnew/v0.20.3.rst": 707,
+                          "doc/source/whatsnew/v1.2.2.rst": 709,
+                          "doc/source/whatsnew/v1.4.1.rst": 711,
+                          "doc/source/whatsnew/v1.3.2.rst": 713,
+                          "doc/source/whatsnew/index.rst": 744,
+                          "doc/source/whatsnew/v2.1.1.rst": 746,
+                          "doc/source/whatsnew/v0.4.x.rst": 748,
+                          "doc/source/whatsnew/v1.5.3.rst": 750,
+                          "doc/source/whatsnew/v1.3.4.rst": 752,
+                          "doc/source/whatsnew/v0.5.0.rst": 754,
+                          "doc/source/whatsnew/v2.0.2.rst": 756,
+                          "doc/source/_static/index_api.svg": 758,
+                          "doc/source/whatsnew/v1.0.4.rst": 760,
+                          "doc/source/whatsnew/v2.3.3.rst": 762,
+                          "doc/source/whatsnew/v0.9.0.rst": 764,
+                          "doc/source/whatsnew/v1.3.3.rst": 766,
+                          "doc/source/whatsnew/v1.1.4.rst": 794,
+                          "doc/source/whatsnew/v2.3.1.rst": 796,
+                          "doc/source/whatsnew/v1.1.1.rst": 798,
+                          "doc/source/whatsnew/v0.24.1.rst": 800,
+                          "doc/source/_static/index_getting_started.svg": 802,
+                          "doc/source/_static/logo_sql.svg": 804,
+                          "doc/source/whatsnew/v1.1.2.rst": 806,
+                          "doc/source/whatsnew/v1.0.1.rst": 808,
+                          "doc/source/whatsnew/v0.19.1.rst": 810,
+                          "doc/source/whatsnew/v0.7.3.rst": 812,
+                          "doc/source/whatsnew/v1.4.4.rst": 814,
+                          "doc/source/whatsnew/v1.4.3.rst": 816
+                        },
+                        "body_reads": {
+                          "pyproject.toml": 18,
+                          "setup.py": 21,
+                          "meson.build": 24,
+                          "pandas/__init__.py": 26,
+                          "doc/source/development/internals.rst": 29,
+                          "doc/source/development/contributing_codebase.rst": 31,
+                          "web/pandas/pdeps/0001-purpose-and-guidelines.md": 196,
+                          "web/pandas/pdeps/0005-no-default-index-mode.md": 211,
+                          "web/pandas/pdeps/0006-ban-upcasting.md": 211,
+                          "web/pandas/pdeps/0004-consistent-to-datetime-parsing.md": 211,
+                          "web/pandas/pdeps/0007-copy-on-write.md": 223,
+                          "web/pandas/pdeps/0008-inplace-methods-in-pandas.md": 228,
+                          "web/pandas/pdeps/0009-io-extensions.md": 232,
+                          "web/pandas/pdeps/0010-required-pyarrow-dependency.md": 238,
+                          "web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md": 238,
+                          "web/pandas/pdeps/0012-compact-and-reversible-JSON-interface.md": 245,
+                          "web/pandas/pdeps/0014-string-dtype.md": 249,
+                          "doc/source/development/contributing.rst": 264,
+                          "doc/source/development/community.rst": 264,
+                          "doc/source/development/contributing_docstring.rst": 272,
+                          "doc/source/development/contributing_environment.rst": 277,
+                          "doc/source/development/contributing_gitpod.rst": 277,
+                          "doc/source/development/contributing_documentation.rst": 277,
+                          "doc/source/development/copy_on_write.rst": 286,
+                          "doc/source/development/debugging_extensions.rst": 286,
+                          "doc/source/development/extending.rst": 286,
+                          "doc/source/development/policies.rst": 295,
+                          "doc/source/development/maintaining.rst": 295,
+                          "doc/source/development/index.rst": 295,
+                          "doc/source/getting_started/index.rst": 305,
+                          "doc/source/getting_started/tutorials.rst": 310,
+                          "doc/source/getting_started/overview.rst": 310,
+                          "doc/source/getting_started/install.rst": 310,
+                          "doc/source/getting_started/comparison/index.rst": 320,
+                          "doc/source/getting_started/comparison/comparison_with_r.rst": 374,
+                          "doc/source/getting_started/comparison/comparison_with_sas.rst": 378,
+                          "doc/source/getting_started/comparison/comparison_with_spreadsheets.rst": 382,
+                          "doc/source/getting_started/comparison/comparison_with_spss.rst": 386,
+                          "doc/source/getting_started/comparison/comparison_with_sql.rst": 390,
+                          "doc/source/getting_started/comparison/comparison_with_stata.rst": 394,
+                          "doc/source/getting_started/intro_tutorials/01_table_oriented.rst": 400,
+                          "doc/source/getting_started/intro_tutorials/02_read_write.rst": 400,
+                          "doc/source/getting_started/intro_tutorials/03_subset_data.rst": 407,
+                          "doc/source/getting_started/intro_tutorials/05_add_columns.rst": 411,
+                          "doc/source/getting_started/intro_tutorials/04_plotting.rst": 411,
+                          "doc/source/getting_started/intro_tutorials/07_reshape_table_layout.rst": 418,
+                          "doc/source/getting_started/intro_tutorials/06_calculate_statistics.rst": 418,
+                          "doc/source/getting_started/intro_tutorials/08_combine_dataframes.rst": 424,
+                          "doc/source/getting_started/intro_tutorials/09_timeseries.rst": 424,
+                          "doc/source/getting_started/intro_tutorials/10_text_data.rst": 430,
+                          "doc/source/getting_started/intro_tutorials/includes/titanic.rst": 430,
+                          "doc/source/getting_started/intro_tutorials/index.rst": 430,
+                          "doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst": 430,
+                          "doc/source/reference/general_functions.rst": 444,
+                          "doc/source/reference/aliases.rst": 444,
+                          "doc/source/reference/plotting.rst": 444,
+                          "doc/source/reference/index.rst": 444,
+                          "doc/source/reference/options.rst": 444,
+                          "doc/source/reference/extensions.rst": 444,
+                          "doc/source/reference/missing_value.rst": 444,
+                          "doc/source/reference/groupby.rst": 467,
+                          "doc/source/reference/window.rst": 467,
+                          "doc/source/reference/resampling.rst": 467,
+                          "doc/source/reference/style.rst": 467,
+                          "doc/source/reference/testing.rst": 467,
+                          "doc/source/reference/frame.rst": 480,
+                          "doc/source/reference/series.rst": 484,
+                          "doc/source/reference/arrays.rst": 488,
+                          "doc/source/reference/indexing.rst": 494,
+                          "doc/source/reference/io.rst": 498,
+                          "doc/source/user_guide/templates/html_style_structure.html": 521,
+                          "doc/source/user_guide/templates/myhtml.tpl": 523,
+                          "doc/source/user_guide/templates/html_table_structure.html": 525,
+                          "doc/source/user_guide/index.rst": 527,
+                          "doc/source/user_guide/boolean.rst": 538,
+                          "doc/source/user_guide/integer_na.rst": 540,
+                          "doc/source/user_guide/duplicates.rst": 542,
+                          "doc/source/user_guide/pyarrow.rst": 544,
+                          "doc/source/user_guide/scale.rst": 555,
+                          "doc/source/user_guide/sparse.rst": 557,
+                          "doc/source/user_guide/copy_on_write.rst": 559,
+                          "doc/source/user_guide/gotchas.rst": 568,
+                          "doc/source/whatsnew/v2.2.2.rst": 664,
+                          "doc/source/whatsnew/v1.4.2.rst": 666,
+                          "doc/source/whatsnew/v2.1.4.rst": 668,
+                          "doc/scripts/eval_performance.py": 670,
+                          "doc/source/whatsnew/v1.1.5.rst": 672,
+                          "doc/source/whatsnew/index.rst": 719,
+                          "doc/source/whatsnew/v2.1.1.rst": 721,
+                          "doc/source/whatsnew/v0.4.x.rst": 723,
+                          "doc/source/whatsnew/v1.5.3.rst": 725,
+                          "doc/source/whatsnew/v1.3.4.rst": 727,
+                          "doc/source/whatsnew/v0.5.0.rst": 729,
+                          "doc/source/whatsnew/v2.0.2.rst": 731,
+                          "doc/source/_static/index_api.svg": 733,
+                          "doc/source/whatsnew/v1.0.4.rst": 735,
+                          "doc/source/whatsnew/v2.3.3.rst": 737,
+                          "doc/source/whatsnew/v0.9.0.rst": 739,
+                          "doc/source/whatsnew/v1.3.3.rst": 741,
+                          "doc/source/whatsnew/v1.1.4.rst": 770,
+                          "doc/source/whatsnew/v2.3.1.rst": 772,
+                          "doc/source/whatsnew/v1.1.1.rst": 774,
+                          "doc/source/whatsnew/v0.24.1.rst": 776,
+                          "doc/source/_static/index_getting_started.svg": 778,
+                          "doc/source/_static/logo_sql.svg": 780,
+                          "doc/source/whatsnew/v1.1.2.rst": 782,
+                          "doc/source/whatsnew/v1.0.1.rst": 784,
+                          "doc/source/whatsnew/v0.19.1.rst": 786,
+                          "doc/source/whatsnew/v0.7.3.rst": 788,
+                          "doc/source/whatsnew/v1.4.4.rst": 790,
+                          "doc/source/whatsnew/v1.4.3.rst": 792
+                        },
+                        "core_files": null,
+                        "header_saves": 1,
+                        "generated_outline_commands": 0,
+                        "known_template_updates": 0,
+                        "product_refusals": 13,
+                        "api_abnormal": false,
+                        "scope_drift": false
+                      }
+                    },
+                    "event_summary": {
+                      "completed": true,
+                      "turn_usages": {
+                        "0": {
+                          "input_tokens": 2351405,
+                          "cached_input_tokens": 2154496,
+                          "cache_write_input_tokens": 0,
+                          "output_tokens": 13642,
+                          "reasoning_output_tokens": 3423
+                        }
+                      },
+                      "usage_total": {
+                        "input_tokens": 2351405,
+                        "cached_input_tokens": 2154496,
+                        "output_tokens": 13642
+                      }
+                    },
+                    "model_elapsed_seconds": 395.05693694,
+                    "model_exit_code": 0,
+                    "stage_evidence_status": {
+                      "valid": true,
+                      "api_abnormal": false
+                    },
+                    "state_files_saved": {
+                      "artifact_24e44c228e5184e3": true,
+                      "artifact_2c1f8de3485efb44": false,
+                      "artifact_4caf12de69a79acd": false
+                    },
+                    "elapsed_seconds": 396.94364110900096
+                  },
+                  "continuation_allowed": true
+                },
+                "2": {
+                  "number": 3,
+                  "metadata": {
+                    "ready": false,
+                    "initialization_timeout_seconds": 305,
+                    "tsv_version": 2,
+                    "scope_binding": {
+                      "original_masked_scope_reference": null,
+                      "provenance": {
+                        "order": 21
+                      }
+                    },
+                    "original_masked_scope_reference": null,
+                    "protocol_records": null,
+                    "event_summary": {
+                      "completed": false,
+                      "usage_total": null
+                    },
+                    "model_elapsed_seconds": 305.21674041500046,
+                    "model_exit_code": 124,
+                    "state_files_saved": {
+                      "artifact_24e44c228e5184e3": true,
+                      "artifact_2c1f8de3485efb44": false,
+                      "artifact_4caf12de69a79acd": false
+                    },
+                    "elapsed_seconds": 306.0241812389995
+                  },
+                  "continuation_allowed": false
+                }
+              }
+            }
+          },
+          "partial_cache_receipt": {
+            "raw_receipt": {
+              "new_model_calls": 0,
+              "new_run_wallclock_seconds": 0.32201737400100683,
+              "usd": null,
+              "before": {
+                "cognitive": 2504,
+                "outlined": 219,
+                "missing": 2285
+              },
+              "source_history": {
+                "cache_provenance": {
+                  "completed_source_cost_model_seconds": null,
+                  "completed_source_cost_elapsed_seconds": null
+                },
+                "historical_input_not_to_restore": null,
+                "usd": null
+              },
+              "verification": {
+                "header_and_config_unchanged": true,
+                "build_and_roles_unchanged": true,
+                "existing_outlines_unchanged": true,
+                "source_body_and_mode_unchanged": true,
+                "source_inventory_unchanged": true,
+                "source_sha_unchanged": true
+              },
+              "counts": {
+                "eligible": 10,
+                "imported": 0,
+                "skipped": 101,
+                "rejected": 10
+              }
+            }
+          },
+          "source_cost_usd": null,
+          "accounting_note": "unknown"
+        },
+        "current_seed_derivation": {
+          "genuine_semantic_seed": 0,
+          "active_outline_rows": 0,
+          "active_target_rows": 0,
+          "cognitive_rows": 2504,
+          "original_outline_rows_retained_history_only": 1352,
+          "preserved_path_and_first_six_fields_byte_exact": true,
+          "generic_rules_tag_dictionary_config_preserved_byte_exact": true,
+          "unverified_business_head_and_contracts_removed_from_active": true,
+          "removed_business_contract_header_lines": 5,
+          "target_delete_reset_to": "0",
+          "original_row_order_and_line_endings_preserved": true,
+          "scope_roles_source_tracked_cognitive_unchanged": true,
+          "unverified_historical_entries_are_not_declared_wrong": true,
+          "history_is_not_active_semantic_seed": true
+        },
+        "source_cost_records": {
+          "actor_input_allowed": false,
+          "original_source_metadata": {
+            "bytes": 3177
+          },
+          "original_prior_metadata": {
+            "bytes": 72275
+          },
+          "current_metadata_cost_fields_as_recorded": {
+            "model_elapsed_seconds": 110.6175098800004,
+            "elapsed_seconds": 111.56823530099973,
+            "ready": true,
+            "source_only": true
+          },
+          "prior_metadata_cost_fields_as_recorded": {
+            "model_elapsed_seconds": 2298.612135024,
+            "elapsed_seconds": 2303.952892915,
+            "ready": false,
+            "source_only": true,
+            "prior_source_initialization_cost": {
+              "ready": false,
+              "model_elapsed_seconds": 3595.900372798,
+              "elapsed_seconds": 3600.976144782,
+              "model_exit_code": 124,
+              "segment_limit": 4
+            }
+          },
+          "current_recorded_segment_count": 1,
+          "current_segment_time_usage_null_and_event_digest_records_preserved_raw": true,
+          "extra_history_records": {
+            "prior-lineage.json": {
+              "bytes": 6467
+            }
+          },
+          "known_current_metadata_model_seconds_as_recorded": 110.6175098800004,
+          "prior_source_cost_summary_as_recorded": {
+            "model_elapsed_seconds": 3595.900372798,
+            "previous_metadata_056_model_seconds": 2298.612135024,
+            "latest_focused_057_model_seconds": 110.6175098800004,
+            "total_deduplicated_model_seconds": null,
+            "monetary_total": null,
+            "unknown_is_not_zero": true
+          },
+          "complete_total_seconds": null,
+          "complete_usage_total": null,
+          "billed_usd": null,
+          "unknown_is_not_zero": true,
+          "failed_or_not_ready_source_is_not_free": true,
+          "deduplication_rule": "unknown",
+          "source_raw_events_reread": false,
+          "new_source_and_formal_costs_separate": true
+        }
+      },
+      "trusted_mode_repair_receipt": {
+        "original_receipt": {
+          "source_preflight_passed": true,
+          "pass": true,
+          "source_files_checked": 2504,
+          "tracked_files_checked": 2504,
+          "after_source_body_and_modes_exact": true,
+          "scope_unchanged": true,
+          "tsv_unchanged": true,
+          "roles_content_unchanged": true,
+          "models_called": 0
+        }
+      },
+      "source_cost_usd": null,
+      "accounting_note": "unknown",
+      "source_files_four_SHA_mtime_precede_formal_marker": true,
+      "original_legacy_full_table_rows": 2504,
+      "active_genuine_rows_before_new_source": 0,
+      "trace_grounded_seed_rows": 0,
+      "full_source_files_body_and_modes": 2504,
+      "unattributed_legacy_outlines_used_for_current_source": false
+    },
+    "formal": {
+      "infer_success": true,
+      "infer_exit_code": 0,
+      "grade_exit_code": 0,
+      "agent_exit_status": null,
+      "prediction_success": true,
+      "prediction_error": null,
+      "formal_turn_completed_observed": true,
+      "formal_budget_time_exceeded": false,
+      "formal_model_calls": 1,
+      "single_formal_budget_seconds": 3600,
+      "budget_extended": false,
+      "usage": {
+        "input_tokens": 1503749,
+        "cached_input_tokens": 1415296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7021,
+        "reasoning_output_tokens": 3620
+      },
+      "formal_event_types": {
+        "thread.started": 1,
+        "item.completed": 55,
+        "turn.started": 1,
+        "item.started": 24,
+        "turn.completed": 1
+      },
+      "formal_model_active_seconds": null,
+      "formal_cost_usd": null
+    },
+    "accounting_rule": "unknown"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "019",
+    "source_and_execution": {
+      "whole_full_eval_outer_seconds": 39.33634750100009,
+      "inner_eval_already_in_whole_outer_seconds": 38.863615721000315,
+      "charge_inner_and_outer_twice": false,
+      "fresh_evaluator_creation_seconds": 0.17032064799968794,
+      "current_phase_ledger": {
+        "bytes": 18504
+      },
+      "current_phase_charged_seconds": 258.8970769220041,
+      "current_phase_remaining_seconds": 941.1029230779959,
+      "phase_and_all_history_actual_total_seconds": null,
+      "all_history_USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "existing_full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.17032064799968794,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 39.33634750100009,
+          "inner_budget_already_charged": 38.863615721000315,
+          "inner_known_actual_already_charged": 38.863615721000315,
+          "additional_budget": 0.47273177999977634,
+          "additional_known_actual": 0.47273177999977634,
+          "models": 0
+        }
+      },
+      "known_actual_elapsed_seconds_is_not_complete_phase_total": 257.8970769220041
+    },
+    "historical_source_and_method_reference": {
+      "protocol_historical_costs": {
+        "new_prepare_segments_not_reset": true,
+        "historical_source_model_elapsed_seconds": null,
+        "original_formal_cap_seconds": 3600,
+        "preserve_all_historical_costs_and_dispatches": true,
+        "original_formal_exact_seconds": null,
+        "original_remaining_seconds": null,
+        "Root_model_method_cap_not_yet_bound": null,
+        "USD": null,
+        "backend_seconds": null,
+        "operator_RD_seconds": null
+      },
+      "original_exact_remaining_seconds": null,
+      "all_older_records_retained": true
+    },
+    "accounting_rule": "unknown"
+  }
+}

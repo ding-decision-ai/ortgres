@@ -1,0 +1,128 @@
+diff --git a/sphinx/application.py b/sphinx/application.py
+index fd89e09..67a2ae6 100644
+--- a/sphinx/application.py
++++ b/sphinx/application.py
+@@ -1812,6 +1812,12 @@ def is_parallel_allowed(self, typ: str) -> bool:
+ 
+         return True
+ 
++    def set_html_assets_policy(self, policy: Literal['always', 'per_page']) -> None:
++        """Set when extensions should include their HTML assets."""
++        if policy not in ('always', 'per_page'):
++            msg = f'unknown HTML assets policy: {policy!r}'
++            raise ValueError(msg)
++        self.registry.html_assets_policy = policy
+ 
+ 
+ 
+@@ -1866,4 +1872,4 @@ def render_string(self, template: str, context: dict[str, Any]) -> str:
+         specified context (a Python dictionary).
+         """
+         msg = 'must be implemented in subclasses'
+-        raise NotImplementedError(msg)
+\ No newline at end of file
++        raise NotImplementedError(msg)
+diff --git a/sphinx/builders/latex/transforms.py b/sphinx/builders/latex/transforms.py
+index d385270..6cbbd47 100644
+--- a/sphinx/builders/latex/transforms.py
++++ b/sphinx/builders/latex/transforms.py
+@@ -633,6 +633,17 @@ class IndexInSectionTitleTransform(SphinxPostTransform):
+     default_priority = 400
+     formats = ('latex',)
+ 
++    def run(self, **kwargs: Any) -> None:
++        for title in self.document.findall(nodes.title):
++            section = title.parent
++            if not isinstance(section, nodes.section):
++                continue
++
++            insert_at = section.index(title) + 1
++            for index in list(title.findall(addnodes.index)):
++                index.parent.remove(index)
++                section.insert(insert_at, index)
++                insert_at += 1
+ 
+ 
+ 
+@@ -658,4 +669,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }
+diff --git a/sphinx/builders/singlehtml.py b/sphinx/builders/singlehtml.py
+index 951e021..87b56f8 100644
+--- a/sphinx/builders/singlehtml.py
++++ b/sphinx/builders/singlehtml.py
+@@ -39,6 +39,17 @@ class SingleFileHTMLBuilder(StandaloneHTMLBuilder):
+     def get_outdated_docs(self) -> str | list[str]:  # type: ignore[override]
+         return 'all documents'
+ 
++    def get_relative_uri(self, from_: str, to: str, typ: str | None = None) -> str:
++        # All source documents are written to the same output page, so the
++        # source document has no bearing on the resulting URI.
++        return self.get_target_uri(to, typ)
++
++    def get_target_uri(self, docname: str, typ: str | None = None) -> str:
++        if docname in self.env.all_docs:
++            return '#document-' + docname
++
++        # Additional pages are not part of the combined document.
++        return docname + self.out_suffix
+ 
+ 
+ 
+@@ -220,4 +231,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }
+diff --git a/sphinx/ext/imgmath.py b/sphinx/ext/imgmath.py
+index 9845ef2..b6e4c5f 100644
+--- a/sphinx/ext/imgmath.py
++++ b/sphinx/ext/imgmath.py
+@@ -84,6 +84,11 @@ def write_svg_depth(filename: Path, depth: int) -> None:
+         f.write('\n<!-- DEPTH=%s -->' % depth)
+ 
+ 
++def clean_up_files(app: Sphinx, exc: Exception) -> None:
++    if exc is None and app.config.imgmath_embed:
++        image_dir = Path(app.outdir, app.builder.imagedir, 'math')
++        shutil.rmtree(image_dir, ignore_errors=True)
++
+ 
+ 
+ 
+@@ -419,4 +424,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+     return {
+         'version': sphinx.__display_version__,
+         'parallel_read_safe': True,
+-    }
+\ No newline at end of file
++    }
+diff --git a/sphinx/transforms/post_transforms/code.py b/sphinx/transforms/post_transforms/code.py
+index 059a942..f5d44e4 100644
+--- a/sphinx/transforms/post_transforms/code.py
++++ b/sphinx/transforms/post_transforms/code.py
+@@ -65,6 +65,11 @@ def visit_document(self, node: Node) -> None:
+     def depart_document(self, node: Node) -> None:
+         self.settings.pop()
+ 
++    def depart_start_of_file(self, node: Node) -> None:
++        self.settings.pop()
++
++    def visit_start_of_file(self, node: Node) -> None:
++        self.settings.append(self.default_setting)
+ 
+ 
+ 
+@@ -140,4 +145,4 @@ def setup(app: Sphinx) -> ExtensionMetadata:
+         'version': 'builtin',
+         'parallel_read_safe': True,
+         'parallel_write_safe': True,
+-    }
+\ No newline at end of file
++    }

@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 34 items
+
+tests/_core/test_moves.py ..................................             [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_core/test_moves.py::TestJitter::test_default
+PASSED tests/_core/test_moves.py::TestJitter::test_width
+PASSED tests/_core/test_moves.py::TestJitter::test_x
+PASSED tests/_core/test_moves.py::TestJitter::test_y
+PASSED tests/_core/test_moves.py::TestJitter::test_seed
+PASSED tests/_core/test_moves.py::TestDodge::test_default
+PASSED tests/_core/test_moves.py::TestDodge::test_fill
+PASSED tests/_core/test_moves.py::TestDodge::test_drop
+PASSED tests/_core/test_moves.py::TestDodge::test_gap
+PASSED tests/_core/test_moves.py::TestDodge::test_widths_default
+PASSED tests/_core/test_moves.py::TestDodge::test_widths_fill
+PASSED tests/_core/test_moves.py::TestDodge::test_widths_drop
+PASSED tests/_core/test_moves.py::TestDodge::test_faceted_default
+PASSED tests/_core/test_moves.py::TestDodge::test_faceted_fill
+PASSED tests/_core/test_moves.py::TestDodge::test_faceted_drop
+PASSED tests/_core/test_moves.py::TestDodge::test_orient
+PASSED tests/_core/test_moves.py::TestDodge::test_single_semantic[grp2]
+PASSED tests/_core/test_moves.py::TestDodge::test_single_semantic[grp3]
+PASSED tests/_core/test_moves.py::TestDodge::test_two_semantics
+PASSED tests/_core/test_moves.py::TestStack::test_basic
+PASSED tests/_core/test_moves.py::TestStack::test_faceted
+PASSED tests/_core/test_moves.py::TestStack::test_misssing_data
+PASSED tests/_core/test_moves.py::TestStack::test_baseline_homogeneity_check
+PASSED tests/_core/test_moves.py::TestShift::test_default
+PASSED tests/_core/test_moves.py::TestShift::test_moves[0.3-0]
+PASSED tests/_core/test_moves.py::TestShift::test_moves[0-0.2]
+PASSED tests/_core/test_moves.py::TestShift::test_moves[0.1-0.3]
+PASSED tests/_core/test_moves.py::TestNorm::test_default_no_groups[x]
+PASSED tests/_core/test_moves.py::TestNorm::test_default_no_groups[y]
+PASSED tests/_core/test_moves.py::TestNorm::test_default_groups[x]
+PASSED tests/_core/test_moves.py::TestNorm::test_default_groups[y]
+PASSED tests/_core/test_moves.py::TestNorm::test_sum
+PASSED tests/_core/test_moves.py::TestNorm::test_where
+PASSED tests/_core/test_moves.py::TestNorm::test_percent
+============================== 34 passed in 0.41s ==============================

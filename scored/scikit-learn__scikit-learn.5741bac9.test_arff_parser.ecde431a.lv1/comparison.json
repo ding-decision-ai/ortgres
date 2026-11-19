@@ -1,0 +1,40 @@
+{
+  "instance_id": "scikit-learn__scikit-learn.5741bac9.test_arff_parser.ecde431a.lv1",
+  "repo": "scikit-learn/scikit-learn",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 9,
+      "failure": 1,
+      "total": 10
+    },
+    "p2p": {
+      "success": 433,
+      "failure": 0,
+      "total": 433
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "1ff5279de22280ee5375d3f29bbf9c158e1878aa122e6aadc8c291babb220dd1"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 9,
+      "failure": 1,
+      "total": 10
+    },
+    "p2p": {
+      "success": 433,
+      "failure": 0,
+      "total": 433
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "267d9fc10c4f0455dc802f037760024ea0149af1791be14f92817eb9dbb2851e"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "3fd30828328813db625aa8db0c949301bec5ca1f15eda6a36a70b17f1a7d2b6a",
+    "p2p": "99ccb72fbcb67b8cf0d094bcc85b4608bf28283d8ceb05077c83f31362b7c733"
+  }
+}

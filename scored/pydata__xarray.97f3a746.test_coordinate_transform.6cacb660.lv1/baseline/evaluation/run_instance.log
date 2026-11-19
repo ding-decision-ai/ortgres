@@ -1,0 +1,124 @@
+2026-10-11 05:13:31,778 - INFO - ============================================================
+2026-10-11 05:13:31,778 - INFO - Starting evaluation for instance: pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1
+2026-10-11 05:13:31,778 - INFO - Level: 1
+2026-10-11 05:13:31,778 - INFO - Attempt: 1
+2026-10-11 05:13:31,778 - INFO - ============================================================
+2026-10-11 05:13:31,785 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-11 05:13:31,785 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_xarray-instance_62de996a
+2026-10-11 05:13:31,786 - INFO - Image docker.io/libercoders/featurebench-specs_xarray-instance_62de996a found locally
+2026-10-11 05:13:31,786 - INFO - Creating container: fb-eval-pydata__xarray-97f3a746-test_coordinate_transform-6cacb660-lv1-attempt-1-20261011-051331-786782
+2026-10-11 05:13:31,787 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-11 05:13:32,044 - INFO - Container fb-eval-pydata__xarray-97f3a746-test_coordinate_transform-6cacb660-lv1-attempt-1-20261011-051331-786782 created successfully
+2026-10-11 05:13:32,044 - INFO - Starting Level 1 evaluation for pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1
+2026-10-11 05:13:32,044 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-11 05:13:32,491 - INFO - Restore project exit code: 0
+2026-10-11 05:13:32,491 - INFO - Output: 
+2026-10-11 05:13:32,491 - INFO - Step 2: Applying patch to mask files
+2026-10-11 05:13:32,495 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-11 05:13:32,757 - INFO - Mask patch apply exit code: 0
+2026-10-11 05:13:32,757 - INFO - Mask patch output: /tmp/mask_patch.diff:303: new blank line at EOF.
++
+/tmp/mask_patch.diff:1628: new blank line at EOF.
++
+/tmp/mask_patch.diff:3252: new blank line at EOF.
++
+warning: 3 lines add whitespace errors.
+
+2026-10-11 05:13:32,757 - INFO - Successfully applied mask patch
+2026-10-11 05:13:32,758 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-11 05:13:32,761 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-11 05:13:32,762 - INFO - Deleting F2P test file: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-11 05:13:33,010 - INFO - Successfully deleted F2P test file: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-11 05:13:33,010 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-11 05:13:33,010 - INFO - Step 4: Reinitializing git repository
+2026-10-11 05:13:34,766 - INFO - Step 5: Applying agent patch
+2026-10-11 05:13:34,770 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-11 05:13:35,030 - INFO - Patch apply exit code: 0
+2026-10-11 05:13:35,030 - INFO - Patch output: Checking patch xarray/coding/times.py...
+Checking patch xarray/compat/array_api_compat.py...
+Checking patch xarray/computation/apply_ufunc.py...
+Checking patch xarray/core/coordinate_transform.py...
+Checking patch xarray/core/coordinates.py...
+Checking patch xarray/core/dataarray.py...
+Checking patch xarray/core/dataset.py...
+Checking patch xarray/core/dtypes.py...
+Checking patch xarray/core/duck_array_ops.py...
+Checking patch xarray/core/formatting.py...
+Checking patch xarray/core/formatting_html.py...
+Checking patch xarray/core/indexes.py...
+Checking patch xarray/core/indexing.py...
+Checking patch xarray/core/nputils.py...
+Checking patch xarray/core/utils.py...
+Checking patch xarray/core/variable.py...
+Checking patch xarray/groupers.py...
+Checking patch xarray/namedarray/core.py...
+Checking patch xarray/namedarray/pycompat.py...
+Checking patch xarray/structure/merge.py...
+Applied patch xarray/coding/times.py cleanly.
+Applied patch xarray/compat/array_api_compat.py cleanly.
+Applied patch xarray/computation/apply_ufunc.py cleanly.
+Applied patch xarray/core/coordinate_transform.py cleanly.
+Applied patch xarray/core/coordinates.py cleanly.
+Applied patch xarray/core/dataarray.py cleanly.
+Applied patch xarray/core/dataset.py cleanly.
+Applied patch xarray/core/dtypes.py cleanly.
+Applied patch xarray/core/duck_array_ops.py cleanly.
+Applied patch xarray/core/formatting.py cleanly.
+Applied patch xarray/core/formatting_html.py cleanly.
+Applied patch xarray/core/indexes.py cleanly.
+Applied patch xarray/core/indexing.py cleanly.
+Applied patch xarray/core/nputils.py cleanly.
+Applied patch xarray/core/utils.py cleanly.
+Applied patch xarray/core/variable.py cleanly.
+Applied patch xarray/groupers.py cleanly.
+Applied patch xarray/namedarray/core.py cleanly.
+Applied patch xarray/namedarray/pycompat.py cleanly.
+Applied patch xarray/structure/merge.py cleanly.
+
+2026-10-11 05:13:35,030 - INFO - >>>>> Applied Patch
+2026-10-11 05:13:35,030 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-11 05:13:35,030 - INFO - F2P test path: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-11 05:13:35,278 - INFO - Delete F2P file exit code: 0
+2026-10-11 05:13:35,278 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-11 05:13:35,518 - INFO - Reverse apply exit code: 0
+2026-10-11 05:13:35,518 - INFO - Reverse apply output: 
+2026-10-11 05:13:35,518 - INFO - Successfully restored F2P test file using test_patch
+2026-10-11 05:13:35,518 - INFO - Step 7: Running tests
+2026-10-11 05:13:35,518 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-11 05:13:35,518 - INFO - Test timeout: 600s
+2026-10-11 05:13:35,518 - INFO - Running F2P test: /testbed/xarray/tests/test_coordinate_transform.py
+2026-10-11 05:13:41,214 - INFO - F2P test exit code: 1
+2026-10-11 05:13:41,214 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: zarr-3.1.3, env-1.2.0, asyncio-1.3.0, hypothesis-6.147.0, xdist-3.8.0, mypy-plugins-3.2.0, cov-7.0.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+col
+2026-10-11 05:13:41,214 - INFO - Saved F2P test output to artifact://d719d79b24342a3d
+2026-10-11 05:13:41,214 - INFO - Running 5 P2P tests
+2026-10-11 05:13:41,214 - INFO - Running P2P test: /testbed/xarray/tests/test_treenode.py
+2026-10-11 05:13:44,184 - INFO - P2P test /testbed/xarray/tests/test_treenode.py exit code: 0
+2026-10-11 05:13:44,184 - INFO - Saved P2P test output to artifact://a5ca2e8bd7297591
+2026-10-11 05:13:44,184 - INFO - Running P2P test: /testbed/xarray/tests/test_backends_chunks.py
+2026-10-11 05:13:47,096 - INFO - P2P test /testbed/xarray/tests/test_backends_chunks.py exit code: 0
+2026-10-11 05:13:47,096 - INFO - Saved P2P test output to artifact://d0250f413fe7a58a
+2026-10-11 05:13:47,096 - INFO - Running P2P test: /testbed/xarray/tests/test_plugins.py
+2026-10-11 05:13:50,082 - INFO - P2P test /testbed/xarray/tests/test_plugins.py exit code: 0
+2026-10-11 05:13:50,082 - INFO - Saved P2P test output to artifact://baf4f4bebce10aa9
+2026-10-11 05:13:50,082 - INFO - Running P2P test: /testbed/xarray/tests/test_backends_locks.py
+2026-10-11 05:13:52,999 - INFO - P2P test /testbed/xarray/tests/test_backends_locks.py exit code: 0
+2026-10-11 05:13:52,999 - INFO - Saved P2P test output to artifact://7cb12ef0c7254a35
+2026-10-11 05:13:52,999 - INFO - Running P2P test: /testbed/xarray/tests/test_backends_lru_cache.py
+2026-10-11 05:13:55,842 - INFO - P2P test /testbed/xarray/tests/test_backends_lru_cache.py exit code: 0
+2026-10-11 05:13:55,842 - INFO - Saved P2P test output to artifact://7f695900164c28c5
+2026-10-11 05:13:55,844 - INFO - ============================================================
+2026-10-11 05:13:55,844 - INFO - Evaluation completed for pydata__xarray.97f3a746.test_coordinate_transform.6cacb660.lv1
+2026-10-11 05:13:55,844 - INFO - Resolved: False
+2026-10-11 05:13:55,844 - INFO - F2P Pass rate: 0.7143
+2026-10-11 05:13:55,844 - INFO - ============================================================
+2026-10-11 05:13:55,844 - INFO - Stopping and removing container
+2026-10-11 05:14:06,070 - INFO - Container removed successfully

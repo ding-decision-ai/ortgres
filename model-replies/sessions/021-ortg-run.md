@@ -1,0 +1,1363 @@
+# 021 · ORTG · task-run
+
+pandas-dev__pandas.82fa2715.test_col.a592871d.lv1
+
+输入留存情况：Recorded solver input file
+
+以下保留已记录的模型消息与工具活动；未完成记录不补写最终回复。
+
+# Public model conversation
+
+Private reasoning is omitted; credential-bearing content is redacted.
+
+## 1. user / message
+
+````
+## Task
+**Task Statement: Restore the Deferred Expression Representation**
+
+Restore the listed `Expression.__repr__` method. The shown `__module__` class attribute
+is existing class context and must remain `"pandas.api.typing"`; it is not a second
+missing implementation. The surrounding repository already builds deferred column
+expressions and their display strings, so the method only returns the stored display
+string, falling back to `"Expr(...)"` when that string is falsy.
+
+**NOTE**: 
+- This test comes from the `pandas` library, and we have given you the content of this code repository under `/testbed/`, and you need to complete based on this code repository and supplement the files we specify. Remember, all your changes must be in this codebase, and changes that are not in this codebase will not be discovered and tested by us.
+- We've already installed all the environments and dependencies you need, you don't need to install any dependencies, just focus on writing the code!
+- **CRITICAL REQUIREMENT**: After completing the task, pytest will be used to test your implementation. **YOU MUST** match the exact interface shown in the **Interface Description** (I will give you this later)
+
+You are forbidden to access the following URLs:
+black_links:
+- https://github.com/pandas-dev/pandas
+
+Your final deliverable should be code under the `/testbed/` directory, and after completing the codebase, we will evaluate your completion and it is important that you complete our tasks with integrity and precision.
+
+The final structure is like below.
+```
+/testbed                   # all your work should be put into this codebase and match the specific dir structure
+├── dir1/
+│   ├── file1.py
+│   ├── ...
+├── dir2/
+```
+
+## Interface Descriptions
+
+### Clarification
+The **Interface Description**  describes what the functions we are testing do and the input and output formats.
+
+for example, you will get things like this:
+
+Path: `/testbed/pandas/core/col.py`
+```python
+class Expression:
+    """
+    
+        Class representing a deferred column.
+    
+        This is not meant to be instantiated directly. Instead, use :meth:`pandas.col`.
+        
+    """
+    __module__ = "pandas.api.typing"
+
+    def __repr__(self) -> str:
+        """
+        Return the string representation of the Expression object.
+        
+        This method provides a human-readable string representation of the Expression,
+        which is useful for debugging and displaying the expression structure. The
+        representation shows the deferred operations that will be applied when the
+        expression is evaluated against a DataFrame.
+        
+        Returns
+        -------
+        str
+            The symbolic representation already established for the expression. If no
+            non-empty symbolic representation is available, returns `"Expr(...)"`.
+        
+        Notes
+        -----
+        The returned string represents the symbolic form of the expression, showing
+        column references, operations, and method calls in a readable format. For
+        example, mathematical operations are displayed with their corresponding
+        symbols (e.g., "+", "-", "*"), and method calls are shown with their
+        arguments.
+        
+        Chained expression-building operations establish the symbolic representation that
+        this method exposes; `__repr__` must not evaluate the expression.
+        
+        Examples
+        --------
+        For a simple column reference:
+        col('price') -> "col('price')"
+        
+        For a mathematical operation:
+        col('price') * 2 -> "(col('price') * 2)"
+        
+        For method chaining:
+        col('name').str.upper() -> "col('name').str.upper()"
+        """
+        # <your code>
+...
+```
+The value of Path declares the path under which the following interface should be implemented and you must generate the interface class/function given to you under the specified path. 
+
+In addition to the above path requirement, you may try to modify any file in codebase that you feel will help you accomplish our task. However, please note that you may cause our test to fail if you arbitrarily modify or delete some generic functions in existing files, so please be careful in completing your work.
+
+All required dependencies are already installed. Do not fetch or install additional packages; focus on the interface and behavior specified here. You **MUST** fulfill the input/output format described by this interface, otherwise the test will not pass and you will get zero points for this feature.
+
+And note that there may be not only one **Interface Description**, you should match all **Interface Description {n}**
+
+### Interface Description 1
+Below is **Interface Description 1**
+
+Path: `/testbed/pandas/core/col.py`
+```python
+class Expression:
+    """
+    
+        Class representing a deferred column.
+    
+        This is not meant to be instantiated directly. Instead, use :meth:`pandas.col`.
+        
+    """
+    __module__ = "pandas.api.typing"
+
+    def __repr__(self) -> str:
+        """
+        Return the string representation of the Expression object.
+        
+        This method provides a human-readable string representation of the Expression,
+        which is useful for debugging and displaying the expression structure. The
+        representation shows the deferred operations that will be applied when the
+        expression is evaluated against a DataFrame.
+        
+        Returns
+        -------
+        str
+            The symbolic representation already established for the expression. If no
+            non-empty symbolic representation is available, returns `"Expr(...)"`.
+        
+        Notes
+        -----
+        The returned string represents the symbolic form of the expression, showing
+        column references, operations, and method calls in a readable format. For
+        example, mathematical operations are displayed with their corresponding
+        symbols (e.g., "+", "-", "*"), and method calls are shown with their
+        arguments.
+        
+        Chained expression-building operations establish the symbolic representation that
+        this method exposes; `__repr__` must not evaluate the expression.
+        
+        Examples
+        --------
+        For a simple column reference:
+        col('price') -> "col('price')"
+        
+        For a mathematical operation:
+        col('price') * 2 -> "(col('price') * 2)"
+        
+        For method chaining:
+        col('name').str.upper() -> "col('name').str.upper()"
+        """
+        # <your code>
+```
+
+Remember, **the interface template above is extremely important**. You must generate callable interfaces strictly according to the specified requirements, as this will directly determine whether you can pass our tests. If your implementation has incorrect naming or improper input/output formats, it may directly result in a 0% pass rate for this case.
+
+Use the current masked working tree and its visible tests. Web search is disabled. Do not recover a reference implementation from the internet, Git history, installed copies, caches, other workspaces, or filesystem search outside this repository. Normal tests may import installed dependencies. Fix genuine task blockers, including required helpers and consumers. Do not modify tests to conceal failures. The repository outline contains existing source-only knowledge, and task-related preparation may leave unrelated outlines unknown. Use it to locate relevant files; read current source as needed and maintain outlines for files you change. Do not spend the task budget completing unrelated repository outlines.
+
+````
+
+## 2. tool / event
+
+```
+{
+  "name": "thread.started",
+  "output": {
+    "type": "thread.started",
+    "session_ref": "ref-002074"
+  }
+}
+```
+
+## 3. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "id": "item_0",
+    "type": "error",
+    "message": "`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."
+  },
+  "message_ref": "item_0"
+}
+```
+
+## 4. tool / event
+
+```
+{
+  "name": "error",
+  "output": {
+    "id": "item_1",
+    "type": "error",
+    "message": "`--dangerously-bypass-hook-trust` is enabled. Enabled hooks may run without review for this invocation."
+  },
+  "message_ref": "item_1"
+}
+```
+
+## 5. tool / event
+
+```
+{
+  "name": "turn.started",
+  "output": {
+    "type": "turn.started"
+  }
+}
+```
+
+## 6. assistant / message
+
+```
+当前纲要对账为：对齐 4、过期 0、无纲要 2500。我先读取仓库纲要，再只核查 `pandas/core/col.py` 及相关可见测试，完成最小实现并运行针对性验证。
+```
+
+## 7. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_5",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_overview",
+    "arguments": {},
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 8. assistant / tool_call
+
+```
+{
+  "name": "ortg_overview",
+  "server": "ortg",
+  "arguments": {},
+  "call_ref": "item_5"
+}
+```
+
+## 9. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "ortg: 当前为任务维护模式(task)。无需先补齐全部文档；未覆盖文件继续保留裸行与未知状态，实时对账仍报告无纲要，不代表全库初始化完成。 任务纲要生成：普通任务先显式用 ortg_header mode=task。先读原任务和可见测试，列出相关仓库相对路径及关联理由，再逐份读正文，仅生成或修订任务和测试有关文件的纲要。沿合法公共对象的构造或获取、目标调用、输出及实际依赖，将必要 helper 和消费者动态纳入。已有有据且对齐的纲要复用，不为凑全库覆盖补无关文件；未相关裸行保持未知，不宣称全库 ready。可见测试缺失时，依据公开接口和可见调用方形成候选并标未验证，不用隐藏评测、gold 或历史失败答案推范围。相关名单只限定纲要生成，不缩小任务、源码、角色或测试评测范围；保留原库存与已有真实纲要，不通过改忽略/观察角色隐藏无关文件。只有用户明确要求全库初始化才用 mode=build。\n\n#纲要格式：文件名[标签]: Role:职责 | Uses:依赖 | API:对外契约 | Constraints:约束 ；文件名不带路径；四字段必填,无内容写-\n#骨架规则：只有裸文件名没有纲要的行是尚未建立认知的文件,读取时顺便生成纲要并调用 ortg_update 提交\n#目标规则：条目下一行 #目标: 是目标纲要(改完后应有的纲要,不写待核查事项)；#目标:删除 计划删除；#计划新建 文件尚不存在\n#测试契约规则：被测试锁定的对外行为写成\"必须保持 X(测试名)\"并写清期望结果；只涉及一个文件的写进它的 Constraints,跨模块的登记进【契约】；需求与守护测试冲突时按证据裁决:需求点名该测试或说旧行为错→改测试,需求说测试权威/行为不变/只是迁移→保持,有命令与期望输出的验收例→按实跑结果,都没有→先求两全,不能两全按需求实现,并把选择与理由记进纲要\n#契约规则：跨模块、不靠调用关系的约定在纲要头登记为 #【契约】键：正文；参与文件用 Keys 声明角色。\n#===代码纲要规范===\n#【标签】[C A B D… E] 重要度数字在前,其后层级、模块、特征(0到多个)、规模,空格分隔\n#A层级: E入口 C核心 S服务 D数据 I集成 U工具 T测试 B构建 X配置 O文档\n#B模块: P公共API与核心容器 Y类型与扩展数组 I索引与内部存储 T时间序列 G分组窗口 R算法计算与重塑 F输入输出与格式 V绘图 L本地扩展 U配置兼容与通用工具 B构建发布与CI Q测试基准与质量工具 W文档网站与社区\n#C重要度: 9核心 8高频 7业务 5常规 3辅助 1边缘\n#D特征: N本地编译 E扩展数组 K兼容协议 M元编程\n#E规模: L大>400 M中200-400 S小100-200 T微<100\n#===代码纲要规范完毕===\n#任务交接 public_consumer_path_v1：Deferred Expression repr 的公开调用链记录保存在 /agent-logs/related_files.json；仅基于当前遮罩源码与 pandas/tests/api/test_api.py 静态全文阅读，测试未执行，且可见测试只约束 col/Expression 导出与模块归属、不覆盖 Expression.__repr__，该记录和 subset-ready 均不构成语义正确或测试通过证明。\n\n#代码纲要\n\n===/testbed/===\n.devcontainer.json\n.gitattributes\n.gitignore\n.gitpod.yml\n.pre-commit-config.yaml\nAUTHORS.md\nCITATION.cff\nDockerfile\nLICENSE\nMANIFEST.in\nREADME.md\ncodecov.yml\nenvironment.yml\ngenerate_pxi.py\ngenerate_version.py\nmeson.build\npyproject.toml\npyright_reportGeneralTypeIssues.json\nrequirements-dev.txt\nsetup.py\n\n===/testbed/.github/===\nCODEOWNERS\nPULL_REQUEST_TEMPLATE.md\ndependabot.yml\n\n===/testbed/.github/ISSUE_TEMPLATE/===\nbug_report.yaml\ndocumentation_improvement.yaml\nfeature_request.yaml\ninstallation_issue.yaml\npdep_vote.yaml\nperformance_issue.yaml\nsubmit_question.yml\n\n===/testbed/.github/actions/build_pandas/===\naction.yml\n\n===/testbed/.github/actions/run-tests/===\naction.yml\n\n===/testbed/.github/actions/setup-conda/===\naction.yml\n\n===/testbed/.github/workflows/===\ncache-cleanup-daily.yml\ncache-cleanup.yml\ncode-checks.yml\ncodeql.yml\ncomment-commands.yml\ndeprecation-tracking-bot.yml\ndocbuild-and-upload.yml\npackage-checks.yml\nstale-pr.yml\nunit-tests.yml\nwheels.yml\n\n===/testbed/LICENSES/===\nBOTTLENECK_LICENCE\nDATEUTIL_LICENSE\nHAVEN_LICENSE\nHAVEN_MIT\nKLIB_LICENSE\nMUSL_LICENSE\nNUMPY_LICENSE\nPACKAGING_LICENSE\nPSF_LICENSE\nPYPERCLIP_LICENSE\nPYUPGRADE_LICENSE\nSAS7BDAT_LICENSE\nULTRAJSON_LICENSE\n\n===/testbed/asv_bench/===\nasv.conf.json\n\n===/testbed/asv_bench/benchmarks/===\n__init__.py\nalgorithms.py\narithmetic.py\narray.py\nattrs_caching.py\nboolean.py\ncategoricals.py\nctors.py\ndtypes.py\neval.py\nfinalize.py\nframe_ctor.py\nframe_methods.py\ngil.py\ngroupby.py\nhash_functions.py\nindex_cached_properties.py\nindex_object.py\nindexing.py\nindexing_engines.py\ninference.py\njoin_merge.py\nlibs.py\nmultiindex_object.py\npackage.py\npandas_vb_common.py\nperiod.py\nplotting.py\nreindex.py\nreplace.py\nreshape.py\nrolling.py\nseries_methods.py\nsparse.py\nstat_ops.py\nstrftime.py\nstrings.py\ntimedelta.py\ntimeseries.py\n\n===/testbed/asv_bench/benchmarks/algos/===\n__init__.py\nisin.py\n\n===/testbed/asv_bench/benchmarks/io/===\n__init__.py\ncsv.py\nexcel.py\nhdf.py\njson.py\nparsers.py\npickle.py\nsas.py\nsql.py\nstata.py\nstyle.py\n\n===/testbed/asv_bench/benchmarks/tslibs/===\n__init__.py\nfields.py\nnormalize.py\noffsets.py\nperiod.py\nresolution.py\ntimedelta.py\ntimestamp.py\ntslib.py\ntz_convert.py\n\n===/testbed/ci/===\n.condarc\ncode_checks.sh\nmeta.yaml\nrun_tests.sh\nupload_wheels.sh\n\n===/testbed/ci/deps/===\nactions-311-minimum_versions.yaml\nactions-311.yaml\nactions-312.yaml\nactions-313-downstream_compat.yaml\nactions-313-freethreading.yaml\nactions-313-numpydev.yaml\nactions-313-pyarrownightly.yaml\nactions-313.yaml\n\n===/testbed/doc/===\n.gitignore\nmake.py\nredirects.csv\n\n===/testbed/doc/_templates/===\napi_redirect.html\npandas_footer.html\nsidebar-nav-bs.html\n\n===/testbed/doc/_templates/autosummary/===\naccessor.rst\naccessor_attribute.rst\naccessor_callable.rst\naccessor_method.rst\nclass.rst\nclass_without_autosummary.rst\n\n===/testbed/doc/cheatsheet/===\nPandas_Cheat_Sheet.pdf\nPandas_Cheat_Sheet.pptx\nPandas_Cheat_Sheet_FA.pdf\nPandas_Cheat_Sheet_FA.pptx\nPandas_Cheat_Sheet_JA.pdf\nPandas_Cheat_Sheet_JA.pptx\nREADME.md\n\n===/testbed/doc/scripts/===\neval_performance.py\n\n===/testbed/doc/source/===\nconf.py\nindex.rst.template\n\n===/testbed/doc/source/_static/===\nci.png\ndf_repr_truncated.png\neval-perf.png\nindex_api.svg\nindex_contribute.svg\nindex_getting_started.svg\nindex_user_guide.svg\nlogo_r.svg\nlogo_sas.svg\nlogo_sas_white.svg\nlogo_sql.svg\nlogo_stata.svg\nnew-excel-index.png\nold-excel-index.png\nprint_df_new.png\nprint_df_old.png\nquery-perf.png\nquestion_mark_noback.svg\nreshaping_melt.png\nreshaping_pivot.png\nreshaping_stack.png\nreshaping_unstack.png\nreshaping_unstack_0.png\nreshaping_unstack_1.png\nstyle-excel.png\ntrunc_after.png\ntrunc_before.png\nwhatsnew_assign.png\nwhatsnew_plot_submethods.png\n\n===/testbed/doc/source/_static/css/===\ngetting_started.css\npandas.css\n\n===/testbed/doc/source/_static/schemas/===\n01_table_dataframe.svg\n01_table_series.svg\n01_table_spreadsheet.png\n02_io_readwrite.svg\n03_subset_columns.svg\n03_subset_columns_rows.svg\n03_subset_rows.svg\n04_plot_overview.svg\n05_newcolumn_1.svg\n05_newcolumn_2.svg\n05_newcolumn_3.svg\n06_aggregate.svg\n06_groupby.svg\n06_groupby_agg_detail.svg\n06_groupby_select_detail.svg\n06_reduction.svg\n06_valuecounts.svg\n07_melt.svg\n07_pivot.svg\n07_pivot_table.svg\n08_concat_column.svg\n08_concat_row.svg\n08_merge_left.svg\n\n===/testbed/doc/source/_static/spreadsheets/===\nconditional.png\nfilter.png\nfind.png\nlogo_excel.svg\npivot.png\nsort.png\nvlookup.png\n\n===/testbed/doc/source/_static/style/===\nappmaphead1.png\nappmaphead2.png\nbg_ax0.png\nbg_axNone.png\nbg_axNone_gmap.png\nbg_axNone_lowhigh.png\nbg_axNone_vminvmax.png\nbg_gmap.png\ndf_pipe.png\ndf_pipe_applydata.png\ndf_pipe_applymap.png\ndf_pipe_hl.png\ndf_pipe_hl2.png\nfooter_extended.png\nfooter_simple.png\nformat_excel_css.png\nhbetw_axNone.png\nhbetw_basic.png\nhbetw_props.png\nhbetw_seq.png\nhq_ax1.png\nhq_axNone.png\nhq_props.png\nlatex_1.png\nlatex_2.png\nlatex_stocks.png\nlatex_stocks_html.png\ntg_ax0.png\ntg_axNone.png\ntg_axNone_gmap.png\ntg_axNone_lowhigh.png\ntg_axNone_vminvmax.png\ntg_gmap.png\n\n===/testbed/doc/source/development/===\ncommunity.rst\ncontributing.rst\ncontributing_codebase.rst\ncontributing_docstring.rst\ncontributing_documentation.rst\ncontributing_environment.rst\ncontributing_gitpod.rst\ncopy_on_write.rst\ndebugging_extensions.rst\ndeveloper.rst\nextending.rst\nindex.rst\ninternals.rst\nmaintaining.rst\npolicies.rst\n\n===/testbed/doc/source/development/gitpod-imgs/===\ngitpod-dashboard-stop.png\ngitpod-edit-permissions-gh.png\ngitpod-edit-permissions-repo.png\ngitpod-workspace.png\npandas-github.png\npandas-gitpod-branches.png\nrst-rendering.png\nvscode-rst.png\nvscode-statusbar.png\n\n===/testbed/doc/source/getting_started/===\nindex.rst\ninstall.rst\noverview.rst\ntutorials.rst\n\n===/testbed/doc/source/getting_started/comparison/===\ncomparison_with_r.rst\ncomparison_with_sas.rst\ncomparison_with_spreadsheets.rst\ncomparison_with_spss.rst\ncomparison_with_sql.rst\ncomparison_with_stata.rst\nindex.rst\n\n===/testbed/doc/source/getting_started/comparison/includes/===\ncase.rst\ncolumn_operations.rst\ncolumn_selection.rst\nconstruct_dataframe.rst\ncopies.rst\nextract_substring.rst\nfiltering.rst\nfind_substring.rst\ngroupby.rst\nif_then.rst\nintroduction.rst\nlength.rst\nlimit.rst\nmerge.rst\nmerge_setup.rst\nmissing.rst\nmissing_intro.rst\nnth_word.rst\nsorting.rst\ntime_date.rst\ntransform.rst\n\n===/testbed/doc/source/getting_started/intro_tutorials/===\n01_table_oriented.rst\n02_read_write.rst\n03_subset_data.rst\n04_plotting.rst\n05_add_columns.rst\n06_calculate_statistics.rst\n07_reshape_table_layout.rst\n08_combine_dataframes.rst\n09_timeseries.rst\n10_text_data.rst\nindex.rst\n\n===/testbed/doc/source/getting_started/intro_tutorials/includes/===\nair_quality_no2.rst\ntitanic.rst\n\n===/testbed/doc/source/reference/===\naliases.rst\narrays.rst\nextensions.rst\nframe.rst\ngeneral_functions.rst\ngroupby.rst\nindex.rst\nindexing.rst\nio.rst\nmissing_value.rst\noffset_frequency.rst\noptions.rst\nplotting.rst\nresampling.rst\nseries.rst\nstyle.rst\ntesting.rst\nwindow.rst\n\n===/testbed/doc/source/user_guide/===\n10min.rst\nadvanced.rst\nbasics.rst\nboolean.rst\ncategorical.rst\ncookbook.rst\ncopy_on_write.rst\ndsintro.rst\nduplicates.rst\nenhancingperf.rst\ngotchas.rst\ngroupby.rst\nindex.rst\nindexing.rst\ninteger_na.rst\nio.rst\nmerging.rst\nmigration-3-strings.rst\nmissing_data.rst\noptions.rst\npyarrow.rst\nreshaping.rst\nscale.rst\nsparse.rst\nstyle.ipynb\ntext.rst\ntimedeltas.rst\ntimeseries.rst\nuser_defined_functions.rst\nvisualization.rst\nwindow.rst\n\n===/testbed/doc/source/user_guide/templates/===\nhtml_style_structure.html\nhtml_table_structure.html\nmyhtml.tpl\n\n===/testbed/doc/source/whatsnew/===\nindex.rst\nv0.10.0.rst\nv0.10.1.rst\nv0.11.0.rst\nv0.12.0.rst\nv0.13.0.rst\nv0.13.1.rst\nv0.14.0.rst\nv0.14.1.rst\nv0.15.0.rst\nv0.15.1.rst\nv0.15.2.rst\nv0.16.0.rst\nv0.16.1.rst\nv0.16.2.rst\nv0.17.0.rst\nv0.17.1.rst\nv0.18.0.rst\nv0.18.1.rst\nv0.19.0.rst\nv0.19.1.rst\nv0.19.2.rst\nv0.20.0.rst\nv0.20.2.rst\nv0.20.3.rst\nv0.21.0.rst\nv0.21.1.rst\nv0.22.0.rst\nv0.23.0.rst\nv0.23.1.rst\nv0.23.2.rst\nv0.23.3.rst\nv0.23.4.rst\nv0.24.0.rst\nv0.24.1.rst\nv0.24.2.rst\nv0.25.0.rst\nv0.25.1.rst\nv0.25.2.rst\nv0.25.3.rst\nv0.4.x.rst\nv0.5.0.rst\nv0.6.0.rst\nv0.6.1.rst\nv0.7.0.rst\nv0.7.1.rst\nv0.7.2.rst\nv0.7.3.rst\nv0.8.0.rst\nv0.8.1.rst\nv0.9.0.rst\nv0.9.1.rst\nv1.0.0.rst\nv1.0.1.rst\nv1.0.2.rst\nv1.0.3.rst\nv1.0.4.rst\nv1.0.5.rst\nv1.1.0.rst\nv1.1.1.rst\nv1.1.2.rst\nv1.1.3.rst\nv1.1.4.rst\nv1.1.5.rst\nv1.2.0.rst\nv1.2.1.rst\nv1.2.2.rst\nv1.2.3.rst\nv1.2.4.rst\nv1.2.5.rst\nv1.3.0.rst\nv1.3.1.rst\nv1.3.2.rst\nv1.3.3.rst\nv1.3.4.rst\nv1.3.5.rst\nv1.4.0.rst\nv1.4.1.rst\nv1.4.2.rst\nv1.4.3.rst\nv1.4.4.rst\nv1.5.0.rst\nv1.5.1.rst\nv1.5.2.rst\nv1.5.3.rst\nv2.0.0.rst\nv2.0.1.rst\nv2.0.2.rst\nv2.0.3.rst\nv2.1.0.rst\nv2.1.1.rst\nv2.1.2.rst\nv2.1.3.rst\nv2.1.4.rst\nv2.2.0.rst\nv2.2.1.rst\nv2.2.2.rst\nv2.2.3.rst\nv2.3.0.rst\nv2.3.1.rst\nv2.3.2.rst\nv2.3.3.rst\nv3.0.0.rst\nwhatsnew_0171_html_table.html\n\n===/testbed/doc/sphinxext/===\nREADME.rst\nannounce.py\ncontributors.py\n\n===/testbed/gitpod/===\nDockerfile\ngitpod.Dockerfile\nsettings.json\nworkspace_config\n\n===/testbed/pandas/===\n__init__.py[9 E P M]: Role:初始化 pandas 包、校验运行依赖并汇集顶层公共数据结构、函数、子包与版本信息 | Uses:pandas/_config/(顶层选项 API 与初始化), pandas/core/api.py(核心容器和通用操作导出), pandas/core/col.py(col 导出), pandas/core/reshape/api.py(重塑合并导出), pandas/io/api.py(IO 导出) | API:pandas 顶层公共命名空间与 __all__，其中 col 是 pandas.core.col.col 的直接公开别名 | Constraints:必须保持顶层实际命名空间与测试清单一致（TestPDApi.test_api），并保持 __all__ 与公开清单无缺漏或多余项（TestPDApi.test_api_all）；当前可见测试仅确认 col 名称存在及列入 __all__，不调用 pd.col 或 Expression.__repr__，且测试未执行\n_typing.py\n_version.py\nconftest.py\nmeson.build\ntesting.py\n\n===/testbed/pandas/_config/===\n__init__.py\nconfig.py\ndates.py\ndisplay.py\nlocalization.py\n\n===/testbed/pandas/_libs/===\n__init__.py\nalgos.pxd\nalgos.pyi\nalgos.pyx\nalgos_common_helper.pxi.in\nalgos_take_helper.pxi.in\narrays.pxd\narrays.pyi\narrays.pyx\nbyteswap.pyi\nbyteswap.pyx\ndtypes.pxd\nfree_threading_config.pxi.in\ngroupby.pyi\ngroupby.pyx\nhashing.pyi\nhashing.pyx\nhashtable.pxd\nhashtable.pyi\nhashtable.pyx\nhashtable_class_helper.pxi.in\nhashtable_func_helper.pxi.in\nindex.pyi\nindex.pyx\nindex_class_helper.pxi.in\nindexing.pyi\nindexing.pyx\ninternals.pyi\ninternals.pyx\ninterval.pyi\ninterval.pyx\nintervaltree.pxi.in\njoin.pyi\njoin.pyx\njson.pyi\nkhash.pxd\nkhash_for_primitive_helper.pxi.in\nlib.pxd\nlib.pyi\nlib.pyx\nmeson.build\nmissing.pxd\nmissing.pyi\nmissing.pyx\nops.pyi\nops.pyx\nops_dispatch.pyi\nops_dispatch.pyx\nparsers.pyi\nparsers.pyx\nproperties.pyi\nproperties.pyx\nreshape.pyi\nreshape.pyx\nsas.pyi\nsas.pyx\nsparse.pyi\nsparse.pyx\nsparse_op_helper.pxi.in\ntesting.pyi\ntesting.pyx\ntslib.pyi\ntslib.pyx\nutil.pxd\nwriters.pyi\nwriters.pyx\n\n===/testbed/pandas/_libs/include/pandas/===\nportable.h\nskiplist.h\n\n===/testbed/pandas/_libs/include/pandas/datetime/===\ndate_conversions.h\npd_datetime.h\n\n===/testbed/pandas/_libs/include/pandas/parser/===\nio.h\npd_parser.h\ntokenizer.h\n\n===/testbed/pandas/_libs/include/pandas/vendored/klib/===\nkhash.h\nkhash_python.h\n\n===/testbed/pandas/_libs/include/pandas/vendored/numpy/datetime/===\nnp_datetime.h\nnp_datetime_strings.h\n\n===/testbed/pandas/_libs/include/pandas/vendored/ujson/lib/===\nultrajson.h\n\n===/testbed/pandas/_libs/src/datetime/===\ndate_conversions.c\npd_datetime.c\n\n===/testbed/pandas/_libs/src/parser/===\nio.c\npd_parser.c\ntokenizer.c\n\n===/testbed/pandas/_libs/src/vendored/numpy/datetime/===\nnp_datetime.c\nnp_datetime_strings.c\n\n===/testbed/pandas/_libs/src/vendored/ujson/lib/===\nultrajsondec.c\nultrajsonenc.c\n\n===/testbed/pandas/_libs/src/vendored/ujson/python/===\nJSONtoObj.c\nobjToJSON.c\nujson.c\n\n===/testbed/pandas/_libs/tslibs/===\n__init__.py\nbase.pxd\nbase.pyx\nccalendar.pxd\nccalendar.pyi\nccalendar.pyx\nconversion.pxd\nconversion.pyi\nconversion.pyx\ndtypes.pxd\ndtypes.pyi\ndtypes.pyx\nfields.pyi\nfields.pyx\nmeson.build\nnattype.pxd\nnattype.pyi\nnattype.pyx\nnp_datetime.pxd\nnp_datetime.pyi\nnp_datetime.pyx\noffsets.pxd\noffsets.pyi\noffsets.pyx\nparsing.pxd\nparsing.pyi\nparsing.pyx\nperiod.pxd\nperiod.pyi\nperiod.pyx\nstrptime.pxd\nstrptime.pyi\nstrptime.pyx\ntimedeltas.pxd\ntimedeltas.pyi\ntimedeltas.pyx\ntimestamps.pxd\ntimestamps.pyi\ntimestamps.pyx\ntimezones.pxd\ntimezones.pyi\ntimezones.pyx\ntzconversion.pxd\ntzconversion.pyi\ntzconversion.pyx\nutil.pxd\nvectorized.pyi\nvectorized.pyx\n\n===/testbed/pandas/_libs/window/===\n__init__.py\naggregations.pyi\naggregations.pyx\nindexers.pyi\nindexers.pyx\nmeson.build\n\n===/testbed/pandas/_testing/===\n__init__.py\n_hypothesis.py\n_io.py\n_warnings.py\nasserters.py\ncompat.py\ncontexts.py\n\n===/testbed/pandas/api/===\n__init__.py\ninternals.py\n\n===/testbed/pandas/api/executors/===\n__init__.py\n\n===/testbed/pandas/api/extensions/===\n__init__.py\n\n===/testbed/pandas/api/indexers/===\n__init__.py\n\n===/testbed/pandas/api/interchange/===\n__init__.py\n\n===/testbed/pandas/api/types/===\n__init__.py\n\n===/testbed/pandas/api/typing/===\n__init__.py[7 E P T]: Role:汇集并公开供类型标注使用的 pandas 中间结果类与读取器类型 | Uses:pandas/core/col.py(Expression), pandas/core/groupby/(GroupBy 类型), pandas/core/resample.py(重采样类型), pandas/core/window/(窗口类型), pandas/io/(读取器类型) | API:pandas.api.typing 公共类型命名空间与 __all__，包括 Expression | Constraints:必须保持公开命名空间与允许清单一致（TestApi.test_api_typing）；Expression 从 pandas.core.col 重导出且其 __module__ 必须保持 pandas.api.typing，使 test_attributes_module 的模块归属与反向导入成立；这些可见测试未调用 Expression.__repr__，且测试未执行\naliases.py\n\n===/testbed/pandas/arrays/===\n__init__.py\n\n===/testbed/pandas/compat/===\n__init__.py\n_constants.py\n_optional.py\npickle_compat.py\npyarrow.py\n\n===/testbed/pandas/compat/numpy/===\n__init__.py\nfunction.py\n\n===/testbed/pandas/core/===\n__init__.py\naccessor.py\nalgorithms.py\napi.py\napply.py\narraylike.py\nbase.py\ncol.py[9 C P M M]: Role:实现 DataFrame 列的延迟 Expression，负责求值回调、运算与方法链组合及其符号展示字符串 | Uses:pandas/core/series.py(访问器发现与延迟方法契约), pandas/core/frame.py(DataFrame 列选择求值契约), pandas/util/_decorators.py(将 col 公开归属设为 pandas) | API:pandas.col(col_name)->pandas.api.typing.Expression；Expression 可调用求值并支持二元运算、NumPy ufunc、Series 普通方法与访问器链 | Constraints:Expression.__module__ 必须保持 pandas.api.typing；各表达式构造路径先建立 _repr_str，公开任务规定 __repr__ 只返回 truthy 的存储展示串，否则返回 \"Expr(...)\" 且不得求值，但当前遮罩源码中该方法体缺失，留待正式修复阶段；col 只接受 Hashable，实际求值时缺列抛含候选列提示的 ValueError；pandas/tests/api/test_api.py 仅静态约束 pd.col 导出、Expression 类型导出及公开模块归属，未调用该公开入口或覆盖 repr，且测试未执行\ncommon.py\nconfig_init.py\nconstruction.py\nflags.py\nframe.py\ngeneric.py\nindexing.py\nmissing.py\nnanops.py\nresample.py\nroperator.py\nsample.py\nseries.py\nshared_docs.py\nsorting.py\n\n===/testbed/pandas/core/_numba/===\n__init__.py\nexecutor.py\nextensions.py\n\n===/testbed/pandas/core/_numba/kernels/===\n__init__.py\nmean_.py\nmin_max_.py\nshared.py\nsum_.py\nvar_.py\n\n===/testbed/pandas/core/array_algos/===\n__init__.py\ndatetimelike_accumulations.py\nmasked_accumulations.py\nmasked_reductions.py\nputmask.py\nquantile.py\nreplace.py\ntake.py\ntransforms.py\n\n===/testbed/pandas/core/arrays/===\n__init__.py\n_arrow_string_mixins.py\n_mixins.py\n_ranges.py\n_utils.py\nbase.py\nboolean.py\ncategorical.py\ndatetimelike.py\ndatetimes.py\nfloating.py\ninteger.py\ninterval.py\nmasked.py\nnumeric.py\nnumpy_.py\nperiod.py\nstring_.py\nstring_arrow.py\ntimedeltas.py\n\n===/testbed/pandas/core/arrays/arrow/===\n__init__.py\n_arrow_utils.py\naccessors.py\narray.py\nextension_types.py\n\n===/testbed/pandas/core/arrays/sparse/===\n__init__.py\naccessor.py\narray.py\nscipy_sparse.py\n\n===/testbed/pandas/core/computation/===\n__init__.py\nalign.py\napi.py\ncheck.py\ncommon.py\nengines.py\neval.py\nexpr.py\nexpressions.py\nops.py\nparsing.py\npytables.py\nscope.py\n\n===/testbed/pandas/core/dtypes/===\n__init__.py\napi.py\nastype.py\nbase.py\ncast.py\ncommon.py\nconcat.py\ndtypes.py\ngeneric.py\ninference.py\nmissing.py\n\n===/testbed/pandas/core/groupby/===\n__init__.py\nbase.py\ncategorical.py\ngeneric.py\ngroupby.py\ngrouper.py\nindexing.py\nnumba_.py\nops.py\n\n===/testbed/pandas/core/indexers/===\n__init__.py\nobjects.py\nutils.py\n\n===/testbed/pandas/core/indexes/===\n__init__.py\naccessors.py\napi.py\nbase.py\ncategory.py\ndatetimelike.py\ndatetimes.py\nextension.py\nfrozen.py\ninterval.py\nmulti.py\nperiod.py\nrange.py\ntimedeltas.py\n\n===/testbed/pandas/core/interchange/===\n__init__.py\nbuffer.py\ncolumn.py\ndataframe.py\ndataframe_protocol.py\nfrom_dataframe.py\nutils.py\n\n===/testbed/pandas/core/internals/===\n__init__.py\napi.py\nblocks.py\nconcat.py\nconstruction.py\nmanagers.py\nops.py\n\n===/testbed/pandas/core/methods/===\n__init__.py\ndescribe.py\nselectn.py\nto_dict.py\n\n===/testbed/pandas/core/ops/===\n__init__.py\narray_ops.py\ncommon.py\ndispatch.py\ndocstrings.py\ninvalid.py\nmask_ops.py\nmissing.py\n\n===/testbed/pandas/core/reshape/===\n__init__.py\napi.py\nconcat.py\nencoding.py\nmelt.py\nmerge.py\npivot.py\nreshape.py\ntile.py\n\n===/testbed/pandas/core/sparse/===\n__init__.py\napi.py\n\n===/testbed/pandas/core/strings/===\n__init__.py\naccessor.py\nobject_array.py\n\n===/testbed/pandas/core/tools/===\n__init__.py\ndatetimes.py\nnumeric.py\ntimedeltas.py\ntimes.py\n\n===/testbed/pandas/core/util/===\n__init__.py\nhashing.py\nnumba_.py\n\n===/testbed/pandas/core/window/===\n__init__.py\ncommon.py\ndoc.py\newm.py\nexpanding.py\nnumba_.py\nonline.py\nrolling.py\n\n===/testbed/pandas/errors/===\n__init__.py\ncow.py\n\n===/testbed/pandas/io/===\n__init__.py\n_util.py\napi.py\nclipboards.py\ncommon.py\nfeather_format.py\nhtml.py\niceberg.py\norc.py\nparquet.py\npickle.py\npytables.py\nspss.py\nsql.py\nstata.py\nxml.py\n\n===/testbed/pandas/io/clipboard/===\n__init__.py\n\n===/testbed/pandas/io/excel/===\n__init__.py\n_base.py\n_calamine.py\n_odfreader.py\n_odswriter.py\n_openpyxl.py\n_pyxlsb.py\n_util.py\n_xlrd.py\n_xlsxwriter.py\n\n===/testbed/pandas/io/formats/===\n__init__.py\n_color_data.py\nconsole.py\ncss.py\ncsvs.py\nexcel.py\nformat.py\nhtml.py\ninfo.py\nprinting.py\nstring.py\nstyle.py\nstyle_render.py\nxml.py\n\n===/testbed/pandas/io/formats/templates/===\nhtml.tpl\nhtml_style.tpl\nhtml_table.tpl\nlatex.tpl\nlatex_longtable.tpl\nlatex_table.tpl\nstring.tpl\ntypst.tpl\n\n===/testbed/pandas/io/json/===\n__init__.py\n_json.py\n_normalize.py\n_table_schema.py\n\n===/testbed/pandas/io/parsers/===\n__init__.py\narrow_parser_wrapper.py\nbase_parser.py\nc_parser_wrapper.py\npython_parser.py\nreaders.py\n\n===/testbed/pandas/io/sas/===\n__init__.py\nsas7bdat.py\nsas_constants.py\nsas_xport.py\nsasreader.py\n\n===/testbed/pandas/plotting/===\n__init__.py\n_core.py\n_misc.py\n\n===/testbed/pandas/plotting/_matplotlib/===\n__init__.py\nboxplot.py\nconverter.py\ncore.py\ngroupby.py\nhist.py\nmisc.py\nstyle.py\ntimeseries.py\ntools.py\n\n===/testbed/pandas/tests/===\n__init__.py\ntest_aggregation.py\ntest_algos.py\ntest_common.py\ntest_downstream.py\ntest_errors.py\ntest_expressions.py\ntest_flags.py\ntest_multilevel.py\ntest_nanops.py\ntest_optional_dependency.py\ntest_register_accessor.py\ntest_sorting.py\ntest_take.py\n\n===/testbed/pandas/tests/api/===\n__init__.py\ntest_api.py[7 T Q L]: Role:验证 pandas 顶层及 pandas.api 子命名空间的公开成员集合、__all__、对象模块归属与可导入性 | Uses:pandas/__init__.py(顶层公共 API), pandas/api/(子命名空间), pandas/_testing/__init__.py(断言辅助) | API:pytest 收集 TestPDApi、TestApi、其他 API 测试类及 test_attributes_module | Constraints:TestPDApi.test_api 要求顶层命名空间精确包含 col，TestPDApi.test_api_all 要求 col 位于精确的 __all__ 集合；TestApi.test_api_typing 要求 pandas.api.typing 精确包含 Expression；test_attributes_module 要求公开对象的 __module__ 等于公开导入路径并能从该路径取回对象；本文件没有构造 pd.col 表达式或断言 Expression.__repr__ 的行为，且本准备阶段未执行测试\ntest_types.py\n\n===/testbed/pandas/tests/apply/===\n__init__.py\ncommon.py\nconftest.py\ntest_frame_apply.py\ntest_frame_apply_relabeling.py\ntest_frame_transform.py\ntest_invalid_arg.py\ntest_numba.py\ntest_series_apply.py\ntest_series_apply_relabeling.py\ntest_series_transform.py\ntest_str.py\n\n===/testbed/pandas/tests/arithmetic/===\n__init__.py\ncommon.py\nconftest.py\ntest_array_ops.py\ntest_bool.py\ntest_categorical.py\ntest_datetime64.py\ntest_interval.py\ntest_numeric.py\ntest_object.py\ntest_period.py\ntest_string.py\ntest_timedelta64.py\n\n===/testbed/pandas/tests/arrays/===\n__init__.py\nmasked_shared.py\ntest_array.py\ntest_datetimelike.py\ntest_datetimes.py\ntest_ndarray_backed.py\ntest_period.py\ntest_timedeltas.py\n\n===/testbed/pandas/tests/arrays/boolean/===\n__init__.py\ntest_arithmetic.py\ntest_astype.py\ntest_comparison.py\ntest_construction.py\ntest_function.py\ntest_indexing.py\ntest_logical.py\ntest_ops.py\ntest_reduction.py\ntest_repr.py\n\n===/testbed/pandas/tests/arrays/categorical/===\n__init__.py\ntest_algos.py\ntest_analytics.py\ntest_api.py\ntest_astype.py\ntest_constructors.py\ntest_dtypes.py\ntest_indexing.py\ntest_map.py\ntest_missing.py\ntest_operators.py\ntest_replace.py\ntest_repr.py\ntest_sorting.py\ntest_subclass.py\ntest_take.py\ntest_warnings.py\n\n===/testbed/pandas/tests/arrays/datetimes/===\n__init__.py\ntest_constructors.py\ntest_cumulative.py\ntest_reductions.py\n\n===/testbed/pandas/tests/arrays/floating/===\n__init__.py\nconftest.py\ntest_arithmetic.py\ntest_astype.py\ntest_comparison.py\ntest_concat.py\ntest_construction.py\ntest_contains.py\ntest_function.py\ntest_repr.py\ntest_to_numpy.py\n\n===/testbed/pandas/tests/arrays/integer/===\n__init__.py\nconftest.py\ntest_arithmetic.py\ntest_comparison.py\ntest_concat.py\ntest_construction.py\ntest_dtypes.py\ntest_function.py\ntest_indexing.py\ntest_reduction.py\ntest_repr.py\n\n===/testbed/pandas/tests/arrays/interval/===\n__init__.py\ntest_astype.py\ntest_formats.py\ntest_interval.py\ntest_interval_pyarrow.py\ntest_overlaps.py\n\n===/testbed/pandas/tests/arrays/masked/===\n__init__.py\ntest_arithmetic.py\ntest_arrow_compat.py\ntest_function.py\ntest_indexing.py\n\n===/testbed/pandas/tests/arrays/numpy_/===\n__init__.py\ntest_indexing.py\ntest_numpy.py\n\n===/testbed/pandas/tests/arrays/period/===\n__init__.py\ntest_arrow_compat.py\ntest_astype.py\ntest_constructors.py\ntest_reductions.py\n\n===/testbed/pandas/tests/arrays/sparse/===\n__init__.py\ntest_accessor.py\ntest_arithmetics.py\ntest_array.py\ntest_astype.py\ntest_combine_concat.py\ntest_constructors.py\ntest_dtype.py\ntest_indexing.py\ntest_libsparse.py\ntest_reductions.py\ntest_unary.py\n\n===/testbed/pandas/tests/arrays/string_/===\n__init__.py\ntest_concat.py\ntest_string.py\ntest_string_arrow.py\n\n===/testbed/pandas/tests/arrays/timedeltas/===\n__init__.py\ntest_constructors.py\ntest_cumulative.py\ntest_reductions.py\n\n===/testbed/pandas/tests/base/===\n__init__.py\ncommon.py\ntest_constructors.py\ntest_conversion.py\ntest_fillna.py\ntest_misc.py\ntest_transpose.py\ntest_unique.py\ntest_value_counts.py\n\n===/testbed/pandas/tests/computation/===\n__init__.py\ntest_compat.py\ntest_eval.py\n\n===/testbed/pandas/tests/config/===\n__init__.py\ntest_config.py\ntest_localization.py\n\n===/testbed/pandas/tests/construction/===\n__init__.py\ntest_extract_array.py\n\n===/testbed/pandas/tests/copy_view/===\n__init__.py\ntest_array.py\ntest_astype.py\ntest_chained_assignment_deprecation.py\ntest_clip.py\ntest_constructors.py\ntest_copy_deprecation.py\ntest_core_functionalities.py\ntest_functions.py\ntest_indexing.py\ntest_internals.py\ntest_interp_fillna.py\ntest_methods.py\ntest_replace.py\ntest_setitem.py\ntest_util.py\nutil.py\n\n===/testbed/pandas/tests/copy_view/index/===\n__init__.py\ntest_datetimeindex.py\ntest_index.py\ntest_periodindex.py\ntest_timedeltaindex.py\n\n===/testbed/pandas/tests/dtypes/===\n__init__.py\ntest_common.py\ntest_concat.py\ntest_dtypes.py\ntest_generic.py\ntest_inference.py\ntest_missing.py\n\n===/testbed/pandas/tests/dtypes/cast/===\n__init__.py\ntest_can_hold_element.py\ntest_construct_from_scalar.py\ntest_construct_ndarray.py\ntest_construct_object_arr.py\ntest_dict_compat.py\ntest_downcast.py\ntest_find_common_type.py\ntest_infer_datetimelike.py\ntest_infer_dtype.py\ntest_maybe_box_native.py\ntest_promote.py\n\n===/testbed/pandas/tests/extension/===\n__init__.py\nconftest.py\ntest_arrow.py\ntest_categorical.py\ntest_common.py\ntest_datetime.py\ntest_extension.py\ntest_interval.py\ntest_masked.py\ntest_numpy.py\ntest_period.py\ntest_sparse.py\ntest_string.py\n\n===/testbed/pandas/tests/extension/array_with_attr/===\n__init__.py\narray.py\ntest_array_with_attr.py\n\n===/testbed/pandas/tests/extension/base/===\n__init__.py\naccumulate.py\nbase.py\ncasting.py\nconstructors.py\ndim2.py\ndtype.py\ngetitem.py\ngroupby.py\nindex.py\ninterface.py\nio.py\nmethods.py\nmissing.py\nops.py\nprinting.py\nreduce.py\nreshaping.py\nsetitem.py\n\n===/testbed/pandas/tests/extension/date/===\n__init__.py\narray.py\n\n===/testbed/pandas/tests/extension/decimal/===\n__init__.py\narray.py\ntest_decimal.py\n\n===/testbed/pandas/tests/extension/json/===\n__init__.py\narray.py\ntest_json.py\n\n===/testbed/pandas/tests/extension/list/===\n__init__.py\narray.py\ntest_list.py\n\n===/testbed/pandas/tests/frame/===\n__init__.py\ncommon.py\nconftest.py\ntest_alter_axes.py\ntest_api.py\ntest_arithmetic.py\ntest_arrow_interface.py\ntest_block_internals.py\ntest_constructors.py\ntest_cumulative.py\ntest_iteration.py\ntest_logical_ops.py\ntest_nonunique_indexes.py\ntest_npfuncs.py\ntest_query_eval.py\ntest_reductions.py\ntest_repr.py\ntest_stack_unstack.py\ntest_subclass.py\ntest_ufunc.py\ntest_unary.py\ntest_validate.py\n\n===/testbed/pandas/tests/frame/constructors/===\n__init__.py\ntest_from_dict.py\ntest_from_records.py\n\n===/testbed/pandas/tests/frame/indexing/===\n__init__.py\ntest_coercion.py\ntest_delitem.py\ntest_get.py\ntest_get_value.py\ntest_getitem.py\ntest_indexing.py\ntest_insert.py\ntest_mask.py\ntest_set_value.py\ntest_setitem.py\ntest_take.py\ntest_where.py\ntest_xs.py\n\n===/testbed/pandas/tests/frame/methods/===\n__init__.py\ntest_add_prefix_suffix.py\ntest_align.py\ntest_asfreq.py\ntest_asof.py\ntest_assign.py\ntest_astype.py\ntest_at_time.py\ntest_between_time.py\ntest_clip.py\ntest_combine.py\ntest_combine_first.py\ntest_compare.py\ntest_convert_dtypes.py\ntest_copy.py\ntest_count.py\ntest_cov_corr.py\ntest_describe.py\ntest_diff.py\ntest_dot.py\ntest_drop.py\ntest_drop_duplicates.py\ntest_droplevel.py\ntest_dropna.py\ntest_dtypes.py\ntest_duplicated.py\ntest_equals.py\ntest_explode.py\ntest_fillna.py\ntest_filter.py\ntest_first_valid_index.py\ntest_get_numeric_data.py\ntest_head_tail.py\ntest_infer_objects.py\ntest_info.py\ntest_interpolate.py\ntest_is_homogeneous_dtype.py\ntest_isetitem.py\ntest_isin.py\ntest_iterrows.py\ntest_join.py\ntest_map.py\ntest_matmul.py\ntest_nlargest.py\ntest_pct_change.py\ntest_pipe.py\ntest_pop.py\ntest_quantile.py\ntest_rank.py\ntest_reindex.py\ntest_reindex_like.py\ntest_rename.py\ntest_rename_axis.py\ntest_reorder_levels.py\ntest_replace.py\ntest_reset_index.py\ntest_round.py\ntest_sample.py\ntest_select_dtypes.py\ntest_set_axis.py\ntest_set_index.py\ntest_shift.py\ntest_size.py\ntest_sort_index.py\ntest_sort_values.py\ntest_swaplevel.py\ntest_to_csv.py\ntest_to_dict.py\ntest_to_dict_of_blocks.py\ntest_to_numpy.py\ntest_to_period.py\ntest_to_records.py\ntest_to_timestamp.py\ntest_transpose.py\ntest_truncate.py\ntest_tz_convert.py\ntest_tz_localize.py\ntest_update.py\ntest_value_counts.py\ntest_values.py\n\n===/testbed/pandas/tests/generic/===\n__init__.py\ntest_duplicate_labels.py\ntest_finalize.py\ntest_frame.py\ntest_generic.py\ntest_label_or_level_utils.py\ntest_series.py\ntest_to_xarray.py\n\n===/testbed/pandas/tests/groupby/===\n__init__.py\nconftest.py\ntest_all_methods.py\ntest_api.py\ntest_apply.py\ntest_bin_groupby.py\ntest_categorical.py\ntest_counting.py\ntest_cumulative.py\ntest_filters.py\ntest_groupby.py\ntest_groupby_dropna.py\ntest_groupby_subclass.py\ntest_grouping.py\ntest_index_as_string.py\ntest_indexing.py\ntest_libgroupby.py\ntest_missing.py\ntest_numba.py\ntest_numeric_only.py\ntest_pipe.py\ntest_raises.py\ntest_reductions.py\ntest_timegrouper.py\n\n===/testbed/pandas/tests/groupby/aggregate/===\n__init__.py\ntest_aggregate.py\ntest_cython.py\ntest_numba.py\ntest_other.py\n\n===/testbed/pandas/tests/groupby/methods/===\n__init__.py\ntest_describe.py\ntest_groupby_shift_diff.py\ntest_is_monotonic.py\ntest_kurt.py\ntest_nlargest_nsmallest.py\ntest_nth.py\ntest_quantile.py\ntest_rank.py\ntest_sample.py\ntest_size.py\ntest_skew.py\ntest_value_counts.py\n\n===/testbed/pandas/tests/groupby/transform/===\n__init__.py\ntest_numba.py\ntest_transform.py\n\n===/testbed/pandas/tests/indexes/===\n__init__.py\nconftest.py\ntest_any_index.py\ntest_base.py\ntest_common.py\ntest_datetimelike.py\ntest_engines.py\ntest_frozen.py\ntest_index_new.py\ntest_indexing.py\ntest_numpy_compat.py\ntest_old_base.py\ntest_setops.py\ntest_subclass.py\n\n===/testbed/pandas/tests/indexes/base_class/===\n__init__.py\ntest_constructors.py\ntest_formats.py\ntest_indexing.py\ntest_pickle.py\ntest_reshape.py\ntest_setops.py\ntest_where.py\n\n===/testbed/pandas/tests/indexes/categorical/===\n__init__.py\ntest_append.py\ntest_astype.py\ntest_category.py\ntest_constructors.py\ntest_equals.py\ntest_fillna.py\ntest_formats.py\ntest_indexing.py\ntest_map.py\ntest_reindex.py\ntest_setops.py\n\n===/testbed/pandas/tests/indexes/datetimelike_/===\n__init__.py\ntest_drop_duplicates.py\ntest_equals.py\ntest_indexing.py\ntest_is_monotonic.py\ntest_nat.py\ntest_sort_values.py\ntest_value_counts.py\n\n===/testbed/pandas/tests/indexes/datetimes/===\n__init__.py\ntest_arithmetic.py\ntest_constructors.py\ntest_date_range.py\ntest_datetime.py\ntest_formats.py\ntest_freq_attr.py\ntest_indexing.py\ntest_iter.py\ntest_join.py\ntest_npfuncs.py\ntest_ops.py\ntest_partial_slicing.py\ntest_pickle.py\ntest_reindex.py\ntest_scalar_compat.py\ntest_setops.py\ntest_timezones.py\n\n===/testbed/pandas/tests/indexes/datetimes/methods/===\n__init__.py\ntest_asof.py\ntest_astype.py\ntest_delete.py\ntest_factorize.py\ntest_fillna.py\ntest_insert.py\ntest_isocalendar.py\ntest_map.py\ntest_normalize.py\ntest_repeat.py\ntest_resolution.py\ntest_round.py\ntest_shift.py\ntest_snap.py\ntest_to_frame.py\ntest_to_julian_date.py\ntest_to_period.py\ntest_to_pydatetime.py\ntest_to_series.py\ntest_tz_convert.py\ntest_tz_localize.py\ntest_unique.py\n\n===/testbed/pandas/tests/indexes/interval/===\n__init__.py\ntest_astype.py\ntest_constructors.py\ntest_equals.py\ntest_formats.py\ntest_indexing.py\ntest_interval.py\ntest_interval_range.py\ntest_interval_tree.py\ntest_join.py\ntest_pickle.py\ntest_setops.py\n\n===/testbed/pandas/tests/indexes/multi/===\n__init__.py\nconftest.py\ntest_analytics.py\ntest_astype.py\ntest_compat.py\ntest_constructors.py\ntest_conversion.py\ntest_copy.py\ntest_drop.py\ntest_duplicates.py\ntest_equivalence.py\ntest_formats.py\ntest_get_level_values.py\ntest_get_set.py\ntest_indexing.py\ntest_integrity.py\ntest_isin.py\ntest_join.py\ntest_lexsort.py\ntest_missing.py\ntest_monotonic.py\ntest_names.py\ntest_partial_indexing.py\ntest_pickle.py\ntest_reindex.py\ntest_reshape.py\ntest_setops.py\ntest_sorting.py\ntest_take.py\ntest_util.py\n\n===/testbed/pandas/tests/indexes/numeric/===\n__init__.py\ntest_astype.py\ntest_indexing.py\ntest_join.py\ntest_numeric.py\ntest_setops.py\n\n===/testbed/pandas/tests/indexes/object/===\n__init__.py\ntest_astype.py\ntest_indexing.py\n\n===/testbed/pandas/tests/indexes/period/===\n__init__.py\ntest_constructors.py\ntest_formats.py\ntest_freq_attr.py\ntest_indexing.py\ntest_join.py\ntest_monotonic.py\ntest_partial_slicing.py\ntest_period.py\ntest_period_range.py\ntest_pickle.py\ntest_resolution.py\ntest_scalar_compat.py\ntest_searchsorted.py\ntest_setops.py\ntest_tools.py\n\n===/testbed/pandas/tests/indexes/period/methods/===\n__init__.py\ntest_asfreq.py\ntest_astype.py\ntest_factorize.py\ntest_fillna.py\ntest_insert.py\ntest_is_full.py\ntest_repeat.py\ntest_shift.py\ntest_to_timestamp.py\n\n===/testbed/pandas/tests/indexes/ranges/===\n__init__.py\ntest_constructors.py\ntest_indexing.py\ntest_join.py\ntest_range.py\ntest_setops.py\n\n===/testbed/pandas/tests/indexes/string/===\n__init__.py\ntest_astype.py\ntest_indexing.py\n\n===/testbed/pandas/tests/indexes/timedeltas/===\n__init__.py\ntest_arithmetic.py\ntest_constructors.py\ntest_delete.py\ntest_formats.py\ntest_freq_attr.py\ntest_indexing.py\ntest_join.py\ntest_ops.py\ntest_pickle.py\ntest_scalar_compat.py\ntest_searchsorted.py\ntest_setops.py\ntest_timedelta.py\ntest_timedelta_range.py\n\n===/testbed/pandas/tests/indexes/timedeltas/methods/===\n__init__.py\ntest_astype.py\ntest_factorize.py\ntest_fillna.py\ntest_insert.py\ntest_repeat.py\ntest_shift.py\n\n===/testbed/pandas/tests/indexing/===\n__init__.py\ncommon.py\ntest_at.py\ntest_categorical.py\ntest_chaining_and_caching.py\ntest_check_indexer.py\ntest_coercion.py\ntest_datetime.py\ntest_floats.py\ntest_iat.py\ntest_iloc.py\ntest_indexers.py\ntest_indexing.py\ntest_loc.py\ntest_na_indexing.py\ntest_partial.py\ntest_scalar.py\n\n===/testbed/pandas/tests/indexing/interval/===\n__init__.py\ntest_interval.py\ntest_interval_new.py\n\n===/testbed/pandas/tests/indexing/multiindex/===\n__init__.py\ntest_chaining_and_caching.py\ntest_datetime.py\ntest_getitem.py\ntest_iloc.py\ntest_indexing_slow.py\ntest_loc.py\ntest_multiindex.py\ntest_partial.py\ntest_setitem.py\ntest_slice.py\ntest_sorted.py\n\n===/testbed/pandas/tests/interchange/===\n__init__.py\ntest_impl.py\ntest_spec_conformance.py\ntest_utils.py\n\n===/testbed/pandas/tests/internals/===\n__init__.py\ntest_api.py\ntest_internals.py\n\n===/testbed/pandas/tests/io/===\n__init__.py\nconftest.py\ngenerate_legacy_storage_files.py\ntest_clipboard.py\ntest_common.py\ntest_compression.py\ntest_feather.py\ntest_fsspec.py\ntest_gcs.py\ntest_html.py\ntest_http_headers.py\ntest_iceberg.py\ntest_orc.py\ntest_parquet.py\ntest_pickle.py\ntest_s3.py\ntest_spss.py\ntest_sql.py\ntest_stata.py\n\n===/testbed/pandas/tests/io/data/csv/===\nbanklist.csv\niris.csv\ntest1.csv\ntest1.csv.bz2\ntest1.csv.gz\ntest_mmap.csv\ntips.csv\ntips.csv.bz2\ntips.csv.gz\n\n===/testbed/pandas/tests/io/data/excel/===\nblank.ods\nblank.xls\nblank.xlsb\nblank.xlsm\nblank.xlsx\nblank_with_header.ods\nblank_with_header.xls\nblank_with_header.xlsb\nblank_with_header.xlsm\nblank_with_header.xlsx\nchartsheet.xls\nchartsheet.xlsb\nchartsheet.xlsm\nchartsheet.xlsx\ndf_empty.xlsx\ndf_equals.xlsx\ndf_header_oob.xlsx\ndf_mangle_dup_col_dtypes.ods\ndf_mangle_dup_col_dtypes.xls\ndf_mangle_dup_col_dtypes.xlsb\ndf_mangle_dup_col_dtypes.xlsm\ndf_mangle_dup_col_dtypes.xlsx\ndimension_large.xlsx\ndimension_missing.xlsx\ndimension_small.xlsx\nempty_trailing_rows.xlsx\nempty_with_blank_row.xlsx\ngh-35802.ods\ngh-36122.ods\nints_spelled_with_decimals.xlsx\ninvalid_value_type.ods\nmultiindex_no_index_names.xlsx\none_col_blank_line.ods\none_col_blank_line.xls\none_col_blank_line.xlsb\none_col_blank_line.xlsm\none_col_blank_line.xlsx\ntest1.ods\ntest1.xls\ntest1.xlsb\ntest1.xlsm\ntest1.xlsx\ntest2.ods\ntest2.xls\ntest2.xlsb\ntest2.xlsm\ntest2.xlsx\ntest3.ods\ntest3.xls\ntest3.xlsb\ntest3.xlsm\ntest3.xlsx\ntest4.ods\ntest4.xls\ntest4.xlsb\ntest4.xlsm\ntest4.xlsx\ntest5.ods\ntest5.xls\ntest5.xlsb\ntest5.xlsm\ntest5.xlsx\ntest6.xls\ntest_cell_annotation.ods\ntest_converters.ods\ntest_converters.xls\ntest_converters.xlsb\ntest_converters.xlsm\ntest_converters.xlsx\ntest_datetime_mi.ods\ntest_datetime_mi.xls\ntest_datetime_mi.xlsb\ntest_datetime_mi.xlsm\ntest_datetime_mi.xlsx\ntest_decimal.ods\ntest_decimal.xls\ntest_decimal.xlsb\ntest_decimal.xlsm\ntest_decimal.xlsx\ntest_index_name_pre17.ods\ntest_index_name_pre17.xls\ntest_index_name_pre17.xlsb\ntest_index_name_pre17.xlsm\ntest_index_name_pre17.xlsx\ntest_multisheet.ods\ntest_multisheet.xls\ntest_multisheet.xlsb\ntest_multisheet.xlsm\ntest_multisheet.xlsx\ntest_newlines.ods\ntest_none_type.xlsx\ntest_spaces.ods\ntest_spaces.xls\ntest_spaces.xlsb\ntest_spaces.xlsm\ntest_spaces.xlsx\ntest_squeeze.ods\ntest_squeeze.xls\ntest_squeeze.xlsb\ntest_squeeze.xlsm\ntest_squeeze.xlsx\ntest_types.ods\ntest_types.xls\ntest_types.xlsb\ntest_types.xlsm\ntest_types.xlsx\ntest_unempty_cells.ods\ntestdateoverflow.ods\ntestdateoverflow.xls\ntestdateoverflow.xlsb\ntestdateoverflow.xlsm\ntestdateoverflow.xlsx\ntestdtype.ods\ntestdtype.xls\ntestdtype.xlsb\ntestdtype.xlsm\ntestdtype.xlsx\ntestmultiindex.ods\ntestmultiindex.xls\ntestmultiindex.xlsb\ntestmultiindex.xlsm\ntestmultiindex.xlsx\ntestskiprows.ods\ntestskiprows.xls\ntestskiprows.xlsb\ntestskiprows.xlsm\ntestskiprows.xlsx\ntimes_1900.ods\ntimes_1900.xls\ntimes_1900.xlsb\ntimes_1900.xlsm\ntimes_1900.xlsx\ntimes_1904.ods\ntimes_1904.xls\ntimes_1904.xlsb\ntimes_1904.xlsm\ntimes_1904.xlsx\ntrailing_blanks.ods\ntrailing_blanks.xls\ntrailing_blanks.xlsb\ntrailing_blanks.xlsm\ntrailing_blanks.xlsx\nwritertable.odt\n\n===/testbed/pandas/tests/io/data/feather/===\nfeather-0_3_1.feather\n\n===/testbed/pandas/tests/io/data/fixed_width/===\nfixed_width_format.txt\n\n===/testbed/pandas/tests/io/data/html/===\nbanklist.html\nspam.html\nvalid_markup.html\nwikipedia_states.html\n\n===/testbed/pandas/tests/io/data/html_encoding/===\nchinese_utf-16.html\nchinese_utf-32.html\nchinese_utf-8.html\nletz_latin1.html\n\n===/testbed/pandas/tests/io/data/legacy_pickle/1.1.0/===\n1.1.0_x86_64_darwin_3.8.5.pickle\n\n===/testbed/pandas/tests/io/data/legacy_pickle/1.2.4/===\nempty_frame_v1_2_4-GH#42345.pkl\n\n===/testbed/pandas/tests/io/data/legacy_pickle/1.3.5/===\n1.3.5_x86_64_darwin_3.10.13.pickle\n\n===/testbed/pandas/tests/io/data/legacy_pickle/1.4.2/===\n1.4.2_x86_64_linux_3.9.7.pickle\n\n===/testbed/pandas/tests/io/data/legacy_pickle/1.5.3/===\n1.5.3_x86_64_win_3.11.13.pickle\n\n===/testbed/pandas/tests/io/data/legacy_pickle/2.0.3/===\n2.0.3_AMD64_windows_3.11.12.pickle\n\n===/testbed/pandas/tests/io/data/legacy_pickle/2.1.4/===\n2.1.4_AMD64_windows_3.11.12.pickle\n\n===/testbed/pandas/tests/io/data/legacy_pickle/2.2.3/===\n2.2.3_AMD64_windows_3.11.12.pickle\n\n===/testbed/pandas/tests/io/data/orc/===\nTestOrcFile.decimal.orc\nTestOrcFile.emptyFile.orc\nTestOrcFile.test1.orc\nTestOrcFile.testDate1900.orc\nTestOrcFile.testDate2038.orc\nTestOrcFile.testSnappy.orc\n\n===/testbed/pandas/tests/io/data/parquet/===\nsimple.parquet\n\n===/testbed/pandas/tests/io/data/pickle/===\ncategorical.0.25.0.pickle\n\n===/testbed/pandas/tests/io/data/spss/===\nlabelled-num-na.sav\nlabelled-num.sav\nlabelled-str.sav\numlauts.sav\n\n===/testbed/pandas/tests/io/data/stata/===\nstata1_119.dta.gz\nstata3.csv\nstata5.csv\nstata6.csv\n\n===/testbed/pandas/tests/io/data/tar/===\ntest-csv.tar\n\n===/testbed/pandas/tests/io/data/xml/===\nbaby_names.xml\nbooks.xml\ncta_rail_lines.kml\ndoc_ch_utf.xml\nflatten_doc.xsl\nrow_field_output.xsl\n\n===/testbed/pandas/tests/io/excel/===\n__init__.py\ntest_odf.py\ntest_odswriter.py\ntest_openpyxl.py\ntest_readers.py\ntest_style.py\ntest_writers.py\ntest_xlrd.py\ntest_xlsxwriter.py\n\n===/testbed/pandas/tests/io/formats/===\n__init__.py\ntest_console.py\ntest_css.py\ntest_eng_formatting.py\ntest_format.py\ntest_ipython_compat.py\ntest_printing.py\ntest_to_csv.py\ntest_to_excel.py\ntest_to_html.py\ntest_to_latex.py\ntest_to_markdown.py\ntest_to_string.py\n\n===/testbed/pandas/tests/io/formats/data/html/===\ndatetime64_hourformatter.html\ndatetime64_monthformatter.html\nescape_disabled.html\nescaped.html\ngh12031_expected_output.html\ngh13828_expected_output.html\ngh14882_expected_output_1.html\ngh14882_expected_output_2.html\ngh14998_expected_output.html\ngh15019_expected_output.html\ngh21625_expected_output.html\ngh22270_expected_output.html\ngh22579_expected_output.html\ngh22783_expected_output.html\ngh22783_named_columns_index.html\ngh40024_expected_output.html\ngh47103_expected_output.html\ngh6131_expected_output.html\ngh8452_expected_output.html\nhtml_repr_max_rows_10_min_rows_12.html\nhtml_repr_max_rows_10_min_rows_4.html\nhtml_repr_max_rows_12_min_rows_None.html\nhtml_repr_max_rows_None_min_rows_12.html\nhtml_repr_min_rows_default_no_truncation.html\nhtml_repr_min_rows_default_truncated.html\nindex_1.html\nindex_2.html\nindex_3.html\nindex_4.html\nindex_5.html\nindex_formatter.html\nindex_named_multi_columns_named_multi.html\nindex_named_multi_columns_named_standard.html\nindex_named_multi_columns_none.html\nindex_named_multi_columns_unnamed_multi.html\nindex_named_multi_columns_unnamed_standard.html\nindex_named_standard_columns_named_multi.html\nindex_named_standard_columns_named_standard.html\nindex_named_standard_columns_none.html\nindex_named_standard_columns_unnamed_multi.html\nindex_named_standard_columns_unnamed_standard.html\nindex_none_columns_named_multi.html\nindex_none_columns_named_standard.html\nindex_none_columns_none.html\nindex_none_columns_unnamed_multi.html\nindex_none_columns_unnamed_standard.html\nindex_unnamed_multi_columns_named_multi.html\nindex_unnamed_multi_columns_named_standard.html\nindex_unnamed_multi_columns_none.html\nindex_unnamed_multi_columns_unnamed_multi.html\nindex_unnamed_multi_columns_unnamed_standard.html\nindex_unnamed_standard_columns_named_multi.html\nindex_unnamed_standard_columns_named_standard.html\nindex_unnamed_standard_columns_none.html\nindex_unnamed_standard_columns_unnamed_multi.html\nindex_unnamed_standard_columns_unnamed_standard.html\njustify.html\nmultiindex_1.html\nmultiindex_2.html\nmultiindex_sparsify_1.html\nmultiindex_sparsify_2.html\nmultiindex_sparsify_false_multi_sparse_1.html\nmultiindex_sparsify_false_multi_sparse_2.html\nrender_links_false.html\nrender_links_true.html\ntrunc_df_index_named_multi_columns_named_multi.html\ntrunc_df_index_named_multi_columns_named_standard.html\ntrunc_df_index_named_multi_columns_none.html\ntrunc_df_index_named_multi_columns_unnamed_multi.html\ntrunc_df_index_named_multi_columns_unnamed_standard.html\ntrunc_df_index_named_standard_columns_named_multi.html\ntrunc_df_index_named_standard_columns_named_standard.html\ntrunc_df_index_named_standard_columns_none.html\ntrunc_df_index_named_standard_columns_unnamed_multi.html\ntrunc_df_index_named_standard_columns_unnamed_standard.html\ntrunc_df_index_none_columns_named_multi.html\ntrunc_df_index_none_columns_named_standard.html\ntrunc_df_index_none_columns_none.html\ntrunc_df_index_none_columns_unnamed_multi.html\ntrunc_df_index_none_columns_unnamed_standard.html\ntrunc_df_index_unnamed_multi_columns_named_multi.html\ntrunc_df_index_unnamed_multi_columns_named_standard.html\ntrunc_df_index_unnamed_multi_columns_none.html\ntrunc_df_index_unnamed_multi_columns_unnamed_multi.html\ntrunc_df_index_unnamed_multi_columns_unnamed_standard.html\ntrunc_df_index_unnamed_standard_columns_named_multi.html\ntrunc_df_index_unnamed_standard_columns_named_standard.html\ntrunc_df_index_unnamed_standard_columns_none.html\ntrunc_df_index_unnamed_standard_columns_unnamed_multi.html\ntrunc_df_index_unnamed_standard_columns_unnamed_standard.html\ntruncate.html\ntruncate_formatter.html\ntruncate_multi_index.html\ntruncate_multi_index_sparse_off.html\nunicode_1.html\nunicode_2.html\nvarious_dtypes_formatted.html\nwith_classes.html\n\n===/testbed/pandas/tests/io/formats/style/===\n__init__.py\ntest_bar.py\ntest_exceptions.py\ntest_format.py\ntest_highlight.py\ntest_html.py\ntest_matplotlib.py\ntest_non_unique.py\ntest_style.py\ntest_to_latex.py\ntest_to_string.py\ntest_to_typst.py\ntest_tooltip.py\n\n===/testbed/pandas/tests/io/json/===\n__init__.py\nconftest.py\ntest_compression.py\ntest_deprecated_kwargs.py\ntest_json_table_schema.py\ntest_json_table_schema_ext_dtype.py\ntest_normalize.py\ntest_pandas.py\ntest_readlines.py\ntest_ujson.py\n\n===/testbed/pandas/tests/io/json/data/===\nline_delimited.json\nteams.csv\ntsframe_iso_v012.json\ntsframe_v012.json\n\n===/testbed/pandas/tests/io/parser/===\n__init__.py\nconftest.py\ntest_c_parser_only.py\ntest_comment.py\ntest_compression.py\ntest_concatenate_chunks.py\ntest_converters.py\ntest_dialect.py\ntest_encoding.py\ntest_header.py\ntest_index_col.py\ntest_mangle_dupes.py\ntest_multi_thread.py\ntest_na_values.py\ntest_network.py\ntest_parse_dates.py\ntest_python_parser_only.py\ntest_quoting.py\ntest_read_fwf.py\ntest_skiprows.py\ntest_textreader.py\ntest_unsupported.py\ntest_upcast.py\n\n===/testbed/pandas/tests/io/parser/common/===\n__init__.py\ntest_chunksize.py\ntest_common_basic.py\ntest_data_list.py\ntest_decimal.py\ntest_file_buffer_url.py\ntest_float.py\ntest_index.py\ntest_inf.py\ntest_ints.py\ntest_iterator.py\ntest_read_errors.py\n\n===/testbed/pandas/tests/io/parser/data/===\nitems.jsonl\nsalaries.csv\nsalaries.csv.bz2\nsalaries.csv.gz\nsalaries.csv.xz\nsalaries.csv.zst\nsauron.SHIFT_JIS.csv\nsub_char.csv\ntar_csv.tar\ntar_csv.tar.gz\ntest2.csv\ntest_mmap.csv\nunicode_series.csv\nutf16_ex.txt\n\n===/testbed/pandas/tests/io/parser/dtypes/===\n__init__.py\ntest_categorical.py\ntest_dtypes_basic.py\ntest_empty.py\n\n===/testbed/pandas/tests/io/parser/usecols/===\n__init__.py\ntest_parse_dates.py\ntest_strings.py\ntest_usecols_basic.py\n\n===/testbed/pandas/tests/io/pytables/===\n__init__.py\ncommon.py\nconftest.py\ntest_append.py\ntest_categorical.py\ntest_compat.py\ntest_complex.py\ntest_errors.py\ntest_file_handling.py\ntest_keys.py\ntest_put.py\ntest_pytables_missing.py\ntest_read.py\ntest_retain_attributes.py\ntest_round_trip.py\ntest_select.py\ntest_store.py\ntest_subclass.py\ntest_time_series.py\ntest_timezones.py\n\n===/testbed/pandas/tests/io/sas/===\n__init__.py\ntest_byteswap.py\ntest_sas.py\ntest_sas7bdat.py\ntest_xport.py\n\n===/testbed/pandas/tests/io/sas/data/===\n0x00controlbyte.sas7bdat.bz2\n0x40controlbyte.csv\n0x40controlbyte.sas7bdat\nDEMO_G.csv\nDEMO_PUF.cpt\nDRXFCD_G.csv\nSSHSV1_A.csv\nairline.csv\nairline.sas7bdat\nairline.sas7bdat.gz\ncars.sas7bdat\ncorrupt.sas7bdat\ndates_null.sas7bdat\ndatetime.csv\ndatetime.sas7bdat\nload_log.sas7bdat\nmany_columns.csv\nmany_columns.sas7bdat\nmax_sas_date.sas7bdat\npaxraw_d_short.csv\nproductsales.csv\nproductsales.sas7bdat\ntest1.sas7bdat\ntest10.sas7bdat\ntest11.sas7bdat\ntest12.sas7bdat\ntest13.sas7bdat\ntest14.sas7bdat\ntest15.sas7bdat\ntest16.sas7bdat\ntest2.sas7bdat\ntest3.sas7bdat\ntest4.sas7bdat\ntest5.sas7bdat\ntest6.sas7bdat\ntest7.sas7bdat\ntest8.sas7bdat\ntest9.sas7bdat\ntest_12659.csv\ntest_12659.sas7bdat\ntest_meta2_page.sas7bdat\ntest_sas7bdat_1.csv\ntest_sas7bdat_2.csv\nzero_rows.sas7bdat\nzero_variables.sas7bdat\n\n===/testbed/pandas/tests/io/xml/===\n__init__.py\nconftest.py\ntest_to_xml.py\ntest_xml.py\ntest_xml_dtypes.py\n\n===/testbed/pandas/tests/libs/===\n__init__.py\ntest_hashtable.py\ntest_join.py\ntest_lib.py\ntest_libalgos.py\n\n===/testbed/pandas/tests/plotting/===\n__init__.py\ncommon.py\nconftest.py\ntest_backend.py\ntest_boxplot_method.py\ntest_common.py\ntest_converter.py\ntest_datetimelike.py\ntest_groupby.py\ntest_hist_method.py\ntest_misc.py\ntest_series.py\ntest_style.py\n\n===/testbed/pandas/tests/plotting/frame/===\n__init__.py\ntest_frame.py\ntest_frame_color.py\ntest_frame_groupby.py\ntest_frame_legend.py\ntest_frame_subplots.py\ntest_hist_box_by.py\n\n===/testbed/pandas/tests/reductions/===\n__init__.py\ntest_reductions.py\ntest_stat_reductions.py\n\n===/testbed/pandas/tests/resample/===\n__init__.py\nconftest.py\ntest_base.py\ntest_datetime_index.py\ntest_period_index.py\ntest_resample_api.py\ntest_resampler_grouper.py\ntest_time_grouper.py\ntest_timedelta.py\n\n===/testbed/pandas/tests/reshape/===\n__init__.py\ntest_crosstab.py\ntest_cut.py\ntest_from_dummies.py\ntest_get_dummies.py\ntest_melt.py\ntest_pivot.py\ntest_pivot_multilevel.py\ntest_qcut.py\ntest_union_categoricals.py\n\n===/testbed/pandas/tests/reshape/concat/===\n__init__.py\ntest_append.py\ntest_append_common.py\ntest_categorical.py\ntest_concat.py\ntest_dataframe.py\ntest_datetimes.py\ntest_empty.py\ntest_index.py\ntest_invalid.py\ntest_series.py\ntest_sort.py\n\n===/testbed/pandas/tests/reshape/data/===\ncut_data.csv\n\n===/testbed/pandas/tests/reshape/merge/===\n__init__.py\ntest_join.py\ntest_merge.py\ntest_merge_antijoin.py\ntest_merge_asof.py\ntest_merge_cross.py\ntest_merge_index_as_string.py\ntest_merge_ordered.py\ntest_multi.py\n\n===/testbed/pandas/tests/scalar/===\n__init__.py\ntest_na_scalar.py\ntest_nat.py\n\n===/testbed/pandas/tests/scalar/interval/===\n__init__.py\ntest_arithmetic.py\ntest_constructors.py\ntest_contains.py\ntest_formats.py\ntest_interval.py\ntest_overlaps.py\n\n===/testbed/pandas/tests/scalar/period/===\n__init__.py\ntest_arithmetic.py\ntest_asfreq.py\ntest_period.py\n\n===/testbed/pandas/tests/scalar/timedelta/===\n__init__.py\ntest_arithmetic.py\ntest_constructors.py\ntest_formats.py\ntest_timedelta.py\n\n===/testbed/pandas/tests/scalar/timedelta/methods/===\n__init__.py\ntest_as_unit.py\ntest_round.py\n\n===/testbed/pandas/tests/scalar/timestamp/===\n__init__.py\ntest_arithmetic.py\ntest_comparisons.py\ntest_constructors.py\ntest_formats.py\ntest_timestamp.py\ntest_timezones.py\n\n===/testbed/pandas/tests/scalar/timestamp/methods/===\n__init__.py\ntest_as_unit.py\ntest_normalize.py\ntest_replace.py\ntest_round.py\ntest_timestamp_method.py\ntest_to_julian_date.py\ntest_to_pydatetime.py\ntest_tz_convert.py\ntest_tz_localize.py\n\n===/testbed/pandas/tests/series/===\n__init__.py\ntest_api.py\ntest_arithmetic.py\ntest_arrow_interface.py\ntest_constructors.py\ntest_cumulative.py\ntest_formats.py\ntest_iteration.py\ntest_logical_ops.py\ntest_missing.py\ntest_npfuncs.py\ntest_reductions.py\ntest_subclass.py\ntest_ufunc.py\ntest_unary.py\ntest_validate.py\n\n===/testbed/pandas/tests/series/accessors/===\n__init__.py\ntest_cat_accessor.py\ntest_dt_accessor.py\ntest_list_accessor.py\ntest_sparse_accessor.py\ntest_str_accessor.py\ntest_struct_accessor.py\n\n===/testbed/pandas/tests/series/indexing/===\n__init__.py\ntest_datetime.py\ntest_delitem.py\ntest_get.py\ntest_getitem.py\ntest_indexing.py\ntest_mask.py\ntest_set_value.py\ntest_setitem.py\ntest_take.py\ntest_where.py\ntest_xs.py\n\n===/testbed/pandas/tests/series/methods/===\n__init__.py\ntest_add_prefix_suffix.py\ntest_align.py\ntest_argsort.py\ntest_asof.py\ntest_astype.py\ntest_autocorr.py\ntest_between.py\ntest_case_when.py\ntest_clip.py\ntest_combine.py\ntest_combine_first.py\ntest_compare.py\ntest_convert_dtypes.py\ntest_copy.py\ntest_count.py\ntest_cov_corr.py\ntest_describe.py\ntest_diff.py\ntest_drop.py\ntest_drop_duplicates.py\ntest_dropna.py\ntest_dtypes.py\ntest_duplicated.py\ntest_equals.py\ntest_explode.py\ntest_fillna.py\ntest_get_numeric_data.py\ntest_head_tail.py\ntest_infer_objects.py\ntest_info.py\ntest_interpolate.py\ntest_is_monotonic.py\ntest_is_unique.py\ntest_isin.py\ntest_isna.py\ntest_item.py\ntest_map.py\ntest_matmul.py\ntest_nlargest.py\ntest_nunique.py\ntest_pct_change.py\ntest_pop.py\ntest_quantile.py\ntest_rank.py\ntest_reindex.py\ntest_reindex_like.py\ntest_rename.py\ntest_rename_axis.py\ntest_repeat.py\ntest_replace.py\ntest_reset_index.py\ntest_round.py\ntest_searchsorted.py\ntest_set_name.py\ntest_size.py\ntest_sort_index.py\ntest_sort_values.py\ntest_to_csv.py\ntest_to_dict.py\ntest_to_frame.py\ntest_to_numpy.py\ntest_tolist.py\ntest_truncate.py\ntest_tz_localize.py\ntest_unique.py\ntest_unstack.py\ntest_update.py\ntest_value_counts.py\ntest_values.py\n\n===/testbed/pandas/tests/strings/===\n__init__.py\nconftest.py\ntest_api.py\ntest_case_justify.py\ntest_cat.py\ntest_extract.py\ntest_find_replace.py\ntest_get_dummies.py\ntest_split_partition.py\ntest_string_array.py\ntest_strings.py\n\n===/testbed/pandas/tests/tools/===\n__init__.py\ntest_to_datetime.py\ntest_to_numeric.py\ntest_to_time.py\ntest_to_timedelta.py\n\n===/testbed/pandas/tests/tseries/===\n__init__.py\n\n===/testbed/pandas/tests/tseries/frequencies/===\n__init__.py\ntest_freq_code.py\ntest_frequencies.py\ntest_inference.py\n\n===/testbed/pandas/tests/tseries/holiday/===\n__init__.py\ntest_calendar.py\ntest_federal.py\ntest_holiday.py\ntest_observance.py\n\n===/testbed/pandas/tests/tseries/offsets/===\n__init__.py\ncommon.py\ntest_business_day.py\ntest_business_halfyear.py\ntest_business_hour.py\ntest_business_month.py\ntest_business_quarter.py\ntest_business_year.py\ntest_common.py\ntest_custom_business_day.py\ntest_custom_business_hour.py\ntest_custom_business_month.py\ntest_dst.py\ntest_easter.py\ntest_fiscal.py\ntest_halfyear.py\ntest_index.py\ntest_month.py\ntest_offsets.py\ntest_offsets_properties.py\ntest_quarter.py\ntest_ticks.py\ntest_week.py\ntest_year.py\n\n===/testbed/pandas/tests/tseries/offsets/data/===\ncday-0.14.1.pickle\n\n===/testbed/pandas/tests/tslibs/===\n__init__.py\ntest_api.py\ntest_array_to_datetime.py\ntest_ccalendar.py\ntest_conversion.py\ntest_fields.py\ntest_libfrequencies.py\ntest_liboffsets.py\ntest_np_datetime.py\ntest_npy_units.py\ntest_parse_iso8601.py\ntest_parsing.py\ntest_period.py\ntest_resolution.py\ntest_strptime.py\ntest_timedeltas.py\ntest_timezones.py\ntest_to_offset.py\ntest_tzconversion.py\n\n===/testbed/pandas/tests/util/===\n__init__.py\nconftest.py\ntest_assert_almost_equal.py\ntest_assert_attr_equal.py\ntest_assert_categorical_equal.py\ntest_assert_extension_array_equal.py\ntest_assert_frame_equal.py\ntest_assert_index_equal.py\ntest_assert_interval_array_equal.py\ntest_assert_numpy_array_equal.py\ntest_assert_produces_warning.py\ntest_assert_series_equal.py\ntest_deprecate.py\ntest_deprecate_kwarg.py\ntest_deprecate_nonkeyword_arguments.py\ntest_doc.py\ntest_hashing.py\ntest_numba.py\ntest_rewrite_warning.py\ntest_shares_memory.py\ntest_show_versions.py\ntest_util.py\ntest_validate_args.py\ntest_validate_args_and_kwargs.py\ntest_validate_inclusive.py\ntest_validate_kwargs.py\n\n===/testbed/pandas/tests/window/===\n__init__.py\nconftest.py\ntest_api.py\ntest_apply.py\ntest_base_indexer.py\ntest_cython_aggregations.py\ntest_dtypes.py\ntest_ewm.py\ntest_expanding.py\ntest_groupby.py\ntest_numba.py\ntest_online.py\ntest_pairwise.py\ntest_rolling.py\ntest_rolling_functions.py\ntest_rolling_quantile.py\ntest_rolling_skew_kurt.py\ntest_timeseries_window.py\ntest_win_type.py\n\n===/testbed/pandas/tests/window/moments/===\n__init__.py\nconftest.py\ntest_moments_consistency_ewm.py\ntest_moments_consistency_expanding.py\ntest_moments_consistency_rolling.py\n\n===/testbed/pandas/tseries/===\n__init__.py\napi.py\nfrequencies.py\nholiday.py\noffsets.py\n\n===/testbed/pandas/util/===\n__init__.py\n_decorators.py\n_doctools.py\n_exceptions.py\n_print_versions.py\n_test_decorators.py\n_tester.py\n_validators.py\n\n===/testbed/pandas/util/version/===\n__init__.py\n\n===/testbed/scripts/===\n__init__.py\ncheck_for_inconsistent_pandas_namespace.py\ncheck_test_naming.py\ncibw_before_build.sh\ndownload_wheels.sh\ngenerate_pip_deps_from_conda.py\npandas_errors_documented.py\nrun_stubtest.py\nrun_vulture.py\nsort_whatsnew_note.py\nvalidate_docstrings.py\nvalidate_exception_location.py\nvalidate_min_versions_in_sync.py\nvalidate_rst_title_capitalization.py\nvalidate_unwanted_patterns.py\n\n===/testbed/scripts/tests/===\n__init__.py\nconftest.py\ntest_check_test_naming.py\ntest_inconsistent_namespace_check.py\ntest_sort_whatsnew_note.py\ntest_validate_docstrings.py\ntest_validate_exception_location.py\ntest_validate_min_versions_in_sync.py\ntest_validate_unwanted_patterns.py\n\n===/testbed/scripts/tests/data/===\ndeps_expected_duplicate_package.yaml\ndeps_expected_no_version.yaml\ndeps_expected_random.yaml\ndeps_expected_range.yaml\ndeps_expected_same_version.yaml\ndeps_minimum.toml\ndeps_unmodified_duplicate_package.yaml\ndeps_unmodified_no_version.yaml\ndeps_unmodified_random.yaml\ndeps_unmodified_range.yaml\ndeps_unmodified_same_version.yaml\n\n===/testbed/typings/===\nnumba.pyi\n\n===/testbed/web/===\nREADME.md\npandas_web.py\n\n===/testbed/web/interactive_terminal/===\nREADME.md\njupyter-lite.json\njupyter_lite_config.json\n\n===/testbed/web/pandas/===\nconfig.yml\ncontribute.md\ngetting_started.md\nindex.html\nrobots.txt\ntry.md\nversions.json\n\n===/testbed/web/pandas/_templates/===\nlayout.html\n\n===/testbed/web/pandas/about/===\nciting.md\ngovernance.md\nindex.md\nroadmap.md\nsponsors.md\nteam.md\n\n===/testbed/web/pandas/community/===\nbenchmarks.md\ncoc.md\necosystem.md\n\n===/testbed/web/pandas/community/blog/===\n2019-user-survey.md\nasv-pandas-grant.md\nextension-arrays.md\nindex.html\npandas-1.0.md\n\n===/testbed/web/pandas/pdeps/===\n0001-purpose-and-guidelines.md\n0004-consistent-to-datetime-parsing.md\n0005-no-default-index-mode.md\n0006-ban-upcasting.md\n0007-copy-on-write.md\n0008-inplace-methods-in-pandas.md\n0009-io-extensions.md\n0010-required-pyarrow-dependency.md\n0012-compact-and-reversible-JSON-interface.md\n0014-string-dtype.md\n0017-backwards-compatibility-and-deprecation-policy.md\n\n===/testbed/web/pandas/static/css/===\ncodehilite.css\npandas.css\n\n===/testbed/web/pandas/static/img/===\nfavicon.ico\nfavicon_white.ico\npandas.svg\npandas_mark.svg\npandas_mark_white.svg\npandas_secondary.svg\npandas_secondary_white.svg\npandas_white.svg\n\n===/testbed/web/pandas/static/img/blog/2019-user-survey/===\n2019_13_0.png\n2019_18_0.png\n2019_20_0.png\n2019_22_0.png\n2019_24_0.png\n2019_26_0.png\n2019_31_0.png\n2019_33_0.png\n2019_4_0.png\n2019_5_0.png\n\n===/testbed/web/pandas/static/img/books/===\neffective_pandas_2.gif\npandas_cookbook_3.gif\npydata_book.gif\n\n===/testbed/web/pandas/static/img/partners/===\nbodo.svg\nnumfocus.svg\nnvidia.svg\ntidelift.svg\n\n===/testbed/web/tests/===\ntest_pandas_web.py\n\n## 对账报告\n- 无纲要 2500: .devcontainer.json, .gitattributes, .github/CODEOWNERS, .github/ISSUE_TEMPLATE/bug_report.yaml, .github/ISSUE_TEMPLATE/documentation_improvement.yaml, .github/ISSUE_TEMPLATE/feature_request.yaml, .github/ISSUE_TEMPLATE/installation_issue.yaml, .github/ISSUE_TEMPLATE/pdep_vote.yaml, .github/ISSUE_TEMPLATE/performance_issue.yaml, .github/ISSUE_TEMPLATE/submit_question.yml, .github/PULL_REQUEST_TEMPLATE.md, .github/actions/build_pandas/action.yml, .github/actions/run-tests/action.yml, .github/actions/setup-conda/action.yml, .github/dependabot.yml, .github/workflows/cache-cleanup-daily.yml, .github/workflows/cache-cleanup.yml, .github/workflows/code-checks.yml, .github/workflows/codeql.yml, .github/workflows/comment-commands.yml, .github/workflows/deprecation-tracking-bot.yml, .github/workflows/docbuild-and-upload.yml, .github/workflows/package-checks.yml, .github/workflows/stale-pr.yml, .github/workflows/unit-tests.yml, .github/workflows/wheels.yml, .gitignore, .gitpod.yml, .pre-commit-config.yaml, AUTHORS.md, CITATION.cff, Dockerfile, LICENSE, LICENSES/BOTTLENECK_LICENCE, LICENSES/DATEUTIL_LICENSE, LICENSES/HAVEN_LICENSE, LICENSES/HAVEN_MIT, LICENSES/KLIB_LICENSE, LICENSES/MUSL_LICENSE, LICENSES/NUMPY_LICENSE, LICENSES/PACKAGING_LICENSE, LICENSES/PSF_LICENSE, LICENSES/PYPERCLIP_LICENSE, LICENSES/PYUPGRADE_LICENSE, LICENSES/SAS7BDAT_LICENSE, LICENSES/ULTRAJSON_LICENSE, MANIFEST.in, README.md, asv_bench/asv.conf.json, asv_bench/benchmarks/__init__.py, asv_bench/benchmarks/algorithms.py, asv_bench/benchmarks/algos/__init__.py, asv_bench/benchmarks/algos/isin.py, asv_bench/benchmarks/arithmetic.py, asv_bench/benchmarks/array.py, asv_bench/benchmarks/attrs_caching.py, asv_bench/benchmarks/boolean.py, asv_bench/benchmarks/categoricals.py, asv_bench/benchmarks/ctors.py, asv_bench/benchmarks/dtypes.py, asv_bench/benchmarks/eval.py, asv_bench/benchmarks/finalize.py, asv_bench/benchmarks/frame_ctor.py, asv_bench/benchmarks/frame_methods.py, asv_bench/benchmarks/gil.py, asv_bench/benchmarks/groupby.py, asv_bench/benchmarks/hash_functions.py, asv_bench/benchmarks/index_cached_properties.py, asv_bench/benchmarks/index_object.py, asv_bench/benchmarks/indexing.py, asv_bench/benchmarks/indexing_engines.py, asv_bench/benchmarks/inference.py, asv_bench/benchmarks/io/__init__.py, asv_bench/benchmarks/io/csv.py, asv_bench/benchmarks/io/excel.py, asv_bench/benchmarks/io/hdf.py, asv_bench/benchmarks/io/json.py, asv_bench/benchmarks/io/parsers.py, asv_bench/benchmarks/io/pickle.py, asv_bench/benchmarks/io/sas.py, asv_bench/benchmarks/io/sql.py, asv_bench/benchmarks/io/stata.py, asv_bench/benchmarks/io/style.py, asv_bench/benchmarks/join_merge.py, asv_bench/benchmarks/libs.py, asv_bench/benchmarks/multiindex_object.py, asv_bench/benchmarks/package.py, asv_bench/benchmarks/pandas_vb_common.py, asv_bench/benchmarks/period.py, asv_bench/benchmarks/plotting.py, asv_bench/benchmarks/reindex.py, asv_bench/benchmarks/replace.py, asv_bench/benchmarks/reshape.py, asv_bench/benchmarks/rolling.py, asv_bench/benchmarks/series_methods.py, asv_bench/benchmarks/sparse.py, asv_bench/benchmarks/stat_ops.py, asv_bench/benchmarks/strftime.py, asv_bench/benchmarks/strings.py, asv_bench/benchmarks/timedelta.py, asv_bench/benchmarks/timeseries.py, asv_bench/benchmarks/tslibs/__init__.py, asv_bench/benchmarks/tslibs/fields.py, asv_bench/benchmarks/tslibs/normalize.py, asv_bench/benchmarks/tslibs/offsets.py, asv_bench/benchmarks/tslibs/period.py, asv_bench/benchmarks/tslibs/resolution.py, asv_bench/benchmarks/tslibs/timedelta.py, asv_bench/benchmarks/tslibs/timestamp.py, asv_bench/benchmarks/tslibs/tslib.py, asv_bench/benchmarks/tslibs/tz_convert.py, ci/.condarc, ci/code_checks.sh, ci/deps/actions-311-minimum_versions.yaml, ci/deps/actions-311.yaml, ci/deps/actions-312.yaml, ci/deps/actions-313-downstream_compat.yaml, ci/deps/actions-313-freethreading.yaml, ci/deps/actions-313-numpydev.yaml, ci/deps/actions-313-pyarrownightly.yaml, ci/deps/actions-313.yaml, ci/meta.yaml, ci/run_tests.sh, ci/upload_wheels.sh, codecov.yml, doc/.gitignore, doc/_templates/api_redirect.html, doc/_templates/autosummary/accessor.rst, doc/_templates/autosummary/accessor_attribute.rst, doc/_templates/autosummary/accessor_callable.rst, doc/_templates/autosummary/accessor_method.rst, doc/_templates/autosummary/class.rst, doc/_templates/autosummary/class_without_autosummary.rst, doc/_templates/pandas_footer.html, doc/_templates/sidebar-nav-bs.html, doc/cheatsheet/Pandas_Cheat_Sheet.pdf, doc/cheatsheet/Pandas_Cheat_Sheet.pptx, doc/cheatsheet/Pandas_Cheat_Sheet_FA.pdf, doc/cheatsheet/Pandas_Cheat_Sheet_FA.pptx, doc/cheatsheet/Pandas_Cheat_Sheet_JA.pdf, doc/cheatsheet/Pandas_Cheat_Sheet_JA.pptx, doc/cheatsheet/README.md, doc/make.py, doc/redirects.csv, doc/scripts/eval_performance.py, doc/source/_static/ci.png, doc/source/_static/css/getting_started.css, doc/source/_static/css/pandas.css, doc/source/_static/df_repr_truncated.png, doc/source/_static/eval-perf.png, doc/source/_static/index_api.svg, doc/source/_static/index_contribute.svg, doc/source/_static/index_getting_started.svg, doc/source/_static/index_user_guide.svg, doc/source/_static/logo_r.svg, doc/source/_static/logo_sas.svg, doc/source/_static/logo_sas_white.svg, doc/source/_static/logo_sql.svg, doc/source/_static/logo_stata.svg, doc/source/_static/new-excel-index.png, doc/source/_static/old-excel-index.png, doc/source/_static/print_df_new.png, doc/source/_static/print_df_old.png, doc/source/_static/query-perf.png, doc/source/_static/question_mark_noback.svg, doc/source/_static/reshaping_melt.png, doc/source/_static/reshaping_pivot.png, doc/source/_static/reshaping_stack.png, doc/source/_static/reshaping_unstack.png, doc/source/_static/reshaping_unstack_0.png, doc/source/_static/reshaping_unstack_1.png, doc/source/_static/schemas/01_table_dataframe.svg, doc/source/_static/schemas/01_table_series.svg, doc/source/_static/schemas/01_table_spreadsheet.png, doc/source/_static/schemas/02_io_readwrite.svg, doc/source/_static/schemas/03_subset_columns.svg, doc/source/_static/schemas/03_subset_columns_rows.svg, doc/source/_static/schemas/03_subset_rows.svg, doc/source/_static/schemas/04_plot_overview.svg, doc/source/_static/schemas/05_newcolumn_1.svg, doc/source/_static/schemas/05_newcolumn_2.svg, doc/source/_static/schemas/05_newcolumn_3.svg, doc/source/_static/schemas/06_aggregate.svg, doc/source/_static/schemas/06_groupby.svg, doc/source/_static/schemas/06_groupby_agg_detail.svg, doc/source/_static/schemas/06_groupby_select_detail.svg, doc/source/_static/schemas/06_reduction.svg, doc/source/_static/schemas/06_valuecounts.svg, doc/source/_static/schemas/07_melt.svg, doc/source/_static/schemas/07_pivot.svg, doc/source/_static/schemas/07_pivot_table.svg, doc/source/_static/schemas/08_concat_column.svg, doc/source/_static/schemas/08_concat_row.svg, doc/source/_static/schemas/08_merge_left.svg, doc/source/_static/spreadsheets/conditional.png, doc/source/_static/spreadsheets/filter.png, doc/source/_static/spreadsheets/find.png, doc/source/_static/spreadsheets/logo_excel.svg, doc/source/_static/spreadsheets/pivot.png, doc/source/_static/spreadsheets/sort.png, doc/source/_static/spreadsheets/vlookup.png, doc/source/_static/style-excel.png, doc/source/_static/style/appmaphead1.png, doc/source/_static/style/appmaphead2.png, doc/source/_static/style/bg_ax0.png, doc/source/_static/style/bg_axNone.png, doc/source/_static/style/bg_axNone_gmap.png, doc/source/_static/style/bg_axNone_lowhigh.png, doc/source/_static/style/bg_axNone_vminvmax.png, doc/source/_static/style/bg_gmap.png, doc/source/_static/style/df_pipe.png, doc/source/_static/style/df_pipe_applydata.png, doc/source/_static/style/df_pipe_applymap.png, doc/source/_static/style/df_pipe_hl.png, doc/source/_static/style/df_pipe_hl2.png, doc/source/_static/style/footer_extended.png, doc/source/_static/style/footer_simple.png, doc/source/_static/style/format_excel_css.png, doc/source/_static/style/hbetw_axNone.png, doc/source/_static/style/hbetw_basic.png, doc/source/_static/style/hbetw_props.png, doc/source/_static/style/hbetw_seq.png, doc/source/_static/style/hq_ax1.png, doc/source/_static/style/hq_axNone.png, doc/source/_static/style/hq_props.png, doc/source/_static/style/latex_1.png, doc/source/_static/style/latex_2.png, doc/source/_static/style/latex_stocks.png, doc/source/_static/style/latex_stocks_html.png, doc/source/_static/style/tg_ax0.png, doc/source/_static/style/tg_axNone.png, doc/source/_static/style/tg_axNone_gmap.png, doc/source/_static/style/tg_axNone_lowhigh.png, doc/source/_static/style/tg_axNone_vminvmax.png, doc/source/_static/style/tg_gmap.png, doc/source/_static/trunc_after.png, doc/source/_static/trunc_before.png, doc/source/_static/whatsnew_assign.png, doc/source/_static/whatsnew_plot_submethods.png, doc/source/conf.py, doc/source/development/community.rst, doc/source/development/contributing.rst, doc/source/development/contributing_codebase.rst, doc/source/development/contributing_docstring.rst, doc/source/development/contributing_documentation.rst, doc/source/development/contributing_environment.rst, doc/source/development/contributing_gitpod.rst, doc/source/development/copy_on_write.rst, doc/source/development/debugging_extensions.rst, doc/source/development/developer.rst, doc/source/development/extending.rst, doc/source/development/gitpod-imgs/gitpod-dashboard-stop.png, doc/source/development/gitpod-imgs/gitpod-edit-permissions-gh.png, doc/source/development/gitpod-imgs/gitpod-edit-permissions-repo.png, doc/source/development/gitpod-imgs/gitpod-workspace.png, doc/source/development/gitpod-imgs/pandas-github.png, doc/source/development/gitpod-imgs/pandas-gitpod-branches.png, doc/source/development/gitpod-imgs/rst-rendering.png, doc/source/development/gitpod-imgs/vscode-rst.png, doc/source/development/gitpod-imgs/vscode-statusbar.png, doc/source/development/index.rst, doc/source/development/internals.rst, doc/source/development/maintaining.rst, doc/source/development/policies.rst, doc/source/getting_started/comparison/comparison_with_r.rst, doc/source/getting_started/comparison/comparison_with_sas.rst, doc/source/getting_started/comparison/comparison_with_spreadsheets.rst, doc/source/getting_started/comparison/comparison_with_spss.rst, doc/source/getting_started/comparison/comparison_with_sql.rst, doc/source/getting_started/comparison/comparison_with_stata.rst, doc/source/getting_started/comparison/includes/case.rst, doc/source/getting_started/comparison/includes/column_operations.rst, doc/source/getting_started/comparison/includes/column_selection.rst, doc/source/getting_started/comparison/includes/construct_dataframe.rst, doc/source/getting_started/comparison/includes/copies.rst, doc/source/getting_started/comparison/includes/extract_substring.rst, doc/source/getting_started/comparison/includes/filtering.rst, doc/source/getting_started/comparison/includes/find_substring.rst, doc/source/getting_started/comparison/includes/groupby.rst, doc/source/getting_started/comparison/includes/if_then.rst, doc/source/getting_started/comparison/includes/introduction.rst, doc/source/getting_started/comparison/includes/length.rst, doc/source/getting_started/comparison/includes/limit.rst, doc/source/getting_started/comparison/includes/merge.rst, doc/source/getting_started/comparison/includes/merge_setup.rst, doc/source/getting_started/comparison/includes/missing.rst, doc/source/getting_started/comparison/includes/missing_intro.rst, doc/source/getting_started/comparison/includes/nth_word.rst, doc/source/getting_started/comparison/includes/sorting.rst, doc/source/getting_started/comparison/includes/time_date.rst, doc/source/getting_started/comparison/includes/transform.rst, doc/source/getting_started/comparison/index.rst, doc/source/getting_started/index.rst, doc/source/getting_started/install.rst, doc/source/getting_started/intro_tutorials/01_table_oriented.rst, doc/source/getting_started/intro_tutorials/02_read_write.rst, doc/source/getting_started/intro_tutorials/03_subset_data.rst, doc/source/getting_started/intro_tutorials/04_plotting.rst, doc/source/getting_started/intro_tutorials/05_add_columns.rst, doc/source/getting_started/intro_tutorials/06_calculate_statistics.rst, doc/source/getting_started/intro_tutorials/07_reshape_table_layout.rst, doc/source/getting_started/intro_tutorials/08_combine_dataframes.rst, doc/source/getting_started/intro_tutorials/09_timeseries.rst, doc/source/getting_started/intro_tutorials/10_text_data.rst, doc/source/getting_started/intro_tutorials/includes/air_quality_no2.rst, doc/source/getting_started/intro_tutorials/includes/titanic.rst, doc/source/getting_started/intro_tutorials/index.rst, doc/source/getting_started/overview.rst, doc/source/getting_started/tutorials.rst, doc/source/index.rst.template, doc/source/reference/aliases.rst, doc/source/reference/arrays.rst, doc/source/reference/extensions.rst, doc/source/reference/frame.rst, doc/source/reference/general_functions.rst, doc/source/reference/groupby.rst, doc/source/reference/index.rst, doc/source/reference/indexing.rst, doc/source/reference/io.rst, doc/source/reference/missing_value.rst, doc/source/reference/offset_frequency.rst, doc/source/reference/options.rst, doc/source/reference/plotting.rst, doc/source/reference/resampling.rst, doc/source/reference/series.rst, doc/source/reference/style.rst, doc/source/reference/testing.rst, doc/source/reference/window.rst, doc/source/user_guide/10min.rst, doc/source/user_guide/advanced.rst, doc/source/user_guide/basics.rst, doc/source/user_guide/boolean.rst, doc/source/user_guide/categorical.rst, doc/source/user_guide/cookbook.rst, doc/source/user_guide/copy_on_write.rst, doc/source/user_guide/dsintro.rst, doc/source/user_guide/duplicates.rst, doc/source/user_guide/enhancingperf.rst, doc/source/user_guide/gotchas.rst, doc/source/user_guide/groupby.rst, doc/source/user_guide/index.rst, doc/source/user_guide/indexing.rst, doc/source/user_guide/integer_na.rst, doc/source/user_guide/io.rst, doc/source/user_guide/merging.rst, doc/source/user_guide/migration-3-strings.rst, doc/source/user_guide/missing_data.rst, doc/source/user_guide/options.rst, doc/source/user_guide/pyarrow.rst, doc/source/user_guide/reshaping.rst, doc/source/user_guide/scale.rst, doc/source/user_guide/sparse.rst, doc/source/user_guide/style.ipynb, doc/source/user_guide/templates/html_style_structure.html, doc/source/user_guide/templates/html_table_structure.html, doc/source/user_guide/templates/myhtml.tpl, doc/source/user_guide/text.rst, doc/source/user_guide/timedeltas.rst, doc/source/user_guide/timeseries.rst, doc/source/user_guide/user_defined_functions.rst, doc/source/user_guide/visualization.rst, doc/source/user_guide/window.rst, doc/source/whatsnew/index.rst, doc/source/whatsnew/v0.10.0.rst, doc/source/whatsnew/v0.10.1.rst, doc/source/whatsnew/v0.11.0.rst, doc/source/whatsnew/v0.12.0.rst, doc/source/whatsnew/v0.13.0.rst, doc/source/whatsnew/v0.13.1.rst, doc/source/whatsnew/v0.14.0.rst, doc/source/whatsnew/v0.14.1.rst, doc/source/whatsnew/v0.15.0.rst, doc/source/whatsnew/v0.15.1.rst, doc/source/whatsnew/v0.15.2.rst, doc/source/whatsnew/v0.16.0.rst, doc/source/whatsnew/v0.16.1.rst, doc/source/whatsnew/v0.16.2.rst, doc/source/whatsnew/v0.17.0.rst, doc/source/whatsnew/v0.17.1.rst, doc/source/whatsnew/v0.18.0.rst, doc/source/whatsnew/v0.18.1.rst, doc/source/whatsnew/v0.19.0.rst, doc/source/whatsnew/v0.19.1.rst, doc/source/whatsnew/v0.19.2.rst, doc/source/whatsnew/v0.20.0.rst, doc/source/whatsnew/v0.20.2.rst, doc/source/whatsnew/v0.20.3.rst, doc/source/whatsnew/v0.21.0.rst, doc/source/whatsnew/v0.21.1.rst, doc/source/whatsnew/v0.22.0.rst, doc/source/whatsnew/v0.23.0.rst, doc/source/whatsnew/v0.23.1.rst, doc/source/whatsnew/v0.23.2.rst, doc/source/whatsnew/v0.23.3.rst, doc/source/whatsnew/v0.23.4.rst, doc/source/whatsnew/v0.24.0.rst, doc/source/whatsnew/v0.24.1.rst, doc/source/whatsnew/v0.24.2.rst, doc/source/whatsnew/v0.25.0.rst, doc/source/whatsnew/v0.25.1.rst, doc/source/whatsnew/v0.25.2.rst, doc/source/whatsnew/v0.25.3.rst, doc/source/whatsnew/v0.4.x.rst, doc/source/whatsnew/v0.5.0.rst, doc/source/whatsnew/v0.6.0.rst, doc/source/whatsnew/v0.6.1.rst, doc/source/whatsnew/v0.7.0.rst, doc/source/whatsnew/v0.7.1.rst, doc/source/whatsnew/v0.7.2.rst, doc/source/whatsnew/v0.7.3.rst, doc/source/whatsnew/v0.8.0.rst, doc/source/whatsnew/v0.8.1.rst, doc/source/whatsnew/v0.9.0.rst, doc/source/whatsnew/v0.9.1.rst, doc/source/whatsnew/v1.0.0.rst, doc/source/whatsnew/v1.0.1.rst, doc/source/whatsnew/v1.0.2.rst, doc/source/whatsnew/v1.0.3.rst, doc/source/whatsnew/v1.0.4.rst, doc/source/whatsnew/v1.0.5.rst, doc/source/whatsnew/v1.1.0.rst, doc/source/whatsnew/v1.1.1.rst, doc/source/whatsnew/v1.1.2.rst, doc/source/whatsnew/v1.1.3.rst, doc/source/whatsnew/v1.1.4.rst, doc/source/whatsnew/v1.1.5.rst, doc/source/whatsnew/v1.2.0.rst, doc/source/whatsnew/v1.2.1.rst, doc/source/whatsnew/v1.2.2.rst, doc/source/whatsnew/v1.2.3.rst, doc/source/whatsnew/v1.2.4.rst, doc/source/whatsnew/v1.2.5.rst, doc/source/whatsnew/v1.3.0.rst, doc/source/whatsnew/v1.3.1.rst, doc/source/whatsnew/v1.3.2.rst, doc/source/whatsnew/v1.3.3.rst, doc/source/whatsnew/v1.3.4.rst, doc/source/whatsnew/v1.3.5.rst, doc/source/whatsnew/v1.4.0.rst, doc/source/whatsnew/v1.4.1.rst, doc/source/whatsnew/v1.4.2.rst, doc/source/whatsnew/v1.4.3.rst, doc/source/whatsnew/v1.4.4.rst, doc/source/whatsnew/v1.5.0.rst, doc/source/whatsnew/v1.5.1.rst, doc/source/whatsnew/v1.5.2.rst, doc/source/whatsnew/v1.5.3.rst, doc/source/whatsnew/v2.0.0.rst, doc/source/whatsnew/v2.0.1.rst, doc/source/whatsnew/v2.0.2.rst, doc/source/whatsnew/v2.0.3.rst, doc/source/whatsnew/v2.1.0.rst, doc/source/whatsnew/v2.1.1.rst, doc/source/whatsnew/v2.1.2.rst, doc/source/whatsnew/v2.1.3.rst, doc/source/whatsnew/v2.1.4.rst, doc/source/whatsnew/v2.2.0.rst, doc/source/whatsnew/v2.2.1.rst, doc/source/whatsnew/v2.2.2.rst, doc/source/whatsnew/v2.2.3.rst, doc/source/whatsnew/v2.3.0.rst, doc/source/whatsnew/v2.3.1.rst, doc/source/whatsnew/v2.3.2.rst, doc/source/whatsnew/v2.3.3.rst, doc/source/whatsnew/v3.0.0.rst, doc/source/whatsnew/whatsnew_0171_html_table.html, doc/sphinxext/README.rst, doc/sphinxext/announce.py, doc/sphinxext/contributors.py, environment.yml, generate_pxi.py, generate_version.py, gitpod/Dockerfile, gitpod/gitpod.Dockerfile, gitpod/settings.json, gitpod/workspace_config, meson.build, pandas/_config/__init__.py, pandas/_config/config.py, pandas/_config/dates.py, pandas/_config/display.py, pandas/_config/localization.py, pandas/_libs/__init__.py, pandas/_libs/algos.pxd, pandas/_libs/algos.pyi, pandas/_libs/algos.pyx, pandas/_libs/algos_common_helper.pxi.in, pandas/_libs/algos_take_helper.pxi.in, pandas/_libs/arrays.pxd, pandas/_libs/arrays.pyi, pandas/_libs/arrays.pyx, pandas/_libs/byteswap.pyi, pandas/_libs/byteswap.pyx, pandas/_libs/dtypes.pxd, pandas/_libs/free_threading_config.pxi.in, pandas/_libs/groupby.pyi, pandas/_libs/groupby.pyx, pandas/_libs/hashing.pyi, pandas/_libs/hashing.pyx, pandas/_libs/hashtable.pxd, pandas/_libs/hashtable.pyi, pandas/_libs/hashtable.pyx, pandas/_libs/hashtable_class_helper.pxi.in, pandas/_libs/hashtable_func_helper.pxi.in, pandas/_libs/include/pandas/datetime/date_conversions.h, pandas/_libs/include/pandas/datetime/pd_datetime.h, pandas/_libs/include/pandas/parser/io.h, pandas/_libs/include/pandas/parser/pd_parser.h, pandas/_libs/include/pandas/parser/tokenizer.h, pandas/_libs/include/pandas/portable.h, pandas/_libs/include/pandas/skiplist.h, pandas/_libs/include/pandas/vendored/klib/khash.h, pandas/_libs/include/pandas/vendored/klib/khash_python.h, pandas/_libs/include/pandas/vendored/numpy/datetime/np_datetime.h, pandas/_libs/include/pandas/vendored/numpy/datetime/np_datetime_strings.h, pandas/_libs/include/pandas/vendored/ujson/lib/ultrajson.h, pandas/_libs/index.pyi, pandas/_libs/index.pyx, pandas/_libs/index_class_helper.pxi.in, pandas/_libs/indexing.pyi, pandas/_libs/indexing.pyx, pandas/_libs/internals.pyi, pandas/_libs/internals.pyx, pandas/_libs/interval.pyi, pandas/_libs/interval.pyx, pandas/_libs/intervaltree.pxi.in, pandas/_libs/join.pyi, pandas/_libs/join.pyx, pandas/_libs/json.pyi, pandas/_libs/khash.pxd, pandas/_libs/khash_for_primitive_helper.pxi.in, pandas/_libs/lib.pxd, pandas/_libs/lib.pyi, pandas/_libs/lib.pyx, pandas/_libs/meson.build, pandas/_libs/missing.pxd, pandas/_libs/missing.pyi, pandas/_libs/missing.pyx, pandas/_libs/ops.pyi, pandas/_libs/ops.pyx, pandas/_libs/ops_dispatch.pyi, pandas/_libs/ops_dispatch.pyx, pandas/_libs/parsers.pyi, pandas/_libs/parsers.pyx, pandas/_libs/properties.pyi, pandas/_libs/properties.pyx, pandas/_libs/reshape.pyi, pandas/_libs/reshape.pyx, pandas/_libs/sas.pyi, pandas/_libs/sas.pyx, pandas/_libs/sparse.pyi, pandas/_libs/sparse.pyx, pandas/_libs/sparse_op_helper.pxi.in, pandas/_libs/src/datetime/date_conversions.c, pandas/_libs/src/datetime/pd_datetime.c, pandas/_libs/src/parser/io.c, pandas/_libs/src/parser/pd_parser.c, pandas/_libs/src/parser/tokenizer.c, pandas/_libs/src/vendored/numpy/datetime/np_datetime.c, pandas/_libs/src/vendored/numpy/datetime/np_datetime_strings.c, pandas/_libs/src/vendored/ujson/lib/ultrajsondec.c, pandas/_libs/src/vendored/ujson/lib/ultrajsonenc.c, pandas/_libs/src/vendored/ujson/python/JSONtoObj.c, pandas/_libs/src/vendored/ujson/python/objToJSON.c, pandas/_libs/src/vendored/ujson/python/ujson.c, pandas/_libs/testing.pyi, pandas/_libs/testing.pyx, pandas/_libs/tslib.pyi, pandas/_libs/tslib.pyx, pandas/_libs/tslibs/__init__.py, pandas/_libs/tslibs/base.pxd, pandas/_libs/tslibs/base.pyx, pandas/_libs/tslibs/ccalendar.pxd, pandas/_libs/tslibs/ccalendar.pyi, pandas/_libs/tslibs/ccalendar.pyx, pandas/_libs/tslibs/conversion.pxd, pandas/_libs/tslibs/conversion.pyi, pandas/_libs/tslibs/conversion.pyx, pandas/_libs/tslibs/dtypes.pxd, pandas/_libs/tslibs/dtypes.pyi, pandas/_libs/tslibs/dtypes.pyx, pandas/_libs/tslibs/fields.pyi, pandas/_libs/tslibs/fields.pyx, pandas/_libs/tslibs/meson.build, pandas/_libs/tslibs/nattype.pxd, pandas/_libs/tslibs/nattype.pyi, pandas/_libs/tslibs/nattype.pyx, pandas/_libs/tslibs/np_datetime.pxd, pandas/_libs/tslibs/np_datetime.pyi, pandas/_libs/tslibs/np_datetime.pyx, pandas/_libs/tslibs/offsets.pxd, pandas/_libs/tslibs/offsets.pyi, pandas/_libs/tslibs/offsets.pyx, pandas/_libs/tslibs/parsing.pxd, pandas/_libs/tslibs/parsing.pyi, pandas/_libs/tslibs/parsing.pyx, pandas/_libs/tslibs/period.pxd, pandas/_libs/tslibs/period.pyi, pandas/_libs/tslibs/period.pyx, pandas/_libs/tslibs/strptime.pxd, pandas/_libs/tslibs/strptime.pyi, pandas/_libs/tslibs/strptime.pyx, pandas/_libs/tslibs/timedeltas.pxd, pandas/_libs/tslibs/timedeltas.pyi, pandas/_libs/tslibs/timedeltas.pyx, pandas/_libs/tslibs/timestamps.pxd, pandas/_libs/tslibs/timestamps.pyi, pandas/_libs/tslibs/timestamps.pyx, pandas/_libs/tslibs/timezones.pxd, pandas/_libs/tslibs/timezones.pyi, pandas/_libs/tslibs/timezones.pyx, pandas/_libs/tslibs/tzconversion.pxd, pandas/_libs/tslibs/tzconversion.pyi, pandas/_libs/tslibs/tzconversion.pyx, pandas/_libs/tslibs/util.pxd, pandas/_libs/tslibs/vectorized.pyi, pandas/_libs/tslibs/vectorized.pyx, pandas/_libs/util.pxd, pandas/_libs/window/__init__.py, pandas/_libs/window/aggregations.pyi, pandas/_libs/window/aggregations.pyx, pandas/_libs/window/indexers.pyi, pandas/_libs/window/indexers.pyx, pandas/_libs/window/meson.build, pandas/_libs/writers.pyi, pandas/_libs/writers.pyx, pandas/_testing/__init__.py, pandas/_testing/_hypothesis.py, pandas/_testing/_io.py, pandas/_testing/_warnings.py, pandas/_testing/asserters.py, pandas/_testing/compat.py, pandas/_testing/contexts.py, pandas/_typing.py, pandas/_version.py, pandas/api/__init__.py, pandas/api/executors/__init__.py, pandas/api/extensions/__init__.py, pandas/api/indexers/__init__.py, pandas/api/interchange/__init__.py, pandas/api/internals.py, pandas/api/types/__init__.py, pandas/api/typing/aliases.py, pandas/arrays/__init__.py, pandas/compat/__init__.py, pandas/compat/_constants.py, pandas/compat/_optional.py, pandas/compat/numpy/__init__.py, pandas/compat/numpy/function.py, pandas/compat/pickle_compat.py, pandas/compat/pyarrow.py, pandas/conftest.py, pandas/core/__init__.py, pandas/core/_numba/__init__.py, pandas/core/_numba/executor.py, pandas/core/_numba/extensions.py, pandas/core/_numba/kernels/__init__.py, pandas/core/_numba/kernels/mean_.py, pandas/core/_numba/kernels/min_max_.py, pandas/core/_numba/kernels/shared.py, pandas/core/_numba/kernels/sum_.py, pandas/core/_numba/kernels/var_.py, pandas/core/accessor.py, pandas/core/algorithms.py, pandas/core/api.py, pandas/core/apply.py, pandas/core/array_algos/__init__.py, pandas/core/array_algos/datetimelike_accumulations.py, pandas/core/array_algos/masked_accumulations.py, pandas/core/array_algos/masked_reductions.py, pandas/core/array_algos/putmask.py, pandas/core/array_algos/quantile.py, pandas/core/array_algos/replace.py, pandas/core/array_algos/take.py, pandas/core/array_algos/transforms.py, pandas/core/arraylike.py, pandas/core/arrays/__init__.py, pandas/core/arrays/_arrow_string_mixins.py, pandas/core/arrays/_mixins.py, pandas/core/arrays/_ranges.py, pandas/core/arrays/_utils.py, pandas/core/arrays/arrow/__init__.py, pandas/core/arrays/arrow/_arrow_utils.py, pandas/core/arrays/arrow/accessors.py, pandas/core/arrays/arrow/array.py, pandas/core/arrays/arrow/extension_types.py, pandas/core/arrays/base.py, pandas/core/arrays/boolean.py, pandas/core/arrays/categorical.py, pandas/core/arrays/datetimelike.py, pandas/core/arrays/datetimes.py, pandas/core/arrays/floating.py, pandas/core/arrays/integer.py, pandas/core/arrays/interval.py, pandas/core/arrays/masked.py, pandas/core/arrays/numeric.py, pandas/core/arrays/numpy_.py, pandas/core/arrays/period.py, pandas/core/arrays/sparse/__init__.py, pandas/core/arrays/sparse/accessor.py, pandas/core/arrays/sparse/array.py, pandas/core/arrays/sparse/scipy_sparse.py, pandas/core/arrays/string_.py, pandas/core/arrays/string_arrow.py, pandas/core/arrays/timedeltas.py, pandas/core/base.py, pandas/core/common.py, pandas/core/computation/__init__.py, pandas/core/computation/align.py, pandas/core/computation/api.py, pandas/core/computation/check.py, pandas/core/computation/common.py, pandas/core/computation/engines.py, pandas/core/computation/eval.py, pandas/core/computation/expr.py, pandas/core/computation/expressions.py, pandas/core/computation/ops.py, pandas/core/computation/parsing.py, pandas/core/computation/pytables.py, pandas/core/computation/scope.py, pandas/core/config_init.py, pandas/core/construction.py, pandas/core/dtypes/__init__.py, pandas/core/dtypes/api.py, pandas/core/dtypes/astype.py, pandas/core/dtypes/base.py, pandas/core/dtypes/cast.py, pandas/core/dtypes/common.py, pandas/core/dtypes/concat.py, pandas/core/dtypes/dtypes.py, pandas/core/dtypes/generic.py, pandas/core/dtypes/inference.py, pandas/core/dtypes/missing.py, pandas/core/flags.py, pandas/core/frame.py, pandas/core/generic.py, pandas/core/groupby/__init__.py, pandas/core/groupby/base.py, pandas/core/groupby/categorical.py, pandas/core/groupby/generic.py, pandas/core/groupby/groupby.py, pandas/core/groupby/grouper.py, pandas/core/groupby/indexing.py, pandas/core/groupby/numba_.py, pandas/core/groupby/ops.py, pandas/core/indexers/__init__.py, pandas/core/indexers/objects.py, pandas/core/indexers/utils.py, pandas/core/indexes/__init__.py, pandas/core/indexes/accessors.py, pandas/core/indexes/api.py, pandas/core/indexes/base.py, pandas/core/indexes/category.py, pandas/core/indexes/datetimelike.py, pandas/core/indexes/datetimes.py, pandas/core/indexes/extension.py, pandas/core/indexes/frozen.py, pandas/core/indexes/interval.py, pandas/core/indexes/multi.py, pandas/core/indexes/period.py, pandas/core/indexes/range.py, pandas/core/indexes/timedeltas.py, pandas/core/indexing.py, pandas/core/interchange/__init__.py, pandas/core/interchange/buffer.py, pandas/core/interchange/column.py, pandas/core/interchange/dataframe.py, pandas/core/interchange/dataframe_protocol.py, pandas/core/interchange/from_dataframe.py, pandas/core/interchange/utils.py, pandas/core/internals/__init__.py, pandas/core/internals/api.py, pandas/core/internals/blocks.py, pandas/core/internals/concat.py, pandas/core/internals/construction.py, pandas/core/internals/managers.py, pandas/core/internals/ops.py, pandas/core/methods/__init__.py, pandas/core/methods/describe.py, pandas/core/methods/selectn.py, pandas/core/methods/to_dict.py, pandas/core/missing.py, pandas/core/nanops.py, pandas/core/ops/__init__.py, pandas/core/ops/array_ops.py, pandas/core/ops/common.py, pandas/core/ops/dispatch.py, pandas/core/ops/docstrings.py, pandas/core/ops/invalid.py, pandas/core/ops/mask_ops.py, pandas/core/ops/missing.py, pandas/core/resample.py, pandas/core/reshape/__init__.py, pandas/core/reshape/api.py, pandas/core/reshape/concat.py, pandas/core/reshape/encoding.py, pandas/core/reshape/melt.py, pandas/core/reshape/merge.py, pandas/core/reshape/pivot.py, pandas/core/reshape/reshape.py, pandas/core/reshape/tile.py, pandas/core/roperator.py, pandas/core/sample.py, pandas/core/series.py, pandas/core/shared_docs.py, pandas/core/sorting.py, pandas/core/sparse/__init__.py, pandas/core/sparse/api.py, pandas/core/strings/__init__.py, pandas/core/strings/accessor.py, pandas/core/strings/object_array.py, pandas/core/tools/__init__.py, pandas/core/tools/datetimes.py, pandas/core/tools/numeric.py, pandas/core/tools/timedeltas.py, pandas/core/tools/times.py, pandas/core/util/__init__.py, pandas/core/util/hashing.py, pandas/core/util/numba_.py, pandas/core/window/__init__.py, pandas/core/window/common.py, pandas/core/window/doc.py, pandas/core/window/ewm.py, pandas/core/window/expanding.py, pandas/core/window/numba_.py, pandas/core/window/online.py, pandas/core/window/rolling.py, pandas/errors/__init__.py, pandas/errors/cow.py, pandas/io/__init__.py, pandas/io/_util.py, pandas/io/api.py, pandas/io/clipboard/__init__.py, pandas/io/clipboards.py, pandas/io/common.py, pandas/io/excel/__init__.py, pandas/io/excel/_base.py, pandas/io/excel/_calamine.py, pandas/io/excel/_odfreader.py, pandas/io/excel/_odswriter.py, pandas/io/excel/_openpyxl.py, pandas/io/excel/_pyxlsb.py, pandas/io/excel/_util.py, pandas/io/excel/_xlrd.py, pandas/io/excel/_xlsxwriter.py, pandas/io/feather_format.py, pandas/io/formats/__init__.py, pandas/io/formats/_color_data.py, pandas/io/formats/console.py, pandas/io/formats/css.py, pandas/io/formats/csvs.py, pandas/io/formats/excel.py, pandas/io/formats/format.py, pandas/io/formats/html.py, pandas/io/formats/info.py, pandas/io/formats/printing.py, pandas/io/formats/string.py, pandas/io/formats/style.py, pandas/io/formats/style_render.py, pandas/io/formats/templates/html.tpl, pandas/io/formats/templates/html_style.tpl, pandas/io/formats/templates/html_table.tpl, pandas/io/formats/templates/latex.tpl, pandas/io/formats/templates/latex_longtable.tpl, pandas/io/formats/templates/latex_table.tpl, pandas/io/formats/templates/string.tpl, pandas/io/formats/templates/typst.tpl, pandas/io/formats/xml.py, pandas/io/html.py, pandas/io/iceberg.py, pandas/io/json/__init__.py, pandas/io/json/_json.py, pandas/io/json/_normalize.py, pandas/io/json/_table_schema.py, pandas/io/orc.py, pandas/io/parquet.py, pandas/io/parsers/__init__.py, pandas/io/parsers/arrow_parser_wrapper.py, pandas/io/parsers/base_parser.py, pandas/io/parsers/c_parser_wrapper.py, pandas/io/parsers/python_parser.py, pandas/io/parsers/readers.py, pandas/io/pickle.py, pandas/io/pytables.py, pandas/io/sas/__init__.py, pandas/io/sas/sas7bdat.py, pandas/io/sas/sas_constants.py, pandas/io/sas/sas_xport.py, pandas/io/sas/sasreader.py, pandas/io/spss.py, pandas/io/sql.py, pandas/io/stata.py, pandas/io/xml.py, pandas/meson.build, pandas/plotting/__init__.py, pandas/plotting/_core.py, pandas/plotting/_matplotlib/__init__.py, pandas/plotting/_matplotlib/boxplot.py, pandas/plotting/_matplotlib/converter.py, pandas/plotting/_matplotlib/core.py, pandas/plotting/_matplotlib/groupby.py, pandas/plotting/_matplotlib/hist.py, pandas/plotting/_matplotlib/misc.py, pandas/plotting/_matplotlib/style.py, pandas/plotting/_matplotlib/timeseries.py, pandas/plotting/_matplotlib/tools.py, pandas/plotting/_misc.py, pandas/testing.py, pandas/tests/__init__.py, pandas/tests/api/__init__.py, pandas/tests/api/test_types.py, pandas/tests/apply/__init__.py, pandas/tests/apply/common.py, pandas/tests/apply/conftest.py, pandas/tests/apply/test_frame_apply.py, pandas/tests/apply/test_frame_apply_relabeling.py, pandas/tests/apply/test_frame_transform.py, pandas/tests/apply/test_invalid_arg.py, pandas/tests/apply/test_numba.py, pandas/tests/apply/test_series_apply.py, pandas/tests/apply/test_series_apply_relabeling.py, pandas/tests/apply/test_series_transform.py, pandas/tests/apply/test_str.py, pandas/tests/arithmetic/__init__.py, pandas/tests/arithmetic/common.py, pandas/tests/arithmetic/conftest.py, pandas/tests/arithmetic/test_array_ops.py, pandas/tests/arithmetic/test_bool.py, pandas/tests/arithmetic/test_categorical.py, pandas/tests/arithmetic/test_datetime64.py, pandas/tests/arithmetic/test_interval.py, pandas/tests/arithmetic/test_numeric.py, pandas/tests/arithmetic/test_object.py, pandas/tests/arithmetic/test_period.py, pandas/tests/arithmetic/test_string.py, pandas/tests/arithmetic/test_timedelta64.py, pandas/tests/arrays/__init__.py, pandas/tests/arrays/boolean/__init__.py, pandas/tests/arrays/boolean/test_arithmetic.py, pandas/tests/arrays/boolean/test_astype.py, pandas/tests/arrays/boolean/test_comparison.py, pandas/tests/arrays/boolean/test_construction.py, pandas/tests/arrays/boolean/test_function.py, pandas/tests/arrays/boolean/test_indexing.py, pandas/tests/arrays/boolean/test_logical.py, pandas/tests/arrays/boolean/test_ops.py, pandas/tests/arrays/boolean/test_reduction.py, pandas/tests/arrays/boolean/test_repr.py, pandas/tests/arrays/categorical/__init__.py, pandas/tests/arrays/categorical/test_algos.py, pandas/tests/arrays/categorical/test_analytics.py, pandas/tests/arrays/categorical/test_api.py, pandas/tests/arrays/categorical/test_astype.py, pandas/tests/arrays/categorical/test_constructors.py, pandas/tests/arrays/categorical/test_dtypes.py, pandas/tests/arrays/categorical/test_indexing.py, pandas/tests/arrays/categorical/test_map.py, pandas/tests/arrays/categorical/test_missing.py, pandas/tests/arrays/categorical/test_operators.py, pandas/tests/arrays/categorical/test_replace.py, pandas/tests/arrays/categorical/test_repr.py, pandas/tests/arrays/categorical/test_sorting.py, pandas/tests/arrays/categorical/test_subclass.py, pandas/tests/arrays/categorical/test_take.py, pandas/tests/arrays/categorical/test_warnings.py, pandas/tests/arrays/datetimes/__init__.py, pandas/tests/arrays/datetimes/test_constructors.py, pandas/tests/arrays/datetimes/test_cumulative.py, pandas/tests/arrays/datetimes/test_reductions.py, pandas/tests/arrays/floating/__init__.py, pandas/tests/arrays/floating/conftest.py, pandas/tests/arrays/floating/test_arithmetic.py, pandas/tests/arrays/floating/test_astype.py, pandas/tests/arrays/floating/test_comparison.py, pandas/tests/arrays/floating/test_concat.py, pandas/tests/arrays/floating/test_construction.py, pandas/tests/arrays/floating/test_contains.py, pandas/tests/arrays/floating/test_function.py, pandas/tests/arrays/floating/test_repr.py, pandas/tests/arrays/floating/test_to_numpy.py, pandas/tests/arrays/integer/__init__.py, pandas/tests/arrays/integer/conftest.py, pandas/tests/arrays/integer/test_arithmetic.py, pandas/tests/arrays/integer/test_comparison.py, pandas/tests/arrays/integer/test_concat.py, pandas/tests/arrays/integer/test_construction.py, pandas/tests/arrays/integer/test_dtypes.py, pandas/tests/arrays/integer/test_function.py, pandas/tests/arrays/integer/test_indexing.py, pandas/tests/arrays/integer/test_reduction.py, pandas/tests/arrays/integer/test_repr.py, pandas/tests/arrays/interval/__init__.py, pandas/tests/arrays/interval/test_astype.py, pandas/tests/arrays/interval/test_formats.py, pandas/tests/arrays/interval/test_interval.py, pandas/tests/arrays/interval/test_interval_pyarrow.py, pandas/tests/arrays/interval/test_overlaps.py, pandas/tests/arrays/masked/__init__.py, pandas/tests/arrays/masked/test_arithmetic.py, pandas/tests/arrays/masked/test_arrow_compat.py, pandas/tests/arrays/masked/test_function.py, pandas/tests/arrays/masked/test_indexing.py, pandas/tests/arrays/masked_shared.py, pandas/tests/arrays/numpy_/__init__.py, pandas/tests/arrays/numpy_/test_indexing.py, pandas/tests/arrays/numpy_/test_numpy.py, pandas/tests/arrays/period/__init__.py, pandas/tests/arrays/period/test_arrow_compat.py, pandas/tests/arrays/period/test_astype.py, pandas/tests/arrays/period/test_constructors.py, pandas/tests/arrays/period/test_reductions.py, pandas/tests/arrays/sparse/__init__.py, pandas/tests/arrays/sparse/test_accessor.py, pandas/tests/arrays/sparse/test_arithmetics.py, pandas/tests/arrays/sparse/test_array.py, pandas/tests/arrays/sparse/test_astype.py, pandas/tests/arrays/sparse/test_combine_concat.py, pandas/tests/arrays/sparse/test_constructors.py, pandas/tests/arrays/sparse/test_dtype.py, pandas/tests/arrays/sparse/test_indexing.py, pandas/tests/arrays/sparse/test_libsparse.py, pandas/tests/arrays/sparse/test_reductions.py, pandas/tests/arrays/sparse/test_unary.py, pandas/tests/arrays/string_/__init__.py, pandas/tests/arrays/string_/test_concat.py, pandas/tests/arrays/string_/test_string.py, pandas/tests/arrays/string_/test_string_arrow.py, pandas/tests/arrays/test_array.py, pandas/tests/arrays/test_datetimelike.py, pandas/tests/arrays/test_datetimes.py, pandas/tests/arrays/test_ndarray_backed.py, pandas/tests/arrays/test_period.py, pandas/tests/arrays/test_timedeltas.py, pandas/tests/arrays/timedeltas/__init__.py, pandas/tests/arrays/timedeltas/test_constructors.py, pandas/tests/arrays/timedeltas/test_cumulative.py, pandas/tests/arrays/timedeltas/test_reductions.py, pandas/tests/base/__init__.py, pandas/tests/base/common.py, pandas/tests/base/test_constructors.py, pandas/tests/base/test_conversion.py, pandas/tests/base/test_fillna.py, pandas/tests/base/test_misc.py, pandas/tests/base/test_transpose.py, pandas/tests/base/test_unique.py, pandas/tests/base/test_value_counts.py, pandas/tests/computation/__init__.py, pandas/tests/computation/test_compat.py, pandas/tests/computation/test_eval.py, pandas/tests/config/__init__.py, pandas/tests/config/test_config.py, pandas/tests/config/test_localization.py, pandas/tests/construction/__init__.py, pandas/tests/construction/test_extract_array.py, pandas/tests/copy_view/__init__.py, pandas/tests/copy_view/index/__init__.py, pandas/tests/copy_view/index/test_datetimeindex.py, pandas/tests/copy_view/index/test_index.py, pandas/tests/copy_view/index/test_periodindex.py, pandas/tests/copy_view/index/test_timedeltaindex.py, pandas/tests/copy_view/test_array.py, pandas/tests/copy_view/test_astype.py, pandas/tests/copy_view/test_chained_assignment_deprecation.py, pandas/tests/copy_view/test_clip.py, pandas/tests/copy_view/test_constructors.py, pandas/tests/copy_view/test_copy_deprecation.py, pandas/tests/copy_view/test_core_functionalities.py, pandas/tests/copy_view/test_functions.py, pandas/tests/copy_view/test_indexing.py, pandas/tests/copy_view/test_internals.py, pandas/tests/copy_view/test_interp_fillna.py, pandas/tests/copy_view/test_methods.py, pandas/tests/copy_view/test_replace.py, pandas/tests/copy_view/test_setitem.py, pandas/tests/copy_view/test_util.py, pandas/tests/copy_view/util.py, pandas/tests/dtypes/__init__.py, pandas/tests/dtypes/cast/__init__.py, pandas/tests/dtypes/cast/test_can_hold_element.py, pandas/tests/dtypes/cast/test_construct_from_scalar.py, pandas/tests/dtypes/cast/test_construct_ndarray.py, pandas/tests/dtypes/cast/test_construct_object_arr.py, pandas/tests/dtypes/cast/test_dict_compat.py, pandas/tests/dtypes/cast/test_downcast.py, pandas/tests/dtypes/cast/test_find_common_type.py, pandas/tests/dtypes/cast/test_infer_datetimelike.py, pandas/tests/dtypes/cast/test_infer_dtype.py, pandas/tests/dtypes/cast/test_maybe_box_native.py, pandas/tests/dtypes/cast/test_promote.py, pandas/tests/dtypes/test_common.py, pandas/tests/dtypes/test_concat.py, pandas/tests/dtypes/test_dtypes.py, pandas/tests/dtypes/test_generic.py, pandas/tests/dtypes/test_inference.py, pandas/tests/dtypes/test_missing.py, pandas/tests/extension/__init__.py, pandas/tests/extension/array_with_attr/__init__.py, pandas/tests/extension/array_with_attr/array.py, pandas/tests/extension/array_with_attr/test_array_with_attr.py, pandas/tests/extension/base/__init__.py, pandas/tests/extension/base/accumulate.py, pandas/tests/extension/base/base.py, pandas/tests/extension/base/casting.py, pandas/tests/extension/base/constructors.py, pandas/tests/extension/base/dim2.py, pandas/tests/extension/base/dtype.py, pandas/tests/extension/base/getitem.py, pandas/tests/extension/base/groupby.py, pandas/tests/extension/base/index.py, pandas/tests/extension/base/interface.py, pandas/tests/extension/base/io.py, pandas/tests/extension/base/methods.py, pandas/tests/extension/base/missing.py, pandas/tests/extension/base/ops.py, pandas/tests/extension/base/printing.py, pandas/tests/extension/base/reduce.py, pandas/tests/extension/base/reshaping.py, pandas/tests/extension/base/setitem.py, pandas/tests/extension/conftest.py, pandas/tests/extension/date/__init__.py, pandas/tests/extension/date/array.py, pandas/tests/extension/decimal/__init__.py, pandas/tests/extension/decimal/array.py, pandas/tests/extension/decimal/test_decimal.py, pandas/tests/extension/json/__init__.py, pandas/tests/extension/json/array.py, pandas/tests/extension/json/test_json.py, pandas/tests/extension/list/__init__.py, pandas/tests/extension/list/array.py, pandas/tests/extension/list/test_list.py, pandas/tests/extension/test_arrow.py, pandas/tests/extension/test_categorical.py, pandas/tests/extension/test_common.py, pandas/tests/extension/test_datetime.py, pandas/tests/extension/test_extension.py, pandas/tests/extension/test_interval.py, pandas/tests/extension/test_masked.py, pandas/tests/extension/test_numpy.py, pandas/tests/extension/test_period.py, pandas/tests/extension/test_sparse.py, pandas/tests/extension/test_string.py, pandas/tests/frame/__init__.py, pandas/tests/frame/common.py, pandas/tests/frame/conftest.py, pandas/tests/frame/constructors/__init__.py, pandas/tests/frame/constructors/test_from_dict.py, pandas/tests/frame/constructors/test_from_records.py, pandas/tests/frame/indexing/__init__.py, pandas/tests/frame/indexing/test_coercion.py, pandas/tests/frame/indexing/test_delitem.py, pandas/tests/frame/indexing/test_get.py, pandas/tests/frame/indexing/test_get_value.py, pandas/tests/frame/indexing/test_getitem.py, pandas/tests/frame/indexing/test_indexing.py, pandas/tests/frame/indexing/test_insert.py, pandas/tests/frame/indexing/test_mask.py, pandas/tests/frame/indexing/test_set_value.py, pandas/tests/frame/indexing/test_setitem.py, pandas/tests/frame/indexing/test_take.py, pandas/tests/frame/indexing/test_where.py, pandas/tests/frame/indexing/test_xs.py, pandas/tests/frame/methods/__init__.py, pandas/tests/frame/methods/test_add_prefix_suffix.py, pandas/tests/frame/methods/test_align.py, pandas/tests/frame/methods/test_asfreq.py, pandas/tests/frame/methods/test_asof.py, pandas/tests/frame/methods/test_assign.py, pandas/tests/frame/methods/test_astype.py, pandas/tests/frame/methods/test_at_time.py, pandas/tests/frame/methods/test_between_time.py, pandas/tests/frame/methods/test_clip.py, pandas/tests/frame/methods/test_combine.py, pandas/tests/frame/methods/test_combine_first.py, pandas/tests/frame/methods/test_compare.py, pandas/tests/frame/methods/test_convert_dtypes.py, pandas/tests/frame/methods/test_copy.py, pandas/tests/frame/methods/test_count.py, pandas/tests/frame/methods/test_cov_corr.py, pandas/tests/frame/methods/test_describe.py, pandas/tests/frame/methods/test_diff.py, pandas/tests/frame/methods/test_dot.py, pandas/tests/frame/methods/test_drop.py, pandas/tests/frame/methods/test_drop_duplicates.py, pandas/tests/frame/methods/test_droplevel.py, pandas/tests/frame/methods/test_dropna.py, pandas/tests/frame/methods/test_dtypes.py, pandas/tests/frame/methods/test_duplicated.py, pandas/tests/frame/methods/test_equals.py, pandas/tests/frame/methods/test_explode.py, pandas/tests/frame/methods/test_fillna.py, pandas/tests/frame/methods/test_filter.py, pandas/tests/frame/methods/test_first_valid_index.py, pandas/tests/frame/methods/test_get_numeric_data.py, pandas/tests/frame/methods/test_head_tail.py, pandas/tests/frame/methods/test_infer_objects.py, pandas/tests/frame/methods/test_info.py, pandas/tests/frame/methods/test_interpolate.py, pandas/tests/frame/methods/test_is_homogeneous_dtype.py, pandas/tests/frame/methods/test_isetitem.py, pandas/tests/frame/methods/test_isin.py, pandas/tests/frame/methods/test_iterrows.py, pandas/tests/frame/methods/test_join.py, pandas/tests/frame/methods/test_map.py, pandas/tests/frame/methods/test_matmul.py, pandas/tests/frame/methods/test_nlargest.py, pandas/tests/frame/methods/test_pct_change.py, pandas/tests/frame/methods/test_pipe.py, pandas/tests/frame/methods/test_pop.py, pandas/tests/frame/methods/test_quantile.py, pandas/tests/frame/methods/test_rank.py, pandas/tests/frame/methods/test_reindex.py, pandas/tests/frame/methods/test_reindex_like.py, pandas/tests/frame/methods/test_rename.py, pandas/tests/frame/methods/test_rename_axis.py, pandas/tests/frame/methods/test_reorder_levels.py, pandas/tests/frame/methods/test_replace.py, pandas/tests/frame/methods/test_reset_index.py, pandas/tests/frame/methods/test_round.py, pandas/tests/frame/methods/test_sample.py, pandas/tests/frame/methods/test_select_dtypes.py, pandas/tests/frame/methods/test_set_axis.py, pandas/tests/frame/methods/test_set_index.py, pandas/tests/frame/methods/test_shift.py, pandas/tests/frame/methods/test_size.py, pandas/tests/frame/methods/test_sort_index.py, pandas/tests/frame/methods/test_sort_values.py, pandas/tests/frame/methods/test_swaplevel.py, pandas/tests/frame/methods/test_to_csv.py, pandas/tests/frame/methods/test_to_dict.py, pandas/tests/frame/methods/test_to_dict_of_blocks.py, pandas/tests/frame/methods/test_to_numpy.py, pandas/tests/frame/methods/test_to_period.py, pandas/tests/frame/methods/test_to_records.py, pandas/tests/frame/methods/test_to_timestamp.py, pandas/tests/frame/methods/test_transpose.py, pandas/tests/frame/methods/test_truncate.py, pandas/tests/frame/methods/test_tz_convert.py, pandas/tests/frame/methods/test_tz_localize.py, pandas/tests/frame/methods/test_update.py, pandas/tests/frame/methods/test_value_counts.py, pandas/tests/frame/methods/test_values.py, pandas/tests/frame/test_alter_axes.py, pandas/tests/frame/test_api.py, pandas/tests/frame/test_arithmetic.py, pandas/tests/frame/test_arrow_interface.py, pandas/tests/frame/test_block_internals.py, pandas/tests/frame/test_constructors.py, pandas/tests/frame/test_cumulative.py, pandas/tests/frame/test_iteration.py, pandas/tests/frame/test_logical_ops.py, pandas/tests/frame/test_nonunique_indexes.py, pandas/tests/frame/test_npfuncs.py, pandas/tests/frame/test_query_eval.py, pandas/tests/frame/test_reductions.py, pandas/tests/frame/test_repr.py, pandas/tests/frame/test_stack_unstack.py, pandas/tests/frame/test_subclass.py, pandas/tests/frame/test_ufunc.py, pandas/tests/frame/test_unary.py, pandas/tests/frame/test_validate.py, pandas/tests/generic/__init__.py, pandas/tests/generic/test_duplicate_labels.py, pandas/tests/generic/test_finalize.py, pandas/tests/generic/test_frame.py, pandas/tests/generic/test_generic.py, pandas/tests/generic/test_label_or_level_utils.py, pandas/tests/generic/test_series.py, pandas/tests/generic/test_to_xarray.py, pandas/tests/groupby/__init__.py, pandas/tests/groupby/aggregate/__init__.py, pandas/tests/groupby/aggregate/test_aggregate.py, pandas/tests/groupby/aggregate/test_cython.py, pandas/tests/groupby/aggregate/test_numba.py, pandas/tests/groupby/aggregate/test_other.py, pandas/tests/groupby/conftest.py, pandas/tests/groupby/methods/__init__.py, pandas/tests/groupby/methods/test_describe.py, pandas/tests/groupby/methods/test_groupby_shift_diff.py, pandas/tests/groupby/methods/test_is_monotonic.py, pandas/tests/groupby/methods/test_kurt.py, pandas/tests/groupby/methods/test_nlargest_nsmallest.py, pandas/tests/groupby/methods/test_nth.py, pandas/tests/groupby/methods/test_quantile.py, pandas/tests/groupby/methods/test_rank.py, pandas/tests/groupby/methods/test_sample.py, pandas/tests/groupby/methods/test_size.py, pandas/tests/groupby/methods/test_skew.py, pandas/tests/groupby/methods/test_value_counts.py, pandas/tests/groupby/test_all_methods.py, pandas/tests/groupby/test_api.py, pandas/tests/groupby/test_apply.py, pandas/tests/groupby/test_bin_groupby.py, pandas/tests/groupby/test_categorical.py, pandas/tests/groupby/test_counting.py, pandas/tests/groupby/test_cumulative.py, pandas/tests/groupby/test_filters.py, pandas/tests/groupby/test_groupby.py, pandas/tests/groupby/test_groupby_dropna.py, pandas/tests/groupby/test_groupby_subclass.py, pandas/tests/groupby/test_grouping.py, pandas/tests/groupby/test_index_as_string.py, pandas/tests/groupby/test_indexing.py, pandas/tests/groupby/test_libgroupby.py, pandas/tests/groupby/test_missing.py, pandas/tests/groupby/test_numba.py, pandas/tests/groupby/test_numeric_only.py, pandas/tests/groupby/test_pipe.py, pandas/tests/groupby/test_raises.py, pandas/tests/groupby/test_reductions.py, pandas/tests/groupby/test_timegrouper.py, pandas/tests/groupby/transform/__init__.py, pandas/tests/groupby/transform/test_numba.py, pandas/tests/groupby/transform/test_transform.py, pandas/tests/indexes/__init__.py, pandas/tests/indexes/base_class/__init__.py, pandas/tests/indexes/base_class/test_constructors.py, pandas/tests/indexes/base_class/test_formats.py, pandas/tests/indexes/base_class/test_indexing.py, pandas/tests/indexes/base_class/test_pickle.py, pandas/tests/indexes/base_class/test_reshape.py, pandas/tests/indexes/base_class/test_setops.py, pandas/tests/indexes/base_class/test_where.py, pandas/tests/indexes/categorical/__init__.py, pandas/tests/indexes/categorical/test_append.py, pandas/tests/indexes/categorical/test_astype.py, pandas/tests/indexes/categorical/test_category.py, pandas/tests/indexes/categorical/test_constructors.py, pandas/tests/indexes/categorical/test_equals.py, pandas/tests/indexes/categorical/test_fillna.py, pandas/tests/indexes/categorical/test_formats.py, pandas/tests/indexes/categorical/test_indexing.py, pandas/tests/indexes/categorical/test_map.py, pandas/tests/indexes/categorical/test_reindex.py, pandas/tests/indexes/categorical/test_setops.py, pandas/tests/indexes/conftest.py, pandas/tests/indexes/datetimelike_/__init__.py, pandas/tests/indexes/datetimelike_/test_drop_duplicates.py, pandas/tests/indexes/datetimelike_/test_equals.py, pandas/tests/indexes/datetimelike_/test_indexing.py, pandas/tests/indexes/datetimelike_/test_is_monotonic.py, pandas/tests/indexes/datetimelike_/test_nat.py, pandas/tests/indexes/datetimelike_/test_sort_values.py, pandas/tests/indexes/datetimelike_/test_value_counts.py, pandas/tests/indexes/datetimes/__init__.py, pandas/tests/indexes/datetimes/methods/__init__.py, pandas/tests/indexes/datetimes/methods/test_asof.py, pandas/tests/indexes/datetimes/methods/test_astype.py, pandas/tests/indexes/datetimes/methods/test_delete.py, pandas/tests/indexes/datetimes/methods/test_factorize.py, pandas/tests/indexes/datetimes/methods/test_fillna.py, pandas/tests/indexes/datetimes/methods/test_insert.py, pandas/tests/indexes/datetimes/methods/test_isocalendar.py, pandas/tests/indexes/datetimes/methods/test_map.py, pandas/tests/indexes/datetimes/methods/test_normalize.py, pandas/tests/indexes/datetimes/methods/test_repeat.py, pandas/tests/indexes/datetimes/methods/test_resolution.py, pandas/tests/indexes/datetimes/methods/test_round.py, pandas/tests/indexes/datetimes/methods/test_shift.py, pandas/tests/indexes/datetimes/methods/test_snap.py, pandas/tests/indexes/datetimes/methods/test_to_frame.py, pandas/tests/indexes/datetimes/methods/test_to_julian_date.py, pandas/tests/indexes/datetimes/methods/test_to_period.py, pandas/tests/indexes/datetimes/methods/test_to_pydatetime.py, pandas/tests/indexes/datetimes/methods/test_to_series.py, pandas/tests/indexes/datetimes/methods/test_tz_convert.py, pandas/tests/indexes/datetimes/methods/test_tz_localize.py, pandas/tests/indexes/datetimes/methods/test_unique.py, pandas/tests/indexes/datetimes/test_arithmetic.py, pandas/tests/indexes/datetimes/test_constructors.py, pandas/tests/indexes/datetimes/test_date_range.py, pandas/tests/indexes/datetimes/test_datetime.py, pandas/tests/indexes/datetimes/test_formats.py, pandas/tests/indexes/datetimes/test_freq_attr.py, pandas/tests/indexes/datetimes/test_indexing.py, pandas/tests/indexes/datetimes/test_iter.py, pandas/tests/indexes/datetimes/test_join.py, pandas/tests/indexes/datetimes/test_npfuncs.py, pandas/tests/indexes/datetimes/test_ops.py, pandas/tests/indexes/datetimes/test_partial_slicing.py, pandas/tests/indexes/datetimes/test_pickle.py, pandas/tests/indexes/datetimes/test_reindex.py, pandas/tests/indexes/datetimes/test_scalar_compat.py, pandas/tests/indexes/datetimes/test_setops.py, pandas/tests/indexes/datetimes/test_timezones.py, pandas/tests/indexes/interval/__init__.py, pandas/tests/indexes/interval/test_astype.py, pandas/tests/indexes/interval/test_constructors.py, pandas/tests/indexes/interval/test_equals.py, pandas/tests/indexes/interval/test_formats.py, pandas/tests/indexes/interval/test_indexing.py, pandas/tests/indexes/interval/test_interval.py, pandas/tests/indexes/interval/test_interval_range.py, pandas/tests/indexes/interval/test_interval_tree.py, pandas/tests/indexes/interval/test_join.py, pandas/tests/indexes/interval/test_pickle.py, pandas/tests/indexes/interval/test_setops.py, pandas/tests/indexes/multi/__init__.py, pandas/tests/indexes/multi/conftest.py, pandas/tests/indexes/multi/test_analytics.py, pandas/tests/indexes/multi/test_astype.py, pandas/tests/indexes/multi/test_compat.py, pandas/tests/indexes/multi/test_constructors.py, pandas/tests/indexes/multi/test_conversion.py, pandas/tests/indexes/multi/test_copy.py, pandas/tests/indexes/multi/test_drop.py, pandas/tests/indexes/multi/test_duplicates.py, pandas/tests/indexes/multi/test_equivalence.py, pandas/tests/indexes/multi/test_formats.py, pandas/tests/indexes/multi/test_get_level_values.py, pandas/tests/indexes/multi/test_get_set.py, pandas/tests/indexes/multi/test_indexing.py, pandas/tests/indexes/multi/test_integrity.py, pandas/tests/indexes/multi/test_isin.py, pandas/tests/indexes/multi/test_join.py, pandas/tests/indexes/multi/test_lexsort.py, pandas/tests/indexes/multi/test_missing.py, pandas/tests/indexes/multi/test_monotonic.py, pandas/tests/indexes/multi/test_names.py, pandas/tests/indexes/multi/test_partial_indexing.py, pandas/tests/indexes/multi/test_pickle.py, pandas/tests/indexes/multi/test_reindex.py, pandas/tests/indexes/multi/test_reshape.py, pandas/tests/indexes/multi/test_setops.py, pandas/tests/indexes/multi/test_sorting.py, pandas/tests/indexes/multi/test_take.py, pandas/tests/indexes/multi/test_util.py, pandas/tests/indexes/numeric/__init__.py, pandas/tests/indexes/numeric/test_astype.py, pandas/tests/indexes/numeric/test_indexing.py, pandas/tests/indexes/numeric/test_join.py, pandas/tests/indexes/numeric/test_numeric.py, pandas/tests/indexes/numeric/test_setops.py, pandas/tests/indexes/object/__init__.py, pandas/tests/indexes/object/test_astype.py, pandas/tests/indexes/object/test_indexing.py, pandas/tests/indexes/period/__init__.py, pandas/tests/indexes/period/methods/__init__.py, pandas/tests/indexes/period/methods/test_asfreq.py, pandas/tests/indexes/period/methods/test_astype.py, pandas/tests/indexes/period/methods/test_factorize.py, pandas/tests/indexes/period/methods/test_fillna.py, pandas/tests/indexes/period/methods/test_insert.py, pandas/tests/indexes/period/methods/test_is_full.py, pandas/tests/indexes/period/methods/test_repeat.py, pandas/tests/indexes/period/methods/test_shift.py, pandas/tests/indexes/period/methods/test_to_timestamp.py, pandas/tests/indexes/period/test_constructors.py, pandas/tests/indexes/period/test_formats.py, pandas/tests/indexes/period/test_freq_attr.py, pandas/tests/indexes/period/test_indexing.py, pandas/tests/indexes/period/test_join.py, pandas/tests/indexes/period/test_monotonic.py, pandas/tests/indexes/period/test_partial_slicing.py, pandas/tests/indexes/period/test_period.py, pandas/tests/indexes/period/test_period_range.py, pandas/tests/indexes/period/test_pickle.py, pandas/tests/indexes/period/test_resolution.py, pandas/tests/indexes/period/test_scalar_compat.py, pandas/tests/indexes/period/test_searchsorted.py, pandas/tests/indexes/period/test_setops.py, pandas/tests/indexes/period/test_tools.py, pandas/tests/indexes/ranges/__init__.py, pandas/tests/indexes/ranges/test_constructors.py, pandas/tests/indexes/ranges/test_indexing.py, pandas/tests/indexes/ranges/test_join.py, pandas/tests/indexes/ranges/test_range.py, pandas/tests/indexes/ranges/test_setops.py, pandas/tests/indexes/string/__init__.py, pandas/tests/indexes/string/test_astype.py, pandas/tests/indexes/string/test_indexing.py, pandas/tests/indexes/test_any_index.py, pandas/tests/indexes/test_base.py, pandas/tests/indexes/test_common.py, pandas/tests/indexes/test_datetimelike.py, pandas/tests/indexes/test_engines.py, pandas/tests/indexes/test_frozen.py, pandas/tests/indexes/test_index_new.py, pandas/tests/indexes/test_indexing.py, pandas/tests/indexes/test_numpy_compat.py, pandas/tests/indexes/test_old_base.py, pandas/tests/indexes/test_setops.py, pandas/tests/indexes/test_subclass.py, pandas/tests/indexes/timedeltas/__init__.py, pandas/tests/indexes/timedeltas/methods/__init__.py, pandas/tests/indexes/timedeltas/methods/test_astype.py, pandas/tests/indexes/timedeltas/methods/test_factorize.py, pandas/tests/indexes/timedeltas/methods/test_fillna.py, pandas/tests/indexes/timedeltas/methods/test_insert.py, pandas/tests/indexes/timedeltas/methods/test_repeat.py, pandas/tests/indexes/timedeltas/methods/test_shift.py, pandas/tests/indexes/timedeltas/test_arithmetic.py, pandas/tests/indexes/timedeltas/test_constructors.py, pandas/tests/indexes/timedeltas/test_delete.py, pandas/tests/indexes/timedeltas/test_formats.py, pandas/tests/indexes/timedeltas/test_freq_attr.py, pandas/tests/indexes/timedeltas/test_indexing.py, pandas/tests/indexes/timedeltas/test_join.py, pandas/tests/indexes/timedeltas/test_ops.py, pandas/tests/indexes/timedeltas/test_pickle.py, pandas/tests/indexes/timedeltas/test_scalar_compat.py, pandas/tests/indexes/timedeltas/test_searchsorted.py, pandas/tests/indexes/timedeltas/test_setops.py, pandas/tests/indexes/timedeltas/test_timedelta.py, pandas/tests/indexes/timedeltas/test_timedelta_range.py, pandas/tests/indexing/__init__.py, pandas/tests/indexing/common.py, pandas/tests/indexing/interval/__init__.py, pandas/tests/indexing/interval/test_interval.py, pandas/tests/indexing/interval/test_interval_new.py, pandas/tests/indexing/multiindex/__init__.py, pandas/tests/indexing/multiindex/test_chaining_and_caching.py, pandas/tests/indexing/multiindex/test_datetime.py, pandas/tests/indexing/multiindex/test_getitem.py, pandas/tests/indexing/multiindex/test_iloc.py, pandas/tests/indexing/multiindex/test_indexing_slow.py, pandas/tests/indexing/multiindex/test_loc.py, pandas/tests/indexing/multiindex/test_multiindex.py, pandas/tests/indexing/multiindex/test_partial.py, pandas/tests/indexing/multiindex/test_setitem.py, pandas/tests/indexing/multiindex/test_slice.py, pandas/tests/indexing/multiindex/test_sorted.py, pandas/tests/indexing/test_at.py, pandas/tests/indexing/test_categorical.py, pandas/tests/indexing/test_chaining_and_caching.py, pandas/tests/indexing/test_check_indexer.py, pandas/tests/indexing/test_coercion.py, pandas/tests/indexing/test_datetime.py, pandas/tests/indexing/test_floats.py, pandas/tests/indexing/test_iat.py, pandas/tests/indexing/test_iloc.py, pandas/tests/indexing/test_indexers.py, pandas/tests/indexing/test_indexing.py, pandas/tests/indexing/test_loc.py, pandas/tests/indexing/test_na_indexing.py, pandas/tests/indexing/test_partial.py, pandas/tests/indexing/test_scalar.py, pandas/tests/interchange/__init__.py, pandas/tests/interchange/test_impl.py, pandas/tests/interchange/test_spec_conformance.py, pandas/tests/interchange/test_utils.py, pandas/tests/internals/__init__.py, pandas/tests/internals/test_api.py, pandas/tests/internals/test_internals.py, pandas/tests/io/__init__.py, pandas/tests/io/conftest.py, pandas/tests/io/data/csv/banklist.csv, pandas/tests/io/data/csv/iris.csv, pandas/tests/io/data/csv/test1.csv, pandas/tests/io/data/csv/test1.csv.bz2, pandas/tests/io/data/csv/test1.csv.gz, pandas/tests/io/data/csv/test_mmap.csv, pandas/tests/io/data/csv/tips.csv, pandas/tests/io/data/csv/tips.csv.bz2, pandas/tests/io/data/csv/tips.csv.gz, pandas/tests/io/data/excel/blank.ods, pandas/tests/io/data/excel/blank.xls, pandas/tests/io/data/excel/blank.xlsb, pandas/tests/io/data/excel/blank.xlsm, pandas/tests/io/data/excel/blank.xlsx, pandas/tests/io/data/excel/blank_with_header.ods, pandas/tests/io/data/excel/blank_with_header.xls, pandas/tests/io/data/excel/blank_with_header.xlsb, pandas/tests/io/data/excel/blank_with_header.xlsm, pandas/tests/io/data/excel/blank_with_header.xlsx, pandas/tests/io/data/excel/chartsheet.xls, pandas/tests/io/data/excel/chartsheet.xlsb, pandas/tests/io/data/excel/chartsheet.xlsm, pandas/tests/io/data/excel/chartsheet.xlsx, pandas/tests/io/data/excel/df_empty.xlsx, pandas/tests/io/data/excel/df_equals.xlsx, pandas/tests/io/data/excel/df_header_oob.xlsx, pandas/tests/io/data/excel/df_mangle_dup_col_dtypes.ods, pandas/tests/io/data/excel/df_mangle_dup_col_dtypes.xls, pandas/tests/io/data/excel/df_mangle_dup_col_dtypes.xlsb, pandas/tests/io/data/excel/df_mangle_dup_col_dtypes.xlsm, pandas/tests/io/data/excel/df_mangle_dup_col_dtypes.xlsx, pandas/tests/io/data/excel/dimension_large.xlsx, pandas/tests/io/data/excel/dimension_missing.xlsx, pandas/tests/io/data/excel/dimension_small.xlsx, pandas/tests/io/data/excel/empty_trailing_rows.xlsx, pandas/tests/io/data/excel/empty_with_blank_row.xlsx, pandas/tests/io/data/excel/gh-35802.ods, pandas/tests/io/data/excel/gh-36122.ods, pandas/tests/io/data/excel/ints_spelled_with_decimals.xlsx, pandas/tests/io/data/excel/invalid_value_type.ods, pandas/tests/io/data/excel/multiindex_no_index_names.xlsx, pandas/tests/io/data/excel/one_col_blank_line.ods, pandas/tests/io/data/excel/one_col_blank_line.xls, pandas/tests/io/data/excel/one_col_blank_line.xlsb, pandas/tests/io/data/excel/one_col_blank_line.xlsm, pandas/tests/io/data/excel/one_col_blank_line.xlsx, pandas/tests/io/data/excel/test1.ods, pandas/tests/io/data/excel/test1.xls, pandas/tests/io/data/excel/test1.xlsb, pandas/tests/io/data/excel/test1.xlsm, pandas/tests/io/data/excel/test1.xlsx, pandas/tests/io/data/excel/test2.ods, pandas/tests/io/data/excel/test2.xls, pandas/tests/io/data/excel/test2.xlsb, pandas/tests/io/data/excel/test2.xlsm, pandas/tests/io/data/excel/test2.xlsx, pandas/tests/io/data/excel/test3.ods, pandas/tests/io/data/excel/test3.xls, pandas/tests/io/data/excel/test3.xlsb, pandas/tests/io/data/excel/test3.xlsm, pandas/tests/io/data/excel/test3.xlsx, pandas/tests/io/data/excel/test4.ods, pandas/tests/io/data/excel/test4.xls, pandas/tests/io/data/excel/test4.xlsb, pandas/tests/io/data/excel/test4.xlsm, pandas/tests/io/data/excel/test4.xlsx, pandas/tests/io/data/excel/test5.ods, pandas/tests/io/data/excel/test5.xls, pandas/tests/io/data/excel/test5.xlsb, pandas/tests/io/data/excel/test5.xlsm, pandas/tests/io/data/excel/test5.xlsx, pandas/tests/io/data/excel/test6.xls, pandas/tests/io/data/excel/test_cell_annotation.ods, pandas/tests/io/data/excel/test_converters.ods, pandas/tests/io/data/excel/test_converters.xls, pandas/tests/io/data/excel/test_converters.xlsb, pandas/tests/io/data/excel/test_converters.xlsm, pandas/tests/io/data/excel/test_converters.xlsx, pandas/tests/io/data/excel/test_datetime_mi.ods, pandas/tests/io/data/excel/test_datetime_mi.xls, pandas/tests/io/data/excel/test_datetime_mi.xlsb, pandas/tests/io/data/excel/test_datetime_mi.xlsm, pandas/tests/io/data/excel/test_datetime_mi.xlsx, pandas/tests/io/data/excel/test_decimal.ods, pandas/tests/io/data/excel/test_decimal.xls, pandas/tests/io/data/excel/test_decimal.xlsb, pandas/tests/io/data/excel/test_decimal.xlsm, pandas/tests/io/data/excel/test_decimal.xlsx, pandas/tests/io/data/excel/test_index_name_pre17.ods, pandas/tests/io/data/excel/test_index_name_pre17.xls, pandas/tests/io/data/excel/test_index_name_pre17.xlsb, pandas/tests/io/data/excel/test_index_name_pre17.xlsm, pandas/tests/io/data/excel/test_index_name_pre17.xlsx, pandas/tests/io/data/excel/test_multisheet.ods, pandas/tests/io/data/excel/test_multisheet.xls, pandas/tests/io/data/excel/test_multisheet.xlsb, pandas/tests/io/data/excel/test_multisheet.xlsm, pandas/tests/io/data/excel/test_multisheet.xlsx, pandas/tests/io/data/excel/test_newlines.ods, pandas/tests/io/data/excel/test_none_type.xlsx, pandas/tests/io/data/excel/test_spaces.ods, pandas/tests/io/data/excel/test_spaces.xls, pandas/tests/io/data/excel/test_spaces.xlsb, pandas/tests/io/data/excel/test_spaces.xlsm, pandas/tests/io/data/excel/test_spaces.xlsx, pandas/tests/io/data/excel/test_squeeze.ods, pandas/tests/io/data/excel/test_squeeze.xls, pandas/tests/io/data/excel/test_squeeze.xlsb, pandas/tests/io/data/excel/test_squeeze.xlsm, pandas/tests/io/data/excel/test_squeeze.xlsx, pandas/tests/io/data/excel/test_types.ods, pandas/tests/io/data/excel/test_types.xls, pandas/tests/io/data/excel/test_types.xlsb, pandas/tests/io/data/excel/test_types.xlsm, pandas/tests/io/data/excel/test_types.xlsx, pandas/tests/io/data/excel/test_unempty_cells.ods, pandas/tests/io/data/excel/testdateoverflow.ods, pandas/tests/io/data/excel/testdateoverflow.xls, pandas/tests/io/data/excel/testdateoverflow.xlsb, pandas/tests/io/data/excel/testdateoverflow.xlsm, pandas/tests/io/data/excel/testdateoverflow.xlsx, pandas/tests/io/data/excel/testdtype.ods, pandas/tests/io/data/excel/testdtype.xls, pandas/tests/io/data/excel/testdtype.xlsb, pandas/tests/io/data/excel/testdtype.xlsm, pandas/tests/io/data/excel/testdtype.xlsx, pandas/tests/io/data/excel/testmultiindex.ods, pandas/tests/io/data/excel/testmultiindex.xls, pandas/tests/io/data/excel/testmultiindex.xlsb, pandas/tests/io/data/excel/testmultiindex.xlsm, pandas/tests/io/data/excel/testmultiindex.xlsx, pandas/tests/io/data/excel/testskiprows.ods, pandas/tests/io/data/excel/testskiprows.xls, pandas/tests/io/data/excel/testskiprows.xlsb, pandas/tests/io/data/excel/testskiprows.xlsm, pandas/tests/io/data/excel/testskiprows.xlsx, pandas/tests/io/data/excel/times_1900.ods, pandas/tests/io/data/excel/times_1900.xls, pandas/tests/io/data/excel/times_1900.xlsb, pandas/tests/io/data/excel/times_1900.xlsm, pandas/tests/io/data/excel/times_1900.xlsx, pandas/tests/io/data/excel/times_1904.ods, pandas/tests/io/data/excel/times_1904.xls, pandas/tests/io/data/excel/times_1904.xlsb, pandas/tests/io/data/excel/times_1904.xlsm, pandas/tests/io/data/excel/times_1904.xlsx, pandas/tests/io/data/excel/trailing_blanks.ods, pandas/tests/io/data/excel/trailing_blanks.xls, pandas/tests/io/data/excel/trailing_blanks.xlsb, pandas/tests/io/data/excel/trailing_blanks.xlsm, pandas/tests/io/data/excel/trailing_blanks.xlsx, pandas/tests/io/data/excel/writertable.odt, pandas/tests/io/data/feather/feather-0_3_1.feather, pandas/tests/io/data/fixed_width/fixed_width_format.txt, pandas/tests/io/data/html/banklist.html, pandas/tests/io/data/html/spam.html, pandas/tests/io/data/html/valid_markup.html, pandas/tests/io/data/html/wikipedia_states.html, pandas/tests/io/data/html_encoding/chinese_utf-16.html, pandas/tests/io/data/html_encoding/chinese_utf-32.html, pandas/tests/io/data/html_encoding/chinese_utf-8.html, pandas/tests/io/data/html_encoding/letz_latin1.html, pandas/tests/io/data/legacy_pickle/1.1.0/1.1.0_x86_64_darwin_3.8.5.pickle, pandas/tests/io/data/legacy_pickle/1.2.4/empty_frame_v1_2_4-GH#42345.pkl, pandas/tests/io/data/legacy_pickle/1.3.5/1.3.5_x86_64_darwin_3.10.13.pickle, pandas/tests/io/data/legacy_pickle/1.4.2/1.4.2_x86_64_linux_3.9.7.pickle, pandas/tests/io/data/legacy_pickle/1.5.3/1.5.3_x86_64_win_3.11.13.pickle, pandas/tests/io/data/legacy_pickle/2.0.3/2.0.3_AMD64_windows_3.11.12.pickle, pandas/tests/io/data/legacy_pickle/2.1.4/2.1.4_AMD64_windows_3.11.12.pickle, pandas/tests/io/data/legacy_pickle/2.2.3/2.2.3_AMD64_windows_3.11.12.pickle, pandas/tests/io/data/orc/TestOrcFile.decimal.orc, pandas/tests/io/data/orc/TestOrcFile.emptyFile.orc, pandas/tests/io/data/orc/TestOrcFile.test1.orc, pandas/tests/io/data/orc/TestOrcFile.testDate1900.orc, pandas/tests/io/data/orc/TestOrcFile.testDate2038.orc, pandas/tests/io/data/orc/TestOrcFile.testSnappy.orc, pandas/tests/io/data/parquet/simple.parquet, pandas/tests/io/data/pickle/categorical.0.25.0.pickle, pandas/tests/io/data/spss/labelled-num-na.sav, pandas/tests/io/data/spss/labelled-num.sav, pandas/tests/io/data/spss/labelled-str.sav, pandas/tests/io/data/spss/umlauts.sav, pandas/tests/io/data/stata/stata1_119.dta.gz, pandas/tests/io/data/stata/stata3.csv, pandas/tests/io/data/stata/stata5.csv, pandas/tests/io/data/stata/stata6.csv, pandas/tests/io/data/tar/test-csv.tar, pandas/tests/io/data/xml/baby_names.xml, pandas/tests/io/data/xml/books.xml, pandas/tests/io/data/xml/cta_rail_lines.kml, pandas/tests/io/data/xml/doc_ch_utf.xml, pandas/tests/io/data/xml/flatten_doc.xsl, pandas/tests/io/data/xml/row_field_output.xsl, pandas/tests/io/excel/__init__.py, pandas/tests/io/excel/test_odf.py, pandas/tests/io/excel/test_odswriter.py, pandas/tests/io/excel/test_openpyxl.py, pandas/tests/io/excel/test_readers.py, pandas/tests/io/excel/test_style.py, pandas/tests/io/excel/test_writers.py, pandas/tests/io/excel/test_xlrd.py, pandas/tests/io/excel/test_xlsxwriter.py, pandas/tests/io/formats/__init__.py, pandas/tests/io/formats/data/html/datetime64_hourformatter.html, pandas/tests/io/formats/data/html/datetime64_monthformatter.html, pandas/tests/io/formats/data/html/escape_disabled.html, pandas/tests/io/formats/data/html/escaped.html, pandas/tests/io/formats/data/html/gh12031_expected_output.html, pandas/tests/io/formats/data/html/gh13828_expected_output.html, pandas/tests/io/formats/data/html/gh14882_expected_output_1.html, pandas/tests/io/formats/data/html/gh14882_expected_output_2.html, pandas/tests/io/formats/data/html/gh14998_expected_output.html, pandas/tests/io/formats/data/html/gh15019_expected_output.html, pandas/tests/io/formats/data/html/gh21625_expected_output.html, pandas/tests/io/formats/data/html/gh22270_expected_output.html, pandas/tests/io/formats/data/html/gh22579_expected_output.html, pandas/tests/io/formats/data/html/gh22783_expected_output.html, pandas/tests/io/formats/data/html/gh22783_named_columns_index.html, pandas/tests/io/formats/data/html/gh40024_expected_output.html, pandas/tests/io/formats/data/html/gh47103_expected_output.html, pandas/tests/io/formats/data/html/gh6131_expected_output.html, pandas/tests/io/formats/data/html/gh8452_expected_output.html, pandas/tests/io/formats/data/html/html_repr_max_rows_10_min_rows_12.html, pandas/tests/io/formats/data/html/html_repr_max_rows_10_min_rows_4.html, pandas/tests/io/formats/data/html/html_repr_max_rows_12_min_rows_None.html, pandas/tests/io/formats/data/html/html_repr_max_rows_None_min_rows_12.html, pandas/tests/io/formats/data/html/html_repr_min_rows_default_no_truncation.html, pandas/tests/io/formats/data/html/html_repr_min_rows_default_truncated.html, pandas/tests/io/formats/data/html/index_1.html, pandas/tests/io/formats/data/html/index_2.html, pandas/tests/io/formats/data/html/index_3.html, pandas/tests/io/formats/data/html/index_4.html, pandas/tests/io/formats/data/html/index_5.html, pandas/tests/io/formats/data/html/index_formatter.html, pandas/tests/io/formats/data/html/index_named_multi_columns_named_multi.html, pandas/tests/io/formats/data/html/index_named_multi_columns_named_standard.html, pandas/tests/io/formats/data/html/index_named_multi_columns_none.html, pandas/tests/io/formats/data/html/index_named_multi_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/index_named_multi_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/index_named_standard_columns_named_multi.html, pandas/tests/io/formats/data/html/index_named_standard_columns_named_standard.html, pandas/tests/io/formats/data/html/index_named_standard_columns_none.html, pandas/tests/io/formats/data/html/index_named_standard_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/index_named_standard_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/index_none_columns_named_multi.html, pandas/tests/io/formats/data/html/index_none_columns_named_standard.html, pandas/tests/io/formats/data/html/index_none_columns_none.html, pandas/tests/io/formats/data/html/index_none_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/index_none_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/index_unnamed_multi_columns_named_multi.html, pandas/tests/io/formats/data/html/index_unnamed_multi_columns_named_standard.html, pandas/tests/io/formats/data/html/index_unnamed_multi_columns_none.html, pandas/tests/io/formats/data/html/index_unnamed_multi_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/index_unnamed_multi_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/index_unnamed_standard_columns_named_multi.html, pandas/tests/io/formats/data/html/index_unnamed_standard_columns_named_standard.html, pandas/tests/io/formats/data/html/index_unnamed_standard_columns_none.html, pandas/tests/io/formats/data/html/index_unnamed_standard_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/index_unnamed_standard_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/justify.html, pandas/tests/io/formats/data/html/multiindex_1.html, pandas/tests/io/formats/data/html/multiindex_2.html, pandas/tests/io/formats/data/html/multiindex_sparsify_1.html, pandas/tests/io/formats/data/html/multiindex_sparsify_2.html, pandas/tests/io/formats/data/html/multiindex_sparsify_false_multi_sparse_1.html, pandas/tests/io/formats/data/html/multiindex_sparsify_false_multi_sparse_2.html, pandas/tests/io/formats/data/html/render_links_false.html, pandas/tests/io/formats/data/html/render_links_true.html, pandas/tests/io/formats/data/html/trunc_df_index_named_multi_columns_named_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_named_multi_columns_named_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_named_multi_columns_none.html, pandas/tests/io/formats/data/html/trunc_df_index_named_multi_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_named_multi_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_named_standard_columns_named_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_named_standard_columns_named_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_named_standard_columns_none.html, pandas/tests/io/formats/data/html/trunc_df_index_named_standard_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_named_standard_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_none_columns_named_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_none_columns_named_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_none_columns_none.html, pandas/tests/io/formats/data/html/trunc_df_index_none_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_none_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_multi_columns_named_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_multi_columns_named_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_multi_columns_none.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_multi_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_multi_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_standard_columns_named_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_standard_columns_named_standard.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_standard_columns_none.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_standard_columns_unnamed_multi.html, pandas/tests/io/formats/data/html/trunc_df_index_unnamed_standard_columns_unnamed_standard.html, pandas/tests/io/formats/data/html/truncate.html, pandas/tests/io/formats/data/html/truncate_formatter.html, pandas/tests/io/formats/data/html/truncate_multi_index.html, pandas/tests/io/formats/data/html/truncate_multi_index_sparse_off.html, pandas/tests/io/formats/data/html/unicode_1.html, pandas/tests/io/formats/data/html/unicode_2.html, pandas/tests/io/formats/data/html/various_dtypes_formatted.html, pandas/tests/io/formats/data/html/with_classes.html, pandas/tests/io/formats/style/__init__.py, pandas/tests/io/formats/style/test_bar.py, pandas/tests/io/formats/style/test_exceptions.py, pandas/tests/io/formats/style/test_format.py, pandas/tests/io/formats/style/test_highlight.py, pandas/tests/io/formats/style/test_html.py, pandas/tests/io/formats/style/test_matplotlib.py, pandas/tests/io/formats/style/test_non_unique.py, pandas/tests/io/formats/style/test_style.py, pandas/tests/io/formats/style/test_to_latex.py, pandas/tests/io/formats/style/test_to_string.py, pandas/tests/io/formats/style/test_to_typst.py, pandas/tests/io/formats/style/test_tooltip.py, pandas/tests/io/formats/test_console.py, pandas/tests/io/formats/test_css.py, pandas/tests/io/formats/test_eng_formatting.py, pandas/tests/io/formats/test_format.py, pandas/tests/io/formats/test_ipython_compat.py, pandas/tests/io/formats/test_printing.py, pandas/tests/io/formats/test_to_csv.py, pandas/tests/io/formats/test_to_excel.py, pandas/tests/io/formats/test_to_html.py, pandas/tests/io/formats/test_to_latex.py, pandas/tests/io/formats/test_to_markdown.py, pandas/tests/io/formats/test_to_string.py, pandas/tests/io/generate_legacy_storage_files.py, pandas/tests/io/json/__init__.py, pandas/tests/io/json/conftest.py, pandas/tests/io/json/data/line_delimited.json, pandas/tests/io/json/data/teams.csv, pandas/tests/io/json/data/tsframe_iso_v012.json, pandas/tests/io/json/data/tsframe_v012.json, pandas/tests/io/json/test_compression.py, pandas/tests/io/json/test_deprecated_kwargs.py, pandas/tests/io/json/test_json_table_schema.py, pandas/tests/io/json/test_json_table_schema_ext_dtype.py, pandas/tests/io/json/test_normalize.py, pandas/tests/io/json/test_pandas.py, pandas/tests/io/json/test_readlines.py, pandas/tests/io/json/test_ujson.py, pandas/tests/io/parser/__init__.py, pandas/tests/io/parser/common/__init__.py, pandas/tests/io/parser/common/test_chunksize.py, pandas/tests/io/parser/common/test_common_basic.py, pandas/tests/io/parser/common/test_data_list.py, pandas/tests/io/parser/common/test_decimal.py, pandas/tests/io/parser/common/test_file_buffer_url.py, pandas/tests/io/parser/common/test_float.py, pandas/tests/io/parser/common/test_index.py, pandas/tests/io/parser/common/test_inf.py, pandas/tests/io/parser/common/test_ints.py, pandas/tests/io/parser/common/test_iterator.py, pandas/tests/io/parser/common/test_read_errors.py, pandas/tests/io/parser/conftest.py, pandas/tests/io/parser/data/items.jsonl, pandas/tests/io/parser/data/salaries.csv, pandas/tests/io/parser/data/salaries.csv.bz2, pandas/tests/io/parser/data/salaries.csv.gz, pandas/tests/io/parser/data/salaries.csv.xz, pandas/tests/io/parser/data/salaries.csv.zst, pandas/tests/io/parser/data/sauron.SHIFT_JIS.csv, pandas/tests/io/parser/data/sub_char.csv, pandas/tests/io/parser/data/tar_csv.tar, pandas/tests/io/parser/data/tar_csv.tar.gz, pandas/tests/io/parser/data/test2.csv, pandas/tests/io/parser/data/test_mmap.csv, pandas/tests/io/parser/data/unicode_series.csv, pandas/tests/io/parser/data/utf16_ex.txt, pandas/tests/io/parser/dtypes/__init__.py, pandas/tests/io/parser/dtypes/test_categorical.py, pandas/tests/io/parser/dtypes/test_dtypes_basic.py, pandas/tests/io/parser/dtypes/test_empty.py, pandas/tests/io/parser/test_c_parser_only.py, pandas/tests/io/parser/test_comment.py, pandas/tests/io/parser/test_compression.py, pandas/tests/io/parser/test_concatenate_chunks.py, pandas/tests/io/parser/test_converters.py, pandas/tests/io/parser/test_dialect.py, pandas/tests/io/parser/test_encoding.py, pandas/tests/io/parser/test_header.py, pandas/tests/io/parser/test_index_col.py, pandas/tests/io/parser/test_mangle_dupes.py, pandas/tests/io/parser/test_multi_thread.py, pandas/tests/io/parser/test_na_values.py, pandas/tests/io/parser/test_network.py, pandas/tests/io/parser/test_parse_dates.py, pandas/tests/io/parser/test_python_parser_only.py, pandas/tests/io/parser/test_quoting.py, pandas/tests/io/parser/test_read_fwf.py, pandas/tests/io/parser/test_skiprows.py, pandas/tests/io/parser/test_textreader.py, pandas/tests/io/parser/test_unsupported.py, pandas/tests/io/parser/test_upcast.py, pandas/tests/io/parser/usecols/__init__.py, pandas/tests/io/parser/usecols/test_parse_dates.py, pandas/tests/io/parser/usecols/test_strings.py, pandas/tests/io/parser/usecols/test_usecols_basic.py, pandas/tests/io/pytables/__init__.py, pandas/tests/io/pytables/common.py, pandas/tests/io/pytables/conftest.py, pandas/tests/io/pytables/test_append.py, pandas/tests/io/pytables/test_categorical.py, pandas/tests/io/pytables/test_compat.py, pandas/tests/io/pytables/test_complex.py, pandas/tests/io/pytables/test_errors.py, pandas/tests/io/pytables/test_file_handling.py, pandas/tests/io/pytables/test_keys.py, pandas/tests/io/pytables/test_put.py, pandas/tests/io/pytables/test_pytables_missing.py, pandas/tests/io/pytables/test_read.py, pandas/tests/io/pytables/test_retain_attributes.py, pandas/tests/io/pytables/test_round_trip.py, pandas/tests/io/pytables/test_select.py, pandas/tests/io/pytables/test_store.py, pandas/tests/io/pytables/test_subclass.py, pandas/tests/io/pytables/test_time_series.py, pandas/tests/io/pytables/test_timezones.py, pandas/tests/io/sas/__init__.py, pandas/tests/io/sas/data/0x00controlbyte.sas7bdat.bz2, pandas/tests/io/sas/data/0x40controlbyte.csv, pandas/tests/io/sas/data/0x40controlbyte.sas7bdat, pandas/tests/io/sas/data/DEMO_G.csv, pandas/tests/io/sas/data/DEMO_PUF.cpt, pandas/tests/io/sas/data/DRXFCD_G.csv, pandas/tests/io/sas/data/SSHSV1_A.csv, pandas/tests/io/sas/data/airline.csv, pandas/tests/io/sas/data/airline.sas7bdat, pandas/tests/io/sas/data/airline.sas7bdat.gz, pandas/tests/io/sas/data/cars.sas7bdat, pandas/tests/io/sas/data/corrupt.sas7bdat, pandas/tests/io/sas/data/dates_null.sas7bdat, pandas/tests/io/sas/data/datetime.csv, pandas/tests/io/sas/data/datetime.sas7bdat, pandas/tests/io/sas/data/load_log.sas7bdat, pandas/tests/io/sas/data/many_columns.csv, pandas/tests/io/sas/data/many_columns.sas7bdat, pandas/tests/io/sas/data/max_sas_date.sas7bdat, pandas/tests/io/sas/data/paxraw_d_short.csv, pandas/tests/io/sas/data/productsales.csv, pandas/tests/io/sas/data/productsales.sas7bdat, pandas/tests/io/sas/data/test1.sas7bdat, pandas/tests/io/sas/data/test10.sas7bdat, pandas/tests/io/sas/data/test11.sas7bdat, pandas/tests/io/sas/data/test12.sas7bdat, pandas/tests/io/sas/data/test13.sas7bdat, pandas/tests/io/sas/data/test14.sas7bdat, pandas/tests/io/sas/data/test15.sas7bdat, pandas/tests/io/sas/data/test16.sas7bdat, pandas/tests/io/sas/data/test2.sas7bdat, pandas/tests/io/sas/data/test3.sas7bdat, pandas/tests/io/sas/data/test4.sas7bdat, pandas/tests/io/sas/data/test5.sas7bdat, pandas/tests/io/sas/data/test6.sas7bdat, pandas/tests/io/sas/data/test7.sas7bdat, pandas/tests/io/sas/data/test8.sas7bdat, pandas/tests/io/sas/data/test9.sas7bdat, pandas/tests/io/sas/data/test_12659.csv, pandas/tests/io/sas/data/test_12659.sas7bdat, pandas/tests/io/sas/data/test_meta2_page.sas7bdat, pandas/tests/io/sas/data/test_sas7bdat_1.csv, pandas/tests/io/sas/data/test_sas7bdat_2.csv, pandas/tests/io/sas/data/zero_rows.sas7bdat, pandas/tests/io/sas/data/zero_variables.sas7bdat, pandas/tests/io/sas/test_byteswap.py, pandas/tests/io/sas/test_sas.py, pandas/tests/io/sas/test_sas7bdat.py, pandas/tests/io/sas/test_xport.py, pandas/tests/io/test_clipboard.py, pandas/tests/io/test_common.py, pandas/tests/io/test_compression.py, pandas/tests/io/test_feather.py, pandas/tests/io/test_fsspec.py, pandas/tests/io/test_gcs.py, pandas/tests/io/test_html.py, pandas/tests/io/test_http_headers.py, pandas/tests/io/test_iceberg.py, pandas/tests/io/test_orc.py, pandas/tests/io/test_parquet.py, pandas/tests/io/test_pickle.py, pandas/tests/io/test_s3.py, pandas/tests/io/test_spss.py, pandas/tests/io/test_sql.py, pandas/tests/io/test_stata.py, pandas/tests/io/xml/__init__.py, pandas/tests/io/xml/conftest.py, pandas/tests/io/xml/test_to_xml.py, pandas/tests/io/xml/test_xml.py, pandas/tests/io/xml/test_xml_dtypes.py, pandas/tests/libs/__init__.py, pandas/tests/libs/test_hashtable.py, pandas/tests/libs/test_join.py, pandas/tests/libs/test_lib.py, pandas/tests/libs/test_libalgos.py, pandas/tests/plotting/__init__.py, pandas/tests/plotting/common.py, pandas/tests/plotting/conftest.py, pandas/tests/plotting/frame/__init__.py, pandas/tests/plotting/frame/test_frame.py, pandas/tests/plotting/frame/test_frame_color.py, pandas/tests/plotting/frame/test_frame_groupby.py, pandas/tests/plotting/frame/test_frame_legend.py, pandas/tests/plotting/frame/test_frame_subplots.py, pandas/tests/plotting/frame/test_hist_box_by.py, pandas/tests/plotting/test_backend.py, pandas/tests/plotting/test_boxplot_method.py, pandas/tests/plotting/test_common.py, pandas/tests/plotting/test_converter.py, pandas/tests/plotting/test_datetimelike.py, pandas/tests/plotting/test_groupby.py, pandas/tests/plotting/test_hist_method.py, pandas/tests/plotting/test_misc.py, pandas/tests/plotting/test_series.py, pandas/tests/plotting/test_style.py, pandas/tests/reductions/__init__.py, pandas/tests/reductions/test_reductions.py, pandas/tests/reductions/test_stat_reductions.py, pandas/tests/resample/__init__.py, pandas/tests/resample/conftest.py, pandas/tests/resample/test_base.py, pandas/tests/resample/test_datetime_index.py, pandas/tests/resample/test_period_index.py, pandas/tests/resample/test_resample_api.py, pandas/tests/resample/test_resampler_grouper.py, pandas/tests/resample/test_time_grouper.py, pandas/tests/resample/test_timedelta.py, pandas/tests/reshape/__init__.py, pandas/tests/reshape/concat/__init__.py, pandas/tests/reshape/concat/test_append.py, pandas/tests/reshape/concat/test_append_common.py, pandas/tests/reshape/concat/test_categorical.py, pandas/tests/reshape/concat/test_concat.py, pandas/tests/reshape/concat/test_dataframe.py, pandas/tests/reshape/concat/test_datetimes.py, pandas/tests/reshape/concat/test_empty.py, pandas/tests/reshape/concat/test_index.py, pandas/tests/reshape/concat/test_invalid.py, pandas/tests/reshape/concat/test_series.py, pandas/tests/reshape/concat/test_sort.py, pandas/tests/reshape/data/cut_data.csv, pandas/tests/reshape/merge/__init__.py, pandas/tests/reshape/merge/test_join.py, pandas/tests/reshape/merge/test_merge.py, pandas/tests/reshape/merge/test_merge_antijoin.py, pandas/tests/reshape/merge/test_merge_asof.py, pandas/tests/reshape/merge/test_merge_cross.py, pandas/tests/reshape/merge/test_merge_index_as_string.py, pandas/tests/reshape/merge/test_merge_ordered.py, pandas/tests/reshape/merge/test_multi.py, pandas/tests/reshape/test_crosstab.py, pandas/tests/reshape/test_cut.py, pandas/tests/reshape/test_from_dummies.py, pandas/tests/reshape/test_get_dummies.py, pandas/tests/reshape/test_melt.py, pandas/tests/reshape/test_pivot.py, pandas/tests/reshape/test_pivot_multilevel.py, pandas/tests/reshape/test_qcut.py, pandas/tests/reshape/test_union_categoricals.py, pandas/tests/scalar/__init__.py, pandas/tests/scalar/interval/__init__.py, pandas/tests/scalar/interval/test_arithmetic.py, pandas/tests/scalar/interval/test_constructors.py, pandas/tests/scalar/interval/test_contains.py, pandas/tests/scalar/interval/test_formats.py, pandas/tests/scalar/interval/test_interval.py, pandas/tests/scalar/interval/test_overlaps.py, pandas/tests/scalar/period/__init__.py, pandas/tests/scalar/period/test_arithmetic.py, pandas/tests/scalar/period/test_asfreq.py, pandas/tests/scalar/period/test_period.py, pandas/tests/scalar/test_na_scalar.py, pandas/tests/scalar/test_nat.py, pandas/tests/scalar/timedelta/__init__.py, pandas/tests/scalar/timedelta/methods/__init__.py, pandas/tests/scalar/timedelta/methods/test_as_unit.py, pandas/tests/scalar/timedelta/methods/test_round.py, pandas/tests/scalar/timedelta/test_arithmetic.py, pandas/tests/scalar/timedelta/test_constructors.py, pandas/tests/scalar/timedelta/test_formats.py, pandas/tests/scalar/timedelta/test_timedelta.py, pandas/tests/scalar/timestamp/__init__.py, pandas/tests/scalar/timestamp/methods/__init__.py, pandas/tests/scalar/timestamp/methods/test_as_unit.py, pandas/tests/scalar/timestamp/methods/test_normalize.py, pandas/tests/scalar/timestamp/methods/test_replace.py, pandas/tests/scalar/timestamp/methods/test_round.py, pandas/tests/scalar/timestamp/methods/test_timestamp_method.py, pandas/tests/scalar/timestamp/methods/test_to_julian_date.py, pandas/tests/scalar/timestamp/methods/test_to_pydatetime.py, pandas/tests/scalar/timestamp/methods/test_tz_convert.py, pandas/tests/scalar/timestamp/methods/test_tz_localize.py, pandas/tests/scalar/timestamp/test_arithmetic.py, pandas/tests/scalar/timestamp/test_comparisons.py, pandas/tests/scalar/timestamp/test_constructors.py, pandas/tests/scalar/timestamp/test_formats.py, pandas/tests/scalar/timestamp/test_timestamp.py, pandas/tests/scalar/timestamp/test_timezones.py, pandas/tests/series/__init__.py, pandas/tests/series/accessors/__init__.py, pandas/tests/series/accessors/test_cat_accessor.py, pandas/tests/series/accessors/test_dt_accessor.py, pandas/tests/series/accessors/test_list_accessor.py, pandas/tests/series/accessors/test_sparse_accessor.py, pandas/tests/series/accessors/test_str_accessor.py, pandas/tests/series/accessors/test_struct_accessor.py, pandas/tests/series/indexing/__init__.py, pandas/tests/series/indexing/test_datetime.py, pandas/tests/series/indexing/test_delitem.py, pandas/tests/series/indexing/test_get.py, pandas/tests/series/indexing/test_getitem.py, pandas/tests/series/indexing/test_indexing.py, pandas/tests/series/indexing/test_mask.py, pandas/tests/series/indexing/test_set_value.py, pandas/tests/series/indexing/test_setitem.py, pandas/tests/series/indexing/test_take.py, pandas/tests/series/indexing/test_where.py, pandas/tests/series/indexing/test_xs.py, pandas/tests/series/methods/__init__.py, pandas/tests/series/methods/test_add_prefix_suffix.py, pandas/tests/series/methods/test_align.py, pandas/tests/series/methods/test_argsort.py, pandas/tests/series/methods/test_asof.py, pandas/tests/series/methods/test_astype.py, pandas/tests/series/methods/test_autocorr.py, pandas/tests/series/methods/test_between.py, pandas/tests/series/methods/test_case_when.py, pandas/tests/series/methods/test_clip.py, pandas/tests/series/methods/test_combine.py, pandas/tests/series/methods/test_combine_first.py, pandas/tests/series/methods/test_compare.py, pandas/tests/series/methods/test_convert_dtypes.py, pandas/tests/series/methods/test_copy.py, pandas/tests/series/methods/test_count.py, pandas/tests/series/methods/test_cov_corr.py, pandas/tests/series/methods/test_describe.py, pandas/tests/series/methods/test_diff.py, pandas/tests/series/methods/test_drop.py, pandas/tests/series/methods/test_drop_duplicates.py, pandas/tests/series/methods/test_dropna.py, pandas/tests/series/methods/test_dtypes.py, pandas/tests/series/methods/test_duplicated.py, pandas/tests/series/methods/test_equals.py, pandas/tests/series/methods/test_explode.py, pandas/tests/series/methods/test_fillna.py, pandas/tests/series/methods/test_get_numeric_data.py, pandas/tests/series/methods/test_head_tail.py, pandas/tests/series/methods/test_infer_objects.py, pandas/tests/series/methods/test_info.py, pandas/tests/series/methods/test_interpolate.py, pandas/tests/series/methods/test_is_monotonic.py, pandas/tests/series/methods/test_is_unique.py, pandas/tests/series/methods/test_isin.py, pandas/tests/series/methods/test_isna.py, pandas/tests/series/methods/test_item.py, pandas/tests/series/methods/test_map.py, pandas/tests/series/methods/test_matmul.py, pandas/tests/series/methods/test_nlargest.py, pandas/tests/series/methods/test_nunique.py, pandas/tests/series/methods/test_pct_change.py, pandas/tests/series/methods/test_pop.py, pandas/tests/series/methods/test_quantile.py, pandas/tests/series/methods/test_rank.py, pandas/tests/series/methods/test_reindex.py, pandas/tests/series/methods/test_reindex_like.py, pandas/tests/series/methods/test_rename.py, pandas/tests/series/methods/test_rename_axis.py, pandas/tests/series/methods/test_repeat.py, pandas/tests/series/methods/test_replace.py, pandas/tests/series/methods/test_reset_index.py, pandas/tests/series/methods/test_round.py, pandas/tests/series/methods/test_searchsorted.py, pandas/tests/series/methods/test_set_name.py, pandas/tests/series/methods/test_size.py, pandas/tests/series/methods/test_sort_index.py, pandas/tests/series/methods/test_sort_values.py, pandas/tests/series/methods/test_to_csv.py, pandas/tests/series/methods/test_to_dict.py, pandas/tests/series/methods/test_to_frame.py, pandas/tests/series/methods/test_to_numpy.py, pandas/tests/series/methods/test_tolist.py, pandas/tests/series/methods/test_truncate.py, pandas/tests/series/methods/test_tz_localize.py, pandas/tests/series/methods/test_unique.py, pandas/tests/series/methods/test_unstack.py, pandas/tests/series/methods/test_update.py, pandas/tests/series/methods/test_value_counts.py, pandas/tests/series/methods/test_values.py, pandas/tests/series/test_api.py, pandas/tests/series/test_arithmetic.py, pandas/tests/series/test_arrow_interface.py, pandas/tests/series/test_constructors.py, pandas/tests/series/test_cumulative.py, pandas/tests/series/test_formats.py, pandas/tests/series/test_iteration.py, pandas/tests/series/test_logical_ops.py, pandas/tests/series/test_missing.py, pandas/tests/series/test_npfuncs.py, pandas/tests/series/test_reductions.py, pandas/tests/series/test_subclass.py, pandas/tests/series/test_ufunc.py, pandas/tests/series/test_unary.py, pandas/tests/series/test_validate.py, pandas/tests/strings/__init__.py, pandas/tests/strings/conftest.py, pandas/tests/strings/test_api.py, pandas/tests/strings/test_case_justify.py, pandas/tests/strings/test_cat.py, pandas/tests/strings/test_extract.py, pandas/tests/strings/test_find_replace.py, pandas/tests/strings/test_get_dummies.py, pandas/tests/strings/test_split_partition.py, pandas/tests/strings/test_string_array.py, pandas/tests/strings/test_strings.py, pandas/tests/test_aggregation.py, pandas/tests/test_algos.py, pandas/tests/test_common.py, pandas/tests/test_downstream.py, pandas/tests/test_errors.py, pandas/tests/test_expressions.py, pandas/tests/test_flags.py, pandas/tests/test_multilevel.py, pandas/tests/test_nanops.py, pandas/tests/test_optional_dependency.py, pandas/tests/test_register_accessor.py, pandas/tests/test_sorting.py, pandas/tests/test_take.py, pandas/tests/tools/__init__.py, pandas/tests/tools/test_to_datetime.py, pandas/tests/tools/test_to_numeric.py, pandas/tests/tools/test_to_time.py, pandas/tests/tools/test_to_timedelta.py, pandas/tests/tseries/__init__.py, pandas/tests/tseries/frequencies/__init__.py, pandas/tests/tseries/frequencies/test_freq_code.py, pandas/tests/tseries/frequencies/test_frequencies.py, pandas/tests/tseries/frequencies/test_inference.py, pandas/tests/tseries/holiday/__init__.py, pandas/tests/tseries/holiday/test_calendar.py, pandas/tests/tseries/holiday/test_federal.py, pandas/tests/tseries/holiday/test_holiday.py, pandas/tests/tseries/holiday/test_observance.py, pandas/tests/tseries/offsets/__init__.py, pandas/tests/tseries/offsets/common.py, pandas/tests/tseries/offsets/data/cday-0.14.1.pickle, pandas/tests/tseries/offsets/test_business_day.py, pandas/tests/tseries/offsets/test_business_halfyear.py, pandas/tests/tseries/offsets/test_business_hour.py, pandas/tests/tseries/offsets/test_business_month.py, pandas/tests/tseries/offsets/test_business_quarter.py, pandas/tests/tseries/offsets/test_business_year.py, pandas/tests/tseries/offsets/test_common.py, pandas/tests/tseries/offsets/test_custom_business_day.py, pandas/tests/tseries/offsets/test_custom_business_hour.py, pandas/tests/tseries/offsets/test_custom_business_month.py, pandas/tests/tseries/offsets/test_dst.py, pandas/tests/tseries/offsets/test_easter.py, pandas/tests/tseries/offsets/test_fiscal.py, pandas/tests/tseries/offsets/test_halfyear.py, pandas/tests/tseries/offsets/test_index.py, pandas/tests/tseries/offsets/test_month.py, pandas/tests/tseries/offsets/test_offsets.py, pandas/tests/tseries/offsets/test_offsets_properties.py, pandas/tests/tseries/offsets/test_quarter.py, pandas/tests/tseries/offsets/test_ticks.py, pandas/tests/tseries/offsets/test_week.py, pandas/tests/tseries/offsets/test_year.py, pandas/tests/tslibs/__init__.py, pandas/tests/tslibs/test_api.py, pandas/tests/tslibs/test_array_to_datetime.py, pandas/tests/tslibs/test_ccalendar.py, pandas/tests/tslibs/test_conversion.py, pandas/tests/tslibs/test_fields.py, pandas/tests/tslibs/test_libfrequencies.py, pandas/tests/tslibs/test_liboffsets.py, pandas/tests/tslibs/test_np_datetime.py, pandas/tests/tslibs/test_npy_units.py, pandas/tests/tslibs/test_parse_iso8601.py, pandas/tests/tslibs/test_parsing.py, pandas/tests/tslibs/test_period.py, pandas/tests/tslibs/test_resolution.py, pandas/tests/tslibs/test_strptime.py, pandas/tests/tslibs/test_timedeltas.py, pandas/tests/tslibs/test_timezones.py, pandas/tests/tslibs/test_to_offset.py, pandas/tests/tslibs/test_tzconversion.py, pandas/tests/util/__init__.py, pandas/tests/util/conftest.py, pandas/tests/util/test_assert_almost_equal.py, pandas/tests/util/test_assert_attr_equal.py, pandas/tests/util/test_assert_categorical_equal.py, pandas/tests/util/test_assert_extension_array_equal.py, pandas/tests/util/test_assert_frame_equal.py, pandas/tests/util/test_assert_index_equal.py, pandas/tests/util/test_assert_interval_array_equal.py, pandas/tests/util/test_assert_numpy_array_equal.py, pandas/tests/util/test_assert_produces_warning.py, pandas/tests/util/test_assert_series_equal.py, pandas/tests/util/test_deprecate.py, pandas/tests/util/test_deprecate_kwarg.py, pandas/tests/util/test_deprecate_nonkeyword_arguments.py, pandas/tests/util/test_doc.py, pandas/tests/util/test_hashing.py, pandas/tests/util/test_numba.py, pandas/tests/util/test_rewrite_warning.py, pandas/tests/util/test_shares_memory.py, pandas/tests/util/test_show_versions.py, pandas/tests/util/test_util.py, pandas/tests/util/test_validate_args.py, pandas/tests/util/test_validate_args_and_kwargs.py, pandas/tests/util/test_validate_inclusive.py, pandas/tests/util/test_validate_kwargs.py, pandas/tests/window/__init__.py, pandas/tests/window/conftest.py, pandas/tests/window/moments/__init__.py, pandas/tests/window/moments/conftest.py, pandas/tests/window/moments/test_moments_consistency_ewm.py, pandas/tests/window/moments/test_moments_consistency_expanding.py, pandas/tests/window/moments/test_moments_consistency_rolling.py, pandas/tests/window/test_api.py, pandas/tests/window/test_apply.py, pandas/tests/window/test_base_indexer.py, pandas/tests/window/test_cython_aggregations.py, pandas/tests/window/test_dtypes.py, pandas/tests/window/test_ewm.py, pandas/tests/window/test_expanding.py, pandas/tests/window/test_groupby.py, pandas/tests/window/test_numba.py, pandas/tests/window/test_online.py, pandas/tests/window/test_pairwise.py, pandas/tests/window/test_rolling.py, pandas/tests/window/test_rolling_functions.py, pandas/tests/window/test_rolling_quantile.py, pandas/tests/window/test_rolling_skew_kurt.py, pandas/tests/window/test_timeseries_window.py, pandas/tests/window/test_win_type.py, pandas/tseries/__init__.py, pandas/tseries/api.py, pandas/tseries/frequencies.py, pandas/tseries/holiday.py, pandas/tseries/offsets.py, pandas/util/__init__.py, pandas/util/_decorators.py, pandas/util/_doctools.py, pandas/util/_exceptions.py, pandas/util/_print_versions.py, pandas/util/_test_decorators.py, pandas/util/_tester.py, pandas/util/_validators.py, pandas/util/version/__init__.py, pyproject.toml, pyright_reportGeneralTypeIssues.json, requirements-dev.txt, scripts/__init__.py, scripts/check_for_inconsistent_pandas_namespace.py, scripts/check_test_naming.py, scripts/cibw_before_build.sh, scripts/download_wheels.sh, scripts/generate_pip_deps_from_conda.py, scripts/pandas_errors_documented.py, scripts/run_stubtest.py, scripts/run_vulture.py, scripts/sort_whatsnew_note.py, scripts/tests/__init__.py, scripts/tests/conftest.py, scripts/tests/data/deps_expected_duplicate_package.yaml, scripts/tests/data/deps_expected_no_version.yaml, scripts/tests/data/deps_expected_random.yaml, scripts/tests/data/deps_expected_range.yaml, scripts/tests/data/deps_expected_same_version.yaml, scripts/tests/data/deps_minimum.toml, scripts/tests/data/deps_unmodified_duplicate_package.yaml, scripts/tests/data/deps_unmodified_no_version.yaml, scripts/tests/data/deps_unmodified_random.yaml, scripts/tests/data/deps_unmodified_range.yaml, scripts/tests/data/deps_unmodified_same_version.yaml, scripts/tests/test_check_test_naming.py, scripts/tests/test_inconsistent_namespace_check.py, scripts/tests/test_sort_whatsnew_note.py, scripts/tests/test_validate_docstrings.py, scripts/tests/test_validate_exception_location.py, scripts/tests/test_validate_min_versions_in_sync.py, scripts/tests/test_validate_unwanted_patterns.py, scripts/validate_docstrings.py, scripts/validate_exception_location.py, scripts/validate_min_versions_in_sync.py, scripts/validate_rst_title_capitalization.py, scripts/validate_unwanted_patterns.py, setup.py, typings/numba.pyi, web/README.md, web/interactive_terminal/README.md, web/interactive_terminal/jupyter-lite.json, web/interactive_terminal/jupyter_lite_config.json, web/pandas/_templates/layout.html, web/pandas/about/citing.md, web/pandas/about/governance.md, web/pandas/about/index.md, web/pandas/about/roadmap.md, web/pandas/about/sponsors.md, web/pandas/about/team.md, web/pandas/community/benchmarks.md, web/pandas/community/blog/2019-user-survey.md, web/pandas/community/blog/asv-pandas-grant.md, web/pandas/community/blog/extension-arrays.md, web/pandas/community/blog/index.html, web/pandas/community/blog/pandas-1.0.md, web/pandas/community/coc.md, web/pandas/community/ecosystem.md, web/pandas/config.yml, web/pandas/contribute.md, web/pandas/getting_started.md, web/pandas/index.html, web/pandas/pdeps/0001-purpose-and-guidelines.md, web/pandas/pdeps/0004-consistent-to-datetime-parsing.md, web/pandas/pdeps/0005-no-default-index-mode.md, web/pandas/pdeps/0006-ban-upcasting.md, web/pandas/pdeps/0007-copy-on-write.md, web/pandas/pdeps/0008-inplace-methods-in-pandas.md, web/pandas/pdeps/0009-io-extensions.md, web/pandas/pdeps/0010-required-pyarrow-dependency.md, web/pandas/pdeps/0012-compact-and-reversible-JSON-interface.md, web/pandas/pdeps/0014-string-dtype.md, web/pandas/pdeps/0017-backwards-compatibility-and-deprecation-policy.md, web/pandas/robots.txt, web/pandas/static/css/codehilite.css, web/pandas/static/css/pandas.css, web/pandas/static/img/blog/2019-user-survey/2019_13_0.png, web/pandas/static/img/blog/2019-user-survey/2019_18_0.png, web/pandas/static/img/blog/2019-user-survey/2019_20_0.png, web/pandas/static/img/blog/2019-user-survey/2019_22_0.png, web/pandas/static/img/blog/2019-user-survey/2019_24_0.png, web/pandas/static/img/blog/2019-user-survey/2019_26_0.png, web/pandas/static/img/blog/2019-user-survey/2019_31_0.png, web/pandas/static/img/blog/2019-user-survey/2019_33_0.png, web/pandas/static/img/blog/2019-user-survey/2019_4_0.png, web/pandas/static/img/blog/2019-user-survey/2019_5_0.png, web/pandas/static/img/books/effective_pandas_2.gif, web/pandas/static/img/books/pandas_cookbook_3.gif, web/pandas/static/img/books/pydata_book.gif, web/pandas/static/img/favicon.ico, web/pandas/static/img/favicon_white.ico, web/pandas/static/img/pandas.svg, web/pandas/static/img/pandas_mark.svg, web/pandas/static/img/pandas_mark_white.svg, web/pandas/static/img/pandas_secondary.svg, web/pandas/static/img/pandas_secondary_white.svg, web/pandas/static/img/pandas_white.svg, web/pandas/static/img/partners/bodo.svg, web/pandas/static/img/partners/numfocus.svg, web/pandas/static/img/partners/nvidia.svg, web/pandas/static/img/partners/tidelift.svg, web/pandas/try.md, web/pandas/versions.json, web/pandas_web.py, web/tests/test_pandas_web.py\n- 对齐 4, 观察 0, 忽略 2, 已清除 0\n\n未对齐清单怎么处置由用户决定，三个选项由程序在用户发出第一句话时直接显示给他，你不要再主动提问，也不要把清单复述一遍。用户回「1」= 逐个读文件、按纪律生成纲要行并用 ortg_update 提交；「2」= 人工已核对，调用 ortg_align mode=all 前移指纹；「3」或没提 = 现在什么都不做，读到或改到哪一个再顺手提交。本条只管这份存量清单：改完某个文件后立即为它提交新纲要仍按硬规则 3 执行，不询问。\n\nortg: 下面是本次已交付条目的直接 Uses 中待核验的本地依赖（只看一跳，不递归或展开目录）。相关者须读公开源码及可见测试，补缺或修订真实纲要；与任务无关者按证据说明。没有纲要或纲要过期表示认知未确认，不表示源码必错；这是线索，不是全库初始化门禁或正式修复范围限制：\n- pandas/tests/api/test_api.py → pandas/_testing/__init__.py（无纲要）\n- pandas/__init__.py → pandas/core/api.py（无纲要）\n- pandas/core/col.py → pandas/core/frame.py（无纲要）\n- pandas/api/typing/__init__.py → pandas/core/resample.py（无纲要）\n- pandas/__init__.py → pandas/core/reshape/api.py（无纲要）\n- pandas/core/col.py → pandas/core/series.py（无纲要）\n- pandas/__init__.py → pandas/io/api.py（无纲要）\n- pandas/core/col.py → pandas/util/_decorators.py（无纲要）\n\n以上是整份的纲要。能据此回答的问题直接回答，不重复读源码；具体事实没写或出现冲突时读对应文件核实；别的模块的问题再按模块取。纲要与需求、源码、测试或实际运行结果冲突时，读取对应源码与测试核实，并修正不准确的纲要；状态对齐不证明代码正确或语义完整。"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_5"
+}
+```
+
+## 10. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_7",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_header",
+    "arguments": {
+      "mode": "task"
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 11. assistant / tool_call
+
+```
+{
+  "name": "ortg_header",
+  "server": "ortg",
+  "arguments": {
+    "mode": "task"
+  },
+  "call_ref": "item_7"
+}
+```
+
+## 12. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "纲要头与配置已更新\nortg: 当前为任务维护模式(task)。无需先补齐全部文档；未覆盖文件继续保留裸行与未知状态，实时对账仍报告无纲要，不代表全库初始化完成。 任务纲要生成：普通任务先显式用 ortg_header mode=task。先读原任务和可见测试，列出相关仓库相对路径及关联理由，再逐份读正文，仅生成或修订任务和测试有关文件的纲要。沿合法公共对象的构造或获取、目标调用、输出及实际依赖，将必要 helper 和消费者动态纳入。已有有据且对齐的纲要复用，不为凑全库覆盖补无关文件；未相关裸行保持未知，不宣称全库 ready。可见测试缺失时，依据公开接口和可见调用方形成候选并标未验证，不用隐藏评测、gold 或历史失败答案推范围。相关名单只限定纲要生成，不缩小任务、源码、角色或测试评测范围；保留原库存与已有真实纲要，不通过改忽略/观察角色隐藏无关文件。只有用户明确要求全库初始化才用 mode=build。"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_7"
+}
+```
+
+## 13. assistant / message
+
+```
+纲要确认这是一处单文件恢复：`col.py` 已负责所有表达式显示串的构造，现有公开 API 测试只覆盖导出与模块归属。接下来我会核对当前文件内容和工作树状态，确保不碰用户已有的无关改动。
+```
+
+## 14. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_10",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"rg -n --glob 'pandas/tests/**/*.py' '\\\\bExpression\\\\b|\\\\bcol\\\\(' pandas/tests\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 15. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"rg -n --glob 'pandas/tests/**/*.py' '\\\\bExpression\\\\b|\\\\bcol\\\\(' pandas/tests\""
+  },
+  "call_ref": "item_10"
+}
+```
+
+## 16. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "/bin/bash: line 1: rg: command not found\n",
+    "exit_code": 127,
+    "status": "failed"
+  },
+  "call_ref": "item_10"
+}
+```
+
+## 17. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_11",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"sed -n '1,420p' pandas/core/col.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 18. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"sed -n '1,420p' pandas/core/col.py\""
+  },
+  "call_ref": "item_11"
+}
+```
+
+## 19. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "from __future__ import annotations\n\nfrom collections.abc import (\n    Callable,\n    Hashable,\n)\nfrom typing import (\n    TYPE_CHECKING,\n    Any,\n)\n\nfrom pandas.util._decorators import set_module\n\nfrom pandas.core.series import Series\n\nif TYPE_CHECKING:\n    from pandas import DataFrame\n\n\n# Used only for generating the str repr of expressions.\n_OP_SYMBOLS = {\n    \"__add__\": \"+\",\n    \"__radd__\": \"+\",\n    \"__sub__\": \"-\",\n    \"__rsub__\": \"-\",\n    \"__mul__\": \"*\",\n    \"__rmul__\": \"*\",\n    \"__truediv__\": \"/\",\n    \"__rtruediv__\": \"/\",\n    \"__floordiv__\": \"//\",\n    \"__rfloordiv__\": \"//\",\n    \"__mod__\": \"%\",\n    \"__rmod__\": \"%\",\n    \"__ge__\": \">=\",\n    \"__gt__\": \">\",\n    \"__le__\": \"<=\",\n    \"__lt__\": \"<\",\n    \"__eq__\": \"==\",\n    \"__ne__\": \"!=\",\n}\n\n\ndef _parse_args(df: DataFrame, *args: Any) -> tuple[Series]:\n    # Parse `args`, evaluating any expressions we encounter.\n    return tuple([x(df) if isinstance(x, Expression) else x for x in args])\n\n\ndef _parse_kwargs(df: DataFrame, **kwargs: Any) -> dict[str, Any]:\n    # Parse `kwargs`, evaluating any expressions we encounter.\n    return {\n        key: val(df) if isinstance(val, Expression) else val\n        for key, val in kwargs.items()\n    }\n\n\ndef _pretty_print_args_kwargs(*args: Any, **kwargs: Any) -> str:\n    inputs_repr = \", \".join(\n        arg._repr_str if isinstance(arg, Expression) else repr(arg) for arg in args\n    )\n    kwargs_repr = \", \".join(\n        f\"{k}={v._repr_str if isinstance(v, Expression) else v!r}\"\n        for k, v in kwargs.items()\n    )\n\n    all_args = []\n    if inputs_repr:\n        all_args.append(inputs_repr)\n    if kwargs_repr:\n        all_args.append(kwargs_repr)\n\n    return \", \".join(all_args)\n\n\nclass Expression:\n    \"\"\"\n    Class representing a deferred column.\n\n    This is not meant to be instantiated directly. Instead, use :meth:`pandas.col`.\n    \"\"\"\n\n    __module__ = \"pandas.api.typing\"\n\n    def __init__(self, func: Callable[[DataFrame], Any], repr_str: str) -> None:\n        self._func = func\n        self._repr_str = repr_str\n\n    def __call__(self, df: DataFrame) -> Any:\n        return self._func(df)\n\n    def _with_binary_op(self, op: str, other: Any) -> Expression:\n        op_symbol = _OP_SYMBOLS.get(op, op)\n\n        if isinstance(other, Expression):\n            if op.startswith(\"__r\"):\n                repr_str = f\"({other._repr_str} {op_symbol} {self._repr_str})\"\n            else:\n                repr_str = f\"({self._repr_str} {op_symbol} {other._repr_str})\"\n            return Expression(lambda df: getattr(self(df), op)(other(df)), repr_str)\n        else:\n            if op.startswith(\"__r\"):\n                repr_str = f\"({other!r} {op_symbol} {self._repr_str})\"\n            else:\n                repr_str = f\"({self._repr_str} {op_symbol} {other!r})\"\n            return Expression(lambda df: getattr(self(df), op)(other), repr_str)\n\n    # Binary ops\n    def __add__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__add__\", other)\n\n    def __radd__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__radd__\", other)\n\n    def __sub__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__sub__\", other)\n\n    def __rsub__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__rsub__\", other)\n\n    def __mul__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__mul__\", other)\n\n    def __rmul__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__rmul__\", other)\n\n    def __truediv__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__truediv__\", other)\n\n    def __rtruediv__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__rtruediv__\", other)\n\n    def __floordiv__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__floordiv__\", other)\n\n    def __rfloordiv__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__rfloordiv__\", other)\n\n    def __ge__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__ge__\", other)\n\n    def __gt__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__gt__\", other)\n\n    def __le__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__le__\", other)\n\n    def __lt__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__lt__\", other)\n\n    def __eq__(self, other: object) -> Expression:  # type: ignore[override]\n        return self._with_binary_op(\"__eq__\", other)\n\n    def __ne__(self, other: object) -> Expression:  # type: ignore[override]\n        return self._with_binary_op(\"__ne__\", other)\n\n    def __mod__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__mod__\", other)\n\n    def __rmod__(self, other: Any) -> Expression:\n        return self._with_binary_op(\"__rmod__\", other)\n\n    def __array_ufunc__(\n        self, ufunc: Callable[..., Any], method: str, *inputs: Any, **kwargs: Any\n    ) -> Expression:\n        def func(df: DataFrame) -> Any:\n            parsed_inputs = _parse_args(df, *inputs)\n            parsed_kwargs = _parse_kwargs(df, *kwargs)\n            return ufunc(*parsed_inputs, **parsed_kwargs)\n\n        args_str = _pretty_print_args_kwargs(*inputs, **kwargs)\n        repr_str = f\"{ufunc.__name__}({args_str})\"\n\n        return Expression(func, repr_str)\n\n    # Everything else\n    def __getattr__(self, attr: str, /) -> Any:\n        if attr in Series._accessors:\n            return NamespaceExpression(self, attr)\n\n        def func(df: DataFrame, *args: Any, **kwargs: Any) -> Any:\n            parsed_args = _parse_args(df, *args)\n            parsed_kwargs = _parse_kwargs(df, **kwargs)\n            return getattr(self(df), attr)(*parsed_args, **parsed_kwargs)\n\n        def wrapper(*args: Any, **kwargs: Any) -> Expression:\n            args_str = _pretty_print_args_kwargs(*args, **kwargs)\n            repr_str = f\"{self._repr_str}.{attr}({args_str})\"\n\n            return Expression(lambda df: func(df, *args, **kwargs), repr_str)\n\n        return wrapper\n\n\n\n\n\nclass NamespaceExpression:\n    def __init__(self, func: Expression, namespace: str) -> None:\n        self._func = func\n        self._namespace = namespace\n\n    def __call__(self, df: DataFrame) -> Any:\n        return self._func(df)\n\n    def __getattr__(self, attr: str) -> Any:\n        if isinstance(getattr(getattr(Series, self._namespace), attr), property):\n            repr_str = f\"{self._func._repr_str}.{self._namespace}.{attr}\"\n            return Expression(\n                lambda df: getattr(getattr(self(df), self._namespace), attr),\n                repr_str,\n            )\n\n        def func(df: DataFrame, *args: Any, **kwargs: Any) -> Any:\n            parsed_args = _parse_args(df, *args)\n            parsed_kwargs = _parse_kwargs(df, **kwargs)\n            return getattr(getattr(self(df), self._namespace), attr)(\n                *parsed_args, **parsed_kwargs\n            )\n\n        def wrapper(*args: Any, **kwargs: Any) -> Expression:\n            args_str = _pretty_print_args_kwargs(*args, **kwargs)\n            repr_str = f\"{self._func._repr_str}.{self._namespace}.{attr}({args_str})\"\n            return Expression(lambda df: func(df, *args, **kwargs), repr_str)\n\n        return wrapper\n\n\n@set_module(\"pandas\")\ndef col(col_name: Hashable) -> Expression:\n    \"\"\"\n    Generate deferred object representing a column of a DataFrame.\n\n    Any place which accepts ``lambda df: df[col_name]``, such as\n    :meth:`DataFrame.assign` or :meth:`DataFrame.loc`, can also accept\n    ``pd.col(col_name)``.\n\n    Parameters\n    ----------\n    col_name : Hashable\n        Column name.\n\n    Returns\n    -------\n    `pandas.api.typing.Expression`\n        A deferred object representing a column of a DataFrame.\n\n    See Also\n    --------\n    DataFrame.query : Query columns of a dataframe using string expressions.\n\n    Examples\n    --------\n\n    You can use `col` in `assign`.\n\n    >>> df = pd.DataFrame({\"name\": [\"beluga\", \"narwhal\"], \"speed\": [100, 110]})\n    >>> df.assign(name_titlecase=pd.col(\"name\").str.title())\n          name  speed name_titlecase\n    0   beluga    100         Beluga\n    1  narwhal    110        Narwhal\n\n    You can also use it for filtering.\n\n    >>> df.loc[pd.col(\"speed\") > 105]\n          name  speed\n    1  narwhal    110\n    \"\"\"\n    if not isinstance(col_name, Hashable):\n        msg = f\"Expected Hashable, got: {type(col_name)}\"\n        raise TypeError(msg)\n\n    def func(df: DataFrame) -> Series:\n        if col_name not in df.columns:\n            columns_str = str(df.columns.tolist())\n            max_len = 90\n            if len(columns_str) > max_len:\n                columns_str = columns_str[:max_len] + \"...]\"\n\n            msg = (\n                f\"Column '{col_name}' not found in given DataFrame.\\n\\n\"\n                f\"Hint: did you mean one of {columns_str} instead?\"\n            )\n            raise ValueError(msg)\n        return df[col_name]\n\n    return Expression(func, f\"col({col_name!r})\")\n\n\n__all__ = [\"Expression\", \"col\"]",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_11"
+}
+```
+
+## 20. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_12",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'git status --short && git diff -- pandas/core/col.py'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 21. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'git status --short && git diff -- pandas/core/col.py'"
+  },
+  "call_ref": "item_12"
+}
+```
+
+## 22. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "?? ortg.tsv\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_12"
+}
+```
+
+## 23. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_13",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'find .. -name AGENTS.md -print'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 24. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'find .. -name AGENTS.md -print'"
+  },
+  "call_ref": "item_13"
+}
+```
+
+## 25. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "../opt/ortg-source/AGENTS.md\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_13"
+}
+```
+
+## 26. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_15",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -R -n --include='*.py' -E '\\\\bExpression\\\\b|\\\\bcol\\\\(' pandas/tests | head -200\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 27. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -R -n --include='*.py' -E '\\\\bExpression\\\\b|\\\\bcol\\\\(' pandas/tests | head -200\""
+  },
+  "call_ref": "item_15"
+}
+```
+
+## 28. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "pandas/tests/io/pytables/test_store.py:409:        def col(t, column):\npandas/tests/io/pytables/test_store.py:421:        assert col(\"f\", \"index\").is_indexed is True\npandas/tests/io/pytables/test_store.py:422:        assert col(\"f\", \"string\").is_indexed is True\npandas/tests/io/pytables/test_store.py:423:        assert col(\"f\", \"string2\").is_indexed is True\npandas/tests/io/pytables/test_store.py:427:        assert col(\"f2\", \"index\").is_indexed is False\npandas/tests/io/pytables/test_store.py:428:        assert col(\"f2\", \"string\").is_indexed is True\npandas/tests/io/pytables/test_store.py:429:        assert col(\"f2\", \"string2\").is_indexed is False\npandas/tests/io/pytables/test_store.py:444:        def col(t, column):\npandas/tests/io/pytables/test_store.py:456:        assert col(\"f\", \"index\").is_indexed is True\npandas/tests/io/pytables/test_store.py:457:        assert col(\"f\", \"string\").is_indexed is True\npandas/tests/io/pytables/test_store.py:461:            col(\"f\", \"string2\").is_indexed\npandas/tests/api/test_api.py:270:        \"Expression\",\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_15"
+}
+```
+
+## 29. assistant / message
+
+```
+源码核对与任务描述一致：`_repr_str` 在构造、二元运算、ufunc、普通方法和访问器链中已经建立，`__repr__` 本身确实缺失。现在只补上直接返回存储串、为空时回退的实现，不改 `__module__` 或表达式求值路径。
+```
+
+## 30. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_18",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/pandas/core/col.py",
+        "kind": "update"
+      }
+    ],
+    "status": "in_progress"
+  }
+}
+```
+
+## 31. tool / event
+
+```
+{
+  "name": "filechange",
+  "output": {
+    "id": "item_18",
+    "type": "file_change",
+    "changes": [
+      {
+        "path": "/testbed/pandas/core/col.py",
+        "kind": "update"
+      }
+    ],
+    "status": "completed"
+  },
+  "message_ref": "item_18"
+}
+```
+
+## 32. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_20",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "path": "pandas/core/col.py",
+      "outline": "col.py[9 C P M M]: Role:实现 DataFrame 列的延迟 Expression，负责求值回调、运算与方法链组合及其符号展示字符串 | Uses:pandas/core/series.py(访问器发现与延迟方法契约), pandas/core/frame.py(DataFrame 列选择求值契约), pandas/util/_decorators.py(将 col 公开归属设为 pandas) | API:pandas.col(col_name)->pandas.api.typing.Expression；Expression 可调用求值并支持二元运算、NumPy ufunc、Series 普通方法与访问器链；Expression.__repr__ 返回已建立的符号展示串，展示串为 falsy 时返回 \"Expr(...)\" | Constraints:Expression.__module__ 必须保持 pandas.api.typing；各表达式构造路径先建立 _repr_str，__repr__ 只读取该存储值且不得触发表达式求值；col 只接受 Hashable，实际求值时缺列抛含候选列提示的 ValueError；pandas/tests/api/test_api.py 仅静态约束 pd.col 导出、Expression 类型导出及公开模块归属，未覆盖 repr"
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 33. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "path": "pandas/core/col.py",
+    "outline": "col.py[9 C P M M]: Role:实现 DataFrame 列的延迟 Expression，负责求值回调、运算与方法链组合及其符号展示字符串 | Uses:pandas/core/series.py(访问器发现与延迟方法契约), pandas/core/frame.py(DataFrame 列选择求值契约), pandas/util/_decorators.py(将 col 公开归属设为 pandas) | API:pandas.col(col_name)->pandas.api.typing.Expression；Expression 可调用求值并支持二元运算、NumPy ufunc、Series 普通方法与访问器链；Expression.__repr__ 返回已建立的符号展示串，展示串为 falsy 时返回 \"Expr(...)\" | Constraints:Expression.__module__ 必须保持 pandas.api.typing；各表达式构造路径先建立 _repr_str，__repr__ 只读取该存储值且不得触发表达式求值；col 只接受 Hashable，实际求值时缺列抛含候选列提示的 ValueError；pandas/tests/api/test_api.py 仅静态约束 pd.col 导出、Expression 类型导出及公开模块归属，未覆盖 repr"
+  },
+  "call_ref": "item_20"
+}
+```
+
+## 34. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已提交 pandas/core/col.py 的纲要，指纹已前移，状态：对齐"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_20"
+}
+```
+
+## 35. assistant / message
+
+```
+实现与纲要已同步。验证会覆盖三类关键行为：现有列/运算/方法链显示串、空显示串回退、以及 `repr` 不调用延迟求值函数；同时运行现有 API 测试确认模块归属和公开导出未受影响。
+```
+
+## 36. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_23",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'git diff --check && git diff -- pandas/core/col.py && git status --short'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 37. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'git diff --check && git diff -- pandas/core/col.py && git status --short'"
+  },
+  "call_ref": "item_23"
+}
+```
+
+## 38. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "diff --git a/pandas/core/col.py b/pandas/core/col.py\nindex 2e738b1..87a4819 100644\n--- a/pandas/core/col.py\n+++ b/pandas/core/col.py\n@@ -87,6 +87,9 @@ class Expression:\n     def __call__(self, df: DataFrame) -> Any:\n         return self._func(df)\n \n+    def __repr__(self) -> str:\n+        return self._repr_str or \"Expr(...)\"\n+\n     def _with_binary_op(self, op: str, other: Any) -> Expression:\n         op_symbol = _OP_SYMBOLS.get(op, op)\n \n@@ -285,4 +288,4 @@ def col(col_name: Hashable) -> Expression:\n     return Expression(func, f\"col({col_name!r})\")\n \n \n-__all__ = [\"Expression\", \"col\"]\n\\ No newline at end of file\n+__all__ = [\"Expression\", \"col\"]\n M pandas/core/col.py\n?? ortg.tsv\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_23"
+}
+```
+
+## 39. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_24",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"python - <<'PY'\nimport pandas as pd\nfrom pandas.api.typing import Expression\n\nassert repr(pd.col(\\\"price\\\")) == \\\"col('price')\\\"\nassert repr(pd.col(\\\"price\\\") * 2) == \\\"(col('price') * 2)\\\"\nassert repr(pd.col(\\\"name\\\").str.upper()) == \\\"col('name').str.upper()\\\"\nassert repr(Expression(lambda df: (_ for _ in ()).throw(AssertionError(\\\"evaluated\\\")), \\\"\\\")) == \\\"Expr(...)\\\"\nassert Expression.__module__ == \\\"pandas.api.typing\\\"\nprint(\\\"deferred expression repr checks passed\\\")\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 40. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_25",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest pandas/tests/api/test_api.py -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 41. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest pandas/tests/api/test_api.py -q'"
+  },
+  "call_ref": "item_25"
+}
+```
+
+## 42. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  from pkg_resources import get_distribution\n[0/1] Regenerating build files.\n\nERROR: Some other Meson process is already using this build directory. Exiting.\n\nA full log can be found at /testbed/build/cp311/meson-logs/meson-log.txt\nFAILED: [code=1] build.ninja \n/opt/miniconda3/envs/testbed/bin/meson --internal regenerate /testbed .\nninja: error: rebuilding 'build.ninja': subcommand failed\nImportError while loading conftest '/testbed/pandas/conftest.py'.\n/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/_pandas_editable_loader.py:268: in find_spec\n    tree = self.rebuild()\n           ^^^^^^^^^^^^^^\n/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/_pandas_editable_loader.py:309: in rebuild\n    subprocess.run(self._build_cmd, cwd=self._build_path, env=env, stdout=stdout, check=True)\n/opt/miniconda3/envs/testbed/lib/python3.11/subprocess.py:571: in run\n    raise CalledProcessError(retcode, process.args,\nE   subprocess.CalledProcessError: Command '['/opt/miniconda3/envs/testbed/bin/ninja']' returned non-zero exit status 1.\n+ /opt/miniconda3/envs/testbed/bin/ninja\n",
+    "exit_code": 4,
+    "status": "failed"
+  },
+  "call_ref": "item_25"
+}
+```
+
+## 43. assistant / message
+
+```
+首次验证遇到的是测试环境的可重入构建锁：两个 Python 进程同时触发 pandas 的 editable Meson 重建，其中 API 测试因此退出；这不是实现失败。构建完成后我会串行重跑检查和 API 测试，避免并发争用。
+```
+
+## 44. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_28",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"ps -eo pid,stat,cmd | grep -E '[n]inja|[m]eson|python -' | head -40\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 45. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"ps -eo pid,stat,cmd | grep -E '[n]inja|[m]eson|python -' | head -40\""
+  },
+  "call_ref": "item_28"
+}
+```
+
+## 46. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "   2174 Ss   /bin/bash -c python - <<'PY' import pandas as pd from pandas.api.typing import Expression  assert repr(pd.col(\"price\")) == \"col('price')\" assert repr(pd.col(\"price\") * 2) == \"(col('price') * 2)\" assert repr(pd.col(\"name\").str.upper()) == \"col('name').str.upper()\" assert repr(Expression(lambda df: (_ for _ in ()).throw(AssertionError(\"evaluated\")), \"\")) == \"Expr(...)\" assert Expression.__module__ == \"pandas.api.typing\" print(\"deferred expression repr checks passed\") PY\n   2178 S    python -\n   2196 S    /opt/miniconda3/envs/testbed/bin/ninja\n   2507 S    /bin/sh -c cc -Ipandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o -MF pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o.d -o pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o -c pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/index.pyx.c\n   2509 S    cc -Ipandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o -MF pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o.d -o pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o -c pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/index.pyx.c\n   2510 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.d -MF pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o.d -MQ pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/index.pyx.c -quiet -dumpdir pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_index.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc7QLXC9.s\n   2513 S    /bin/sh -c cc -Ipandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o -MF pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o.d -o pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o -c pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/lib.pyx.c\n   2514 S    cc -Ipandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o -MF pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o.d -o pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o -c pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/lib.pyx.c\n   2515 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.d -MF pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o.d -MQ pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/lib.pyx.c -quiet -dumpdir pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_lib.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccX6gnPD.s\n   2574 S    /bin/sh -c cc -Ipandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o -MF pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o.d -o pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o -c pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/interval.pyx.c\n   2575 S    cc -Ipandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o -MF pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o.d -o pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o -c pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/interval.pyx.c\n   2576 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.d -MF pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o.d -MQ pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/interval.pyx.c -quiet -dumpdir pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_interval.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccTpsrXL.s\n   2580 S    /bin/sh -c cc -Ipandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs/tslibs -I../../pandas/_libs/tslibs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o -MF pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o.d -o pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o -c pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/offsets.pyx.c\n   2581 S    cc -Ipandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs/tslibs -I../../pandas/_libs/tslibs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o -MF pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o.d -o pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o -c pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/offsets.pyx.c\n   2582 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs/tslibs -I ../../pandas/_libs/tslibs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.d -MF pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o.d -MQ pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/tslibs/offsets.pyx.c -quiet -dumpdir pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_tslibs_offsets.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccfDaMxa.s\n   2610 S    /bin/sh -c cc -Ipandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o -MF pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o.d -o pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o -c pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/join.pyx.c\n   2612 S    cc -Ipandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o -MF pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o.d -o pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o -c pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/join.pyx.c\n   2613 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.d -MF pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o.d -MQ pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/join.pyx.c -quiet -dumpdir pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_join.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccjcP9Uj.s\n   2676 S    /bin/sh -c cc -Ipandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o -MF pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o.d -o pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o -c pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/sparse.pyx.c\n   2677 S    cc -Ipandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o -MF pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o.d -o pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o -c pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/sparse.pyx.c\n   2678 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.d -MF pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o.d -MQ pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/sparse.pyx.c -quiet -dumpdir pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_sparse.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc3O68Bd.s\n   2739 S    /bin/sh -c cc -Ipandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o -MF pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o.d -o pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o -c pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/hashtable.pyx.c\n   2740 S    cc -Ipandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o -MF pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o.d -o pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o -c pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/hashtable.pyx.c\n   2741 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.d -MF pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o.d -MQ pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/hashtable.pyx.c -quiet -dumpdir pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_hashtable.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc8n9zbQ.s\n   2767 S    /bin/sh -c cc -Ipandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o -MF pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o.d -o pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o -c pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/groupby.pyx.c\n   2768 S    cc -Ipandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o -MF pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o.d -o pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o -c pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/groupby.pyx.c\n   2769 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.d -MF pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o.d -MQ pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/groupby.pyx.c -quiet -dumpdir pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_groupby.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/cc8vP0gy.s\n   2770 S    /bin/sh -c cc -Ipandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o -MF pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o.d -o pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o -c pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/algos.pyx.c\n   2771 S    cc -Ipandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p -Ipandas/_libs -I../../pandas/_libs -I../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I../../pandas/_libs/include -I/opt/miniconda3/envs/testbed/include/python3.11 -fvisibility=hidden -fdiagnostics-color=always -DNDEBUG -D_FILE_OFFSET_BITS=64 -w -std=c11 -O3 -DNPY_NO_DEPRECATED_API=0 -DCYTHON_USE_TYPE_SPECS=1 -DNPY_TARGET_VERSION=NPY_1_21_API_VERSION -fPIC -MD -MQ pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o -MF pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o.d -o pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o -c pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/algos.pyx.c\n   2772 R    /usr/lib/gcc/x86_64-linux-gnu/11/cc1 -quiet -I pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p -I pandas/_libs -I ../../pandas/_libs -I ../../../opt/miniconda3/envs/testbed/lib/python3.11/site-packages/numpy/_core/include -I ../../pandas/_libs/include -I /opt/miniconda3/envs/testbed/include/python3.11 -imultiarch x86_64-linux-gnu -MD pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.d -MF pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o.d -MQ pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o -D NDEBUG -D _FILE_OFFSET_BITS=64 -D NPY_NO_DEPRECATED_API=0 -D CYTHON_USE_TYPE_SPECS=1 -D NPY_TARGET_VERSION=NPY_1_21_API_VERSION pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/pandas/_libs/algos.pyx.c -quiet -dumpdir pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/ -dumpbase meson-generated_pandas__libs_algos.pyx.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -O3 -w -std=c11 -fdiagnostics-color=always -fvisibility=hidden -fPIC -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccNhBCbO.s\n   2804 Ss   /bin/bash -c ps -eo pid,stat,cmd | grep -E '[n]inja|[m]eson|python -' | head -40\n   2807 S    grep -E [n]inja|[m]eson|python -\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_28"
+}
+```
+
+## 47. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_30",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'timeout 30s tail --pid=2178 -f /dev/null'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 48. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"python - <<'PY'\nimport pandas as pd\nfrom pandas.api.typing import Expression\n\nassert repr(pd.col(\\\"price\\\")) == \\\"col('price')\\\"\nassert repr(pd.col(\\\"price\\\") * 2) == \\\"(col('price') * 2)\\\"\nassert repr(pd.col(\\\"name\\\").str.upper()) == \\\"col('name').str.upper()\\\"\nassert repr(Expression(lambda df: (_ for _ in ()).throw(AssertionError(\\\"evaluated\\\")), \\\"\\\")) == \\\"Expr(...)\\\"\nassert Expression.__module__ == \\\"pandas.api.typing\\\"\nprint(\\\"deferred expression repr checks passed\\\")\nPY\""
+  },
+  "call_ref": "item_24"
+}
+```
+
+## 49. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "[0/1] Regenerating build files.\nCleaning... 0 files.\nThe Meson build system\nVersion: 1.2.1\nSource dir: /testbed\nBuild dir: /testbed/build/cp311\nBuild type: native build\nProject name: pandas\nProject version: 0+untagged.1.g8d72599.dirty\nC compiler for the host machine: cc (gcc 11.4.0 \"cc (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0\")\nC linker for the host machine: cc ld.bfd 2.38\nC++ compiler for the host machine: c++ (gcc 11.4.0 \"c++ (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0\")\nC++ linker for the host machine: c++ ld.bfd 2.38\nCython compiler for the host machine: cython (cython 3.2.1)\nHost machine cpu family: x86_64\nHost machine cpu: x86_64\nProgram python found: YES (/opt/miniconda3/envs/testbed/bin/python)\nProgram cython found: YES (/opt/miniconda3/envs/testbed/bin/cython)\nConfiguring free_threading_config.pxi using configuration\nBuild targets in project: 56\n\npandas 0+untagged.1.g8d72599.dirty\n\n  User defined options\n    Native files: /testbed/build/cp311/meson-python-native-file.ini\n    buildtype   : release\n    vsenv       : True\n    b_ndebug    : if-release\n    b_vscrt     : md\n\nFound ninja-1.13.0.git.kitware.jobserver-pipe-1 at /opt/miniconda3/envs/testbed/bin/ninja\n\nVisual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:\n/opt/miniconda3/envs/testbed/bin/meson compile -C .\n[1/155] Generating pandas/_libs/algos_common_helper_pxi with a custom command\n[2/155] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command\n[3/155] Generating pandas/_libs/index_class_helper_pxi with a custom command\n[4/155] Generating pandas/_libs/algos_take_helper_pxi with a custom command\n[5/155] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command\n[6/155] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command\n[7/155] Generating pandas/_libs/sparse_op_helper_pxi with a custom command\n[8/155] Generating pandas/_libs/intervaltree_helper_pxi with a custom command\n[9/155] Compiling Cython source /testbed/pandas/_libs/tslibs/base.pyx\n[10/155] Compiling Cython source /testbed/pandas/_libs/sas.pyx\n[11/155] Compiling Cython source /testbed/pandas/_libs/tslibs/ccalendar.pyx\n[12/155] Compiling Cython source /testbed/pandas/_libs/properties.pyx\n[13/155] Compiling Cython source /testbed/pandas/_libs/hashing.pyx\n[14/155] Compiling Cython source /testbed/pandas/_libs/ops.pyx\n[15/155] Compiling Cython source /testbed/pandas/_libs/ops_dispatch.pyx\n[16/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timezones.pyx\n[17/155] Compiling Cython source /testbed/pandas/_libs/arrays.pyx\n[18/155] Compiling Cython source /testbed/pandas/_libs/tslibs/fields.pyx\n[19/155] Compiling Cython source /testbed/pandas/_libs/tslibs/nattype.pyx\n[20/155] Compiling Cython source /testbed/pandas/_libs/reshape.pyx\n[21/155] Compiling Cython source /testbed/pandas/_libs/indexing.pyx\n[22/155] Compiling Cython source /testbed/pandas/_libs/missing.pyx\n[23/155] Compiling Cython source /testbed/pandas/_libs/tslibs/parsing.pyx\n[24/155] Compiling Cython source /testbed/pandas/_libs/tslibs/tzconversion.pyx\n[25/155] Compiling Cython source /testbed/pandas/_libs/internals.pyx\nwarning: /testbed/pandas/_libs/internals.pyx:31:0: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310\nwarning: /testbed/pandas/_libs/internals.pyx:916:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310\nwarning: /testbed/pandas/_libs/internals.pyx:921:12: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310\nwarning: /testbed/pandas/_libs/internals.pyx:955:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310\nwarning: /testbed/pandas/_libs/internals.pyx:973:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310\nwarning: /testbed/pandas/_libs/internals.pyx:994:8: The 'IF' statement is deprecated and will be removed in a future Cython version. Consider using runtime conditions or C macros instead. See https://github.com/cython/cython/issues/4310\n[26/155] Compiling Cython source /testbed/pandas/_libs/tslibs/np_datetime.pyx\n[27/155] Compiling Cython source /testbed/pandas/_libs/tslibs/vectorized.pyx\n[28/155] Compiling Cython source /testbed/pandas/_libs/tslibs/conversion.pyx\n[29/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timestamps.pyx\n[30/155] Compiling Cython source /testbed/pandas/_libs/byteswap.pyx\n[31/155] Compiling Cython source /testbed/pandas/_libs/tslibs/strptime.pyx\n[32/155] Compiling Cython source /testbed/pandas/_libs/tslibs/dtypes.pyx\n[33/155] Compiling Cython source /testbed/pandas/_libs/tslibs/timedeltas.pyx\n[34/155] Compiling Cython source /testbed/pandas/_libs/tslibs/period.pyx\n[35/155] Compiling Cython source /testbed/pandas/_libs/parsers.pyx\n[36/155] Compiling Cython source /testbed/pandas/_libs/testing.pyx\n[37/155] Compiling C object pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_base.pyx.c.o\n[38/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/.._src_parser_tokenizer.c.o\n[39/155] Compiling Cython source /testbed/pandas/_libs/writers.pyx\n[40/155] Compiling Cython source /testbed/pandas/_libs/tslib.pyx\n[41/155] Compiling Cython source /testbed/pandas/_libs/index.pyx\n[42/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o\n[43/155] Compiling Cython source /testbed/pandas/_libs/lib.pyx\n[44/155] Compiling C object pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_indexing.pyx.c.o\n[45/155] Compiling C object pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashing.pyx.c.o\n[46/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime.c.o\n[47/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_date_conversions.c.o\n[48/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_vendored_numpy_datetime_np_datetime_strings.c.o\n[49/155] Compiling Cython source /testbed/pandas/_libs/window/indexers.pyx\n[50/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o\n[51/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_pd_parser.c.o\n[52/155] Compiling C object pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so.p/src_datetime_pd_datetime.c.o\n[53/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_io.c.o\n[54/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_JSONtoObj.c.o\n[55/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_ujson.c.o\n[56/155] Compiling C object pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o\n[57/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsonenc.c.o\n[58/155] Compiling Cython source /testbed/pandas/_libs/interval.pyx\n[59/155] Compiling C object pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_ccalendar.pyx.c.o\n[60/155] Compiling Cython source /testbed/pandas/_libs/tslibs/offsets.pyx\n[61/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/src_parser_tokenizer.c.o\n[62/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_lib_ultrajsondec.c.o\n[63/155] Compiling C object pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_arrays.pyx.c.o\n[64/155] Compiling C object pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_vectorized.pyx.c.o\n[65/155] Compiling C object pandas/_libs/json.cpython-311-x86_64-linux-gnu.so.p/src_vendored_ujson_python_objToJSON.c.o\n[66/155] Compiling Cython source /testbed/pandas/_libs/window/aggregations.pyx\n[67/155] Compiling C object pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops_dispatch.pyx.c.o\n[68/155] Compiling Cython source /testbed/pandas/_libs/join.pyx\n[69/155] Compiling C object pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_byteswap.pyx.c.o\n[70/155] Compiling C object pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timezones.pyx.c.o\n[71/155] Generating write_version_file with a custom command\n[72/155] Compiling C object pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_np_datetime.pyx.c.o\n[73/155] Generating pandas/__init__.py with a custom command\n[74/155] Linking target pandas/_libs/tslibs/base.cpython-311-x86_64-linux-gnu.so\n[75/155] Linking target pandas/_libs/tslibs/ccalendar.cpython-311-x86_64-linux-gnu.so\n[76/155] Linking target pandas/_libs/tslibs/np_datetime.cpython-311-x86_64-linux-gnu.so\n[77/155] Linking target pandas/_libs/tslibs/timezones.cpython-311-x86_64-linux-gnu.so\n[78/155] Linking target pandas/_libs/tslibs/vectorized.cpython-311-x86_64-linux-gnu.so\n[79/155] Linking target pandas/_libs/arrays.cpython-311-x86_64-linux-gnu.so\n[80/155] Linking target pandas/_libs/hashing.cpython-311-x86_64-linux-gnu.so\n[81/155] Linking target pandas/_libs/indexing.cpython-311-x86_64-linux-gnu.so\n[82/155] Linking target pandas/_libs/pandas_datetime.cpython-311-x86_64-linux-gnu.so\n[83/155] Linking target pandas/_libs/pandas_parser.cpython-311-x86_64-linux-gnu.so\n[84/155] Linking target pandas/_libs/json.cpython-311-x86_64-linux-gnu.so\n[85/155] Linking target pandas/_libs/ops_dispatch.cpython-311-x86_64-linux-gnu.so\n[86/155] Compiling Cython source /testbed/pandas/_libs/sparse.pyx\n[87/155] Linking target pandas/_libs/byteswap.cpython-311-x86_64-linux-gnu.so\n[88/155] Compiling C object pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_conversion.pyx.c.o\n[89/155] Linking target pandas/_libs/tslibs/conversion.cpython-311-x86_64-linux-gnu.so\n[90/155] Compiling C object _cyutility.cpython-311-x86_64-linux-gnu.so.p/meson-generated_..__cyutility.c.o\n[91/155] Compiling C object pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_properties.pyx.c.o\n[92/155] Linking target _cyutility.cpython-311-x86_64-linux-gnu.so\n[93/155] Linking target pandas/_libs/properties.cpython-311-x86_64-linux-gnu.so\n[94/155] Compiling C object pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_dtypes.pyx.c.o\n[95/155] Linking target pandas/_libs/tslibs/dtypes.cpython-311-x86_64-linux-gnu.so\n[96/155] Compiling C object pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_fields.pyx.c.o\n[97/155] Linking target pandas/_libs/tslibs/fields.cpython-311-x86_64-linux-gnu.so\n[98/155] Compiling C object pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_writers.pyx.c.o\n[99/155] Linking target pandas/_libs/writers.cpython-311-x86_64-linux-gnu.so\n[100/155] Compiling C object pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_ops.pyx.c.o\n[101/155] Linking target pandas/_libs/ops.cpython-311-x86_64-linux-gnu.so\n[102/155] Compiling C object pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_reshape.pyx.c.o\n[103/155] Linking target pandas/_libs/reshape.cpython-311-x86_64-linux-gnu.so\n[104/155] Compiling C object pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_missing.pyx.c.o\n[105/155] Compiling C object pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_nattype.pyx.c.o\n[106/155] Compiling C object pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sas.pyx.c.o\n[107/155] Linking target pandas/_libs/missing.cpython-311-x86_64-linux-gnu.so\n[108/155] Linking target pandas/_libs/tslibs/nattype.cpython-311-x86_64-linux-gnu.so\n[109/155] Linking target pandas/_libs/sas.cpython-311-x86_64-linux-gnu.so\n[110/155] Compiling C object pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_testing.pyx.c.o\n[111/155] Linking target pandas/_libs/testing.cpython-311-x86_64-linux-gnu.so\n[112/155] Compiling Cython source /testbed/pandas/_libs/hashtable.pyx\n[113/155] Compiling C object pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_tzconversion.pyx.c.o\n[114/155] Linking target pandas/_libs/tslibs/tzconversion.cpython-311-x86_64-linux-gnu.so\n[115/155] Compiling C object pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslib.pyx.c.o\n[116/155] Linking target pandas/_libs/tslib.cpython-311-x86_64-linux-gnu.so\n[117/155] Compiling C object pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_parsing.pyx.c.o\n[118/155] Linking target pandas/_libs/tslibs/parsing.cpython-311-x86_64-linux-gnu.so\n[119/155] Compiling C object pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_internals.pyx.c.o\n[120/155] Linking target pandas/_libs/internals.cpython-311-x86_64-linux-gnu.so\n[121/155] Compiling C object pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_strptime.pyx.c.o\n[122/155] Linking target pandas/_libs/tslibs/strptime.cpython-311-x86_64-linux-gnu.so\n[123/155] Compiling Cython source /testbed/pandas/_libs/groupby.pyx\n[124/155] Compiling Cython source /testbed/pandas/_libs/algos.pyx\n[125/155] Compiling C object pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_indexers.pyx.c.o\n[126/155] Linking target pandas/_libs/window/indexers.cpython-311-x86_64-linux-gnu.so\n[127/155] Compiling C object pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_period.pyx.c.o\n[128/155] Linking target pandas/_libs/tslibs/period.cpython-311-x86_64-linux-gnu.so\n[129/155] Compiling C object pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timestamps.pyx.c.o\n[130/155] Linking target pandas/_libs/tslibs/timestamps.cpython-311-x86_64-linux-gnu.so\n[131/155] Compiling C object pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_timedeltas.pyx.c.o\n[132/155] Linking target pandas/_libs/tslibs/timedeltas.cpython-311-x86_64-linux-gnu.so\n[133/155] Compiling C object pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_parsers.pyx.c.o\n[134/155] Linking target pandas/_libs/parsers.cpython-311-x86_64-linux-gnu.so\n[135/155] Compiling C++ object pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_window_aggregations.pyx.cpp.o\n[136/155] Linking target pandas/_libs/window/aggregations.cpython-311-x86_64-linux-gnu.so\n[137/155] Compiling C object pandas/_libs/index.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_index.pyx.c.o\n[138/155] Linking target pandas/_libs/index.cpython-311-x86_64-linux-gnu.so\n[139/155] Compiling C object pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_lib.pyx.c.o\n[140/155] Linking target pandas/_libs/lib.cpython-311-x86_64-linux-gnu.so\n[141/155] Compiling C object pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_sparse.pyx.c.o\n[142/155] Linking target pandas/_libs/sparse.cpython-311-x86_64-linux-gnu.so\n[143/155] Compiling C object pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_interval.pyx.c.o\n[144/155] Linking target pandas/_libs/interval.cpython-311-x86_64-linux-gnu.so\n[145/155] Compiling C object pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_tslibs_offsets.pyx.c.o\n[146/155] Linking target pandas/_libs/tslibs/offsets.cpython-311-x86_64-linux-gnu.so\n[147/155] Compiling C object pandas/_libs/join.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_join.pyx.c.o\n[148/155] Linking target pandas/_libs/join.cpython-311-x86_64-linux-gnu.so\n[149/155] Compiling C object pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_algos.pyx.c.o\n[150/155] Linking target pandas/_libs/algos.cpython-311-x86_64-linux-gnu.so\n[151/155] Compiling C object pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_hashtable.pyx.c.o\n[152/155] Linking target pandas/_libs/hashtable.cpython-311-x86_64-linux-gnu.so\n[153/155] Compiling C object pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so.p/meson-generated_pandas__libs_groupby.pyx.c.o\n[154/155] Linking target pandas/_libs/groupby.cpython-311-x86_64-linux-gnu.so\n+ /opt/miniconda3/envs/testbed/bin/ninja\ndeferred expression repr checks passed\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_24"
+}
+```
+
+## 50. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'timeout 30s tail --pid=2178 -f /dev/null'"
+  },
+  "call_ref": "item_30"
+}
+```
+
+## 51. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_30"
+}
+```
+
+## 52. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_32",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"python - <<'PY'\nimport pandas as pd\nfrom pandas.api.typing import Expression\n\nassert repr(pd.col(\\\"price\\\")) == \\\"col('price')\\\"\nassert repr(pd.col(\\\"price\\\") * 2) == \\\"(col('price') * 2)\\\"\nassert repr(pd.col(\\\"name\\\").str.upper()) == \\\"col('name').str.upper()\\\"\nassert repr(Expression(lambda df: (_ for _ in ()).throw(AssertionError(\\\"evaluated\\\")), \\\"\\\")) == \\\"Expr(...)\\\"\nassert Expression.__module__ == \\\"pandas.api.typing\\\"\nprint(\\\"deferred expression repr checks passed\\\")\nPY\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 53. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"python - <<'PY'\nimport pandas as pd\nfrom pandas.api.typing import Expression\n\nassert repr(pd.col(\\\"price\\\")) == \\\"col('price')\\\"\nassert repr(pd.col(\\\"price\\\") * 2) == \\\"(col('price') * 2)\\\"\nassert repr(pd.col(\\\"name\\\").str.upper()) == \\\"col('name').str.upper()\\\"\nassert repr(Expression(lambda df: (_ for _ in ()).throw(AssertionError(\\\"evaluated\\\")), \\\"\\\")) == \\\"Expr(...)\\\"\nassert Expression.__module__ == \\\"pandas.api.typing\\\"\nprint(\\\"deferred expression repr checks passed\\\")\nPY\""
+  },
+  "call_ref": "item_32"
+}
+```
+
+## 54. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "[1/1] Generating write_version_file with a custom command\n+ /opt/miniconda3/envs/testbed/bin/ninja\ndeferred expression repr checks passed\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_32"
+}
+```
+
+## 55. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_34",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest pandas/tests/api/test_api.py -q'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 56. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest pandas/tests/api/test_api.py -q'"
+  },
+  "call_ref": "item_34"
+}
+```
+
+## 57. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  from pkg_resources import get_distribution\n[1/1] Generating write_version_file with a custom command\n+ /opt/miniconda3/envs/testbed/bin/ninja\n...F...............x..\n=================================== FAILURES ===================================\n_______________________________ TestApi.test_api _______________________________\n\nself = <pandas.tests.api.test_api.TestApi object at 0x7d1f5a646b10>\n\n    def test_api(self):\n>       self.check(api, self.allowed_api_dirs)\n\npandas/tests/api/test_api.py:423: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npandas/tests/api/test_api.py:37: in check\n    tm.assert_almost_equal(result, expected)\npandas/_testing/asserters.py:149: in assert_almost_equal\n    _testing.assert_almost_equal(\npandas/_libs/testing.pyx:53: in pandas._libs.testing.assert_almost_equal\n    cpdef assert_almost_equal(a, b,\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n>   raise_assert_detail(obj, f\"{obj} length are different\", na, nb, r)\nE   AssertionError: Iterable are different\nE   \nE   Iterable length are different\nE   [left]:  6\nE   [right]: 7\nE   [diff]: ['internals']\n\npandas/_libs/testing.pyx:154: AssertionError\n============================= slowest 30 durations =============================\n0.06s call     pandas/tests/api/test_api.py::test_attributes_module[pandas.io]\n\n(29 durations < 0.005s hidden.  Use -vv to show these durations.)\n=========================== short test summary info ============================\nFAILED pandas/tests/api/test_api.py::TestApi::test_api - AssertionError: Iter...\n1 failed, 20 passed, 1 xfailed in 0.14s\n",
+    "exit_code": 1,
+    "status": "failed"
+  },
+  "call_ref": "item_34"
+}
+```
+
+## 58. assistant / message
+
+```
+串行验证已确认新增行为通过。完整 API 文件中有 1 个与本任务无关的既有失败：`pandas.api` 缺少预期的 `internals` 成员；其余为 20 通过、1 xfail。为区分该基线问题，我会单独运行 `col`/`Expression` 的导出、`__all__`、typing 命名空间和模块归属测试。
+```
+
+## 59. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_37",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"grep -n -E '\"'^class Test|''^def test_attributes_module|def test_api|def test_api_all|typing'\"' pandas/tests/api/test_api.py | head -120\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 60. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"grep -n -E '\"'^class Test|''^def test_attributes_module|def test_api|def test_api_all|typing'\"' pandas/tests/api/test_api.py | head -120\""
+  },
+  "call_ref": "item_37"
+}
+```
+
+## 61. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "19:    typing as api_typing,\n21:from pandas.api.typing import aliases as api_aliases\n40:class TestPDApi(Base):\n201:        \"_typing\",\n206:    def test_api(self):\n222:    def test_api_all(self):\n253:class TestApi(Base):\n260:        \"typing\",\n263:    allowed_typing = [\n422:    def test_api(self):\n425:    def test_api_typing(self):\n426:        self.check(api_typing, self.allowed_typing)\n428:    def test_api_types(self):\n431:    def test_api_interchange(self):\n434:    def test_api_indexers(self):\n437:    def test_api_extensions(self):\n440:    def test_api_executors(self):\n443:    def test_api_typing_aliases(self):\n447:class TestErrors(Base):\n453:class TestUtil(Base):\n471:class TestTesting(Base):\n546:def test_attributes_module(module_name):\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_37"
+}
+```
+
+## 62. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_39",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'python -m pytest -q pandas/tests/api/test_api.py::TestPDApi::test_api pandas/tests/api/test_api.py::TestPDApi::test_api_all pandas/tests/api/test_api.py::TestApi::test_api_typing pandas/tests/api/test_api.py::test_attributes_module'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 63. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'python -m pytest -q pandas/tests/api/test_api.py::TestPDApi::test_api pandas/tests/api/test_api.py::TestPDApi::test_api_all pandas/tests/api/test_api.py::TestApi::test_api_typing pandas/tests/api/test_api.py::test_attributes_module'"
+  },
+  "call_ref": "item_39"
+}
+```
+
+## 64. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n  from pkg_resources import get_distribution\n[1/1] Generating write_version_file with a custom command\n+ /opt/miniconda3/envs/testbed/bin/ninja\n.......x..\n============================= slowest 30 durations =============================\n0.09s call     pandas/tests/api/test_api.py::test_attributes_module[pandas.io]\n\n(29 durations < 0.005s hidden.  Use -vv to show these durations.)\n9 passed, 1 xfailed in 0.16s\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_39"
+}
+```
+
+## 65. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_41",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"git diff --check && git status --short && nl -ba pandas/core/col.py | sed -n '80,100p'\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 66. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"git diff --check && git status --short && nl -ba pandas/core/col.py | sed -n '80,100p'\""
+  },
+  "call_ref": "item_41"
+}
+```
+
+## 67. tool / tool_output
+
+```
+{
+  "output": {
+    "output": " M pandas/core/col.py\n?? ortg.tsv\n    80\t\n    81\t    __module__ = \"pandas.api.typing\"\n    82\t\n    83\t    def __init__(self, func: Callable[[DataFrame], Any], repr_str: str) -> None:\n    84\t        self._func = func\n    85\t        self._repr_str = repr_str\n    86\t\n    87\t    def __call__(self, df: DataFrame) -> Any:\n    88\t        return self._func(df)\n    89\t\n    90\t    def __repr__(self) -> str:\n    91\t        return self._repr_str or \"Expr(...)\"\n    92\t\n    93\t    def _with_binary_op(self, op: str, other: Any) -> Expression:\n    94\t        op_symbol = _OP_SYMBOLS.get(op, op)\n    95\t\n    96\t        if isinstance(other, Expression):\n    97\t            if op.startswith(\"__r\"):\n    98\t                repr_str = f\"({other._repr_str} {op_symbol} {self._repr_str})\"\n    99\t            else:\n   100\t                repr_str = f\"({self._repr_str} {op_symbol} {other._repr_str})\"\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_41"
+}
+```
+
+## 68. assistant / message
+
+````
+Implemented [`Expression.__repr__`](/testbed/pandas/core/col.py:90):
+
+```python
+return self._repr_str or "Expr(...)"
+```
+
+`Expression.__module__` remains `"pandas.api.typing"` and representation does not evaluate the expression.
+
+Validation:
+
+- Deferred-expression behavior checks passed.
+- Relevant API tests: 9 passed, 1 expected xfail.
+- Full API file has one unrelated failure because `pandas.api.internals` is missing from the namespace.
+````
+
+## 69. assistant / message
+
+```
+我会沿完整测试的失败堆栈核实 `pandas.api.internals` 缺失是否由本次 `Expression.__repr__` 改动造成，以及它是否阻断本任务；若确认无关，我会保留最小改动并明确记录完整测试仍未通过的证据。
+```
+
+## 70. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_46",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"sed -n '240,450p' pandas/tests/api/test_api.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 71. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"sed -n '240,450p' pandas/tests/api/test_api.py\""
+  },
+  "call_ref": "item_46"
+}
+```
+
+## 72. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "        assert not missing\n\n    def test_depr(self):\n        deprecated_list = (\n            self.deprecated_classes\n            + self.deprecated_funcs\n            + self.deprecated_funcs_in_future\n        )\n        for depr in deprecated_list:\n            with tm.assert_produces_warning(FutureWarning):\n                _ = getattr(pd, depr)\n\n\nclass TestApi(Base):\n    allowed_api_dirs = [\n        \"executors\",\n        \"types\",\n        \"extensions\",\n        \"indexers\",\n        \"interchange\",\n        \"typing\",\n        \"internals\",\n    ]\n    allowed_typing = [\n        \"DataFrameGroupBy\",\n        \"DatetimeIndexResamplerGroupby\",\n        \"Expanding\",\n        \"ExpandingGroupby\",\n        \"ExponentialMovingWindow\",\n        \"ExponentialMovingWindowGroupby\",\n        \"Expression\",\n        \"FrozenList\",\n        \"JsonReader\",\n        \"NaTType\",\n        \"NAType\",\n        \"NoDefault\",\n        \"PeriodIndexResamplerGroupby\",\n        \"Resampler\",\n        \"Rolling\",\n        \"RollingGroupby\",\n        \"SeriesGroupBy\",\n        \"StataReader\",\n        \"SASReader\",\n        \"TimedeltaIndexResamplerGroupby\",\n        \"TimeGrouper\",\n        \"Window\",\n        \"aliases\",\n    ]\n    allowed_api_types = [\n        \"is_any_real_numeric_dtype\",\n        \"is_array_like\",\n        \"is_bool\",\n        \"is_bool_dtype\",\n        \"is_categorical_dtype\",\n        \"is_complex\",\n        \"is_complex_dtype\",\n        \"is_datetime64_any_dtype\",\n        \"is_datetime64_dtype\",\n        \"is_datetime64_ns_dtype\",\n        \"is_datetime64tz_dtype\",\n        \"is_dict_like\",\n        \"is_dtype_equal\",\n        \"is_extension_array_dtype\",\n        \"is_file_like\",\n        \"is_float\",\n        \"is_float_dtype\",\n        \"is_hashable\",\n        \"is_int64_dtype\",\n        \"is_integer\",\n        \"is_integer_dtype\",\n        \"is_interval_dtype\",\n        \"is_iterator\",\n        \"is_list_like\",\n        \"is_named_tuple\",\n        \"is_number\",\n        \"is_numeric_dtype\",\n        \"is_object_dtype\",\n        \"is_period_dtype\",\n        \"is_re\",\n        \"is_re_compilable\",\n        \"is_scalar\",\n        \"is_signed_integer_dtype\",\n        \"is_sparse\",\n        \"is_string_dtype\",\n        \"is_timedelta64_dtype\",\n        \"is_timedelta64_ns_dtype\",\n        \"is_unsigned_integer_dtype\",\n        \"pandas_dtype\",\n        \"infer_dtype\",\n        \"union_categoricals\",\n        \"CategoricalDtype\",\n        \"DatetimeTZDtype\",\n        \"IntervalDtype\",\n        \"PeriodDtype\",\n    ]\n    allowed_api_interchange = [\"from_dataframe\", \"DataFrame\"]\n    allowed_api_indexers = [\n        \"check_array_indexer\",\n        \"BaseIndexer\",\n        \"FixedForwardWindowIndexer\",\n        \"VariableOffsetWindowIndexer\",\n    ]\n    allowed_api_extensions = [\n        \"no_default\",\n        \"ExtensionDtype\",\n        \"register_extension_dtype\",\n        \"register_dataframe_accessor\",\n        \"register_index_accessor\",\n        \"register_series_accessor\",\n        \"take\",\n        \"ExtensionArray\",\n        \"ExtensionScalarOpsMixin\",\n    ]\n    allowed_api_executors = [\"BaseExecutionEngine\"]\n    allowed_api_aliases = [\n        \"AggFuncType\",\n        \"AlignJoin\",\n        \"AnyAll\",\n        \"AnyArrayLike\",\n        \"ArrayLike\",\n        \"AstypeArg\",\n        \"Axes\",\n        \"Axis\",\n        \"CSVEngine\",\n        \"ColspaceArgType\",\n        \"CompressionOptions\",\n        \"CorrelationMethod\",\n        \"DropKeep\",\n        \"Dtype\",\n        \"DtypeArg\",\n        \"DtypeBackend\",\n        \"DtypeObj\",\n        \"ExcelWriterIfSheetExists\",\n        \"ExcelWriterMergeCells\",\n        \"FilePath\",\n        \"FillnaOptions\",\n        \"FloatFormatType\",\n        \"FormattersType\",\n        \"FromDictOrient\",\n        \"HTMLFlavors\",\n        \"IgnoreRaise\",\n        \"IndexLabel\",\n        \"InterpolateOptions\",\n        \"JSONEngine\",\n        \"JSONSerializable\",\n        \"JoinHow\",\n        \"JoinValidate\",\n        \"MergeHow\",\n        \"MergeValidate\",\n        \"NaPosition\",\n        \"NsmallestNlargestKeep\",\n        \"OpenFileErrors\",\n        \"Ordered\",\n        \"ParquetCompressionOptions\",\n        \"QuantileInterpolation\",\n        \"ReadBuffer\",\n        \"ReadCsvBuffer\",\n        \"ReadPickleBuffer\",\n        \"ReindexMethod\",\n        \"Scalar\",\n        \"SequenceNotStr\",\n        \"SliceType\",\n        \"SortKind\",\n        \"StorageOptions\",\n        \"Suffixes\",\n        \"TakeIndexer\",\n        \"TimeAmbiguous\",\n        \"TimeGrouperOrigin\",\n        \"TimeNonexistent\",\n        \"TimeUnit\",\n        \"TimedeltaConvertibleTypes\",\n        \"TimestampConvertibleTypes\",\n        \"ToStataByteorder\",\n        \"ToTimestampHow\",\n        \"UpdateJoin\",\n        \"UsecolsArgType\",\n        \"WindowingRankType\",\n        \"WriteBuffer\",\n        \"WriteExcelBuffer\",\n        \"XMLParsers\",\n    ]\n\n    def test_api(self):\n        self.check(api, self.allowed_api_dirs)\n\n    def test_api_typing(self):\n        self.check(api_typing, self.allowed_typing)\n\n    def test_api_types(self):\n        self.check(api_types, self.allowed_api_types)\n\n    def test_api_interchange(self):\n        self.check(api_interchange, self.allowed_api_interchange)\n\n    def test_api_indexers(self):\n        self.check(api_indexers, self.allowed_api_indexers)\n\n    def test_api_extensions(self):\n        self.check(api_extensions, self.allowed_api_extensions)\n\n    def test_api_executors(self):\n        self.check(api_executors, self.allowed_api_executors)\n\n    def test_api_typing_aliases(self):\n        self.check(api_aliases, self.allowed_api_aliases)\n\n\nclass TestErrors(Base):\n    def test_errors(self):\n        ignored = [\"_CurrentDeprecationWarning\", \"abc\", \"ctypes\", \"cow\"]\n        self.check(pd.errors, pd.errors.__all__, ignored=ignored)\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_46"
+}
+```
+
+## 73. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_47",
+    "type": "command_execution",
+    "command": "/bin/bash -lc \"sed -n '1,220p' pandas/api/__init__.py\"",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 74. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc \"sed -n '1,220p' pandas/api/__init__.py\""
+  },
+  "call_ref": "item_47"
+}
+```
+
+## 75. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "\"\"\"public toolkit API\"\"\"\n\nfrom pandas.api import (\n    executors,\n    extensions,\n    indexers,\n    interchange,\n    types,\n    typing,\n)\n\n__all__ = [\n    \"executors\",\n    \"extensions\",\n    \"indexers\",\n    \"interchange\",\n    \"types\",\n    \"typing\",\n]\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_47"
+}
+```
+
+## 76. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_48",
+    "type": "command_execution",
+    "command": "/bin/bash -lc 'git diff -- pandas/core/col.py pandas/api/__init__.py pandas/tests/api/test_api.py && git status --short'",
+    "aggregated_output": "",
+    "exit_code": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 77. assistant / tool_call
+
+```
+{
+  "name": "command_execution",
+  "arguments": {
+    "command": "/bin/bash -lc 'git diff -- pandas/core/col.py pandas/api/__init__.py pandas/tests/api/test_api.py && git status --short'"
+  },
+  "call_ref": "item_48"
+}
+```
+
+## 78. tool / tool_output
+
+```
+{
+  "output": {
+    "output": "diff --git a/pandas/core/col.py b/pandas/core/col.py\nindex 2e738b1..87a4819 100644\n--- a/pandas/core/col.py\n+++ b/pandas/core/col.py\n@@ -87,6 +87,9 @@ class Expression:\n     def __call__(self, df: DataFrame) -> Any:\n         return self._func(df)\n \n+    def __repr__(self) -> str:\n+        return self._repr_str or \"Expr(...)\"\n+\n     def _with_binary_op(self, op: str, other: Any) -> Expression:\n         op_symbol = _OP_SYMBOLS.get(op, op)\n \n@@ -285,4 +288,4 @@ def col(col_name: Hashable) -> Expression:\n     return Expression(func, f\"col({col_name!r})\")\n \n \n-__all__ = [\"Expression\", \"col\"]\n\\ No newline at end of file\n+__all__ = [\"Expression\", \"col\"]\n M pandas/core/col.py\n?? ortg.tsv\n",
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "call_ref": "item_48"
+}
+```
+
+## 79. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_50",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "path": "pandas/api/__init__.py",
+      "outline": "api/__init__.py[8 E P T]: Role:汇集 pandas.api 的公开工具子命名空间并声明顶层导出集合 | Uses:pandas/api/(executors、extensions、indexers、interchange、types 与 typing 子命名空间) | API:pandas.api 公共命名空间与 __all__ | Constraints:公开成员集合由 pandas/tests/api/test_api.py::TestApi::test_api 精确校验；当前源码仅导出 executors、extensions、indexers、interchange、types、typing 六项，而可见测试另要求 internals，导致该完整测试失败，此缺口不涉及 Expression.__repr__"
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 80. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "path": "pandas/api/__init__.py",
+    "outline": "api/__init__.py[8 E P T]: Role:汇集 pandas.api 的公开工具子命名空间并声明顶层导出集合 | Uses:pandas/api/(executors、extensions、indexers、interchange、types 与 typing 子命名空间) | API:pandas.api 公共命名空间与 __all__ | Constraints:公开成员集合由 pandas/tests/api/test_api.py::TestApi::test_api 精确校验；当前源码仅导出 executors、extensions、indexers、interchange、types、typing 六项，而可见测试另要求 internals，导致该完整测试失败，此缺口不涉及 Expression.__repr__"
+  },
+  "call_ref": "item_50"
+}
+```
+
+## 81. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "pandas/api/__init__.py：纲要行不合法，请修正后重提：文件名 api/__init__.py 与路径 pandas/api/__init__.py 不一致；本批全部未提交"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "failed"
+  },
+  "call_ref": "item_50"
+}
+```
+
+## 82. tool / event
+
+```
+{
+  "name": "item.started",
+  "output": {
+    "id": "item_52",
+    "type": "mcp_tool_call",
+    "server": "ortg",
+    "tool": "ortg_update",
+    "arguments": {
+      "path": "pandas/api/__init__.py",
+      "outline": "__init__.py[8 E P T]: Role:汇集 pandas.api 的公开工具子命名空间并声明顶层导出集合 | Uses:pandas/api/(executors、extensions、indexers、interchange、types 与 typing 子命名空间) | API:pandas.api 公共命名空间与 __all__ | Constraints:公开成员集合由 pandas/tests/api/test_api.py::TestApi::test_api 精确校验；当前源码仅导出 executors、extensions、indexers、interchange、types、typing 六项，而可见测试另要求 internals，导致该完整测试失败，此缺口不涉及 Expression.__repr__"
+    },
+    "result": null,
+    "error": null,
+    "status": "in_progress"
+  }
+}
+```
+
+## 83. assistant / tool_call
+
+```
+{
+  "name": "ortg_update",
+  "server": "ortg",
+  "arguments": {
+    "path": "pandas/api/__init__.py",
+    "outline": "__init__.py[8 E P T]: Role:汇集 pandas.api 的公开工具子命名空间并声明顶层导出集合 | Uses:pandas/api/(executors、extensions、indexers、interchange、types 与 typing 子命名空间) | API:pandas.api 公共命名空间与 __all__ | Constraints:公开成员集合由 pandas/tests/api/test_api.py::TestApi::test_api 精确校验；当前源码仅导出 executors、extensions、indexers、interchange、types、typing 六项，而可见测试另要求 internals，导致该完整测试失败，此缺口不涉及 Expression.__repr__"
+  },
+  "call_ref": "item_52"
+}
+```
+
+## 84. tool / tool_output
+
+```
+{
+  "output": {
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "已提交 pandas/api/__init__.py 的纲要，指纹已前移，状态：对齐"
+        }
+      ],
+      "structured_content": null
+    },
+    "error": null,
+    "status": "completed"
+  },
+  "call_ref": "item_52"
+}
+```
+
+## 85. assistant / message
+
+```
+Implementation remains complete in [`pandas/core/col.py`](/testbed/pandas/core/col.py:90).
+
+Validation:
+
+- Deferred-expression repr checks passed, including fallback and non-evaluation.
+- Relevant API tests: 9 passed, 1 xfailed.
+- Full `test_api.py`: 1 failed, 20 passed, 1 xfailed.
+
+The remaining failure is unrelated: [`pandas/api/__init__.py`](/testbed/pandas/api/__init__.py:3) exports six namespaces, while `TestApi.test_api` additionally expects `internals`. The `Expression.__repr__` change cannot affect that namespace list, so I did not expand this narrowly scoped task to alter unrelated public API exports.
+```
+
+## 86. tool / event
+
+```
+{
+  "name": "turn.completed",
+  "output": {
+    "type": "turn.completed",
+    "usage": {
+      "input_tokens": 1503749,
+      "cached_input_tokens": 1415296,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7021,
+      "reasoning_output_tokens": 3620
+    }
+  }
+}
+```

@@ -1,0 +1,87 @@
+{
+  "visible_tests_status": "read",
+  "visible_test_files": [
+    "tests/test_intl/test_intl.py",
+    "tests/test_util/test_util_template.py"
+  ],
+  "unknown_evidence": [
+    "No visible test directly constructs sphinx.builders.gettext.Catalog or GettextRenderer; the precise interface behavior is specified by the public task and only indirectly covered by visible gettext-build tests.",
+    "The visible gettext integration test file covers broader builder behavior whose masked implementation is outside this task, so its end-to-end executability does not establish the three requested interfaces in isolation."
+  ],
+  "related_files": [
+    {
+      "path": "sphinx/builders/gettext.py",
+      "reason": "The public task names Catalog.add, GettextRenderer.__init__, and GettextRenderer.render in this module; the same module owns the catalog data model and renderer consumer path.",
+      "visible_test_entries": [
+        "tests/test_intl/test_intl.py::test_gettext_section",
+        "tests/test_intl/test_intl.py::test_gettext_toctree",
+        "tests/test_intl/test_intl.py::test_gettext_table",
+        "tests/test_intl/test_intl.py::test_gettext_topic",
+        "tests/test_intl/test_intl.py::test_gettext_definition_terms",
+        "tests/test_intl/test_intl.py::test_gettext_glossary_terms",
+        "tests/test_intl/test_intl.py::test_gettext_glossary_term_inconsistencies",
+        "tests/test_intl/test_intl.py::test_gettext_literalblock"
+      ],
+      "source_entry": "Catalog.add; GettextRenderer.__init__; GettextRenderer.render"
+    },
+    {
+      "path": "sphinx/util/template.py",
+      "reason": "GettextRenderer directly subclasses SphinxRenderer, whose constructor establishes ordered filesystem template loading and whose render method defines the normal text-rendering contract required by the task.",
+      "visible_test_entries": [
+        "tests/test_util/test_util_template.py::test_ReSTRenderer_escape",
+        "tests/test_util/test_util_template.py::test_ReSTRenderer_heading"
+      ],
+      "source_entry": "BaseRenderer.render; FileRenderer.__init__; SphinxRenderer.__init__"
+    },
+    {
+      "path": "sphinx/jinja2glue.py",
+      "reason": "FileRenderer delegates ordered template lookup to SphinxFileSystemLoader; this dependency is needed to ground the task's user-path-before-fallback rule in the actual public loading chain.",
+      "visible_test_entries": [],
+      "source_entry": "SphinxFileSystemLoader.__init__; SphinxFileSystemLoader.get_source"
+    },
+    {
+      "path": "sphinx/util/osutil.py",
+      "reason": "The target module publicly imports canon_path and relpath, the existing path helpers needed to implement the required canonical relative-path callable without inventing path semantics.",
+      "visible_test_entries": [],
+      "source_entry": "canon_path; relpath"
+    },
+    {
+      "path": "sphinx/__init__.py",
+      "reason": "GettextRenderer's built-in fallback template directory is rooted at the package_dir value imported from this public package module.",
+      "visible_test_entries": [],
+      "source_entry": "package_dir"
+    },
+    {
+      "path": "sphinx/templates/gettext/message.pot.jinja",
+      "reason": "This is the built-in fallback template rendered by the gettext renderer and exposes the context fields and gettext escaping consumed at output.",
+      "visible_test_entries": [
+        "tests/test_intl/test_intl.py::test_gettext_section"
+      ],
+      "source_entry": "message.pot.jinja template rendered by GettextRenderer.render"
+    },
+    {
+      "path": "tests/test_intl/test_intl.py",
+      "reason": "This visible integration suite invokes the gettext builder and parses generated POT files, providing public evidence for catalog/render output consumers while not directly isolating the requested interfaces.",
+      "visible_test_entries": [
+        "tests/test_intl/test_intl.py::test_gettext_section",
+        "tests/test_intl/test_intl.py::test_gettext_toctree",
+        "tests/test_intl/test_intl.py::test_gettext_table",
+        "tests/test_intl/test_intl.py::test_gettext_topic",
+        "tests/test_intl/test_intl.py::test_gettext_definition_terms",
+        "tests/test_intl/test_intl.py::test_gettext_glossary_terms",
+        "tests/test_intl/test_intl.py::test_gettext_glossary_term_inconsistencies",
+        "tests/test_intl/test_intl.py::test_gettext_literalblock"
+      ],
+      "source_entry": "pytest gettext-builder integration tests reading generated POT catalogs"
+    },
+    {
+      "path": "tests/test_util/test_util_template.py",
+      "reason": "This visible unit test file documents the filter-extension pattern and rendered-string contract of a sibling SphinxRenderer subclass used to interpret GettextRenderer's base behavior.",
+      "visible_test_entries": [
+        "tests/test_util/test_util_template.py::test_ReSTRenderer_escape",
+        "tests/test_util/test_util_template.py::test_ReSTRenderer_heading"
+      ],
+      "source_entry": "ReSTRenderer construction followed by render_string"
+    }
+  ]
+}

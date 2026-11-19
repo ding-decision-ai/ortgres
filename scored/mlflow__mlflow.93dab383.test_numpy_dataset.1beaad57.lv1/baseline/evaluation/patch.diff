@@ -1,0 +1,342 @@
+diff --git a/mlflow/data/dataset.py b/mlflow/data/dataset.py
+index 4ae4cc7..32b1c74 100644
+--- a/mlflow/data/dataset.py
++++ b/mlflow/data/dataset.py
+@@ -24,6 +24,26 @@ class Dataset:
+ 
+ 
+ 
++    def __init__(
++        self,
++        source: DatasetSource,
++        name: str | None = None,
++        digest: str | None = None,
++    ):
++        self._source = source
++        self._name = name
++        self._digest = digest or self._compute_digest()
++
++    @property
++    def digest(self) -> str:
++        """The dataset's stored digest."""
++        return self._digest
++
++    @property
++    def name(self) -> str:
++        """The supplied dataset name, or ``"dataset"`` when absent."""
++        return self._name or "dataset"
++
+     @abstractmethod
+     def _compute_digest(self) -> str:
+         """Computes a digest for the dataset. Called if the user doesn't supply
+@@ -67,6 +87,19 @@ class Dataset:
+ 
+         return self.source._get_source_type()
+ 
++    def to_dict(self) -> dict[str, str]:
++        """Create the common serialized dataset configuration."""
++        return {
++            "name": self.name,
++            "digest": self.digest,
++            "source": self.source.to_json(),
++            "source_type": self._get_source_type(),
++        }
++
++    def to_json(self) -> str:
++        """Obtains a JSON string representation of this dataset."""
++        return json.dumps(self.to_dict())
++
+ 
+ 
+ 
+@@ -123,4 +156,4 @@ class Dataset:
+             source=dataset_dict["source"],
+             schema=dataset_dict.get("schema"),
+             profile=dataset_dict.get("profile"),
+-        )
+\ No newline at end of file
++        )
+diff --git a/mlflow/data/dataset_source.py b/mlflow/data/dataset_source.py
+index 04224ba..f1026da 100644
+--- a/mlflow/data/dataset_source.py
++++ b/mlflow/data/dataset_source.py
+@@ -72,15 +72,9 @@ class DatasetSource:
+ 
+         """
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def to_json(self) -> str:
++        """Obtains a JSON string representation of this dataset source."""
++        return json.dumps(self.to_dict())
+ 
+ 
+     @classmethod
+@@ -107,4 +101,4 @@ class DatasetSource:
+             A DatasetSource instance.
+ 
+         """
+-        return cls.from_dict(json.loads(source_json))
+\ No newline at end of file
++        return cls.from_dict(json.loads(source_json))
+diff --git a/mlflow/data/schema.py b/mlflow/data/schema.py
+index 4d01789..ab0697a 100644
+--- a/mlflow/data/schema.py
++++ b/mlflow/data/schema.py
+@@ -64,6 +64,51 @@ class TensorDatasetSchema:
+ 
+ 
+ 
++
++    def __init__(self, features: Schema, targets: Schema = None):
++        if not isinstance(features, Schema):
++            raise MlflowException(
++                f"Expected 'features' to be an instance of mlflow.types.Schema, got "
++                f"'{type(features).__name__}'.",
++                INVALID_PARAMETER_VALUE,
++            )
++        if targets is not None and not isinstance(targets, Schema):
++            raise MlflowException(
++                f"Expected 'targets' to be an instance of mlflow.types.Schema or None, got "
++                f"'{type(targets).__name__}'.",
++                INVALID_PARAMETER_VALUE,
++            )
++        self._features = features
++        self._targets = targets
++
++    @property
++    def features(self) -> Schema:
++        return self._features
++
++    @property
++    def targets(self) -> Schema | None:
++        return self._targets
++
++    def to_dict(self) -> dict[str, Any]:
++        return {
++            "mlflow_tensorspec": {
++                "features": self.features.to_json(),
++                "targets": self.targets.to_json() if self.targets is not None else None,
++            }
++        }
++
++    @classmethod
++    def from_dict(cls, schema_dict: dict[str, Any]):
++        if "mlflow_tensorspec" not in schema_dict:
++            raise MlflowException(
++                "Missing required key 'mlflow_tensorspec' in tensor dataset schema.",
++                INVALID_PARAMETER_VALUE,
++            )
++        tensor_spec = schema_dict["mlflow_tensorspec"]
++        features = Schema.from_json(tensor_spec["features"])
++        targets_json = tensor_spec.get("targets")
++        targets = Schema.from_json(targets_json) if targets_json is not None else None
++        return cls(features=features, targets=targets)
+ 
+     def __eq__(self, other) -> bool:
+         return (
+@@ -73,4 +118,4 @@ class TensorDatasetSchema:
+         )
+ 
+     def __repr__(self) -> str:
+-        return f"features:\n  {self.features!r}\ntargets:\n  {self.targets!r}\n"
+\ No newline at end of file
++        return f"features:\n  {self.features!r}\ntargets:\n  {self.targets!r}\n"
+diff --git a/mlflow/types/schema.py b/mlflow/types/schema.py
+index 9739e30..11df861 100644
+--- a/mlflow/types/schema.py
++++ b/mlflow/types/schema.py
+@@ -1007,8 +1007,9 @@ class Schema:
+         """Representation of a dataset that defines this schema."""
+         return self._inputs
+ 
+-
+-
++    def is_tensor_spec(self) -> bool:
++        """Return whether this schema contains tensor specifications."""
++        return self.inputs and isinstance(self.inputs[0], TensorSpec)
+ 
+ 
+     def input_names(self) -> list[str | int]:
+@@ -1512,4 +1513,4 @@ def _convert_field_to_property(field_name, field_type):
+             name=field_name,
+             dtype=_map_field_type(effective_type),
+             required=not is_optional,
+-        )
+\ No newline at end of file
++        )
+diff --git a/mlflow/types/utils.py b/mlflow/types/utils.py
+index 118156b..e824546 100644
+--- a/mlflow/types/utils.py
++++ b/mlflow/types/utils.py
+@@ -39,6 +39,156 @@ class TensorsNotSupportedException(MlflowException):
+         super().__init__(f"Multidimensional arrays (aka tensors) are not supported. {msg}")
+ 
+ 
++def _get_tensor_shape(data, variable_dimension: int | None = 0) -> tuple[int, ...]:
++    """Return a tensor shape, marking ``variable_dimension`` as variable."""
++    from scipy.sparse import csc_matrix, csr_matrix
++
++    if not isinstance(data, (np.ndarray, csr_matrix, csc_matrix)):
++        raise TypeError(
++            "Expected data to be a numpy.ndarray, scipy.sparse.csr_matrix, or "
++            f"scipy.sparse.csc_matrix, got '{type(data)}'."
++        )
++
++    shape = tuple(data.shape)
++    if variable_dimension is None:
++        return shape
++    if not isinstance(variable_dimension, int) or not -len(shape) <= variable_dimension < len(shape):
++        raise MlflowException.invalid_parameter_value(
++            f"The specified variable_dimension {variable_dimension} is out of bounds with "
++            f"respect to the number of dimensions {len(shape)} in the input dataset"
++        )
++
++    shape = list(shape)
++    shape[variable_dimension] = -1
++    return tuple(shape)
++
++
++def clean_tensor_type(dtype: np.dtype):
++    """Remove item-size information from NumPy string and byte dtypes."""
++    if not isinstance(dtype, np.dtype):
++        raise TypeError(f"Expected `dtype` to be instance of `np.dtype`, got {type(dtype)}")
++    if dtype.char == "U":
++        return np.dtype("str")
++    if dtype.char == "S":
++        return np.dtype("bytes")
++    return dtype
++
++
++def _infer_schema(data: Any) -> Schema:
++    """Infer an MLflow :class:`Schema` from supported data containers."""
++    from scipy.sparse import csc_matrix, csr_matrix
++
++    try:
++        if isinstance(data, np.ndarray):
++            return Schema(
++                [TensorSpec(clean_tensor_type(data.dtype), _get_tensor_shape(data))]
++            )
++
++        if isinstance(data, (csr_matrix, csc_matrix)):
++            return Schema(
++                [TensorSpec(clean_tensor_type(data.dtype), _get_tensor_shape(data))]
++            )
++
++        if isinstance(data, dict):
++            if not all(isinstance(key, str) for key in data):
++                raise MlflowException(
++                    "The dictionary keys are not all strings. "
++                    f"Invalid keys: {[key for key in data if not isinstance(key, str)]}"
++                )
++            if not data:
++                raise MlflowException.invalid_parameter_value(
++                    "Schema inference is not supported for an empty dictionary."
++                )
++            if all(isinstance(value, np.ndarray) for value in data.values()):
++                return Schema(
++                    [
++                        TensorSpec(
++                            clean_tensor_type(value.dtype),
++                            _get_tensor_shape(value),
++                            name,
++                        )
++                        for name, value in data.items()
++                    ]
++                )
++            if any(isinstance(value, np.ndarray) for value in data.values()):
++                raise MlflowException("The dictionary values are not all numpy.ndarray.")
++            return Schema(
++                [
++                    ColSpec(
++                        _infer_colspec_type(value),
++                        name=name,
++                        required=not isinstance(_infer_colspec_type(value), AnyType),
++                    )
++                    for name, value in data.items()
++                ]
++            )
++
++        if isinstance(data, pd.DataFrame):
++            return Schema(
++                [
++                    ColSpec(
++                        _infer_pandas_column(data[column]),
++                        name=column,
++                        required=_infer_required(data[column]),
++                    )
++                    for column in data.columns
++                ]
++            )
++
++        if isinstance(data, pd.Series):
++            return Schema(
++                [
++                    ColSpec(
++                        _infer_pandas_column(data),
++                        name=data.name,
++                        required=_infer_required(data),
++                    )
++                ]
++            )
++
++        if _is_spark_df(data):
++            return Schema(
++                [
++                    ColSpec(
++                        _infer_spark_type(field.dataType, data, field.name),
++                        name=field.name,
++                        required=not field.nullable,
++                    )
++                    for field in data.schema.fields
++                ]
++            )
++
++        if isinstance(data, DataType):
++            return Schema([ColSpec(data)])
++
++        if isinstance(data, list):
++            if not data:
++                return Schema([ColSpec(DataType.string)])
++            inferred = _infer_colspec_type(data)
++            # A top-level list represents rows. Unwrap its outer Array layer.
++            dtype = inferred.dtype
++            if isinstance(dtype, Object):
++                return Schema(
++                    [
++                        ColSpec(prop.dtype, prop.name, required=prop.required)
++                        for prop in dtype.properties
++                    ]
++                )
++            return Schema([ColSpec(dtype)])
++
++        return Schema([ColSpec(_infer_colspec_type(data))])
++    except InvalidDataForSignatureInferenceError:
++        raise
++    except TensorsNotSupportedException:
++        raise
++    except MlflowException:
++        raise
++    except Exception as e:
++        raise MlflowException.invalid_parameter_value(
++            f"Failed to infer schema for data. Error: {e}"
++        ) from e
++
++
+ 
+ 
+ 
+@@ -750,4 +900,4 @@ def _infer_param_schema(parameters: dict[str, Any]):
+             f"Failed to infer schema for parameters: {invalid_params}",
+         )
+ 
+-    return ParamSchema(param_specs)
+\ No newline at end of file
++    return ParamSchema(param_specs)

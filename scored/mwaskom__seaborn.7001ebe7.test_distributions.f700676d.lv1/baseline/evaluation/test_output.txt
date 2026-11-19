@@ -1,0 +1,2878 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 259 items
+
+tests/test_distributions.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 16%]
+FFFFFFFFFsFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 44%]
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 72%]
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF  [100%]
+
+=================================== FAILURES ===================================
+_________________________ TestDistPlot.test_hist_bins __________________________
+tests/test_distributions.py:76: in test_hist_bins
+    ax = distplot(self.x)
+seaborn/distributions.py:2448: in distplot
+    a = remove_na(a)
+E   NameError: name 'remove_na' is not defined
+__________________________ TestDistPlot.test_elements __________________________
+tests/test_distributions.py:93: in test_elements
+    ax = distplot(self.x, bins=n,
+seaborn/distributions.py:2448: in distplot
+    a = remove_na(a)
+E   NameError: name 'remove_na' is not defined
+_____________________ TestDistPlot.test_distplot_with_nans _____________________
+tests/test_distributions.py:134: in test_distplot_with_nans
+    distplot(self.x, ax=ax1)
+seaborn/distributions.py:2448: in distplot
+    a = remove_na(a)
+E   NameError: name 'remove_na' is not defined
+____________________________ TestRugPlot.test_color ____________________________
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________________ TestRugPlot.test_long_data[x] _________________________
+tests/test_distributions.py:186: in test_long_data
+    rugplot(data=long_df, **{variable: vector})
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________________ TestRugPlot.test_long_data[y] _________________________
+tests/test_distributions.py:186: in test_long_data
+    rugplot(data=long_df, **{variable: vector})
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________________ TestRugPlot.test_bivariate_data ________________________
+tests/test_distributions.py:195: in test_bivariate_data
+    rugplot(data=long_df, x="x", y="y", ax=ax1)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestRugPlot.test_wide_vs_long_data ______________________
+tests/test_distributions.py:205: in test_wide_vs_long_data
+    rugplot(data=wide_df, ax=ax1)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestRugPlot.test_flat_vector _________________________
+tests/test_distributions.py:221: in test_flat_vector
+    rugplot(data=long_df["x"])
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________________ TestRugPlot.test_datetime_data ________________________
+tests/test_distributions.py:227: in test_datetime_data
+    ax = rugplot(data=long_df["t"])
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestRugPlot.test_empty_data __________________________
+tests/test_distributions.py:233: in test_empty_data
+    ax = rugplot(x=[])
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________________ TestRugPlot.test_a_deprecation ________________________
+tests/test_distributions.py:241: in test_a_deprecation
+    rugplot(a=flat_series)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestRugPlot.test_axis_deprecation[x] _____________________
+tests/test_distributions.py:252: in test_axis_deprecation
+    rugplot(flat_series, axis=variable)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestRugPlot.test_axis_deprecation[y] _____________________
+tests/test_distributions.py:252: in test_axis_deprecation
+    rugplot(flat_series, axis=variable)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestRugPlot.test_vertical_deprecation _____________________
+tests/test_distributions.py:262: in test_vertical_deprecation
+    rugplot(flat_series, vertical=True)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________________ TestRugPlot.test_rug_data ___________________________
+tests/test_distributions.py:270: in test_rug_data
+    ax = rugplot(x=flat_array, height=height)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestRugPlot.test_rug_colors __________________________
+tests/test_distributions.py:280: in test_rug_colors
+    ax = rugplot(data=long_df, x="x", hue="a")
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________________ TestRugPlot.test_expand_margins ________________________
+tests/test_distributions.py:295: in test_expand_margins
+    rugplot(x=flat_array, expand_margins=False)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________________ TestRugPlot.test_multiple_rugs ________________________
+tests/test_distributions.py:311: in test_multiple_rugs
+    ax = rugplot(x=values)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestRugPlot.test_matplotlib_kwargs ______________________
+tests/test_distributions.py:322: in test_matplotlib_kwargs
+    ax = rugplot(y=flat_series, linewidth=lw, alpha=alpha)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestRugPlot.test_axis_labels _________________________
+tests/test_distributions.py:329: in test_axis_labels
+    ax = rugplot(x=flat_series)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________________ TestRugPlot.test_log_scale __________________________
+tests/test_distributions.py:339: in test_log_scale
+    rugplot(data=long_df, x="z", ax=ax1)
+seaborn/distributions.py:2031: in rugplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_color[True] ____________________
+tests/test_distributions.py:362: in test_color
+    super().test_color(long_df, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestKDEPlotUnivariate.test_color[False] ____________________
+tests/test_distributions.py:362: in test_color
+    super().test_color(long_df, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotUnivariate.test_long_vectors[x] __________________
+tests/test_distributions.py:386: in test_long_vectors
+    kdeplot(data=long_df, **{variable: vector})
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotUnivariate.test_long_vectors[y] __________________
+tests/test_distributions.py:386: in test_long_vectors
+    kdeplot(data=long_df, **{variable: vector})
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotUnivariate.test_wide_vs_long_data _________________
+tests/test_distributions.py:399: in test_wide_vs_long_data
+    kdeplot(data=wide_df, ax=ax1, common_norm=False, common_grid=False)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_flat_vector ____________________
+tests/test_distributions.py:409: in test_flat_vector
+    kdeplot(data=long_df["x"])
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_empty_data _____________________
+tests/test_distributions.py:415: in test_empty_data
+    ax = kdeplot(x=[])
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestKDEPlotUnivariate.test_singular_data ___________________
+tests/test_distributions.py:421: in test_singular_data
+    ax = kdeplot(x=np.ones(10))
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+
+During handling of the above exception, another exception occurred:
+tests/test_distributions.py:420: in test_singular_data
+    with pytest.warns(UserWarning):
+E   Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted.
+E    Emitted warnings: [].
+________________ TestKDEPlotUnivariate.test_variable_assignment ________________
+tests/test_distributions.py:441: in test_variable_assignment
+    kdeplot(data=long_df, x="x", fill=True)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestKDEPlotUnivariate.test_vertical_deprecation ________________
+tests/test_distributions.py:452: in test_vertical_deprecation
+    kdeplot(data=long_df, y="x")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotUnivariate.test_bw_deprecation ___________________
+tests/test_distributions.py:462: in test_bw_deprecation
+    kdeplot(data=long_df, x="x", bw_method="silverman")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_kernel_deprecation _________________
+tests/test_distributions.py:472: in test_kernel_deprecation
+    kdeplot(data=long_df, x="x")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotUnivariate.test_shade_deprecation _________________
+tests/test_distributions.py:483: in test_shade_deprecation
+    kdeplot(data=long_df, x="x", shade=True)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotUnivariate.test_hue_colors[layer] _________________
+tests/test_distributions.py:493: in test_hue_colors
+    ax = kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotUnivariate.test_hue_colors[stack] _________________
+tests/test_distributions.py:493: in test_hue_colors
+    ax = kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotUnivariate.test_hue_colors[fill] __________________
+tests/test_distributions.py:493: in test_hue_colors
+    ax = kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestKDEPlotUnivariate.test_hue_stacking ____________________
+tests/test_distributions.py:513: in test_hue_stacking
+    kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_hue_filling ____________________
+tests/test_distributions.py:537: in test_hue_filling
+    kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_fill_default[stack] ________________
+tests/test_distributions.py:559: in test_fill_default
+    ax = kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_fill_default[fill] _________________
+tests/test_distributions.py:559: in test_fill_default
+    ax = kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestKDEPlotUnivariate.test_fill_nondefault[layer] _______________
+tests/test_distributions.py:571: in test_fill_nondefault
+    kdeplot(**kws, multiple=multiple, fill=False, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestKDEPlotUnivariate.test_fill_nondefault[stack] _______________
+tests/test_distributions.py:571: in test_fill_nondefault
+    kdeplot(**kws, multiple=multiple, fill=False, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestKDEPlotUnivariate.test_fill_nondefault[fill] _______________
+tests/test_distributions.py:571: in test_fill_nondefault
+    kdeplot(**kws, multiple=multiple, fill=False, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestKDEPlotUnivariate.test_color_cycle_interaction ______________
+tests/test_distributions.py:582: in test_color_cycle_interaction
+    kdeplot(flat_series)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_artist_color[True] _________________
+tests/test_distributions.py:610: in test_artist_color
+    kdeplot(long_df["x"], fill=fill, color=color)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_artist_color[False] ________________
+tests/test_distributions.py:610: in test_artist_color
+    kdeplot(long_df["x"], fill=fill, color=color)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotUnivariate.test_datetime_scale ___________________
+tests/test_distributions.py:628: in test_datetime_scale
+    kdeplot(x=long_df["t"], fill=True, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestKDEPlotUnivariate.test_multiple_argument_check ______________
+tests/test_distributions.py:635: in test_multiple_argument_check
+    kdeplot(data=long_df, x="x", hue="a", multiple="bad_input")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________________ TestKDEPlotUnivariate.test_cut ________________________
+tests/test_distributions.py:642: in test_cut
+    kdeplot(x=x, cut=0, legend=False)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________________ TestKDEPlotUnivariate.test_clip ________________________
+tests/test_distributions.py:661: in test_clip
+    ax = kdeplot(x=x, clip=clip)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotUnivariate.test_line_is_density __________________
+tests/test_distributions.py:670: in test_line_is_density
+    ax = kdeplot(data=long_df, x="x", cut=5)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________ TestKDEPlotUnivariate.test_cumulative_requires_scipy _____________
+tests/test_distributions.py:686: in test_cumulative_requires_scipy
+    kdeplot(data=long_df, x="x", cut=5, cumulative=True)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_common_norm ____________________
+tests/test_distributions.py:692: in test_common_norm
+    kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_common_grid ____________________
+tests/test_distributions.py:715: in test_common_grid
+    kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestKDEPlotUnivariate.test_bw_method _____________________
+tests/test_distributions.py:737: in test_bw_method
+    kdeplot(data=long_df, x="x", bw_method=0.2, legend=False)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestKDEPlotUnivariate.test_bw_adjust _____________________
+tests/test_distributions.py:756: in test_bw_adjust
+    kdeplot(data=long_df, x="x", bw_adjust=0.2, legend=False)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_log_scale_implicit _________________
+tests/test_distributions.py:779: in test_log_scale_implicit
+    kdeplot(x=x, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_log_scale_explicit _________________
+tests/test_distributions.py:799: in test_log_scale_explicit
+    kdeplot(x=x, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotUnivariate.test_log_scale_with_hue _________________
+tests/test_distributions.py:821: in test_log_scale_with_hue
+    ax = kdeplot(data=data, log_scale=True, common_grid=True)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestKDEPlotUnivariate.test_log_scale_normalization ______________
+tests/test_distributions.py:827: in test_log_scale_normalization
+    ax = kdeplot(x=x, log_scale=True, cut=10)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestKDEPlotUnivariate.test_weights ______________________
+tests/test_distributions.py:837: in test_weights
+    ax = kdeplot(x=x, weights=weights, bw_method=.1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_weight_norm ____________________
+tests/test_distributions.py:851: in test_weight_norm
+    ax = kdeplot(x=x, weights=w, hue=w, common_norm=True)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestKDEPlotUnivariate.test_sticky_edges ____________________
+tests/test_distributions.py:863: in test_sticky_edges
+    kdeplot(data=long_df, x="x", fill=True, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestKDEPlotUnivariate.test_line_kws ______________________
+tests/test_distributions.py:875: in test_line_kws
+    ax = kdeplot(x=flat_array, linewidth=lw, color=color)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotUnivariate.test_input_checking ___________________
+tests/test_distributions.py:884: in test_input_checking
+    kdeplot(data=long_df, x="a")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotUnivariate.test_axis_labels ____________________
+tests/test_distributions.py:890: in test_axis_labels
+    kdeplot(data=long_df, x="x", ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestKDEPlotUnivariate.test_legend _______________________
+tests/test_distributions.py:900: in test_legend
+    ax = kdeplot(data=long_df, x="x", hue="a")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotBivariate.test_long_vectors ____________________
+tests/test_distributions.py:932: in test_long_vectors
+    ax1 = kdeplot(data=long_df, x="x", y="y")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestKDEPlotBivariate.test_singular_data ____________________
+tests/test_distributions.py:950: in test_singular_data
+    ax = dist.kdeplot(x=np.ones(10), y=np.arange(10))
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+
+During handling of the above exception, another exception occurred:
+tests/test_distributions.py:949: in test_singular_data
+    with pytest.warns(UserWarning):
+E   Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted.
+E    Emitted warnings: [].
+____________________ TestKDEPlotBivariate.test_fill_artists ____________________
+tests/test_distributions.py:970: in test_fill_artists
+    kdeplot(data=long_df, x="x", y="y", hue="c", fill=fill)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestKDEPlotBivariate.test_common_norm _____________________
+tests/test_distributions.py:987: in test_common_norm
+    kdeplot(x=x, y=y, hue=hue, common_norm=True, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestKDEPlotBivariate.test_log_scale ______________________
+tests/test_distributions.py:1002: in test_log_scale
+    kdeplot(x=x, y=y, log_scale=True, levels=levels, ax=ax)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestKDEPlotBivariate.test_bandwidth ______________________
+tests/test_distributions.py:1029: in test_bandwidth
+    kdeplot(x=x, y=y, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestKDEPlotBivariate.test_weights _______________________
+tests/test_distributions.py:1047: in test_weights
+    kdeplot(x=x, y=y, hue=hue, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestKDEPlotBivariate.test_hue_ignores_cmap __________________
+tests/test_distributions.py:1059: in test_hue_ignores_cmap
+    ax = kdeplot(data=long_df, x="x", y="y", hue="c", cmap="viridis")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+
+During handling of the above exception, another exception occurred:
+tests/test_distributions.py:1058: in test_hue_ignores_cmap
+    with pytest.warns(UserWarning, match="cmap parameter ignored"):
+E   Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted.
+E    Emitted warnings: [].
+________________ TestKDEPlotBivariate.test_contour_line_colors _________________
+tests/test_distributions.py:1066: in test_contour_line_colors
+    ax = kdeplot(data=long_df, x="x", y="y", color=color)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotBivariate.test_contour_line_cmap __________________
+tests/test_distributions.py:1075: in test_contour_line_cmap
+    ax = kdeplot(data=long_df, x="x", y="y", cmap=cmap)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestKDEPlotBivariate.test_contour_fill_colors _________________
+tests/test_distributions.py:1084: in test_contour_fill_colors
+    ax = kdeplot(
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestKDEPlotBivariate.test_colorbar ______________________
+tests/test_distributions.py:1096: in test_colorbar
+    ax = kdeplot(data=long_df, x="x", y="y", fill=True, cbar=True)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotBivariate.test_levels_and_thresh __________________
+tests/test_distributions.py:1106: in test_levels_and_thresh
+    kdeplot(**plot_kws, levels=n, thresh=thresh, ax=ax1)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestKDEPlotBivariate.test_quantile_to_level __________________
+tests/test_distributions.py:1136: in test_quantile_to_level
+    levels = _DistributionPlotter()._quantile_to_level(x, isoprop)
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestKDEPlotBivariate.test_input_checking ___________________
+tests/test_distributions.py:1143: in test_input_checking
+    kdeplot(data=long_df, x="a", y="y")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_color[bars-True] _________________
+tests/test_distributions.py:1173: in test_color
+    super().test_color(long_df, element=element, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_color[bars-False] _________________
+tests/test_distributions.py:1173: in test_color
+    super().test_color(long_df, element=element, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_color[step-True] _________________
+tests/test_distributions.py:1173: in test_color
+    super().test_color(long_df, element=element, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_color[step-False] _________________
+tests/test_distributions.py:1173: in test_color
+    super().test_color(long_df, element=element, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_color[poly-True] _________________
+tests/test_distributions.py:1173: in test_color
+    super().test_color(long_df, element=element, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_color[poly-False] _________________
+tests/test_distributions.py:1173: in test_color
+    super().test_color(long_df, element=element, fill=fill)
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_long_vectors[x] __________________
+tests/test_distributions.py:1187: in test_long_vectors
+    histplot(data=long_df, ax=ax, **{variable: vector})
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_long_vectors[y] __________________
+tests/test_distributions.py:1187: in test_long_vectors
+    histplot(data=long_df, ax=ax, **{variable: vector})
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_wide_vs_long_data _________________
+tests/test_distributions.py:1199: in test_wide_vs_long_data
+    histplot(data=wide_df, ax=ax1, common_bins=False)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_flat_vector ____________________
+tests/test_distributions.py:1212: in test_flat_vector
+    histplot(data=long_df["x"], ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_empty_data ____________________
+tests/test_distributions.py:1221: in test_empty_data
+    ax = histplot(x=[])
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestHistPlotUnivariate.test_variable_assignment ________________
+tests/test_distributions.py:1228: in test_variable_assignment
+    histplot(data=long_df, x="x", ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[layer-bars] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[layer-step] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[layer-poly] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[dodge-bars] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[dodge-step] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[dodge-poly] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[stack-bars] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[stack-step] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_hue_fill_colors[stack-poly] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________ TestHistPlotUnivariate.test_hue_fill_colors[fill-bars] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________ TestHistPlotUnivariate.test_hue_fill_colors[fill-step] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________ TestHistPlotUnivariate.test_hue_fill_colors[fill-poly] ____________
+tests/test_distributions.py:1238: in test_hue_fill_colors
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_hue_stack _____________________
+tests/test_distributions.py:1268: in test_hue_stack
+    histplot(**kws, multiple="layer", ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestHistPlotUnivariate.test_hue_fill _____________________
+tests/test_distributions.py:1289: in test_hue_fill
+    histplot(**kws, multiple="layer", ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_hue_dodge _____________________
+tests/test_distributions.py:1312: in test_hue_dodge
+    histplot(**kws, multiple="layer", ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestHistPlotUnivariate.test_hue_as_numpy_dodged ________________
+tests/test_distributions.py:1327: in test_hue_as_numpy_dodged
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestHistPlotUnivariate.test_multiple_input_check _______________
+tests/test_distributions.py:1338: in test_multiple_input_check
+    histplot(flat_series, multiple="invalid")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestHistPlotUnivariate.test_element_input_check ________________
+tests/test_distributions.py:1343: in test_element_input_check
+    histplot(flat_series, element="invalid")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_count_stat ____________________
+tests/test_distributions.py:1347: in test_count_stat
+    ax = histplot(flat_series, stat="count")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_density_stat ___________________
+tests/test_distributions.py:1353: in test_density_stat
+    ax = histplot(flat_series, stat="density")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________ TestHistPlotUnivariate.test_density_stat_common_norm _____________
+tests/test_distributions.py:1360: in test_density_stat_common_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________ TestHistPlotUnivariate.test_density_stat_unique_norm _____________
+tests/test_distributions.py:1371: in test_density_stat_unique_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________ TestHistPlotUnivariate.test_probability_stat[probability] ___________
+tests/test_distributions.py:1390: in test_probability_stat
+    ax = histplot(flat_series, stat=height_norm_arg)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_probability_stat[proportion] ___________
+tests/test_distributions.py:1390: in test_probability_stat
+    ax = histplot(flat_series, stat=height_norm_arg)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____ TestHistPlotUnivariate.test_probability_stat_common_norm[probability] _____
+tests/test_distributions.py:1396: in test_probability_stat_common_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____ TestHistPlotUnivariate.test_probability_stat_common_norm[proportion] _____
+tests/test_distributions.py:1396: in test_probability_stat_common_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____ TestHistPlotUnivariate.test_probability_stat_unique_norm[probability] _____
+tests/test_distributions.py:1406: in test_probability_stat_unique_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____ TestHistPlotUnivariate.test_probability_stat_unique_norm[proportion] _____
+tests/test_distributions.py:1406: in test_probability_stat_unique_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_percent_stat ___________________
+tests/test_distributions.py:1419: in test_percent_stat
+    ax = histplot(flat_series, stat="percent")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_common_bins ____________________
+tests/test_distributions.py:1426: in test_common_bins
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_unique_bins ____________________
+tests/test_distributions.py:1438: in test_unique_bins
+    ax = histplot(wide_df, common_bins=False, bins=10, element="bars")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestHistPlotUnivariate.test_range_with_inf __________________
+tests/test_distributions.py:1452: in test_range_with_inf
+    ax = histplot([-np.inf, *x])
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestHistPlotUnivariate.test_weights_with_missing _______________
+tests/test_distributions.py:1458: in test_weights_with_missing
+    ax = histplot(null_df, x="x", weights="s", bins=5)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_weight_norm ____________________
+tests/test_distributions.py:1469: in test_weight_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestHistPlotUnivariate.test_discrete _____________________
+tests/test_distributions.py:1481: in test_discrete
+    ax = histplot(long_df, x="s", discrete=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_discrete_categorical_default ___________
+tests/test_distributions.py:1493: in test_discrete_categorical_default
+    ax = histplot(long_df, x="a")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_categorical_yaxis_inversion ____________
+tests/test_distributions.py:1499: in test_categorical_yaxis_inversion
+    ax = histplot(long_df, y="a")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestHistPlotUnivariate.test_datetime_scale __________________
+tests/test_distributions.py:1506: in test_datetime_scale
+    histplot(x=long_df["t"], fill=True, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_kde[count] ____________________
+tests/test_distributions.py:1513: in test_kde
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_kde[density] ___________________
+tests/test_distributions.py:1513: in test_kde
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_kde[probability] _________________
+tests/test_distributions.py:1513: in test_kde
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________ TestHistPlotUnivariate.test_kde_with_hue[count-layer] _____________
+tests/test_distributions.py:1531: in test_kde_with_hue
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________ TestHistPlotUnivariate.test_kde_with_hue[count-dodge] _____________
+tests/test_distributions.py:1531: in test_kde_with_hue
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_kde_with_hue[density-layer] ____________
+tests/test_distributions.py:1531: in test_kde_with_hue
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_kde_with_hue[density-dodge] ____________
+tests/test_distributions.py:1531: in test_kde_with_hue
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________ TestHistPlotUnivariate.test_kde_with_hue[probability-layer] __________
+tests/test_distributions.py:1531: in test_kde_with_hue
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________ TestHistPlotUnivariate.test_kde_with_hue[probability-dodge] __________
+tests/test_distributions.py:1531: in test_kde_with_hue
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_kde_default_cut __________________
+tests/test_distributions.py:1554: in test_kde_default_cut
+    ax = histplot(flat_series, kde=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestHistPlotUnivariate.test_kde_hue ______________________
+tests/test_distributions.py:1562: in test_kde_hue
+    ax = histplot(data=long_df, x="x", hue="a", kde=True, bins=n)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_kde_yaxis _____________________
+tests/test_distributions.py:1572: in test_kde_yaxis
+    histplot(x=flat_series, kde=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_kde_line_kws ___________________
+tests/test_distributions.py:1582: in test_kde_line_kws
+    ax = histplot(flat_series, kde=True, line_kws=dict(lw=lw))
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_kde_singular_data _________________
+tests/test_distributions.py:1589: in test_kde_singular_data
+    ax = histplot(x=np.ones(10), kde=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_element_default __________________
+tests/test_distributions.py:1600: in test_element_default
+    histplot(long_df, x="x", ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_bars_no_fill ___________________
+tests/test_distributions.py:1612: in test_bars_no_fill
+    ax = histplot(flat_series, element="bars", fill=False, alpha=alpha)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_step_fill _____________________
+tests/test_distributions.py:1622: in test_step_fill
+    histplot(flat_series, element="bars", fill=True, bins=n, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_poly_fill _____________________
+tests/test_distributions.py:1643: in test_poly_fill
+    histplot(flat_series, element="bars", fill=True, bins=n, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_poly_no_fill ___________________
+tests/test_distributions.py:1661: in test_poly_no_fill
+    histplot(flat_series, element="bars", fill=False, bins=n, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_step_no_fill ___________________
+tests/test_distributions.py:1677: in test_step_no_fill
+    histplot(flat_series, element="bars", fill=False, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotUnivariate.test_step_fill_xy ___________________
+tests/test_distributions.py:1695: in test_step_fill_xy
+    histplot(x=flat_series, element="step", fill=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_step_no_fill_xy __________________
+tests/test_distributions.py:1707: in test_step_no_fill_xy
+    histplot(x=flat_series, element="step", fill=False)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_weighted_histogram ________________
+tests/test_distributions.py:1717: in test_weighted_histogram
+    ax = histplot(x=[0, 1, 2], weights=[1, 2, 3], discrete=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestHistPlotUnivariate.test_weights_with_auto_bins ______________
+tests/test_distributions.py:1725: in test_weights_with_auto_bins
+    ax = histplot(long_df, x="x", weights="f")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+
+During handling of the above exception, another exception occurred:
+tests/test_distributions.py:1724: in test_weights_with_auto_bins
+    with pytest.warns(UserWarning):
+E   Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted.
+E    Emitted warnings: [].
+______________________ TestHistPlotUnivariate.test_shrink ______________________
+tests/test_distributions.py:1735: in test_shrink
+    histplot(long_df, x="x", binwidth=bw, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_log_scale_explicit ________________
+tests/test_distributions.py:1749: in test_log_scale_explicit
+    ax = histplot(x, log_scale=True, binrange=(-3, 3), binwidth=1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+________________ TestHistPlotUnivariate.test_log_scale_implicit ________________
+tests/test_distributions.py:1761: in test_log_scale_implicit
+    histplot(x, binrange=(-3, 3), binwidth=1, ax=ax)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_log_scale_dodge __________________
+tests/test_distributions.py:1771: in test_log_scale_dodge
+    ax = histplot(x=x, hue=hue, bins=5, log_scale=True, multiple="dodge")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestHistPlotUnivariate.test_log_scale_kde ___________________
+tests/test_distributions.py:1779: in test_log_scale_kde
+    ax = histplot(x=x, log_scale=True, kde=True, bins=20)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestHistPlotUnivariate.test_auto_linewidth[True] _______________
+tests/test_distributions.py:1794: in test_auto_linewidth
+    histplot(flat_series, **kws, bins=10, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestHistPlotUnivariate.test_auto_linewidth[False] _______________
+tests/test_distributions.py:1794: in test_auto_linewidth
+    histplot(flat_series, **kws, bins=10, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotUnivariate.test_bar_kwargs ____________________
+tests/test_distributions.py:1820: in test_bar_kwargs
+    ax = histplot(flat_series, binwidth=1, ec=ec, lw=lw)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_step_fill_kwargs _________________
+tests/test_distributions.py:1829: in test_step_fill_kwargs
+    ax = histplot(flat_series, element="step", ec=ec, lw=lw)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotUnivariate.test_step_line_kwargs _________________
+tests/test_distributions.py:1838: in test_step_line_kwargs
+    ax = histplot(flat_series, element="step", fill=False, lw=lw, ls=ls)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestHistPlotUnivariate.test_label _______________________
+tests/test_distributions.py:1845: in test_label
+    ax = histplot(flat_series, label="a label")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________ TestHistPlotUnivariate.test_default_color_scout_cleanup ____________
+tests/test_distributions.py:1852: in test_default_color_scout_cleanup
+    ax = histplot(flat_series)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________________ TestHistPlotBivariate.test_mesh ________________________
+tests/test_distributions.py:1863: in test_mesh
+    ax = histplot(long_df, x="x", y="y")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotBivariate.test_mesh_with_hue ___________________
+tests/test_distributions.py:1878: in test_mesh_with_hue
+    ax = histplot(long_df, x="x", y="y", hue="c")
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________ TestHistPlotBivariate.test_mesh_with_hue_unique_bins _____________
+tests/test_distributions.py:1901: in test_mesh_with_hue_unique_bins
+    ax = histplot(long_df, x="x", y="y", hue="c", common_bins=False)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________ TestHistPlotBivariate.test_mesh_with_col_unique_bins _____________
+tests/test_distributions.py:1923: in test_mesh_with_col_unique_bins
+    g = displot(long_df, x="x", y="y", col="c", common_bins=False)
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________________ TestHistPlotBivariate.test_mesh_log_scale ___________________
+tests/test_distributions.py:1949: in test_mesh_log_scale
+    ax = histplot(x=x, y=y, log_scale=True)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotBivariate.test_mesh_thresh ____________________
+tests/test_distributions.py:1967: in test_mesh_thresh
+    ax = histplot(long_df, x="x", y="y", thresh=thresh)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotBivariate.test_mesh_sticky_edges _________________
+tests/test_distributions.py:1976: in test_mesh_sticky_edges
+    ax = histplot(long_df, x="x", y="y", thresh=None)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotBivariate.test_mesh_common_norm __________________
+tests/test_distributions.py:1990: in test_mesh_common_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotBivariate.test_mesh_unique_norm __________________
+tests/test_distributions.py:2010: in test_mesh_unique_norm
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________ TestHistPlotBivariate.test_mesh_normalization[probability] __________
+tests/test_distributions.py:2030: in test_mesh_normalization
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+__________ TestHistPlotBivariate.test_mesh_normalization[proportion] ___________
+tests/test_distributions.py:2030: in test_mesh_normalization
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________ TestHistPlotBivariate.test_mesh_normalization[percent] ____________
+tests/test_distributions.py:2030: in test_mesh_normalization
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestHistPlotBivariate.test_mesh_colors ____________________
+tests/test_distributions.py:2042: in test_mesh_colors
+    histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestHistPlotBivariate.test_color_limits ____________________
+tests/test_distributions.py:2069: in test_color_limits
+    histplot(**kws, ax=ax1)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestHistPlotBivariate.test_hue_color_limits __________________
+tests/test_distributions.py:2106: in test_hue_color_limits
+    f = _DistributionPlotter()._quantile_to_level
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestHistPlotBivariate.test_colorbar ______________________
+tests/test_distributions.py:2135: in test_colorbar
+    histplot(long_df, x="x", y="y", cbar=True, ax=ax)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestECDFPlotUnivariate.test_color _______________________
+tests/test_distributions.py:151: in test_color
+    self.func(data=long_df, x="y", ax=ax, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestECDFPlotUnivariate.test_long_vectors[x] __________________
+tests/test_distributions.py:2161: in test_long_vectors
+    ecdfplot(data=long_df, ax=ax, **{variable: vector})
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestECDFPlotUnivariate.test_long_vectors[y] __________________
+tests/test_distributions.py:2161: in test_long_vectors
+    ecdfplot(data=long_df, ax=ax, **{variable: vector})
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________________ TestECDFPlotUnivariate.test_hue ________________________
+tests/test_distributions.py:2173: in test_hue
+    ax = ecdfplot(long_df, x="x", hue="a")
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestECDFPlotUnivariate.test_line_kwargs ____________________
+tests/test_distributions.py:2183: in test_line_kwargs
+    ax = ecdfplot(long_df, x="x", color=color, ls=ls, lw=lw)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestECDFPlotUnivariate.test_drawstyle[x] ___________________
+tests/test_distributions.py:2193: in test_drawstyle
+    ax = ecdfplot(**{data_var: flat_series})
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________ TestECDFPlotUnivariate.test_drawstyle[y] ___________________
+tests/test_distributions.py:2193: in test_drawstyle
+    ax = ecdfplot(**{data_var: flat_series})
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestECDFPlotUnivariate.test_proportion_limits[x-y] ______________
+tests/test_distributions.py:2202: in test_proportion_limits
+    ax = ecdfplot(**{data_var: flat_series})
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestECDFPlotUnivariate.test_proportion_limits[y-x] ______________
+tests/test_distributions.py:2202: in test_proportion_limits
+    ax = ecdfplot(**{data_var: flat_series})
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______ TestECDFPlotUnivariate.test_proportion_limits_complementary[x-y] _______
+tests/test_distributions.py:2214: in test_proportion_limits_complementary
+    ax = ecdfplot(**{data_var: flat_series}, complementary=True)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______ TestECDFPlotUnivariate.test_proportion_limits_complementary[y-x] _______
+tests/test_distributions.py:2214: in test_proportion_limits_complementary
+    ax = ecdfplot(**{data_var: flat_series}, complementary=True)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestECDFPlotUnivariate.test_proportion_count[x-y] _______________
+tests/test_distributions.py:2227: in test_proportion_count
+    ax = ecdfplot(**{data_var: flat_series}, stat="count")
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestECDFPlotUnivariate.test_proportion_count[y-x] _______________
+tests/test_distributions.py:2227: in test_proportion_count
+    ax = ecdfplot(**{data_var: flat_series}, stat="count")
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestECDFPlotUnivariate.test_weights ______________________
+tests/test_distributions.py:2236: in test_weights
+    ax = ecdfplot(x=[1, 2, 3], weights=[1, 1, 2])
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________ TestECDFPlotUnivariate.test_bivariate_error __________________
+tests/test_distributions.py:2243: in test_bivariate_error
+    ecdfplot(data=long_df, x="x", y="y")
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestECDFPlotUnivariate.test_log_scale _____________________
+tests/test_distributions.py:2249: in test_log_scale
+    ecdfplot(data=long_df, x="z", ax=ax1)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs0] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs1] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs2] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs3] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs4] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs5] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs6] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs7] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs8] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_histplot[kwargs9] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestDisPlot.test_versus_single_histplot[kwargs10] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestDisPlot.test_versus_single_histplot[kwargs11] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestDisPlot.test_versus_single_histplot[kwargs12] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestDisPlot.test_versus_single_histplot[kwargs13] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestDisPlot.test_versus_single_histplot[kwargs14] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________ TestDisPlot.test_versus_single_histplot[kwargs15] _______________
+tests/test_distributions.py:2284: in test_versus_single_histplot
+    ax = histplot(long_df, **kwargs)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs0] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs1] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs2] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs3] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs4] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs5] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs6] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs7] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs8] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs9] ________________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs10] _______________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_kdeplot[kwargs11] _______________
+tests/test_distributions.py:2314: in test_versus_single_kdeplot
+    ax = kdeplot(data=long_df, **kwargs)
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs0] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs1] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs2] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs3] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs4] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs5] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs6] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs7] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs8] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________ TestDisPlot.test_versus_single_ecdfplot[kwargs9] _______________
+tests/test_distributions.py:2342: in test_versus_single_ecdfplot
+    ax = ecdfplot(data=long_df, **kwargs)
+seaborn/distributions.py:1875: in ecdfplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestDisPlot.test_with_rug[kwargs0] ______________________
+tests/test_distributions.py:2364: in test_with_rug
+    histplot(data=long_df, **kwargs, ax=ax)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestDisPlot.test_with_rug[kwargs1] ______________________
+tests/test_distributions.py:2364: in test_with_rug
+    histplot(data=long_df, **kwargs, ax=ax)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+______________________ TestDisPlot.test_with_rug[kwargs2] ______________________
+tests/test_distributions.py:2364: in test_with_rug
+    histplot(data=long_df, **kwargs, ax=ax)
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestDisPlot.test_facets[col] _________________________
+tests/test_distributions.py:2382: in test_facets
+    ax = kdeplot(data=long_df, x="x", hue="a")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestDisPlot.test_facets[row] _________________________
+tests/test_distributions.py:2382: in test_facets
+    ax = kdeplot(data=long_df, x="x", hue="a")
+seaborn/distributions.py:1669: in kdeplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestDisPlot.test_facet_multiple[dodge] ____________________
+tests/test_distributions.py:2399: in test_facet_multiple
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestDisPlot.test_facet_multiple[stack] ____________________
+tests/test_distributions.py:2399: in test_facet_multiple
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestDisPlot.test_facet_multiple[fill] _____________________
+tests/test_distributions.py:2399: in test_facet_multiple
+    ax = histplot(
+seaborn/distributions.py:1379: in histplot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_________________________ TestDisPlot.test_ax_warning __________________________
+tests/test_distributions.py:2416: in test_ax_warning
+    displot(long_df, x="x", ax=ax)
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+
+During handling of the above exception, another exception occurred:
+tests/test_distributions.py:2415: in test_ax_warning
+    with pytest.warns(UserWarning, match="`displot` is a figure-level"):
+E   Failed: DID NOT WARN. No warnings of type (<class 'UserWarning'>,) were emitted.
+E    Emitted warnings: [].
+_____________________ TestDisPlot.test_array_faceting[col] _____________________
+tests/test_distributions.py:2423: in test_array_faceting
+    g = displot(long_df, x="x", **{key: a})
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestDisPlot.test_array_faceting[row] _____________________
+tests/test_distributions.py:2423: in test_array_faceting
+    g = displot(long_df, x="x", **{key: a})
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+___________________________ TestDisPlot.test_legend ____________________________
+tests/test_distributions.py:2430: in test_legend
+    g = displot(long_df, x="x", hue="a")
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________________ TestDisPlot.test_empty ____________________________
+tests/test_distributions.py:2435: in test_empty
+    g = displot(x=[], y=[])
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+____________________ TestDisPlot.test_bivariate_ecdf_error _____________________
+tests/test_distributions.py:2441: in test_bivariate_ecdf_error
+    displot(long_df, x="x", y="y", kind="ecdf")
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestDisPlot.test_bivariate_kde_norm ______________________
+tests/test_distributions.py:2454: in test_bivariate_kde_norm
+    g = displot(x=x, y=y, col=z, kind="kde", levels=10)
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_____________________ TestDisPlot.test_bivariate_hist_norm _____________________
+tests/test_distributions.py:2469: in test_bivariate_hist_norm
+    g = displot(x=x, y=y, col=z, kind="hist")
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+_______________________ TestDisPlot.test_facetgrid_data ________________________
+tests/test_distributions.py:2481: in test_facetgrid_data
+    g = displot(
+seaborn/distributions.py:2108: in displot
+    p = _DistributionPlotter(
+seaborn/distributions.py:110: in __init__
+    super().__init__(data=data, variables=variables)
+seaborn/_base.py:634: in __init__
+    self.assign_variables(data, variables)
+E   AttributeError: '_DistributionPlotter' object has no attribute 'assign_variables'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_distributions.py::TestKDEPlotUnivariate::test_replaced_kws
+SKIPPED [1] tests/test_distributions.py:674: Test requires scipy
+FAILED tests/test_distributions.py::TestDistPlot::test_hist_bins - NameError:...
+FAILED tests/test_distributions.py::TestDistPlot::test_elements - NameError: ...
+FAILED tests/test_distributions.py::TestDistPlot::test_distplot_with_nans - N...
+FAILED tests/test_distributions.py::TestRugPlot::test_color - AttributeError:...
+FAILED tests/test_distributions.py::TestRugPlot::test_long_data[x] - Attribut...
+FAILED tests/test_distributions.py::TestRugPlot::test_long_data[y] - Attribut...
+FAILED tests/test_distributions.py::TestRugPlot::test_bivariate_data - Attrib...
+FAILED tests/test_distributions.py::TestRugPlot::test_wide_vs_long_data - Att...
+FAILED tests/test_distributions.py::TestRugPlot::test_flat_vector - Attribute...
+FAILED tests/test_distributions.py::TestRugPlot::test_datetime_data - Attribu...
+FAILED tests/test_distributions.py::TestRugPlot::test_empty_data - AttributeE...
+FAILED tests/test_distributions.py::TestRugPlot::test_a_deprecation - Attribu...
+FAILED tests/test_distributions.py::TestRugPlot::test_axis_deprecation[x] - A...
+FAILED tests/test_distributions.py::TestRugPlot::test_axis_deprecation[y] - A...
+FAILED tests/test_distributions.py::TestRugPlot::test_vertical_deprecation - ...
+FAILED tests/test_distributions.py::TestRugPlot::test_rug_data - AttributeErr...
+FAILED tests/test_distributions.py::TestRugPlot::test_rug_colors - AttributeE...
+FAILED tests/test_distributions.py::TestRugPlot::test_expand_margins - Attrib...
+FAILED tests/test_distributions.py::TestRugPlot::test_multiple_rugs - Attribu...
+FAILED tests/test_distributions.py::TestRugPlot::test_matplotlib_kwargs - Att...
+FAILED tests/test_distributions.py::TestRugPlot::test_axis_labels - Attribute...
+FAILED tests/test_distributions.py::TestRugPlot::test_log_scale - AttributeEr...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_color[True]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_color[False]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_long_vectors[x]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_long_vectors[y]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_wide_vs_long_data
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_flat_vector
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_empty_data - ...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_singular_data
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_variable_assignment
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_vertical_deprecation
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_bw_deprecation
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_kernel_deprecation
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_shade_deprecation
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_hue_colors[layer]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_hue_colors[stack]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_hue_colors[fill]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_hue_stacking
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_hue_filling
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_fill_default[stack]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_fill_default[fill]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_fill_nondefault[layer]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_fill_nondefault[stack]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_fill_nondefault[fill]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_color_cycle_interaction
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_artist_color[True]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_artist_color[False]
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_datetime_scale
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_multiple_argument_check
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_cut - Attribu...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_clip - Attrib...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_line_is_density
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_cumulative_requires_scipy
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_common_norm
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_common_grid
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_bw_method - A...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_bw_adjust - A...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_log_scale_implicit
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_log_scale_explicit
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_log_scale_with_hue
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_log_scale_normalization
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_weights - Att...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_weight_norm
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_sticky_edges
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_line_kws - At...
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_input_checking
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_axis_labels
+FAILED tests/test_distributions.py::TestKDEPlotUnivariate::test_legend - Attr...
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_long_vectors
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_singular_data
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_fill_artists
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_common_norm - ...
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_log_scale - At...
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_bandwidth - At...
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_weights - Attr...
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_hue_ignores_cmap
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_contour_line_colors
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_contour_line_cmap
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_contour_fill_colors
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_colorbar - Att...
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_levels_and_thresh
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_quantile_to_level
+FAILED tests/test_distributions.py::TestKDEPlotBivariate::test_input_checking
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_color[bars-True]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_color[bars-False]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_color[step-True]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_color[step-False]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_color[poly-True]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_color[poly-False]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_long_vectors[x]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_long_vectors[y]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_wide_vs_long_data
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_flat_vector
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_empty_data
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_variable_assignment
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[layer-bars]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[layer-step]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[layer-poly]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[dodge-bars]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[dodge-step]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[dodge-poly]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[stack-bars]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[stack-step]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[stack-poly]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[fill-bars]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[fill-step]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill_colors[fill-poly]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_stack - ...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_fill - A...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_dodge - ...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_hue_as_numpy_dodged
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_multiple_input_check
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_element_input_check
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_count_stat
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_density_stat
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_density_stat_common_norm
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_density_stat_unique_norm
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_probability_stat[probability]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_probability_stat[proportion]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_probability_stat_common_norm[probability]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_probability_stat_common_norm[proportion]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_probability_stat_unique_norm[probability]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_probability_stat_unique_norm[proportion]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_percent_stat
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_common_bins
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_unique_bins
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_range_with_inf
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_weights_with_missing
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_weight_norm
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_discrete - A...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_discrete_categorical_default
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_categorical_yaxis_inversion
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_datetime_scale
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde[count]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde[density]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde[probability]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_with_hue[count-layer]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_with_hue[count-dodge]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_with_hue[density-layer]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_with_hue[density-dodge]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_with_hue[probability-layer]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_with_hue[probability-dodge]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_default_cut
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_hue - At...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_yaxis - ...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_line_kws
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_kde_singular_data
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_element_default
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_bars_no_fill
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_step_fill - ...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_poly_fill - ...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_poly_no_fill
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_step_no_fill
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_step_fill_xy
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_step_no_fill_xy
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_weighted_histogram
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_weights_with_auto_bins
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_shrink - Att...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_log_scale_explicit
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_log_scale_implicit
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_log_scale_dodge
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_log_scale_kde
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_auto_linewidth[True]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_auto_linewidth[False]
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_bar_kwargs
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_step_fill_kwargs
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_step_line_kwargs
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_label - Attr...
+FAILED tests/test_distributions.py::TestHistPlotUnivariate::test_default_color_scout_cleanup
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh - Attrib...
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_with_hue
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_with_hue_unique_bins
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_with_col_unique_bins
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_log_scale
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_thresh
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_sticky_edges
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_common_norm
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_unique_norm
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_normalization[probability]
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_normalization[proportion]
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_normalization[percent]
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_mesh_colors
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_color_limits
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_hue_color_limits
+FAILED tests/test_distributions.py::TestHistPlotBivariate::test_colorbar - At...
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_color - Attr...
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_long_vectors[x]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_long_vectors[y]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_hue - Attrib...
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_line_kwargs
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_drawstyle[x]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_drawstyle[y]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_proportion_limits[x-y]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_proportion_limits[y-x]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_proportion_limits_complementary[x-y]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_proportion_limits_complementary[y-x]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_proportion_count[x-y]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_proportion_count[y-x]
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_weights - At...
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_bivariate_error
+FAILED tests/test_distributions.py::TestECDFPlotUnivariate::test_log_scale - ...
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs0]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs1]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs2]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs3]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs4]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs5]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs6]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs7]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs8]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs9]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs10]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs11]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs12]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs13]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs14]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_histplot[kwargs15]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs0]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs1]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs2]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs3]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs4]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs5]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs6]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs7]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs8]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs9]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs10]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_kdeplot[kwargs11]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs0]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs1]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs2]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs3]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs4]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs5]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs6]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs7]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs8]
+FAILED tests/test_distributions.py::TestDisPlot::test_versus_single_ecdfplot[kwargs9]
+FAILED tests/test_distributions.py::TestDisPlot::test_with_rug[kwargs0] - Att...
+FAILED tests/test_distributions.py::TestDisPlot::test_with_rug[kwargs1] - Att...
+FAILED tests/test_distributions.py::TestDisPlot::test_with_rug[kwargs2] - Att...
+FAILED tests/test_distributions.py::TestDisPlot::test_facets[col] - Attribute...
+FAILED tests/test_distributions.py::TestDisPlot::test_facets[row] - Attribute...
+FAILED tests/test_distributions.py::TestDisPlot::test_facet_multiple[dodge]
+FAILED tests/test_distributions.py::TestDisPlot::test_facet_multiple[stack]
+FAILED tests/test_distributions.py::TestDisPlot::test_facet_multiple[fill] - ...
+FAILED tests/test_distributions.py::TestDisPlot::test_ax_warning - Failed: DI...
+FAILED tests/test_distributions.py::TestDisPlot::test_array_faceting[col] - A...
+FAILED tests/test_distributions.py::TestDisPlot::test_array_faceting[row] - A...
+FAILED tests/test_distributions.py::TestDisPlot::test_legend - AttributeError...
+FAILED tests/test_distributions.py::TestDisPlot::test_empty - AttributeError:...
+FAILED tests/test_distributions.py::TestDisPlot::test_bivariate_ecdf_error - ...
+FAILED tests/test_distributions.py::TestDisPlot::test_bivariate_kde_norm - At...
+FAILED tests/test_distributions.py::TestDisPlot::test_bivariate_hist_norm - A...
+FAILED tests/test_distributions.py::TestDisPlot::test_facetgrid_data - Attrib...
+================== 257 failed, 1 passed, 1 skipped in 23.60s ===================

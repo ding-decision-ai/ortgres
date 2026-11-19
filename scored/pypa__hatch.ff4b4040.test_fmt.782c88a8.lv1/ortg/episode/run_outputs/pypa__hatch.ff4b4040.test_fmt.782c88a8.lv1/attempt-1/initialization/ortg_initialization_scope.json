@@ -1,0 +1,3057 @@
+{
+  "cognitive": [
+    ".gitattributes",
+    ".github/FUNDING.yml",
+    ".github/ISSUE_TEMPLATE/1-hatch_bug_report.yml",
+    ".github/ISSUE_TEMPLATE/2-feature_request.yml",
+    ".github/dependabot.yml",
+    ".github/workflows/auto-merge.yml",
+    ".github/workflows/build-distributions.yml",
+    ".github/workflows/build-hatch.yml",
+    ".github/workflows/build-hatchling.yml",
+    ".github/workflows/cli.yml",
+    ".github/workflows/docs-dev.yml",
+    ".github/workflows/docs-release.yml",
+    ".github/workflows/test.yml",
+    ".gitignore",
+    ".linkcheckerrc",
+    "LICENSE.txt",
+    "README.md",
+    "backend/LICENSE.txt",
+    "backend/README.md",
+    "backend/pyproject.toml",
+    "backend/src/hatchling/__about__.py",
+    "backend/src/hatchling/__init__.py",
+    "backend/src/hatchling/__main__.py",
+    "backend/src/hatchling/bridge/__init__.py",
+    "backend/src/hatchling/bridge/app.py",
+    "backend/src/hatchling/build.py",
+    "backend/src/hatchling/builders/__init__.py",
+    "backend/src/hatchling/builders/app.py",
+    "backend/src/hatchling/builders/binary.py",
+    "backend/src/hatchling/builders/config.py",
+    "backend/src/hatchling/builders/constants.py",
+    "backend/src/hatchling/builders/custom.py",
+    "backend/src/hatchling/builders/hooks/__init__.py",
+    "backend/src/hatchling/builders/hooks/custom.py",
+    "backend/src/hatchling/builders/hooks/plugin/__init__.py",
+    "backend/src/hatchling/builders/hooks/plugin/hooks.py",
+    "backend/src/hatchling/builders/hooks/plugin/interface.py",
+    "backend/src/hatchling/builders/hooks/version.py",
+    "backend/src/hatchling/builders/macos.py",
+    "backend/src/hatchling/builders/plugin/__init__.py",
+    "backend/src/hatchling/builders/plugin/hooks.py",
+    "backend/src/hatchling/builders/plugin/interface.py",
+    "backend/src/hatchling/builders/sdist.py",
+    "backend/src/hatchling/builders/utils.py",
+    "backend/src/hatchling/builders/wheel.py",
+    "backend/src/hatchling/cli/__init__.py",
+    "backend/src/hatchling/cli/build/__init__.py",
+    "backend/src/hatchling/cli/dep/__init__.py",
+    "backend/src/hatchling/cli/dep/core.py",
+    "backend/src/hatchling/cli/metadata/__init__.py",
+    "backend/src/hatchling/cli/version/__init__.py",
+    "backend/src/hatchling/dep/__init__.py",
+    "backend/src/hatchling/dep/core.py",
+    "backend/src/hatchling/licenses/__init__.py",
+    "backend/src/hatchling/licenses/supported.py",
+    "backend/src/hatchling/metadata/__init__.py",
+    "backend/src/hatchling/metadata/core.py",
+    "backend/src/hatchling/metadata/custom.py",
+    "backend/src/hatchling/metadata/plugin/__init__.py",
+    "backend/src/hatchling/metadata/plugin/hooks.py",
+    "backend/src/hatchling/metadata/plugin/interface.py",
+    "backend/src/hatchling/metadata/spec.py",
+    "backend/src/hatchling/metadata/utils.py",
+    "backend/src/hatchling/ouroboros.py",
+    "backend/src/hatchling/plugin/__init__.py",
+    "backend/src/hatchling/plugin/exceptions.py",
+    "backend/src/hatchling/plugin/manager.py",
+    "backend/src/hatchling/plugin/specs.py",
+    "backend/src/hatchling/plugin/utils.py",
+    "backend/src/hatchling/py.typed",
+    "backend/src/hatchling/utils/__init__.py",
+    "backend/src/hatchling/utils/constants.py",
+    "backend/src/hatchling/utils/context.py",
+    "backend/src/hatchling/utils/fs.py",
+    "backend/src/hatchling/version/__init__.py",
+    "backend/src/hatchling/version/core.py",
+    "backend/src/hatchling/version/scheme/__init__.py",
+    "backend/src/hatchling/version/scheme/plugin/__init__.py",
+    "backend/src/hatchling/version/scheme/plugin/hooks.py",
+    "backend/src/hatchling/version/scheme/plugin/interface.py",
+    "backend/src/hatchling/version/scheme/standard.py",
+    "backend/src/hatchling/version/source/__init__.py",
+    "backend/src/hatchling/version/source/code.py",
+    "backend/src/hatchling/version/source/env.py",
+    "backend/src/hatchling/version/source/plugin/__init__.py",
+    "backend/src/hatchling/version/source/plugin/hooks.py",
+    "backend/src/hatchling/version/source/plugin/interface.py",
+    "backend/src/hatchling/version/source/regex.py",
+    "backend/tests/__init__.py",
+    "backend/tests/downstream/datadogpy/data.json",
+    "backend/tests/downstream/datadogpy/pyproject.toml",
+    "backend/tests/downstream/hatch-showcase/data.json",
+    "backend/tests/downstream/integrate.py",
+    "backend/tests/downstream/requirements.txt",
+    "docs/.hooks/expand_blocks.py",
+    "docs/.hooks/inject_version.py",
+    "docs/.hooks/plugin_register.py",
+    "docs/.hooks/render_default_test_env.py",
+    "docs/.hooks/render_ruff_defaults.py",
+    "docs/.hooks/title_from_content.py",
+    "docs/.overrides/partials/copyright.html",
+    "docs/.snippets/abbrs.txt",
+    "docs/.snippets/links.txt",
+    "docs/assets/badge/v0.json",
+    "docs/assets/css/custom.css",
+    "docs/assets/images/logo.svg",
+    "docs/blog/.authors.yml",
+    "docs/blog/index.md",
+    "docs/blog/posts/release-hatch-1100.md",
+    "docs/blog/posts/release-hatch-1100/run-script.gif",
+    "docs/blog/posts/release-hatch-1100/testing-jinja.gif",
+    "docs/blog/posts/release-hatch-1100/testing-rich.gif",
+    "docs/blog/posts/release-hatch-160.md",
+    "docs/blog/posts/release-hatch-160/rich-readme.png",
+    "docs/blog/posts/release-hatch-180.md",
+    "docs/blog/posts/release-hatch-180/available-pythons.png",
+    "docs/blog/posts/release-hatch-180/install-demo.gif",
+    "docs/blog/posts/release-hatch-190.md",
+    "docs/build.md",
+    "docs/cli/about.md",
+    "docs/cli/reference.md",
+    "docs/community/contributing.md",
+    "docs/community/highlights.md",
+    "docs/community/users.md",
+    "docs/config/build.md",
+    "docs/config/context.md",
+    "docs/config/dependency.md",
+    "docs/config/environment/advanced.md",
+    "docs/config/environment/overview.md",
+    "docs/config/hatch.md",
+    "docs/config/internal/build.md",
+    "docs/config/internal/static-analysis.md",
+    "docs/config/internal/testing.md",
+    "docs/config/metadata.md",
+    "docs/config/project-templates.md",
+    "docs/environment.md",
+    "docs/history/hatch.md",
+    "docs/history/hatchling.md",
+    "docs/how-to/config/dynamic-metadata.md",
+    "docs/how-to/environment/dependency-resolution.md",
+    "docs/how-to/environment/select-installer.md",
+    "docs/how-to/environment/workspace.md",
+    "docs/how-to/integrate/vscode.md",
+    "docs/how-to/integrate/vscode/run-file.png",
+    "docs/how-to/integrate/vscode/select-interpreter.png",
+    "docs/how-to/meta/report-issues.md",
+    "docs/how-to/plugins/testing-builds.md",
+    "docs/how-to/publish/auth.md",
+    "docs/how-to/publish/repo.md",
+    "docs/how-to/python/custom.md",
+    "docs/how-to/run/python-scripts.md",
+    "docs/how-to/static-analysis/behavior.md",
+    "docs/index.md",
+    "docs/install.md",
+    "docs/intro.md",
+    "docs/meta/authors.md",
+    "docs/meta/faq.md",
+    "docs/next-steps.md",
+    "docs/plugins/about.md",
+    "docs/plugins/build-hook/custom.md",
+    "docs/plugins/build-hook/reference.md",
+    "docs/plugins/build-hook/version.md",
+    "docs/plugins/builder/binary.md",
+    "docs/plugins/builder/custom.md",
+    "docs/plugins/builder/reference.md",
+    "docs/plugins/builder/sdist.md",
+    "docs/plugins/builder/wheel.md",
+    "docs/plugins/environment-collector/custom.md",
+    "docs/plugins/environment-collector/default.md",
+    "docs/plugins/environment-collector/reference.md",
+    "docs/plugins/environment/reference.md",
+    "docs/plugins/environment/virtual.md",
+    "docs/plugins/metadata-hook/custom.md",
+    "docs/plugins/metadata-hook/reference.md",
+    "docs/plugins/publisher/package-index.md",
+    "docs/plugins/publisher/reference.md",
+    "docs/plugins/utilities.md",
+    "docs/plugins/version-scheme/reference.md",
+    "docs/plugins/version-scheme/standard.md",
+    "docs/plugins/version-source/code.md",
+    "docs/plugins/version-source/env.md",
+    "docs/plugins/version-source/reference.md",
+    "docs/plugins/version-source/regex.md",
+    "docs/publish.md",
+    "docs/tutorials/environment/basic-usage.md",
+    "docs/tutorials/python/manage.md",
+    "docs/tutorials/testing/overview.md",
+    "docs/version.md",
+    "docs/why.md",
+    "hatch.toml",
+    "mkdocs.insiders.yml",
+    "mkdocs.yml",
+    "pyoxidizer.bzl",
+    "pyproject.toml",
+    "release/README.md",
+    "release/macos/build_pkg.py",
+    "release/macos/pkg/distribution.xml",
+    "release/macos/pkg/resources/icon.png",
+    "release/unix/make_scripts_portable.py",
+    "release/windows/make_scripts_portable.py",
+    "ruff.toml",
+    "ruff_defaults.toml",
+    "scripts/bump.py",
+    "scripts/generate_coverage_summary.py",
+    "scripts/install_mkdocs_material_insiders.py",
+    "scripts/release_github.py",
+    "scripts/set_release_version.py",
+    "scripts/update_distributions.py",
+    "scripts/update_ruff.py",
+    "scripts/utils.py",
+    "scripts/validate_history.py",
+    "scripts/write_coverage_summary_report.py",
+    "src/hatch/__init__.py",
+    "src/hatch/__main__.py",
+    "src/hatch/cli/__init__.py",
+    "src/hatch/cli/application.py",
+    "src/hatch/cli/build/__init__.py",
+    "src/hatch/cli/clean/__init__.py",
+    "src/hatch/cli/config/__init__.py",
+    "src/hatch/cli/dep/__init__.py",
+    "src/hatch/cli/env/__init__.py",
+    "src/hatch/cli/env/create.py",
+    "src/hatch/cli/env/find.py",
+    "src/hatch/cli/env/prune.py",
+    "src/hatch/cli/env/remove.py",
+    "src/hatch/cli/env/run.py",
+    "src/hatch/cli/env/show.py",
+    "src/hatch/cli/fmt/__init__.py",
+    "src/hatch/cli/fmt/core.py",
+    "src/hatch/cli/new/__init__.py",
+    "src/hatch/cli/new/migrate.py",
+    "src/hatch/cli/project/__init__.py",
+    "src/hatch/cli/project/metadata.py",
+    "src/hatch/cli/publish/__init__.py",
+    "src/hatch/cli/python/__init__.py",
+    "src/hatch/cli/python/find.py",
+    "src/hatch/cli/python/install.py",
+    "src/hatch/cli/python/remove.py",
+    "src/hatch/cli/python/show.py",
+    "src/hatch/cli/python/update.py",
+    "src/hatch/cli/run/__init__.py",
+    "src/hatch/cli/self/__init__.py",
+    "src/hatch/cli/self/report.py",
+    "src/hatch/cli/self/restore.py",
+    "src/hatch/cli/self/update.py",
+    "src/hatch/cli/shell/__init__.py",
+    "src/hatch/cli/status/__init__.py",
+    "src/hatch/cli/terminal.py",
+    "src/hatch/cli/test/__init__.py",
+    "src/hatch/cli/test/core.py",
+    "src/hatch/cli/version/__init__.py",
+    "src/hatch/config/__init__.py",
+    "src/hatch/config/constants.py",
+    "src/hatch/config/model.py",
+    "src/hatch/config/user.py",
+    "src/hatch/config/utils.py",
+    "src/hatch/dep/__init__.py",
+    "src/hatch/dep/core.py",
+    "src/hatch/dep/sync.py",
+    "src/hatch/env/__init__.py",
+    "src/hatch/env/collectors/__init__.py",
+    "src/hatch/env/collectors/custom.py",
+    "src/hatch/env/collectors/default.py",
+    "src/hatch/env/collectors/plugin/__init__.py",
+    "src/hatch/env/collectors/plugin/hooks.py",
+    "src/hatch/env/collectors/plugin/interface.py",
+    "src/hatch/env/context.py",
+    "src/hatch/env/internal/__init__.py",
+    "src/hatch/env/internal/build.py",
+    "src/hatch/env/internal/static_analysis.py",
+    "src/hatch/env/internal/test.py",
+    "src/hatch/env/internal/uv.py",
+    "src/hatch/env/plugin/__init__.py",
+    "src/hatch/env/plugin/hooks.py",
+    "src/hatch/env/plugin/interface.py",
+    "src/hatch/env/system.py",
+    "src/hatch/env/utils.py",
+    "src/hatch/env/virtual.py",
+    "src/hatch/errors/__init__.py",
+    "src/hatch/index/__init__.py",
+    "src/hatch/index/core.py",
+    "src/hatch/index/errors.py",
+    "src/hatch/index/publish.py",
+    "src/hatch/plugin/__init__.py",
+    "src/hatch/plugin/constants.py",
+    "src/hatch/plugin/manager.py",
+    "src/hatch/plugin/specs.py",
+    "src/hatch/plugin/utils.py",
+    "src/hatch/project/__init__.py",
+    "src/hatch/project/config.py",
+    "src/hatch/project/constants.py",
+    "src/hatch/project/core.py",
+    "src/hatch/project/env.py",
+    "src/hatch/project/frontend/__init__.py",
+    "src/hatch/project/frontend/core.py",
+    "src/hatch/project/frontend/scripts/__init__.py",
+    "src/hatch/project/frontend/scripts/build_deps.py",
+    "src/hatch/project/frontend/scripts/core_metadata.py",
+    "src/hatch/project/frontend/scripts/standard.py",
+    "src/hatch/project/utils.py",
+    "src/hatch/publish/__init__.py",
+    "src/hatch/publish/auth.py",
+    "src/hatch/publish/index.py",
+    "src/hatch/publish/plugin/__init__.py",
+    "src/hatch/publish/plugin/hooks.py",
+    "src/hatch/publish/plugin/interface.py",
+    "src/hatch/py.typed",
+    "src/hatch/python/__init__.py",
+    "src/hatch/python/core.py",
+    "src/hatch/python/distributions.py",
+    "src/hatch/python/resolve.py",
+    "src/hatch/template/__init__.py",
+    "src/hatch/template/default.py",
+    "src/hatch/template/files_default.py",
+    "src/hatch/template/files_feature_ci.py",
+    "src/hatch/template/files_feature_cli.py",
+    "src/hatch/template/files_feature_tests.py",
+    "src/hatch/template/plugin/__init__.py",
+    "src/hatch/template/plugin/hooks.py",
+    "src/hatch/template/plugin/interface.py",
+    "src/hatch/utils/__init__.py",
+    "src/hatch/utils/ci.py",
+    "src/hatch/utils/dep.py",
+    "src/hatch/utils/env.py",
+    "src/hatch/utils/fs.py",
+    "src/hatch/utils/metadata.py",
+    "src/hatch/utils/network.py",
+    "src/hatch/utils/platform.py",
+    "src/hatch/utils/runner.py",
+    "src/hatch/utils/shells.py",
+    "src/hatch/utils/structures.py",
+    "src/hatch/utils/toml.py",
+    "src/hatch/venv/__init__.py",
+    "src/hatch/venv/core.py",
+    "src/hatch/venv/utils.py",
+    "tests/__init__.py",
+    "tests/backend/__init__.py",
+    "tests/backend/builders/__init__.py",
+    "tests/backend/builders/hooks/__init__.py",
+    "tests/backend/builders/hooks/test_custom.py",
+    "tests/backend/builders/hooks/test_version.py",
+    "tests/backend/builders/plugin/__init__.py",
+    "tests/backend/builders/plugin/test_interface.py",
+    "tests/backend/builders/test_binary.py",
+    "tests/backend/builders/test_config.py",
+    "tests/backend/builders/test_custom.py",
+    "tests/backend/builders/test_sdist.py",
+    "tests/backend/builders/test_wheel.py",
+    "tests/backend/builders/utils.py",
+    "tests/backend/metadata/__init__.py",
+    "tests/backend/metadata/test_build.py",
+    "tests/backend/metadata/test_core.py",
+    "tests/backend/metadata/test_custom_hook.py",
+    "tests/backend/metadata/test_hatch.py",
+    "tests/backend/metadata/test_spec.py",
+    "tests/backend/test_build.py",
+    "tests/backend/utils/__init__.py",
+    "tests/backend/utils/test_context.py",
+    "tests/backend/utils/test_fs.py",
+    "tests/backend/utils/test_macos.py",
+    "tests/backend/version/__init__.py",
+    "tests/backend/version/scheme/__init__.py",
+    "tests/backend/version/scheme/test_standard.py",
+    "tests/backend/version/source/__init__.py",
+    "tests/backend/version/source/test_code.py",
+    "tests/backend/version/source/test_env.py",
+    "tests/backend/version/source/test_regex.py",
+    "tests/cli/__init__.py",
+    "tests/cli/build/__init__.py",
+    "tests/cli/build/test_build.py",
+    "tests/cli/clean/__init__.py",
+    "tests/cli/clean/test_clean.py",
+    "tests/cli/config/__init__.py",
+    "tests/cli/config/test_explore.py",
+    "tests/cli/config/test_find.py",
+    "tests/cli/config/test_restore.py",
+    "tests/cli/config/test_set.py",
+    "tests/cli/config/test_show.py",
+    "tests/cli/dep/__init__.py",
+    "tests/cli/dep/show/__init__.py",
+    "tests/cli/dep/show/test_requirements.py",
+    "tests/cli/dep/show/test_table.py",
+    "tests/cli/dep/test_hash.py",
+    "tests/cli/env/__init__.py",
+    "tests/cli/env/test_create.py",
+    "tests/cli/env/test_find.py",
+    "tests/cli/env/test_prune.py",
+    "tests/cli/env/test_remove.py",
+    "tests/cli/env/test_run.py",
+    "tests/cli/env/test_show.py",
+    "tests/cli/fmt/__init__.py",
+    "tests/cli/new/__init__.py",
+    "tests/cli/new/test_new.py",
+    "tests/cli/project/__init__.py",
+    "tests/cli/project/test_metadata.py",
+    "tests/cli/publish/__init__.py",
+    "tests/cli/publish/test_publish.py",
+    "tests/cli/python/__init__.py",
+    "tests/cli/python/conftest.py",
+    "tests/cli/python/test_find.py",
+    "tests/cli/python/test_install.py",
+    "tests/cli/python/test_remove.py",
+    "tests/cli/python/test_show.py",
+    "tests/cli/python/test_update.py",
+    "tests/cli/run/__init__.py",
+    "tests/cli/run/test_run.py",
+    "tests/cli/self/__init__.py",
+    "tests/cli/self/test_report.py",
+    "tests/cli/self/test_self.py",
+    "tests/cli/status/__init__.py",
+    "tests/cli/status/test_status.py",
+    "tests/cli/test/__init__.py",
+    "tests/cli/test/test_test.py",
+    "tests/cli/test_root.py",
+    "tests/cli/version/__init__.py",
+    "tests/cli/version/test_version.py",
+    "tests/config/__init__.py",
+    "tests/config/test_model.py",
+    "tests/conftest.py",
+    "tests/dep/__init__.py",
+    "tests/dep/test_sync.py",
+    "tests/env/__init__.py",
+    "tests/env/collectors/__init__.py",
+    "tests/env/collectors/test_custom.py",
+    "tests/env/plugin/__init__.py",
+    "tests/env/plugin/test_interface.py",
+    "tests/helpers/__init__.py",
+    "tests/helpers/helpers.py",
+    "tests/helpers/templates/__init__.py",
+    "tests/helpers/templates/licenses/__init__.py",
+    "tests/helpers/templates/new/__init__.py",
+    "tests/helpers/templates/new/basic.py",
+    "tests/helpers/templates/new/default.py",
+    "tests/helpers/templates/new/feature_ci.py",
+    "tests/helpers/templates/new/feature_cli.py",
+    "tests/helpers/templates/new/feature_no_src_layout.py",
+    "tests/helpers/templates/new/licenses_empty.py",
+    "tests/helpers/templates/new/licenses_multiple.py",
+    "tests/helpers/templates/new/projects_urls_empty.py",
+    "tests/helpers/templates/new/projects_urls_space_in_label.py",
+    "tests/helpers/templates/sdist/__init__.py",
+    "tests/helpers/templates/sdist/standard_default.py",
+    "tests/helpers/templates/sdist/standard_default_build_script_artifacts.py",
+    "tests/helpers/templates/sdist/standard_default_build_script_extra_dependencies.py",
+    "tests/helpers/templates/sdist/standard_default_support_legacy.py",
+    "tests/helpers/templates/sdist/standard_default_vcs_git_exclusion_files.py",
+    "tests/helpers/templates/sdist/standard_default_vcs_mercurial_exclusion_files.py",
+    "tests/helpers/templates/sdist/standard_include.py",
+    "tests/helpers/templates/sdist/standard_include_config_file.py",
+    "tests/helpers/templates/wheel/__init__.py",
+    "tests/helpers/templates/wheel/standard_default_build_script.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_artifacts.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_artifacts_with_src_layout.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_configured_build_hooks.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_extra_dependencies.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_force_include.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_force_include_no_duplication.py",
+    "tests/helpers/templates/wheel/standard_default_extra_metadata.py",
+    "tests/helpers/templates/wheel/standard_default_license_multiple.py",
+    "tests/helpers/templates/wheel/standard_default_license_single.py",
+    "tests/helpers/templates/wheel/standard_default_namespace_package.py",
+    "tests/helpers/templates/wheel/standard_default_python_constraint.py",
+    "tests/helpers/templates/wheel/standard_default_python_constraint_three_components.py",
+    "tests/helpers/templates/wheel/standard_default_shared_data.py",
+    "tests/helpers/templates/wheel/standard_default_shared_scripts.py",
+    "tests/helpers/templates/wheel/standard_default_single_module.py",
+    "tests/helpers/templates/wheel/standard_default_symlink.py",
+    "tests/helpers/templates/wheel/standard_editable_exact.py",
+    "tests/helpers/templates/wheel/standard_editable_exact_extra_dependencies.py",
+    "tests/helpers/templates/wheel/standard_editable_exact_force_include.py",
+    "tests/helpers/templates/wheel/standard_editable_pth.py",
+    "tests/helpers/templates/wheel/standard_editable_pth_extra_dependencies.py",
+    "tests/helpers/templates/wheel/standard_editable_pth_force_include.py",
+    "tests/helpers/templates/wheel/standard_entry_points.py",
+    "tests/helpers/templates/wheel/standard_no_strict_naming.py",
+    "tests/helpers/templates/wheel/standard_only_packages_artifact_override.py",
+    "tests/helpers/templates/wheel/standard_tests.py",
+    "tests/helpers/templates/wheel/utils.py",
+    "tests/index/__init__.py",
+    "tests/index/server/devpi/Dockerfile",
+    "tests/index/server/devpi/entrypoint.sh",
+    "tests/index/server/docker-compose.yaml",
+    "tests/index/server/nginx/nginx.conf",
+    "tests/index/test_core.py",
+    "tests/project/__init__.py",
+    "tests/project/test_config.py",
+    "tests/project/test_core.py",
+    "tests/project/test_frontend.py",
+    "tests/project/test_utils.py",
+    "tests/publish/__init__.py",
+    "tests/publish/plugin/__init__.py",
+    "tests/publish/plugin/test_interface.py",
+    "tests/python/__init__.py",
+    "tests/python/test_core.py",
+    "tests/python/test_resolve.py",
+    "tests/utils/__init__.py",
+    "tests/utils/test_auth.py",
+    "tests/utils/test_fs.py",
+    "tests/utils/test_platform.py",
+    "tests/utils/test_runner.py",
+    "tests/utils/test_structures.py",
+    "tests/venv/__init__.py",
+    "tests/venv/test_core.py",
+    "tests/venv/test_utils.py",
+    "tests/workspaces/__init__.py",
+    "tests/workspaces/test_config.py"
+  ],
+  "roles": {
+    "ignore_dirs": [],
+    "ignore_files": [],
+    "keep_files": [],
+    "observe_dirs": [],
+    "observe_files": []
+  },
+  "counts": [
+    0,
+    0,
+    1,
+    0
+  ],
+  "tracked": [
+    ".gitattributes",
+    ".github/FUNDING.yml",
+    ".github/ISSUE_TEMPLATE/1-hatch_bug_report.yml",
+    ".github/ISSUE_TEMPLATE/2-feature_request.yml",
+    ".github/dependabot.yml",
+    ".github/workflows/auto-merge.yml",
+    ".github/workflows/build-distributions.yml",
+    ".github/workflows/build-hatch.yml",
+    ".github/workflows/build-hatchling.yml",
+    ".github/workflows/cli.yml",
+    ".github/workflows/docs-dev.yml",
+    ".github/workflows/docs-release.yml",
+    ".github/workflows/test.yml",
+    ".gitignore",
+    ".linkcheckerrc",
+    "LICENSE.txt",
+    "README.md",
+    "backend/LICENSE.txt",
+    "backend/README.md",
+    "backend/pyproject.toml",
+    "backend/src/hatchling/__about__.py",
+    "backend/src/hatchling/__init__.py",
+    "backend/src/hatchling/__main__.py",
+    "backend/src/hatchling/bridge/__init__.py",
+    "backend/src/hatchling/bridge/app.py",
+    "backend/src/hatchling/build.py",
+    "backend/src/hatchling/builders/__init__.py",
+    "backend/src/hatchling/builders/app.py",
+    "backend/src/hatchling/builders/binary.py",
+    "backend/src/hatchling/builders/config.py",
+    "backend/src/hatchling/builders/constants.py",
+    "backend/src/hatchling/builders/custom.py",
+    "backend/src/hatchling/builders/hooks/__init__.py",
+    "backend/src/hatchling/builders/hooks/custom.py",
+    "backend/src/hatchling/builders/hooks/plugin/__init__.py",
+    "backend/src/hatchling/builders/hooks/plugin/hooks.py",
+    "backend/src/hatchling/builders/hooks/plugin/interface.py",
+    "backend/src/hatchling/builders/hooks/version.py",
+    "backend/src/hatchling/builders/macos.py",
+    "backend/src/hatchling/builders/plugin/__init__.py",
+    "backend/src/hatchling/builders/plugin/hooks.py",
+    "backend/src/hatchling/builders/plugin/interface.py",
+    "backend/src/hatchling/builders/sdist.py",
+    "backend/src/hatchling/builders/utils.py",
+    "backend/src/hatchling/builders/wheel.py",
+    "backend/src/hatchling/cli/__init__.py",
+    "backend/src/hatchling/cli/build/__init__.py",
+    "backend/src/hatchling/cli/dep/__init__.py",
+    "backend/src/hatchling/cli/dep/core.py",
+    "backend/src/hatchling/cli/metadata/__init__.py",
+    "backend/src/hatchling/cli/version/__init__.py",
+    "backend/src/hatchling/dep/__init__.py",
+    "backend/src/hatchling/dep/core.py",
+    "backend/src/hatchling/licenses/__init__.py",
+    "backend/src/hatchling/licenses/supported.py",
+    "backend/src/hatchling/metadata/__init__.py",
+    "backend/src/hatchling/metadata/core.py",
+    "backend/src/hatchling/metadata/custom.py",
+    "backend/src/hatchling/metadata/plugin/__init__.py",
+    "backend/src/hatchling/metadata/plugin/hooks.py",
+    "backend/src/hatchling/metadata/plugin/interface.py",
+    "backend/src/hatchling/metadata/spec.py",
+    "backend/src/hatchling/metadata/utils.py",
+    "backend/src/hatchling/ouroboros.py",
+    "backend/src/hatchling/plugin/__init__.py",
+    "backend/src/hatchling/plugin/exceptions.py",
+    "backend/src/hatchling/plugin/manager.py",
+    "backend/src/hatchling/plugin/specs.py",
+    "backend/src/hatchling/plugin/utils.py",
+    "backend/src/hatchling/py.typed",
+    "backend/src/hatchling/utils/__init__.py",
+    "backend/src/hatchling/utils/constants.py",
+    "backend/src/hatchling/utils/context.py",
+    "backend/src/hatchling/utils/fs.py",
+    "backend/src/hatchling/version/__init__.py",
+    "backend/src/hatchling/version/core.py",
+    "backend/src/hatchling/version/scheme/__init__.py",
+    "backend/src/hatchling/version/scheme/plugin/__init__.py",
+    "backend/src/hatchling/version/scheme/plugin/hooks.py",
+    "backend/src/hatchling/version/scheme/plugin/interface.py",
+    "backend/src/hatchling/version/scheme/standard.py",
+    "backend/src/hatchling/version/source/__init__.py",
+    "backend/src/hatchling/version/source/code.py",
+    "backend/src/hatchling/version/source/env.py",
+    "backend/src/hatchling/version/source/plugin/__init__.py",
+    "backend/src/hatchling/version/source/plugin/hooks.py",
+    "backend/src/hatchling/version/source/plugin/interface.py",
+    "backend/src/hatchling/version/source/regex.py",
+    "backend/tests/__init__.py",
+    "backend/tests/downstream/datadogpy/data.json",
+    "backend/tests/downstream/datadogpy/pyproject.toml",
+    "backend/tests/downstream/hatch-showcase/data.json",
+    "backend/tests/downstream/integrate.py",
+    "backend/tests/downstream/requirements.txt",
+    "docs/.hooks/expand_blocks.py",
+    "docs/.hooks/inject_version.py",
+    "docs/.hooks/plugin_register.py",
+    "docs/.hooks/render_default_test_env.py",
+    "docs/.hooks/render_ruff_defaults.py",
+    "docs/.hooks/title_from_content.py",
+    "docs/.overrides/partials/copyright.html",
+    "docs/.snippets/abbrs.txt",
+    "docs/.snippets/links.txt",
+    "docs/assets/badge/v0.json",
+    "docs/assets/css/custom.css",
+    "docs/assets/images/logo.svg",
+    "docs/blog/.authors.yml",
+    "docs/blog/index.md",
+    "docs/blog/posts/release-hatch-1100.md",
+    "docs/blog/posts/release-hatch-1100/run-script.gif",
+    "docs/blog/posts/release-hatch-1100/testing-jinja.gif",
+    "docs/blog/posts/release-hatch-1100/testing-rich.gif",
+    "docs/blog/posts/release-hatch-160.md",
+    "docs/blog/posts/release-hatch-160/rich-readme.png",
+    "docs/blog/posts/release-hatch-180.md",
+    "docs/blog/posts/release-hatch-180/available-pythons.png",
+    "docs/blog/posts/release-hatch-180/install-demo.gif",
+    "docs/blog/posts/release-hatch-190.md",
+    "docs/build.md",
+    "docs/cli/about.md",
+    "docs/cli/reference.md",
+    "docs/community/contributing.md",
+    "docs/community/highlights.md",
+    "docs/community/users.md",
+    "docs/config/build.md",
+    "docs/config/context.md",
+    "docs/config/dependency.md",
+    "docs/config/environment/advanced.md",
+    "docs/config/environment/overview.md",
+    "docs/config/hatch.md",
+    "docs/config/internal/build.md",
+    "docs/config/internal/static-analysis.md",
+    "docs/config/internal/testing.md",
+    "docs/config/metadata.md",
+    "docs/config/project-templates.md",
+    "docs/environment.md",
+    "docs/history/hatch.md",
+    "docs/history/hatchling.md",
+    "docs/how-to/config/dynamic-metadata.md",
+    "docs/how-to/environment/dependency-resolution.md",
+    "docs/how-to/environment/select-installer.md",
+    "docs/how-to/environment/workspace.md",
+    "docs/how-to/integrate/vscode.md",
+    "docs/how-to/integrate/vscode/run-file.png",
+    "docs/how-to/integrate/vscode/select-interpreter.png",
+    "docs/how-to/meta/report-issues.md",
+    "docs/how-to/plugins/testing-builds.md",
+    "docs/how-to/publish/auth.md",
+    "docs/how-to/publish/repo.md",
+    "docs/how-to/python/custom.md",
+    "docs/how-to/run/python-scripts.md",
+    "docs/how-to/static-analysis/behavior.md",
+    "docs/index.md",
+    "docs/install.md",
+    "docs/intro.md",
+    "docs/meta/authors.md",
+    "docs/meta/faq.md",
+    "docs/next-steps.md",
+    "docs/plugins/about.md",
+    "docs/plugins/build-hook/custom.md",
+    "docs/plugins/build-hook/reference.md",
+    "docs/plugins/build-hook/version.md",
+    "docs/plugins/builder/binary.md",
+    "docs/plugins/builder/custom.md",
+    "docs/plugins/builder/reference.md",
+    "docs/plugins/builder/sdist.md",
+    "docs/plugins/builder/wheel.md",
+    "docs/plugins/environment-collector/custom.md",
+    "docs/plugins/environment-collector/default.md",
+    "docs/plugins/environment-collector/reference.md",
+    "docs/plugins/environment/reference.md",
+    "docs/plugins/environment/virtual.md",
+    "docs/plugins/metadata-hook/custom.md",
+    "docs/plugins/metadata-hook/reference.md",
+    "docs/plugins/publisher/package-index.md",
+    "docs/plugins/publisher/reference.md",
+    "docs/plugins/utilities.md",
+    "docs/plugins/version-scheme/reference.md",
+    "docs/plugins/version-scheme/standard.md",
+    "docs/plugins/version-source/code.md",
+    "docs/plugins/version-source/env.md",
+    "docs/plugins/version-source/reference.md",
+    "docs/plugins/version-source/regex.md",
+    "docs/publish.md",
+    "docs/tutorials/environment/basic-usage.md",
+    "docs/tutorials/python/manage.md",
+    "docs/tutorials/testing/overview.md",
+    "docs/version.md",
+    "docs/why.md",
+    "hatch.toml",
+    "mkdocs.insiders.yml",
+    "mkdocs.yml",
+    "pyoxidizer.bzl",
+    "pyproject.toml",
+    "release/README.md",
+    "release/macos/build_pkg.py",
+    "release/macos/pkg/distribution.xml",
+    "release/macos/pkg/resources/icon.png",
+    "release/unix/make_scripts_portable.py",
+    "release/windows/make_scripts_portable.py",
+    "ruff.toml",
+    "ruff_defaults.toml",
+    "scripts/bump.py",
+    "scripts/generate_coverage_summary.py",
+    "scripts/install_mkdocs_material_insiders.py",
+    "scripts/release_github.py",
+    "scripts/set_release_version.py",
+    "scripts/update_distributions.py",
+    "scripts/update_ruff.py",
+    "scripts/utils.py",
+    "scripts/validate_history.py",
+    "scripts/write_coverage_summary_report.py",
+    "src/hatch/__init__.py",
+    "src/hatch/__main__.py",
+    "src/hatch/cli/__init__.py",
+    "src/hatch/cli/application.py",
+    "src/hatch/cli/build/__init__.py",
+    "src/hatch/cli/clean/__init__.py",
+    "src/hatch/cli/config/__init__.py",
+    "src/hatch/cli/dep/__init__.py",
+    "src/hatch/cli/env/__init__.py",
+    "src/hatch/cli/env/create.py",
+    "src/hatch/cli/env/find.py",
+    "src/hatch/cli/env/prune.py",
+    "src/hatch/cli/env/remove.py",
+    "src/hatch/cli/env/run.py",
+    "src/hatch/cli/env/show.py",
+    "src/hatch/cli/fmt/__init__.py",
+    "src/hatch/cli/fmt/core.py",
+    "src/hatch/cli/new/__init__.py",
+    "src/hatch/cli/new/migrate.py",
+    "src/hatch/cli/project/__init__.py",
+    "src/hatch/cli/project/metadata.py",
+    "src/hatch/cli/publish/__init__.py",
+    "src/hatch/cli/python/__init__.py",
+    "src/hatch/cli/python/find.py",
+    "src/hatch/cli/python/install.py",
+    "src/hatch/cli/python/remove.py",
+    "src/hatch/cli/python/show.py",
+    "src/hatch/cli/python/update.py",
+    "src/hatch/cli/run/__init__.py",
+    "src/hatch/cli/self/__init__.py",
+    "src/hatch/cli/self/report.py",
+    "src/hatch/cli/self/restore.py",
+    "src/hatch/cli/self/update.py",
+    "src/hatch/cli/shell/__init__.py",
+    "src/hatch/cli/status/__init__.py",
+    "src/hatch/cli/terminal.py",
+    "src/hatch/cli/test/__init__.py",
+    "src/hatch/cli/test/core.py",
+    "src/hatch/cli/version/__init__.py",
+    "src/hatch/config/__init__.py",
+    "src/hatch/config/constants.py",
+    "src/hatch/config/model.py",
+    "src/hatch/config/user.py",
+    "src/hatch/config/utils.py",
+    "src/hatch/dep/__init__.py",
+    "src/hatch/dep/core.py",
+    "src/hatch/dep/sync.py",
+    "src/hatch/env/__init__.py",
+    "src/hatch/env/collectors/__init__.py",
+    "src/hatch/env/collectors/custom.py",
+    "src/hatch/env/collectors/default.py",
+    "src/hatch/env/collectors/plugin/__init__.py",
+    "src/hatch/env/collectors/plugin/hooks.py",
+    "src/hatch/env/collectors/plugin/interface.py",
+    "src/hatch/env/context.py",
+    "src/hatch/env/internal/__init__.py",
+    "src/hatch/env/internal/build.py",
+    "src/hatch/env/internal/static_analysis.py",
+    "src/hatch/env/internal/test.py",
+    "src/hatch/env/internal/uv.py",
+    "src/hatch/env/plugin/__init__.py",
+    "src/hatch/env/plugin/hooks.py",
+    "src/hatch/env/plugin/interface.py",
+    "src/hatch/env/system.py",
+    "src/hatch/env/utils.py",
+    "src/hatch/env/virtual.py",
+    "src/hatch/errors/__init__.py",
+    "src/hatch/index/__init__.py",
+    "src/hatch/index/core.py",
+    "src/hatch/index/errors.py",
+    "src/hatch/index/publish.py",
+    "src/hatch/plugin/__init__.py",
+    "src/hatch/plugin/constants.py",
+    "src/hatch/plugin/manager.py",
+    "src/hatch/plugin/specs.py",
+    "src/hatch/plugin/utils.py",
+    "src/hatch/project/__init__.py",
+    "src/hatch/project/config.py",
+    "src/hatch/project/constants.py",
+    "src/hatch/project/core.py",
+    "src/hatch/project/env.py",
+    "src/hatch/project/frontend/__init__.py",
+    "src/hatch/project/frontend/core.py",
+    "src/hatch/project/frontend/scripts/__init__.py",
+    "src/hatch/project/frontend/scripts/build_deps.py",
+    "src/hatch/project/frontend/scripts/core_metadata.py",
+    "src/hatch/project/frontend/scripts/standard.py",
+    "src/hatch/project/utils.py",
+    "src/hatch/publish/__init__.py",
+    "src/hatch/publish/auth.py",
+    "src/hatch/publish/index.py",
+    "src/hatch/publish/plugin/__init__.py",
+    "src/hatch/publish/plugin/hooks.py",
+    "src/hatch/publish/plugin/interface.py",
+    "src/hatch/py.typed",
+    "src/hatch/python/__init__.py",
+    "src/hatch/python/core.py",
+    "src/hatch/python/distributions.py",
+    "src/hatch/python/resolve.py",
+    "src/hatch/template/__init__.py",
+    "src/hatch/template/default.py",
+    "src/hatch/template/files_default.py",
+    "src/hatch/template/files_feature_ci.py",
+    "src/hatch/template/files_feature_cli.py",
+    "src/hatch/template/files_feature_tests.py",
+    "src/hatch/template/plugin/__init__.py",
+    "src/hatch/template/plugin/hooks.py",
+    "src/hatch/template/plugin/interface.py",
+    "src/hatch/utils/__init__.py",
+    "src/hatch/utils/ci.py",
+    "src/hatch/utils/dep.py",
+    "src/hatch/utils/env.py",
+    "src/hatch/utils/fs.py",
+    "src/hatch/utils/metadata.py",
+    "src/hatch/utils/network.py",
+    "src/hatch/utils/platform.py",
+    "src/hatch/utils/runner.py",
+    "src/hatch/utils/shells.py",
+    "src/hatch/utils/structures.py",
+    "src/hatch/utils/toml.py",
+    "src/hatch/venv/__init__.py",
+    "src/hatch/venv/core.py",
+    "src/hatch/venv/utils.py",
+    "tests/__init__.py",
+    "tests/backend/__init__.py",
+    "tests/backend/builders/__init__.py",
+    "tests/backend/builders/hooks/__init__.py",
+    "tests/backend/builders/hooks/test_custom.py",
+    "tests/backend/builders/hooks/test_version.py",
+    "tests/backend/builders/plugin/__init__.py",
+    "tests/backend/builders/plugin/test_interface.py",
+    "tests/backend/builders/test_binary.py",
+    "tests/backend/builders/test_config.py",
+    "tests/backend/builders/test_custom.py",
+    "tests/backend/builders/test_sdist.py",
+    "tests/backend/builders/test_wheel.py",
+    "tests/backend/builders/utils.py",
+    "tests/backend/metadata/__init__.py",
+    "tests/backend/metadata/test_build.py",
+    "tests/backend/metadata/test_core.py",
+    "tests/backend/metadata/test_custom_hook.py",
+    "tests/backend/metadata/test_hatch.py",
+    "tests/backend/metadata/test_spec.py",
+    "tests/backend/test_build.py",
+    "tests/backend/utils/__init__.py",
+    "tests/backend/utils/test_context.py",
+    "tests/backend/utils/test_fs.py",
+    "tests/backend/utils/test_macos.py",
+    "tests/backend/version/__init__.py",
+    "tests/backend/version/scheme/__init__.py",
+    "tests/backend/version/scheme/test_standard.py",
+    "tests/backend/version/source/__init__.py",
+    "tests/backend/version/source/test_code.py",
+    "tests/backend/version/source/test_env.py",
+    "tests/backend/version/source/test_regex.py",
+    "tests/cli/__init__.py",
+    "tests/cli/build/__init__.py",
+    "tests/cli/build/test_build.py",
+    "tests/cli/clean/__init__.py",
+    "tests/cli/clean/test_clean.py",
+    "tests/cli/config/__init__.py",
+    "tests/cli/config/test_explore.py",
+    "tests/cli/config/test_find.py",
+    "tests/cli/config/test_restore.py",
+    "tests/cli/config/test_set.py",
+    "tests/cli/config/test_show.py",
+    "tests/cli/dep/__init__.py",
+    "tests/cli/dep/show/__init__.py",
+    "tests/cli/dep/show/test_requirements.py",
+    "tests/cli/dep/show/test_table.py",
+    "tests/cli/dep/test_hash.py",
+    "tests/cli/env/__init__.py",
+    "tests/cli/env/test_create.py",
+    "tests/cli/env/test_find.py",
+    "tests/cli/env/test_prune.py",
+    "tests/cli/env/test_remove.py",
+    "tests/cli/env/test_run.py",
+    "tests/cli/env/test_show.py",
+    "tests/cli/fmt/__init__.py",
+    "tests/cli/new/__init__.py",
+    "tests/cli/new/test_new.py",
+    "tests/cli/project/__init__.py",
+    "tests/cli/project/test_metadata.py",
+    "tests/cli/publish/__init__.py",
+    "tests/cli/publish/test_publish.py",
+    "tests/cli/python/__init__.py",
+    "tests/cli/python/conftest.py",
+    "tests/cli/python/test_find.py",
+    "tests/cli/python/test_install.py",
+    "tests/cli/python/test_remove.py",
+    "tests/cli/python/test_show.py",
+    "tests/cli/python/test_update.py",
+    "tests/cli/run/__init__.py",
+    "tests/cli/run/test_run.py",
+    "tests/cli/self/__init__.py",
+    "tests/cli/self/test_report.py",
+    "tests/cli/self/test_self.py",
+    "tests/cli/status/__init__.py",
+    "tests/cli/status/test_status.py",
+    "tests/cli/test/__init__.py",
+    "tests/cli/test/test_test.py",
+    "tests/cli/test_root.py",
+    "tests/cli/version/__init__.py",
+    "tests/cli/version/test_version.py",
+    "tests/config/__init__.py",
+    "tests/config/test_model.py",
+    "tests/conftest.py",
+    "tests/dep/__init__.py",
+    "tests/dep/test_sync.py",
+    "tests/env/__init__.py",
+    "tests/env/collectors/__init__.py",
+    "tests/env/collectors/test_custom.py",
+    "tests/env/plugin/__init__.py",
+    "tests/env/plugin/test_interface.py",
+    "tests/helpers/__init__.py",
+    "tests/helpers/helpers.py",
+    "tests/helpers/templates/__init__.py",
+    "tests/helpers/templates/licenses/__init__.py",
+    "tests/helpers/templates/new/__init__.py",
+    "tests/helpers/templates/new/basic.py",
+    "tests/helpers/templates/new/default.py",
+    "tests/helpers/templates/new/feature_ci.py",
+    "tests/helpers/templates/new/feature_cli.py",
+    "tests/helpers/templates/new/feature_no_src_layout.py",
+    "tests/helpers/templates/new/licenses_empty.py",
+    "tests/helpers/templates/new/licenses_multiple.py",
+    "tests/helpers/templates/new/projects_urls_empty.py",
+    "tests/helpers/templates/new/projects_urls_space_in_label.py",
+    "tests/helpers/templates/sdist/__init__.py",
+    "tests/helpers/templates/sdist/standard_default.py",
+    "tests/helpers/templates/sdist/standard_default_build_script_artifacts.py",
+    "tests/helpers/templates/sdist/standard_default_build_script_extra_dependencies.py",
+    "tests/helpers/templates/sdist/standard_default_support_legacy.py",
+    "tests/helpers/templates/sdist/standard_default_vcs_git_exclusion_files.py",
+    "tests/helpers/templates/sdist/standard_default_vcs_mercurial_exclusion_files.py",
+    "tests/helpers/templates/sdist/standard_include.py",
+    "tests/helpers/templates/sdist/standard_include_config_file.py",
+    "tests/helpers/templates/wheel/__init__.py",
+    "tests/helpers/templates/wheel/standard_default_build_script.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_artifacts.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_artifacts_with_src_layout.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_configured_build_hooks.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_extra_dependencies.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_force_include.py",
+    "tests/helpers/templates/wheel/standard_default_build_script_force_include_no_duplication.py",
+    "tests/helpers/templates/wheel/standard_default_extra_metadata.py",
+    "tests/helpers/templates/wheel/standard_default_license_multiple.py",
+    "tests/helpers/templates/wheel/standard_default_license_single.py",
+    "tests/helpers/templates/wheel/standard_default_namespace_package.py",
+    "tests/helpers/templates/wheel/standard_default_python_constraint.py",
+    "tests/helpers/templates/wheel/standard_default_python_constraint_three_components.py",
+    "tests/helpers/templates/wheel/standard_default_shared_data.py",
+    "tests/helpers/templates/wheel/standard_default_shared_scripts.py",
+    "tests/helpers/templates/wheel/standard_default_single_module.py",
+    "tests/helpers/templates/wheel/standard_default_symlink.py",
+    "tests/helpers/templates/wheel/standard_editable_exact.py",
+    "tests/helpers/templates/wheel/standard_editable_exact_extra_dependencies.py",
+    "tests/helpers/templates/wheel/standard_editable_exact_force_include.py",
+    "tests/helpers/templates/wheel/standard_editable_pth.py",
+    "tests/helpers/templates/wheel/standard_editable_pth_extra_dependencies.py",
+    "tests/helpers/templates/wheel/standard_editable_pth_force_include.py",
+    "tests/helpers/templates/wheel/standard_entry_points.py",
+    "tests/helpers/templates/wheel/standard_no_strict_naming.py",
+    "tests/helpers/templates/wheel/standard_only_packages_artifact_override.py",
+    "tests/helpers/templates/wheel/standard_tests.py",
+    "tests/helpers/templates/wheel/utils.py",
+    "tests/index/__init__.py",
+    "tests/index/server/devpi/Dockerfile",
+    "tests/index/server/devpi/entrypoint.sh",
+    "tests/index/server/docker-compose.yaml",
+    "tests/index/server/nginx/nginx.conf",
+    "tests/index/test_core.py",
+    "tests/project/__init__.py",
+    "tests/project/test_config.py",
+    "tests/project/test_core.py",
+    "tests/project/test_frontend.py",
+    "tests/project/test_utils.py",
+    "tests/publish/__init__.py",
+    "tests/publish/plugin/__init__.py",
+    "tests/publish/plugin/test_interface.py",
+    "tests/python/__init__.py",
+    "tests/python/test_core.py",
+    "tests/python/test_resolve.py",
+    "tests/utils/__init__.py",
+    "tests/utils/test_auth.py",
+    "tests/utils/test_fs.py",
+    "tests/utils/test_platform.py",
+    "tests/utils/test_runner.py",
+    "tests/utils/test_structures.py",
+    "tests/venv/__init__.py",
+    "tests/venv/test_core.py",
+    "tests/venv/test_utils.py",
+    "tests/workspaces/__init__.py",
+    "tests/workspaces/test_config.py"
+  ],
+  "source": {
+    ".gitattributes": [
+      "621e92f04511dfc1ee1b5db85b908a00e8a5a3a9804be129c153092aa45b5e1e",
+      436
+    ],
+    ".github/FUNDING.yml": [
+      "79a20829e97ed56c5fc546d0e2fa7f5d61ecf2abe334187c0b68e791da4ff81a",
+      436
+    ],
+    ".github/ISSUE_TEMPLATE/1-hatch_bug_report.yml": [
+      "6a8394d2104d4008ec35fbcb720165957300b51a04314a78fc8f8534abf07d71",
+      436
+    ],
+    ".github/ISSUE_TEMPLATE/2-feature_request.yml": [
+      "9298322810eb39471569fcf60cbf33e76a4093ceaf6a68cf04c88298b09aa565",
+      436
+    ],
+    ".github/dependabot.yml": [
+      "628b3580c72402e480da2cb976e18bacb5d23ee6065f325201e6f65afd85a0ae",
+      436
+    ],
+    ".github/workflows/auto-merge.yml": [
+      "7173102810631f1f06ee628ceaebcd12a80c2678bed8c7ab7c4fe787cb029c1c",
+      436
+    ],
+    ".github/workflows/build-distributions.yml": [
+      "03738a5014e3c9eb8591d3ab63e83d86dbc69c9c38de6b9b0083cdfa90393a97",
+      436
+    ],
+    ".github/workflows/build-hatch.yml": [
+      "a3a14b06420a219e1835bbf7a5da6b2a08794107a6bc37afc56dc6a47f556766",
+      436
+    ],
+    ".github/workflows/build-hatchling.yml": [
+      "1a486659be820ab51731c117e33aa0b1a1a4288f07a142ee7ff359195bedb8d7",
+      436
+    ],
+    ".github/workflows/cli.yml": [
+      "92e517d82650a5790b797983bd3f83dc3617414a59a999ec4f66ba24092aeaf7",
+      436
+    ],
+    ".github/workflows/docs-dev.yml": [
+      "d0b729e896a7c28301aa958a91350c4dd9bd42f3b85528a024b4bce9c734bcff",
+      436
+    ],
+    ".github/workflows/docs-release.yml": [
+      "6edf55a6f999826d700c0aec7c6af53c1b33b7a6df000cf5397a9a8750d02bd1",
+      436
+    ],
+    ".github/workflows/test.yml": [
+      "32543d7abc4554671a1a0e552dd71fd1beb973e151942f81aec72045b0043dc6",
+      436
+    ],
+    ".gitignore": [
+      "339565eba4a795eeef2b25b4590f3ac84a4b5abd0cb2f926303d0d692f78ec68",
+      436
+    ],
+    ".linkcheckerrc": [
+      "be006f8c6d81f709070affa5eca66785032fbd23fd5fb1430b8b11ca1b253a48",
+      436
+    ],
+    "LICENSE.txt": [
+      "9f4f88aa42884240ae152d6fdd0e0b7e83e2430169c8ce613ae18f6a840f1c57",
+      420
+    ],
+    "README.md": [
+      "cb063661396f4171a6f749a8f4c8efdd9f0b788611fc3c7e282d2dd50d586e18",
+      420
+    ],
+    "backend/LICENSE.txt": [
+      "7f143a8127ad4873862d70854b5bd2abd0085aa73e64fd2b08704a3b9f5c07fc",
+      420
+    ],
+    "backend/README.md": [
+      "9efca13dc298d77a18dbc2b072e263efcbcc3c6b2df9393393f2ad34661bad3a",
+      420
+    ],
+    "backend/pyproject.toml": [
+      "c4fad10c7a79e6df3045452c3de244ae4d39b88bcf1a011495bade64dd21a13b",
+      420
+    ],
+    "backend/src/hatchling/__about__.py": [
+      "41b42787b6b36915ecb775815c95f861e9ed4f60cef796308e0e1694b48fd3b8",
+      420
+    ],
+    "backend/src/hatchling/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/__main__.py": [
+      "99dcd4b605d93aad86be0059dc237d920345fce400dc4f71f46dcc16d8983731",
+      420
+    ],
+    "backend/src/hatchling/bridge/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/bridge/app.py": [
+      "2f7b9adb0e6eb3ae47d6b39ddfa66aecd347be709ba0cb9cd1753a44a6116ac7",
+      420
+    ],
+    "backend/src/hatchling/build.py": [
+      "8bdc5f386de529d512e8807b1bf47843010b142f3e61fc2d5e75f13634d7e583",
+      420
+    ],
+    "backend/src/hatchling/builders/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/builders/app.py": [
+      "49b853d930d5818a32dc76541eb0447769daddac040b3bc33e173eb1722b654d",
+      420
+    ],
+    "backend/src/hatchling/builders/binary.py": [
+      "249a3f72578edf1b1215326a21e49a40e66fd0d2ca6b6a2d198bb787ce7dec5c",
+      420
+    ],
+    "backend/src/hatchling/builders/config.py": [
+      "f4ed3f77be8c7b01bd6ae0baaada25f317a2c391879ebf77a3351795babf7b34",
+      420
+    ],
+    "backend/src/hatchling/builders/constants.py": [
+      "4ca21af3c9850e9d3e56bdd350f7c02f915354d60fe634dbfc5efbfec4193b70",
+      420
+    ],
+    "backend/src/hatchling/builders/custom.py": [
+      "0ffb7fd0e0926738894b3aaa9bce893f173249aaf7efa25ce852eba80547eb1f",
+      420
+    ],
+    "backend/src/hatchling/builders/hooks/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/builders/hooks/custom.py": [
+      "3caf97218acccd3c803ed1b514f3b76791fb63a9a022f22d9d65706826efccfc",
+      420
+    ],
+    "backend/src/hatchling/builders/hooks/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/builders/hooks/plugin/hooks.py": [
+      "2d1052dae1d6177bf77bc2a86103502bc29cb9c92f1903020f15b20255204b43",
+      420
+    ],
+    "backend/src/hatchling/builders/hooks/plugin/interface.py": [
+      "71e01e6a59c084d3121b26f415945dbc08849de7b5bdfa7a711e2ca1b60f2d2b",
+      420
+    ],
+    "backend/src/hatchling/builders/hooks/version.py": [
+      "cf7f7a8775be1d6e71b095f2c22ea2f67a3e337ca3a94bbf52a0d365693241fc",
+      420
+    ],
+    "backend/src/hatchling/builders/macos.py": [
+      "89d9a8a6211d525f5a137a9e8f36e4710dc35a1a528bc8149d205c040cc3f9e7",
+      420
+    ],
+    "backend/src/hatchling/builders/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/builders/plugin/hooks.py": [
+      "c61bfacaf6f643d03b6648bace4859ffe249d75b63fac7b6b1df8f722db708f2",
+      420
+    ],
+    "backend/src/hatchling/builders/plugin/interface.py": [
+      "ce68735742a5132e6a4e886138c2cc6af06557f0d4cccab8b98f9272662cd450",
+      420
+    ],
+    "backend/src/hatchling/builders/sdist.py": [
+      "46a5c65ee90e1fb3db645176fd15c8eddf628cba9f1776b6bc40d26af84b9130",
+      420
+    ],
+    "backend/src/hatchling/builders/utils.py": [
+      "d5bc8e2f1120a0938bdb6ed5c0667158dc92b2fb6519f94d7533e56f6b261644",
+      420
+    ],
+    "backend/src/hatchling/builders/wheel.py": [
+      "1f8fe13ff0306544811922d75c8487ad0f822540dc3618eb1147c55c84c91b9f",
+      420
+    ],
+    "backend/src/hatchling/cli/__init__.py": [
+      "8b4cd2a2cc336a82cc64f00e0d3f7c51be88e1430db8a2b663ea1ce5ac9c0e39",
+      420
+    ],
+    "backend/src/hatchling/cli/build/__init__.py": [
+      "225dba83bc6fcb3eb7bac5cca7c11378671a5452c13a2ddc55d7f98732549149",
+      420
+    ],
+    "backend/src/hatchling/cli/dep/__init__.py": [
+      "534a6f6f5ebb0db6906db7911f1d2f5d977743d3c2654a628cf4dde38a8edb4a",
+      420
+    ],
+    "backend/src/hatchling/cli/dep/core.py": [
+      "c07261903aa790f2a1edc99a44c4b3d1bc012077660bebd7e85f21d969e62c1c",
+      420
+    ],
+    "backend/src/hatchling/cli/metadata/__init__.py": [
+      "30de7e2dedcf0392dd079d26a97858e978d0499a4a42ab9ca273a4a700324ca4",
+      420
+    ],
+    "backend/src/hatchling/cli/version/__init__.py": [
+      "3afff788ae721f8621562821299ea4e29e1565cef2072abe5b1f6b7b1a955ac8",
+      420
+    ],
+    "backend/src/hatchling/dep/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/dep/core.py": [
+      "f9510bb08b2a1693c9dd18ac20826a466af48af22ac47f0a266d7e8c6d4d595b",
+      420
+    ],
+    "backend/src/hatchling/licenses/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/licenses/supported.py": [
+      "641fb474d6916e23ea297f2b8d8ae20addad1c8f65e2852e7ca4445e73ed92e6",
+      420
+    ],
+    "backend/src/hatchling/metadata/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/metadata/core.py": [
+      "8d833b6b8d5b44604bf1b42b85b9f2088efbb0c83eb2ccae72bcffbf5c5c8184",
+      420
+    ],
+    "backend/src/hatchling/metadata/custom.py": [
+      "d82eec9a761d70b52536d8f522c7f10968c850bb8f5ecc950d4a44696a704314",
+      420
+    ],
+    "backend/src/hatchling/metadata/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/metadata/plugin/hooks.py": [
+      "642b018d3b8da6ae7bf229e7fd4fe120c8d0f0b823316c5454a034b4b9e98d38",
+      420
+    ],
+    "backend/src/hatchling/metadata/plugin/interface.py": [
+      "6547414bf20fe03ffa09e3a795a72f494b6bb27ca3945006f8b2258c0ca0a5a1",
+      420
+    ],
+    "backend/src/hatchling/metadata/spec.py": [
+      "dc0c6eca63be9dce2374be6543915c7a7ba3d0b4d6639f6418cefc9fe86abda8",
+      420
+    ],
+    "backend/src/hatchling/metadata/utils.py": [
+      "c478f6243f167e779e17e080409a03bfdb9b595383cdb4e7c5834ead720d590f",
+      420
+    ],
+    "backend/src/hatchling/ouroboros.py": [
+      "9eff899398f15e08866b7138fe986d8324d89064c0f4cf1aabe692056eef2bbe",
+      420
+    ],
+    "backend/src/hatchling/plugin/__init__.py": [
+      "4ef84cdb0d9ca6e493fd357917e9f94d4c8eae98418dbb16265dbc4b3df35ce0",
+      420
+    ],
+    "backend/src/hatchling/plugin/exceptions.py": [
+      "bb9ad18317074c3fe49850d18c2f63942aea6150caf5e03ce6bbbf98eddfb8c0",
+      420
+    ],
+    "backend/src/hatchling/plugin/manager.py": [
+      "3d0e3b8f10b764be926e96d1163783b3a240946e9f8558499a427d8791aa93f4",
+      420
+    ],
+    "backend/src/hatchling/plugin/specs.py": [
+      "08a47f071bfbbc8d87e98471e2ce67cdcc943796a7b0079f9abc85fac8dea868",
+      420
+    ],
+    "backend/src/hatchling/plugin/utils.py": [
+      "b71324a3d678ba53adcc4c1324b074e27ecc51d9e083d3ccb56197b4916e48f1",
+      420
+    ],
+    "backend/src/hatchling/py.typed": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/utils/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/utils/constants.py": [
+      "32972b3701b0eeae1730c2708825fb1e3fd105089dda8f7576ad512ddc483f85",
+      420
+    ],
+    "backend/src/hatchling/utils/context.py": [
+      "2f9f39d7b8d70f0cea8098de1a3f4c8b27532dd7f2532c7422d9a6c8d74c69f5",
+      420
+    ],
+    "backend/src/hatchling/utils/fs.py": [
+      "5e3a62274a02f658bdfa68d75637738244febb350d32f3fd330daef1de592782",
+      420
+    ],
+    "backend/src/hatchling/version/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/version/core.py": [
+      "27fc29bdefe3574c58111643bdd3efdaf419353821d4f81a7ebca79c4a5a61f5",
+      420
+    ],
+    "backend/src/hatchling/version/scheme/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/version/scheme/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/version/scheme/plugin/hooks.py": [
+      "831c499eb73ec468e8d0da4b8b1ad0c63acb23b6d61d544506a79d5a63ebc8e6",
+      420
+    ],
+    "backend/src/hatchling/version/scheme/plugin/interface.py": [
+      "e3ac78390aa92f0b6f8cee7c2384a7f147383c08303e4052e96ae57247670883",
+      420
+    ],
+    "backend/src/hatchling/version/scheme/standard.py": [
+      "0e32002f134ddd198f339add7fd8e205669c3eb0e15173facda6451c83658b18",
+      420
+    ],
+    "backend/src/hatchling/version/source/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/version/source/code.py": [
+      "8af286cb54376d8167be0ab9a0aaee15c72af02d9c03c312405ab981a4b2fb1b",
+      420
+    ],
+    "backend/src/hatchling/version/source/env.py": [
+      "16651de892e98e25d9f73e7c9f9cf96776cfc8d8074b371137e0f4510cadc1f2",
+      420
+    ],
+    "backend/src/hatchling/version/source/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/src/hatchling/version/source/plugin/hooks.py": [
+      "761cf8737a95e8accb71aefd97845c2acb5ad42f395a1ef2ded2e4b912a7e570",
+      420
+    ],
+    "backend/src/hatchling/version/source/plugin/interface.py": [
+      "1caaade0e2ae48bc53f1aeffc3ad86af59ac03dac7d3b61db65c00df04e58a44",
+      420
+    ],
+    "backend/src/hatchling/version/source/regex.py": [
+      "a4e6e2c1e59042967ef665324b43a14bcb92ff14f4cb30637697db1ed069a279",
+      420
+    ],
+    "backend/tests/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "backend/tests/downstream/datadogpy/data.json": [
+      "ecdb76bd92e30732e3b26aece0757970cb5f61de1d24ae3b8c99543b4bc7281c",
+      420
+    ],
+    "backend/tests/downstream/datadogpy/pyproject.toml": [
+      "8a4c58a1572bad010be0836fdb137f3d2f38772732caf6cdc08f0d12cbe2004c",
+      420
+    ],
+    "backend/tests/downstream/hatch-showcase/data.json": [
+      "952d6afd627e0930759adc6b55a3f923a6c0d9aa15eb13f0c1aee37bc1410797",
+      420
+    ],
+    "backend/tests/downstream/integrate.py": [
+      "d70f5efd6c5b4c0b425adcd73714605604d1f11d7fe53b250af450de8a6f4b20",
+      420
+    ],
+    "backend/tests/downstream/requirements.txt": [
+      "9f14cb5e91caf21138d85ab38deb690dff296119d810f3d386b368facac8add0",
+      420
+    ],
+    "docs/.hooks/expand_blocks.py": [
+      "96beea642051b83378c25d3ca5fa97503ccfcbe7e56817024ba08df9821c0b69",
+      420
+    ],
+    "docs/.hooks/inject_version.py": [
+      "180fc6c89d3bbe21a38e355b82bee055999fbddb6f9d6aa693af22f3345c12b1",
+      420
+    ],
+    "docs/.hooks/plugin_register.py": [
+      "de4f629ddb9c7dc31689b0ef43b9ef1dfaf8975979bc8613177eea549040c36a",
+      420
+    ],
+    "docs/.hooks/render_default_test_env.py": [
+      "7f3ded20a9a53832a8078a99b0f7e71e1a63b1f5c95a856edce11298e830158a",
+      420
+    ],
+    "docs/.hooks/render_ruff_defaults.py": [
+      "979175e859991d541ca913291ebc5e38c0fcd66838c272f1dbc9e089a867e501",
+      420
+    ],
+    "docs/.hooks/title_from_content.py": [
+      "8ea0e019a051378850ad9b122bd116f77fabda072b861eb4b7a79ca1dd8d1dd9",
+      420
+    ],
+    "docs/.overrides/partials/copyright.html": [
+      "d9393281538e49409183a7bcd96f7822c78dff9fce084af286226db39eead321",
+      420
+    ],
+    "docs/.snippets/abbrs.txt": [
+      "95b94070efc0c94f2d0e036321b2fcaee4a5c46a9d4392610cf8f093384507a2",
+      420
+    ],
+    "docs/.snippets/links.txt": [
+      "474c9c26fa17079e249b4ff6f052bb1a9bf08a207de18528ae15d9acfc21f902",
+      420
+    ],
+    "docs/assets/badge/v0.json": [
+      "7bae7c12d3a495ef9258eca92ef9ff0b904d73c2d49f2b2058a00833fbaff1e7",
+      420
+    ],
+    "docs/assets/css/custom.css": [
+      "e72198c9b7714bd191f6f53839be0e8aa27c43a4119d2b842fd00efb04119bae",
+      420
+    ],
+    "docs/assets/images/logo.svg": [
+      "1f8be4e5358198b47fa58f5e365e19f5ea4993c82417611a755b109692859a13",
+      420
+    ],
+    "docs/blog/.authors.yml": [
+      "204fbdfe44223a8f75124469b143a3773ceb078d047623c6aa1f841d84c6fe9a",
+      420
+    ],
+    "docs/blog/index.md": [
+      "809747d4b311fc0f5de1cc670fd27cb636ad54cdb21f28c441bf929e7f9eaee6",
+      420
+    ],
+    "docs/blog/posts/release-hatch-1100.md": [
+      "eab6991cf39ce3094520d3fb8dece44a1e2b985f697524eb24299a89731230c1",
+      420
+    ],
+    "docs/blog/posts/release-hatch-1100/run-script.gif": [
+      "2e553a0f6d691de7c2b60b96d8fec28749ef84d2cc334853691c924d226cadca",
+      420
+    ],
+    "docs/blog/posts/release-hatch-1100/testing-jinja.gif": [
+      "94b8090d0b8235c32ea8ea98463a86d381f77bf45979cc033170d12cc5f0525b",
+      420
+    ],
+    "docs/blog/posts/release-hatch-1100/testing-rich.gif": [
+      "0a687b0cae75c132807275358f0cdfbc73a9ffc4f0b9622452bffd3af0cc5a1b",
+      420
+    ],
+    "docs/blog/posts/release-hatch-160.md": [
+      "965cacbd6ba2723716c4249213ec57ad8ecb8f02811045a61a495e262f1c09c5",
+      420
+    ],
+    "docs/blog/posts/release-hatch-160/rich-readme.png": [
+      "8bb7ecdf76abd6c7bbd4d195298ee8981bbdf49a0e74005353cc10ae4fe0d5ed",
+      420
+    ],
+    "docs/blog/posts/release-hatch-180.md": [
+      "cd68978023bd748e2ba24b2f9cf5249be73ad3360e1b8df194c4a26a9e803901",
+      420
+    ],
+    "docs/blog/posts/release-hatch-180/available-pythons.png": [
+      "7bf11fe1f872d5521b6dbfda239773493718bffec9d28fbf0e21ff213c34ad5b",
+      420
+    ],
+    "docs/blog/posts/release-hatch-180/install-demo.gif": [
+      "2bdf5f594106d94251e4813cb2ef0456ca72455f766561c280a2e983a7fab974",
+      420
+    ],
+    "docs/blog/posts/release-hatch-190.md": [
+      "8e5219d98899175239ad3e0294d75d5f6c13b26c24d0604cc3199f2ff4c9db37",
+      420
+    ],
+    "docs/build.md": [
+      "2240c678a64a205623a1696da1c4e595f395359499f584b8cd9cdbe4a0186dd8",
+      420
+    ],
+    "docs/cli/about.md": [
+      "1a4ae16fb46913feee62e7fd1b810643520b983d40cfd45723597a3fe42fd8a8",
+      420
+    ],
+    "docs/cli/reference.md": [
+      "cc99f92fa0c8d138e79a4cfe25a62f9912c00ebebdd8370066b72193272d47c0",
+      420
+    ],
+    "docs/community/contributing.md": [
+      "f889032e64893ebb4ff74f9a1892df8261415c13af834f3c943e6c360981c039",
+      420
+    ],
+    "docs/community/highlights.md": [
+      "f9909a0135e613692d719a2f0f6f01e13ad3d86ed379da1dc12add24596c758e",
+      420
+    ],
+    "docs/community/users.md": [
+      "60f1cc5d242d759e1dc991d7d827d8277704986c7e2dbe61e6daf012d9c3f732",
+      420
+    ],
+    "docs/config/build.md": [
+      "7a19bf8dc9a10853aeb71fcfefb3692b28040730832f90a59d8a82a3d3e1f570",
+      420
+    ],
+    "docs/config/context.md": [
+      "02160f59a894d62691f3094c63765a44a6c64e188f0c7ce962bde2f74f6e4cee",
+      420
+    ],
+    "docs/config/dependency.md": [
+      "d85d435913a2042529dcfd35a9aa14cf37fbc481293de83bc1dbb6eee11ca589",
+      420
+    ],
+    "docs/config/environment/advanced.md": [
+      "191b00dd543555390d9a635dde85bcb4b10a1d56a3005b8ba070995473ff4fe1",
+      420
+    ],
+    "docs/config/environment/overview.md": [
+      "08e5530bd41bf71896efa0d9962fbe5d7c54f5609d7197d78ae2108776497652",
+      420
+    ],
+    "docs/config/hatch.md": [
+      "b7631837988bd0ea0fa232c2b0b696cd7732ce7ce5bd714619ab4ba777dfea4c",
+      420
+    ],
+    "docs/config/internal/build.md": [
+      "f19771c1077557402cf1eb9bad117d30efade148d8f2819c269b106b53a13ee2",
+      420
+    ],
+    "docs/config/internal/static-analysis.md": [
+      "71ef1e0827a98a1edc37b1021ef62b1c7dd1779502fa724e16afb5092317e304",
+      420
+    ],
+    "docs/config/internal/testing.md": [
+      "67725f93fb9076e8e51b660634b5d3a81d6351e1b9fd535dc6e1491940f81ce9",
+      420
+    ],
+    "docs/config/metadata.md": [
+      "481ef41532ca16bbd6bd06fadfd99f84cfce10de51e10a58d63190e78f64870d",
+      420
+    ],
+    "docs/config/project-templates.md": [
+      "c76c0e9fa4d0278116a58265ee0b53ca6bff4d57fb69705581829d6ead7b48b1",
+      420
+    ],
+    "docs/environment.md": [
+      "a7aabc41be69e008ba8f73826965cf511236eb6e465f176107a9e833edda8d9f",
+      420
+    ],
+    "docs/history/hatch.md": [
+      "68e800e8b55f55d70d8c2e460ced674a779f4efe218578fa999803c57a72f6a6",
+      420
+    ],
+    "docs/history/hatchling.md": [
+      "fd4edbc0585b941d409ea470a55bd4cfc0a429ca5345d2840ee941e9024c1bfd",
+      420
+    ],
+    "docs/how-to/config/dynamic-metadata.md": [
+      "54ad30b8c03bcc297d6d4cc958ae2a75ebebc06aef5bb57d2fc187f9efe19e87",
+      420
+    ],
+    "docs/how-to/environment/dependency-resolution.md": [
+      "8f11334f9ca3018b94a05a47a0686ba62996a077e5d4378a19e7f09a73c0260a",
+      420
+    ],
+    "docs/how-to/environment/select-installer.md": [
+      "ffe1b6eaecaeef4d6fc006ada90986090cbf149f574b7c329d517080b9808da5",
+      420
+    ],
+    "docs/how-to/environment/workspace.md": [
+      "5d2a0448fdb40315f37c127282d0f694c49c09ceebba678e930a2a1a116d7691",
+      420
+    ],
+    "docs/how-to/integrate/vscode.md": [
+      "1c6dab8031ea3e4c214d4ed9304d3d73503fd9e5ad265bce60678c14c29d26b2",
+      420
+    ],
+    "docs/how-to/integrate/vscode/run-file.png": [
+      "047f33fb3ec2cb29e78c51352f63699aa5f9ec8768b4b24ec9efee60b9604298",
+      420
+    ],
+    "docs/how-to/integrate/vscode/select-interpreter.png": [
+      "6c907c45f37a28b773efc71f56781abd8405021d07954204e9ba992d42ad964c",
+      420
+    ],
+    "docs/how-to/meta/report-issues.md": [
+      "792c718e946c9b90957230253ab1b3c528384ebf67d58450eefac050ec796c44",
+      420
+    ],
+    "docs/how-to/plugins/testing-builds.md": [
+      "4960ac50a419d30f74273df7ee49b083db4a7af1bb4f139456284feb201abe96",
+      420
+    ],
+    "docs/how-to/publish/auth.md": [
+      "a1aa537fdca55ae24c8283daa2ba2b6b97b4eaf35313fb64d87c2cdb44d66ea7",
+      420
+    ],
+    "docs/how-to/publish/repo.md": [
+      "392e354456f7a4f3bbfb9cdfeae6640f590160372cf9c253ccdad608a1dda3a3",
+      420
+    ],
+    "docs/how-to/python/custom.md": [
+      "92119ec2d8420ef35679cb49c7ec89c14b4d6181a334240e4ff64b200987548a",
+      420
+    ],
+    "docs/how-to/run/python-scripts.md": [
+      "033befd71ac1c4787678c65ad60c8bcf5dbb1d47a0747a93887c18f6ac993ce2",
+      420
+    ],
+    "docs/how-to/static-analysis/behavior.md": [
+      "98272578e32b45a5be2475e7f63366cfb436a60dc72161a6916126415df2c949",
+      420
+    ],
+    "docs/index.md": [
+      "c606c25d067896cb3f42efd72e6bbf052280e380be68b99e5af7c82ad667e53f",
+      420
+    ],
+    "docs/install.md": [
+      "4a95ed8ce72550b42a724bda0d05e9275e3cd9207436da6c45c6c8bf80093139",
+      420
+    ],
+    "docs/intro.md": [
+      "93f1a72c203e1b19b06d8f62d0805b60aa9648abc259702163c8dae1e9f3ec5d",
+      420
+    ],
+    "docs/meta/authors.md": [
+      "71090ac688713b1cbec0f0d8ccffab46850af3d6a151de7ef521603061f6be90",
+      420
+    ],
+    "docs/meta/faq.md": [
+      "169e425870a5ef9909e175fa6c45b4f35f0a9bc9ce64b9bd5f8a993e445c22ba",
+      420
+    ],
+    "docs/next-steps.md": [
+      "5e8fafe66b9b4ecdd80caacd367b74f7a40b33f963bc412ccb1c1cf10ce9dc32",
+      420
+    ],
+    "docs/plugins/about.md": [
+      "fa1635708b3c83996f9298308b7c5d574d38655aef94d7d9881a87c5fe9ab7f1",
+      420
+    ],
+    "docs/plugins/build-hook/custom.md": [
+      "167b53a6e3f7ee550dad423b3428047dedf3f79bd181030267308621c0803aa1",
+      420
+    ],
+    "docs/plugins/build-hook/reference.md": [
+      "9e5df08ffffc01e5d39882ccc3ae76edbe903f32bd981653c4dccc3be09ccd53",
+      420
+    ],
+    "docs/plugins/build-hook/version.md": [
+      "3a6226cab1ea732da7066e446e9d78eeab360a0febdb75c4295fb63a37446474",
+      420
+    ],
+    "docs/plugins/builder/binary.md": [
+      "8d6a0139a0bb41aea0bd2b62d10c728d8bbd447453daaf5d31421f6ec9b04f31",
+      420
+    ],
+    "docs/plugins/builder/custom.md": [
+      "c834e670623b790cd302d5114a42615a08444288efe9a91f800ff5cf8f542024",
+      420
+    ],
+    "docs/plugins/builder/reference.md": [
+      "1986ee38e530cebb05191fe79eb7d2565c7202b06f53799970d19c5ebcc0df05",
+      420
+    ],
+    "docs/plugins/builder/sdist.md": [
+      "626945ef775d9e16bf6ed4070b92b485645097a2e29196380d6cfd8e9ec1d5de",
+      420
+    ],
+    "docs/plugins/builder/wheel.md": [
+      "7261b42ef56776f784ae7392878f89978037720071d938056bf232f6eedad06c",
+      420
+    ],
+    "docs/plugins/environment-collector/custom.md": [
+      "b0a0915a7465d8ddbe3ce3b9a494118e0b790145e51956d419dbc940ff0cf614",
+      420
+    ],
+    "docs/plugins/environment-collector/default.md": [
+      "1599d06b9841a8392c8da143424e10c4ab3a7462c694989d011ef2caa1901401",
+      420
+    ],
+    "docs/plugins/environment-collector/reference.md": [
+      "b554b6b4012522cfc0bc085b7d8b6adc374b2abd3b25bd9d92916180324b6e25",
+      420
+    ],
+    "docs/plugins/environment/reference.md": [
+      "1ddef111813b9a809a676a37872588047cf95355fd65cb67cc1b72ae2a5fd8a2",
+      420
+    ],
+    "docs/plugins/environment/virtual.md": [
+      "c7a7a1ad418ad1f32f0f4f4d1825a635b9fbbe5fa39d4b5dd27e43fbb903f974",
+      420
+    ],
+    "docs/plugins/metadata-hook/custom.md": [
+      "ed8a0e7c2f497f1c798a96224b89c4113a8b0662c7d8a17a1d7df6a20bbd7e75",
+      420
+    ],
+    "docs/plugins/metadata-hook/reference.md": [
+      "d3ec41b425d556a78c46c59975266fe26b5ae81a9379a917c7a17202f19260f9",
+      420
+    ],
+    "docs/plugins/publisher/package-index.md": [
+      "60a9d71ee2a640213b01ff5d7bc146299ff3244c23cf2cf0adf181d211a45fd6",
+      420
+    ],
+    "docs/plugins/publisher/reference.md": [
+      "69cd1443cc2e3658ad6426a5a66936e7677194ba1392779224b218082df25b31",
+      420
+    ],
+    "docs/plugins/utilities.md": [
+      "1b80012cb8d170730b7aa48d755abad7e1dd880a6f60941e823ce92053992d9f",
+      420
+    ],
+    "docs/plugins/version-scheme/reference.md": [
+      "a7d81f5579cc9ceea65714622136608667a0cd53aafaa44390035c028730c837",
+      420
+    ],
+    "docs/plugins/version-scheme/standard.md": [
+      "5adad82b98f46c58aa808aa192d8d24f61378faee759cf1b5506db1936818251",
+      420
+    ],
+    "docs/plugins/version-source/code.md": [
+      "aeea5acf7a50b5b03b93626431d093c5f010b54bf5f63ca3ae59d65aee936492",
+      420
+    ],
+    "docs/plugins/version-source/env.md": [
+      "2f9f12183306ddbf19d298fbc849c3edf130661aaafc4b46acfd2ee059fcc965",
+      420
+    ],
+    "docs/plugins/version-source/reference.md": [
+      "af4d32d18df693a9fbe0120ed23d102bed8e6494b690647bb1350d927abba60d",
+      420
+    ],
+    "docs/plugins/version-source/regex.md": [
+      "9dcfac3234861b3ed119e9b98446c293d89a87088ef099b42c69fb3987a16ad3",
+      420
+    ],
+    "docs/publish.md": [
+      "3fab0a9d1999b7b56e74136f6c4e8844ce9b94c76a07ea65b45a5b2a6814b9ce",
+      420
+    ],
+    "docs/tutorials/environment/basic-usage.md": [
+      "b294d2d34d53817f0df7aa80a67476212c147016a2527853a3c5f71842e60790",
+      420
+    ],
+    "docs/tutorials/python/manage.md": [
+      "92d0ba277a12adfcffdfafd4a3c5cb28bcccd12960a1e622c1c5d7425f8194c9",
+      420
+    ],
+    "docs/tutorials/testing/overview.md": [
+      "174c7f47160444711f0b82971c8212ced64043b08fccd71d6e38dbd7571f2c11",
+      420
+    ],
+    "docs/version.md": [
+      "8ec531b510fbd33bd338672025d1b243bc1e39ae57da06a321d5df90f37fb329",
+      420
+    ],
+    "docs/why.md": [
+      "f6e130cccaa22eb4989ca63f17f7985ab9c59b66e784a6944630ad76d13f7697",
+      420
+    ],
+    "hatch.toml": [
+      "fef4a711f22ca078cd39a96e48d3e5ba082d32704d8573eeeea21ad8cfbbc843",
+      420
+    ],
+    "mkdocs.insiders.yml": [
+      "1cbf751d8453eb0204f4d831b7538ea30bc9ad35647e505777501564c2789d32",
+      420
+    ],
+    "mkdocs.yml": [
+      "92b62817f364ac421ebdabe4b60aa58bc5995cc9936bef0ef1135f7e4c52c0b4",
+      420
+    ],
+    "pyoxidizer.bzl": [
+      "f06158560765a1a9ca3ec6a0e53b3b1786cf3d1849ff6b40b764cc97db55388e",
+      420
+    ],
+    "pyproject.toml": [
+      "563660e365a8af740a829cf5bf835a09a969f3335a9a692aaf31a13c82806a78",
+      420
+    ],
+    "release/README.md": [
+      "cc4b859f6eb0779561ae3ed5f86f706ab8f2d10d2b4264d9d1708e0b77f2c4ca",
+      420
+    ],
+    "release/macos/build_pkg.py": [
+      "fbb3dd5f0f80d0362b3699d5f6d36c04cf14b613de4e06233fe28538ac7d4642",
+      420
+    ],
+    "release/macos/pkg/distribution.xml": [
+      "b12be7d46f3d16c4e722022429980fff2779118df95bfe07c1950db493d6c540",
+      420
+    ],
+    "release/macos/pkg/resources/icon.png": [
+      "4288d3ecc26938f385049e76d28b6e6eaa37d49015f456233f72fe312293bbb6",
+      420
+    ],
+    "release/unix/make_scripts_portable.py": [
+      "287da8ef50c7c1edb671d240093265ceacf3499663e002f6cd3dbf7d8ee0c9f2",
+      420
+    ],
+    "release/windows/make_scripts_portable.py": [
+      "ea688f81e9b6ede62815f2733e25d407147a3c4bc95b4eea66037aefa0cb7131",
+      420
+    ],
+    "ruff.toml": [
+      "d0787e65eac8ce15246288cf64bd08529ba200dbf66e8b446fcc6796b5cf8ac5",
+      420
+    ],
+    "ruff_defaults.toml": [
+      "fa3b2314f7927446fb63cf2792a25eaa25cdb51f6a2fc4a92f1466d0e9ab8158",
+      420
+    ],
+    "scripts/bump.py": [
+      "d05eb9ef12acb3f2eba58f7fb74841e206abd5c33985c09a36014fb6013ac99a",
+      420
+    ],
+    "scripts/generate_coverage_summary.py": [
+      "91b9e175381d0fe6794aa17157d5fad3cd14b928ec537419c2c98606fcdad403",
+      420
+    ],
+    "scripts/install_mkdocs_material_insiders.py": [
+      "43c16df2b036f43da6eb88c874fa5b57a4936e226c6c73e72cdc30e4841c899b",
+      420
+    ],
+    "scripts/release_github.py": [
+      "e181e162f6a6d9f5c2a86110a5bea790d3b44450e895ed07cc4d32c5f277fde9",
+      420
+    ],
+    "scripts/set_release_version.py": [
+      "d7f42b11e36b3c13f7543b8b28e220b58d2067e382906e459fc083a610e6f240",
+      420
+    ],
+    "scripts/update_distributions.py": [
+      "f56a40173f5cb18ec2ce7862637b076472e3cbbe9369cf793c6910f8c70956ab",
+      420
+    ],
+    "scripts/update_ruff.py": [
+      "bcd8d35c3afb555ec1217bdde45511b3dcaa417750a3432d9650e1272c8dda09",
+      420
+    ],
+    "scripts/utils.py": [
+      "81647f0cb195e3e67ab5c4897808a1ed0e48478a0b883a07064d3184acd57a28",
+      420
+    ],
+    "scripts/validate_history.py": [
+      "bf96ad4713c04a7f399634ed493c4736c6b3872978ad607e549c6d0f1ea499a8",
+      420
+    ],
+    "scripts/write_coverage_summary_report.py": [
+      "3ca69fa90c77456b4ea664e2986e02585895197e1226969b7288cb5ea7b8fa57",
+      420
+    ],
+    "src/hatch/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/__main__.py": [
+      "b56a5d9b3db0a697ef116d60f1380377727b6d39d049348eb35f11b30c92095d",
+      420
+    ],
+    "src/hatch/cli/__init__.py": [
+      "e98f7be6a19737b7e64e6fc521535fdcbf3ad81f4ef13eab974defff27443300",
+      420
+    ],
+    "src/hatch/cli/application.py": [
+      "6af313606967cdeeb749bc92c2a236b5088a49cc9ddf0b9b23a5f3877a76ced1",
+      438
+    ],
+    "src/hatch/cli/build/__init__.py": [
+      "7bc1292133080f77f1c7384350f12938b0901662e205ddf160c94c52ce13bcf4",
+      420
+    ],
+    "src/hatch/cli/clean/__init__.py": [
+      "996ca29834717b5de78a7ebe6a68e93725f192abd29305ea1e12a2e5b30c1f6e",
+      420
+    ],
+    "src/hatch/cli/config/__init__.py": [
+      "20c68682884d2b25b40b504f654d4b08be252fc5e1f787309d6916daaca668fd",
+      420
+    ],
+    "src/hatch/cli/dep/__init__.py": [
+      "b845d8d7f4224774d04e40a07240b75832e90f687062de6025640febcb873639",
+      420
+    ],
+    "src/hatch/cli/env/__init__.py": [
+      "74292b8c8cf3060c1570405b411e255d34b3b1101af097d7b9dfd52dde17adff",
+      420
+    ],
+    "src/hatch/cli/env/create.py": [
+      "875fbf6e6d451bd4b7a49b9e75d8234f63f742eb88aafd8e38e3ab96e8ab9974",
+      420
+    ],
+    "src/hatch/cli/env/find.py": [
+      "e626e9a9f6ea7637b56fd9074a92fd4b39f907de0aa4e8775365674617e15ed8",
+      420
+    ],
+    "src/hatch/cli/env/prune.py": [
+      "b982ec884b3264ca97c3f2663a0d8389586b58d054af2ca7284ff79862d813ce",
+      420
+    ],
+    "src/hatch/cli/env/remove.py": [
+      "e131c981a5d4101bf894777e1de967bcd9806fbd48fc0b9cf9d6c104bc39994f",
+      420
+    ],
+    "src/hatch/cli/env/run.py": [
+      "e44c4f7fb63aae24ddbdc4e23049a06db7286cbf0a01c43947287406c4db147f",
+      420
+    ],
+    "src/hatch/cli/env/show.py": [
+      "72d7039caaf701a5bcb44cbe1affa7f914751712bcac366bdd4a396508f5d6da",
+      420
+    ],
+    "src/hatch/cli/fmt/__init__.py": [
+      "03fad4d26a3042b7183885aa08b2d2f7100f7f1ec4ecef4739d493d98922c81d",
+      420
+    ],
+    "src/hatch/cli/fmt/core.py": [
+      "505f326b7bcda267e5f2fc248a4e573e56b5b16b87f2d1b677258ecbbfda4666",
+      438
+    ],
+    "src/hatch/cli/new/__init__.py": [
+      "e26afd4a2af7a7bc21fa0ba4f4a452fa6fcecb29cb6728ac1c5764780a07ad8d",
+      420
+    ],
+    "src/hatch/cli/new/migrate.py": [
+      "709b72adfa84260fe02c933acbbefd89fc1eb4a701a8dc66c561407b40e05c96",
+      420
+    ],
+    "src/hatch/cli/project/__init__.py": [
+      "9b8a7e12257cbbf7207533e659726bfd7f030aef95fd6704535be1a0f04aa363",
+      420
+    ],
+    "src/hatch/cli/project/metadata.py": [
+      "f42269d013143d13c54a1a1e73005ed16dcf43a3eff34a215d222eed19161e7a",
+      420
+    ],
+    "src/hatch/cli/publish/__init__.py": [
+      "a2032fa34c98f1b8b296b19d73bd11dd56be2e59e5cde979801f44c1bbf56e7a",
+      420
+    ],
+    "src/hatch/cli/python/__init__.py": [
+      "7cec0ebb8ea14d7d6bf51d52e3a7487d21a965812d4322f854ae0fbacfaced78",
+      420
+    ],
+    "src/hatch/cli/python/find.py": [
+      "8fee6ea1d004b1c8c40277305036a0c6c00061b87fa1788e3db91789edd3c931",
+      420
+    ],
+    "src/hatch/cli/python/install.py": [
+      "498560704a96063b7fa937286dcbfddfee90fdc98d0d079c50f7d819e70d8c21",
+      420
+    ],
+    "src/hatch/cli/python/remove.py": [
+      "e60d75b9d81782437223024ba49e3de0fb5d106fc10163d8024af33a3bbb4112",
+      420
+    ],
+    "src/hatch/cli/python/show.py": [
+      "12fe0964fa09795b596300d40a6b0eda29666b5e7165c36c5196685107f6ca32",
+      420
+    ],
+    "src/hatch/cli/python/update.py": [
+      "a41d16390ff113b4c27ea6fe241970950153e90823e078e2508ad5481238c8f6",
+      420
+    ],
+    "src/hatch/cli/run/__init__.py": [
+      "2a8ddc3ea5ab0083cd8a234ec512796470ce7602bcb57fb62b714e80dcb269d0",
+      420
+    ],
+    "src/hatch/cli/self/__init__.py": [
+      "8a378003fd5414241b2df9d381a61f8b568bb23a0483a3f0e25782c54c697064",
+      420
+    ],
+    "src/hatch/cli/self/report.py": [
+      "c17421585a4c16cc417fc43565d23149a6e780290227ab933d52b0b3d9a39706",
+      420
+    ],
+    "src/hatch/cli/self/restore.py": [
+      "8e3fedff062b0018cef452971b730e6eff02169bf31c6f3ff8e4c448648ce29d",
+      420
+    ],
+    "src/hatch/cli/self/update.py": [
+      "1283b9cfb5ff0233d3ccad267c94c7e0c7f4d50ea11a2cba29add385439fb342",
+      420
+    ],
+    "src/hatch/cli/shell/__init__.py": [
+      "828cf04cfb78f7ba0655cfeffc049039a9a68ced0ed39ce759729feca1d54aef",
+      420
+    ],
+    "src/hatch/cli/status/__init__.py": [
+      "dfb1bbb7f1ecb18ee5f847075ba315cf1b0a8483ed8f357bb3ad4b0479bff522",
+      420
+    ],
+    "src/hatch/cli/terminal.py": [
+      "584a2b18f59cc0f345f78888bd668cbd4a27d1404e3189c4cacc00de9c5f5960",
+      438
+    ],
+    "src/hatch/cli/test/__init__.py": [
+      "7799d9892ffeb4afb05fa7b3911da2b1d0633d01e80cf739dc8fa582554904fa",
+      420
+    ],
+    "src/hatch/cli/test/core.py": [
+      "53085391790c905f806a06df6a73f1d2b36d1a91438383360eeacb28e6815500",
+      420
+    ],
+    "src/hatch/cli/version/__init__.py": [
+      "9c2302318399abb54c87e24cbbda4f42d3a71b83661d720c21c984e41ef6b7ed",
+      420
+    ],
+    "src/hatch/config/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/config/constants.py": [
+      "a51b1f4e8fca76e6ad6fa7235f3f06d439e109cb31c6f86728654c97c06904ce",
+      420
+    ],
+    "src/hatch/config/model.py": [
+      "2b448eafaf8392788c29d433146cfafabe22fb4b19e27a69c85cf3217b7b1ab7",
+      420
+    ],
+    "src/hatch/config/user.py": [
+      "e4caf5e126de9c9fc6b7378e3a25883203c73d1a2096267dee95200d5efb51d6",
+      420
+    ],
+    "src/hatch/config/utils.py": [
+      "636cc7519e44b8cc6f4c90f5e221d150f6f14471d3e35658bab49210a002e565",
+      420
+    ],
+    "src/hatch/dep/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/dep/core.py": [
+      "abc0ee47e4263760fc86b1786f12882389767fe0429063f2adbab6572d359485",
+      420
+    ],
+    "src/hatch/dep/sync.py": [
+      "1c2e44a5b96f1ff2897f24eaacdce9d5a1b56989112f58ab6964ef59f9d768cf",
+      420
+    ],
+    "src/hatch/env/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/env/collectors/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/env/collectors/custom.py": [
+      "5e392445ad417fd8b4412c42fec8278e6dbb7b5066bd941de6fe04c10f16ad25",
+      420
+    ],
+    "src/hatch/env/collectors/default.py": [
+      "1bda0cf47f57b2762075fa9d9188386164fbb84e96381685809743ff9446e6ad",
+      438
+    ],
+    "src/hatch/env/collectors/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/env/collectors/plugin/hooks.py": [
+      "621deeff08566a40aedb309fe7de4875cd23095929131ced5575df957b8d8e5f",
+      438
+    ],
+    "src/hatch/env/collectors/plugin/interface.py": [
+      "557ec7ed536a11c2e0e2a177507e43ef1ea57dec5affb7c6a1f8180156d33798",
+      438
+    ],
+    "src/hatch/env/context.py": [
+      "a37f82c760d75ec4ffec67561c64f312d5b11fd7716dded7d213c78e99226861",
+      438
+    ],
+    "src/hatch/env/internal/__init__.py": [
+      "840763e3fbf0e9e8831a1a406e33279609ea6b0d10e53afacb3d07a66208b223",
+      438
+    ],
+    "src/hatch/env/internal/build.py": [
+      "174c7395c26c1589a69c07a32af5360548ea15a918de96b70bb49a05f2517457",
+      420
+    ],
+    "src/hatch/env/internal/static_analysis.py": [
+      "b6b1e3a5bea2c567c8b4a64caa251ebe34f6c54648092423efdc8decc21cb930",
+      420
+    ],
+    "src/hatch/env/internal/test.py": [
+      "ee9af7562a25df2c21fc54b14639afbd64990e8c0773acc07dd7dc0d469f2974",
+      420
+    ],
+    "src/hatch/env/internal/uv.py": [
+      "6fe1e3cc413b8295b966422a9057d4c4597591d4cb3281080b9ed6fbe84a3f35",
+      420
+    ],
+    "src/hatch/env/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/env/plugin/hooks.py": [
+      "0ff618ab3e4cb5f79471360b7a00abd2091f782d159353db7dba629e53fe0b77",
+      438
+    ],
+    "src/hatch/env/plugin/interface.py": [
+      "8af02f4b3d51c4a1dad9aaf12d84450c2dfca1bd01293ee3639968ceb4431a1c",
+      438
+    ],
+    "src/hatch/env/system.py": [
+      "d20e925e64162bc12a2c51404bb0552225cdc478b421d3ae305515b47d55700e",
+      420
+    ],
+    "src/hatch/env/utils.py": [
+      "9d0ae67ebddcc8bef4c9cb72aca6784548773b43419f1b791e0c082cb67c2536",
+      438
+    ],
+    "src/hatch/env/virtual.py": [
+      "3bb7017b0d964df714b442c77f5fc01dcfb64110594fd807f7aecc9de2392180",
+      438
+    ],
+    "src/hatch/errors/__init__.py": [
+      "08189821dc4ccc75dd4875c379ca418b3824f4a57c33740c4d86f09909fffb8a",
+      420
+    ],
+    "src/hatch/index/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/index/core.py": [
+      "385ff9f5533e020b81aedfaecf0b0a408b074bf2e8a0148c94feed99a85085c7",
+      420
+    ],
+    "src/hatch/index/errors.py": [
+      "d5a161226d840805eddc6779cfa2e0989326c1236c0c8f055a2f734310cfc19d",
+      420
+    ],
+    "src/hatch/index/publish.py": [
+      "0d1c6012f0add01d2f7e5b929becd3c35003bec5db15c27236bc1349b91d0f87",
+      420
+    ],
+    "src/hatch/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/plugin/constants.py": [
+      "cdec3d8dffd10d3f68b91e907ba798d3377c8f3c6c401a4f0624aa208236e76a",
+      420
+    ],
+    "src/hatch/plugin/manager.py": [
+      "9469340a84d6173fded71b668a1772f7cb90d9a67e3fed712c1a2659a81dfad2",
+      438
+    ],
+    "src/hatch/plugin/specs.py": [
+      "1d75b2972edf0e6b67df873aff9e9201f575e4ec4e7bef9b925103c248e54e1f",
+      420
+    ],
+    "src/hatch/plugin/utils.py": [
+      "b7656af17e59258a86bb7f8b45eaaabe04d12105d0471d0cd138b1e7a229004e",
+      420
+    ],
+    "src/hatch/project/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/project/config.py": [
+      "2b978c82d50ad47f56188e5e3676df84d2e76b28f04b3b8b46f095d60caa22a6",
+      438
+    ],
+    "src/hatch/project/constants.py": [
+      "6f49b97d8738b6de73ba3628a5525bafe15aa4b774f853aa2bbc1f079f9b1410",
+      420
+    ],
+    "src/hatch/project/core.py": [
+      "7d60647e73ab30ce030875c8e68fb270d38f2aa52c37670a213c5f1d92f920df",
+      438
+    ],
+    "src/hatch/project/env.py": [
+      "380ae3b857342859fa7866972d31f8abc4842a0d1d03084a7e22fbef1d04f530",
+      438
+    ],
+    "src/hatch/project/frontend/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/project/frontend/core.py": [
+      "f44900277a7d76608cb04cc22c7f82be3fc02133aa580ef64a9cb646027309bd",
+      420
+    ],
+    "src/hatch/project/frontend/scripts/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/project/frontend/scripts/build_deps.py": [
+      "209e6402f1529121d4e5c964661a38baf66914c508c34078075b1adb2a69bd8b",
+      420
+    ],
+    "src/hatch/project/frontend/scripts/core_metadata.py": [
+      "28572f57ddc3792ac2d168869bede502f1ca15bd808bf21ee3de40fd21b459af",
+      420
+    ],
+    "src/hatch/project/frontend/scripts/standard.py": [
+      "4a1d5e7f3e8efc7185548c03f0639d3927f0dfb1ee2d934540114f6c9736abb1",
+      420
+    ],
+    "src/hatch/project/utils.py": [
+      "c1104c976b075600dd75f86a73ccaac2b8fe1a3ce3a726a7da223d785fc19770",
+      420
+    ],
+    "src/hatch/publish/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/publish/auth.py": [
+      "355b16960a652eb160fe2d51df700d42659a1c36481f82e44871bbe83be6e355",
+      420
+    ],
+    "src/hatch/publish/index.py": [
+      "f40d5c35c5ed3a8e120b58b46876fa173799f001ad8b7523992934b7efca9dae",
+      420
+    ],
+    "src/hatch/publish/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/publish/plugin/hooks.py": [
+      "440d11e1501ec698f3199b5272a1db36e62665ef06bcdb72204d91dc259cf1fa",
+      420
+    ],
+    "src/hatch/publish/plugin/interface.py": [
+      "c1711a504111170a60349daed22c39ae28d043ad99ccb087d2403b6029157195",
+      420
+    ],
+    "src/hatch/py.typed": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/python/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/python/core.py": [
+      "f32e8590f8f46e0245512200bae625f14735c0c511d5d554a26b4354b1b2fd0d",
+      420
+    ],
+    "src/hatch/python/distributions.py": [
+      "62c91f32e73dfc1a025ad8f135cf88f14dc876da1ec25e759b5ada89199b6d23",
+      420
+    ],
+    "src/hatch/python/resolve.py": [
+      "333d21d7c81402a9ffb9bc5d54f8b5a91a53baba6a671c1d84a6ea396b0eecb7",
+      420
+    ],
+    "src/hatch/template/__init__.py": [
+      "14e5a0003649403292eeabf0e1bb047dfe1cb04c12824700cb8b807c4f162995",
+      420
+    ],
+    "src/hatch/template/default.py": [
+      "09da7c203264565091db74f951f70ea7bd92bb74b8b4885e8d9c0d13d0d8d482",
+      438
+    ],
+    "src/hatch/template/files_default.py": [
+      "cae48322009f9e509d9c27d362799ea1323cba900c2122d95986c3c9184f6087",
+      420
+    ],
+    "src/hatch/template/files_feature_ci.py": [
+      "5bdb43149334cf418bf24e76fb3875c74e0598d82ca99d439935978f03c47523",
+      420
+    ],
+    "src/hatch/template/files_feature_cli.py": [
+      "899fcd0d7777db776a4575dc8f0bf749046c92f77354f90129cfd8845fcf9965",
+      420
+    ],
+    "src/hatch/template/files_feature_tests.py": [
+      "c19774a50a409bf40f00ea4c42c13677284e5a405393412a7f3146304858062b",
+      420
+    ],
+    "src/hatch/template/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/template/plugin/hooks.py": [
+      "6bcd07a774fc31cf4f355ccbe59cedf767a8d93d3bb9a28a07bff399fe5519d8",
+      420
+    ],
+    "src/hatch/template/plugin/interface.py": [
+      "5e6b8a93433db07db1e0dd110019c5e7266726bfea51fa96fe7820061a537738",
+      438
+    ],
+    "src/hatch/utils/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/utils/ci.py": [
+      "5b081ba7b71c2444bf239e2763f5bae2ebb1090e2b2b88807ed4777d405b0693",
+      420
+    ],
+    "src/hatch/utils/dep.py": [
+      "00a50d73a27e8b6c971ddd818e54b9557bc696257f2030bd05dcd9b1f24bfeb5",
+      420
+    ],
+    "src/hatch/utils/env.py": [
+      "271a011c1f6b830c0457dd8b34d889f5b71f9c65df94729370f137d4df98dad6",
+      438
+    ],
+    "src/hatch/utils/fs.py": [
+      "502ea2dc7b4f6a1389a9a3764a8ec9cbcf2fe9e4389da267c66c5acec568a84d",
+      420
+    ],
+    "src/hatch/utils/metadata.py": [
+      "385a9521222cdf422c3915f1b24df54ee7b2487599a39916b6e5c7f666c907a9",
+      420
+    ],
+    "src/hatch/utils/network.py": [
+      "103bbb9769449db4bb14fb96c963484653baa3f243c04c95904adaf28b6a23f6",
+      420
+    ],
+    "src/hatch/utils/platform.py": [
+      "bfad1463dd3df9729f212e00a7001bd99e681b0baaea01eea3aa35e0dcbb105a",
+      438
+    ],
+    "src/hatch/utils/runner.py": [
+      "7b9b84771c769d2d5d38dbdbc1d6482379686d073f7bc31ef4451b14b3f718b0",
+      420
+    ],
+    "src/hatch/utils/shells.py": [
+      "d016381f080365271e5e1e320941d33510adaf2f66cfd92f3c8aaeb29e5f774a",
+      438
+    ],
+    "src/hatch/utils/structures.py": [
+      "35b00883d7e98bd69de1ce29d09d588209442ca7a8eb710d23fb2c5657c9d962",
+      420
+    ],
+    "src/hatch/utils/toml.py": [
+      "00e3e067c6f83bb4dde6df6b02ba2ea49f371a9579f42991827a57f853062ba3",
+      438
+    ],
+    "src/hatch/venv/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "src/hatch/venv/core.py": [
+      "de7455228e4892071e835ac2331dc41a179caed28b50a797b36c071d786f3dfa",
+      438
+    ],
+    "src/hatch/venv/utils.py": [
+      "fcc5199a151a3c9f9ce4b2b581557392348ae986af6b9d58838fa001b873b56a",
+      420
+    ],
+    "tests/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/builders/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/builders/hooks/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/builders/hooks/test_custom.py": [
+      "785952278a46f1ad0643a999cd663558f399a148867246f926f45e2f651a5202",
+      420
+    ],
+    "tests/backend/builders/hooks/test_version.py": [
+      "14e4e661cd7ee86e297a8b9383849501ff31984106b0ca91e1562739b30c4717",
+      420
+    ],
+    "tests/backend/builders/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/builders/plugin/test_interface.py": [
+      "c1323f2bc3398447175955e4d5be8b6b673f45cbc7a2d1f1d75555e5030669bf",
+      420
+    ],
+    "tests/backend/builders/test_binary.py": [
+      "cfe27bf58fe09741198723a1f9ac6ff29e87d73fcc20396f82708415db1059e1",
+      420
+    ],
+    "tests/backend/builders/test_config.py": [
+      "ce3a5c0fa61b537e2d212bd2e1a3e73aa94efb8791b5acc69b6663a4e29e93ef",
+      420
+    ],
+    "tests/backend/builders/test_custom.py": [
+      "e1d1ccdf0d648914834906186a60c0225a445b387b2c4297f1dfc8836b3011e2",
+      420
+    ],
+    "tests/backend/builders/test_sdist.py": [
+      "6cb06cc1ac8dbf5af33ca2084eb0360d5cde9bf31be171091ba7a0976e53df91",
+      420
+    ],
+    "tests/backend/builders/test_wheel.py": [
+      "c1da224286d858793e979b1283ec73e29178760b3f97f7a052df7a545a447d4d",
+      420
+    ],
+    "tests/backend/builders/utils.py": [
+      "c9927794f485ee765db3c3c7b8e7b94fd28fea7abc7a5bbe9ab3f44169432be5",
+      420
+    ],
+    "tests/backend/metadata/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/metadata/test_build.py": [
+      "fbc9e0c7c49e3637d9b5ba22bd9f6139d9948c8b774377c5157d78659fc0ed81",
+      420
+    ],
+    "tests/backend/metadata/test_core.py": [
+      "882fbfbc9d116143f4bace48a5d80d5406d09018bc0d19194f07a5c8cea088eb",
+      420
+    ],
+    "tests/backend/metadata/test_custom_hook.py": [
+      "6f57acaed73657b04185ada3989ccd60e99c5e11a30a77d4c5c1b33ea0041b97",
+      420
+    ],
+    "tests/backend/metadata/test_hatch.py": [
+      "5bdd2b8926c849a3dcfd078f815ca77e19bee219e69d320ef302d1da47ca7f9f",
+      420
+    ],
+    "tests/backend/metadata/test_spec.py": [
+      "f1c782edfbe24223c25296a6e3e57215570515078933f94552b7717eb0f3b88e",
+      420
+    ],
+    "tests/backend/test_build.py": [
+      "5f9f51f11e776c5bd16081efe693175ebc6e680408ca3497b7b0c9487342b20f",
+      420
+    ],
+    "tests/backend/utils/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/utils/test_context.py": [
+      "7a3eed5ccf44407db62610ca69fc2e10c20a8dc8a5558636c601cce9b4b2b021",
+      420
+    ],
+    "tests/backend/utils/test_fs.py": [
+      "4829d45fb307b42e57bfbbd578cb1d59f11b90350a68e79d4cf1e957e75c584d",
+      420
+    ],
+    "tests/backend/utils/test_macos.py": [
+      "f42926cdc3c077d65b99f6a4a62774a4c3dd049af3eea95bb3133801cc1b1b86",
+      420
+    ],
+    "tests/backend/version/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/version/scheme/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/version/scheme/test_standard.py": [
+      "e3974ca302400d49821f63d2602285efb7f99abc862226cb4f348b5619df73e7",
+      420
+    ],
+    "tests/backend/version/source/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/backend/version/source/test_code.py": [
+      "d16549c2790cd9990f3aab761ce40d52bcdc22de7b6eaee4793116a4a6b7d17c",
+      420
+    ],
+    "tests/backend/version/source/test_env.py": [
+      "ab5779a9418e2d2a9134f54df213d77e17dbb49f0defe4304d70d873178f9846",
+      420
+    ],
+    "tests/backend/version/source/test_regex.py": [
+      "312ec9dea7c0e962e82694926029ea7277c2a3b1f668c499b87e739051500b17",
+      420
+    ],
+    "tests/cli/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/build/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/build/test_build.py": [
+      "4bb09f246a98a65c3cee55ed66fa9d2d80c40c4d11b89022444511b75febaa42",
+      420
+    ],
+    "tests/cli/clean/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/clean/test_clean.py": [
+      "4f8ad83f9379eac6cc36440f42e34d5d6270612b5aed5af2a28715c4a1baf9b6",
+      420
+    ],
+    "tests/cli/config/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/config/test_explore.py": [
+      "d4302a7cb06aada22fa63716ab61ed99666936509df03b5e01e6a263bac9d0c2",
+      420
+    ],
+    "tests/cli/config/test_find.py": [
+      "8be7bf837107ad424f9fd23024b4226856fa336b38122cfb5b3c1702d6ddf0a2",
+      420
+    ],
+    "tests/cli/config/test_restore.py": [
+      "bfd94879d1d010912435ec098d9601b5b10bf278c376bc922910cee7ec072386",
+      420
+    ],
+    "tests/cli/config/test_set.py": [
+      "5f6539d618d8200b3b1c1c1cbc57b942374f560636d78450d8d541e005273cf1",
+      420
+    ],
+    "tests/cli/config/test_show.py": [
+      "4ba4f2c7527564b8718b10585050540272d87fa4a7f0d78f745c903aca0ab066",
+      420
+    ],
+    "tests/cli/dep/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/dep/show/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/dep/show/test_requirements.py": [
+      "92d9ffcba4b6295c6d78f433a1adf5374de06f6d032d515f1ba50aee0c1aec8b",
+      420
+    ],
+    "tests/cli/dep/show/test_table.py": [
+      "fa96f3453f4270d394e942ea01965dbc9717867e93a0a78b1a367f2402607dc3",
+      420
+    ],
+    "tests/cli/dep/test_hash.py": [
+      "60bd2e114bc16512df020a0ff92adf7e41b21958ef0c08d9be01e615710c13cd",
+      420
+    ],
+    "tests/cli/env/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/env/test_create.py": [
+      "78dc1181565d51d4e17c3453528a395bc9a4f2ef79d94446f97ba13cb5171e34",
+      420
+    ],
+    "tests/cli/env/test_find.py": [
+      "2dd49e9eecf4a8aa960c59b00d4b6ef765414fb9ebba05bed4de06d602a3c180",
+      420
+    ],
+    "tests/cli/env/test_prune.py": [
+      "756f653160d2994c771248d6bff4048ef70814f8259a85f88e177600540aefce",
+      420
+    ],
+    "tests/cli/env/test_remove.py": [
+      "e25611477fed201710f1a95b3c5aaea98c1951652030efcdb4537e8a247989db",
+      420
+    ],
+    "tests/cli/env/test_run.py": [
+      "489352107bbaebc968d750555f7b333908b56e20c857536449de6626b7365880",
+      420
+    ],
+    "tests/cli/env/test_show.py": [
+      "cb9112a3ec0a908e7f11032c672964c71cff1d4133bbed5a21d0bb2e66c3b932",
+      420
+    ],
+    "tests/cli/fmt/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/new/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/new/test_new.py": [
+      "71422fe15193defe6e957354c1ea96c0416fc0ad84ba24003629a533ede174f4",
+      420
+    ],
+    "tests/cli/project/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/project/test_metadata.py": [
+      "41f8037ee3f9cb85eeafb78558268dd6a163c06af69f807c05da346f4025b736",
+      420
+    ],
+    "tests/cli/publish/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/publish/test_publish.py": [
+      "41f4f19c795fc6de79c2ae79a738a17ffa0633b54d2a5a013e833f86e8c287e1",
+      420
+    ],
+    "tests/cli/python/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/python/conftest.py": [
+      "bfac0c1360f59393c3218d8005a5cfb8dfe390e5dd9dd1cb1e2afe7445f87386",
+      420
+    ],
+    "tests/cli/python/test_find.py": [
+      "80fbebad266e5bd3c990577032fe9f633396cdc9833d57d3c22cc7f3cf041973",
+      420
+    ],
+    "tests/cli/python/test_install.py": [
+      "cb26916397c828d8320dc745a4961fcbb941ab81ea72246aff52eda7ddbaaaf7",
+      420
+    ],
+    "tests/cli/python/test_remove.py": [
+      "e27480925644520867bef21988b2ae09faea3ba06aabcf2dd31f472d3f9ff8d8",
+      420
+    ],
+    "tests/cli/python/test_show.py": [
+      "315f95ba1124783657933f7a8f6ab4c5f14716df22c6ff433c8d0ead9a5549c4",
+      420
+    ],
+    "tests/cli/python/test_update.py": [
+      "976d6c0d3544521a4066c410802508b67a2cdb4fa91ce1df0e8067ca702f40cd",
+      420
+    ],
+    "tests/cli/run/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/run/test_run.py": [
+      "96508187a192a01d37aa4bab9db63dee1c9892437f402c4001de53d36f082606",
+      420
+    ],
+    "tests/cli/self/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/self/test_report.py": [
+      "ded83af025e2aeac09536c99d954d32f9ba166c3f8647911b0d7d74447a70879",
+      420
+    ],
+    "tests/cli/self/test_self.py": [
+      "797e4ce81f9910cab5b36a4f8bd489fd6a57367d545c276f34f1327a8b22be76",
+      420
+    ],
+    "tests/cli/status/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/status/test_status.py": [
+      "0f981f8773ad7c3662171fa2ef5774177f754fb6e52f0ad6b730df22f9815d05",
+      420
+    ],
+    "tests/cli/test/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/test/test_test.py": [
+      "a25e7275a3b110564a34666f756cf3f25cdd8dd3358838ff5f1af6e980b87b4b",
+      420
+    ],
+    "tests/cli/test_root.py": [
+      "0c49253351311377887c70b9ba0a29de7328033e81cc6d0c01d1c16af90a8a8a",
+      420
+    ],
+    "tests/cli/version/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/cli/version/test_version.py": [
+      "16da2f719d4c44652582984f63caa525e2766e62d698c05d4b374640b406f06a",
+      420
+    ],
+    "tests/config/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/config/test_model.py": [
+      "79b577751234af39e83c505b2d61a568edc5017f0ad1082f8b79377b3907a541",
+      420
+    ],
+    "tests/conftest.py": [
+      "2a6ffae39ef90e9a5ada140f9d1e3ecdec2da068d5697b4e49989515fd939e6d",
+      420
+    ],
+    "tests/dep/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/dep/test_sync.py": [
+      "7509f4c7e24a5c1a3f7bf7171fc6d392fdc475304e8b25a30236cb234d82e009",
+      420
+    ],
+    "tests/env/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/env/collectors/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/env/collectors/test_custom.py": [
+      "d5b5bd089432a1bd6137667cff392071557deba3815cdf06325b30c1c875e5e5",
+      420
+    ],
+    "tests/env/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/env/plugin/test_interface.py": [
+      "dc63b1c856dff4953660de116d0553c08737e2709c5fad6c922a26134eb3a86b",
+      420
+    ],
+    "tests/helpers/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/helpers/helpers.py": [
+      "102c62e85b39d08099cc1a2fd812cb6fa698d86343b3cb94ed01313bd37afe47",
+      438
+    ],
+    "tests/helpers/templates/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/helpers/templates/licenses/__init__.py": [
+      "5b631692ecded5ce87e1f72ece4b9e8c3b86a831a73ef668f80dffc89c580575",
+      420
+    ],
+    "tests/helpers/templates/new/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/helpers/templates/new/basic.py": [
+      "66dac084fcb78a00c6a8bbc8f17e6056d5545a0e0cb5c27274a87bb7f0c11775",
+      420
+    ],
+    "tests/helpers/templates/new/default.py": [
+      "90b5b8e1330078e279853c3b66d695bc1b0f884d836f0756e338fd3f8d157773",
+      420
+    ],
+    "tests/helpers/templates/new/feature_ci.py": [
+      "38ab7ecac384a11e939eb41bdafa2baeeb0ec462480b84bebfa1af4c05655d73",
+      420
+    ],
+    "tests/helpers/templates/new/feature_cli.py": [
+      "db7078016195229541a736b715038813377ea61923b10fa0c539d0ebab48568b",
+      420
+    ],
+    "tests/helpers/templates/new/feature_no_src_layout.py": [
+      "83047b116d7cdfc2954cd030eb7a34d0e0a7798cb1ac1a3b6cf08b58a5ff2388",
+      420
+    ],
+    "tests/helpers/templates/new/licenses_empty.py": [
+      "407d8ea47007392317f4381fc259a9234812e6e055c57375b4a522f45d8a14d8",
+      420
+    ],
+    "tests/helpers/templates/new/licenses_multiple.py": [
+      "68fbe1b6ceacd55da80159dafa8ed0bd058548fc9c08b2f507e5318a37eb2404",
+      420
+    ],
+    "tests/helpers/templates/new/projects_urls_empty.py": [
+      "576b33eece9956e2af09c6ec56f7cd1a1df2a190afc31d0e77c948cc7a91a84b",
+      420
+    ],
+    "tests/helpers/templates/new/projects_urls_space_in_label.py": [
+      "290b50f29ddaa6adc117e545dc77dd24749966292da7a35b189b37a8bc84dc15",
+      420
+    ],
+    "tests/helpers/templates/sdist/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_default.py": [
+      "e1316839a1973ddc58a19b87fe89e66e9aa8f8b1cf7d985f6efe8c5074ac18bf",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_default_build_script_artifacts.py": [
+      "bed2cc7272224db59d8ef9eef10200abfd7036a423d8967a399e7f6ba279f206",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_default_build_script_extra_dependencies.py": [
+      "562af2ee0b393e350ce54796390eaeb41af99ac1b972d147a3b798ceb3e3d044",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_default_support_legacy.py": [
+      "2b883164abe28bb8b12aaad44fa2c643de82be13c94a56a63d8d80d781170ed4",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_default_vcs_git_exclusion_files.py": [
+      "4255629cb882d6ed7f6ccbd7e08d0107de891515733b52a4142c4973235b62ed",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_default_vcs_mercurial_exclusion_files.py": [
+      "edcda21683f752175285a52c8a763ab403771dbc140a8372dd25933800725d36",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_include.py": [
+      "f20d576560d48fb1a2e0e6aec5bbe311a188df326d06440b5202b7d43b15637b",
+      420
+    ],
+    "tests/helpers/templates/sdist/standard_include_config_file.py": [
+      "6e1d2beeb34373163be6bfe9706a55d8a5a5ce6bd38f5d6294dec6d8009577e6",
+      420
+    ],
+    "tests/helpers/templates/wheel/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script.py": [
+      "7f4f20498f4ac0949ec0a9849976a8cc134fb42f7c825064c1c77b5aedb05ea6",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script_artifacts.py": [
+      "0b2088410a3e371b713f4330a9aabb9fbe0cde551561f6544fb86a3000d39875",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script_artifacts_with_src_layout.py": [
+      "f16f7059b25d5fc75642f1fb799b8a9519c8191f374ec52e344776181c3c0b40",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script_configured_build_hooks.py": [
+      "019a5b55b29e4de10eed8febae0aad410c4bb7d135dcf872d00bc62747d2c855",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script_extra_dependencies.py": [
+      "676c7ed8a7fa50fbda9240463cabf7f1d403218c034f0eee680fb106e1ef780a",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script_force_include.py": [
+      "143f9aa6e6f5db05b53084f120bd655d7a600c665bfba7b9100aa9d206bddb11",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_build_script_force_include_no_duplication.py": [
+      "01a6e1ba75089d66b95bb1b1bd2f662463608cfcaf076edc8859d545b5dbff16",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_extra_metadata.py": [
+      "37da591af0ced58f893ac2849016ac01aca0297132d1aace706ac2447a135e41",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_license_multiple.py": [
+      "82d3ab14dfb6a823dc468a2125ef629ee0fc48413c7fc2c261998b8f4ace6fd3",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_license_single.py": [
+      "6e3d54688da54c199b6e8fdf3638d4ab8bb8bf0f838809c70b4a588f999aeda5",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_namespace_package.py": [
+      "912db380a67930392003d9e913c3a82056018e557fcdf6e21cc8c75b44b083d4",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_python_constraint.py": [
+      "7d21f1dcb3ef6023403de1efbd31e52ec6bac21cf59d4632381fc480913e9772",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_python_constraint_three_components.py": [
+      "cfd1312564878649b743e86f3ddad6bfa8d7353718b5982689008944487fc2de",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_shared_data.py": [
+      "c059eb2ea76d2c9fa7daab9f05ccf3d19c2734ee5a0b59fa916dd68445b36cc4",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_shared_scripts.py": [
+      "138f8aa48a92e53d687f1affce6945b45336390babe546a3b6c234686e80ed32",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_single_module.py": [
+      "2523e2f367545565e92a068e180885398184dba97fc6290217f53d8ad7edf590",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_default_symlink.py": [
+      "5d0695f0d1e805e504833951ba92424ff39a62308c357e8aff2167126596c20d",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_editable_exact.py": [
+      "06cb92880792bf0cff694cc106e90192d82366febd34c1ee2aab37e9b4a363e2",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_editable_exact_extra_dependencies.py": [
+      "b83993515303f077b1ec700633fad4f93eef7b164a74c369219b52d3f6e69635",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_editable_exact_force_include.py": [
+      "6532a5cde7d0a6043a2bc750f8122a8771fe09f22f362ee3f3946ce70acfc83b",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_editable_pth.py": [
+      "a82bfcdbb4a4003fec50fa69292525fc7e23c7657e4d915d4cec47107a98aefa",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_editable_pth_extra_dependencies.py": [
+      "ab0c9f9b1b7740684a2cc417f02d1b852e29322c86cafbce3ef797f4bea064d3",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_editable_pth_force_include.py": [
+      "0988dd154f19ad07cc2738cac254b7d3deb0007952fb1000b28b27f23b8574e7",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_entry_points.py": [
+      "effc4782cbc934a5e04992b86390f0bfc537055ff0cc04ddf5f6229d1c64b066",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_no_strict_naming.py": [
+      "994801ffe0f831b771d0e3d1764eef99733f2fc71ebfd61683d939a0f2bb99c5",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_only_packages_artifact_override.py": [
+      "2074af1455cefcd4d43dc76f8252fe7e932e289701ef6537cd534183c1993f57",
+      420
+    ],
+    "tests/helpers/templates/wheel/standard_tests.py": [
+      "180454eb3a69d5c6be90dbaf222b4c5f6d11a9bcc8a8e093f1985994fff2a120",
+      420
+    ],
+    "tests/helpers/templates/wheel/utils.py": [
+      "1a31bd8135b30eaef7d9dbd50fe7fe3784cf62bcb27905b75f29f039aed99a59",
+      420
+    ],
+    "tests/index/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/index/server/devpi/Dockerfile": [
+      "a53ed5cf5bdd8b606dc2fedec341c3218ad503b548c069feafbee6212e25065e",
+      420
+    ],
+    "tests/index/server/devpi/entrypoint.sh": [
+      "e23e38e6626dca14507cb7943d2266c407506c570736b7785ea510e4ec82e7f5",
+      420
+    ],
+    "tests/index/server/docker-compose.yaml": [
+      "6a4aaa7005f030697f57fb554bacc92f35e8521db3e7be9401c09e19ae7110a5",
+      420
+    ],
+    "tests/index/server/nginx/nginx.conf": [
+      "b2635044b10185eeb8e604492ace2565822460fae5521dc1dba4984485952e40",
+      420
+    ],
+    "tests/index/test_core.py": [
+      "e1fa7a1b62c12f98fd8a2007c9af28c56be3c15278e88c19b24c4619beadb58c",
+      420
+    ],
+    "tests/project/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/project/test_config.py": [
+      "135866505860bf777f080f1431f2d6350323ca1b05548324470ac759f518eb60",
+      420
+    ],
+    "tests/project/test_core.py": [
+      "b410e8346a018b30d46b5b1eceeddeb0b0fa1542f45722a2054036939d3a2ebb",
+      420
+    ],
+    "tests/project/test_frontend.py": [
+      "92219a518bddd4cb8292858cd1836d61dfa20ea88486154196daa7c6122af47a",
+      420
+    ],
+    "tests/project/test_utils.py": [
+      "eb292ab7fbf8144fad8d4091ae1ba393353d509e700ca380fc0349f9addb032a",
+      420
+    ],
+    "tests/publish/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/publish/plugin/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/publish/plugin/test_interface.py": [
+      "1a9edc1ae0660f4c4f48704ebeef4882f042decdd1268da81177bbbe1e04c2b6",
+      420
+    ],
+    "tests/python/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/python/test_core.py": [
+      "2e4d0be21b1063b41395148020570d4a4767d1803750f05eac7fd921cebfba45",
+      420
+    ],
+    "tests/python/test_resolve.py": [
+      "4d85e7fb73dac13c8b5303acbfa7b95abd4831743d2977d57b6f38a7c9f0b74a",
+      420
+    ],
+    "tests/utils/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/utils/test_auth.py": [
+      "7a931e7b15018918772d765897b91acef898b245825bf258e8f88ec0f771cd2f",
+      420
+    ],
+    "tests/utils/test_fs.py": [
+      "e36833dd94f09a29115980383404d93956cbf5ad63f327ebefff71d32339a5e5",
+      420
+    ],
+    "tests/utils/test_platform.py": [
+      "28a318a3b466a465bbe34cc8cd02894494d62ce1a9247c1299400f0c69d30d57",
+      420
+    ],
+    "tests/utils/test_runner.py": [
+      "91edad02705e2f3446ef817dbdf5d49ae393b503fa1664bea93283f6cbc2f5cf",
+      420
+    ],
+    "tests/utils/test_structures.py": [
+      "f1e08bc4c924e1138be10940314566cb6dba9fa27e6d31f4e1638d217022fb63",
+      420
+    ],
+    "tests/venv/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/venv/test_core.py": [
+      "64a52f9e44c9cbfea414452667f26f64071ec1dfa8fabd21437388f2ad6fa2df",
+      420
+    ],
+    "tests/venv/test_utils.py": [
+      "02df4df79550c7b158ad91271334fb71c5731332a2d6e887b7bd59687338b883",
+      420
+    ],
+    "tests/workspaces/__init__.py": [
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      420
+    ],
+    "tests/workspaces/test_config.py": [
+      "5bc46ef6bf4706a4e807f1e2b248cd4157b9e3d2aaa1a05b8c318d9b3661fd24",
+      420
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/utils/tests/test_console.py.
+
+Date: 2026-10-11T00:14:25
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 28 items
+
+astropy/utils/tests/test_console.py ............................         [100%]
+
+==================================== PASSES ====================================
+_______________________________ test_color_print _______________________________
+----------------------------- Captured stdout call -----------------------------
+foo
+foobar
+___________________________ test_color_print_unicode ___________________________
+----------------------------- Captured stdout call -----------------------------
+überbær
+________________________ test_color_print_invalid_color ________________________
+----------------------------- Captured stdout call -----------------------------
+foo
+=========================== short test summary info ============================
+PASSED astropy/utils/tests/test_console.py::test_fake_tty
+PASSED astropy/utils/tests/test_console.py::test_color_text
+PASSED astropy/utils/tests/test_console.py::test_color_print
+PASSED astropy/utils/tests/test_console.py::test_color_print2
+PASSED astropy/utils/tests/test_console.py::test_color_print3
+PASSED astropy/utils/tests/test_console.py::test_color_print_unicode
+PASSED astropy/utils/tests/test_console.py::test_color_print_invalid_color
+PASSED astropy/utils/tests/test_console.py::test_spinner_non_unicode_console
+PASSED astropy/utils/tests/test_console.py::test_progress_bar
+PASSED astropy/utils/tests/test_console.py::test_progress_bar2
+PASSED astropy/utils/tests/test_console.py::test_progress_bar3
+PASSED astropy/utils/tests/test_console.py::test_zero_progress_bar
+PASSED astropy/utils/tests/test_console.py::test_progress_bar_as_generator
+PASSED astropy/utils/tests/test_console.py::test_progress_bar_map
+PASSED astropy/utils/tests/test_console.py::test_human_time[864088- 1w 3d]
+PASSED astropy/utils/tests/test_console.py::test_human_time[187213- 2d 4h]
+PASSED astropy/utils/tests/test_console.py::test_human_time[3905- 1h 5m]
+PASSED astropy/utils/tests/test_console.py::test_human_time[64- 1m 4s]
+PASSED astropy/utils/tests/test_console.py::test_human_time[15-   15s]
+PASSED astropy/utils/tests/test_console.py::test_human_time[2-    2s]
+PASSED astropy/utils/tests/test_console.py::test_human_file_size[8640882-8.6M]
+PASSED astropy/utils/tests/test_console.py::test_human_file_size[187213-187k]
+PASSED astropy/utils/tests/test_console.py::test_human_file_size[3905-3.9k]
+PASSED astropy/utils/tests/test_console.py::test_human_file_size[64- 64 ]
+PASSED astropy/utils/tests/test_console.py::test_human_file_size[2-  2 ]
+PASSED astropy/utils/tests/test_console.py::test_human_file_size[size5- 10G]
+PASSED astropy/utils/tests/test_console.py::test_bad_human_file_size[size0]
+PASSED astropy/utils/tests/test_console.py::test_bad_human_file_size[size1]
+============================== 28 passed in 0.47s ==============================

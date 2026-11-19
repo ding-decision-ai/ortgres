@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 8 items
+
+lib/mpl_toolkits/axisartist/tests/test_axislines.py ........             [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_SubplotZero[png]
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_Subplot[png]
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_Axes
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_ParasiteAxesAuxTrans[png]
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_axisline_style[png]
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_axisline_style_size_color[png]
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_axisline_style_tight[png]
+PASSED lib/mpl_toolkits/axisartist/tests/test_axislines.py::test_subplotzero_ylabel[png]
+============================== 8 passed in 0.50s ===============================

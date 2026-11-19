@@ -1,0 +1,90 @@
+{
+    "mlflow__mlflow.93dab383.test_validation.2e1c5076.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.6364,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_scorers_valid",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_scorers_empty_list",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data_with_expectations",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_global_guidelines_do_not_require_expectations",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data_with_trace",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data_with_predict_fn"
+                ],
+                "failure": [
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_scorers_invalid_all_scorers",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data_with_correctness[expectations0]",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data_with_correctness[expectations1]",
+                    "| MEM 7.0/46.9 GB | DISK 898.1/915.7 GB tests/genai/scorers/test_validation.py::test_validate_data_missing_columns"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/claude_code/test_autolog.py::test_anthropic_autolog_without_claude_sdk",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/claude_code/test_autolog.py::test_patched_claude_sdk_init_with_options",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/claude_code/test_autolog.py::test_sdk_hook_handler_when_disabled",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_upload_project_to_dbfs",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_upload_existing_project_to_dbfs",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_dbfs_path_exists_error_response_handling[response_mock0]",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_dbfs_path_exists_error_response_handling[response_mock1]",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_dbfs_path_exists_error_response_handling[response_mock2]",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_validations",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_cluster_spec_json",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_extended_cluster_spec_json",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_extended_cluster_spec_json_without_libraries",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_throws_exception_when_spec_uses_existing_cluster",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_cancel",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_get_tracking_uri_for_run",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_databricks_http_request_integration",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_failed",
+                    "| MEM 6.6/46.9 GB | DISK 898.1/915.7 GB tests/projects/test_databricks.py::test_run_databricks_generates_valid_mlflow_run_cmd",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_return_trace",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_does_not_return_trace[databricks_output0]",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_does_not_return_trace[databricks_output1]",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_does_not_return_trace[databricks_output2]",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_pass_tracing_check",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_return_v2_trace",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_should_not_pass_databricks_options_to_fmapi",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_handles_trace_without_tags",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_reuses_trace_in_dual_write_mode",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/genai/evaluate/test_to_predict_fn.py::test_to_predict_fn_copies_trace_when_experiment_differs",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_init_validation_and_cleaning",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_init_get_host_creds_with_databricks_profile_uri",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifact[None-/dbfs/test/test.txt]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifact[output-/dbfs/test/output/test.txt]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifact_empty_file",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifact_empty_artifact_path",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifact_error",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifacts[None]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifacts[]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifacts_error",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifacts_with_artifact_path[a-expected_endpoints0]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifacts_with_artifact_path[a/-expected_endpoints1]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_log_artifacts_with_artifact_path[/-expected_endpoints2]",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_list_artifacts",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_download_artifacts",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_get_host_creds_from_default_store_file_store",
+                    "| MEM 6.4/46.9 GB | DISK 898.1/915.7 GB tests/store/artifact/test_dbfs_rest_artifact_repo.py::test_get_host_creds_from_default_store_rest_store",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_set_experiment_trace_location",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_set_experiment_trace_location_with_default_experiment",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_set_experiment_trace_location_no_experiment",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_set_experiment_trace_location_non_existent_experiment",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_unset_experiment_trace_location",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_unset_experiment_trace_location_errors",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_unset_experiment_trace_location_with_default_experiment",
+                    "| MEM 6.5/46.9 GB | DISK 898.1/915.7 GB tests/tracing/test_enablement.py::test_non_databricks_tracking_uri_errors"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-19T07:22:43.309635"
+    }
+}

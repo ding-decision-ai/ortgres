@@ -1,0 +1,47 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "source": {
+      "models_called": 1,
+      "model_elapsed_seconds": 429.5513238720014,
+      "model_exit_code": 0,
+      "turn_usages": {
+        "0": {
+          "input_tokens": 4010473,
+          "cached_input_tokens": 3852672,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 18043,
+          "reasoning_output_tokens": 8262
+        }
+      },
+      "cost_usd": null,
+      "source_budget_separate_from_formal": true,
+      "prior_costs_preserved": true
+    },
+    "source_event_reference": {
+      "bytes": 2326494,
+      "mode": "0400"
+    },
+    "source_event_count_once_across_reuses": true,
+    "formal": {
+      "elapsed_seconds": 1453.4941859000028,
+      "raw_completed_turn_usages": {
+        "0": {
+          "input_tokens": 16402655,
+          "cached_input_tokens": 16137856,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 42239,
+          "reasoning_output_tokens": 14734
+        }
+      },
+      "usd": null,
+      "exact_inference_api_active_seconds": null,
+      "incremental_tokens": null
+    },
+    "earlier_history_costs_not_erased_or_summed_when_unknown": true,
+    "source_cost_is_same_handoff_event_as_technical_attempt_not_a_new_initialization": false,
+    "other_cohort_source_and_formal_costs_are_separate_preserved_history": true,
+    "incremental_token_usage": null,
+    "USD": null
+  }
+}

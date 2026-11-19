@@ -1,0 +1,411 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+libraries: Sphinx-8.3.0+/0e6ad59, docutils-0.22.3
+test roots directory: /testbed/tests/roots
+base tmp_path: /tmp/pytest-of-root/pytest-2
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 21 items
+
+tests/test_domains/test_domain_js.py .....................               [100%]
+
+==================================== PASSES ====================================
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m[new config] 3 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[ 33%] [35mindex[39;49;00m
+[01mreading sources... [39;49;00m[ 67%] [35mmodule[39;49;00m
+[01mreading sources... [39;49;00m[100%] [35mroles[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mroles[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mroles[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: dummy
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js/_build/dummy
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mall of 0 po files
+[01mwriting output... [39;49;00m
+[01mbuilding [dummy]: [39;49;00mall source files
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[ 33%] [32mindex[39;49;00m
+[01mwriting output... [39;49;00m[ 67%] [32mmodule[39;49;00m
+[01mwriting output... [39;49;00m[100%] [32mroles[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The dummy builder generates no files.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/_blank
+# outdir: /tmp/pytest-of-root/pytest-2/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/_blank
+# outdir: /tmp/pytest-of-root/pytest-2/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/_blank
+# outdir: /tmp/pytest-of-root/pytest-2/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/_blank
+# outdir: /tmp/pytest-of-root/pytest-2/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/_blank
+# outdir: /tmp/pytest-of-root/pytest-2/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+[91m/tmp/pytest-of-root/pytest-2/_blank/index.rst:1: WARNING: duplicate class description of f, other class in index[39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/_blank/index.rst:2: WARNING: duplicate class description of g, other class in index[39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/_blank/index.rst:1: WARNING: duplicate module description of f, other module in index[39;49;00m
+[91m/tmp/pytest-of-root/pytest-2/_blank/index.rst:2: WARNING: duplicate module description of g, other module in index[39;49;00m
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/_blank
+# outdir: /tmp/pytest-of-root/pytest-2/_blank/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/root
+# outdir: /tmp/pytest-of-root/pytest-2/root/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (1 option: 'html_theme')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m0 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/text.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: html
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mloading pickled environment... [39;49;00mThe configuration has changed (2 options: 'html_theme', 'javascript_trailing_comma_in_multi_line_signatures')
+done
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [html]: [39;49;00mtargets for 0 source files that are out of date
+[01mupdating environment: [39;49;00m[config changed ('javascript_trailing_comma_in_multi_line_signatures')] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying static files... [39;49;00m
+Writing evaluated template result to /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html/_static/documentation_options.js
+Writing evaluated template result to /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html/_static/basic.css
+Writing evaluated template result to /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html/_static/language_data.js
+[01mcopying static files: [39;49;00mdone
+[01mcopying extra files... [39;49;00m
+[01mcopying extra files: [39;49;00mdone
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mgenerating indices... [39;49;00mgenindex done
+[01mwriting additional pages... [39;49;00msearch done
+[01mdumping search index in English (code: en)... [39;49;00mdone
+[01mdumping object inventory... [39;49;00mdone
+[01mbuild succeeded.[39;49;00m
+
+The HTML pages are in ../tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/html.
+
+# warning: 
+
+--------------------------- Captured stdout teardown ---------------------------
+# testroot: root
+# builder: text
+# srcdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length
+# outdir: /tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/text
+# status: 
+[01mRunning Sphinx v8.3.0+/0e6ad59[39;49;00m
+[01mloading translations [en]... [39;49;00mdone
+[01mbuilding [mo]: [39;49;00mtargets for 0 po files that are out of date
+[01mwriting output... [39;49;00m
+[01mbuilding [text]: [39;49;00mtargets for 1 source files that are out of date
+[01mupdating environment: [39;49;00m[new config] 1 added, 0 changed, 0 removed
+[01mreading sources... [39;49;00m[100%] [35mindex[39;49;00m
+
+[01mlooking for now-outdated files... [39;49;00mnone found
+[01mpickling environment... [39;49;00mdone
+[01mchecking consistency... [39;49;00mdone
+[01mpreparing documents... [39;49;00mdone
+[01mcopying assets... [39;49;00m
+[01mcopying assets: [39;49;00mdone
+[01mwriting output... [39;49;00m[100%] [32mindex[39;49;00m
+
+[01mbuild succeeded.[39;49;00m
+
+The text files are in ../tmp/pytest-of-root/pytest-2/domain-js-javascript_maximum_signature_line_length/_build/text.
+
+# warning: 
+
+=========================== short test summary info ============================
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_xrefs
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_objects
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_find_obj
+PASSED tests/test_domains/test_domain_js.py::test_get_full_qualified_name
+PASSED tests/test_domains/test_domain_js.py::test_js_module
+PASSED tests/test_domains/test_domain_js.py::test_js_function
+PASSED tests/test_domains/test_domain_js.py::test_js_class
+PASSED tests/test_domains/test_domain_js.py::test_js_data
+PASSED tests/test_domains/test_domain_js.py::test_no_index_entry
+PASSED tests/test_domains/test_domain_js.py::test_module_content_line_number
+PASSED tests/test_domains/test_domain_js.py::test_jsfunction_signature_with_javascript_maximum_signature_line_length_equal
+PASSED tests/test_domains/test_domain_js.py::test_jsfunction_signature_with_javascript_maximum_signature_line_length_force_single
+PASSED tests/test_domains/test_domain_js.py::test_jsfunction_signature_with_javascript_maximum_signature_line_length_break
+PASSED tests/test_domains/test_domain_js.py::test_jsfunction_signature_with_maximum_signature_line_length_equal
+PASSED tests/test_domains/test_domain_js.py::test_jsfunction_signature_with_maximum_signature_line_length_force_single
+PASSED tests/test_domains/test_domain_js.py::test_jsfunction_signature_with_maximum_signature_line_length_break
+PASSED tests/test_domains/test_domain_js.py::test_javascript_maximum_signature_line_length_overrides_global
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_javascript_maximum_signature_line_length_in_html
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_javascript_maximum_signature_line_length_in_text
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_javascript_trailing_comma_in_multi_line_signatures_in_html
+PASSED tests/test_domains/test_domain_js.py::test_domain_js_javascript_trailing_comma_in_multi_line_signatures_in_text
+============================== 21 passed in 0.66s ==============================

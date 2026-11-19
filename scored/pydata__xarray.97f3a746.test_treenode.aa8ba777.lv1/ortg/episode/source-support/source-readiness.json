@@ -1,0 +1,30 @@
+{
+  "source_identity_preserved": true,
+  "roles_preserved": true,
+  "coverage_scope": "task_and_visible_tests_related_files",
+  "original_cognitive_files": 428,
+  "related_files": [
+    "xarray/core/treenode.py",
+    "xarray/core/datatree.py",
+    "xarray/core/datatree_mapping.py",
+    "xarray/core/formatting.py",
+    "xarray/structure/concat.py",
+    "xarray/__init__.py",
+    "xarray/tests/test_datatree.py",
+    "xarray/tests/test_datatree_mapping.py",
+    "xarray/tests/test_backends_datatree.py"
+  ],
+  "related_file_count": 9,
+  "related_valid_outline_count": 9,
+  "missing_paths": [],
+  "invalid_paths": [],
+  "subset_ready": true,
+  "coverage_complete": true,
+  "full_repository_ready": false,
+  "full_repository_completion_required": false,
+  "unselected_bare_rows": 419,
+  "visible_tests_status": "read",
+  "selection_is_repair_allowlist": false,
+  "official_evaluation_scope_changed": false,
+  "semantic_fidelity": "Selected summaries require source-body/test reading; row syntax does not prove semantic quality."
+}

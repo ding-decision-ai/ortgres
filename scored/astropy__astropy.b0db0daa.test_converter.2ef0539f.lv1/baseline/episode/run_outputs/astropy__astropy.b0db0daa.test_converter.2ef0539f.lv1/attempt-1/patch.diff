@@ -1,0 +1,478 @@
+diff --git a/astropy/io/votable/converters.py b/astropy/io/votable/converters.py
+index c0bf064..c720636 100644
+--- a/astropy/io/votable/converters.py
++++ b/astropy/io/votable/converters.py
+@@ -72,6 +72,11 @@ else:
+         return x
+ 
+ 
++def _make_masked_array(data, mask):
++    """Construct a masked array while retaining element masks."""
++    return ma.array(data, mask=mask)
++
++
+ 
+ 
+ 
+@@ -180,6 +185,10 @@ class Converter:
+     def _parse_length(read):
+         return struct.unpack(">I", read(4))[0]
+ 
++    @staticmethod
++    def _write_length(length):
++        return struct.pack(">I", length)
++
+ 
+ 
+ 
+@@ -487,6 +496,29 @@ class UnicodeChar(Converter):
+             return s[:end], False
+         return s, False
+ 
++    def _binoutput_var(self, value, mask):
++        if mask or value is None or value == "":
++            return _zero_int
++
++        if self.arraysize != "*" and len(value) > self.arraysize:
++            vo_warn(W46, ("unicodeChar", self.arraysize), None, None)
++
++        encoded = str(value).encode("utf_16_be")
++        return self._write_length(len(encoded) // 2) + encoded
++
++    def _binoutput_fixed(self, value, mask):
++        if mask:
++            encoded = _empty_bytes
++        else:
++            encoded = str(value).encode("utf_16_be")
++
++        size = self.arraysize * 2
++        if len(encoded) > size:
++            raise struct.error(
++                f"argument for '{size}s' must be a bytes object of length at most {size}"
++            )
++        return struct.pack(self._struct_format, encoded)
++
+ 
+ 
+ 
+@@ -775,6 +807,9 @@ class FloatingPoint(Numeric):
+         else:
+             self.parse = self._parse_permissive
+ 
++    def supports_empty_values(self, config):
++        return True
++
+ 
+ 
+ 
+@@ -1124,6 +1159,21 @@ class BitArray(NumericArray):
+ 
+         self._bytes = ((self._items - 1) // 8) + 1
+ 
++    def parse(self, value, config=None, pos=None):
++        # Both the whitespace-separated representation commonly found in
++        # input files and the compact representation emitted by ``output``
++        # are legal for bit arrays.
++        if not value.strip():
++            if config is None:
++                config = {}
++            if config.get("version_1_3_or_later"):
++                return np.zeros(self._arraysize, dtype=self._base.format), True
++            warn_or_raise(E02, E02, (self._items, 0), config, pos)
++            return self.parse_parts([False] * self._items, config, pos)
++        if not any(char.isspace() for char in value):
++            value = " ".join(value)
++        return NumericArray.parse(self, value, config, pos)
++
+ 
+ 
+ 
+@@ -1525,4 +1575,4 @@ def table_column_to_votable_datatype(column):
+     if original_arraysize is not None:
+         result["arraysize"] = original_arraysize
+ 
+-    return result
+\ No newline at end of file
++    return result
+diff --git a/astropy/io/votable/exceptions.py b/astropy/io/votable/exceptions.py
+index cda29c9..c00beac 100644
+--- a/astropy/io/votable/exceptions.py
++++ b/astropy/io/votable/exceptions.py
+@@ -73,6 +73,41 @@ class Conf(_config.ConfigNamespace):
+ conf = Conf()
+ 
+ 
++def _format_message(message, warning, config=None, pos=None):
++    if config is None:
++        config = {}
++
++    parts = []
++    filename = config.get("filename")
++    if filename:
++        parts.append(str(filename))
++    if pos is not None:
++        parts.extend(str(value) for value in pos)
++
++    prefix = ":".join(parts)
++    if prefix:
++        prefix += ": "
++    return f"{prefix}{warning}: {message}"
++
++
++def _suppressed_warning(warning, config=None, stacklevel=1):
++    if config is None:
++        config = {}
++
++    counts = config.setdefault("_warning_counts", {})
++    warning_type = type(warning)
++    count = counts.get(warning_type, 0) + 1
++    counts[warning_type] = count
++
++    maximum = conf.max_warnings
++    if count < maximum:
++        warn(warning, stacklevel=stacklevel + 1)
++    elif count == maximum:
++        warning.formatted_message += " (suppressing further warnings of this type...)"
++        warning.args = (warning.formatted_message,)
++        warn(warning, stacklevel=stacklevel + 1)
++
++
+ 
+ 
+ 
+@@ -1609,4 +1644,4 @@ if __doc__ is not None:
+     __doc__ = __doc__.format(**_build_doc_string())
+ 
+ __all__ += [x[0] for x in _get_warning_and_exception_classes("W")]
+-__all__ += [x[0] for x in _get_warning_and_exception_classes("E")]
+\ No newline at end of file
++__all__ += [x[0] for x in _get_warning_and_exception_classes("E")]
+diff --git a/astropy/io/votable/tree.py b/astropy/io/votable/tree.py
+index ca1d43f..2c98b3b 100644
+--- a/astropy/io/votable/tree.py
++++ b/astropy/io/votable/tree.py
+@@ -241,6 +241,16 @@ def _lookup_by_id_or_name_factory(iterator, element_name, doc):
+     return lookup_by_id_or_name
+ 
+ 
++def _get_default_unit_format(config):
++    if config.get("version_1_4_or_later"):
++        return "vounit"
++    return "cds"
++
++
++def _get_unit_format(config):
++    return config.get("unit_format") or _get_default_unit_format(config)
++
++
+ 
+ 
+ 
+@@ -316,6 +326,14 @@ def check_astroyear(year, field, config=None, pos=None):
+     return True
+ 
+ 
++def check_string(string, attr_name, config=None, pos=None):
++    """Validate attributes whose VOTable representation must be a string."""
++    if string is not None and not isinstance(string, (str, bytes)):
++        warn_or_raise(W08, W08, attr_name, config, pos)
++        return False
++    return True
++
++
+ 
+ 
+ 
+@@ -993,6 +1011,40 @@ class Values(Element, _IDProperty):
+         self.to_xml(XMLWriter(buff))
+         return buff.getvalue().strip()
+ 
++    def _parse_minmax(self, val):
++        if val is None:
++            return None
++
++        converter = getattr(self._field, "converter", None)
++        if converter is None:
++            return val
++
++        arraysize = getattr(self._field, "arraysize", None)
++        if arraysize is None:
++            return converter.parse(val, self._config, self._pos)[0]
++
++        # Array-valued fields in real-world files use both scalar constraints
++        # and full arrays (notably for interval xtypes).  A permissive scalar
++        # floating-point converter consumes an array as a bad scalar instead
++        # of raising, so select the array parser from the lexical form first.
++        if isinstance(converter, converters.Array) and len(
++            converters.array_splitter.split(val.strip())
++        ) > 1:
++            config = self._config.copy()
++            config["verify"] = "ignore"
++            return converter.parse(val, config, self._pos)[0]
++        return converter.parse_scalar(val, self._config, self._pos)[0]
++
++    def is_defaults(self):
++        return (
++            self.ref is None
++            and self.null is None
++            and self.ID is None
++            and self.max is None
++            and self.min is None
++            and len(self.options) == 0
++        )
++
+     @property
+     def null(self):
+         """
+@@ -1716,6 +1768,27 @@ class Field(
+             for link in self.links:
+                 link.to_xml(w, **kwargs)
+ 
++    def to_table_column(self, column):
++        """Copy this FIELD's metadata to an Astropy table column."""
++        for key in ("ucd", "width", "precision", "utype", "xtype"):
++            val = getattr(self, key, None)
++            if val is not None:
++                column.meta[key] = val
++
++        if self.datatype in ("char", "unicodeChar"):
++            column.meta["_votable_string_dtype"] = self.datatype
++            if self.arraysize is not None:
++                column.meta["_votable_arraysize"] = self.arraysize
++
++        if self.unit is not None:
++            column.unit = self.unit
++        if self.description is not None:
++            column.description = self.description
++
++        self.values.to_table_column(column)
++        for link in self.links:
++            link.to_table_column(column)
++
+ 
+ 
+ 
+@@ -3494,6 +3567,29 @@ class TableElement(
+                 w._flush()
+                 w.write(base64.b64encode(data.getvalue()).decode("ascii"))
+ 
++    def to_table(self, use_names_over_ids=False):
++        """Convert this VOTable table element to an `astropy.table.Table`."""
++        from astropy.table import Table
++
++        fields = self.fields
++        if use_names_over_ids:
++            names = [field._unique_name for field in fields]
++        else:
++            names = [field.ID for field in fields]
++
++        meta = {}
++        for key in ("ID", "name", "ref", "ucd", "utype"):
++            val = getattr(self, key, None)
++            if val is not None:
++                meta[key] = val
++        if self.description is not None:
++            meta["description"] = self.description
++
++        table = Table(self.array, names=names, meta=meta)
++        for field, column in zip(fields, table.columns.values()):
++            field.to_table_column(column)
++        return table
++
+ 
+ 
+ 
+@@ -3951,6 +4047,11 @@ class Resource(
+         """
+         return self._params
+ 
++    @property
++    def links(self):
++        """A homogeneous list of links belonging to this resource."""
++        return self._links
++
+ 
+ 
+ 
+@@ -4495,6 +4596,13 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+         for resource in self.resources:
+             yield from resource.iter_tables()
+ 
++    def get_first_table(self):
++        """Return the first table in the flattened resource tree."""
++        for table in self.iter_tables():
++            if not table._empty:
++                return table
++        raise IndexError("No table found in VOTABLE file.")
++
+ 
+ 
+ 
+@@ -4703,4 +4811,4 @@ class VOTableFile(Element, _IDProperty, _DescriptionProperty):
+             votable.ID = table_id
+         resource.tables.append(votable)
+         votable_file.resources.append(resource)
+-        return votable_file
+\ No newline at end of file
++        return votable_file
+diff --git a/astropy/io/votable/ucd.py b/astropy/io/votable/ucd.py
+index a5e55bf..8113f87 100644
+--- a/astropy/io/votable/ucd.py
++++ b/astropy/io/votable/ucd.py
+@@ -20,6 +20,47 @@ class UCDWords:
+     file resides in data/ucd1p-words.txt.
+     """
+ 
++    def __init__(self):
++        self._primary = set()
++        self._secondary = set()
++        self._descriptions = {}
++        self._capitalization = {}
++
++        contents = data.get_pkg_data_contents(
++            "data/ucd1p-words.txt", package="astropy.io.votable", encoding="utf-8"
++        )
++        for line in contents.splitlines():
++            line = line.strip()
++            if not line or line.startswith("#"):
++                continue
++
++            parts = line.split("|")
++            if len(parts) != 3:
++                raise ValueError(f"Invalid UCD vocabulary line: {line!r}")
++            word_type, name, description = (part.strip() for part in parts)
++            if len(word_type) != 1 or word_type not in "QPESVC":
++                raise ValueError(f"Invalid UCD word type {word_type!r}")
++
++            key = name.lower()
++            if word_type in "QPEVC":
++                self._primary.add(key)
++            if word_type in "QSEVC":
++                self._secondary.add(key)
++            self._descriptions[key] = description
++            self._capitalization[key] = name
++
++    def is_primary(self, name):
++        """Return whether *name* may be the primary word of a UCD."""
++        return name.lower() in self._primary
++
++    def is_secondary(self, name):
++        """Return whether *name* may be a secondary word of a UCD."""
++        return name.lower() in self._secondary
++
++    def normalize_capitalization(self, name):
++        """Return the spelling of *name* used by the controlled vocabulary."""
++        return self._capitalization[name.lower()]
++
+ 
+ 
+ 
+@@ -193,4 +234,4 @@ def check_ucd(ucd, check_controlled_vocabulary=False, has_colon=False):
+         )
+     except ValueError:
+         return False
+-    return True
+\ No newline at end of file
++    return True
+diff --git a/astropy/utils/xml/check.py b/astropy/utils/xml/check.py
+index 309bbfa..3ea1659 100644
+--- a/astropy/utils/xml/check.py
++++ b/astropy/utils/xml/check.py
+@@ -8,11 +8,22 @@ import re
+ import urllib.parse
+ 
+ 
++_id_regex = re.compile(r"^[A-Za-z_][A-Za-z0-9_.-]*$")
++_id_char_regex = re.compile(r"[^A-Za-z0-9_.-]")
+ 
+ 
++def check_id(ID):
++    """Return whether *ID* is valid in the ASCII XML-ID subset used here."""
++    return _id_regex.fullmatch(ID) is not None
+ 
+ 
++def fix_id(ID):
++    """Convert an arbitrary string to the ASCII XML-ID subset used here."""
++    if ID == "":
++        return ID
+ 
++    prefix = "" if re.match(r"[A-Za-z_]", ID[0]) is not None else "_"
++    return prefix + _id_char_regex.sub("_", ID)
+ 
+ 
+ 
+@@ -34,7 +45,6 @@ import urllib.parse
+ 
+ 
+ 
+-_token_regex = r"(?![\r\l\t ])[^\r\l\t]*(?![\r\l\t ])"
+ 
+ 
+ 
+@@ -42,6 +52,7 @@ _token_regex = r"(?![\r\l\t ])[^\r\l\t]*(?![\r\l\t ])"
+ 
+ 
+ 
++_token_regex = r"^(?![\r\n\t ])[^\r\n\t]*(?<![\r\n\t ])$"
+ 
+ 
+ 
+@@ -49,6 +60,18 @@ _token_regex = r"(?![\r\l\t ])[^\r\l\t]*(?![\r\l\t ])"
+ 
+ 
+ 
++
++
++
++
++
++
++
++def check_token(token):
++    """Return whether *token* is in canonical XML Schema token form."""
++    return re.match(_token_regex, token) is not None
++
++
+ def check_mime_content_type(content_type):
+     """
+     Returns `True` if *content_type* is a valid MIME content type
+@@ -81,4 +104,4 @@ def check_anyuri(uri):
+         urllib.parse.urlparse(uri)
+     except Exception:
+         return False
+-    return True
+\ No newline at end of file
++    return True
+diff --git a/astropy/utils/xml/iterparser.py b/astropy/utils/xml/iterparser.py
+index a3d6a28..16df125 100644
+--- a/astropy/utils/xml/iterparser.py
++++ b/astropy/utils/xml/iterparser.py
+@@ -16,6 +16,21 @@ from ._iterparser import IterParser as _fast_iterparse
+ __all__ = ["get_xml_encoding", "get_xml_iterator", "xml_readlines"]
+ 
+ 
++@contextlib.contextmanager
++def _convert_to_fd_or_read_function(source):
++    """Yield a binary file descriptor or read callable for an XML source."""
++    if callable(source):
++        yield source
++    else:
++        with data.get_readable_fileobj(source, encoding="binary") as fd:
++            # The C parser can consume raw file descriptors directly on
++            # POSIX.  Windows requires the Python read callback instead.
++            if sys.platform != "win32" and isinstance(fd, io.FileIO):
++                yield fd
++            else:
++                yield fd.read
++
++
+ 
+ 
+ 
+@@ -207,4 +222,4 @@ def xml_readlines(source):
+         input.seek(0)
+         xml_lines = input.readlines()
+ 
+-    return xml_lines
+\ No newline at end of file
++    return xml_lines

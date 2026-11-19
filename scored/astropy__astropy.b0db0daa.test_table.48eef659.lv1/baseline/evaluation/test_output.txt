@@ -1,0 +1,597 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/io/votable/tests/test_table.py.
+
+Date: 2026-10-11T00:44:07
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 47 items
+
+astropy/io/votable/tests/test_table.py F.F......FFssssFFFFF...FValidation report for /testbed/astropy/io/votable/tests/data/regression.xml
+
+11: W01: Array uses commas rather than whitespace
+<PARAM datatype="float" name="wrong_arraysize" value="0.000000,0.00...
+^
+
+11: E02: Incorrect number of elements in array. Expected multiple of
+  0, got 2
+<PARAM datatype="float" name="wrong_arraysize" value="0.000000,0.00...
+^
+
+12: W01: Array uses commas rather than whitespace
+<PARAM datatype="float" name="INPUT" value="0.000000,0.000000" arra...
+^
+
+20: W01: Array uses commas rather than whitespace
+<PARAM ID="awesome" datatype="float" name="INPUT" value="0.000000,0...
+^
+
+21: W50: Invalid unit string 'foo'
+<PARAM ID="empty_value" arraysize="*" datatype="char" name="empty_v...
+^
+
+27: W11: The gref attribute on LINK is deprecated in VOTable 1.1
+<LINK href="http://www.foo.com/" gref="DECPRECATED">
+^
+
+28: W10: Unknown tag 'DESCRIPTION'.  Ignoring
+  <DESCRIPTION>Really, this link is totally bogus.</DESCRIPTION>
+  ^
+
+34: W26: 'INFO' inside 'TABLE' added in VOTable 1.2
+<INFO name="Error" ID="ErrorInfo" value="One might expect to find s...
+^
+
+38: W01: Array uses commas rather than whitespace
+<PARAM datatype="float" name="INPUT2" value="0.000000,0.000000" arr...
+^
+
+41: W09: ID attribute not capitalized
+<FIELD id="string_test" name="string test" datatype="char" arraysiz...
+^
+
+44: W13: 'unicodeString' is not a valid VOTable datatype, should be
+  'unicodeChar'
+<FIELD ID="fixed_unicode_test" name="unicode test" datatype="unicod...
+^
+
+46: W13: 'string' is not a valid VOTable datatype, should be 'char'
+<FIELD ID="string_array_test" name="string array test" datatype="st...
+^
+
+49: W51: Value '-32769' is out of range for a 16-bit integer field
+  <VALUES null="-32769"/>
+  ^
+
+57: W10: Unknown tag 'IGNORE_ME'.  Ignoring
+  <IGNORE_ME/>
+  ^
+
+98: W17: GROUP element contains more than one DESCRIPTION element
+    This should warn of a second description.
+^
+
+105: W01: Array uses commas rather than whitespace
+  <PARAM datatype="float" name="INPUT3" value="0.000000,0.000000" a...
+  ^
+
+42: W32: Duplicate ID 'string_test' renamed to 'string_test_2' to
+  ensure uniqueness
+<FIELD ID="string_test" name="fixed string test" datatype="char" ar...
+^
+
+113: W46: char value is too long for specified length of 10
+  <TD>Fixed string long test</TD> <!-- Should truncate -->
+      ^
+
+115: W46: unicodeChar value is too long for specified length of 10
+  <TD>Ceçi n'est pas un pipe</TD>
+      ^
+
+116: W46: char value is too long for specified length of 4
+  <TD>ab cd</TD>
+      ^
+
+136: E02: Incorrect number of elements in array. Expected multiple of
+  4, got 1
+  <TD/>
+  ^
+
+136: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+144: W46: char value is too long for specified length of 10
+  <TD>0123456789A</TD>
+      ^
+
+147: W46: char value is too long for specified length of 4
+  <TD>0123456789A</TD>
+      ^
+
+148: W51: Value '256' is out of range for a 8-bit unsigned integer
+  field
+  <TD>256</TD> <!-- should overflow to 0 -->
+      ^
+
+149: W51: Value '65536' is out of range for a 16-bit integer field
+  <TD>65536</TD> <!-- should overflow to 0-->
+      ^
+
+152: W49: Empty cell illegal for integer fields.
+  <TD></TD>
+  ^
+
+155: W01: Array uses commas rather than whitespace
+  <TD>42 32, 12 32</TD>
+      ^
+
+171: E02: Incorrect number of elements in array. Expected multiple of
+  16, got 1
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields.
+  <TD/>
+  ^
+
+171: W49: Empty cell illegal for integer fields. (suppressing further
+  warnings of this type...)
+  <TD/>
+  ^
+
+177: W46: unicodeChar value is too long for specified length of 10
+  <TD>0123456789A</TD>
+      ^
+
+179: W51: Value '-23' is out of range for a 8-bit unsigned integer
+  field
+  <TD>-23</TD> <!-- negative, should wrap around to positive -->
+      ^
+
+202: E02: Incorrect number of elements in array. Expected multiple of
+  16, got 1
+  <TD/>
+  ^
+
+211: W51: Value '65535' is out of range for a 16-bit integer field
+  <TD>0xffff</TD> <!-- hex - negative value -->
+      ^
+
+217: W01: Array uses commas rather than whitespace
+  <TD>NaN, 23</TD>
+      ^
+
+219: E02: Incorrect number of elements in array. Expected multiple of
+  6, got 1
+  <TD/>
+  ^
+
+227: E02: Incorrect number of elements in array. Expected multiple of
+  4, got 1
+  <TD/>
+  ^
+
+233: E02: Incorrect number of elements in array. Expected multiple of
+  16, got 1
+  <TD/>
+  ^
+
+241: W51: Value '256' is out of range for a 8-bit unsigned integer
+  field
+  <TD>0x100</TD> <!-- hex, overflow -->
+      ^
+
+242: W51: Value '65536' is out of range for a 16-bit integer field
+  <TD>0x10000</TD> <!-- hex, overflow -->
+      ^
+
+248: W01: Array uses commas rather than whitespace
+  <TD>31, -1</TD>
+      ^
+
+250: E02: Incorrect number of elements in array. Expected multiple of
+  6, got 1
+  <TD/>
+  ^
+
+258: E02: Incorrect number of elements in array. Expected multiple of
+  4, got 1
+  <TD/>
+  ^
+
+260: E02: Incorrect number of elements in array. Expected multiple of
+  4, got 1 (suppressing further warnings of this type...)
+  <TD/>
+  ^
+
+278: W46: char value is too long for specified length of 10
+  <TD>Fixed string long test</TD> <!-- Should truncate -->
+      ^
+
+280: W46: unicodeChar value is too long for specified length of 10
+  <TD>Ceçi n'est pas un pipe</TD>
+      ^
+
+281: W46: char value is too long for specified length of 4
+  <TD>ab cd</TD>
+      ^
+
+.Validation report for /testbed/astropy/io/votable/tests/data/valid_votable.xml
+
+astropy.io.votable found no violations.
+
+.F...... [ 70%]
+.....Validation report for /testbed/astropy/io/votable/tests/data/valid_votable.xml
+
+astropy.io.votable found no violations.
+
+.........                                                           [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_table __________________________________
+astropy/io/votable/tests/test_table.py:72: in test_table
+    votable2 = tree.VOTableFile.from_table(astropy_table)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+______________________ test_read_through_table_interface _______________________
+astropy/io/votable/tests/test_table.py:144: in test_read_through_table_interface
+    t.write(fn, table_id="FOO", format="votable")
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+
+During handling of the above exception, another exception occurred:
+astropy/io/votable/tests/test_table.py:143: in test_read_through_table_interface
+    with pytest.warns(W39):
+E   Failed: DID NOT WARN. No warnings of type (<class 'astropy.io.votable.exceptions.W39'>,) were emitted.
+E    Emitted warnings: [].
+_________________________ test_from_table_without_mask _________________________
+astropy/io/votable/tests/test_table.py:248: in test_from_table_without_mask
+    t.write(output, format="votable")
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+____________________________ test_write_with_format ____________________________
+astropy/io/votable/tests/test_table.py:257: in test_write_with_format
+    t.write(output, format="votable", tabledata_format="binary")
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+____________________________ test_write_jybeam_unit ____________________________
+astropy/io/votable/tests/test_table.py:370: in test_write_jybeam_unit
+    t.write(filename, format="votable", overwrite=True)
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+_____________________________ test_write_overwrite _____________________________
+astropy/io/votable/tests/test_table.py:397: in test_write_overwrite
+    t.write(filename, format="votable")
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+____________________________ test_write_tilde_path _____________________________
+astropy/io/votable/tests/test_table.py:408: in test_write_tilde_path
+    t.write(fname, format="votable", tabledata_format="binary")
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+_____________________________ test_writeto[plain] ______________________________
+astropy/io/votable/tests/test_table.py:431: in test_writeto
+    vt = from_table(t)
+         ^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+_____________________________ test_writeto[tilde] ______________________________
+astropy/io/votable/tests/test_table.py:431: in test_writeto
+    vt = from_table(t)
+         ^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+_________________________ test_binary2_masked_strings __________________________
+astropy/io/votable/tests/test_table.py:476: in test_binary2_masked_strings
+    assert not np.any(table.array.mask["epoch_photometry_url"])
+E   assert not np.True_
+E    +  where np.True_ = <function any at 0x7b6e23b73530>(array([ True,  True,  True]))
+E    +    where <function any at 0x7b6e23b73530> = np.any
+____________________ test_binary2_single_bounded_char_array ____________________
+astropy/io/votable/tests/test_table.py:540: in test_binary2_single_bounded_char_array
+    astropy_table.write(output, format="votable", tabledata_format="binary2")
+astropy/table/connect.py:130: in __call__
+    self.registry.write(instance, *args, **kwargs)
+astropy/io/registry/core.py:386: in write
+    return writer(data, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/connect.py:173: in write_table_votable
+    table_file = from_table(input, table_id=table_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/table.py:372: in from_table
+    return tree.VOTableFile.from_table(table, table_id=table_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:4847: in from_table
+    votable = TableElement.from_table(votable_file, table)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:3695: in from_table
+    new_table.add_field(Field.from_table_column(votable, column))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/tree.py:1772: in from_table_column
+    result = converters.table_column_to_votable_datatype(column)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+astropy/io/votable/converters.py:1566: in table_column_to_votable_datatype
+    result = numpy_to_votable_dtype(column.dtype, column.shape[1:])
+             ^^^^^^^^^^^^^^^^^^^^^^
+E   NameError: name 'numpy_to_votable_dtype' is not defined
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/io/votable/tests/test_table.py::test_read_from_tilde_path
+PASSED astropy/io/votable/tests/test_table.py::test_read_through_table_interface2
+PASSED astropy/io/votable/tests/test_table.py::test_pass_kwargs_through_table_interface
+PASSED astropy/io/votable/tests/test_table.py::test_names_over_ids
+PASSED astropy/io/votable/tests/test_table.py::test_explicit_ids
+PASSED astropy/io/votable/tests/test_table.py::test_table_read_with_unnamed_tables
+PASSED astropy/io/votable/tests/test_table.py::test_votable_path_object
+PASSED astropy/io/votable/tests/test_table.py::test_empty_table
+PASSED astropy/io/votable/tests/test_table.py::test_no_field_not_empty_table
+PASSED astropy/io/votable/tests/test_table.py::test_no_field_not_empty_table_exception
+PASSED astropy/io/votable/tests/test_table.py::test_validate_output_invalid
+PASSED astropy/io/votable/tests/test_table.py::test_validate_output_valid
+PASSED astropy/io/votable/tests/test_table.py::test_binary2_bounded_variable_length_char
+PASSED astropy/io/votable/tests/test_table.py::test_binary2_bounded_variable_length_char_edge_cases
+PASSED astropy/io/votable/tests/test_table.py::test_binary2_char_fields_vizier_data
+PASSED astropy/io/votable/tests/test_table.py::test_char_bounds_validation
+PASSED astropy/io/votable/tests/test_table.py::test_binary2_bounded_char_warnings
+PASSED astropy/io/votable/tests/test_table.py::test_binary2_bounded_unichar_valid
+PASSED astropy/io/votable/tests/test_table.py::test_unichar_bounds_validation
+PASSED astropy/io/votable/tests/test_table.py::test_char_invalid_arraysize_raises_e01
+PASSED astropy/io/votable/tests/test_table.py::test_unicodechar_invalid_arraysize_raises_e01
+PASSED astropy/io/votable/tests/test_table.py::test_char_exceeding_arraysize
+PASSED astropy/io/votable/tests/test_table.py::test_unicodechar_binparse_var_exceeds_arraysize
+PASSED astropy/io/votable/tests/test_table.py::test_validate_tilde_path
+PASSED astropy/io/votable/tests/test_table.py::test_is_votable_tilde_path
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_default
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_verify_ignore
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_verify_warn
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_verify_exception
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_conf_verify_ignore
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_conf_verify_warn
+PASSED astropy/io/votable/tests/test_table.py::TestVerifyOptions::test_conf_verify_exception
+SKIPPED [2] astropy/io/votable/tests/test_table.py:271: requires pyarrow
+SKIPPED [2] astropy/io/votable/tests/test_table.py:335: requires pyarrow
+FAILED astropy/io/votable/tests/test_table.py::test_table - NameError: name '...
+FAILED astropy/io/votable/tests/test_table.py::test_read_through_table_interface
+FAILED astropy/io/votable/tests/test_table.py::test_from_table_without_mask
+FAILED astropy/io/votable/tests/test_table.py::test_write_with_format - NameE...
+FAILED astropy/io/votable/tests/test_table.py::test_write_jybeam_unit - NameE...
+FAILED astropy/io/votable/tests/test_table.py::test_write_overwrite - NameErr...
+FAILED astropy/io/votable/tests/test_table.py::test_write_tilde_path - NameEr...
+FAILED astropy/io/votable/tests/test_table.py::test_writeto[plain] - NameErro...
+FAILED astropy/io/votable/tests/test_table.py::test_writeto[tilde] - NameErro...
+FAILED astropy/io/votable/tests/test_table.py::test_binary2_masked_strings - ...
+FAILED astropy/io/votable/tests/test_table.py::test_binary2_single_bounded_char_array
+=================== 11 failed, 32 passed, 4 skipped in 1.39s ===================

@@ -1,0 +1,3221 @@
+diff --git a/astropy/io/fits/card.py b/astropy/io/fits/card.py
+index e3096d7..5b92204 100644
+--- a/astropy/io/fits/card.py
++++ b/astropy/io/fits/card.py
+@@ -8,7 +8,7 @@ import numpy as np
+ from astropy.utils.exceptions import AstropyUserWarning
+ 
+ from . import conf
+-from .util import _words_group
++from .util import _is_int, _str_to_num, _words_group, translate
+ from .verify import VerifyError, VerifyWarning, _ErrList, _Verify
+ 
+ __all__ = ["Card", "Undefined"]
+@@ -1262,6 +1262,16 @@ def _int_or_float(s):
+             raise ValueError(str(e))
+ 
+ 
++def _format_float(value):
++    value_str = repr(float(value)).upper()
++    if "E" in value_str and len(value_str) > 20:
++        mantissa, exponent = value_str.split("E", 1)
++        mantissa = mantissa[: max(1, 19 - len(exponent))]
++        mantissa = mantissa.rstrip(".")
++        value_str = mantissa + "E" + exponent
++    return value_str
++
++
+ def _format_value(value):
+     """
+     Converts a card value to its appropriate string representation as
+@@ -1297,8 +1307,9 @@ def _format_value(value):
+         return ""
+ 
+ 
+-
+-
+-
+-
+-
++def _pad(input):
++    """Pad a card image to a non-zero multiple of 80 characters."""
++    length = len(input)
++    if length and length % Card.length == 0:
++        return input
++    return input + " " * (Card.length - length % Card.length)
+diff --git a/astropy/io/fits/column.py b/astropy/io/fits/column.py
+index 837d914..34f0029 100644
+--- a/astropy/io/fits/column.py
++++ b/astropy/io/fits/column.py
+@@ -20,7 +20,7 @@ from astropy.utils import lazyproperty
+ from astropy.utils.exceptions import AstropyUserWarning
+ 
+ from .card import CARD_LENGTH, Card
+-from .util import NotifierMixin, cmp, encode_ascii
++from .util import NotifierMixin, _convert_array, _is_int, cmp, encode_ascii
+ from .verify import VerifyError, VerifyWarning
+ 
+ __all__ = ["ColDefs", "Column", "Delayed"]
+@@ -523,19 +523,23 @@ class ColumnAttribute:
+         # column attributes.
+         self._attr = "_" + KEYWORD_TO_ATTRIBUTE[self._keyword]
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    def __get__(self, obj, objtype=None):
++        if obj is None:
++            return self
++        return getattr(obj, self._attr, None)
++
++    def __set__(self, obj, value):
++        if self._validator is not None:
++            self._validator(obj, value)
++        old_value = getattr(obj, self._attr, None)
++        setattr(obj, self._attr, value)
++        obj._notify(
++            "column_attribute_changed",
++            obj,
++            self._attr[1:],
++            old_value,
++            value,
++        )
+ 
+     def __call__(self, func):
+         """
+@@ -2527,6 +2531,127 @@ def _cmp_recformats(f1, f2):
+ 
+ 
+ 
++
++
++def _convert_fits2record(format):
++    f_alias = re.fullmatch(r"(?P<repeat>[0-9]*)F", format.strip(), re.I)
++    if f_alias is not None:
++        repeat = int(f_alias.group("repeat") or 1)
++        return (str(repeat) if repeat != 1 else "") + "f8"
++    repeat, format_code, option = _parse_tformat(format)
++    if format_code == "A":
++        return f"S{repeat}"
++    if format_code == "X":
++        return _FormatX(repeat)
++    if format_code == "P":
++        return _FormatP.from_tform(format)
++    if format_code == "Q":
++        return _FormatQ.from_tform(format)
++    if format_code == "F":
++        recformat = "f8"
++    else:
++        try:
++            recformat = FITS2NUMPY[format_code]
++        except KeyError:
++            raise ValueError(f"Illegal format `{format}`.")
++    if repeat != 1:
++        recformat = str(repeat) + recformat
++    return recformat
++
++
++def _dtype_to_recformat(dtype):
++    dtype = np.dtype(dtype)
++    kind = dtype.kind
++    if kind in "SU":
++        return "S", "S", dtype
++    return kind + str(dtype.itemsize), kind, dtype
++
++
++def _convert_record2fits(format):
++    dtype = np.dtype(format)
++    shape = ()
++    if dtype.subdtype is not None:
++        dtype, shape = dtype.subdtype
++
++    recformat, kind, dtype = _dtype_to_recformat(dtype)
++    repeat = int(np.prod(shape)) if shape else 1
++    if kind == "S":
++        width = dtype.itemsize if dtype.kind == "S" else dtype.itemsize // 4
++        repeat *= width
++        code = "A"
++    else:
++        try:
++            code = NUMPY2FITS[recformat]
++        except KeyError:
++            raise ValueError(f"Illegal format `{format}`.")
++    return (str(repeat) if repeat != 1 else "") + code
++
++
++def _get_index(names, key):
++    if _is_int(key):
++        return int(key)
++    if not isinstance(key, str):
++        raise KeyError(f"Illegal key {key!r}.")
++
++    key = key.rstrip()
++    try:
++        return names.index(key)
++    except ValueError:
++        matches = [idx for idx, name in enumerate(names) if name.lower() == key.lower()]
++        if len(matches) == 1:
++            return matches[0]
++        if len(matches) > 1:
++            raise KeyError(f"Ambiguous key name {key!r}.")
++        raise KeyError(f"Key {key!r} does not exist.")
++
++
++def _parse_ascii_tformat(tform, strict=False):
++    try:
++        match = TFORMAT_ASCII_RE.fullmatch(tform.strip())
++    except AttributeError:
++        match = None
++    if match is None:
++        raise VerifyError(f"Invalid ASCII table TFORM: {tform!r}")
++
++    format = (match.group("format") or match.group("formatf")).upper()
++    width_text = match.group("width") or match.group("widthf")
++    precision_text = match.group("precision")
++    if strict and (width_text is None or (format in "EFD" and precision_text is None)):
++        raise VerifyError(f"Ambiguous ASCII table TFORM: {tform!r}")
++
++    default_width, default_precision = ASCII_DEFAULT_WIDTHS[format]
++    width = int(width_text) if width_text is not None else default_width
++    precision = (
++        int(precision_text)
++        if precision_text is not None
++        else (default_precision if format in "EFD" else 0)
++    )
++    if width <= 0:
++        raise VerifyError("Column width must be a positive integer")
++    if precision >= width:
++        raise VerifyError("Column precision must be less than column width")
++    return format, width, precision
++
++
++def _parse_tdim(tdim):
++    if not isinstance(tdim, str):
++        return ()
++    match = TDIM_RE.fullmatch(tdim.strip())
++    if match is None:
++        return ()
++    return tuple(reversed([int(dim.strip()) for dim in match.group("dims").split(",")]))
++
++
++def _parse_tformat(tform):
++    try:
++        stripped = tform.strip()
++        match = TFORMAT_RE.fullmatch(stripped)
++    except AttributeError:
++        match = None
++    if match is None:
++        raise VerifyError(f"Invalid column format: {tform}")
++    repeat = int(match.group("repeat") or 1)
++    return repeat, match.group("format").upper(), match.group("option") or ""
+ 
+ 
+ def _convert_format(format, reverse=False):
+@@ -2768,4 +2893,4 @@ def python_to_tdisp(format_string, logical_dtype=False):
+     if logical_dtype:
+         ftype = "L"
+ 
+-    return ftype + width + sep + precision
+\ No newline at end of file
++    return ftype + width + sep + precision
+diff --git a/astropy/io/fits/convenience.py b/astropy/io/fits/convenience.py
+index 2d49a56..eeeb13e 100644
+--- a/astropy/io/fits/convenience.py
++++ b/astropy/io/fits/convenience.py
+@@ -70,7 +70,14 @@ from .hdu.hdulist import HDUList, fitsopen
+ from .hdu.image import ImageHDU, PrimaryHDU
+ from .hdu.table import BinTableHDU
+ from .header import Header
+-from .util import _is_dask_array, path_like
++from .util import (
++    _is_dask_array,
++    _is_int,
++    fileobj_closed,
++    fileobj_mode,
++    fileobj_name,
++    path_like,
++)
+ 
+ 
+ 
+diff --git a/astropy/io/fits/file.py b/astropy/io/fits/file.py
+index 220ac99..c4a3ea5 100644
+--- a/astropy/io/fits/file.py
++++ b/astropy/io/fits/file.py
+@@ -28,7 +28,18 @@ from astropy.utils.decorators import classproperty
+ from astropy.utils.exceptions import AstropyUserWarning
+ from astropy.utils.misc import NOT_OVERWRITING_MSG
+ 
+-from .util import _array_from_file, isfile, isreadable, iswritable, path_like
++from .util import (
++    _array_from_file,
++    _array_to_file,
++    _array_to_file_like,
++    fileobj_closed,
++    fileobj_mode,
++    fileobj_name,
++    isfile,
++    isreadable,
++    iswritable,
++    path_like,
++)
+ 
+ 
+ 
+@@ -108,24 +119,16 @@ LZMA_MAGIC = b"\xfd7zXZ\x00"
+ LZW_MAGIC = b"\x1f\x9d"
+ 
+ 
++def _is_bz2file(fileobj):
++    return HAS_BZ2 and isinstance(fileobj, bz2.BZ2File)
+ 
+ 
++def _is_lzmafile(fileobj):
++    return HAS_LZMA and isinstance(fileobj, lzma.LZMAFile)
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def _is_lzwfile(fileobj):
++    return HAS_UNCOMPRESSPY and isinstance(fileobj, uncompresspy.LZWFile)
+ 
+ 
+ 
+@@ -147,153 +150,150 @@ class _File:
+     Represents a FITS file on disk (or in some other file-like object).
+     """
+ 
++    def __init__(
++        self,
++        fileobj=None,
++        mode=None,
++        memmap=None,
++        overwrite=False,
++        cache=True,
++        *,
++        use_fsspec=None,
++        fsspec_kwargs=None,
++        decompress_in_memory=False,
++    ):
++        self.strict_memmap = bool(memmap)
++        self.memmap = True if memmap is None else memmap
++        self._mmap = None
++        self._file = None
++        self.closed = False
++        self.close_on_error = False
++        self.file_like = False
++        self.compression = None
++        self.name = fileobj_name(fileobj) if fileobj is not None else None
++        self.size = 0
++        self._sim_pos = 0
++
++        mode = _normalize_fits_mode(mode)
++        if fileobj is not None and not isinstance(fileobj, path_like):
++            raw_mode = fileobj_mode(fileobj)
++            actual_mode = None
++            if raw_mode is not None:
++                raw_mode = _file_mode = _normalize_fits_mode(raw_mode)
++                actual_mode = _file_mode
++            if mode is None:
++                mode = actual_mode
++            elif actual_mode is not None and not isinstance(fileobj, zipfile.ZipFile):
++                readonly_modes = {"readonly", "copyonwrite", "denywrite"}
++                compatible = mode == actual_mode or (
++                    mode in readonly_modes and actual_mode in readonly_modes
++                ) or (
++                    mode == "ostream" and actual_mode == "append"
++                )
++                if not compatible:
++                    raise ValueError(
++                        f"Mode {mode!r} is not compatible with the mode of the "
++                        f"input file ({raw_mode!r})."
++                    )
++        if mode is None:
++            mode = "readonly"
++        self.mode = mode
++        self.readonly = mode in ("readonly", "copyonwrite", "denywrite")
++        self.writeonly = mode == "ostream"
++
++        if fileobj is None:
++            return
+ 
++        if isinstance(fileobj, os.PathLike):
++            fileobj = os.fspath(fileobj)
++            self.name = fileobj
++
++        if isinstance(fileobj, (str, bytes)):
++            if isinstance(fileobj, str) and _is_url(fileobj):
++                fileobj = download_file(fileobj, cache=cache)
++                self.name = fileobj
++            elif isinstance(fileobj, str) and (
++                use_fsspec or (use_fsspec is None and _requires_fsspec(fileobj))
++            ):
++                import fsspec
++
++                self._file = fsspec.open(fileobj, mode=IO_FITS_MODES[mode], **(fsspec_kwargs or {})).open()
++                self.file_like = True
++            if self._file is None:
++                self._open_filename(fileobj, mode, overwrite)
++        elif isfile(fileobj) or isinstance(
++            fileobj,
++            (gzip.GzipFile,)
++            + ((bz2.BZ2File,) if HAS_BZ2 else ())
++            + ((lzma.LZMAFile,) if HAS_LZMA else ())
++            + ((uncompresspy.LZWFile,) if HAS_UNCOMPRESSPY else ()),
++        ):
++            self._open_fileobj(fileobj, mode, overwrite)
++        else:
++            self._open_filelike(fileobj, mode, overwrite)
+ 
++        if self._file is None:
++            raise OSError(f"Could not open file {self.name!r}")
+ 
++        if decompress_in_memory and self.compression and self.readonly:
++            self._file.seek(0)
++            self._file = io.BytesIO(self._file.read())
++            self.file_like = True
+ 
++        # mmap only works for real, uncompressed files.
++        if self.compression or not isfile(self._file):
++            self.memmap = False
++        if self.mode == "update" and self.memmap and not self._mmap_available:
++            self.memmap = False
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        try:
++            current = self._file.tell()
++            self._file.seek(0, os.SEEK_END)
++            self.size = self._file.tell()
++            if mode == "append":
++                current = 0
++            self._file.seek(current)
++        except (AttributeError, OSError, ValueError):
++            self.size = 0
++
++    @property
++    def fileobj_mode(self):
++        return IO_FITS_MODES[self.mode]
++
++    def _maybe_close_mmap(self, refcount_delta=0):
++        if self._mmap is None or not hasattr(sys, "getrefcount"):
++            return
++        # getrefcount contributes the temporary reference used for this call;
++        # self._mmap contributes the sole persistent internal reference.
++        if sys.getrefcount(self._mmap) + refcount_delta <= 2:
++            self._mmap.close()
++            self._mmap = None
++
++    @classproperty(lazy=True)
++    def _mmap_available(cls):
++        with tempfile.NamedTemporaryFile() as f:
++            f.write(b"0")
++            f.flush()
++            try:
++                mm = mmap.mmap(f.fileno(), 1, access=mmap.ACCESS_WRITE)
++            except OSError as exc:
++                warnings.warn(
++                    f"mmap is unavailable on this platform: {exc}",
++                    AstropyUserWarning,
++                )
++                return False
++            try:
++                try:
++                    mm.flush()
++                except OSError as exc:
++                    warnings.warn(
++                        f"mmap.flush is unavailable on this platform: {exc}",
++                        AstropyUserWarning,
++                    )
++                    return False
++            finally:
++                mm.close()
++        return True
+ 
+ 
+     def __repr__(self):
+@@ -311,186 +311,199 @@ class _File:
+             return False
+         return isreadable(self._file)
+ 
++    def read(self, size=None):
++        if self._file is None:
++            raise EOFError
++        if not hasattr(self._file, "read"):
++            raise EOFError
++        try:
++            return self._file.read() if size is None else self._file.read(size)
++        except OSError:
++            if self.compression == "gzip":
++                return b""
++            raise
++
++    def write(self, string):
++        if self._file is None:
++            self._sim_pos += len(string)
++            return len(string)
++        if not hasattr(self._file, "write"):
++            raise EOFError
++        if isinstance(string, str):
++            string = string.encode("ascii")
++        return self._file.write(string)
++
++    def seek(self, offset, whence=0):
++        if self._file is None:
++            raise OSError("No file object available")
++        if not hasattr(self._file, "seek"):
++            return
++        self._file.seek(offset, whence)
++        if self.size and self.tell() > self.size:
++            warnings.warn(
++                "File may have been truncated: actual file length is smaller than "
++                "the expected size",
++                AstropyUserWarning,
++            )
+ 
++    def tell(self):
++        if self._file is None:
++            raise OSError("No file object available")
++        if not hasattr(self._file, "tell"):
++            raise EOFError
++        return self._file.tell()
++
++    def flush(self):
++        if self._file is not None and hasattr(self._file, "flush"):
++            self._file.flush()
++
++    def close(self):
++        if self._file is not None and hasattr(self._file, "close"):
++            self._file.close()
++        self.closed = True
++        self.close_on_error = False
++        self._maybe_close_mmap()
++
++    def readarray(self, size=None, offset=0, dtype=np.uint8, shape=None):
++        dtype = np.dtype(dtype)
++        if shape is None:
++            if size is None:
++                raise ValueError("No size or shape given")
++            shape = (size // dtype.itemsize,)
++        elif isinstance(shape, int):
++            shape = (shape,)
++        count = reduce(operator.mul, shape, 1)
++
++        if self.memmap and isfile(self._file) and self.compression is None:
++            if self._mmap is None:
++                try:
++                    self._mmap = mmap.mmap(
++                        self._file.fileno(),
++                        0,
++                        access=MEMMAP_MODES[self.mode],
++                    )
++                except OSError as exc:
++                    warnings.warn(
++                        f"Could not memory map array with mode={self.mode!r}: {exc}",
++                        AstropyUserWarning,
++                    )
++                    self.memmap = False
++            if self._mmap is not None:
++                return np.ndarray(shape=shape, dtype=dtype, offset=offset, buffer=self._mmap)
++
++        self.seek(offset)
++        array = _array_from_file(self._file, dtype, count).reshape(shape)
++        if self.readonly:
++            array.flags.writeable = False
++        return array
+ 
++    def writearray(self, array):
++        array = np.asarray(array)
++        if self._file is None:
++            self._sim_pos += array.nbytes
++            return
++        if isfile(self._file):
++            _array_to_file(array, self._file)
++        else:
++            _array_to_file_like(array, self._file)
+ 
++    def _open_filename(self, filename, mode, overwrite):
++        filename = os.path.expanduser(filename)
++        self.name = filename
++        ext = os.path.splitext(os.fsdecode(filename))[1].lower()
++        if mode == "ostream":
++            self._overwrite_existing(overwrite, None, True)
++            magic = b""
++            if self._try_read_compressed(filename, magic, mode, ext=ext):
++                return
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        self._file = open(filename, IO_FITS_MODES[mode])
++        self.close_on_error = True
++        try:
++            if mode == "append":
++                self._file.seek(0)
++            magic = self._file.read(6) if mode != "ostream" else b""
++            self._file.seek(0)
++            raw_file = self._file
++            if self._try_read_compressed(filename, magic, mode, ext=ext):
++                raw_file.close()
++        except Exception:
++            self._file.close()
++            raise
++
++    def _overwrite_existing(self, overwrite, fileobj, closed):
++        file_like_nonempty = (
++            self.file_like and hasattr(fileobj, "len") and fileobj.len > 0
++        )
++        disk_nonempty = (
++            not self.file_like
++            and self.name is not None
++            and os.path.exists(self.name)
++            and os.path.getsize(self.name) > 0
++        )
++        if not (file_like_nonempty or disk_nonempty):
++            return
++        if not overwrite:
++            raise OSError(NOT_OVERWRITING_MSG.format(self.name))
++        if file_like_nonempty and hasattr(fileobj, "truncate"):
++            fileobj.seek(0)
++            fileobj.truncate(0)
++        elif disk_nonempty:
++            if not closed and fileobj is not None and hasattr(fileobj, "close"):
++                fileobj.close()
++            os.remove(self.name)
++
++    def _try_read_compressed(self, obj_or_name, magic, mode, ext=""):
++        gzip_match = magic.startswith(GZIP_MAGIC) or (mode == "ostream" and ext == ".gz")
++        zip_match = magic.startswith(PKZIP_MAGIC) or (mode == "ostream" and ext == ".zip")
++        bz2_match = magic.startswith(BZIP2_MAGIC) or (mode == "ostream" and ext == ".bz2")
++        lzma_match = magic.startswith(LZMA_MAGIC) or (mode == "ostream" and ext in (".xz", ".lzma"))
++        lzw_match = magic.startswith(LZW_MAGIC) or (mode == "ostream" and ext == ".z")
++
++        if gzip_match:
++            if mode == "append":
++                raise OSError("'append' mode is not supported with gzip files. Use 'update' mode instead")
++            self.compression = "gzip"
++            gzmode = "wb" if mode == "ostream" else "rb"
++            self._file = gzip.GzipFile(filename=obj_or_name if isinstance(obj_or_name, path_like) else None, mode=gzmode, fileobj=None if isinstance(obj_or_name, path_like) else obj_or_name)
++            return True
++        if zip_match:
++            if mode != "readonly" and mode != "denywrite" and mode != "copyonwrite":
++                raise OSError("Writing to zipped fits files is not currently supported")
++            self.compression = "zip"
++            self._open_zipfile(obj_or_name, mode)
++            return True
++        if bz2_match:
++            if not HAS_BZ2:
++                raise ModuleNotFoundError("This Python installation does not provide bz2 support")
++            if mode in ("update", "append"):
++                raise OSError("update and append modes are not supported with bzip2 files")
++            self.compression = "bzip2"
++            self._file = bz2.BZ2File(obj_or_name, "wb" if mode == "ostream" else "rb")
++            return True
++        if lzma_match:
++            if not HAS_LZMA:
++                raise ModuleNotFoundError("This Python installation does not provide lzma support")
++            if mode in ("update", "append"):
++                raise OSError("update and append modes are not supported with lzma files")
++            self.compression = "lzma"
++            self._file = lzma.LZMAFile(obj_or_name, "wb" if mode == "ostream" else "rb")
++            return True
++        if lzw_match:
++            if not HAS_UNCOMPRESSPY:
++                raise ModuleNotFoundError("LZW-compressed files require the uncompresspy package")
++            if mode in ("update", "append", "ostream"):
++                raise OSError(f"{mode} mode not supported with LZW files")
++            self.compression = "lzw"
++            self._file = uncompresspy.LZWFile(obj_or_name)
++            return True
++        return False
+ 
+ 
+     def writable(self):
+         if self.readonly:
+             return False
+         return iswritable(self._file)
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+     def truncate(self, size=None):
+         if hasattr(self._file, "truncate"):
+             self._file.truncate(size)
+@@ -622,6 +635,25 @@ class _File:
+         elif isfile(fileobj):
+             self._file = open(self.name, IO_FITS_MODES[mode])
+ 
++        # Compressed stream objects expose the decompressed bytes from read(),
++        # so their compression cannot be discovered from those bytes' magic.
++        if isinstance(fileobj, gzip.GzipFile):
++            self.compression = "gzip"
++            self._file = fileobj
++            return
++        if _is_bz2file(fileobj):
++            self.compression = "bzip2"
++            self._file = fileobj
++            return
++        if _is_lzmafile(fileobj):
++            self.compression = "lzma"
++            self._file = fileobj
++            return
++        if _is_lzwfile(fileobj):
++            self.compression = "lzw"
++            self._file = fileobj
++            return
++
+         # Attempt to determine if the file represented by the open file object
+         # is compressed
+         try:
+@@ -654,6 +686,7 @@ class _File:
+             )
+ 
+         if isinstance(fileobj, zipfile.ZipFile):
++            self.compression = "zip"
+             self._open_zipfile(fileobj, mode)
+             # We can bypass any additional checks at this point since now
+             # self._file points to the temp file extracted from the zip
+@@ -671,7 +704,7 @@ class _File:
+         if self.mode in ("update", "append", "ostream") and not hasattr(
+             self._file, "write"
+         ):
+-            raise OSError(
++            raise ValueError(
+                 "File-like object does not have a 'write' "
+                 f"method, required for mode '{self.mode}'."
+             )
+@@ -683,6 +716,15 @@ class _File:
+                 f"method, required for mode {self.mode!r}."
+             )
+ 
++        try:
++            pos = self._file.tell()
++            self._file.seek(0)
++            magic = self._file.read(6)
++            self._file.seek(pos)
++        except (AttributeError, OSError):
++            magic = b""
++        self._try_read_compressed(fileobj, magic, mode)
++
+ 
+ 
+ 
+@@ -775,4 +817,4 @@ class _File:
+         # We just wrote the contents of the first file in the archive to a new
+         # temp file, which now serves as our underlying file object. So it's
+         # necessary to reset the position back to the beginning
+-        self._file.seek(0)
+\ No newline at end of file
++        self._file.seek(0)
+diff --git a/astropy/io/fits/fitsrec.py b/astropy/io/fits/fitsrec.py
+index bb4c7dc..e0005c1 100644
+--- a/astropy/io/fits/fitsrec.py
++++ b/astropy/io/fits/fitsrec.py
+@@ -12,7 +12,7 @@ from numpy import char as chararray
+ 
+ from astropy.utils import lazyproperty
+ 
+-from .column import _VLF, ASCII2NUMPY, ASCII2STR, ASCIITNULL, FITS2NUMPY, ColDefs, Delayed, _AsciiColDefs, _FormatP, _FormatX, _makep, _unwrapx, _wrapx
++from .column import _VLF, ASCII2NUMPY, ASCII2STR, ASCIITNULL, FITS2NUMPY, ColDefs, Delayed, _AsciiColDefs, _FormatP, _FormatX, _get_index, _makep, _unwrapx, _wrapx
+ 
+ 
+ 
+@@ -31,6 +31,18 @@ from .column import _VLF, ASCII2NUMPY, ASCII2STR, ASCIITNULL, FITS2NUMPY, ColDef
+ from .util import _rstrip_inplace, decode_ascii, encode_ascii
+ 
+ 
++def _get_recarray_field(array, key):
++    field = np.recarray.field(array, key)
++    if field.dtype.kind in "SU":
++        field = field.view(chararray.chararray)
++    return field
++
++
++def _has_unicode_fields(array):
++    fields = array.dtype.fields
++    return bool(fields) and any(dtype[0].kind == "U" for dtype in fields.values())
++
++
+ class FITS_record:
+     """
+     FITS record class.
+@@ -1406,5 +1418,3 @@ def _ascii_encode(inarray, out=None):
+         raise _UnicodeArrayEncodeError(*(exc.args + (index,)))
+ 
+     return it.operands[1]
+-
+-
+diff --git a/astropy/io/fits/hdu/base.py b/astropy/io/fits/hdu/base.py
+index 4a9e3bd..50272b3 100644
+--- a/astropy/io/fits/hdu/base.py
++++ b/astropy/io/fits/hdu/base.py
+@@ -4,6 +4,7 @@
+ import datetime
+ import numbers
+ import os
++import re
+ import sys
+ import warnings
+ from contextlib import suppress
+@@ -13,8 +14,15 @@ import numpy as np
+ 
+ from astropy.io.fits import conf
+ from astropy.io.fits.file import _File
+-from astropy.io.fits.header import Header, _BasicHeader, _DelayedHeader
+-from astropy.io.fits.util import decode_ascii, first, itersubclasses
++from astropy.io.fits.header import Header, _BasicHeader, _DelayedHeader, _pad_length
++from astropy.io.fits.util import (
++    _free_space_check,
++    _get_array_mmap,
++    _is_int,
++    decode_ascii,
++    first,
++    itersubclasses,
++)
+ 
+ 
+ 
+@@ -72,6 +80,18 @@ will be used in this case.
+ """
+ 
+ 
++def _extract_number(value, default=None):
++    if _is_int(value):
++        return int(value)
++    match = re.search(r"[+-]?\d+", str(value))
++    if match is None:
++        return default
++    try:
++        return int(match.group())
++    except ValueError:
++        return default
++
++
+ class InvalidHDUException(Exception):
+     """
+     A custom exception class used mainly to signal to _BaseHDU.__new__ that
+@@ -204,6 +224,7 @@ class _BaseHDU:
+             cls.data = data_prop.deleter(data)
+ 
+         super().__init_subclass__(**kwargs)
++        _BaseHDU._hdu_registry.add(cls)
+ 
+     @property
+     def header(self):
+@@ -270,6 +291,18 @@ class _BaseHDU:
+             )
+         )
+ 
++    def _close(self, closed=True):
++        if closed and self._data_loaded and _get_array_mmap(self.data) is not None:
++            del self.data
++
++    @property
++    def _data_loaded(self):
++        return "data" in self.__dict__ and self.__dict__["data"] is not DELAYED
++
++    @property
++    def _has_data(self):
++        return self._data_loaded and self.data is not None
++
+ 
+ 
+ 
+@@ -328,6 +361,66 @@ class _BaseHDU:
+             data, checksum=checksum, ignore_missing_end=ignore_missing_end, **kwargs
+         )
+ 
++    @classmethod
++    def readfrom(cls, fileobj, checksum=False, ignore_missing_end=False, **kwargs):
++        return cls._readfrom_internal(
++            fileobj, checksum=checksum, ignore_missing_end=ignore_missing_end, **kwargs
++        )
++
++    @classmethod
++    def _readfrom_internal(
++        cls, data, checksum=False, ignore_missing_end=False, header=None, **kwargs
++    ):
++        if isinstance(data, _File):
++            fileobj = data
++            buffer = None
++            header_offset = fileobj.tell()
++            if header_offset >= fileobj.size:
++                raise EOFError
++            if header is None:
++                header_str, basic = _BasicHeader.fromfile(fileobj)
++            else:
++                basic = header
++                header_str = None
++            data_offset = fileobj.tell()
++        else:
++            fileobj = None
++            buffer = data
++            header_offset = 0
++            raw = data.tobytes() if isinstance(data, np.ndarray) else data
++            basic = Header.fromstring(raw)
++            header_str = None
++            data_offset = len(basic.tostring(endcard=True, padding=True))
++
++        klass = _hdu_class_from_header(cls, basic)
++        try:
++            params = signature(klass.__init__).parameters
++            accepted = {key: val for key, val in kwargs.items() if key in params}
++        except (TypeError, ValueError):
++            accepted = kwargs
++        hdu = klass(data=DELAYED, header=basic, **accepted)
++        hdu._file = fileobj
++        hdu._buffer = buffer
++        hdu._header_offset = header_offset
++        hdu._data_offset = data_offset
++        hdu._data_size = basic.data_size_padded
++        hdu._header_str = header_str
++        if header_str is not None:
++            hdu.__dict__.pop("_header", None)
++        hdu._new = False
++        if checksum:
++            hdu._verify_checksum_datasum()
++        return hdu
++
++    def _get_raw_data(self, shape, code, offset):
++        if isinstance(shape, int):
++            shape = (shape,)
++        if self._buffer is not None:
++            return np.ndarray(shape=shape, dtype=code, buffer=self._buffer, offset=offset)
++        if self._file is not None:
++            return self._file.readarray(offset=offset, dtype=code, shape=shape)
++        return None
++
+ 
+ 
+ 
+@@ -410,8 +503,97 @@ class _BaseHDU:
+         Instantiate the HDU object after guessing the HDU class from the
+         FITS Header.
+         """
+-        klass = _hdu_class_from_header(cls, header)
+-        return klass(data=data, header=header, **kwargs)
++        if len(header) == 0:
++            if isinstance(data, np.ndarray) and data.dtype.fields is not None:
++                from .table import BinTableHDU
++
++                klass = BinTableHDU
++                header_arg = header
++            else:
++                from .image import PrimaryHDU
++
++                klass = PrimaryHDU
++                header_arg = None
++        else:
++            klass = _hdu_class_from_header(cls, header)
++            header_arg = header
++        return klass(data=data, header=header_arg, **kwargs)
++
++    def _writeheader(self, fileobj):
++        try:
++            offset = fileobj.tell()
++        except OSError:
++            offset = 0
++        header = self._header.tostring(endcard=True, padding=True)
++        fileobj.write(header.encode("ascii"))
++        return offset, len(header)
++
++    def _writedata_direct_copy(self, fileobj):
++        size = self._data_size or 0
++        if not size:
++            return 0
++        if self._buffer is not None:
++            block = memoryview(self._buffer)[
++                self._data_offset : self._data_offset + size
++            ]
++            fileobj.write(block)
++            return len(block)
++        if self._file is not None:
++            pos = self._file.tell()
++            self._file.seek(self._data_offset)
++            remaining = size
++            while remaining:
++                block = self._file.read(min(1024 * 1024, remaining))
++                if not block:
++                    break
++                fileobj.write(block)
++                remaining -= len(block)
++            self._file.seek(pos)
++            return size - remaining
++        return 0
++
++    def _postwriteto(self):
++        pass
++
++    def _writeto(self, fileobj, inplace=False, copy=False):
++        dirname = None
++        if isinstance(getattr(fileobj, "name", None), (str, bytes, os.PathLike)):
++            dirname = os.path.dirname(os.path.abspath(fileobj.name))
++        with _free_space_check(self, dirname=dirname):
++            self._writeto_internal(fileobj, inplace, copy)
++
++    def _writeto_internal(self, fileobj, inplace, copy):
++        if inplace and not self._new:
++            if copy:
++                # Resizing writes copy existing HDUs sequentially into a new
++                # file; their old offsets are not meaningful in that target.
++                self._header_offset, _ = self._writeheader(fileobj)
++                self._data_offset, self._data_size = self._writedata(fileobj)
++                self._header._modified = False
++                self._data_replaced = False
++                self._new = False
++                return
++            if self._header._modified or copy:
++                fileobj.seek(self._header_offset)
++                self._writeheader(fileobj)
++            if self._data_loaded or self._data_replaced or copy:
++                fileobj.seek(self._data_offset)
++                _, size = self._writedata(fileobj)
++                self._data_size = size
++            data_mmap = _get_array_mmap(self.data) if self._data_loaded else None
++            if data_mmap is not None:
++                data_mmap.flush()
++        else:
++            header_offset, _ = self._writeheader(fileobj)
++            data_offset, data_size = self._writedata(fileobj)
++            if self._new:
++                self._header_offset = header_offset
++                self._data_offset = data_offset
++                self._data_size = data_size
++
++        self._header._modified = False
++        self._data_replaced = False
++        self._new = False
+ 
+ 
+ 
+@@ -837,6 +1019,28 @@ class _NonstandardHDU(_BaseHDU, _Verify):
+         """
+         return self._get_raw_data(self.size, "ubyte", self._data_offset)
+ 
++
++def _hdu_class_from_header(cls, header):
++    """Return the most specific registered HDU class matching *header*."""
++    if cls is not _BaseHDU:
++        return cls
++    candidates = list(itersubclasses(cls))
++    for hducls in reversed(candidates):
++        try:
++            if hducls.match_header(header):
++                return hducls
++        except (
++            KeyError,
++            IndexError,
++            TypeError,
++            ValueError,
++            AttributeError,
++            NotImplementedError,
++            StopIteration,
++        ):
++            continue
++    raise OSError("HDU type could not be determined from the header")
++
+     def _verify(self, option="warn"):
+         errs = _ErrList([], unit="Card")
+ 
+@@ -1596,4 +1800,4 @@ class NonstandardExtHDU(ExtensionHDU):
+         """
+         Return the file data.
+         """
+-        return self._get_raw_data(self.size, "ubyte", self._data_offset)
+\ No newline at end of file
++        return self._get_raw_data(self.size, "ubyte", self._data_offset)
+diff --git a/astropy/io/fits/hdu/compressed/_codecs.py b/astropy/io/fits/hdu/compressed/_codecs.py
+index 9933d17..68c4b7e 100644
+--- a/astropy/io/fits/hdu/compressed/_codecs.py
++++ b/astropy/io/fits/hdu/compressed/_codecs.py
+@@ -39,15 +39,24 @@ __all__ = [
+ ]
+ 
+ 
++def _as_native_endian_array(buf):
++    if isinstance(buf, (bytes, bytearray, memoryview)):
++        return np.frombuffer(buf, dtype=np.uint8)
++    array = np.asarray(buf)
++    if not array.dtype.isnative and array.dtype.byteorder != "|":
++        array = array.byteswap().view(array.dtype.newbyteorder("="))
++    return array
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
++def _as_big_endian_array(buf):
++    if isinstance(buf, (bytes, bytearray, memoryview)):
++        return np.frombuffer(buf, dtype=np.uint8)
++    array = np.asarray(buf)
++    if array.dtype.byteorder != "|" and (
++        array.dtype.byteorder == "<" or (array.dtype.byteorder == "=" and np.little_endian)
++    ):
++        array = array.byteswap().view(array.dtype.newbyteorder(">"))
++    return array
+ 
+ 
+ class NoCompress(Codec):
+@@ -335,7 +344,9 @@ class PLIO1(Codec):
+         buf : np.ndarray
+             The decompressed buffer.
+         """
+-        cbytes = np.frombuffer(_as_native_endian_array(buf), dtype=np.uint8).tobytes()
++        raw = np.asarray(buf, dtype=np.uint8).tobytes()
++        compressed = np.frombuffer(raw, dtype=">i2").astype("i2")
++        cbytes = compressed.tobytes()
+         dbytes = decompress_plio_1_c(cbytes, self.tilesize)
+         return np.frombuffer(dbytes, dtype="i4")
+ 
+@@ -398,9 +409,33 @@ class HCompress1(Codec):
+ 
+     codec_id = "FITS_HCOMPRESS1"
+ 
++    def __init__(self, *, scale: int, smooth: bool, bytepix: int, nx: int, ny: int):
++        self.scale = scale
++        self.smooth = smooth
++        self.bytepix = bytepix
++        self.nx = nx
++        self.ny = ny
+ 
++    def decode(self, buf):
++        cbytes = np.frombuffer(_as_native_endian_array(buf), dtype=np.uint8).tobytes()
++        dbytes = decompress_hcompress_1_c(
++            cbytes,
++            self.nx,
++            self.ny,
++            self.scale,
++            int(self.smooth),
++            self.bytepix,
++        )
++        # The cfitsio wrapper returns a buffer of C ``int`` values for both
++        # HCompress variants (including the 64-bit input variant).
++        return np.frombuffer(dbytes, dtype="i4")
+ 
+-
+-
+-
+-
++    def encode(self, buf):
++        if isinstance(buf, (bytes, bytearray, memoryview)):
++            array = np.frombuffer(buf, dtype=f"i{self.bytepix}")
++        else:
++            array = _as_native_endian_array(buf)
++        dbytes = array.astype(f"i{self.bytepix}", copy=False).tobytes()
++        return compress_hcompress_1_c(
++            dbytes, self.nx, self.ny, self.scale, self.bytepix
++        )
+diff --git a/astropy/io/fits/hdu/compressed/_quantization.py b/astropy/io/fits/hdu/compressed/_quantization.py
+index fc8b43d..790aaae 100644
+--- a/astropy/io/fits/hdu/compressed/_quantization.py
++++ b/astropy/io/fits/hdu/compressed/_quantization.py
+@@ -32,6 +32,56 @@ class Quantize:
+     Quantization of floating-point data following the FITS standard.
+     """
+ 
++    def __init__(self, *, row, dither_method, quantize_level, bitpix):
++        self.row = row
++        self.dither_method = dither_method
++        self.quantize_level = quantize_level
++        self.bitpix = bitpix
++
++    def encode_quantized(self, buf):
++        array = np.asarray(buf, dtype=BITPIX2DTYPE[self.bitpix])
++        if not array.dtype.isnative:
++            array = array.byteswap().view(array.dtype.newbyteorder("="))
++        nx = int(array.shape[-1]) if array.ndim else 1
++        ny = int(array.size // nx)
++        function = quantize_float_c if self.bitpix == -32 else quantize_double_c
++        result, status, scale, zero, _imin, _imax = function(
++            array.tobytes(),
++            int(self.row),
++            nx,
++            ny,
++            0,
++            0.0,
++            float(self.quantize_level),
++            int(self.dither_method),
++        )
++        if status == 0:
++            raise QuantizationFailedException
++        return np.frombuffer(result, dtype="i4"), scale, zero
++
++    def decode_quantized(self, buf, scale, zero):
++        array = np.asarray(buf)
++        if not array.dtype.isnative:
++            array = array.byteswap().view(array.dtype.newbyteorder("="))
++        if self.dither_method == -1:
++            return (
++                array.astype(BITPIX2DTYPE[self.bitpix]) * scale + zero
++            ).astype(BITPIX2DTYPE[self.bitpix], copy=False)
++        function = unquantize_float_c if self.bitpix == -32 else unquantize_double_c
++        result = function(
++            array.tobytes(),
++            int(self.row),
++            int(array.size),
++            float(scale),
++            float(zero),
++            int(self.dither_method),
++            0,
++            0,
++            0.0,
++            int(array.dtype.itemsize),
++        )
++        return np.frombuffer(result, dtype=BITPIX2DTYPE[self.bitpix])
++
+ 
+ 
+ 
+@@ -46,4 +96,3 @@ class Quantize:
+     # decode and encode as we need to break with the numcodec API and take/return
+     # scale and zero in addition to quantized value. We should figure out how
+     # to properly use the numcodec API for this use case.
+-
+diff --git a/astropy/io/fits/hdu/compressed/_tiled_compression.py b/astropy/io/fits/hdu/compressed/_tiled_compression.py
+index a10cf4f..6c66bc0 100644
+--- a/astropy/io/fits/hdu/compressed/_tiled_compression.py
++++ b/astropy/io/fits/hdu/compressed/_tiled_compression.py
+@@ -28,12 +28,257 @@ ALGORITHMS = {
+ DEFAULT_ZBLANK = -2147483648
+ 
+ 
++def _tile_shape(header):
++    naxis = int(header.get("ZNAXIS", 0))
++    return np.array(
++        [int(header.get(f"ZTILE{axis}", 1)) for axis in range(naxis, 0, -1)],
++        dtype=int,
++    )
++
++
++def _get_compression_setting(header, name, default=None):
++    index = 1
++    wanted = name.upper()
++    while f"ZNAME{index}" in header:
++        if str(header[f"ZNAME{index}"]).strip().upper() == wanted:
++            return header.get(f"ZVAL{index}", default)
++        index += 1
++    return default
++
++
+ __all__ = [
+     "compress_image_data",
+     "decompress_image_data_section",
+ ]
+ 
+ 
++def _check_compressed_header(header):
++    """Validate the subset of the compressed-table header used below."""
++    compression_type = header["ZCMPTYPE"]
++    if not isinstance(compression_type, str):
++        raise TypeError("ZCMPTYPE should be a string")
++    if compression_type.upper() not in ALGORITHMS:
++        raise ValueError(f"Unrecognized compression type: {compression_type}")
++
++    zbitpix = header["ZBITPIX"]
++    if zbitpix not in BITPIX2DTYPE:
++        raise ValueError(f"Invalid value for BITPIX: {zbitpix}")
++    znaxis = header["ZNAXIS"]
++
++    int_limits = np.iinfo(np.intc)
++    long_limits = np.iinfo(int)
++    longlong_limits = np.iinfo(np.longlong)
++
++    def check_integer(key, limits):
++        if key not in header:
++            return
++        value = header[key]
++        if not isinstance(value, (int, np.integer)):
++            raise TypeError(f"{key} should be an integer")
++        if value < limits.min or value > limits.max:
++            raise OverflowError(f"{key} value is out of range")
++
++    def check_number(key, limits):
++        if key not in header:
++            return
++        value = header[key]
++        if not isinstance(value, (int, float, np.integer, np.floating)):
++            raise TypeError(f"{key} should be numeric")
++        if not np.isfinite(value) or value < limits.min or value > limits.max:
++            raise OverflowError(f"{key} value is out of range")
++
++    for key in ("ZNAXIS", "ZBLANK", "BLANK"):
++        check_integer(key, int_limits)
++    for key in ("ZVAL1", "ZVAL2"):
++        check_number(key, int_limits)
++    for axis in range(1, int(znaxis) + 1):
++        check_integer(f"ZTILE{axis}", long_limits)
++        check_integer(f"ZNAXIS{axis}", long_limits)
++    for key in ("NAXIS1", "NAXIS2", "TNULL1", "PCOUNT", "THEAP"):
++        check_integer(key, longlong_limits)
++
++    for key in ("NAXIS1", "NAXIS2", "TFIELDS", "PCOUNT"):
++        if key in header and header[key] < 0:
++            raise ValueError(f"{key} should not be negative.")
++    if not 0 <= znaxis <= 999:
++        raise ValueError("ZNAXIS should be between 0 and 999")
++    if "TFIELDS" in header and header["TFIELDS"] > 999:
++        raise ValueError("TFIELDS should not exceed 999")
++
++    for key in ("TTYPE1", "TFORM1", "ZCMPTYPE", "ZNAME1", "ZQUANTIZ"):
++        if key in header and not isinstance(header[key], str):
++            raise TypeError(f"{key} should be a string")
++    for key in ("TZERO1", "TSCAL1", "ZSCALE", "ZZERO"):
++        if key in header and not isinstance(
++            header[key], (int, float, np.integer, np.floating)
++        ):
++            raise TypeError(f"{key} should be numeric")
++    if "ZVAL3" in header:
++        value = header["ZVAL3"]
++        if not isinstance(value, (int, float, np.integer, np.floating)):
++            raise TypeError("ZVAL3 should be numeric")
++        if not np.isfinite(value) or abs(value) > float(np.finfo(np.float32).max):
++            raise OverflowError("ZVAL3 value is out of range")
++
++    # Variable-length compressed columns use a P or Q descriptor, optionally
++    # followed by the element type and a maximum length in parentheses.
++    for index in range(1, int(header.get("TFIELDS", 0)) + 1):
++        key = f"TFORM{index}"
++        if key in header:
++            value = header[key]
++            if not isinstance(value, str):
++                raise TypeError(f"{key} should be a string")
++            import re
++
++            if re.fullmatch(r"\s*\d*[PQ][A-Z](?:\(\d*\))?\s*", value, re.I) is None and index <= 2:
++                raise RuntimeError(f"Invalid TFORM value: {value}")
++
++
++def _data_shape(header):
++    naxis = int(header["ZNAXIS"])
++    return np.array(
++        [int(header[f"ZNAXIS{axis}"]) for axis in range(naxis, 0, -1)],
++        dtype=int,
++    )
++
++
++def _header_to_settings(header):
++    algorithm = str(header["ZCMPTYPE"]).upper()
++    bitpix = int(header["ZBITPIX"])
++    if algorithm in ("RICE_1", "RICE_ONE"):
++        return {
++            "blocksize": int(_get_compression_setting(header, "BLOCKSIZE", 32)),
++            "bytepix": int(
++                _get_compression_setting(
++                    header, "BYTEPIX", 1 if bitpix == 8 else 2 if bitpix == 16 else 4
++                )
++            ),
++        }
++    if algorithm == "HCOMPRESS_1":
++        return {
++            "scale": int(_get_compression_setting(header, "SCALE", 0)),
++            "smooth": bool(_get_compression_setting(header, "SMOOTH", 0)),
++            "bytepix": 8 if bitpix == 64 else 4,
++        }
++    if algorithm == "GZIP_2":
++        return {"itemsize": abs(bitpix) // 8}
++    return {}
++
++
++def _update_tile_settings(settings, algorithm, tile_shape):
++    settings = dict(settings)
++    tilesize = int(prod(tile_shape))
++    algorithm = algorithm.upper()
++    if algorithm in ("RICE_1", "RICE_ONE", "PLIO_1"):
++        settings["tilesize"] = tilesize
++    elif algorithm == "HCOMPRESS_1":
++        hshape = tuple(size for size in tile_shape if size != 1)
++        if len(hshape) != 2:
++            raise ValueError("HCOMPRESS_1 requires two-dimensional tiles")
++        settings["nx"] = int(hshape[0])
++        settings["ny"] = int(hshape[1])
++    return settings
++
++
++def _iter_array_tiles(data_shape, tile_shape, first_tile_index=None, last_tile_index=None):
++    data_shape = np.asarray(data_shape, dtype=int)
++    tile_shape = np.asarray(tile_shape, dtype=int)
++    tile_counts = (data_shape + tile_shape - 1) // tile_shape
++    if first_tile_index is None:
++        first_tile_index = np.zeros(len(data_shape), dtype=int)
++    else:
++        first_tile_index = np.asarray(first_tile_index, dtype=int)
++    if last_tile_index is None:
++        last_tile_index = tile_counts - 1
++    else:
++        last_tile_index = np.asarray(last_tile_index, dtype=int)
++
++    selected_shape = tuple((last_tile_index - first_tile_index + 1).astype(int))
++    for relative_index in np.ndindex(selected_shape):
++        tile_index = first_tile_index + np.asarray(relative_index)
++        row_index = int(np.ravel_multi_index(tuple(tile_index), tuple(tile_counts)))
++        starts = tile_index * tile_shape
++        stops = np.minimum(starts + tile_shape, data_shape)
++        relative_starts = starts - first_tile_index * tile_shape
++        slices = tuple(
++            slice(int(start), int(start + stop - absolute_start))
++            for start, stop, absolute_start in zip(relative_starts, stops, starts)
++        )
++        yield row_index, slices
++
++
++def _compress_tile(tile_data, algorithm, **settings):
++    algorithm = algorithm.upper()
++    try:
++        codec = ALGORITHMS[algorithm](**settings)
++    except KeyError:
++        raise ValueError(f"Unrecognized compression type: {algorithm}") from None
++    return codec.encode(tile_data)
++
++
++def _decompress_tile(compressed_data, algorithm, **settings):
++    algorithm = algorithm.upper()
++    try:
++        codec = ALGORITHMS[algorithm](**settings)
++    except KeyError:
++        raise ValueError(f"Unrecognized compression type: {algorithm}") from None
++    return codec.decode(compressed_data)
++
++
++def _finalize_array(buffer, bitpix, tile_shape, algorithm, lossless):
++    dtype = np.dtype(BITPIX2DTYPE[bitpix])
++    algorithm = algorithm.upper()
++    if algorithm in ("GZIP_1", "GZIP_2", "NOCOMPRESS"):
++        stored_dtype = dtype if lossless else np.dtype("i4")
++        array = np.frombuffer(
++            np.asarray(buffer, dtype=np.uint8), stored_dtype.newbyteorder(">")
++        )
++        array = array.astype(dtype, copy=False)
++    else:
++        array = np.asarray(buffer).astype(dtype, copy=False)
++    return array.reshape(tuple(tile_shape))
++
++
++def _column_dtype(coldefs, name):
++    column = coldefs[name]
++    p_format = getattr(column.format, "p_format", None)
++    if p_format:
++        dtype = np.dtype(
++            {
++                "B": "u1",
++                "I": "i2",
++                "J": "i4",
++                "K": "i8",
++                "E": "f4",
++                "D": "f8",
++                "C": "c8",
++                "M": "c16",
++            }[p_format.upper()]
++        )
++        return dtype
++    dtype = coldefs.dtype.fields[name][0]
++    if dtype.subdtype is not None:
++        dtype = dtype.subdtype[0]
++    return dtype
++
++
++def _get_data_from_heap(bintable, size, offset, dtype, heap_cache=None):
++    dtype = np.dtype(dtype)
++    size = int(size)
++    offset = int(offset)
++    byte_offset = offset * dtype.itemsize
++    byte_size = size * dtype.itemsize
++    if heap_cache is None:
++        raw = bintable._get_raw_data(
++            byte_size,
++            np.uint8,
++            bintable._data_offset + bintable._theap + byte_offset,
++        )
++    else:
++        raw = heap_cache[byte_offset : byte_offset + byte_size]
++    return np.asarray(raw, dtype=np.uint8)
++
++
+ 
+ 
+ 
+@@ -342,6 +587,10 @@ def decompress_image_data_section(
+     # otherwise slow.
+     compressed_data_column = np.array(compressed_data["COMPRESSED_DATA"])
+     compressed_data_dtype = _column_dtype(compressed_coldefs, "COMPRESSED_DATA")
++    if compression_type == "PLIO_1":
++        # PLIO descriptors count 16-bit words even though the table column is
++        # conventionally declared as a variable-length byte array.
++        compressed_data_dtype = np.dtype(">i2")
+ 
+     if "ZBLANK" in compressed_coldefs.dtype.names:
+         zblank_column = np.array(compressed_data["ZBLANK"])
+@@ -629,7 +878,7 @@ def compress_image_data(
+     # For PLIO_1, the size of each heap element is a factor of two lower than
+     # the real size - not clear if this is deliberate or bug somewhere.
+     if compression_type == "PLIO_1":
+-        table["COMPRESSED_DATA"][:, 0] //= 2
++        table["COMPRESSED_DATA"] //= 2
+ 
+     # For PLIO_1, it looks like the compressed data is always stored big endian
+     if compression_type == "PLIO_1":
+@@ -645,4 +894,4 @@ def compress_image_data(
+ 
+     table_bytes = table.tobytes()
+ 
+-    return table.tobytes() + compressed_bytes
+\ No newline at end of file
++    return table.tobytes() + compressed_bytes
+diff --git a/astropy/io/fits/hdu/compressed/compressed.py b/astropy/io/fits/hdu/compressed/compressed.py
+index 5dcd25c..44eeae9 100644
+--- a/astropy/io/fits/hdu/compressed/compressed.py
++++ b/astropy/io/fits/hdu/compressed/compressed.py
+@@ -11,8 +11,12 @@ from astropy.io.fits.fitsrec import FITS_rec
+ from astropy.io.fits.hdu.base import BITPIX2DTYPE, DELAYED
+ from astropy.io.fits.hdu.compressed._quantization import DITHER_METHODS
+ from astropy.io.fits.hdu.compressed._tiled_compression import compress_image_data
+-
+-
++from astropy.io.fits.hdu.compressed._tiled_compression import (
++    _get_compression_setting,
++    _tile_shape,
++)
++from astropy.io.fits.file import _File
++from astropy.io.fits.util import _is_int
+ 
+ from astropy.io.fits.hdu.compressed.utils import _validate_tile_shape
+ from astropy.io.fits.hdu.image import ImageHDU
+diff --git a/astropy/io/fits/hdu/compressed/header.py b/astropy/io/fits/hdu/compressed/header.py
+index 6275863..570ea43 100644
+--- a/astropy/io/fits/hdu/compressed/header.py
++++ b/astropy/io/fits/hdu/compressed/header.py
+@@ -73,6 +73,22 @@ class CompImageHeader(Header):
+         super().__init__(*args, **kwargs)
+ 
+ 
++def _is_reserved_keyword(keyword):
++    """Whether a card belongs to the compressed binary-table machinery."""
++    keyword = keyword.upper()
++    if keyword in COMPRESSION_KEYWORDS or keyword in REMAPPED_KEYWORDS.values():
++        return True
++    if keyword in {"TFIELDS", "THEAP"}:
++        return True
++    match = TDEF_RE.match(keyword)
++    if match and match.group("label") in set(TABLE_KEYWORD_NAMES).union(
++        {"TFIELDS", "THEAP"}
++    ):
++        return True
++    match = ZDEF_RE.match(keyword)
++    return bool(match and match.group("label").upper() in INDEXED_COMPRESSION_KEYWORDS)
++
++
+ 
+ 
+ 
+@@ -701,4 +717,4 @@ def _image_header_to_empty_bintable(
+ 
+     # TODO: avoid writing the same comment multiple times
+ 
+-    return bintable
+\ No newline at end of file
++    return bintable
+diff --git a/astropy/io/fits/hdu/compressed/section.py b/astropy/io/fits/hdu/compressed/section.py
+index 53ad55e..a55f1bd 100644
+--- a/astropy/io/fits/hdu/compressed/section.py
++++ b/astropy/io/fits/hdu/compressed/section.py
+@@ -26,6 +26,25 @@ class CompImageSection:
+     for more details.
+     """
+ 
++    def __init__(self, hdu):
++        self.hdu = hdu
++        self._data_shape = np.asarray(hdu.shape, dtype=int)
++        self._n_dim = len(self._data_shape)
++        if hdu._bintable is not None:
++            header = hdu._bintable.header
++            self._tile_shape = np.asarray(
++                [
++                    int(header.get(f"ZTILE{axis}", 1))
++                    for axis in range(self._n_dim, 0, -1)
++                ],
++                dtype=int,
++            )
++        else:
++            self._tile_shape = np.ones(self._n_dim, dtype=int)
++        self._n_tiles = (
++            self._data_shape + self._tile_shape - 1
++        ) // self._tile_shape
++
+ 
+ 
+ 
+@@ -128,4 +147,4 @@ class CompImageSection:
+         if self.hdu._do_not_scale_image_data:
+             return data
+         else:
+-            return self.hdu._scale_data(data)
+\ No newline at end of file
++            return self.hdu._scale_data(data)
+diff --git a/astropy/io/fits/hdu/groups.py b/astropy/io/fits/hdu/groups.py
+index a22cfae..ba7fd3d 100644
+--- a/astropy/io/fits/hdu/groups.py
++++ b/astropy/io/fits/hdu/groups.py
+@@ -6,11 +6,11 @@ import numpy as np
+ 
+ from astropy.io.fits.column import FITS2NUMPY, ColDefs, Column
+ from astropy.io.fits.fitsrec import FITS_rec, FITS_record
+-from astropy.io.fits.util import _pseudo_zero
++from astropy.io.fits.util import _is_int, _pseudo_zero
+ from astropy.utils import lazyproperty
+ 
+ from .base import DELAYED, DTYPE2BITPIX
+-from .image import PrimaryHDU
++from .image import PrimaryHDU, _is_pseudo_integer
+ from .table import _TableLikeHDU
+ 
+ 
+diff --git a/astropy/io/fits/hdu/hdulist.py b/astropy/io/fits/hdu/hdulist.py
+index 0ca0ea6..25c018c 100644
+--- a/astropy/io/fits/hdu/hdulist.py
++++ b/astropy/io/fits/hdu/hdulist.py
+@@ -13,7 +13,17 @@ import numpy as np
+ 
+ from astropy.io.fits.file import FILE_MODES, _File
+ 
+-from astropy.io.fits.util import _tmp_name, ignore_sigint, isfile
++from astropy.io.fits.header import _pad_length
++from astropy.io.fits.util import (
++    _free_space_check,
++    _get_array_mmap,
++    _is_int,
++    _tmp_name,
++    fileobj_closed,
++    fileobj_mode,
++    ignore_sigint,
++    isfile,
++)
+ 
+ 
+ 
+@@ -417,6 +427,10 @@ class HDUList(list, _Verify):
+         """
+         Set an HDU to the `HDUList`, indexed by number or name.
+         """
++        # Finish lazy discovery before replacing an entry: otherwise replacing
++        # the last currently-loaded HDU discards the offsets needed to locate
++        # any following HDUs.
++        self.readall()
+         _key = self._positive_index_of(key)
+         if isinstance(hdu, (slice, list)):
+             if _is_int(_key):
+diff --git a/astropy/io/fits/hdu/image.py b/astropy/io/fits/hdu/image.py
+index 8b94421..6639b5d 100644
+--- a/astropy/io/fits/hdu/image.py
++++ b/astropy/io/fits/hdu/image.py
+@@ -7,7 +7,7 @@ import warnings
+ import numpy as np
+ 
+ from astropy.io.fits.header import Header
+-from astropy.io.fits.util import _is_dask_array, _pseudo_zero
++from astropy.io.fits.util import _is_dask_array, _is_int, _pseudo_zero
+ 
+ 
+ 
+@@ -21,6 +21,13 @@ from .base import BITPIX2DTYPE, DELAYED, DTYPE2BITPIX, ExtensionHDU, _ValidHDU
+ __all__ = ["ImageHDU", "PrimaryHDU", "Section"]
+ 
+ 
++def _is_pseudo_integer(dtype):
++    dtype = np.dtype(dtype)
++    return (dtype.kind == "u" and dtype.itemsize > 1) or (
++        dtype.kind == "i" and dtype.itemsize == 1
++    )
++
++
+ class _ImageBaseHDU(_ValidHDU):
+     """FITS image HDU base class.
+ 
+@@ -777,6 +784,9 @@ class _ImageBaseHDU(_ValidHDU):
+         dtype = self._dtype_for_bitpix()
+         # bool(dtype) is always False--have to explicitly compare to None; this
+         # caused a fair amount of hair loss
++        if dtype is not None and dtype.kind == "i" and dtype.itemsize == 1:
++            return (np.asarray(data, dtype=np.int16) - 128).astype(np.int8)
++
+         if dtype is not None and dtype.kind == "u":
+             # Convert the input raw data into an unsigned integer array and
+             # then scale the data adjusting for the value of BZERO.  Note that
+@@ -966,11 +976,9 @@ class Section:
+     def __init__(self, hdu):
+         self.hdu = hdu
+ 
+-
+-
+-
+-
+-
++    @property
++    def shape(self):
++        return self.hdu.shape
+ 
+     @property
+     def dtype(self):
+@@ -1293,4 +1301,4 @@ class _IndexInfo:
+             self.offset = 0
+             self.contiguous = False
+         else:
+-            raise IndexError(f"Illegal index {index}")
+\ No newline at end of file
++            raise IndexError(f"Illegal index {index}")
+diff --git a/astropy/io/fits/hdu/streaming.py b/astropy/io/fits/hdu/streaming.py
+index 62b4862..c841a93 100644
+--- a/astropy/io/fits/hdu/streaming.py
++++ b/astropy/io/fits/hdu/streaming.py
+@@ -4,10 +4,12 @@ import gzip
+ import os
+ 
+ from astropy.io.fits.file import _File
++from astropy.io.fits.util import fileobj_name
+ 
+ 
+ 
+ from .base import BITPIX2DTYPE, _BaseHDU
++from ..header import _pad_length
+ from .hdulist import HDUList
+ from .image import PrimaryHDU
+ 
+diff --git a/astropy/io/fits/hdu/table.py b/astropy/io/fits/hdu/table.py
+index f760ee0..cbf7fe2 100644
+--- a/astropy/io/fits/hdu/table.py
++++ b/astropy/io/fits/hdu/table.py
+@@ -16,7 +16,7 @@ from numpy import char as chararray
+ # This module may have many dependencies on astropy.io.fits.column, but
+ # astropy.io.fits.column has fewer dependencies overall, so it's easier to
+ # keep table/column-related utilities in astropy.io.fits.column
+-from astropy.io.fits.column import ATTRIBUTE_TO_KEYWORD, FITS2NUMPY, KEYWORD_NAMES, KEYWORD_TO_ATTRIBUTE, TDEF_RE, ColDefs, Column, _AsciiColDefs, _cmp_recformats, _convert_format, _FormatP, _FormatQ, _makep, _scalar_to_format
++from astropy.io.fits.column import ATTRIBUTE_TO_KEYWORD, FITS2NUMPY, KEYWORD_NAMES, KEYWORD_TO_ATTRIBUTE, TDEF_RE, ColDefs, Column, _AsciiColDefs, _cmp_recformats, _convert_format, _FormatP, _FormatQ, _makep, _parse_tformat, _scalar_to_format
+ 
+ 
+ 
+@@ -33,9 +33,9 @@ from astropy.io.fits.column import ATTRIBUTE_TO_KEYWORD, FITS2NUMPY, KEYWORD_NAM
+ 
+ 
+ 
+-from astropy.io.fits.fitsrec import FITS_rec
+-from astropy.io.fits.header import Header
+-from astropy.io.fits.util import path_like
++from astropy.io.fits.fitsrec import FITS_rec, _get_recarray_field, _has_unicode_fields
++from astropy.io.fits.header import Header, _pad_length
++from astropy.io.fits.util import _is_int, _str_to_num, path_like
+ from astropy.utils import lazyproperty
+ 
+ from .base import DELAYED, ExtensionHDU, _ValidHDU
+@@ -53,6 +53,37 @@ class FITSTableDumpDialect(csv.excel):
+     skipinitialspace = True
+ 
+ 
++@contextlib.contextmanager
++def _binary_table_byte_swap(data):
++    swapped = []
++    for name in data.dtype.names or ():
++        dtype = data.dtype.fields[name][0]
++        base = dtype.subdtype[0] if dtype.subdtype is not None else dtype
++        if base.kind in "iufc" and base.byteorder != "|" and (
++            base.byteorder == "<" or (base.byteorder == "=" and sys.byteorder == "little")
++        ):
++            field = _get_recarray_field(data, name)
++            field.byteswap(True)
++            swapped.append(field)
++    if isinstance(data, FITS_rec):
++        for idx, recformat in enumerate(data.columns._recformats):
++            if not isinstance(recformat, (_FormatP, _FormatQ)):
++                continue
++            for row in data.field(idx):
++                dtype = getattr(row, "dtype", None)
++                if dtype is not None and dtype.kind in "iufc" and dtype.byteorder != "|" and (
++                    dtype.byteorder == "<"
++                    or (dtype.byteorder == "=" and sys.byteorder == "little")
++                ):
++                    row.byteswap(True)
++                    swapped.append(row)
++    try:
++        yield data
++    finally:
++        for field in swapped:
++            field.byteswap(True)
++
++
+ class _TableLikeHDU(_ValidHDU):
+     """
+     A class for HDUs that have table-like data.  This is used for both
+@@ -1455,6 +1486,3 @@ class BinTableHDU(_TableBaseHDU):
+             fileobj.close()
+ 
+         return ColDefs(columns)
+-
+-
+-
+diff --git a/astropy/io/fits/header.py b/astropy/io/fits/header.py
+index 823a415..d67797b 100644
+--- a/astropy/io/fits/header.py
++++ b/astropy/io/fits/header.py
+@@ -43,6 +43,8 @@ END_CARD = "END" + " " * 77
+ 
+ _commentary_keywords = Card._commentary_keywords
+ 
++_WILDCARD_RE = re.compile(r"(?P<ellipsis>\.\.\.)|(?P<star>\*)|(?P<question>\?)")
++
+ __doctest_skip__ = [
+     "Header",
+     "Header.comments",
+@@ -312,18 +314,9 @@ class Header:
+         """
+         return _CardAccessor(self)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    @property
++    def comments(self):
++        return _HeaderComments(self)
+ 
+ 
+ 
+@@ -517,18 +510,65 @@ class Header:
+             close_file = True
+ 
+         try:
+-            is_binary = fileobj_is_binary(fileobj)
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-            return cls._from_blocks(block_iter, is_binary, sep, endcard, padding)[1]
++            if sep:
++                raw = fileobj.read()
++                if isinstance(raw, bytes):
++                    raw = decode_ascii(raw)
++                return cls.fromstring(raw, sep=sep)
++
++            blocks = []
++            found_end = False
++            while True:
++                block = fileobj.read(BLOCK_SIZE)
++                if not block:
++                    break
++                blocks.append(block)
++                text = decode_ascii(block) if isinstance(block, bytes) else block
++                # ``decode_ascii`` deliberately replaces invalid header bytes;
++                # retain that sanitized text for the Header constructed below.
++                blocks[-1] = text
++                for offset in range(0, len(text), Card.length):
++                    card_text = text[offset : offset + Card.length]
++                    if (
++                        len(card_text) == Card.length
++                        and card_text.startswith("END")
++                        and not card_text[3:].strip()
++                    ):
++                        found_end = True
++                        break
++                    if card_text.startswith("END") and (
++                        len(card_text) == 3
++                        or len(card_text) < 4
++                        or card_text[3] not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
++                    ):
++                        trailing = card_text[3:].rstrip()
++                        if trailing:
++                            warnings.warn(
++                                "Unexpected bytes trailing END keyword: "
++                                f"{trailing!r}; these bytes will be replaced with "
++                                "spaces on write.",
++                                AstropyUserWarning,
++                            )
++                        else:
++                            warnings.warn(
++                                "Missing padding to end of the FITS block after the "
++                                "END keyword; additional spaces will be appended to "
++                                f"the file upon writing to pad out to {BLOCK_SIZE} bytes.",
++                                AstropyUserWarning,
++                            )
++                        replacement = END_CARD
++                        text = text[:offset] + replacement + text[offset + Card.length :]
++                        blocks[-1] = text
++                        found_end = True
++                        break
++                if found_end:
++                    break
++            if endcard and not found_end:
++                raise OSError("Header missing END card.")
++            if padding and blocks and len(blocks[-1]) != BLOCK_SIZE:
++                raise OSError("Header missing END card.")
++            raw = "".join(blocks)
++            return cls.fromstring(raw, sep="")
+         finally:
+             if close_file:
+                 fileobj.close()
+@@ -546,6 +586,44 @@ class Header:
+         header._modified = False
+         return header
+ 
++    def tostring(self, sep="", endcard=True, padding=True):
++        cards = []
++        for card in self._cards:
++            image = str(card)
++            cards.extend(
++                image[offset : offset + Card.length]
++                for offset in range(0, len(image), Card.length)
++            )
++        if endcard:
++            cards.append(END_CARD)
++        text = sep.join(cards)
++        if padding:
++            text += " " * _pad_length(len(text))
++        return text
++
++    def tofile(self, fileobj, sep="", endcard=True, padding=True, overwrite=False):
++        close = False
++        if fileobj is None:
++            self.tostring(sep=sep, endcard=endcard, padding=padding)
++            return
++        if isinstance(fileobj, path_like):
++            fileobj = os.path.expanduser(fileobj)
++            if os.path.exists(fileobj) and os.path.getsize(fileobj) and not overwrite:
++                from astropy.utils.misc import NOT_OVERWRITING_MSG
++
++                raise OSError(NOT_OVERWRITING_MSG.format(fileobj))
++            fileobj = open(fileobj, "wb" if not sep else "w")
++            close = True
++        try:
++            text = self.tostring(sep=sep, endcard=endcard, padding=padding)
++            try:
++                fileobj.write(text)
++            except TypeError:
++                fileobj.write(encode_ascii(text))
++        finally:
++            if close:
++                fileobj.close()
++
+ 
+ 
+ 
+@@ -950,7 +1028,10 @@ class Header:
+             if value is None:
+                 value = self[keyword]
+ 
+-            self[keyword] = (value, comment)
++            idx = self._cardindex(keyword)
++            current = self._cards[idx]
++            if current.value != value or current.comment != comment:
++                self[keyword] = (value, comment)
+ 
+             if before is not None or after is not None:
+                 card = self._cards[self._cardindex(keyword)]
+@@ -965,12 +1046,8 @@ class Header:
+         for card in self._cards:
+             yield card.keyword, None if card.value == UNDEFINED else card.value
+ 
+-
+-
+-
+-
+-
+-
++    def keys(self):
++        return iter(self)
+ 
+ 
+     def values(self):
+@@ -1342,111 +1419,49 @@ class Header:
+                 return idx
+         raise ValueError(f"The keyword {keyword!r} is not in the  header.")
+ 
++    def insert(self, key, card, useblanks=True, after=False):
++        """Insert a card at, or immediately after, *key*."""
++        if isinstance(key, numbers.Integral):
++            idx = int(key)
++            if idx < 0:
++                idx = max(0, len(self._cards) + idx)
++            idx = min(idx, len(self._cards))
++        else:
++            idx = self._cardindex(key)
++        if after:
++            idx = min(idx + 1, len(self._cards))
+ 
++        if isinstance(card, str):
++            cards = [Card(card)]
++        elif isinstance(card, tuple):
++            cards = [Card(*card)]
++        elif isinstance(card, Card):
++            cards = [card]
++        else:
++            raise ValueError(
++                "The value inserted into a Header must be either a keyword or "
++                f"(keyword, value, [comment]) tuple; got: {card!r}"
++            )
+ 
++        if cards[0].keyword in _commentary_keywords and len(str(cards[0])) > Card.length:
++            cards = list(cards[0]._itersubcards())
+ 
++        for new_card in cards:
++            self._cards.insert(idx, new_card)
++            self._updateindices(idx)
++            keyword = Card.normalize_keyword(new_card.keyword)
++            self._keyword_indices[keyword].append(idx)
++            self._keyword_indices[keyword].sort()
++            if new_card.field_specifier is not None:
++                self._rvkc_indices[new_card.rawkeyword].append(idx)
++                self._rvkc_indices[new_card.rawkeyword].sort()
++            idx += 1
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        if useblanks:
++            for _ in cards:
++                if self._countblanks():
++                    del self[-1]
++        self._modified = True
+ 
+ 
+     def remove(self, keyword, ignore_missing=False, remove_all=False):
+@@ -1530,6 +1545,9 @@ class Header:
+         """
+         self._add_commentary("HISTORY", value, before=before, after=after)
+ 
++    def add_comment(self, value, before=None, after=None):
++        self._add_commentary("COMMENT", value, before=before, after=after)
++
+ 
+ 
+ 
+@@ -1743,63 +1761,95 @@ class Header:
+         repeat = self._keyword_indices[keyword].index(idx)
+         return keyword, repeat
+ 
++    def _haswildcard(self, keyword):
++        return isinstance(keyword, str) and (
++            "*" in keyword or "?" in keyword or keyword.endswith("...")
++        )
+ 
++    def _wildcardmatch(self, pattern):
++        def repl(match):
++            if match.lastgroup == "ellipsis":
++                return r"\S*"
++            if match.lastgroup == "star":
++                return ".*"
++            return "."
++
++        regex = re.compile("^" + _WILDCARD_RE.sub(repl, pattern) + "$", re.IGNORECASE)
++        return [
++            idx
++            for idx, card in enumerate(self._cards)
++            if regex.match(card.keyword) is not None
++        ]
++
++    def _set_slice(self, key, value, target):
++        if not isinstance(key, slice) and not self._haswildcard(key):
++            return False
++        if isinstance(key, slice):
++            indices = range(*key.indices(len(target)))
++        else:
++            indices = self._wildcardmatch(key)
++        if isinstance(value, str) or not np.iterable(value):
++            value = itertools.repeat(value, len(indices))
++        for idx, val in zip(indices, value):
++            target[idx] = val
++        return True
+ 
++    def _relativeinsert(self, card, before=None, after=None, replace=False):
++        if before is not None:
++            reference = before
++            after_ref = False
++        elif after is not None:
++            reference = after
++            after_ref = True
++        else:
++            return
+ 
++        if isinstance(reference, numbers.Integral):
++            target = int(reference)
++            if target < 0:
++                target = max(0, len(self) + target)
++            target = min(target, len(self))
++        else:
++            target = self._cardindex(reference)
++
++        if replace:
++            current = self._cardindex(card.keyword)
++            desired = min(target + int(after_ref), len(self))
++            if desired == current or desired == current + 1:
++                return
++            del self[current]
++            if current < target:
++                target -= 1
++
++        self.insert(target, card, after=after_ref)
++
++    def _update(self, card):
++        comment_given = isinstance(card, Card)
++        if not isinstance(card, Card):
++            values = card
++            comment_given = len(values) > 2 and values[2] is not None
++            card = Card(*values)
+ 
++        keyword = card.keyword
++        if keyword.upper().startswith("HIERARCH "):
++            keyword = keyword[9:].strip()
++            card = Card(keyword, card.value, card.comment)
++        normalized = Card.normalize_keyword(keyword)
++
++        if normalized not in _commentary_keywords and normalized in self:
++            idx = self._cardindex(normalized)
++            existing = self._cards[idx]
++            existing.value = card.value
++            if comment_given:
++                existing.comment = card.comment
++            self._modified = True
++            return
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        if normalized in _commentary_keywords and len(str(card)) > Card.length:
++            for subcard in card._itersubcards():
++                self.append(subcard)
++        else:
++            self.append(card)
+ 
+ 
+     def _updateindices(self, idx, increment=True):
+@@ -1826,6 +1876,19 @@ class Header:
+                 return idx - 1
+         return 0
+ 
++    def _useblanks(self, count):
++        while count > 0 and self._countblanks():
++            del self[-1]
++            count -= 1
++
++    def _add_commentary(self, keyword, value, before=None, after=None):
++        if before is not None or after is not None:
++            self._relativeinsert((keyword, value), before=before, after=after)
++        elif keyword == "":
++            self.append((keyword, value), useblanks=False, end=True)
++        else:
++            self._update((keyword, value, None))
++
+ 
+ 
+ 
+@@ -2046,8 +2109,26 @@ class _BasicHeader(collections.abc.Mapping):
+             close_file = True
+ 
+         try:
+-            header_str, cards = parse_header(fileobj)
+-            _check_padding(header_str, BLOCK_SIZE, False)
++            start = fileobj.tell()
++            try:
++                header_str, cards = parse_header(fileobj)
++            except UnicodeDecodeError:
++                fileobj.seek(start)
++                header = Header.fromfile(fileobj)
++                return None, header
++            except Exception as exc:
++                remaining = fileobj.size - start if hasattr(fileobj, "size") else 0
++                fileobj.seek(start)
++                extra = fileobj.read(remaining)
++                if extra and not extra.strip(b"\0 "):
++                    warnings.warn(
++                        "Unexpected extra padding at the end of the file.",
++                        AstropyUserWarning,
++                    )
++                    fileobj.seek(start + remaining)
++                    raise EOFError from exc
++                raise ValueError("Header block is incomplete or corrupt") from exc
++            header_str = _check_padding(header_str, BLOCK_SIZE, False)
+             return header_str, cls(cards)
+         finally:
+             if close_file:
+@@ -2218,7 +2299,44 @@ class _HeaderCommentaryCards(_CardAccessor):
+         self._header[(self._keyword, item)] = value
+ 
+ 
++def _pad_length(stringlen):
++    return (BLOCK_SIZE - (stringlen % BLOCK_SIZE)) % BLOCK_SIZE
+ 
+ 
++def _hdr_data_size(header):
++    try:
++        bitpix = abs(int(header.get("BITPIX", 0)))
++        naxis = int(header.get("NAXIS", 0))
++        dims = 0 if naxis == 0 else 1
++        first_axis = 2 if header.get("GROUPS", False) else 1
++        for axis in range(first_axis, naxis + 1):
++            dims *= int(header.get(f"NAXIS{axis}", 0))
++        return (
++            bitpix
++            * int(header.get("GCOUNT", 1))
++            * (int(header.get("PCOUNT", 0)) + dims)
++            // 8
++        )
++    except (TypeError, ValueError):
++        return 0
+ 
+ 
++def _check_padding(header_str, block_size=BLOCK_SIZE, is_binary=False):
++    if len(header_str) % block_size:
++        raise ValueError("Header size is not a multiple of 2880")
++    end = header_str.find(END_CARD)
++    if end >= 0:
++        padding_start = end + Card.length
++        padding = header_str[padding_start:]
++        if "\0" in padding:
++            warnings.warn(
++                "Header block contains null bytes instead of spaces for padding, "
++                "and is not FITS-compliant. Nulls may be replaced with spaces "
++                "upon writing.",
++                AstropyUserWarning,
++            )
++            header_str = (
++                header_str[:padding_start]
++                + padding.replace("\0", " ")
++            )
++    return header_str
+diff --git a/astropy/io/fits/util.py b/astropy/io/fits/util.py
+index cb8d16f..b424bc6 100644
+--- a/astropy/io/fits/util.py
++++ b/astropy/io/fits/util.py
+@@ -76,18 +76,26 @@ class NotifierMixin:
+ 
+     _listeners = None
+ 
++    def _add_listener(self, listener):
++        """Register *listener* without keeping it alive."""
++        if self._listeners is None:
++            # This must be an instance attribute; sharing the mixin's mapping
++            # between instances makes notifications leak between objects.
++            self._listeners = {}
+ 
++        key = id(listener)
++        current = self._listeners.get(key)
++        if current is not None and current() is listener:
++            return
+ 
++        listeners = self._listeners
+ 
++        def remove(ref, key=key, listeners=listeners):
++            # Guard against the (unlikely, but possible) reuse of an object id.
++            if listeners.get(key) is ref:
++                listeners.pop(key, None)
+ 
+-
+-
+-
+-
+-
+-
+-
+-
++        self._listeners[key] = weakref.ref(listener, remove)
+     def _remove_listener(self, listener):
+         """
+         Removes the specified listener from the listeners list.  This relies
+@@ -99,29 +107,19 @@ class NotifierMixin:
+         with suppress(KeyError):
+             del self._listeners[id(listener)]
+ 
++    def _notify(self, notification, *args, **kwargs):
++        if self._listeners is None:
++            return
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        method_name = "_update_" + notification
++        # Take a snapshot since callbacks are allowed to change registration.
++        for listener_ref in list(self._listeners.values()):
++            listener = listener_ref()
++            if listener is None:
++                continue
++            update = getattr(listener, method_name, None)
++            if update is not None:
++                update(*args, **kwargs)
+ 
+ 
+     def __getstate__(self):
+@@ -344,131 +342,125 @@ def isfile(f):
+     return False
+ 
+ 
++def _convert_array(array, dtype):
++    if array.dtype == dtype:
++        return array
++    if (
++        array.dtype.itemsize == dtype.itemsize
++        and not (
++            np.issubdtype(array.dtype, np.number)
++            and np.issubdtype(dtype, np.number)
++        )
++    ):
++        return array.view(dtype)
++    return array.astype(dtype)
++
++
++def _fileobj_normalize_mode(f):
++    mode = f.mode
++    if isinstance(f, gzip.GzipFile) and not isinstance(mode, str):
++        if mode == gzip.READ:
++            mode = "rb"
++        elif mode == gzip.WRITE:
++            mode = "wb"
++        else:
++            return None
++    if isinstance(mode, str) and "+" in mode:
++        mode = mode.replace("+", "") + "+"
++    return mode
+ 
+ 
++@contextmanager
++def _free_space_check(hdulist, dirname=None):
++    if not isinstance(hdulist, list):
++        hdulist = [hdulist]
+ 
++    try:
++        yield
++    except OSError as exc:
++        if dirname is None:
++            # Kept for compatibility: normalization above means an ordinary
++            # one-item list has no filename() method here.
++            dirname = os.path.dirname(hdulist.filename())
++        requested = sum(hdu.size for hdu in hdulist)
++        available = data.get_free_space_in_dir(dirname)
++        for hdu in hdulist:
++            hdu._close()
++        message = str(exc)
++        if available is not None and requested > available:
++            message = (
++                f"Not enough space on disk: requested {requested}, "
++                f"available {available}. {message}"
++            )
++        raise OSError(message) from exc
+ 
+ 
++def _get_array_mmap(array):
++    while array is not None:
++        if isinstance(array, mmap.mmap):
++            return array
++        array = getattr(array, "base", None)
++    return None
+ 
+ 
++def _is_int(val):
++    return isinstance(val, all_integer_types)
+ 
+ 
++def _str_to_num(val):
++    try:
++        return int(val)
++    except ValueError:
++        return float(val)
+ 
+ 
++def fileobj_closed(f):
++    if isinstance(f, path_like):
++        return True
++    if hasattr(f, "closed"):
++        return f.closed
++    if hasattr(f, "fileobj") and hasattr(f.fileobj, "closed"):
++        return f.fileobj.closed
++    if hasattr(f, "fp") and hasattr(f.fp, "closed"):
++        return f.fp.closed
++    return False
+ 
+ 
++def fileobj_mode(f):
++    if isinstance(f, path_like):
++        return None
++    if isinstance(f, gzip.GzipFile):
++        if getattr(f, "fileobj", None) is not None and hasattr(f.fileobj, "mode"):
++            return _fileobj_normalize_mode(f.fileobj)
++        return _fileobj_normalize_mode(f)
++    if hasattr(f, "fileobj_mode"):
++        return f.fileobj_mode
++    if hasattr(f, "fp") and hasattr(f.fp, "mode"):
++        return _fileobj_normalize_mode(f.fp)
++    if hasattr(f, "mode"):
++        return _fileobj_normalize_mode(f)
++    return None
+ 
+ 
++def fileobj_name(f):
++    if isinstance(f, path_like):
++        return f
++    if isinstance(f, gzip.GzipFile) and getattr(f, "fileobj", None) is not None:
++        return fileobj_name(f.fileobj)
++    if hasattr(f, "name"):
++        return f.name
++    if hasattr(f, "filename"):
++        return f.filename
++    if hasattr(f, "__class__"):
++        return str(f.__class__)
++    return str(type(f))
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++def translate(s, table, deletechars):
++    table = table.copy()
++    if deletechars:
++        table.update(dict.fromkeys(map(ord, deletechars)))
++    return s.translate(table)
+ 
+ 
+ 
+@@ -542,62 +534,25 @@ _OSX_WRITE_LIMIT = (2**32) - 1
+ _WIN_WRITE_LIMIT = (2**31) - 1
+ 
+ 
++def _array_to_file(arr, outfile):
++    """Write an array to an OS file, respecting platform write limits."""
++    if sys.platform.startswith("win"):
++        write_limit = _WIN_WRITE_LIMIT
++    elif sys.platform == "darwin":
++        write_limit = _OSX_WRITE_LIMIT
++    else:
++        write_limit = None
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++    if write_limit is None or arr.nbytes <= write_limit:
++        try:
++            arr.tofile(outfile)
++        except OSError:
++            _array_to_file_like(arr, outfile)
++        return
++    chunk = max(1, write_limit // arr.dtype.itemsize)
++    flat = arr.ravel()
++    for start in range(0, flat.size, chunk):
++        flat[start : start + chunk].tofile(outfile)
+ 
+ 
+ def _array_to_file_like(arr, fileobj):
+@@ -897,4 +852,4 @@ def _is_dask_array(data):
+ 
+     from dask.array import Array
+ 
+-    return isinstance(data, Array)
+\ No newline at end of file
++    return isinstance(data, Array)
+diff --git a/astropy/io/fits/verify.py b/astropy/io/fits/verify.py
+index dd9a633..9075c24 100644
+--- a/astropy/io/fits/verify.py
++++ b/astropy/io/fits/verify.py
+@@ -59,70 +59,77 @@ class _Verify:
+ 
+         return (fixable, text)
+ 
++    def verify(self, option="warn"):
++        if option not in VERIFY_OPTIONS:
++            raise ValueError(f"Option {option!r} not recognized.")
++        if option == "ignore":
++            return
++
++        plain_fix = option in ("fix", "silentfix")
++        if "+" in option:
++            fix_opt, report_opt = option.split("+", 1)
++        elif plain_fix:
++            fix_opt, report_opt = option, "exception"
++        else:
++            fix_opt = report_opt = option
++
++        errs = self._verify(fix_opt)
++        if plain_fix:
++            fixed = list(errs.iter_lines(filter=lambda item: item[0]))
++            unfixable = list(errs.iter_lines(filter=lambda item: not item[0]))
++            if unfixable:
++                exception_lines = unfixable if fix_opt == "silentfix" else fixed + unfixable
++                raise VerifyError(
++                    "\n".join(
++                        ["Verification reported errors:"]
++                        + [message for _, message in exception_lines]
++                        + ["Note: astropy.io.fits uses zero-based indexing."]
++                    )
++                )
++            if fix_opt == "fix" and fixed:
++                warnings.warn("Verification reported errors:", VerifyWarning)
++                for _, message in fixed:
++                    warnings.warn(message, VerifyWarning)
++                warnings.warn(
++                    "Note: astropy.io.fits uses zero-based indexing.\n",
++                    VerifyWarning,
++                )
++            return
++
++        if fix_opt == "silentfix" and report_opt == "ignore":
++            return
++        if fix_opt == "silentfix":
++            filt = lambda item: not item[0]
++        elif fix_opt == "fix" and report_opt == "ignore":
++            # ``fix+ignore`` reports successful repairs but ignores errors it
++            # could not repair.
++            filt = lambda item: item[0]
++        elif report_opt == "ignore":
++            return
++        else:
++            filt = None
+ 
++        lines = list(errs.iter_lines(filter=filt))
++        if not lines:
++            return
+ 
++        messages = [line for _, line in lines]
++        if report_opt == "exception":
++            raise VerifyError(
++                "\n".join(["Verification reported errors:"] + messages + [
++                    "Note: astropy.io.fits uses zero-based indexing."
++                ])
++            )
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++        # Fixed defects are intentionally warned about for ``fix`` modes,
++        # including fix+ignore.  ``silentfix`` was filtered above.
++        warnings.warn("Verification reported errors:", VerifyWarning)
++        for message in messages:
++            warnings.warn(message, VerifyWarning)
++        warnings.warn(
++            "Note: astropy.io.fits uses zero-based indexing.\n",
++            VerifyWarning,
++        )
+ 
+ 
+ 
+@@ -174,4 +181,4 @@ class _ErrList(list):
+ 
+                 yield from next_lines
+ 
+-                element += 1
+\ No newline at end of file
++                element += 1

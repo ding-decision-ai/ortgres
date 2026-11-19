@@ -1,0 +1,98 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/modeling/tests/test_spline.py.
+
+Date: 2026-10-11T01:15:59
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 111 items
+
+astropy/modeling/tests/test_spline.py .............sssssssssssssssssssss [ 30%]
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 95%]
+sssss                                                                    [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test___init__
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test_param_names
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__optional_arg
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__create_optional_inputs
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__intercept_optional_inputs
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test_evaluate
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test___call__
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__create_parameter
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__create_parameters
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__init_parameters
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__init_data
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__init_spline
+PASSED astropy/modeling/tests/test_spline.py::TestSpline::test__init_tck
+SKIPPED [1] astropy/modeling/tests/test_spline.py:380: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:392: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:427: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:457: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:491: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:522: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:541: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:585: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:682: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:693: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:704: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:717: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:748: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:777: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:791: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:800: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:865: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:924: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:939: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:954: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:964: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:979: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:1034: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:1058: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:1089: requires scipy
+SKIPPED [10] astropy/modeling/tests/test_spline.py:1207: requires scipy
+SKIPPED [20] astropy/modeling/tests/test_spline.py:1236: requires scipy
+SKIPPED [10] astropy/modeling/tests/test_spline.py:1265: requires scipy
+SKIPPED [20] astropy/modeling/tests/test_spline.py:1309: requires scipy
+SKIPPED [10] astropy/modeling/tests/test_spline.py:1346: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:1428: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:1485: requires scipy
+SKIPPED [1] astropy/modeling/tests/test_spline.py:1536: requires scipy
+======================== 13 passed, 98 skipped in 0.30s ========================

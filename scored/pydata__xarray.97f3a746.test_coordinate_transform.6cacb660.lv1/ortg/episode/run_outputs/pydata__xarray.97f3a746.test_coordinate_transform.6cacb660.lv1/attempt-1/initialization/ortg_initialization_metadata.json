@@ -1,0 +1,106 @@
+{
+  "ready": true,
+  "error": null,
+  "condition": "continuous_source_only_completion_v1",
+  "source_only": true,
+  "native_version": "0.5.41",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "segments": [
+    {
+      "number": 1,
+      "model_exit_code": 0,
+      "model_elapsed_seconds": 301.8213770479924,
+      "events_sha256": "d4a75bcdac816b0761d70175730bc41d2db0a35d2b02b0fe263ee9c52153cac8",
+      "event_summary": {
+        "completed": true,
+        "turn_usages": [
+          {
+            "input_tokens": 2800527,
+            "cached_input_tokens": 2363776,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 7386,
+            "reasoning_output_tokens": 3540
+          }
+        ],
+        "usage_total": {
+          "input_tokens": 2800527,
+          "cached_input_tokens": 2363776,
+          "output_tokens": 7386
+        },
+        "last_event_type": "turn.completed"
+      }
+    }
+  ],
+  "model_elapsed_seconds": 301.8213770479924,
+  "elapsed_seconds": 303.83205667999573,
+  "segment_timeout_seconds": 1800,
+  "initialization_total_budget": "No hard segment/total cap; all source-only costs accumulated separately",
+  "formal_solver_budget_separate_seconds": 3600,
+  "cache_source_run": "artifact://edc18487b2470119",
+  "prior_source_initialization_cost": {
+    "latest_episode": {
+      "ready": false,
+      "native_version": "0.5.39",
+      "condition": "continuous_source_only_completion_v1",
+      "model_elapsed_seconds": 1834.4856883469765,
+      "elapsed_seconds": 2039.127397432996,
+      "error": null,
+      "event_summary": {
+        "turn_usages": [],
+        "usage_total": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "output_tokens": 0
+        }
+      }
+    },
+    "earlier_paid_source_cost": {
+      "ready": false,
+      "ortg_version": "0.5.34",
+      "preparation_recipe": "bounded_source_only_v1",
+      "model_elapsed_seconds": 3598.2100701889995,
+      "elapsed_seconds": 3599.2515818029997,
+      "model_exit_code": 124,
+      "error": "ORTG method initialization failed: ORTG initialization failed: Initialization session failed or timed out (exit 124)",
+      "segment_limit": 4
+    },
+    "latest_metadata_path": "artifact://33514a9ccfe61bd7",
+    "all_historical_costs_retained": true
+  },
+  "snapshot_sha256": "9172a448d30d350f65733408ac217730d40cfec848b13a8c3e1b7bd56e6d469e",
+  "current_readiness": {
+    "source_identity_preserved": true,
+    "roles_preserved": true,
+    "total_cognitive_files": 428,
+    "native_outline_rows": 428,
+    "missing_count": 0,
+    "missing_paths": [],
+    "malformed_paths": [],
+    "native_status_bad_states": {},
+    "coverage_complete": true,
+    "native_status_counts": [
+      428,
+      0,
+      2,
+      0
+    ],
+    "semantic_fidelity": "Row/native completeness is checked; semantic fidelity relies on current-source model maintenance, not row count."
+  },
+  "event_summary": {
+    "turn_usages": [
+      {
+        "input_tokens": 2800527,
+        "cached_input_tokens": 2363776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7386,
+        "reasoning_output_tokens": 3540
+      }
+    ],
+    "usage_total": {
+      "input_tokens": 2800527,
+      "cached_input_tokens": 2363776,
+      "output_tokens": 7386
+    }
+  }
+}

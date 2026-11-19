@@ -1,0 +1,83 @@
+{
+    "astropy__astropy.b0db0daa.test_functions.40530bf7.lv1": {
+        "n_attempt": 1,
+        "patch_is_None": false,
+        "patch_exists": true,
+        "patch_successfully_applied": true,
+        "resolved": false,
+        "pass_rate": 0.6,
+        "tests_status": {
+            "FAIL_TO_PASS": {
+                "success": [
+                    "astropy/uncertainty/tests/test_functions.py::TestConcatenation::test_concatenate",
+                    "astropy/uncertainty/tests/test_functions.py::TestConcatenation::test_concatenate_not_all_distribution",
+                    "astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionConcatenation::test_concatenate",
+                    "astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionConcatenation::test_concatenate_not_all_distribution",
+                    "astropy/uncertainty/tests/test_functions.py::TestBroadcast::test_broadcast_to",
+                    "astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionBroadcast::test_broadcast_to"
+                ],
+                "failure": [
+                    "astropy/uncertainty/tests/test_functions.py::TestBroadcast::test_broadcast_arrays",
+                    "astropy/uncertainty/tests/test_functions.py::TestBroadcast::test_broadcast_arrays_subok_false",
+                    "astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionBroadcast::test_broadcast_arrays",
+                    "astropy/uncertainty/tests/test_functions.py::TestQuantityDistributionBroadcast::test_broadcast_arrays_subok_false"
+                ]
+            },
+            "PASS_TO_PASS": {
+                "success": [
+                    "astropy/visualization/tests/test_lupton_rgb.py::test_compute_intensity_1_float",
+                    "astropy/visualization/tests/test_lupton_rgb.py::test_compute_intensity_1_uint",
+                    "astropy/visualization/tests/test_lupton_rgb.py::test_compute_intensity_3_float",
+                    "astropy/visualization/tests/test_lupton_rgb.py::test_compute_intensity_3_uint",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_Asinh",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_Asinh_incorrect_stretch_asserts",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_Asinh_incorrect_Q_asserts",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_Asinh_Q_machine_floor",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_Asinh_Q_ceil",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscale",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscaleIntensity",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscaleIntensityBW",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscale_pedestal_array",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscale_pedestal_float",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscale_pedestal_incorrect_assert",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscale_incorrect_input_asserts",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_AsinhZscale_incorrect_input_nonimage_asserts",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_make_rgb_incorrect_min_input",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_linear",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_different_shapes_asserts",
+                    "astropy/visualization/tests/test_lupton_rgb.py::TestLuptonRgb::test_incorrect_input_compute_intensity_asserts",
+                    "astropy/samp/tests/test_standard_profile.py::TestStandardProfile::test_main",
+                    "astropy/units/function/logarithmic.py::astropy.units.function.logarithmic.LogQuantity",
+                    "astropy/units/format/console.py::astropy.units.format.console.Console",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[True-None-1.0]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[True-None-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[True-2.0-1.0]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[True-2.0-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[False-None-1.0]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[False-None-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[False-2.0-1.0]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_design_matrix[False-2.0-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_multiterm_design_matrix[0]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_multiterm_design_matrix[1]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_multiterm_design_matrix[2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_multiterm_design_matrix[3]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[True-1-1]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[True-1-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[True-1-3]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[True-2-1]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[True-2-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[True-2-3]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[False-1-1]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[False-1-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[False-1-3]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[False-2-1]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[False-2-2]",
+                    "astropy/timeseries/periodograms/lombscargle/implementations/tests/test_mle.py::test_exact_mle_fit[False-2-3]"
+                ],
+                "failure": []
+            }
+        },
+        "featurebench_eval_completed": true,
+        "featurebench_eval_completed_at": "2026-10-11T00:30:01.436949"
+    }
+}

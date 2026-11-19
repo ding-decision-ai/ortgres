@@ -1,0 +1,118 @@
+2026-10-14 12:00:12,462 - INFO - ============================================================
+2026-10-14 12:00:12,462 - INFO - Starting evaluation for instance: mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1
+2026-10-14 12:00:12,462 - INFO - Level: 1
+2026-10-14 12:00:12,462 - INFO - Attempt: 1
+2026-10-14 12:00:12,462 - INFO - ============================================================
+2026-10-14 12:00:12,469 - INFO - Docker runtime config: shm_size=4g, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 12:00:12,469 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e
+2026-10-14 12:00:12,471 - INFO - Image docker.io/libercoders/featurebench-specs_mlflow-instance_efffa87e found locally
+2026-10-14 12:00:12,471 - INFO - Creating container: fb-eval-mlflow__mlflow-93dab383-test_mlflow-d1847ff9-lv1-attempt-1-20261014-120012-471266
+2026-10-14 12:00:12,472 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 12:00:12,472 - INFO - Using shared memory size: 4g
+2026-10-14 12:00:12,728 - INFO - Container fb-eval-mlflow__mlflow-93dab383-test_mlflow-d1847ff9-lv1-attempt-1-20261014-120012-471266 created successfully
+2026-10-14 12:00:12,728 - INFO - Starting Level 1 evaluation for mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1
+2026-10-14 12:00:12,728 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 12:00:16,985 - INFO - Restore project exit code: 0
+2026-10-14 12:00:16,985 - INFO - Output: 
+2026-10-14 12:00:16,985 - INFO - Step 2: Applying patch to mask files
+2026-10-14 12:00:16,989 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 12:00:17,224 - INFO - Mask patch apply exit code: 0
+2026-10-14 12:00:17,224 - INFO - Mask patch output: /tmp/mask_patch.diff:258: new blank line at EOF.
++
+/tmp/mask_patch.diff:544: new blank line at EOF.
++
+/tmp/mask_patch.diff:588: new blank line at EOF.
++
+/tmp/mask_patch.diff:1436: new blank line at EOF.
++
+warning: 4 lines add whitespace errors.
+
+2026-10-14 12:00:17,224 - INFO - Successfully applied mask patch
+2026-10-14 12:00:17,224 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 12:00:17,228 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 12:00:17,228 - INFO - Deleting F2P test file: /testbed/tests/deployments/mlflow/test_mlflow.py
+2026-10-14 12:00:17,447 - INFO - Successfully deleted F2P test file: /testbed/tests/deployments/mlflow/test_mlflow.py
+2026-10-14 12:00:17,447 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 12:00:17,447 - INFO - Applying environment fix mlflow_parallel_sources for mlflow/mlflow
+2026-10-14 12:00:17,774 - INFO - Environment fix mlflow_parallel_sources completed for mlflow/mlflow
+2026-10-14 12:00:17,774 - INFO - Step 4: Reinitializing git repository
+2026-10-14 12:00:36,480 - INFO - Step 5: Applying agent patch
+2026-10-14 12:00:36,493 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 12:00:36,737 - INFO - Patch apply exit code: 0
+2026-10-14 12:00:36,737 - INFO - Patch output: Checking patch mlflow/deployments/__init__.py...
+Checking patch mlflow/deployments/base.py...
+Checking patch mlflow/deployments/databricks/__init__.py...
+Checking patch mlflow/deployments/interface.py...
+Checking patch mlflow/deployments/mlflow/__init__.py...
+Checking patch mlflow/deployments/plugin_manager.py...
+Checking patch mlflow/deployments/server/config.py...
+Checking patch mlflow/gateway/config.py...
+Checking patch mlflow/tracking/request_header/databricks_request_header_provider.py...
+Checking patch mlflow/tracking/request_header/default_request_header_provider.py...
+Checking patch mlflow/tracking/request_header/registry.py...
+Checking patch mlflow/utils/request_utils.py...
+Checking patch mlflow/utils/rest_utils.py...
+Checking patch ortg.tsv...
+Checking patch ortg.tsv.bak...
+Applied patch mlflow/deployments/__init__.py cleanly.
+Applied patch mlflow/deployments/base.py cleanly.
+Applied patch mlflow/deployments/databricks/__init__.py cleanly.
+Applied patch mlflow/deployments/interface.py cleanly.
+Applied patch mlflow/deployments/mlflow/__init__.py cleanly.
+Applied patch mlflow/deployments/plugin_manager.py cleanly.
+Applied patch mlflow/deployments/server/config.py cleanly.
+Applied patch mlflow/gateway/config.py cleanly.
+Applied patch mlflow/tracking/request_header/databricks_request_header_provider.py cleanly.
+Applied patch mlflow/tracking/request_header/default_request_header_provider.py cleanly.
+Applied patch mlflow/tracking/request_header/registry.py cleanly.
+Applied patch mlflow/utils/request_utils.py cleanly.
+Applied patch mlflow/utils/rest_utils.py cleanly.
+Applied patch ortg.tsv cleanly.
+Applied patch ortg.tsv.bak cleanly.
+
+2026-10-14 12:00:36,737 - INFO - >>>>> Applied Patch
+2026-10-14 12:00:36,737 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 12:00:36,738 - INFO - F2P test path: /testbed/tests/deployments/mlflow/test_mlflow.py
+2026-10-14 12:00:36,965 - INFO - Delete F2P file exit code: 0
+2026-10-14 12:00:36,965 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 12:00:37,191 - INFO - Reverse apply exit code: 0
+2026-10-14 12:00:37,191 - INFO - Reverse apply output: 
+2026-10-14 12:00:37,191 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 12:00:37,191 - INFO - Step 7: Running tests
+2026-10-14 12:00:37,191 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=20
+2026-10-14 12:00:37,191 - INFO - Test timeout: 1200s
+2026-10-14 12:00:37,191 - INFO - Running F2P test: /testbed/tests/deployments/mlflow/test_mlflow.py
+2026-10-14 12:00:39,277 - INFO - F2P test exit code: 0
+2026-10-14 12:00:39,277 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0 -- /opt/miniconda3/envs/testbed/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, anyio-4.11.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 20.0s
+timeout method: 
+2026-10-14 12:00:39,278 - INFO - Saved F2P test output to artifact://9d005054d225329a
+2026-10-14 12:00:39,278 - INFO - Running 5 P2P tests
+2026-10-14 12:00:39,278 - INFO - Running P2P test: /testbed/tests/models/test_dependencies_schema.py
+2026-10-14 12:00:40,906 - INFO - P2P test /testbed/tests/models/test_dependencies_schema.py exit code: 0
+2026-10-14 12:00:40,906 - INFO - Saved P2P test output to artifact://96662bfd10d25f65
+2026-10-14 12:00:40,906 - INFO - Running P2P test: /testbed/tests/pyfunc/test_pyfunc_input_converter.py
+2026-10-14 12:00:42,845 - INFO - P2P test /testbed/tests/pyfunc/test_pyfunc_input_converter.py exit code: 0
+2026-10-14 12:00:42,845 - INFO - Saved P2P test output to artifact://52e9ae12e4692d8f
+2026-10-14 12:00:42,845 - INFO - Running P2P test: /testbed/tests/genai/scorers/test_scorer.py
+2026-10-14 12:01:13,843 - INFO - P2P test /testbed/tests/genai/scorers/test_scorer.py exit code: 0
+2026-10-14 12:01:13,843 - INFO - Saved P2P test output to artifact://49b1ead6c5a3cba2
+2026-10-14 12:01:13,843 - INFO - Running P2P test: /testbed/tests/tracing/utils/test_search.py
+2026-10-14 12:01:15,530 - INFO - P2P test /testbed/tests/tracing/utils/test_search.py exit code: 0
+2026-10-14 12:01:15,530 - INFO - Saved P2P test output to artifact://3cf172be5241d9c2
+2026-10-14 12:01:15,530 - INFO - Running P2P test: /testbed/tests/entities/test_trace_state.py
+2026-10-14 12:01:17,046 - INFO - P2P test /testbed/tests/entities/test_trace_state.py exit code: 0
+2026-10-14 12:01:17,046 - INFO - Saved P2P test output to artifact://9edc715aa25dd439
+2026-10-14 12:01:17,052 - INFO - ============================================================
+2026-10-14 12:01:17,052 - INFO - Evaluation completed for mlflow__mlflow.93dab383.test_mlflow.d1847ff9.lv1
+2026-10-14 12:01:17,052 - INFO - Resolved: True
+2026-10-14 12:01:17,052 - INFO - F2P Pass rate: 1.0
+2026-10-14 12:01:17,052 - INFO - ============================================================
+2026-10-14 12:01:17,052 - INFO - Stopping and removing container
+2026-10-14 12:01:27,683 - INFO - Container removed successfully

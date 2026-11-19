@@ -1,0 +1,60 @@
+{
+  "accounting_note": "Recorded measurements are retained by phase. Shared or overlapping entries must not be summed; null denotes unknown. Elapsed time is not necessarily model-active or billed time.",
+  "measurements": {
+    "case": "050",
+    "source_and_execution": {
+      "whole_full_eval_outer_seconds": 82.12947261099998,
+      "inner_eval_already_in_whole_outer_seconds": 81.70344644400029,
+      "charge_inner_and_outer_twice": false,
+      "fresh_evaluator_creation_seconds": 0.40175971600001503,
+      "current_phase_ledger": {
+        "bytes": 25241
+      },
+      "current_phase_charged_seconds": 410.08611054900666,
+      "current_phase_remaining_seconds": 789.9138894509933,
+      "phase_and_all_history_actual_total_seconds": null,
+      "all_history_USD": null,
+      "backend_active_or_billed_seconds": null,
+      "operator_RD_seconds": null,
+      "existing_full_scoring_segments_verbatim": {
+        "0": {
+          "seconds": 0.40175971600001503,
+          "models": 0
+        },
+        "1": {
+          "whole_seconds": 0.37466065199987497,
+          "inner_budget_already_charged": 0.0,
+          "inner_known_actual_already_charged": 0.0,
+          "additional_budget": 0.37466065199987497,
+          "additional_known_actual": 0.37466065199987497,
+          "models": 0
+        },
+        "2": {
+          "whole_seconds": 82.12947261099998,
+          "inner_budget_already_charged": 81.70344644400029,
+          "inner_known_actual_already_charged": 0.0,
+          "additional_budget": 0.42602616699969076,
+          "additional_known_actual": 82.12947261099998,
+          "models": 0
+        }
+      },
+      "known_actual_elapsed_seconds_is_not_complete_phase_total": 375.4031633610093,
+      "prior005_tuple_key_error_zero_grade_failure_outer_seconds": 0.37466065199987497,
+      "prior005_grade_or_model_calls": 0,
+      "prior005_fresh_evaluator_never_started": true
+    },
+    "historical_source_and_method_reference": {
+      "previous_method_spent_seconds": 869.0657794849985,
+      "original_known_prefix_seconds": 384.9492676730079,
+      "known_case_spent_before_new_method_seconds": 1254.0150471580064,
+      "counter_scopes": {
+        "immutable_all_history_model_dispatches": 2,
+        "earlier_non_clean_round18_dispatches": 1,
+        "retained_current_SID_clean_round18_dispatches": 1,
+        "stage_06_dispatches": 1,
+        "new_method_retains_both_scope_references": true
+      }
+    },
+    "accounting_rule": "unknown"
+  }
+}

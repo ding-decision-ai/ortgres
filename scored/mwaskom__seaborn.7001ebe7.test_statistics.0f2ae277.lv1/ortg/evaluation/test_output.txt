@@ -1,0 +1,179 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 72 items
+
+tests/test_statistics.py ....s.....s.....F..........................FFFF [ 65%]
+Fs.F..............FFFFFFF                                                [100%]
+
+=================================== FAILURES ===================================
+___________________ TestHistogram.test_bivariate_array_bins ____________________
+tests/test_statistics.py:226: in test_bivariate_array_bins
+    e1, e2 = h.define_bin_params(x, y)["bins"]
+seaborn/_statistics.py:380: in define_bin_params
+    bin_edges.append(self._define_bin_edges(
+seaborn/_statistics.py:329: in _define_bin_edges
+    bin_edges = np.histogram_bin_edges(
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/numpy/lib/_histograms_impl.py:677: in histogram_bin_edges
+    bin_edges, _ = _get_bin_edges(a, bins, range, weights)
+/opt/miniconda3/envs/testbed/lib/python3.10/site-packages/numpy/lib/_histograms_impl.py:428: in _get_bin_edges
+    raise ValueError('`bins` must be positive, when an integer')
+E   ValueError: `bins` must be positive, when an integer
+_____________________ TestECDF.test_univariate_proportion ______________________
+tests/test_statistics.py:435: in test_univariate_proportion
+    stat, vals = ecdf(x)
+seaborn/_statistics.py:588: in __call__
+    return self._eval_univariate(x1, weights)
+E   AttributeError: 'ECDF' object has no attribute '_eval_univariate'
+________________________ TestECDF.test_univariate_count ________________________
+tests/test_statistics.py:443: in test_univariate_count
+    stat, vals = ecdf(x)
+seaborn/_statistics.py:588: in __call__
+    return self._eval_univariate(x1, weights)
+E   AttributeError: 'ECDF' object has no attribute '_eval_univariate'
+_______________________ TestECDF.test_univariate_percent _______________________
+tests/test_statistics.py:452: in test_univariate_percent
+    stat, vals = ecdf(x2)
+seaborn/_statistics.py:588: in __call__
+    return self._eval_univariate(x1, weights)
+E   AttributeError: 'ECDF' object has no attribute '_eval_univariate'
+_________________ TestECDF.test_univariate_proportion_weights __________________
+tests/test_statistics.py:461: in test_univariate_proportion_weights
+    stat, vals = ecdf(x, weights=weights)
+seaborn/_statistics.py:588: in __call__
+    return self._eval_univariate(x1, weights)
+E   AttributeError: 'ECDF' object has no attribute '_eval_univariate'
+____________________ TestECDF.test_univariate_count_weights ____________________
+tests/test_statistics.py:470: in test_univariate_count_weights
+    stat, vals = ecdf(x, weights=weights)
+seaborn/_statistics.py:588: in __call__
+    return self._eval_univariate(x1, weights)
+E   AttributeError: 'ECDF' object has no attribute '_eval_univariate'
+________________________ TestECDF.test_bivariate_error _________________________
+tests/test_statistics.py:499: in test_bivariate_error
+    ecdf(x, y)
+seaborn/_statistics.py:590: in __call__
+    return self._eval_bivariate(x1, x2, weights)
+E   AttributeError: 'ECDF' object has no attribute '_eval_bivariate'
+_________________________ TestLetterValues.test_levels _________________________
+tests/test_statistics.py:677: in test_levels
+    res = LetterValues(k_depth="tukey", outlier_prop=0, trust_alpha=0)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+_________________________ TestLetterValues.test_values _________________________
+tests/test_statistics.py:684: in test_values
+    res = LetterValues(k_depth="tukey", outlier_prop=0, trust_alpha=0)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+_________________________ TestLetterValues.test_fliers _________________________
+tests/test_statistics.py:689: in test_fliers
+    res = LetterValues(k_depth="tukey", outlier_prop=0, trust_alpha=0)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+_________________________ TestLetterValues.test_median _________________________
+tests/test_statistics.py:696: in test_median
+    res = LetterValues(k_depth="tukey", outlier_prop=0, trust_alpha=0)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+______________________ TestLetterValues.test_k_depth_int _______________________
+tests/test_statistics.py:701: in test_k_depth_int
+    res = LetterValues(k_depth=(k := 12), outlier_prop=0, trust_alpha=0)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+______________________ TestLetterValues.test_trust_alpha _______________________
+tests/test_statistics.py:707: in test_trust_alpha
+    res1 = LetterValues(k_depth="trustworthy", outlier_prop=0, trust_alpha=.1)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+______________________ TestLetterValues.test_outlier_prop ______________________
+tests/test_statistics.py:713: in test_outlier_prop
+    res1 = LetterValues(k_depth="proportion", outlier_prop=.001, trust_alpha=0)(x)
+seaborn/_statistics.py:778: in __call__
+    k = self._compute_k(len(x))
+E   AttributeError: 'LetterValues' object has no attribute '_compute_k'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_statistics.py::TestKDE::test_gridsize
+PASSED tests/test_statistics.py::TestKDE::test_cut
+PASSED tests/test_statistics.py::TestKDE::test_clip
+PASSED tests/test_statistics.py::TestKDE::test_density_normalization
+PASSED tests/test_statistics.py::TestKDE::test_cached_support
+PASSED tests/test_statistics.py::TestKDE::test_bw_method
+PASSED tests/test_statistics.py::TestKDE::test_bw_adjust
+PASSED tests/test_statistics.py::TestKDE::test_bivariate_grid
+PASSED tests/test_statistics.py::TestKDE::test_bivariate_normalization
+PASSED tests/test_statistics.py::TestHistogram::test_string_bins
+PASSED tests/test_statistics.py::TestHistogram::test_int_bins
+PASSED tests/test_statistics.py::TestHistogram::test_array_bins
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_string_bins
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_int_bins
+PASSED tests/test_statistics.py::TestHistogram::test_binwidth
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_binwidth
+PASSED tests/test_statistics.py::TestHistogram::test_binrange
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_binrange
+PASSED tests/test_statistics.py::TestHistogram::test_discrete_bins
+PASSED tests/test_statistics.py::TestHistogram::test_odd_single_observation
+PASSED tests/test_statistics.py::TestHistogram::test_binwidth_roundoff
+PASSED tests/test_statistics.py::TestHistogram::test_histogram
+PASSED tests/test_statistics.py::TestHistogram::test_count_stat
+PASSED tests/test_statistics.py::TestHistogram::test_density_stat
+PASSED tests/test_statistics.py::TestHistogram::test_probability_stat
+PASSED tests/test_statistics.py::TestHistogram::test_frequency_stat
+PASSED tests/test_statistics.py::TestHistogram::test_cumulative_count
+PASSED tests/test_statistics.py::TestHistogram::test_cumulative_density
+PASSED tests/test_statistics.py::TestHistogram::test_cumulative_probability
+PASSED tests/test_statistics.py::TestHistogram::test_cumulative_frequency
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_histogram
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_count_stat
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_density_stat
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_probability_stat
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_frequency_stat
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_cumulative_count
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_cumulative_density
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_cumulative_frequency
+PASSED tests/test_statistics.py::TestHistogram::test_bivariate_cumulative_probability
+PASSED tests/test_statistics.py::TestHistogram::test_bad_stat
+PASSED tests/test_statistics.py::TestECDF::test_invalid_stat
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_func_estimator
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_name_estimator
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_custom_func_estimator
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_se_errorbars
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_sd_errorbars
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_pi_errorbars
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_ci_errorbars
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_custom_errorbars
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_singleton_errorbars
+PASSED tests/test_statistics.py::TestEstimateAggregator::test_errorbar_validation
+PASSED tests/test_statistics.py::TestWeightedAggregator::test_weighted_mean
+PASSED tests/test_statistics.py::TestWeightedAggregator::test_weighted_ci
+PASSED tests/test_statistics.py::TestWeightedAggregator::test_limited_estimator
+PASSED tests/test_statistics.py::TestWeightedAggregator::test_limited_ci
+SKIPPED [1] tests/test_statistics.py:95: Test requires scipy
+SKIPPED [1] tests/test_statistics.py:157: Test requires scipy
+SKIPPED [1] tests/test_statistics.py:475: Requires statsmodels
+FAILED tests/test_statistics.py::TestHistogram::test_bivariate_array_bins - V...
+FAILED tests/test_statistics.py::TestECDF::test_univariate_proportion - Attri...
+FAILED tests/test_statistics.py::TestECDF::test_univariate_count - AttributeE...
+FAILED tests/test_statistics.py::TestECDF::test_univariate_percent - Attribut...
+FAILED tests/test_statistics.py::TestECDF::test_univariate_proportion_weights
+FAILED tests/test_statistics.py::TestECDF::test_univariate_count_weights - At...
+FAILED tests/test_statistics.py::TestECDF::test_bivariate_error - AttributeEr...
+FAILED tests/test_statistics.py::TestLetterValues::test_levels - AttributeErr...
+FAILED tests/test_statistics.py::TestLetterValues::test_values - AttributeErr...
+FAILED tests/test_statistics.py::TestLetterValues::test_fliers - AttributeErr...
+FAILED tests/test_statistics.py::TestLetterValues::test_median - AttributeErr...
+FAILED tests/test_statistics.py::TestLetterValues::test_k_depth_int - Attribu...
+FAILED tests/test_statistics.py::TestLetterValues::test_trust_alpha - Attribu...
+FAILED tests/test_statistics.py::TestLetterValues::test_outlier_prop - Attrib...
+=================== 14 failed, 55 passed, 3 skipped in 3.24s ===================

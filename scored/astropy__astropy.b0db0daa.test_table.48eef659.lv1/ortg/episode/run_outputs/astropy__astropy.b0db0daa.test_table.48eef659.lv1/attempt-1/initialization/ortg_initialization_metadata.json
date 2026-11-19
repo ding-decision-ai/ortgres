@@ -1,0 +1,60 @@
+{
+  "ready": true,
+  "error": null,
+  "condition": "continuous_source_only_compact_handoff_v2",
+  "source_only": true,
+  "native_version": "0.5.54",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "segments": [],
+  "model_elapsed_seconds": 0,
+  "elapsed_seconds": 2.1207505529996524,
+  "segment_timeout_seconds": 1800,
+  "initialization_total_budget": "No hard segment/total cap; all source-only costs accumulated separately",
+  "formal_solver_budget_separate_seconds": 3600,
+  "cache_source_run": "/media/d/myshuju/featurebench-public-results-20261011/initialization-completion-34-case043-ortg0548-handoffv2-20261013/tasks/043-astropy__astropy.b0db0daa.test_table.48eef659.lv1/ortg/infra-attempt-01/runs/2026-10-13__16-01-27",
+  "prior_source_initialization_cost": {
+    "native_version": "0.5.48",
+    "source_model_elapsed_seconds": 21781.80504981894,
+    "source_elapsed_seconds": 21818.016563510013,
+    "prior_source_initialization_cost": {
+      "ready": false,
+      "ortg_version": "0.5.31",
+      "preparation_recipe": "bounded_source_only_v1",
+      "model_elapsed_seconds": 614.3297967830003,
+      "elapsed_seconds": 620.5698632390122,
+      "model_exit_code": 0,
+      "error": "ORTG method initialization failed: ORTG initialization failed: Readiness verification failed (exit 1); see initialization.log",
+      "segment_limit": 4
+    },
+    "source_metadata_sha256": "d24339ee27cd60a8f66ef9b009849f4845394a3872e4b242b63d7dd25facd6e7",
+    "initialization_stage_only": true
+  },
+  "snapshot_sha256": "b004296c439b11dbb75d2aae513880ba25e8096ea250f88e1e36188f07980497",
+  "current_readiness": {
+    "source_identity_preserved": true,
+    "roles_preserved": true,
+    "total_cognitive_files": 1944,
+    "native_outline_rows": 1944,
+    "missing_count": 0,
+    "missing_paths": [],
+    "malformed_paths": [],
+    "native_status_bad_states": {},
+    "coverage_complete": true,
+    "native_status_counts": [
+      1944,
+      0,
+      2,
+      0
+    ],
+    "semantic_fidelity": "Row/native completeness is checked; semantic fidelity relies on current-source model maintenance, not row count."
+  },
+  "event_summary": {
+    "turn_usages": [],
+    "usage_total": {
+      "input_tokens": 0,
+      "cached_input_tokens": 0,
+      "output_tokens": 0
+    }
+  }
+}

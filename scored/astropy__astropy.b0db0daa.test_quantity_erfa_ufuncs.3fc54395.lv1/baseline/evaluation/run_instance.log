@@ -1,0 +1,87 @@
+2026-10-11 02:16:16,295 - INFO - ============================================================
+2026-10-11 02:16:16,295 - INFO - Starting evaluation for instance: astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1
+2026-10-11 02:16:16,295 - INFO - Level: 1
+2026-10-11 02:16:16,295 - INFO - Attempt: 1
+2026-10-11 02:16:16,295 - INFO - ============================================================
+2026-10-11 02:16:16,302 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-11 02:16:16,302 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_astropy-instance_493bb78b
+2026-10-11 02:16:16,304 - INFO - Image docker.io/libercoders/featurebench-specs_astropy-instance_493bb78b found locally
+2026-10-11 02:16:16,304 - INFO - Creating container: fb-eval-astropy__astropy-b0db0daa-test_quantity_erfa_ufuncs-3fc54395-lv1-attempt-1-20261011-021616-304194
+2026-10-11 02:16:16,305 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-11 02:16:16,580 - INFO - Container fb-eval-astropy__astropy-b0db0daa-test_quantity_erfa_ufuncs-3fc54395-lv1-attempt-1-20261011-021616-304194 created successfully
+2026-10-11 02:16:16,580 - INFO - Starting Level 1 evaluation for astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1
+2026-10-11 02:16:16,580 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-11 02:16:17,502 - INFO - Restore project exit code: 0
+2026-10-11 02:16:17,503 - INFO - Output: 
+2026-10-11 02:16:17,503 - INFO - Step 2: Applying patch to mask files
+2026-10-11 02:16:17,507 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-11 02:16:17,767 - INFO - Mask patch apply exit code: 0
+2026-10-11 02:16:17,767 - INFO - Mask patch output: 
+2026-10-11 02:16:17,767 - INFO - Successfully applied mask patch
+2026-10-11 02:16:17,767 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-11 02:16:17,771 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-11 02:16:17,771 - INFO - Deleting F2P test file: /testbed/astropy/units/tests/test_quantity_erfa_ufuncs.py
+2026-10-11 02:16:18,030 - INFO - Successfully deleted F2P test file: /testbed/astropy/units/tests/test_quantity_erfa_ufuncs.py
+2026-10-11 02:16:18,030 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-11 02:16:18,031 - INFO - Step 4: Reinitializing git repository
+2026-10-11 02:16:20,379 - INFO - Step 5: Applying agent patch
+2026-10-11 02:16:20,383 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-11 02:16:20,665 - INFO - Patch apply exit code: 0
+2026-10-11 02:16:20,665 - INFO - Patch output: Checking patch astropy/units/core.py...
+Checking patch astropy/units/quantity_helper/function_helpers.py...
+Checking patch astropy/units/structured.py...
+Applied patch astropy/units/core.py cleanly.
+Applied patch astropy/units/quantity_helper/function_helpers.py cleanly.
+Applied patch astropy/units/structured.py cleanly.
+
+2026-10-11 02:16:20,665 - INFO - >>>>> Applied Patch
+2026-10-11 02:16:20,665 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-11 02:16:20,665 - INFO - F2P test path: /testbed/astropy/units/tests/test_quantity_erfa_ufuncs.py
+2026-10-11 02:16:20,921 - INFO - Delete F2P file exit code: 0
+2026-10-11 02:16:20,921 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-11 02:16:21,182 - INFO - Reverse apply exit code: 0
+2026-10-11 02:16:21,182 - INFO - Reverse apply output: 
+2026-10-11 02:16:21,182 - INFO - Successfully restored F2P test file using test_patch
+2026-10-11 02:16:21,182 - INFO - Step 7: Running tests
+2026-10-11 02:16:21,182 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-11 02:16:21,182 - INFO - Test timeout: 600s
+2026-10-11 02:16:21,182 - INFO - Running F2P test: /testbed/astropy/units/tests/test_quantity_erfa_ufuncs.py
+2026-10-11 02:16:23,629 - INFO - F2P test exit code: 1
+2026-10-11 02:16:23,629 - INFO - F2P output (truncated): ============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/units/tests/test_quantity_erfa_ufuncs.py.
+
+Date: 2026-10-11T02:16:22
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:
+2026-10-11 02:16:23,629 - INFO - Saved F2P test output to artifact://b308070f0b2cdc97
+2026-10-11 02:16:23,629 - INFO - Running 5 P2P tests
+2026-10-11 02:16:23,629 - INFO - Running P2P test: /testbed/astropy/io/registry/tests/test_registries.py
+2026-10-11 02:16:25,098 - INFO - P2P test /testbed/astropy/io/registry/tests/test_registries.py exit code: 0
+2026-10-11 02:16:25,098 - INFO - Saved P2P test output to artifact://b378b9f835a11d37
+2026-10-11 02:16:25,098 - INFO - Running P2P test: /testbed/astropy/cosmology/_src/tests/parameter/test_descriptors.py
+2026-10-11 02:16:26,431 - INFO - P2P test /testbed/astropy/cosmology/_src/tests/parameter/test_descriptors.py exit code: 0
+2026-10-11 02:16:26,432 - INFO - Saved P2P test output to artifact://f9efd9941da35ba5
+2026-10-11 02:16:26,432 - INFO - Running P2P test: /testbed/astropy/table/index.py
+2026-10-11 02:16:27,341 - INFO - P2P test /testbed/astropy/table/index.py exit code: 0
+2026-10-11 02:16:27,342 - INFO - Saved P2P test output to artifact://712fedb47ac229e0
+2026-10-11 02:16:27,342 - INFO - Running P2P test: /testbed/astropy/coordinates/representation/base.py
+2026-10-11 02:16:28,312 - INFO - P2P test /testbed/astropy/coordinates/representation/base.py exit code: 0
+2026-10-11 02:16:28,312 - INFO - Saved P2P test output to artifact://2417974269f87c78
+2026-10-11 02:16:28,312 - INFO - Running P2P test: /testbed/astropy/coordinates/tests/test_iau_fullstack.py
+2026-10-11 02:16:30,199 - INFO - P2P test /testbed/astropy/coordinates/tests/test_iau_fullstack.py exit code: 1
+2026-10-11 02:16:30,199 - INFO - Saved P2P test output to artifact://fc24758961884b01
+2026-10-11 02:16:30,202 - INFO - ============================================================
+2026-10-11 02:16:30,202 - INFO - Evaluation completed for astropy__astropy.b0db0daa.test_quantity_erfa_ufuncs.3fc54395.lv1
+2026-10-11 02:16:30,202 - INFO - Resolved: False
+2026-10-11 02:16:30,202 - INFO - F2P Pass rate: 0.5455
+2026-10-11 02:16:30,202 - INFO - ============================================================
+2026-10-11 02:16:30,202 - INFO - Stopping and removing container
+2026-10-11 02:16:40,499 - INFO - Container removed successfully

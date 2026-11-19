@@ -1,0 +1,40 @@
+{
+  "instance_id": "pytest-dev__pytest.68016f0e.raises_group.c28bf36a.lv1",
+  "repo": "pytest-dev/pytest",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 15,
+      "failure": 14,
+      "total": 29
+    },
+    "p2p": {
+      "success": 11,
+      "failure": 4,
+      "total": 15
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "5ed8e066f536aad0a0a13c58e61df1ca3909239ec39884c11bef799ca14e6a76"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 15,
+      "failure": 14,
+      "total": 29
+    },
+    "p2p": {
+      "success": 11,
+      "failure": 4,
+      "total": 15
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "355473f79c128b4a2697ded00efd4fd7479c5ddaf3a09d3b2800929eaf7bf7a7"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "be707a56d82cbe79aa4eea44e6d920c08de4ea56c6fc876b40624463a999fc20",
+    "p2p": "f0789abc23dc9bab236de95aed4a28cbcc53c7d1102ec95b2a9fcbf0c38d2639"
+  }
+}

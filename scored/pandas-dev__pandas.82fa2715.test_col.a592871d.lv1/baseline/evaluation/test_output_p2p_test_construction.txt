@@ -1,0 +1,62 @@
+/opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[1/1] Generating write_version_file with a custom command
++ /opt/miniconda3/envs/testbed/bin/ninja
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+PyQt5 5.15.11 -- Qt runtime 5.15.18 -- Qt compiled 5.15.14
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: cython-0.3.1, localserver-0.9.0.post0, xdist-3.8.0, cov-7.0.0, anyio-4.11.0, timeout-2.4.0, qt-4.5.0, hypothesis-6.148.2
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 38 items
+
+pandas/tests/arrays/floating/test_construction.py ......................................
+
+==================================== PASSES ====================================
+------------------ generated xml file: /testbed/test-data.xml ------------------
+============================= slowest 30 durations =============================
+
+(30 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+PASSED pandas/tests/arrays/floating/test_construction.py::test_uses_pandas_na
+PASSED pandas/tests/arrays/floating/test_construction.py::test_floating_array_constructor
+PASSED pandas/tests/arrays/floating/test_construction.py::test_floating_array_disallows_float16
+PASSED pandas/tests/arrays/floating/test_construction.py::test_floating_array_disallows_Float16_dtype
+PASSED pandas/tests/arrays/floating/test_construction.py::test_floating_array_constructor_copy
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[True-a0-b0]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[True-a1-b1]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[True-a2-b2]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[True-a3-b3]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[True-a4-b4]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[False-a0-b0]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[False-a1-b1]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[False-a2-b2]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[False-a3-b3]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_none_is_nan[False-a4-b4]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_mixed_integer_float
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[values0]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[foo]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[1]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[1.0]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[values4]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[values5]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[values6]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[values7]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_error[values8]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_construct_from_float_strings[values0]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_construct_from_float_strings[values1]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_inferred_dtype
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_dtype_keyword
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_integer
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_bool[bool_values0-values0-target_dtype0-expected_dtype0]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_bool[bool_values1-values1-Float64-expected_dtype1]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_to_array_bool[bool_values2-values2-target_dtype2-expected_dtype2]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_series_from_float[True-Float32Dtype]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_series_from_float[True-Float64Dtype]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_series_from_float[False-Float32Dtype]
+PASSED pandas/tests/arrays/floating/test_construction.py::test_series_from_float[False-Float64Dtype]
+============================== 38 passed in 0.04s ==============================

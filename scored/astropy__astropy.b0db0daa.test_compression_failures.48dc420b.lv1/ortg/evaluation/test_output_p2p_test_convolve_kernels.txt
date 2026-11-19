@@ -1,0 +1,163 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.1, pluggy-1.6.0
+
+Running tests with Astropy version 8.0.0.dev49+gb0db0daac.
+Running tests in /testbed/astropy/convolution/tests/test_convolve_kernels.py.
+
+Date: 2026-10-10T23:36:14
+
+Platform: Linux-7.0.0-34-generic-x86_64-with-glibc2.35
+
+Executable: /opt/miniconda3/envs/testbed/bin/python3.11
+
+Full Python Version: 
+3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:46:25) [GCC 14.3.0]
+
+encodings: sys: utf-8, locale: utf-8, filesystem: utf-8
+byteorder: little
+float info: dig: 15, mant_dig: 15
+
+Package versions: 
+Numpy: 2.3.3
+Scipy: not available
+Matplotlib: not available
+h5py: not available
+Pandas: not available
+PyERFA: 2.0.1.5
+Cython: not available
+Scikit-image: not available
+asdf-astropy: not available
+pyarrow: not available
+
+Using Astropy options: remote_data: none.
+
+CI: undefined
+ARCH_ON_CI: undefined
+IS_CRON: undefined
+
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: remotedata-0.4.1, hypothesis-6.147.0, xdist-3.8.0, cov-7.0.0, mock-3.15.1, doctestplus-1.5.0, astropy-header-0.2.2, astropy-0.11.0, filter-subpackage-0.2.0, timeout-2.4.0, arraydiff-0.6.1
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 111 items
+
+astropy/convolution/tests/test_convolve_kernels.py ..................... [ 18%]
+........................................................................ [ 83%]
+..................                                                       [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel2]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel3]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel4]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel5]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel6]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel7]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel8]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel9]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel10]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel11]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel12]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel13]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel14]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel15]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel16]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel17]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel18]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel19]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel20]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel21]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel22]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel23]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel24]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel25]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel26]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel27]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel28]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel29]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel30]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel31]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel32]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel33]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel34]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel35]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel36]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel37]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel38]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel39]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel40]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel41]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel42]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel43]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel44]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel45]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel46]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_centered_makekernel[kernel47]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel2]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel3]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel4]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel5]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel6]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel7]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel8]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel9]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel10]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel11]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel12]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel13]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel14]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel15]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel16]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel17]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel18]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel19]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel20]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel21]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel22]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel23]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel24]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel25]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel26]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel27]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel28]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel29]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel30]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel31]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel32]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel33]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel34]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel35]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel36]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel37]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel38]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel39]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel40]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel41]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel42]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel43]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel44]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel45]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel46]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_random_makekernel[kernel47]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[2-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[2-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[3-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[3-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[4-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[4-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[5-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_uniform_smallkernel[5-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_smallkernel_Box2DKernel[1-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_smallkernel_Box2DKernel[1-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_smallkernel_Box2DKernel[3-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_smallkernel_Box2DKernel[3-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_smallkernel_Box2DKernel[5-shape0]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::Test2DConvolutions::test_smallkernel_Box2DKernel[5-shape1]
+PASSED astropy/convolution/tests/test_convolve_kernels.py::test_gaussian_2d_kernel_quantity
+============================= 111 passed in 0.48s ==============================

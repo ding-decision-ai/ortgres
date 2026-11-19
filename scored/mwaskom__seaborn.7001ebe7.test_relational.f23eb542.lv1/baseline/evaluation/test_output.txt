@@ -1,0 +1,772 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 119 items
+
+tests/test_relational.py ............FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 39%]
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF..FFFFFFFFFFFFFFFFFFFFFF [100%]
+
+=================================== FAILURES ===================================
+__________________ TestRelationalPlotter.test_relplot_simple ___________________
+tests/test_relational.py:452: in test_relplot_simple
+    g = relplot(data=long_df, x="x", y="y", kind="scatter")
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+__________________ TestRelationalPlotter.test_relplot_complex __________________
+tests/test_relational.py:469: in test_relplot_complex
+    g = relplot(data=long_df, x="x", y="y", **{sem: "a"})
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+______________ TestRelationalPlotter.test_relplot_vectors[series] ______________
+tests/test_relational.py:514: in test_relplot_vectors
+    g = relplot(data=long_df, **kws)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+______________ TestRelationalPlotter.test_relplot_vectors[numpy] _______________
+tests/test_relational.py:514: in test_relplot_vectors
+    g = relplot(data=long_df, **kws)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+_______________ TestRelationalPlotter.test_relplot_vectors[list] _______________
+tests/test_relational.py:514: in test_relplot_vectors
+    g = relplot(data=long_df, **kws)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+___________________ TestRelationalPlotter.test_relplot_wide ____________________
+tests/test_relational.py:524: in test_relplot_wide
+    g = relplot(data=wide_df)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+___________________ TestRelationalPlotter.test_relplot_hues ____________________
+tests/test_relational.py:532: in test_relplot_hues
+    g = relplot(
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+___________________ TestRelationalPlotter.test_relplot_sizes ___________________
+tests/test_relational.py:547: in test_relplot_sizes
+    g = relplot(
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+__________________ TestRelationalPlotter.test_relplot_styles ___________________
+tests/test_relational.py:563: in test_relplot_styles
+    g = relplot(
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+____________ TestRelationalPlotter.test_relplot_weighted_estimator _____________
+tests/test_relational.py:583: in test_relplot_weighted_estimator
+    g = relplot(data=long_df, x="a", y="y", weights="x", kind="line")
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+_____________ TestRelationalPlotter.test_relplot_stringy_numerics ______________
+tests/test_relational.py:594: in test_relplot_stringy_numerics
+    g = relplot(data=long_df, x="x", y="y", hue="x_str")
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+__________________ TestRelationalPlotter.test_relplot_legend ___________________
+tests/test_relational.py:610: in test_relplot_legend
+    g = relplot(data=long_df, x="x", y="y")
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+___________ TestRelationalPlotter.test_relplot_unshared_axis_labels ____________
+tests/test_relational.py:640: in test_relplot_unshared_axis_labels
+    g = relplot(
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+___________________ TestRelationalPlotter.test_relplot_data ____________________
+tests/test_relational.py:656: in test_relplot_data
+    g = relplot(
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+_____________ TestRelationalPlotter.test_facet_variable_collision ______________
+tests/test_relational.py:674: in test_facet_variable_collision
+    g = relplot(
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+_________ TestRelationalPlotter.test_relplot_scatter_unused_variables __________
+tests/test_relational.py:683: in test_relplot_scatter_unused_variables
+    g = relplot(long_df, x="x", y="y", units="a")
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+_________________ TestRelationalPlotter.test_ax_kwarg_removal __________________
+tests/test_relational.py:694: in test_ax_kwarg_removal
+    g = relplot(data=long_df, x="x", y="y", ax=ax)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+_______________ TestRelationalPlotter.test_legend_has_no_offset ________________
+tests/test_relational.py:700: in test_legend_has_no_offset
+    g = relplot(data=long_df, x="x", y="y", hue=long_df["z"] + 1e8)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+________________ TestRelationalPlotter.test_lineplot_2d_dashes _________________
+tests/test_relational.py:705: in test_lineplot_2d_dashes
+    ax = lineplot(data=long_df[["x", "y"]], dashes=[(5, 5), (10, 10)])
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_______________ TestRelationalPlotter.test_legend_attributes_hue _______________
+tests/test_relational.py:712: in test_legend_attributes_hue
+    g = relplot(long_df, x="x", y="y", hue="a", **kws)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+______________ TestRelationalPlotter.test_legend_attributes_style ______________
+tests/test_relational.py:724: in test_legend_attributes_style
+    g = relplot(long_df, x="x", y="y", style="a", **kws)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+__________ TestRelationalPlotter.test_legend_attributes_hue_and_style __________
+tests/test_relational.py:733: in test_legend_attributes_hue_and_style
+    g = relplot(long_df, x="x", y="y", hue="a", style="b", **kws)
+seaborn/relational.py:838: in relplot
+    g.map_dataframe(func, **plot_kws)
+E   AttributeError: 'FacetGrid' object has no attribute 'map_dataframe'
+__________________________ TestLinePlotter.test_color __________________________
+tests/test_relational.py:75: in test_color
+    self.func(data=long_df, x="x", y="y", ax=ax)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+___________________ TestLinePlotter.test_legend_no_semantics ___________________
+tests/test_relational.py:750: in test_legend_no_semantics
+    ax = lineplot(long_df, x="x", y="y")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_________________ TestLinePlotter.test_legend_hue_categorical __________________
+tests/test_relational.py:756: in test_legend_hue_categorical
+    ax = lineplot(long_df, x="x", y="y", hue="a")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+________________ TestLinePlotter.test_legend_hue_and_style_same ________________
+tests/test_relational.py:764: in test_legend_hue_and_style_same
+    ax = lineplot(long_df, x="x", y="y", hue="a", style="a", markers=True)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+________________ TestLinePlotter.test_legend_hue_and_style_diff ________________
+tests/test_relational.py:774: in test_legend_hue_and_style_diff
+    ax = lineplot(long_df, x="x", y="y", hue="a", style="b", markers=True)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+________________ TestLinePlotter.test_legend_hue_and_size_same _________________
+tests/test_relational.py:793: in test_legend_hue_and_size_same
+    ax = lineplot(long_df, x="x", y="y", hue="a", size="a")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_______________ TestLinePlotter.test_legend_numerical_full[hue] ________________
+tests/test_relational.py:811: in test_legend_numerical_full
+    ax = lineplot(x=x, y=y, **{var: z}, legend="full")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_______________ TestLinePlotter.test_legend_numerical_full[size] _______________
+tests/test_relational.py:811: in test_legend_numerical_full
+    ax = lineplot(x=x, y=y, **{var: z}, legend="full")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+______________ TestLinePlotter.test_legend_numerical_full[style] _______________
+tests/test_relational.py:811: in test_legend_numerical_full
+    ax = lineplot(x=x, y=y, **{var: z}, legend="full")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_______________ TestLinePlotter.test_legend_numerical_brief[hue] _______________
+tests/test_relational.py:821: in test_legend_numerical_brief
+    ax = lineplot(x=x, y=y, **{var: z}, legend="brief")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+______________ TestLinePlotter.test_legend_numerical_brief[size] _______________
+tests/test_relational.py:821: in test_legend_numerical_brief
+    ax = lineplot(x=x, y=y, **{var: z}, legend="brief")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+______________ TestLinePlotter.test_legend_numerical_brief[style] ______________
+tests/test_relational.py:821: in test_legend_numerical_brief
+    ax = lineplot(x=x, y=y, **{var: z}, legend="brief")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+___________________ TestLinePlotter.test_legend_value_error ____________________
+tests/test_relational.py:831: in test_legend_value_error
+    lineplot(long_df, x="x", y="y", hue="a", legend="bad_value")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________________ TestLinePlotter.test_legend_log_norm[hue] ___________________
+tests/test_relational.py:840: in test_legend_log_norm
+    ax = lineplot(x=x, y=y, **{var: z + 1, f"{var}_norm": norm})
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________________ TestLinePlotter.test_legend_log_norm[size] __________________
+tests/test_relational.py:840: in test_legend_log_norm
+    ax = lineplot(x=x, y=y, **{var: z + 1, f"{var}_norm": norm})
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_________________ TestLinePlotter.test_legend_binary_var[hue] __________________
+tests/test_relational.py:850: in test_legend_binary_var
+    ax = lineplot(x=x, y=y, hue=z % 2)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_________________ TestLinePlotter.test_legend_binary_var[size] _________________
+tests/test_relational.py:850: in test_legend_binary_var
+    ax = lineplot(x=x, y=y, hue=z % 2)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+____________ TestLinePlotter.test_legend_binary_numberic_brief[hue] ____________
+tests/test_relational.py:857: in test_legend_binary_numberic_brief
+    ax = lineplot(long_df, x="x", y="y", **{var: "f"}, legend="brief")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+___________ TestLinePlotter.test_legend_binary_numberic_brief[size] ____________
+tests/test_relational.py:857: in test_legend_binary_numberic_brief
+    ax = lineplot(long_df, x="x", y="y", **{var: "f"}, legend="brief")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________________________ TestLinePlotter.test_plot ___________________________
+tests/test_relational.py:872: in test_plot
+    p.plot(ax, {})
+seaborn/relational.py:257: in plot
+    agg = (WeightedAggregator if weighted else EstimateAggregator)(
+seaborn/_statistics.py:478: in __init__
+    method, level = _validate_errorbar_arg(errorbar)
+E   NameError: name '_validate_errorbar_arg' is not defined
+_________________________ TestLinePlotter.test_weights _________________________
+tests/test_relational.py:1073: in test_weights
+    ax = lineplot(long_df, x="a", y="y", weights="x")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+___________________ TestLinePlotter.test_non_aggregated_data ___________________
+tests/test_relational.py:1084: in test_non_aggregated_data
+    ax = lineplot(x=x, y=y)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_________________________ TestLinePlotter.test_orient __________________________
+tests/test_relational.py:1094: in test_orient
+    lineplot(data=long_df, x="x", y="y", orient="y", errorbar="sd")
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+________________________ TestLinePlotter.test_log_scale ________________________
+tests/test_relational.py:1122: in test_log_scale
+    lineplot(x=x, y=y)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_______________________ TestLinePlotter.test_axis_labels _______________________
+tests/test_relational.py:1151: in test_axis_labels
+    p.plot(ax1, {})
+seaborn/relational.py:257: in plot
+    agg = (WeightedAggregator if weighted else EstimateAggregator)(
+seaborn/_statistics.py:478: in __init__
+    method, level = _validate_errorbar_arg(errorbar)
+E   NameError: name '_validate_errorbar_arg' is not defined
+____________________ TestLinePlotter.test_matplotlib_kwargs ____________________
+tests/test_relational.py:1169: in test_matplotlib_kwargs
+    ax = lineplot(data=long_df, x="x", y="y", **kws)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+____________________ TestLinePlotter.test_nonmapped_dashes _____________________
+tests/test_relational.py:1178: in test_nonmapped_dashes
+    ax = lineplot(x=[1, 2], y=[1, 2], dashes=(2, 1))
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+______________________ TestLinePlotter.test_lineplot_axes ______________________
+tests/test_relational.py:1188: in test_lineplot_axes
+    ax = lineplot(data=wide_df)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_______________ TestLinePlotter.test_legend_attributes_with_hue ________________
+tests/test_relational.py:1197: in test_legend_attributes_with_hue
+    ax = lineplot(long_df, x="x", y="y", hue="a", **kws)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+______________ TestLinePlotter.test_legend_attributes_with_style _______________
+tests/test_relational.py:1208: in test_legend_attributes_with_style
+    ax = lineplot(long_df, x="x", y="y", style="a", **kws)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_legend_attributes_with_hue_and_style ___________
+tests/test_relational.py:1218: in test_legend_attributes_with_hue_and_style
+    ax = lineplot(long_df, x="x", y="y", hue="a", style="b", **kws)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics0] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics1] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics2] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics3] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics4] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics5] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics6] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics7] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics8] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics9] ___________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics10] __________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+__________ TestLinePlotter.test_lineplot_vs_relplot[long_semantics11] __________
+tests/test_relational.py:1227: in test_lineplot_vs_relplot
+    ax = lineplot(data=long_df, legend=False, **long_semantics)
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_____________________ TestLinePlotter.test_lineplot_smoke ______________________
+tests/test_relational.py:1249: in test_lineplot_smoke
+    lineplot(x=[], y=[])
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+_____________________ TestLinePlotter.test_ci_deprecation ______________________
+tests/test_relational.py:1333: in test_ci_deprecation
+    lineplot(data=long_df, x="x", y="y", errorbar=("ci", 95), seed=0, ax=axs[0])
+seaborn/relational.py:483: in lineplot
+    errorbar = _deprecate_ci(errorbar, ci)
+E   NameError: name '_deprecate_ci' is not defined
+________________________ TestScatterPlotter.test_color _________________________
+tests/test_relational.py:1358: in test_color
+    super().test_color(long_df)
+tests/test_relational.py:75: in test_color
+    self.func(data=long_df, x="x", y="y", ax=ax)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_________________ TestScatterPlotter.test_legend_no_semantics __________________
+tests/test_relational.py:1374: in test_legend_no_semantics
+    ax = scatterplot(long_df, x="x", y="y")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________________ TestScatterPlotter.test_legend_hue ______________________
+tests/test_relational.py:1380: in test_legend_hue
+    ax = scatterplot(long_df, x="x", y="y", hue="a")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+________________ TestScatterPlotter.test_legend_hue_style_same _________________
+tests/test_relational.py:1389: in test_legend_hue_style_same
+    ax = scatterplot(long_df, x="x", y="y", hue="a", style="a")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________ TestScatterPlotter.test_legend_hue_style_different ______________
+tests/test_relational.py:1401: in test_legend_hue_style_different
+    ax = scatterplot(long_df, x="x", y="y", hue="a", style="b")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________ TestScatterPlotter.test_legend_data_hue_size_same _______________
+tests/test_relational.py:1422: in test_legend_data_hue_size_same
+    ax = scatterplot(long_df, x="x", y="y", hue="a", size="a")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_legend_size_numeric_list _______________
+tests/test_relational.py:1439: in test_legend_size_numeric_list
+    ax = scatterplot(long_df, x="x", y="y", size="s", sizes=size_list)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_legend_size_numeric_dict _______________
+tests/test_relational.py:1450: in test_legend_size_numeric_dict
+    ax = scatterplot(long_df, x="x", y="y", size="s", sizes=size_dict)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_legend_numeric_hue_full ________________
+tests/test_relational.py:1463: in test_legend_numeric_hue_full
+    ax = scatterplot(x=x, y=y, hue=z, legend="full")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_legend_numeric_hue_brief _______________
+tests/test_relational.py:1472: in test_legend_numeric_hue_brief
+    ax = scatterplot(x=x, y=y, hue=z, legend="brief")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_legend_numeric_size_full _______________
+tests/test_relational.py:1480: in test_legend_numeric_size_full
+    ax = scatterplot(x=x, y=y, size=z, legend="full")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________ TestScatterPlotter.test_legend_numeric_size_brief _______________
+tests/test_relational.py:1488: in test_legend_numeric_size_brief
+    ax = scatterplot(x=x, y=y, size=z, legend="brief")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+________________ TestScatterPlotter.test_legend_attributes_hue _________________
+tests/test_relational.py:1495: in test_legend_attributes_hue
+    ax = scatterplot(long_df, x="x", y="y", hue="a", **kws)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_legend_attributes_style ________________
+tests/test_relational.py:1509: in test_legend_attributes_style
+    ax = scatterplot(long_df, x="x", y="y", style="a", **kws)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+___________ TestScatterPlotter.test_legend_attributes_hue_and_style ____________
+tests/test_relational.py:1518: in test_legend_attributes_hue_and_style
+    ax = scatterplot(long_df, x="x", y="y", hue="a", style="b", **kws)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+__________________ TestScatterPlotter.test_legend_value_error __________________
+tests/test_relational.py:1527: in test_legend_value_error
+    scatterplot(long_df, x="x", y="y", hue="a", legend="bad_value")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+___________________ TestScatterPlotter.test_scatterplot_axes ___________________
+tests/test_relational.py:1638: in test_scatterplot_axes
+    ax = scatterplot(data=wide_df)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________ TestScatterPlotter.test_literal_attribute_vectors _______________
+tests/test_relational.py:1652: in test_literal_attribute_vectors
+    scatterplot(x=x, y=y, c=c, s=s, ax=ax)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_________________ TestScatterPlotter.test_supplied_color_array _________________
+tests/test_relational.py:1670: in test_supplied_color_array
+    scatterplot(data=long_df, x="x", y="y", **{key: colors})
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________________ TestScatterPlotter.test_hue_order _______________________
+tests/test_relational.py:1684: in test_hue_order
+    ax = scatterplot(data=long_df, x="x", y="y", hue="a", hue_order=order)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+______________________ TestScatterPlotter.test_linewidths ______________________
+tests/test_relational.py:1693: in test_linewidths
+    scatterplot(data=long_df, x="x", y="y", s=10)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______________ TestScatterPlotter.test_size_norm_extrapolation ________________
+tests/test_relational.py:1722: in test_size_norm_extrapolation
+    scatterplot(x=x, y=x, size=x, ax=axs[0], **kws)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+____________________ TestScatterPlotter.test_datetime_scale ____________________
+tests/test_relational.py:1749: in test_datetime_scale
+    ax = scatterplot(data=long_df, x="t", y="y")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+__________ TestScatterPlotter.test_unfilled_marker_edgecolor_warning ___________
+tests/test_relational.py:1758: in test_unfilled_marker_edgecolor_warning
+    scatterplot(data=long_df, x="x", y="y", marker="+")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+__________________ TestScatterPlotter.test_short_form_kwargs ___________________
+tests/test_relational.py:1762: in test_short_form_kwargs
+    ax = scatterplot(data=long_df, x="x", y="y", ec="g")
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics0] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics1] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics2] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics3] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics4] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics5] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics6] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics7] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics8] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics9] ________
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics10] _______
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+_______ TestScatterPlotter.test_scatterplot_vs_relplot[long_semantics11] _______
+tests/test_relational.py:1768: in test_scatterplot_vs_relplot
+    ax = scatterplot(data=long_df, **long_semantics)
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+__________________ TestScatterPlotter.test_scatterplot_smoke ___________________
+tests/test_relational.py:1788: in test_scatterplot_smoke
+    scatterplot(x=[], y=[])
+seaborn/relational.py:628: in scatterplot
+    if not p.has_xy_data:
+E   AttributeError: '_ScatterPlotter' object has no attribute 'has_xy_data'
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_df_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_df_with_nonnumeric_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_array_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_flat_array_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_flat_list_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_flat_series_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_list_of_series_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_list_of_arrays_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_list_of_list_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_dict_of_series_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_dict_of_arrays_variables
+PASSED tests/test_relational.py::TestRelationalPlotter::test_wide_dict_of_lists_variables
+PASSED tests/test_relational.py::TestScatterPlotter::test_plot
+PASSED tests/test_relational.py::TestScatterPlotter::test_axis_labels
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_simple
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_complex
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_vectors[series]
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_vectors[numpy]
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_vectors[list]
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_wide - A...
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_hues - A...
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_sizes - ...
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_styles
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_weighted_estimator
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_stringy_numerics
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_legend
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_unshared_axis_labels
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_data - A...
+FAILED tests/test_relational.py::TestRelationalPlotter::test_facet_variable_collision
+FAILED tests/test_relational.py::TestRelationalPlotter::test_relplot_scatter_unused_variables
+FAILED tests/test_relational.py::TestRelationalPlotter::test_ax_kwarg_removal
+FAILED tests/test_relational.py::TestRelationalPlotter::test_legend_has_no_offset
+FAILED tests/test_relational.py::TestRelationalPlotter::test_lineplot_2d_dashes
+FAILED tests/test_relational.py::TestRelationalPlotter::test_legend_attributes_hue
+FAILED tests/test_relational.py::TestRelationalPlotter::test_legend_attributes_style
+FAILED tests/test_relational.py::TestRelationalPlotter::test_legend_attributes_hue_and_style
+FAILED tests/test_relational.py::TestLinePlotter::test_color - NameError: nam...
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_no_semantics - ...
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_hue_categorical
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_hue_and_style_same
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_hue_and_style_diff
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_hue_and_size_same
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_numerical_full[hue]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_numerical_full[size]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_numerical_full[style]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_numerical_brief[hue]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_numerical_brief[size]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_numerical_brief[style]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_value_error - N...
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_log_norm[hue]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_log_norm[size]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_binary_var[hue]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_binary_var[size]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_binary_numberic_brief[hue]
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_binary_numberic_brief[size]
+FAILED tests/test_relational.py::TestLinePlotter::test_plot - NameError: name...
+FAILED tests/test_relational.py::TestLinePlotter::test_weights - NameError: n...
+FAILED tests/test_relational.py::TestLinePlotter::test_non_aggregated_data - ...
+FAILED tests/test_relational.py::TestLinePlotter::test_orient - NameError: na...
+FAILED tests/test_relational.py::TestLinePlotter::test_log_scale - NameError:...
+FAILED tests/test_relational.py::TestLinePlotter::test_axis_labels - NameErro...
+FAILED tests/test_relational.py::TestLinePlotter::test_matplotlib_kwargs - Na...
+FAILED tests/test_relational.py::TestLinePlotter::test_nonmapped_dashes - Nam...
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_axes - NameEr...
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_attributes_with_hue
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_attributes_with_style
+FAILED tests/test_relational.py::TestLinePlotter::test_legend_attributes_with_hue_and_style
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics0]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics1]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics2]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics3]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics4]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics5]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics6]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics7]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics8]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics9]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics10]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_vs_relplot[long_semantics11]
+FAILED tests/test_relational.py::TestLinePlotter::test_lineplot_smoke - NameE...
+FAILED tests/test_relational.py::TestLinePlotter::test_ci_deprecation - NameE...
+FAILED tests/test_relational.py::TestScatterPlotter::test_color - AttributeEr...
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_no_semantics
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_hue - Attrib...
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_hue_style_same
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_hue_style_different
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_data_hue_size_same
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_size_numeric_list
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_size_numeric_dict
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_hue_full
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_hue_brief
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_size_full
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_numeric_size_brief
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_attributes_hue
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_attributes_style
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_attributes_hue_and_style
+FAILED tests/test_relational.py::TestScatterPlotter::test_legend_value_error
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_axes - ...
+FAILED tests/test_relational.py::TestScatterPlotter::test_literal_attribute_vectors
+FAILED tests/test_relational.py::TestScatterPlotter::test_supplied_color_array
+FAILED tests/test_relational.py::TestScatterPlotter::test_hue_order - Attribu...
+FAILED tests/test_relational.py::TestScatterPlotter::test_linewidths - Attrib...
+FAILED tests/test_relational.py::TestScatterPlotter::test_size_norm_extrapolation
+FAILED tests/test_relational.py::TestScatterPlotter::test_datetime_scale - At...
+FAILED tests/test_relational.py::TestScatterPlotter::test_unfilled_marker_edgecolor_warning
+FAILED tests/test_relational.py::TestScatterPlotter::test_short_form_kwargs
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics0]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics1]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics2]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics3]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics4]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics5]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics6]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics7]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics8]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics9]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics10]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_vs_relplot[long_semantics11]
+FAILED tests/test_relational.py::TestScatterPlotter::test_scatterplot_smoke
+======================== 105 failed, 14 passed in 7.93s ========================

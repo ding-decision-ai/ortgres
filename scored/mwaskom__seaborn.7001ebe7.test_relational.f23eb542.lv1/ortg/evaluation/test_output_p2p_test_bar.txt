@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.19, pytest-9.0.1, pluggy-1.6.0
+rootdir: /testbed
+configfile: pyproject.toml
+plugins: xdist-3.8.0, cov-7.0.0, timeout-2.4.0
+timeout: 10.0s
+timeout method: signal
+timeout func_only: False
+collected 16 items
+
+tests/_marks/test_bar.py ................                                [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/_marks/test_bar.py::TestBar::test_categorical_positions_vertical
+PASSED tests/_marks/test_bar.py::TestBar::test_categorical_positions_horizontal
+PASSED tests/_marks/test_bar.py::TestBar::test_numeric_positions_vertical
+PASSED tests/_marks/test_bar.py::TestBar::test_numeric_positions_horizontal
+PASSED tests/_marks/test_bar.py::TestBar::test_set_properties
+PASSED tests/_marks/test_bar.py::TestBar::test_mapped_properties
+PASSED tests/_marks/test_bar.py::TestBar::test_zero_height_skipped
+PASSED tests/_marks/test_bar.py::TestBar::test_artist_kws_clip
+PASSED tests/_marks/test_bar.py::TestBars::test_positions
+PASSED tests/_marks/test_bar.py::TestBars::test_positions_horizontal
+PASSED tests/_marks/test_bar.py::TestBars::test_width
+PASSED tests/_marks/test_bar.py::TestBars::test_mapped_color_direct_alpha
+PASSED tests/_marks/test_bar.py::TestBars::test_mapped_edgewidth
+PASSED tests/_marks/test_bar.py::TestBars::test_auto_edgewidth
+PASSED tests/_marks/test_bar.py::TestBars::test_unfilled
+PASSED tests/_marks/test_bar.py::TestBars::test_log_scale
+============================== 16 passed in 0.72s ==============================

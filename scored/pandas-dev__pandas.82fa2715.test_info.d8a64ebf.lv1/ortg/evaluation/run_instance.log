@@ -1,0 +1,172 @@
+2026-10-14 13:30:11,745 - INFO - ============================================================
+2026-10-14 13:30:11,745 - INFO - Starting evaluation for instance: pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1
+2026-10-14 13:30:11,745 - INFO - Level: 1
+2026-10-14 13:30:11,745 - INFO - Attempt: 1
+2026-10-14 13:30:11,745 - INFO - ============================================================
+2026-10-14 13:30:11,758 - INFO - Docker runtime config: shm_size=None, number_once=1, env_vars=[], env_exports=0 items
+2026-10-14 13:30:11,758 - INFO - Using Docker image: docker.io/libercoders/featurebench-specs_pandas-instance_15f634a6
+2026-10-14 13:30:11,760 - INFO - Image docker.io/libercoders/featurebench-specs_pandas-instance_15f634a6 found locally
+2026-10-14 13:30:11,761 - INFO - Creating container: fb-eval-pandas-dev__pandas-82fa2715-test_info-d8a64ebf-lv1-attempt-1-20261014-133011-761056
+2026-10-14 13:30:11,762 - INFO - This task does not require GPU; starting container without GPU access
+2026-10-14 13:30:13,164 - INFO - Container fb-eval-pandas-dev__pandas-82fa2715-test_info-d8a64ebf-lv1-attempt-1-20261014-133011-761056 created successfully
+2026-10-14 13:30:13,165 - INFO - Starting Level 1 evaluation for pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1
+2026-10-14 13:30:13,165 - INFO - Step 1: Activating conda environment and restoring project
+2026-10-14 13:30:14,496 - INFO - Restore project exit code: 0
+2026-10-14 13:30:14,496 - INFO - Output: 
+2026-10-14 13:30:14,496 - INFO - Step 2: Applying patch to mask files
+2026-10-14 13:30:14,504 - INFO - Copied mask patch to container: /tmp/mask_patch.diff
+2026-10-14 13:30:14,948 - INFO - Mask patch apply exit code: 0
+2026-10-14 13:30:14,948 - INFO - Mask patch output: /tmp/mask_patch.diff:101: new blank line at EOF.
++
+/tmp/mask_patch.diff:783: new blank line at EOF.
++
+/tmp/mask_patch.diff:1559: new blank line at EOF.
++
+/tmp/mask_patch.diff:2410: new blank line at EOF.
++
+/tmp/mask_patch.diff:3357: new blank line at EOF.
++
+warning: squelched 3 whitespace errors
+warning: 8 lines add whitespace errors.
+
+2026-10-14 13:30:14,948 - INFO - Successfully applied mask patch
+2026-10-14 13:30:14,948 - INFO - Step 2b: Preparing test_patch and deleting F2P test files
+2026-10-14 13:30:14,954 - INFO - Saved test_patch to container: /tmp/test_patch.diff (for later reverse apply)
+2026-10-14 13:30:14,954 - INFO - Deleting F2P test file: /testbed/pandas/tests/frame/methods/test_info.py
+2026-10-14 13:30:15,337 - INFO - Successfully deleted F2P test file: /testbed/pandas/tests/frame/methods/test_info.py
+2026-10-14 13:30:15,338 - INFO - Step 3: Applying repository-specific environment fixes
+2026-10-14 13:30:15,338 - INFO - Step 4: Reinitializing git repository
+2026-10-14 13:30:19,239 - INFO - Step 5: Applying agent patch
+2026-10-14 13:30:19,249 - INFO - Copied patch file to container: /tmp/agent_patch.diff
+2026-10-14 13:30:19,703 - INFO - Patch apply exit code: 0
+2026-10-14 13:30:19,703 - INFO - Patch output: Checking patch ortg.tsv...
+Checking patch pandas/__init__.py...
+Checking patch pandas/api/extensions/__init__.py...
+Checking patch pandas/compat/numpy/function.py...
+/tmp/agent_patch.diff:2626: new blank line at EOF.
++
+Checking patch pandas/core/_numba/executor.py...
+Checking patch pandas/core/algorithms.py...
+Checking patch pandas/core/array_algos/take.py...
+Checking patch pandas/core/arrays/_mixins.py...
+Checking patch pandas/core/arrays/base.py...
+Checking patch pandas/core/arrays/datetimelike.py...
+Checking patch pandas/core/arrays/datetimes.py...
+Checking patch pandas/core/arrays/masked.py...
+Checking patch pandas/core/arrays/timedeltas.py...
+Checking patch pandas/core/common.py...
+Checking patch pandas/core/dtypes/base.py...
+Checking patch pandas/core/dtypes/cast.py...
+Checking patch pandas/core/dtypes/common.py...
+Checking patch pandas/core/dtypes/concat.py...
+Checking patch pandas/core/dtypes/inference.py...
+Checking patch pandas/core/dtypes/missing.py...
+Checking patch pandas/core/frame.py...
+Checking patch pandas/core/groupby/generic.py...
+Checking patch pandas/core/groupby/groupby.py...
+Checking patch pandas/core/groupby/grouper.py...
+Checking patch pandas/core/groupby/ops.py...
+Checking patch pandas/core/indexes/api.py...
+Checking patch pandas/core/indexes/base.py...
+Checking patch pandas/core/indexes/datetimelike.py...
+Checking patch pandas/core/internals/blocks.py...
+Checking patch pandas/core/internals/concat.py...
+Checking patch pandas/core/internals/construction.py...
+Checking patch pandas/core/internals/managers.py...
+Checking patch pandas/core/reshape/api.py...
+Checking patch pandas/core/reshape/concat.py...
+Checking patch pandas/core/reshape/reshape.py...
+Checking patch pandas/core/series.py...
+Checking patch pandas/core/sorting.py...
+Checking patch pandas/core/tools/timedeltas.py...
+Checking patch pandas/io/formats/printing.py...
+Checking patch pandas/io/parsers/c_parser_wrapper.py...
+Checking patch pandas/util/_validators.py...
+Applied patch ortg.tsv cleanly.
+Applied patch pandas/__init__.py cleanly.
+Applied patch pandas/api/extensions/__init__.py cleanly.
+Applied patch pandas/compat/numpy/function.py cleanly.
+Applied patch pandas/core/_numba/executor.py cleanly.
+Applied patch pandas/core/algorithms.py cleanly.
+Applied patch pandas/core/array_algos/take.py cleanly.
+Applied patch pandas/core/arrays/_mixins.py cleanly.
+Applied patch pandas/core/arrays/base.py cleanly.
+Applied patch pandas/core/arrays/datetimelike.py cleanly.
+Applied patch pandas/core/arrays/datetimes.py cleanly.
+Applied patch pandas/core/arrays/masked.py cleanly.
+Applied patch pandas/core/arrays/timedeltas.py cleanly.
+Applied patch pandas/core/common.py cleanly.
+Applied patch pandas/core/dtypes/base.py cleanly.
+Applied patch pandas/core/dtypes/cast.py cleanly.
+Applied patch pandas/core/dtypes/common.py cleanly.
+Applied patch pandas/core/dtypes/concat.py cleanly.
+Applied patch pandas/core/dtypes/inference.py cleanly.
+Applied patch pandas/core/dtypes/missing.py cleanly.
+Applied patch pandas/core/frame.py cleanly.
+Applied patch pandas/core/groupby/generic.py cleanly.
+Applied patch pandas/core/groupby/groupby.py cleanly.
+Applied patch pandas/core/groupby/grouper.py cleanly.
+Applied patch pandas/core/groupby/ops.py cleanly.
+Applied patch pandas/core/indexes/api.py cleanly.
+Applied patch pandas/core/indexes/base.py cleanly.
+Applied patch pandas/core/indexes/datetimelike.py cleanly.
+Applied patch pandas/core/internals/blocks.py cleanly.
+Applied patch pandas/core/internals/concat.py cleanly.
+Applied patch pandas/core/internals/construction.py cleanly.
+Applied patch pandas/core/internals/managers.py cleanly.
+Applied patch pandas/core/reshape/api.py cleanly.
+Applied patch pandas/core/reshape/concat.py cleanly.
+Applied patch pandas/core/reshape/reshape.py cleanly.
+Applied patch pandas/core/series.py cleanly.
+Applied patch pandas/core/sorting.py cleanly.
+Applied patch pandas/core/tools/timedeltas.py cleanly.
+Applied patch pandas/io/formats/printing.py cleanly.
+Applied patch pandas/io/parsers/c_parser_wrapper.py cleanly.
+Applied patch pandas/util/_validators.py cleanly.
+warning: 1 line adds whitespace errors.
+
+2026-10-14 13:30:19,703 - INFO - >>>>> Applied Patch
+2026-10-14 13:30:19,703 - INFO - Step 6: Preparing for testing - cleaning up and restoring F2P test
+2026-10-14 13:30:19,703 - INFO - F2P test path: /testbed/pandas/tests/frame/methods/test_info.py
+2026-10-14 13:30:20,102 - INFO - Delete F2P file exit code: 0
+2026-10-14 13:30:20,103 - INFO - Reverse applying test_patch to restore F2P test file
+2026-10-14 13:30:20,476 - INFO - Reverse apply exit code: 0
+2026-10-14 13:30:20,476 - INFO - Reverse apply output: 
+2026-10-14 13:30:20,476 - INFO - Successfully restored F2P test file using test_patch
+2026-10-14 13:30:20,477 - INFO - Step 7: Running tests
+2026-10-14 13:30:20,478 - INFO - Test command: pytest -rA --tb=short --color=no --timeout=10
+2026-10-14 13:30:20,478 - INFO - Test timeout: 600s
+2026-10-14 13:30:20,478 - INFO - Running F2P test: /testbed/pandas/tests/frame/methods/test_info.py
+2026-10-14 13:31:38,580 - INFO - F2P test exit code: 1
+2026-10-14 13:31:38,580 - INFO - F2P output (truncated): /opt/miniconda3/envs/testbed/lib/python3.11/site-packages/pytest_cython/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import get_distribution
+[0/1] Regenerating build files.
+Cleaning... 0 files.
+The Meson build system
+Version: 1.2.1
+Source dir: /testbed
+Build dir: /te
+2026-10-14 13:31:38,581 - INFO - Saved F2P test output to artifact://3e0ac501ea58e5c8
+2026-10-14 13:31:38,581 - INFO - Running 5 P2P tests
+2026-10-14 13:31:38,581 - INFO - Running P2P test: /testbed/pandas/tests/arrays/floating/test_construction.py
+2026-10-14 13:31:41,255 - INFO - P2P test /testbed/pandas/tests/arrays/floating/test_construction.py exit code: 0
+2026-10-14 13:31:41,256 - INFO - Saved P2P test output to artifact://585fd0c39a10534b
+2026-10-14 13:31:41,256 - INFO - Running P2P test: /testbed/pandas/tests/frame/methods/test_pipe.py
+2026-10-14 13:31:43,904 - INFO - P2P test /testbed/pandas/tests/frame/methods/test_pipe.py exit code: 0
+2026-10-14 13:31:43,905 - INFO - Saved P2P test output to artifact://c81b82b663b85d38
+2026-10-14 13:31:43,905 - INFO - Running P2P test: /testbed/pandas/tests/copy_view/test_clip.py
+2026-10-14 13:31:46,616 - INFO - P2P test /testbed/pandas/tests/copy_view/test_clip.py exit code: 0
+2026-10-14 13:31:46,616 - INFO - Saved P2P test output to artifact://8764c419c545e602
+2026-10-14 13:31:46,617 - INFO - Running P2P test: /testbed/pandas/tests/arrays/categorical/test_subclass.py
+2026-10-14 13:31:49,223 - INFO - P2P test /testbed/pandas/tests/arrays/categorical/test_subclass.py exit code: 0
+2026-10-14 13:31:49,224 - INFO - Saved P2P test output to artifact://fd24999b9830da3c
+2026-10-14 13:31:49,224 - INFO - Running P2P test: /testbed/pandas/tests/tools/test_to_time.py
+2026-10-14 13:31:51,849 - INFO - P2P test /testbed/pandas/tests/tools/test_to_time.py exit code: 0
+2026-10-14 13:31:51,850 - INFO - Saved P2P test output to artifact://2be87208cdacd027
+2026-10-14 13:31:51,857 - INFO - ============================================================
+2026-10-14 13:31:51,857 - INFO - Evaluation completed for pandas-dev__pandas.82fa2715.test_info.d8a64ebf.lv1
+2026-10-14 13:31:51,857 - INFO - Resolved: False
+2026-10-14 13:31:51,857 - INFO - F2P Pass rate: 0.125
+2026-10-14 13:31:51,857 - INFO - ============================================================
+2026-10-14 13:31:51,857 - INFO - Stopping and removing container
+2026-10-14 13:32:02,016 - INFO - Container removed successfully

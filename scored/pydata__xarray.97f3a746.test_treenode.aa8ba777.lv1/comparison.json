@@ -1,0 +1,40 @@
+{
+  "instance_id": "pydata__xarray.97f3a746.test_treenode.aa8ba777.lv1",
+  "repo": "pydata/xarray",
+  "evaluation_scope": "original_full_instance_f2p_and_p2p",
+  "comparison_metric": "official_report_test_counts",
+  "baseline": {
+    "f2p": {
+      "success": 33,
+      "failure": 1,
+      "total": 34
+    },
+    "p2p": {
+      "success": 40,
+      "failure": 0,
+      "total": 40
+    },
+    "report": "baseline/report.json",
+    "source_report_sha256": "9beb74d99a684f3e62bef0bf9640c69f7358fabcbd03b3836af6db007232fd87"
+  },
+  "ortg": {
+    "f2p": {
+      "success": 31,
+      "failure": 3,
+      "total": 34
+    },
+    "p2p": {
+      "success": 40,
+      "failure": 0,
+      "total": 40
+    },
+    "report": "ortg/report.json",
+    "source_report_sha256": "b5ed94d4700fc241182f9299537f7255bb160be7eeec72534be281b4ae6a5cea"
+  },
+  "conditions": "conditions.json",
+  "costs": "costs.json",
+  "official_test_identity_sha256": {
+    "f2p": "1df93245dfe76058a487ff2cc26c3ee2980c499d00b1eb71a51f13d9a2efda64",
+    "p2p": "361b358e8a5fd72a37f630f9187c98823ff0c98525b1369bf89a74934a3f27a7"
+  }
+}
